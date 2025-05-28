@@ -1,14 +1,12 @@
 package mysticmods.roots.client.particle.world;
 
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 
-public class SmokeParticle extends TextureSheetParticle {
-  protected float oR1, oG1, oB1;
-  protected float rCol2, gCol2, bcol2;
-  protected float rollAmount;
+public class SmokeParticle extends SortedParticle {
   private final SpriteSet sprites;
 
   protected SmokeParticle(SpriteSet sprites, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
@@ -31,34 +29,8 @@ public class SmokeParticle extends TextureSheetParticle {
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
-  }
-
-  @Override
-  protected int getLightColor(float partialTick) {
-    return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
-  }
-
-  @Override
-  public void tick() {
-    super.tick();
-    if (!this.removed) {
-
-      float f = (float) this.age / (float) this.lifetime;
-
-      setSpriteFromAge(this.sprites);
-      if (this.oB1 != this.bcol2) {
-        this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
-        this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
-        this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
-      }
-
-      this.oRoll = this.roll;
-      this.roll = this.roll + this.rollAmount;
-
-      this.alpha = 1f - f;
-    }
+  protected void updateSprite(float f) {
+    setSpriteFromAge(this.sprites);
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

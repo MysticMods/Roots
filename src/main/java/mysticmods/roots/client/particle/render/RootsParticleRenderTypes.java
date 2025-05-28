@@ -69,10 +69,10 @@ public class RootsParticleRenderTypes {
     }
   };
 
-  public static ParticleRenderType TRANSLUCENT_NO_MASK = new ParticleRenderType() {
+  public static ParticleRenderType SORTED_TRANSLUCENT = new ParticleRenderType() {
     @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
-      RenderSystem.depthMask(false);
+      RenderSystem.depthMask(true);
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableBlend();
       RenderSystem.blendFuncSeparate(

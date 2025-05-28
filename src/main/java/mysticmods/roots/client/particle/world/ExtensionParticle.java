@@ -1,15 +1,12 @@
 package mysticmods.roots.client.particle.world;
 
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 
-public class ExtensionParticle extends TextureSheetParticle {
-  protected float oR1, oG1, oB1;
-  protected float rCol2, gCol2, bcol2;
-  protected float rollAmount;
-
+public class ExtensionParticle extends SortedParticle {
   protected ExtensionParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.lifetime = 59;
@@ -24,7 +21,6 @@ public class ExtensionParticle extends TextureSheetParticle {
     this.yd = ySpeed;
     this.zd = zSpeed;
     this.hasPhysics = false;
-    // These values seem innaccurate
     this.oRoll = this.roll = random.nextFloat() * 360f;
     this.rollAmount = random.nextFloat() * 0.1f;
     this.quadSize = 0.195f;
@@ -32,33 +28,8 @@ public class ExtensionParticle extends TextureSheetParticle {
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
-  }
-
-  @Override
-  protected int getLightColor(float partialTick) {
-    return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
-  }
-
-  @Override
-  public void tick() {
-    super.tick();
-    if (!this.removed) {
-      float f = (float) this.age / (float) this.lifetime;
-
-      // Color lerp
-      if (this.oB1 != this.bcol2) {
-        this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
-        this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
-        this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
-      }
-
-      // Roll and fade
-      this.oRoll = this.roll;
-      this.roll += this.rollAmount;
-      this.alpha = 1f - f * f;
-    }
+  protected void updateAlpha(float f) {
+    this.alpha = 1f - f * f;
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

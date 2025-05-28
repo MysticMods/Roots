@@ -1,31 +1,26 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
-// This needs to become entity bound
-public class MagnetismParticle extends TextureSheetParticle {
-  protected float oR1, oG1, oB1;
-  protected float rCol2, gCol2, bcol2;
-  protected float rollAmount;
-  private final Entity entity;
+public class MagnetismParticle extends SortedEntityParticle {
   protected double radius;
   protected final double yOffset;
   protected final float angle, rads;
 
   protected MagnetismParticle(ClientLevel level, double x, double y, double z, double radius, double angle, double yOffset, int c1, int c2, Entity entity) {
-    super(level, entity.getX(), entity.getY(), entity.getZ());
+    super(level, entity.getX(), entity.getY(), entity.getZ(), entity);
     this.angle = (float) angle;
     this.rads = (float) Math.toRadians(angle);
     this.radius = radius;
     this.yOffset = yOffset;
-    this.entity = entity;
     this.lifetime = 25;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
     this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
@@ -47,16 +42,6 @@ public class MagnetismParticle extends TextureSheetParticle {
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
-  }
-
-  @Override
-  protected int getLightColor(float partialTick) {
-    return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
-  }
-
-  @Override
   public void tick() {
     this.xo = this.x;
     this.yo = this.y;
@@ -66,21 +51,13 @@ public class MagnetismParticle extends TextureSheetParticle {
     } else {
       this.radius *= 0.93f;
 
-      float f = (float) this.age / (float) this.lifetime;
-
-      // Color lerp
-      if (this.oB1 != this.bcol2) {
-        this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
-        this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
-        this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
-      }
-
-      // Roll and fade
-      this.oRoll = this.roll;
-      this.roll += this.rollAmount;
-      this.alpha = 1f - f * f * f;
       updatePosition();
     }
+  }
+
+  @Override
+  protected void updateAlpha(float f) {
+    this.alpha = 1f - f * f * f;
   }
 
   @Override

@@ -1,49 +1,43 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 
-public class ChannelNoCastParticle extends TextureSheetParticle {
+public class ChannelNoCastParticle extends SortedEntityParticle {
   private static final int threshold = 13;
 
-  private final float oR, oG, oB, rR, rG, rB;
   private double fallSpeed = 0;
-  private final Entity entity;
   private final double angle, radius, hand;
 
   public ChannelNoCastParticle(ClientLevel level, double x, double y, double z,
                                double radius, double angle, double hand,
-                               int color1, int color2, Entity entity) {
-    super(level, x, y, z);
+                               int c1, int c2, Entity entity) {
+    super(level, x, y, z, entity);
     this.angle = angle;
     this.radius = radius;
     this.hand = hand;
-    this.entity = entity;
-    this.oR = ((color1 >> 16) & 0xFF) / 255.0f;
-    this.oG = ((color1 >> 8) & 0xFF) / 255.0f;
-    this.oB = ((color1) & 0xFF) / 255.0f;
-    this.rR = ((color2 >> 16) & 0xFF) / 255.0f;
-    this.rG = ((color2 >> 8) & 0xFF) / 255.0f;
-    this.rB = ((color2) & 0xFF) / 255.0f;
+    this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
+    this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
+    this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
+    this.rCol2 = ((c2 >> 16) & 0xFF) / 255.0f;
+    this.gCol2 = ((c2 >> 8) & 0xFF) / 255.0f;
+    this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.xd = 0;
     this.yd = 0;
     this.zd = 0;
-
-    this.rCol = oR;
-    this.gCol = oG;
-    this.bCol = oB;
-
     this.lifetime = 11 + random.nextInt(10); // ~1.5s
     this.quadSize = 0.2f;
     this.alpha = 1f;
     this.hasPhysics = false;
+    this.tickMovement = false;
     updatePosition();
     tick();
   }
@@ -73,42 +67,24 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
 
   @Override
   public void tick() {
-    this.xo = this.x;
-    this.yo = this.y;
-    this.zo = this.z;
-    if (this.age++ >= this.lifetime) {
-      this.remove();
-    } else {
+    super.tick();
+    if (!this.removed) {
       if (age > threshold) {
         fallSpeed += 0.03; // acceleration
       }
-      float t = (float) age / lifetime;
-
-      this.rCol = oR + (rR - oR) * t;
-      this.gCol = oG + (rG - oG) * t;
-      this.bCol = oB + (rB - oB) * t;
-
-      this.alpha = 1.0f - (float) Math.pow(t, 9); // non-linear fade
-
-      // Begin falling after short delay
       updatePosition();
     }
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK; //ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+  protected void updateAlpha(float f) {
+    this.alpha = 1.0f - (float) Math.pow(f, 9); // non-linear fade
   }
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
     updatePosition();
     super.render(buffer, renderInfo, partialTicks);
-  }
-
-  @Override
-  protected int getLightColor(float partialTick) {
-    return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
   }
 
   public static class Provider implements ParticleProvider<RootsParticleOptions> {

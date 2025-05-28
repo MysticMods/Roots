@@ -1,16 +1,14 @@
 package mysticmods.roots.client.particle.world;
 
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.world.phys.Vec3;
 
-public class ChannelTargetCastParticle extends TextureSheetParticle {
-  protected float oR1, oG1, oB1;
-  protected float rCol2, gCol2, bcol2;
+public class ChannelTargetCastParticle extends SortedParticle {
   protected boolean bounced = false;
-
   protected Vec3 stop;
 
   protected ChannelTargetCastParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
@@ -41,28 +39,10 @@ public class ChannelTargetCastParticle extends TextureSheetParticle {
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
-  }
-
-  @Override
-  protected int getLightColor(float partialTick) {
-    return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
-  }
-
-  @Override
   public void tick() {
     super.tick();
 
     if (!this.removed) {
-      float f = (float) this.age / (float) this.lifetime;
-      if (this.oB1 != this.bcol2) {
-        this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
-        this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
-        this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
-      }
-
-      // Here is where we determine if we're close to the stop location
       if (this.getPos().distanceTo(this.stop) < 0.18 && !bounced) {
         Vec3 normal = stop.subtract(this.x, this.y, this.z).normalize();
         Vec3 velocity = new Vec3(this.xd, this.yd, this.zd);
@@ -86,13 +66,19 @@ public class ChannelTargetCastParticle extends TextureSheetParticle {
         this.lifetime = 12;
         this.bounced = true;
       }
-
-      if (bounced) {
-        this.alpha = Math.max(1.0f - ((float) this.age / this.lifetime), 0.0f);
-      }
-
-      this.quadSize = Math.max(0.15f, quadSize * (1.0f - f));
     }
+  }
+
+  @Override
+  protected void updateAlpha(float f) {
+    if (bounced) {
+      this.alpha = Math.max(1.0f - ((float) this.age / this.lifetime), 0.0f);
+    }
+  }
+
+  @Override
+  protected void updateQuadSize(float f) {
+    this.quadSize = Math.max(0.15f, quadSize * (1.0f - f));
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

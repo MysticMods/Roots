@@ -1,34 +1,31 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 
-public class LifeDrainParticle extends TextureSheetParticle {
-  protected float oR1, oG1, oB1;
-  protected float rCol2, gCol2, bcol2;
-  protected float rollAmount;
-  private final Entity entity;
+public class LifeDrainParticle extends SortedEntityParticle {
   protected double radius, prevRadius;
   protected double yOffset;
   protected final double angleRandom;
   protected final int angle;
 
   protected LifeDrainParticle(ClientLevel level, double x, double y, double z, double radius, double angleRandom, double angle, int c1, int c2, Entity entity) {
-    super(level, entity.getX(), entity.getY(), entity.getZ());
+    super(level, entity.getX(), entity.getY(), entity.getZ(), entity);
+    this.tickMovement = false;
     this.angleRandom = angleRandom;
     this.radius = this.prevRadius = radius;
     this.angle = (int) angle;
     this.yOffset = (random.nextDouble() - 1.5) * 0.15;
-    this.entity = entity;
     this.lifetime = 15;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
     this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
@@ -53,46 +50,27 @@ public class LifeDrainParticle extends TextureSheetParticle {
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
+  protected void updateAlpha(float f) {
+    float FADE_IN_TICKS = 8f;
+    if (this.age <= FADE_IN_TICKS) {
+      this.alpha = (float) this.age / FADE_IN_TICKS;
+    } else {
+      this.alpha = 1f;
+    }
   }
 
   @Override
-  protected int getLightColor(float partialTick) {
-    return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
+  protected void updateQuadSize(float f) {
+    this.quadSize = 0.395f * (1.0f - f * f * f);
   }
 
   @Override
   public void tick() {
-    if (this.age++ >= this.lifetime || entity == null || entity.isRemoved()) {
-      this.remove();
-    } else {
-      this.xo = this.x = entity.getX();
-      this.yo = this.y = entity.getY();
-      this.zo = this.z = entity.getZ();
+    super.tick();
+    if (!this.removed) {
       this.prevRadius = this.radius;
-
       this.radius *= 0.91f;
       this.yOffset -= 0.02f;
-
-      float f = (float) this.age / (float) this.lifetime;
-
-      if (this.oB1 != this.bcol2) {
-        this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
-        this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
-        this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
-      }
-      this.oRoll = this.roll;
-      this.roll += this.rollAmount;
-
-      float FADE_IN_TICKS = 8f;
-      if (this.age <= FADE_IN_TICKS) {
-        this.alpha = (float) this.age / FADE_IN_TICKS;
-      } else {
-        this.alpha = 1f;
-      }
-
-      this.quadSize = 0.395f * (1.0f - f * f * f);
     }
   }
 

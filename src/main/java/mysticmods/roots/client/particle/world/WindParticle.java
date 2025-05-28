@@ -24,7 +24,7 @@ public class WindParticle extends TextureSheetVelocityParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
+    return RootsParticleRenderTypes.SORTED_TRANSLUCENT;
   }
 
   @Override
