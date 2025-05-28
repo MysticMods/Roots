@@ -1,16 +1,22 @@
 package mysticmods.roots.client.particle.world;
 
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class SortedParticle extends TextureSheetParticle {
+  protected double distanceToCamera = Float.MAX_VALUE;
+
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected float rollAmount;
   protected boolean forceLight = true;
   protected boolean tickMovement = true;
+  protected boolean autoUpdateDistance = true;
 
   protected SortedParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
@@ -43,6 +49,26 @@ public abstract class SortedParticle extends TextureSheetParticle {
 
   protected void updateSprite(float f) {
 
+  }
+
+  public void updateDistanceToCamera(Camera camera, float partialTicks) {
+    Vec3 camPos = camera.getPosition();
+    Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
+    Vec3 newPos = new Vec3(this.x, this.y, this.z);
+    Vec3 pos = oldPos.lerp(newPos, partialTicks);
+    this.distanceToCamera = pos.distanceTo(camPos);
+  }
+
+  public double getDistanceToCamera() {
+    return this.distanceToCamera;
+  }
+
+  @Override
+  public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
+    if (autoUpdateDistance) {
+      updateDistanceToCamera(renderInfo, partialTicks);
+    }
+    super.render(buffer, renderInfo, partialTicks);
   }
 
   @Override

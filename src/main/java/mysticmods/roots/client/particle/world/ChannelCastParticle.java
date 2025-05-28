@@ -45,6 +45,7 @@ public class ChannelCastParticle extends SortedEntityParticle {
     this.alpha = 1f;
     this.hasPhysics = false;
     this.depthOffset = (random.nextDouble() - 0.5) * 0.2;
+    this.autoUpdateDistance = false;
 
     updatePosition(0f);
     tick();
@@ -102,6 +103,7 @@ public class ChannelCastParticle extends SortedEntityParticle {
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
     this.updatePosition(0f);
+    updateDistanceToCamera(renderInfo, partialTicks);
     super.render(buffer, renderInfo, partialTicks);
   }
 

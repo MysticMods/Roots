@@ -75,12 +75,13 @@ public class RootsParticleRenderTypes {
       RenderSystem.depthMask(true);
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableBlend();
-      RenderSystem.blendFuncSeparate(
+      RenderSystem.defaultBlendFunc();
+/*      RenderSystem.blendFuncSeparate(
           GlStateManager.SourceFactor.SRC_ALPHA,
           GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
           GlStateManager.SourceFactor.ONE,
           GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
-      );
+      );*/
       return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 

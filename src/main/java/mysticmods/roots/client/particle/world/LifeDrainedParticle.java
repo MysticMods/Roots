@@ -1,18 +1,15 @@
 package mysticmods.roots.client.particle.world;
 
 import mysticmods.roots.client.RenderTickHandler;
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 
-public class LifeDrainedParticle extends TextureSheetParticle {
-  protected float oR1, oG1, oB1;
-  protected float rCol2, gCol2, bcol2;
-  protected float rollAmount;
+public class LifeDrainedParticle extends SortedParticle {
   private final Entity entity;
   private Vec3 smoothedTarget;
 
@@ -36,16 +33,6 @@ public class LifeDrainedParticle extends TextureSheetParticle {
     this.gravity = 0.01f;
   }
 
-  @Override
-  public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
-  }
-
-  @Override
-  protected int getLightColor(float partialTick) {
-    return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
-  }
-
   protected void calculateMovement() {
     Vec3 start = new Vec3(x, y, z);
     Vec3 end = entity.getPosition(RenderTickHandler.getPartialTick()).add(0, 0.6, 0);
@@ -65,25 +52,13 @@ public class LifeDrainedParticle extends TextureSheetParticle {
 
   @Override
   public void tick() {
-    if (entity == null || entity.isRemoved()) {
-      this.remove();
-      return;
-    }
     calculateMovement();
     super.tick();
-    if (!removed) {
-      float f = (float) this.age / (float) this.lifetime;
+  }
 
-      if (this.oB1 != this.bcol2) {
-        this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
-        this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
-        this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
-      }
-
-      this.oRoll = this.roll;
-      this.roll += this.rollAmount;
-      this.alpha = 1f - f * f * f;
-    }
+  @Override
+  protected void updateAlpha(float f) {
+    this.alpha = 1f - f * f * f;
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

@@ -108,6 +108,9 @@ public class LifeDrainParticle extends SortedEntityParticle {
       quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
     }
 
+    Vec3 renderPos = new Vec3(rx, ry, rz);
+    this.distanceToCamera = (float) renderPos.distanceToSqr(cam);
+
     renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
   }
 
