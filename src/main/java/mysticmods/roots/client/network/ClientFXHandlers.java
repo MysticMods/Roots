@@ -4,12 +4,12 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.client.particle.Beam;
+import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.client.particle.bolt.PositionProvider;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -224,35 +224,34 @@ public class ClientFXHandlers {
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = minecraft.level.random;
 
+
     if (entity != null) {
       int color1 = ModSpells.DANDELION_WINDS.get().getColor1();
       int color2 = ModSpells.DANDELION_WINDS.get().getColor2();
 
-      Vec3 origin = entity.getEyePosition().subtract(0, 0.6, 0);
-      Vec3 look = entity.getLookAngle().normalize();
+      Vec3 look = entity.getViewVector(1.0F);
+      double yaw = Math.atan2(look.z, look.x) - Math.PI / 2;
 
-      int streamCount = 6;
+      double dirX = -Math.sin(yaw);
+      double dirZ = Math.cos(yaw);
 
-      for (int stream = 0; stream < streamCount; stream++) {
-        // Slight variation per stream
-        float angle = (float) ((random.nextDouble() - 0.5) * Math.toRadians(8)); // very narrow cone
-        Vec3 streamDir = look.yRot(angle).normalize();
+      for (int i = 0; i < 18; i++) {
+        double x = (random.nextDouble() - 0.5);
+        double z = (random.nextDouble() - 0.5);
+        double spawnX = entity.getX() - dirX * 0.5 + x * 0.2;
+        double spawnY = entity.getY() + entity.getBbHeight() * 0.8 + (random.nextDouble() - 0.5) * 0.2;
+        double spawnZ = entity.getZ() - dirZ * 0.5 + x * 0.2;
 
-        // Base speed per stream (uniform)
-        Vec3 baseMotion = streamDir.scale(0.07).add(0, 0.04, 0);
+        double speed = 0.5 + random.nextDouble() * 0.8;
+        double vx = dirX * speed + x * 0.05;
+        double vy = random.nextDouble() * 0.05;
+        double vz = dirZ * speed + z * 0.05;
 
-        // Each stream spawns multiple particles in a row
-        for (int i = 0; i < 5; i++) {
-          RootsParticleOptions opts = random.nextBoolean()
-              ? new RootsParticleOptions(ModParticles.WIND, color1, color2)
-              : new RootsParticleOptions(ModParticles.WIND, color2, color1);
-
-          // Offset origin slightly to make trails
-          Vec3 offset = streamDir.scale(i * 0.1);
-          Vec3 spawnPos = origin.add(offset);
-
-          minecraft.level.addParticle(opts, spawnPos.x, spawnPos.y, spawnPos.z, baseMotion.x, baseMotion.y, baseMotion.z);
-        }
+        minecraft.level.addParticle(
+            new RootsParticleOptions(ModParticles.WIND, color1, color2),
+            spawnX, spawnY, spawnZ,
+            vx, vy, vz
+        );
       }
     }
   }
@@ -627,7 +626,7 @@ public class ClientFXHandlers {
     }
   }
 
-  public static void drainLife (int entityId, int casterId) {
+  public static void drainLife(int entityId, int casterId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     Entity caster = minecraft.level.getEntity(casterId);
