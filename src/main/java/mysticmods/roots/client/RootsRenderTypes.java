@@ -48,6 +48,7 @@ public class RootsRenderTypes {
       false,
       true,
       RenderType.CompositeState.builder()
+          .setCullState(RenderType.NO_CULL)
           .setShaderState(PARTICLE_SHADER)
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))

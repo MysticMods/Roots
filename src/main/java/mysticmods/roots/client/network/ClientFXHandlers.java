@@ -235,23 +235,27 @@ public class ClientFXHandlers {
       double dirX = -Math.sin(yaw);
       double dirZ = Math.cos(yaw);
 
-      for (int i = 0; i < 18; i++) {
-        double x = (random.nextDouble() - 0.5);
-        double z = (random.nextDouble() - 0.5);
-        double spawnX = entity.getX() - dirX * 0.5 + x * 0.2;
-        double spawnY = entity.getY() + entity.getBbHeight() * 0.8 + (random.nextDouble() - 0.5) * 0.2;
-        double spawnZ = entity.getZ() - dirZ * 0.5 + x * 0.2;
+      double sideX = dirZ;
+      double sideZ = -dirX;
 
-        double speed = 0.5 + random.nextDouble() * 0.8;
-        double vx = dirX * speed + x * 0.05;
-        double vy = random.nextDouble() * 0.05;
-        double vz = dirZ * speed + z * 0.05;
+      for (int i = 0; i < 28; i++) {
+        double lateralOffset = (random.nextDouble() - 0.5) * 6.0;
+        double forwardOffset = 0.5;
 
-        minecraft.level.addParticle(
-            new RootsParticleOptions(ModParticles.WIND, color1, color2),
-            spawnX, spawnY, spawnZ,
-            vx, vy, vz
-        );
+      double spawnX = entity.getX() - dirX * forwardOffset + sideX * lateralOffset;
+      double spawnY = entity.getY() + entity.getBbHeight() * 0.5 + (random.nextDouble() - 0.5) * 1.5;
+      double spawnZ = entity.getZ() - dirZ * forwardOffset + sideZ * lateralOffset;
+
+      double speed = 0.4 + random.nextDouble() * 0.4;
+      double vx = dirX * speed;
+      double vy = 0;
+      double vz = dirZ * speed;
+
+      minecraft.level.addParticle(
+          new RootsParticleOptions(ModParticles.WIND, color1, color2),
+          spawnX, spawnY, spawnZ,
+          vx, vy, vz
+      );
       }
     }
   }

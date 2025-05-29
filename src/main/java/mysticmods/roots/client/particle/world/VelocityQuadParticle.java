@@ -45,32 +45,32 @@ public abstract class VelocityQuadParticle extends Particle {
     float vz = (float) Mth.lerp(partialTicks, this.zdo, this.zd);
 
     Quaternionf quaternionf = new Quaternionf();
-Vec3 velocity = new Vec3(vx, vy, vz);
-if (velocity.lengthSqr() > 1e-6f) {
-  Vector3f right = new Vector3f((float) velocity.x, (float) velocity.y, (float) velocity.z).normalize(); // X axis
-  Vector3f up = new Vector3f(0, 1, 0);
+    Vec3 velocity = new Vec3(vx, vy, vz);
+    if (velocity.lengthSqr() > 1e-6f) {
+      Vector3f right = new Vector3f((float) velocity.x, (float) velocity.y, (float) velocity.z).normalize(); // X axis
+      Vector3f up = new Vector3f(0, 1, 0);
 
-  // handle degenerate case where up and right are parallel
-  if (Math.abs(right.dot(up)) > 0.99f) {
-    up.set(0, 0, 1);
-  }
+      // handle degenerate case where up and right are parallel
+      if (Math.abs(right.dot(up)) > 0.99f) {
+        up.set(0, 0, 1);
+      }
 
-  Vector3f forward = new Vector3f();
-  up.cross(right, forward).normalize(); // Z axis (out of quad)
+      Vector3f forward = new Vector3f();
+      up.cross(right, forward).normalize(); // Z axis (out of quad)
 
-  up = new Vector3f();
-  forward.cross(right, up).normalize(); // recompute corrected Y axis
+      up = new Vector3f();
+      forward.cross(right, up).normalize(); // recompute corrected Y axis
 
-  Matrix4f matrix = new Matrix4f()
-      .identity()
-      .m00(right.x).m01(up.x).m02(forward.x)
-      .m10(right.y).m11(up.y).m12(forward.y)
-      .m20(right.z).m21(up.z).m22(forward.z);
+      Matrix4f matrix = new Matrix4f()
+          .identity()
+          .m00(right.x).m01(up.x).m02(forward.x)
+          .m10(right.y).m11(up.y).m12(forward.y)
+          .m20(right.z).m21(up.z).m22(forward.z);
 
-  quaternionf.setFromNormalized(matrix);
-} else {
-  quaternionf.identity();
-}
+      quaternionf.setFromNormalized(matrix);
+    } else {
+      quaternionf.identity();
+    }
     if (this.roll != 0.0F) {
       quaternionf.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
     }
@@ -80,23 +80,23 @@ if (velocity.lengthSqr() > 1e-6f) {
 
   protected void renderRotatedQuad(VertexConsumer buffer, Quaternionf quaternion, float x, float y, float z, float partialTicks) {
     float f = this.getQuadSize(partialTicks);
-    float f1 = this.getU0();
-    float f2 = this.getU1();
-    float f3 = this.getV0();
-    float f4 = this.getV1();
+    float u0 = this.getU0();
+    float u1 = this.getU1();
+    float v0 = this.getV0();
+    float v1 = this.getV1();
     int i = this.getLightColor(partialTicks);
 
     // Front face
-    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, -1.0F, f, f2, f4, i);
-    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, 1.0F, f, f2, f3, i);
-    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, 1.0F, f, f1, f3, i);
-    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, f1, f4, i);
+    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, -1.0F, f, u1, v1, i);
+    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, 1.0F, f, u1, v0, i);
+    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, 1.0F, f, u0, v0, i);
+    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, u0, v1, i);
 
     // Back face
-    this.renderVertex(buffer, quaternion, x, y, z, -1.0f, -1.0f, f, f1, f4, i);
-    this.renderVertex(buffer, quaternion, x, y, z, -1.0f, 1.0f, f, f1, f3, i);
-    this.renderVertex(buffer, quaternion, x, y, z, 1.0f, 1.0f, f, f2, f3, i);
-    this.renderVertex(buffer, quaternion, x, y, z, 1.0f, -1.0f, f, f2, f4, i);
+this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, u0, v1, i);
+this.renderVertex(buffer, quaternion, x, y, z, -1.0F,  1.0F, f, u0, v0, i);
+this.renderVertex(buffer, quaternion, x, y, z,  1.0F,  1.0F, f, u1, v0, i);
+this.renderVertex(buffer, quaternion, x, y, z,  1.0F, -1.0F, f, u1, v1, i);
   }
 
   private void renderVertex(

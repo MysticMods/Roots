@@ -30,7 +30,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.sprite(ModParticles.ANIMAL_HARVEST.get(), RootsAPI.rl("simple"));
 
     this.sprite(ModParticles.TEST.get(), RootsAPI.rl("simple"));
-    this.sprite(ModParticles.WIND.get(), RootsAPI.rl("simple"));
+    this.sprite(ModParticles.WIND.get(), RootsAPI.rl("wind"));
 
     this.spriteSet(ModParticles.SKY_SOARER.get(), RootsAPI.rl("feather"), 2, false);
     this.sprite(ModParticles.SKY_SOARER_PUFF.get(), RootsAPI.rl("simple"));
