@@ -6,7 +6,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 
-public class SmokeParticle extends SortedParticle {
+public class SmokeParticle extends RootsParticle {
   private final SpriteSet sprites;
 
   protected SmokeParticle(SpriteSet sprites, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {

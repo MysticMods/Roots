@@ -9,7 +9,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 
-public class LifeDrainedParticle extends SortedParticle {
+public class LifeDrainedParticle extends RootsParticle {
   private final Entity entity;
   private Vec3 smoothedTarget;
 

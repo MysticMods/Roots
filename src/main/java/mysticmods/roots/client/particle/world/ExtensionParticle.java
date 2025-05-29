@@ -6,7 +6,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 
-public class ExtensionParticle extends SortedParticle {
+public class ExtensionParticle extends RootsParticle {
   protected ExtensionParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.lifetime = 59;

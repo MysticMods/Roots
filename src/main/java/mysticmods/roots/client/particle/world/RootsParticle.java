@@ -1,29 +1,26 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.world.phys.Vec3;
 
-public abstract class SortedParticle extends TextureSheetParticle {
-  protected double distanceToCamera = Float.MAX_VALUE;
-
+public abstract class RootsParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected float rollAmount;
   protected boolean forceLight = true;
   protected boolean tickMovement = true;
-  protected boolean autoUpdateDistance = true;
   protected boolean delayedRender = true;
 
-  protected SortedParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+  protected RootsParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
   }
 
-  protected SortedParticle(ClientLevel level, double x, double y, double z) {
+  protected RootsParticle(ClientLevel level, double x, double y, double z) {
     super(level, x, y, z);
   }
 
@@ -52,31 +49,17 @@ public abstract class SortedParticle extends TextureSheetParticle {
 
   }
 
-  public void updateDistanceToCamera(Camera camera, float partialTicks) {
-    Vec3 camPos = camera.getPosition();
-    Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
-    Vec3 newPos = new Vec3(this.x, this.y, this.z);
-    Vec3 pos = oldPos.lerp(newPos, partialTicks);
-    this.distanceToCamera = pos.distanceTo(camPos);
-  }
+  protected boolean shouldRender () {
+    if (!RenderTickHandler.isRenderingDelayedParticles() || delayedRender) {
+      return true;
+    }
 
-  public double getDistanceToCamera() {
-    return this.distanceToCamera;
+    return false;
   }
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    if (autoUpdateDistance) {
-      updateDistanceToCamera(renderInfo, partialTicks);
-    }
-    if (!delayedRender) {
-      super.render(buffer, renderInfo, partialTicks);
-    }
-  }
-
-  public void delayedRender (VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    if (delayedRender) {
-      updateDistanceToCamera(renderInfo, partialTicks);
+    if (shouldRender()) {
       super.render(buffer, renderInfo, partialTicks);
     }
   }
@@ -125,7 +108,7 @@ public abstract class SortedParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.SORTED_TRANSLUCENT;
+    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
   }
 
 }

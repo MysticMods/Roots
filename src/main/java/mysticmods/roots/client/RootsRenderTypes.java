@@ -51,7 +51,7 @@ public class RootsRenderTypes {
           .setShaderState(PARTICLE_SHADER)
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-          .setWriteMaskState(RenderStateShard.COLOR_WRITE)
+          .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .createCompositeState(false));

@@ -7,7 +7,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.world.phys.Vec3;
 
-public class ChannelTargetCastParticle extends SortedParticle {
+public class ChannelTargetCastParticle extends RootsParticle {
   protected boolean bounced = false;
   protected Vec3 stop;
 

@@ -12,9 +12,9 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
 
-public class ChannelNoCastParticle extends SortedEntityParticle {
+public class ChannelNoCastParticle extends RootsEntityParticle {
   private static final int threshold = 13;
 
   private double fallSpeed = 0;
@@ -41,7 +41,6 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
     this.alpha = 1f;
     this.hasPhysics = false;
     this.tickMovement = false;
-    this.autoUpdateDistance = false;
     updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
     this.xo = this.x;
     this.yo = this.y;
@@ -50,7 +49,13 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
 
   private void updatePosition(Camera camera, float partialTicks) {
     if (entity != null) {
-      Vec3 lookDir = entity.getViewVector(partialTicks).normalize();
+      Vec3 eye0 = entity.getEyePosition(0);
+      Vec3 eye1 = entity.getEyePosition(1);
+      Vec3 eyePos = eye0.lerp(eye1, partialTicks);
+
+      Vec3 look0 = entity.getViewVector(0);
+      Vec3 look1 = entity.getViewVector(1);
+      Vec3 lookDir = look0.lerp(look1, partialTicks).normalize();
       Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
       Vec3 upVec = rightVec.cross(lookDir).normalize();
 
@@ -58,7 +63,6 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
       double localY = Math.sin(angle) * radius;
       Vec3 circleOffset = rightVec.scale(localX).add(upVec.scale(localY));
 
-      Vec3 eyePos = entity.getEyePosition();
       Vec3 start = eyePos.add(lookDir.scale(0.6)).add(circleOffset).add(rightVec.scale(hand));
 
       // Renderer should automatically lerp this
@@ -69,12 +73,6 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
         this.y = start.y; //Mth.lerp(partialTicks, start.y, this.yo);
       }
       this.z = start.z; //Mth.lerp(partialTicks, start.z, this.zo);
-
-      Vec3 newPos = new Vec3(this.x, this.y, this.z);
-      Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
-      Vec3 pos = oldPos.lerp(newPos, partialTicks);
-      Vec3 camPos = camera.getPosition();
-      this.distanceToCamera = pos.distanceTo(camPos);
     }
   }
 
@@ -95,14 +93,22 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    updatePosition(renderInfo, partialTicks);
-    super.render(buffer, renderInfo, partialTicks);
-  }
+    if (shouldRender()) {
+      updatePosition(renderInfo, partialTicks);
 
-  @Override
-  public void delayedRender(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    this.updatePosition(renderInfo, partialTicks);
-    super.delayedRender(buffer, renderInfo, partialTicks);
+      Vec3 cam = renderInfo.getPosition();
+      float rx = (float) (this.x - cam.x);
+      float ry = (float) (this.y - cam.y);
+      float rz = (float) (this.z - cam.z);
+
+      Quaternionf quaternion = new Quaternionf();
+      this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
+      if (this.roll != 0.0f) {
+        quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
+      }
+
+      renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
+    }
   }
 
   public static class Provider implements ParticleProvider<RootsParticleOptions> {

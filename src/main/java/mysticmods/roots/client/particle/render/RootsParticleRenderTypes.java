@@ -69,7 +69,7 @@ public class RootsParticleRenderTypes {
     }
   };
 
-  public static ParticleRenderType SORTED_TRANSLUCENT = new ParticleRenderType() {
+  public static ParticleRenderType DELAYED_TRANSLUCENT = new ParticleRenderType() {
     @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
       RenderSystem.depthMask(false);

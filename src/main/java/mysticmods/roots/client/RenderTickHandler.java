@@ -12,7 +12,6 @@ import mysticmods.roots.client.particle.BeamManager;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
 import mysticmods.roots.client.particle.bolt.IBoltEffect;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
-import mysticmods.roots.client.particle.world.SortedParticle;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinLevelRenderer;
@@ -24,7 +23,6 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -44,7 +42,8 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Queue;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class RenderTickHandler {
@@ -52,6 +51,12 @@ public class RenderTickHandler {
 
   private static boolean outliningArea = false;
   private static final BoltRenderer boltRenderer = new BoltRenderer();
+
+  private static boolean renderingDelayedParticles = false;
+
+  public static boolean isRenderingDelayedParticles() {
+    return renderingDelayedParticles;
+  }
 
   public static float getPartialTick() {
     return Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
@@ -70,56 +75,48 @@ public class RenderTickHandler {
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
       clientTicks += event.getPartialTick().getGameTimeDeltaPartialTick(false);
     }
-    if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && boltRenderer.hasBoltsToRender()) {
-      MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
-      boltRenderer.render(event.getPartialTick()
-          .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
-    } else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
-      MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
+    MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
+    if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
+      if (boltRenderer.hasBoltsToRender()) {
+        boltRenderer.render(event.getPartialTick()
+            .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
+      }
+
       BeamManager.render(event.getPartialTick()
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
       renderer.endLastBatch();
-    } else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
-      List<SortedParticle> toRender = new ArrayList<>();
 
+
+      renderingDelayedParticles = true;
       Queue<Particle> particles = ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).rootsGetParticles()
-          .get(RootsParticleRenderTypes.SORTED_TRANSLUCENT);
+          .get(RootsParticleRenderTypes.DELAYED_TRANSLUCENT);
       if (particles == null || particles.isEmpty()) {
         return;
       }
 
-      for (Particle particle : particles) {
-        if (particle instanceof SortedParticle sortedParticle) {
-          toRender.add(sortedParticle);
-        }
-      }
-
-      toRender.sort(Comparator.comparingDouble(SortedParticle::getDistanceToCamera));
-
-      LightTexture lightTexture = Minecraft.getInstance().gameRenderer.lightTexture();
       Frustum frustum = event.getFrustum();
       float partialTick = getPartialTick();
       Camera camera = event.getCamera();
-      lightTexture.turnOnLightLayer();
 
-      MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
       VertexConsumer consumer = renderer.getBuffer(RootsRenderTypes.PARTICLES);
-      for (SortedParticle particle : toRender) {
+      for (Particle particle : particles) {
         if (!frustum.isVisible(particle.getRenderBoundingBox(partialTick))) continue;
         try {
-          particle.delayedRender(consumer, camera, partialTick);
+          particle.render(consumer, camera, partialTick);
         } catch (Throwable throwable) {
           CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering Particle");
           CrashReportCategory crashreportcategory = crashreport.addCategory("Particle being rendered");
           crashreportcategory.setDetail("Particle", particle::toString);
-          crashreportcategory.setDetail("Particle Type", RootsParticleRenderTypes.SORTED_TRANSLUCENT::toString);
+          crashreportcategory.setDetail("Particle Type", RootsParticleRenderTypes.DELAYED_TRANSLUCENT::toString);
+          renderingDelayedParticles = false;
           throw new ReportedException(crashreport);
         }
       }
       renderer.endBatch(RootsRenderTypes.PARTICLES);
       RenderSystem.disableBlend();
-      lightTexture.turnOffLightLayer();
     }
+
+    renderingDelayedParticles = false;
   }
 
   @SubscribeEvent

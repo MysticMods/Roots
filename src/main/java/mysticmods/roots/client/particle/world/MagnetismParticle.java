@@ -11,9 +11,8 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.Vec3;
 
-public class MagnetismParticle extends SortedEntityParticle {
+public class MagnetismParticle extends RootsEntityParticle {
   protected double radius, oRadius;
   protected final double yOffset;
   protected final float angle, rads;
@@ -40,7 +39,6 @@ public class MagnetismParticle extends SortedEntityParticle {
     this.rollAmount = random.nextFloat() * 0.1f;
     this.quadSize = 0.195f;
     this.gravity = 0.01f;
-    this.autoUpdateDistance = false;
     this.updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
   }
 
@@ -74,17 +72,11 @@ public class MagnetismParticle extends SortedEntityParticle {
     this.z = entity.getZ() + offsetZ;
     this.y = entity.getY() + entity.getEyeHeight() - 0.5 + yOffset;
 
-    Vec3 newPos = new Vec3(this.x, this.y, this.z);
-
     if (age == 0) {
       this.xo = this.x;
       this.yo = this.y;
       this.zo = this.z;
     }
-    Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
-    Vec3 pos = oldPos.lerp(newPos, partialTicks);
-    Vec3 camPos = renderInfo.getPosition();
-    this.distanceToCamera = pos.distanceTo(camPos);
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

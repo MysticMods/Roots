@@ -5,12 +5,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class SortedEntityParticle extends SortedParticle {
+public abstract class RootsEntityParticle extends RootsParticle {
   protected final Entity entity;
   @Nullable
   protected final LivingEntity living;
 
-  protected SortedEntityParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, Entity entity) {
+  protected RootsEntityParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, Entity entity) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.entity = entity;
     if (entity instanceof LivingEntity livingEntity) {
@@ -20,7 +20,7 @@ public abstract class SortedEntityParticle extends SortedParticle {
     }
   }
 
-  protected SortedEntityParticle(ClientLevel level, double x, double y, double z, Entity entity) {
+  protected RootsEntityParticle(ClientLevel level, double x, double y, double z, Entity entity) {
     super(level, x, y, z);
     this.entity = entity;
     if (entity instanceof LivingEntity livingEntity) {

@@ -15,8 +15,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 
-public class ChannelCastParticle extends SortedEntityParticle {
+public class ChannelCastParticle extends RootsEntityParticle {
   private final double radius;
   private double angle, oAngle;
   private final InteractionHand hand;
@@ -46,7 +47,6 @@ public class ChannelCastParticle extends SortedEntityParticle {
     this.alpha = 1f;
     this.hasPhysics = false;
     this.depthOffset = (random.nextDouble() - 0.5) * 0.2;
-    this.autoUpdateDistance = false;
     updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
     this.xo = this.x;
     this.yo = this.y;
@@ -55,8 +55,13 @@ public class ChannelCastParticle extends SortedEntityParticle {
 
   private void updatePosition(Camera camera, float partialTicks) {
     if (entity != null) {
-      Vec3 eyePos = entity.getEyePosition();
-      Vec3 lookDir = entity.getViewVector(partialTicks).normalize();
+      Vec3 eye0 = entity.getEyePosition(0);
+      Vec3 eye1 = entity.getEyePosition(1);
+      Vec3 eyePos = eye0.lerp(eye1, partialTicks);
+
+      Vec3 look0 = entity.getViewVector(0);
+      Vec3 look1 = entity.getViewVector(1);
+      Vec3 lookDir = look0.lerp(look1, partialTicks).normalize();
       Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
       Vec3 upVec = rightVec.cross(lookDir).normalize();
 
@@ -76,15 +81,11 @@ public class ChannelCastParticle extends SortedEntityParticle {
           .add(lookDir.scale(0.6 + smoothedDepth))
           .add(rightVec.scale(handOffset));
 
-      this.x = basePos.x + circleOffset.x; //Mth.lerp(0, basePos.x + circleOffset.x, this.xo);
-      this.y = basePos.y + circleOffset.y; //Mth.lerp(0, basePos.y + circleOffset.y, this.yo);
-      this.z = basePos.z + circleOffset.z; //Mth.lerp(0, basePos.z + circleOffset.z, this.zo);
+      Vec3 newPos = basePos.add(circleOffset);
 
-      Vec3 newPos = new Vec3(this.x, this.y, this.z);
-      Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
-      Vec3 pos = oldPos.lerp(newPos, partialTicks);
-      Vec3 camPos = camera.getPosition();
-      this.distanceToCamera = pos.distanceTo(camPos);
+      this.x = newPos.x;
+      this.y = newPos.y;
+      this.z = newPos.z;
     }
   }
 
@@ -109,14 +110,21 @@ public class ChannelCastParticle extends SortedEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    this.updatePosition(renderInfo, partialTicks);
-    super.render(buffer, renderInfo, partialTicks);
-  }
+    if (shouldRender()) {
+      updatePosition(renderInfo, partialTicks);
+      Vec3 cam = renderInfo.getPosition();
+      float rx = (float) (this.x - cam.x);
+      float ry = (float) (this.y - cam.y);
+      float rz = (float) (this.z - cam.z);
 
-  @Override
-  public void delayedRender(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    this.updatePosition(renderInfo, partialTicks);
-    super.delayedRender(buffer, renderInfo, partialTicks);
+      Quaternionf quaternion = new Quaternionf();
+      this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
+      if (this.roll != 0.0f) {
+        quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
+      }
+
+      renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
+    }
   }
 
   public static class Provider implements ParticleProvider<RootsParticleOptions> {

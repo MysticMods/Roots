@@ -1,14 +1,12 @@
 package mysticmods.roots.client.particle.world;
 
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 
-public class ShatterBeamParticle extends SortedParticle {
+public class ShatterBeamParticle extends RootsParticle {
   protected float startScale;
 
   protected ShatterBeamParticle(ClientLevel level, double x, double y, double z, double scale, double unused, double unused2, int c1, int c2) {
