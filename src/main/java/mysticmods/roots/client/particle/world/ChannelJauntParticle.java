@@ -60,7 +60,7 @@ public class ChannelJauntParticle extends RootsEntityParticle {
     if (entity != null) {
       Vec3 eye0 = entity.getEyePosition(0);
       Vec3 eye1 = entity.getEyePosition(1);
-      Vec3 eyePos = eye0.lerp(eye1, partialTicks);
+      Vec3 eyePos = eye0.lerp(eye1, partialTicks).subtract(0, 0.4, 0);
 
       Vec3 look0 = entity.getViewVector(0);
       Vec3 look1 = entity.getViewVector(1);
@@ -77,7 +77,7 @@ public class ChannelJauntParticle extends RootsEntityParticle {
       Vec3 basePos = eyePos
           .add(lookDir.scale(0.6 + smoothedDepth))
           .add(rightVec.scale(handOffset + (motionUp ? -0.08 : 0.08) + jiggle))
-          .add(0, motionUp ? 0 : 0.2, -0.3);
+          .add(0, motionUp ? 0 : 0.7, 0);
 
       double fallSpeed = Mth.lerp(partialTicks, oFallSpeed, this.fallSpeed);
 

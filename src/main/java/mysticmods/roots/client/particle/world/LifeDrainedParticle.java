@@ -47,7 +47,7 @@ public class LifeDrainedParticle extends RootsParticle {
 
     Vec3 direction = diff.normalize().scale(0.37f * dist * f);
     Vec3 current = new Vec3(xd, yd, zd);
-    Vec3 smoothed = current.lerp(direction, 0.2);
+    Vec3 smoothed = current.lerp(direction, 0.5 * f);
     this.xd = smoothed.x;
     this.yd = smoothed.y;
     this.zd = smoothed.z;

@@ -19,6 +19,7 @@ public class ChannelNoCastParticle extends RootsEntityParticle {
 
   private double fallSpeed = 0;
   private final double angle, radius, hand;
+  private final double depthOffset;
 
   public ChannelNoCastParticle(ClientLevel level, double x, double y, double z,
                                double radius, double angle, double hand,
@@ -41,6 +42,7 @@ public class ChannelNoCastParticle extends RootsEntityParticle {
     this.alpha = 1f;
     this.hasPhysics = false;
     this.tickMovement = false;
+    this.depthOffset = (random.nextDouble() - 0.5) * 0.2;
     updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
     this.xo = this.x;
     this.yo = this.y;
@@ -63,7 +65,10 @@ public class ChannelNoCastParticle extends RootsEntityParticle {
       double localY = Math.sin(angle) * radius;
       Vec3 circleOffset = rightVec.scale(localX).add(upVec.scale(localY));
 
-      Vec3 start = eyePos.add(lookDir.scale(0.6)).add(circleOffset).add(rightVec.scale(hand));
+      float t = (age + partialTicks) / lifetime;
+      double smoothedDepth = Mth.lerp(t, 0.0, depthOffset);
+
+      Vec3 start = eyePos.add(lookDir.scale(0.6 + smoothedDepth)).add(circleOffset).add(rightVec.scale(hand));
 
       // Renderer should automatically lerp this
       this.x = start.x; //Mth.lerp(partialTicks, start.x, this.xo);
