@@ -17,6 +17,7 @@ public abstract class SortedParticle extends TextureSheetParticle {
   protected boolean forceLight = true;
   protected boolean tickMovement = true;
   protected boolean autoUpdateDistance = true;
+  protected boolean delayedRender = false;
 
   protected SortedParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
@@ -68,7 +69,16 @@ public abstract class SortedParticle extends TextureSheetParticle {
     if (autoUpdateDistance) {
       updateDistanceToCamera(renderInfo, partialTicks);
     }
-    super.render(buffer, renderInfo, partialTicks);
+    if (!delayedRender) {
+      super.render(buffer, renderInfo, partialTicks);
+    }
+  }
+
+  public void delayedRender (VertexConsumer buffer, Camera renderInfo, float partialTicks) {
+    if (delayedRender) {
+      updateDistanceToCamera(renderInfo, partialTicks);
+      super.render(buffer, renderInfo, partialTicks);
+    }
   }
 
   @Override

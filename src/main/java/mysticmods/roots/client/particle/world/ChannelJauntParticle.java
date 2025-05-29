@@ -1,6 +1,7 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -17,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class ChannelJauntParticle extends SortedEntityParticle {
   private final InteractionHand hand;
-  private double fallSpeed;
+  private double fallSpeed, oFallSpeed;
   private final double depthOffset, jiggle;
   private final boolean motionUp;
 
@@ -48,31 +49,42 @@ public class ChannelJauntParticle extends SortedEntityParticle {
     this.hasPhysics = false;
     this.depthOffset = (random.nextDouble() - 0.5) * 0.2;
     this.jiggle = (random.nextDouble() - 0.5) * 0.1;
-
-    tick();
+    this.autoUpdateDistance = false;
+    updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
+    this.xo = this.x;
+    this.yo = this.y;
+    this.zo = this.z;
   }
 
-  private void updatePosition(float partialTicks) {
+  private void updatePosition(Camera camera, float partialTicks) {
     if (entity != null) {
-      Vec3 eyePos = entity.getEyePosition(partialTicks).subtract(0, 0.4, 0);
+      Vec3 eyePos = entity.getEyePosition().subtract(0, 0.4, 0);
       Vec3 lookDir = entity.getViewVector(partialTicks).normalize();
       Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
 
       // TODO: MAJOR TODO: Left-handedness
       // Hand-based horizontal offset (right for MAIN_HAND, left for OFF_HAND)
       double handOffset = hand == InteractionHand.MAIN_HAND ? 0.25 : -0.25;
-      float t = (float) (age + partialTicks) / lifetime;
+      float t = (float) age / (float) lifetime;
       double smoothedDepth = Mth.lerp(t, 0.0, depthOffset);
 
       // Final particle base position, slightly in front of the face and offset to side
       Vec3 basePos = eyePos
           .add(lookDir.scale(0.6 + smoothedDepth))
-          .add(rightVec.scale(handOffset + (motionUp ? -0.1 : 0.1) + jiggle))
+          .add(rightVec.scale(handOffset + (motionUp ? -0.08 : 0.08) + jiggle))
           .add(0, motionUp ? 0 : 0.7, 0);
 
-      this.x = Mth.lerp(partialTicks, basePos.x, this.xo);
-      this.y = Mth.lerp(partialTicks, basePos.y - fallSpeed, this.yo);
-      this.z = Mth.lerp(partialTicks, basePos.z, this.zo);
+      double fallSpeed = Mth.lerp(partialTicks, oFallSpeed, this.fallSpeed);
+
+      this.x = basePos.x; //Mth.lerp(partialTicks, basePos.x, this.xo);
+      this.y = basePos.y - fallSpeed; //Mth.lerp(partialTicks, basePos.y - fallSpeed, this.yo);
+      this.z = basePos.z; //Mth.lerp(partialTicks, basePos.z, this.zo);
+
+      Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
+      Vec3 newPos = new Vec3(this.x, this.y, this.z);
+      Vec3 pos = oldPos.lerp(newPos, partialTicks);
+      Vec3 camPos = camera.getPosition();
+      this.distanceToCamera = pos.distanceTo(camPos);
     }
   }
 
@@ -80,7 +92,8 @@ public class ChannelJauntParticle extends SortedEntityParticle {
   public void tick() {
     super.tick();
     if (!this.removed) {
-      this.fallSpeed += motionUp ? -0.08 : 0.08;
+      this.oFallSpeed = fallSpeed;
+      this.fallSpeed += motionUp ? -0.03 : 0.03;
     }
   }
 
@@ -96,7 +109,7 @@ public class ChannelJauntParticle extends SortedEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    this.updatePosition(0f);
+    this.updatePosition(renderInfo, partialTicks);
     super.render(buffer, renderInfo, partialTicks);
   }
 

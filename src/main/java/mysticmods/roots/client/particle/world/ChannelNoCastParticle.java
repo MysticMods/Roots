@@ -1,8 +1,10 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -10,6 +12,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class ChannelNoCastParticle extends SortedEntityParticle {
   private static final int threshold = 13;
@@ -38,13 +41,16 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
     this.alpha = 1f;
     this.hasPhysics = false;
     this.tickMovement = false;
-    updatePosition();
-    tick();
+    this.autoUpdateDistance = false;
+    updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
+    this.xo = this.x;
+    this.yo = this.y;
+    this.zo = this.z;
   }
 
-  private void updatePosition() {
+  private void updatePosition(Camera camera, float partialTicks) {
     if (entity != null) {
-      Vec3 lookDir = entity.getViewVector(1.0f).normalize();
+      Vec3 lookDir = entity.getViewVector(partialTicks).normalize();
       Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
       Vec3 upVec = rightVec.cross(lookDir).normalize();
 
@@ -52,16 +58,23 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
       double localY = Math.sin(angle) * radius;
       Vec3 circleOffset = rightVec.scale(localX).add(upVec.scale(localY));
 
-      Vec3 eyePos = entity.getEyePosition(1.0f);
+      Vec3 eyePos = entity.getEyePosition();
       Vec3 start = eyePos.add(lookDir.scale(0.6)).add(circleOffset).add(rightVec.scale(hand));
 
-      this.x = Mth.lerp(0, start.x, this.xo);
+      // Renderer should automatically lerp this
+      this.x = start.x; //Mth.lerp(partialTicks, start.x, this.xo);
       if (age > threshold) {
-        this.y = Mth.lerp(0, start.y - fallSpeed, this.yo);
+        this.y = start.y - fallSpeed; //Mth.lerp(partialTicks, start.y - fallSpeed, this.yo);
       } else {
-        this.y = Mth.lerp(0, start.y, this.yo);
+        this.y = start.y; //Mth.lerp(partialTicks, start.y, this.yo);
       }
-      this.z = Mth.lerp(0, start.z, this.zo);
+      this.z = start.z; //Mth.lerp(partialTicks, start.z, this.zo);
+
+      Vec3 newPos = new Vec3(this.x, this.y, this.z);
+      Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
+      Vec3 pos = oldPos.lerp(newPos, partialTicks);
+      Vec3 camPos = camera.getPosition();
+      this.distanceToCamera = pos.distanceTo(camPos);
     }
   }
 
@@ -72,7 +85,6 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
       if (age > threshold) {
         fallSpeed += 0.03; // acceleration
       }
-      updatePosition();
     }
   }
 
@@ -83,7 +95,7 @@ public class ChannelNoCastParticle extends SortedEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    updatePosition();
+    updatePosition(renderInfo, partialTicks);
     super.render(buffer, renderInfo, partialTicks);
   }
 

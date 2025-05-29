@@ -38,11 +38,14 @@ public class LifeDrainedParticle extends SortedParticle {
     Vec3 end = entity.getPosition(RenderTickHandler.getPartialTick()).add(0, 0.6, 0);
     smoothedTarget = smoothedTarget.lerp(end, 0.3);
     Vec3 diff = smoothedTarget.subtract(start);
-    if (end.subtract(start).length() < 0.1f) {
+    double dist = end.subtract(start).length();
+    if (dist < 0.1f) {
       this.remove();
       return;
     }
-    Vec3 direction = diff.normalize().scale(0.17f);
+    double f = Math.pow((double) this.age / (double) this.lifetime, 2);
+
+    Vec3 direction = diff.normalize().scale(0.37f * dist * f);
     Vec3 current = new Vec3(xd, yd, zd);
     Vec3 smoothed = current.lerp(direction, 0.2);
     this.xd = smoothed.x;

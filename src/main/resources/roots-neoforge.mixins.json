@@ -31,7 +31,6 @@
     "accessor.AccessorMixinItemRenderer",
     "client.MixinEntity",
     "client.MixinLocalPlayer",
-    "client.MixinParticleEngine",
     "client.accessor.AccessorMixinEntityRenderer",
     "client.accessor.AccessorMixinLevelRenderer",
     "client.accessor.AccessorMixinParticle",

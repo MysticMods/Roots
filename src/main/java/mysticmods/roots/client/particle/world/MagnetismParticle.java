@@ -1,17 +1,20 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public class MagnetismParticle extends SortedEntityParticle {
-  protected double radius;
+  protected double radius, oRadius;
   protected final double yOffset;
   protected final float angle, rads;
 
@@ -37,21 +40,16 @@ public class MagnetismParticle extends SortedEntityParticle {
     this.rollAmount = random.nextFloat() * 0.1f;
     this.quadSize = 0.195f;
     this.gravity = 0.01f;
-    this.updatePosition();
-    this.tick();
+    this.autoUpdateDistance = false;
+    this.updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
   }
 
   @Override
   public void tick() {
-    this.xo = this.x;
-    this.yo = this.y;
-    this.zo = this.z;
-    if (this.age++ >= this.lifetime || entity == null || entity.isRemoved()) {
-      this.remove();
-    } else {
+    super.tick();
+    if (!this.removed) {
+      this.oRadius = this.radius;
       this.radius *= 0.93f;
-
-      updatePosition();
     }
   }
 
@@ -62,21 +60,31 @@ public class MagnetismParticle extends SortedEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    updatePosition();
+    updatePosition(renderInfo, partialTicks);
     super.render(buffer, renderInfo, partialTicks);
   }
 
-  protected void updatePosition() {
-    if (entity == null || entity.isRemoved() || removed) {
-      return;
-    }
+  protected void updatePosition(Camera renderInfo, float partialTicks) {
+    double radius = Mth.lerp(partialTicks, this.oRadius, this.radius);
 
     double offsetX = Mth.cos(rads) * radius;
     double offsetZ = Mth.sin(rads) * radius;
 
-    this.x = Mth.lerp(0.0, entity.getX() + offsetX, this.xo);
-    this.z = Mth.lerp(0.0, entity.getZ() + offsetZ, this.zo);
-    this.y = Mth.lerp(0.0, entity.getY() + entity.getEyeHeight() - 0.5 + yOffset, this.yo);
+    this.x = entity.getX() + offsetX;
+    this.z = entity.getZ() + offsetZ;
+    this.y = entity.getY() + entity.getEyeHeight() - 0.5 + yOffset;
+
+    Vec3 newPos = new Vec3(this.x, this.y, this.z);
+
+    if (age == 0) {
+      this.xo = this.x;
+      this.yo = this.y;
+      this.zo = this.z;
+    }
+    Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
+    Vec3 pos = oldPos.lerp(newPos, partialTicks);
+    Vec3 camPos = renderInfo.getPosition();
+    this.distanceToCamera = pos.distanceTo(camPos);
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

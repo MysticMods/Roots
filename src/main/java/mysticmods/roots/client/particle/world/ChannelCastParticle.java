@@ -1,6 +1,7 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -46,14 +47,15 @@ public class ChannelCastParticle extends SortedEntityParticle {
     this.hasPhysics = false;
     this.depthOffset = (random.nextDouble() - 0.5) * 0.2;
     this.autoUpdateDistance = false;
-
-    updatePosition(0f);
-    tick();
+    updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
+    this.xo = this.x;
+    this.yo = this.y;
+    this.zo = this.z;
   }
 
-  private void updatePosition(float partialTicks) {
+  private void updatePosition(Camera camera, float partialTicks) {
     if (entity != null) {
-      Vec3 eyePos = entity.getEyePosition(partialTicks);
+      Vec3 eyePos = entity.getEyePosition();
       Vec3 lookDir = entity.getViewVector(partialTicks).normalize();
       Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
       Vec3 upVec = rightVec.cross(lookDir).normalize();
@@ -66,19 +68,23 @@ public class ChannelCastParticle extends SortedEntityParticle {
 
       Vec3 circleOffset = rightVec.scale(localX).add(upVec.scale(localY));
 
-      // Hand-based horizontal offset (right for MAIN_HAND, left for OFF_HAND)
       double handOffset = hand == InteractionHand.MAIN_HAND ? 0.25 : -0.25;
       float t = (age + partialTicks) / lifetime;
       double smoothedDepth = Mth.lerp(t, 0.0, depthOffset);
 
-      // Final particle base position, slightly in front of the face and offset to side
       Vec3 basePos = eyePos
           .add(lookDir.scale(0.6 + smoothedDepth))
           .add(rightVec.scale(handOffset));
 
-      this.x = Mth.lerp(0, basePos.x + circleOffset.x, this.xo);
-      this.y = Mth.lerp(0, basePos.y + circleOffset.y, this.yo);
-      this.z = Mth.lerp(0, basePos.z + circleOffset.z, this.zo);
+      this.x = basePos.x + circleOffset.x; //Mth.lerp(0, basePos.x + circleOffset.x, this.xo);
+      this.y = basePos.y + circleOffset.y; //Mth.lerp(0, basePos.y + circleOffset.y, this.yo);
+      this.z = basePos.z + circleOffset.z; //Mth.lerp(0, basePos.z + circleOffset.z, this.zo);
+
+      Vec3 newPos = new Vec3(this.x, this.y, this.z);
+      Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
+      Vec3 pos = oldPos.lerp(newPos, partialTicks);
+      Vec3 camPos = camera.getPosition();
+      this.distanceToCamera = pos.distanceTo(camPos);
     }
   }
 
@@ -86,7 +92,8 @@ public class ChannelCastParticle extends SortedEntityParticle {
   public void tick() {
     super.tick();
     if (!this.removed) {
-      this.angle += 0.2 + random.nextDouble() * 0.1; // make an
+      this.oAngle = this.angle;
+      this.angle += 0.2 + random.nextDouble() * 0.1;
     }
   }
 
@@ -102,8 +109,7 @@ public class ChannelCastParticle extends SortedEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    this.updatePosition(0f);
-    updateDistanceToCamera(renderInfo, partialTicks);
+    this.updatePosition(renderInfo, partialTicks);
     super.render(buffer, renderInfo, partialTicks);
   }
 

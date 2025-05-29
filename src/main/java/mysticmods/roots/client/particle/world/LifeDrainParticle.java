@@ -42,6 +42,7 @@ public class LifeDrainParticle extends SortedEntityParticle {
     this.rollAmount = random.nextFloat() * 0.1f;
     this.quadSize = 0.395f;
     this.gravity = 0.01f;
+    this.autoUpdateDistance = false;
   }
 
   @Override
