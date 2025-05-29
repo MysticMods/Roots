@@ -17,7 +17,7 @@ public abstract class SortedParticle extends TextureSheetParticle {
   protected boolean forceLight = true;
   protected boolean tickMovement = true;
   protected boolean autoUpdateDistance = true;
-  protected boolean delayedRender = false;
+  protected boolean delayedRender = true;
 
   protected SortedParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);

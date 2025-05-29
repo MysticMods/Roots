@@ -1,5 +1,6 @@
 package mysticmods.roots.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsAPI;
@@ -10,14 +11,23 @@ import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.BeamManager;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
 import mysticmods.roots.client.particle.bolt.IBoltEffect;
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
+import mysticmods.roots.client.particle.world.SortedParticle;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinLevelRenderer;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinParticleEngine;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.ReportedException;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +44,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-import java.util.Map;
+import java.util.*;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class RenderTickHandler {
@@ -51,7 +61,7 @@ public class RenderTickHandler {
     boltRenderer.update(renderer, bolt, getPartialTick());
   }
 
-  public static void renderBeam (Beam beam) {
+  public static void renderBeam(Beam beam) {
     BeamManager.addBeam(beam);
   }
 
@@ -66,8 +76,49 @@ public class RenderTickHandler {
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
     } else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
       MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
-      BeamManager.render(event.getPartialTick().getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
+      BeamManager.render(event.getPartialTick()
+          .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
       renderer.endLastBatch();
+    } else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
+      List<SortedParticle> toRender = new ArrayList<>();
+
+      Queue<Particle> particles = ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).rootsGetParticles()
+          .get(RootsParticleRenderTypes.SORTED_TRANSLUCENT);
+      if (particles == null || particles.isEmpty()) {
+        return;
+      }
+
+      for (Particle particle : particles) {
+        if (particle instanceof SortedParticle sortedParticle) {
+          toRender.add(sortedParticle);
+        }
+      }
+
+      toRender.sort(Comparator.comparingDouble(SortedParticle::getDistanceToCamera));
+
+      LightTexture lightTexture = Minecraft.getInstance().gameRenderer.lightTexture();
+      Frustum frustum = event.getFrustum();
+      float partialTick = getPartialTick();
+      Camera camera = event.getCamera();
+      lightTexture.turnOnLightLayer();
+
+      MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
+      VertexConsumer consumer = renderer.getBuffer(RootsRenderTypes.PARTICLES);
+      for (SortedParticle particle : toRender) {
+        if (!frustum.isVisible(particle.getRenderBoundingBox(partialTick))) continue;
+        try {
+          particle.delayedRender(consumer, camera, partialTick);
+        } catch (Throwable throwable) {
+          CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering Particle");
+          CrashReportCategory crashreportcategory = crashreport.addCategory("Particle being rendered");
+          crashreportcategory.setDetail("Particle", particle::toString);
+          crashreportcategory.setDetail("Particle Type", RootsParticleRenderTypes.SORTED_TRANSLUCENT::toString);
+          throw new ReportedException(crashreport);
+        }
+      }
+      renderer.endBatch(RootsRenderTypes.PARTICLES);
+      RenderSystem.disableBlend();
+      lightTexture.turnOffLightLayer();
     }
   }
 

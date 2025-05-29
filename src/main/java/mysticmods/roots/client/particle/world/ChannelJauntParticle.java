@@ -113,6 +113,12 @@ public class ChannelJauntParticle extends SortedEntityParticle {
     super.render(buffer, renderInfo, partialTicks);
   }
 
+  @Override
+  public void delayedRender(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
+    this.updatePosition(renderInfo, partialTicks);
+    super.delayedRender(buffer, renderInfo, partialTicks);
+  }
+
   public static class Provider implements ParticleProvider<RootsParticleOptions> {
     private final SpriteSet sprite;
 
