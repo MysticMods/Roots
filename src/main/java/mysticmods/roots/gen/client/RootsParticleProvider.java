@@ -31,6 +31,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
 
     this.sprite(ModParticles.TEST.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.WIND.get(), RootsAPI.rl("wind"));
+    this.sprite(ModParticles.DANDELION.get(), RootsAPI.rl("dandelion"));
 
     this.spriteSet(ModParticles.SKY_SOARER.get(), RootsAPI.rl("feather"), 2, false);
     this.sprite(ModParticles.SKY_SOARER_PUFF.get(), RootsAPI.rl("simple"));
@@ -51,6 +52,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.spriteSet(ModParticles.SMOKE.get(), ResourceLocation.withDefaultNamespace("generic"), 8, true);
 
     this.spriteSet(ModParticles.DISARM.get(), RootsAPI.rl("petal"), 4, false);
+    this.spriteSet(ModParticles.PETAL.get(), RootsAPI.rl("petal"), 4, false);
 
     this.spriteSet(ModParticles.SPIRAL.get(), RootsAPI.rl("petal"), 4, false);
 

@@ -111,4 +111,20 @@ public class RootsParticleRenderTypes {
       return "roots:delayed_translucent_no_cull";
     }
   };
+
+  public static ParticleRenderType DELAYED_ADDITIVE = new ParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
+      RenderSystem.depthMask(true);
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.enableBlend();
+      RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:delayed_additive";
+    }
+  };
 }

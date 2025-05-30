@@ -31,7 +31,7 @@ public class WindParticle extends TextureSheetVelocityParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL;
+    return RootsParticleRenderTypes.DELAYED_ADDITIVE;
   }
 
   @Override

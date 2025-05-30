@@ -242,20 +242,39 @@ public class ClientFXHandlers {
         double lateralOffset = (random.nextDouble() - 0.5) * 6.0;
         double forwardOffset = 0.5;
 
-      double spawnX = entity.getX() - dirX * forwardOffset + sideX * lateralOffset;
-      double spawnY = entity.getY() + entity.getBbHeight() * 0.5 + (random.nextDouble() - 0.5) * 1.5;
-      double spawnZ = entity.getZ() - dirZ * forwardOffset + sideZ * lateralOffset;
+        double spawnX = entity.getX() - dirX * forwardOffset + sideX * lateralOffset;
+        double spawnY = entity.getY() + entity.getBbHeight() * 0.5 + (random.nextDouble() - 0.5) * 1.5;
+        double spawnZ = entity.getZ() - dirZ * forwardOffset + sideZ * lateralOffset;
 
-      double speed = 0.4 + random.nextDouble() * 0.4;
-      double vx = dirX * speed;
-      double vy = 0;
-      double vz = dirZ * speed;
+        double speed = 0.4 + random.nextDouble() * 0.4;
+        double vx = dirX * speed;
+        double vy = 0;
+        double vz = dirZ * speed;
 
-      minecraft.level.addParticle(
-          new RootsParticleOptions(ModParticles.WIND, color1, color2),
-          spawnX, spawnY, spawnZ,
-          vx, vy, vz
-      );
+        minecraft.level.addParticle(
+            new RootsParticleOptions(ModParticles.WIND, color1, color2),
+            spawnX, spawnY, spawnZ,
+            vx, vy, vz
+        );
+      }
+      for (int i = 0; i < 8; i++) {
+        double offset = (random.nextDouble() - 0.5) * 1.8; // lateral variation in front cone
+        double forwardOffset = 0.2;
+
+        double x = entity.getX() + dirX * forwardOffset + sideX * offset;
+        double y = entity.getY() + entity.getBbHeight() * 0.4 + (random.nextDouble()) * 0.4;
+        double z = entity.getZ() + dirZ * forwardOffset + sideZ * offset;
+
+        double speed = 0.02 + random.nextDouble() * 0.02;
+        double vx = dirX * speed + (random.nextDouble() - 0.5) * 0.01;
+        double vy = 0.01 + (random.nextDouble() - 0.5) * 0.01;
+        double vz = dirZ * speed + (random.nextDouble() - 0.5) * 0.01;
+
+        minecraft.level.addParticle(
+            new RootsParticleOptions(ModParticles.DANDELION, 0, 0),
+            x, y, z,
+            vx, vy, vz
+        );
       }
     }
   }

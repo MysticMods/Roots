@@ -2,10 +2,13 @@ package mysticmods.roots.client.particle.world;
 
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
 
-public class DisarmParticle extends RootsParticle {
-  protected DisarmParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
+public class PetalParticle extends RootsParticle {
+  protected PetalParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.lifetime = 30;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
@@ -19,8 +22,12 @@ public class DisarmParticle extends RootsParticle {
     this.yd = ySpeed;
     this.zd = zSpeed;
     this.hasPhysics = false;
-    this.quadSize = 0.08f;
-    this.rollAmount = 0.1f + random.nextFloat() * 0.1f; // randomized roll amount
+    this.quadSize = 0.02f;
+    this.rollAmount = 0.2f + random.nextFloat() * 0.1f; // randomized roll amount
+  }
+
+  @Override
+  protected void updateQuadSize(float f) {
   }
 
   @Override
@@ -31,7 +38,7 @@ public class DisarmParticle extends RootsParticle {
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      var particle = new DisarmParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
+      var particle = new PetalParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;
     }

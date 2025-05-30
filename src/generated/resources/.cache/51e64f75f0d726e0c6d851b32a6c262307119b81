@@ -1,10 +1,11 @@
-// 1.21.1	2025-05-29T20:17:57.1386746	Roots Particle Provider
+// 1.21.1	2025-05-30T14:35:38.8037936	Roots Particle Provider
 32a41ad35180f7899f7a75f0ba7b6e17915bb028 assets/roots/particles/air_bubble.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/animal_harvest.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel_fail.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel_jaunt.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel_target.json
+a20761545a51256de04f83355971b162fc4cef3f assets/roots/particles/dandelion.json
 c8b62f8d850dcf143ab1311edf34979fc0c0ec18 assets/roots/particles/disarm.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/extension.json
 84a80b9135a88362ba9db0b9a6331d4a6c17e406 assets/roots/particles/grove_stone.json
@@ -13,6 +14,7 @@ e010db985110904ded48d94ce298a1dc29566d98 assets/roots/particles/growth.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/life_drained.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/magnetism.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/meteor.json
+c8b62f8d850dcf143ab1311edf34979fc0c0ec18 assets/roots/particles/petal.json
 febee1f8d7a9f50e51c8f367d93518eca51465a6 assets/roots/particles/petal_shell.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/pyre.json
 a84f731247477228effe74040741fd88d8f2ba8e assets/roots/particles/pyre_leaf.json

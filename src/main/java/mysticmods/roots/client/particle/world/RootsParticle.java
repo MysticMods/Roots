@@ -49,7 +49,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
 
   }
 
-  protected boolean shouldRender () {
+  protected boolean shouldRender() {
     return !RenderTickHandler.isRenderingDelayedParticles() || delayedRender;
   }
 
@@ -107,4 +107,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
     return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
   }
 
+  public static final FacingCameraMode FACING_UP = (quaternion, camera, partialTick) -> {
+    quaternion.rotationX((float) Math.PI / 2);
+  };
 }
