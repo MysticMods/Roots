@@ -40,8 +40,24 @@ public class RootsRenderTypes {
         return RenderType.create("roots_beam", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, rendertype$compositestate);
       };
 
-  public static final RenderType PARTICLES = RenderType.create(
+  public static final RenderType TRANSLUCENT_DELAYED_PARTICLES = RenderType.create(
       "roots:particles",
+      DefaultVertexFormat.PARTICLE,
+      VertexFormat.Mode.QUADS,
+      256,
+      false,
+      true,
+      RenderType.CompositeState.builder()
+          .setShaderState(PARTICLE_SHADER)
+          .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+          .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
+          .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
+          .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
+          .setLightmapState(RenderStateShard.LIGHTMAP)
+          .createCompositeState(false));
+
+  public static final RenderType TRANSLUCENT_DELAYED_PARTICLES_NO_CULL = RenderType.create(
+      "roots:particles_no_cull",
       DefaultVertexFormat.PARTICLE,
       VertexFormat.Mode.QUADS,
       256,

@@ -70,14 +70,13 @@ public class ChannelNoCastParticle extends RootsEntityParticle {
 
       Vec3 start = eyePos.add(lookDir.scale(0.6 + smoothedDepth)).add(circleOffset).add(rightVec.scale(hand));
 
-      // Renderer should automatically lerp this
-      this.x = start.x; //Mth.lerp(partialTicks, start.x, this.xo);
+      this.x = start.x;
       if (age > threshold) {
-        this.y = start.y - fallSpeed; //Mth.lerp(partialTicks, start.y - fallSpeed, this.yo);
+        this.y = start.y - fallSpeed;
       } else {
-        this.y = start.y; //Mth.lerp(partialTicks, start.y, this.yo);
+        this.y = start.y;
       }
-      this.z = start.z; //Mth.lerp(partialTicks, start.z, this.zo);
+      this.z = start.z;
     }
   }
 

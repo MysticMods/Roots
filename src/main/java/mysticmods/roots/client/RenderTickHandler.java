@@ -1,5 +1,7 @@
 package mysticmods.roots.client;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,6 +24,7 @@ import net.minecraft.ReportedException;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -53,6 +56,16 @@ public class RenderTickHandler {
   private static final BoltRenderer boltRenderer = new BoltRenderer();
 
   private static boolean renderingDelayedParticles = false;
+
+  private static final ImmutableList<ParticleRenderType> RENDER_ORDER = ImmutableList.of(
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL
+  );
+
+  private static final ImmutableMap<ParticleRenderType, RenderType> PARTICLE_RENDER_TYPES = ImmutableMap.of(
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL
+  );
 
   public static boolean isRenderingDelayedParticles() {
     return renderingDelayedParticles;
@@ -86,33 +99,42 @@ public class RenderTickHandler {
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
       renderer.endLastBatch();
 
-
       renderingDelayedParticles = true;
-      Queue<Particle> particles = ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).rootsGetParticles()
-          .get(RootsParticleRenderTypes.DELAYED_TRANSLUCENT);
-      if (particles == null || particles.isEmpty()) {
-        return;
-      }
+      var allParticles = ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).rootsGetParticles();
 
       Frustum frustum = event.getFrustum();
       float partialTick = getPartialTick();
       Camera camera = event.getCamera();
 
-      VertexConsumer consumer = renderer.getBuffer(RootsRenderTypes.PARTICLES);
-      for (Particle particle : particles) {
-        if (!frustum.isVisible(particle.getRenderBoundingBox(partialTick))) continue;
-        try {
-          particle.render(consumer, camera, partialTick);
-        } catch (Throwable throwable) {
-          CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering Particle");
-          CrashReportCategory crashreportcategory = crashreport.addCategory("Particle being rendered");
-          crashreportcategory.setDetail("Particle", particle::toString);
-          crashreportcategory.setDetail("Particle Type", RootsParticleRenderTypes.DELAYED_TRANSLUCENT::toString);
-          renderingDelayedParticles = false;
-          throw new ReportedException(crashreport);
+      for (ParticleRenderType type : RENDER_ORDER) {
+        Queue<Particle> particles = allParticles.get(type);
+
+        if (particles == null || particles.isEmpty()) {
+          continue;
         }
+
+        RenderType renderType = PARTICLE_RENDER_TYPES.get(type);
+        if (renderType == null) {
+          RootsAPI.LOG.error("No render type found for particle render type: {}", type);
+          continue;
+        }
+
+        VertexConsumer consumer = renderer.getBuffer(renderType);
+        for (Particle particle : particles) {
+          if (!frustum.isVisible(particle.getRenderBoundingBox(partialTick))) continue;
+          try {
+            particle.render(consumer, camera, partialTick);
+          } catch (Throwable throwable) {
+            CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering Particle");
+            CrashReportCategory crashreportcategory = crashreport.addCategory("Particle being rendered");
+            crashreportcategory.setDetail("Particle", particle::toString);
+            crashreportcategory.setDetail("Particle Type", type::toString);
+            renderingDelayedParticles = false;
+            throw new ReportedException(crashreport);
+          }
+        }
+        renderer.endBatch(renderType);
       }
-      renderer.endBatch(RootsRenderTypes.PARTICLES);
       RenderSystem.disableBlend();
     }
 

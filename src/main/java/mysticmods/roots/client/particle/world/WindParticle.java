@@ -1,7 +1,10 @@
 package mysticmods.roots.client.particle.world;
 
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -28,12 +31,19 @@ public class WindParticle extends TextureSheetVelocityParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
+    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL;
   }
 
   @Override
   protected int getLightColor(float partialTick) {
     return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
+  }
+
+  @Override
+  public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
+    if (RenderTickHandler.isRenderingDelayedParticles()) {
+      super.render(buffer, renderInfo, partialTicks);
+    }
   }
 
   @Override

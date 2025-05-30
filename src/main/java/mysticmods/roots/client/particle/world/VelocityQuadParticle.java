@@ -93,10 +93,10 @@ public abstract class VelocityQuadParticle extends Particle {
     this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, u0, v1, i);
 
     // Back face
-this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, u0, v1, i);
-this.renderVertex(buffer, quaternion, x, y, z, -1.0F,  1.0F, f, u0, v0, i);
-this.renderVertex(buffer, quaternion, x, y, z,  1.0F,  1.0F, f, u1, v0, i);
-this.renderVertex(buffer, quaternion, x, y, z,  1.0F, -1.0F, f, u1, v1, i);
+    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, u0, v1, i);
+    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, 1.0F, f, u0, v0, i);
+    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, 1.0F, f, u1, v0, i);
+    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, -1.0F, f, u1, v1, i);
   }
 
   private void renderVertex(

@@ -72,7 +72,7 @@ public class RootsParticleRenderTypes {
   public static ParticleRenderType DELAYED_TRANSLUCENT = new ParticleRenderType() {
     @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
-      RenderSystem.depthMask(false);
+      RenderSystem.depthMask(true);
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableBlend();
       RenderSystem.blendFuncSeparate(
@@ -86,7 +86,29 @@ public class RootsParticleRenderTypes {
 
     @Override
     public String toString() {
-      return "roots:translucent_no_mask";
+      return "roots:delayed_translucent";
+    }
+  };
+
+  public static ParticleRenderType DELAYED_TRANSLUCENT_NO_CULL = new ParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
+      RenderSystem.depthMask(true);
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.enableBlend();
+      RenderSystem.disableCull();
+      RenderSystem.blendFuncSeparate(
+          GlStateManager.SourceFactor.SRC_ALPHA,
+          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+          GlStateManager.SourceFactor.ONE,
+          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
+      );
+      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:delayed_translucent_no_cull";
     }
   };
 }
