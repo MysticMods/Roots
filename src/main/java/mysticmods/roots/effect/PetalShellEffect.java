@@ -16,7 +16,7 @@ public class PetalShellEffect extends SimpleEffect {
   @Override
   public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
     if (livingEntity.level().isClientSide()) {
-      livingEntity.level().addParticle(new RootsParticleOptions(ModParticles.PETAL_SHELL, ModSpells.PETAL_SHELL.get().getColor1(), ModSpells.PETAL_SHELL.get().getColor1(), livingEntity.getId()), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
+      livingEntity.level().addParticle(RootsParticleOptions.builder(ModParticles.PETAL_SHELL).color(ModSpells.PETAL_SHELL).entityId(livingEntity.getId()).build(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
     }
 
     return super.applyEffectTick(livingEntity, amplifier);

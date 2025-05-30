@@ -67,11 +67,10 @@ public class MeteorEntity extends Entity {
       if (this.level().isClientSide()) {
         for (int i = 0; i < 9; i++) {
           level().addParticle(
-              new RootsParticleOptions(
-                  ModParticles.METEOR,
+              RootsParticleOptions.builder(
+                  ModParticles.METEOR).color(
                   0xe87a21,
-                  0xc10000
-              ),
+                  0xc10000).build(),
               getX() + (this.random.nextFloat() - 0.5f) * 0.35f,
               getY(),
               getZ() + (this.random.nextFloat() - 0.5f) * 0.35f,

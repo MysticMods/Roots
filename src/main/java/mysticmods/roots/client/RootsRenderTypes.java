@@ -41,7 +41,7 @@ public class RootsRenderTypes {
       };
 
   public static final RenderType TRANSLUCENT_DELAYED_PARTICLES = RenderType.create(
-      "roots:particles",
+      "roots:particles_translucent",
       DefaultVertexFormat.PARTICLE,
       VertexFormat.Mode.QUADS,
       256,
@@ -57,7 +57,7 @@ public class RootsRenderTypes {
           .createCompositeState(false));
 
   public static final RenderType TRANSLUCENT_DELAYED_PARTICLES_NO_CULL = RenderType.create(
-      "roots:particles_no_cull",
+      "roots:particles_translucent_no_cull",
       DefaultVertexFormat.PARTICLE,
       VertexFormat.Mode.QUADS,
       256,
@@ -83,6 +83,23 @@ public class RootsRenderTypes {
       RenderType.CompositeState.builder()
           .setShaderState(PARTICLE_SHADER)
           .setTransparencyState(RenderStateShard.ADDITIVE_TRANSPARENCY)
+          .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
+          .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
+          .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
+          .setLightmapState(RenderStateShard.LIGHTMAP)
+          .createCompositeState(false));
+
+  public static final RenderType DELAYED_PARTICLES = RenderType.create(
+      "roots:particles",
+      DefaultVertexFormat.PARTICLE,
+      VertexFormat.Mode.QUADS,
+      256,
+      false,
+      false,
+      RenderType.CompositeState.builder()
+          .setShaderState(PARTICLE_SHADER)
+          .setCullState(RenderStateShard.NO_CULL)
+          .setTransparencyState(RenderStateShard.NO_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
           .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)

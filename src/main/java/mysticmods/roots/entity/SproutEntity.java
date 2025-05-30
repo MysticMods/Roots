@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -20,7 +19,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -44,7 +42,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.PathType;
-import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -105,7 +102,8 @@ public class SproutEntity extends Animal {
       if (this.level().isClientSide && this.random.nextInt(5) == 0) {
         for (int i = 0; i < 2; ++i) {
           this.level()
-              .addParticle(new RootsParticleOptions(ModParticles.SPROUT_PORTAL.get(), 0, 0, this.getId()), this.getRandomX(0.1F), this.getRandomY() - (double) 0.45F, this.getRandomZ(0.1F), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F, -this.random.nextDouble(), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F);
+              .addParticle(RootsParticleOptions.builder(ModParticles.SPROUT_PORTAL).entityId(this.getId())
+                  .build(), this.getRandomX(0.1F), this.getRandomY() - (double) 0.45F, this.getRandomZ(0.1F), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F, -this.random.nextDouble(), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F);
         }
       }
     }
@@ -209,29 +207,30 @@ public class SproutEntity extends Animal {
       blockTag = RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN;
     }
     if (blockTag == null) {
-      return level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) ? 10.0F : level.getPathfindingCostFromLightLevels(pos);
+      return level.getBlockState(pos.below())
+          .is(Blocks.GRASS_BLOCK) ? 10.0F : level.getPathfindingCostFromLightLevels(pos);
     } else {
       return level.getBlockState(pos.below()).is(blockTag) ? 10.0f : level.getPathfindingCostFromLightLevels(pos);
     }
   }
 
-  private boolean is (TagKey<EntityType<?>> tag) {
+  private boolean is(TagKey<EntityType<?>> tag) {
     return getType().is(tag);
   }
 
-  public static boolean checkMelodySpawnRule (
+  public static boolean checkMelodySpawnRule(
       EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random
   ) {
     return level.getBlockState(pos.below()).is(RootsTags.Blocks.SUPPORTS_MELODY_SPROUT_SPAWN);
   }
 
-  public static boolean checkHellSpawnRule (
+  public static boolean checkHellSpawnRule(
       EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random
   ) {
     return level.getBlockState(pos.below()).is(RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN);
   }
 
-  public static boolean checkSnowSpawnRule (
+  public static boolean checkSnowSpawnRule(
       EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random
   ) {
     boolean flag = MobSpawnType.ignoresLightRequirements(spawnType) || isBrightEnoughToSpawn(level, pos);

@@ -127,4 +127,20 @@ public class RootsParticleRenderTypes {
       return "roots:delayed_additive";
     }
   };
+
+  public static ParticleRenderType DELAYED_OPAQUE = new ParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
+      RenderSystem.depthMask(true);
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.disableBlend();
+      RenderSystem.enableCull();
+      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:delayed_opaque";
+    }
+  };
 }

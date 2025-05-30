@@ -134,11 +134,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
       if (pRandom.nextInt(4) == 0) {
         pLevel.addParticle(
-            new RootsParticleOptions(
-                ModParticles.PYRE,
-                color1,
-                color2
-            ),
+            RootsParticleOptions.builder(ModParticles.PYRE).color(color1, color2).build(),
             x + (pRandom.nextFloat() - 0.5f) * 0.3f,
             y + 0.1f + (pRandom.nextFloat()) * 0.2f,
             z + (pRandom.nextFloat() - 0.5f) * 0.3f,
@@ -160,10 +156,8 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
           double ny = (float) pos.getY() + 0.5f + pRandom.nextFloat() - 0.5f;
           double nz = (float) pos.getZ() + 0.5f + pRandom.nextFloat() - 0.5f;
           pLevel.addParticle(
-              new RootsParticleOptions(
-                  ModParticles.PYRE_LEAF,
-                  pRandom.nextBoolean() ? 0x7abb75 : 0x2b6322
-              ),
+              RootsParticleOptions.builder(
+                  ModParticles.PYRE_LEAF).color(pRandom.nextBoolean() ? 0x7abb75 : 0x2b6322).build(),
               x,
               y + 1.5,
               z,

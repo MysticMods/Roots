@@ -58,12 +58,14 @@ public class RenderTickHandler {
   private static boolean renderingDelayedParticles = false;
 
   private static final ImmutableList<ParticleRenderType> RENDER_ORDER = ImmutableList.of(
+      RootsParticleRenderTypes.DELAYED_OPAQUE,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
       RootsParticleRenderTypes.DELAYED_ADDITIVE
   );
 
   private static final ImmutableMap<ParticleRenderType, RenderType> PARTICLE_RENDER_TYPES = ImmutableMap.of(
+      RootsParticleRenderTypes.DELAYED_OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
       RootsParticleRenderTypes.DELAYED_ADDITIVE, RootsRenderTypes.ADDITIVE_DELAYED

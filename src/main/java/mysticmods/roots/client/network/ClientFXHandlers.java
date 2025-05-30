@@ -39,14 +39,14 @@ public class ClientFXHandlers {
       double handOffset = hand == InteractionHand.MAIN_HAND ? 0.3 : -0.3;
 
       minecraft.level.addParticle(
-          new RootsParticleOptions(ModParticles.CHANNEL_JAUNT, col1, col2, casterId),
+          RootsParticleOptions.builder(ModParticles.CHANNEL_JAUNT).color(col1, col2).entityId(casterId).build(),
           caster.getX(),
           caster.getY(),
           caster.getZ(),
           1, 0, handOffset
       );
       minecraft.level.addParticle(
-          new RootsParticleOptions(ModParticles.CHANNEL_JAUNT, col2, col1, casterId),
+          RootsParticleOptions.builder(ModParticles.CHANNEL_JAUNT).color(col2, col1).entityId(casterId).build(),
           caster.getX(),
           caster.getY(),
           caster.getZ(),
@@ -66,7 +66,8 @@ public class ClientFXHandlers {
       return;
     }
 
-    minecraft.level.addParticle(new RootsParticleOptions(ModParticles.PETAL_SHELL, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
+    minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.PETAL_SHELL).color(color1, color2)
+        .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
 /*    SnapshotHelper.applyLiving(entity, ModSerializers.PETAL_SHELL.get(), (e, snapshot) -> {
       if (!(e instanceof LivingEntity living)) {
         return;
@@ -106,8 +107,10 @@ public class ClientFXHandlers {
     int color1 = ModSpells.MAGNETISM.get().getColor1();
     int color2 = ModSpells.MAGNETISM.get().getColor2();
 
-    RootsParticleOptions opt1 = new RootsParticleOptions(ModParticles.MAGNETISM, color2, color1, entityId);
-    RootsParticleOptions opt2 = new RootsParticleOptions(ModParticles.MAGNETISM, color1, color2, entityId);
+    RootsParticleOptions opt1 = RootsParticleOptions.builder(ModParticles.MAGNETISM).color(color2, color1)
+        .entityId(entityId).build();
+    RootsParticleOptions opt2 = RootsParticleOptions.builder(ModParticles.MAGNETISM).color(color1, color2)
+        .entityId(entityId).build();
 
     if (entity != null) {
       double x = entity.getX();
@@ -145,8 +148,8 @@ public class ClientFXHandlers {
 
     Vec3 start = entity.getEyePosition();
 
-    RootsParticleOptions first = new RootsParticleOptions(ModParticles.SHATTER_BEAM, color1, color2);
-    RootsParticleOptions second = new RootsParticleOptions(ModParticles.SHATTER_BEAM, color2, color1);
+    RootsParticleOptions first = RootsParticleOptions.builder(ModParticles.SHATTER_BEAM).color(color1, color2).build();
+    RootsParticleOptions second = RootsParticleOptions.builder(ModParticles.SHATTER_BEAM).color(color2, color1).build();
 
     for (BlockPos pos : positions) {
       Vec3 stop = Vec3.atCenterOf(pos);
@@ -198,8 +201,8 @@ public class ClientFXHandlers {
         Vec3 motion = new Vec3(offsetX, offsetY, offsetZ).normalize().scale(0.1 + random.nextDouble() * 0.15);
 
         RootsParticleOptions opt = random.nextBoolean()
-            ? new RootsParticleOptions(ModParticles.EXTENSION, color2, color1)
-            : new RootsParticleOptions(ModParticles.EXTENSION, color1, color2);
+            ? RootsParticleOptions.builder(ModParticles.EXTENSION).color(color2, color1).build()
+            : RootsParticleOptions.builder(ModParticles.EXTENSION).color(color1, color2).build();
 
         minecraft.level.addParticle(opt, spawnPos.x, spawnPos.y, spawnPos.z, motion.x, motion.y, motion.z);
       }
@@ -215,7 +218,8 @@ public class ClientFXHandlers {
       int color1 = 0xb0ecff; //ModSpells.SKY_SOARER.get().getColor1();
       int color2 = 0xccd3ff; //ModSpells.SKY_SOARER.get().getColor2();
 
-      minecraft.level.addParticle(new RootsParticleOptions(ModParticles.SKY_SOARER_EMITTER, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), duration + 25, 5, 0.9);
+      minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.SKY_SOARER_EMITTER).color(color1, color2)
+          .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), duration + 25, 5, 0.9);
     }
   }
 
@@ -252,7 +256,7 @@ public class ClientFXHandlers {
         double vz = dirZ * speed;
 
         minecraft.level.addParticle(
-            new RootsParticleOptions(ModParticles.WIND, color1, color2),
+            RootsParticleOptions.builder(ModParticles.WIND).build(),
             spawnX, spawnY, spawnZ,
             vx, vy, vz
         );
@@ -271,7 +275,7 @@ public class ClientFXHandlers {
         double vz = dirZ * speed + (random.nextDouble() - 0.5) * 0.01;
 
         minecraft.level.addParticle(
-            new RootsParticleOptions(ModParticles.DANDELION, 0, 0),
+            RootsParticleOptions.builder(ModParticles.DANDELION).build(),
             x, y, z,
             vx, vy, vz
         );
@@ -287,7 +291,9 @@ public class ClientFXHandlers {
     RandomSource random = minecraft.level.random;
     if (entity != null) {
       for (float i = 0; i < 360; i += (random.nextFloat() * 5)) {
-        RootsParticleOptions opts = random.nextBoolean() ? new RootsParticleOptions(ModParticles.SMOKE, color1, color2) : new RootsParticleOptions(ModParticles.SMOKE, color2, color1);
+        RootsParticleOptions opts = random.nextBoolean() ? RootsParticleOptions.builder(ModParticles.SMOKE)
+            .color(color1, color2).build() : RootsParticleOptions.builder(ModParticles.SMOKE).color(color2, color1)
+            .build();
         double rad = Math.toRadians(i);
         double x = entity.getX() + (1.5 * random.nextDouble()) * Math.sin(rad);
         double y = entity.getY() + 0.5;
@@ -309,13 +315,14 @@ public class ClientFXHandlers {
     int color2 = ModSpells.DISARM.get().getColor2();
     Entity entity = minecraft.level.getEntity(entityId);
     if (entity != null) {
-      minecraft.level.addParticle(new RootsParticleOptions(ModParticles.DISARM_EMITTER, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), 18, 2, 0.4);
+      minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.DISARM_EMITTER).color(color1, color2)
+          .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), 18, 2, 0.4);
     }
   }
 
   public static void spiral(BlockPos position, double radius, double angle, int color1, int color2) {
     Minecraft minecraft = Minecraft.getInstance();
-    minecraft.level.addParticle(new RootsParticleOptions(ModParticles.SPIRAL, color1, color2),
+    minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.SPIRAL).color(color1, color2).build(),
         position.getX() + 0.5f,
         position.getY() + 1.15f,
         position.getZ() + 0.5f, radius, angle, 0);
@@ -344,11 +351,10 @@ public class ClientFXHandlers {
         // Emit near top of entity, scaled by height
         double yOffset = entity.getY() + entity.getBbHeight() * (0.8 + random.nextDouble() * 0.2);
         minecraft.level.addParticle(
-            new RootsParticleOptions(
-                ModParticles.ANIMAL_HARVEST,
+            RootsParticleOptions.builder(
+                ModParticles.ANIMAL_HARVEST).color(
                 col1,
-                col2
-            ),
+                col2).build(),
             entity.getX(),
             yOffset,
             entity.getZ(),
@@ -415,7 +421,7 @@ public class ClientFXHandlers {
       double handOffset = hand == InteractionHand.MAIN_HAND ? 0.3 : -0.3;
 
       minecraft.level.addParticle(
-          new RootsParticleOptions(ModParticles.CHANNEL_FAIL, col1, col2, casterId),
+          RootsParticleOptions.builder(ModParticles.CHANNEL_FAIL).color(col1, col2).entityId(casterId).build(),
           caster.getX(),
           caster.getY(),
           caster.getZ(),
@@ -425,7 +431,7 @@ public class ClientFXHandlers {
       radius = 0.08 + minecraft.level.random.nextDouble() * 0.08;
       angle = minecraft.level.random.nextDouble() * (2 * Math.PI);
       minecraft.level.addParticle(
-          new RootsParticleOptions(ModParticles.CHANNEL_FAIL, col2, col1, casterId),
+          RootsParticleOptions.builder(ModParticles.CHANNEL_FAIL).color(col2, col1).entityId(casterId).build(),
           caster.getX(),
           caster.getY(),
           caster.getZ(),
@@ -446,12 +452,11 @@ public class ClientFXHandlers {
       double radius = 0.1 + minecraft.level.random.nextDouble() * 0.15;
 
       minecraft.level.addParticle(
-          new RootsParticleOptions(
-              ModParticles.CHANNEL,
+          RootsParticleOptions.builder(
+              ModParticles.CHANNEL).color(
               col1,
-              col2,
-              casterId
-          ),
+              col2).entityId(
+              casterId).build(),
           start.x,
           start.y,
           start.z,
@@ -460,12 +465,11 @@ public class ClientFXHandlers {
           0
       );
       minecraft.level.addParticle(
-          new RootsParticleOptions(
-              ModParticles.CHANNEL,
+          RootsParticleOptions.builder(
+              ModParticles.CHANNEL).color(
               col2,
-              col1,
-              casterId
-          ),
+              col1).entityId(
+              casterId).build(),
           start.x,
           start.y,
           start.z,
@@ -485,11 +489,10 @@ public class ClientFXHandlers {
       int col2 = spell.getColor2();
 
       minecraft.level.addParticle(
-          new RootsParticleOptions(
-              ModParticles.CHANNEL_TARGET,
+          RootsParticleOptions.builder(
+              ModParticles.CHANNEL_TARGET).color(
               col1,
-              col2
-          ),
+              col2).build(),
           start.x,
           start.y,
           start.z,
@@ -498,11 +501,10 @@ public class ClientFXHandlers {
           stop.z
       );
       minecraft.level.addParticle(
-          new RootsParticleOptions(
-              ModParticles.CHANNEL_TARGET,
+          RootsParticleOptions.builder(
+              ModParticles.CHANNEL_TARGET).color(
               col2,
-              col1
-          ),
+              col1).build(),
           start.x,
           start.y,
           start.z,
@@ -522,11 +524,10 @@ public class ClientFXHandlers {
         double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
-            new RootsParticleOptions(
-                ModParticles.GROWTH,
+            RootsParticleOptions.builder(
+                ModParticles.GROWTH).color(
                 0x2ce713,
-                0x4d7e20
-            ),
+                0x4d7e20).build(),
             location.getX() + 0.5 + xOffset,
             location.getY() + yOffset,
             location.getZ() + 0.5 + zOffset,
@@ -547,11 +548,10 @@ public class ClientFXHandlers {
         double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
-            new RootsParticleOptions(
-                ModParticles.GROWTH,
+            RootsParticleOptions.builder(
+                ModParticles.GROWTH).color(
                 0xc2d02a,
-                0x7fc73c
-            ),
+                0x7fc73c).build(),
             location.getX() + xOffset,
             location.getY() + yOffset,
             location.getZ() + zOffset,
@@ -632,8 +632,10 @@ public class ClientFXHandlers {
     int color1 = 0x1e0e13;//ModSpells.LIFE_DRAIN.get().getColor1();
     int color2 = 0x6b5766; //ModSpells.LIFE_DRAIN.get().getColor2();
 
-    RootsParticleOptions opt1 = new RootsParticleOptions(ModParticles.LIFE_DRAIN, color2, color1, entityId);
-    RootsParticleOptions opt2 = new RootsParticleOptions(ModParticles.LIFE_DRAIN, color1, color2, entityId);
+    RootsParticleOptions opt1 = RootsParticleOptions.builder(ModParticles.LIFE_DRAIN).color(color2, color1)
+        .entityId(entityId).build();
+    RootsParticleOptions opt2 = RootsParticleOptions.builder(ModParticles.LIFE_DRAIN).color(color1, color2)
+        .entityId(entityId).build();
 
     if (entity != null) {
       double x = entity.getX();
@@ -657,11 +659,8 @@ public class ClientFXHandlers {
       return;
     }
 
-    int color1 = ModSpells.LIFE_DRAIN.get().getColor1();
-    int color2 = ModSpells.LIFE_DRAIN.get().getColor2();
-
     minecraft.level.addParticle(
-        new RootsParticleOptions(ModParticles.LIFE_DRAIN_EMITTER, color1, color2, entityId, casterId),
+        RootsParticleOptions.builder(ModParticles.LIFE_DRAIN_EMITTER).color(ModSpells.LIFE_DRAIN).entityId(entityId).casterId(casterId).build(),
         entity.getX(),
         entity.getY(),
         entity.getZ(),
@@ -669,5 +668,15 @@ public class ClientFXHandlers {
         0,
         0
     );
+  }
+
+  public static void harvestPositions(List<BlockPos> positions) {
+    Minecraft minecraft = Minecraft.getInstance();
+
+    for (BlockPos pos : positions) {
+      Vec3 vec = Vec3.atCenterOf(pos);
+      minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.HARVEST)
+          .build(), vec.x, vec.y, vec.z, 0, 0, 0);
+    }
   }
 }

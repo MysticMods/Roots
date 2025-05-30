@@ -52,10 +52,9 @@ public class GrowthEmitter extends NoRenderParticle {
       if (this.age % this.interval == 0) {
         Vec3 pos = positions[count--];
         level.addParticle(
-            new RootsParticleOptions(
-                ModParticles.GROWTH,
-                0x248542
-            ),
+            RootsParticleOptions.builder(
+                ModParticles.GROWTH).color(
+                0x248542).build(),
             pos.x,
             pos.y,
             pos.z,

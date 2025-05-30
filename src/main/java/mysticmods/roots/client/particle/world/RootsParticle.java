@@ -7,6 +7,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
+import org.joml.Vector3f;
 
 public abstract class RootsParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;
@@ -109,5 +110,10 @@ public abstract class RootsParticle extends TextureSheetParticle {
 
   public static final FacingCameraMode FACING_UP = (quaternion, camera, partialTick) -> {
     quaternion.rotationX((float) Math.PI / 2);
+  };
+
+  public static final FacingCameraMode BILLBOARD_TILTED = (quaternion, camera, partialTick) -> {
+    quaternion.set(camera.rotation());
+    quaternion.rotateX((float) Math.toRadians(45));
   };
 }

@@ -84,9 +84,9 @@ public abstract class EntityEmitter extends Particle {
         if (random.nextDouble() < chance) {
           RootsParticleOptions opt;
           if (random.nextBoolean()) {
-            opt = new RootsParticleOptions(options.type(), options.color2(), options.color1(), options.entityId());
+            opt = options.builder().swapColors().build();
           } else {
-            opt = new RootsParticleOptions(options.type(), options.color1(), options.color2(), options.entityId());
+            opt = options;
           }
           level.addParticle(opt, x + (random.nextDouble() - 0.5), y + (random.nextDouble() - 0.5), z + (random.nextDouble() - 0.5), (random.nextDouble() - 0.5) * 0.1, (random.nextDouble() - 0.5) * 0.05, (random.nextDouble() - 0.5) * 0.1);
         }
@@ -105,7 +105,7 @@ public abstract class EntityEmitter extends Particle {
     @Override
     public void particleTick() {
       for (int i = 0; i < 3; i++) {
-        level.addParticle(random.nextBoolean() ? new RootsParticleOptions(options.type(), options.color2(), options.color1(), target.getId()) : new RootsParticleOptions(options.type(), options.color1(), options.color2(), target.getId()), x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2, 0, 0, 0);
+        level.addParticle(random.nextBoolean() ? options : options.builder().swapColors().build(), x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2, 0, 0, 0);
       }
     }
   }
@@ -136,8 +136,8 @@ public abstract class EntityEmitter extends Particle {
           double pz = pos.z + (random.nextDouble() - 0.5) * 0.3;
 
           RootsParticleOptions opt = random.nextBoolean()
-              ? new RootsParticleOptions(options.type(), options.color2(), options.color1(), options.entityId())
-              : new RootsParticleOptions(options.type(), options.color1(), options.color2(), options.entityId());
+              ? options
+              : options.builder().swapColors().build();
 
           level.addParticle(opt, px, py, pz, motion.x, 0, motion.z);
         }
@@ -162,7 +162,8 @@ public abstract class EntityEmitter extends Particle {
         return null;
       }
 
-      Particle newParticle = new LifeDrainEmitter(level, x, y, z, new RootsParticleOptions(ModParticles.LIFE_DRAINED, type.color1(), type.color2(), type.entityId(), type.casterId()), entity, (int) xSpeed, target);
+      Particle newParticle = new LifeDrainEmitter(level, x, y, z, type.builder().type(ModParticles.LIFE_DRAINED)
+          .build(), entity, (int) xSpeed, target);
       ((IParticleHolder) entity).roots_1_21$setParticle(ModParticles.LIFE_DRAIN_EMITTER.get(), newParticle, tester);
 
       return newParticle;
@@ -176,7 +177,8 @@ public abstract class EntityEmitter extends Particle {
       if (entity == null) {
         return null;
       }
-      return new DisarmEmitter(level, x, y, z, new RootsParticleOptions(ModParticles.DISARM, type.color1(), type.color2(), type.entityId()), entity, (int) xSpeed, (int) ySpeed, zSpeed);
+      return new DisarmEmitter(level, x, y, z, type.builder().type(ModParticles.DISARM)
+          .build(), entity, (int) xSpeed, (int) ySpeed, zSpeed);
     }
   }
 
@@ -187,7 +189,8 @@ public abstract class EntityEmitter extends Particle {
       if (entity == null) {
         return null;
       }
-      return new SkySorarerEmitter(level, x, y, z, new RootsParticleOptions(ModParticles.SKY_SOARER, type.color1(), type.color2(), type.entityId()), entity, (int) xSpeed, (int) ySpeed, zSpeed);
+      return new SkySorarerEmitter(level, x, y, z, type.builder().type(ModParticles.SKY_SOARER)
+          .build(), entity, (int) xSpeed, (int) ySpeed, zSpeed);
     }
   }
 }

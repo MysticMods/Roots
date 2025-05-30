@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
+import mysticmods.roots.api.spell.Spell;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -12,15 +14,16 @@ import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
-                                   int entityId, int casterId) implements ParticleOptions {
+                                   int entityId, int casterId, int fastForward) implements ParticleOptions {
 
   public static MapCodec<RootsParticleOptions> codec(ParticleType<?> type) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codec.INT.fieldOf("color1").forGetter(RootsParticleOptions::color1),
         Codec.INT.fieldOf("color2").forGetter(RootsParticleOptions::color2),
         Codec.INT.fieldOf("entityId").forGetter(RootsParticleOptions::entityId),
-        Codec.INT.fieldOf("casterId").forGetter(RootsParticleOptions::casterId)
-    ).apply(instance, (a, b, c, d) -> new RootsParticleOptions(type, a, b, c, d)));
+        Codec.INT.fieldOf("casterId").forGetter(RootsParticleOptions::casterId),
+        Codec.INT.fieldOf("fastForward").forGetter(RootsParticleOptions::fastForward)
+    ).apply(instance, (a, b, c, d, e) -> new RootsParticleOptions(type, a, b, c, d, e)));
   }
 
   public static StreamCodec<ByteBuf, RootsParticleOptions> streamCodec(ParticleType<?> type) {
@@ -29,32 +32,87 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::color2,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::entityId,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::casterId,
-        (c1, c2, e, f) -> new RootsParticleOptions(type, c1, c2, e, f)
+        ByteBufCodecs.VAR_INT, RootsParticleOptions::fastForward,
+        (c1, c2, e, f, g) -> new RootsParticleOptions(type, c1, c2, e, f, g)
     );
   }
 
-  public RootsParticleOptions(ParticleType<?> type, int color) {
-    this(type, color, color, -1, -1);
+  public Builder builder () {
+    return new Builder(type)
+        .color(color1, color2)
+        .entityId(entityId)
+        .casterId(casterId)
+        .fastForward(fastForward);
   }
 
-  public RootsParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type, int color1, int color2) {
-    this(type.get(), color1, color2, -1, -1);
+  public static Builder builder (ParticleType<?> type) {
+    return new Builder(type);
   }
 
-  public RootsParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type, int color) {
-    this(type.get(), color, color, -1, -1);
+  public static Builder builder (DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type) {
+    return new Builder(type.get());
   }
 
-  public RootsParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type, int color1, int color2, int entityId) {
-    this(type.get(), color1, color2, entityId, -1);
-  }
+  public static class Builder {
+    private ParticleType<?> type;
+    private int color1, color2,
+        entityId, casterId, fastForward;
 
-  public RootsParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type, int color1, int color2, int entityId, int casterId) {
-    this(type.get(), color1, color2, entityId, casterId);
-  }
+    public Builder(ParticleType<?> type) {
+      this.type = type;
+    }
 
-  public RootsParticleOptions(ParticleType<?> type, int color1, int color2, int entityId) {
-    this(type, color1, color2, entityId, -1);
+    public Builder type(ParticleType<?> type) {
+      this.type = type;
+      return this;
+    }
+
+    public Builder swapColors () {
+      int temp = this.color1;
+      this.color1 = this.color2;
+      this.color2 = temp;
+      return this;
+    }
+
+    public Builder color (Holder<Spell> spell) {
+      return color(spell.value().getColor1(), spell.value().getColor2());
+    }
+
+    public Builder type(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type) {
+      this.type = type.get();
+      return this;
+    }
+
+    public Builder color(int color) {
+      this.color1 = color;
+      this.color2 = color;
+      return this;
+    }
+
+    public Builder color(int color1, int color2) {
+      this.color1 = color1;
+      this.color2 = color2;
+      return this;
+    }
+
+    public Builder entityId(int entityId) {
+      this.entityId = entityId;
+      return this;
+    }
+
+    public Builder casterId(int casterId) {
+      this.casterId = casterId;
+      return this;
+    }
+
+    public Builder fastForward(int fastForward) {
+      this.fastForward = fastForward;
+      return this;
+    }
+
+    public RootsParticleOptions build() {
+      return new RootsParticleOptions(type, color1, color2, entityId, casterId, fastForward);
+    }
   }
 
   @Override

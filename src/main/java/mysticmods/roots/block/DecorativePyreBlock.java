@@ -51,11 +51,7 @@ public class DecorativePyreBlock extends Block {
 
     if (pRandom.nextInt(4) == 0) {
       pLevel.addParticle(
-          new RootsParticleOptions(
-              ModParticles.PYRE,
-              color1,
-              color2
-          ),
+          RootsParticleOptions.builder(ModParticles.PYRE).color(color1, color2).build(),
           x + (pRandom.nextFloat() - 0.5f) * 0.3f,
           y + 0.1f + (pRandom.nextFloat()) * 0.2f,
           z + (pRandom.nextFloat() - 0.5f) * 0.3f,

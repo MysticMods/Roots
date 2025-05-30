@@ -49,11 +49,10 @@ public class SylvanLightEmitter extends NoRenderParticle {
         count--;
         int[] color = COLORS[level.getRandom().nextInt(COLORS.length)];
         level.addParticle(
-            new RootsParticleOptions(
-                ModParticles.SYLVAN_LIGHT,
+            RootsParticleOptions.builder(
+                ModParticles.SYLVAN_LIGHT).color(
                 color[0],
-                color[1]
-            ),
+                color[1]).build(),
             x + (random.nextFloat() - 0.5) * 0.2,
             y + (random.nextFloat() - 0.5) * 0.2,
             z + (random.nextFloat() - 0.5) * 0.2,

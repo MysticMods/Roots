@@ -236,7 +236,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
     Vec3 direction = center.subtract(spawnPos).normalize().scale(0.03 + pRandom.nextDouble() * 0.04);
 
     pLevel.addParticle(
-        new RootsParticleOptions(ModParticles.GROVE_STONE, col1, col2),
+        RootsParticleOptions.builder(ModParticles.GROVE_STONE).color(col1, col2).build(),
         spawnPos.x, spawnPos.y, spawnPos.z,
         direction.x, direction.y, direction.z
     );

@@ -219,6 +219,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.LIFE_DRAINED.get(), LifeDrainedParticle.Provider::new);
     event.registerSpriteSet(ModParticles.DANDELION.get(), DandelionParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PETAL.get(), PetalParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.HARVEST.get(), HarvestParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());

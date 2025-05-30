@@ -157,11 +157,10 @@ public class WildfireEntity extends Projectile {
     double d1 = vec3.z;
     for (int i = 0; i < 8; i++) {
       level().addParticle(
-          new RootsParticleOptions(
-              ModParticles.WILDFIRE,
+          RootsParticleOptions.builder(
+              ModParticles.WILDFIRE).color(
               0xe87a21,
-              0xc10000
-          ),
+              0xc10000).build(),
           getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
           getY(),
           getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,

@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.growth.HarvestRecord;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.HarvestFXPacket;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.HarvestUtil;
 import net.minecraft.ChatFormatting;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +111,7 @@ public class HarvestSpell extends TwoRadiusSpell {
       return 0;
     }
 
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HarvestFXPacket(positions));
     costs.operations(positions.size());
     return cooldown * positions.size();
   }
