@@ -4,21 +4,13 @@ import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
-public class PyreParticle extends TextureSheetParticle {
-  protected float oR1, oG1, oB1;
-  protected float rCol2, gCol2, bcol2;
+public class PyreParticle extends RootsParticle {
   protected float rotSpeed, spinAcceleration;
 
   protected PyreParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
-    super(level, x, y, z, xSpeed, ySpeed, zSpeed);
+    super(level, x, y, z, xSpeed, ySpeed, zSpeed, c1, c2);
     this.speedUpWhenYMotionIsBlocked = true;
     this.lifetime = 40;
-    this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
-    this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
-    this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
-    this.rCol2 = ((c2 >> 16) & 0xFF) / 255.0f;
-    this.gCol2 = ((c2 >> 8) & 0xFF) / 255.0f;
-    this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
     this.xd = 0;
     this.yd *= 0.03f;

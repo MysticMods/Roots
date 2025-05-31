@@ -20,6 +20,11 @@ public abstract class RootsEntityParticle extends RootsParticle {
     }
   }
 
+  protected RootsEntityParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, Entity entity, int c1, int c2) {
+    this(level, x, y, z, xSpeed, ySpeed, zSpeed, entity);
+    this.unwrapColor(c1, c2);
+  }
+
   protected RootsEntityParticle(ClientLevel level, double x, double y, double z, Entity entity) {
     super(level, x, y, z);
     this.entity = entity;

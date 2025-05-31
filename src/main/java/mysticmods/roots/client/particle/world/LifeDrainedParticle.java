@@ -23,7 +23,7 @@ public class LifeDrainedParticle extends RootsParticle {
     this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
     this.rCol2 = ((c2 >> 16) & 0xFF) / 255.0f;
     this.gCol2 = ((c2 >> 8) & 0xFF) / 255.0f;
-    this.bcol2 = ((c2) & 0xFF) / 255.0f;
+    this.bCol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
     calculateMovement();
     this.hasPhysics = false;

@@ -38,7 +38,7 @@ public class ChannelCastParticle extends RootsEntityParticle {
     this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
     this.rCol2 = ((c2 >> 16) & 0xFF) / 255.0f;
     this.gCol2 = ((c2 >> 8) & 0xFF) / 255.0f;
-    this.bcol2 = ((c2) & 0xFF) / 255.0f;
+    this.bCol2 = ((c2) & 0xFF) / 255.0f;
 
     this.lifetime = 18 + random.nextInt(10); // ~1.5s
     this.radius = radius;
@@ -47,13 +47,13 @@ public class ChannelCastParticle extends RootsEntityParticle {
     this.alpha = 1f;
     this.hasPhysics = false;
     this.depthOffset = (random.nextDouble() - 0.5) * 0.2;
-    updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
+    updatePosition(RenderTickHandler.getPartialTick());
     this.xo = this.x;
     this.yo = this.y;
     this.zo = this.z;
   }
 
-  private void updatePosition(Camera camera, float partialTicks) {
+  private void updatePosition(float partialTicks) {
     if (entity != null) {
       Vec3 eye0 = entity.getEyePosition(0);
       Vec3 eye1 = entity.getEyePosition(1);
@@ -111,7 +111,7 @@ public class ChannelCastParticle extends RootsEntityParticle {
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
     if (shouldRender()) {
-      updatePosition(renderInfo, partialTicks);
+      updatePosition(partialTicks);
       Vec3 cam = renderInfo.getPosition();
       float rx = (float) (this.x - cam.x);
       float ry = (float) (this.y - cam.y);

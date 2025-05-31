@@ -82,12 +82,7 @@ public abstract class EntityEmitter extends Particle {
     public void particleTick() {
       for (int i = 0; i < count; i++) {
         if (random.nextDouble() < chance) {
-          RootsParticleOptions opt;
-          if (random.nextBoolean()) {
-            opt = options.builder().swapColors().build();
-          } else {
-            opt = options;
-          }
+          RootsParticleOptions opt = options.swapColors(random);
           level.addParticle(opt, x + (random.nextDouble() - 0.5), y + (random.nextDouble() - 0.5), z + (random.nextDouble() - 0.5), (random.nextDouble() - 0.5) * 0.1, (random.nextDouble() - 0.5) * 0.05, (random.nextDouble() - 0.5) * 0.1);
         }
       }
@@ -105,7 +100,7 @@ public abstract class EntityEmitter extends Particle {
     @Override
     public void particleTick() {
       for (int i = 0; i < 3; i++) {
-        level.addParticle(random.nextBoolean() ? options : options.builder().swapColors().build(), x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2, 0, 0, 0);
+        level.addParticle(options.swapColors(random), x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2, 0, 0, 0);
       }
     }
   }
@@ -135,9 +130,7 @@ public abstract class EntityEmitter extends Particle {
           double py = pos.y + (random.nextDouble() - 0.5) * 0.2;
           double pz = pos.z + (random.nextDouble() - 0.5) * 0.3;
 
-          RootsParticleOptions opt = random.nextBoolean()
-              ? options
-              : options.builder().swapColors().build();
+          RootsParticleOptions opt = options.swapColors(random);
 
           level.addParticle(opt, px, py, pz, motion.x, 0, motion.z);
         }

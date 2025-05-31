@@ -11,6 +11,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.RandomSource;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
@@ -35,6 +36,14 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::fastForward,
         (c1, c2, e, f, g) -> new RootsParticleOptions(type, c1, c2, e, f, g)
     );
+  }
+
+  public RootsParticleOptions swapColors (RandomSource random) {
+    return builder().swapColors(random).build();
+  }
+
+  public RootsParticleOptions swapColors () {
+    return builder().swapColors().build();
   }
 
   public Builder builder () {
@@ -71,6 +80,13 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       int temp = this.color1;
       this.color1 = this.color2;
       this.color2 = temp;
+      return this;
+    }
+
+    public Builder swapColors (RandomSource random) {
+      if (random.nextBoolean()) {
+        return swapColors();
+      }
       return this;
     }
 
