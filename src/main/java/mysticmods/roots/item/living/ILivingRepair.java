@@ -10,6 +10,7 @@ public interface ILivingRepair {
     if (!pLevel.isClientSide() && pEntity instanceof Player player && pStack.isDamaged() && pLevel.getRandom()
         .nextInt(Math.max(1, bounds)) == 0) {
       pStack.setDamageValue(pStack.getDamageValue() - 1);
+      // TODO: Repair particles
     }
   }
 }
