@@ -1,10 +1,13 @@
 package mysticmods.roots.client.particle.screen.base;
 
+import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import org.joml.AxisAngle4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -19,62 +22,41 @@ public abstract class SingleQuadScreenParticle extends ScreenParticle {
       ClientLevel level, double x, double y, double xSpeed, double ySpeed
   ) {
     super(level, x, y, xSpeed, ySpeed);
-  }
-
-  public SingleQuadScreenParticle.FacingCameraMode getFacingCameraMode() {
-    return SingleQuadScreenParticle.FacingCameraMode.LOOKAT_XYZ;
+    this.quadSize = 8f;
   }
 
   @Override
-  public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    Quaternionf quaternionf = new Quaternionf();
-    this.getFacingCameraMode().setRotation(quaternionf, renderInfo, partialTicks);
-    if (this.roll != 0.0F) {
-      quaternionf.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
+  public void render(VertexConsumer buffer, float partialTicks) {
+    float size = this.getQuadSize(partialTicks);
+    float u0 = this.getU0();
+    float u1 = this.getU1();
+    float v0 = this.getV0();
+    float v1 = this.getV1();
+
+    int light = getLightColor(partialTicks);
+
+    float lerpRoll = Mth.lerp(partialTicks, this.oRoll, this.roll);
+    Quaternionf quaternion = new Quaternionf(new AxisAngle4f(lerpRoll, new Vector3f(0.0f, 0.0f, 1.0f)));
+
+    float quadZ = this.getQuadZ();
+
+    Window window = Minecraft.getInstance().getWindow();
+
+    Vector3f[] vectors = new Vector3f[]{new Vector3f(-1.0f, -1.0f, 0f), new Vector3f(-1.0f, 1.0f, 0f), new Vector3f(1.0f, 1.0f, 0.0f), new Vector3f(1.0f, -1.0f, 0.0f)};
+    for (int i = 0; i < 4; i++) {
+      vectors[i].rotate(quaternion);
+      vectors[i].mul(size, size, 1.0f);
+      vectors[i].add((float) this.x, window.getGuiScaledHeight() - (float) this.y, 0f);
     }
 
-    this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
+    buffer.addVertex(vectors[0].x, vectors[0].y, quadZ).setUv(u1, v1).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
+    buffer.addVertex(vectors[1].x, vectors[1].y, quadZ).setUv(u1, v0).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
+    buffer.addVertex(vectors[2].x, vectors[2].y, quadZ).setUv(u0, v0).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
+    buffer.addVertex(vectors[3].x, vectors[3].y, quadZ).setUv(u0, v1).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
   }
 
-  protected void renderRotatedQuad(VertexConsumer buffer, Camera camera, Quaternionf quaternion, float partialTicks) {
-    Vec3 vec3 = camera.getPosition();
-    float f = (float) (Mth.lerp((double) partialTicks, this.xo, this.x) - vec3.x());
-    float f1 = (float) (Mth.lerp((double) partialTicks, this.yo, this.y) - vec3.y());
-    float f2 = (float) (Mth.lerp((double) partialTicks, 0, 0) - vec3.z());
-    this.renderRotatedQuad(buffer, quaternion, f, f1, f2, partialTicks);
-  }
-
-  protected void renderRotatedQuad(VertexConsumer buffer, Quaternionf quaternion, float x, float y, float z, float partialTicks) {
-    float f = this.getQuadSize(partialTicks);
-    float f1 = this.getU0();
-    float f2 = this.getU1();
-    float f3 = this.getV0();
-    float f4 = this.getV1();
-    int i = this.getLightColor(partialTicks);
-    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, -1.0F, f, f2, f4, i);
-    this.renderVertex(buffer, quaternion, x, y, z, 1.0F, 1.0F, f, f2, f3, i);
-    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, 1.0F, f, f1, f3, i);
-    this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, f1, f4, i);
-  }
-
-  private void renderVertex(
-      VertexConsumer buffer,
-      Quaternionf quaternion,
-      float x,
-      float y,
-      float z,
-      float xOffset,
-      float yOffset,
-      float quadSize,
-      float u,
-      float v,
-      int packedLight
-  ) {
-    Vector3f vector3f = new Vector3f(xOffset, yOffset, 0.0F).rotate(quaternion).mul(quadSize).add(x, y, z);
-    buffer.addVertex(vector3f.x(), vector3f.y(), vector3f.z())
-        .setUv(u, v)
-        .setColor(this.rCol, this.gCol, this.bCol, this.alpha)
-        .setLight(packedLight);
+  public float getQuadZ () {
+    return 1000f;
   }
 
   public float getQuadSize(float scaleFactor) {

@@ -1,10 +1,8 @@
 package mysticmods.roots.client.particle.screen.base;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import org.joml.Vector2d;
 
@@ -91,7 +89,7 @@ public abstract class ScreenParticle {
     }
   }
 
-  public abstract void render(VertexConsumer buffer, Camera camera, float partialTicks);
+  public abstract void render(VertexConsumer buffer, float partialTicks);
 
   public abstract ParticleRenderType getRenderType();
 
@@ -132,29 +130,7 @@ public abstract class ScreenParticle {
     return !this.removed;
   }
 
-/*  public Optional<ScreenParticleGroup> getScreenParticleGroup() {
-    return Optional.empty();
-  }*/
-
   public Vector2d getPos() {
     return new Vector2d(this.x, this.y);
-  }
-
-  public static record LifetimeAlpha(float startAlpha, float endAlpha, float startAtNormalizedAge,
-                                     float endAtNormalizedAge) {
-    public static final ScreenParticle.LifetimeAlpha ALWAYS_OPAQUE = new ScreenParticle.LifetimeAlpha(1.0F, 1.0F, 0.0F, 1.0F);
-
-    public boolean isOpaque() {
-      return this.startAlpha >= 1.0F && this.endAlpha >= 1.0F;
-    }
-
-    public float currentAlphaForAge(int age, int lifetime, float partialTick) {
-      if (Mth.equal(this.startAlpha, this.endAlpha)) {
-        return this.startAlpha;
-      } else {
-        float f = Mth.inverseLerp(((float) age + partialTick) / (float) lifetime, this.startAtNormalizedAge, this.endAtNormalizedAge);
-        return Mth.clampedLerp(this.startAlpha, this.endAlpha, f);
-      }
-    }
   }
 }

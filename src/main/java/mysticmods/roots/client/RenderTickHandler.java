@@ -14,6 +14,7 @@ import mysticmods.roots.client.particle.BeamManager;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
 import mysticmods.roots.client.particle.bolt.IBoltEffect;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
+import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinLevelRenderer;
@@ -23,6 +24,7 @@ import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -41,9 +43,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.ClientHooks;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RenderHighlightEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.*;
 
 import java.util.Map;
 import java.util.Queue;
@@ -57,7 +57,7 @@ public class RenderTickHandler {
 
   private static boolean renderingDelayedParticles = false;
 
-  private static final ImmutableList<ParticleRenderType> RENDER_ORDER = ImmutableList.of(
+  public static final ImmutableList<ParticleRenderType> RENDER_ORDER = ImmutableList.of(
       RootsParticleRenderTypes.DELAYED_OPAQUE,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
@@ -85,6 +85,11 @@ public class RenderTickHandler {
 
   public static void renderBeam(Beam beam) {
     BeamManager.addBeam(beam);
+  }
+
+  @SubscribeEvent
+  public static void onRenderGui (RenderGuiEvent.Post event) {
+    ScreenParticleEngine.render(event.getPartialTick().getGameTimeDeltaPartialTick(false));
   }
 
   @SubscribeEvent
@@ -149,6 +154,8 @@ public class RenderTickHandler {
   public static void onClientTick(ClientTickEvent.Post post) {
     HerbLayer.tick();
     BeamManager.tick();
+    // TODO: Check pausing
+    ScreenParticleEngine.tick();
   }
 
   // This is stolen from Mekanism

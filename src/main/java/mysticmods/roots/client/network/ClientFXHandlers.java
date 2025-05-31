@@ -1,17 +1,24 @@
 package mysticmods.roots.client.network;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.client.particle.bolt.PositionProvider;
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
+import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
+import mysticmods.roots.client.particle.screen.base.TextureSheetScreenParticle;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinParticleEngine;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -677,6 +684,24 @@ public class ClientFXHandlers {
       Vec3 vec = Vec3.atCenterOf(pos);
       minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.HARVEST)
           .build(), vec.x, vec.y, vec.z, 0, 0, 0);
+    }
+  }
+
+  public static void desaturate() {
+    Minecraft minecraft = Minecraft.getInstance();
+    RandomSource random = minecraft.level.random;
+
+    SpriteSet sprites = ((AccessorMixinParticleEngine)Minecraft.getInstance().particleEngine).rootsGetSpriteSets().get(RootsAPI.rl("growth"));
+
+    for (int i = 0; i < 15; i++) {
+      TextureSheetScreenParticle test = new TextureSheetScreenParticle(minecraft.level, 20 + random.nextDouble(), 20 + random.nextDouble(), 0.2, 0.2) {
+        @Override
+        public ParticleRenderType getRenderType() {
+          return RootsParticleRenderTypes.DELAYED_OPAQUE;
+        }
+      };
+      test.pickSprite(sprites);
+      ScreenParticleEngine.addParticle(test);
     }
   }
 }

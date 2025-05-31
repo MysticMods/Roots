@@ -134,7 +134,6 @@ public class RootsParticleRenderTypes {
       RenderSystem.depthMask(true);
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.disableBlend();
-      RenderSystem.enableCull();
       return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 

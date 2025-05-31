@@ -2,6 +2,7 @@ package mysticmods.roots.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinEntityRenderer;
@@ -18,6 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;

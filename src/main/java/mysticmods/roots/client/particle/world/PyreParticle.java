@@ -2,7 +2,10 @@ package mysticmods.roots.client.particle.world;
 
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
 
 public class PyreParticle extends RootsParticle {
   protected float rotSpeed, spinAcceleration;
@@ -32,31 +35,25 @@ public class PyreParticle extends RootsParticle {
   }
 
   @Override
-  public void tick() {
-    super.tick();
-    if (!this.removed) {
+  protected void updateColour(float f) {
+    super.updateColour(f * f);
+  }
 
-      float f = (float) this.age / (float) this.lifetime;
-      f *= f;
-      if (this.oB1 != this.bcol2) {
-        this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
-        this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
-        this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
-      }
-
-      float spinFactor = 1.0f - f;
-      spinFactor *= spinFactor;
-      f *= f;
-      f *= f;
-
-      if (this.spinAcceleration != 0.0f) {
-        this.rotSpeed += this.spinAcceleration / 20.0f * spinFactor;
-        this.oRoll = this.roll;
-        this.roll += this.rotSpeed;
-      }
-
-      this.quadSize *= 1.0f - f;
+  @Override
+  protected void updateRoll(float f) {
+    float spinFactor = 1.0f - f * f;
+    spinFactor *= spinFactor;
+    if (this.spinAcceleration != 0.0f) {
+      this.rotSpeed += this.spinAcceleration / 20.0f * spinFactor;
+      this.oRoll = this.roll;
+      this.roll += this.rotSpeed;
     }
+  }
+
+  @Override
+  protected void updateQuadSize(float f) {
+    f = f * f * f * f;
+    this.quadSize *= 1.0f - f;
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

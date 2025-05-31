@@ -1,9 +1,8 @@
 package mysticmods.roots.mixin.client.accessor;
 
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TrackingEmitter;
+import com.google.common.collect.Maps;
+import net.minecraft.client.particle.*;
+import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -17,4 +16,7 @@ public interface AccessorMixinParticleEngine {
 
   @Accessor("particles")
   Map<ParticleRenderType, Queue<Particle>> rootsGetParticles ();
+
+  @Accessor("spriteSets")
+  Map<ResourceLocation, SpriteSet> rootsGetSpriteSets();
 }
