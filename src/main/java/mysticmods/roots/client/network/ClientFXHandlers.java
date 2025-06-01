@@ -695,8 +695,7 @@ public class ClientFXHandlers {
     int guiHeight = minecraft.getWindow().getGuiScaledHeight();
 
     int visibleHearts = Math.min(10, (int) Math.ceil(player.getMaxHealth() / 2f));
-    float targetIndex = visibleHearts - 1;
-    Vector2d heart = getHeartIcon(player, guiWidth, guiHeight, targetIndex);
+    Vector2d heart = getHeartIcon(player, guiWidth, guiHeight, visibleHearts - 2);
 
     for (int i = 0; i < oldFood; i++) {
       Vector2d pos = getFoodIcon(player, guiWidth, guiHeight, newFood + i);
@@ -711,11 +710,7 @@ public class ClientFXHandlers {
   public static Vector2d getFoodIcon(Player player, int guiWidth, int guiHeight, int foodLevel) {
     int foodIcons = Math.min(10, (foodLevel + 1) / 2);
 
-    // Inline estimateFoodBarY logic:
-    boolean hasMountHealth =
-        player.getVehicle() instanceof LivingEntity mount &&
-            mount.isAlive() &&
-            mount.getMaxHealth() > 20;
+    boolean hasMountHealth = player.getVehicle() instanceof LivingEntity mount && mount.isAlive() && mount.getMaxHealth() > 20;
 
     int baseY = guiHeight - 39;
     if (hasMountHealth) {
@@ -724,21 +719,13 @@ public class ClientFXHandlers {
 
     int baseX = guiWidth / 2 + 91;
 
-    int index = foodIcons - 1;
-    int iconX = baseX - index * 8 - 9;
-    int iconY = baseY;
-
-    return new Vector2d(iconX + 4.5, iconY + 4.5);
+    return new Vector2d(baseX - (foodIcons - 1) * 8 - 9 + 4.5, baseY + 4.5);
   }
 
   public static Vector2d getHeartIcon(Player player, int guiWidth, int guiHeight, float heartIndex) {
-    // Same logic used in Minecraft's HUD renderer
-    boolean hasMountHealth =
-        player.getVehicle() instanceof LivingEntity mount &&
-            mount.isAlive() &&
-            mount.getMaxHealth() > 20;
+    boolean hasMountHealth = player.getVehicle() instanceof LivingEntity mount && mount.isAlive() && mount.getMaxHealth() > 20;
 
-    int baseY = guiHeight - 39; // Default heart bar Y
+    int baseY = guiHeight - 39;
     if (hasMountHealth) {
       baseY -= 10;
     }
