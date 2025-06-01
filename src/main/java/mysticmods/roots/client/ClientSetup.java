@@ -15,6 +15,9 @@ import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
 import mysticmods.roots.client.particle.bolt.RenderPreset;
+import mysticmods.roots.client.particle.screen.EmptyProvider;
+import mysticmods.roots.client.particle.screen.FoodScreenParticle;
+import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
 import mysticmods.roots.client.particle.world.emitter.EntityEmitter;
 import mysticmods.roots.client.particle.world.emitter.SylvanLightEmitter;
 import mysticmods.roots.client.particle.world.*;
@@ -24,7 +27,6 @@ import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.mixin.accessor.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -220,6 +222,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.DANDELION.get(), DandelionParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PETAL.get(), PetalParticle.Provider::new);
     event.registerSpriteSet(ModParticles.HARVEST.get(), HarvestParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.FOOD.get(), EmptyProvider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());
@@ -227,6 +230,8 @@ public class ClientSetup {
     event.registerSpecial(ModParticles.LIFE_DRAIN_EMITTER.get(), new EntityEmitter.LifeDrainProvider());
 
     BoltRenderer.registerRenderPreset(RenderPreset.LIGHTNING, RootsRenderTypes.ROOTS_LIGHTNING);
+
+    ScreenParticleEngine.register(ModParticles.FOOD.get(), new FoodScreenParticle.Provider());
   }
 
   @SubscribeEvent

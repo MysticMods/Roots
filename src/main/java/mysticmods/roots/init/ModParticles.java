@@ -58,6 +58,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> DANDELION = PARTICLES.register("dandelion", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PETAL = PARTICLES.register("petal", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> HARVEST = PARTICLES.register("harvest", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> FOOD = PARTICLES.register("food", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);

@@ -1,32 +1,28 @@
 package mysticmods.roots.client.network;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.client.particle.bolt.PositionProvider;
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
-import mysticmods.roots.client.particle.screen.base.TextureSheetScreenParticle;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.mixin.client.accessor.AccessorMixinParticleEngine;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector2d;
 
 import java.util.List;
 
@@ -667,7 +663,8 @@ public class ClientFXHandlers {
     }
 
     minecraft.level.addParticle(
-        RootsParticleOptions.builder(ModParticles.LIFE_DRAIN_EMITTER).color(ModSpells.LIFE_DRAIN).entityId(entityId).casterId(casterId).build(),
+        RootsParticleOptions.builder(ModParticles.LIFE_DRAIN_EMITTER).color(ModSpells.LIFE_DRAIN).entityId(entityId)
+            .casterId(casterId).build(),
         entity.getX(),
         entity.getY(),
         entity.getZ(),
@@ -687,21 +684,73 @@ public class ClientFXHandlers {
     }
   }
 
-  public static void desaturate() {
+  public static void desaturate(float heartsStart, float heartsNow, int oldFood, int newFood) {
     Minecraft minecraft = Minecraft.getInstance();
-    RandomSource random = minecraft.level.random;
-
-    SpriteSet sprites = ((AccessorMixinParticleEngine)Minecraft.getInstance().particleEngine).rootsGetSpriteSets().get(RootsAPI.rl("growth"));
-
-    for (int i = 0; i < 15; i++) {
-      TextureSheetScreenParticle test = new TextureSheetScreenParticle(minecraft.level, 20 + random.nextDouble(), 20 + random.nextDouble(), 0.2, 0.2) {
-        @Override
-        public ParticleRenderType getRenderType() {
-          return RootsParticleRenderTypes.DELAYED_OPAQUE;
-        }
-      };
-      test.pickSprite(sprites);
-      ScreenParticleEngine.addParticle(test);
+    if (minecraft == null || oldFood == 0 || heartsNow <= heartsStart) {
+      return;
     }
+
+    Player player = minecraft.player;
+    int guiWidth = minecraft.getWindow().getGuiScaledWidth();
+    int guiHeight = minecraft.getWindow().getGuiScaledHeight();
+
+    int visibleHearts = Math.min(10, (int) Math.ceil(player.getMaxHealth() / 2f));
+    float targetIndex = visibleHearts - 1;
+    Vector2d heart = getHeartIcon(player, guiWidth, guiHeight, targetIndex);
+
+    for (int i = 0; i < oldFood; i++) {
+      Vector2d pos = getFoodIcon(player, guiWidth, guiHeight, newFood + i);
+      ScreenParticleEngine.addParticle(
+          RootsParticleOptions.builder(ModParticles.FOOD).color(0xffffff, 0xffffff).build(),
+          pos.x, pos.y,
+          heart.x, heart.y
+      );
+    }
+  }
+
+  public static Vector2d getFoodIcon(Player player, int guiWidth, int guiHeight, int foodLevel) {
+    int foodIcons = Math.min(10, (foodLevel + 1) / 2);
+
+    // Inline estimateFoodBarY logic:
+    boolean hasMountHealth =
+        player.getVehicle() instanceof LivingEntity mount &&
+            mount.isAlive() &&
+            mount.getMaxHealth() > 20;
+
+    int baseY = guiHeight - 39;
+    if (hasMountHealth) {
+      baseY -= 10;
+    }
+
+    int baseX = guiWidth / 2 + 91;
+
+    int index = foodIcons - 1;
+    int iconX = baseX - index * 8 - 9;
+    int iconY = baseY;
+
+    return new Vector2d(iconX + 4.5, iconY + 4.5);
+  }
+
+  public static Vector2d getHeartIcon(Player player, int guiWidth, int guiHeight, float heartIndex) {
+    // Same logic used in Minecraft's HUD renderer
+    boolean hasMountHealth =
+        player.getVehicle() instanceof LivingEntity mount &&
+            mount.isAlive() &&
+            mount.getMaxHealth() > 20;
+
+    int baseY = guiHeight - 39; // Default heart bar Y
+    if (hasMountHealth) {
+      baseY -= 10;
+    }
+
+    int baseX = guiWidth / 2 - 91;
+
+    int row = (int) (heartIndex / 10);
+    int col = (int) (heartIndex % 10);
+
+    int iconX = baseX + col * 8;
+    int iconY = baseY + row * 10;
+
+    return new Vector2d(iconX + 4.5, iconY + 4.5);
   }
 }

@@ -48,19 +48,20 @@ public class DesaturateSpell extends Spell {
 
   @Override
   public int cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    PacketDistributor.sendToPlayer((ServerPlayer)pPlayer, DesaturateScreenFX.INSTANCE);
-
     if (!pPlayer.isHurt()) {
       costs.noCharge();
       return 0;
     }
 
     FoodData stats = pPlayer.getFoodData();
-    int food = stats.getFoodLevel();
+    final int originalFood = stats.getFoodLevel();
+    int food = originalFood;
     if (food <= 1) {
       costs.noCharge();
       return 0;
     }
+
+    float originalHealth = pPlayer.getHealth();
 
     float missing = pPlayer.getMaxHealth() - pPlayer.getHealth();
     float healed = 0;
@@ -83,6 +84,7 @@ public class DesaturateSpell extends Spell {
     pPlayer.heal(healed);
     stats.setFoodLevel(food);
     stats.setSaturation(Math.min(stats.getExhaustionLevel(), food));
+    PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new DesaturateScreenFX(originalHealth, pPlayer.getHealth(), originalFood, food));
     return cooldown;
   }
 }

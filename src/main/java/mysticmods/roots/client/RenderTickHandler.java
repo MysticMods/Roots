@@ -25,6 +25,7 @@ import net.minecraft.ReportedException;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -32,6 +33,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -44,6 +46,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.util.Map;
 import java.util.Queue;
@@ -88,8 +91,16 @@ public class RenderTickHandler {
   }
 
   @SubscribeEvent
-  public static void onRenderGui (RenderGuiEvent.Post event) {
-    ScreenParticleEngine.render(event.getPartialTick().getGameTimeDeltaPartialTick(false));
+  public static void onRenderGui (RenderGuiLayerEvent.Post event) {
+    ResourceLocation layer = event.getName();
+    if (layer.equals(VanillaGuiLayers.SAVING_INDICATOR)) {
+      GuiGraphics graphics = event.getGuiGraphics();
+      PoseStack pose = graphics.pose();
+      pose.pushPose();
+      pose.translate(0, 0, 1000);
+      ScreenParticleEngine.render(event.getPartialTick().getGameTimeDeltaPartialTick(false));
+      pose.popPose();
+    }
   }
 
   @SubscribeEvent
