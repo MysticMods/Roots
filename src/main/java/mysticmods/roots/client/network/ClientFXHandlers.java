@@ -700,7 +700,7 @@ public class ClientFXHandlers {
 
     for (int i = 0; i < oldFood; i++) {
       Vector2d pos = getFoodIcon(player, guiWidth, guiHeight, newFood + i);
-      ScreenParticleEngine.addParticle(
+      ScreenParticleEngine.addHudParticle(
           RootsParticleOptions.builder(ModParticles.FOOD).color(0xffffff, 0xffffff).build(),
           pos.x, pos.y,
           heart.x, heart.y
@@ -748,9 +748,6 @@ public class ClientFXHandlers {
     int row = (int) (heartIndex / 10);
     int col = (int) (heartIndex % 10);
 
-    int iconX = baseX + col * 8;
-    int iconY = baseY + row * 10;
-
-    return new Vector2d(iconX + 4.5, iconY + 4.5);
+    return new Vector2d(baseX + col * 8 + 4.5, baseY + row * 10 + 4.5);
   }
 }

@@ -21,33 +21,53 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 public class ScreenParticleEngine {
-  private static final Map<ParticleRenderType, List<ScreenParticle>> particles = new HashMap<>();
+  private static final Map<ParticleRenderType, List<ScreenParticle>> hudParticles = new HashMap<>();
+  private static final Map<ParticleRenderType, List<ScreenParticle>> containerParticles = new HashMap<>();
   private static final Map<ParticleType<?>, ScreenParticleProvider<?>> particleTypes = new HashMap<>();
 
-  public static void tick() {
-    particles.forEach((type, particleList) -> {
-      Iterator<ScreenParticle> iterator = particleList.iterator();
-      while (iterator.hasNext()) {
-        ScreenParticle next = iterator.next();
-        next.tick();
-        if (!next.isAlive()) {
-          iterator.remove();
-        }
+  private static boolean renderedContainerParticles = false;
+
+  private static final BiConsumer<ParticleRenderType, List<ScreenParticle>> particleConsumer = (type, particleList) -> {
+    Iterator<ScreenParticle> iterator = particleList.iterator();
+    while (iterator.hasNext()) {
+      ScreenParticle next = iterator.next();
+      next.tick();
+      if (!next.isAlive()) {
+        iterator.remove();
       }
-    });
+    }
+  };
+
+  public static void tick() {
+    hudParticles.forEach(particleConsumer);
+    containerParticles.forEach(particleConsumer);
+    renderedContainerParticles = false;
   }
 
-  public static void addParticle(ScreenParticle particle) {
+  public static void addHudParticle(ScreenParticle particle) {
     ParticleRenderType type = particle.getRenderType();
-    particles.computeIfAbsent(type, k -> new ArrayList<>()).add(particle);
+    hudParticles.computeIfAbsent(type, k -> new ArrayList<>()).add(particle);
   }
 
-  public static <T extends ParticleOptions> void addParticle(T options, double x, double y, double xSpeed, double ySpeed) {
+  public static void addContainerParticle(ScreenParticle particle) {
+    ParticleRenderType type = particle.getRenderType();
+    containerParticles.computeIfAbsent(type, k -> new ArrayList<>()).add(particle);
+  }
+
+  public static <T extends ParticleOptions> void addHudParticle(T options, double x, double y, double xSpeed, double ySpeed) {
     TextureSheetScreenParticle particle = createParticle(options, x, y, xSpeed, ySpeed);
     if (particle != null) {
-      addParticle(particle);
+      addHudParticle(particle);
+    }
+  }
+
+  public static <T extends ParticleOptions> void addContainerParticle(T options, double x, double y, double xSpeed, double ySpeed) {
+    TextureSheetScreenParticle particle = createParticle(options, x, y, xSpeed, ySpeed);
+    if (particle != null) {
+      addContainerParticle(particle);
     }
   }
 
@@ -86,17 +106,17 @@ public class ScreenParticleEngine {
     particleTypes.put(type, provider);
   }
 
-  public static void render(float partialTicks) {
-    RenderSystem.disableDepthTest();
+  public static void renderHudParticles(float partialTicks) {
+    RenderSystem.enableDepthTest();
     RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
     Tesselator tesselator = Tesselator.getInstance();
     TextureManager textureManager = Minecraft.getInstance().getTextureManager();
 
-    particles.forEach((type, particleList) -> {
+    hudParticles.forEach((type, particleList) -> {
       if (!particleList.isEmpty()) {
         BufferBuilder buffer = type.begin(tesselator, textureManager);
         if (buffer == null) {
-          RootsAPI.LOG.error("Failed to create buffer for particle type: " + type);
+          RootsAPI.LOG.error("Failed to create buffer for particle type: '{}'", type);
           return;
         }
         for (ScreenParticle particle : particleList) {
@@ -114,4 +134,35 @@ public class ScreenParticleEngine {
     RenderSystem.disableBlend();
   }
 
+  public static void renderContainerParticles(float partialTicks) {
+    if (renderedContainerParticles) {
+      RootsAPI.LOG.error("Container particles are already rendered this frame. This should not happen.");
+    }
+    RenderSystem.enableDepthTest();
+    RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+    Tesselator tesselator = Tesselator.getInstance();
+    TextureManager textureManager = Minecraft.getInstance().getTextureManager();
+
+    hudParticles.forEach((type, particleList) -> {
+      if (!particleList.isEmpty()) {
+        BufferBuilder buffer = type.begin(tesselator, textureManager);
+        if (buffer == null) {
+          RootsAPI.LOG.error("Failed to create buffer for particle type: {}", type);
+          return;
+        }
+        for (ScreenParticle particle : particleList) {
+          particle.render(buffer, partialTicks);
+        }
+
+        MeshData meshdata = buffer.build();
+        if (meshdata != null) {
+          BufferUploader.drawWithShader(meshdata);
+        }
+      }
+    });
+
+    RenderSystem.depthMask(true);
+    RenderSystem.disableBlend();
+    renderedContainerParticles = true;
+  }
 }
