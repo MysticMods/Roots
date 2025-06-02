@@ -76,6 +76,7 @@ public class PacketHandler {
     registrar.play(DrainLifeFXPacket.TYPE, DrainLifeFXPacket.CODEC);
     registrar.play(HarvestFXPacket.TYPE, HarvestFXPacket.CODEC);
     registrar.play(DesaturateScreenFX.TYPE, DesaturateScreenFX.CODEC);
+    registrar.play(HealFXPacket.TYPE, HealFXPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

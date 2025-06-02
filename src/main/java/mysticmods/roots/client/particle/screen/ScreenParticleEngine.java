@@ -41,6 +41,14 @@ public class ScreenParticleEngine {
     }
   };
 
+  public static boolean hasHudParticles () {
+    return hudParticles.values().stream().anyMatch(list -> !list.isEmpty());
+  }
+
+  public static boolean hasContainerParticles() {
+    return containerParticles.values().stream().anyMatch(list -> !list.isEmpty());
+  }
+
   public static void tick() {
     hudParticles.forEach(particleConsumer);
     containerParticles.forEach(particleConsumer);
@@ -107,7 +115,7 @@ public class ScreenParticleEngine {
   }
 
   public static void renderHudParticles(float partialTicks) {
-    RenderSystem.enableDepthTest();
+    RenderSystem.disableDepthTest();
     RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
     Tesselator tesselator = Tesselator.getInstance();
     TextureManager textureManager = Minecraft.getInstance().getTextureManager();
@@ -138,7 +146,7 @@ public class ScreenParticleEngine {
     if (renderedContainerParticles) {
       RootsAPI.LOG.error("Container particles are already rendered this frame. This should not happen.");
     }
-    RenderSystem.enableDepthTest();
+    RenderSystem.disableDepthTest();
     RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
     Tesselator tesselator = Tesselator.getInstance();
     TextureManager textureManager = Minecraft.getInstance().getTextureManager();

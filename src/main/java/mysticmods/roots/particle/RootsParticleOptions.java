@@ -64,7 +64,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
 
   public static class Builder {
     private ParticleType<?> type;
-    private int color1, color2,
+    private int color1 = 0xffffff, color2 = 0xffffff,
         entityId, casterId, fastForward;
 
     public Builder(ParticleType<?> type) {

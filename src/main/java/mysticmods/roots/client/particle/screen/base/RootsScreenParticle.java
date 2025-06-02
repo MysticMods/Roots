@@ -87,7 +87,7 @@ public abstract class RootsScreenParticle extends TextureSheetScreenParticle {
       this.remove();
     } else {
       if (defaultMovement) {
-        this.yd = this.yd - 0.04 * (double) this.gravity;
+        this.yd = this.yd + 0.04 * (double) this.gravity;
         this.x += this.xd;
         this.y += this.yd;
 

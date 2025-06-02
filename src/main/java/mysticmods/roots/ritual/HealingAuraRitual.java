@@ -6,6 +6,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.network.client.fx.HealFXPacket;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -26,13 +28,21 @@ public class HealingAuraRitual extends Ritual {
     if (duration % getInterval() == 0) {
       List<Player> players = pLevel.getEntitiesOfClass(Player.class, pCache.getAABB());
       for (Player player : players) {
-        player.heal(playerHeal);
+        float amount = Math.min(player.getMaxHealth() - player.getHealth(), playerHeal);
+        if (amount > 0) {
+          player.heal(amount);
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new HealFXPacket(player.getId(), amount));
+        }
       }
 
       // TODO: Tags
       List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB(), o -> !(o instanceof Player));
       for (LivingEntity entity : entities) {
-        entity.heal(entityHeal);
+        float amount = Math.min(entity.getMaxHealth() - entity.getHealth(), entityHeal);
+        if (amount > 0) {
+          entity.heal(amount);
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new HealFXPacket(entity.getId(), amount));
+        }
       }
     }
   }

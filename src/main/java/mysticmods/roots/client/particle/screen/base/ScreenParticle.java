@@ -47,7 +47,7 @@ public abstract class ScreenParticle {
 
   public ScreenParticle setPower(float multiplier) {
     this.xd *= multiplier;
-    this.yd = (this.yd - 0.1F) * (double) multiplier + 0.1F;
+    this.yd = (this.yd + 0.1F) * (double) multiplier + 0.1F;
     return this;
   }
 
@@ -80,7 +80,8 @@ public abstract class ScreenParticle {
     if (this.age++ >= this.lifetime) {
       this.remove();
     } else {
-      this.yd = this.yd - 0.04 * (double) this.gravity;
+      // Friction is applied in reverse
+      this.yd = this.yd + 0.04 * (double) this.gravity;
       this.x += this.xd;
       this.y += this.yd;
 

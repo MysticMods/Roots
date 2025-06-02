@@ -7,6 +7,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.network.client.fx.HealFXPacket;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,9 +135,13 @@ public class FrostLandsRitual extends Ritual {
               .and(o -> o.getType().is(RootsTags.Entities.HEALABLE_ICE_CREATURES)));
       if (!entities.isEmpty()) {
         for (LivingEntity entity : entities) {
-          entity.heal(entity.getMaxHealth() - entity.getHealth());
+          float amount = entity.getMaxHealth() - entity.getHealth();
+          if (amount > 0) {
+            entity.heal(amount);
+            PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new HealFXPacket(entity.getId(), amount));
+            affectedPositions.add(entity.blockPosition());
+          }
           entity.extinguishFire();
-          affectedPositions.add(entity.blockPosition());
         }
       }
     }

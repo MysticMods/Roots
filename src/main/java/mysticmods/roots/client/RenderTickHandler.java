@@ -43,10 +43,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.ClientHooks;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import net.neoforged.neoforge.client.event.RenderHighlightEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.gui.GuiLayerManager;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.util.Map;
 import java.util.Queue;
@@ -91,13 +90,15 @@ public class RenderTickHandler {
   }
 
   @SubscribeEvent
-  public static void onRenderGui(RenderGuiEvent.Post event) {
-    GuiGraphics graphics = event.getGuiGraphics();
-    PoseStack pose = graphics.pose();
-    pose.pushPose();
-    pose.translate(0, 0, 1000);
-    ScreenParticleEngine.renderHudParticles(event.getPartialTick().getGameTimeDeltaPartialTick(false));
-    pose.popPose();
+  public static void onRenderGui(RenderGuiLayerEvent.Post event) {
+    if (event.getName().equals(VanillaGuiLayers.SAVING_INDICATOR) && ScreenParticleEngine.hasHudParticles()) {
+      GuiGraphics graphics = event.getGuiGraphics();
+      PoseStack pose = graphics.pose();
+      pose.pushPose();
+      pose.translate(0, 0, ClientHooks.getGuiFarPlane());
+      ScreenParticleEngine.renderHudParticles(event.getPartialTick().getGameTimeDeltaPartialTick(false));
+      pose.popPose();
+    }
   }
 
   @SubscribeEvent

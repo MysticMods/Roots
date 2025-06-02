@@ -737,4 +737,33 @@ public class ClientFXHandlers {
 
     return new Vector2d(baseX + col * 8 + 4.5, baseY + row * 10 + 4.5);
   }
+
+
+  public static void heal(int entityId, float amount) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    if (entity == null) {
+      return;
+    }
+
+    RandomSource random = minecraft.level.getRandom();
+
+    RootsParticleOptions options = RootsParticleOptions.builder(ModParticles.HEAL).build();
+
+    if (entity.getId() == minecraft.player.getId()) {
+      Player player = minecraft.player;
+      int guiWidth = minecraft.getWindow().getGuiScaledWidth();
+      int guiHeight = minecraft.getWindow().getGuiScaledHeight();
+
+      int visibleHearts = Math.min(10, (int) Math.ceil(player.getMaxHealth() / 2f));
+      Vector2d heart = getHeartIcon(player, guiWidth, guiHeight, visibleHearts - 2);
+      for (int a = 0; a < amount; a+= 2) {
+        ScreenParticleEngine.addHudParticle(options, heart.x, heart.y - 4 - random.nextDouble() * 3, (random.nextDouble() - 0.5) * 0.8, -(1.4 + random.nextDouble()));
+      }
+    }
+
+    for (float a = 0; a < amount; a += 0.5f) {
+      minecraft.level.addParticle(options, entity.getX(), entity.getY() + 0.5, entity.getZ(), (random.nextDouble() - 0.5) * 0.2, (random.nextDouble() * 0.2), (random.nextDouble() - 0.5) * 0.2);
+    }
+  }
 }

@@ -12,7 +12,7 @@ import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastLifeDrainFXPacket;
 import mysticmods.roots.network.client.fx.DrainLifeFXPacket;
-import mysticmods.roots.network.client.fx.EntityBeamFXPacket;
+import mysticmods.roots.network.client.fx.HealFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -84,8 +84,13 @@ public class LifeDrainSpell extends Spell {
     for (LivingEntity entity : entities) {
       foundTarget = true;
       if (entity.hurt(ModDamage.lifeDrain(pPlayer), this.damage)) {
-        pPlayer.heal(heal);
         count++;
+
+        float amount = Math.min(heal, pPlayer.getMaxHealth() - pPlayer.getHealth());
+        if (amount > 0) {
+          pPlayer.heal(amount);
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HealFXPacket(pPlayer.getId(), heal));
+        }
 
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new DrainLifeFXPacket(entity.getId(), pPlayer.getId()));
       }
@@ -118,7 +123,8 @@ public class LifeDrainSpell extends Spell {
         continue;
       }
 
-      if (candidate.getEyePosition().subtract(startVec).normalize().dot(look) >= radius && candidate.distanceToSqr(startVec) <= dist) {
+      if (candidate.getEyePosition().subtract(startVec).normalize()
+          .dot(look) >= radius && candidate.distanceToSqr(startVec) <= dist) {
         results.add(candidate);
       }
     }

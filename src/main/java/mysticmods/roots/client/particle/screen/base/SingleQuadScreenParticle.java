@@ -54,7 +54,7 @@ public abstract class SingleQuadScreenParticle extends ScreenParticle {
   }
 
   public float getQuadZ() {
-    return -50f;
+    return 0;
   }
 
   public float getQuadSize(float scaleFactor) {
