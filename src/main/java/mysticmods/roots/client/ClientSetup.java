@@ -225,6 +225,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.HARVEST.get(), HarvestParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FOOD.get(), EmptyProvider::new);
     event.registerSpriteSet(ModParticles.HEAL.get(), HealParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.NONDETECTION.get(), NondetectionParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());

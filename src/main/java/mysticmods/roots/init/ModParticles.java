@@ -60,6 +60,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> HARVEST = PARTICLES.register("harvest", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> FOOD = PARTICLES.register("food", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> HEAL = PARTICLES.register("heal", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> NONDETECTION = PARTICLES.register("nondetection", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);

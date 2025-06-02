@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RootsParticleProvider extends ParticleDescriptionProvider {
@@ -68,6 +69,13 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.spriteSet(ModParticles.FOOD.get(), RootsAPI.rl("food"), 2, false);
 
     this.spriteSet(ModParticles.HEAL.get(), ResourceLocation.withDefaultNamespace("heart"));
+
+    List<ResourceLocation> sga = new ArrayList<>();
+    for (char c : "abcdefghijklmnopqrstuvwxyz".toCharArray()) {
+      sga.add(ResourceLocation.withDefaultNamespace("sga_" + c));
+    }
+
+    this.spriteSet(ModParticles.NONDETECTION.get(), sga);
   }
 
   @Override

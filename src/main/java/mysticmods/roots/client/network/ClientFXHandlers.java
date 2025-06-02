@@ -766,4 +766,19 @@ public class ClientFXHandlers {
       minecraft.level.addParticle(options, entity.getX(), entity.getY() + 0.5, entity.getZ(), (random.nextDouble() - 0.5) * 0.2, (random.nextDouble() * 0.2), (random.nextDouble() - 0.5) * 0.2);
     }
   }
+
+  public static void nondetection(int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+
+    int color1 = ModSpells.NONDETECTION.get().getColor1();
+    int color2 = ModSpells.NONDETECTION.get().getColor2();
+
+    if (entity == null) {
+      return;
+    }
+
+    minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.NONDETECTION).color(color1, color2)
+        .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
+  }
 }
