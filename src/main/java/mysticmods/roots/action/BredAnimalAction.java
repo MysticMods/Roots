@@ -29,13 +29,13 @@ public class BredAnimalAction implements GroveAction {
 
   public record Context(ServerLevel level, ServerPlayer player, Entity target, Entity secondary,
                         Entity tertiary) implements GroveContext {
-    public static Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.TARGET_ENTITY,
+    public static Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER,
         GroveContext.SECONDARY_ENTITY, GroveContext.TERTIARY_ENTITY);
 
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       return switch (type) {
-        case TARGET_ENTITY -> target.getType().is(TagKey.create(Registries.ENTITY_TYPE, tag));
+        case TARGET_ENTITY -> target != null && target.getType().is(TagKey.create(Registries.ENTITY_TYPE, tag));
         case SECONDARY_ENTITY -> secondary.getType().is(TagKey.create(Registries.ENTITY_TYPE, tag));
         case TERTIARY_ENTITY -> tertiary.getType().is(TagKey.create(Registries.ENTITY_TYPE, tag));
         default -> false;
