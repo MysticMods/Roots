@@ -69,6 +69,23 @@ public class RootsParticleRenderTypes {
     }
   };
 
+  public static ParticleRenderType DELAYED_TRANSLUCENT_NO_MASK = new ParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
+      RenderSystem.depthMask(false);
+      RenderSystem.disableDepthTest();
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.enableBlend();
+      RenderSystem.blendFuncSeparate(
+          GlStateManager.SourceFactor.SRC_ALPHA,
+          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+          GlStateManager.SourceFactor.ONE,
+          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
+      );
+      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+  };
+
   public static ParticleRenderType DELAYED_TRANSLUCENT = new ParticleRenderType() {
     @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {

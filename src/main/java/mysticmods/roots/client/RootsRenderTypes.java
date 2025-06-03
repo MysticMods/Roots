@@ -73,6 +73,22 @@ public class RootsRenderTypes {
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .createCompositeState(false));
 
+  public static final RenderType TRANSLUCENT_DELAYED_PARTICLES_NO_MASK = RenderType.create(
+      "roots:particles_translucent_no_mask",
+      DefaultVertexFormat.PARTICLE,
+      VertexFormat.Mode.QUADS,
+      256,
+      false,
+      true,
+      RenderType.CompositeState.builder()
+          .setShaderState(PARTICLE_SHADER)
+          .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+          .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
+          .setWriteMaskState(RenderStateShard.COLOR_WRITE)
+          .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
+          .setLightmapState(RenderStateShard.LIGHTMAP)
+          .createCompositeState(false));
+
   public static final RenderType ADDITIVE_DELAYED = RenderType.create(
       "roots:particles_additive",
       DefaultVertexFormat.PARTICLE,

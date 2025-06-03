@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -63,6 +64,7 @@ public class RenderTickHandler {
       RootsParticleRenderTypes.DELAYED_OPAQUE,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_MASK,
       RootsParticleRenderTypes.DELAYED_ADDITIVE
   );
 
@@ -70,6 +72,7 @@ public class RenderTickHandler {
       RootsParticleRenderTypes.DELAYED_OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_MASK, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK,
       RootsParticleRenderTypes.DELAYED_ADDITIVE, RootsRenderTypes.ADDITIVE_DELAYED
   );
 

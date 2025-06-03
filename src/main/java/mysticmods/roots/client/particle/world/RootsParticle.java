@@ -91,7 +91,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
   }
 
   protected boolean shouldRender() {
-    return !RenderTickHandler.isRenderingDelayedParticles() || delayedRender;
+    return RenderTickHandler.isRenderingDelayedParticles() && delayedRender;
   }
 
   @Override

@@ -70,6 +70,8 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
 
     this.spriteSet(ModParticles.HEAL.get(), ResourceLocation.withDefaultNamespace("heart"));
 
+    this.sprite(ModParticles.FOG.get(), RootsAPI.rl("smoke"));
+
     List<ResourceLocation> sga = new ArrayList<>();
     for (char c : "abcdefghijklmnopqrstuvwxyz".toCharArray()) {
       sga.add(ResourceLocation.withDefaultNamespace("sga_" + c));
