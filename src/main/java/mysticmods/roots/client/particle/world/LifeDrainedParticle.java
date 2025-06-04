@@ -1,10 +1,12 @@
 package mysticmods.roots.client.particle.world;
 
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
@@ -51,6 +53,11 @@ public class LifeDrainedParticle extends RootsParticle {
     this.xd = smoothed.x;
     this.yd = smoothed.y;
     this.zd = smoothed.z;
+  }
+
+  @Override
+  public ParticleRenderType getRenderType() {
+    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
   }
 
   @Override

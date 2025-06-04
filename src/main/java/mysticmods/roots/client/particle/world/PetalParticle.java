@@ -1,5 +1,6 @@
 package mysticmods.roots.client.particle.world;
 
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -32,7 +33,7 @@ public class PetalParticle extends RootsParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

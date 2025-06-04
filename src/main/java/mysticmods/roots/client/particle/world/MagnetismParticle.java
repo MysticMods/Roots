@@ -2,12 +2,14 @@ package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -49,6 +51,11 @@ public class MagnetismParticle extends RootsEntityParticle {
       this.oRadius = this.radius;
       this.radius *= 0.93f;
     }
+  }
+
+  @Override
+  public ParticleRenderType getRenderType() {
+    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
   }
 
   @Override

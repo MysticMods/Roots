@@ -20,7 +20,6 @@ public class MeteorParticle extends TextureSheetParticle {
     this.gCol2 = ((c2 >> 8) & 0xFF) / 255.0f;
     this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
-    this.gravity = gravity;
     this.hasPhysics = true;
     this.quadSize = 0.2f;
     this.rotSpeed = 0f;

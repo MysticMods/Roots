@@ -2,11 +2,13 @@ package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -43,6 +45,11 @@ public class LifeDrainParticle extends RootsEntityParticle {
     this.rollAmount = random.nextFloat() * 0.1f;
     this.quadSize = 0.395f;
     this.gravity = 0.01f;
+  }
+
+  @Override
+  public ParticleRenderType getRenderType() {
+    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
   }
 
   @Override
