@@ -26,8 +26,9 @@ public abstract class SingleQuadScreenParticle extends ScreenParticle {
     float size = this.getQuadSize(partialTicks);
     float u0 = this.getU0();
     float u1 = this.getU1();
-    float v0 = this.getV0();
-    float v1 = this.getV1();
+    // Invert verticals to match UI's screen space coordinates
+    float v0 = this.getV1();
+    float v1 = this.getV0();
 
     int light = getLightColor(partialTicks);
 
@@ -43,13 +44,13 @@ public abstract class SingleQuadScreenParticle extends ScreenParticle {
       vectors[i].add((float) this.x, (float) this.y, 0f);
     }
 
-    buffer.addVertex(vectors[0].x, vectors[0].y, quadZ).setUv(u1, v1)
+    buffer.addVertex(vectors[0].x, vectors[0].y, quadZ).setUv(u0, v1)
         .setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
-    buffer.addVertex(vectors[1].x, vectors[1].y, quadZ).setUv(u1, v0)
+    buffer.addVertex(vectors[1].x, vectors[1].y, quadZ).setUv(u0, v0)
         .setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
-    buffer.addVertex(vectors[2].x, vectors[2].y, quadZ).setUv(u0, v0)
+    buffer.addVertex(vectors[2].x, vectors[2].y, quadZ).setUv(u1, v0)
         .setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
-    buffer.addVertex(vectors[3].x, vectors[3].y, quadZ).setUv(u0, v1)
+    buffer.addVertex(vectors[3].x, vectors[3].y, quadZ).setUv(u1, v1)
         .setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
   }
 

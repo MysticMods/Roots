@@ -4,16 +4,13 @@ import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.client.particle.screen.base.RootsScreenParticle;
 import mysticmods.roots.client.particle.screen.base.TextureSheetScreenParticle;
 import mysticmods.roots.particle.RootsParticleOptions;
-import mysticmods.roots.util.VecUtil;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector2f;
 
-public class HealScreenParticle extends RootsScreenParticle {
-  protected HealScreenParticle(ClientLevel level, RootsParticleOptions options, double x, double y, double xSpeed, double ySpeed) {
+public class RiseBounceScreenParticle extends RootsScreenParticle {
+  protected RiseBounceScreenParticle(ClientLevel level, RootsParticleOptions options, double x, double y, double xSpeed, double ySpeed) {
     super(level, options, x, y, xSpeed, ySpeed);
     this.xd = xSpeed;
     this.yd = ySpeed;
@@ -48,7 +45,7 @@ public class HealScreenParticle extends RootsScreenParticle {
   public static class Provider implements ScreenParticleProvider<RootsParticleOptions> {
     @Override
     public @Nullable TextureSheetScreenParticle createParticle(SpriteSet sprites, RootsParticleOptions type, ClientLevel level, double x, double y, double xSpeed, double ySpeed) {
-      HealScreenParticle particle = new HealScreenParticle(level, type, x, y, xSpeed, ySpeed);
+      RiseBounceScreenParticle particle = new RiseBounceScreenParticle(level, type, x, y, xSpeed, ySpeed);
       particle.pickSprite(sprites);
       return particle;
     }

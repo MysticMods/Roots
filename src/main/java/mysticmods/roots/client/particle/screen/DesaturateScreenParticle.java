@@ -12,10 +12,10 @@ import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2f;
 
-public class FoodScreenParticle extends RootsScreenParticle {
+public class Desaturate extends RootsScreenParticle {
   private final Vector2f startPos, stopPos, control1, control2;
 
-  protected FoodScreenParticle(ClientLevel level, RootsParticleOptions options, double x, double y, double xSpeed, double ySpeed) {
+  protected Desaturate(ClientLevel level, RootsParticleOptions options, double x, double y, double xSpeed, double ySpeed) {
     super(level, options, x, y, xSpeed, ySpeed);
     this.lifetime = 60;
     this.quadSize = 4f;
@@ -56,7 +56,7 @@ public class FoodScreenParticle extends RootsScreenParticle {
   public static class Provider implements ScreenParticleProvider<RootsParticleOptions> {
     @Override
     public @Nullable TextureSheetScreenParticle createParticle(SpriteSet sprites, RootsParticleOptions type, ClientLevel level, double x, double y, double xSpeed, double ySpeed) {
-      FoodScreenParticle particle = new FoodScreenParticle(level, type, x, y, xSpeed, ySpeed);
+      Desaturate particle = new Desaturate(level, type, x, y, xSpeed, ySpeed);
       particle.pickSprite(sprites);
       return particle;
     }
