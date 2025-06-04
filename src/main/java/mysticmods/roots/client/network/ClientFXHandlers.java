@@ -814,23 +814,38 @@ public class ClientFXHandlers {
     }
   }
 
-  public static void saturate(int oldFood, int newFood) {
+  public static void saturate(int entityId, int oldFood, int newFood) {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft == null || newFood == oldFood) {
       return;
     }
 
-    Player player = minecraft.player;
-    int guiWidth = minecraft.getWindow().getGuiScaledWidth();
-    int guiHeight = minecraft.getWindow().getGuiScaledHeight();
+    Entity entity = minecraft.level.getEntity(entityId);
+    if (entity == null) {
+      return;
+    }
+
+    int delta = newFood - oldFood;
 
     RandomSource random = minecraft.level.getRandom();
+    RootsParticleOptions options = RootsParticleOptions.builder(ModParticles.SATURATE).build();
 
-    for (int i = 0; i < oldFood; i++) {
-      Vector2d pos = getFoodIcon(player, guiWidth, guiHeight, newFood + i);
-      ScreenParticleEngine.addHudParticle(
-          RootsParticleOptions.builder(ModParticles.DESATURATE).build(),
-          pos.x, pos.y  - 4 - random.nextDouble() * 3, (random.nextDouble() - 0.5) * 0.8, -(1.4 + random.nextDouble()));
+    Player player = minecraft.player;
+    if (player != null && player.getId() == entityId) {
+      int guiWidth = minecraft.getWindow().getGuiScaledWidth();
+      int guiHeight = minecraft.getWindow().getGuiScaledHeight();
+
+      for (int i = 0; i < delta; i++) {
+        Vector2d pos = getFoodIcon(player, guiWidth, guiHeight, newFood - i);
+        ScreenParticleEngine.addHudParticle(options,
+            pos.x, pos.y - 4 - random.nextDouble() * 3, (random.nextDouble() - 0.5) * 0.8, -(1.4 + random.nextDouble()));
+      }
     }
+
+    for (int i = 0; i < delta; i++) {
+      minecraft.level.addParticle(options, entity.getX(), entity.getY() + 0.5, entity.getZ(), (random.nextDouble() - 0.5) * 0.2, (random.nextDouble() * 0.2), (random.nextDouble() - 0.5) * 0.2);
+    }
+
+    // TODO: Particles to demonstration saturation to others
   }
 }

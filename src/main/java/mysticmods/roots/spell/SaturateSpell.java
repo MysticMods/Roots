@@ -12,6 +12,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.SaturateScreenFXPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -23,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +140,8 @@ public class SaturateSpell extends Spell {
     if (data.getFoodLevel() < newFood) {
       data.setFoodLevel((int) Math.floor(Math.min(20, newFood)));
     }
+
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new SaturateScreenFXPacket(pPlayer.getId(), currentFood, data.getFoodLevel()));
 
     for (ItemStack stack : consumedItems) {
       ItemStack result = stack.finishUsingItem(pLevel, pPlayer);

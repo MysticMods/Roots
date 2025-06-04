@@ -225,7 +225,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.PETAL.get(), PetalParticle.Provider::new);
     event.registerSpriteSet(ModParticles.HARVEST.get(), HarvestParticle.Provider::new);
     event.registerSpriteSet(ModParticles.DESATURATE.get(), EmptyProvider::new);
-    event.registerSpriteSet(ModParticles.SATURATE.get(), EmptyProvider::new);
+    event.registerSpriteSet(ModParticles.SATURATE.get(), HealParticle.Provider::new);
     event.registerSpriteSet(ModParticles.HEAL.get(), HealParticle.Provider::new);
     event.registerSpriteSet(ModParticles.NONDETECTION.get(), NondetectionParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FOG.get(), FogParticle.Provider::new);
