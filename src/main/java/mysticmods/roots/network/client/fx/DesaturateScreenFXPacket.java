@@ -9,14 +9,14 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record DesaturateScreenFX(float heartsStart, float heartsNow, int foodStartLevel, int foodNewLevel) implements IRootsPacket {
-  public static final CustomPacketPayload.Type<DesaturateScreenFX> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_fx/desaturate_screen"));
-  public static final StreamCodec<FriendlyByteBuf, DesaturateScreenFX> CODEC = StreamCodec.composite(
-      ByteBufCodecs.FLOAT, DesaturateScreenFX::heartsStart,
-      ByteBufCodecs.FLOAT, DesaturateScreenFX::heartsNow,
-      ByteBufCodecs.VAR_INT, DesaturateScreenFX::foodStartLevel,
-      ByteBufCodecs.VAR_INT, DesaturateScreenFX::foodNewLevel,
-      DesaturateScreenFX::new
+public record DesaturateScreenFXPacket(float heartsStart, float heartsNow, int foodStartLevel, int foodNewLevel) implements IRootsPacket {
+  public static final CustomPacketPayload.Type<DesaturateScreenFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_fx/desaturate_screen"));
+  public static final StreamCodec<FriendlyByteBuf, DesaturateScreenFXPacket> CODEC = StreamCodec.composite(
+      ByteBufCodecs.FLOAT, DesaturateScreenFXPacket::heartsStart,
+      ByteBufCodecs.FLOAT, DesaturateScreenFXPacket::heartsNow,
+      ByteBufCodecs.VAR_INT, DesaturateScreenFXPacket::foodStartLevel,
+      ByteBufCodecs.VAR_INT, DesaturateScreenFXPacket::foodNewLevel,
+      DesaturateScreenFXPacket::new
   );
 
 

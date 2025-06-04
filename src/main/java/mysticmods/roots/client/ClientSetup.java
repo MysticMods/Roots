@@ -19,6 +19,7 @@ import mysticmods.roots.client.particle.screen.EmptyProvider;
 import mysticmods.roots.client.particle.screen.DesaturateScreenParticle;
 import mysticmods.roots.client.particle.screen.RiseBounceScreenParticle;
 import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
+import mysticmods.roots.client.particle.screen.base.ScreenParticle;
 import mysticmods.roots.client.particle.world.emitter.EntityEmitter;
 import mysticmods.roots.client.particle.world.emitter.SylvanLightEmitter;
 import mysticmods.roots.client.particle.world.*;
@@ -223,7 +224,8 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.DANDELION.get(), DandelionParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PETAL.get(), PetalParticle.Provider::new);
     event.registerSpriteSet(ModParticles.HARVEST.get(), HarvestParticle.Provider::new);
-    event.registerSpriteSet(ModParticles.FOOD.get(), EmptyProvider::new);
+    event.registerSpriteSet(ModParticles.DESATURATE.get(), EmptyProvider::new);
+    event.registerSpriteSet(ModParticles.SATURATE.get(), EmptyProvider::new);
     event.registerSpriteSet(ModParticles.HEAL.get(), HealParticle.Provider::new);
     event.registerSpriteSet(ModParticles.NONDETECTION.get(), NondetectionParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FOG.get(), FogParticle.Provider::new);
@@ -237,7 +239,8 @@ public class ClientSetup {
 
     BoltRenderer.registerRenderPreset(RenderPreset.LIGHTNING, RootsRenderTypes.ROOTS_LIGHTNING);
 
-    ScreenParticleEngine.register(ModParticles.FOOD.get(), new DesaturateScreenParticle.Provider());
+    ScreenParticleEngine.register(ModParticles.DESATURATE.get(), new DesaturateScreenParticle.Provider());
+    ScreenParticleEngine.register(ModParticles.SATURATE.get(), new RiseBounceScreenParticle.Provider());
     ScreenParticleEngine.register(ModParticles.HEAL.get(), new RiseBounceScreenParticle.Provider());
   }
 

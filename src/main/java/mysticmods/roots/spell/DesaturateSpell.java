@@ -9,7 +9,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.network.client.fx.DesaturateScreenFX;
+import mysticmods.roots.network.client.fx.DesaturateScreenFXPacket;
 import mysticmods.roots.network.client.fx.HealFXPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -85,7 +85,7 @@ public class DesaturateSpell extends Spell {
     pPlayer.heal(healed);
     stats.setFoodLevel(food);
     stats.setSaturation(Math.min(stats.getExhaustionLevel(), food));
-    PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new DesaturateScreenFX(originalHealth, pPlayer.getHealth(), originalFood, food));
+    PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new DesaturateScreenFXPacket(originalHealth, pPlayer.getHealth(), originalFood, food));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HealFXPacket(pPlayer.getId(), healed));
     return cooldown;
   }

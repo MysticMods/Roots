@@ -700,7 +700,7 @@ public class ClientFXHandlers {
     for (int i = 0; i < oldFood; i++) {
       Vector2d pos = getFoodIcon(player, guiWidth, guiHeight, newFood + i);
       ScreenParticleEngine.addHudParticle(
-          RootsParticleOptions.builder(ModParticles.FOOD).color(0xffffff, 0xffffff).build(),
+          RootsParticleOptions.builder(ModParticles.DESATURATE).build(),
           pos.x, pos.y,
           heart.x, heart.y
       );
@@ -811,6 +811,26 @@ public class ClientFXHandlers {
           .color(ModSpells.SANCTUARY).build() : RootsParticleOptions.builder(ModParticles.SANCTUARY).color(ModSpells.SANCTUARY).swapColors().build();
 
       minecraft.level.addParticle(opts, spawnPos.x, spawnPos.y, spawnPos.z, 0, 0, 0);
+    }
+  }
+
+  public static void saturate(int oldFood, int newFood) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft == null || newFood == oldFood) {
+      return;
+    }
+
+    Player player = minecraft.player;
+    int guiWidth = minecraft.getWindow().getGuiScaledWidth();
+    int guiHeight = minecraft.getWindow().getGuiScaledHeight();
+
+    RandomSource random = minecraft.level.getRandom();
+
+    for (int i = 0; i < oldFood; i++) {
+      Vector2d pos = getFoodIcon(player, guiWidth, guiHeight, newFood + i);
+      ScreenParticleEngine.addHudParticle(
+          RootsParticleOptions.builder(ModParticles.DESATURATE).build(),
+          pos.x, pos.y  - 4 - random.nextDouble() * 3, (random.nextDouble() - 0.5) * 0.8, -(1.4 + random.nextDouble()));
     }
   }
 }
