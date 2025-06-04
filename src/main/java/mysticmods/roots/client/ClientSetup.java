@@ -228,6 +228,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.NONDETECTION.get(), NondetectionParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FOG.get(), FogParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SANCTUARY.get(), SanctuaryParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.ROSE_THORNS.get(), RoseThornsParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());

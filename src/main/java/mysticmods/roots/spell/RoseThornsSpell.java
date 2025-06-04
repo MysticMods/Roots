@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -9,8 +10,10 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.init.ModEntities;
+import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -62,8 +65,8 @@ public class RoseThornsSpell extends Spell {
       rose.setOwner(pPlayer);
       rose.setLifetime(duration);
       rose.setPos(result.getLocation());
-      rose.setSnapshot(new RoseThornsEntitySnapshot(rose.tickCount, -1, radiusZX, radiusY, duration, damage));
       pLevel.addFreshEntity(rose);
+      SnapshotHelper.addLiving(rose, ModSerializers.ROSE_THORNS.get(), new RoseThornsEntitySnapshot(rose.tickCount, -1, radiusZX, radiusY, duration, damage));
       return cooldown;
     } else {
       costs.noCharge();

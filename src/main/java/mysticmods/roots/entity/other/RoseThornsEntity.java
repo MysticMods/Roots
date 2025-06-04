@@ -3,10 +3,10 @@ package mysticmods.roots.entity.other;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.SnapshotStorage;
-import mysticmods.roots.init.ModDamage;
-import mysticmods.roots.init.ModEntities;
-import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.init.*;
+import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -29,7 +29,6 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
   private Entity cachedOwner;
   private static final EntityDataAccessor<Integer> LIFETIME = SynchedEntityData.defineId(RoseThornsEntity.class, EntityDataSerializers.INT);
   private AABB aabb;
-  private SnapshotStorage snapshotStorage = new SnapshotStorage();
 
   public RoseThornsEntity(EntityType<RoseThornsEntity> timeStopEntityEntityType, Level level) {
     super(ModEntities.ROSE_THORNS.get(), level);
@@ -61,24 +60,6 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
     return 0.05;
   }
 
-
-  public SnapshotStorage getSnapshotStorage() {
-    return snapshotStorage;
-  }
-
-  public void setSnapshot(RoseThornsEntitySnapshot snapshot) {
-    this.snapshotStorage.addSnapshot(this, ModSerializers.ROSE_THORNS.get(), snapshot);
-  }
-
-  protected RoseThornsEntitySnapshot getSnapshot() {
-    SnapshotStorage storage = getSnapshotStorage();
-    if (storage == null) {
-      return null;
-    }
-
-    return storage.getSnapshot(this, ModSerializers.ROSE_THORNS.get());
-  }
-
   @Override
   public boolean canCollideWith(Entity entity) {
     return super.canCollideWith(entity);
@@ -87,7 +68,7 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
   @Nullable
   protected AABB getAabb() {
     if (this.aabb == null) {
-      RoseThornsEntitySnapshot snapshot = getSnapshot();
+      RoseThornsEntitySnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.ROSE_THORNS.get());
       if (snapshot == null) {
         return null;
       }
@@ -105,12 +86,22 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
       this.move(MoverType.SELF, this.getDeltaMovement());
     }
 
-    this.snapshotStorage.tick(this);
+    if (this.level().isClientSide()) {
+      if (this.random.nextInt(6) == 0) {
+        this.level().addParticle(RootsParticleOptions.builder(ModParticles.ROSE_THORNS).color(ModSpells.ROSE_THORNS)
+                .swapColors(this.random).build(),
+            this.getX() + (this.random.nextDouble() - 0.5) * 0.4,
+            this.getY() + 0.2,
+            this.getZ() + (this.random.nextDouble() - 0.5) * 0.4,
+            (this.random.nextDouble() - 0.5) * 0.1, random.nextDouble() * 0.05, (this.random.nextDouble() - 0.5) * 0.1);
+      }
+    }
+
     AABB aabb = this.getAabb();
     int newLifetime = this.getLifetime() - 1;
     this.setLifetime(newLifetime);
     this.checkInsideBlocks();
-    RoseThornsEntitySnapshot snapshot = this.snapshotStorage.getSnapshot(this, ModSerializers.ROSE_THORNS.get());
+    RoseThornsEntitySnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.ROSE_THORNS.get());
     if (snapshot == null) {
       RootsAPI.LOG.error("RoseThornsEntitySnapshot is null for {}", this);
     } else {
@@ -152,8 +143,6 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
       compound.putUUID("Owner", this.ownerUUID);
     }
     compound.putInt("lifetime", this.getLifetime());
-    SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result()
-        .ifPresent(storage -> this.snapshotStorage = storage);
   }
 
   protected boolean ownedBy(Entity entity) {
@@ -167,8 +156,6 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
       this.cachedOwner = null;
     }
     this.setLifetime(compound.getInt("lifetime"));
-    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result()
-        .ifPresent(tag -> compound.put("snapshots", tag));
   }
 
   @Override

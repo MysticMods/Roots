@@ -6,6 +6,7 @@ import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.world.entity.Entity;
 import org.apache.logging.log4j.util.TriConsumer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 
@@ -18,6 +19,12 @@ public class SnapshotHelper {
     if (storage.isDirty()) {
       living.setData(ModAttachments.SNAPSHOT_STORAGE, storage);
     }
+  }
+
+  @Nullable
+  public static <T extends Snapshot> T getSnapshot (Entity entity, SnapshotType<T> serializer) {
+    SnapshotStorage storage = entity.getData(ModAttachments.SNAPSHOT_STORAGE);
+    return storage.getSnapshot(entity, serializer);
   }
 
   public static <T extends Snapshot> void applyLiving(Entity living, SnapshotType<T> serializer, BiConsumer<Entity, T> consumer) {

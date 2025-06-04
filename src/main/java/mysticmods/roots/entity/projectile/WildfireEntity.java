@@ -5,6 +5,7 @@ import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.particle.RootsParticleOptions;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.snapshot.WildfireEntitySnapshot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -29,7 +30,6 @@ import javax.annotation.Nullable;
 
 public class WildfireEntity extends Projectile {
   private int life;
-  private SnapshotStorage snapshotStorage = new SnapshotStorage();
 
   public WildfireEntity(EntityType<? extends WildfireEntity> entityType, Level level) {
     super(entityType, level);
@@ -44,14 +44,6 @@ public class WildfireEntity extends Projectile {
   public WildfireEntity(EntityType<? extends WildfireEntity> entityType, LivingEntity owner, Level level) {
     this(entityType, owner.getX(), owner.getEyeY() - 0.1, owner.getZ(), level);
     this.setOwner(owner);
-  }
-
-  public SnapshotStorage getSnapshotStorage() {
-    return snapshotStorage;
-  }
-
-  public void setSnapshot(WildfireEntitySnapshot snapshot) {
-    this.snapshotStorage.addSnapshot(this, ModSerializers.WILDFIRE.get(), snapshot);
   }
 
   @Override
@@ -83,8 +75,6 @@ public class WildfireEntity extends Projectile {
     if (!level().isClientSide) {
       tickDespawn();
     }
-
-    this.snapshotStorage.tick(this);
 
     Vec3 vec3 = this.getDeltaMovement();
     if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
@@ -210,7 +200,7 @@ public class WildfireEntity extends Projectile {
     Entity entity = result.getEntity();
     float f = (float) this.getDeltaMovement().length();
     // Get damage from the spell instance
-    WildfireEntitySnapshot snapshot = snapshotStorage.getSnapshot(this, ModSerializers.WILDFIRE.get());
+    WildfireEntitySnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.WILDFIRE.get());
     if (snapshot != null) {
       // TODO:
       DamageSource damagesource = ModDamage.wildfire(this, getOwner() == null ? this : getOwner());
@@ -268,18 +258,12 @@ public class WildfireEntity extends Projectile {
   protected void addAdditionalSaveData(CompoundTag compound) {
     super.addAdditionalSaveData(compound);
     compound.putInt("life", this.life);
-
-    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result()
-        .ifPresent(tag -> compound.put("snapshots", tag));
   }
 
   @Override
   protected void readAdditionalSaveData(CompoundTag compound) {
     super.readAdditionalSaveData(compound);
     this.life = compound.getInt("life");
-
-    this.snapshotStorage = SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result()
-        .orElseGet(SnapshotStorage::new);
   }
 
   @Override

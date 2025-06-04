@@ -20,38 +20,21 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 
-public class TimeStopEntity extends Entity {
-  private static final EntityDataAccessor<Integer> LIFETIME = SynchedEntityData.defineId(TimeStopEntity.class, EntityDataSerializers.INT);
+public class TemporalMorassEntity extends Entity {
+  private static final EntityDataAccessor<Integer> LIFETIME = SynchedEntityData.defineId(TemporalMorassEntity.class, EntityDataSerializers.INT);
   private AABB aabb;
-  private SnapshotStorage snapshotStorage = new SnapshotStorage();
 
-  public TimeStopEntity(EntityType<TimeStopEntity> timeStopEntityEntityType, Level level) {
+  public TemporalMorassEntity(EntityType<TemporalMorassEntity> timeStopEntityEntityType, Level level) {
     super(ModEntities.TEMPORAL_MORASS.get(), level);
     this.noPhysics = true;
     setNoGravity(true);
   }
 
-  public SnapshotStorage getSnapshotStorage() {
-    return snapshotStorage;
-  }
-
-  public void setSnapshot(TemporalMorassEntitySnapshot snapshot) {
-    this.snapshotStorage.addSnapshot(this, ModSerializers.TEMPORAL_MORASS.get(), snapshot);
-  }
-
-  protected TemporalMorassEntitySnapshot getSnapshot() {
-    SnapshotStorage storage = getSnapshotStorage();
-    if (storage == null) {
-      return null;
-    }
-
-    return storage.getSnapshot(this, ModSerializers.TEMPORAL_MORASS.get());
-  }
 
   @Nullable
   protected AABB getAabb() {
     if (this.aabb == null) {
-      TemporalMorassEntitySnapshot snapshot = getSnapshot();
+      TemporalMorassEntitySnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.TEMPORAL_MORASS.get());
       if (snapshot == null) {
         return null;
       }
@@ -64,12 +47,11 @@ public class TimeStopEntity extends Entity {
   @Override
   public void tick() {
     super.tick();
-    this.snapshotStorage.tick(this);
     AABB aabb = this.getAabb();
     int newLifetime = this.getLifetime() - 1;
     this.setLifetime(newLifetime);
     if (aabb != null) {
-      TemporalMorassEntitySnapshot snapshot = getSnapshot();
+      TemporalMorassEntitySnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.TEMPORAL_MORASS.get());
       for (LivingEntity living : this.level().getEntitiesOfClass(LivingEntity.class, aabb, entity -> {
             if (entity.getType().is(RootsTags.Entities.TEMPORAL_MORASS_EXCLUDE)) {
               return false;
@@ -97,15 +79,11 @@ public class TimeStopEntity extends Entity {
   @Override
   protected void readAdditionalSaveData(CompoundTag compound) {
     this.setLifetime(compound.getInt("lifetime"));
-    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result()
-        .ifPresent(tag -> compound.put("snapshots", tag));
   }
 
   @Override
   protected void addAdditionalSaveData(CompoundTag compound) {
     compound.putInt("lifetime", this.getLifetime());
-    SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result()
-        .ifPresent(storage -> this.snapshotStorage = storage);
   }
 
   public void setLifetime(int duration) {

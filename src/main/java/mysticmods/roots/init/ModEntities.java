@@ -3,7 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.*;
 import mysticmods.roots.entity.other.RoseThornsEntity;
-import mysticmods.roots.entity.other.TimeStopEntity;
+import mysticmods.roots.entity.other.TemporalMorassEntity;
 import mysticmods.roots.entity.projectile.LivingArrowEntity;
 import mysticmods.roots.entity.projectile.MeteorEntity;
 import mysticmods.roots.entity.projectile.WildfireEntity;
@@ -70,7 +70,7 @@ public class ModEntities {
       .sized(0.3f, 0.3f).eyeHeight(0.13f).clientTrackingRange(4).updateInterval(10).build("meteor"));
   public static final DeferredHolder<EntityType<?>, EntityType<WildfireEntity>> WILDFIRE = REGISTER.register("wildfire", () -> EntityType.Builder.<WildfireEntity>of(WildfireEntity::new, MobCategory.MISC)
       .sized(1.9f, 1.9f).clientTrackingRange(4).updateInterval(10).build("wildfire"));
-  public static final DeferredHolder<EntityType<?>, EntityType<TimeStopEntity>> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> EntityType.Builder.of(TimeStopEntity::new, MobCategory.MISC)
+  public static final DeferredHolder<EntityType<?>, EntityType<TemporalMorassEntity>> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> EntityType.Builder.of(TemporalMorassEntity::new, MobCategory.MISC)
       .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("temporal_morass"));
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
