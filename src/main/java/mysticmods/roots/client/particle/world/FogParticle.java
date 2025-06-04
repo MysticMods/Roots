@@ -11,7 +11,7 @@ import net.minecraft.client.particle.SpriteSet;
 public class FogParticle extends RootsParticle {
   protected FogParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
-    this.lifetime = 28;
+    this.lifetime = 32;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
     this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
     this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
@@ -29,12 +29,12 @@ public class FogParticle extends RootsParticle {
 
   @Override
   protected void updateAlpha(float f) {
-    this.alpha = Math.max(0, 0.3f - f);
+    this.alpha = Math.max(0, 0.3f - f * f);
   }
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_MASK;
+    return RootsParticleRenderTypes.DELAYED_TRANSLUCENT;
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

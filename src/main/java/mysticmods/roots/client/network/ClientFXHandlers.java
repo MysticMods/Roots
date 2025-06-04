@@ -304,7 +304,10 @@ public class ClientFXHandlers {
         double vx = 0.0825 * Math.sin(rad);
         double vz = 0.0825 * Math.cos(rad);
         minecraft.level.addParticle(opts, x, y, z, vx, 0.0525 * (random.nextDouble() - 0.5), vz);
-        //minecraft.level.addParticle(opts.builder().type(ModParticles.FOG).build(), x, y, z, vx, 0.0525 * (random.nextDouble() - 0.5), vz);
+        if (random.nextInt(3) == 0) {
+          minecraft.level.addParticle(opts.builder().type(ModParticles.FOG)
+              .build(), x, y - 0.4, z, vx, 0.0525 * (random.nextDouble() - 0.5), vz);
+        }
       }
     }
   }
