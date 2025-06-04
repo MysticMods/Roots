@@ -16,8 +16,8 @@ import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
 import mysticmods.roots.client.particle.bolt.RenderPreset;
 import mysticmods.roots.client.particle.screen.EmptyProvider;
-import mysticmods.roots.client.particle.screen.FoodScreenParticle;
-import mysticmods.roots.client.particle.screen.HealScreenParticle;
+import mysticmods.roots.client.particle.screen.DesaturateScreenParticle;
+import mysticmods.roots.client.particle.screen.RiseBounceScreenParticle;
 import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
 import mysticmods.roots.client.particle.world.emitter.EntityEmitter;
 import mysticmods.roots.client.particle.world.emitter.SylvanLightEmitter;
@@ -237,8 +237,8 @@ public class ClientSetup {
 
     BoltRenderer.registerRenderPreset(RenderPreset.LIGHTNING, RootsRenderTypes.ROOTS_LIGHTNING);
 
-    ScreenParticleEngine.register(ModParticles.FOOD.get(), new FoodScreenParticle.Provider());
-    ScreenParticleEngine.register(ModParticles.HEAL.get(), new HealScreenParticle.Provider());
+    ScreenParticleEngine.register(ModParticles.FOOD.get(), new DesaturateScreenParticle.Provider());
+    ScreenParticleEngine.register(ModParticles.HEAL.get(), new RiseBounceScreenParticle.Provider());
   }
 
   @SubscribeEvent

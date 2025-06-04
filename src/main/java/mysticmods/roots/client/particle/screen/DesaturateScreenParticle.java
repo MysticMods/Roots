@@ -12,14 +12,13 @@ import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2f;
 
-public class Desaturate extends RootsScreenParticle {
+public class DesaturateScreenParticle extends RootsScreenParticle {
   private final Vector2f startPos, stopPos, control1, control2;
 
-  protected Desaturate(ClientLevel level, RootsParticleOptions options, double x, double y, double xSpeed, double ySpeed) {
+  protected DesaturateScreenParticle(ClientLevel level, RootsParticleOptions options, double x, double y, double xSpeed, double ySpeed) {
     super(level, options, x, y, xSpeed, ySpeed);
     this.lifetime = 60;
     this.quadSize = 4f;
-    this.oRoll = this.roll = (float) Math.toRadians(180);
     this.defaultMovement = false;
     this.startPos = new Vector2f((float) x, (float) y);
     this.stopPos = new Vector2f((float) xSpeed, (float) ySpeed);
@@ -56,7 +55,7 @@ public class Desaturate extends RootsScreenParticle {
   public static class Provider implements ScreenParticleProvider<RootsParticleOptions> {
     @Override
     public @Nullable TextureSheetScreenParticle createParticle(SpriteSet sprites, RootsParticleOptions type, ClientLevel level, double x, double y, double xSpeed, double ySpeed) {
-      Desaturate particle = new Desaturate(level, type, x, y, xSpeed, ySpeed);
+      DesaturateScreenParticle particle = new DesaturateScreenParticle(level, type, x, y, xSpeed, ySpeed);
       particle.pickSprite(sprites);
       return particle;
     }

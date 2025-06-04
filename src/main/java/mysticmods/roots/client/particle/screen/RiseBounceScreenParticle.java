@@ -16,7 +16,6 @@ public class RiseBounceScreenParticle extends RootsScreenParticle {
     this.yd = ySpeed;
     this.lifetime = 65;
     this.quadSize = 4f;
-    this.oRoll = this.roll = (float) Math.toRadians(180);
     this.defaultAlpha = false;
   }
 
