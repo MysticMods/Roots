@@ -78,6 +78,7 @@ public class PacketHandler {
     registrar.play(DesaturateScreenFX.TYPE, DesaturateScreenFX.CODEC);
     registrar.play(HealFXPacket.TYPE, HealFXPacket.CODEC);
     registrar.play(NondetectionFXPacket.TYPE, NondetectionFXPacket.CODEC);
+    registrar.play(SanctuaryFXPacket.TYPE, SanctuaryFXPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

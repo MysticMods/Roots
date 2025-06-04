@@ -778,4 +778,36 @@ public class ClientFXHandlers {
     minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.NONDETECTION).color(color1, color2)
         .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
   }
+
+  public static void sanctuary (int entityId, int radiusInt) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+
+    double radius = Math.sqrt(radiusInt);
+
+    RandomSource random = minecraft.level.random;
+
+    if (entity == null) {
+      return;
+    }
+
+    double x = entity.getX();
+    double y = entity.getY() + (entity.getEyeHeight() * 0.3);
+    double z = entity.getZ();
+
+    for (float angle = 0; angle < 360; angle += 1 + random.nextFloat() * 2) {
+      double radians = Math.toRadians(angle);
+
+      double offsetX = Math.cos(radians) * radius;
+      double offsetZ = Math.sin(radians) * radius;
+      double offsetY = (random.nextDouble() - 0.5) * 0.2;
+
+      Vec3 spawnPos = new Vec3(x + offsetX, y + offsetY, z + offsetZ);
+
+      RootsParticleOptions opts = random.nextBoolean() ? RootsParticleOptions.builder(ModParticles.SANCTUARY)
+          .color(ModSpells.SANCTUARY).build() : RootsParticleOptions.builder(ModParticles.SANCTUARY).color(ModSpells.SANCTUARY).swapColors().build();
+
+      minecraft.level.addParticle(opts, spawnPos.x, spawnPos.y, spawnPos.z, 0, 0, 0);
+    }
+  }
 }

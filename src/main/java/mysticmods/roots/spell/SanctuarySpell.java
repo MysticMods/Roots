@@ -9,6 +9,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.SanctuaryFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -74,6 +76,8 @@ public class SanctuarySpell extends TwoRadiusSpell {
         count++;
       }
     }
+
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new SanctuaryFXPacket(pPlayer.getId(), r));
 
     if (count == 0) {
       costs.noCharge();

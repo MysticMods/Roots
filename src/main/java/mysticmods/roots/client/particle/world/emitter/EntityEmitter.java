@@ -100,7 +100,7 @@ public abstract class EntityEmitter extends Particle {
     @Override
     public void particleTick() {
       for (int i = 0; i < 3; i++) {
-        level.addParticle(options.swapColors(random), x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2, 0, 0, 0);
+        level.addParticle(options.builder().entityId(target.getId()).swapColors().build(), x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2, 0, 0, 0);
       }
     }
   }
