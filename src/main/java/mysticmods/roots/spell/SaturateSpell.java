@@ -1,6 +1,8 @@
 package mysticmods.roots.spell;
 
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.CostInstance;
@@ -12,12 +14,15 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,24 +64,24 @@ public class SaturateSpell extends Spell {
     }
 
     float newSat = currentSaturation;
-    int newFood = currentFood;
+    float newFood = currentFood;
 
     // TODO: Handle ModActions.EAT_ITEM
 
     Object2IntLinkedOpenHashMap<ItemStack> foodsToSlots = new Object2IntLinkedOpenHashMap<>();
     Object2IntLinkedOpenHashMap<ItemStack> usedAmounts = new Object2IntLinkedOpenHashMap<>();
-/*    pPlayer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-      for (int i = 0; i < cap.getSlots(); i++) {
-        ItemStack stack = cap.getStackInSlot(i);
-        if (stack.isEdible() && !stack.is(RootsTags.Items.SKIPPED_FOODS)) {
-          FoodProperties props = stack.getFoodProperties(pPlayer);
-          if (props == null || !props.getEffects().isEmpty()) {
-            continue;
-          }
-          foodsToSlots.put(stack, i);
+
+    IItemHandlerModifiable playerInventory = new PlayerMainInvWrapper(pPlayer.getInventory());
+    for (int i = 0; i < playerInventory.getSlots(); i++) {
+      ItemStack stack = playerInventory.getStackInSlot(i);
+      FoodProperties props = stack.get(DataComponents.FOOD);
+      if (props != null && !stack.is(RootsTags.Items.SKIPPED_FOODS)) {
+        if (!props.effects().isEmpty()) {
+          continue;
         }
+        foodsToSlots.put(stack, i);
       }
-    });*/
+    }
 
     if (foodsToSlots.isEmpty()) {
       costs.noCharge();
@@ -113,16 +118,14 @@ public class SaturateSpell extends Spell {
     }
 
     List<ItemStack> consumedItems = new ArrayList<>();
-/*    pPlayer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-      for (Object2IntMap.Entry<ItemStack> entry : usedAmounts.object2IntEntrySet()) {
-        int usedAmount = entry.getIntValue();
-        int index = foodsToSlots.getInt(entry.getKey());
-        ItemStack result = handler.extractItem(index, usedAmount, false);
-        if (!result.isEmpty()) {
-          consumedItems.add(result);
-        }
+    for (Object2IntMap.Entry<ItemStack> entry : usedAmounts.object2IntEntrySet()) {
+      int usedAmount = entry.getIntValue();
+      int index = foodsToSlots.getInt(entry.getKey());
+      ItemStack result = playerInventory.extractItem(index, usedAmount, false);
+      if (!result.isEmpty()) {
+        consumedItems.add(result);
       }
-    });*/
+    }
 
     if (consumedItems.isEmpty()) {
       costs.noCharge();
@@ -133,7 +136,7 @@ public class SaturateSpell extends Spell {
       data.setSaturation(Math.min(20, newSat));
     }
     if (data.getFoodLevel() < newFood) {
-      data.setFoodLevel(Math.min(20, newFood));
+      data.setFoodLevel((int) Math.floor(Math.min(20, newFood)));
     }
 
     for (ItemStack stack : consumedItems) {
@@ -152,11 +155,6 @@ public class SaturateSpell extends Spell {
   }
 
   private float saturation(ItemStack stack, Player pPlayer, ISpellInstance spell) {
-    // TODO: what is edible now
-/*    if (!stack.isEdible()) {
-      return 0;
-    }*/
-
     FoodProperties props = stack.getFoodProperties(pPlayer);
     if (props == null) {
       return 0;
@@ -166,11 +164,6 @@ public class SaturateSpell extends Spell {
   }
 
   private float food(ItemStack stack, Player pPlayer, ISpellInstance spell) {
-    // TODO:
-/*    if (!stack.isEdible()) {
-      return 0;
-    }*/
-
     FoodProperties props = stack.getFoodProperties(pPlayer);
     if (props == null) {
       return 0;
