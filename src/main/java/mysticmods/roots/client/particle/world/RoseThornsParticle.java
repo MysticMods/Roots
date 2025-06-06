@@ -40,7 +40,7 @@ public class RoseThornsParticle extends RootsParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.DELAYED_ADDITIVE;
+    return RootsParticleRenderTypes.ADDITIVE;
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

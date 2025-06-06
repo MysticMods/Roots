@@ -1,5 +1,7 @@
 package mysticmods.roots.client;
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -30,6 +32,7 @@ import mysticmods.roots.mixin.accessor.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
@@ -49,6 +52,8 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+
+import java.io.IOException;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -191,6 +196,11 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
+  public static void onRegisterShaders (RegisterShadersEvent event) throws IOException {
+    event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsAPI.rl("particle_discard"), DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.DISCARD_PARTICLE_SHADER = s);
+  }
+
+  @SubscribeEvent
   public static void onRegisterParticle(RegisterParticleProvidersEvent event) {
     event.registerSpriteSet(ModParticles.PYRE.get(), PyreParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PYRE_LEAF.get(), PyreLeafParticle.Provider::new);
@@ -218,7 +228,6 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.SHATTER_BEAM.get(), ShatterBeamParticle.Provider::new);
     event.registerSpriteSet(ModParticles.MAGNETISM.get(), MagnetismParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PETAL_SHELL.get(), PetalShellParticle.Provider::new);
-    //event.registerSpriteSet(ModParticles.SHATTER.get(), ShatterBeamParticle.Provider::new);
     event.registerSpriteSet(ModParticles.LIFE_DRAIN.get(), LifeDrainParticle.Provider::new);
     event.registerSpriteSet(ModParticles.LIFE_DRAINED.get(), LifeDrainedParticle.Provider::new);
     event.registerSpriteSet(ModParticles.DANDELION.get(), DandelionParticle.Provider::new);
@@ -231,6 +240,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.FOG.get(), FogParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SANCTUARY.get(), SanctuaryParticle.Provider::new);
     event.registerSpriteSet(ModParticles.ROSE_THORNS.get(), RoseThornsParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.LIGHT.get(), LightParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());

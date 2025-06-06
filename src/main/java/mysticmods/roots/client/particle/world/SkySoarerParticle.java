@@ -40,7 +40,7 @@ public class SkySoarerParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.GLOW_NO_MASK;
+    return RootsParticleRenderTypes.ADDITIVE_NO_DEPTH;
   }
 
   @Override

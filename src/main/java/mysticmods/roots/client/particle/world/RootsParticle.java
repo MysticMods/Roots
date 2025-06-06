@@ -3,6 +3,7 @@ package mysticmods.roots.client.particle.world;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -90,8 +91,20 @@ public abstract class RootsParticle extends TextureSheetParticle {
     return (float) this.age / (float) this.lifetime;
   }
 
+  protected boolean isDelayedRender () {
+    if (!ConfigManager.DELAYED_PARTICLES.get()) {
+      return false;
+    }
+    ParticleRenderType type = this.getRenderType();
+    if (type instanceof RootsParticleRenderTypes.RootsParticleRenderType rootsType) {
+      return delayedRender && rootsType.isDelayed();
+    }
+
+    return delayedRender;
+  }
+
   protected boolean shouldRender() {
-    return RenderTickHandler.isRenderingDelayedParticles() && delayedRender;
+    return RenderTickHandler.isRenderingDelayedParticles() || !isDelayedRender();
   }
 
   @Override
@@ -160,7 +173,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.DELAYED_OPAQUE;
+    return RootsParticleRenderTypes.OPAQUE;
   }
 
   public static final FacingCameraMode FACING_UP = (quaternion, camera, partialTick) -> {

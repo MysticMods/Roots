@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -45,7 +44,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.gui.GuiLayerManager;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.util.Map;
@@ -60,20 +58,16 @@ public class RenderTickHandler {
 
   private static boolean renderingDelayedParticles = false;
 
-  public static final ImmutableList<ParticleRenderType> RENDER_ORDER = ImmutableList.of(
-      RootsParticleRenderTypes.DELAYED_OPAQUE,
+  public static final ImmutableList<ParticleRenderType> DELAYED_RENDER_ORDER = ImmutableList.of(
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_MASK,
-      RootsParticleRenderTypes.DELAYED_ADDITIVE
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH
   );
 
-  private static final ImmutableMap<ParticleRenderType, RenderType> PARTICLE_RENDER_TYPES = ImmutableMap.of(
-      RootsParticleRenderTypes.DELAYED_OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,
+  private static final ImmutableMap<ParticleRenderType, RenderType> DELAYED_PARTICLE_RENDER_TYPES = ImmutableMap.of(
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
       RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_MASK, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK,
-      RootsParticleRenderTypes.DELAYED_ADDITIVE, RootsRenderTypes.ADDITIVE_DELAYED
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK
   );
 
   public static boolean isRenderingDelayedParticles() {
@@ -127,14 +121,14 @@ public class RenderTickHandler {
       float partialTick = getPartialTick();
       Camera camera = event.getCamera();
 
-      for (ParticleRenderType type : RENDER_ORDER) {
+      for (ParticleRenderType type : DELAYED_RENDER_ORDER) {
         Queue<Particle> particles = allParticles.get(type);
 
         if (particles == null || particles.isEmpty()) {
           continue;
         }
 
-        RenderType renderType = PARTICLE_RENDER_TYPES.get(type);
+        RenderType renderType = DELAYED_PARTICLE_RENDER_TYPES.get(type);
         if (renderType == null) {
           RootsAPI.LOG.error("No render type found for particle render type: {}", type);
           continue;

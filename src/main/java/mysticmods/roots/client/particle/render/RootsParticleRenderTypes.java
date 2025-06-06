@@ -6,57 +6,29 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import mysticmods.roots.client.RootsShaders;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
-import org.jetbrains.annotations.Nullable;
 
-// Adapted from Ars Nouveau: https://github.com/baileyholl/Ars-Nouveau/blob/main/src/main/java/com/hollingsworth/arsnouveau/client/particle/ParticleRenderTypes.java
 public class RootsParticleRenderTypes {
-  public static ParticleRenderType END_PORTAL = new ParticleRenderType() {
-
-    @Override
-    public @Nullable BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
-      RenderSystem.disableBlend();
-      RenderSystem.depthMask(true);
-      RenderSystem.setShader(GameRenderer::getRendertypeEndPortalShader);
-      RenderSystem.setShaderTexture(0, TheEndPortalRenderer.END_SKY_LOCATION);
-      RenderSystem.setShaderTexture(1, TheEndPortalRenderer.END_PORTAL_LOCATION);
-      return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+  public interface RootsParticleRenderType extends ParticleRenderType {
+    default boolean isDelayed() {
+      return false;
     }
+  }
 
-    @Override
-    public String toString() {
-      return "roots:end_portal";
-    }
-  };
 
-  public static ParticleRenderType GLOW = new ParticleRenderType() {
+  // Normal render types
+  public static RootsParticleRenderType ADDITIVE = new RootsParticleRenderType() {
     @Override
-    public @Nullable BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
-      RenderSystem.enableBlend();
-      RenderSystem.depthMask(true);
-      RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-      RenderSystem.enableCull();
-      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-      RenderSystem.enableDepthTest();
-      return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-    }
-
-    @Override
-    public String toString() {
-      return "roots:glow";
-    }
-  };
-
-  public static ParticleRenderType GLOW_NO_MASK = new ParticleRenderType() {
-    @Override
-    public @Nullable BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
+    public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
       RenderSystem.depthMask(false);
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+      RenderSystem.setShader(RootsShaders::getDiscardParticleShader);
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableDepthTest();
@@ -65,11 +37,76 @@ public class RootsParticleRenderTypes {
 
     @Override
     public String toString() {
-      return "roots:glow_no_mask";
+      return "roots:additive";
     }
   };
 
-  public static ParticleRenderType DELAYED_TRANSLUCENT_NO_MASK = new ParticleRenderType() {
+  public static RootsParticleRenderType ADDITIVE_NO_CULL = new RootsParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
+      RenderSystem.enableBlend();
+      RenderSystem.depthMask(false);
+      RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+      RenderSystem.setShader(RootsShaders::getDiscardParticleShader);
+      RenderSystem.disableCull();
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.enableDepthTest();
+      return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:additive_no_cull";
+    }
+  };
+
+  public static RootsParticleRenderType ADDITIVE_NO_DEPTH = new RootsParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
+      RenderSystem.enableBlend();
+      RenderSystem.depthMask(false);
+      RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+      RenderSystem.setShader(RootsShaders::getDiscardParticleShader);
+      RenderSystem.enableCull();
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.disableDepthTest();
+      return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:additive_no_depth";
+    }
+  };
+
+
+  public static RootsParticleRenderType OPAQUE = new RootsParticleRenderType() {
+    @Override
+    public boolean isDelayed() {
+      return false;
+    }
+
+    @Override
+    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
+      RenderSystem.depthMask(true);
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.disableBlend();
+      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:opaque";
+    }
+  };
+
+  // Delayed render types that use quad sorting
+  public static RootsParticleRenderType DELAYED_TRANSLUCENT_NO_DEPTH = new RootsParticleRenderType() {
+    @Override
+    public boolean isDelayed() {
+      return true;
+    }
+
     @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
       RenderSystem.depthMask(false);
@@ -84,9 +121,19 @@ public class RootsParticleRenderTypes {
       );
       return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
+
+    @Override
+    public String toString() {
+      return "roots:delayed_translucent_no_mask";
+    }
   };
 
-  public static ParticleRenderType DELAYED_TRANSLUCENT = new ParticleRenderType() {
+  public static RootsParticleRenderType DELAYED_TRANSLUCENT = new RootsParticleRenderType() {
+    @Override
+    public boolean isDelayed() {
+      return true;
+    }
+
     @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
       RenderSystem.depthMask(true);
@@ -107,7 +154,12 @@ public class RootsParticleRenderTypes {
     }
   };
 
-  public static ParticleRenderType DELAYED_TRANSLUCENT_NO_CULL = new ParticleRenderType() {
+  public static RootsParticleRenderType DELAYED_TRANSLUCENT_NO_CULL = new RootsParticleRenderType() {
+    @Override
+    public boolean isDelayed() {
+      return true;
+    }
+
     @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
       RenderSystem.depthMask(true);
@@ -129,34 +181,22 @@ public class RootsParticleRenderTypes {
     }
   };
 
-  public static ParticleRenderType DELAYED_ADDITIVE = new ParticleRenderType() {
+  // Special render types
+  public static RootsParticleRenderType END_PORTAL = new RootsParticleRenderType() {
     @Override
-    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
-      RenderSystem.depthMask(true);
-      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-      RenderSystem.enableBlend();
-      RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-    }
-
-    @Override
-    public String toString() {
-      return "roots:delayed_additive";
-    }
-  };
-
-  public static ParticleRenderType DELAYED_OPAQUE = new ParticleRenderType() {
-    @Override
-    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
-      RenderSystem.depthMask(true);
-      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+    public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.disableBlend();
-      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+      RenderSystem.depthMask(true);
+      RenderSystem.setShader(GameRenderer::getRendertypeEndPortalShader);
+      RenderSystem.setShaderTexture(0, TheEndPortalRenderer.END_SKY_LOCATION);
+      RenderSystem.setShaderTexture(1, TheEndPortalRenderer.END_PORTAL_LOCATION);
+      return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
     @Override
     public String toString() {
-      return "roots:delayed_opaque";
+      return "roots:end_portal";
     }
   };
+
 }

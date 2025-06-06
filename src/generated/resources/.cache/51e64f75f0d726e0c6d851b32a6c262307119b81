@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-04T22:06:38.1567484	Roots Particle Provider
+// 1.21.1	2025-06-05T18:23:34.7146047	Roots Particle Provider
 32a41ad35180f7899f7a75f0ba7b6e17915bb028 assets/roots/particles/air_bubble.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/animal_harvest.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel.json
@@ -16,6 +16,7 @@ df3620b4fc75de9ed119c43b5b58474f5bc41607 assets/roots/particles/harvest.json
 e4f4fd46e3dd78032a3de8ee8ced47fd8385de01 assets/roots/particles/heal.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/life_drain.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/life_drained.json
+12df3e2eed908c733ca5604c57dbafae83f1c6ff assets/roots/particles/light.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/magnetism.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/meteor.json
 33407865daf96f1eaa11e09ea3a04e4f651a59c9 assets/roots/particles/nondetection.json

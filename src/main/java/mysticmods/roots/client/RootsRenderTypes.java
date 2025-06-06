@@ -18,13 +18,9 @@ public class RootsRenderTypes {
           .createCompositeState(false)
   );
 
-  public static final RenderType ROOTS_WHAT = RenderType.create("roots_what", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256,
-      false, true, RenderType.CompositeState.builder()
-          .setShaderState(RenderType.POSITION_COLOR_SHADER)
-          .createCompositeState(false)
-  );
-
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
+
+  public static final RenderStateShard.ShaderStateShard PARTICLE_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDiscardParticleShader);
 
   public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =
       p_286159_ -> {
@@ -85,39 +81,6 @@ public class RootsRenderTypes {
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
           .setWriteMaskState(RenderStateShard.COLOR_WRITE)
-          .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
-          .setLightmapState(RenderStateShard.LIGHTMAP)
-          .createCompositeState(false));
-
-  public static final RenderType ADDITIVE_DELAYED = RenderType.create(
-      "roots:particles_additive",
-      DefaultVertexFormat.PARTICLE,
-      VertexFormat.Mode.QUADS,
-      256,
-      false,
-      true,
-      RenderType.CompositeState.builder()
-          .setShaderState(PARTICLE_SHADER)
-          .setTransparencyState(RenderStateShard.ADDITIVE_TRANSPARENCY)
-          .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-          .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
-          .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
-          .setLightmapState(RenderStateShard.LIGHTMAP)
-          .createCompositeState(false));
-
-  public static final RenderType DELAYED_PARTICLES = RenderType.create(
-      "roots:particles",
-      DefaultVertexFormat.PARTICLE,
-      VertexFormat.Mode.QUADS,
-      256,
-      false,
-      false,
-      RenderType.CompositeState.builder()
-          .setShaderState(PARTICLE_SHADER)
-          .setCullState(RenderStateShard.NO_CULL)
-          .setTransparencyState(RenderStateShard.NO_TRANSPARENCY)
-          .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-          .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .createCompositeState(false));

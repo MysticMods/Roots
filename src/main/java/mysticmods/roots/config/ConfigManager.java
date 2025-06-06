@@ -60,6 +60,8 @@ public class ConfigManager {
 
   public static ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
 
+  public static ModConfigSpec.BooleanValue DELAYED_PARTICLES;
+
 
   public static ModConfigSpec COMMON_CONFIG;
   public static ModConfigSpec CLIENT_CONFIG;
@@ -131,9 +133,6 @@ public class ConfigManager {
     DEBUG_REPUTATION = COMMON_BUILDER.comment("if true, will send messages for all reputation gains and losses")
         .define("debug_reputation", false);
     COMMON_BUILDER.pop();
-    CLIENT_BUILDER.push("debug");
-    SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
-        .define("suppress_reputation_changes", true);
     COMMON_BUILDER.push("ritual_conflict");
     RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]").defineEnum("ritual_resolution_type", RitualInformation.RitualResolutionType.AGE_PRIORITY);
     COMMON_BUILDER.pop();
@@ -145,6 +144,16 @@ public class ConfigManager {
     DROP_GROVE_SPORES = COMMON_BUILDER.comment("whether or not grove spores should drop from grass")
         .define("drop_grove_spores", true);
     COMMON_BUILDER.pop();
+
+    CLIENT_BUILDER.push("debug");
+    SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
+        .define("suppress_reputation_changes", true);
+    CLIENT_BUILDER.pop();
+    CLIENT_BUILDER.push("particles");
+    DELAYED_PARTICLES = CLIENT_BUILDER.comment("if true, translucent particles will be rendered with quads sorted to improve rendering and prevent overlapping translucent particles from disappearing")
+        .define("delayed_particles", true);
+    CLIENT_BUILDER.pop();
+
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
   }

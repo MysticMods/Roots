@@ -47,7 +47,7 @@ public class WhirlwindParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.GLOW;
+    return RootsParticleRenderTypes.ADDITIVE;
   }
 
   @Override

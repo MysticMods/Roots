@@ -48,7 +48,7 @@ public class HarvestParticle extends RootsParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.DELAYED_ADDITIVE;
+    return RootsParticleRenderTypes.ADDITIVE;
   }
 
   @Override

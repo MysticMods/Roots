@@ -4,7 +4,6 @@
 	"render_type": "translucent",
 	"textures": {
 		"0": "block/gold_block",
-		"1": "block/pink_stained_glass",
 		"particle": "block/gold_block"
 	},
 	"elements": [
@@ -33,19 +32,6 @@
 				"up": {"uv": [0, 0, 2, 2], "texture": "#0"},
 				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
 			}
-		},
-		{
-			"from": [6, 6, 6],
-			"to": [10, 10, 10],
-			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 6]},
-			"faces": {
-				"north": {"uv": [4, 4, 12, 12], "texture": "#1"},
-				"east": {"uv": [4, 4, 12, 12], "texture": "#1"},
-				"south": {"uv": [4, 4, 12, 12], "texture": "#1"},
-				"west": {"uv": [4, 4, 12, 12], "texture": "#1"},
-				"up": {"uv": [4, 4, 12, 12], "texture": "#1"},
-				"down": {"uv": [4, 4, 12, 12], "texture": "#1"}
-			}
 		}
 	],
 	"groups": [
@@ -53,7 +39,7 @@
 			"name": "group",
 			"origin": [6, 6, 6],
 			"color": 0,
-			"children": [0, 1, 2]
+			"children": [0, 1]
 		}
 	]
 }

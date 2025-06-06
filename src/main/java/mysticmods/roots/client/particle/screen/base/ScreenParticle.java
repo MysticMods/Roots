@@ -3,6 +3,7 @@ package mysticmods.roots.client.particle.screen.base;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.util.RandomSource;
 import org.joml.Vector2d;
 
@@ -123,8 +124,7 @@ public abstract class ScreenParticle {
   }
 
   protected int getLightColor(float partialTick) {
-    // TODO:
-    return 0xffffff;
+    return LightTexture.pack(15, 15);
   }
 
   public boolean isAlive() {

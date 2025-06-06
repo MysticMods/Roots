@@ -33,7 +33,7 @@ public class SkySoarerPuffParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.GLOW;
+    return RootsParticleRenderTypes.ADDITIVE;
   }
 
   @Override
