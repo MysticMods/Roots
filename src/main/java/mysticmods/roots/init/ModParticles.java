@@ -66,6 +66,9 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> ROSE_THORNS = PARTICLES.register("rose_thorns", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> LIGHT = PARTICLES.register("light", () -> new RootsParticleOptions.Type(false));
 
+  // "Special"
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> ITEM = PARTICLES.register("item", () -> new RootsParticleOptions.Type(false));
+
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);
   }
