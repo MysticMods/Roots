@@ -20,7 +20,7 @@ public class RootsRenderTypes {
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
 
-  public static final RenderStateShard.ShaderStateShard PARTICLE_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getLowDiscardParticleShader);
+  public static final RenderStateShard.ShaderStateShard PARTICLE_LOW_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getLowDiscardParticleShader);
 
   public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =
       p_286159_ -> {
@@ -44,7 +44,7 @@ public class RootsRenderTypes {
       false,
       true,
       RenderType.CompositeState.builder()
-          .setShaderState(PARTICLE_SHADER)
+          .setShaderState(PARTICLE_LOW_DISCARD_SHADER)
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
           .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
@@ -61,7 +61,7 @@ public class RootsRenderTypes {
       true,
       RenderType.CompositeState.builder()
           .setCullState(RenderType.NO_CULL)
-          .setShaderState(PARTICLE_SHADER)
+          .setShaderState(PARTICLE_LOW_DISCARD_SHADER)
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
           .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
@@ -77,7 +77,7 @@ public class RootsRenderTypes {
       false,
       true,
       RenderType.CompositeState.builder()
-          .setShaderState(PARTICLE_SHADER)
+          .setShaderState(PARTICLE_LOW_DISCARD_SHADER)
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
           .setWriteMaskState(RenderStateShard.COLOR_WRITE)
