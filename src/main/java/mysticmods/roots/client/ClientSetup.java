@@ -1,7 +1,6 @@
 package mysticmods.roots.client;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -21,7 +20,6 @@ import mysticmods.roots.client.particle.screen.EmptyProvider;
 import mysticmods.roots.client.particle.screen.DesaturateScreenParticle;
 import mysticmods.roots.client.particle.screen.RiseBounceScreenParticle;
 import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
-import mysticmods.roots.client.particle.screen.base.ScreenParticle;
 import mysticmods.roots.client.particle.world.emitter.EntityEmitter;
 import mysticmods.roots.client.particle.world.emitter.SylvanLightEmitter;
 import mysticmods.roots.client.particle.world.*;
@@ -197,7 +195,7 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void onRegisterShaders (RegisterShadersEvent event) throws IOException {
-    event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsAPI.rl("particle_discard"), DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.DISCARD_PARTICLE_SHADER = s);
+    event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.LOW_DISCARD_PARTICLE_SHADER_LOCATION, DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.LOW_DISCARD_PARTICLE_SHADER = s);
   }
 
   @SubscribeEvent

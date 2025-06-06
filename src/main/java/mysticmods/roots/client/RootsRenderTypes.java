@@ -20,7 +20,7 @@ public class RootsRenderTypes {
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
 
-  public static final RenderStateShard.ShaderStateShard PARTICLE_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDiscardParticleShader);
+  public static final RenderStateShard.ShaderStateShard PARTICLE_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getLowDiscardParticleShader);
 
   public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =
       p_286159_ -> {

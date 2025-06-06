@@ -28,7 +28,7 @@ public class RootsParticleRenderTypes {
       RenderSystem.enableBlend();
       RenderSystem.depthMask(false);
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-      RenderSystem.setShader(RootsShaders::getDiscardParticleShader);
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableDepthTest();
@@ -47,7 +47,7 @@ public class RootsParticleRenderTypes {
       RenderSystem.enableBlend();
       RenderSystem.depthMask(false);
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-      RenderSystem.setShader(RootsShaders::getDiscardParticleShader);
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
       RenderSystem.disableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableDepthTest();
@@ -66,7 +66,7 @@ public class RootsParticleRenderTypes {
       RenderSystem.enableBlend();
       RenderSystem.depthMask(false);
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-      RenderSystem.setShader(RootsShaders::getDiscardParticleShader);
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.disableDepthTest();
