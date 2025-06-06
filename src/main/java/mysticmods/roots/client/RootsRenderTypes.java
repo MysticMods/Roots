@@ -20,7 +20,14 @@ public class RootsRenderTypes {
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
 
-  public static final RenderStateShard.ShaderStateShard PARTICLE_LOW_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getLowDiscardParticleShader);
+  public static final RenderStateShard.ShaderStateShard PARTICLE_LOW_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(() -> {
+    // TODO: Check for Iris/etc here
+    if (true) {
+      return RootsShaders.getLowDiscardParticleShader();
+    } else {
+      return GameRenderer.getParticleShader();
+    }
+  });
 
   public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =
       p_286159_ -> {
