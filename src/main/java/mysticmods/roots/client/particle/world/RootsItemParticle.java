@@ -30,10 +30,10 @@ public class RootsItemParticle extends RootsParticle {
     this.defaultColor = false;
     this.uo = this.random.nextFloat() * 3.0F;
     this.vo = this.random.nextFloat() * 3.0F;
-    Vec3 diff = this.destination.subtract(this.origin).normalize();
+    Vec3 diff = this.destination.subtract(this.origin);
     Vec3 up = new Vec3(0, 1, 0);
 
-    double height = Math.max(0.25, diff.length() * 0.15);
+    double height = Math.max(0.25, diff.normalize().length() * 0.15);
 
     Vec3 randomOffset = new Vec3(
         (random.nextGaussian() - 0.5) * 0.2,
