@@ -1,17 +1,12 @@
 package mysticmods.roots.client.particle.world;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
-import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.util.Mth;
-import org.joml.Quaternionf;
 
 public class HarvestParticle extends RootsParticle {
   private SpriteSet sprites;
@@ -48,7 +43,7 @@ public class HarvestParticle extends RootsParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.ADDITIVE;
+    return RootsParticleRenderTypes.GLOW;
   }
 
   @Override

@@ -58,7 +58,7 @@ public class SpiralParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.ADDITIVE_NO_DEPTH;
+    return RootsParticleRenderTypes.GLOW_NO_DEPTH;
   }
 
   @Override

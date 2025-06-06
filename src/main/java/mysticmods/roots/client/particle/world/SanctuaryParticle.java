@@ -31,7 +31,7 @@ public class SanctuaryParticle extends RootsParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.ADDITIVE;
+    return RootsParticleRenderTypes.GLOW;
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

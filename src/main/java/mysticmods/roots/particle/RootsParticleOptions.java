@@ -12,10 +12,17 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
-                                   int entityId, int casterId, int fastForward) implements ParticleOptions {
+                                   int entityId, int casterId, int fastForward,
+                                   @Nullable ItemStack item) implements ParticleOptions {
+
+  private static final Codec<ItemStack> ITEM_CODEC = Codec.withAlternative(ItemStack.SINGLE_ITEM_CODEC, ItemStack.ITEM_NON_AIR_CODEC, ItemStack::new);
 
   public static MapCodec<RootsParticleOptions> codec(ParticleType<?> type) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -23,30 +30,32 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         Codec.INT.fieldOf("color2").forGetter(RootsParticleOptions::color2),
         Codec.INT.fieldOf("entityId").forGetter(RootsParticleOptions::entityId),
         Codec.INT.fieldOf("casterId").forGetter(RootsParticleOptions::casterId),
-        Codec.INT.fieldOf("fastForward").forGetter(RootsParticleOptions::fastForward)
-    ).apply(instance, (a, b, c, d, e) -> new RootsParticleOptions(type, a, b, c, d, e)));
+        Codec.INT.fieldOf("fastForward").forGetter(RootsParticleOptions::fastForward),
+        ITEM_CODEC.optionalFieldOf("item").forGetter(o -> Optional.ofNullable(o.item()))
+    ).apply(instance, (a, b, c, d, e, f) -> new RootsParticleOptions(type, a, b, c, d, e, f.orElse(null))));
   }
 
-  public static StreamCodec<ByteBuf, RootsParticleOptions> streamCodec(ParticleType<?> type) {
+  public static StreamCodec<RegistryFriendlyByteBuf, RootsParticleOptions> streamCodec(ParticleType<?> type) {
     return StreamCodec.composite(
         ByteBufCodecs.VAR_INT, RootsParticleOptions::color1,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::color2,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::entityId,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::casterId,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::fastForward,
-        (c1, c2, e, f, g) -> new RootsParticleOptions(type, c1, c2, e, f, g)
+        ByteBufCodecs.optional(ItemStack.STREAM_CODEC), o -> Optional.ofNullable(o.item()),
+        (c1, c2, e, f, g, h) -> new RootsParticleOptions(type, c1, c2, e, f, g, h.orElse(null))
     );
   }
 
-  public RootsParticleOptions swapColors (RandomSource random) {
+  public RootsParticleOptions swapColors(RandomSource random) {
     return builder().swapColors(random).build();
   }
 
-  public RootsParticleOptions swapColors () {
+  public RootsParticleOptions swapColors() {
     return builder().swapColors().build();
   }
 
-  public Builder builder () {
+  public Builder builder() {
     return new Builder(type)
         .color(color1, color2)
         .entityId(entityId)
@@ -54,11 +63,11 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         .fastForward(fastForward);
   }
 
-  public static Builder builder (ParticleType<?> type) {
+  public static Builder builder(ParticleType<?> type) {
     return new Builder(type);
   }
 
-  public static Builder builder (DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type) {
+  public static Builder builder(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type) {
     return new Builder(type.get());
   }
 
@@ -66,6 +75,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     private ParticleType<?> type;
     private int color1 = 0xffffff, color2 = 0xffffff,
         entityId, casterId, fastForward;
+    private ItemStack item = null;
 
     public Builder(ParticleType<?> type) {
       this.type = type;
@@ -76,21 +86,26 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder swapColors () {
+    public Builder swapColors() {
       int temp = this.color1;
       this.color1 = this.color2;
       this.color2 = temp;
       return this;
     }
 
-    public Builder swapColors (RandomSource random) {
+    public Builder swapColors(RandomSource random) {
       if (random.nextBoolean()) {
         return swapColors();
       }
       return this;
     }
 
-    public Builder color (Holder<Spell> spell) {
+    public Builder item(@Nullable ItemStack item) {
+      this.item = item;
+      return this;
+    }
+
+    public Builder color(Holder<Spell> spell) {
       return color(spell.value().getColor1(), spell.value().getColor2());
     }
 
@@ -127,7 +142,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     }
 
     public RootsParticleOptions build() {
-      return new RootsParticleOptions(type, color1, color2, entityId, casterId, fastForward);
+      return new RootsParticleOptions(type, color1, color2, entityId, casterId, fastForward, item);
     }
   }
 

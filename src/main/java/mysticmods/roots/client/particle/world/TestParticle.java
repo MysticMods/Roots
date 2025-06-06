@@ -40,7 +40,7 @@ public class TestParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.ADDITIVE;
+    return RootsParticleRenderTypes.GLOW;
     //return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
   }
 

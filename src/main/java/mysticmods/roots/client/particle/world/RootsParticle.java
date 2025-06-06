@@ -84,7 +84,25 @@ public abstract class RootsParticle extends TextureSheetParticle {
   }
 
   protected void updateSprite(float f) {
+  }
 
+  protected void updateMovement (float f) {
+    if (defaultMovement) {
+      this.yd = this.yd - 0.04 * (double) this.gravity;
+      this.move(this.xd, this.yd, this.zd);
+      if (this.speedUpWhenYMotionIsBlocked && this.y == this.yo) {
+        this.xd *= 1.1;
+        this.zd *= 1.1;
+      }
+
+      this.xd = this.xd * (double) this.friction;
+      this.yd = this.yd * (double) this.friction;
+      this.zd = this.zd * (double) this.friction;
+      if (this.onGround) {
+        this.xd *= 0.7F;
+        this.zd *= 0.7F;
+      }
+    }
   }
 
   protected float generateF() {
@@ -122,23 +140,8 @@ public abstract class RootsParticle extends TextureSheetParticle {
     if (this.age++ >= this.lifetime) {
       this.remove();
     } else {
-      if (defaultMovement) {
-        this.yd = this.yd - 0.04 * (double) this.gravity;
-        this.move(this.xd, this.yd, this.zd);
-        if (this.speedUpWhenYMotionIsBlocked && this.y == this.yo) {
-          this.xd *= 1.1;
-          this.zd *= 1.1;
-        }
-
-        this.xd = this.xd * (double) this.friction;
-        this.yd = this.yd * (double) this.friction;
-        this.zd = this.zd * (double) this.friction;
-        if (this.onGround) {
-          this.xd *= 0.7F;
-          this.zd *= 0.7F;
-        }
-      }
       float f = generateF();
+      updateMovement(f);
       updateColour(f);
       updateAlpha(f);
       updateRoll(f);

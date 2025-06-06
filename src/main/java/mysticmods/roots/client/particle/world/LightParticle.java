@@ -35,7 +35,7 @@ public class LightParticle extends RootsParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.ADDITIVE;
+    return RootsParticleRenderTypes.GLOW;
   }
 
   @Override

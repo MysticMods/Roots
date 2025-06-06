@@ -22,7 +22,7 @@ public class RootsParticleRenderTypes {
 
 
   // Normal render types
-  public static RootsParticleRenderType ADDITIVE = new RootsParticleRenderType() {
+  public static RootsParticleRenderType GLOW = new RootsParticleRenderType() {
     @Override
     public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
@@ -37,11 +37,11 @@ public class RootsParticleRenderTypes {
 
     @Override
     public String toString() {
-      return "roots:additive";
+      return "roots:glow";
     }
   };
 
-  public static RootsParticleRenderType ADDITIVE_NO_CULL = new RootsParticleRenderType() {
+  public static RootsParticleRenderType GLOW_NO_CULL = new RootsParticleRenderType() {
     @Override
     public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
@@ -56,11 +56,11 @@ public class RootsParticleRenderTypes {
 
     @Override
     public String toString() {
-      return "roots:additive_no_cull";
+      return "roots:glow_no_cull";
     }
   };
 
-  public static RootsParticleRenderType ADDITIVE_NO_DEPTH = new RootsParticleRenderType() {
+  public static RootsParticleRenderType GLOW_NO_DEPTH = new RootsParticleRenderType() {
     @Override
     public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
@@ -75,7 +75,7 @@ public class RootsParticleRenderTypes {
 
     @Override
     public String toString() {
-      return "roots:additive_no_depth";
+      return "roots:glow_no_depth";
     }
   };
 
