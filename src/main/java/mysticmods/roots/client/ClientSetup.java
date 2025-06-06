@@ -193,6 +193,7 @@ public class ClientSetup {
     event.registerRecipeCategoryFinder(ModRecipes.RUNIC_ENTITY.get(), (o) -> RecipeBookCategories.UNKNOWN);
   }
 
+  // TODO: Fallback to default particle shader if Iris or whatever
   @SubscribeEvent
   public static void onRegisterShaders (RegisterShadersEvent event) throws IOException {
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.LOW_DISCARD_PARTICLE_SHADER_LOCATION, DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.LOW_DISCARD_PARTICLE_SHADER = s);
