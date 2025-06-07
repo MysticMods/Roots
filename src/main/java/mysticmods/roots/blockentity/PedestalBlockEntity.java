@@ -2,7 +2,9 @@ package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
+import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.blockentity.inventory.LimitedItemStackHandler;
+import mysticmods.roots.blockentity.inventory.LockableLimitedItemStackHandler;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.util.ItemUtil;
@@ -30,7 +32,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int limit) {
     super(pType, pWorldPosition, pBlockState);
     this.limit = limit;
-    inventory = new LimitedItemStackHandler(1, this::getLimit) {
+    inventory = new LockableLimitedItemStackHandler(1, this::getLimit, this::isLocked) {
       @Override
       protected void onContentsChanged(int slot) {
         if (PedestalBlockEntity.this.hasLevel() && !PedestalBlockEntity.this.getLevel().isClientSide()) {
@@ -55,6 +57,16 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public PedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     this(ModBlockEntities.PEDESTAL.get(), pWorldPosition, pBlockState, Item.DEFAULT_MAX_STACK_SIZE);
+  }
+
+  public boolean isLocked () {
+    return this.getBlockState().getValue(PedestalBlock.LOCKED);
+  }
+
+  public void lock () {
+    if (this.getBlockState().hasProperty(PedestalBlock.LOCKED)) {
+      this.getLevel().setBlock(this.getBlockPos(), this.getBlockState().setValue(PedestalBlock.LOCKED, true), 3);
+    }
   }
 
   public int getLimit() {
