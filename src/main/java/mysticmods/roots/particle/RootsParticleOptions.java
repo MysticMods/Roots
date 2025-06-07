@@ -64,7 +64,9 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         .color(color1, color2)
         .entityId(entityId)
         .casterId(casterId)
-        .fastForward(fastForward);
+        .fastForward(fastForward)
+        .item(item)
+        .pos(pos);
   }
 
   public static Builder builder(ParticleType<?> type) {
