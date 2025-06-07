@@ -1,9 +1,9 @@
 {
   "variants": {
-    "valid=false": {
+    "locked=false": {
       "model": "roots:block/wildwood_pedestal"
     },
-    "valid=true": {
+    "locked=true": {
       "model": "roots:block/wildwood_pedestal"
     }
   }

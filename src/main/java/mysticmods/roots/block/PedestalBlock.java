@@ -19,11 +19,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PedestalBlock extends UseDelegatedBlock {
-  public static final BooleanProperty VALID = BooleanProperty.create("valid");
+  public static final BooleanProperty LOCKED = BooleanProperty.create("locked");
 
   public PedestalBlock(Properties p_49795_) {
     super(p_49795_);
-    registerDefaultState(defaultBlockState().setValue(VALID, false));
+    registerDefaultState(defaultBlockState().setValue(LOCKED, false));
   }
 
   @Nullable
@@ -46,7 +46,7 @@ public abstract class PedestalBlock extends UseDelegatedBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(VALID);
+    pBuilder.add(LOCKED);
   }
 
   public static class GrovePedestalBlock extends PedestalBlock {
