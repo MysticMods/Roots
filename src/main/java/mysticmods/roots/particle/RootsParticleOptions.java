@@ -4,7 +4,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
+import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.spell.Spell;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -20,7 +22,7 @@ import java.util.Optional;
 
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
                                    int entityId, int casterId, int fastForward,
-                                   @Nullable ItemStack item) implements ParticleOptions {
+                                   @Nullable ItemStack item, @Nullable BlockPos pos) implements ParticleOptions {
 
   private static final Codec<ItemStack> ITEM_CODEC = Codec.withAlternative(ItemStack.SINGLE_ITEM_CODEC, ItemStack.ITEM_NON_AIR_CODEC, ItemStack::new);
 
@@ -31,19 +33,21 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         Codec.INT.fieldOf("entityId").forGetter(RootsParticleOptions::entityId),
         Codec.INT.fieldOf("casterId").forGetter(RootsParticleOptions::casterId),
         Codec.INT.fieldOf("fastForward").forGetter(RootsParticleOptions::fastForward),
-        ITEM_CODEC.optionalFieldOf("item").forGetter(o -> Optional.ofNullable(o.item()))
-    ).apply(instance, (a, b, c, d, e, f) -> new RootsParticleOptions(type, a, b, c, d, e, f.orElse(null))));
+        ITEM_CODEC.optionalFieldOf("item").forGetter(o -> Optional.ofNullable(o.item())),
+        BlockPos.CODEC.optionalFieldOf("pos").forGetter(o -> Optional.ofNullable(o.pos()))
+    ).apply(instance, (a, b, c, d, e, f, g) -> new RootsParticleOptions(type, a, b, c, d, e, f.orElse(null), g.orElse(null))));
   }
 
   public static StreamCodec<RegistryFriendlyByteBuf, RootsParticleOptions> streamCodec(ParticleType<?> type) {
-    return StreamCodec.composite(
+    return ExtraStreamCodecs.composite(
         ByteBufCodecs.VAR_INT, RootsParticleOptions::color1,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::color2,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::entityId,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::casterId,
         ByteBufCodecs.VAR_INT, RootsParticleOptions::fastForward,
         ByteBufCodecs.optional(ItemStack.STREAM_CODEC), o -> Optional.ofNullable(o.item()),
-        (c1, c2, e, f, g, h) -> new RootsParticleOptions(type, c1, c2, e, f, g, h.orElse(null))
+        ByteBufCodecs.optional(BlockPos.STREAM_CODEC), o -> Optional.ofNullable(o.pos()),
+        (c1, c2, e, f, g, h, i) -> new RootsParticleOptions(type, c1, c2, e, f, g, h.orElse(null), i.orElse(null))
     );
   }
 
@@ -76,6 +80,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     private int color1 = 0xffffff, color2 = 0xffffff,
         entityId, casterId, fastForward;
     private ItemStack item = null;
+    private BlockPos pos = null;
 
     public Builder(ParticleType<?> type) {
       this.type = type;
@@ -141,8 +146,13 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
+    public Builder pos(@Nullable BlockPos pos) {
+      this.pos = pos;
+      return this;
+    }
+
     public RootsParticleOptions build() {
-      return new RootsParticleOptions(type, color1, color2, entityId, casterId, fastForward, item);
+      return new RootsParticleOptions(type, color1, color2, entityId, casterId, fastForward, item, pos);
     }
   }
 
