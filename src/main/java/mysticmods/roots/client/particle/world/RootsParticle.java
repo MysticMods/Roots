@@ -8,6 +8,8 @@ import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class RootsParticle extends TextureSheetParticle {
@@ -168,10 +170,15 @@ public abstract class RootsParticle extends TextureSheetParticle {
   @Override
   protected int getLightColor(float partialTick) {
     if (defaultLight) {
-      return 0xf000f0 | super.getLightColor(partialTick) & 0xff0000;
+      return 0xf000f0 | getLightColorRaw(partialTick) & 0xff0000;
     } else {
-      return super.getLightColor(partialTick);
+      return getLightColorRaw(partialTick);
     }
+  }
+
+  protected int getLightColorRaw(float partialTick) {
+    BlockPos blockpos = BlockPos.containing(this.x, this.y, this.z);
+    return this.level.hasChunkAt(blockpos) ? LevelRenderer.getLightColor(this.level, blockpos) : 0;
   }
 
   @Override

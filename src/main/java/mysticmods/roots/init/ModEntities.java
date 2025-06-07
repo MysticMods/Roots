@@ -71,7 +71,7 @@ public class ModEntities {
   public static final DeferredHolder<EntityType<?>, EntityType<WildfireEntity>> WILDFIRE = REGISTER.register("wildfire", () -> EntityType.Builder.<WildfireEntity>of(WildfireEntity::new, MobCategory.MISC)
       .sized(1.9f, 1.9f).clientTrackingRange(4).updateInterval(10).build("wildfire"));
   public static final DeferredHolder<EntityType<?>, EntityType<TemporalMorassEntity>> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> EntityType.Builder.of(TemporalMorassEntity::new, MobCategory.MISC)
-      .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("temporal_morass"));
+      .sized(6f, 3f).clientTrackingRange(4).updateInterval(10).build("temporal_morass"));
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
   }

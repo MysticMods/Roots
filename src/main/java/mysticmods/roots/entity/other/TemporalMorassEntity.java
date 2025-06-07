@@ -1,18 +1,20 @@
 package mysticmods.roots.entity.other;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.attachment.SnapshotStorage;
-import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModEntities;
+import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.snapshot.TemporalMorassEntitySnapshot;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,10 +49,28 @@ public class TemporalMorassEntity extends Entity {
   @Override
   public void tick() {
     super.tick();
+    if ((tickCount == 5 || (tickCount % 40 == 0 && getLifetime() > 39)) && this.level().isClientSide()) {
+      AABB aabb = this.getAabb();
+      if (aabb != null) {
+        for (int i = 0; i < 150; i++) {
+          double x = Mth.lerp(this.random.nextDouble(), aabb.minX, aabb.maxX);
+          double y = Mth.lerp(this.random.nextDouble(), aabb.minY, aabb.maxY);
+          double z = Mth.lerp(this.random.nextDouble(), aabb.minZ, aabb.maxZ);
+          this.level().addParticle(
+              RootsParticleOptions.builder(ModParticles.TEMPORAL_MORASS).color(ModSpells.TEMPORAL_MORASS)
+                  .swapColors(random)
+                  .build(),
+              x, y, z,
+              this.getX(), this.getY(), this.getZ()
+          );
+        }
+      }
+    }
+
     AABB aabb = this.getAabb();
     int newLifetime = this.getLifetime() - 1;
     this.setLifetime(newLifetime);
-    if (aabb != null) {
+    if (aabb != null && !this.level().isClientSide()) {
       TemporalMorassEntitySnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.TEMPORAL_MORASS.get());
       for (LivingEntity living : this.level().getEntitiesOfClass(LivingEntity.class, aabb, entity -> {
             if (entity.getType().is(RootsTags.Entities.TEMPORAL_MORASS_EXCLUDE)) {
@@ -61,7 +81,7 @@ public class TemporalMorassEntity extends Entity {
           }
       )) {
         TemporalMorassEntitySnapshot livingSnapshot = new TemporalMorassEntitySnapshot(living, 10, snapshot.getRadiusZX(), snapshot.getRadiusY(), 10);
-        living.addEffect(new MobEffectInstance(ModEffects.TEMPORAL_MORASS, livingSnapshot.getDuration(), 0, false, false));
+        living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, livingSnapshot.getDuration(), 0, false, true));
         SnapshotHelper.addLiving(living, ModSerializers.TEMPORAL_MORASS.get(), livingSnapshot);
       }
     }
