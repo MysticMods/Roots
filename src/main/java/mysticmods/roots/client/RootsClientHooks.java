@@ -6,16 +6,13 @@ import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.gui.layer.HerbLayer;
+import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +24,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class RootsClientHooks {
   public static void setGrantStorage(GrantStorage storage) {
@@ -148,7 +144,7 @@ public class RootsClientHooks {
 
   public static void setHerbCount(Object2DoubleMap<Herb> map) {
     for (Object2DoubleMap.Entry<Herb> entry : map.object2DoubleEntrySet()) {
-      HerbLayer.updateHerb(entry.getKey(), entry.getDoubleValue());
+      HerbOverlay.updateHerb(entry.getKey(), entry.getDoubleValue());
     }
   }
 

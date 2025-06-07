@@ -1,4 +1,4 @@
-package mysticmods.roots.client.gui.layer;
+package mysticmods.roots.client.gui.overlay;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -18,7 +18,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class HudLayer {
+public class HudOverlay {
   public static void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
     PoseStack stack = guiGraphics.pose();
     float partialTicks = deltaTracker.getRealtimeDeltaTicks();

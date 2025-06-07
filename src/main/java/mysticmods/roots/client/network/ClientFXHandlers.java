@@ -2,7 +2,7 @@ package mysticmods.roots.client.network;
 
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
-import mysticmods.roots.client.gui.layer.WarningLayer;
+import mysticmods.roots.client.gui.overlay.WarningOverlay;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.client.particle.bolt.PositionProvider;
@@ -568,7 +568,7 @@ public class ClientFXHandlers {
 
   public static void alert(int entityId) {
     if (ConfigManager.ALERTNESS_VISUAL.getAsBoolean()) {
-      WarningLayer.warningTicks = ConfigManager.ALERTNESS_DURATION.getAsInt();
+      WarningOverlay.warningTicks = ConfigManager.ALERTNESS_DURATION.getAsInt();
     }
 
     if (ConfigManager.ALERTNESS_SOUND.getAsBoolean()) {

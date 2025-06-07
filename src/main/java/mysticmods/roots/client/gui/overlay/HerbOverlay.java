@@ -1,4 +1,4 @@
-package mysticmods.roots.client.gui.layer;
+package mysticmods.roots.client.gui.overlay;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,7 +13,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HerbLayer {
+public class HerbOverlay {
   public static final Deque<HerbAlert> slots = new ArrayDeque<>();
   private static final Map<Herb, HerbAlert> alerts = new HashMap<>();
 

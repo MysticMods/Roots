@@ -1,4 +1,4 @@
-package mysticmods.roots.client.gui.layer;
+package mysticmods.roots.client.gui.overlay;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -11,7 +11,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 
-public class AquaBubbleLayer {
+public class AquaBubbleOverlay {
   public static final ResourceLocation WARNING_TEXTURE = RootsAPI.rl("textures/misc/aqua_bubble_vignette.png");
 
   public static void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {

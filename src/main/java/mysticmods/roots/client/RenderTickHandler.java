@@ -8,7 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.client.gui.layer.HerbLayer;
+import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.BeamManager;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
@@ -158,7 +158,7 @@ public class RenderTickHandler {
 
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post post) {
-    HerbLayer.tick();
+    HerbOverlay.tick();
     BeamManager.tick();
     // TODO: Check pausing
     ScreenParticleEngine.tick();
