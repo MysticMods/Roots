@@ -2,7 +2,7 @@ package mysticmods.roots.mixin.client;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import mysticmods.roots.client.particle.IParticleHolder;
+import mysticmods.roots.client.particle.IMixinParticleHolder;
 import mysticmods.roots.client.particle.IParticleTester;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinParticle;
 import net.minecraft.client.particle.Particle;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Mixin(Entity.class)
-public abstract class MixinEntity implements IParticleHolder {
+public abstract class MixinEntity implements IMixinParticleHolder {
   @Unique
   Map<ParticleType<?>, Particle> roots_1_21$particleMap = null;
 

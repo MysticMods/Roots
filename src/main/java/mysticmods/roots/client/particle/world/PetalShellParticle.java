@@ -2,6 +2,7 @@ package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.client.particle.IMixinParticleHolder;
 import mysticmods.roots.client.particle.IParticleHolder;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
@@ -174,14 +175,19 @@ public class PetalShellParticle extends TextureSheetParticle {
         return null;
       }
 
-      Particle current = ((IParticleHolder)entity).roots_1_21$getParticle(ModParticles.PETAL_SHELL.value());
+      IParticleHolder holder = IParticleHolder.getHolder(entity);
+      if (holder == null) {
+        return null;
+      }
+
+      Particle current = holder.getParticle(ModParticles.PETAL_SHELL.value());
       if (current != null) {
         return null;
       }
 
       var particle = new PetalShellParticle(level, x, y, z, living, type.color1(), type.color2());
       particle.pickSprite(sprite);
-      ((IParticleHolder)entity).roots_1_21$setParticle(ModParticles.PETAL_SHELL.value(), particle);
+      holder.setParticle(ModParticles.PETAL_SHELL.value(), particle);
       return particle;
     }
   }

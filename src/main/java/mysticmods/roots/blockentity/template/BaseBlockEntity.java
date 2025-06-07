@@ -37,9 +37,19 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> lastOutput;
+  protected Object particleHolder;
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  @Nullable
+  public Object getParticleHolder () {
+    return particleHolder;
+  }
+
+  public void setParticleHolder(Object particleHolder) {
+    this.particleHolder = particleHolder;
   }
 
   protected boolean canOutputTo(BlockState state, BlockPos pos) {

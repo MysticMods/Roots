@@ -1,7 +1,7 @@
 package mysticmods.roots.client.particle.world.emitter;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.client.particle.IParticleHolder;
+import mysticmods.roots.client.particle.IMixinParticleHolder;
 import mysticmods.roots.client.particle.IParticleTester;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
@@ -149,7 +149,7 @@ public abstract class EntityEmitter extends Particle {
 
       IParticleTester tester = (particle) -> (particle instanceof LifeDrainEmitter emitter) && emitter.entity.getId() == type.entityId() && emitter.target.getId() == type.casterId();
 
-      Particle current = ((IParticleHolder) entity).roots_1_21$getParticle(ModParticles.LIFE_DRAIN_EMITTER.get(), tester);
+      Particle current = ((IMixinParticleHolder) entity).roots_1_21$getParticle(ModParticles.LIFE_DRAIN_EMITTER.get(), tester);
       if (current != null) {
         current.setLifetime((int) xSpeed);
         return null;
@@ -157,7 +157,7 @@ public abstract class EntityEmitter extends Particle {
 
       Particle newParticle = new LifeDrainEmitter(level, x, y, z, type.builder().type(ModParticles.LIFE_DRAINED)
           .build(), entity, (int) xSpeed, target);
-      ((IParticleHolder) entity).roots_1_21$setParticle(ModParticles.LIFE_DRAIN_EMITTER.get(), newParticle, tester);
+      ((IMixinParticleHolder) entity).roots_1_21$setParticle(ModParticles.LIFE_DRAIN_EMITTER.get(), newParticle, tester);
 
       return newParticle;
     }

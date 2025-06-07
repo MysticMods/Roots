@@ -180,7 +180,7 @@ public class NondetectionParticle extends RootsParticle {
       float f2 = (float) (Mth.lerp(partialTicks, zo, z) - vec3.z());
 
       Quaternionf q = new Quaternionf(quaternion);
-/*      q.rotateZ(Mth.lerp(partialTicks, rolls[i][1], rolls[i][2]));*/
+      /*      q.rotateZ(Mth.lerp(partialTicks, rolls[i][1], rolls[i][2]));*/
 
       this.renderRotatedQuad(i, buffer, q, f, f1, f2, partialTicks, getLightColor(x, y, z, partialTicks));
 
@@ -250,14 +250,19 @@ public class NondetectionParticle extends RootsParticle {
         return null;
       }
 
-      Particle current = ((IParticleHolder) entity).roots_1_21$getParticle(ModParticles.NONDETECTION.value());
+      IParticleHolder holder = IParticleHolder.getHolder(entity);
+      if (holder == null) {
+        return null;
+      }
+
+      Particle current = holder.getParticle(ModParticles.NONDETECTION.value());
       if (current != null) {
         current.setLifetime(100);
         return null;
       }
 
       var particle = new NondetectionParticle(sprite, level, x, y, z, living, type.color1(), type.color2());
-      ((IParticleHolder) entity).roots_1_21$setParticle(ModParticles.NONDETECTION.value(), particle);
+      holder.setParticle(ModParticles.NONDETECTION.value(), particle);
       return particle;
     }
   }
