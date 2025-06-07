@@ -65,7 +65,8 @@ public class MoveRandomlyInAABBParticle extends RootsParticle {
 
   @Override
   protected int getLightColor(float partialTick) {
-    int rawLight = getLightColorRaw(partialTick);
+    return super.getLightColor(partialTick);
+/*    int rawLight = getLightColorRaw(partialTick);
     Vec3 currentPos = new Vec3(this.x, this.y, this.z);
     Vec3 center = bounds.getCenter();
 
@@ -79,7 +80,7 @@ public class MoveRandomlyInAABBParticle extends RootsParticle {
     blockLight = (int) (blockLight * brightnessFactor);
     skyLight = (int) (skyLight * brightnessFactor);
 
-    return (skyLight << 20) | (blockLight << 4);
+    return (skyLight << 20) | (blockLight << 4);*/
   }
 
   @Override
