@@ -70,7 +70,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.sprite(ModParticles.SATURATE.get(), RootsAPI.rl("food_0"));
 
     this.sprite(ModParticles.ROSE_THORNS.get(), RootsAPI.rl("thorn"));
-    this.sprite(ModParticles.LIGHT.get(), RootsAPI.rl("light"));
+    this.sprite(ModParticles.LIGHT.get(), RootsAPI.rl("small_light"));
     this.sprite(ModParticles.TEMPORAL_MORASS.get(), RootsAPI.rl("simple"));
 
     this.sprite(ModParticles.HEAL.get(), ResourceLocation.withDefaultNamespace("heart"));
