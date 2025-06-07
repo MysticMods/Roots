@@ -3,6 +3,7 @@ package mysticmods.roots.client.gui.layer;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModEffects;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -14,6 +15,9 @@ public class AquaBubbleLayer {
   public static final ResourceLocation WARNING_TEXTURE = RootsAPI.rl("textures/misc/aqua_bubble_vignette.png");
 
   public static void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    if (!ConfigManager.AQUA_BUBBLE_OVERLAY.getAsBoolean()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.player == null) {
       return;

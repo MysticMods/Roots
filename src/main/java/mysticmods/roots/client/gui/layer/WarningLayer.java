@@ -3,6 +3,7 @@ package mysticmods.roots.client.gui.layer;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.config.ConfigManager;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,9 @@ public class WarningLayer {
   public static void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
     warningTicks--;
     if (warningTicks < 0) {
+      return;
+    }
+    if (!ConfigManager.WARNING_OVERLAY.getAsBoolean()) {
       return;
     }
     RenderSystem.disableDepthTest();

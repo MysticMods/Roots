@@ -61,6 +61,8 @@ public class ConfigManager {
   public static ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
 
   public static ModConfigSpec.BooleanValue DELAYED_PARTICLES;
+  public static ModConfigSpec.BooleanValue AQUA_BUBBLE_OVERLAY;
+  public static ModConfigSpec.BooleanValue WARNING_OVERLAY;
 
 
   public static ModConfigSpec COMMON_CONFIG;
@@ -153,7 +155,10 @@ public class ConfigManager {
     DELAYED_PARTICLES = CLIENT_BUILDER.comment("if true, translucent particles will be rendered with quads sorted to improve rendering and prevent overlapping translucent particles from disappearing")
         .define("delayed_particles", true);
     CLIENT_BUILDER.pop();
-
+    CLIENT_BUILDER.push("overlays");
+    AQUA_BUBBLE_OVERLAY = CLIENT_BUILDER.comment("if true, the aqua bubble overlay will be displayed in first person while the player has an active Aqua Bubble effect")
+        .define("aqua_bubble_overlay", true);
+    WARNING_OVERLAY = CLIENT_BUILDER.comment("if true, the warning overlay will be displayed whenever a mob targets you while holding the Alertness charm (or equipped in a suitable Curios slot)").define("warning_overlay", true);
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
   }
