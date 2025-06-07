@@ -64,8 +64,14 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   public void lock () {
-    if (this.getBlockState().hasProperty(PedestalBlock.LOCKED)) {
+    if (this.getLevel() != null && this.getBlockState().hasProperty(PedestalBlock.LOCKED)) {
       this.getLevel().setBlock(this.getBlockPos(), this.getBlockState().setValue(PedestalBlock.LOCKED, true), 3);
+    }
+  }
+
+  public void unlock () {
+    if (this.getLevel() != null && this.getBlockState().hasProperty(PedestalBlock.LOCKED)) {
+      this.getLevel().setBlock(this.getBlockPos(), this.getBlockState().setValue(PedestalBlock.LOCKED, false), 3);
     }
   }
 

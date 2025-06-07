@@ -49,4 +49,20 @@ public interface InventoryBlockEntity {
       return inSlot;
     }
   }
+
+  default ItemStack getOne() {
+    ItemStackHandler inventory = getInventory();
+    ItemStack inSlot = inventory.getStackInSlot(0);
+    if (inSlot.isEmpty()) {
+      return ItemStack.EMPTY;
+    }
+
+    if (inSlot.getCount() > 1) {
+      ItemStack result = inSlot.copy();
+      result.setCount(1);
+      return result;
+    } else {
+      return inSlot.copy();
+    }
+  }
 }

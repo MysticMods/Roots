@@ -21,6 +21,7 @@ import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -38,13 +39,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity {
+  private static final int CRAFTING_TICKS = 20 * 5; // 4 seconds
+
   private RecipeHolder<GroveRecipe> lastRecipe = null;
   private RecipeHolder<GroveRecipe> cachedRecipe = null;
+
+  private final List<ItemStack> storedItems = new ArrayList<>();
+  private int craftingTicks = 0;
+
+  private Player lastPlayer;
+  private UUID lastUuid;
 
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -52,6 +59,45 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
 
   public GroveCrafterBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.GROVE_CRAFTER.get(), pWorldPosition, pBlockState);
+  }
+
+  protected void outputStoredItems (@Nullable Player player) {
+    if (getLevel() == null || getLevel().isClientSide()) {
+      return;
+    }
+    GroveCrafting playerCrafting = new GroveCrafting(this, player);
+    playerCrafting.popItems();
+    if (!storedItems.isEmpty()) {
+      if (player != null) {
+        for (ItemStack item : storedItems) {
+          CraftItemAction.Context context = new CraftItemAction.Context(
+              (ServerLevel) level,
+              (ServerPlayer) player,
+              item
+          );
+          ModActions.CRAFT_ITEM.get().accept(context);
+        }
+      }
+      for (ItemStack stack : this.outputAdjacent(storedItems)) {
+        ItemUtil.Spawn.spawnItem(level, player == null ? this.getBlockPos() : player.blockPosition(), stack);
+      }
+    }
+    if (lastRecipe != null && player!= null) {
+      CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+          (ServerLevel) level,
+          (ServerPlayer) player,
+          lastRecipe.id(),
+          lastRecipe.value(),
+          this
+      );
+      ModActions.CRAFT_RECIPE.get().accept(context);
+    }
+    lastPlayer = null;
+    lastUuid = null;
+  }
+
+  protected boolean isCrafting() {
+    return craftingTicks > 0;
   }
 
   @Override
@@ -89,28 +135,13 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         failedGrants.report();
         return InteractionResult.FAIL;
       }
+      lastPlayer = player;
+      lastUuid = null;
       lastRecipe = cachedRecipe;
       List<ItemStack> results = cachedRecipe.value()
-          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
-      for (ItemStack item : results) {
-        CraftItemAction.Context context = new CraftItemAction.Context(
-            (ServerLevel) level,
-            (ServerPlayer) player,
-            item
-        );
-        ModActions.CRAFT_ITEM.get().accept(context);
-      }
-      for (ItemStack stack : this.outputAdjacent(results)) {
-        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
-      }
-      CraftRecipeAction.Context context = new CraftRecipeAction.Context(
-          (ServerLevel) level,
-          (ServerPlayer) player,
-          cachedRecipe.id(),
-          cachedRecipe.value(),
-          this
-      );
-      ModActions.CRAFT_RECIPE.get().accept(context);
+          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::getItemsAndLock);
+      storedItems.addAll(results);
+      this.craftingTicks = CRAFTING_TICKS;
       cachedRecipe = null;
       if (!level.isClientSide()) {
         setChanged();
@@ -200,31 +231,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     return 3;
   }
 
-/*  @Override
-  public void notify(ServerLevel pLevel, BlockPos pPos) {
-    if (pedestalPositions == null) {
-      pedestalPositions = new ArrayList<>();
-    } else {
-      pedestalPositions.clear();
-    }
-    BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
-      BlockState state = pLevel.getBlockState(pos);
-      if (state.is(RootsTags.Blocks.GROVE_PEDESTALS)) {
-        if (!state.getValue(PedestalBlock.VALID)) {
-*//*          if (pLevel.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {*//*
-   *//*            if (!pedestal.getHeldItem().isEmpty()) {*//*
-              pLevel.setBlock(pos, state.setValue(PedestalBlock.VALID, true), 1 | 2 | 8);
-              pedestalPositions.add(pos.immutable());
-*//*            }*//*
-   *//*          }*//*
-        } else {
-          pedestalPositions.add(pos.immutable());
-        }
-      }
-    });
-    revalidateRecipe();
-  }*/
-
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.saveAdditional(pTag, lookup);
@@ -233,6 +239,21 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
     if (lastRecipe != null) {
       pTag.putString("last_recipe", lastRecipe.id().toString());
+    }
+    ListTag storedItems = new ListTag();
+    for (ItemStack stack : this.storedItems) {
+      if (!stack.isEmpty()) {
+        storedItems.add(stack.save(lookup, new CompoundTag()));
+      }
+    }
+    if (!storedItems.isEmpty()) {
+      pTag.put("stored_items", storedItems);
+    }
+    pTag.putInt("crafting_ticks", craftingTicks);
+    if (lastPlayer != null) {
+      pTag.putUUID("last_player", lastPlayer.getUUID());
+    } else if (lastUuid != null) {
+      pTag.putUUID("last_player", lastUuid);
     }
   }
 
@@ -250,6 +271,40 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
       lastRecipeId = RootsAPI.parse(pTag.getString("last_recipe"));
     }
+    if (!storedItems.isEmpty()) {
+      outputStoredItems(getLastPlayer());
+    }
+    storedItems.clear();
+    if (pTag.contains("stored_items", Tag.TAG_LIST)) {
+      ListTag incomingStoredItems = pTag.getList("stored_items", Tag.TAG_COMPOUND);
+      for (int i = 0; i < incomingStoredItems.size(); i++) {
+        ItemStack.parse(lookup, incomingStoredItems.getCompound(i)).ifPresent(storedItems::add);
+      }
+    }
+    if (pTag.hasUUID("last_player")) {
+      lastUuid = pTag.getUUID("last_player");
+      if (getLevel() != null) {
+        lastPlayer = getLevel().getPlayerByUUID(lastUuid);
+      }
+    }
+  }
+
+  @Nullable
+  public Player getLastPlayer() {
+    if (lastPlayer != null) {
+      return lastPlayer;
+    }
+
+    if (getLevel() == null) {
+      return null;
+    }
+
+    if (lastUuid != null) {
+      lastPlayer = getLevel().getPlayerByUUID(lastUuid);
+      return lastPlayer;
+    }
+
+    return null;
   }
 
   @Nullable
@@ -260,6 +315,14 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     revalidateRecipe();
+    if (craftingTicks > 0) {
+      craftingTicks--;
+      if (craftingTicks == 0) {
+        outputStoredItems(getLastPlayer());
+      }
+      setChanged();
+      updateViaState();
+    }
 /*    if (pLevel.getServer().getTickCount() % 8 == 0) {
       PacketDistributor.sendToPlayersNear(pLevel, null, pPos.getX(), pPos.getY(), pPos.getZ(), 32, new SpiralFXPacket(pPos, 0.5, (Mth.TWO_PI / 256), 0xc1f3ee, 0xe5ff23));
     }*/
