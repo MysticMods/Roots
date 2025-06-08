@@ -1,5 +1,6 @@
 package mysticmods.roots.client.network;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.overlay.WarningOverlay;
@@ -12,6 +13,7 @@ import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
+import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
@@ -21,6 +23,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector2d;
 
@@ -757,7 +760,7 @@ public class ClientFXHandlers {
 
       int visibleHearts = Math.min(10, (int) Math.ceil(player.getMaxHealth() / 2f));
       Vector2d heart = getHeartIcon(player, guiWidth, guiHeight, visibleHearts - 2);
-      for (int a = 0; a < amount; a+= 2) {
+      for (int a = 0; a < amount; a += 2) {
         ScreenParticleEngine.addHudParticle(options, heart.x, heart.y - 4 - random.nextDouble() * 3, (random.nextDouble() - 0.5) * 0.8, -(1.4 + random.nextDouble()));
       }
     }
@@ -782,7 +785,7 @@ public class ClientFXHandlers {
         .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
   }
 
-  public static void sanctuary (int entityId, int radiusInt) {
+  public static void sanctuary(int entityId, int radiusInt) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 
@@ -808,7 +811,8 @@ public class ClientFXHandlers {
       Vec3 spawnPos = new Vec3(x + offsetX, y + offsetY, z + offsetZ);
 
       RootsParticleOptions opts = random.nextBoolean() ? RootsParticleOptions.builder(ModParticles.SANCTUARY)
-          .color(ModSpells.SANCTUARY).build() : RootsParticleOptions.builder(ModParticles.SANCTUARY).color(ModSpells.SANCTUARY).swapColors().build();
+          .color(ModSpells.SANCTUARY).build() : RootsParticleOptions.builder(ModParticles.SANCTUARY)
+          .color(ModSpells.SANCTUARY).swapColors().build();
 
       minecraft.level.addParticle(opts, spawnPos.x, spawnPos.y, spawnPos.z, 0, 0, 0);
     }
@@ -847,5 +851,30 @@ public class ClientFXHandlers {
     }
 
     // TODO: Particles to demonstration saturation to others
+  }
+
+  public static void startGroveCrafting(BlockPos groveCrafter, List<TaggedPedestalCrafting.ItemPosition> positions) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Vec3 dest = Vec3.atBottomCenterOf(groveCrafter).add(0, 1.05, 0);
+
+    RandomSource random = minecraft.level.getRandom();
+
+    for (int i = 0; i < positions.size(); i++) {
+      BlockPos pos = positions.get(i).position();
+      ItemStack item = positions.get(i).item();
+
+      Vec3 spawnPos = Vec3.atBottomCenterOf(pos).add(0, 1.15, 0);
+
+      int total = 7 + random.nextInt(8);
+
+      for (int j = 0; j < total; j++) {
+        Vec3 offset = spawnPos;
+        Minecraft.getInstance().level.addParticle(
+            RootsParticleOptions.builder(ModParticles.ITEM).item(item).build(),
+            offset.x, offset.y, offset.z,
+            dest.x, dest.y, dest.z
+        );
+      }
+    }
   }
 }

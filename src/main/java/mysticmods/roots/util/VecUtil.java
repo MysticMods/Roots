@@ -12,7 +12,7 @@ public class VecUtil {
     Vec3 p0 = startPos.scale(u * u * u);
     Vec3 p1 = control1.scale(3 * u * u * t);
     Vec3 p2 = control2.scale(3 * u * t * t);
-    Vec3 p3 = startPos.scale(t * t * t);
+    Vec3 p3 = endPos.scale(t * t * t);
 
     return p0.add(p1).add(p2).add(p3);
   }

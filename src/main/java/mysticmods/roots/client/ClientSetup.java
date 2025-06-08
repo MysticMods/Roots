@@ -244,6 +244,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.ROSE_THORNS.get(), RoseThornsParticle.Provider::new);
     event.registerSpriteSet(ModParticles.LIGHT.get(), LightParticle.Provider::new);
     event.registerSpriteSet(ModParticles.TEMPORAL_MORASS.get(), MoveRandomlyInAABBParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.GROVE_CRAFTER.get(), GroveCrafterParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());

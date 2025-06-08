@@ -80,6 +80,7 @@ public class PacketHandler {
     registrar.play(NondetectionFXPacket.TYPE, NondetectionFXPacket.CODEC);
     registrar.play(SanctuaryFXPacket.TYPE, SanctuaryFXPacket.CODEC);
     registrar.play(SaturateScreenFXPacket.TYPE, SaturateScreenFXPacket.CODEC);
+    registrar.play(StartGroveCraftingFX.TYPE, StartGroveCraftingFX.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

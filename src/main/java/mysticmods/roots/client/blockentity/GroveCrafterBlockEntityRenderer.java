@@ -53,7 +53,7 @@ public class GroveCrafterBlockEntityRenderer extends BoundedBlockEntityRenderer<
           Sheets.translucentItemSheet());
       pPoseStack.popPose();
     } else {
-      RecipeHolder<GroveRecipe> recipe = pBlockEntity.getRecipe();
+      RecipeHolder<GroveRecipe> recipe = pBlockEntity.getCurrentRecipe();
       if (recipe != null) {
         ItemStack inSlot = recipe.value().getResultItem(Minecraft.getInstance().getConnection().registryAccess());
         pPoseStack.pushPose();

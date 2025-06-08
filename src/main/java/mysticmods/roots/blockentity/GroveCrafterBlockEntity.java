@@ -5,6 +5,7 @@ import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.recipe.ConditionResult;
@@ -12,9 +13,10 @@ import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.block.GroveCrafterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.condition.GroveStoneCondition;
-import mysticmods.roots.init.ModActions;
-import mysticmods.roots.init.ModBlockEntities;
-import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.init.*;
+import mysticmods.roots.network.client.fx.StartGroveCraftingFX;
+import mysticmods.roots.particle.RootsParticleOptions;
+import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
@@ -38,11 +40,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity {
+public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity {
   private static final int CRAFTING_TICKS = 20 * 5; // 4 seconds
 
   private RecipeHolder<GroveRecipe> lastRecipe = null;
@@ -54,9 +57,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   private Player lastPlayer;
   private UUID lastUuid;
 
-  public float visualRotation = 0f;
-  public float lastRenderTick = 0f;
-  public float smoothedProgress = 0f;
+  private boolean revalidatedRecipes = false;
 
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -82,7 +83,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         }
       }
       for (ItemStack stack : this.outputAdjacent(storedItems)) {
-        ItemUtil.Spawn.spawnItem(level, /*player == null ? */this.getBlockPos()/* : player.blockPosition()*/, stack);
+        ItemUtil.Spawn.spawnItem(level, /*player == null ? */this.getBlockPos()
+            .above()/* : player.blockPosition()*/, stack);
       }
     }
     storedItems.clear();
@@ -126,6 +128,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       return InteractionResult.PASS;
     }
 
+    if (isCrafting()) {
+      return InteractionResult.PASS;
+    }
+
     if (inHand.isEmpty() || inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
       GroveCrafting playerCrafting = new GroveCrafting(this, player);
       if (cachedRecipe == null) {
@@ -149,6 +155,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       lastPlayer = player;
       lastUuid = null;
       lastRecipe = cachedRecipe;
+      List<TaggedPedestalCrafting.ItemPosition> positions = playerCrafting.getItemsAndPositions();
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new StartGroveCraftingFX(getBlockPos(), positions));
       List<ItemStack> results = cachedRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
       storedItems.addAll(results);
@@ -299,6 +307,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       }
     }
     this.craftingTicks = pTag.getInt("crafting_ticks");
+    this.revalidatedRecipes = false;
   }
 
   @Nullable
@@ -359,6 +368,37 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     } else {
       lastRecipe = null;
       cachedRecipe = null;
+    }
+  }
+
+  @Override
+  public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
+    if (!revalidatedRecipes) {
+      revalidateRecipe();
+      revalidatedRecipes = true;
+    }
+    if (isCrafting() && craftingTicks % 4 == 0) {
+      float progress = 1.0f - (craftingTicks / (float) CRAFTING_TICKS); // 0 to 1
+      double spread = 0.1 + progress * 0.4; // dynamic radius
+
+      int tickCount = (CRAFTING_TICKS - craftingTicks) / 4;
+      int particleCount = 5 + pLevel.random.nextInt(10) + pLevel.random.nextInt(Math.max(tickCount, 1));
+
+      if (craftingTicks <= 24 && craftingTicks > 16) {
+        particleCount += 20 + pLevel.random.nextInt(20);
+        spread += 0.3;
+      }
+
+      for (int i = 0; i < particleCount; i++) {
+        double x = pPos.getX() + 0.5 + (pLevel.random.nextDouble() - 0.5) * spread;
+        double y = pPos.getY() + 0.5;
+        double z = pPos.getZ() + 0.5 + (pLevel.random.nextDouble() - 0.5) * spread;
+
+        level.addParticle(RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).color(ModSpells.WILDFIRE).build(),
+            x, y, z,
+            0, (pLevel.random.nextDouble() * 0.05), 0
+        );
+      }
     }
   }
 }
