@@ -45,11 +45,11 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
 
       BlockState state = pBlockEntity.getBlockState();
 
-      if (state.hasProperty(PedestalBlock.LOCKED) && state.getValue(PedestalBlock.LOCKED)) {
+/*      if (state.hasProperty(PedestalBlock.LOCKED) && state.getValue(PedestalBlock.LOCKED)) {
         pRed = 0f;
         pGreen = 1f;
         pBlue = 0f;
-      } else if (inSlot.isEmpty()) {
+      } else */if (inSlot.isEmpty()) {
         pRed = 1f;
         pBlue = 1f;
         pGreen = 0f;

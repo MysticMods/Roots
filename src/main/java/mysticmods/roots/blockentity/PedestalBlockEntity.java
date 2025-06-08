@@ -32,7 +32,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int limit) {
     super(pType, pWorldPosition, pBlockState);
     this.limit = limit;
-    inventory = new LockableLimitedItemStackHandler(1, this::getLimit, this::isLocked) {
+    inventory = new LimitedItemStackHandler(1, this::getLimit) {
       @Override
       protected void onContentsChanged(int slot) {
         if (PedestalBlockEntity.this.hasLevel() && !PedestalBlockEntity.this.getLevel().isClientSide()) {
@@ -57,22 +57,6 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public PedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     this(ModBlockEntities.PEDESTAL.get(), pWorldPosition, pBlockState, Item.DEFAULT_MAX_STACK_SIZE);
-  }
-
-  public boolean isLocked () {
-    return this.getBlockState().getValue(PedestalBlock.LOCKED);
-  }
-
-  public void lock () {
-    if (this.getLevel() != null && this.getBlockState().hasProperty(PedestalBlock.LOCKED)) {
-      this.getLevel().setBlock(this.getBlockPos(), this.getBlockState().setValue(PedestalBlock.LOCKED, true), 3);
-    }
-  }
-
-  public void unlock () {
-    if (this.getLevel() != null && this.getBlockState().hasProperty(PedestalBlock.LOCKED)) {
-      this.getLevel().setBlock(this.getBlockPos(), this.getBlockState().setValue(PedestalBlock.LOCKED, false), 3);
-    }
   }
 
   public int getLimit() {

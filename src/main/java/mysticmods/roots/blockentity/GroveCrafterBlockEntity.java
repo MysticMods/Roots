@@ -65,8 +65,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     if (getLevel() == null || getLevel().isClientSide()) {
       return;
     }
-    GroveCrafting playerCrafting = new GroveCrafting(this, player);
-    playerCrafting.popItems();
     if (!storedItems.isEmpty()) {
       if (player != null) {
         for (ItemStack item : storedItems) {
@@ -139,7 +137,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       lastUuid = null;
       lastRecipe = cachedRecipe;
       List<ItemStack> results = cachedRecipe.value()
-          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::getItemsAndLock);
+          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
       storedItems.addAll(results);
       this.craftingTicks = CRAFTING_TICKS;
       cachedRecipe = null;

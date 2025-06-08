@@ -32,25 +32,12 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
     return excludeTag;
   }
 
-  public List<ItemStack> getItemsAndLock () {
-    List<ItemStack> result = new ArrayList<>();
-    if (getBlockEntity() == null) {
-      return result;
-    }
-    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag())) {
-      result.add(entry.getSecond().getOne());
-      entry.getSecond().lock();
-    }
-    return result;
-  }
-
   public List<ItemStack> popItems() {
     List<ItemStack> result = new ArrayList<>();
     if (getBlockEntity() == null) {
       return result;
     }
     for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag())) {
-      entry.getSecond().unlock();
       result.add(entry.getSecond().popOne());
     }
     return result;
