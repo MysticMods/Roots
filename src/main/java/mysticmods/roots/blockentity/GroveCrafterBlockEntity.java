@@ -28,6 +28,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -53,6 +54,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   private Player lastPlayer;
   private UUID lastUuid;
 
+  public float visualRotation = 0f;
+  public float lastRenderTick = 0f;
+  public float smoothedProgress = 0f;
+
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
   }
@@ -61,7 +66,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     super(ModBlockEntities.GROVE_CRAFTER.get(), pWorldPosition, pBlockState);
   }
 
-  protected void outputStoredItems (@Nullable Player player) {
+  protected void outputStoredItems(@Nullable Player player) {
     if (getLevel() == null || getLevel().isClientSide()) {
       return;
     }
@@ -77,10 +82,11 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         }
       }
       for (ItemStack stack : this.outputAdjacent(storedItems)) {
-        ItemUtil.Spawn.spawnItem(level, player == null ? this.getBlockPos() : player.blockPosition(), stack);
+        ItemUtil.Spawn.spawnItem(level, /*player == null ? */this.getBlockPos()/* : player.blockPosition()*/, stack);
       }
     }
-    if (lastRecipe != null && player!= null) {
+    storedItems.clear();
+    if (lastRecipe != null && player != null) {
       CraftRecipeAction.Context context = new CraftRecipeAction.Context(
           (ServerLevel) level,
           (ServerPlayer) player,
@@ -94,8 +100,15 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     lastUuid = null;
   }
 
-  protected boolean isCrafting() {
+  public boolean isCrafting() {
     return craftingTicks > 0;
+  }
+
+  public float getCraftingProgress() {
+    if (craftingTicks <= 0) {
+      return 1f;
+    }
+    return 1f - Mth.clamp((float) craftingTicks / CRAFTING_TICKS, 0f, 1f);
   }
 
   @Override
@@ -285,6 +298,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         lastPlayer = getLevel().getPlayerByUUID(lastUuid);
       }
     }
+    this.craftingTicks = pTag.getInt("crafting_ticks");
   }
 
   @Nullable
@@ -308,6 +322,15 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   @Nullable
   public RecipeHolder<GroveRecipe> getRecipe() {
     return cachedRecipe;
+  }
+
+  @Nullable
+  public RecipeHolder<GroveRecipe> getCurrentRecipe() {
+    if (craftingTicks == 0) {
+      return getRecipe();
+    } else {
+      return lastRecipe;
+    }
   }
 
   @Override

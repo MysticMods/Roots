@@ -1,9 +1,6 @@
 {
   "variants": {
-    "locked=false": {
-      "model": "roots:block/ritual_pedestal"
-    },
-    "locked=true": {
+    "": {
       "model": "roots:block/ritual_pedestal"
     }
   }

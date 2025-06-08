@@ -1,9 +1,6 @@
 {
   "variants": {
-    "locked=false": {
-      "model": "roots:block/display_pedestal"
-    },
-    "locked=true": {
+    "": {
       "model": "roots:block/display_pedestal"
     }
   }
