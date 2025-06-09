@@ -1,6 +1,8 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
+import mysticmods.roots.blockentity.SylvanLightBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -8,6 +10,10 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -15,9 +21,10 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 
-public class SylvanLightBlock extends WaterloggedBlock {
+public class SylvanLightBlock extends WaterloggedBlock implements EntityBlock {
   public static BooleanProperty WATERLOGGED = WaterloggedBlock.WATERLOGGED;
   public static BooleanProperty DECAYING = BooleanProperty.create("decaying");
   public static IntegerProperty DECAY = IntegerProperty.create("decay", 0, 10);
@@ -45,16 +52,19 @@ public class SylvanLightBlock extends WaterloggedBlock {
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRand) {
     super.animateTick(pState, pLevel, pPos, pRand);
-    if (pRand.nextInt(2) == 0) {
-      pLevel.addParticle(
-          ModParticles.SYLVAN_LIGHT_EMITTER.get(),
-          pPos.getX() + 0.5,
-          pPos.getY() + 0.5,
-          pPos.getZ() + 0.5,
-          0,
-          0,
-          0
-      );
+  }
+
+  @Override
+  public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return new SylvanLightBlockEntity(pos, state);
+  }
+
+  @Override
+  public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    if (level.isClientSide()) {
+      return BaseBlockEntity::clientTick;
+    } else {
+      return null;
     }
   }
 }
