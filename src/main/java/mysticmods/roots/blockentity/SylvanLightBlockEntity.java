@@ -33,19 +33,6 @@ public class SylvanLightBlockEntity extends BlockEntity implements ClientTickBlo
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     this.ticks++;
 
-    Vec3 center = Vec3.atCenterOf(pPos);
-
-    if (ticks % 3 == 0) {
-/*
-      pLevel.addParticle(RootsParticleOptions.builder(ModParticles.LARGE_LIGHT).color(0xffe383).build(),
-          center.x,
-          center.y,
-          center.z,
-          0,
-          0,
-          0);*/
-    }
-
     if (ticks % 2 == 0) {
       if (random.nextInt(3) == 0) {
         return;
@@ -54,15 +41,8 @@ public class SylvanLightBlockEntity extends BlockEntity implements ClientTickBlo
       Vec3 spot = Vec3.atCenterOf(pPos)
           .add((random.nextDouble() - 0.5) * 0.058, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.058);
 
-      pLevel.addParticle(
-          RootsParticleOptions.builder(
-              ModParticles.LIGHT).color(
-              color[0],
-              color[1]).build(),
-          spot.x, spot.y, spot.z,
-          0,
-          random.nextFloat() * 0.003,
-          0
+      pLevel.addParticle(RootsParticleOptions.builder(ModParticles.LIGHT).color(color)
+          .build(), spot.x, spot.y, spot.z, 0, random.nextFloat() * 0.003, 0
       );
     }
   }

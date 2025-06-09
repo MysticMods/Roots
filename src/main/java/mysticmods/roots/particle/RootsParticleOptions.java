@@ -133,6 +133,16 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
+    public Builder color (int[] color) {
+      if (color.length == 1) {
+        return this.color(color[0]);
+      } else if (color.length == 2) {
+        return this.color(color[0], color[1]);
+      } else {
+        throw new IllegalArgumentException("Color array must have 1 or 2 elements, got: " + color.length);
+      }
+    }
+
     public Builder entityId(int entityId) {
       this.entityId = entityId;
       return this;
