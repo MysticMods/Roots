@@ -19,7 +19,7 @@ public class RootsItemParticle extends RootsParticle {
     Vec3 start = new Vec3(x, y, z);
     this.lifetime = 20 * 5;
     this.quadSize = 0.025f + random.nextFloat() * 0.01f;
-    this.origin = new Vec3(x + (random.nextDouble() - 0.5) * 0.4, y + (random.nextDouble() - 0.5) * 0.4, z + (random.nextDouble() - 0.5) * 0.4);
+    this.origin = new Vec3(x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2);
     this.destination = new Vec3(xSpeed, ySpeed, zSpeed);
     this.delayedRender = false;
     if (item == null) {
@@ -49,7 +49,9 @@ public class RootsItemParticle extends RootsParticle {
     this.control2 = origin.add(diff.scale(0.6)).add(up.scale(height)).subtract(randomOffset);
     this.defaultLight = false;
 
-    Vec3 motion = origin.subtract(start).normalize().scale(0.05);
+    Vec3 initMotionDiff = origin.subtract(start);
+    Vec3 motion = initMotionDiff.scale(1.0/6.0);
+
     this.xd = motion.x;
     this.yd = motion.y;
     this.zd = motion.z;
@@ -67,10 +69,17 @@ public class RootsItemParticle extends RootsParticle {
 
   @Override
   protected void updateMovement(float f) {
-    if (this.age > (lifetime - 10)) {
+    if (this.age <= 6) {
+      this.x += this.xd;
+      this.y += this.yd;
+      this.z += this.zd;
+    } else if (this.age > (lifetime - 10)) {
 
     } else {
-      f = (float) Math.pow((float) this.age / (this.lifetime - 10), 1.5);
+      int bezierAge = this.age - 6;
+      int bezierDuration = this.lifetime - 16;
+      float t = (float) bezierAge / bezierDuration;
+      f = (float) Math.pow(t, 1.5);
       Vec3 pos = VecUtil.bezier(origin, control1, control2, destination, f);
       this.x = pos.x;
       this.y = pos.y;
