@@ -18,10 +18,14 @@ import java.util.Set;
 
 public class BrushBlockAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log (GroveContext context) {
     RootsAPI.LOG.error("BrushBlockAction fired by '{}' at '{}' on block '{}' with item '{}'",
         context.player().getName().getString(), context.position(), context.blockState(), context.item()
             .getDisplayName().getString());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

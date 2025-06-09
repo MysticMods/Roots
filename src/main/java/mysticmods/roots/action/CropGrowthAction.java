@@ -24,6 +24,12 @@ import javax.annotation.Nullable;
 import java.util.Set;
 
 public class CropGrowthAction implements GroveAction {
+
+
+  @Override
+  public void log(GroveContext context) {
+  }
+
   @Override
   public boolean test(GroveContext context) {
     if (context.oldBlockState().isAir() && !context.blockState().isAir()) {
@@ -48,8 +54,10 @@ public class CropGrowthAction implements GroveAction {
     int newAge = context.blockState().getValue(age);
 
     if (newAge > oldAge) {
-      RootsAPI.LOG.error("CropGrowthAction fired by '{}' with new block state '{}'",
-          context.player().getName().getString(), context.blockState());
+      if (shouldLog()) {
+        RootsAPI.LOG.error("CropGrowthAction fired by '{}' with new block state '{}'",
+            context.player().getName().getString(), context.blockState());
+      }
       return true;
     }
     return false;

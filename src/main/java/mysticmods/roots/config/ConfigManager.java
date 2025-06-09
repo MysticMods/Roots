@@ -56,6 +56,7 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
 
   public static ModConfigSpec.BooleanValue DEBUG_REPUTATION;
+  public static ModConfigSpec.BooleanValue DEBUG_GROVE_ACTIONS;
   public static ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
 
   public static ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
@@ -134,6 +135,7 @@ public class ConfigManager {
     COMMON_BUILDER.push("debug");
     DEBUG_REPUTATION = COMMON_BUILDER.comment("if true, will send messages for all reputation gains and losses")
         .define("debug_reputation", false);
+    DEBUG_GROVE_ACTIONS = COMMON_BUILDER.comment("if true, will report in the message log whenever a Grove Action has been fired").define("debug_grove_actions", false);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("ritual_conflict");
     RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]").defineEnum("ritual_resolution_type", RitualInformation.RitualResolutionType.AGE_PRIORITY);

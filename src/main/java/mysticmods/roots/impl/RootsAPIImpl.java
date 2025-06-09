@@ -94,4 +94,9 @@ public class RootsAPIImpl implements IRootsAPI {
     return new ClientboundDiscardBlockEntityAttachmentPacket(attachmentType.location().toString(), entity.getBlockPos()
         .asLong());
   }
+
+  @Override
+  public boolean logGroveActions() {
+    return ConfigManager.DEBUG_GROVE_ACTIONS.getAsBoolean();
+  }
 }

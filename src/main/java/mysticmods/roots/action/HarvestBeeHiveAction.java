@@ -17,9 +17,13 @@ import java.util.Set;
 
 public class HarvestBeeHiveAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("HarvestBeeHiveAction triggered by '{}' at '{}' using item '{}'", context.player().getName()
         .getString(), context.position(), context.item());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

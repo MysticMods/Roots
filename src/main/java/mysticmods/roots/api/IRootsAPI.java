@@ -38,4 +38,6 @@ public interface IRootsAPI {
 
   IRootsPacket getEntityDiscardPacket (ResourceKey<AttachmentType<?>> attachmentType, Entity entity);
   IRootsPacket getBlockEntityDiscardPacket (ResourceKey<AttachmentType<?>> attachmentType, BlockEntity entity);
+
+  boolean logGroveActions ();
 }

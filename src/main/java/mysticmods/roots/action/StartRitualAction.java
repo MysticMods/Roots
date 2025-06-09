@@ -14,9 +14,13 @@ import java.util.Set;
 
 public class StartRitualAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("StartRitualAction fired by '{}' with ritual '{}'",
         context.player().getName().getString(), context.ritual().getRitual().getName().getString());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

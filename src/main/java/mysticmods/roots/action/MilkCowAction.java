@@ -17,10 +17,14 @@ import java.util.Set;
 
 public class MilkCowAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("MilkCowAction triggered by '{}' with item '{}' creating item '{}' on entity '{}'",
         context.player().getName().getString(), context.oldItem().getDisplayName().getString(), context.item()
             .getDisplayName().getString(), context.target().getName().getString());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

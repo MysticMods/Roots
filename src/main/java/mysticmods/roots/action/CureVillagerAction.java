@@ -16,9 +16,13 @@ import java.util.Set;
 
 public class CureVillagerAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("CureVillageAction triggered by '{}' for entity '{}'", context.player().getName()
         .getString(), context.target().getName().getString());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

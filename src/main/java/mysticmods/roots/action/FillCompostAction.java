@@ -19,10 +19,17 @@ import java.util.Set;
 
 public class FillCompostAction implements GroveAction {
   @Override
+  public void log(GroveContext context) {
+
+  }
+
+  @Override
   public boolean test(GroveContext context) {
     if (context.blockState().getValue(ComposterBlock.LEVEL) == ComposterBlock.MAX_LEVEL) {
-      RootsAPI.LOG.error("FillCompostAction triggered by '{}' at '{}' with full composter", context.player().getName()
-          .getString(), context.position());
+      if (shouldLog()) {
+        RootsAPI.LOG.error("FillCompostAction triggered by '{}' at '{}' with full composter", context.player().getName()
+            .getString(), context.position());
+      }
       return true;
     }
 

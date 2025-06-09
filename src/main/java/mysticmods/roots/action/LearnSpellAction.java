@@ -1,5 +1,6 @@
 package mysticmods.roots.action;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
@@ -13,6 +14,12 @@ import net.minecraft.tags.TagKey;
 import java.util.Set;
 
 public class LearnSpellAction implements GroveAction {
+  @Override
+  public void log(GroveContext context) {
+    RootsAPI.LOG.error("LearnSpellAction fired by '{}' with spell '{}'",
+        context.player().getName().getString(), context.spell().getSpell().builtInRegistryHolder().getKey().location());
+  }
+
   @Override
   public boolean test(GroveContext context) {
     return true;

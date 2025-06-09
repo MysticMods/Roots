@@ -16,9 +16,13 @@ import java.util.Set;
 
 public class TradeVillagerAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("TradeVillagerAction triggered by '{}' with offer '{}'", context.player().getName()
         .getString(), context.offer().getResult().getDisplayName().getString());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

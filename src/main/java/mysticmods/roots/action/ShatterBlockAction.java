@@ -18,9 +18,13 @@ import java.util.Set;
 
 public class ShatterBlockAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("ShatterBlockAction triggered by '{}' at '{}' with block '{}'", context.player().getName()
         .getString(), context.position(), context.blockState());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

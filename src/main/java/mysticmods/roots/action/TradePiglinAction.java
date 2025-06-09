@@ -16,9 +16,13 @@ import java.util.Set;
 
 public class TradePiglinAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("TradePiglinAction triggered by '{}' with item '{}'", context.player().getName()
         .getString(), context.item().getItem().getDescriptionId());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

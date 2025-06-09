@@ -25,8 +25,6 @@ import java.util.Set;
 public class SpellCastAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("SpellCastAction fired by '{}' with spell '{}'",
-        context.player().getName().getString(), context.spell().getSpell().getName().getString());
     return context.costing().shouldCharge();
   }
 
@@ -36,6 +34,12 @@ public class SpellCastAction implements GroveAction {
       return reputation.multiply(context.costing().operations());
     }
     return GroveAction.super.modify(context, reputation);
+  }
+
+  @Override
+  public void log(GroveContext context) {
+    RootsAPI.LOG.error("SpellCastAction fired by '{}' with spell '{}'",
+        context.player().getName().getString(), context.spell().getSpell().getName().getString());
   }
 
   @Override

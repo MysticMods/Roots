@@ -14,9 +14,13 @@ import java.util.Set;
 
 public class CraftRecipeAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log (GroveContext context) {
     RootsAPI.LOG.error("CraftRecipeAction fired by '{}' with recipe '{}'",
         context.player().getName().getString(), context.recipeId());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

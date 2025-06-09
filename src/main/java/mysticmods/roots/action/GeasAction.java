@@ -15,9 +15,13 @@ import java.util.Set;
 
 public class GeasAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("GeasAction triggered by '{}' applied to '{}",
         context.player().getName().getString(), context.target().getName().getString());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

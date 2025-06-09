@@ -13,9 +13,13 @@ import java.util.Set;
 
 public class TameAnimalAction implements GroveAction {
   @Override
-  public boolean test(GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("TameAnimalAction triggered by '{}' on entity '{}'", context.player().getName()
         .getString(), context.target().getName().getString());
+  }
+
+  @Override
+  public boolean test(GroveContext context) {
     return true;
   }
 

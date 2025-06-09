@@ -19,7 +19,7 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   @Override
   default void accept(GroveContext context) {
     validate(context);
-    if (test(context)) {
+    if (testAndLog(context)) {
       reward(context);
     }
   }
@@ -28,7 +28,20 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
     return reputation;
   }
 
+  void log (GroveContext context);
+
   boolean test(GroveContext context);
+
+  default boolean shouldLog () {
+    return RootsAPI.getInstance().logGroveActions();
+  }
+
+  default boolean testAndLog (GroveContext context) {
+    if (shouldLog()) {
+      log(context);
+    }
+    return test (context);
+  }
 
   default void reward(GroveContext context) {
     for (GroveReputationEntry entry : getReputationEntries()) {
