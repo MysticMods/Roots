@@ -54,7 +54,6 @@ public class SylvanLightBlockEntity extends BlockEntity implements ClientTickBlo
       Vec3 spot = Vec3.atCenterOf(pPos)
           .add((random.nextDouble() - 0.5) * 0.058, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.058);
 
-      System.out.println("Spawning light particle at: " + spot.x + ", " + spot.y + ", " + spot.z);
       pLevel.addParticle(
           RootsParticleOptions.builder(
               ModParticles.LIGHT).color(
