@@ -1,0 +1,9 @@
+{
+  "entities": {
+    "name": "Entities",
+    "icon": "Bug"
+  },
+  "ores.mdx": "Ores",
+  "structures.mdx": "Structures",
+  "wild_roots.mdx": "Wild Roots"
+}

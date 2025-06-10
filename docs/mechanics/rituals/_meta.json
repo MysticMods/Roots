@@ -1,0 +1,29 @@
+{
+  "pyres.mdx": {
+    "name": "Pyres",
+    "icon": "Flame"
+  },
+  "properties.mdx": {
+    "name": "Ritual Properties",
+    "icon": "Wrench"
+  },
+	"animal-harvest.mdx": { "name": "Animal Harvest", "icon": "Drumstick" },
+	"blooming.mdx": { "name": "Blooming", "icon": "Flower" },
+	"crafting.mdx": { "name": "Crafting", "icon": "Grid3x3" },
+	"fire-storm.mdx": { "name": "Fire Storm", "icon": "Flame" },
+	"frost-lands.mdx": { "name": "Frost Lands", "icon": "Snowflake" },
+	"gathering.mdx": { "name": "Gathering", "icon": "Boxes" },
+	"germination.mdx": { "name": "Germination", "icon": "Sprout" },
+	"grove-supplication.mdx": { "name": "Grove Supplication", "icon": "TreePine" },
+	"healing-aura.mdx": { "name": "Healing Aura", "icon": "Heart" },
+	"heavy-storms.mdx": { "name": "Heavy Storms", "icon": "CloudLightning" },
+	"overgrowth.mdx": { "name": "Overgrowth", "icon": "Leaf" },
+	"protection.mdx": { "name": "Protection", "icon": "SunMoon" },
+	"purity.mdx": { "name": "Purity", "icon": "CircleDashed" },
+	"spreading-forest.mdx": { "name": "Spreading Forest", "icon": "Trees" },
+	"summon-creatures.mdx": { "name": "Summon Creatures", "icon": "UserPlus" },
+	"transmutation.mdx": { "name": "Transmutation", "icon": "Rotate3D" },
+	"warding.mdx": { "name": "Warding", "icon": "Shield" },
+	"wildroot-growth.mdx": { "name": "Wildroot Growth", "icon": "Radical" },
+	"windwall.mdx": { "name": "Windwall", "icon": "BrickWall" }
+}

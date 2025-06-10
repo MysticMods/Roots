@@ -1,0 +1,11 @@
+{
+	"sprouts.mdx": {
+		"name": "Sprouts",
+		"icon": "Sprout"
+	},
+	"beetle.mdx": "Beetle",
+	"deer.mdx": "Deer",
+	"duck.mdx": "Duck",
+	"fennec.mdx": "Fennec",
+	"owl.mdx": "Owl"
+}

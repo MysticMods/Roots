@@ -1,0 +1,12 @@
+{
+  "crops": {
+    "name": "Crops",
+    "icon": "Sprout"
+  },
+  "bark.mdx": "Bark",
+  "elemental-soil.mdx": "Elemental Soil",
+  "grove-moss.mdx":"Grove Moss",
+  "runed-stone.mdx":"Runed Stone",
+  "wildroot.mdx":"Wildroot",
+  "wildwood.mdx":"Wildwood"
+}

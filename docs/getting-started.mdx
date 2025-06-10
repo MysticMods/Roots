@@ -1,107 +1,87 @@
 ## Getting Started
 
-To start, you will need to locate wild roots and hanging grove moss.
+To start, you will need to locate <Asset location="roots:wild_roots" width={24} style={{margin: '0px 2px 2px 2px'}}/> [Wild Roots](resources/crops/wildroot) and [Hanging Grove Moss]().
 
-<Asset location="roots:wild_roots" title="Wild roots can be found growing under trees" width={512} />
+<Asset location="roots:wild_roots_screen" title="Wild Roots can be found growing under trees" width={512} />
 
-Wild roots can be found growing under trees. Breaking them will drop wild roots.
+Wild Roots can be found growing under trees. Breaking them will drop [<Asset location="roots:wildroot"/>Wildroot](resouces/crops/wildroot).
 
-<Asset location="roots:underground_wild_roots" title="Wild roots can also be found underground" width={512} />
+<Asset location="roots:underground_wild_roots_screen" title="Wild roots can also be found underground" width={512} />
 
-Wild roots can also be found growing underground.
+Wild Roots can also be found growing underground.
 
-<Asset location="roots:underwater_wild_roots" title="Wild roots growing underwater will also drop grove spores" width={512} />
+<Asset location="roots:underwater_wild_roots_screen" title="Wild roots growing underwater will also drop grove spores" width={512} />
 
-Wild roots that grow under water will have a slightly mossy texture. Breaking these will also drop grove spores.
+Wild Roots that grow under water will have a slightly mossy texture. Breaking these will also drop [<Asset location="roots:grove_spores"/>Grove Spores](resources/grove_spores).
 
-<Asset location="roots:hanging_grove_moss" title="Hanging grove moss can be found on trees" width={512} />
+<Asset location="roots:hanging_grove_moss_screen" title="Hanging grove moss can be found on trees" width={512} />
 
-Hanging grove moss can be found growing on trees.
+[Hanging Grove Moss]() can be found growing on trees.
 
 ## Renewing Resources
 
-Wildroot can be planted as a crop in any tilled soil.
+[<Asset location="roots:wildroot"/>Wildroot](resources/crops/wildroot) can be planted as a crop in any tilled soil.
 
-The Overgrowth rituals causes creeping grove moss to spawn which, when broken, will yield grove moss.
+The [<Asset location="roots:ritual_overgrowth"/>Overgrowth](mechanics/rituals/overgrowth) ritual causes <Asset location="roots:creeping_grove_moss"/> [Creeping Grove Moss](resources/grove_moss) to spawn which, when broken, will yield <Asset location="roots:grove_moss"/>[Grove Moss](resources/grove_moss).
 
-You can rarely find wildroot and grove spores when breaking grass and ferns.
+You can rarely find Wildroot and [<Asset location="roots:grove_spores"/>Grove Spores](resources/grove_spores) when breaking grass and ferns.
 
-Grove spores can be used by right-clicking on a block that has a water source adjacent to it. Doing so will grow creeping grove moss.
+Grove Spores can be used by right-clicking on a block that has a water source adjacent to it. Doing so will grow Creeping Grove Moss.
 
-Creeping grove moss grown from grove spores has a chance to drop further grove spores. Creeping grove moss grown via the Overgrowth ritual will never drop grove spores.
+Creeping Grove Moss grown from grove spores has a chance to drop further Grove Spores. Creeping Grove Moss grown via the Overgrowth ritual will never drop Grove Spores.
 
-See the Overgrowth ritual entry for more details on automating grove moss production.
+See the [<Asset location="roots:ritual_overgrowth"/>Overgrowth](mechanics/rituals/overgrowth) ritual entry for more details on automating grove moss production.
 
 ## Wooden Shears
 
-Crafting wooden shears allows you to access wool and leaf blocks, etc, sooner than you otherwise would.
-
-## Copper Armor and Tools
-
-While copper is more plentiful, the default recipes require copper blocks instead of copper bars.
-
-The defensive benefits and offensive benefits and tool tiers are roughly equivalent to iron.
-
-## Charm of Alertness
-
-This charm will play a warning sound from the location of a mob the moment that it targets you. It will also cause the edges of the screen to turn red before fading. It will also cause the mob to glow for a few seconds afterwards.
-
-The sound and visual are configurable.
-
-The charm can be equipped into the curios charm slot.
-
-Note: zombies regularly aggro outside of hearing range, meaning that the warning sound cannot be heard.
+Crafting <Asset location="roots:wooden_shears"/>[Wooden Shears](tools/wooden_shears) allows you to access wool and leaf blocks, etc, sooner than you otherwise would.
 
 ## Foraging
 
-Using a knife to break leaves and grasses (and other blocks contained within the `roots:foragable/single` and `roots:foragable/double`) has an increased chance to drop wild roots, grove moss and grove spores. This attribute is called "foraging".
+Using a <Asset location="roots:knives"/>[Knife](tools/knives) to break leaves and grasses (and other blocks contained within the `roots:foragable/single` and `roots:foragable/double`) has an increased chance to drop wild roots, grove moss and grove spores. This attribute is called "foraging".
 
 The following tiers have the following levels of foraging. Each level of foraging increases the chances of finding wild roots, grove moss and grove spores.
 
-- Wood: level 1
-- Stone: level 2
-- Iron or copper: level 3
-- Gold or silver: level 4
-- Diamond: level 5
-- Netherite: level 6
+- <Asset location="roots:wooden_knife"/>Wood: level 1
+- <Asset location="roots:stone_knife"/>Stone: level 2
+- <Asset location="roots:iron_knife"/>Iron or <Asset location="roots:copper_knife"/>Copper: level 3
+- <Asset location="roots:golden_knife"/>Gold or <Asset location="roots:silver_knife"/>Silver: level 4
+- <Asset location="roots:diamond_knife"/>Diamond: level 5
+- <Asset location="roots:netherite_knife"/>Netherite: level 6
 
 Foraging can also be increased with the Foraging enchantment, but that is not yet implemented.
 
 ## Bark and Runed Logs
 
-Knives are also used to strip bark from logs. If you hold wild root or grove moss in your off-hand, you can instead convert logs into runed logs.
+Knives are also used to strip <Asset location="roots:barks"/>[Bark](resources/bark) from logs. If you hold wild root or grove moss in your off-hand, you can instead convert logs into <Asset location="roots:runed_logs"/>[Runed Logs]().
 
 ## Runestone
 
-The next major step is creating a source of runestone.
+The next major step is creating a source of <Asset location="roots:runestone"/> [Runestone](resources/runestone).
 
 The default recipe allows you to convert 8 blocks of any type of stone into 3 runestone.
 
-Runestone can then be used to craft a pyre (see the rituals section), a mortar & pestle, a primal grove stone and a grove crafter.
-
-## Pyre
-
-See the rituals section for detailed information on the use of a pyre.
-
-Pyre crafting is the default source for all of the elemental herbs and a number of others.
+Runestone can then be used to craft a <Asset location="roots:pyre"/> [Pyre](mechanics/rituals/pyres) (see the rituals section), a <Asset location="roots:mortar"/>[Mortar](mechanics/mortar-and-pestle), a <Asset location="roots:primal_grove_stone"/>[Primal Grove Stone]() and a <Asset location="roots:grove_crafter"/> [Grove Crafter]().
 
 ## Grove Stone
 
 Use Just Enough Items to see the recipe for a grove stone.
 
-Once placed, you will need to use the Grove Suppliation ritual to activate the grove stone.
+Once placed, you will need to use the <Asset location="roots:ritual_grove_supplication"/>[Grove Supplication]() ritual to activate the Grove Stone.
 
 ## Grove Crafter
 
-A grove crafter requires a nearby, activated grove stone. If it does not have one, the grove display will be dull and it will display an icon above it.
+A grove crafter requires a nearby, activated Grove Stone. If it does not have one, the grove display will be dull and it will display an icon above it.
 
-Once you have an activated grove stone, you can use a grove crafter to easily create runestone.
+Once you have an Activated Grove Stone, you can use a Grove Crafter to easily create Runestone.
 
-Grove crafting recipes require you to place the relevant ingredients on pedestals.
+Grove crafting recipes require you to place the relevant ingredients on Pedestals.
 
-Grove pedestals can contain one item and can be filled by a hopper or other similar methods. Wildwood pedestals can contain a full stack of an item.
+<Asset location="roots:grove_pedestal"/>[Grove Pedestals]() can contain one item and can be filled by a hopper or other similar methods.
 
-Empty and display pedestals do not contribute to a recipe.
+<Asset location="roots:wildwood_pedestal"/>[Wildwood Pedestals]() can contain a full stack of an item.
+
+Empty and <Asset location="roots:display_pedestal"/>[Display Pedestals]() do not contribute to a recipe.
 
 Once a valid recipe is found, the resulting item will display above the grove crafter.
 
@@ -121,15 +101,9 @@ Items can be removed by right-clicking the mortar with an empty hand.
 
 Once the mortar is full with a valid recipe, simply right click the mortar with a pestle until it finishes crafting. The number of times required to craft with the mortar varies with recipes.
 
-[Note: Just Enough Items currently does not display the number of times required to activate a recipe.]
-
-## Spells & staff
-
-Please see the spells section.
-
-## Living Tools
-
-Living tools are currently untested.
+<Callout variant='warning'>
+Just Enough Items currently does not display the number of times required to activate a recipe
+</Callout>
 
 ## Runic Shears
 
@@ -143,38 +117,6 @@ Runic shears can also be used on entities. By default, this is the acquisition s
 
 Please see Just Enough Items for these entity interactions.
 
-## Entities
-
-Sprouts can be tempted and bred with aubergine.
-
-After creating a baby sprout, both parents will offer a gift and will show a gift box above their heads.
-
-Gifts can be acquired from sprouts by right-clicking them with an empty hand.
-
-Gifts are configurable through NeoForge data maps, and, by default, consist of difficult-to-acquire seeds and natural objects.
-
-## Structures
-
-In addition to wild roots and hanging grove moss, there are a number of structures that can spawn.
-
-These may be familiar to players of older versions of Mystical World.
-
-- Barrows spawn in plains biomes and have a dead bush on their roof, making them easier to spot.
-- Huts and ruined huts also spawn in plains biomes, with randomized basements.
-- Standing stones made of runestone and mossy runestone spawn in a variety of biomes with a flower in the middle. Buried beneath the flower is a chest with seeds, plants, etc.
-
-## Elemental Soil
-
-Elemental crops grow best on their matching elemental soil.
-
-On normal farmland, dewgonia must be waterlogged to grow.
-
-When harvested on normal farmland, elemental crops will always drop one with a chance to drop a second.
-
-On default ("plain") elemental soil or non-matching elemental soil, elemental crops will always drop two with a chance to drop a third.
-
-On matching elemental soil, elemental crops will always drop three with a chance to drop a fourth.
-
-Additional elemental crops will drop based on fortune.
-
-Other mechanics of elemental soil beyond matching types are not yet implemented.
+<Callout variant='warning'>
+EMI currently does not display these recipes correctly, please use JEI
+</Callout>

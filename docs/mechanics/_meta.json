@@ -1,0 +1,18 @@
+{
+	"spells": {
+		"name": "Staff & Spells",
+		"icon": "Sparkles"
+	},
+	"rituals": {
+		"name": "Rituals",
+		"icon": "FlameKindling"
+	},
+	"groves": {
+		"name": "Groves",
+		"icon": "Trees"
+	},
+	"mortar_and_pestle.mdx": {
+		"name": "Mortar & Pestle",
+		"icon": "CircleGauge"
+	}
+}
