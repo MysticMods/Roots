@@ -6,8 +6,10 @@ import com.mojang.datafixers.util.Either;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.client.DeltaTracker;
@@ -62,6 +64,7 @@ public class HudOverlay {
     }
   }
 
+  // TODO: Handle conditions
   public static void renderPyre(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {
     Level level = mc.level;
     if (level.getBlockEntity(trace.getBlockPos()) instanceof PyreBlockEntity pyre) {
@@ -127,8 +130,39 @@ public class HudOverlay {
     }
   }
 
+  // TODO: In theory, pyre and grove crafter recipes can just unlock spells
   public static void renderGroveCrafter(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {
+    Level level = mc.level;
 
+    // TODO: Handle invalid recipes
+    if (level.getBlockEntity(trace.getBlockPos()) instanceof GroveCrafterBlockEntity groveCrafter) {
+      int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
+      int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
+
+      y += 10;
+      x += 30;
+
+      GroveRecipe cachedRecipe = groveCrafter.getRecipe() == null ? null : groveCrafter.getRecipe().value();
+
+      ItemStack output = ItemStack.EMPTY;
+      Component comp1 = Component.empty();
+      Component comp2 = Component.empty();
+
+      if (cachedRecipe != null && !groveCrafter.isCrafting()) {
+        output = cachedRecipe.getResultItem(mc.level.registryAccess());
+        comp1 = Component.translatable("roots.hud.grove_crafter");
+        comp2 = output.getHoverName();
+      }
+
+      graphics.renderItem(output, x, y, 0);
+      graphics.renderItemDecorations(mc.font, output, x, y);
+      RenderSystem.disableDepthTest();
+      RenderSystem.disableBlend();
+      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
+      RenderSystem.enableDepthTest();
+      RenderSystem.enableBlend();
+    }
   }
 
   public static void renderGroveStone(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {

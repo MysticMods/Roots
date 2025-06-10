@@ -698,6 +698,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.hud.mortar.remove_pestle", "Right-Click to remove pestle");
     add("roots.hud.mortar.store_pestle", "Right-Click to store pestle");
 
+    add("roots.hud.grove_crafter", "Right-Click to start crafting");
+
     add("roots.hud.pyre.auto1", "will start automatically");
 
     RootsRegistries.GROVES.entrySet().forEach(o -> {
