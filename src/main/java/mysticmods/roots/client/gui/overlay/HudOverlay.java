@@ -23,6 +23,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
+import java.util.List;
+
 public class HudOverlay {
   public static void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
     PoseStack stack = guiGraphics.pose();
@@ -64,12 +66,10 @@ public class HudOverlay {
     Level level = mc.level;
     if (level.getBlockEntity(trace.getBlockPos()) instanceof PyreBlockEntity pyre) {
       int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
-      int y = (graphics.guiHeight() / 4);// + (graphics.guiHeight() / 4);
+      int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
 
-      y = y * 2;
-
-      y = y + 20;
-      x = x + 20;
+      y += 10;
+      x += 30;
 
       Ritual activeRitual = pyre.getCurrentRitual();
       PyreRecipe cachedRecipe = pyre.getCachedRecipe() == null ? null : pyre.getCachedRecipe().value();
@@ -130,15 +130,40 @@ public class HudOverlay {
     Player player = mc.player;
     if (level.getBlockEntity(trace.getBlockPos()) instanceof MortarBlockEntity mortar) {
       int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
-      int y = (graphics.guiHeight() / 4);// + (graphics.guiHeight() / 4);
+      int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
 
-      y = y * 2;
+/*      y = y * 2;
 
       y = y + 20;
-      x = x + 20;
+      x = x + 20;*/
 
       MortarRecipe cachedRecipe = mortar.getCachedRecipe() == null ? null : mortar.getCachedRecipe().value();
       MortarRecipe lastRecipe = mortar.getLastRecipe() == null ? null : mortar.getLastRecipe().value();
+
+      boolean empty = mortar.getInventory().isEmpty();
+      boolean pestle = player.getMainHandItem().is(RootsTags.Items.MORTAR_ACTIVATION) || player.getOffhandItem()
+          .is(RootsTags.Items.MORTAR_ACTIVATION);
+      boolean emptyHand = player.getMainHandItem().isEmpty();
+      boolean pestleStored = mortar.getInventory().getStackInSlot(0).is(RootsTags.Items.MORTAR_ACTIVATION);
+
+      if (!empty) {
+        float angle = -90;
+        int radius = 24;
+        List<ItemStack> nonEmpty = mortar.getNonEmptyItems();
+        float anglePer = 360f / nonEmpty.size();
+
+        for (ItemStack stack : nonEmpty) {
+          double xPos = x + Math.cos(angle * Math.PI / 180) * radius - 8;
+          double yPos = y + Math.sin(angle * Math.PI / 180) * radius - 8;
+          graphics.renderItem(stack, (int) xPos, (int) yPos, 0);
+          graphics.renderItemDecorations(mc.font, stack, (int) xPos, (int) yPos);
+          angle += anglePer;
+        }
+      }
+
+      y += 10;
+      x += 30;
+
 
       ItemStack output = ItemStack.EMPTY;
       Spell spell = null;
@@ -146,12 +171,6 @@ public class HudOverlay {
       Component comp2 = Component.empty();
       Component comp3 = Component.empty();
       Component comp4 = Component.empty();
-
-      boolean empty = mortar.getInventory().isEmpty();
-      boolean pestle = player.getMainHandItem().is(RootsTags.Items.MORTAR_ACTIVATION) || player.getOffhandItem()
-          .is(RootsTags.Items.MORTAR_ACTIVATION);
-      boolean emptyHand = player.getMainHandItem().isEmpty();
-      boolean pestleStored = mortar.getInventory().getStackInSlot(0).is(RootsTags.Items.MORTAR_ACTIVATION);
 
       if (cachedRecipe != null) {
         Either<ItemStack, Spell> outputItemOrSpell = cachedRecipe.getOutputItemOrSpell(mc.level.registryAccess());
