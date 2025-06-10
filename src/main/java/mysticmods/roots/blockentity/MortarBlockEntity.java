@@ -186,7 +186,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     super.loadAdditional(pTag, provider);
     // TODO: reference this
     if (pTag.contains("MortarUses", Tag.TAG_INT)) {
-      this.uses = pTag.getInt("uses");
+      this.uses = pTag.getInt("MortarUses");
     }
     if (pTag.contains("MortarPreviousItems", Tag.TAG_LIST)) {
       previousRecipeItems.clear();

@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-06T13:17:24.4376455	Roots Block Tags
+// 1.21.1	2025-06-10T12:34:23.3572363	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -99,6 +99,7 @@ d17a97ae6e613b481dec932c38e92f9776fcf84c data/roots/tags/block/functional_pyres.
 277febcb81e6cdedb2c430d51bcd1850d597779d data/roots/tags/block/granite_ore_replaceables.json
 4fd76122f15f8ad5b0091e94cc3027e509642ac2 data/roots/tags/block/grove/elemental/crops.json
 e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/block/grove/sprout/crops.json
+eddcaa86bbcac9fa0953dab3bd03a9f687ecbed6 data/roots/tags/block/grove_crafter_hud_layer.json
 d66fd5801ed493567186dbdb2f7d2d91f4497aee data/roots/tags/block/grove_generators/elemental.json
 c05e998c718feb7c79e577ca9f09edc7225b3d22 data/roots/tags/block/grove_generators/fairy.json
 d5140d1e8bd6a91f904fd01a209a5dad3cc34f23 data/roots/tags/block/grove_generators/fairy/paths.json
@@ -115,6 +116,7 @@ a10f4893aa793d9a58932b14d983daca8e055665 data/roots/tags/block/grove_stones/fung
 ecd2f0dde1c61318a3c87219ac7830a7061e71ac data/roots/tags/block/grove_stones/sprouting.json
 bbbdabc47adfef24d589a4860b387406ffacd3bd data/roots/tags/block/grove_stones/twilight.json
 ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/block/grove_stones/wild.json
+03a2bc97fb3a1445c30ac998b9f72dd93a57bbe6 data/roots/tags/block/grove_stone_hud_layer.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/force.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/reduce.json
@@ -132,6 +134,7 @@ e16c92e31940c0c62767ba46b55ac10f3e133b58 data/roots/tags/block/logs/runed/mangro
 cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/block/logs/runed/wildwood.json
 1b76b7887fbceab43d0a517275981c378378e349 data/roots/tags/block/logs/wildwood.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/block/mortars.json
+da8ee321b0342b26c029606e8a0ae4c9e8a79e6c data/roots/tags/block/mortar_hud_layer.json
 69baf8d04546f32d5ca8b6f83f6a870cb03b5756 data/roots/tags/block/nyi.json
 c55106d54db2ac749ccc95747891b03f570d8fc3 data/roots/tags/block/pedestals.json
 45c768b93d7e13a13dd2a41a896005c7e3960523 data/roots/tags/block/pedestals/display.json

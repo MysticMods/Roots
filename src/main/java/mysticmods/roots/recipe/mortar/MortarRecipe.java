@@ -1,5 +1,6 @@
 package mysticmods.roots.recipe.mortar;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -8,13 +9,16 @@ import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.reference.Identifiers;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -40,6 +44,14 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   public int getTimes() {
     return times;
+  }
+
+  public Either<ItemStack, Spell> getOutputItemOrSpell(HolderLookup.Provider provider) {
+    if (!getUnlocks().isEmpty() && getUnlocks().getFirst() instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
+      return Either.right(value.value());
+    } else {
+      return Either.left(getResultItem(provider));
+    }
   }
 
   @Override

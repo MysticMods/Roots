@@ -686,6 +686,18 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.hud.pyre.restart1", "Sneak-Right-Click with");
     add("roots.hud.pyre.restart2", "empty hand to repeat");
 
+    add("roots.hud.mortar.repeat1", "Sneak-Right-Click with");
+    add("roots.hud.mortar.repeat2", "empty hand to refill");
+
+    add("roots.hud.mortar.crafting1", "Grind with pestle");
+    add("roots.hud.mortar.crafting2", "%s time to craft");
+    add("roots.hud.mortar.crafting3", "%s times to craft");
+
+    add("roots.hud.item_count", "%s (%s)");
+
+    add("roots.hud.mortar.remove_pestle", "Right-Click to remove pestle");
+    add("roots.hud.mortar.store_pestle", "Right-Click to store pestle");
+
     add("roots.hud.pyre.auto1", "will start automatically");
 
     RootsRegistries.GROVES.entrySet().forEach(o -> {
