@@ -68,6 +68,24 @@ public class HudOverlay {
       int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
       int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
 
+
+      boolean empty = pyre.getInventory().isEmpty();
+
+      if (!empty) {
+        float angle = -90;
+        int radius = 24;
+        List<ItemStack> nonEmpty = pyre.getNonEmptyItems();
+        float anglePer = 360f / nonEmpty.size();
+
+        for (ItemStack stack : nonEmpty) {
+          double xPos = x + Math.cos(angle * Math.PI / 180) * radius - 8;
+          double yPos = y + Math.sin(angle * Math.PI / 180) * radius - 8;
+          graphics.renderItem(stack, (int) xPos, (int) yPos, 0);
+          graphics.renderItemDecorations(mc.font, stack, (int) xPos, (int) yPos);
+          angle += anglePer;
+        }
+      }
+
       y += 10;
       x += 30;
 
