@@ -3,7 +3,6 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
 import net.minecraft.client.Minecraft;
@@ -19,8 +18,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Random;
 
 public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
   public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
@@ -49,7 +46,8 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
         pRed = 0f;
         pGreen = 1f;
         pBlue = 0f;
-      } else */if (inSlot.isEmpty()) {
+      } else */
+      if (inSlot.isEmpty()) {
         pRed = 1f;
         pBlue = 1f;
         pGreen = 0f;
@@ -120,6 +118,11 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
           }
         }
 
+        int prog = 0;
+
+        if (pBlockEntity.isAnimating()) {
+          prog = Math.clamp(pBlockEntity.getAnimateTick() / 2, 0, 9);
+        }
         Minecraft.getInstance().getItemRenderer()
             .render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
         pPoseStack.popPose();

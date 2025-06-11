@@ -232,53 +232,6 @@ public class RenderUtil {
     if (entity == EntityType.ELDER_GUARDIAN) stack.scale(0.6F, 0.6F, 0.6F);
   }
 
-/*  public static void renderItemEntity(GuiGraphics graphics, ItemStack stack, @Nullable Level level, float bobOffset) {
-    PoseStack posestack = graphics.pose();
-    posestack.pushPose();
-    posestack.translate(16.0D, 32.0D, 50.0D);
-    posestack.scale(50.0F, 50.0F, -50.0F);
-    Quaternionf quaternion = Axis.ZP.rotationDegrees(180.0F);
-    Quaternionf quaternion1 = Axis.XP.rotationDegrees(20.0F);
-    quaternion.mul(quaternion1);
-    posestack.mulPose(quaternion);
-    posestack.mulPose(Axis.XN.rotationDegrees(35.0F));
-    posestack.mulPose(Axis.YN.rotationDegrees(145.0F));
-    Lighting.setupForEntityInInventory();
-    quaternion1.conjugate();
-    ItemEntity item = (ItemEntity) fetchEntity(EntityType.ITEM, level);
-    Objects.requireNonNull(item).setItem(stack);
-    RenderSystem.runAsFancy(() -> render(item, Minecraft.getInstance().getTimer()
-        .getGameTimeDeltaTicks(), posestack, graphics.bufferSource(), bobOffset));
-    graphics.flush();
-    posestack.popPose();
-    Lighting.setupFor3DItems();
-  }
-
-  //[VanillaCopy] of ItemEntityRenderer.render. I have to add my own bob offset and ticker since using the vanilla method has issues
-  private static void render(ItemEntity entity, float partialTicks, PoseStack stack, MultiBufferSource buffer, float bobOffset) {
-    stack.pushPose();
-    ItemStack itemstack = entity.getItem();
-    BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer()
-        .getModel(itemstack, entity.level(), null, entity.getId());
-    float f1 = Mth.sin((Objects.requireNonNull(Minecraft.getInstance().level)
-        .getGameTime() + partialTicks) / 10.0F + bobOffset) * 0.1F + 0.1F;
-    float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
-    stack.translate(0.0D, f1 + 0.25F * f2, 0.0D);
-    float f3 = getSpin(partialTicks, bobOffset);
-    stack.mulPose(Axis.YP.rotation(f3));
-
-    stack.pushPose();
-    renderItem(itemstack, ItemDisplayContext.GROUND, false, stack, buffer, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel, Minecraft.getInstance().getItemRenderer());
-    stack.popPose();
-
-
-    stack.popPose();
-  }*/
-
-/*  private static float getSpin(float partialTicks, float bobOffset) {
-    return (Objects.requireNonNull(Minecraft.getInstance().level).getGameTime() + partialTicks) / 20.0F + bobOffset;
-  }*/
-
   public static List<Component> getMobTooltip(EntityType<?> type) {
     List<Component> components = new ArrayList<>();
     components.add(type.getDescription());
@@ -287,71 +240,6 @@ public class RenderUtil {
           .withStyle(ChatFormatting.DARK_GRAY));
     }
     return components;
-  }
-
-  // Drop-in replacement for ItemRenderer.render
-  public static void renderItemCrumble(ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel bakedModel, ItemRenderer renderer, int progress) {
-    if (!itemStack.isEmpty()) {
-      poseStack.pushPose();
-
-      boolean flag = displayContext == ItemDisplayContext.GUI || displayContext == ItemDisplayContext.GROUND || displayContext == ItemDisplayContext.FIXED;
-      if (flag) {
-        if (itemStack.is(Items.TRIDENT)) {
-          bakedModel = ((AccessorMixinItemRenderer) renderer).RootsGetItemModelShaper().getModelManager()
-              .getModel(((AccessorMixinItemRenderer) renderer).RootsGetTridentModel());
-        } else if (itemStack.is(Items.SPYGLASS)) {
-          bakedModel = ((AccessorMixinItemRenderer) renderer).RootsGetItemModelShaper().getModelManager()
-              .getModel(((AccessorMixinItemRenderer) renderer).RootsGetSpyglassModel());
-        }
-      }
-
-      bakedModel = ClientHooks.handleCameraTransforms(poseStack, bakedModel, displayContext, leftHand);
-      poseStack.translate(-0.5F, -0.5F, -0.5F);
-      if (!bakedModel.isCustomRenderer() && (!itemStack.is(Items.TRIDENT) || flag)) {
-        boolean flag1;
-        if (displayContext != ItemDisplayContext.GUI && !displayContext.firstPerson() && itemStack.getItem() instanceof BlockItem blockitem) {
-          Block block = blockitem.getBlock();
-          flag1 = !(block instanceof HalfTransparentBlock) && !(block instanceof StainedGlassPaneBlock);
-        } else {
-          flag1 = true;
-        }
-
-        for (var model : bakedModel.getRenderPasses(itemStack, flag1)) {
-          for (var rendertype : model.getRenderTypes(itemStack, flag1)) {
-            VertexConsumer vertexconsumer;
-            if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
-              PoseStack.Pose pose = poseStack.last().copy();
-              if (displayContext == ItemDisplayContext.GUI) {
-                MatrixUtil.mulComponentWise(pose.pose(), 0.5F);
-              } else if (displayContext.firstPerson()) {
-                MatrixUtil.mulComponentWise(pose.pose(), 0.75F);
-              }
-
-              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource, rendertype, pose);
-            } else if (flag1) {
-              vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource, rendertype, true, itemStack.hasFoil());
-            } else {
-              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource, rendertype, true, itemStack.hasFoil());
-            }
-
-            VertexConsumer crumble = new SheetedDecalTextureGenerator(
-                Minecraft.getInstance().renderBuffers().crumblingBufferSource()
-                    .getBuffer(RootsRenderTypes.getCrumbleType(progress)), poseStack.last(), 1.0F
-            );
-
-            vertexconsumer = VertexMultiConsumer.create(vertexconsumer, crumble);
-
-            RenderSystem.applyModelViewMatrix();
-            renderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
-          }
-        }
-      } else {
-        IClientItemExtensions.of(itemStack).getCustomRenderer()
-            .renderByItem(itemStack, displayContext, poseStack, bufferSource, combinedLight, combinedOverlay);
-      }
-
-      poseStack.popPose();
-    }
   }
 
   private static boolean hasAnimatedTexture(ItemStack stack) {

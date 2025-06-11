@@ -99,31 +99,4 @@ public class RootsRenderTypes {
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .createCompositeState(false));
-
-  public static final Function<ResourceLocation, RenderType> CRUMBLE_GLINT = Util.memoize((texture) ->
-      RenderType.create(
-          "glint_translucent",
-          DefaultVertexFormat.POSITION_TEX,
-          VertexFormat.Mode.QUADS,
-          1536,
-          RenderType.CompositeState.builder()
-              .setShaderState(RenderType.RENDERTYPE_GLINT_TRANSLUCENT_SHADER)
-              .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
-              .setWriteMaskState(COLOR_WRITE)
-              .setCullState(RenderType.NO_CULL)
-              .setDepthTestState(RenderType.EQUAL_DEPTH_TEST)
-              .setTransparencyState(RenderType.GLINT_TRANSPARENCY)
-              .setTexturingState(RenderType.GLINT_TEXTURING)
-              .setOutputState(RenderType.ITEM_ENTITY_TARGET)
-              .createCompositeState(false)
-      ));
-
-  private static List<RenderType> CRUMBLE_TYPES = null;
-
-  public static RenderType getCrumbleType(int index) {
-    if (CRUMBLE_TYPES == null) {
-      CRUMBLE_TYPES = ModelBakery.BREAKING_LOCATIONS.stream().map(CRUMBLE_GLINT).collect(Collectors.toList());
-    }
-    return CRUMBLE_TYPES.get(index);
-  }
 }
