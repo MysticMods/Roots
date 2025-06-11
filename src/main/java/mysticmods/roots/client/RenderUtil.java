@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
 import com.mojang.math.MatrixUtil;
 import mysticmods.roots.api.RootsAPI;
@@ -326,21 +327,22 @@ public class RenderUtil {
                 MatrixUtil.mulComponentWise(pose.pose(), 0.75F);
               }
 
-/*              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource, rendertype, pose);*/
-/*            } else if (flag1) {
+              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource, rendertype, pose);
+            } else if (flag1) {
               vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource, rendertype, true, itemStack.hasFoil());
             } else {
-              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource, rendertype, true, itemStack.hasFoil());*/
+              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource, rendertype, true, itemStack.hasFoil());
             }
 
             VertexConsumer crumble = new SheetedDecalTextureGenerator(
-                Minecraft.getInstance().renderBuffers().crumblingBufferSource().getBuffer(ModelBakery.DESTROY_TYPES.get(progress)), poseStack.last(), 1.0F
+                Minecraft.getInstance().renderBuffers().crumblingBufferSource()
+                    .getBuffer(RootsRenderTypes.getCrumbleType(progress)), poseStack.last(), 1.0F
             );
 
-            //vertexconsumer = VertexMultiConsumer.create(vertexconsumer, crumble);
+            vertexconsumer = VertexMultiConsumer.create(vertexconsumer, crumble);
 
             RenderSystem.applyModelViewMatrix();
-            renderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, crumble);
+            renderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
           }
         }
       } else {

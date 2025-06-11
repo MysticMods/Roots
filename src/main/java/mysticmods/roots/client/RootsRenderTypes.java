@@ -2,16 +2,17 @@ package mysticmods.roots.client;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.Util;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiFunction;
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE;
 
@@ -99,48 +100,30 @@ public class RootsRenderTypes {
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .createCompositeState(false));
 
-  public static final BiFunction<ResourceLocation, ResourceLocation, RenderType> SMART_CRUMBLING = memoize(
-      (crumblingTexture, itemTexture) -> {
-        RenderStateShard.MultiTextureStateShard renderstateshard$texturestateshard =
-            RenderStateShard.MultiTextureStateShard.builder()
-                .add(crumblingTexture, false, false)
-                .add(itemTexture, false, false)
-                .build();
-        return RenderType.create(
-            "crumbling",
-            DefaultVertexFormat.BLOCK,
-            VertexFormat.Mode.QUADS,
-            1536,
-            false,
-            true,
-            RenderType.CompositeState.builder()
-                .setShaderState(RenderType.RENDERTYPE_CRUMBLING_SHADER)
-                .setTextureState(renderstateshard$texturestateshard)
-                .setTransparencyState(RenderType.CRUMBLING_TRANSPARENCY)
-                .setWriteMaskState(COLOR_WRITE)
-                .setLayeringState(RenderType.POLYGON_OFFSET_LAYERING)
-                .createCompositeState(false)
-        );
-      }
-  );
+  public static final Function<ResourceLocation, RenderType> CRUMBLE_GLINT = Util.memoize((texture) ->
+      RenderType.create(
+          "glint_translucent",
+          DefaultVertexFormat.POSITION_TEX,
+          VertexFormat.Mode.QUADS,
+          1536,
+          RenderType.CompositeState.builder()
+              .setShaderState(RenderType.RENDERTYPE_GLINT_TRANSLUCENT_SHADER)
+              .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
+              .setWriteMaskState(COLOR_WRITE)
+              .setCullState(RenderType.NO_CULL)
+              .setDepthTestState(RenderType.EQUAL_DEPTH_TEST)
+              .setTransparencyState(RenderType.GLINT_TRANSPARENCY)
+              .setTexturingState(RenderType.GLINT_TEXTURING)
+              .setOutputState(RenderType.ITEM_ENTITY_TARGET)
+              .createCompositeState(false)
+      ));
 
-  private record ResourcePair(ResourceLocation resource1, ResourceLocation resource2) {
+  private static List<RenderType> CRUMBLE_TYPES = null;
 
-  }
-
-  private static BiFunction<ResourceLocation, ResourceLocation, RenderType> memoize(final BiFunction<ResourceLocation, ResourceLocation, RenderType> memoFunction) {
-    return new BiFunction<ResourceLocation, ResourceLocation, RenderType>() {
-      private final Map<ResourcePair, RenderType> cache = new ConcurrentHashMap<>();
-
-      @Override
-      public RenderType apply(ResourceLocation resource1, ResourceLocation resource2) {
-        return this.cache.computeIfAbsent(new ResourcePair(resource1, resource2), (o -> memoFunction.apply(o.resource1(), o.resource2())));
-      }
-
-      @Override
-      public String toString() {
-        return "memoize/1[function=" + memoFunction + ", size=" + this.cache.size() + "]";
-      }
-    };
+  public static RenderType getCrumbleType(int index) {
+    if (CRUMBLE_TYPES == null) {
+      CRUMBLE_TYPES = ModelBakery.BREAKING_LOCATIONS.stream().map(CRUMBLE_GLINT).collect(Collectors.toList());
+    }
+    return CRUMBLE_TYPES.get(index);
   }
 }
