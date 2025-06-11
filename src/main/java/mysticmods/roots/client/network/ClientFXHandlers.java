@@ -863,7 +863,7 @@ public class ClientFXHandlers {
       BlockPos pos = positions.get(i).position();
       ItemStack item = positions.get(i).item();
 
-      Vec3 spawnPos = Vec3.atBottomCenterOf(pos).add(0, 1.15, 0);
+      Vec3 spawnPos = Vec3.atBottomCenterOf(pos).add(0, 1.05, 0);
 
       int total = 7 + random.nextInt(8);
 

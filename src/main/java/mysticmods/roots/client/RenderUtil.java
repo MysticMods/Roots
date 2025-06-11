@@ -241,8 +241,4 @@ public class RenderUtil {
     }
     return components;
   }
-
-  private static boolean hasAnimatedTexture(ItemStack stack) {
-    return stack.is(ItemTags.COMPASSES) || stack.is(Items.CLOCK);
-  }
 }

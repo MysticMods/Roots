@@ -16,7 +16,7 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed, item);
     this.delay = delay;
     Vec3 start = new Vec3(x, y, z);
-    this.lifetime = 20 * 6;
+    this.lifetime = 20 * 6 + 10;
     this.quadSize = 0.025f + random.nextFloat() * 0.01f;
     this.origin = new Vec3(x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2);
     this.destination = new Vec3(xSpeed, ySpeed, zSpeed);

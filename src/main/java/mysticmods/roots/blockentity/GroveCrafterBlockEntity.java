@@ -46,7 +46,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity {
-  private static final int CRAFTING_TICKS = 20 * 6; // 6 seconds
+  private static final int CRAFTING_TICKS = 20 * 5 + 10; // 6 seconds
 
   private RecipeHolder<GroveRecipe> lastRecipe = null;
   private RecipeHolder<GroveRecipe> cachedRecipe = null;

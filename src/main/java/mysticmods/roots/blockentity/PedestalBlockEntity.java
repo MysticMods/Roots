@@ -28,7 +28,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity {
-  public static final int ANIMATION_TICKS = 20;
+  public static final int ANIMATION_TICKS = 10;
 
   protected ItemStackHandler inventory;
   protected int limit;
@@ -188,7 +188,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   public ItemStack getHeldItem() {
-    if (!this.animationItem.isEmpty()) {
+    if (this.animationTicks > 0 && !this.animationItem.isEmpty()) {
       return this.animationItem;
     }
     return inventory.getStackInSlot(0);
