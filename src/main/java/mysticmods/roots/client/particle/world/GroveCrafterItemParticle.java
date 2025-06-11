@@ -16,7 +16,7 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed, item);
     this.delay = delay;
     Vec3 start = new Vec3(x, y, z);
-    this.lifetime = 20 * 5;
+    this.lifetime = 20 * 6;
     this.quadSize = 0.025f + random.nextFloat() * 0.01f;
     this.origin = new Vec3(x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2);
     this.destination = new Vec3(xSpeed, ySpeed, zSpeed);
@@ -56,11 +56,12 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
       this.x += this.xd;
       this.y += this.yd;
       this.z += this.zd;
+    } else if (this.age <= 6 + this.delay) {
     } else if (this.age > (lifetime - 10)) {
 
     } else {
-      int bezierAge = this.age - 6;
-      int bezierDuration = this.lifetime - 16;
+      int bezierAge = this.age - 6 - delay;
+      int bezierDuration = this.lifetime - 16 - delay;
       float t = (float) bezierAge / bezierDuration;
       f = (float) Math.pow(t, 1.5);
       Vec3 pos = VecUtil.bezier(origin, control1, control2, destination, f);

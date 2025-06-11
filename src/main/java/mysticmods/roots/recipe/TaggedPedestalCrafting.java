@@ -59,6 +59,7 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
       return result;
     }
     for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag())) {
+      entry.getSecond().animate();
       result.add(entry.getSecond().popOne());
     }
     return result;

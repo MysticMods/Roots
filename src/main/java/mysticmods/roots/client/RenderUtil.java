@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mojang.math.MatrixUtil;
@@ -22,15 +23,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -289,9 +289,10 @@ public class RenderUtil {
   }
 
   // Drop-in replacement for ItemRenderer.render
-  public static void renderItem(ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel bakedModel, ItemRenderer renderer, int progress, int progressMax) {
+  public static void renderItemCrumble(ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel bakedModel, ItemRenderer renderer, int progress) {
     if (!itemStack.isEmpty()) {
       poseStack.pushPose();
+
       boolean flag = displayContext == ItemDisplayContext.GUI || displayContext == ItemDisplayContext.GROUND || displayContext == ItemDisplayContext.FIXED;
       if (flag) {
         if (itemStack.is(Items.TRIDENT)) {
@@ -325,14 +326,21 @@ public class RenderUtil {
                 MatrixUtil.mulComponentWise(pose.pose(), 0.75F);
               }
 
-              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource, rendertype, pose);
-            } else if (flag1) {
+/*              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource, rendertype, pose);*/
+/*            } else if (flag1) {
               vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource, rendertype, true, itemStack.hasFoil());
             } else {
-              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource, rendertype, true, itemStack.hasFoil());
+              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource, rendertype, true, itemStack.hasFoil());*/
             }
 
-            renderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+            VertexConsumer crumble = new SheetedDecalTextureGenerator(
+                Minecraft.getInstance().renderBuffers().crumblingBufferSource().getBuffer(ModelBakery.DESTROY_TYPES.get(progress)), poseStack.last(), 1.0F
+            );
+
+            //vertexconsumer = VertexMultiConsumer.create(vertexconsumer, crumble);
+
+            RenderSystem.applyModelViewMatrix();
+            renderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, crumble);
           }
         }
       } else {

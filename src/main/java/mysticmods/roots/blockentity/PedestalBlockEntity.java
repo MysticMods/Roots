@@ -2,6 +2,7 @@ package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
+import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.blockentity.inventory.LimitedItemStackHandler;
 import mysticmods.roots.blockentity.inventory.LockableLimitedItemStackHandler;
@@ -14,6 +15,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -25,9 +27,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
+public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity {
+  public static final int ANIMATION_TICKS = 20;
+
   protected ItemStackHandler inventory;
   protected int limit;
+
+  private ItemStack animationItem = ItemStack.EMPTY;
+  private int animationTicks = 0;
 
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int limit) {
     super(pType, pWorldPosition, pBlockState);
@@ -61,6 +68,23 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public int getLimit() {
     return limit;
+  }
+
+  public void animate () {
+    if (!level.isClientSide()) {
+      this.animationTicks = ANIMATION_TICKS;
+      this.animationItem = inventory.getStackInSlot(0).copy();
+      setChanged();
+      updateViaState();
+    }
+  }
+
+  public int getAnimateTick () {
+    return animationTicks;
+  }
+
+  public boolean isAnimating() {
+    return this.animationTicks > 0;
   }
 
   @Override
@@ -127,6 +151,10 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pProvider) {
     super.saveAdditional(pTag, pProvider);
+    if (!animationItem.isEmpty()) {
+      pTag.put("animationItem", animationItem.save(pProvider));
+    }
+    pTag.putInt("animationTicks", animationTicks);
     pTag.put("inventory", inventory.serializeNBT(pProvider));
     pTag.putInt("limit", limit);
   }
@@ -142,6 +170,12 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     } else {
       limit = 64;
     }
+    if (pTag.contains("animationItem", Tag.TAG_COMPOUND)) {
+      animationItem = ItemStack.parse(provider, pTag.getCompound("animationItem")).orElse(ItemStack.EMPTY);
+    } else {
+      animationItem = ItemStack.EMPTY;
+    }
+    this.animationTicks = pTag.getInt("animationTicks");
   }
 
   @Override
@@ -154,6 +188,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   public ItemStack getHeldItem() {
+    if (!this.animationItem.isEmpty()) {
+      return this.animationItem;
+    }
     return inventory.getStackInSlot(0);
   }
 
@@ -174,5 +211,18 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       }
     }
     return offset;
+  }
+
+  // TODO: Block ticker
+  @Override
+  public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
+    if (this.animationTicks > 0) {
+      this.animationTicks--;
+      if (this.animationTicks == 0) {
+        this.animationItem = ItemStack.EMPTY;
+      }
+      setChanged();
+      updateViaState();
+    }
   }
 }

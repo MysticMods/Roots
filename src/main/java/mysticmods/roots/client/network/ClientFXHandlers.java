@@ -870,7 +870,7 @@ public class ClientFXHandlers {
       for (int j = 0; j < total; j++) {
         Vec3 offset = spawnPos;
         Minecraft.getInstance().level.addParticle(
-            RootsParticleOptions.builder(ModParticles.ITEM).item(item).build(),
+            RootsParticleOptions.builder(ModParticles.ITEM).item(item).delay(20+j*2+random.nextInt(12)+random.nextInt(12)+random.nextInt(6)).build(),
             offset.x, offset.y, offset.z,
             dest.x, dest.y, dest.z
         );
