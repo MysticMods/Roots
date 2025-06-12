@@ -19,6 +19,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -236,27 +237,32 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (this.animationTicks > 0) {
       this.visualAnimationTicks += 1.0f;
-/*      float progress = 1.0f - (animationTicks / (float) AnimationValues.PEDESTAL_ANIMATION_TICKS); // 0 to 1
-      double spread = 0.1 + progress * 0.4; // dynamic radius
 
-      int tickCount = (AnimationValues.PEDESTAL_ANIMATION_TICKS - animationTicks) / 4;
-      int particleCount = 5 + pLevel.random.nextInt(10) + pLevel.random.nextInt(Math.max(tickCount, 1));
+      float progress = Mth.clamp(this.visualAnimationTicks / (float) AnimationValues.PEDESTAL_ANIMATION_TICKS, 0.0f, 1.0f);
 
-      if (animationTicks > 6) {
-        particleCount += 20 + pLevel.random.nextInt(20);
-        spread += 0.3;
+      if (progress < 0.75f) {
+        float y = pPos.getY() + (float) offset();
+
+        if (progress <= 0.25f) {
+          float liftProgress = progress / 0.25f;
+          y += Mth.lerp(liftProgress, 0.0f, 0.6f) + 0.1f;
+        } else {
+          y += 0.6f;
+        }
+
+        for (int i = 0; i < 5; i++) {
+          double x = pPos.getX() + 0.5 + (pLevel.random.nextDouble() - 0.5) * 0.2;
+          double z = pPos.getZ() + 0.5 + (pLevel.random.nextDouble() - 0.5) * 0.2;
+
+          // Spawn particles at the pedestal
+          pLevel.addParticle(
+              RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).color(ModSpells.WILDFIRE).build(),
+              x, y, z,
+              pLevel.getRandom().nextDouble() * 0.01, (pLevel.random.nextDouble() * 0.05), pLevel.getRandom()
+                  .nextDouble() * 0.01
+          );
+        }
       }
-
-      for (int i = 0; i < particleCount; i++) {
-        double x = pPos.getX() + 0.5 + (pLevel.random.nextDouble() - 0.5) * spread;
-        double y = pPos.getY() + 0.5;
-        double z = pPos.getZ() + 0.5 + (pLevel.random.nextDouble() - 0.5) * spread;
-
-        level.addParticle(RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).color(ModSpells.WILDFIRE).build(),
-            x, y, z,
-            0, (pLevel.random.nextDouble() * 0.05), 0
-        );
-      }*/
     }
   }
 }

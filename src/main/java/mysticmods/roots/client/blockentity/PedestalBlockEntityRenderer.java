@@ -165,10 +165,6 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
     }
   }
 
-  protected int getRenderAmount(ItemStack stack) {
-    return this.getRenderAmount(stack.getCount());
-  }
-
   protected int getRenderAmount(int count) {
     int i = 1;
     if (count > 48) {
