@@ -56,7 +56,7 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
   protected void updateAlpha(float f) {
     if (this.age < AnimationValues.GROVE_PARTICLE_PEDESTAL_FADE_IN_START) {
       this.alpha = 0f;
-    } else if (this.age < AnimationValues.GROVE_PARTICLE_PEDESTAL_DELAY) {
+    } else if (this.age <= AnimationValues.GROVE_PARTICLE_PEDESTAL_DELAY) {
       // Fade from 0 to 1 over
       float f2 = (float) (this.age - AnimationValues.GROVE_PARTICLE_PEDESTAL_FADE_IN_START) / AnimationValues.GROVE_PARTICLE_PEDESTAL_FADE_IN_TICKS;
       this.alpha = Mth.lerp(f2, 0f, 1f);

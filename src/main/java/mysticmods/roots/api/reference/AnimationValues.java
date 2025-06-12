@@ -6,7 +6,7 @@ public class AnimationValues {
 
   public static final int GROVE_CRAFTING_ANIMATION_TICKS = PEDESTAL_ANIMATION_TICKS + BASE_GROVE_CRAFTER_ANIMATION_TICKS; // Total value for both, used for the item particles
 
-  public static final int GROVE_PARTICLE_PEDESTAL_DELAY = PEDESTAL_ANIMATION_TICKS - 4; // How long the particles are hidden for
+  public static final int GROVE_PARTICLE_PEDESTAL_DELAY = PEDESTAL_ANIMATION_TICKS; // How long the particles are hidden for
 
   public static final int GROVE_PARTICLE_EXPAND_TICKS = 6; // How many ticks particles should spend spreading out
 
