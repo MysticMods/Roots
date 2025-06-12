@@ -863,14 +863,14 @@ public class ClientFXHandlers {
       BlockPos pos = positions.get(i).position();
       ItemStack item = positions.get(i).item();
 
-      Vec3 spawnPos = Vec3.atBottomCenterOf(pos).add(0, 1.15, 0);
+      Vec3 spawnPos = Vec3.atBottomCenterOf(pos).add(0, 1.6, 0);
 
       int total = 7 + random.nextInt(8);
 
       for (int j = 0; j < total; j++) {
         Vec3 offset = spawnPos;
         Minecraft.getInstance().level.addParticle(
-            RootsParticleOptions.builder(ModParticles.ITEM).item(item).build(),
+            RootsParticleOptions.builder(ModParticles.ITEM).item(item).delay(20+j*2+random.nextInt(12)+random.nextInt(12)+random.nextInt(6)).build(),
             offset.x, offset.y, offset.z,
             dest.x, dest.y, dest.z
         );

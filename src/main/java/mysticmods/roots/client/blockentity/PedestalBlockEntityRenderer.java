@@ -3,7 +3,7 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mysticmods.roots.block.PedestalBlock;
+import mysticmods.roots.api.reference.AnimationValues;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
 import net.minecraft.client.Minecraft;
@@ -19,8 +19,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Random;
 
 public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
   public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
@@ -49,7 +47,8 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
         pRed = 0f;
         pGreen = 1f;
         pBlue = 0f;
-      } else */if (inSlot.isEmpty()) {
+      } else */
+      if (inSlot.isEmpty()) {
         pRed = 1f;
         pBlue = 1f;
         pGreen = 0f;
@@ -86,24 +85,30 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       pPoseStack.popPose();
     }*/
 
-    RandomSource random = pBlockEntity.getLevel().getRandom();
+    RandomSource random = RandomSource.create();
+
+    int loc = pBlockEntity.getBlockPos().hashCode();
 
     if (!inSlot.isEmpty()) {
       pPoseStack.pushPose();
-      int loc = pBlockEntity.getBlockPos().hashCode();
-      random.setSeed(loc);
       BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer()
           .getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
       boolean flag = bakedmodel.isGui3d();
-      int j = this.getRenderAmount(inSlot);
+      boolean isanimating = pBlockEntity.isAnimating();
+      int j = this.getRenderAmount(isanimating ? inSlot.getCount() - 1 : inSlot.getCount());
+      if (isanimating && inSlot.getCount() == 1) {
+        j = 0;
+      }
+
       pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
       pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
+
       if (!flag) {
-        float f7 = -0.0F * (float) (j - 1) * 0.5F;
-        float f8 = -0.0F * (float) (j - 1) * 0.5F;
         float f9 = -0.09375F * (float) (j - 1) * 0.5F;
-        pPoseStack.translate(f7, f8, f9);
+        pPoseStack.translate(0, 0, f9);
       }
+
+      random.setSeed(loc);
 
       for (int k = 0; k < j; ++k) {
         pPoseStack.pushPose();
@@ -129,18 +134,50 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       }
 
       pPoseStack.popPose();
+
+      if (isanimating) {
+        pPoseStack.pushPose();
+        pPoseStack.translate(0.5, pBlockEntity.offset(), 0.5);
+        pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
+
+        float liftAmount;
+        float scaleAmount;
+
+        float progress = (pBlockEntity.visualAnimationTicks + pPartialTick) / AnimationValues.PEDESTAL_ANIMATION_TICKS;
+        progress = Mth.clamp(progress, 0.0f, 1.0f);
+
+        if (progress <= 0.25f) {
+          float liftProgress = progress / 0.25f;
+          liftAmount = Mth.lerp(liftProgress, 0.0f, 0.6f);
+          scaleAmount = 1f;
+        } else {
+          float shrinkProgress = (progress - 0.25f) / 0.75f;
+          liftAmount = 0.6f;
+          scaleAmount = Mth.lerp(shrinkProgress, 1.0f, 0.4f);
+        }
+
+        pPoseStack.translate(0, liftAmount, 0);
+        pPoseStack.scale(scaleAmount, scaleAmount, scaleAmount);
+        Minecraft.getInstance().getItemRenderer()
+            .render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+        pPoseStack.popPose();
+      }
     }
   }
 
-  protected int getRenderAmount(ItemStack pStack) {
+  protected int getRenderAmount(ItemStack stack) {
+    return this.getRenderAmount(stack.getCount());
+  }
+
+  protected int getRenderAmount(int count) {
     int i = 1;
-    if (pStack.getCount() > 48) {
+    if (count > 48) {
       i = 5;
-    } else if (pStack.getCount() > 32) {
+    } else if (count > 32) {
       i = 4;
-    } else if (pStack.getCount() > 16) {
+    } else if (count > 16) {
       i = 3;
-    } else if (pStack.getCount() > 1) {
+    } else if (count > 1) {
       i = 2;
     }
 

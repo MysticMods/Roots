@@ -2,13 +2,19 @@ package mysticmods.roots.client;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.Util;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE;
 
 public class RootsRenderTypes {
   public static final RenderType ROOTS_LIGHTNING = RenderType.create("roots_lightning", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256,
@@ -17,6 +23,8 @@ public class RootsRenderTypes {
           .setTransparencyState(RenderType.ADDITIVE_TRANSPARENCY)
           .createCompositeState(false)
   );
+
+  public static final RenderStateShard.ShaderStateShard SMART_CRUMBLING_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getSmartCrumblingShader);
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
 
@@ -87,7 +95,7 @@ public class RootsRenderTypes {
           .setShaderState(PARTICLE_LOW_DISCARD_SHADER)
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-          .setWriteMaskState(RenderStateShard.COLOR_WRITE)
+          .setWriteMaskState(COLOR_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .createCompositeState(false));
