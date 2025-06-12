@@ -10,6 +10,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.api.reference.AnimationValues;
 import mysticmods.roots.block.GroveCrafterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.condition.GroveStoneCondition;
@@ -46,8 +47,6 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity {
-  private static final int CRAFTING_TICKS = 20 * 5 + 10; // 6 seconds
-
   private RecipeHolder<GroveRecipe> lastRecipe = null;
   private RecipeHolder<GroveRecipe> cachedRecipe = null;
 
@@ -110,7 +109,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     if (craftingTicks <= 0) {
       return 1f;
     }
-    return 1f - Mth.clamp((float) craftingTicks / CRAFTING_TICKS, 0f, 1f);
+    return 1f - Mth.clamp((float) craftingTicks / AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS, 0f, 1f);
   }
 
   @Override
@@ -160,7 +159,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       List<ItemStack> results = cachedRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
       storedItems.addAll(results);
-      this.craftingTicks = CRAFTING_TICKS;
+      this.craftingTicks = AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS;
       cachedRecipe = null;
       if (!level.isClientSide()) {
         setChanged();
@@ -378,10 +377,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       revalidatedRecipes = true;
     }
     if (isCrafting() && craftingTicks % 4 == 0) {
-      float progress = 1.0f - (craftingTicks / (float) CRAFTING_TICKS); // 0 to 1
+      float progress = 1.0f - (craftingTicks / (float) AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS); // 0 to 1
       double spread = 0.1 + progress * 0.4; // dynamic radius
 
-      int tickCount = (CRAFTING_TICKS - craftingTicks) / 4;
+      int tickCount = (AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS - craftingTicks) / 4;
       int particleCount = 5 + pLevel.random.nextInt(10) + pLevel.random.nextInt(Math.max(tickCount, 1));
 
       if (craftingTicks <= 24 && craftingTicks > 16) {
@@ -394,7 +393,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         double y = pPos.getY() + 0.5;
         double z = pPos.getZ() + 0.5 + (pLevel.random.nextDouble() - 0.5) * spread;
 
-        level.addParticle(RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).color(ModSpells.WILDFIRE).build(),
+        level.addParticle(RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).build(),
             x, y, z,
             0, (pLevel.random.nextDouble() * 0.05), 0
         );

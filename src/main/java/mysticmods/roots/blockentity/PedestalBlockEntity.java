@@ -1,13 +1,16 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.block.PedestalBlock;
+import mysticmods.roots.api.reference.AnimationValues;
 import mysticmods.roots.blockentity.inventory.LimitedItemStackHandler;
-import mysticmods.roots.blockentity.inventory.LockableLimitedItemStackHandler;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -27,9 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity {
-  public static final int ANIMATION_TICKS = 10;
-
+public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity, ClientTickBlockEntity {
   protected ItemStackHandler inventory;
   protected int limit;
 
@@ -70,16 +71,16 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     return limit;
   }
 
-  public void animate () {
+  public void animate() {
     if (!level.isClientSide()) {
-      this.animationTicks = ANIMATION_TICKS;
+      this.animationTicks = AnimationValues.PEDESTAL_ANIMATION_TICKS;
       this.animationItem = inventory.getStackInSlot(0).copy();
       setChanged();
       updateViaState();
     }
   }
 
-  public int getAnimateTick () {
+  public int getAnimateTick() {
     return animationTicks;
   }
 
@@ -223,6 +224,33 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       }
       setChanged();
       updateViaState();
+    }
+  }
+
+  @Override
+  public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
+    if (this.animationTicks > 0) {
+/*      float progress = 1.0f - (animationTicks / (float) AnimationValues.PEDESTAL_ANIMATION_TICKS); // 0 to 1
+      double spread = 0.1 + progress * 0.4; // dynamic radius
+
+      int tickCount = (AnimationValues.PEDESTAL_ANIMATION_TICKS - animationTicks) / 4;
+      int particleCount = 5 + pLevel.random.nextInt(10) + pLevel.random.nextInt(Math.max(tickCount, 1));
+
+      if (animationTicks > 6) {
+        particleCount += 20 + pLevel.random.nextInt(20);
+        spread += 0.3;
+      }
+
+      for (int i = 0; i < particleCount; i++) {
+        double x = pPos.getX() + 0.5 + (pLevel.random.nextDouble() - 0.5) * spread;
+        double y = pPos.getY() + 0.5;
+        double z = pPos.getZ() + 0.5 + (pLevel.random.nextDouble() - 0.5) * spread;
+
+        level.addParticle(RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).color(ModSpells.WILDFIRE).build(),
+            x, y, z,
+            0, (pLevel.random.nextDouble() * 0.05), 0
+        );
+      }*/
     }
   }
 }

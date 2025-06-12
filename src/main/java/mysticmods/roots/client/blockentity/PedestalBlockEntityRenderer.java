@@ -3,6 +3,7 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import mysticmods.roots.api.reference.AnimationValues;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
 import net.minecraft.client.Minecraft;
@@ -84,26 +85,35 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       pPoseStack.popPose();
     }*/
 
-    RandomSource random = pBlockEntity.getLevel().getRandom();
+    RandomSource random = RandomSource.create();
+
+    int loc = pBlockEntity.getBlockPos().hashCode();
 
     if (!inSlot.isEmpty()) {
       pPoseStack.pushPose();
-      int loc = pBlockEntity.getBlockPos().hashCode();
-      random.setSeed(loc);
       BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer()
           .getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
       boolean flag = bakedmodel.isGui3d();
       int j = this.getRenderAmount(inSlot);
       pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
       pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
+      float scale = 1f;
+
+      if (inSlot.getCount() == 1 && pBlockEntity.isAnimating()) {
+        float v = pBlockEntity.getAnimateTick() == AnimationValues.PEDESTAL_ANIMATION_TICKS ? 0.0f : (float) (AnimationValues.PEDESTAL_ANIMATION_TICKS - pBlockEntity.getAnimateTick()) / AnimationValues.PEDESTAL_ANIMATION_TICKS;
+        float t = Mth.lerp(v, 1.0f, 0.4f);
+        scale = t;
+      }
+
+      pPoseStack.scale(scale, scale, scale);
+
       if (!flag) {
-        float f7 = -0.0F * (float) (j - 1) * 0.5F;
-        float f8 = -0.0F * (float) (j - 1) * 0.5F;
         float f9 = -0.09375F * (float) (j - 1) * 0.5F;
-        pPoseStack.translate(f7, f8, f9);
+        pPoseStack.translate(0, 0, f9);
       }
 
       for (int k = 0; k < j; ++k) {
+        random.setSeed(loc);
         pPoseStack.pushPose();
         if (k > 0) {
           if (flag) {
@@ -118,11 +128,6 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
           }
         }
 
-        int prog = 0;
-
-        if (pBlockEntity.isAnimating()) {
-          prog = Math.clamp(pBlockEntity.getAnimateTick() / 2, 0, 9);
-        }
         Minecraft.getInstance().getItemRenderer()
             .render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
         pPoseStack.popPose();

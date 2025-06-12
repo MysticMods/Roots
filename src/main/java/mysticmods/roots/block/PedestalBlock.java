@@ -52,9 +52,9 @@ public abstract class PedestalBlock extends UseDelegatedBlock {
   public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
     if (!level.isClientSide()) {
       return BaseBlockEntity::serverTick;
+    } else {
+      return BaseBlockEntity::clientTick;
     }
-
-    return null;
   }
 
   public static class GrovePedestalBlock extends PedestalBlock {

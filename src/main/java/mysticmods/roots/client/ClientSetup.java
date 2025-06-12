@@ -1,5 +1,6 @@
 package mysticmods.roots.client;
 
+import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -200,7 +201,6 @@ public class ClientSetup {
   @SubscribeEvent
   public static void onRegisterShaders (RegisterShadersEvent event) throws IOException {
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.LOW_DISCARD_PARTICLE_SHADER_LOCATION, DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.LOW_DISCARD_PARTICLE_SHADER = s);
-
   }
 
   @SubscribeEvent
