@@ -37,6 +37,8 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   private ItemStack animationItem = ItemStack.EMPTY;
   private int animationTicks = 0;
 
+  public float visualAnimationTicks = 0.0f;
+
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int limit) {
     super(pType, pWorldPosition, pBlockState);
     this.limit = limit;
@@ -177,6 +179,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       animationItem = ItemStack.EMPTY;
     }
     this.animationTicks = pTag.getInt("animationTicks");
+    if (this.animationTicks == AnimationValues.PEDESTAL_ANIMATION_TICKS) {
+      this.visualAnimationTicks = 0.0f;
+    }
   }
 
   @Override
@@ -230,6 +235,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (this.animationTicks > 0) {
+      this.visualAnimationTicks += 1.0f;
 /*      float progress = 1.0f - (animationTicks / (float) AnimationValues.PEDESTAL_ANIMATION_TICKS); // 0 to 1
       double spread = 0.1 + progress * 0.4; // dynamic radius
 

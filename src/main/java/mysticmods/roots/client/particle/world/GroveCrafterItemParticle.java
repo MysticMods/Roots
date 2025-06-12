@@ -50,6 +50,7 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
     this.xd = motion.x;
     this.yd = motion.y;
     this.zd = motion.z;
+    this.alpha = 0f;
   }
 
   @Override

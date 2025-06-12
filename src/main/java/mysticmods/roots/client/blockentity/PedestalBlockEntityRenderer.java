@@ -94,26 +94,23 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer()
           .getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
       boolean flag = bakedmodel.isGui3d();
-      int j = this.getRenderAmount(inSlot);
-      pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
-      pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-      float scale = 1f;
-
-      if (inSlot.getCount() == 1 && pBlockEntity.isAnimating()) {
-        float v = pBlockEntity.getAnimateTick() == AnimationValues.PEDESTAL_ANIMATION_TICKS ? 0.0f : (float) (AnimationValues.PEDESTAL_ANIMATION_TICKS - pBlockEntity.getAnimateTick()) / AnimationValues.PEDESTAL_ANIMATION_TICKS;
-        float t = Mth.lerp(v, 1.0f, 0.4f);
-        scale = t;
+      boolean isanimating = pBlockEntity.isAnimating();
+      int j = this.getRenderAmount(isanimating ? inSlot.getCount() - 1 : inSlot.getCount());
+      if (isanimating && inSlot.getCount() == 1) {
+        j = 0;
       }
 
-      pPoseStack.scale(scale, scale, scale);
+      pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
+      pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
 
       if (!flag) {
         float f9 = -0.09375F * (float) (j - 1) * 0.5F;
         pPoseStack.translate(0, 0, f9);
       }
 
+      random.setSeed(loc);
+
       for (int k = 0; k < j; ++k) {
-        random.setSeed(loc);
         pPoseStack.pushPose();
         if (k > 0) {
           if (flag) {
@@ -137,18 +134,50 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       }
 
       pPoseStack.popPose();
+
+      if (isanimating) {
+        pPoseStack.pushPose();
+        pPoseStack.translate(0.5, pBlockEntity.offset(), 0.5);
+        pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
+
+        float liftAmount;
+        float scaleAmount;
+
+        float progress = (pBlockEntity.visualAnimationTicks + pPartialTick) / AnimationValues.PEDESTAL_ANIMATION_TICKS;
+        progress = Mth.clamp(progress, 0.0f, 1.0f);
+
+        if (progress <= 0.25f) {
+          float liftProgress = progress / 0.25f;
+          liftAmount = Mth.lerp(liftProgress, 0.0f, 0.6f);
+          scaleAmount = 1f;
+        } else {
+          float shrinkProgress = (progress - 0.25f) / 0.75f;
+          liftAmount = 0.6f;
+          scaleAmount = Mth.lerp(shrinkProgress, 1.0f, 0.4f);
+        }
+
+        pPoseStack.translate(0, liftAmount, 0);
+        pPoseStack.scale(scaleAmount, scaleAmount, scaleAmount);
+        Minecraft.getInstance().getItemRenderer()
+            .render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+        pPoseStack.popPose();
+      }
     }
   }
 
-  protected int getRenderAmount(ItemStack pStack) {
+  protected int getRenderAmount(ItemStack stack) {
+    return this.getRenderAmount(stack.getCount());
+  }
+
+  protected int getRenderAmount(int count) {
     int i = 1;
-    if (pStack.getCount() > 48) {
+    if (count > 48) {
       i = 5;
-    } else if (pStack.getCount() > 32) {
+    } else if (count > 32) {
       i = 4;
-    } else if (pStack.getCount() > 16) {
+    } else if (count > 16) {
       i = 3;
-    } else if (pStack.getCount() > 1) {
+    } else if (count > 1) {
       i = 2;
     }
 

@@ -1,7 +1,7 @@
 package mysticmods.roots.api.reference;
 
 public class AnimationValues {
-  public static final int PEDESTAL_ANIMATION_TICKS = 15;
+  public static final int PEDESTAL_ANIMATION_TICKS = 20 * 2;
   public static final int BASE_GROVE_CRAFTER_ANIMATION_TICKS = 20 * 6;
 
   public static final int GROVE_CRAFTING_ANIMATION_TICKS = PEDESTAL_ANIMATION_TICKS + BASE_GROVE_CRAFTER_ANIMATION_TICKS; // Total value for both, used for the item particles
