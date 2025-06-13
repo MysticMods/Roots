@@ -1,7 +1,9 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.entity.*;
+import mysticmods.roots.entity.other.FairyHutEntity;
 import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.entity.other.TemporalMorassEntity;
 import mysticmods.roots.entity.projectile.LivingArrowEntity;
@@ -72,6 +74,10 @@ public class ModEntities {
       .sized(1.9f, 1.9f).clientTrackingRange(4).updateInterval(10).build("wildfire"));
   public static final DeferredHolder<EntityType<?>, EntityType<TemporalMorassEntity>> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> EntityType.Builder.of(TemporalMorassEntity::new, MobCategory.MISC)
       .sized(6f, 3f).clientTrackingRange(4).updateInterval(10).build("temporal_morass"));
+
+  public static final DeferredHolder<EntityType<?>, EntityType<FairyHutEntity>> FAIRY_HUT = REGISTER.register("fairy_hut", () -> EntityType.Builder.of(FairyHutEntity::new, MobCategory.MISC)
+      .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("fairy_hut"));
+
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
   }

@@ -1,22 +1,60 @@
 package mysticmods.roots.blockentity;
 
+import com.google.common.collect.Lists;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.block.FairyHutBlock;
-import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.entity.other.FairyHutEntity;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.init.ModEntities;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.npc.VillagerData;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.Merchant;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-public class FairyHutBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
+import java.util.ArrayList;
+import java.util.UUID;
+
+public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer, Merchant {
   private boolean powered = false;
+
+  // Trading stuff
+  private UUID tradingPlayerUUID = null;
+  private Player tradingPlayer = null;
+  private int xp = 0;
+  private int level = 0;
+  private MerchantOffers offers;
+
+
+  private boolean increaseProfessionLevelOnUpdate;
+  private int updateMerchantTimer;
 
   public FairyHutBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.FAIRY_HUT.get(), pWorldPosition, pBlockState);
@@ -25,6 +63,7 @@ public class FairyHutBlockEntity extends BaseBlockEntity implements ServerTickBl
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (pState.getValue(FairyHutBlock.ACTIVE)) {
+      // Do some visuals
     }
   }
 
@@ -41,6 +80,27 @@ public class FairyHutBlockEntity extends BaseBlockEntity implements ServerTickBl
         pLevel.setBlock(pPos.above(), aboveState.setValue(FairyHutBlock.ACTIVE, false), 3);
       }
     }
+
+    if (!this.isTrading() && this.updateMerchantTimer > 0) {
+      this.updateMerchantTimer--;
+      if (this.updateMerchantTimer <= 0) {
+        if (this.increaseProfessionLevelOnUpdate) {
+          this.increaseMerchantCareer();
+          this.increaseProfessionLevelOnUpdate = false;
+        }
+      }
+      setChanged();
+      updateViaState();
+    }
+  }
+
+  private void increaseMerchantCareer() {
+    this.level += 1;
+    updateTrades();
+  }
+
+  private boolean isTrading() {
+    return getTradingPlayer() != null;
   }
 
   @Override
@@ -72,14 +132,185 @@ public class FairyHutBlockEntity extends BaseBlockEntity implements ServerTickBl
   }
 
   @Override
-  protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-    super.loadAdditional(tag, registries);
-    this.powered = tag.getBoolean("powered");
+  protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+    super.loadAdditional(compound, registries);
+    this.powered = compound.getBoolean("powered");
+    this.tradingPlayerUUID = compound.getUUID("tradingPlayer");
+    this.xp = compound.getInt("xp");
+    this.level = compound.getInt("level");
+    if (compound.contains("Offers")) {
+      MerchantOffers.CODEC
+          .parse(this.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE), compound.get("Offers"))
+          .resultOrPartial(Util.prefix("Failed to load offers: ", RootsAPI.LOG::warn))
+          .ifPresent(p_323775_ -> this.offers = p_323775_);
+    }
   }
 
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.saveAdditional(pTag, lookup);
     pTag.putBoolean("powered", this.powered);
+    if (tradingPlayerUUID != null) {
+      pTag.putUUID("tradingPlayer", this.tradingPlayerUUID);
+    } else if (tradingPlayer != null) {
+      pTag.putUUID("tradingPlayer", this.tradingPlayer.getUUID());
+    }
+    pTag.putInt("xp", this.xp);
+    pTag.putInt("level", this.level);
+    if (!this.getLevel().isClientSide) {
+      MerchantOffers merchantoffers = this.getOffers();
+      if (!merchantoffers.isEmpty()) {
+        pTag.put(
+            "Offers", MerchantOffers.CODEC.encodeStart(this.getLevel().registryAccess()
+                .createSerializationContext(NbtOps.INSTANCE), merchantoffers).getOrThrow()
+        );
+      }
+    }
   }
+
+  @Override
+  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack stack) {
+    return null;
+  }
+
+  @Override
+  public void setTradingPlayer(@Nullable Player tradingPlayer) {
+    this.tradingPlayer = tradingPlayer;
+  }
+
+  @Override
+  public @Nullable Player getTradingPlayer() {
+    if (tradingPlayerUUID != null) {
+      this.tradingPlayer = getLevel().getPlayerByUUID(tradingPlayerUUID);
+      this.tradingPlayerUUID = null;
+    }
+    return tradingPlayer;
+  }
+
+  @Override
+  public MerchantOffers getOffers() {
+    if (getLevel().isClientSide()) {
+      throw new IllegalStateException("Cannot load trading offers on the client side.");
+    }
+
+    if (this.offers == null) {
+      this.offers = new MerchantOffers();
+      this.updateTrades();
+    }
+
+    return this.offers;
+  }
+
+  private void updateTrades() {
+    Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillagerTrades.TRADES.get(VillagerProfession.CLERIC);
+
+    if (int2objectmap != null && !int2objectmap.isEmpty()) {
+      VillagerTrades.ItemListing[] avillagertrades$itemlisting = int2objectmap.get(level);
+      if (avillagertrades$itemlisting != null) {
+        MerchantOffers merchantoffers = this.getOffers();
+        this.addOffersFromItemListings(merchantoffers, avillagertrades$itemlisting, 2);
+      }
+    }
+  }
+
+  protected void addOffersFromItemListings(MerchantOffers givenMerchantOffers, VillagerTrades.ItemListing[] newTrades, int maxNumbers) {
+    ArrayList<VillagerTrades.ItemListing> arraylist = Lists.newArrayList(newTrades);
+    int i = 0;
+
+    FairyHutEntity entity = new FairyHutEntity(ModEntities.FAIRY_HUT.get(), this.getLevel());
+    entity.setPos(getPosition());
+
+    while (i < maxNumbers && !arraylist.isEmpty()) {
+      MerchantOffer merchantoffer = arraylist.remove(this.getRandom().nextInt(arraylist.size()))
+          .getOffer(entity, this.getRandom());
+      if (merchantoffer != null) {
+        givenMerchantOffers.add(merchantoffer);
+        i++;
+      }
+    }
+  }
+
+  @Override
+  public void overrideOffers(MerchantOffers offers) {
+    // Not sure why this does nothing
+  }
+
+  @Override
+  public void notifyTrade(MerchantOffer offer) {
+    offer.increaseUses();
+    /*    this.ambientSoundTime = -this.getAmbientSoundInterval();*/
+    this.rewardTradeXp(offer);
+    if (this.tradingPlayer instanceof ServerPlayer) {
+      // TODO: New trigger
+      /*      CriteriaTriggers.TRADE.trigger((ServerPlayer) this.tradingPlayer, this, offer.getResult());*/
+    }
+  }
+
+  private void rewardTradeXp(MerchantOffer offer) {
+    int i = 3 + this.getLevel().getRandom().nextInt(4);
+    this.xp += offer.getXp();
+    if (this.shouldIncreaseLevel()) {
+      this.updateMerchantTimer = 40;
+      this.increaseProfessionLevelOnUpdate = true;
+      i += 5;
+    }
+
+    if (offer.shouldRewardExp()) {
+      BlockPos pos = this.getBlockPos();
+      this.getLevel()
+          .addFreshEntity(new ExperienceOrb(this.getLevel(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, i));
+    }
+  }
+
+  private boolean shouldIncreaseLevel() {
+    return VillagerData.canLevelUp(level) && this.xp >= VillagerData.getMaxXpPerLevel(level);
+  }
+
+
+  @Override
+  public void notifyTradeUpdated(ItemStack stack) {
+/*    if (!this.level().isClientSide && this.ambientSoundTime > -this.getAmbientSoundInterval() + 20) {
+      this.ambientSoundTime = -this.getAmbientSoundInterval();
+      this.makeSound(this.getTradeUpdatedSound(!stack.isEmpty()));
+    }*/
+  }
+
+  @Override
+  public int getVillagerXp() {
+    return xp;
+  }
+
+  @Override
+  public void overrideXp(int xp) {
+    this.xp = xp;
+    if (!getLevel().isClientSide()) {
+      setChanged();
+      updateViaState();
+    }
+  }
+
+  @Override
+  public boolean showProgressBar() {
+    return true;
+  }
+
+  @Override
+  public SoundEvent getNotifyTradeSound() {
+    return SoundEvents.WANDERING_TRADER_YES;
+  }
+
+  @Override
+  public boolean isClientSide() {
+    return getLevel().isClientSide();
+  }
+
+  private Vec3 pos;
+
+  public Vec3 getPosition() {
+    if (pos == null) {
+      pos = Vec3.atCenterOf(getBlockPos());
+    }
+    return pos;
+  }
+
 }

@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -32,8 +33,6 @@ import java.util.List;
 
 @SuppressWarnings({"DataFlowIssue", "NullableProblems"})
 public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
-/*  private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
-  protected AABB singleBlockBoundingBox;*/
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> lastOutput;
@@ -41,6 +40,14 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  public RandomSource getRandom () {
+    if (getLevel() == null) {
+      return RandomSource.create();
+    }
+
+    return getLevel().getRandom();
   }
 
   @Nullable

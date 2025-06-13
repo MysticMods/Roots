@@ -12,6 +12,9 @@ import mysticmods.roots.util.VoxelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,13 +31,14 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, EntityBlock {
+public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, EntityBlock, IUseDelegatedBlock {
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -94,6 +98,34 @@ public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleW
   @Override
   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
     return simpleCodec(FairyHutBlock::new);
+  }
+
+  @Override
+  public BlockPos adjustBlockPos(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+      return pos.below();
+    }
+
+    return IUseDelegatedBlock.super.adjustBlockPos(stack, state, level, pos, player, hand, result);
+  }
+
+  @Override
+  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    ItemInteractionResult result = useItemOnDelegate(stack, state, level, pos, player, hand, hitResult);
+    if (result != null) {
+      return result;
+    }
+    return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+  }
+
+  @Override
+  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
+    InteractionResult result = useWithoutItemOnDelegate(state, level, pos, player, ray);
+    if (result != null) {
+      return result;
+    }
+
+    return super.useWithoutItem(state, level, pos, player, ray);
   }
 
   @Override
