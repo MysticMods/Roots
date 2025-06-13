@@ -4,9 +4,15 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
+import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -16,10 +22,12 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -166,7 +174,54 @@ public class HudOverlay {
   }
 
   public static void renderGroveStone(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {
+    Level level = mc.level;
 
+    BlockEntity blockEntity;
+
+    if (!state.hasProperty(GroveStoneBlock.PART) && !state.hasProperty(GroveStoneBlock.ACTIVE)) {
+      return;
+    }
+
+    if (!state.getValue(GroveStoneBlock.ACTIVE)) {
+      return; // Render nothing for inactive grove stones
+    }
+
+    StateProperties.Part part = state.getValue(GroveStoneBlock.PART);
+
+    BlockPos pos;
+
+    if (part == StateProperties.Part.TOP) {
+      pos = trace.getBlockPos();
+    } else if (part == StateProperties.Part.BOTTOM) {
+      pos = trace.getBlockPos().above(2);
+    } else if (part == StateProperties.Part.MIDDLE) {
+      pos = trace.getBlockPos().above();
+    } else {
+      return; // Somehow an invalid part? I'm not sure if this is even possible. I should make this a switch statement.
+    }
+
+    if (level.getBlockEntity(pos) instanceof IGroveInstance groveInstance) {
+      int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
+      int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
+
+      y += 10;
+      x += 30;
+
+      GrovePower powerPower = groveInstance.getPower();
+      Grove grove = groveInstance.asGrove();
+
+      Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank(), groveInstance.getMaxRank());
+      Component comp2 = Component.translatable("roots.hud.grove_power.power", powerPower.getUsedPower(), powerPower.getMaxPower());
+
+/*      graphics.renderItem(output, x, y, 0);
+      graphics.renderItemDecorations(mc.font, output, x, y);*/
+      RenderSystem.disableDepthTest();
+      RenderSystem.disableBlend();
+      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
+      RenderSystem.enableDepthTest();
+      RenderSystem.enableBlend();
+    }
   }
 
   private static Component getItemNameWithCount(ItemStack stack) {

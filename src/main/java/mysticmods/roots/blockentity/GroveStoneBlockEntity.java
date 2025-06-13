@@ -15,6 +15,8 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,9 +25,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+// TODO: Handle rank changes
 public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, GrovePower, IGroveInstance {
   private int generatedLastTick = 0;
   private int consumedLastTick = 0;
@@ -62,6 +66,11 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
 
     generateTick(pLevel, pPos, pState);
     consumeTick(pLevel, pPos, pState);
+
+    if (generatedThisTick != generatedLastTick || consumedThisTick != consumedLastTick) {
+      setChanged();
+      updateViaState();
+    }
   }
 
   private Holder<Grove> getGrove() {
@@ -138,6 +147,9 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
 
     for (BlockPos pos : generatorPositions) {
       BlockState stateAt = pLevel.getBlockState(pos);
+      if (stateAt.isAir()) {
+        continue;
+      }
       List<Generator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_POWER_GENERATORS);
       if (generators == null) {
         continue;
@@ -171,6 +183,9 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
 
     for (BlockPos pos : consumerPositions) {
       BlockState stateAt = level.getBlockState(pos);
+      if (stateAt.isAir()) {
+        continue;
+      }
       if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IGroveConsumer consumer) {
@@ -196,8 +211,36 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     return getBlockState().getValue(GroveStoneBlock.RANK);
   }
 
+  private int maxRank = -1;
+
+  @Override
+  public int getMaxRank() {
+    if (maxRank == -1) {
+      maxRank = Collections.max(GroveStoneBlock.RANK.getPossibleValues());
+    }
+    return maxRank;
+  }
+
   @Override
   public GrovePower getPower() {
     return this;
+  }
+
+  @Override
+  protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+    super.loadAdditional(tag, registries);
+    this.generatedLastTick = tag.getInt("generatedLastTick");
+    this.consumedLastTick = tag.getInt("consumedLastTick");
+    this.generatedThisTick = tag.getInt("generatedThisTick");
+    this.consumedThisTick = tag.getInt("consumedThisTick");
+  }
+
+  @Override
+  protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
+    super.saveAdditional(pTag, lookup);
+    pTag.putInt("generatedLastTick", generatedLastTick);
+    pTag.putInt("consumedLastTick", consumedLastTick);
+    pTag.putInt("generatedThisTick", generatedThisTick);
+    pTag.putInt("consumedThisTick", consumedThisTick);
   }
 }

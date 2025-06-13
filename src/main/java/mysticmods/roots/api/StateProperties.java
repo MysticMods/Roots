@@ -15,7 +15,7 @@ public class StateProperties {
   public static class GroveStone {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final PartProperty PART = PartProperty.create("part");
-    public static final IntegerProperty RANK = IntegerProperty.create("rank", 0, 16);
+    public static final IntegerProperty RANK = IntegerProperty.create("rank", 0, 4);
   }
 
   public static class PartProperty extends EnumProperty<Part> {

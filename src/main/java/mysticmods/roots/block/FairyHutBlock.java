@@ -1,10 +1,9 @@
 package mysticmods.roots.block;
 
-import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.blockentity.GroveStoneBlockEntity;
+import mysticmods.roots.blockentity.FairyHutBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSpells;
@@ -34,7 +33,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.Map;
-import java.util.function.Function;
 
 public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, EntityBlock {
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -53,7 +51,8 @@ public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleW
   private VoxelShape getShape(BlockState blockState) {
     if (blockState.getValue(HALF) == DoubleBlockHalf.LOWER) {
       return VoxelUtil.rotateHorizontal(Shapes.HUT_LOWER, blockState.getValue(FACING).getClockWise());
-    } else {;
+    } else {
+      ;
       return VoxelUtil.rotateHorizontal(Shapes.HUT_UPPER, blockState.getValue(FACING).getClockWise());
     }
   }
@@ -149,7 +148,7 @@ public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleW
       return null;
     }
 
-    return null; //new GroveStoneBlockEntity(pos, state);
+    return new FairyHutBlockEntity(pos, state);
   }
 
   @org.jetbrains.annotations.Nullable
@@ -162,19 +161,10 @@ public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleW
     }
   }
 
-  public static int lightLevel (BlockState state) {
+  public static int lightLevel(BlockState state) {
     if (state.getValue(ACTIVE)) {
       return 6;
     }
     return 0;
   }
-
-  @Override
-  public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-      double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 1.2;
-      double y = pos.getY() + 0.5 + (random.nextDouble() - 0.5) * 0.5;
-      double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 1.2;
-
-      level.addParticle(RootsParticleOptions.builder(ModParticles.SYLVAN_LIGHT).color(ModSpells.SYLVAN_LIGHT).build(), x, y, z, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.02);
-    }
 }

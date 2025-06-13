@@ -401,6 +401,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.GROVE_CRAFTER_HUD_RENDERER).addTag(RootsTags.Blocks.GROVE_CRAFTERS);
     tag(RootsTags.Blocks.MORTAR_HUD_RENDERER).addTag(RootsTags.Blocks.MORTARS);
     tag(RootsTags.Blocks.GROVE_STONE_HUD_RENDERER).addTag(RootsTags.Blocks.GROVE_STONES);
+
+    tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS);
   }
 
   @Override

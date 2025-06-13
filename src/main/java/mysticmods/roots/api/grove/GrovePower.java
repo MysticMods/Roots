@@ -75,10 +75,6 @@ public interface GrovePower {
     public static final StreamCodec<ByteBuf, Consumer> STREAM_CODEC = Congen.streamCodec(Consumer::new);
     public static final Codec<List<Consumer>> LIST_CODEC = CODEC.listOf();
     public static final StreamCodec<ByteBuf, List<Consumer>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
-
-/*    boolean consume(IGroveInstance grove, BlockPos pos) {
-      return grove.getPower().consumePower(value);
-    }*/
   }
 
   class BlockTracker {
