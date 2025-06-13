@@ -3,45 +3,34 @@ package mysticmods.roots.client.particle.world;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
-import net.minecraft.util.Mth;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
 
 public class LightParticle extends RootsParticle {
   private final float quadSizeStart;
-  private final boolean large;
 
-  protected LightParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2, boolean large) {
+  protected LightParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed, c1, c2);
     this.lifetime = 25;
-    if (large) {
-      this.lifetime = 5;
-    }
     this.alpha = 1f;
     this.xd = 0;
     this.yd = ySpeed;
     this.zd = 0;
     this.hasPhysics = false;
-    this.large = large;
-    if (large) {
-      this.quadSize = this.quadSizeStart = 0.18f;
-    } else {
-      this.quadSize = this.quadSizeStart = 0.1f;
-      this.rollAmount = (random.nextFloat() - 0.5f) * 0.1f;
-    }
+    this.quadSize = this.quadSizeStart = 0.1f;
+    this.rollAmount = (random.nextFloat() - 0.5f) * 0.1f;
   }
 
   @Override
   protected void updateAlpha(float f) {
-      super.updateAlpha(f*f);
+    super.updateAlpha(f * f);
   }
 
   @Override
   protected void updateQuadSize(float f) {
-    if (quadSizeStart <= 0.1f) {
-      this.quadSize = quadSizeStart - 0.05f * f * f * f;
-/*    } else {*/
-/*      this.quadSize = quadSizeStart + 0.005f * Mth.sin(f * Mth.PI);*/
-    }
+    this.quadSize = quadSizeStart - 0.05f * f * f * f;
   }
 
   @Override
@@ -65,7 +54,7 @@ public class LightParticle extends RootsParticle {
   public record SmallProvider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      var particle = new LightParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2(), false);
+      var particle = new LightParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;
     }
@@ -74,7 +63,7 @@ public class LightParticle extends RootsParticle {
   public record LargeProvider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      var particle = new LightParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2(), true);
+      var particle = new LightParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;
     }

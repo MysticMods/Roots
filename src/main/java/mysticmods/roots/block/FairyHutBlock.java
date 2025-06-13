@@ -6,9 +6,13 @@ import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.VoxelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -164,4 +168,13 @@ public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleW
     }
     return 0;
   }
+
+  @Override
+  public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+      double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 1.2;
+      double y = pos.getY() + 0.5 + (random.nextDouble() - 0.5) * 0.5;
+      double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 1.2;
+
+      level.addParticle(RootsParticleOptions.builder(ModParticles.SYLVAN_LIGHT).color(ModSpells.SYLVAN_LIGHT).build(), x, y, z, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.02);
+    }
 }

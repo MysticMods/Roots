@@ -1,6 +1,5 @@
 package mysticmods.roots.client;
 
-import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -244,7 +243,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.SANCTUARY.get(), SanctuaryParticle.Provider::new);
     event.registerSpriteSet(ModParticles.ROSE_THORNS.get(), RoseThornsParticle.Provider::new);
     event.registerSpriteSet(ModParticles.LIGHT.get(), LightParticle.SmallProvider::new);
-    event.registerSpriteSet(ModParticles.LARGE_LIGHT.get(), LightParticle.LargeProvider::new);
+    event.registerSpriteSet(ModParticles.SPARKLE.get(), LightParticle.SmallProvider::new);
     event.registerSpriteSet(ModParticles.TEMPORAL_MORASS.get(), MoveRandomlyInAABBParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GROVE_CRAFTER.get(), GroveCrafterParticle.Provider::new);
 

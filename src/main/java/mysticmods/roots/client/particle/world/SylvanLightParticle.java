@@ -22,19 +22,15 @@ public class SylvanLightParticle extends TextureSheetParticle {
     this.xd = 0;
     this.yd = 0;
     this.zd = 0;
+    this.gravity = 0.02f;
     this.hasPhysics = false;
-    this.quadSize = 0.2f;
-    this.oRoll = this.roll = (float) Math.toRadians(switch (level.getRandom().nextInt(4)) {
-      case 1 -> (float) Math.toRadians(-45);
-      case 2 -> (float) Math.toRadians(135);
-      case 3 -> (float) Math.toRadians(-135);
-      default -> (float) Math.toRadians(45);
-    });
+    this.quadSize = 0.1f;
+    this.oRoll = this.roll = random.nextFloat();
   }
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
   }
 
   @Override
@@ -53,17 +49,7 @@ public class SylvanLightParticle extends TextureSheetParticle {
         this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
       }
 
-      f *= f;
-
-/*      // Height control
-      if (this.age < 8) {
-        this.yd = 0; // Stay at the same height
-      } else {
-        // Start dropping slowly in the last few ticks
-        this.yd -= (0.2 * f) * 0.1f;
-      }*/
-
-      this.quadSize *= 1.0f - f;
+      this.alpha = 1.0f - f * f *f;
     }
   }
 
