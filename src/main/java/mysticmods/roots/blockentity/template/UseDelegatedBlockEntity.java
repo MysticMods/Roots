@@ -14,7 +14,6 @@ import net.minecraft.world.phys.BlockHitResult;
 public abstract class UseDelegatedBlockEntity extends BaseBlockEntity {
   public UseDelegatedBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
-    Villager
   }
 
   public abstract InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack stack);

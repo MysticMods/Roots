@@ -117,12 +117,12 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
 
   @Override
   public int getMaxPower() {
-    return generatedLastTick;
+    return generatedThisTick;
   }
 
   @Override
   public int getUsedPower() {
-    return consumedLastTick;
+    return consumedThisTick;
   }
 
   @Override

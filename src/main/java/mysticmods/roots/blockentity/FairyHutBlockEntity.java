@@ -18,6 +18,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -49,9 +50,8 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   private UUID tradingPlayerUUID = null;
   private Player tradingPlayer = null;
   private int xp = 0;
-  private int level = 0;
+  private int xpLevel = 1; // Always starts at level 1
   private MerchantOffers offers;
-
 
   private boolean increaseProfessionLevelOnUpdate;
   private int updateMerchantTimer;
@@ -63,7 +63,6 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (pState.getValue(FairyHutBlock.ACTIVE)) {
-      // Do some visuals
     }
   }
 
@@ -95,7 +94,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   }
 
   private void increaseMerchantCareer() {
-    this.level += 1;
+    this.xpLevel += 1;
     updateTrades();
   }
 
@@ -135,10 +134,18 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
     super.loadAdditional(compound, registries);
     this.powered = compound.getBoolean("powered");
-    this.tradingPlayerUUID = compound.getUUID("tradingPlayer");
-    this.xp = compound.getInt("xp");
-    this.level = compound.getInt("level");
+    this.tradingPlayer = null;
+    if (compound.hasUUID("tradingPlayer")) {
+      this.tradingPlayerUUID = compound.getUUID("tradingPlayer");
+    }
+    if (compound.contains("xp")) {
+      this.xp = compound.getInt("xp");
+    }
+    if (compound.contains("level")) {
+      this.xpLevel = compound.getInt("level");
+    }
     if (compound.contains("Offers")) {
+      // TODO: Is this problematic on the client side?
       MerchantOffers.CODEC
           .parse(this.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE), compound.get("Offers"))
           .resultOrPartial(Util.prefix("Failed to load offers: ", RootsAPI.LOG::warn))
@@ -156,13 +163,12 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
       pTag.putUUID("tradingPlayer", this.tradingPlayer.getUUID());
     }
     pTag.putInt("xp", this.xp);
-    pTag.putInt("level", this.level);
-    if (!this.getLevel().isClientSide) {
+    pTag.putInt("level", this.xpLevel);
+    if (!this.getLevel().isClientSide()) {
       MerchantOffers merchantoffers = this.getOffers();
       if (!merchantoffers.isEmpty()) {
-        pTag.put(
-            "Offers", MerchantOffers.CODEC.encodeStart(this.getLevel().registryAccess()
-                .createSerializationContext(NbtOps.INSTANCE), merchantoffers).getOrThrow()
+        pTag.put("Offers", MerchantOffers.CODEC.encodeStart(this.getLevel().registryAccess()
+            .createSerializationContext(NbtOps.INSTANCE), merchantoffers).getOrThrow()
         );
       }
     }
@@ -170,7 +176,17 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack stack) {
-    return null;
+    if (!level.isClientSide()) {
+      if (getTradingPlayer() != null && getTradingPlayer() != player) {
+        // If another player is already trading, we can't open the trading screen
+        return InteractionResult.FAIL;
+      }
+
+      this.setTradingPlayer(player);
+      this.openTradingScreen(player, Component.empty(), xpLevel);
+    }
+
+    return InteractionResult.CONSUME;
   }
 
   @Override
@@ -205,7 +221,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillagerTrades.TRADES.get(VillagerProfession.CLERIC);
 
     if (int2objectmap != null && !int2objectmap.isEmpty()) {
-      VillagerTrades.ItemListing[] avillagertrades$itemlisting = int2objectmap.get(level);
+      VillagerTrades.ItemListing[] avillagertrades$itemlisting = int2objectmap.get(xpLevel);
       if (avillagertrades$itemlisting != null) {
         MerchantOffers merchantoffers = this.getOffers();
         this.addOffersFromItemListings(merchantoffers, avillagertrades$itemlisting, 2);
@@ -263,7 +279,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   }
 
   private boolean shouldIncreaseLevel() {
-    return VillagerData.canLevelUp(level) && this.xp >= VillagerData.getMaxXpPerLevel(level);
+    return VillagerData.canLevelUp(xpLevel) && this.xp >= VillagerData.getMaxXpPerLevel(xpLevel);
   }
 
 
