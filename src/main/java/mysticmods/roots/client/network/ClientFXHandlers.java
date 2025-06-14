@@ -1,6 +1,5 @@
 package mysticmods.roots.client.network;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.overlay.WarningOverlay;
@@ -865,12 +864,21 @@ public class ClientFXHandlers {
 
       Vec3 spawnPos = Vec3.atBottomCenterOf(pos).add(0, 1.6, 0);
 
-      int total = 7 + random.nextInt(8);
+
+      int total = (7 + random.nextInt(8)) * 3;
+      int baseDelay = 10; // base starting delay
+      int maxSpread = 80; // total maximum spread across the whole sequence
 
       for (int j = 0; j < total; j++) {
+        double linearProgress = (double) j / total; // 0.0 -> 1.0
+        double curvedProgress = Math.pow(linearProgress, 0.4);
+        int spreadDelay = (int) (curvedProgress * maxSpread);
+        int jitter = random.nextInt(5);
+        int delay = baseDelay + spreadDelay + jitter;
         Vec3 offset = spawnPos;
         Minecraft.getInstance().level.addParticle(
-            RootsParticleOptions.builder(ModParticles.ITEM).item(item).delay(20+j*2+random.nextInt(12)+random.nextInt(12)+random.nextInt(6)).build(),
+            RootsParticleOptions.builder(ModParticles.GROVE_ITEM).item(item)
+                .delay(delay).build(),
             offset.x, offset.y, offset.z,
             dest.x, dest.y, dest.z
         );

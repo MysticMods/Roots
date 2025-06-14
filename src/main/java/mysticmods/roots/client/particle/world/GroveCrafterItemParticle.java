@@ -6,6 +6,7 @@ import mysticmods.roots.util.VecUtil;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -20,11 +21,11 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
     Vec3 start = new Vec3(x, y, z);
     this.lifetime = AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS;
     this.quadSize = 0.025f + random.nextFloat() * 0.01f;
+    this.rollAmount = random.nextFloat() * 0.1f;
     this.origin = new Vec3(x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2);
     this.destination = new Vec3(xSpeed, ySpeed, zSpeed);
     this.delayedRender = false;
 
-    this.rollAmount = random.nextFloat() * 0.1f;
     this.defaultMovement = false;
     this.defaultAlpha = false;
     this.defaultColor = false;

@@ -240,7 +240,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
       float progress = Mth.clamp(this.visualAnimationTicks / (float) AnimationValues.PEDESTAL_ANIMATION_TICKS, 0.0f, 1.0f);
 
-      if (progress < 0.75f) {
+      if (progress < 0.65f) {
         float y = pPos.getY() + (float) offset();
 
         if (progress <= 0.25f) {

@@ -70,7 +70,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROVE_CRAFTER = PARTICLES.register("grove_crafter", () -> new RootsParticleOptions.Type(false));
 
   // "Special"
-  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> ITEM = PARTICLES.register("item", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROVE_ITEM = PARTICLES.register("grove_item", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);

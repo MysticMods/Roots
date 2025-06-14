@@ -247,11 +247,11 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.TEMPORAL_MORASS.get(), MoveRandomlyInAABBParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GROVE_CRAFTER.get(), GroveCrafterParticle.Provider::new);
 
+    event.registerSpecial(ModParticles.GROVE_ITEM.get(), new GroveCrafterItemParticle.Provider());
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
     event.registerSpecial(ModParticles.LIFE_DRAIN_EMITTER.get(), new EntityEmitter.LifeDrainProvider());
-    event.registerSpecial(ModParticles.ITEM.get(), new GroveCrafterItemParticle.Provider());
 
     BoltRenderer.registerRenderPreset(RenderPreset.LIGHTNING, RootsRenderTypes.ROOTS_LIGHTNING);
 
