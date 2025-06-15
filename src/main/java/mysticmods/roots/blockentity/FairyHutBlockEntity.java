@@ -18,6 +18,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -55,6 +56,8 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   private boolean increaseProfessionLevelOnUpdate;
   private int updateMerchantTimer;
+
+  private Tag offersTag = null;
 
   public FairyHutBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.FAIRY_HUT.get(), pWorldPosition, pBlockState);
@@ -145,11 +148,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
       this.xpLevel = compound.getInt("level");
     }
     if (compound.contains("Offers")) {
-      // TODO: Is this problematic on the client side?
-      MerchantOffers.CODEC
-          .parse(this.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE), compound.get("Offers"))
-          .resultOrPartial(Util.prefix("Failed to load offers: ", RootsAPI.LOG::warn))
-          .ifPresent(p_323775_ -> this.offers = p_323775_);
+      this.offersTag = compound.get("Offers");
     }
   }
 
@@ -207,6 +206,16 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   public MerchantOffers getOffers() {
     if (getLevel().isClientSide()) {
       throw new IllegalStateException("Cannot load trading offers on the client side.");
+    }
+
+    if (this.offersTag != null) {
+      MerchantOffers.CODEC
+          .parse(this.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE), offersTag)
+          .resultOrPartial(Util.prefix("Failed to load offers: ", RootsAPI.LOG::warn))
+          .ifPresent(p_323775_ -> {
+            this.offers = p_323775_;
+            this.offersTag = null;
+          });
     }
 
     if (this.offers == null) {
