@@ -28,7 +28,7 @@ public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBloc
       slot++;
       pPoseStack.pushPose();
       int uses = Math.max(0, pBlockEntity.getUses());
-      random.setSeed(((long) item.getItem().hashCode() * slot) ^ uses);
+      random.setSeed(((item.getItem().hashCode() & 0xFFFFFFFFL) * 31 + slot) * 31 + uses);
       pPoseStack.translate(0.475 + random.nextFloat() / 20.0, 0.15 + random.nextFloat() / 20.0, 0.475 + random.nextFloat() / 20);
       pPoseStack.scale(0.8f, 0.8f, 0.8f);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(random.nextInt(360)));
