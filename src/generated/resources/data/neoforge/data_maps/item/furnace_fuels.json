@@ -15,6 +15,9 @@
     "roots:grove_pedestal": {
       "burn_time": 100
     },
+    "roots:growth_amplifier": {
+      "burn_time": 300
+    },
     "roots:inferno_bulb": {
       "burn_time": 600
     },

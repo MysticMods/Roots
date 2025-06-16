@@ -140,6 +140,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
         .getPath(), modLoc("block/complex/wildwood_pedestal"));
     withExistingParent(ModBlocks.DISPLAY_PEDESTAL.getKey().location()
         .getPath(), modLoc("block/complex/grove_pedestal"));
+    withExistingParent(ModBlocks.GROWTH_AMPLIFIER.getKey().location()
+        .getPath(), modLoc("block/complex/grove_amplifier"));
     // Wild roots are existing
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
 

@@ -16,6 +16,8 @@ public class ModelHolder {
   public static final ModelLayerLocation METEOR = new ModelLayerLocation(RootsAPI.rl("meteor"), "main");
   public static final ModelLayerLocation ROSE_THORNS = new ModelLayerLocation(RootsAPI.rl("rose_thorns"), "main");
   public static final ModelLayerLocation JERBOA = new ModelLayerLocation(RootsAPI.rl("jerboa"), "main");
+  public static final ModelLayerLocation AMPLIFIER_CENTER = new ModelLayerLocation(RootsAPI.rl("amplifier_center"), "main");
+  public static final ModelLayerLocation AMPLIFIER_OUTER = new ModelLayerLocation(RootsAPI.rl("amplifier_outer"), "main");
 
   public static void init() {
   }

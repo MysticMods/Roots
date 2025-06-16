@@ -4,14 +4,10 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.reference.AnimationValues;
-import mysticmods.roots.blockentity.inventory.LimitedItemStackHandler;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
-import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.SimpleNoise;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -19,11 +15,9 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -31,64 +25,29 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity, ClientTickBlockEntity {
+public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity, ClientTickBlockEntity {
+  public float ticks;
+  public float rotationAccumulator;
+  public boolean animated;
+
   protected ItemStackHandler inventory;
-  protected int limit;
 
-  private ItemStack animationItem = ItemStack.EMPTY;
-  private int animationTicks = 0;
 
-  public float visualAnimationTicks = 0.0f;
-
-  public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int limit) {
-    super(pType, pWorldPosition, pBlockState);
-    this.limit = limit;
-    inventory = new LimitedItemStackHandler(1, this::getLimit) {
+  public AmplifierBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+    super(ModBlockEntities.GROWTH_AMPLIFIER.get(), pWorldPosition, pBlockState);
+    inventory = new ItemStackHandler(1) {
       @Override
       protected void onContentsChanged(int slot) {
-        if (PedestalBlockEntity.this.hasLevel() && !PedestalBlockEntity.this.getLevel().isClientSide()) {
-          PedestalBlockEntity.this.setChanged();
-          Level level = PedestalBlockEntity.this.getLevel();
-          BlockPos pos = PedestalBlockEntity.this.getBlockPos();
-          BlockState state = PedestalBlockEntity.this.getBlockState();
+        if (AmplifierBlockEntity.this.hasLevel() && !AmplifierBlockEntity.this.getLevel().isClientSide()) {
+          AmplifierBlockEntity.this.setChanged();
+          Level level = AmplifierBlockEntity.this.getLevel();
+          BlockPos pos = AmplifierBlockEntity.this.getBlockPos();
+          BlockState state = AmplifierBlockEntity.this.getBlockState();
           level.sendBlockUpdated(pos, state, state, 8);
           level.invalidateCapabilities(pos);
         }
       }
     };
-  }
-
-  public PedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState, int limit) {
-    this(ModBlockEntities.PEDESTAL.get(), pWorldPosition, pBlockState, limit);
-  }
-
-  public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
-    this(pType, pWorldPosition, pBlockState, Item.DEFAULT_MAX_STACK_SIZE);
-  }
-
-  public PedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-    this(ModBlockEntities.PEDESTAL.get(), pWorldPosition, pBlockState, Item.DEFAULT_MAX_STACK_SIZE);
-  }
-
-  public int getLimit() {
-    return limit;
-  }
-
-  public void animate() {
-    if (!level.isClientSide()) {
-      this.animationTicks = AnimationValues.PEDESTAL_ANIMATION_TICKS;
-      this.animationItem = inventory.getStackInSlot(0).copy();
-      setChanged();
-      updateViaState();
-    }
-  }
-
-  public int getAnimateTick() {
-    return animationTicks;
-  }
-
-  public boolean isAnimating() {
-    return this.animationTicks > 0;
   }
 
   @Override
@@ -155,12 +114,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pProvider) {
     super.saveAdditional(pTag, pProvider);
-    if (!animationItem.isEmpty()) {
-      pTag.put("animationItem", animationItem.save(pProvider));
-    }
-    pTag.putInt("animationTicks", animationTicks);
     pTag.put("inventory", inventory.serializeNBT(pProvider));
-    pTag.putInt("limit", limit);
   }
 
   @Override
@@ -168,20 +122,6 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     super.loadAdditional(pTag, provider);
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
-    }
-    if (pTag.contains("limit", Tag.TAG_INT)) {
-      limit = pTag.getInt("limit");
-    } else {
-      limit = 64;
-    }
-    if (pTag.contains("animationItem", Tag.TAG_COMPOUND)) {
-      animationItem = ItemStack.parse(provider, pTag.getCompound("animationItem")).orElse(ItemStack.EMPTY);
-    } else {
-      animationItem = ItemStack.EMPTY;
-    }
-    this.animationTicks = pTag.getInt("animationTicks");
-    if (this.animationTicks == AnimationValues.PEDESTAL_ANIMATION_TICKS) {
-      this.visualAnimationTicks = 0.0f;
     }
   }
 
@@ -195,9 +135,6 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   public ItemStack getHeldItem() {
-    if (this.animationTicks > 0 && !this.animationItem.isEmpty()) {
-      return this.animationItem;
-    }
     return inventory.getStackInSlot(0);
   }
 
@@ -223,46 +160,16 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   // TODO: Block ticker
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    if (this.animationTicks > 0) {
-      this.animationTicks--;
-      if (this.animationTicks == 0) {
-        this.animationItem = ItemStack.EMPTY;
-      }
-      setChanged();
-      updateViaState();
-    }
   }
 
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
-    if (this.animationTicks > 0) {
-      this.visualAnimationTicks += 1.0f;
+    this.ticks += 1f;
 
-      float progress = Mth.clamp(this.visualAnimationTicks / (float) AnimationValues.PEDESTAL_ANIMATION_TICKS, 0.0f, 1.0f);
+    float time = ticks * 0.02f;
+    float baseSpeed = 0.65f;
+    float speedMod = SimpleNoise.noise(time * 0.4f) * 0.8f + 1.0f;
 
-      if (progress < 0.65f) {
-        float y = pPos.getY() + (float) offset();
-
-        if (progress <= 0.25f) {
-          float liftProgress = progress / 0.25f;
-          y += Mth.lerp(liftProgress, 0.0f, 0.6f) + 0.1f;
-        } else {
-          y += 0.6f;
-        }
-
-        for (int i = 0; i < 5; i++) {
-          double x = pPos.getX() + 0.5 + (pLevel.random.nextDouble() - 0.5) * 0.2;
-          double z = pPos.getZ() + 0.5 + (pLevel.random.nextDouble() - 0.5) * 0.2;
-
-          // Spawn particles at the pedestal
-          pLevel.addParticle(
-              RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).color(ModSpells.WILDFIRE).build(),
-              x, y, z,
-              pLevel.getRandom().nextDouble() * 0.01, (pLevel.random.nextDouble() * 0.05), pLevel.getRandom()
-                  .nextDouble() * 0.01
-          );
-        }
-      }
-    }
+    this.rotationAccumulator += baseSpeed * speedMod;
   }
 }

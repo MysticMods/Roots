@@ -22,6 +22,7 @@ public class ModBlockEntities {
 
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PedestalBlockEntity>> PEDESTAL = BLOCK_ENTITIES.register("pedestal", () -> BlockEntityType.Builder.of(PedestalBlockEntity::new, ModBlocks.RITUAL_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get(), ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), ModBlocks.DISPLAY_PEDESTAL.get(), ModBlocks.GROVE_PEDESTAL.get())
       .build(null));
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AmplifierBlockEntity>> GROWTH_AMPLIFIER = BLOCK_ENTITIES.register("grove_amplifier", () -> BlockEntityType.Builder.of(AmplifierBlockEntity::new, ModBlocks.GROWTH_AMPLIFIER.get()).build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MortarBlockEntity>> MORTAR = BLOCK_ENTITIES.register("mortar", () -> BlockEntityType.Builder.of(MortarBlockEntity::new, ModBlocks.MORTAR.get())
       .build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GroveCrafterBlockEntity>> GROVE_CRAFTER = BLOCK_ENTITIES.register("grove_crafter", () -> BlockEntityType.Builder.of(GroveCrafterBlockEntity::new, ModBlocks.GROVE_CRAFTER.get())

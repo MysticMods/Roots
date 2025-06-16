@@ -100,6 +100,7 @@ public class RootsTags {
     public static final TagKey<Block> LIMITED_PEDESTALS = modTag("pedestals/limited");
 
     public static final TagKey<Block> DISPLAY_PEDESTALS = modTag("pedestals/display");
+    public static final TagKey<Block> AMPLIFIERS = modTag("amplifiers");
 
     // Pyres (does not include decorative)
     public static final TagKey<Block> PYRES = modTag("pyres");

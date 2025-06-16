@@ -1,11 +1,9 @@
 package mysticmods.roots.block;
 
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.blockentity.PedestalBlockEntity;
+import mysticmods.roots.blockentity.AmplifierBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
-import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.level.BlockGetter;
@@ -16,23 +14,19 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PedestalBlock extends UseDelegatedBlock {
-  public PedestalBlock(Properties p_49795_) {
+public class AmplifierBlock extends UseDelegatedBlock {
+  public AmplifierBlock(Properties p_49795_) {
     super(p_49795_);
   }
 
   @Nullable
   @Override
   public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-    if (pState.is(RootsTags.Blocks.LIMITED_PEDESTALS)) {
-      return new PedestalBlockEntity(ModBlockEntities.PEDESTAL.get(), pPos, pState, 1);
-    }
-    return new PedestalBlockEntity(ModBlockEntities.PEDESTAL.get(), pPos, pState);
+    return new AmplifierBlockEntity(pPos, pState);
   }
 
   @Override
@@ -57,30 +51,8 @@ public abstract class PedestalBlock extends UseDelegatedBlock {
     }
   }
 
-  public static class GrovePedestalBlock extends PedestalBlock {
-    public GrovePedestalBlock(Properties p_49795_) {
-      super(p_49795_);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-      return Shapes.GROVE_PEDESTAL;
-    }
-
-    @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-      return new PedestalBlockEntity(pPos, pState, 1);
-    }
-  }
-
-  public static class WildwoodPedestalBlock extends PedestalBlock {
-    public WildwoodPedestalBlock(Properties p_49795_) {
-      super(p_49795_);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-      return Shapes.GROVE_PEDESTAL;
-    }
+  @Override
+  protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    return Shapes.AMPLIFIER;
   }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "tag": "roots:runestone"
+    },
+    "W": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "WRW",
+    " W ",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:growth_amplifier"
+  }
+}

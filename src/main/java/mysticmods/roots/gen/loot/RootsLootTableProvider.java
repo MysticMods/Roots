@@ -366,6 +366,7 @@ public class RootsLootTableProvider {
       dropSelf(ModBlocks.GROVE_PEDESTAL.get());
       dropSelf(ModBlocks.WILDWOOD_PEDESTAL.get());
       dropSelf(ModBlocks.DISPLAY_PEDESTAL.get());
+      dropSelf(ModBlocks.GROWTH_AMPLIFIER.get());
       add(ModBlocks.WILD_ROOTS.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
               .setRolls(ConstantValue.exactly(1f))

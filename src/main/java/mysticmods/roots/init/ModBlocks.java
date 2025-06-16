@@ -207,6 +207,10 @@ public class ModBlocks {
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
   ));
 
+  public static final DeferredHolder<Block, AmplifierBlock> GROWTH_AMPLIFIER = BLOCKS.register("growth_amplifier", () -> new AmplifierBlock(BlockBehaviour.Properties.of()
+      .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
+      .requiresCorrectToolForDrops()));
+
   public static final DeferredHolder<Block, FairyHutBlock> RED_FAIRY_HUT = BLOCKS.register("red_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
       .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> BROWN_FAIRY_HUT = BLOCKS.register("brown_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()

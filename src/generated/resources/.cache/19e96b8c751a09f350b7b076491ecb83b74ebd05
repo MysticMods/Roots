@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-13T12:47:10.5162402	Block States: roots
+// 1.21.1	2025-06-15T18:53:59.6126974	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -23,6 +23,7 @@ d256cf7816bc89f7c5f024790771665e58ad52e2 assets/roots/blockstates/elemental_soil
 8689bdbdd69fd55eafb855074519c75569eff8e5 assets/roots/blockstates/granite_quartz_ore.json
 bdcef51b9b44a3cb63cfe45a6bb1fd271b117257 assets/roots/blockstates/grove_crafter.json
 7f7849a45d6a7635bf3aa74d137358e27a542df5 assets/roots/blockstates/grove_pedestal.json
+cb3a8c30f0db71c2927e725aea885f45c54bce37 assets/roots/blockstates/growth_amplifier.json
 174010471bc170cbf4ed85e99069f98b4a5cb328 assets/roots/blockstates/hanging_grove_moss.json
 6093094aeb76fdbc8037b4e8aece713adf957b3e assets/roots/blockstates/incense_burner.json
 1f26b4cf43538207ac91424eacf5cca6f27d3962 assets/roots/blockstates/inferno_bulb_crop.json
@@ -192,6 +193,7 @@ fa336b3dca6f7e81deeb93a0b27b1b249a864b43 assets/roots/models/block/fungal_grove_
 06eb1d5ea6dd0dd11106b80a054fd03eae4f0605 assets/roots/models/block/grove_crafter_active.json
 786bbb629007ccf3a4a90470709ec1295a95b742 assets/roots/models/block/grove_crafter_inactive.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/block/grove_pedestal.json
+0c5672c076d20ebab759b98069f4cdf6b0386bb6 assets/roots/models/block/growth_amplifier.json
 c754625b4a2af545f705145c79c0e84726594acf assets/roots/models/block/hanging_grove_moss.json
 820e46af052e2581572f598ff045090cbed78466 assets/roots/models/block/incense_burner.json
 4f0b76e814e04279d47fcda2fe2ce0ad2e5240a5 assets/roots/models/block/inferno_bulb_0.json

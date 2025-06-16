@@ -864,8 +864,8 @@ public class ClientFXHandlers {
 
       Vec3 spawnPos = Vec3.atBottomCenterOf(pos).add(0, 1.6, 0);
 
-
-      int total = (7 + random.nextInt(8)) * 3;
+      // TODO: Delay actually spawning some of these
+      int total = (7 + random.nextInt(8));
       int baseDelay = 10; // base starting delay
       int maxSpread = 80; // total maximum spread across the whole sequence
 
@@ -875,11 +875,11 @@ public class ClientFXHandlers {
         int spreadDelay = (int) (curvedProgress * maxSpread);
         int jitter = random.nextInt(5);
         int delay = baseDelay + spreadDelay + jitter;
-        Vec3 offset = spawnPos;
+        // TODO: Generate a stream of additive particles that spiral around the average of the bezier curves
         Minecraft.getInstance().level.addParticle(
             RootsParticleOptions.builder(ModParticles.GROVE_ITEM).item(item)
                 .delay(delay).build(),
-            offset.x, offset.y, offset.z,
+            spawnPos.x, spawnPos.y, spawnPos.z,
             dest.x, dest.y, dest.z
         );
       }

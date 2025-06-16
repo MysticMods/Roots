@@ -3,180 +3,93 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mysticmods.roots.api.reference.AnimationValues;
-import mysticmods.roots.blockentity.PedestalBlockEntity;
-import mysticmods.roots.client.RenderTickHandler;
-import net.minecraft.client.Minecraft;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.blockentity.AmplifierBlockEntity;
+import mysticmods.roots.client.model.ModelHolder;
+import mysticmods.roots.util.SimpleNoise;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.resources.ResourceLocation;
 
-public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
-  public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+public class AmplifierBlockEntityRenderer implements BlockEntityRenderer<AmplifierBlockEntity> {
+  private static final ResourceLocation TEXTURE = RootsAPI.rl("textures/entity/amplifier.png");
+
+  private static final String AMPLIFIER_CENTER = "amplifier_center";
+  private static final String AMPLIFIER_OUTER = "amplifier_outer";
+  private final ModelPart amplifierCenter;
+  private final ModelPart amplifierOuter;
+
+  public AmplifierBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    ModelPart amplifierModel = context.bakeLayer(ModelHolder.AMPLIFIER_CENTER);
+    ModelPart amplifierModel2 = context.bakeLayer(ModelHolder.AMPLIFIER_OUTER);
+
+    this.amplifierCenter = amplifierModel.getChild(AMPLIFIER_CENTER);
+    this.amplifierOuter = amplifierModel2.getChild(AMPLIFIER_OUTER);
   }
 
-  // TODO: Render more when there's more
+  public static LayerDefinition createOuterLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition part = mesh.getRoot();
+    PartDefinition outer = part.addOrReplaceChild(AMPLIFIER_OUTER, CubeListBuilder.create().texOffs(0, 0)
+        .addBox(-2.5F, 0.0F, -2.5f, 5.0f, 5.0f, 5.0f), PartPose.ZERO);
+    return LayerDefinition.create(mesh, 32, 32);
+  }
+
+  public static LayerDefinition createInnerLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition part = mesh.getRoot();
+    PartDefinition inner = part.addOrReplaceChild(AMPLIFIER_CENTER, CubeListBuilder.create().texOffs(0, 10)
+        .addBox(-1.5F, 1f, -1.5F, 3.0f, 3.0f, 3.0f), PartPose.ZERO);
+    return LayerDefinition.create(mesh, 32, 32);
+  }
+
   @Override
-  public void render(PedestalBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-    ItemStack inSlot = pBlockEntity.getHeldItem();
-    if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
-      pPoseStack.pushPose();
-      VoxelShape pShape = pBlockEntity.getBlockState()
-          .getCollisionShape(pBlockEntity.getLevel(), pBlockEntity.getBlockPos());
-      VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
-      PoseStack.Pose pose = pPoseStack.last();
+  public void render(AmplifierBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+    float ticks = pBlockEntity.ticks + pPartialTick;
+    float time = ticks * 0.02f;
 
-      double pX = 0;
-      double pY = 0;
-      double pZ = 0;
-      float pRed, pGreen, pBlue;
-      float pAlpha = 1f;
+    float rotationY = pBlockEntity.rotationAccumulator;
 
-      BlockState state = pBlockEntity.getBlockState();
+    float swayNoise = SimpleNoise.noise(time * 0.15f);
+    float swayAmplitude = swayNoise * 12f;
 
-/*      if (state.hasProperty(PedestalBlock.LOCKED) && state.getValue(PedestalBlock.LOCKED)) {
-        pRed = 0f;
-        pGreen = 1f;
-        pBlue = 0f;
-      } else */
-      if (inSlot.isEmpty()) {
-        pRed = 1f;
-        pBlue = 1f;
-        pGreen = 0f;
-      } else {
-        pRed = 1f;
-        pGreen = 0f;
-        pBlue = 0f;
-      }
+    float rotationX = (float)(Math.sin(ticks * 0.06) * swayAmplitude);
+    float rotationZ = (float)(Math.cos(ticks * 0.06) * swayAmplitude);
 
-      pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
-        float f = (float) (pMaxX - pMinX);
-        float f1 = (float) (pMaxY - pMinY);
-        float f2 = (float) (pMaxZ - pMinZ);
-        float f3 = Mth.sqrt(f * f + f1 * f1 + f2 * f2);
-        f /= f3;
-        f1 /= f3;
-        f2 /= f3;
-        pConsumer.addVertex(pose.pose(), (float) (pMinX + pX), (float) (pMinY + pY), (float) (pMinZ + pZ))
-            .setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
-        pConsumer.addVertex(pose.pose(), (float) (pMaxX + pX), (float) (pMaxY + pY), (float) (pMaxZ + pZ))
-            .setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
-      });
-      pPoseStack.popPose();
-    }
+    float yOffset = (float)(Math.sin(ticks * 0.015) * 0.05f);
 
-    // original single item rendering
-/*    if (!inSlot.isEmpty()) {
-      int loc = pBlockEntity.getBlockPos().hashCode();
-      pPoseStack.pushPose();
-      pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
-      pPoseStack.scale(0.5f, 0.5f, 0.5f);
-      pPoseStack.mulPose(Vector3f.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-      Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemTransforms.TransformType.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, 0);
-      pPoseStack.popPose();
-    }*/
+    float pulse = (float)(Math.sin(ticks * 0.02) * 0.05f + 1.1f);
 
-    RandomSource random = RandomSource.create();
+    float coreNoise = SimpleNoise.noise(time * 0.3f + 100f);
+    float coreRotation = ticks * 0.1f * (coreNoise * 0.2f + 1.0f);
 
-    int loc = pBlockEntity.getBlockPos().hashCode();
+    pPoseStack.pushPose();
+    pPoseStack.translate(0.5, 0.9 + yOffset, 0.5);
+    pPoseStack.scale(0.7f * pulse, 0.7f * pulse, 0.7f * pulse);
 
-    if (!inSlot.isEmpty()) {
-      pPoseStack.pushPose();
-      BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer()
-          .getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
-      boolean flag = bakedmodel.isGui3d();
-      boolean isanimating = pBlockEntity.isAnimating();
-      int j = this.getRenderAmount(isanimating ? inSlot.getCount() - 1 : inSlot.getCount());
-      if (isanimating && inSlot.getCount() == 1) {
-        j = 0;
-      }
+    // Outer rotation
+    pPoseStack.mulPose(Axis.YP.rotationDegrees(rotationY));
+    pPoseStack.mulPose(Axis.XP.rotationDegrees(rotationX));
+    pPoseStack.mulPose(Axis.ZP.rotationDegrees(rotationZ));
 
-      pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
-      pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
+    pPoseStack.pushPose();
+    pPoseStack.mulPose(Axis.YP.rotationDegrees(coreRotation));
+    VertexConsumer center = pBufferSource.getBuffer(RenderType.entitySolid(TEXTURE));
+    this.amplifierCenter.render(pPoseStack, center, pPackedLight, pPackedOverlay);
+    pPoseStack.popPose();
 
-      if (!flag) {
-        float f9 = -0.09375F * (float) (j - 1) * 0.5F;
-        pPoseStack.translate(0, 0, f9);
-      }
+    VertexConsumer outer = pBufferSource.getBuffer(RenderType.entityTranslucentEmissive(TEXTURE));
+    this.amplifierOuter.render(pPoseStack, outer, LightTexture.pack(15, 15), pPackedOverlay);
 
-      random.setSeed(loc);
-
-      for (int k = 0; k < j; ++k) {
-        pPoseStack.pushPose();
-        if (k > 0) {
-          if (flag) {
-            float f11 = (random.nextFloat() * 2.0F - 1.0F) * 0.15F;
-            float f13 = (random.nextFloat() * 2.0F - 1.0F) * 0.15F;
-            float f10 = (random.nextFloat() * 2.0F - 1.0F) * 0.15F;
-            pPoseStack.translate(f11, f13, f10);
-          } else {
-            float f12 = (random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
-            float f14 = (random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
-            pPoseStack.translate(f12, f14, 0.0D);
-          }
-        }
-
-        Minecraft.getInstance().getItemRenderer()
-            .render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
-        pPoseStack.popPose();
-        if (!flag) {
-          pPoseStack.translate(0.0, 0.0, 0.09375F);
-        }
-      }
-
-      pPoseStack.popPose();
-
-      if (isanimating) {
-        pPoseStack.pushPose();
-        pPoseStack.translate(0.5, pBlockEntity.offset(), 0.5);
-        pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-
-        float liftAmount;
-        float scaleAmount;
-
-        float progress = (pBlockEntity.visualAnimationTicks + pPartialTick) / AnimationValues.PEDESTAL_ANIMATION_TICKS;
-        progress = Mth.clamp(progress, 0.0f, 1.0f);
-
-        if (progress <= 0.25f) {
-          float liftProgress = progress / 0.25f;
-          liftAmount = Mth.lerp(liftProgress, 0.0f, 0.6f);
-          scaleAmount = 1f;
-        } else {
-          float shrinkProgress = (progress - 0.25f) / 0.75f;
-          liftAmount = 0.6f;
-          scaleAmount = Mth.lerp(shrinkProgress, 1.0f, 0.4f);
-        }
-
-        pPoseStack.translate(0, liftAmount, 0);
-        pPoseStack.scale(scaleAmount, scaleAmount, scaleAmount);
-        Minecraft.getInstance().getItemRenderer()
-            .render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
-        pPoseStack.popPose();
-      }
-    }
-  }
-
-  protected int getRenderAmount(int count) {
-    int i = 1;
-    if (count > 48) {
-      i = 5;
-    } else if (count > 32) {
-      i = 4;
-    } else if (count > 16) {
-      i = 3;
-    } else if (count > 1) {
-      i = 2;
-    }
-
-    return i;
+    pPoseStack.popPose();
   }
 }
