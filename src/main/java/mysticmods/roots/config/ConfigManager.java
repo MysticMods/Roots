@@ -124,11 +124,11 @@ public class ConfigManager {
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for Growth Amplifiers").push("growth_amplifier");
     GROWTH_AMPLIFIER_BOUNDS_Z = COMMON_BUILDER.comment("the Z half value for the size of the Growth Amplifier aoe bounding box")
-        .defineInRange("growth_amplifier_bounds_z", 4, 1, Integer.MAX_VALUE);
+        .defineInRange("growth_amplifier_bounds_z", 2, 1, Integer.MAX_VALUE);
     GROWTH_AMPLIFIER_BOUNDS_X = COMMON_BUILDER.comment("the X half value for the size of the Growth Amplifier aoe bounding box")
-        .defineInRange("growth_amplifier_bounds_x", 4, 1, Integer.MAX_VALUE);
+        .defineInRange("growth_amplifier_bounds_x", 2, 1, Integer.MAX_VALUE);
     GROWTH_AMPLIFIER_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Growth Amplifier aoe bounding box")
-        .defineInRange("growth_amplifier_bounds_y", 3, 1, Integer.MAX_VALUE);
+        .defineInRange("growth_amplifier_bounds_y", 2, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for sprout breeding rewards").push("sprouts");
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
