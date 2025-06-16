@@ -23,7 +23,7 @@ import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.util.ItemUtil;
-import mysticmods.roots.util.RitualPositionCache;
+import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -95,7 +95,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private UUID lastUuid;
 
   private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
-  private RitualPositionCache cache;
+  private PositionCache cache;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -246,13 +246,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
     if (cache == null || !this.cache.getPosition().equals(p)) {
       BoundingBox bb = currentRitual.getBoundingBox().moved(p.getX(), p.getY(), p.getZ());
-      this.cache = new RitualPositionCache(p, bb, new ArrayList<>(BlockPos.betweenClosedStream(bb)
+      this.cache = new PositionCache(p, bb, new ArrayList<>(BlockPos.betweenClosedStream(bb)
           .map(BlockPos::immutable).toList()));
     }
   }
 
   @Nullable
-  public RitualPositionCache getCache() {
+  public PositionCache getCache() {
     return cache;
   }
 

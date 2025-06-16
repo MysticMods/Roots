@@ -1,7 +1,5 @@
 package mysticmods.roots.ritual;
 
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
@@ -18,7 +16,7 @@ import mysticmods.roots.mixin.accessor.AccessorMixinLootTable;
 import mysticmods.roots.network.client.fx.AnimalHarvestFXPacket;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
-import mysticmods.roots.util.RitualPositionCache;
+import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -59,7 +57,7 @@ public class AnimalHarvestRitual extends Ritual {
   private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
 
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     FakePlayerUtil.buildItems(pLevel, randomSource);
 
     IntSet marked = new IntOpenHashSet();

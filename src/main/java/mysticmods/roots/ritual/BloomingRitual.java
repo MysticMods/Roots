@@ -10,7 +10,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.util.RitualPositionCache;
+import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -36,7 +36,11 @@ import java.util.function.BiPredicate;
 public class BloomingRitual extends Ritual {
   private int count;
 
-  private static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE = (level, pos) -> {
+  public static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE = (level, pos) -> {
+    BlockPos below = pos.below();
+    if (level.isEmptyBlock(below)) {
+      return false;
+    }
     BlockPos above = pos.above();
     return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above())
         .isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos)
@@ -52,7 +56,7 @@ public class BloomingRitual extends Ritual {
   // TODO:
   @SuppressWarnings("deprecation")
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       List<Pair<BlockPos, PedestalBlockEntity>> pedestals = blockEntity.pedestals(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
 

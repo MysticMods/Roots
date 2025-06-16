@@ -10,7 +10,7 @@ import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
-import mysticmods.roots.util.RitualPositionCache;
+import mysticmods.roots.util.PositionCache;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -80,13 +80,13 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   public void removed (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
-  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RitualPositionCache cache, RandomSource random) {
+  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, PositionCache cache, RandomSource random) {
     int dur = getDuration() - blockEntity.getLifetime();
     functionalTick(pLevel, pPos, pState, cache, blockEntity, dur, random);
     animationTick(pLevel, pPos, pState, cache.getBoundingBox(), blockEntity, dur, random);
   }
 
-  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
+  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   // Still executed on the server
   protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);

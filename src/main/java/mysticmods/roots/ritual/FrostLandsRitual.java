@@ -8,7 +8,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.network.client.fx.HealFXPacket;
-import mysticmods.roots.util.RitualPositionCache;
+import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -126,7 +126,7 @@ public class FrostLandsRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     List<BlockPos> affectedPositions = new ArrayList<>();
 
     if (duration % healInterval == 0) {

@@ -33,6 +33,10 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Y;
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
 
+  public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_X;
+  public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_Y;
+  public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_Z;
+
   public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_ZX;
   public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_Y;
 
@@ -117,7 +121,15 @@ public class ConfigManager {
         .defineInRange("grove_stone_power_range_y", 30, 1, Integer.MAX_VALUE);
     GROVE_STONE_POWER_RANGE_Z = COMMON_BUILDER.comment("the Z half value for the size of the Grove Stone power range")
         .defineInRange("grove_stone_power_range_z", 30, 1, Integer.MAX_VALUE);
-
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.comment("Options for Growth Amplifiers").push("growth_amplifier");
+    GROWTH_AMPLIFIER_BOUNDS_Z = COMMON_BUILDER.comment("the Z half value for the size of the Growth Amplifier aoe bounding box")
+        .defineInRange("growth_amplifier_bounds_z", 4, 1, Integer.MAX_VALUE);
+    GROWTH_AMPLIFIER_BOUNDS_X = COMMON_BUILDER.comment("the X half value for the size of the Growth Amplifier aoe bounding box")
+        .defineInRange("growth_amplifier_bounds_x", 4, 1, Integer.MAX_VALUE);
+    GROWTH_AMPLIFIER_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Growth Amplifier aoe bounding box")
+        .defineInRange("growth_amplifier_bounds_y", 3, 1, Integer.MAX_VALUE);
+    COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for sprout breeding rewards").push("sprouts");
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
         .defineInRange("default_chance", 10, 1, 100);

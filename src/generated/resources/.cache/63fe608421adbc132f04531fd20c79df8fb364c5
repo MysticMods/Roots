@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-06T14:09:40.7197686	Roots Item Tags
+// 1.21.1	2025-06-16T20:09:07.2573798	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -114,6 +114,7 @@ a10f4893aa793d9a58932b14d983daca8e055665 data/roots/tags/item/grove_stones/funga
 ecd2f0dde1c61318a3c87219ac7830a7061e71ac data/roots/tags/item/grove_stones/sprouting.json
 bbbdabc47adfef24d589a4860b387406ffacd3bd data/roots/tags/item/grove_stones/twilight.json
 ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/item/grove_stones/wild.json
+817a6bd7f94e13b5fa1b350c0704f567d5d98d16 data/roots/tags/item/growth_amplifier_grasses.json
 a49f80806de2f40b79a2700f33930cc814298cf8 data/roots/tags/item/herbs.json
 d6ef38e38b2457620f02a7c7cd8c35b9915bded1 data/roots/tags/item/herbs/bafflecap.json
 e4c7774a71c33e82d562f08c73d3ee806325fd74 data/roots/tags/item/herbs/cloud_berry.json

@@ -23,6 +23,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector2d;
 
@@ -883,6 +884,31 @@ public class ClientFXHandlers {
             dest.x, dest.y, dest.z
         );
       }
+    }
+  }
+
+  public static void growthAmplifierGrew(BlockPos amplifier, Vec3 target) {
+    Level level = Minecraft.getInstance().level;
+    RandomSource random = level.getRandom();
+
+    Vec3 start = Vec3.atCenterOf(amplifier);
+
+    Vec3 diff = target.subtract(start).normalize();
+    Vec3 motion = diff.scale(0.1 + random.nextDouble() * 0.05);
+
+    for (int i = 0; i < 13; i++) {
+      Vec3 offset = start.add(
+          (random.nextDouble() - 0.5) * 0.2,
+          (random.nextDouble() - 0.5) * 0.2,
+          (random.nextDouble() - 0.5) * 0.2
+      );
+      level.addParticle(
+          RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).build(),
+          offset.x, offset.y, offset.z,
+          motion.x,
+          motion.y,
+          motion.z
+      );
     }
   }
 }

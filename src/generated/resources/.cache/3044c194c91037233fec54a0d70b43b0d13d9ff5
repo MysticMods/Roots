@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-15T18:53:59.6187674	Roots Block Tags
+// 1.21.1	2025-06-16T20:09:07.2523739	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -100,7 +100,7 @@ d17a97ae6e613b481dec932c38e92f9776fcf84c data/roots/tags/block/functional_pyres.
 277febcb81e6cdedb2c430d51bcd1850d597779d data/roots/tags/block/granite_ore_replaceables.json
 4fd76122f15f8ad5b0091e94cc3027e509642ac2 data/roots/tags/block/grove/elemental/crops.json
 e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/block/grove/sprout/crops.json
-c6123c1fda0f54c6a32ea680e5b174cc68529652 data/roots/tags/block/grove_consumers.json
+9ff44adde5c96c0def79db5af04db5475ab1bf64 data/roots/tags/block/grove_consumers.json
 eddcaa86bbcac9fa0953dab3bd03a9f687ecbed6 data/roots/tags/block/grove_crafter_hud_layer.json
 d66fd5801ed493567186dbdb2f7d2d91f4497aee data/roots/tags/block/grove_generators/elemental.json
 c05e998c718feb7c79e577ca9f09edc7225b3d22 data/roots/tags/block/grove_generators/fairy.json
@@ -122,6 +122,7 @@ ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/block/grove_stones/wild
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/force.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/reduce.json
+817a6bd7f94e13b5fa1b350c0704f567d5d98d16 data/roots/tags/block/growth_amplifier_grasses.json
 3f9791f6926dfe99b98612d18897e601ccdaa3d3 data/roots/tags/block/huts.json
 047b7c7631a4b09bd9bbdf8c77cfe781370cd790 data/roots/tags/block/logs/runed.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/block/logs/runed/acacia.json

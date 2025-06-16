@@ -327,6 +327,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(RootsTags.Items.ROTTEN_FLESH).add(Items.ROTTEN_FLESH);
 
+    this.copy(RootsTags.Blocks.GROWTH_AMPLIFIER_GRASSES, RootsTags.Items.GROWTH_AMPLIFIER_GRASSES);
+
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
     this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);

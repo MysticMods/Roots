@@ -14,18 +14,22 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiPredicate;
 
-public class RitualPositionCache {
+public class PositionCache {
   private final BlockPos position;
   private final AABB aabb;
   private final BoundingBox boundingBox;
   private final List<BlockPos> positions;
   private final Map<BiPredicate<Level, BlockPos>, RitualCacheEntry> cache = new HashMap<>();
 
-  public RitualPositionCache(BlockPos position, BoundingBox boundingBox, List<BlockPos> positions) {
+  public PositionCache(BlockPos position, BoundingBox boundingBox, List<BlockPos> positions) {
     this.boundingBox = boundingBox;
     this.positions = positions;
     this.position = position;
     this.aabb = AABB.of(boundingBox);
+  }
+
+  public PositionCache(BlockPos position, BoundingBox boundingBox) {
+    this(position, boundingBox, new ArrayList<>(BlockPos.betweenClosedStream(boundingBox).map(BlockPos::immutable).toList()));
   }
 
   public BlockPos getPosition() {

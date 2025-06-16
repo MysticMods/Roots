@@ -242,6 +242,8 @@ public class RootsTags {
 
     public static final TagKey<Block> HUTS = modTag("huts");
 
+    public static final TagKey<Block> GROWTH_AMPLIFIER_GRASSES = modTag("growth_amplifier_grasses");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
@@ -472,6 +474,8 @@ public class RootsTags {
     public static final TagKey<Item> RUNED_LOG_HERBS = modTag("runed_log_herbs");
 
     public static final TagKey<Item> ROTTEN_FLESH = modTag("rotten_flesh");
+
+    public static final TagKey<Item> GROWTH_AMPLIFIER_GRASSES = modTag("growth_amplifier_grasses");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

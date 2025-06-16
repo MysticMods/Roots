@@ -9,7 +9,7 @@ import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.entity.projectile.MeteorEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.util.RitualPositionCache;
+import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
@@ -23,7 +23,7 @@ public class FireStormRitual extends Ritual {
   private int count;
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       List<MeteorEntity> entities = pLevel.getEntitiesOfClass(MeteorEntity.class, pCache.getAABB());
       if (entities.size() < count) {
