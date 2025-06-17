@@ -2,15 +2,19 @@ package mysticmods.roots.ritual;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.PositionCache;
+import mysticmods.roots.util.ReputationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -38,11 +42,21 @@ public class GroveSupplicationRitual extends Ritual {
       if (blockEntity.getBoundingBox() != null) {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
           BlockState state = blockEntity.getLevel().getBlockState(pos);
-          if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL)) {
-            if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE)) {
-              if (!state.getValue(StateProperties.ACTIVE)) {
-                blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true));
-              }
+          // Activate all grove stones
+          if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE)) {
+            if (!state.getValue(StateProperties.ACTIVE)) {
+              blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true));
+            }
+          }
+          // Upgrade the ranks on everything else
+          if (state.hasProperty(StateProperties.GroveStone.RANK) && !state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.getBlock() instanceof GroveStoneBlock groveStone && blockEntity.getLastPlayer() != null) {
+            Grove grove = groveStone.getGrove().value();
+            Player player = blockEntity.getLastPlayer();
+            int rank = ReputationHelper.getRank(player, grove);
+            // TODO: Max rank???
+            int currentRank = state.getValue(GroveStoneBlock.RANK);
+            if (rank >= 0 && rank > currentRank) {
+              blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.GroveStone.RANK, rank));
             }
           }
         }
@@ -51,7 +65,8 @@ public class GroveSupplicationRitual extends Ritual {
   }
 
   @Override
-  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity
+      blockEntity, int duration, RandomSource randomSource) {
 
   }
 
