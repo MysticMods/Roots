@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:mortar/blaze_powder_from_magma_cream_2"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_magma_cream": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:magma_cream"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_magma_cream"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:mortar/blaze_powder_from_magma_cream_2"
+    ]
+  }
+}

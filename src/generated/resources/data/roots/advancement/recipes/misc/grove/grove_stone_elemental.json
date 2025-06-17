@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:grove/grove_stone_elemental"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_grove_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:grove_stones/primal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_grove_stone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:grove/grove_stone_elemental"
+    ]
+  }
+}

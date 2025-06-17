@@ -1,0 +1,59 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:grove_stones/primal"
+      },
+      {
+        "tag": "roots:herbs/pereskia"
+      },
+      {
+        "tag": "roots:herbs/pereskia"
+      },
+      {
+        "tag": "roots:herbs/pereskia"
+      },
+      {
+        "tag": "roots:herbs/pereskia"
+      },
+      {
+        "tag": "minecraft:bookshelf_books"
+      },
+      {
+        "item": "minecraft:compass"
+      },
+      {
+        "tag": "c:gems/emerald"
+      },
+      {
+        "tag": "c:gems/emerald"
+      },
+      {
+        "item": "roots:golden_knife"
+      }
+    ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "any",
+          "tag": "roots:grove_stones"
+        },
+        "require_active": true
+      }
+    ],
+    "player_conditions": [
+      {
+        "type": "roots:grove_rank_condition",
+        "grove": "roots:fairy",
+        "minimum_rank": 1
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:fairy_grove_stone"
+    }
+  }
+}

@@ -7,6 +7,7 @@ import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
+import mysticmods.roots.condition.GroveRankReputation;
 import mysticmods.roots.init.*;
 import mysticmods.roots.recipe.PouchDyeRecipe;
 import mysticmods.roots.recipe.grove.GrovePouchRecipe;
@@ -993,7 +994,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(c, RootsAPI.rl("magmatic_soil_from_elemental_soil_and_inferno_bulb"));
 
     RecipeSaver.saver().unlockedBy("has_elemental_soil", has(ModItems.ELEMENTAL_SOIL.get()))
-        .save(GroveRecipe.Builder.create().build( BaseRecipeData.Builder.create()
+        .save(GroveRecipe.Builder.create().build(BaseRecipeData.Builder.create()
             .requires(ModItems.ELEMENTAL_SOIL.get())
             .requires(ModItems.ELEMENTAL_SOIL.get())
             .requires(ModItems.ELEMENTAL_SOIL.get())
@@ -1821,7 +1822,144 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_ink_bottle", has(ModItems.INK_BOTTLE.get()))
         .save(c, RootsAPI.rl("writable_book_ink_bottle"));
 
+    MortarRecipe.Builder blazePowder1 = MortarRecipe.Builder.create().times(1);
+    BaseRecipeData.Builder blazePowderData = BaseRecipeData.Builder.create().requires(Tags.Items.RODS_BLAZE)
+        .result(Items.BLAZE_POWDER.builtInRegistryHolder(), 2).chanceOutput(Items.BLAZE_POWDER, 0.5f);
+    saver = RecipeSaver.saver().unlockedBy("has_blaze_rod", has(Tags.Items.RODS_BLAZE));
 
+    saver.save(blazePowder1.build(blazePowderData), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod"));
+    saver.save(blazePowder1.times(2)
+        .build(blazePowderData.multiplty(2)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_2"));
+    saver.save(blazePowder1.times(3)
+        .build(blazePowderData.multiplty(3)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_3"));
+    saver.save(blazePowder1.times(4)
+        .build(blazePowderData.multiplty(4)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_4"));
+    saver.save(blazePowder1.times(5)
+        .build(blazePowderData.multiplty(5)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_5"));
+
+    blazePowderData = BaseRecipeData.Builder.create().requires(Items.MAGMA_CREAM).result(Items.SLIME_BALL, 1)
+        .chanceOutput(Items.BLAZE_POWDER, 1f);
+    saver = RecipeSaver.saver().unlockedBy("has_magma_cream", has(Items.MAGMA_CREAM));
+    saver.save(MortarRecipe.Builder.create().times(1)
+        .build(blazePowderData), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream"));
+    saver.save(MortarRecipe.Builder.create().times(2)
+        .build(blazePowderData.multiplty(2)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_2"));
+    saver.save(MortarRecipe.Builder.create().times(3)
+        .build(blazePowderData.multiplty(3)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_3"));
+    saver.save(MortarRecipe.Builder.create().times(4)
+        .build(blazePowderData.multiplty(4)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_4"));
+    saver.save(MortarRecipe.Builder.create().times(5)
+        .build(blazePowderData.multiplty(5)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_5"));
+
+    // Grove Stones
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.SPROUTING_GROVE_STONE, 1)
+                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.WILDEWHEET_HERB)
+                .requires(RootsTags.Items.WILDEWHEET_HERB)
+                .requires(RootsTags.Items.WILDEWHEET_HERB)
+                .requires(RootsTags.Items.WILDEWHEET_HERB)
+                .requires(Tags.Items.SEEDS)
+                .requires(Tags.Items.SEEDS)
+                .requires(Tags.Items.SEEDS)
+                .requires(Tags.Items.BUCKETS)
+                .requires(Items.GOLDEN_HOE)
+                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(new GroveRankReputation(ModGroves.SPROUTING.get(), 1))), c, RootsAPI.rl("grove/grove_stone_sprouting"));
+
+    // Fungal
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.FUNGAL_GROVE_STONE, 1)
+                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.BAFFLECAP_HERB)
+                .requires(RootsTags.Items.BAFFLECAP_HERB)
+                .requires(RootsTags.Items.BAFFLECAP_HERB)
+                .requires(RootsTags.Items.BAFFLECAP_HERB)
+                .requires(Items.BROWN_MUSHROOM)
+                .requires(Items.RED_MUSHROOM)
+                .requires(Items.CRIMSON_FUNGUS)
+                .requires(Items.WARPED_FUNGUS)
+                .requires(Items.GOLDEN_SHOVEL)
+                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(new GroveRankReputation(ModGroves.FUNGAL.get(), 1))
+            ), c, RootsAPI.rl("grove/grove_stone_fungal"));
+
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.TWILIGHT_GROVE_STONE, 1)
+                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.MOONGLOW_HERB)
+                .requires(RootsTags.Items.MOONGLOW_HERB)
+                .requires(RootsTags.Items.MOONGLOW_HERB)
+                .requires(RootsTags.Items.MOONGLOW_HERB)
+                .requires(RootsTags.Items.MOONGLOW_HERB)
+                .requires(Tags.Items.GEMS_QUARTZ)
+                .requires(Tags.Items.FEATHERS)
+                .requires(RootsTags.Items.SILVER_INGOT)
+                .requires(Items.GOLDEN_SWORD)
+                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(new GroveRankReputation(ModGroves.TWILIGHT.get(), 1))
+            ), c, RootsAPI.rl("grove/grove_stone_twilight"));
+
+
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.ELEMENTAL_GROVE_STONE, 1)
+                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.CLOUD_BERRY_HERB)
+                .requires(RootsTags.Items.CLOUD_BERRY_HERB)
+                .requires(RootsTags.Items.INFERNO_BULB_HERB)
+                .requires(RootsTags.Items.INFERNO_BULB_HERB)
+                .requires(RootsTags.Items.DEWGONIA_HERB)
+                .requires(RootsTags.Items.DEWGONIA_HERB)
+                .requires(RootsTags.Items.STALICRIPE_HERB)
+                .requires(RootsTags.Items.STALICRIPE_HERB)
+                .requires(Items.GOLDEN_PICKAXE)
+                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(new GroveRankReputation(ModGroves.ELEMENTAL.get(), 1))
+            ), c, RootsAPI.rl("grove/grove_stone_elemental"));
+
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.FAIRY_GROVE_STONE, 1)
+                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.PERESKIA_HERB)
+                .requires(RootsTags.Items.PERESKIA_HERB)
+                .requires(RootsTags.Items.PERESKIA_HERB)
+                .requires(RootsTags.Items.PERESKIA_HERB)
+                .requires(ItemTags.BOOKSHELF_BOOKS)
+                .requires(Items.COMPASS)
+                .requires(Tags.Items.GEMS_EMERALD)
+                .requires(Tags.Items.GEMS_EMERALD)
+                .requires(ModItems.GOLDEN_KNIFE.get())
+                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(new GroveRankReputation(ModGroves.FAIRY.get(), 1))
+            ), c, RootsAPI.rl("grove/grove_stone_fairy"));
+
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.WILD_GROVE_STONE, 1)
+                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.SPIRITLEAF_HERB)
+                .requires(RootsTags.Items.SPIRITLEAF_HERB)
+                .requires(RootsTags.Items.SPIRITLEAF_HERB)
+                .requires(RootsTags.Items.SPIRITLEAF_HERB)
+                .requires(Tags.Items.CROPS_WHEAT)
+                .requires(Tags.Items.CROPS)
+                .requires(Tags.Items.CROPS)
+                .requires(Tags.Items.CROPS)
+                .requires(Items.GOLDEN_AXE)
+                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(new GroveRankReputation(ModGroves.WILD.get(), 1))
+            ), c, RootsAPI.rl("grove/grove_stone_wild"));
   }
 
   public static class RecipeSaver {

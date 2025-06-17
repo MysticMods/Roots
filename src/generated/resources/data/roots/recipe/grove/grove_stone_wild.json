@@ -1,0 +1,59 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:grove_stones/primal"
+      },
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "c:crops"
+      },
+      {
+        "tag": "c:crops"
+      },
+      {
+        "tag": "c:crops"
+      },
+      {
+        "item": "minecraft:golden_axe"
+      }
+    ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "any",
+          "tag": "roots:grove_stones"
+        },
+        "require_active": true
+      }
+    ],
+    "player_conditions": [
+      {
+        "type": "roots:grove_rank_condition",
+        "grove": "roots:wild",
+        "minimum_rank": 1
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:wild_grove_stone"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chance_outputs": [
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 5,
+          "id": "minecraft:blaze_powder"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 5,
+          "id": "minecraft:blaze_powder"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 5,
+          "id": "minecraft:blaze_powder"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 5,
+          "id": "minecraft:blaze_powder"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 5,
+          "id": "minecraft:blaze_powder"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:magma_cream"
+      },
+      {
+        "item": "minecraft:magma_cream"
+      },
+      {
+        "item": "minecraft:magma_cream"
+      },
+      {
+        "item": "minecraft:magma_cream"
+      },
+      {
+        "item": "minecraft:magma_cream"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 5,
+      "id": "minecraft:slime_ball"
+    }
+  },
+  "times": 5
+}

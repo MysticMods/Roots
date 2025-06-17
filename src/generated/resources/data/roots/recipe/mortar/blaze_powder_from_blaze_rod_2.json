@@ -1,0 +1,35 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chance_outputs": [
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 2,
+          "id": "minecraft:blaze_powder"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 2,
+          "id": "minecraft:blaze_powder"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "c:rods/blaze"
+      },
+      {
+        "tag": "c:rods/blaze"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 4,
+      "id": "minecraft:blaze_powder"
+    }
+  },
+  "times": 2
+}
