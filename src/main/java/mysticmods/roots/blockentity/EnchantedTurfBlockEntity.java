@@ -6,6 +6,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.network.client.fx.GrowthFXPacket;
 import mysticmods.roots.util.TagUtil;
@@ -75,11 +76,6 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     if (isPowered()) {
-      if (poweredTicks < 80) {
-        poweredTicks++;
-        return;
-      }
-
       Item item = TagUtil.getRandomElement(pLevel, RootsTags.Items.GROWTH_AMPLIFIER_GRASSES);
       if (!(item instanceof BlockItem flowerToPlace)) {
         return;
@@ -87,6 +83,14 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
 
       BlockPos above = pPos.above();
       if (!pLevel.isEmptyBlock(above)) {
+        return;
+      }
+      if (!pLevel.isEmptyBlock(above.above())) {
+        return;
+      }
+
+      if (poweredTicks < ConfigManager.ENCHANTED_TURF_TICKS.get()) {
+        poweredTicks++;
         return;
       }
 

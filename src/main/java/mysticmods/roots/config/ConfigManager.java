@@ -37,6 +37,8 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_Y;
   public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_Z;
 
+  public static ModConfigSpec.IntValue ENCHANTED_TURF_TICKS;
+
   public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_ZX;
   public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_Y;
 
@@ -129,6 +131,8 @@ public class ConfigManager {
         .defineInRange("growth_amplifier_bounds_x", 2, 1, Integer.MAX_VALUE);
     GROWTH_AMPLIFIER_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Growth Amplifier aoe bounding box")
         .defineInRange("growth_amplifier_bounds_y", 2, 1, Integer.MAX_VALUE);
+    ENCHANTED_TURF_TICKS = COMMON_BUILDER.comment("the number of ticks the Enchanted Turf will take to create a new grass block above it")
+        .defineInRange("enchanted_turf_ticks", 20 * 5, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for sprout breeding rewards").push("sprouts");
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")

@@ -75,6 +75,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.VISIBLE.get(), VisibleBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_STONE.get(), BoundedBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.ENCHANTED_TURF.get(), EnchantedTurfBlockEntityRenderer::new);
   }
 
   private static final BlockColor GRASS =
@@ -127,7 +128,7 @@ public class ClientSetup {
     event.register((p_92687_, p_92688_) -> {
       BlockState blockstate = ((BlockItem) p_92687_.getItem()).getBlock().defaultBlockState();
       return GRASS.getColor(blockstate, null, null, p_92688_);
-    }, Blocks.GRASS_BLOCK);
+    }, ModItems.ENCHANTED_TURF.get());
   }
 
   @SubscribeEvent

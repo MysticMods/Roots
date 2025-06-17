@@ -1,6 +1,7 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.blockentity.AmplifierBlockEntity;
+import mysticmods.roots.blockentity.EnchantedTurfBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -20,7 +21,7 @@ public class EnchantedTurfBlock extends GrassBlock implements EntityBlock {
   @Nullable
   @Override
   public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-    return new AmplifierBlockEntity(pPos, pState);
+    return new EnchantedTurfBlockEntity(pPos, pState);
   }
 
   @Override

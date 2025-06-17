@@ -1,22 +1,48 @@
 package mysticmods.roots.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import net.minecraft.Util;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE;
 
 public class RootsRenderTypes {
+  private static final RenderStateShard.LayeringStateShard CUSTOM_POLYGON_OFFSET_LAYERING = new RenderStateShard.LayeringStateShard(
+      "polygon_offset_layering", () -> {
+    RenderSystem.polygonOffset(-0.25F, -10.0F);
+    RenderSystem.enablePolygonOffset();
+  }, () -> {
+    RenderSystem.polygonOffset(0.0F, 0.0F);
+    RenderSystem.disablePolygonOffset();
+  }
+  );
+  public static final RenderType GLINT = RenderType.create(
+      "glint",
+      DefaultVertexFormat.POSITION_TEX,
+      VertexFormat.Mode.QUADS,
+      1536,
+      false,
+      false,
+      RenderType.CompositeState.builder()
+          .setShaderState(RenderType.RENDERTYPE_GLINT_SHADER)
+          .setTextureState(new RenderStateShard.TextureStateShard(ItemRenderer.ENCHANTED_GLINT_ITEM, true, false))
+          .setWriteMaskState(COLOR_WRITE)
+          .setCullState(RenderType.NO_CULL)
+          .setDepthTestState(RenderType.LEQUAL_DEPTH_TEST)
+          .setTransparencyState(RenderType.GLINT_TRANSPARENCY)
+          .setTexturingState(RenderType.GLINT_TEXTURING)
+          .setLayeringState(CUSTOM_POLYGON_OFFSET_LAYERING)
+          .createCompositeState(false)
+  );
+
   public static final RenderType ROOTS_LIGHTNING = RenderType.create("roots_lightning", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256,
       false, true, RenderType.CompositeState.builder()
           .setShaderState(RenderType.RENDERTYPE_LIGHTNING_SHADER)
