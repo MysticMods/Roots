@@ -25,7 +25,7 @@ import java.util.function.BiPredicate;
 public class GroveSupplicationRitual extends Ritual {
   private static final BiPredicate<Level, BlockPos> GROVE_STONE_PREDICATE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
-    return state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE);
+    return state.is(RootsTags.Blocks.GROVE_STONES) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE);
   };
 
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(GROVE_STONE_PREDICATE);
