@@ -41,21 +41,36 @@ public class GroveSupplicationRitual extends Ritual {
       if (blockEntity.getBoundingBox() != null) {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
           BlockState state = blockEntity.getLevel().getBlockState(pos);
-          // Activate all grove stones
-          if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE)) {
-            if (!state.getValue(StateProperties.ACTIVE)) {
-              blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true));
-            }
+
+          if (!state.hasProperty(StateProperties.GroveStone.RANK) || !state.hasProperty(StateProperties.ACTIVE)) {
+            continue;
           }
-          // Upgrade the ranks on everything else
-          if (state.hasProperty(StateProperties.GroveStone.RANK) && !state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.getBlock() instanceof GroveStoneBlock groveStone && blockEntity.getLastPlayer() != null) {
+
+          // Activate primal stones
+          if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && !state.getValue(StateProperties.ACTIVE)) {
+            blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true));
+            continue;
+          }
+
+          // Activate non-primal stones if player has the correct rank
+          if (state.getBlock() instanceof GroveStoneBlock groveStone && blockEntity.getLastPlayer() != null) {
             Grove grove = groveStone.getGrove().value();
             Player player = blockEntity.getLastPlayer();
             int rank = ReputationHelper.getRank(player, grove);
             // TODO: Max rank???
+            BlockState newState = state;
+
+            if (rank > 0 && !state.getValue(GroveStoneBlock.ACTIVE)) {
+              newState = state.setValue(GroveStoneBlock.ACTIVE, true);
+            }
+
             int currentRank = state.getValue(GroveStoneBlock.RANK);
-            if (rank >= 0 && rank > currentRank) {
-              blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.GroveStone.RANK, rank));
+            if (rank > 0 && rank > currentRank) {
+              newState = state.setValue(GroveStoneBlock.RANK, rank);
+            }
+
+            if (newState != state) {
+              blockEntity.getLevel().setBlockAndUpdate(pos, newState);
             }
           }
         }
