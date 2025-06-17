@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-15T18:53:59.6283164	Item Models: roots
+// 1.21.1	2025-06-17T15:41:45.9940724	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -88,6 +88,7 @@ dbf4c4d63cb7b6030aa3cd51c09a4f621b1b4b7a assets/roots/models/item/herb_pouch.jso
 f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.json
 209eb7ef5a39a5622f82eec32b85cafa8c98c7dc assets/roots/models/item/ink_bottle.json
 252f3de0446f34f2f76d3462c7445a5cdd4f26ed assets/roots/models/item/iron_knife.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/jerboa_spawn_egg.json
 5a69aa2da7a46f4d23db5ee0f46b65c18210345d assets/roots/models/item/jungle_bark.json
 07ac679ec17fe212caece89bfa2729cba6367410 assets/roots/models/item/life_essence.json
 2d13b03401c4afaf2f0a49c28eb7eb58bfd2a5be assets/roots/models/item/lilac_cordial.json

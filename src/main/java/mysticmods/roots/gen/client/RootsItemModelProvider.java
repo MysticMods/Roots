@@ -339,6 +339,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.COPPER_BOOTS.get());
 
     spawnEggItem(ModItems.BEETLE_SPAWN_EGG.get());
+    spawnEggItem(ModItems.JERBOA_SPAWN_EGG.get());
     spawnEggItem(ModItems.DEER_SPAWN_EGG.get());
     spawnEggItem(ModItems.FENNEC_SPAWN_EGG.get());
     spawnEggItem(ModItems.GREEN_SPROUT_SPAWN_EGG.get());

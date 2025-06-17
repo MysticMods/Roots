@@ -305,6 +305,7 @@ public class RootsModEvents {
       event.accept(ModItems.SPIRIT_BAG.get());
 
       event.accept(ModItems.BEETLE_SPAWN_EGG.get());
+      event.accept(ModItems.JERBOA_SPAWN_EGG.get());
       event.accept(ModItems.DEER_SPAWN_EGG.get());
       event.accept(ModItems.DUCK_SPAWN_EGG.get());
       event.accept(ModItems.FENNEC_SPAWN_EGG.get());

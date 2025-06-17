@@ -462,6 +462,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.COPPER_BOOTS);
     addItem(ModItems.ALERTNESS_CHARM);
     addItem(ModItems.BEETLE_SPAWN_EGG);
+    addItem(ModItems.JERBOA_SPAWN_EGG);
     addItem(ModItems.DEER_SPAWN_EGG);
     addItem(ModItems.FENNEC_SPAWN_EGG);
     addItem(ModItems.GREEN_SPROUT_SPAWN_EGG);
