@@ -161,6 +161,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.FIRE_SOIL).add(MAGMATIC_SOIL.get());
     this.tag(RootsTags.Blocks.WATER_SOIL).add(AQUEOUS_SOIL.get());
     this.tag(RootsTags.Blocks.EARTH_SOIL).add(TERRAN_SOIL.get());
+    this.tag(BlockTags.DIRT).add(ENCHANTED_TURF.get());
     //noinspection unchecked
     this.tag(RootsTags.Blocks.ELEMENTAL_SOIL)
         .addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL);
@@ -405,7 +406,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     tag(RootsTags.Blocks.GROWTH_AMPLIFIER_GRASSES).add(Blocks.TALL_GRASS, Blocks.SHORT_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
 
-    tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS).add(GROWTH_AMPLIFIER.get());
+    tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS).add(GROWTH_AMPLIFIER.get(), ENCHANTED_TURF.get());
   }
 
   @Override

@@ -163,6 +163,7 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> CAELIC_SOIL = ITEMS.register("caelic_soil", () -> new BlockItem(ModBlocks.CAELIC_SOIL.get(), new Item.Properties().fireResistant()));
   public static DeferredHolder<Item, BlockItem> MAGMATIC_SOIL = ITEMS.register("magmatic_soil", () -> new BlockItem(ModBlocks.MAGMATIC_SOIL.get(), new Item.Properties().fireResistant()));
   public static DeferredHolder<Item, BlockItem> TERRAN_SOIL = ITEMS.register("terran_soil", () -> new BlockItem(ModBlocks.TERRAN_SOIL.get(), new Item.Properties().fireResistant()));
+  public static DeferredHolder<Item, BlockItem> ENCHANTED_TURF = ITEMS.register("enchanted_turf", () -> new BlockItem(ModBlocks.ENCHANTED_TURF.get(), new Item.Properties()));
   // TODO: Contents
   public static DeferredHolder<Item, BlockItem> RITUAL_PEDESTAL = ITEMS.register("ritual_pedestal", () -> new BlockItem(ModBlocks.RITUAL_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO: Contens

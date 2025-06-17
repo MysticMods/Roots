@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-17T15:44:42.3977623	Item Models: roots
+// 1.21.1	2025-06-17T16:00:35.3014323	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -64,6 +64,7 @@ d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/display_pedest
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/duck_spawn_egg.json
 7f85267c384ab7ccb8efebfe827ad58936b8a2b8 assets/roots/models/item/elemental_grove_stone.json
 80bd3330615a9c7632d0f241f0ed9576caccfe5a assets/roots/models/item/elemental_soil.json
+89e643a5a43c280822c3c74b30dd4c7c7de08742 assets/roots/models/item/enchanted_turf.json
 3a0ad12961677c1913f608067cfa5e0ce1e5ae1f assets/roots/models/item/fairy_grove_stone.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/fennec_spawn_egg.json
 ed9102b2e94017998ecf81b2c86cb29365462194 assets/roots/models/item/fire_starter.json

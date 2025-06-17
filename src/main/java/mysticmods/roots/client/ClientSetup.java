@@ -17,18 +17,19 @@ import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
 import mysticmods.roots.client.particle.bolt.RenderPreset;
-import mysticmods.roots.client.particle.screen.EmptyProvider;
 import mysticmods.roots.client.particle.screen.DesaturateScreenParticle;
+import mysticmods.roots.client.particle.screen.EmptyProvider;
 import mysticmods.roots.client.particle.screen.RiseBounceScreenParticle;
 import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
+import mysticmods.roots.client.particle.world.*;
 import mysticmods.roots.client.particle.world.emitter.EntityEmitter;
 import mysticmods.roots.client.particle.world.emitter.SylvanLightEmitter;
-import mysticmods.roots.client.particle.world.*;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
 import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.mixin.accessor.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -41,8 +42,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -72,9 +77,17 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);
   }
 
+  private static final BlockColor GRASS =
+      (p_276237_, p_276238_, p_276239_, p_276240_) -> p_276238_ != null && p_276239_ != null
+          ? BiomeColors.getAverageGrassColor(p_276238_, p_276239_)
+          : GrassColor.getDefaultColor();
+
   @SubscribeEvent
   public static void onColorHandlerBlock(RegisterColorHandlersEvent.Block event) {
     event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos) : -1, ModBlocks.UNENDING_BOWL.get());
+    event.register(GRASS,
+        ModBlocks.ENCHANTED_TURF.get()
+    );
   }
 
   @SubscribeEvent
@@ -111,6 +124,10 @@ public class ClientSetup {
     }, ModItems.HERB_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
     // TODO: Different string colours
     ModItems.SYLVAN_POUCH.get();
+    event.register((p_92687_, p_92688_) -> {
+      BlockState blockstate = ((BlockItem) p_92687_.getItem()).getBlock().defaultBlockState();
+      return GRASS.getColor(blockstate, null, null, p_92688_);
+    }, Blocks.GRASS_BLOCK);
   }
 
   @SubscribeEvent
@@ -201,7 +218,7 @@ public class ClientSetup {
 
   // TODO: Fallback to default particle shader if Iris or whatever
   @SubscribeEvent
-  public static void onRegisterShaders (RegisterShadersEvent event) throws IOException {
+  public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.LOW_DISCARD_PARTICLE_SHADER_LOCATION, DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.LOW_DISCARD_PARTICLE_SHADER = s);
   }
 

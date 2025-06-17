@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-16T20:09:07.2523739	Roots Block Tags
+// 1.21.1	2025-06-17T16:00:35.2946881	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -16,6 +16,7 @@ b6d0e662abeb2be7d10b28c25db6301f5bf0ba32 data/minecraft/tags/block/climbable.jso
 cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/minecraft/tags/block/crimson_stems.json
 4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/minecraft/tags/block/crops.json
 9aa6f447519134a5bfbbb1090fb68fbbf0acfba5 data/minecraft/tags/block/dark_oak_logs.json
+3e6c1d72951012a26456a0a339f8b0e5fb2124f9 data/minecraft/tags/block/dirt.json
 57fc72968638408b4e0a8edff13b96587e5b624d data/minecraft/tags/block/dragon_immune.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/minecraft/tags/block/fence_gates.json
 9e1e35863e6c3ff5fc8d62b51de09635288b2a51 data/minecraft/tags/block/jungle_logs.json

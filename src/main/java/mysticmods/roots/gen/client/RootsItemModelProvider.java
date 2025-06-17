@@ -125,6 +125,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.CAELIC_SOIL.get());
     simpleBlockItem(ModBlocks.MAGMATIC_SOIL.get());
     simpleBlockItem(ModBlocks.TERRAN_SOIL.get());
+    simpleBlockItem(ModBlocks.ENCHANTED_TURF.get());
     withExistingParent(ModBlocks.RITUAL_PEDESTAL.getKey().location()
         .getPath(), modLoc("block/complex/ritual_pedestal"));
     withExistingParent(ModBlocks.REINFORCED_RITUAL_PEDESTAL.getKey().location()

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:wildwood_soil_from_elemental_soil_and_wildwood_herb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_elemental_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:elemental_soil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_elemental_soil"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:wildwood_soil_from_elemental_soil_and_wildwood_herb"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-15T18:53:59.6217739	Recipes
+// 1.21.1	2025-06-17T16:00:35.296094	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -304,6 +304,7 @@ f68054062f527a35bc336adc96b8b516427d81f1 data/roots/advancement/recipes/misc/spe
 770b3906b27e5c63f325d0c2b6a1279eb8defdfe data/roots/advancement/recipes/misc/spell/temporal_morass.json
 f75ffef2f2b6e90eccb953775d9249682ae60e2e data/roots/advancement/recipes/misc/spell/wildfire.json
 d5ef0dfbf5d1b3032f986670e7dfcc8f983f0377 data/roots/advancement/recipes/misc/terran_soil_from_elemental_soil_and_stalicripe.json
+a8c7c988a505a50ca43beb3fde06bb64657e3e57 data/roots/advancement/recipes/misc/wildwood_soil_from_elemental_soil_and_wildwood_herb.json
 87a2da6c82cd14dd78a204110f31f2b8d5413ad9 data/roots/advancement/recipes/misc/writable_book_ink_bottle.json
 b905a465b19b2d3c39f88034207abbeb1e7be2f0 data/roots/advancement/recipes/redstone/mossy_runestone_button.json
 ddbbf319ce233f7954e26adbda255d89cf6194ef data/roots/advancement/recipes/redstone/mossy_runestone_pressure_plate.json
@@ -677,6 +678,7 @@ eba3e9eaa640ffc5dad84dcbe7bdbbfd09cc180a data/roots/recipe/wildwood_button.json
 bb4d3d4fddeb7b270f04140fa0f5491914c51999 data/roots/recipe/wildwood_planks_from_logs.json
 9e0231ac6f1954e2f9a33dafff93c1e2bf76ed14 data/roots/recipe/wildwood_pressure_plate.json
 29bba3f73adffc89688a49e72fb2b2855c9ab5b7 data/roots/recipe/wildwood_slab.json
+d2420308f65876869471ac828b59844bbc9cf5f9 data/roots/recipe/wildwood_soil_from_elemental_soil_and_wildwood_herb.json
 2d39abe37cda7614b630239a226017e3a5c45c1a data/roots/recipe/wildwood_stairs.json
 b2ceee2f3cfa5e2d669f64f3046a6aa53355bb47 data/roots/recipe/wildwood_trapdoor.json
 925259d6df15f0278a2ea9a68a62f9045822153b data/roots/recipe/wildwood_wood_from_logs.json

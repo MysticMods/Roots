@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-15T18:53:59.6107123	Loot Tables
+// 1.21.1	2025-06-17T16:00:35.2856048	Loot Tables
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -19,6 +19,7 @@ bf78417bc47bdc04c69bbc23edaf51f08a6a5407 data/roots/loot_table/blocks/deepslate_
 5acba4c947b6adc59fc8e4ae62c527d6fdc4dceb data/roots/loot_table/blocks/display_pedestal.json
 40664a72af12ce7bb4943c1fb79833e672cbbf80 data/roots/loot_table/blocks/elemental_grove_stone.json
 9d3da56cba4852b5836167257a652a731e1f8622 data/roots/loot_table/blocks/elemental_soil.json
+8bb6e546491f0877ac59411584a34d9a2d859bdc data/roots/loot_table/blocks/enchanted_turf.json
 778659d83ac01d121d60760f485dbbdd124b3780 data/roots/loot_table/blocks/fairy_grove_stone.json
 3da955e6eda0317bdcec1428122a4d752b61ad6b data/roots/loot_table/blocks/fungal_grove_stone.json
 5b8eee6c109061d6e2254ac8ced029a2b196f1d7 data/roots/loot_table/blocks/granite_quartz_ore.json

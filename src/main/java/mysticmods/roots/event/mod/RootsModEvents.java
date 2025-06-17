@@ -109,6 +109,7 @@ public class RootsModEvents {
       event.accept(ModItems.CAELIC_SOIL.get());
       event.accept(ModItems.MAGMATIC_SOIL.get());
       event.accept(ModItems.TERRAN_SOIL.get());
+      event.accept(ModItems.ENCHANTED_TURF.get());
 
       event.accept(ModItems.PRIMAL_GROVE_STONE.get());
       event.accept(ModItems.WILD_GROVE_STONE.get());

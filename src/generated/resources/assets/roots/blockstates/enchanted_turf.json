@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": {
+      "model": "roots:block/enchanted_turf"
+    },
+    "snowy=true": {
+      "model": "roots:block/enchanted_turf"
+    }
+  }
+}

@@ -180,6 +180,8 @@ public class ModBlocks {
   public static final DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(ElementalType.EARTH, BlockBehaviour.Properties.of()
       .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f)
       .sound(SoundType.HANGING_ROOTS)));
+  public static final DeferredHolder<Block, EnchantedTurfBlock> ENCHANTED_TURF = BLOCKS.register("enchanted_turf", () -> new EnchantedTurfBlock(BlockBehaviour.Properties.of()
+      .mapColor(MapColor.COLOR_GREEN).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.GRASS)));
   public static final DeferredHolder<Block, SylvanLightBlock> SYLVAN_LIGHT = BLOCKS.register("sylvan_light", () -> new SylvanLightBlock(BlockBehaviour.Properties.of()
       .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
       .noOcclusion()));

@@ -290,6 +290,7 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.CAELIC_SOIL);
     addBlock(ModBlocks.MAGMATIC_SOIL);
     addBlock(ModBlocks.TERRAN_SOIL);
+    addBlock(ModBlocks.ENCHANTED_TURF);
     addBlock(ModBlocks.SYLVAN_LIGHT);
     addBlock(ModBlocks.RITUAL_PEDESTAL);
     addBlock(ModBlocks.REINFORCED_RITUAL_PEDESTAL);

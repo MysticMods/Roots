@@ -1,0 +1,37 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "item": "roots:elemental_soil"
+      },
+      {
+        "item": "roots:elemental_soil"
+      },
+      {
+        "item": "roots:elemental_soil"
+      },
+      {
+        "item": "roots:elemental_soil"
+      },
+      {
+        "tag": "roots:herbs/grove_moss"
+      }
+    ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "any",
+          "tag": "roots:grove_stones"
+        },
+        "require_active": true
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:enchanted_turf"
+    }
+  }
+}

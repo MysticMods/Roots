@@ -140,6 +140,8 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile reinforcedRitualPedestal = models().withExistingParent("reinforced_ritual_pedestal", modLoc("block/complex/reinforced_ritual_pedestal"));
     getVariantBuilder(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(reinforcedRitualPedestal).build());
+    ModelFile existingModel = models().withExistingParent("enchanted_turf", mcLoc("block/grass_block"));
+    getVariantBuilder(ModBlocks.ENCHANTED_TURF.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(existingModel).build());
     ModelFile existingGroveCrafterActive = models().withExistingParent("grove_crafter_active", modLoc("block/complex/grove_crafter_active"));
     ModelFile existingGroveCrafterInactive = models().withExistingParent("grove_crafter_inactive", modLoc("block/complex/grove_crafter_inactive"));
     getVariantBuilder(ModBlocks.GROVE_CRAFTER.get()).forAllStates(state -> {

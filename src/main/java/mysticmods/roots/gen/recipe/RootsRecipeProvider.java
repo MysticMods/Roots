@@ -992,6 +992,16 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB))
         .save(c, RootsAPI.rl("magmatic_soil_from_elemental_soil_and_inferno_bulb"));
 
+    RecipeSaver.saver().unlockedBy("has_elemental_soil", has(ModItems.ELEMENTAL_SOIL.get()))
+        .save(GroveRecipe.Builder.create().build( BaseRecipeData.Builder.create()
+            .requires(ModItems.ELEMENTAL_SOIL.get())
+            .requires(ModItems.ELEMENTAL_SOIL.get())
+            .requires(ModItems.ELEMENTAL_SOIL.get())
+            .requires(ModItems.ELEMENTAL_SOIL.get())
+            .requires(RootsTags.Items.GROVE_MOSS_HERB)
+            .result(ModItems.ENCHANTED_TURF.get(), 1)
+            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("wildwood_soil_from_elemental_soil_and_wildwood_herb"));
+
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.TERRAN_SOIL.get(), 1)
         .requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.STALICRIPE_HERB)
         .unlockedBy("has_elemental_soil", has(ModItems.ELEMENTAL_SOIL.get()))
