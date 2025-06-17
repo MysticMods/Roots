@@ -25,7 +25,7 @@ import java.util.function.BiPredicate;
 public class GroveSupplicationRitual extends Ritual {
   private static final BiPredicate<Level, BlockPos> GROVE_STONE_PREDICATE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
-    return state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE) && !state.getValue(StateProperties.ACTIVE);
+    return state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE);
   };
 
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(GROVE_STONE_PREDICATE);
@@ -38,7 +38,6 @@ public class GroveSupplicationRitual extends Ritual {
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
-      // TODO: This currently activates every grove stone; maybe it should only activate 1?
       if (blockEntity.getBoundingBox() != null) {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
           BlockState state = blockEntity.getLevel().getBlockState(pos);
