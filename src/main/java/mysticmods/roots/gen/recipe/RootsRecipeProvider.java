@@ -1341,7 +1341,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(PyreRecipe.Builder.create().ritual(ModRituals.GROVE_SUPPLICATION)
             .build(BaseRecipeData.Builder.create().requires(ItemTags.DOORS).requires(Items.BOWL)
                 .requires(ItemTags.SAPLINGS).requires(ItemTags.SMALL_FLOWERS).requires(Tags.Items.FOODS_BREAD)
-                .condition(ModConditions.ANY_GROVE_STONE_INACTIVE.get())), c, RootsAPI.rl("pyre/grove_supplication"));
+                .condition(ModConditions.ANY_GROVE_STONE.get())), c, RootsAPI.rl("pyre/grove_supplication"));
 
     RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.WILDROOT_GROWTH)

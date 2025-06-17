@@ -24,8 +24,7 @@
         "grove_type": {
           "name": "any",
           "tag": "roots:grove_stones"
-        },
-        "require_inactive": true
+        }
       }
     ],
     "priority": 0
