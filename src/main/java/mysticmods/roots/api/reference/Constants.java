@@ -1,6 +1,7 @@
 package mysticmods.roots.api.reference;
 
-public class AnimationValues {
+public class Constants {
+  // Pedestal & Grove Crafter animation int constants
   public static final int PEDESTAL_ANIMATION_TICKS = 20 * 2;
   public static final int BASE_GROVE_CRAFTER_ANIMATION_TICKS = 20 * 6;
 
@@ -19,5 +20,9 @@ public class AnimationValues {
   public static final int GROVE_PARTICLE_PEDESTAL_FADE_IN_TICKS = 4; // How many ticks (subtracted from the pedestal delay) from the particles to go from 0 alpha to 1 alpha
 
   public static final int GROVE_PARTICLE_PEDESTAL_FADE_IN_START = GROVE_PARTICLE_PEDESTAL_DELAY - GROVE_PARTICLE_PEDESTAL_FADE_IN_TICKS;
+
+  // Fairy Hut constants
+  public static final int FAIRY_HUT_MORNING_RESET = 2000; // Start of the "villager workday"
+  public static final int FAIRY_HUT_AFTERNOON_RESET = 9000; // End of the "villager workday";
 
 }

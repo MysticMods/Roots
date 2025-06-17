@@ -8,11 +8,13 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.FairyHutBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.entity.other.FairyHutEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModEntities;
+import mysticmods.roots.ritual.ProtectionRitual;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -54,6 +56,9 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   private int xpLevel = 1; // Always starts at level 1
   private MerchantOffers offers;
 
+  private boolean morningReset = false;
+  private boolean afternoonReset = false;
+
   private boolean increaseProfessionLevelOnUpdate;
   private int updateMerchantTimer;
 
@@ -67,6 +72,31 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (pState.getValue(FairyHutBlock.ACTIVE)) {
     }
+  }
+
+  private void resetOffers () {
+    this.getOffers().forEach(MerchantOffer::resetUses);
+  }
+
+  private void catchUpDemand() {
+    int i = 2;
+    if (morningReset) {
+      i--;
+    }
+    if (afternoonReset) {
+      i--;
+    }
+    if (i > 0) {
+      this.resetOffers();
+    }
+
+    for (int j = 0; j < i; j++) {
+      this.updateDemand();
+    }
+  }
+
+  private void updateDemand () {
+    this.getOffers().forEach(MerchantOffer::updateDemand);
   }
 
   @Override
@@ -83,22 +113,50 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
       }
     }
 
-    if (!this.isTrading() && this.updateMerchantTimer > 0) {
-      this.updateMerchantTimer--;
-      if (this.updateMerchantTimer <= 0) {
-        if (this.increaseProfessionLevelOnUpdate) {
-          this.increaseMerchantCareer();
-          this.increaseProfessionLevelOnUpdate = false;
+    boolean changed = false;
+
+    if (isPowered()) {
+      if (!this.isTrading() && this.updateMerchantTimer > 0) {
+        this.updateMerchantTimer--;
+        if (this.updateMerchantTimer <= 0) {
+          if (this.increaseProfessionLevelOnUpdate) {
+            this.increaseMerchantCareer();
+            this.increaseProfessionLevelOnUpdate = false;
+          }
         }
+        changed = true;
       }
-      setChanged();
-      updateViaState();
+
+      long time = pLevel.getDayTime() % ProtectionRitual.getDayLength();
+      if (!morningReset && time >= Constants.FAIRY_HUT_MORNING_RESET) {
+        morningReset = true;
+        resetOffers();
+        changed = true;
+      } else if (!afternoonReset && time >= Constants.FAIRY_HUT_AFTERNOON_RESET) {
+        afternoonReset = true;
+        resetOffers();
+        changed = true;
+      }
+      if (time < Constants.FAIRY_HUT_MORNING_RESET) {
+        // Reset the morning and afternoon resets
+        morningReset = false;
+        afternoonReset = false;
+        catchUpDemand();
+        changed = true;
+      }
+
+      if (changed) {
+        setChanged();
+        updateViaState();
+      }
     }
   }
 
   private void increaseMerchantCareer() {
     this.xpLevel += 1;
     updateTrades();
+    setChanged();
+    updateViaState();
   }
 
   private boolean isTrading() {
@@ -150,6 +208,13 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     if (compound.contains("Offers")) {
       this.offersTag = compound.get("Offers");
     }
+    if (compound.contains("morningReset")) {
+      this.morningReset = compound.getBoolean("morningReset");
+    }
+    if (compound.contains("afternoonReset")) {
+      this.afternoonReset = compound.getBoolean("afternoonReset");
+    }
+
   }
 
   @Override
@@ -163,6 +228,8 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     }
     pTag.putInt("xp", this.xp);
     pTag.putInt("level", this.xpLevel);
+    pTag.putBoolean("morningReset", this.morningReset);
+    pTag.putBoolean("afternoonReset", this.afternoonReset);
     if (!this.getLevel().isClientSide()) {
       MerchantOffers merchantoffers = this.getOffers();
       if (!merchantoffers.isEmpty()) {
@@ -227,6 +294,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   }
 
   private void updateTrades() {
+    // TODO: Custom trades
     Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillagerTrades.TRADES.get(VillagerProfession.CLERIC);
 
     if (int2objectmap != null && !int2objectmap.isEmpty()) {
@@ -283,7 +351,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     if (offer.shouldRewardExp()) {
       BlockPos pos = this.getBlockPos();
       this.getLevel()
-          .addFreshEntity(new ExperienceOrb(this.getLevel(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, i));
+          .addFreshEntity(new ExperienceOrb(this.getLevel(), pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, i));
     }
   }
 

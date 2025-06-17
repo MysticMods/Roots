@@ -3,7 +3,7 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mysticmods.roots.api.reference.AnimationValues;
+import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
 import net.minecraft.client.Minecraft;
@@ -143,7 +143,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
         float liftAmount;
         float scaleAmount;
 
-        float progress = (pBlockEntity.visualAnimationTicks + pPartialTick) / AnimationValues.PEDESTAL_ANIMATION_TICKS;
+        float progress = (pBlockEntity.visualAnimationTicks + pPartialTick) / Constants.PEDESTAL_ANIMATION_TICKS;
         progress = Mth.clamp(progress, 0.0f, 1.0f);
 
         if (progress <= 0.25f) {

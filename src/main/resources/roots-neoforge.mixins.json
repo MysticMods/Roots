@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MixinLivingEntity",
+    "MixinMerchantMenu",
     "MixinMobEffectInstance",
     "MixinRecipeBuilder",
     "accessor.AccessorMixinBlockLootSubProvider",

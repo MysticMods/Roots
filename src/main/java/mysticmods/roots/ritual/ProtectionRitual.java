@@ -5,6 +5,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModAttachments;
@@ -24,6 +25,10 @@ public class ProtectionRitual extends Ritual {
   private boolean clearsWeather, shortensNight, lengthensDay;
   private int dayLength, nightThreshold, clearDuration;
   private float daySpeed, nightSpeed;
+
+  public static int getDayLength () {
+    return ModRituals.PROTECTION.get().dayLength;
+  }
 
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {

@@ -4,7 +4,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.reference.AnimationValues;
+import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.blockentity.inventory.LimitedItemStackHandler;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
@@ -76,7 +76,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public void animate() {
     if (!level.isClientSide()) {
-      this.animationTicks = AnimationValues.PEDESTAL_ANIMATION_TICKS;
+      this.animationTicks = Constants.PEDESTAL_ANIMATION_TICKS;
       this.animationItem = inventory.getStackInSlot(0).copy();
       setChanged();
       updateViaState();
@@ -180,7 +180,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       animationItem = ItemStack.EMPTY;
     }
     this.animationTicks = pTag.getInt("animationTicks");
-    if (this.animationTicks == AnimationValues.PEDESTAL_ANIMATION_TICKS) {
+    if (this.animationTicks == Constants.PEDESTAL_ANIMATION_TICKS) {
       this.visualAnimationTicks = 0.0f;
     }
   }
@@ -238,7 +238,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     if (this.animationTicks > 0) {
       this.visualAnimationTicks += 1.0f;
 
-      float progress = Mth.clamp(this.visualAnimationTicks / (float) AnimationValues.PEDESTAL_ANIMATION_TICKS, 0.0f, 1.0f);
+      float progress = Mth.clamp(this.visualAnimationTicks / (float) Constants.PEDESTAL_ANIMATION_TICKS, 0.0f, 1.0f);
 
       if (progress < 0.65f) {
         float y = pPos.getY() + (float) offset();

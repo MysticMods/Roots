@@ -1,6 +1,6 @@
 package mysticmods.roots.client.particle.world;
 
-import mysticmods.roots.api.reference.AnimationValues;
+import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.VecUtil;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -18,7 +18,7 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed, item);
     this.delay = delay;
     Vec3 start = new Vec3(x, y, z);
-    this.lifetime = AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS;
+    this.lifetime = Constants.GROVE_CRAFTING_ANIMATION_TICKS;
     this.quadSize = 0.025f + random.nextFloat() * 0.01f;
     this.rollAmount = random.nextFloat() * 0.1f;
     this.origin = new Vec3(x + (random.nextDouble() - 0.5) * 0.08, y + (random.nextDouble() - 0.5) * 0.08, z + (random.nextDouble() - 0.5) * 0.08);
@@ -56,30 +56,30 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
 
   @Override
   protected void updateAlpha(float f) {
-    if (this.age < AnimationValues.GROVE_PARTICLE_PEDESTAL_FADE_IN_START) {
+    if (this.age < Constants.GROVE_PARTICLE_PEDESTAL_FADE_IN_START) {
       this.alpha = 0f;
-    } else if (this.age <= AnimationValues.GROVE_PARTICLE_PEDESTAL_DELAY) {
+    } else if (this.age <= Constants.GROVE_PARTICLE_PEDESTAL_DELAY) {
       // Fade from 0 to 1 over
-      float f2 = (float) (this.age - AnimationValues.GROVE_PARTICLE_PEDESTAL_FADE_IN_START) / AnimationValues.GROVE_PARTICLE_PEDESTAL_FADE_IN_TICKS;
+      float f2 = (float) (this.age - Constants.GROVE_PARTICLE_PEDESTAL_FADE_IN_START) / Constants.GROVE_PARTICLE_PEDESTAL_FADE_IN_TICKS;
       this.alpha = Mth.lerp(f2, 0f, 1f);
     }
   }
 
   @Override
   protected void updateMovement(float f) {
-    if (this.age < AnimationValues.GROVE_PARTICLE_PEDESTAL_DELAY) {
+    if (this.age < Constants.GROVE_PARTICLE_PEDESTAL_DELAY) {
       // Deliberate pause before expanding from spawn position
-    } else if (this.age <= AnimationValues.GROVE_PARTICLE_BEZIER_BEGIN) {
+    } else if (this.age <= Constants.GROVE_PARTICLE_BEZIER_BEGIN) {
       this.x += this.xd;
       this.y += this.yd;
       this.z += this.zd;
-    } else if (this.age <= AnimationValues.GROVE_PARTICLE_BEZIER_BEGIN + this.delay) {
+    } else if (this.age <= Constants.GROVE_PARTICLE_BEZIER_BEGIN + this.delay) {
       // Deliberate pause after expanding from spawn position
-    } else if (this.age > (lifetime - AnimationValues.GROVE_PARTICLE_PAUSE_TICKS)) {
+    } else if (this.age > (lifetime - Constants.GROVE_PARTICLE_PAUSE_TICKS)) {
       // Deliberate pause after arriving at Grove Crafter
     } else {
-      int bezierAge = this.age - AnimationValues.GROVE_PARTICLE_BEZIER_BEGIN - delay;
-      int bezierDuration = this.lifetime - AnimationValues.GROVE_PARTICLE_BEZIER_SHORTENING - delay;
+      int bezierAge = this.age - Constants.GROVE_PARTICLE_BEZIER_BEGIN - delay;
+      int bezierDuration = this.lifetime - Constants.GROVE_PARTICLE_BEZIER_SHORTENING - delay;
       float t = (float) bezierAge / bezierDuration;
       f = (float) Math.pow(t, 1.5);
       Vec3 pos = VecUtil.bezier(origin, control1, control2, destination, f);

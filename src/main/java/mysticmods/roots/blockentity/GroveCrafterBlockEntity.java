@@ -10,7 +10,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
-import mysticmods.roots.api.reference.AnimationValues;
+import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.GroveCrafterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.condition.GroveStoneCondition;
@@ -109,7 +109,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     if (craftingTicks <= 0) {
       return 1f;
     }
-    return 1f - Mth.clamp((float) craftingTicks / AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS, 0f, 1f);
+    return 1f - Mth.clamp((float) craftingTicks / Constants.GROVE_CRAFTING_ANIMATION_TICKS, 0f, 1f);
   }
 
   @Override
@@ -159,7 +159,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       List<ItemStack> results = cachedRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
       storedItems.addAll(results);
-      this.craftingTicks = AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS;
+      this.craftingTicks = Constants.GROVE_CRAFTING_ANIMATION_TICKS;
       cachedRecipe = null;
       if (!level.isClientSide()) {
         setChanged();
@@ -377,10 +377,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       revalidatedRecipes = true;
     }
     if (isCrafting() && craftingTicks % 4 == 0) {
-      float progress = 1.0f - (craftingTicks / (float) AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS); // 0 to 1
+      float progress = 1.0f - (craftingTicks / (float) Constants.GROVE_CRAFTING_ANIMATION_TICKS); // 0 to 1
       double spread = 0.1 + progress * 0.4; // dynamic radius
 
-      int tickCount = (AnimationValues.GROVE_CRAFTING_ANIMATION_TICKS - craftingTicks) / 4;
+      int tickCount = (Constants.GROVE_CRAFTING_ANIMATION_TICKS - craftingTicks) / 4;
       int particleCount = 5 + pLevel.random.nextInt(10) + pLevel.random.nextInt(Math.max(tickCount, 1));
 
       if (craftingTicks <= 24 && craftingTicks > 16) {
