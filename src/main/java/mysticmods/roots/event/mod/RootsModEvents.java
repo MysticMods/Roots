@@ -225,6 +225,7 @@ public class RootsModEvents {
       event.accept(ModItems.RAW_SILVER.get());
       event.accept(ModItems.SILVER_INGOT.get());
       event.accept(ModItems.SILVER_NUGGET.get());
+      event.accept(ModItems.SILVER_STATER.get());
 
       event.accept(ModItems.STAFF.get());
       event.accept(ModItems.FIRE_STARTER.get());

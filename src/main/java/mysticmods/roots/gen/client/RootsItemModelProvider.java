@@ -326,6 +326,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.RAW_SILVER.get());
     basicItem(ModItems.SILVER_INGOT.get());
     basicItem(ModItems.SILVER_NUGGET.get());
+    basicItem(ModItems.SILVER_STATER.get());
     basicItem(ModItems.COPPER_NUGGET.get());
 
     handheldItem(ModItems.COPPER_AXE.get());

@@ -362,6 +362,7 @@ public class ModItems {
   public static DeferredHolder<Item, Item> RAW_SILVER = ITEMS.register("raw_silver", () -> new Item(new Item.Properties()));
   public static DeferredHolder<Item, Item> SILVER_INGOT = ITEMS.register("silver_ingot", () -> new Item(new Item.Properties()));
   public static DeferredHolder<Item, Item> SILVER_NUGGET = ITEMS.register("silver_nugget", () -> new Item(new Item.Properties()));
+  public static DeferredHolder<Item, Item> SILVER_STATER = ITEMS.register("silver_stater", () -> new Item(new Item.Properties()));
   public static DeferredHolder<Item, Item> COPPER_NUGGET = ITEMS.register("copper_nugget", () -> new Item(new Item.Properties()));
   // TODO: Check damage values
   public static DeferredHolder<Item, AxeItem> COPPER_AXE = ITEMS.register("copper_axe", () -> new AxeItem(RootsAPI.COPPER_TIER, new Item.Properties().attributes(AxeItem.createAttributes(RootsAPI.COPPER_TIER, 6.0f, -3.2f))));

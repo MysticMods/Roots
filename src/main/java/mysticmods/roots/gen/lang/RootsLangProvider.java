@@ -450,6 +450,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.RAW_SILVER);
     addItem(ModItems.SILVER_INGOT);
     addItem(ModItems.SILVER_NUGGET);
+    addItem(ModItems.SILVER_STATER);
     addItem(ModItems.COPPER_NUGGET);
     addItem(ModItems.COPPER_AXE);
     addItem(ModItems.COPPER_HOE);
