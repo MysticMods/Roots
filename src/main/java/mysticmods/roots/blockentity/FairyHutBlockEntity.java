@@ -242,6 +242,10 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack stack) {
+    if (!isPowered()) {
+      return InteractionResult.FAIL;
+    }
+
     if (!level.isClientSide()) {
       if (getTradingPlayer() != null && getTradingPlayer() != player) {
         // If another player is already trading, we can't open the trading screen
