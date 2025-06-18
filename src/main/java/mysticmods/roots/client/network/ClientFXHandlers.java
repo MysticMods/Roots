@@ -73,7 +73,7 @@ public class ClientFXHandlers {
     }
 
     minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.PETAL_SHELL).color(color1, color2)
-        .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
+        .entityId(entityId).build(), true, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
 /*    SnapshotHelper.applyLiving(entity, ModSerializers.PETAL_SHELL.get(), (e, snapshot) -> {
       if (!(e instanceof LivingEntity living)) {
         return;
