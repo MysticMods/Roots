@@ -859,8 +859,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The amplifier for the slowness effect applied by Temporal Morass.",
-          "default_value": 5,
-          "value": 5
+          "default_value": 3,
+          "value": 3
         }
       }
     ],
