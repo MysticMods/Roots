@@ -11,8 +11,8 @@ import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.block.GroveStoneBlock;
+import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
-import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -76,6 +76,8 @@ public class HudOverlay {
   public static void renderPyre(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {
     Level level = mc.level;
     if (level.getBlockEntity(trace.getBlockPos()) instanceof PyreBlockEntity pyre) {
+      boolean active = state.getValue(PyreBlock.BURNING);
+
       int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
       int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
 
@@ -117,8 +119,13 @@ public class HudOverlay {
         comp2 = Component.translatable(nextRitual != null ? "roots.hud.pyre.begin2" : "roots.hud.pyre.begin3", nextRitual != null ? nextRitual.getName() : output.getHoverName());
       } else if (cachedRecipe != null && cachedRecipe == lastRecipe) {
         output = nextRitual != null ? nextRitual.getIcon() : cachedRecipe.getResultItem(mc.level.registryAccess());
-        comp1 = nextRitual != null ? nextRitual.getName() : output.getHoverName();
-        comp2 = Component.translatable("roots.hud.pyre.auto1");
+        if (active) {
+          comp1 = nextRitual != null ? nextRitual.getName() : output.getHoverName();
+          comp2 = Component.translatable("roots.hud.pyre.auto1");
+        } else {
+          comp1 = Component.translatable("roots.hud.pyre.begin1");
+          comp2 = Component.translatable(nextRitual != null ? "roots.hud.pyre.begin2" : "roots.hud.pyre.begin3", nextRitual != null ? nextRitual.getName() : output.getHoverName());
+        }
       } else if (lastRecipe != null) {
         output = lastRitual != null ? lastRitual.getIcon() : lastRecipe.getResultItem(mc.level.registryAccess());
         comp1 = Component.translatable("roots.hud.pyre.restart1");
