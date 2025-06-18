@@ -8,13 +8,15 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
-import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.CooldownWidget;
 import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
+import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -95,6 +97,11 @@ public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityReci
       }
       builder.addWidget(new LevelConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
       column++;
+    }
+    int row = 0;
+    for (IPlayerCondition condition : recipe.getPlayerConditions()) {
+      builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
+      row++;
     }
   }
 }

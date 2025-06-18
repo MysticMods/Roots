@@ -8,11 +8,13 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
+import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.WorldTestWidget;
 import mysticmods.roots.recipe.knife.OutputStateMapper;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
@@ -120,7 +122,11 @@ public class RunicBlockCategory extends RootsRecipeBaseCategory<RunicBlockRecipe
       builder.addWidget(new LevelConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
       column++;
     }
-
+    int row = 0;
+    for (IPlayerCondition condition : recipe.getPlayerConditions()) {
+      builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
+      row++;
+    }
 
     if (recipe.getOutputState() != null) {
       // TODO: Create a recipe that uses this
