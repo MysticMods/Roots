@@ -13,7 +13,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.integration.jei.categories.widget.WorldTestWidget;
 import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
@@ -217,9 +217,11 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
       if (count == 3) {
         offset = 79;
       }
-      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
+      builder.addWidget(new LevelConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
       column++;
     }
+
+
 
     if (recipe != DynamicBarkRecipe.INSTANCE) {
       if (recipe.getOutputState() != null) {

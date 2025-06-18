@@ -31,4 +31,8 @@ public interface IPlayerCondition {
   default Component getNameComponent() {
     return Component.translatable("player_condition.roots." + getName());
   }
+
+  default Component getDescriptionComponent () {
+    return Component.translatable("player_condition.roots." + getName() + ".description");
+  }
 }

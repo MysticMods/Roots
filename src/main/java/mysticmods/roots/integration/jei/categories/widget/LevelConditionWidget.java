@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public record ConditionWidget(int xOffset, int yOffset, int width, int height, List<BlockState> states,
-                              Component tooltip, @Nullable Component description) implements IRecipeWidget {
+public record LevelConditionWidget(int xOffset, int yOffset, int width, int height, List<BlockState> states,
+                                   Component tooltip, @Nullable Component description) implements IRecipeWidget {
   @Override
   public void getTooltip(ITooltipBuilder tooltip, double mouseX, double mouseY) {
     if (mouseX > 0 && mouseX <= width && mouseY > 0 && mouseY <= height) {

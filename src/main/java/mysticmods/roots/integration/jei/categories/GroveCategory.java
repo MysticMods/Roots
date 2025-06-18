@@ -8,10 +8,12 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -72,8 +74,13 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
       if (count == 3) {
         offset = 89;
       }
-      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
+      builder.addWidget(new LevelConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
       column++;
+    }
+    int row = 0;
+    for (IPlayerCondition condition : recipe.getPlayerConditions()) {
+      builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
+      row++;
     }
   }
 }

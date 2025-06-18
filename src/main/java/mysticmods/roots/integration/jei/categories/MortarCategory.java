@@ -11,7 +11,7 @@ import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -62,8 +62,9 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
       if (count == 3) {
         offset = 89;
       }
-      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
+      builder.addWidget(new LevelConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
       column++;
     }
+
   }
 }
