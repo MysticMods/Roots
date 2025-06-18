@@ -48,14 +48,14 @@ public class TemporalMorassSpell extends TwoRadiusSpell {
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.duration = properties.get(ModSpells.TEMPORAL_MORASS_DURATION);
-    this.amplifier = properties.get(ModSpells.TEMPORAL_MORASS_DURATION);
+    this.amplifier = properties.get(ModSpells.TEMPORAL_MORASS_AMPLIFIER);
   }
 
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.TEMPORAL_MORASS_DURATION);
-    properties.add(ModSpells.TEMPORAL_MORASS_DURATION);
+    properties.add(ModSpells.TEMPORAL_MORASS_AMPLIFIER);
   }
 
   @Override
