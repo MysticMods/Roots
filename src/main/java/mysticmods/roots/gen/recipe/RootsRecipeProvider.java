@@ -1867,7 +1867,7 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.BUCKETS)
                 .requires(Items.GOLDEN_HOE)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(new GroveRankReputation(ModGroves.SPROUTING.get(), 1))), c, RootsAPI.rl("grove/grove_stone_sprouting"));
+                .condition(ModConditions.SPROUTING_RANK_1.get())), c, RootsAPI.rl("grove/grove_stone_sprouting"));
 
     // Fungal
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
@@ -1885,7 +1885,7 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(Items.WARPED_FUNGUS)
                 .requires(Items.GOLDEN_SHOVEL)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(new GroveRankReputation(ModGroves.FUNGAL.get(), 1))
+                .condition(ModConditions.FUNGAL_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_fungal"));
 
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
@@ -1903,7 +1903,7 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.SILVER_INGOT)
                 .requires(Items.GOLDEN_SWORD)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(new GroveRankReputation(ModGroves.TWILIGHT.get(), 1))
+                .condition(ModConditions.TWILIGHT_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_twilight"));
 
 
@@ -1922,7 +1922,7 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.STALICRIPE_HERB)
                 .requires(Items.GOLDEN_PICKAXE)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(new GroveRankReputation(ModGroves.ELEMENTAL.get(), 1))
+                .condition(ModConditions.ELEMENTAL_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_elemental"));
 
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
@@ -1940,7 +1940,7 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.GEMS_EMERALD)
                 .requires(ModItems.GOLDEN_KNIFE.get())
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(new GroveRankReputation(ModGroves.FAIRY.get(), 1))
+                .condition(ModConditions.FAIRY_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_fairy"));
 
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
@@ -1958,7 +1958,7 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.CROPS)
                 .requires(Items.GOLDEN_AXE)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(new GroveRankReputation(ModGroves.WILD.get(), 1))
+                .condition(ModConditions.WILD_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_wild"));
   }
 

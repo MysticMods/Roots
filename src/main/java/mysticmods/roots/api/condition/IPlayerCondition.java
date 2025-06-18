@@ -29,6 +29,6 @@ public interface IPlayerCondition {
   String getName ();
 
   default Component getNameComponent() {
-    return Component.translatable("level_condition.roots." + getName());
+    return Component.translatable("player_condition.roots." + getName());
   }
 }
