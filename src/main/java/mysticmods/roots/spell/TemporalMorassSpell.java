@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class TemporalMorassSpell extends TwoRadiusSpell {
-  private int duration;
+  private int duration, amplifier;
 
   public TemporalMorassSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x404040, 0xc020ff);
@@ -48,11 +48,13 @@ public class TemporalMorassSpell extends TwoRadiusSpell {
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.duration = properties.get(ModSpells.TEMPORAL_MORASS_DURATION);
+    this.amplifier = properties.get(ModSpells.TEMPORAL_MORASS_DURATION);
   }
 
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
+    properties.add(ModSpells.TEMPORAL_MORASS_DURATION);
     properties.add(ModSpells.TEMPORAL_MORASS_DURATION);
   }
 
@@ -64,7 +66,7 @@ public class TemporalMorassSpell extends TwoRadiusSpell {
       timeStop.setPos(pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
       // Don't use the helper
       pLevel.addFreshEntity(timeStop);
-      SnapshotHelper.addLiving(timeStop, ModSerializers.TEMPORAL_MORASS.get(), new TemporalMorassEntitySnapshot(timeStop.tickCount, -1, radiusZX, radiusY, duration));
+      SnapshotHelper.addLiving(timeStop, ModSerializers.TEMPORAL_MORASS.get(), new TemporalMorassEntitySnapshot(timeStop.tickCount, -1, radiusZX, radiusY, duration, amplifier));
       return cooldown;
     } else {
       costs.noCharge();

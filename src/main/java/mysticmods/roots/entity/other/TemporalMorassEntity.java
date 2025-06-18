@@ -80,8 +80,8 @@ public class TemporalMorassEntity extends Entity {
             return true;
           }
       )) {
-        TemporalMorassEntitySnapshot livingSnapshot = new TemporalMorassEntitySnapshot(living, 10, snapshot.getRadiusZX(), snapshot.getRadiusY(), 10);
-        living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, livingSnapshot.getDuration(), 0, false, true));
+        TemporalMorassEntitySnapshot livingSnapshot = new TemporalMorassEntitySnapshot(living, 10, snapshot.getRadiusZX(), snapshot.getRadiusY(), 10, snapshot.getAmplifier());
+        living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, livingSnapshot.getDuration(), snapshot.getAmplifier(), false, true));
         SnapshotHelper.addLiving(living, ModSerializers.TEMPORAL_MORASS.get(), livingSnapshot);
       }
     }

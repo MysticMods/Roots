@@ -853,6 +853,15 @@
           "default_value": 300,
           "value": 300
         }
+      },
+      {
+        "id": "roots:temporal_morass/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 300,
+          "value": 300
+        }
       }
     ],
     "roots:wildfire": [

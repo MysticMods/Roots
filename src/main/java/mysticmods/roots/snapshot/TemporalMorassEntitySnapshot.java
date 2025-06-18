@@ -21,7 +21,8 @@ public class TemporalMorassEntitySnapshot extends Snapshot {
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Codec.INT.fieldOf("radiusZX").forGetter(TemporalMorassEntitySnapshot::getRadiusZX),
           Codec.INT.fieldOf("radiusY").forGetter(TemporalMorassEntitySnapshot::getRadiusY),
-          Codec.INT.fieldOf("duration").forGetter(TemporalMorassEntitySnapshot::getDuration)
+          Codec.INT.fieldOf("duration").forGetter(TemporalMorassEntitySnapshot::getDuration),
+          Codec.INT.fieldOf("amplifier").forGetter(TemporalMorassEntitySnapshot::getAmplifier)
       ).apply(instance, TemporalMorassEntitySnapshot::new));
   public static final Codec<TemporalMorassEntitySnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, TemporalMorassEntitySnapshot> STREAM_CODEC = StreamCodec.composite(
@@ -30,23 +31,26 @@ public class TemporalMorassEntitySnapshot extends Snapshot {
       ByteBufCodecs.VAR_INT, o -> o.radiusZX,
       ByteBufCodecs.VAR_INT, o -> o.radiusY,
       ByteBufCodecs.VAR_INT, o -> o.duration,
+      ByteBufCodecs.VAR_INT, o -> o.amplifier,
       TemporalMorassEntitySnapshot::new);
 
-  private final int radiusZX, radiusY, duration;
+  private final int radiusZX, radiusY, duration, amplifier;
   private AABB aabb;
 
-  public TemporalMorassEntitySnapshot(LivingEntity player, int decay, int radiusZX, int radiusY, int duration) {
+  public TemporalMorassEntitySnapshot(LivingEntity player, int decay, int radiusZX, int radiusY, int duration, int amplifier) {
     super(player, decay);
     this.radiusZX = radiusZX;
     this.radiusY = radiusY;
     this.duration = duration;
+    this.amplifier = amplifier;
   }
 
-  public TemporalMorassEntitySnapshot(long timestamp, int decay, int radiusZX, int radiusY, int duration) {
+  public TemporalMorassEntitySnapshot(long timestamp, int decay, int radiusZX, int radiusY, int duration, int amplifier) {
     super(timestamp, decay);
     this.radiusY = radiusY;
     this.radiusZX = radiusZX;
     this.duration = duration;
+    this.amplifier = amplifier;
   }
 
   @Override
@@ -64,6 +68,10 @@ public class TemporalMorassEntitySnapshot extends Snapshot {
 
   public int getDuration() {
     return duration;
+  }
+
+  public int getAmplifier() {
+    return amplifier;
   }
 
   public AABB getAABB() {
