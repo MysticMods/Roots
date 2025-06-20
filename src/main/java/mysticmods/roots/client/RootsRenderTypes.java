@@ -91,6 +91,7 @@ public class RootsRenderTypes {
           .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
+          .setOutputState(RenderType.PARTICLES_TARGET)
           .createCompositeState(false));
 
   public static final RenderType TRANSLUCENT_DELAYED_PARTICLES_NO_CULL = RenderType.create(
@@ -108,6 +109,7 @@ public class RootsRenderTypes {
           .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
+          .setOutputState(RenderType.PARTICLES_TARGET)
           .createCompositeState(false));
 
   public static final RenderType TRANSLUCENT_DELAYED_PARTICLES_NO_MASK = RenderType.create(
@@ -124,5 +126,6 @@ public class RootsRenderTypes {
           .setWriteMaskState(COLOR_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
+          .setOutputState(RenderType.PARTICLES_TARGET)
           .createCompositeState(false));
 }
