@@ -108,20 +108,22 @@ public class ChannelJauntParticle extends RootsEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    this.updatePosition(renderInfo, partialTicks);
+    if (shouldRender()) {
+      this.updatePosition(renderInfo, partialTicks);
 
-    Vec3 cam = renderInfo.getPosition();
-    float rx = (float) (this.x - cam.x);
-    float ry = (float) (this.y - cam.y);
-    float rz = (float) (this.z - cam.z);
+      Vec3 cam = renderInfo.getPosition();
+      float rx = (float) (this.x - cam.x);
+      float ry = (float) (this.y - cam.y);
+      float rz = (float) (this.z - cam.z);
 
-    Quaternionf quaternion = new Quaternionf();
-    this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
-    if (this.roll != 0.0f) {
-      quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
+      Quaternionf quaternion = new Quaternionf();
+      this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
+      if (this.roll != 0.0f) {
+        quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
+      }
+
+      renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
     }
-
-    renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
   }
 
   public static class Provider implements ParticleProvider<RootsParticleOptions> {

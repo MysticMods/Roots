@@ -23,6 +23,7 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
     this.rollAmount = random.nextFloat() * 0.1f;
     this.origin = new Vec3(x + (random.nextDouble() - 0.5) * 0.08, y + (random.nextDouble() - 0.5) * 0.08, z + (random.nextDouble() - 0.5) * 0.08);
     this.destination = new Vec3(xSpeed, ySpeed, zSpeed);
+    this.delayedRender = false;
 
     this.defaultMovement = false;
     this.defaultAlpha = false;

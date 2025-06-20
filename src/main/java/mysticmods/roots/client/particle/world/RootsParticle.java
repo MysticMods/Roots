@@ -1,7 +1,11 @@
 package mysticmods.roots.client.particle.world;
 
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.particle.RootsParticleOptions;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -14,6 +18,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
   protected float rollAmount;
   protected boolean defaultLight = true;
   protected boolean defaultMovement = true;
+  protected boolean delayedRender = true;
   protected boolean defaultAlpha = true;
   protected boolean defaultRoll = true;
   protected boolean defaultColor = true;
@@ -83,7 +88,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
   protected void updateSprite(float f) {
   }
 
-  protected void updateMovement(float f) {
+  protected void updateMovement (float f) {
     if (defaultMovement) {
       this.yd = this.yd - 0.04 * (double) this.gravity;
       this.move(this.xd, this.yd, this.zd);
@@ -104,6 +109,29 @@ public abstract class RootsParticle extends TextureSheetParticle {
 
   protected float generateF() {
     return (float) this.age / (float) this.lifetime;
+  }
+
+  protected boolean isDelayedRender () {
+    if (!ConfigManager.DELAYED_PARTICLES.get()) {
+      return false;
+    }
+    ParticleRenderType type = this.getRenderType();
+    if (type instanceof RootsParticleRenderTypes.RootsParticleRenderType rootsType) {
+      return delayedRender && rootsType.isDelayed();
+    }
+
+    return delayedRender;
+  }
+
+  protected boolean shouldRender() {
+    return RenderTickHandler.isRenderingDelayedParticles() || !isDelayedRender();
+  }
+
+  @Override
+  public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
+    if (shouldRender()) {
+      super.render(buffer, renderInfo, partialTicks);
+    }
   }
 
   @Override
