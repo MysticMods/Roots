@@ -33,9 +33,6 @@ public class SkySoarerEffect extends SimpleEffect {
         } else {
           vehicle.setDeltaMovement(player.getLookAngle()
               .multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
-          if (vehicle instanceof LivingEntity living) {
-            living.yya = sky.getAmplifier();
-          }
         }
       });
     }
