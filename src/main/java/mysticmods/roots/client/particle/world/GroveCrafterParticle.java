@@ -19,7 +19,6 @@ public class GroveCrafterParticle extends RootsParticle {
     this.friction = 0.98f;
     this.hasPhysics = false;
     this.quadSize = 0.09f;
-    this.delayedRender = false;
   }
 
   @Override

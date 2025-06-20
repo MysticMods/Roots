@@ -15,14 +15,18 @@ import net.minecraft.client.renderer.texture.TextureManager;
 
 public class RootsParticleRenderTypes {
   public interface RootsParticleRenderType extends ParticleRenderType {
-    default boolean isDelayed() {
-      return false;
+    default boolean sortQuads() {
+      return true;
     }
   }
 
-
   // Normal render types
   public static RootsParticleRenderType GLOW = new RootsParticleRenderType() {
+    @Override
+    public boolean sortQuads() {
+      return false;
+    }
+
     @Override
     public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
@@ -43,6 +47,11 @@ public class RootsParticleRenderTypes {
 
   public static RootsParticleRenderType GLOW_NO_CULL = new RootsParticleRenderType() {
     @Override
+    public boolean sortQuads() {
+      return false;
+    }
+
+    @Override
     public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
       RenderSystem.depthMask(false);
@@ -61,6 +70,11 @@ public class RootsParticleRenderTypes {
   };
 
   public static RootsParticleRenderType GLOW_NO_DEPTH = new RootsParticleRenderType() {
+    @Override
+    public boolean sortQuads() {
+      return false;
+    }
+
     @Override
     public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
@@ -82,7 +96,7 @@ public class RootsParticleRenderTypes {
 
   public static RootsParticleRenderType OPAQUE = new RootsParticleRenderType() {
     @Override
-    public boolean isDelayed() {
+    public boolean sortQuads() {
       return false;
     }
 
@@ -103,15 +117,11 @@ public class RootsParticleRenderTypes {
   // Delayed render types that use quad sorting
   public static RootsParticleRenderType DELAYED_TRANSLUCENT_NO_DEPTH = new RootsParticleRenderType() {
     @Override
-    public boolean isDelayed() {
-      return true;
-    }
-
-    @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
       RenderSystem.depthMask(false);
       RenderSystem.disableDepthTest();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
       RenderSystem.enableBlend();
       RenderSystem.blendFuncSeparate(
           GlStateManager.SourceFactor.SRC_ALPHA,
@@ -130,14 +140,10 @@ public class RootsParticleRenderTypes {
 
   public static RootsParticleRenderType DELAYED_TRANSLUCENT = new RootsParticleRenderType() {
     @Override
-    public boolean isDelayed() {
-      return true;
-    }
-
-    @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
       RenderSystem.depthMask(true);
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
       RenderSystem.enableBlend();
       RenderSystem.blendFuncSeparate(
           GlStateManager.SourceFactor.SRC_ALPHA,
@@ -156,14 +162,10 @@ public class RootsParticleRenderTypes {
 
   public static RootsParticleRenderType DELAYED_TRANSLUCENT_NO_CULL = new RootsParticleRenderType() {
     @Override
-    public boolean isDelayed() {
-      return true;
-    }
-
-    @Override
     public BufferBuilder begin(Tesselator tess, TextureManager tex) {
       RenderSystem.depthMask(true);
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
       RenderSystem.enableBlend();
       RenderSystem.disableCull();
       RenderSystem.blendFuncSeparate(

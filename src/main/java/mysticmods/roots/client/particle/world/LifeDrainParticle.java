@@ -1,7 +1,6 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
@@ -84,37 +83,35 @@ public class LifeDrainParticle extends RootsEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    if (!RenderTickHandler.isRenderingDelayedParticles() || delayedRender) {
-      Vec3 pos = entity.getPosition(partialTicks);
+    Vec3 pos = entity.getPosition(partialTicks);
 
-      float yRot = entity.getViewYRot(partialTicks);
-      double yawRad = Math.toRadians(-yRot);
+    float yRot = entity.getViewYRot(partialTicks);
+    double yawRad = Math.toRadians(-yRot);
 
-      double coneOffset = Math.toRadians(angle / 2.0) * angleRandom;
-      double finalAngle = yawRad + coneOffset;
+    double coneOffset = Math.toRadians(angle / 2.0) * angleRandom;
+    double finalAngle = yawRad + coneOffset;
 
-      double radius = Mth.lerp(partialTicks, prevRadius, this.radius);
+    double radius = Mth.lerp(partialTicks, prevRadius, this.radius);
 
-      double offsetX = Math.sin(finalAngle) * radius;
-      double offsetZ = Math.cos(finalAngle) * radius;
+    double offsetX = Math.sin(finalAngle) * radius;
+    double offsetZ = Math.cos(finalAngle) * radius;
 
-      double x = pos.x + offsetX;
-      double y = pos.y + entity.getEyeHeight() - 0.5 + yOffset;
-      double z = pos.z + offsetZ;
+    double x = pos.x + offsetX;
+    double y = pos.y + entity.getEyeHeight() - 0.5 + yOffset;
+    double z = pos.z + offsetZ;
 
-      Vec3 cam = renderInfo.getPosition();
-      float rx = (float) (x - cam.x);
-      float ry = (float) (y - cam.y);
-      float rz = (float) (z - cam.z);
+    Vec3 cam = renderInfo.getPosition();
+    float rx = (float) (x - cam.x);
+    float ry = (float) (y - cam.y);
+    float rz = (float) (z - cam.z);
 
-      Quaternionf quaternion = new Quaternionf();
-      this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
-      if (this.roll != 0.0F) {
-        quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
-      }
-
-      renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
+    Quaternionf quaternion = new Quaternionf();
+    this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
+    if (this.roll != 0.0F) {
+      quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
     }
+
+    renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
   }
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {

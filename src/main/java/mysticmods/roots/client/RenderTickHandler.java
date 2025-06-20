@@ -56,24 +56,6 @@ public class RenderTickHandler {
   private static boolean outliningArea = false;
   private static final BoltRenderer boltRenderer = new BoltRenderer();
 
-  private static boolean renderingDelayedParticles = false;
-
-  public static final ImmutableList<ParticleRenderType> DELAYED_RENDER_ORDER = ImmutableList.of(
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH
-  );
-
-  private static final ImmutableMap<ParticleRenderType, RenderType> DELAYED_PARTICLE_RENDER_TYPES = ImmutableMap.of(
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK
-  );
-
-  public static boolean isRenderingDelayedParticles() {
-    return renderingDelayedParticles;
-  }
-
   public static float getPartialTick() {
     return Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
   }
@@ -113,47 +95,7 @@ public class RenderTickHandler {
       BeamManager.render(event.getPartialTick()
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
       renderer.endLastBatch();
-
-      renderingDelayedParticles = true;
-      var allParticles = ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).rootsGetParticles();
-
-      Frustum frustum = event.getFrustum();
-      float partialTick = getPartialTick();
-      Camera camera = event.getCamera();
-
-      for (ParticleRenderType type : DELAYED_RENDER_ORDER) {
-        Queue<Particle> particles = allParticles.get(type);
-
-        if (particles == null || particles.isEmpty()) {
-          continue;
-        }
-
-        RenderType renderType = DELAYED_PARTICLE_RENDER_TYPES.get(type);
-        if (renderType == null) {
-          RootsAPI.LOG.error("No render type found for particle render type: {}", type);
-          continue;
-        }
-
-        VertexConsumer consumer = renderer.getBuffer(renderType);
-        for (Particle particle : particles) {
-          if (!frustum.isVisible(particle.getRenderBoundingBox(partialTick))) continue;
-          try {
-            particle.render(consumer, camera, partialTick);
-          } catch (Throwable throwable) {
-            CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering Particle");
-            CrashReportCategory crashreportcategory = crashreport.addCategory("Particle being rendered");
-            crashreportcategory.setDetail("Particle", particle::toString);
-            crashreportcategory.setDetail("Particle Type", type::toString);
-            renderingDelayedParticles = false;
-            throw new ReportedException(crashreport);
-          }
-        }
-        renderer.endBatch(renderType);
-      }
-      RenderSystem.disableBlend();
     }
-
-    renderingDelayedParticles = false;
   }
 
   @SubscribeEvent

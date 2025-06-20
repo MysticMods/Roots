@@ -150,10 +150,6 @@ public class NondetectionParticle extends RootsParticle {
       return;
     }
 
-    if (!RenderTickHandler.isRenderingDelayedParticles()) {
-      return;
-    }
-
     Vec3 vec3 = camera.getPosition();
 
     double radius = 2.0f;
