@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import mysticmods.roots.client.RootsShaders;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
@@ -32,6 +33,7 @@ public class RootsParticleRenderTypes {
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableDepthTest();
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
@@ -51,6 +53,7 @@ public class RootsParticleRenderTypes {
       RenderSystem.disableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.enableDepthTest();
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
@@ -70,6 +73,7 @@ public class RootsParticleRenderTypes {
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.disableDepthTest();
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
@@ -83,7 +87,7 @@ public class RootsParticleRenderTypes {
   public static RootsParticleRenderType OPAQUE = new RootsParticleRenderType() {
     @Override
     public boolean isDelayed() {
-      return false;
+      return true;
     }
 
     @Override
@@ -91,6 +95,8 @@ public class RootsParticleRenderTypes {
       RenderSystem.depthMask(true);
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
       RenderSystem.disableBlend();
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
@@ -119,6 +125,8 @@ public class RootsParticleRenderTypes {
           GlStateManager.SourceFactor.ONE,
           GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
       );
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
@@ -145,6 +153,8 @@ public class RootsParticleRenderTypes {
           GlStateManager.SourceFactor.ONE,
           GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
       );
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
@@ -172,6 +182,8 @@ public class RootsParticleRenderTypes {
           GlStateManager.SourceFactor.ONE,
           GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
       );
+      RenderSystem.setShader(RootsShaders::getLowDiscardParticleShader);
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
