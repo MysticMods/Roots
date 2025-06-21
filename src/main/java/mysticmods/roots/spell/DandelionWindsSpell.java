@@ -70,12 +70,12 @@ public class DandelionWindsSpell extends Spell {
       moved++;
     }
 
-    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new DandelionWindsFXPacket(pPlayer.getId()));
-
     if (moved == 0) {
       costs.noCharge();
       return 0;
     }
+
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new DandelionWindsFXPacket(pPlayer.getId()));
 
     return cooldown;
   }
