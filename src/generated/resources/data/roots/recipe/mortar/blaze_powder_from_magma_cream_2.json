@@ -5,14 +5,14 @@
       {
         "chance": 1.0,
         "output": {
-          "count": 2,
+          "count": 1,
           "id": "minecraft:blaze_powder"
         }
       },
       {
         "chance": 1.0,
         "output": {
-          "count": 2,
+          "count": 1,
           "id": "minecraft:blaze_powder"
         }
       }

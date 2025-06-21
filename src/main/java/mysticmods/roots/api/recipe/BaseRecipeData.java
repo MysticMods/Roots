@@ -219,9 +219,7 @@ public class BaseRecipeData {
       List<ChanceOutput> newChances = new ArrayList<>();
       for (int i = 0; i < value; i++) {
         newIngredients.addAll(ingredients);
-        for (ChanceOutput oldChance : chanceOutputs) {
-          newChances.add(oldChance.multiply(value));
-        }
+        newChances.addAll(chanceOutputs);
       }
       ItemStack newResult = result.copy();
       newResult.setCount(newResult.getCount() * value);
