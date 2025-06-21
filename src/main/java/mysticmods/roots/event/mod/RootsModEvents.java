@@ -325,6 +325,7 @@ public class RootsModEvents {
       event.accept(ModItems.SPELL_AQUA_BUBBLE.get());
       event.accept(ModItems.SPELL_SUMMON_UNDEAD.get());
       event.accept(ModItems.SPELL_DANDELION_WINDS.get());
+      event.accept(ModItems.SPELL_DECAY.get());
       event.accept(ModItems.SPELL_DESATURATE.get());
       event.accept(ModItems.SPELL_DISARM.get());
       event.accept(ModItems.SPELL_EXTENSION.get());

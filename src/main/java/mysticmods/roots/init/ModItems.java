@@ -393,6 +393,7 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_AQUA_BUBBLE = ITEMS.register("spell_aqua_bubble", () -> spell(ModSpells.AQUA_BUBBLE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SUMMON_UNDEAD = ITEMS.register("spell_control_undead", () -> spell(ModSpells.SUMMON_UNDEAD));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DANDELION_WINDS = ITEMS.register("spell_dandelion_winds", () -> spell(ModSpells.DANDELION_WINDS));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DECAY = ITEMS.register("spell_decay", () -> spell(ModSpells.DECAY));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DESATURATE = ITEMS.register("spell_desaturate", () -> spell(ModSpells.DESATURATE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DISARM = ITEMS.register("spell_disarm", () -> spell(ModSpells.DISARM));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_EXTENSION = ITEMS.register("spell_extension", () -> spell(ModSpells.EXTENSION));

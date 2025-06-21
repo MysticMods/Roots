@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-17T16:00:35.3014323	Item Models: roots
+// 1.21.1	2025-06-21T19:03:34.4519433	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -221,6 +221,7 @@ a2ba5cbc0f7f87a0b02d92dd6aa28dc025c55d8c assets/roots/models/item/soul_pyre.json
 cd8a24e7114af53d2a35579627ecdab05225c632 assets/roots/models/item/spell_aqua_bubble.json
 dea19c39d873cf59285725c35b14d09ef4520124 assets/roots/models/item/spell_control_undead.json
 84ebab543b659946c5aa7f19acd4075b1af77b2a assets/roots/models/item/spell_dandelion_winds.json
+e0ccc362bb53d6c3a59c3a5810f3f62537340644 assets/roots/models/item/spell_decay.json
 9ff6e9689fd5a176c45b816818095493f95ccbad assets/roots/models/item/spell_desaturate.json
 e26e7f541f59b0e2e3c1e62fa8d31129cdf2c724 assets/roots/models/item/spell_disarm.json
 475b50a9bb200fa8e59a9daa58acbcf2efbd859e assets/roots/models/item/spell_extension.json

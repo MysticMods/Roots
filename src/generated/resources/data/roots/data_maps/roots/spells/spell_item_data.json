@@ -12,6 +12,10 @@
       "count": 1,
       "id": "roots:spell_dandelion_winds"
     },
+    "roots:decay": {
+      "count": 1,
+      "id": "roots:spell_decay"
+    },
     "roots:desaturate": {
       "count": 1,
       "id": "roots:spell_desaturate"
