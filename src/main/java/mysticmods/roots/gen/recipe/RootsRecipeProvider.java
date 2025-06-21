@@ -421,7 +421,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
         .save(c);
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROWTH_AMPLIFIER.get())
+/*    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROWTH_AMPLIFIER.get())
         .pattern("WRW")
         .pattern(" W ")
         .pattern("WWW")
@@ -429,7 +429,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .define('W', ItemTags.LOGS)
         .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_logs", has(ItemTags.LOGS))
-        .save(c);
+        .save(c);*/
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_RITUAL_PEDESTAL.get())
         .pattern("RRR")
