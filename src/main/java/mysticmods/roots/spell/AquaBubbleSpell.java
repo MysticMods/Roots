@@ -25,7 +25,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
-// Note: VISUALS TEMPORARY
 public class AquaBubbleSpell extends Spell {
   private int duration;
   private float fire_reduction, lava_reduction;
@@ -64,6 +63,7 @@ public class AquaBubbleSpell extends Spell {
       costs.noCharge();
       return 0;
     }
+    pPlayer.extinguishFire();
     SnapshotHelper.addLiving(pPlayer, ModSerializers.AQUA_BUBBLE.get(), new AquaBubbleSnapshot(pPlayer, duration, absorption, fire_reduction, lava_reduction));
     pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, 0, false, false));
     pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, absorption, false, false));
