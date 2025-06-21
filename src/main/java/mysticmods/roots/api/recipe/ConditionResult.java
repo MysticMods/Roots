@@ -22,6 +22,6 @@ public record ConditionResult(List<ILevelCondition> failedLevelConditions,
 
     player.displayClientMessage(Component.translatable("roots.message.recipe.failures"), false);
     failedLevelConditions.forEach(condition -> player.displayClientMessage(Component.translatable("roots.message.recipe.requires", condition.getNameComponent()), false));
-    failedPlayerConditions.forEach(condition -> player.displayClientMessage(Component.translatable("roots.message.recipe.requires", condition.getName()), false));
+    failedPlayerConditions.forEach(condition -> player.displayClientMessage(Component.translatable("roots.message.recipe.requires", condition.getNameComponent()), false));
   }
 }
