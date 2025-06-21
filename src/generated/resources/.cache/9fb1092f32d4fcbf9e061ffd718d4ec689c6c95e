@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-17T21:24:35.7290582	Recipes
+// 1.21.1	2025-06-21T18:42:22.0556065	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -233,6 +233,8 @@ ce1b365e5c44f4fca5664a1f27056a0ee6078425 data/roots/advancement/recipes/misc/mor
 97eec4b6c987eda934829579ad4c2094a36b12d1 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block.json
 31f2792bc211fed1a50138e64d6a04692f4125a9 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block_2.json
 af4b9a71789076d75a7bfdd899c12749475effe7 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block_3.json
+f4567e2d371f5540ab05b78cfb4519d8d884cec0 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block_4.json
+7ca272e6d86eb1d5cd340b67dab7503a79b7e6b3 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block_5.json
 50e8e87d16bc94778ef2b78e131294cc92d66060 data/roots/advancement/recipes/misc/mortar/runic_dust.json
 bda21dfbb8d7ee41cc3eef6f892fb8599b65c7ed data/roots/advancement/recipes/misc/mortar/runic_dust_2.json
 a7ae049f00b1a11e9144dbc6b1e88d161938c895 data/roots/advancement/recipes/misc/mortar/runic_dust_3.json
@@ -513,6 +515,8 @@ cbeddf9e9d50ccc94d9478df1e4df2b14a6e90d6 data/roots/recipe/mortar/flour_2.json
 af64ae9fc3c51e54e771031f49f468da340f62d7 data/roots/recipe/mortar/magma_cream_from_magma_block.json
 dcf6482b6397cb1f0114a61f6ae70b4e63f51eb5 data/roots/recipe/mortar/magma_cream_from_magma_block_2.json
 5c10fd52fce56cf32040e8d9c26758f1239e3bd7 data/roots/recipe/mortar/magma_cream_from_magma_block_3.json
+32e17dbe1c55113235d666043dfadec056b3d607 data/roots/recipe/mortar/magma_cream_from_magma_block_4.json
+4d5ff20cef983ee68fdaec67bd9760e84585453c data/roots/recipe/mortar/magma_cream_from_magma_block_5.json
 7a9d39f752b8805ccc6522f58fd99da7d8c72361 data/roots/recipe/mortar/runic_dust.json
 1b691be1391a818a7dcf52d999a6c5688ab302f4 data/roots/recipe/mortar/runic_dust_2.json
 51ccc17c1f729eeef709ab715b54fe2e67509adc data/roots/recipe/mortar/runic_dust_3.json

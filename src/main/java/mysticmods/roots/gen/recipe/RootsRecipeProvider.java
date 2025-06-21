@@ -7,7 +7,6 @@ import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
-import mysticmods.roots.condition.GroveRankReputation;
 import mysticmods.roots.init.*;
 import mysticmods.roots.recipe.PouchDyeRecipe;
 import mysticmods.roots.recipe.grove.GrovePouchRecipe;
@@ -1193,6 +1192,10 @@ public class RootsRecipeProvider extends RecipeProvider {
         .build(magmaCreamFromMagmaBlockData.multiplty(2)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_2"));
     saver.save(magmaCreamFromMagmaBlockBuilder.times(3)
         .build(magmaCreamFromMagmaBlockData.multiplty(3)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_3"));
+    saver.save(magmaCreamFromMagmaBlockBuilder.times(4)
+        .build(magmaCreamFromMagmaBlockData.multiplty(4)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_4"));
+    saver.save(magmaCreamFromMagmaBlockBuilder.times(5)
+        .build(magmaCreamFromMagmaBlockData.multiplty(5)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_5"));
 
     RecipeSaver.saver().unlockedBy("has_torch", has(Items.TORCH)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.GLASS_BLOCKS)

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:mortar/magma_cream_from_magma_block_5"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_magma_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:magma_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_magma_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:mortar/magma_cream_from_magma_block_5"
+    ]
+  }
+}

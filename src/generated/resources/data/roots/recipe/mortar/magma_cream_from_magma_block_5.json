@@ -1,0 +1,28 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:magma_block"
+      },
+      {
+        "item": "minecraft:magma_block"
+      },
+      {
+        "item": "minecraft:magma_block"
+      },
+      {
+        "item": "minecraft:magma_block"
+      },
+      {
+        "item": "minecraft:magma_block"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 20,
+      "id": "minecraft:magma_cream"
+    }
+  },
+  "times": 5
+}
