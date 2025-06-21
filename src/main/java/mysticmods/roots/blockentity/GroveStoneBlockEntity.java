@@ -73,6 +73,10 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     }
   }
 
+  public void setRank (int rank) {
+    this.resetBounds();
+  }
+
   private Holder<Grove> getGrove() {
     if (!(getBlockState().getBlock() instanceof GroveStoneBlock groveBlock)) {
       throw new IllegalStateException("GroveStoneBlockEntity must be attached to a GroveStoneBlock");

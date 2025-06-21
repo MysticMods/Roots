@@ -7,6 +7,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.GroveStoneBlock;
+import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.PositionCache;
@@ -71,6 +72,10 @@ public class GroveSupplicationRitual extends Ritual {
 
             if (newState != state) {
               blockEntity.getLevel().setBlockAndUpdate(pos, newState);
+
+              if (blockEntity.getLevel().getBlockEntity(pos) instanceof GroveStoneBlockEntity groveStoneEntity) {
+                groveStoneEntity.setRank(rank);
+              }
             }
           }
         }
