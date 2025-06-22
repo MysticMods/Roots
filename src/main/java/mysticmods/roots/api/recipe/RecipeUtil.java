@@ -38,6 +38,7 @@ public class RecipeUtil {
     return RecipeMatcher.findMatches(inputs, recipe.getIngredients()) != null;
   }
 
+  @Nullable
   public static Int2IntOpenHashMap getIngredientMap(Recipe<?> recipe, RecipeInput input) {
     Int2IntOpenHashMap map = new Int2IntOpenHashMap();
     boolean foundOuter = true;
