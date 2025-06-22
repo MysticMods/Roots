@@ -126,6 +126,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.entity.duck.quack", "Duck quacks");
     add("roots.subtitles.entity.deer.ambient", "Deer squeals");
 
+    add("roots.subtitles.item.knife.strip", "Knife strips");
+
     add("roots.commands.usage", "Usage: /roots staff | ritual | pyre | activate");
     add("roots.commands.staff.usage", "Usage: /roots staff <spell>");
     add("roots.commands.staff.spell_not_found", "Spell not found: %s");

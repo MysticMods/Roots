@@ -6,6 +6,7 @@ import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
@@ -97,7 +98,7 @@ public class KnifeItem extends TieredItem {
         }
       }
 
-      level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+      level.playSound(player, blockpos, ModSounds.KNIFE_STRIP.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
       if (player instanceof ServerPlayer) {
         CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockpos, itemstack);
