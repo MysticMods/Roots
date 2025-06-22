@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -15,9 +16,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
@@ -25,6 +29,12 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
                                    @Nullable ItemStack item, @Nullable BlockPos pos, int delay) implements ParticleOptions {
 
   private static final Codec<ItemStack> ITEM_CODEC = Codec.withAlternative(ItemStack.SINGLE_ITEM_CODEC, ItemStack.ITEM_NON_AIR_CODEC, ItemStack::new);
+  private static final Codec<double[]> DOUBLE_ARRAY_CODEC = Codec.DOUBLE.listOf().xmap(
+      list -> list.stream().mapToDouble(Double::doubleValue).toArray(),
+      array -> Arrays.stream(array).boxed().toList());
+  private static final StreamCodec<ByteBuf, double[]> DOUBLE_ARRAY_STREAM_CODEC = ByteBufCodecs.DOUBLE.apply(ByteBufCodecs.list()).map(
+      list -> list.stream().mapToDouble(Double::doubleValue).toArray(),
+      array -> Arrays.stream(array).boxed().toList());
 
   public static MapCodec<RootsParticleOptions> codec(ParticleType<?> type) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -86,6 +96,9 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         entityId, casterId, fastForward, delay;
     private ItemStack item = null;
     private BlockPos pos = null;
+    private double[] spawn = new double[]{0.0, 0.0, 0.0};
+    private double[] velocity = new double[]{0.0, 0.0, 0.0};
+    private boolean forceSpawn = false;
 
     public Builder(ParticleType<?> type) {
       this.type = type;
@@ -105,6 +118,57 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       int temp = this.color1;
       this.color1 = this.color2;
       this.color2 = temp;
+      return this;
+    }
+
+    public Builder spawn (double[] spawn) {
+      if (spawn.length != 3) {
+        throw new IllegalArgumentException("Spawn array must have exactly 3 elements, got: " + spawn.length);
+      }
+      this.spawn = spawn;
+      return this;
+    }
+
+    public Builder x (double x) {
+      this.spawn[0] = x;
+      return this;
+    }
+
+    public Builder y (double y) {
+      this.spawn[1] = y;
+      return this;
+    }
+
+    public Builder z (double z) {
+      this.spawn[2] = z;
+      return this;
+    }
+
+    public Builder velocity (double[] velocity) {
+      if (velocity.length != 3) {
+        throw new IllegalArgumentException("Velocity array must have exactly 3 elements, got: " + velocity.length);
+      }
+      this.velocity = velocity;
+      return this;
+    }
+
+    public Builder vx (double vx) {
+      this.velocity[0] = vx;
+      return this;
+    }
+
+    public Builder vy (double vy) {
+      this.velocity[1] = vy;
+      return this;
+    }
+
+    public Builder vz (double vz) {
+      this.velocity[2] = vz;
+      return this;
+    }
+
+    public Builder forceSpawn() {
+      this.forceSpawn = true;
       return this;
     }
 
@@ -171,8 +235,16 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
+    @Deprecated
     public RootsParticleOptions build() {
       return new RootsParticleOptions(type, color1, color2, entityId, casterId, fastForward, item, pos, delay);
+    }
+
+    public void build (Level level) {
+      if (spawn[0] == 0.0 && spawn[1] == 0.0 && spawn[2] == 0.0) {
+        RootsAPI.LOG.error("Attempted to spawn particle with zero spawn coordinates. Was this intentional? Particle: {}", this);
+      }
+      level.addParticle(build(), forceSpawn, spawn[0], spawn[1], spawn[2], velocity[0], velocity[1], velocity[2]);
     }
   }
 
