@@ -551,16 +551,16 @@ public class ClientFXHandlers {
       for (int i = 0; i < 1; i++) {
         double xOffset = minecraft.level.random.nextDouble() - 0.5;
         double zOffset = minecraft.level.random.nextDouble() - 0.5;
-        double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
+        double yOffset = (minecraft.level.random.nextDouble() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
             RootsParticleOptions.builder(
                 ModParticles.GROWTH).color(
                 0xc2d02a,
                 0x7fc73c).build(),
-            location.getX() + xOffset,
+            location.getX() + 0.5 + xOffset,
             location.getY() + yOffset,
-            location.getZ() + zOffset,
+            location.getZ() + 0.5 + zOffset,
             0,
             0.05,
             0
