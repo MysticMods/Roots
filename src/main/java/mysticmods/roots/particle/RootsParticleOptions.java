@@ -21,7 +21,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
@@ -240,7 +239,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return new RootsParticleOptions(type, color1, color2, entityId, casterId, fastForward, item, pos, delay);
     }
 
-    public void build (Level level) {
+    public void spawn(Level level) {
       if (spawn[0] == 0.0 && spawn[1] == 0.0 && spawn[2] == 0.0) {
         RootsAPI.LOG.error("Attempted to spawn particle with zero spawn coordinates. Was this intentional? Particle: {}", this);
       }
