@@ -120,7 +120,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder spawn (double[] spawn) {
+    public Builder spawn (double... spawn) {
       if (spawn.length != 3) {
         throw new IllegalArgumentException("Spawn array must have exactly 3 elements, got: " + spawn.length);
       }
@@ -143,7 +143,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder velocity (double[] velocity) {
+    public Builder velocity (double... velocity) {
       if (velocity.length != 3) {
         throw new IllegalArgumentException("Velocity array must have exactly 3 elements, got: " + velocity.length);
       }
