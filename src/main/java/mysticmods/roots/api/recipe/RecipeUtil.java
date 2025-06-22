@@ -2,6 +2,7 @@ package mysticmods.roots.api.recipe;
 
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import mysticmods.roots.api.recipe.inventory.RecipeInputWrapper;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,10 +44,14 @@ public class RecipeUtil {
     outer:
     for (Ingredient ingredient : recipe.getIngredients()) {
       for (int i = 0; i < input.size(); i++) {
+        int currentCount = map.get(i);
+        int newCount = currentCount + 1;
         ItemStack stack = input.getItem(i);
         if (ingredient.test(stack)) {
-          map.put(i, map.get(i) + 1);
-          continue outer;
+          if (newCount <= stack.getCount()) {
+            map.put(i, map.get(i) + 1);
+            continue outer;
+          }
         }
       }
       foundOuter = false;
