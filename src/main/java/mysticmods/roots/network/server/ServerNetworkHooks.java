@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
+import mysticmods.roots.item.PouchItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
@@ -42,7 +43,11 @@ public class ServerNetworkHooks {
         return;
       }
 
-      player.openMenu(new HerbPouchMenu(stack));
+      if (!(stack.getItem() instanceof PouchItem pouchItem)) {
+        return;
+      }
+
+      player.openMenu(pouchItem.getMenuProvider().createMenu(stack));
   }
 
   public static void setSpellData(Player player, InteractionHand hand, int index, int value) {
