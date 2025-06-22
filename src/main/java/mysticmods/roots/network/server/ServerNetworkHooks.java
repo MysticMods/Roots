@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 public class ServerNetworkHooks {
   public static void openPouch (Player player) {
       ItemStack stack = ItemStack.EMPTY;
-      for (ItemStack curioStack : RootsAPI.INSTANCE.getCurios(player, RootsTags.Items.POUCHES)) {
+      for (ItemStack curioStack : RootsAPI.getInstance().getCurios(player, RootsTags.Items.POUCHES)) {
         stack = curioStack;
         break;
       }
