@@ -36,6 +36,7 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
 
   private boolean powered = false;
 
+  private long lastPoweredTick = 0;
   private int poweredTicks = 0;
 
   @Override
@@ -116,6 +117,7 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
   @Override
   public void markPowered(IGroveInstance grove, boolean powered) {
     if (this.powered != powered) {
+      this.lastPoweredTick = grove.getTickCount();
       this.powered = powered;
       setChanged();
       updateViaState();
@@ -124,6 +126,9 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
 
   @Override
   public int getRequiredPower(IGroveInstance grove) {
+    if (this.lastPoweredTick == grove.getTickCount()) {
+      return 0;
+    }
     return 30;
   }
 }

@@ -62,6 +62,8 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   private boolean increaseProfessionLevelOnUpdate;
   private int updateMerchantTimer;
 
+  private long lastPoweredTick = 0;
+
   private Tag offersTag = null;
 
   public FairyHutBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
@@ -177,6 +179,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   public void markPowered(IGroveInstance grove, boolean powered) {
     if (this.powered != powered) {
       this.powered = powered;
+      this.lastPoweredTick = grove.getTickCount();
       setChanged();
       updateViaState();
     }
@@ -184,7 +187,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   @Override
   public int getRequiredPower(IGroveInstance grove) {
-    if (grove.is(RootsTags.Groves.FAIRY)) {
+    if (grove.is(RootsTags.Groves.FAIRY) && grove.getTickCount() != this.lastPoweredTick) {
       return 15;
     }
 

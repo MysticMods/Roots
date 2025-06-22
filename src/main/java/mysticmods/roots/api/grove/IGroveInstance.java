@@ -1,9 +1,10 @@
 package mysticmods.roots.api.grove;
 
+import mysticmods.roots.api.IProvidesTick;
 import mysticmods.roots.api.blockentity.Bounded;
 import net.minecraft.tags.TagKey;
 
-public interface IGroveInstance extends Bounded {
+public interface IGroveInstance extends Bounded, IProvidesTick {
   Grove asGrove ();
 
   int getRank();
