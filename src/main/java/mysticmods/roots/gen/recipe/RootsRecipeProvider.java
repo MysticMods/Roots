@@ -1805,7 +1805,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     // Living arrows
     RecipeSaver.saver().unlockedBy("has_leaves", has(ItemTags.LEAVES)).save(GroveRecipe.Builder.create()
-        .build(BaseRecipeData.Builder.create().result(ModItems.LIVING_ARROW, 3).requires(ItemTags.LEAVES)
+        .build(BaseRecipeData.Builder.create().result(ModItems.LIVING_ARROW, 2).requires(ItemTags.LEAVES)
             .requires(ItemTags.LEAVES).requires(RootsTags.Items.FLINT).requires(Tags.Items.RODS_WOODEN)
             .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/living_arrow"));
 

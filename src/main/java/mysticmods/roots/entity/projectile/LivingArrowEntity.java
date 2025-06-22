@@ -10,6 +10,10 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class LivingArrowEntity extends AbstractArrow {
+  public static final double GRAVITY_MODIFIER = 0.7; // 30% less gravity
+  public static final float VELOCITY_MODIFIER = 1.1f; // 10% more velocity
+  public static final float LOWER_CRIT_THRESHOLD = 0.8f; // Only need to charge to 80% for it to be considered a critical hit
+
   public LivingArrowEntity(EntityType<? extends LivingArrowEntity> entityType, Level level) {
     super(entityType, level);
   }
@@ -25,5 +29,18 @@ public class LivingArrowEntity extends AbstractArrow {
   @Override
   protected ItemStack getDefaultPickupItem() {
     return new ItemStack(ModItems.LIVING_ARROW);
+  }
+
+  @Override
+  protected double getDefaultGravity() {
+    return super.getDefaultGravity() * 0.7; // Reduce gravity
+  }
+
+  @Override
+  public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
+    super.shoot(x, y, z, velocity*1.1f, inaccuracy);
+    if (velocity / 3.0f >= LOWER_CRIT_THRESHOLD) {
+      this.setCritArrow(true);
+    }
   }
 }

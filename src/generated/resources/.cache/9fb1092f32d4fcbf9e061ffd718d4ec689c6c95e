@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-21T18:48:13.1012351	Recipes
+// 1.21.1	2025-06-22T13:15:57.1451824	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -437,7 +437,7 @@ dcfc1616311effbc81aae6f36ab49211d00ec14b data/roots/recipe/grove/grove_stone_fai
 2e8767bfdd8126848f5cb404e7f0eca13125d7be data/roots/recipe/grove/grove_stone_sprouting.json
 d8ba20e0f41e58ef18052ccad9b58c5300a2efe1 data/roots/recipe/grove/grove_stone_twilight.json
 53ed665f9c3f8672b20729c266d63a24681501fb data/roots/recipe/grove/grove_stone_wild.json
-16143d87769631a44df4c9c4b0bb54a63035e8eb data/roots/recipe/grove/living_arrow.json
+cf4996c5f282cd2dca07149d9e287b83e24e889f data/roots/recipe/grove/living_arrow.json
 2069452d395d97c88a282132eb9965db369b187d data/roots/recipe/grove/living_axe.json
 a89a07af5940022033542176bff23444361b20e5 data/roots/recipe/grove/living_hoe.json
 2a3ed52ce06e93834b8f5e72a840871f051d8625 data/roots/recipe/grove/living_pickaxe.json
