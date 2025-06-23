@@ -1,0 +1,59 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:red_mushroom"
+      },
+      {
+        "item": "minecraft:red_mushroom"
+      },
+      {
+        "item": "minecraft:red_mushroom"
+      },
+      {
+        "item": "minecraft:red_mushroom"
+      },
+      {
+        "item": "minecraft:experience_bottle"
+      },
+      {
+        "tag": "c:gems/emerald"
+      },
+      {
+        "tag": "minecraft:wooden_doors"
+      },
+      {
+        "tag": "c:chests/wooden"
+      },
+      {
+        "tag": "c:cobblestones/mossy"
+      },
+      {
+        "tag": "c:fertilizers"
+      }
+    ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "fairy",
+          "tag": "roots:grove_stones/fairy"
+        },
+        "require_active": true
+      }
+    ],
+    "player_conditions": [
+      {
+        "type": "roots:grove_rank_condition",
+        "grove": "roots:fairy",
+        "minimum_rank": 1
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:red_fairy_hut"
+    }
+  }
+}

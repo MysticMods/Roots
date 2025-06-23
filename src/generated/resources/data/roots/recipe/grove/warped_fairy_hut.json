@@ -1,0 +1,59 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:warped_fungus"
+      },
+      {
+        "item": "minecraft:warped_fungus"
+      },
+      {
+        "item": "minecraft:warped_fungus"
+      },
+      {
+        "item": "minecraft:warped_fungus"
+      },
+      {
+        "item": "minecraft:experience_bottle"
+      },
+      {
+        "tag": "c:ingots/gold"
+      },
+      {
+        "tag": "roots:doors/nether"
+      },
+      {
+        "tag": "c:chests/wooden"
+      },
+      {
+        "tag": "c:netherracks"
+      },
+      {
+        "tag": "c:fertilizers"
+      }
+    ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "fairy",
+          "tag": "roots:grove_stones/fairy"
+        },
+        "require_active": true
+      }
+    ],
+    "player_conditions": [
+      {
+        "type": "roots:grove_rank_condition",
+        "grove": "roots:fairy",
+        "minimum_rank": 1
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:warped_fairy_hut"
+    }
+  }
+}

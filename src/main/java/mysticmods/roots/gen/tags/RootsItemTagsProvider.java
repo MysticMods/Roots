@@ -103,6 +103,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.SILVER_NUGGET).add(ModItems.SILVER_NUGGET.get());
     this.tag(RootsTags.Items.COPPER_NUGGET).add(ModItems.COPPER_NUGGET.get());
 
+    this.copy(RootsTags.Blocks.NETHER_DOORS, RootsTags.Items.NETHER_DOORS);
     this.copy(RootsTags.Blocks.SOILS, RootsTags.Items.SOILS);
     this.copy(RootsTags.Blocks.WATER_SOIL, RootsTags.Items.WATER_SOIL);
     this.copy(RootsTags.Blocks.AIR_SOIL, RootsTags.Items.AIR_SOIL);
@@ -234,8 +235,6 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.QUIVERS).add(ModItems.WILDWOOD_QUIVER.get());
     this.tag(RootsTags.Items.CREATIVE_POUCHES).add(ModItems.CREATIVE_POUCH.get());
     this.tag(RootsTags.Items.ALL_POUCHES).addTags(RootsTags.Items.POUCHES, RootsTags.Items.CREATIVE_POUCHES);
-
-    this.tag(RootsTags.Items.FERTILIZERS).add(Items.BONE_MEAL);
 
     // For Desaturate/Saturate
     this.tag(RootsTags.Items.SKIPPED_FOODS);

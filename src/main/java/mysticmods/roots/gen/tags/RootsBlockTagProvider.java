@@ -192,7 +192,12 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.GROVE_STONE_FUNGAL).add(FUNGAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_ELEMENTAL).add(ELEMENTAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONES).addTags(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Blocks.GROVE_STONE_SPROUTING, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
-    this.tag(RootsTags.Blocks.HUTS).add(RED_FAIRY_HUT.get(), BROWN_FAIRY_HUT.get(), BAFFLECAP_FAIRY_HUT.get(), CRIMSON_FAIRY_HUT.get(), WARPED_FAIRY_HUT.get());
+    this.tag(RootsTags.Blocks.RED_HUTS).add(RED_FAIRY_HUT.get());
+    this.tag(RootsTags.Blocks.BROWN_HUTS).add(BROWN_FAIRY_HUT.get());
+    this.tag(RootsTags.Blocks.BAFFLECAP_HUTS).add(BAFFLECAP_FAIRY_HUT.get());
+    this.tag(RootsTags.Blocks.CRIMSON_HUTS).add(CRIMSON_FAIRY_HUT.get());
+    this.tag(RootsTags.Blocks.WARPED_HUTS).add(WARPED_FAIRY_HUT.get());
+    this.tag(RootsTags.Blocks.HUTS).addTags(RootsTags.Blocks.RED_HUTS, RootsTags.Blocks.BROWN_HUTS, RootsTags.Blocks.BAFFLECAP_HUTS, RootsTags.Blocks.CRIMSON_HUTS, RootsTags.Blocks.WARPED_HUTS);
 
     this.tag(RootsTags.Blocks.MORTARS).add(MORTAR.get());
 
@@ -407,6 +412,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.GROWTH_AMPLIFIER_GRASSES).add(Blocks.TALL_GRASS, Blocks.SHORT_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
 
     tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS).add(GROWTH_AMPLIFIER.get(), ENCHANTED_TURF.get());
+
+    tag(RootsTags.Blocks.NETHER_DOORS).add(Blocks.CRIMSON_DOOR, Blocks.WARPED_DOOR);
   }
 
   @Override

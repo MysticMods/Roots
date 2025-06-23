@@ -33,6 +33,7 @@ public class ModConditions {
   public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_4_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 4));
   public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_3_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 3));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, true));
+  public static final Supplier<ILevelCondition> FAIRY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.FAIRY, true));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE_INACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, true));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, false));
   private static final String WILDROOT_CROP = "mature_wildroot_crop";

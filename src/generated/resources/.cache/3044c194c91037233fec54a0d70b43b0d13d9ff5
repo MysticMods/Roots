@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-17T16:14:48.1133837	Roots Block Tags
+// 1.21.1	2025-06-23T12:32:01.3493655	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -94,6 +94,7 @@ ac79c9fee49d61de4d35103b3c501dcd9f00f5ff data/roots/tags/block/crops/stalicripe.
 124deb91b6f2a320d3d065cdb42694d1905e1500 data/roots/tags/block/crops/wildewheet.json
 ecda61a71eb355925053fb56bfc8838b38a30dd2 data/roots/tags/block/crops/wildroot.json
 ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/block/decorative_pyres.json
+3ff1373c0ed2034d76fc6aa9c28b453d89f050dd data/roots/tags/block/doors/nether.json
 119233fd9e09f2482d0935240466f08a2e901a1b data/roots/tags/block/forageable/all.json
 aad685bc47fe5961230536c39cb94930971eb077 data/roots/tags/block/forageable/double.json
 0ae23011308e32f2a1e1a536aa42850c5ddaac70 data/roots/tags/block/forageable/single.json
@@ -124,7 +125,12 @@ ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/block/grove_stones/wild
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/force.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/reduce.json
 817a6bd7f94e13b5fa1b350c0704f567d5d98d16 data/roots/tags/block/growth_amplifier_grasses.json
-3f9791f6926dfe99b98612d18897e601ccdaa3d3 data/roots/tags/block/huts.json
+da2a6074f6a747b8aa9bc4f54a6f0a52184d01ac data/roots/tags/block/huts.json
+3f5e694c13f88e828c7588f6e048e14098230da2 data/roots/tags/block/huts/bafflecap.json
+d23b43c2ead8448882385951a6a55b8612c4ea25 data/roots/tags/block/huts/brown.json
+5d26b0d1cc677c1e91cf27e4986aa697dca4e2ca data/roots/tags/block/huts/crimson.json
+bbec56d0bd3d4cfc14e903e45228b49a3874274a data/roots/tags/block/huts/red.json
+0f0191ca62102c21a83d8f8ddd98dbdc571a17c1 data/roots/tags/block/huts/warped.json
 047b7c7631a4b09bd9bbdf8c77cfe781370cd790 data/roots/tags/block/logs/runed.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/block/logs/runed/acacia.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/block/logs/runed/birch.json

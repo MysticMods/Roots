@@ -196,6 +196,8 @@ public class RootsLangProvider extends LanguageProvider {
 
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get().getName(), "Active Grove Stone");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get().getName() + ".description", "A Grove Stone that has been activated by the ritual Grove Supplication.");
+    add("level_condition.roots." + ModConditions.FAIRY_GROVE_STONE_ACTIVE.get().getName(), "Active Fairy Grove Stone");
+    add("level_condition.roots." + ModConditions.FAIRY_GROVE_STONE_ACTIVE.get().getName() + ".description", "A Fairy Grove Stone that has been activated by the ritual Grove Supplication.");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_INACTIVE.get().getName(), "Inactive Grove Stone");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_INACTIVE.get().getName() + ".description", "A Grove Stone that has not yet been activated.");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE.get().getName(), "Any Grove Stone");
@@ -600,7 +602,6 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.WARPED_BARK, "Warped Barks");
     add(RootsTags.Items.MIXED_BARK, "Mixed Barks");
     add(RootsTags.Items.BOTTLES, "Bottles");
-    add(RootsTags.Items.FERTILIZERS, "Fertilizers");
     add(RootsTags.Items.POUCHES, "Pouches");
     add(RootsTags.Items.GROVE_CRAFTER_ACTIVATION, "Grove Crafter Activators");
     add(RootsTags.Items.MORTAR_ACTIVATION, "Mortar Activators");

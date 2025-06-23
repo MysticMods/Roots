@@ -3,7 +3,7 @@
   "data": {
     "ingredients": [
       {
-        "tag": "roots:fertilizers"
+        "tag": "c:fertilizers"
       },
       {
         "tag": "roots:barks/oak"

@@ -1,9 +1,9 @@
 {
   "values": [
-    "roots:red_fairy_hut",
-    "roots:brown_fairy_hut",
-    "roots:bafflecap_fairy_hut",
-    "roots:crimson_fairy_hut",
-    "roots:warped_fairy_hut"
+    "#roots:huts/red",
+    "#roots:huts/brown",
+    "#roots:huts/bafflecap",
+    "#roots:huts/crimson",
+    "#roots:huts/warped"
   ]
 }

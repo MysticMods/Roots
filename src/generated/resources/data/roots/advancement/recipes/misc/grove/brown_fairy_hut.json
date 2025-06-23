@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:grove/brown_fairy_hut"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_brown_mushroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:brown_mushroom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_brown_mushroom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:grove/brown_fairy_hut"
+    ]
+  }
+}

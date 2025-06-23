@@ -242,7 +242,15 @@ public class RootsTags {
 
     public static final TagKey<Block> HUTS = modTag("huts");
 
+    public static final TagKey<Block> BAFFLECAP_HUTS = modTag("huts/bafflecap");
+    public static final TagKey<Block> RED_HUTS = modTag("huts/red");
+    public static final TagKey<Block> BROWN_HUTS = modTag("huts/brown");
+    public static final TagKey<Block> CRIMSON_HUTS = modTag("huts/crimson");
+    public static final TagKey<Block> WARPED_HUTS = modTag("huts/warped");
+
     public static final TagKey<Block> GROWTH_AMPLIFIER_GRASSES = modTag("growth_amplifier_grasses");
+
+    public static final TagKey<Block> NETHER_DOORS = modTag("doors/nether");
 
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
@@ -302,8 +310,6 @@ public class RootsTags {
     public static final TagKey<Item> CRIMSON_BARK = modTag("barks/crimson");
     public static final TagKey<Item> WARPED_BARK = modTag("barks/warped");
     public static final TagKey<Item> MIXED_BARK = modTag("barks/mixed");
-
-    public static final TagKey<Item> FERTILIZERS = modTag("fertilizers");
 
     public static final TagKey<Item> BOTTLES = modTag("bottles");
 
@@ -476,6 +482,8 @@ public class RootsTags {
     public static final TagKey<Item> ROTTEN_FLESH = modTag("rotten_flesh");
 
     public static final TagKey<Item> GROWTH_AMPLIFIER_GRASSES = modTag("growth_amplifier_grasses");
+
+    public static final TagKey<Item> NETHER_DOORS = modTag("doors/nether");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

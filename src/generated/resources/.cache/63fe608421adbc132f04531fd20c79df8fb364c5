@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-16T20:09:07.2573798	Roots Item Tags
+// 1.21.1	2025-06-23T12:32:01.3529842	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -99,9 +99,9 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/item/crops/pereskia.jso
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/item/crops/wildroot.json
 ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/item/decorative_pyres.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/disable_disarming.json
+3ff1373c0ed2034d76fc6aa9c28b453d89f050dd data/roots/tags/item/doors/nether.json
 1b81ce702cc93595adbcfc8dd9dcb1a5e932c8c6 data/roots/tags/item/dusts/runic.json
 5b28ef157c0fd6f0022f555656f0e53a177ca4d2 data/roots/tags/item/dyeable.json
-c7500f481948159c566ddedb8a200fe63a413a56 data/roots/tags/item/fertilizers.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json
 7c23110fe0420d3a96fab43595db02c682e00c68 data/roots/tags/item/foraging_eligible.json
 d17a97ae6e613b481dec932c38e92f9776fcf84c data/roots/tags/item/functional_pyres.json
