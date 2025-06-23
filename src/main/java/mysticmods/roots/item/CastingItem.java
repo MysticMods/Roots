@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModItems;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelFailFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelJauntFXPacket;
@@ -32,6 +33,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CastingItem extends Item {
   public CastingItem(Properties pProperties) {
@@ -41,6 +43,20 @@ public class CastingItem extends Item {
   @Override
   public UseAnim getUseAnimation(ItemStack pStack) {
     return UseAnim.BOW;
+  }
+
+  public static UUID getUUID(ItemStack stack) {
+    if (!stack.is(ModItems.STAFF.get())) {
+      throw new IllegalArgumentException("CastingItem.getUUID can only be called on a staff item");
+    }
+    UUID current = stack.get(ModAttachments.ITEM_UUID);
+    if (current == null || current.equals(ModAttachments.DEFAULT_UUID)) {
+      UUID newUUID = UUID.randomUUID();
+      stack.set(ModAttachments.ITEM_UUID, newUUID);
+      return newUUID;
+    } else {
+      return current;
+    }
   }
 
   @Override
@@ -69,12 +85,14 @@ public class CastingItem extends Item {
 
     SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
+      CastingSuccessCache.clear(pStack);
       pPlayer.stopUsingItem();
       return;
     }
 
     ISpellInstance spell = storage.getCurrentSpell();
     if (spell == null) {
+      CastingSuccessCache.clear(pStack);
       pPlayer.stopUsingItem();
       return;
     }
@@ -87,6 +105,7 @@ public class CastingItem extends Item {
       if (ticks % 20 == 0) {
         if (!costs.canAfford(pPlayer, true)) {
           RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
+          CastingSuccessCache.clear(pStack);
           pPlayer.stopUsingItem();
           return;
         }
@@ -96,27 +115,31 @@ public class CastingItem extends Item {
         // This means the psell didn't cast
         // TODO: Kind of decide something about this
         /*        RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());*/
-        if (ticks % 2 == 0) {
-          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelFailFXPacket(spell.getSpell(), pPlayer.getId(), ticks));
-        }
+        CastingSuccessCache.note(pStack, false);
       } else {
-        if (ticks % 2 == 0) {
-          Vec3 stop = spell.getBlockTarget(pPlayer);
-          IRootsPacket packet;
-          if (stop == null) {
+        CastingSuccessCache.note(pStack, true);
+      }
+
+      if (ticks % 2 == 0) {
+        Vec3 stop = spell.getBlockTarget(pPlayer);
+        IRootsPacket packet;
+
+        if (stop != null) {
+          Vec3 lookDir = pPlayer.getViewVector(1.0f);
+          Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
+          double sideOffset = 0.3;
+          Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
+          Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
+          packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+        } else {
+          if (CastingSuccessCache.isASuccess(pStack)) {
             packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), ticks);
           } else {
-            // Actually transmit particles now
-            Vec3 lookDir = pPlayer.getViewVector(1.0f);
-            Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
-            double sideOffset = 0.3;
-            Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
-            Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
-            packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+            packet = new CastChannelFailFXPacket(spell.getSpell(), pPlayer.getId(), ticks);
           }
-
-          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, packet);
         }
+
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, packet);
       }
 
       // TODO: Properly handle operations
@@ -170,6 +193,7 @@ public class CastingItem extends Item {
         if (newStorage != storage) {
           stack.set(ModAttachments.SPELL_STORAGE, newStorage);
         }
+        CastingSuccessCache.clear(stack);
         return InteractionResultHolder.success(stack);
       } else {
         return InteractionResultHolder.fail(stack);
@@ -199,6 +223,7 @@ public class CastingItem extends Item {
         stack.set(ModAttachments.SPELL_STORAGE, storage.setCooldown(current, cooldown));
       }
     } else {
+      CastingSuccessCache.clear(stack);
       pPlayer.startUsingItem(pUsedHand);
     }
 
@@ -208,6 +233,9 @@ public class CastingItem extends Item {
   @Override
   public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
     this.releaseUsing(stack, level, livingEntity, stack.getUseDuration(livingEntity));
+    if (!level.isClientSide()) {
+      CastingSuccessCache.clear(stack);
+    }
     return stack;
   }
 
@@ -216,6 +244,7 @@ public class CastingItem extends Item {
     super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
     if (!pLevel.isClientSide()) {
       int dur = getUseDuration(pStack, pLivingEntity) - pTimeCharged;
+      CastingSuccessCache.clear(pStack);
       //RootsAPI.LOG.info("Finished using after {} ticks {} seconds", dur, dur / 20);
     }
 

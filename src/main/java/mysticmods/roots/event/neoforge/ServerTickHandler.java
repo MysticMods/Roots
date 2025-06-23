@@ -3,6 +3,7 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.item.CastingSuccessCache;
 import mysticmods.roots.network.client.ClientboundEntitySnapshotSyncPacket;
 import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientboundHerbSyncPacket;
@@ -13,6 +14,10 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -23,6 +28,17 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ServerTickHandler {
+  // This mimics the pattern in `ServerLifecycleHooks` to ensure the cache is cleared whenever the current server is changed.
+  @SubscribeEvent
+  public static void onServerAboutToStart (ServerAboutToStartEvent event) {
+    CastingSuccessCache.clear();
+  }
+
+  @SubscribeEvent
+  public static void onServerStopping (ServerStoppedEvent event) {
+    CastingSuccessCache.clear();
+  }
+
   @SubscribeEvent
   public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
     Player player = event.getEntity();
@@ -77,6 +93,7 @@ public class ServerTickHandler {
           ClientboundReputationSyncPacket::new
       );
     }
+    CastingSuccessCache.tick();
   }
 
 
