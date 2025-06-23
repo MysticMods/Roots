@@ -18,7 +18,7 @@ public class QuiverContainer extends PouchContainer {
     // Item slots
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 3; ++column) {
-        this.addSlot(new QuiverSlot(inventory, column + row * 5, 60 + column * 20, 21 + row * 20));
+        this.addSlot(new QuiverSlot(inventory, column + row * 3, 60 + column * 20, 21 + row * 20));
       }
     }
 

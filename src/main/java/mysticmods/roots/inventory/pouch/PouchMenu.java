@@ -26,6 +26,9 @@ public abstract class PouchMenu implements Container, MenuProvider {
 
   @Override
   public ItemStack getItem(int slot) {
+    if (slot < 0 || slot >= getContainerSize()) {
+      throw new IllegalStateException("Slot index out of bounds: " + slot + ", container size: " + getContainerSize());
+    }
     return inventory.get(slot);
   }
 
