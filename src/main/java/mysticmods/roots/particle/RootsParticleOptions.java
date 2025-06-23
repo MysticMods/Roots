@@ -26,6 +26,7 @@ import java.util.Optional;
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
                                    int entityId, int casterId, int fastForward,
                                    @Nullable ItemStack item, @Nullable BlockPos pos, int delay) implements ParticleOptions {
+  public static final RandomSource RANDOM = RandomSource.create();
 
   private static final Codec<ItemStack> ITEM_CODEC = Codec.withAlternative(ItemStack.SINGLE_ITEM_CODEC, ItemStack.ITEM_NON_AIR_CODEC, ItemStack::new);
   private static final Codec<double[]> DOUBLE_ARRAY_CODEC = Codec.DOUBLE.listOf().xmap(

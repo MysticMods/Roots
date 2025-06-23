@@ -24,7 +24,7 @@ public class AnimalHarvestParticle extends TextureSheetParticle {
     this.zd = zSpeed;
     this.hasPhysics = false;
     this.quadSize = 0.18f;
-    this.roll = this.oRoll = (float) Math.toDegrees(level.random.nextDouble());
+    this.roll = this.oRoll = (float) Math.toDegrees(this.random.nextDouble());
   }
 
   @Override

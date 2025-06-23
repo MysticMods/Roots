@@ -33,7 +33,7 @@ public class TestParticle extends TextureSheetParticle {
     this.zd = 0;
     this.hasPhysics = false;
     this.quadSize = 0.18f;
-    this.roll = this.oRoll = (float) Math.toDegrees(level.random.nextDouble());
+    this.roll = this.oRoll = (float) Math.toDegrees(this.random.nextDouble());
     this.rotSpeed = 0f;
     this.spinAcceleration = (float) Math.toRadians(this.random.nextBoolean() ? -5 : 5);
   }

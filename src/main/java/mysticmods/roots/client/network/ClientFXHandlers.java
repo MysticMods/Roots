@@ -108,7 +108,7 @@ public class ClientFXHandlers {
   public static void castMagnetism(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
 
     int color1 = ModSpells.MAGNETISM.get().getColor1();
     int color2 = ModSpells.MAGNETISM.get().getColor2();
@@ -144,7 +144,7 @@ public class ClientFXHandlers {
   public static void castShatter(int entityId, List<BlockPos> positions) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
     int color1 = ModSpells.SHATTER.get().getColor1();
     int color2 = ModSpells.SHATTER.get().getColor2();
 
@@ -185,7 +185,7 @@ public class ClientFXHandlers {
   public static void castExtension(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
 
     int color1 = ModSpells.EXTENSION.get().getColor1();
     int color2 = ModSpells.EXTENSION.get().getColor2();
@@ -232,7 +232,7 @@ public class ClientFXHandlers {
   public static void dandelionWinds(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.random;
+    RandomSource random = RootsParticleOptions.RANDOM;
 
 
     if (entity != null) {
@@ -294,7 +294,7 @@ public class ClientFXHandlers {
     int color1 = ModSpells.ACID_CLOUD.get().getColor1();
     int color2 = ModSpells.ACID_CLOUD.get().getColor2();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.random;
+    RandomSource random = RootsParticleOptions.RANDOM;
     if (entity != null) {
       for (float i = 0; i < 360; i += (random.nextFloat() * 5)) {
         RootsParticleOptions opts = random.nextBoolean() ? RootsParticleOptions.builder(ModParticles.SMOKE)
@@ -337,7 +337,7 @@ public class ClientFXHandlers {
   public static void animalHarvest(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.random;
+    RandomSource random = RootsParticleOptions.RANDOM;
     if (entity != null) {
       int col2 = 0xb764c2;
       int col1 = 0xf9a0ee;
@@ -375,7 +375,7 @@ public class ClientFXHandlers {
   public static void aquaBubble(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.random;
+    RandomSource random = RootsParticleOptions.RANDOM;
     if (entity != null) {
       for (int i = 0; i < 4; i++) {
         minecraft.level.addParticle(
@@ -394,7 +394,7 @@ public class ClientFXHandlers {
   public static void castAquaBubble(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.random;
+    RandomSource random = RootsParticleOptions.RANDOM;
     if (entity != null) {
       for (int i = 0; i < 31; i++) {
         minecraft.level.addParticle(
@@ -422,8 +422,8 @@ public class ClientFXHandlers {
         hand = player.getUsedItemHand();
       }
 
-      double radius = 0.08 + minecraft.level.random.nextDouble() * 0.08;
-      double angle = minecraft.level.random.nextDouble() * (2 * Math.PI);
+      double radius = 0.08 + RootsParticleOptions.RANDOM.nextDouble() * 0.08;
+      double angle = RootsParticleOptions.RANDOM.nextDouble() * (2 * Math.PI);
       double handOffset = hand == InteractionHand.MAIN_HAND ? 0.3 : -0.3;
 
       minecraft.level.addParticle(
@@ -434,8 +434,8 @@ public class ClientFXHandlers {
           radius, angle, handOffset
       );
 
-      radius = 0.08 + minecraft.level.random.nextDouble() * 0.08;
-      angle = minecraft.level.random.nextDouble() * (2 * Math.PI);
+      radius = 0.08 + RootsParticleOptions.RANDOM.nextDouble() * 0.08;
+      angle = RootsParticleOptions.RANDOM.nextDouble() * (2 * Math.PI);
       minecraft.level.addParticle(
           RootsParticleOptions.builder(ModParticles.CHANNEL_FAIL).color(col2, col1).entityId(casterId).build(),
           caster.getX(),
@@ -455,7 +455,7 @@ public class ClientFXHandlers {
       int col1 = spell.getColor1();
       int col2 = spell.getColor2();
 
-      double radius = 0.1 + minecraft.level.random.nextDouble() * 0.15;
+      double radius = 0.1 + RootsParticleOptions.RANDOM.nextDouble() * 0.15;
 
       minecraft.level.addParticle(
           RootsParticleOptions.builder(
@@ -525,9 +525,9 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.level != null) {
       for (int i = 0; i < 2; i++) {
-        double xOffset = minecraft.level.random.nextDouble() - 0.5;
-        double zOffset = minecraft.level.random.nextDouble() - 0.5;
-        double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
+        double xOffset = RootsParticleOptions.RANDOM.nextDouble() - 0.5;
+        double zOffset = RootsParticleOptions.RANDOM.nextDouble() - 0.5;
+        double yOffset = (RootsParticleOptions.RANDOM.nextFloat() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
             RootsParticleOptions.builder(
@@ -549,9 +549,9 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.level != null) {
       for (int i = 0; i < 1; i++) {
-        double xOffset = minecraft.level.random.nextDouble() - 0.5;
-        double zOffset = minecraft.level.random.nextDouble() - 0.5;
-        double yOffset = (minecraft.level.random.nextDouble() - 0.5) * 0.1;
+        double xOffset = RootsParticleOptions.RANDOM.nextDouble() - 0.5;
+        double zOffset = RootsParticleOptions.RANDOM.nextDouble() - 0.5;
+        double yOffset = (RootsParticleOptions.RANDOM.nextDouble() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
             RootsParticleOptions.builder(
@@ -633,7 +633,7 @@ public class ClientFXHandlers {
   public static void castLifeDrain(int entityId, double distance, int angle) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
-    RandomSource random = minecraft.level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
 
     int color1 = 0x1e0e13;//ModSpells.LIFE_DRAIN.get().getColor1();
     int color2 = 0x6b5766; //ModSpells.LIFE_DRAIN.get().getColor2();
@@ -749,7 +749,7 @@ public class ClientFXHandlers {
       return;
     }
 
-    RandomSource random = minecraft.level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
 
     RootsParticleOptions options = RootsParticleOptions.builder(ModParticles.HEAL).build();
 
@@ -791,7 +791,7 @@ public class ClientFXHandlers {
 
     double radius = Math.sqrt(radiusInt);
 
-    RandomSource random = minecraft.level.random;
+    RandomSource random = RootsParticleOptions.RANDOM;
 
     if (entity == null) {
       return;
@@ -831,7 +831,7 @@ public class ClientFXHandlers {
 
     int delta = newFood - oldFood;
 
-    RandomSource random = minecraft.level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
     RootsParticleOptions options = RootsParticleOptions.builder(ModParticles.SATURATE).build();
 
     Player player = minecraft.player;
@@ -857,7 +857,7 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     Vec3 dest = Vec3.atBottomCenterOf(groveCrafter).add(0, 1.05, 0);
 
-    RandomSource random = minecraft.level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
 
     for (int i = 0; i < positions.size(); i++) {
       BlockPos pos = positions.get(i).position();
@@ -889,7 +889,7 @@ public class ClientFXHandlers {
 
   public static void growthAmplifierGrew(BlockPos amplifier, Vec3 target) {
     Level level = Minecraft.getInstance().level;
-    RandomSource random = level.getRandom();
+    RandomSource random = RootsParticleOptions.RANDOM;
 
     Vec3 start = Vec3.atCenterOf(amplifier);
 
