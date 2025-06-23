@@ -513,6 +513,9 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder20.add(ModActions.TRADE_VILLAGER, List.of(
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("trade_with_villager"), new GroveReputation(20, 15, 8, 2))
     ), false);
+    builder20.add(ModActions.TRADE_FAIRY_HUT, List.of(
+        new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("trade_with_fairy_hut"), new GroveReputation(0, 5, 1, 1))
+    ), false);
     builder20.add(ModActions.TRADE_PIGLIN, List.of(
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("trade_with_piglin"), new GroveReputation(4, 2, 1, 0))
     ), false);

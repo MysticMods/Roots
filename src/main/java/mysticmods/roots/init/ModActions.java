@@ -21,6 +21,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, KillEntityAction> KILL_ENTITY = ACTIONS.register("kill_entity", KillEntityAction::new);
   public static final DeferredHolder<GroveAction, TameAnimalAction> TAME_ANIMAL = ACTIONS.register("tame_animal", TameAnimalAction::new);
   public static final DeferredHolder<GroveAction, TradeVillagerAction> TRADE_VILLAGER = ACTIONS.register("trade_villager", TradeVillagerAction::new);
+  public static final DeferredHolder<GroveAction, TradeFairyHutAction> TRADE_FAIRY_HUT = ACTIONS.register("trade_fairy_hut", TradeFairyHutAction::new);
   public static final DeferredHolder<GroveAction, CureVillagerAction> CURE_VILLAGER = ACTIONS.register("cure_villager", CureVillagerAction::new);
   public static final DeferredHolder<GroveAction, TradePiglinAction> TRADE_PIGLIN = ACTIONS.register("trade_piglin", TradePiglinAction::new);
   public static final DeferredHolder<GroveAction, EatItemAction> EAT_ITEM = ACTIONS.register("eat_item", EatItemAction::new);

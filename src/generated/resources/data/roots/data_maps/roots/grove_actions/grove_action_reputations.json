@@ -1094,6 +1094,19 @@
         "unique": false
       }
     ],
+    "roots:trade_fairy_hut": [
+      {
+        "grove": "roots:fairy",
+        "name": "roots:trade_with_fairy_hut",
+        "reputation": {
+          "gain1": 0,
+          "gain2": 5,
+          "gain3": 1,
+          "gain4": 1
+        },
+        "unique": false
+      }
+    ],
     "roots:trade_piglin": [
       {
         "grove": "roots:fairy",

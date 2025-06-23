@@ -2,6 +2,7 @@ package mysticmods.roots.blockentity;
 
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import mysticmods.roots.action.TradeFairyHutAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
@@ -12,6 +13,7 @@ import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.FairyHutBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.entity.other.FairyHutEntity;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.ritual.ProtectionRitual;
@@ -68,6 +70,20 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   public FairyHutBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.FAIRY_HUT.get(), pWorldPosition, pBlockState);
+  }
+
+  private static VillagerProfession professionFromState (BlockState state) {
+    if (state.is(RootsTags.Blocks.RED_HUTS)) {
+      return VillagerProfession.WEAPONSMITH;
+    } else if (state.is(RootsTags.Blocks.BROWN_HUTS)) {
+      return VillagerProfession.FARMER;
+    } else if (state.is(RootsTags.Blocks.BAFFLECAP_HUTS)) {
+      return VillagerProfession.CLERIC;
+    } else if (state.is(RootsTags.Blocks.CRIMSON_HUTS)) {
+      return VillagerProfession.TOOLSMITH;
+    } else {
+      return VillagerProfession.LIBRARIAN;
+    }
   }
 
   @Override
@@ -302,7 +318,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   private void updateTrades() {
     // TODO: Custom trades
-    Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillagerTrades.TRADES.get(VillagerProfession.CLERIC);
+    Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillagerTrades.TRADES.get(professionFromState(getBlockState()));
 
     if (int2objectmap != null && !int2objectmap.isEmpty()) {
       VillagerTrades.ItemListing[] avillagertrades$itemlisting = int2objectmap.get(xpLevel);
@@ -340,7 +356,10 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     offer.increaseUses();
     /*    this.ambientSoundTime = -this.getAmbientSoundInterval();*/
     this.rewardTradeXp(offer);
-    if (this.tradingPlayer instanceof ServerPlayer) {
+    if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
+      TradeFairyHutAction.Context context = new TradeFairyHutAction.Context(
+          (ServerLevel) this.getLevel(), serverPlayer, this, getBlockPos(), getBlockState(), offer);
+      ModActions.TRADE_FAIRY_HUT.get().accept(context);
       // TODO: New trigger
       /*      CriteriaTriggers.TRADE.trigger((ServerPlayer) this.tradingPlayer, this, offer.getResult());*/
     }
