@@ -17,13 +17,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBlockEntity> {
+  public static final RandomSource RANDOM = RandomSource.create();
+
   public MortarBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
   }
 
   @Override
   public void render(MortarBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     int slot = 0;
-    RandomSource random = pBlockEntity.getLevel().getRandom();
+    RandomSource random = RANDOM;
     for (ItemStack item : pBlockEntity.getNonEmptyItems()) {
       slot++;
       pPoseStack.pushPose();

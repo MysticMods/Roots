@@ -21,6 +21,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
+  public static final RandomSource RANDOM = RandomSource.create();
+
   public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
   }
 
@@ -85,7 +87,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       pPoseStack.popPose();
     }*/
 
-    RandomSource random = RandomSource.create();
+    RandomSource random = RANDOM;
 
     int loc = pBlockEntity.getBlockPos().hashCode();
 

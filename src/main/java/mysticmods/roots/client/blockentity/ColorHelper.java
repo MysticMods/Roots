@@ -4,13 +4,14 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class ColorHelper {
   private final static Cache<BlockPos, Color> COLOR_CACHE = CacheBuilder.newBuilder().build();
-  private final static Random random = new Random();
+  private final static RandomSource random = RandomSource.create();
   private final static Color DEFAULT_COLOR = new Color(1f, 0.5f, 0.5f);
 
   public static Color color(BlockPos position) {
