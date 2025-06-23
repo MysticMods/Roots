@@ -45,11 +45,11 @@ public class MagnetismSpell extends TwoRadiusSpell {
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int pulled = MagnetismUtil.pull(pLevel, pPlayer.blockPosition(), radiusZX, radiusY, radiusZX);
-    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastMagnetismFXPacket(pPlayer.getId()));
     if (pulled == 0) {
       costs.noCharge();
       return 0;
     } else {
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastMagnetismFXPacket(pPlayer.getId()));
       costs.operations(pulled);
       return cooldown * pulled;
     }
