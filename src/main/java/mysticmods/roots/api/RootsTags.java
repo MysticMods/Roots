@@ -15,10 +15,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+
 
 // Tags
 public class RootsTags {
@@ -739,6 +741,14 @@ public class RootsTags {
 
     static TagKey<DamageType> modTag(String name) {
       return TagKey.create(Registries.DAMAGE_TYPE, RootsAPI.rl(name));
+    }
+  }
+
+  public static class Atrtibutes {
+    public static final TagKey<Attribute> GRAMARY_ATTRIBUTES = modTag("gramary_attributes");
+
+    static TagKey<Attribute> modTag(String name) {
+      return TagKey.create(Registries.ATTRIBUTE, RootsAPI.rl(name));
     }
   }
 }
