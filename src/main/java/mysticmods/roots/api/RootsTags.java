@@ -685,6 +685,7 @@ public class RootsTags {
   }
 
   public static class Groves extends RootsTags {
+    public static final TagKey<Grove> ANY = modTag("any");
     public static final TagKey<Grove> PRIMAL = modTag("primal");
     public static final TagKey<Grove> FAIRY = modTag("fairy");
     public static final TagKey<Grove> TWILIGHT = modTag("twilight");

@@ -1,10 +1,13 @@
 package mysticmods.roots.blockentity;
 
+import com.google.common.collect.ImmutableList;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
@@ -30,14 +33,15 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
+  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePower.Consumer(RootsTags.Groves.ANY, 60)));
+
+  private PowerTicket ticket;
+  private boolean poweredLastTick = false;
+  private int poweredTicks;
+
   public EnchantedTurfBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.ENCHANTED_TURF.get(), pWorldPosition, pBlockState);
   }
-
-  private boolean powered = false;
-
-  private long lastPoweredTick = 0;
-  private int poweredTicks = 0;
 
   @Override
   public CompoundTag getUpdateTag(HolderLookup.Provider lookup) {
@@ -47,7 +51,7 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pProvider) {
     super.saveAdditional(pTag, pProvider);
-    pTag.putBoolean("powered", this.powered);
+    pTag.putBoolean("powered", this.poweredLastTick);
     pTag.putInt("poweredTicks", this.poweredTicks);
   }
 
@@ -55,7 +59,7 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.loadAdditional(pTag, provider);
     if (pTag.contains("powered")) {
-      this.powered = pTag.getBoolean("powered");
+      this.poweredLastTick = pTag.getBoolean("powered");
     }
     if (pTag.contains("poweredTicks")) {
       this.poweredTicks = pTag.getInt("poweredTicks");
@@ -73,10 +77,11 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
     }
   }
 
-  // TODO: Block ticker
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    if (isPowered()) {
+    getTicketForTick(pLevel.getGameTime());
+
+    if (wasPoweredLastTick()) {
       Item item = TagUtil.getRandomElement(pLevel, RootsTags.Items.GROWTH_AMPLIFIER_GRASSES);
       if (!(item instanceof BlockItem flowerToPlace)) {
         return;
@@ -110,25 +115,34 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
   }
 
   @Override
-  public boolean isPowered() {
-    return powered;
-  }
+  public PowerTicket getTicketForTick(long tick) {
+    if (ticket == null) {
+      ticket = TICKET_DEFINITION.create(tick);
+      return ticket;
+    }
 
-  @Override
-  public void markPowered(IGroveInstance grove, boolean powered) {
-    if (this.powered != powered) {
-      this.lastPoweredTick = grove.getTickCount();
-      this.powered = powered;
+    if (ticket.isValid(tick)) {
+      return ticket;
+    }
+
+    if (ticket.wasFullfilled()) {
+      if (!this.poweredLastTick) {
+        this.poweredLastTick = true;
+        setChanged();
+        updateViaState();
+      }
+    } else if (this.poweredLastTick) {
+      this.poweredLastTick = false;
       setChanged();
       updateViaState();
     }
+
+    ticket = TICKET_DEFINITION.create(tick);
+    return ticket;
   }
 
   @Override
-  public int getRequiredPower(IGroveInstance grove) {
-    if (this.lastPoweredTick == grove.getTickCount()) {
-      return 0;
-    }
-    return 30;
+  public boolean wasPoweredLastTick() {
+    return poweredLastTick;
   }
 }

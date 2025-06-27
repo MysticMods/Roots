@@ -5,10 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.GrovePower;
-import mysticmods.roots.api.grove.IGroveConsumer;
-import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.grove.*;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;
@@ -180,12 +177,23 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     consumedLastTick = consumedThisTick;
     consumedThisTick = 0;
 
+    if (generatedThisTick == 0) {
+      return;
+    }
+
+    int available = generatedThisTick;
+
+    long tick = level.getGameTime();
+
     BoundingBox box = getGroveStoneBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
 
     List<BlockPos> consumerPositions = new ArrayList<>(BlockPos.betweenClosedStream(box).map(BlockPos::immutable)
         .toList());
 
     for (BlockPos pos : consumerPositions) {
+      if (available <= 0) {
+        break;
+      }
       BlockState stateAt = level.getBlockState(pos);
       if (stateAt.isAir()) {
         continue;
@@ -193,16 +201,13 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
       if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IGroveConsumer consumer) {
-          int required = consumer.getRequiredPower(this);
-          if (consumedThisTick + required <= generatedThisTick) {
-            consumer.markPowered(this, true);
-            consumedThisTick += required;
-          } else {
-            consumer.markPowered(this, false);
-          }
+          PowerTicket ticket = consumer.getTicketForTick(tick);
+          available = ticket.supply(this, available);
         }
       }
     }
+
+    consumedThisTick = generatedThisTick - available;
   }
 
   @Override

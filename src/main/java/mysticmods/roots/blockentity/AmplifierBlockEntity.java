@@ -40,7 +40,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
-public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
+public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity, ClientTickBlockEntity {
   public float ticks;
   public float rotationAccumulator;
 
@@ -198,7 +198,7 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
   // TODO: Block ticker
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    if (isPowered()) {
+/*    if (isPowered()) {
       if (poweredTicks < 80) {
         poweredTicks++;
         return;
@@ -226,7 +226,7 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
         PacketDistributor.sendToPlayersTrackingChunk(pLevel, new ChunkPos(pPos), new GrowthAmplifierFXPacket(center, getBlockPos()));
         poweredTicks = 0;
       }
-    }
+    }*/
   }
 
   @Override
@@ -240,7 +240,7 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
     this.rotationAccumulator += baseSpeed * speedMod;
   }
 
-  @Override
+/*  @Override
   public boolean isPowered() {
     return powered;
   }
@@ -257,5 +257,5 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
   @Override
   public int getRequiredPower(IGroveInstance grove) {
     return 30;
-  }
+  }*/
 }

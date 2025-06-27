@@ -1,5 +1,6 @@
 package mysticmods.roots.blockentity;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import mysticmods.roots.action.TradeFairyHutAction;
@@ -7,8 +8,10 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.FairyHutBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
@@ -49,7 +52,12 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer, Merchant {
-  private boolean powered = false;
+  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(
+      ImmutableList.of(new GrovePower.Consumer(RootsTags.Groves.FAIRY, 15))
+  );
+
+  private boolean wasPoweredLastTick = false;
+  private PowerTicket ticket;
 
   // Trading stuff
   private UUID tradingPlayerUUID = null;
@@ -119,11 +127,13 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    if (!pState.getValue(FairyHutBlock.ACTIVE) && powered) {
+    getTicketForTick(pLevel.getGameTime());
+
+    if (!pState.getValue(FairyHutBlock.ACTIVE) && wasPoweredLastTick) {
       pLevel.setBlock(pPos, pState.setValue(FairyHutBlock.ACTIVE, true), 3);
       BlockState aboveState = pLevel.getBlockState(pPos.above());
       pLevel.setBlock(pPos.above(), aboveState.setValue(FairyHutBlock.ACTIVE, true), 3);
-    } else if (pState.getValue(FairyHutBlock.ACTIVE) && !powered) {
+    } else if (pState.getValue(FairyHutBlock.ACTIVE) && !wasPoweredLastTick) {
       pLevel.setBlock(pPos, pState.setValue(FairyHutBlock.ACTIVE, false), 3);
       BlockState aboveState = pLevel.getBlockState(pPos.above());
       if (aboveState.getBlock() instanceof FairyHutBlock) {
@@ -133,7 +143,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
     boolean changed = false;
 
-    if (isPowered()) {
+    if (wasPoweredLastTick()) {
       if (!this.isTrading() && this.updateMerchantTimer > 0) {
         this.updateMerchantTimer--;
         if (this.updateMerchantTimer <= 0) {
@@ -187,33 +197,41 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   }
 
   @Override
-  public boolean isPowered() {
-    return powered;
-  }
+  public PowerTicket getTicketForTick(long tick) {
+    if (ticket == null) {
+      ticket = TICKET_DEFINITION.create(tick);
+      return ticket;
+    }
 
-  @Override
-  public void markPowered(IGroveInstance grove, boolean powered) {
-    if (this.powered != powered) {
-      this.powered = powered;
-      this.lastPoweredTick = grove.getTickCount();
+    if (ticket.isValid(tick)) {
+      return ticket;
+    }
+
+    if (ticket.wasFullfilled()) {
+      if (!this.wasPoweredLastTick) {
+        this.wasPoweredLastTick = true;
+        setChanged();
+        updateViaState();
+      }
+    } else if (this.wasPoweredLastTick) {
+      this.wasPoweredLastTick = false;
       setChanged();
       updateViaState();
     }
+
+    ticket = TICKET_DEFINITION.create(tick);
+    return ticket;
   }
 
   @Override
-  public int getRequiredPower(IGroveInstance grove) {
-    if (grove.is(RootsTags.Groves.FAIRY) && grove.getTickCount() != this.lastPoweredTick) {
-      return 15;
-    }
-
-    return 0;
+  public boolean wasPoweredLastTick() {
+    return wasPoweredLastTick;
   }
 
   @Override
   protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
     super.loadAdditional(compound, registries);
-    this.powered = compound.getBoolean("powered");
+    this.wasPoweredLastTick = compound.getBoolean("powered");
     this.tradingPlayer = null;
     if (compound.hasUUID("tradingPlayer")) {
       this.tradingPlayerUUID = compound.getUUID("tradingPlayer");
@@ -239,7 +257,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.saveAdditional(pTag, lookup);
-    pTag.putBoolean("powered", this.powered);
+    pTag.putBoolean("powered", this.wasPoweredLastTick);
     if (tradingPlayerUUID != null) {
       pTag.putUUID("tradingPlayer", this.tradingPlayerUUID);
     } else if (tradingPlayer != null) {
@@ -261,7 +279,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack stack) {
-    if (!isPowered()) {
+    if (!wasPoweredLastTick()) {
       return InteractionResult.FAIL;
     }
 

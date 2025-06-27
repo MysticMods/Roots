@@ -27,6 +27,8 @@ public class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Grove> {
     tag(RootsTags.Groves.TWILIGHT).add(ModGroves.TWILIGHT.get());
     tag(RootsTags.Groves.SPROUTING).add(ModGroves.SPROUTING.get());
     tag(RootsTags.Groves.FUNGAL).add(ModGroves.FUNGAL.get());
+    //noinspection unchecked
+    tag(RootsTags.Groves.ANY).addTags(RootsTags.Groves.FAIRY, RootsTags.Groves.ELEMENTAL, RootsTags.Groves.WILD, RootsTags.Groves.TWILIGHT, RootsTags.Groves.SPROUTING, RootsTags.Groves.FUNGAL);
   }
 
   @Override
