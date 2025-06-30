@@ -47,6 +47,8 @@ public class RootsLangProvider extends LanguageProvider {
 
   @Override
   protected void addTranslations() {
+    add("curios.identifier.tome", "Tome");
+
     // Tag translations
     add("itemGroup.roots", "Roots");
     add("itemGroup.roots_spells", "Roots Spells");
