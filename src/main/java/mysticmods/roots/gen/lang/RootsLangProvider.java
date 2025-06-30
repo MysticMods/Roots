@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.init.*;
+import mysticmods.roots.item.GramaryItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
@@ -770,6 +771,12 @@ public class RootsLangProvider extends LanguageProvider {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
         }
     );
+
+    add(GramaryItem.GramaryMode.NONE.getKey(), "None");
+    add(GramaryItem.GramaryMode.ENTITY_INFO.getKey(), "Entity Information");
+    add(GramaryItem.GramaryMode.BLOCK_ENTITY_INFO.getKey(), "Block Information");
+
+    add("roots.item.gramary.with_mode", "Gramary (%s)");
   }
 
   // TODO: Translations for damage

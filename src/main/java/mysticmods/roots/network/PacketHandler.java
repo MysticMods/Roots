@@ -6,10 +6,7 @@ import mysticmods.roots.network.client.fx.*;
 import mysticmods.roots.network.client.fx.lightning.DynamicLightningFXPacket;
 import mysticmods.roots.network.client.fx.lightning.SemiDynamicLightningFXPacket;
 import mysticmods.roots.network.client.fx.lightning.StaticLightningFXPacket;
-import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
-import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
-import mysticmods.roots.network.server.ServerboundSetSpellPacket;
-import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
+import mysticmods.roots.network.server.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -36,6 +33,7 @@ public class PacketHandler {
     registrar.play(ServerboundSwapSpellsPacket.TYPE, ServerboundSwapSpellsPacket.CODEC);
     registrar.play(ServerboundSetSpellDataPacket.TYPE, ServerboundSetSpellDataPacket.CODEC);
     registrar.play(ServerboundOpenPouchPacket.TYPE, ServerboundOpenPouchPacket.CODEC);
+    registrar.play(ServerboundCycleTomePacket.TYPE, ServerboundCycleTomePacket.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {

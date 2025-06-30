@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
+import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -118,5 +119,15 @@ public class ServerNetworkHooks {
     }
     SpellStorage newStorage = existing.swapSlots(slot1, slot2);
     stack.set(ModAttachments.SPELL_STORAGE, newStorage);
+  }
+
+  public static void cycleTome(Player player) {
+    ItemStack tome = RootsAPI.getInstance().getTome(player);
+    if (tome.isEmpty()) {
+      return;
+    }
+
+    GramaryItem.GramaryMode current = GramaryItem.getMode(tome);
+    tome.set(ModAttachments.GRAMARY_MODE, current.cycle());
   }
 }

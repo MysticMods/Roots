@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-30T14:25:20.245839	Roots Item Tags
+// 1.21.1	2025-06-30T14:34:42.2201644	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/curios/tags/item/tome.json
@@ -29,6 +29,7 @@ ca4be7f2a2f75c90936b26662964abad4c1f46d1 data/minecraft/tags/item/head_armor.jso
 3c841c97e7e2fcbeb86c1ff92141c065010ffdae data/minecraft/tags/item/piglin_loved.json
 50ec12b5ae41cf93adbfe643215052a22a52d293 data/minecraft/tags/item/shovels.json
 bf77bddf53a2fdf31168d5839627632f0c96c0ff data/minecraft/tags/item/swords.json
+ab20a21d53e05a57775e73f20f619a4476b10429 data/roots/tags/item/adjustable_item.json
 87f3beeddef89647fae4b5de6f8f86178e11f390 data/roots/tags/item/antlers.json
 a000fcaeb8818c9664e2b088d9cfcbf1c9edf080 data/roots/tags/item/armor/antler.json
 717aa42eb4d9f9f28cbad53dd736c1ba21de2da3 data/roots/tags/item/armor/beetle.json

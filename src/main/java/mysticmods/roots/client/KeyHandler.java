@@ -6,6 +6,8 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.item.GramaryItem;
+import mysticmods.roots.network.server.ServerboundCycleTomePacket;
 import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import net.minecraft.client.Minecraft;
@@ -73,7 +75,7 @@ public class KeyHandler {
     while (KeyBindings.DECREASE_SPELL.consumeClick()) {
       op = 1;
     }
-    while (KeyBindings.CYCLE_SPELL.consumeClick()) {
+    while (KeyBindings.CYCLE_ADJUSTABLE.consumeClick()) {
       op = 0;
     }
 
@@ -81,8 +83,18 @@ public class KeyHandler {
       return;
     }
 
+    if (op == 0) {
+      ItemStack tome = RootsAPI.getInstance().getTome(mc.player);
+      if (!tome.isEmpty()) {
+        PacketDistributor.sendToServer(ServerboundCycleTomePacket.INSTANCE);
+        return;
+      }
+    }
+
+
     InteractionHand hand = InteractionHand.MAIN_HAND;
     ItemStack stack = mc.player.getMainHandItem();
+
     if (!stack.has(ModAttachments.SPELL_STORAGE)) {
       stack = mc.player.getOffhandItem();
       hand = InteractionHand.OFF_HAND;

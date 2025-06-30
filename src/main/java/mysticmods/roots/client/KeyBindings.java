@@ -18,7 +18,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.settings.IKeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,19 +27,22 @@ public class KeyBindings {
   public static final String CATEGORY = "key.category.roots.general";
 
   public static final CastingTaggedSpell ADJUSTABLE = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_SPELL);
+  public static final HasTomeSlotAdjustable HAS_ADJUSTABLE_TOME = new HasTomeSlotAdjustable();
+
+  public static final IKeyConflictContext HAS_ANY_ADJUSTABLE = new MultiKeyConflictContext(ADJUSTABLE, HAS_ADJUSTABLE_TOME);
 
   public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_K, CATEGORY);
   public static final KeyMapping OPEN_POUCH = new KeyMapping("key.roots.open_pouch", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
   public static final KeyMapping OPEN_REPUTATION = new KeyMapping("key.roots.open_reputation", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
   public static final KeyMapping INCREASE_SPELL = new KeyMapping("key.roots.increase_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_RBRACKET, CATEGORY);
   public static final KeyMapping DECREASE_SPELL = new KeyMapping("key.roots.decrease_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_LBRACKET, CATEGORY);
-  public static final KeyMapping CYCLE_SPELL = new KeyMapping("key.roots.cycle_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
+  public static final KeyMapping CYCLE_ADJUSTABLE = new KeyMapping("key.roots.cycle_adjustable", HAS_ANY_ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
 
   public static final List<KeyMapping> MAPPINGS = Arrays.asList(
       OPEN_SPELL_LIBRARY,
       INCREASE_SPELL,
       DECREASE_SPELL,
-      CYCLE_SPELL,
+      CYCLE_ADJUSTABLE,
       OPEN_POUCH,
       OPEN_REPUTATION);
 
@@ -50,10 +52,71 @@ public class KeyBindings {
     event.register(OPEN_SPELL_LIBRARY);
     event.register(INCREASE_SPELL);
     event.register(DECREASE_SPELL);
-    event.register(CYCLE_SPELL);
+    event.register(CYCLE_ADJUSTABLE);
     event.register(OPEN_POUCH);
     event.register(OPEN_REPUTATION);
   }
+
+  public static class MultiKeyConflictContext implements IKeyConflictContext {
+    private final List<IKeyConflictContext> contexts;
+
+    public MultiKeyConflictContext(IKeyConflictContext... contexts) {
+      this.contexts = Arrays.asList(contexts);
+    }
+
+    public MultiKeyConflictContext(List<IKeyConflictContext> contexts) {
+      this.contexts = contexts;
+    }
+
+    @Override
+    public boolean isActive() {
+      for (IKeyConflictContext context : contexts) {
+        if (context.isActive()) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    @Override
+    public boolean conflicts(IKeyConflictContext other) {
+      for (IKeyConflictContext context : contexts) {
+        if (context.conflicts(other)) {
+          return true;
+        }
+      }
+
+      return this == other;
+    }
+  }
+
+  public static class HasTomeSlotAdjustable implements IKeyConflictContext {
+    @Override
+    public boolean isActive() {
+      Minecraft minecraft = Minecraft.getInstance();
+      if (minecraft.screen != null) {
+        return false;
+      }
+
+      if (minecraft.player == null) {
+        return false;
+      }
+
+      ItemStack tome = RootsAPI.getInstance().getTome(minecraft.player);
+      if (tome.isEmpty()) {
+        return false;
+      }
+
+      return tome.is(RootsTags.Items.ADJUSTABLE_ITEM);
+    }
+
+    @Override
+    public boolean conflicts(IKeyConflictContext other) {
+      return this == other;
+    }
+  }
+
 
   public static class HoldingTaggedItem implements IKeyConflictContext {
     private final TagKey<Item> tag;

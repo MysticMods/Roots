@@ -103,6 +103,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.SILVER_NUGGET).add(ModItems.SILVER_NUGGET.get());
     this.tag(RootsTags.Items.COPPER_NUGGET).add(ModItems.COPPER_NUGGET.get());
 
+    this.tag(RootsTags.Items.ADJUSTABLE_ITEM).add(ModItems.GRAMARY.get());
+
     this.copy(RootsTags.Blocks.NETHER_DOORS, RootsTags.Items.NETHER_DOORS);
     this.copy(RootsTags.Blocks.SOILS, RootsTags.Items.SOILS);
     this.copy(RootsTags.Blocks.WATER_SOIL, RootsTags.Items.WATER_SOIL);

@@ -487,6 +487,7 @@ public class RootsTags {
     public static final TagKey<Item> GROWTH_AMPLIFIER_GRASSES = modTag("growth_amplifier_grasses");
 
     public static final TagKey<Item> NETHER_DOORS = modTag("doors/nether");
+    public static final TagKey<Item> ADJUSTABLE_ITEM = modTag("adjustable_item");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));
