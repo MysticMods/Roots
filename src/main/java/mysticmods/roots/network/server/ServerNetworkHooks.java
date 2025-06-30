@@ -128,6 +128,12 @@ public class ServerNetworkHooks {
     }
 
     GramaryItem.GramaryMode current = GramaryItem.getMode(tome);
-    tome.set(ModAttachments.GRAMARY_MODE, current.cycle());
+    GramaryItem.GramaryMode newMode = current.cycle();
+    tome.set(ModAttachments.GRAMARY_MODE, newMode);
+
+    ItemStack mainHand = player.getMainHandItem();
+    if (mainHand != tome) {
+      // If cycling and not in the main hand do something TODO
+    }
   }
 }
