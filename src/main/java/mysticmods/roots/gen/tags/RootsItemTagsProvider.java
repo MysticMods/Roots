@@ -285,6 +285,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.CHARMS).addTag(RootsTags.Items.CHARM_ALERT);
 
     this.tag(RootsTags.Items.CURIOS_CHARMS).addTag(RootsTags.Items.CHARMS);
+    this.tag(RootsTags.Items.CURIOS_TOMES).add(ModItems.GRAMARY.get());
     this.tag(RootsTags.Items.CURIOS_BELTS).addTag(RootsTags.Items.ALL_POUCHES);
 
     this.tag(ItemTags.ARROWS).add(ModItems.LIVING_ARROW.get());

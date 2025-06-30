@@ -7,6 +7,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.network.IRootsPacket;
+import mysticmods.roots.item.GramaryItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public interface IRootsAPI {
@@ -32,6 +34,17 @@ public interface IRootsAPI {
   RitualInformation.RitualResolutionType getRitualResolutionType();
 
   List<ItemStack> getCurios(Player player, TagKey<Item> tag);
+
+  ItemStack getTome (Player player);
+
+  default GramaryItem.GramaryMode getTomeMode (Player player) {
+    ItemStack tome = getTome(player);
+    if (tome.isEmpty()) {
+      return GramaryItem.GramaryMode.NONE;
+    }
+
+    return GramaryItem.getMode(tome);
+  }
 
   double getCostReduction (Player player);
   double getCooldownReduction (Player player);

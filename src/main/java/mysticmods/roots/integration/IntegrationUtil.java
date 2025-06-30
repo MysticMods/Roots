@@ -20,12 +20,12 @@ public class IntegrationUtil {
 
     ItemStack mainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
 
-    if (mainHand.is(RootsTags.Items.CHARMS)) {
+    if (mainHand.is(RootsTags.Items.CURIOS_CHARMS)) {
       charms.add(mainHand);
     }
 
     mainHand = player.getItemInHand(InteractionHand.OFF_HAND);
-    if (mainHand.is(RootsTags.Items.CHARMS)) {
+    if (mainHand.is(RootsTags.Items.CURIOS_CHARMS)) {
       charms.add(mainHand);
     }
 

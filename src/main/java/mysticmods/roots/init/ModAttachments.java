@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.item.GramaryItem;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -66,6 +67,8 @@ public class ModAttachments {
       .networkSynchronized(Dyeable.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<UUID>> ITEM_UUID = COMPONENTS.register("uuid", () -> new DataComponentType.Builder<UUID>().persistent(UUIDUtil.CODEC)
       .networkSynchronized(UUIDUtil.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<GramaryItem.GramaryMode>> GRAMARY_MODE = COMPONENTS.register("gramary_mode", () -> new DataComponentType.Builder<GramaryItem.GramaryMode>().persistent(GramaryItem.GramaryMode.CODEC)
+      .networkSynchronized(GramaryItem.GramaryMode.STREAM_CODEC).build());
 
   public static final UUID DEFAULT_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 

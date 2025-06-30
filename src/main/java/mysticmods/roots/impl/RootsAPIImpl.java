@@ -3,6 +3,7 @@ package mysticmods.roots.impl;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.IRootsAPI;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.api.attachment.GrantStorage;
@@ -72,6 +73,24 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public List<ItemStack> getCurios(Player player, TagKey<Item> tag) {
     return CuriosIntegration.getTagged(player, tag);
+  }
+
+  @Override
+  public ItemStack getTome(Player player) {
+    List<ItemStack> tomes = CuriosIntegration.getTagged(player, RootsTags.Items.CURIOS_TOMES);
+    if (!tomes.isEmpty()) {
+      return tomes.getFirst();
+    }
+
+    if (player.getOffhandItem().is(RootsTags.Items.CURIOS_TOMES)) {
+      return player.getOffhandItem();
+    }
+
+    if (player.getMainHandItem().is(RootsTags.Items.CURIOS_TOMES)) {
+      return player.getMainHandItem();
+    }
+
+    return ItemStack.EMPTY;
   }
 
   @Override

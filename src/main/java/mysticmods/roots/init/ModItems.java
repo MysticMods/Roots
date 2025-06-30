@@ -303,7 +303,7 @@ public class ModItems {
 
   public static final DeferredHolder<Item, FireStarterItem> FIRE_STARTER = ITEMS.register("fire_starter", () -> new FireStarterItem(new Item.Properties()));
   // TODO: What are we doing with this
-  public static final DeferredHolder<Item, Item> GRAMARY = ITEMS.register("gramary", () -> new Item(new Item.Properties().stacksTo(1)));
+  public static final DeferredHolder<Item, GramaryItem> GRAMARY = ITEMS.register("gramary", () -> new GramaryItem(new Item.Properties().stacksTo(1).component(ModAttachments.GRAMARY_MODE, GramaryItem.GramaryMode.NONE)));
   public static final DeferredHolder<Item, LivingArrowItem> LIVING_ARROW = ITEMS.register("living_arrow", () -> new LivingArrowItem(new Item.Properties()));
   public static final DeferredHolder<Item, LivingAxeItem> LIVING_AXE = ITEMS.register("living_axe", () -> new LivingAxeItem(RootsAPI.LIVING_TOOL_TIER, new Item.Properties().attributes(LivingSwordItem.createAttributes(RootsAPI.LIVING_TOOL_TIER, 6.0f, -3.2f))));
   public static final DeferredHolder<Item, LivingHoeItem> LIVING_HOE = ITEMS.register("living_hoe", () -> new LivingHoeItem(RootsAPI.LIVING_TOOL_TIER, new Item.Properties().attributes(LivingHoeItem.createAttributes(RootsAPI.LIVING_TOOL_TIER, 0f, -3.f))));

@@ -1,0 +1,5 @@
+{
+  "order": 500,
+  "icon": "roots:slot/empty_tome_slot",
+  "validators": ["curios:tag"]
+}
