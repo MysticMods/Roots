@@ -3,14 +3,17 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -24,6 +27,19 @@ import java.util.List;
 public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBlockEntity> {
   public PyreBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
+  }
+
+  @Override
+  protected Component getTextToRender(PyreBlockEntity blockEntity) {
+    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.BLOCK_ENTITY_INFO)) {
+      if (blockEntity.getLifetime() != -1) {
+        int lifetime = blockEntity.getLifetime();
+        int seconds = lifetime / 20;
+        int minutes = seconds / 60;
+        return Component.literal(String.format("%02d:%02d", minutes, seconds % 60));
+      }
+    }
+    return Component.empty();
   }
 
   @Override
