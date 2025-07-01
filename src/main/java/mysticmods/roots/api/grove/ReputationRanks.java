@@ -22,10 +22,12 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
 
   public int getRank(int reputation) {
     if (reputation >= threshold4) {
-      return 3;
+      return 4;
     } else if (reputation >= threshold3) {
-      return 2;
+      return 3;
     } else if (reputation >= threshold2) {
+      return 2;
+    } else if (reputation >= threshold1) {
       return 1;
     } else {
       return 0;
@@ -40,6 +42,8 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       return reputation - threshold3;
     } else if (reputation >= threshold2) {
       return reputation - threshold2;
+    } else if (reputation >= threshold1) {
+      return reputation - threshold1;
     } else {
       return reputation;
     }
@@ -53,8 +57,10 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       return threshold4 - threshold3;
     } else if (reputation >= threshold2) {
       return threshold3 - threshold2;
+    } else if (reputation >= threshold1) {
+      return threshold2 - threshold1;
     } else {
-      return threshold2;
+      return threshold1;
     }
   }
 
