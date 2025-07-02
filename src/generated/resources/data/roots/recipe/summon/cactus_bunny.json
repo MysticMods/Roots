@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/cactus"
+      },
+      {
+        "item": "minecraft:dead_bush"
+      },
+      {
+        "tag": "c:crops/cactus"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "roots:jerboa"
+}

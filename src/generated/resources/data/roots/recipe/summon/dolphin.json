@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:sea_pickle"
+      },
+      {
+        "item": "minecraft:kelp"
+      },
+      {
+        "item": "minecraft:seagrass"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:dolphin"
+}

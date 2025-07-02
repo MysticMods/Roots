@@ -85,6 +85,11 @@ public class SummonCreaturesRecipe extends RootsTileRecipe<PedestalInventoryWrap
       this.entity = entity;
     }
 
+    public Builder entity(EntityType<?> entity) {
+      this.entity = entity;
+      return this;
+    }
+
     public SummonCreaturesRecipe build(BaseRecipeData data) {
       return new SummonCreaturesRecipe(data, Optional.ofNullable(entity));
     }

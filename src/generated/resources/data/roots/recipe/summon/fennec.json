@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:sand"
+      },
+      {
+        "tag": "roots:herbs/stalicripe"
+      },
+      {
+        "tag": "c:foods/berry"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "roots:fennec"
+}

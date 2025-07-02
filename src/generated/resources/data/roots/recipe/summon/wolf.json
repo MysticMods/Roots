@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:bones"
+      },
+      {
+        "tag": "c:bones"
+      },
+      {
+        "item": "minecraft:mutton"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:wolf"
+}

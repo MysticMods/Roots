@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:summon/deer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_leaves"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:summon/deer"
+    ]
+  }
+}

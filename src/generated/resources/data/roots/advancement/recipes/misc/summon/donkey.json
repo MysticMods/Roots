@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:summon/donkey"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_silver_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:nuggets/silver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_silver_nugget"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:summon/donkey"
+    ]
+  }
+}

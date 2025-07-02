@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/beetroot"
+      },
+      {
+        "tag": "c:crops/potato"
+      },
+      {
+        "tag": "c:crops/carrot"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:pig"
+}

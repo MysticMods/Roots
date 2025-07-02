@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "c:crops/wheat"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:cow"
+}

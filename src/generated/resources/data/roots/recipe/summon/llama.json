@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:wool_carpets"
+      },
+      {
+        "item": "minecraft:hay_block"
+      },
+      {
+        "tag": "roots:short_grass"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:llama"
+}

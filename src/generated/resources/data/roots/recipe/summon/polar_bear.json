@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:iron_bars"
+      },
+      {
+        "item": "minecraft:snowball"
+      },
+      {
+        "item": "minecraft:snowball"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:polar_bear"
+}

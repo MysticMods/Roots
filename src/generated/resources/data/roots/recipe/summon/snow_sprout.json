@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:seeds/wildroot"
+      },
+      {
+        "tag": "roots:herbs/dewgonia"
+      },
+      {
+        "item": "minecraft:snowball"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "roots:snow_sprout"
+}

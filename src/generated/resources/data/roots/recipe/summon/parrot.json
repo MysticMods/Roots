@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:seeds/beetroot"
+      },
+      {
+        "item": "minecraft:vine"
+      },
+      {
+        "item": "minecraft:jungle_sapling"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:parrot"
+}

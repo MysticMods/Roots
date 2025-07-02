@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:seeds"
+      },
+      {
+        "tag": "roots:short_grass"
+      },
+      {
+        "tag": "roots:short_grass"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:chicken"
+}

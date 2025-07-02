@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:spider_eye"
+      },
+      {
+        "tag": "c:feathers"
+      },
+      {
+        "tag": "roots:short_grass"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:armadillo"
+}

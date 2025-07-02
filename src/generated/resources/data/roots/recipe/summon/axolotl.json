@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:tropical_fish"
+      },
+      {
+        "item": "minecraft:tropical_fish"
+      },
+      {
+        "item": "minecraft:seagrass"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:axolotl"
+}

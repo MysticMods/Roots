@@ -61,6 +61,9 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.PERESKIA_SEEDS).add(ModItems.PERESKIA_BULB.get());
     this.tag(RootsTags.Items.WILDEWHEET_SEEDS).add(ModItems.WILDEWHEET_SEEDS.get());
     this.tag(RootsTags.Items.SPIRITLEAF_SEEDS).add(ModItems.SPIRITLEAF_SEEDS.get());
+    this.tag(RootsTags.Items.WILDROOT_SEEDS).add(ModItems.WILDROOT.get());
+    this.tag(RootsTags.Items.AUBERGINE_SEEDS).add(ModItems.AUBERGINE_SEEDS.get());
+
     this.tag(RootsTags.Items.SEEDS).add(ModItems.GROVE_SPORES.get());
     this.tag(ItemTags.CHICKEN_FOOD).addTag(RootsTags.Items.SEEDS);
 

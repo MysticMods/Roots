@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:bamboo"
+      },
+      {
+        "item": "minecraft:jungle_sapling"
+      },
+      {
+        "tag": "minecraft:dirt"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:panda"
+}

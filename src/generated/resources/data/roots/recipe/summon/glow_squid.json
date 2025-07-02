@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:glow_lichen"
+      },
+      {
+        "item": "minecraft:glow_lichen"
+      },
+      {
+        "tag": "c:dyes/black"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:glow_squid"
+}

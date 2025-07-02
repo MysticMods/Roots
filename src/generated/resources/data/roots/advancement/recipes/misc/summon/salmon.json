@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:summon/salmon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_seagrass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:seagrass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_seagrass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:summon/salmon"
+    ]
+  }
+}

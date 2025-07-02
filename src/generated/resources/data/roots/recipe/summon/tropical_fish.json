@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:kelp"
+      },
+      {
+        "item": "minecraft:kelp"
+      },
+      {
+        "item": "minecraft:kelp"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:tropical_fish"
+}

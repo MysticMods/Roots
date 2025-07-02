@@ -16,6 +16,7 @@ import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.test.entity.EntityTagTest;
@@ -29,6 +30,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.BeetrootBlock;
@@ -2053,6 +2055,278 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.NETHERRACKS)
                 .requires(Tags.Items.FERTILIZERS)
             ), c, RootsAPI.rl("grove/warped_fairy_hut"));
+
+    RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.SNOW_SPROUT.get())
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_SEEDS)
+                .requires(RootsTags.Items.DEWGONIA_HERB)
+                .requires(Items.SNOWBALL)), c, RootsAPI.rl("summon/snow_sprout"));
+
+    RecipeSaver.saver().unlockedBy("has_moonglow", has(RootsTags.Items.MOONGLOW_HERB))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.MELODY_SPROUT.get())
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.AUBERGINE_SEEDS)
+                .requires(RootsTags.Items.MOONGLOW_HERB)
+                .requires(Tags.Items.END_STONES)), c, RootsAPI.rl("summon/melody_sprout"));
+
+    RecipeSaver.saver().unlockedBy("has_aubergine", has(RootsTags.Items.AUBERGINE_CROP))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.PURPLE_SPROUT.get())
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_SEEDS)
+                .requires(RootsTags.Items.AUBERGINE_CROP)
+                .requires(Tags.Items.DYES_PURPLE)), c, RootsAPI.rl("summon/purple_sprout"));
+
+    RecipeSaver.saver().unlockedBy("has_aubergine", has(RootsTags.Items.AUBERGINE_CROP))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.TAN_SPROUT.get())
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_SEEDS)
+                .requires(RootsTags.Items.AUBERGINE_CROP)
+                .requires(Tags.Items.DYES_YELLOW)), c, RootsAPI.rl("summon/tan_sprout"));
+
+    RecipeSaver.saver().unlockedBy("has_aubergine", has(RootsTags.Items.AUBERGINE_CROP))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.GREEN_SPROUT.get())
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_SEEDS)
+                .requires(RootsTags.Items.AUBERGINE_CROP)
+                .requires(Tags.Items.DYES_GREEN)), c, RootsAPI.rl("summon/green_sprout"));
+
+    RecipeSaver.saver().unlockedBy("has_aubergine", has(RootsTags.Items.AUBERGINE_CROP))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.RED_SPROUT.get())
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_SEEDS)
+                .requires(RootsTags.Items.AUBERGINE_CROP)
+                .requires(Tags.Items.DYES_RED)), c, RootsAPI.rl("summon/red_sprout"));
+
+
+    RecipeSaver.saver().unlockedBy("has_cloud_berry", has(RootsTags.Items.CLOUD_BERRY_HERB))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.OWL.get())
+            .build(BaseRecipeData.Builder.create().requires(ItemTags.LEAVES)
+                .requires(RootsTags.Items.CLOUD_BERRY_HERB)
+                .requires(Items.CHICKEN)), c, RootsAPI.rl("summon/owl"));
+
+    RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.FENNEC.get())
+            .build(BaseRecipeData.Builder.create().requires(ItemTags.SAND)
+                .requires(RootsTags.Items.STALICRIPE_HERB)
+                .requires(Tags.Items.FOODS_BERRY)), c, RootsAPI.rl("summon/fennec"));
+
+    RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.DUCK.get())
+            .build(BaseRecipeData.Builder.create().requires(ItemTags.SAND)
+                .requires(RootsTags.Items.DEWGONIA_HERB)
+                .requires(Tags.Items.SEEDS_WHEAT)), c, RootsAPI.rl("summon/duck"));
+
+    RecipeSaver.saver().unlockedBy("has_leaves", has(ItemTags.LEAVES))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.DEER.get())
+            .build(BaseRecipeData.Builder.create().requires(ItemTags.LEAVES)
+                .requires(ItemTags.SAPLINGS)
+                .requires(Items.SPRUCE_SAPLING)), c, RootsAPI.rl("summon/deer"));
+
+    RecipeSaver.saver().unlockedBy("has_cactus", has(Tags.Items.CROPS_CACTUS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.JERBOA.get())
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_CACTUS)
+                .requires(Items.DEAD_BUSH)
+                .requires(Tags.Items.CROPS_CACTUS)), c, RootsAPI.rl("summon/cactus_bunny"));
+
+    RecipeSaver.saver().unlockedBy("has_melon_seeds", has(Tags.Items.SEEDS_MELON))
+        .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.BEETLE.get())
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.SEEDS_MELON)
+                .requires(RootsTags.Items.SHORT_GRASS)
+                .requires(Tags.Items.DYES_BLUE)), c, RootsAPI.rl("summon/beetle"));
+
+    RecipeSaver.saver().unlockedBy("has_tropical_fish", has(Items.TROPICAL_FISH))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.AXOLOTL)
+            .build(BaseRecipeData.Builder.create().requires(Items.TROPICAL_FISH)
+                .requires(Items.TROPICAL_FISH)
+                .requires(Items.SEAGRASS)), c, RootsAPI.rl("summon/axolotl"));
+
+    RecipeSaver.saver().unlockedBy("has_black_dye", has(Tags.Items.DYES_BLACK))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.BAT)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.DYES_BLACK)
+                .requires(Items.TORCH)
+                .requires(Tags.Items.STONES)), c, RootsAPI.rl("summon/bat"));
+
+    RecipeSaver.saver().unlockedBy("has_yellow_dye", has(Tags.Items.DYES_YELLOW))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.BEE)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.DYES_YELLOW)
+                .requires(Items.DANDELION)
+                .requires(Items.CORNFLOWER)), c, RootsAPI.rl("summon/bee"));
+
+    RecipeSaver.saver().unlockedBy("has_cactus", has(Tags.Items.CROPS_CACTUS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.CAMEL)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_CACTUS)
+                .requires(Tags.Items.CROPS_CACTUS)
+                .requires(Items.SAND)), c, RootsAPI.rl("summon/camel"));
+
+    RecipeSaver.saver().unlockedBy("has_string", has(Tags.Items.STRINGS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.CAT)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.STRINGS)
+                .requires(Items.COD)
+                .requires(Items.SALMON)), c, RootsAPI.rl("summon/cat"));
+
+    RecipeSaver.saver().unlockedBy("has_seeds", has(Tags.Items.SEEDS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.CHICKEN)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.SEEDS)
+                .requires(RootsTags.Items.SHORT_GRASS)
+                .requires(RootsTags.Items.SHORT_GRASS)), c, RootsAPI.rl("summon/chicken"));
+
+    RecipeSaver.saver().unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.LLAMA)
+            .build(BaseRecipeData.Builder.create().requires(ItemTags.WOOL_CARPETS)
+                .requires(Items.HAY_BLOCK)
+                .requires(RootsTags.Items.SHORT_GRASS)), c, RootsAPI.rl("summon/llama"));
+
+    RecipeSaver.saver().unlockedBy("has_mushroom", has(Tags.Items.MUSHROOMS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.MOOSHROOM)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.MUSHROOMS)
+                .requires(Tags.Items.CROPS_WHEAT)
+                .requires(Items.BOWL)), c, RootsAPI.rl("summon/mooshroom"));
+
+    RecipeSaver.saver().unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.HORSE)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.NUGGETS_IRON)
+                .requires(Tags.Items.CROPS_CARROT)
+                .requires(Tags.Items.CROPS_CARROT)), c, RootsAPI.rl("summon/horse"));
+
+    RecipeSaver.saver().unlockedBy("has_spider_eye", has(Items.SPIDER_EYE))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.ARMADILLO)
+            .build(BaseRecipeData.Builder.create().requires(Items.SPIDER_EYE)
+                .requires(Tags.Items.FEATHERS)
+                .requires(RootsTags.Items.SHORT_GRASS)), c, RootsAPI.rl("summon/armadillo"));
+
+    RecipeSaver.saver().unlockedBy("has_wheat", has(Tags.Items.CROPS_WHEAT))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.GOAT)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_WHEAT)
+                .requires(Tags.Items.STONES)
+                .requires(Tags.Items.STONES)), c, RootsAPI.rl("summon/goat"));
+
+    RecipeSaver.saver().unlockedBy("has_glow_lichen", has(Items.GLOW_LICHEN))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.GLOW_SQUID)
+            .build(BaseRecipeData.Builder.create().requires(Items.GLOW_LICHEN)
+                .requires(Items.GLOW_LICHEN)
+                .requires(Tags.Items.DYES_BLACK)), c, RootsAPI.rl("summon/glow_squid"));
+
+    RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.FROG)
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.STALICRIPE_HERB)
+                .requires(Items.LILY_PAD)
+                .requires(RootsTags.Items.GROVE_MOSS_HERB)), c, RootsAPI.rl("summon/frog"));
+
+    RecipeSaver.saver().unlockedBy("has_silver_nugget", has(RootsTags.Items.SILVER_NUGGET))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.DONKEY)
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.SILVER_NUGGET)
+                .requires(RootsTags.Items.SHORT_GRASS)
+                .requires(Tags.Items.CROPS_CARROT)), c, RootsAPI.rl("summon/donkey"));
+
+    RecipeSaver.saver().unlockedBy("has_iron_bars", has(Items.IRON_BARS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.POLAR_BEAR)
+            .build(BaseRecipeData.Builder.create().requires(Items.IRON_BARS)
+                .requires(Items.SNOWBALL)
+                .requires(Items.SNOWBALL)), c, RootsAPI.rl("summon/polar_bear"));
+
+    RecipeSaver.saver().unlockedBy("has_beetroot", has(Tags.Items.CROPS_BEETROOT))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.PIG)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_BEETROOT)
+                .requires(Tags.Items.CROPS_POTATO)
+                .requires(Tags.Items.CROPS_CARROT)), c, RootsAPI.rl("summon/pig"));
+
+    RecipeSaver.saver().unlockedBy("has_beetroot_seeds", has(Tags.Items.SEEDS_BEETROOT))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.PARROT)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.SEEDS_BEETROOT)
+                .requires(Items.VINE)
+                .requires(Items.JUNGLE_SAPLING)), c, RootsAPI.rl("summon/parrot"));
+
+    RecipeSaver.saver().unlockedBy("has_bamboo", has(Items.BAMBOO))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.PANDA)
+            .build(BaseRecipeData.Builder.create().requires(Items.BAMBOO)
+                .requires(Items.JUNGLE_SAPLING)
+                .requires(ItemTags.DIRT)), c, RootsAPI.rl("summon/panda"));
+
+    RecipeSaver.saver().unlockedBy("has_raw_salmon", has(Items.SALMON))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.OCELOT)
+            .build(BaseRecipeData.Builder.create().requires(Items.SALMON)
+                .requires(Items.COD)
+                .requires(Tags.Items.SANDS)), c, RootsAPI.rl("summon/ocelot"));
+
+    RecipeSaver.saver().unlockedBy("has_sea_pickle", has(Items.SEA_PICKLE))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.DOLPHIN)
+            .build(BaseRecipeData.Builder.create().requires(Items.SEA_PICKLE)
+                .requires(Items.KELP)
+                .requires(Items.SEAGRASS)), c, RootsAPI.rl("summon/dolphin"));
+
+    RecipeSaver.saver().unlockedBy("has_copper_nugget", has(RootsTags.Items.COPPER_NUGGET))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.MULE)
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.COPPER_NUGGET)
+                .requires(Tags.Items.CROPS_CARROT)
+                .requires(RootsTags.Items.SHORT_GRASS)), c, RootsAPI.rl("summon/mule"));
+
+    RecipeSaver.saver().unlockedBy("has_dandelion", has(Items.DANDELION))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.RABBIT)
+            .build(BaseRecipeData.Builder.create().requires(Items.DANDELION)
+                .requires(Tags.Items.CROPS_CARROT)
+                .requires(Tags.Items.SANDS)), c, RootsAPI.rl("summon/rabbit"));
+
+    RecipeSaver.saver().unlockedBy("has_netherrack", has(Tags.Items.NETHERRACKS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.STRIDER)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.NETHERRACKS)
+                .requires(Items.MAGMA_CREAM)
+                .requires(Tags.Items.NETHERRACKS)), c, RootsAPI.rl("summon/strider"));
+
+    RecipeSaver.saver().unlockedBy("has_wheat", has(Tags.Items.CROPS_WHEAT))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.COW)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_WHEAT)
+                .requires(Tags.Items.CROPS_WHEAT)
+                .requires(Tags.Items.CROPS_WHEAT)), c, RootsAPI.rl("summon/cow"));
+
+    RecipeSaver.saver().unlockedBy("has_wool", has(ItemTags.WOOL))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.SHEEP)
+            .build(BaseRecipeData.Builder.create().requires(ItemTags.WOOL)
+                .requires(ItemTags.WOOL)
+                .requires(Tags.Items.CROPS_WHEAT)), c, RootsAPI.rl("summon/sheep"));
+
+    RecipeSaver.saver().unlockedBy("has_seagrass", has(Items.SEAGRASS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.TURTLE)
+            .build(BaseRecipeData.Builder.create().requires(Items.SEAGRASS)
+                .requires(Tags.Items.SANDS)
+                .requires(Tags.Items.SANDS)), c, RootsAPI.rl("summon/turtle"));
+
+    RecipeSaver.saver().unlockedBy("has_bone", has(Tags.Items.BONES))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.WOLF)
+            .build(BaseRecipeData.Builder.create().requires(Tags.Items.BONES)
+                .requires(Tags.Items.BONES)
+                .requires(Items.MUTTON)), c, RootsAPI.rl("summon/wolf"));
+
+    RecipeSaver.saver().unlockedBy("has_lilypad", has(Items.LILY_PAD))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.TADPOLE)
+            .build(BaseRecipeData.Builder.create().requires(Items.LILY_PAD)
+                .requires(RootsTags.Items.GROVE_MOSS_HERB)
+                .requires(RootsTags.Items.DEWGONIA_HERB)), c, RootsAPI.rl("summon/tadpole"));
+
+    RecipeSaver.saver().unlockedBy("has_vines", has(Items.VINE))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.SQUID)
+            .build(BaseRecipeData.Builder.create().requires(Items.VINE)
+                .requires(Items.VINE)
+                .requires(Tags.Items.DYES_BLACK)), c, RootsAPI.rl("summon/squid"));
+
+    RecipeSaver.saver().unlockedBy("has_lily_pad", has(Items.LILY_PAD))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.PUFFERFISH)
+            .build(BaseRecipeData.Builder.create().requires(Items.LILY_PAD)
+                .requires(Items.SEAGRASS)
+                .requires(Items.KELP)), c, RootsAPI.rl("summon/pufferfish"));
+
+    RecipeSaver.saver().unlockedBy("has_seagrass", has(Items.SEAGRASS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.SALMON)
+            .build(BaseRecipeData.Builder.create().requires(Items.SEAGRASS)
+                .requires(Items.SEAGRASS)
+                .requires(Items.KELP)), c, RootsAPI.rl("summon/salmon"));
+
+    RecipeSaver.saver().unlockedBy("has_kelp", has(Items.KELP))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.TROPICAL_FISH)
+            .build(BaseRecipeData.Builder.create().requires(Items.KELP)
+                .requires(Items.KELP)
+                .requires(Items.KELP)), c, RootsAPI.rl("summon/tropical_fish"));
+
+    RecipeSaver.saver().unlockedBy("has_seagrass", has(Items.SEAGRASS))
+        .save(SummonCreaturesRecipe.Builder.create().entity(EntityType.COD)
+            .build(BaseRecipeData.Builder.create().requires(Items.SEAGRASS)
+                .requires(Items.KELP)
+                .requires(Items.KELP)), c, RootsAPI.rl("summon/cod"));
+
   }
 
   public static class RecipeSaver {

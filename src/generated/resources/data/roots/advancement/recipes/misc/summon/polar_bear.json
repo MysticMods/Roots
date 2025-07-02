@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:summon/polar_bear"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_iron_bars": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_bars"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_iron_bars"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:summon/polar_bear"
+    ]
+  }
+}

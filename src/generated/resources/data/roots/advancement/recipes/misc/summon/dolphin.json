@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:summon/dolphin"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_sea_pickle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:sea_pickle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_sea_pickle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:summon/dolphin"
+    ]
+  }
+}

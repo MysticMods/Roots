@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/cactus"
+      },
+      {
+        "tag": "c:crops/cactus"
+      },
+      {
+        "item": "minecraft:sand"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:camel"
+}

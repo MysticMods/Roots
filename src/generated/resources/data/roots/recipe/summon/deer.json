@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:leaves"
+      },
+      {
+        "tag": "minecraft:saplings"
+      },
+      {
+        "item": "minecraft:spruce_sapling"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "roots:deer"
+}

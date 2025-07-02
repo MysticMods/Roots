@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-30T14:34:42.2201644	Roots Item Tags
+// 1.21.1	2025-07-02T14:32:06.5051557	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/curios/tags/item/tome.json
@@ -182,10 +182,12 @@ b3f0d68ad05349c00594d33d8d0832643f45d54d data/roots/tags/item/runed_obsidian.jso
 2fe8872727a472c144211297c79b1ccf369ca4bc data/roots/tags/item/runestone_herbs.json
 2d28353c96bcda78cf7c3a7781fdc6ee6ac8767f data/roots/tags/item/runic_shears.json
 8f1a5fcf9f87871cb55a7082c6dce81ed3d3c323 data/roots/tags/item/seeds.json
+bfe7c15d9af27a68bd4b4b178b442f8c7928373e data/roots/tags/item/seeds/aubergine.json
 f6e72591b01bd221546ea35352d9bf82ba98aeba data/roots/tags/item/seeds/moonglow.json
 a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/item/seeds/pereskia.json
 80a163aedcf11772401b7b93659ba4d6d134dfe8 data/roots/tags/item/seeds/spiritleaf.json
 5d4ab94abd2241ca52663eb6d537310224a00348 data/roots/tags/item/seeds/wildewheet.json
+9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/item/seeds/wildroot.json
 7d1d8f847cd3a3c2a9c7dd9749a5246f523703ec data/roots/tags/item/short_grass.json
 04422b744e0e4a88f0882757faf982f80ea08beb data/roots/tags/item/silver_items.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/skipped_foods.json

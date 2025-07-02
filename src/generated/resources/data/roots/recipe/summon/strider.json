@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:netherracks"
+      },
+      {
+        "item": "minecraft:magma_cream"
+      },
+      {
+        "tag": "c:netherracks"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:strider"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:dyes/black"
+      },
+      {
+        "item": "minecraft:torch"
+      },
+      {
+        "tag": "c:stones"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:bat"
+}

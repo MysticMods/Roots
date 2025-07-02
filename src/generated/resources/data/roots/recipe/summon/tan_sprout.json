@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:seeds/wildroot"
+      },
+      {
+        "tag": "roots:crops/aubergine"
+      },
+      {
+        "tag": "c:dyes/yellow"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "roots:tan_sprout"
+}

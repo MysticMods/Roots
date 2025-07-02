@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:seeds/melon"
+      },
+      {
+        "tag": "roots:short_grass"
+      },
+      {
+        "tag": "c:dyes/blue"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "roots:beetle"
+}

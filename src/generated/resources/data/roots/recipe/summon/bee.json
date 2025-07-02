@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:dyes/yellow"
+      },
+      {
+        "item": "minecraft:dandelion"
+      },
+      {
+        "item": "minecraft:cornflower"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:bee"
+}

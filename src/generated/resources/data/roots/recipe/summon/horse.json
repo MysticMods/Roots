@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:nuggets/iron"
+      },
+      {
+        "tag": "c:crops/carrot"
+      },
+      {
+        "tag": "c:crops/carrot"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:horse"
+}

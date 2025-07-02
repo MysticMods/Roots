@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:mushrooms"
+      },
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "item": "minecraft:bowl"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:mooshroom"
+}

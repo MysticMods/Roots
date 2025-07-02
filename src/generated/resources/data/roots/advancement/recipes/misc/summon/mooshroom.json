@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:summon/mooshroom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_mushroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:mushrooms"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_mushroom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:summon/mooshroom"
+    ]
+  }
+}

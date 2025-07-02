@@ -278,6 +278,7 @@ public class RootsTags {
     public static final TagKey<Item> STALICRIPE_SEEDS = modTag("seeds/stalicripe");
     public static final TagKey<Item> WILDEWHEET_SEEDS = modTag("seeds/wildewheet");
     public static final TagKey<Item> WILDROOT_SEEDS = modTag("seeds/wildroot");
+    public static final TagKey<Item> AUBERGINE_SEEDS = modTag("seeds/aubergine");
 
     public static final TagKey<Item> CROPS = modTag("crops");
     public static final TagKey<Item> ELEMENTAL_CROPS = modTag("crops/elemental");

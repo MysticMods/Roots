@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:nuggets/silver"
+      },
+      {
+        "tag": "roots:short_grass"
+      },
+      {
+        "tag": "c:crops/carrot"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:donkey"
+}

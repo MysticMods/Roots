@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/stalicripe"
+      },
+      {
+        "item": "minecraft:lily_pad"
+      },
+      {
+        "tag": "roots:herbs/grove_moss"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:frog"
+}

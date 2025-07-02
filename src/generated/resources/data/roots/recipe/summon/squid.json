@@ -1,0 +1,18 @@
+{
+  "type": "roots:pyre_pedestal",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:vine"
+      },
+      {
+        "item": "minecraft:vine"
+      },
+      {
+        "tag": "c:dyes/black"
+      }
+    ],
+    "priority": 0
+  },
+  "entity": "minecraft:squid"
+}
