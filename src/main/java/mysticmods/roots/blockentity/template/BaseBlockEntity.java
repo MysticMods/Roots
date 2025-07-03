@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -109,6 +110,14 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
     CompoundTag pTag = new CompoundTag();
     saveAdditional(pTag, lookup);
     return pTag;
+  }
+
+  @Override
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+    if (getLevel() != null && getLevel().isClientSide()) {
+      resetBounds();
+    }
+    super.onDataPacket(net, pkt, lookupProvider);
   }
 
   @Override
