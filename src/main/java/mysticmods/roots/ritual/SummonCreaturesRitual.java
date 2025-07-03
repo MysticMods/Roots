@@ -71,6 +71,8 @@ public class SummonCreaturesRitual extends Ritual {
           boundPos = pPos;
         }
 
+        // TODO: Some sanity checking of the bound position
+        // TODO: Visuals
         Entity entity = recipe.value().getEntity().create((ServerLevel) pLevel, null, boundPos.above(1), MobSpawnType.EVENT, true, true);
         if (entity != null) {
           pLevel.addFreshEntity(entity);
