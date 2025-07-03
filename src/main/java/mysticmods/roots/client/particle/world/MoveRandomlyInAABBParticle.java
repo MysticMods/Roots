@@ -15,6 +15,7 @@ public class MoveRandomlyInAABBParticle extends RootsParticle {
   private Vec3 nextMovement = null;
   private int randomTick;
 
+  // TODO: These values are actually incorrect
   private final float height = 3f;
   private final float width = 6f;
 
