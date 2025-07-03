@@ -63,12 +63,16 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
     return true;
   }
 
+  protected BoundingBox getPedestalBoundingBox () {
+    return getBoundingBox();
+  }
+
   // TODO: Some sort of caching
   public List<Pair<BlockPos, PedestalBlockEntity>> pedestals(TagKey<Block> include, TagKey<Block> exclude) {
     List<Pair<BlockPos, PedestalBlockEntity>> pedestalPositions = new ArrayList<>();
-    if (getBoundingBox() != null) {
+    if (getPedestalBoundingBox() != null) {
       BlockPos start = getBlockPos();
-      BoundingBox box = getBoundingBox().moved(start.getX(), start.getY(), start.getZ());
+      BoundingBox box = getPedestalBoundingBox().moved(start.getX(), start.getY(), start.getZ());
       BlockPos.betweenClosedStream(box).forEach(pos -> {
         BlockState state = getLevel().getBlockState(pos);
         if (state.is(include) && !state.is(exclude)) {
@@ -117,6 +121,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
     aabb = null;
   }
 
+  // TODO: This really should accept some sort of enum for variable bounding boxes for the same block entity
   @SuppressWarnings("deprecation")
   @Override
   public BoundingBox getBoundingBox() {
@@ -144,32 +149,6 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
 
     return aabb;
   }
-
-/*  private AABB clientBounds;
-
-  @Nullable
-  public AABB getRenderBoundingBox() {
-    if (!isBounded()) {
-      return null;
-    }
-
-    if (clientBounds == null) {
-      BoundingBox box = getBoundingBox();
-      if (box != null) {
-        clientBounds = AABB.of(box);
-      }
-    }
-
-    return clientBounds;
-  }
-
-  public AABB getSingleBlockBoundingBox() {
-    if (singleBlockBoundingBox == null) {
-      singleBlockBoundingBox = singleBlock.move(getBlockPos());
-    }
-
-    return singleBlockBoundingBox;
-  }*/
 
   public ItemStack outputAdjacent(ItemStack stack) {
     // Unneccessary allocation?
