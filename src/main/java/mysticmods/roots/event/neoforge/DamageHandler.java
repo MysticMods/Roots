@@ -29,6 +29,9 @@ public class DamageHandler {
     LivingEntity entity = event.getEntity();
     if (entity.hasEffect(ModEffects.PETAL_SHELL)) {
       MobEffectInstance instance = entity.getEffect(ModEffects.PETAL_SHELL);
+      if (instance == null) {
+        return;
+      }
       if (instance.getAmplifier() == 0) {
         entity.removeEffect(ModEffects.PETAL_SHELL);
       } else {
