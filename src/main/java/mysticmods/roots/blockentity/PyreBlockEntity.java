@@ -3,10 +3,7 @@ package mysticmods.roots.blockentity;
 import mysticmods.roots.action.StartRitualAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
-import mysticmods.roots.api.blockentity.InventoryBlockEntity;
-import mysticmods.roots.api.blockentity.RefillProvider;
-import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.blockentity.*;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
@@ -29,6 +26,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -63,7 +61,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
+public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, BindableBlockEntity {
   private static BoundingBox PYRE_BOUNDS;
 
   public static BoundingBox getPyreBoundingBox() {
@@ -93,6 +91,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private int lifetime = -1;
   private Player lastPlayer;
   private UUID lastUuid;
+  private BlockPos boundPosition = BlockPos.ZERO;
 
   private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
   private PositionCache cache;
@@ -350,6 +349,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     } else if (lastUuid != null) {
       pTag.putUUID("last_player", lastUuid);
     }
+    pTag.put("bound_position", NbtUtils.writeBlockPos(boundPosition));
   }
 
   private ResourceLocation cachedRecipeId = null;
@@ -390,6 +390,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (getLevel() != null) {
         lastPlayer = getLevel().getPlayerByUUID(lastUuid);
       }
+    }
+    if (pTag.contains("bound_position", Tag.TAG_COMPOUND)) {
+      boundPosition = NbtUtils.readBlockPos(pTag, "bound_position").orElse(BlockPos.ZERO);
+    } else {
+      boundPosition = BlockPos.ZERO;
     }
   }
 
@@ -584,5 +589,19 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   public void setBlockCapabilityCache(BlockCapabilityCache<IItemHandler, Direction> blockCapabilityCache) {
     this.capabilityCache = blockCapabilityCache;
+  }
+
+  @Override
+  public BlockPos getBoundPosition() {
+    return boundPosition;
+  }
+
+  @Override
+  public void setBoundPosition(BlockPos position) {
+    this.boundPosition = position;
+    if (getLevel() != null && !getLevel().isClientSide()) {
+      setChanged();
+      updateViaState();
+    }
   }
 }

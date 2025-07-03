@@ -14,8 +14,11 @@ import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -61,6 +64,16 @@ public class SummonCreaturesRitual extends Ritual {
           for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(pLevel, pPos, stack);
           }
+        }
+
+        BlockPos boundPos = blockEntity.getBoundPosition();
+        if (boundPos == BlockPos.ZERO) {
+          boundPos = pPos;
+        }
+
+        Entity entity = recipe.value().getEntity().create((ServerLevel) pLevel, null, boundPos.above(1), MobSpawnType.EVENT, true, true);
+        if (entity != null) {
+          pLevel.addFreshEntity(entity);
         }
       }
     }
