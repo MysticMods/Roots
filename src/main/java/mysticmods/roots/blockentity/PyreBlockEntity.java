@@ -447,6 +447,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return ritual.getRadiusXZ();
   }
 
+  @Override
+  protected BoundingBox getPedestalBoundingBox() {
+    return getPyreBoundingBox();
+  }
+
   public PyrePedestalCrafting getPedestalCrafting() {
     if (playerlessPedestalCrafting == null) {
       playerlessPedestalCrafting = new PyrePedestalCrafting(this, null);

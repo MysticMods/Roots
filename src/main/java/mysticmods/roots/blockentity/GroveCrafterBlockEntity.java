@@ -157,7 +157,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       List<TaggedPedestalCrafting.ItemPosition> positions = playerCrafting.getItemsAndPositions();
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new StartGroveCraftingFX(getBlockPos(), positions));
       List<ItemStack> results = cachedRecipe.value()
-          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
+          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popAndAnimateItems);
       storedItems.addAll(results);
       this.craftingTicks = Constants.GROVE_CRAFTING_ANIMATION_TICKS;
       cachedRecipe = null;

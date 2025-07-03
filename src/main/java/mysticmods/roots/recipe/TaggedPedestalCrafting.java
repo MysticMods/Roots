@@ -53,7 +53,18 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
     return itemsAndPositions;
   }
 
-  public List<ItemStack> popItems() {
+  public List<ItemStack> popItems () {
+    List<ItemStack> result = new ArrayList<>();
+    if (getBlockEntity() == null) {
+      return result;
+    }
+    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag())) {
+      result.add(entry.getSecond().popOne());
+    }
+    return result;
+  }
+
+  public List<ItemStack> popAndAnimateItems() {
     List<ItemStack> result = new ArrayList<>();
     if (getBlockEntity() == null) {
       return result;
