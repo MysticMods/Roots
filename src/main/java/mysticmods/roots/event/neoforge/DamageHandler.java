@@ -18,16 +18,16 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class DamageHandler {
   @SubscribeEvent
-  public static void onDamageEvent(LivingDamageEvent.Pre event) {
+  public static void onIncomingDamageEvent (LivingIncomingDamageEvent event) {
     LivingEntity entity = event.getEntity();
     if (entity.hasEffect(ModEffects.PETAL_SHELL)) {
       MobEffectInstance instance = entity.getEffect(ModEffects.PETAL_SHELL);
-      event.setNewDamage(0);
       if (instance.getAmplifier() == 0) {
         entity.removeEffect(ModEffects.PETAL_SHELL);
       } else {
@@ -35,7 +35,13 @@ public class DamageHandler {
         entity.removeEffect(ModEffects.PETAL_SHELL);
         entity.addEffect(newInstance);
       }
+      event.setCanceled(true);
     }
+  }
+
+  @SubscribeEvent
+  public static void onDamageEvent(LivingDamageEvent.Pre event) {
+    LivingEntity entity = event.getEntity();
     if (event.getNewDamage() > 0 && entity.hasEffect(ModEffects.AQUA_BUBBLE)) {
       SnapshotHelper.applyLiving(entity, ModSerializers.AQUA_BUBBLE.get(), (e, snapshot) -> {
         DamageSource source = event.getSource();
