@@ -12,6 +12,8 @@ public class AquaBubbleEffect extends SimpleEffect {
 
   @Override
   public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+    livingEntity.extinguishFire();
+
     if (livingEntity.tickCount % 18 == 0 && !livingEntity.level().isClientSide()) {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new AquaBubbleFXPacket(livingEntity.getId()));
     }
