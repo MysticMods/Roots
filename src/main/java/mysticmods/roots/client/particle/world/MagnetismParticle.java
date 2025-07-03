@@ -5,7 +5,6 @@ import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -13,6 +12,9 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 
 public class MagnetismParticle extends RootsEntityParticle {
   protected double radius, oRadius;
@@ -23,7 +25,7 @@ public class MagnetismParticle extends RootsEntityParticle {
     super(level, entity.getX(), entity.getY(), entity.getZ(), entity);
     this.angle = (float) angle;
     this.rads = (float) Math.toRadians(angle);
-    this.radius = radius;
+    this.radius = this.oRadius = radius;
     this.yOffset = yOffset;
     this.lifetime = 25;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
@@ -41,15 +43,36 @@ public class MagnetismParticle extends RootsEntityParticle {
     this.rollAmount = random.nextFloat() * 0.1f;
     this.quadSize = 0.195f;
     this.gravity = 0.01f;
-    this.updatePosition(Minecraft.getInstance().gameRenderer.getMainCamera(), RenderTickHandler.getPartialTick());
+  }
+
+  @Override
+  public AABB getRenderBoundingBox(float partialTicks) {
+    return AABB.INFINITE;
   }
 
   @Override
   public void tick() {
-    super.tick();
+    this.oRadius = this.radius;
+    this.radius *= 0.93f;
+    this.xo = this.x;
+    this.yo = this.y;
+    this.zo = this.z;
     if (!this.removed) {
-      this.oRadius = this.radius;
-      this.radius *= 0.93f;
+      if (this.entity == null || this.entity.isRemoved() || (this.living != null && this.living.isDeadOrDying())) {
+        this.remove();
+      } else {
+        this.x = this.entity.getX();
+        this.y = this.entity.getY();
+        this.z = this.entity.getZ();
+        float f = generateF();
+        updateMovement(f);
+        updateColour(f);
+        updateAlpha(f);
+        updateRoll(f);
+        updateQuadSize(f);
+        updateSprite(f);
+        particleTick(f);
+      }
     }
   }
 
@@ -65,24 +88,29 @@ public class MagnetismParticle extends RootsEntityParticle {
 
   @Override
   public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-    updatePosition(renderInfo, partialTicks);
-    super.render(buffer, renderInfo, partialTicks);
-  }
+    if (!RenderTickHandler.isRenderingDelayedParticles() || delayedRender) {
+      Vec3 pos = entity.getPosition(partialTicks);
 
-  protected void updatePosition(Camera renderInfo, float partialTicks) {
-    double radius = Mth.lerp(partialTicks, this.oRadius, this.radius);
+      double radius = Mth.lerp(partialTicks, this.oRadius, this.radius);
+      double offsetX = Mth.cos(rads) * radius;
+      double offsetZ = Mth.sin(rads) * radius;
 
-    double offsetX = Mth.cos(rads) * radius;
-    double offsetZ = Mth.sin(rads) * radius;
+      double x = pos.x + offsetX;
+      double y = pos.y + entity.getEyeHeight() - 0.5 + yOffset;
+      double z = pos.z + offsetZ;
 
-    this.x = entity.getX() + offsetX;
-    this.z = entity.getZ() + offsetZ;
-    this.y = entity.getY() + entity.getEyeHeight() - 0.5 + yOffset;
+      Vec3 cam = renderInfo.getPosition();
+      float rx = (float) (x - cam.x);
+      float ry = (float) (y - cam.y);
+      float rz = (float) (z - cam.z);
 
-    if (age == 0) {
-      this.xo = this.x;
-      this.yo = this.y;
-      this.zo = this.z;
+      Quaternionf quaternion = new Quaternionf();
+      this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
+      if (this.roll != 0.0f) {
+        quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
+      }
+
+      renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
     }
   }
 
