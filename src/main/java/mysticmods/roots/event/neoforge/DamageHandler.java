@@ -23,6 +23,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class DamageHandler {
+  // TODO: See Mob::~1498, this needs to handle setLastHurtMob and playAttackSound?
   @SubscribeEvent
   public static void onIncomingDamageEvent (LivingIncomingDamageEvent event) {
     LivingEntity entity = event.getEntity();
