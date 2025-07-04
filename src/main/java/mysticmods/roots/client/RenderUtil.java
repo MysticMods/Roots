@@ -4,14 +4,10 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
-import com.mojang.math.MatrixUtil;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.blockentity.ColorHelper;
-import mysticmods.roots.mixin.accessor.AccessorMixinItemRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -27,32 +23,20 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HalfTransparentBlock;
-import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.ClientHooks;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
@@ -60,53 +44,80 @@ import java.util.*;
 
 public class RenderUtil {
   private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
+  private static final int[][] BOX_EDGES = {
+      {0, 1}, {1, 2}, {2, 3}, {3, 0}, // bottom face
+      {4, 5}, {5, 6}, {6, 7}, {7, 4}, // top face
+      {0, 4}, {1, 5}, {2, 6}, {3, 7}  // vertical edges
+  };
 
-  public static void renderAABB (PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds) {
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds) {
     renderAABB(pPoseStack, bufferSource, bounds, null, null, null);
   }
 
-  public static void renderAABB (PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, BlockPos position) {
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, BlockPos position) {
     renderAABB(pPoseStack, bufferSource, bounds, position, null, null);
   }
 
-  public static void renderAABB (PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable BlockPos position, @Nullable Frustum frustum, @Nullable Camera camera) {
-    pPoseStack.pushPose();
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable BlockPos position, @Nullable Frustum frustum, @Nullable Camera camera) {
     if (frustum != null && !frustum.isVisible(bounds)) {
       return;
     }
+
+    pPoseStack.pushPose();
 
     if (position == null) {
       position = BlockPos.containing(bounds.getCenter());
     }
 
-    VoxelShape shape;
+    double offsetX = 0, offsetY = 0, offsetZ = 0;
     if (camera != null) {
-      Vec3 cPos = camera.getPosition();
-      shape = Shapes.create(bounds.move(-cPos.x, -cPos.y, -cPos.z));
-    } else {
-      shape = Shapes.create(bounds);
+      Vec3 camPos = camera.getPosition();
+      offsetX = -camPos.x;
+      offsetY = -camPos.y;
+      offsetZ = -camPos.z;
     }
 
-    VertexConsumer pConsumer = bufferSource.getBuffer(RenderType.lines());
+    double minX = bounds.minX + offsetX;
+    double minY = bounds.minY + offsetY;
+    double minZ = bounds.minZ + offsetZ;
+    double maxX = bounds.maxX + offsetX;
+    double maxY = bounds.maxY + offsetY;
+    double maxZ = bounds.maxZ + offsetZ;
+
+    VertexConsumer consumer = bufferSource.getBuffer(RenderType.lines());
     PoseStack.Pose pose = pPoseStack.last();
     ColorHelper.Color color = ColorHelper.color(position);
-    shape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
-      float f = (float) (pMaxX - pMinX);
-      float f1 = (float) (pMaxY - pMinY);
-      float f2 = (float) (pMaxZ - pMinZ);
-      float f3 = Mth.sqrt(f * f + f1 * f1 + f2 * f2);
-      f /= f3;
-      f1 /= f3;
-      f2 /= f3;
-      pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
-          .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
-      pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
-          .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
-    });
+
+    for (int[] edge : BOX_EDGES) {
+      float ax = edge[0] & 1;
+      float ay = (edge[0] >> 1) & 1;
+      float az = (edge[0] >> 2) & 1;
+      float bx = edge[1] & 1;
+      float by = (edge[1] >> 1) & 1;
+      float bz = (edge[1] >> 2) & 1;
+
+      float x1 = (float) (ax == 0 ? minX : maxX);
+      float y1 = (float) (ay == 0 ? minY : maxY);
+      float z1 = (float) (az == 0 ? minZ : maxZ);
+      float x2 = (float) (bx == 0 ? minX : maxX);
+      float y2 = (float) (by == 0 ? minY : maxY);
+      float z2 = (float) (bz == 0 ? minZ : maxZ);
+
+      float dx = x2 - x1;
+      float dy = y2 - y1;
+      float dz = z2 - z1;
+
+      consumer.addVertex(pose.pose(), x1, y1, z1).setColor(color.r(), color.g(), color.b(), color.a())
+          .setNormal(pose, dx, dy, dz);
+      consumer.addVertex(pose.pose(), x2, y2, z2).setColor(color.r(), color.g(), color.b(), color.a())
+          .setNormal(pose, dx, dy, dz);
+    }
+
     pPoseStack.popPose();
   }
 
-  public static void renderItemAsIcon(ItemStack stack, PoseStack poseStack, int pX, int pY, int size, boolean transparent) {
+  public static void renderItemAsIcon(ItemStack stack, PoseStack poseStack, int pX, int pY, int size,
+                                      boolean transparent) {
     if (stack.isEmpty()) {
       RootsAPI.LOG.info("Attempted to render empty item stack {}", stack);
     }
@@ -155,7 +166,8 @@ public class RenderUtil {
     return (type) -> new TintWrappedVertexConsumer(bufferSource.getBuffer(TRANSLUCENT), 1.0f, 1.0f, 1.0f, 0.25f);
   }
 
-  public static void renderBlock(GuiGraphics guiGraphics, BlockState block, float x, float y, float z, float rotate, float scale) {
+  public static void renderBlock(GuiGraphics guiGraphics, BlockState block, float x, float y, float z, float rotate,
+                                 float scale) {
     Minecraft mc = Minecraft.getInstance();
     guiGraphics.pose().pushPose();
     guiGraphics.pose().translate(x, y, z);
