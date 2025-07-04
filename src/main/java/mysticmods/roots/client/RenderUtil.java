@@ -10,14 +10,17 @@ import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
 import com.mojang.math.MatrixUtil;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.blockentity.ColorHelper;
 import mysticmods.roots.mixin.accessor.AccessorMixinItemRenderer;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -25,9 +28,11 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,6 +47,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.joml.Quaternionf;
@@ -51,6 +60,51 @@ import java.util.*;
 
 public class RenderUtil {
   private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
+
+  public static void renderAABB (PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds) {
+    renderAABB(pPoseStack, bufferSource, bounds, null, null, null);
+  }
+
+  public static void renderAABB (PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, BlockPos position) {
+    renderAABB(pPoseStack, bufferSource, bounds, position, null, null);
+  }
+
+  public static void renderAABB (PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable BlockPos position, @Nullable Frustum frustum, @Nullable Camera camera) {
+    pPoseStack.pushPose();
+    if (frustum != null && !frustum.isVisible(bounds)) {
+      return;
+    }
+
+    if (position == null) {
+      position = BlockPos.containing(bounds.getCenter());
+    }
+
+    VoxelShape shape;
+    if (camera != null) {
+      Vec3 cPos = camera.getPosition();
+      shape = Shapes.create(bounds.move(-cPos.x, -cPos.y, -cPos.z));
+    } else {
+      shape = Shapes.create(bounds);
+    }
+
+    VertexConsumer pConsumer = bufferSource.getBuffer(RenderType.lines());
+    PoseStack.Pose pose = pPoseStack.last();
+    ColorHelper.Color color = ColorHelper.color(position);
+    shape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
+      float f = (float) (pMaxX - pMinX);
+      float f1 = (float) (pMaxY - pMinY);
+      float f2 = (float) (pMaxZ - pMinZ);
+      float f3 = Mth.sqrt(f * f + f1 * f1 + f2 * f2);
+      f /= f3;
+      f1 /= f3;
+      f2 /= f3;
+      pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
+          .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
+      pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
+          .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
+    });
+    pPoseStack.popPose();
+  }
 
   public static void renderItemAsIcon(ItemStack stack, PoseStack poseStack, int pX, int pY, int size, boolean transparent) {
     if (stack.isEmpty()) {

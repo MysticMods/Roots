@@ -3,6 +3,7 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.blockentity.Bounded;
+import mysticmods.roots.client.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -35,27 +36,7 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
     if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
       AABB bounds = pBlockEntity.getAABB();
       if (bounds != null) {
-        pPoseStack.pushPose();
-        BlockPos position = pBlockEntity.getBlockPos();
-        ColorHelper.Color color = ColorHelper.color(position);
-        VoxelShape pShape = Shapes.create(bounds);
-        VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
-        PoseStack.Pose pose = pPoseStack.last();
-
-        pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
-          float f = (float) (pMaxX - pMinX);
-          float f1 = (float) (pMaxY - pMinY);
-          float f2 = (float) (pMaxZ - pMinZ);
-          float f3 = Mth.sqrt(f * f + f1 * f1 + f2 * f2);
-          f /= f3;
-          f1 /= f3;
-          f2 /= f3;
-          pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
-              .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
-          pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
-              .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
-        });
-        pPoseStack.popPose();
+        RenderUtil.renderAABB(pPoseStack, pBufferSource, bounds, pBlockEntity.getBlockPos());
       }
     }
     renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick);

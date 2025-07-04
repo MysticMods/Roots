@@ -6,8 +6,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.client.blockentity.ColorHelper;
 import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.BeamManager;
@@ -17,6 +19,7 @@ import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingItem;
+import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinLevelRenderer;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinParticleEngine;
 import net.minecraft.CrashReport;
@@ -32,13 +35,17 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -106,6 +113,13 @@ public class RenderTickHandler {
       clientTicks += event.getPartialTick().getGameTimeDeltaPartialTick(false);
     }
     MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
+    if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.BIND_POSITION)) {
+      ItemStack gramary = RootsClientAPI.getGramary();
+      BlockPos gramaryPos = gramary.get(ModAttachments.BOUND_POSITION);
+      if (gramaryPos != null && gramaryPos != BlockPos.ZERO) {
+        RenderUtil.renderAABB(event.getPoseStack(), renderer, new AABB(gramaryPos), gramaryPos, event.getFrustum(), event.getCamera());
+      }
+    }
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
       if (boltRenderer.hasBoltsToRender()) {
         boltRenderer.render(event.getPartialTick()

@@ -775,6 +775,10 @@ public class RootsLangProvider extends LanguageProvider {
     add(GramaryItem.GramaryMode.NONE.getKey(), "None");
     add(GramaryItem.GramaryMode.ENTITY_INFO.getKey(), "Entity Information");
     add(GramaryItem.GramaryMode.BLOCK_ENTITY_INFO.getKey(), "Block Information");
+    add(GramaryItem.GramaryMode.BIND_POSITION.getKey(), "Bind Position");
+
+    add("roots.item.gramary.bound_block_entity", "Bound Block Entity to position %s/%s/%s");
+    add("roots.item.gramary.bound_block_position", "Bound Gramary to position %s/%s/%s");
 
     add("roots.item.gramary.with_mode", "Gramary (%s)");
   }

@@ -66,13 +66,14 @@ public class GramaryItem extends Item {
       // TODO: Send a message to say that it was bound
       if (context.getPlayer() != null) {
         context.getPlayer()
-            .displayClientMessage(Component.literal(String.format("Set block entity at " + pos.toString()) + " to bound positions " + boundPos.toString()), true);
+            .displayClientMessage(Component.translatable("roots.item.gramary.bound_block_entity", pos.getX(), pos.getY(), pos.getZ()), true);
       }
     } else {
+      pos = pos.above();
       stack.set(ModAttachments.BOUND_POSITION, pos);
       if (context.getPlayer() != null) {
         context.getPlayer()
-            .displayClientMessage(Component.literal(String.format("Set bound position to " + pos.toString())), true);
+            .displayClientMessage(Component.translatable("roots.item.gramary.bound_block_position", pos.getX(), pos.getY(), pos.getZ()), true);
       }
     }
 
