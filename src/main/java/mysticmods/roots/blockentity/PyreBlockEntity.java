@@ -391,7 +391,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         lastPlayer = getLevel().getPlayerByUUID(lastUuid);
       }
     }
-    if (pTag.contains("bound_position", Tag.TAG_COMPOUND)) {
+    if (pTag.contains("bound_position")) {
       boundPosition = NbtUtils.readBlockPos(pTag, "bound_position").orElse(BlockPos.ZERO);
     } else {
       boundPosition = BlockPos.ZERO;

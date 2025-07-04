@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
@@ -13,12 +14,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -45,6 +48,12 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
   @Override
   public void render(PyreBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
+
+    if (pBlockEntity.getBoundPosition() != BlockPos.ZERO) {
+      if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
+        RenderUtil.renderAABB(pPoseStack, pBufferSource, new AABB(BlockPos.ZERO).move(Vec3.atLowerCornerOf(pBlockEntity.getBoundPosition().subtract(pBlockEntity.getBlockPos()))), pBlockEntity.getBoundPosition());
+      }
+    }
 
     List<ItemStack> items = pBlockEntity.getNonEmptyItems();
 
