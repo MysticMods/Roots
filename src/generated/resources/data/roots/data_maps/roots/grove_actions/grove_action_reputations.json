@@ -999,6 +999,23 @@
         "entries": [
           {
             "type": "exact_ritual",
+            "name": "roots:augmentation"
+          }
+        ],
+        "grove": "roots:wild",
+        "name": "roots:first_ritual/augmentation",
+        "reputation": {
+          "gain1": 100,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_ritual",
             "name": "roots:gathering"
           }
         ],

@@ -1233,6 +1233,16 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/animal_harvest"));
 
+    RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
+            .save(PyreRecipe.Builder.create().ritual(ModRituals.AUGMENTATION)
+                .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS)
+                    .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
+                    .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
+                    .requires(RootsTags.Items.WILDWOOD_LOGS)
+                    .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
+                    .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
+                    .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/augmentation"));
+
     RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.GATHERING).build(
             BaseRecipeData.Builder.create()

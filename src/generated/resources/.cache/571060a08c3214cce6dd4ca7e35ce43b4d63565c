@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-05T12:46:10.1213721	Roots Ritual Tags
+// 1.21.1	2025-07-05T12:54:59.9769609	Roots Ritual Tags
 3cb55e1f5e017fc02b67a7ea19d8b2a2aa24a611 data/roots/tags/roots/rituals/elemental.json
 a23b6e5e0d898f280c6af005ca2ddc2bb2afa56c data/roots/tags/roots/rituals/fairy.json
 7b88b7ca9ee5a74f341cbdac769b6fcb3e114f54 data/roots/tags/roots/rituals/fungal.json
@@ -6,5 +6,5 @@ a23b6e5e0d898f280c6af005ca2ddc2bb2afa56c data/roots/tags/roots/rituals/fairy.jso
 ff955aaf949349d57746163fddeb4984bd859160 data/roots/tags/roots/rituals/primal.json
 01ce714ae31a8e83b4aef6f772c4efeea6e0f7cd data/roots/tags/roots/rituals/sprouting.json
 a1b6f8455a3e2afe7858f6529962fda160219a90 data/roots/tags/roots/rituals/twilight.json
-88ed0540d72c9a00575f748eed01cfbf8f8ef1b5 data/roots/tags/roots/rituals/wild.json
+acae41c9295fe8f3c6dc62b8a465b51962d7007c data/roots/tags/roots/rituals/wild.json
 8d87f69e50b9140344063d2399469cade854b621 data/roots/tags/roots/rituals/wip.json

@@ -24,6 +24,7 @@ public class RootsAttributeTagsProvider extends IntrinsicHolderTagsProvider<Attr
   @Override
   protected void addTags(HolderLookup.Provider provider) {
     this.tag(RootsTags.Atrtibutes.GRAMARY_ATTRIBUTES).add(Attributes.JUMP_STRENGTH.value(), Attributes.MAX_HEALTH.value(), Attributes.MOVEMENT_SPEED.value());
+    this.tag(RootsTags.Atrtibutes.AUGMENTABLE).add(Attributes.MAX_HEALTH.value(), Attributes.ATTACK_DAMAGE.value(), Attributes.JUMP_STRENGTH.value(), Attributes.MOVEMENT_SPEED.value());
   }
 
   @Override

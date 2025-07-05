@@ -72,6 +72,9 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             ModEntities.TAN_SPROUT.get(),
             ModEntities.MELODY_SPROUT.get()
         );
+    this.tag(RootsTags.Entities.AUGMENTABLE)
+        .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.LLAMA, EntityType.CAMEL, EntityType.WOLF)
+        .add(ModEntities.FENNEC.get());
     this.tag(RootsTags.Entities.ANIMAL_HARVEST)
         .add(
             EntityType.ALLAY,

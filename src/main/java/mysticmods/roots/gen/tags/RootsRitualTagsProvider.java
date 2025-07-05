@@ -29,7 +29,7 @@ public class RootsRitualTagsProvider extends IntrinsicHolderTagsProvider<Ritual>
     this.tag(RootsTags.Rituals.SPROUTING).add(ModRituals.GERMINATION.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.WILDROOT_GROWTH.get());
     this.tag(RootsTags.Rituals.PRIMAL).add(ModRituals.OVERGROWTH.get(), ModRituals.GROVE_SUPPLICATION.get());
     this.tag(RootsTags.Rituals.TWILIGHT).add(ModRituals.HEALING_AURA.get());
-    this.tag(RootsTags.Rituals.WILD).add(ModRituals.ANIMAL_HARVEST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.GATHERING.get());
+    this.tag(RootsTags.Rituals.WILD).add(ModRituals.ANIMAL_HARVEST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.GATHERING.get(), ModRituals.AUGMENTATION.get());
     this.tag(RootsTags.Rituals.HOLLOW);
     this.tag(RootsTags.Rituals.FAIRY).add(ModRituals.BLOOMING.get(), ModRituals.PROTECTION.get(), ModRituals.WARDING.get());
   }

@@ -1,8 +1,9 @@
-// 1.21.1	2025-07-02T14:32:06.5116788	Roots Entity Type Tags
+// 1.21.1	2025-07-05T12:54:59.9779789	Roots Entity Type Tags
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/allow_casting_tool_right_click.json
 db9628f54b415745899a51f6cc7c3c96482c3d49 data/roots/tags/entity_type/animal_harvest_entities.json
+aa5e988a52b451a1ed199d4564d07dfe37a1741a data/roots/tags/entity_type/augmentable.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_type/boats.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/disable_disarm.json
 e00f2931577049b9a4400a87ed9c249373be376c data/roots/tags/entity_type/dragons.json

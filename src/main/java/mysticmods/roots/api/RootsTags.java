@@ -528,6 +528,7 @@ public class RootsTags {
   }
 
   public static class Entities extends RootsTags {
+    public static final TagKey<EntityType<?>> AUGMENTABLE = modTag("augmentable");
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST = modTag("animal_harvest_entities");
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST_EXCLUDE = modTag("rituals/animal_harvest/exclude");
     public static final TagKey<EntityType<?>> PACIFIST = modTag("pacifist");
@@ -749,6 +750,7 @@ public class RootsTags {
 
   public static class Atrtibutes {
     public static final TagKey<Attribute> GRAMARY_ATTRIBUTES = modTag("gramary_attributes");
+    public static final TagKey<Attribute> AUGMENTABLE = modTag("augmentable");
 
     static TagKey<Attribute> modTag(String name) {
       return TagKey.create(Registries.ATTRIBUTE, RootsAPI.rl(name));
