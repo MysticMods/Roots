@@ -4,6 +4,10 @@
       "count": 1,
       "id": "roots:ritual_animal_harvest"
     },
+    "roots:augmentation": {
+      "count": 1,
+      "id": "roots:ritual_augmentation"
+    },
     "roots:blooming": {
       "count": 1,
       "id": "roots:ritual_blooming"

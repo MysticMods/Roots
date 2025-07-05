@@ -352,6 +352,7 @@ public class RootsModEvents {
     }
     if (event.getTab().equals(ModTabs.RITUALS_TAB.get())) {
       event.accept(ModItems.RITUAL_ANIMAL_HARVEST.get());
+      event.accept(ModItems.RITUAL_AUGMENTATION.get());
       event.accept(ModItems.RITUAL_BLOOMING.get());
       event.accept(ModItems.RITUAL_CRAFTING.get());
       event.accept(ModItems.RITUAL_FIRE_STORM.get());

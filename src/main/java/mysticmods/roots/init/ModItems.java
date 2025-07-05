@@ -427,6 +427,7 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_WILDFIRE = ITEMS.register("spell_wildfire", () -> spell(ModSpells.WILDFIRE));
 
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_ANIMAL_HARVEST = ITEMS.register("ritual_animal_harvest", () -> ritual(ModRituals.ANIMAL_HARVEST));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_AUGMENTATION = ITEMS.register("ritual_augmentation", () -> ritual(ModRituals.AUGMENTATION));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_BLOOMING = ITEMS.register("ritual_blooming", () -> ritual(ModRituals.BLOOMING));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_CRAFTING = ITEMS.register("ritual_crafting", () -> ritual(ModRituals.CRAFTING));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_FIRE_STORM = ITEMS.register("ritual_fire_storm", () -> ritual(ModRituals.FIRE_STORM));
