@@ -60,10 +60,6 @@
       "count": 1,
       "id": "roots:ritual_summon_creatures"
     },
-    "roots:transmutation": {
-      "count": 1,
-      "id": "roots:ritual_transmutation"
-    },
     "roots:warding": {
       "count": 1,
       "id": "roots:ritual_warding"

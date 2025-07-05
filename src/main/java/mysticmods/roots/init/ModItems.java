@@ -441,7 +441,6 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_PURITY = ITEMS.register("ritual_purity", () -> ritual(ModRituals.PURITY));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_SPREADING_FOREST = ITEMS.register("ritual_spreading_forest", () -> ritual(ModRituals.SPREADING_FOREST));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_SUMMON_CREATURES = ITEMS.register("ritual_summon_creatures", () -> ritual(ModRituals.SUMMON_CREATURES));
-  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_TRANSMUTATION = ITEMS.register("ritual_transmutation", () -> ritual(ModRituals.TRANSMUTATION));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WARDING = ITEMS.register("ritual_warding", () -> ritual(ModRituals.WARDING));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WILDROOT_GROWTH = ITEMS.register("ritual_wildroot_growth", () -> ritual(ModRituals.WILDROOT_GROWTH));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WINDWALL = ITEMS.register("ritual_windwall", () -> ritual(ModRituals.WINDWALL));

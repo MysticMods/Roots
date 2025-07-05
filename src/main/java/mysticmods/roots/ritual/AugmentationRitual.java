@@ -1,5 +1,7 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
@@ -13,39 +15,45 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
-public class TransmutationRitual extends Ritual {
+import java.util.List;
+
+public class AugmentationRitual extends Ritual {
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  }
+
+  @Override
+  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
 
   }
 
   @Override
-  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-
+  public void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
   }
 
   @Override
-  protected void initialize(Holder<Ritual> holder) {
-
+  public void initialize(Holder<Ritual> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
   }
 
   @Override
   protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.TRANSMUTATION_DURATION;
+    return ModRituals.AUGMENTATION_DURATION;
   }
 
   @Override
   protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.TRANSMUTATION_RADIUS_XZ;
+    return ModRituals.AUGMENTATION_RADIUS_XZ;
   }
 
   @Override
   protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.TRANSMUTATION_RADIUS_Y;
+    return ModRituals.AUGMENTATION_RADIUS_Y;
   }
 
   @Override
   protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.TRANSMUTATION_INTERVAL;
+    return ModRituals.AUGMENTATION_INTERVAL;
   }
 }

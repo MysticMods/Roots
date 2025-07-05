@@ -92,6 +92,44 @@
         }
       }
     ],
+    "roots:augmentation": [
+      {
+        "id": "roots:augmentation/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The length of the ritual",
+          "default_value": 1200,
+          "value": 1200
+        }
+      },
+      {
+        "id": "roots:augmentation/radius_xz",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The horizontal radius of the ritual in blocks.",
+          "default_value": 8,
+          "value": 8
+        }
+      },
+      {
+        "id": "roots:augmentation/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The vertical radius of the ritual in blocks.",
+          "default_value": 6,
+          "value": 6
+        }
+      },
+      {
+        "id": "roots:augmentation/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 20,
+          "value": 20
+        }
+      }
+    ],
     "roots:blooming": [
       {
         "id": "roots:blooming/duration",
@@ -819,44 +857,6 @@
           "comment": "How often the ritual is executed (must be shorter than duration)",
           "default_value": 150,
           "value": 150
-        }
-      }
-    ],
-    "roots:transmutation": [
-      {
-        "id": "roots:transmutation/duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The length of the ritual",
-          "default_value": 2400,
-          "value": 2400
-        }
-      },
-      {
-        "id": "roots:transmutation/radius_xz",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The horizontal radius of the ritual in blocks.",
-          "default_value": 6,
-          "value": 6
-        }
-      },
-      {
-        "id": "roots:transmutation/radius_y",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The vertical radius of the ritual in blocks.",
-          "default_value": 4,
-          "value": 4
-        }
-      },
-      {
-        "id": "roots:transmutation/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 100,
-          "value": 100
         }
       }
     ],

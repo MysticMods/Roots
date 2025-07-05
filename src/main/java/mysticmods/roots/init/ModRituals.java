@@ -31,6 +31,12 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_STACK_LIMIT = P.recordProperty("animal_harvest/stack_limit", Property.ofInt(1, "The maximum stack size of each item harvested. Set to -1 to not modify."));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_STACK_COUNT_LIMIT = P.recordProperty("animal_harvest/stack_count_limit", Property.ofInt(1, "If multiple items are dropped, the maximum number of items will be selected at random and the others discarded. Set to -1 to allow all items to drop."));
 
+  public static final DeferredHolder<Ritual, AugmentationRitual> AUGMENTATION = RITUAL.register("augmentation", AugmentationRitual::new);
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_DURATION = P.recordProperty("augmentation/duration", Property.ofInt(1200, RitualProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_INTERVAL = P.recordProperty("augmentation/interval", Property.ofInt(20, RitualProperties.INTERVAL));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_RADIUS_XZ = P.recordProperty("augmentation/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_RADIUS_Y = P.recordProperty("augmentation/radius_y", Property.ofInt(6, RitualProperties.RADIUS_Y));
+
   public static final DeferredHolder<Ritual, BloomingRitual> BLOOMING = RITUAL.register("blooming", BloomingRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_DURATION = P.recordProperty("blooming/duration", Property.ofInt(3200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_INTERVAL = P.recordProperty("blooming/interval", Property.ofInt(100, RitualProperties.INTERVAL));
@@ -126,15 +132,6 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, SummonCreaturesRitual> SUMMON_CREATURES = RITUAL.register("summon_creatures", SummonCreaturesRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> SUMMON_CREATURES_DURATION = P.recordProperty("summon_creatures/duration", Property.ofInt(200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> SUMMON_CREATURES_INTERVAL = P.recordProperty("summon_creatures/interval", Property.ofInt(150, RitualProperties.INTERVAL));
-
-  public static final DeferredHolder<Ritual, TransmutationRitual> TRANSMUTATION = RITUAL.register("transmutation", TransmutationRitual::new);
-  public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_DURATION = P.recordProperty("transmutation/duration", Property.ofInt(2400, RitualProperties.DURATION));
-  public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_INTERVAL
-      = P.recordProperty("transmutation/interval", Property.ofInt(100, RitualProperties.INTERVAL));
-  public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_RADIUS_XZ
-      = P.recordProperty("transmutation/radius_xz", Property.ofInt(6, RitualProperties.RADIUS_XZ));
-  public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_RADIUS_Y
-      = P.recordProperty("transmutation/radius_y", Property.ofInt(4, RitualProperties.RADIUS_Y));
 
   public static final DeferredHolder<Ritual, WardingRitual> WARDING = RITUAL.register("warding", WardingRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> WARDING_DURATION = P.recordProperty("warding/duration", Property.ofInt(1200, RitualProperties.DURATION));

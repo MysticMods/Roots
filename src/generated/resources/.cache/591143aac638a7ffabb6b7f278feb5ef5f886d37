@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-21T19:03:34.4519433	Item Models: roots
+// 1.21.1	2025-07-05T12:46:10.1233618	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -150,7 +150,6 @@ a6a2b634e55fae5977cfd39eaca9731e8d6c34cf assets/roots/models/item/ritual_overgro
 dc263c1de3148de488bab1e9561811ab5a5011e2 assets/roots/models/item/ritual_purity.json
 6788ed462ef6117ca6035b1c42c7423c0ca4e96b assets/roots/models/item/ritual_spreading_forest.json
 fe57e1054b44344cd60222a20c2d176ffa30f898 assets/roots/models/item/ritual_summon_creatures.json
-481d1cb1743553e5548c19aee16b69599a4df30d assets/roots/models/item/ritual_transmutation.json
 62d51dceedd676ba453bf12f7ad4d143c522bba6 assets/roots/models/item/ritual_warding.json
 29d2eef26c089dcaa97086f84d656fc480fb9b93 assets/roots/models/item/ritual_wildroot_growth.json
 ad382601b391d21b7fdf003afb465605ee7a4dfc assets/roots/models/item/ritual_windwall.json

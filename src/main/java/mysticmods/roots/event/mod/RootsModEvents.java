@@ -366,7 +366,6 @@ public class RootsModEvents {
       event.accept(ModItems.RITUAL_PURITY.get());
       event.accept(ModItems.RITUAL_SPREADING_FOREST.get());
       event.accept(ModItems.RITUAL_SUMMON_CREATURES.get());
-      event.accept(ModItems.RITUAL_TRANSMUTATION.get());
       event.accept(ModItems.RITUAL_WARDING.get());
       event.accept(ModItems.RITUAL_WILDROOT_GROWTH.get());
       event.accept(ModItems.RITUAL_WINDWALL.get());
