@@ -49,9 +49,12 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
   public void render(PyreBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
 
-    if (pBlockEntity.getBoundPosition() != BlockPos.ZERO) {
+    BlockPos boundPos = pBlockEntity.getBoundPosition();
+    if (boundPos != null && !boundPos.equals(BlockPos.ZERO)) {
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
-        RenderUtil.renderAABB(pPoseStack, pBufferSource, new AABB(BlockPos.ZERO).move(Vec3.atLowerCornerOf(pBlockEntity.getBoundPosition().subtract(pBlockEntity.getBlockPos()))), pBlockEntity.getBoundPosition());
+        BlockPos origin = pBlockEntity.getBlockPos();
+        BlockPos offset = boundPos.subtract(origin);
+        RenderUtil.renderAABB(pPoseStack, pBufferSource, offset);
       }
     }
 

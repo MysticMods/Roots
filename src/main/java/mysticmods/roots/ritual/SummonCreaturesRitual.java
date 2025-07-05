@@ -67,12 +67,13 @@ public class SummonCreaturesRitual extends Ritual {
         }
 
         BlockPos boundPos = blockEntity.getBoundPosition();
-        if (boundPos == BlockPos.ZERO) {
+        if (boundPos.equals(BlockPos.ZERO)) {
           boundPos = pPos.above(1);
         }
 
         // TODO: Some sanity checking of the bound position
-        Entity entity = recipe.value().getEntity().create((ServerLevel) pLevel, null, boundPos, MobSpawnType.EVENT, true, true);
+        Entity entity = recipe.value().getEntity()
+            .create((ServerLevel) pLevel, null, boundPos, MobSpawnType.EVENT, true, true);
         if (entity != null) {
           pLevel.addFreshEntity(entity);
         }

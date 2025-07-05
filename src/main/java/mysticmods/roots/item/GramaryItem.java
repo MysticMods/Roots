@@ -55,7 +55,7 @@ public class GramaryItem extends Item {
     boolean hasBound = false;
 
     BlockPos boundPos = stack.get(ModAttachments.BOUND_POSITION);
-    if (boundPos != BlockPos.ZERO) {
+    if (!boundPos.equals(BlockPos.ZERO)) {
       hasBound = true; // TODO: What if we actually want to bind to ZERO?
     }
 

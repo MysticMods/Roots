@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.blockentity.ColorHelper;
+import mysticmods.roots.mixin.accessor.AccessorMixinFrustum;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -37,6 +38,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
@@ -45,17 +47,74 @@ import java.util.*;
 public class RenderUtil {
   private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
   private static final int[][] BOX_EDGES = {
-      {0, 1}, {1, 2}, {2, 3}, {3, 0}, // bottom face
-      {4, 5}, {5, 6}, {6, 7}, {7, 4}, // top face
-      {0, 4}, {1, 5}, {2, 6}, {3, 7}  // vertical edges
+      {0, 1}, {1, 3}, {3, 2}, {2, 0}, // bottom face: z = 0
+      {4, 5}, {5, 7}, {7, 6}, {6, 4}, // top face: z = 1
+      {0, 4}, {1, 5}, {3, 7}, {2, 6}  // vertical edges
   };
 
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds) {
     renderAABB(pPoseStack, bufferSource, bounds, null, null, null);
   }
 
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, BlockPos position) {
+    renderAABB(pPoseStack, bufferSource, position, null, null);
+  }
+
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, BlockPos position) {
     renderAABB(pPoseStack, bufferSource, bounds, position, null, null);
+  }
+
+  // This doesn't require multiple AABB creations every render frame
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable Frustum frustum, @Nullable Camera camera) {
+    double minX = position.getX();
+    double minY = position.getY();
+    double minZ = position.getZ();
+    double maxX = minX + 1;
+    double maxY = minY + 1;
+    double maxZ = minZ + 1;
+
+    if (frustum != null && !((AccessorMixinFrustum) frustum).roots_1_21$cubeInFrustum(minX, minY, minZ, maxX, maxY, maxZ)) {
+     return;
+    }
+
+    pPoseStack.pushPose();
+
+    if (camera != null) {
+      Vec3 camPos = camera.getPosition();
+      minX -= camPos.x;
+      minY -= camPos.y;
+      minZ -= camPos.z;
+      maxX -= camPos.x;
+      maxY -= camPos.y;
+      maxZ -= camPos.z;
+    }
+
+    VertexConsumer consumer = bufferSource.getBuffer(RenderType.lines());
+    PoseStack.Pose pose = pPoseStack.last();
+    ColorHelper.Color color = ColorHelper.color(position);
+
+    for (int[] edge : BOX_EDGES) {
+      int a = edge[0];
+      int b = edge[1];
+
+      float x1 = ((a & 1) == 0 ? (float) minX : (float) maxX);
+      float y1 = ((a & 2) == 0 ? (float) minY : (float) maxY);
+      float z1 = ((a & 4) == 0 ? (float) minZ : (float) maxZ);
+      float x2 = ((b & 1) == 0 ? (float) minX : (float) maxX);
+      float y2 = ((b & 2) == 0 ? (float) minY : (float) maxY);
+      float z2 = ((b & 4) == 0 ? (float) minZ : (float) maxZ);
+
+      float dx = x2 - x1;
+      float dy = y2 - y1;
+      float dz = z2 - z1;
+
+      consumer.addVertex(pose.pose(), x1, y1, z1).setColor(color.r(), color.g(), color.b(), color.a())
+          .setNormal(pose, dx, dy, dz);
+      consumer.addVertex(pose.pose(), x2, y2, z2).setColor(color.r(), color.g(), color.b(), color.a())
+          .setNormal(pose, dx, dy, dz);
+    }
+
+    pPoseStack.popPose();
   }
 
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable BlockPos position, @Nullable Frustum frustum, @Nullable Camera camera) {
@@ -89,19 +148,15 @@ public class RenderUtil {
     ColorHelper.Color color = ColorHelper.color(position);
 
     for (int[] edge : BOX_EDGES) {
-      float ax = edge[0] & 1;
-      float ay = (edge[0] >> 1) & 1;
-      float az = (edge[0] >> 2) & 1;
-      float bx = edge[1] & 1;
-      float by = (edge[1] >> 1) & 1;
-      float bz = (edge[1] >> 2) & 1;
+      int a = edge[0];
+      int b = edge[1];
 
-      float x1 = (float) (ax == 0 ? minX : maxX);
-      float y1 = (float) (ay == 0 ? minY : maxY);
-      float z1 = (float) (az == 0 ? minZ : maxZ);
-      float x2 = (float) (bx == 0 ? minX : maxX);
-      float y2 = (float) (by == 0 ? minY : maxY);
-      float z2 = (float) (bz == 0 ? minZ : maxZ);
+      float x1 = ((a & 1) == 0 ? (float) minX : (float) maxX);
+      float y1 = ((a & 2) == 0 ? (float) minY : (float) maxY);
+      float z1 = ((a & 4) == 0 ? (float) minZ : (float) maxZ);
+      float x2 = ((b & 1) == 0 ? (float) minX : (float) maxX);
+      float y2 = ((b & 2) == 0 ? (float) minY : (float) maxY);
+      float z2 = ((b & 4) == 0 ? (float) minZ : (float) maxZ);
 
       float dx = x2 - x1;
       float dy = y2 - y1;

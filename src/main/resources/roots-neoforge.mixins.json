@@ -28,6 +28,7 @@
     "action.MixinPiglinAi"
   ],
   "client": [
+    "accessor.AccessorMixinFrustum",
     "accessor.AccessorMixinItemRenderer",
     "client.MixinEntity",
     "client.MixinLocalPlayer",
