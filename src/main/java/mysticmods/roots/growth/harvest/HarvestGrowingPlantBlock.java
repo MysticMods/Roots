@@ -22,33 +22,29 @@ public record HarvestGrowingPlantBlock() implements HarvestFunction {
       return;
     }
 
+    Block body = ((AccessorMixinGrowingPlantBlock) growing).rootsGetBodyBlock();
     Direction dir = ((AccessorMixinGrowingPlantBlock) growing).rootsGetGrowthDirection();
-    BlockPos relativePos = pos.relative(dir);
-    BlockState relativeState = level.getBlockState(relativePos);
-    if (!relativeState.is(state.getBlock())) {
-      return;
+
+    Block head = ((AccessorMixinGrowingPlantBlock) growing).rootsGetHeadBlock();
+    BlockPos first = pos.relative(dir);
+    BlockPos last = pos;
+
+    BlockPos cursor = first;
+    while (true) {
+      BlockState current = level.getBlockState(cursor);
+      if (current.is(body) || current.is(head)) {
+        last = cursor;
+        cursor = cursor.relative(dir);
+      } else {
+        break;
+      }
     }
 
-    BlockPos newRelativePos = relativePos;
-    while (relativeState.is(state.getBlock())) {
-      newRelativePos = newRelativePos.relative(dir);
-      relativeState = level.getBlockState(newRelativePos);
-    }
-
-    newRelativePos = newRelativePos.relative(dir.getOpposite());
-    BlockPos.MutableBlockPos mPos = newRelativePos.mutable();
-    if (dir == Direction.UP) {
-      for (int y = newRelativePos.getY(); y > pos.getY(); y--) {
-        mPos.set(newRelativePos.getX(), y, newRelativePos.getZ());
-        HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(mPos, level.dimension()));
-        level.destroyBlock(mPos, true, entity);
-      }
-    } else if (dir == Direction.DOWN) {
-      for (int y = newRelativePos.getY(); y < pos.getY(); y++) {
-        mPos.set(newRelativePos.getX(), y, newRelativePos.getZ());
-        HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(mPos, level.dimension()));
-        level.destroyBlock(mPos, true, entity);
-      }
+    BlockPos.MutableBlockPos mPos = last.mutable();
+    while (!mPos.equals(pos)) {
+      HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(mPos, level.dimension()));
+      level.destroyBlock(mPos, true, entity);
+      mPos.move(dir.getOpposite());
     }
   }
 }
