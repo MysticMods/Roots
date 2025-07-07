@@ -567,11 +567,11 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder23.add(ModItems.SPIRITLEAF, ModBlocks.SPIRITLEAF_CROP.get(), false);
     builder23.add(ModItems.WILDEWHEET, ModBlocks.WILDEWHEET_CROP.get(), false);
     builder23.add(Items.PITCHER_PLANT.builtInRegistryHolder(), Blocks.PITCHER_CROP, false);
-    builder23.add(Items.MELON.builtInRegistryHolder(), Blocks.MELON_STEM, false);
-    builder23.add(Items.MELON_SLICE.builtInRegistryHolder(), Blocks.MELON_STEM, false);
-    builder23.add(Items.MELON_SEEDS.builtInRegistryHolder(), Blocks.MELON_STEM, false);
-    builder23.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
-    builder23.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
+    builder23.add(Items.MELON.builtInRegistryHolder(), Blocks.MELON, false);
+    builder23.add(Items.MELON_SLICE.builtInRegistryHolder(), Blocks.MELON, false);
+    builder23.add(Items.MELON_SEEDS.builtInRegistryHolder(), Blocks.MELON, false);
+    builder23.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN, false);
+    builder23.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN, false);
 
     var builder24 = builder(DataMaps.GROVE_POWER_GENERATORS);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, List.of(
