@@ -54,7 +54,7 @@ public class GroveSupplicationRitual extends Ritual {
           }
 
           // Activate non-primal stones if player has the correct rank
-          if (state.getBlock() instanceof GroveStoneBlock groveStone && blockEntity.getLastPlayer() != null) {
+          if (!state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.getBlock() instanceof GroveStoneBlock groveStone && blockEntity.getLastPlayer() != null) {
             Grove grove = groveStone.getGrove().value();
             Player player = blockEntity.getLastPlayer();
             int rank = ReputationHelper.getRank(player, grove);
