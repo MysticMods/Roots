@@ -43,12 +43,12 @@ public class LivingArrowEntity extends AbstractArrow {
 
   @Override
   protected double getDefaultGravity() {
-    return super.getDefaultGravity() * 0.7; // Reduce gravity
+    return super.getDefaultGravity() * GRAVITY_MODIFIER; // Reduce gravity
   }
 
   @Override
   public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-    super.shoot(x, y, z, velocity*1.1f, inaccuracy);
+    super.shoot(x, y, z, velocity*VELOCITY_MODIFIER, inaccuracy);
     if (velocity / 3.0f >= LOWER_CRIT_THRESHOLD) {
       this.setCritArrow(true);
     }
