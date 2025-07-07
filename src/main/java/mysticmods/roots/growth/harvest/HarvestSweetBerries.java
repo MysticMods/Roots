@@ -13,11 +13,13 @@ import org.jetbrains.annotations.Nullable;
 public record HarvestSweetBerries() implements HarvestFunction {
   @Override
   public void harvest(Level level, BlockPos pos, BlockState state, LivingEntity entity, @Nullable IntegerProperty ageProperty, int maximumAge, @Nullable Item seedItem) {
-    HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(pos, level.dimension(), seedItem, seedItem == null ? 0 : 1));
-
-    if (!state.hasProperty(ageProperty)) {
+    if (ageProperty == null || !state.hasProperty(ageProperty)) {
       return;
     }
+
+    HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(pos, level.dimension(), seedItem, seedItem == null ? 0 : 1));
+
+    level.destroyBlock(pos, true);
 
     level.setBlock(pos, state.setValue(ageProperty, 1), 3);
   }
