@@ -1,5 +1,6 @@
 {
   "values": [
-    "#roots:soils/all"
+    "#roots:soils/all",
+    "roots:enchanted_turf"
   ]
 }
