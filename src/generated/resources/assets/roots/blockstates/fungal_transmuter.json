@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "roots:block/fungal_transmuter",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "roots:block/fungal_transmuter",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "roots:block/fungal_transmuter"
+    },
+    "facing=west": {
+      "model": "roots:block/fungal_transmuter",
+      "y": 90
+    }
+  }
+}

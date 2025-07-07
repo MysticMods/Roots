@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-02T14:32:06.5051557	Roots Item Tags
+// 1.21.1	2025-07-07T11:51:11.3429677	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/curios/tags/item/tome.json
@@ -213,4 +213,4 @@ a870e030cdcec7c03084a93483c249d3ea20e677 data/roots/tags/item/tempt/jerboa.json
 3acc48b98a61c64992c20898e3cda550f0dac516 data/roots/tags/item/tempt/owl.json
 e2a6f1db35ec3c01274db0b0783283566f3f980b data/roots/tags/item/tempt/sprout.json
 de63ed9e3b03e443f31cbe2fc6660363c46675b3 data/roots/tags/item/vegetables.json
-d129a38f178863081a0dd22537a9aa41a06ea7ba data/roots/tags/item/wip.json
+1e474dff3c9a520c7f8bd956ae22aaaeca853296 data/roots/tags/item/wip.json

@@ -131,6 +131,7 @@ public class RootsModEvents {
       event.accept(ModItems.BAFFLECAP_FAIRY_HUT.get());
       event.accept(ModItems.CRIMSON_FAIRY_HUT.get());
       event.accept(ModItems.WARPED_FAIRY_HUT.get());
+      event.accept(ModItems.FUNGAL_TRANSMUTER.get());
 
       event.accept(ModItems.PYRE.get());
       event.accept(ModItems.SOUL_PYRE.get());

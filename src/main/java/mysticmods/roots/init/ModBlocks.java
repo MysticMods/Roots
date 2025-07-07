@@ -224,6 +224,10 @@ public class ModBlocks {
   public static final DeferredHolder<Block, FairyHutBlock> WARPED_FAIRY_HUT = BLOCKS.register("warped_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
       .mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
 
+  public static final DeferredHolder<Block, FungalTransmuterBlock> FUNGAL_TRANSMUTER = BLOCKS.register("fungal_transmuter", () -> new FungalTransmuterBlock(BlockBehaviour.Properties.of()
+      .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0f, 6.0f)
+      .requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
   public static final DeferredHolder<Block, WildRootsBlock> WILD_ROOTS = BLOCKS.register("wild_roots", () -> new WildRootsBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD)));
   public static final DeferredHolder<Block, CreepingGroveMossBlock> CREEPING_GROVE_MOSS = BLOCKS.register("creeping_grove_moss", () -> new CreepingGroveMossBlock(BlockBehaviour.Properties.of()

@@ -2066,6 +2066,8 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.FERTILIZERS)
             ), c, RootsAPI.rl("grove/warped_fairy_hut"));
 
+    // TODO: Fungal transmuter recipe
+
     RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB))
         .save(SummonCreaturesRecipe.Builder.create().entity(ModEntities.SNOW_SPROUT.get())
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_SEEDS)

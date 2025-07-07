@@ -418,6 +418,7 @@ public class RootsLootTableProvider {
       dropSelf(ModBlocks.DECORATIVE_SOUL_PYRE.get());
       dropSelf(ModBlocks.UNENDING_BOWL.get());
       dropSelf(ModBlocks.BAFFLECAP.get());
+      dropSelf(ModBlocks.FUNGAL_TRANSMUTER.get());
       addCropDrops(ModBlocks.WILDROOT_CROP.get(), ModItems.WILDROOT.get(), BeetrootBlock.AGE);
       addElementalCropDrops(ModBlocks.CLOUD_BERRY_CROP.get(), ModItems.CLOUD_BERRY.get(), ElementalType.AIR);
       addElementalCropDrops(ModBlocks.DEWGONIA_CROP.get(), ModItems.DEWGONIA.get(), ElementalType.WATER);

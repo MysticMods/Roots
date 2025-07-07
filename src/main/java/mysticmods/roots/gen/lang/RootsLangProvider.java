@@ -363,6 +363,7 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.WARPED_FAIRY_HUT);
     addBlock(ModBlocks.BROWN_FAIRY_HUT);
     addBlock(ModBlocks.BAFFLECAP_FAIRY_HUT);
+    addBlock(ModBlocks.FUNGAL_TRANSMUTER);
     addBlock(ModBlocks.WILD_ROOTS);
     addBlock(ModBlocks.CREEPING_GROVE_MOSS);
     addBlock(ModBlocks.HANGING_GROVE_MOSS);

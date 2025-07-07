@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-05T12:48:46.1733055	Item Models: roots
+// 1.21.1	2025-07-07T11:51:11.3449567	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -70,6 +70,7 @@ d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/display_pedest
 ed9102b2e94017998ecf81b2c86cb29365462194 assets/roots/models/item/fire_starter.json
 a9f24fd326a6cb57c1ac50440d5849502ab332cf assets/roots/models/item/flour.json
 232fb061a4dbbb117e4193f5fd9ac85eb1a1962b assets/roots/models/item/fungal_grove_stone.json
+a40ce1bbeb36a60fef363d41d1c5db735c3a4501 assets/roots/models/item/fungal_transmuter.json
 cb855da7b1d0684c4bc009f0241040ca807f5123 assets/roots/models/item/geas.json
 9907759431eb2eabffe2b5fac3a34337273fe463 assets/roots/models/item/gift_box.json
 733417364febd98d98daf39450a5755322e7261d assets/roots/models/item/glass_eye.json

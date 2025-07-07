@@ -183,6 +183,7 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> BAFFLECAP_FAIRY_HUT = ITEMS.register("bafflecap_fairy_hut", () -> new BlockItem(ModBlocks.BAFFLECAP_FAIRY_HUT.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> CRIMSON_FAIRY_HUT = ITEMS.register("crimson_fairy_hut", () -> new BlockItem(ModBlocks.CRIMSON_FAIRY_HUT.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> WARPED_FAIRY_HUT = ITEMS.register("warped_fairy_hut", () -> new BlockItem(ModBlocks.WARPED_FAIRY_HUT.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> FUNGAL_TRANSMUTER = ITEMS.register("fungal_transmuter", () -> new BlockItem(ModBlocks.FUNGAL_TRANSMUTER.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
 
   public static DeferredHolder<Item, BlockItem> BAFFLECAP_BLOCK = ITEMS.register("bafflecap_block", () -> new BlockItem(ModBlocks.BAFFLECAP_BLOCK.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> PRIMAL_GROVE_STONE = ITEMS.register("primal_grove_stone", () -> new BlockItem(ModBlocks.PRIMAL_GROVE_STONE.get(), new Item.Properties()));

@@ -2,10 +2,7 @@ package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.StateProperties;
-import mysticmods.roots.block.FairyHutBlock;
-import mysticmods.roots.block.GroveStoneBlock;
-import mysticmods.roots.block.HangingGroveMossBlock;
-import mysticmods.roots.block.PyreBlock;
+import mysticmods.roots.block.*;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
 import net.minecraft.core.Direction;
@@ -302,6 +299,21 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     crop(ModBlocks.WILDEWHEET_CROP, false);
     crop(ModBlocks.AUBERGINE_CROP, false);
 
+    ModelFile fungalTransmuter = models().withExistingParent("fungal_transmuter", modLoc("block/complex/fungal_transmuter"))
+        .renderType("solid")
+        .texture("bottom", modLoc("block/fungal_transmuter_bottom"))
+        .texture("top", modLoc("block/fungal_transmuter_top"))
+        .texture("side", modLoc("block/fungal_transmuter_side"))
+        .texture("particle", modLoc("block/fungal_transmuter_bottom"));
+    getVariantBuilder(ModBlocks.FUNGAL_TRANSMUTER.get())
+        .forAllStates(state -> {
+          Direction dir = state.getValue(FungalTransmuterBlock.FACING);
+          return ConfiguredModel.builder()
+              .modelFile(fungalTransmuter)
+              .rotationY(dir.getAxis().isVertical() ? 0 : (int) dir.toYRot())
+              .build();
+        });
+
     ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop"))
         .renderType("cutout").texture("crop", modLoc("block/wild_aubergine")).renderType("cutout");
     getVariantBuilder(ModBlocks.WILD_AUBERGINE.get())
@@ -327,6 +339,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     fairyHut(ModBlocks.BAFFLECAP_FAIRY_HUT);
     fairyHut(ModBlocks.CRIMSON_FAIRY_HUT);
     fairyHut(ModBlocks.BROWN_FAIRY_HUT);
+
   }
 
   private void fairyHut(Holder<Block> holder) {

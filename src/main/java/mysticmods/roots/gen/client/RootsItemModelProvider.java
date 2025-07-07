@@ -167,6 +167,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     withExistingParent(ModBlocks.CRIMSON_FAIRY_HUT.getKey().location().getPath(), modLoc("block/crimson_fairy_hut_inventory"));
     withExistingParent(ModBlocks.WARPED_FAIRY_HUT.getKey().location()
         .getPath(), modLoc("block/warped_fairy_hut_inventory"));
+    simpleBlockItem(ModBlocks.FUNGAL_TRANSMUTER.get());
     withExistingParent(ModBlocks.BAFFLECAP_FAIRY_HUT.getKey().location()
         .getPath(), modLoc("block/bafflecap_fairy_hut_inventory"));
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
