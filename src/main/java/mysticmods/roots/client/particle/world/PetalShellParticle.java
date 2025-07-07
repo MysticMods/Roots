@@ -2,7 +2,6 @@ package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.attachment.SnapshotStorage;
-import mysticmods.roots.client.particle.IMixinParticleHolder;
 import mysticmods.roots.client.particle.IParticleHolder;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
@@ -87,14 +86,14 @@ public class PetalShellParticle extends TextureSheetParticle {
 
     this.maxCount = snapshot.getCount();
 
-    if (rolls == null) {
-      rolls = new float[maxCount][3];
-      for (int i = 0; i < maxCount; i++) {
-        rolls[i][0] = 0.05f + (random.nextFloat() - 0.5f) * 0.05f;
-        rolls[i][1] = 0;
-        rolls[i][2] = 0;
-      }
-    }
+if (rolls == null || rolls.length < count) {
+  rolls = new float[Math.max(count, maxCount)][3];
+  for (int i = 0; i < rolls.length; i++) {
+    rolls[i][0] = 0.05f + (random.nextFloat() - 0.5f) * 0.05f;
+    rolls[i][1] = 0;
+    rolls[i][2] = 0;
+  }
+}
 
     this.xo = this.x;
     this.yo = this.y;
@@ -104,8 +103,8 @@ public class PetalShellParticle extends TextureSheetParticle {
     this.z = entity.getZ();
 
     for (int i = 0; i < maxCount; i++) {
-      rolls[i][2] = rolls[i][1];
-      rolls[i][1] += rolls[i][0];
+      rolls[i][1] = rolls[i][2];
+      rolls[i][2] += rolls[i][0];
     }
 
     if (!this.removed) {
@@ -125,40 +124,34 @@ public class PetalShellParticle extends TextureSheetParticle {
   }
 
   @Override
-  protected void renderRotatedQuad(VertexConsumer buffer, Camera camera, Quaternionf quaternion, float partialTicks) {
+  public void render(VertexConsumer buffer, Camera camera, float partialTicks) {
     if (entity == null || entity.isRemoved() || removed) {
       return;
     }
 
-    Vec3 vec3 = camera.getPosition();
+    Vec3 camPos = camera.getPosition();
+    Vec3 entityPos = entity.getPosition(partialTicks);
 
     double radius = 0.8f;
     double height = 1.0f;
     double anglePerShell = Math.PI * 2 / count;
-    double angleOffset = Math.toRadians(entity.tickCount % 360);
+    double angleOffset = Math.toRadians((entity.tickCount + partialTicks)% 360);
 
     int newCount = count;
 
-    for (int i = 0; i <= maxCount; i++) {
+    for (int i = 0; i < count; i++) {
       double sin = Math.sin(angleOffset + i * anglePerShell);
       double cos = Math.cos(angleOffset + i * anglePerShell);
 
-      double x = this.x + radius * sin;
-      double y = this.y + height;
-      double z = this.z + radius * cos;
+      float px = (float) (entityPos.x + radius * sin - camPos.x);
+      float py = (float) (entityPos.y + height - camPos.y);
+      float pz = (float) (entityPos.z + radius * cos - camPos.z);
 
-      double xo = this.xo + radius * sin;
-      double yo = this.yo + height;
-      double zo = this.zo + radius * cos;
-
-      float f = (float) (Mth.lerp(partialTicks, xo, x) - vec3.x());
-      float f1 = (float) (Mth.lerp(partialTicks, yo, y) - vec3.y());
-      float f2 = (float) (Mth.lerp(partialTicks, zo, z) - vec3.z());
-
-      Quaternionf q = new Quaternionf(quaternion);
+      Quaternionf q = new Quaternionf();
+      this.getFacingCameraMode().setRotation(q, camera, partialTicks);
       q.rotateZ(Mth.lerp(partialTicks, rolls[i][1], rolls[i][2]));
 
-      this.renderRotatedQuad(buffer, q, f, f1, f2, partialTicks);
+      this.renderRotatedQuad(buffer, q, px, py, pz, partialTicks);
 
       newCount--;
       if (newCount <= 0) {
