@@ -57,7 +57,7 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique) {
     AttachmentUtil.monitorAndSync(player, ModAttachments.REPUTATION_STORAGE, (serverPlayer, reputationStorage) -> {
-      int change = reputationStorage.adjust(grove, reputation);
+      int change = unique ? reputationStorage.apply(grove, id, reputation) : reputationStorage.adjust(grove, reputation);
       // TODO: When a rank changes etc
       if (change != 0 && ConfigManager.DEBUG_REPUTATION.get()) {
         PacketDistributor.sendToPlayer(serverPlayer, new ClientboundReputationMessagePacket(grove, change));

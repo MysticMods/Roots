@@ -63,27 +63,23 @@ public class ReputationStorage implements ICleanable {
     setDirty(true);
   }
 
-  public boolean apply(Grove grove, ResourceLocation name, GroveReputation reputation) {
+  public int apply(Grove grove, ResourceLocation name, GroveReputation reputation) {
     UniqueReputation rep = new UniqueReputation(grove.builtInRegistryHolder().getKey().location(), name);
     if (uniqueReputations.contains(rep)) {
-      return false;
+      return 0;
     }
     uniqueReputations.add(rep);
-    increaseReputation(grove, reputation.gain1());
-    return true;
+    return increaseReputation(grove, reputation.gain1());
   }
 
   public int adjust(Grove grove, GroveReputation reputation) {
     int[] reps = {reputation.gain1(), reputation.gain2(), reputation.gain3(), reputation.gain4()};
-    int current = reputations.getOrDefault(grove, 0);
     int rank = getRank(grove);
-    reputations.put(grove, current + reps[rank]);
-    setDirty(true);
-    return reps[rank];
+    return increaseReputation(grove, reps[rank]);
   }
 
   public int increaseReputation(Grove grove, int reputation) {
-    int current = reputations.computeIfAbsent(grove, t -> 0);
+    int current = reputations.getOrDefault(grove, 0);
     reputations.put(grove, current + reputation);
     setDirty(true);
     return reputation;
