@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-07T14:33:44.2510863	Data Maps
+// 1.21.1	2025-07-07T14:36:07.6662708	Data Maps
 dd3d79292b26f2d1b2a3eeb4cb4550e54b0d6c2e data/neoforge/data_maps/item/compostables.json
 0e6bca458983fff83db86ba22e3e1f1889756371 data/neoforge/data_maps/item/furnace_fuels.json
 46746a8f88510697331184e08ff6415d9bdb50fc data/roots/data_maps/block/grove_power_generator.json
@@ -9,7 +9,7 @@ b8147d54be0ca9bad247a677e06a9be6bfd0f90e data/roots/data_maps/block/shatter_oper
 26f578a3dff09716ddf6ffc6423ee5fe95de396a data/roots/data_maps/item/herb_item_data.json
 adb55cb48d2519a40f452aadfad8c46c3c07de64 data/roots/data_maps/item/seed_to_crop.json
 b2a349559b34afec4b17b8097a01f8ec66e35ac0 data/roots/data_maps/item/sprout_breeding_item_chance.json
-cd275ae3cb49c61c75761869ff4b2ef69ef68baf data/roots/data_maps/roots/groves/grove_generation_entries.json
+750ca2b4d91e3b8459409b0680d406d42f6a6bf7 data/roots/data_maps/roots/groves/grove_generation_entries.json
 866b78c64be9ea79410ded8b911707ea6bf31736 data/roots/data_maps/roots/groves/grove_ranks.json
 b7aab94e8883ca5810cfbbfc169c9f0ec977a97e data/roots/data_maps/roots/grove_actions/grove_action_reputations.json
 95dd23768814d239d2d6c06d4545d002af33b29c data/roots/data_maps/roots/rituals/ritual_item_data.json

@@ -18,6 +18,31 @@
         "symmetry": "radial_same_block",
         "tag": "roots:grove_generators/fairy/paths"
       }
+    ],
+    "roots:fungal": [
+      {
+        "max_count": 2,
+        "tag": "roots:grove_generators/fungal"
+      }
+    ],
+    "roots:sprouting": [
+      {
+        "max_count": 3,
+        "tag": "roots:grove_generators/sprouting"
+      }
+    ],
+    "roots:twilight": [
+      {
+        "max_count": 1,
+        "symmetry": "radial_not_matching",
+        "tag": "roots:grove_generators/twilight"
+      }
+    ],
+    "roots:wild": [
+      {
+        "max_count": 2,
+        "tag": "roots:grove_generators/wild"
+      }
     ]
   }
 }

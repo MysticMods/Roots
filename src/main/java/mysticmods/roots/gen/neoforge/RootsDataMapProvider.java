@@ -597,5 +597,17 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder25.add(ModGroves.ELEMENTAL, List.of(
         new GrovePower.GenerationEntry(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, 2, GrovePower.Symmetry.RADIAL_DIFFERENT_SAME_TAG)
     ), false);
+    builder25.add(ModGroves.SPROUTING, List.of(
+        new GrovePower.GenerationEntry(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, 3, GrovePower.Symmetry.NONE)
+    ), false);
+    builder25.add(ModGroves.FUNGAL, List.of(
+        new GrovePower.GenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, 2, GrovePower.Symmetry.NONE)
+    ), false);
+    builder25.add(ModGroves.WILD, List.of(
+        new GrovePower.GenerationEntry(RootsTags.Blocks.WILD_GROVE_GENERATORS, 2, GrovePower.Symmetry.NONE)
+    ), false);
+    builder25.add(ModGroves.TWILIGHT, List.of(
+        new GrovePower.GenerationEntry(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, GrovePower.Symmetry.RADIAL_NOT_MATCHING)
+    ), false);
   }
 }
