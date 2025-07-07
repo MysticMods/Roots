@@ -75,7 +75,12 @@ public class ReputationScreen extends RootsScreen {
       int j1 = i1 + 5;
       ReputationRanks.Progress prog = progresses[l];
       Grove grove = groves[l];
-      String s = prog.progress() + "/" + prog.nextRank() + " " + prog.rank();
+      String s;
+      if (prog.nextRank() == 0) {
+        s = prog.progress() + " " + prog.rank();
+      } else {
+        s = prog.progress() + "/" + prog.nextRank() + " " + prog.rank();
+      }
       int i2 = 6839882;
       int j2 = mouseX - (i + 60);
       int k2 = mouseY - (j + 14 + 19 * l);
