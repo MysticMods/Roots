@@ -14,16 +14,26 @@ public class LivingArrowEntity extends AbstractArrow {
   public static final float VELOCITY_MODIFIER = 1.1f; // 10% more velocity
   public static final float LOWER_CRIT_THRESHOLD = 0.8f; // Only need to charge to 80% for it to be considered a critical hit
 
+  private final ItemStack firingWeapon;
+
   public LivingArrowEntity(EntityType<? extends LivingArrowEntity> entityType, Level level) {
     super(entityType, level);
+    this.firingWeapon = ItemStack.EMPTY;
   }
 
   public LivingArrowEntity(Level level, double x, double y, double z, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
     super(ModEntities.LIVING_ARROW.get(), x, y, z, level, pickupItemStack, firedFromWeapon);
+    this.firingWeapon = firedFromWeapon != null ? firedFromWeapon.copy() : ItemStack.EMPTY;
   }
 
   public LivingArrowEntity(Level level, LivingEntity owner, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
     super(ModEntities.LIVING_ARROW.get(), owner, level, pickupItemStack, firedFromWeapon);
+    this.firingWeapon = firedFromWeapon != null ? firedFromWeapon.copy() : ItemStack.EMPTY;
+  }
+
+  @Override
+  public ItemStack getWeaponItem() {
+    return firingWeapon;
   }
 
   @Override
