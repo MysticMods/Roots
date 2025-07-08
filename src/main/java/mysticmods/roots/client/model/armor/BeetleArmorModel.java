@@ -1,5 +1,6 @@
 package mysticmods.roots.client.model.armor;
 
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -7,6 +8,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 
 public class BeetleArmorModel extends ArmorModel {
   private final ModelPart headAnchor;
@@ -37,13 +39,16 @@ public class BeetleArmorModel extends ArmorModel {
     armR.visible = slot == EquipmentSlot.CHEST;
     legR.visible = slot == EquipmentSlot.LEGS;
     legL.visible = slot == EquipmentSlot.LEGS;
+    leftLeg.visible = slot == EquipmentSlot.LEGS || slot == EquipmentSlot.FEET;
+    rightLeg.visible = slot == EquipmentSlot.LEGS || slot == EquipmentSlot.FEET;
     bootL.visible = slot == EquipmentSlot.FEET;
     bootR.visible = slot == EquipmentSlot.FEET;
     hat.visible = false;
   }
 
   @Override
-  protected void setPartVisibility(EquipmentSlot slot) {
+  public void copyPropertiesTo(HumanoidModel<LivingEntity> model) {
+    super.copyPropertiesTo(model);
   }
 
   public static LayerDefinition createBodyLayer() {
@@ -60,10 +65,10 @@ public class BeetleArmorModel extends ArmorModel {
         .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), PartPose.offset(-5.0F, 2.0F, 0.0F));
     PartDefinition left_arm = partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(40, 16)
         .mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), PartPose.offset(5.0F, 2.0F, 0.0F));
-    PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 16)
-        .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F), PartPose.offset(-1.9F, 12.0F, 0.0F));
-    PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 16)
-        .mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F), PartPose.offset(1.9F, 12.0F, 0.0F));
+    PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create()/*.texOffs(0, 16)
+        .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F)*/, PartPose.offset(-1.9F, 0F, 0.0F));
+    PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create()/*.texOffs(0, 16)
+        .mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F)*/, PartPose.offset(1.9F, 0F, 0.0F));
 
     PartDefinition head_anchor = head.addOrReplaceChild("head_anchor", CubeListBuilder.create(), PartPose.offset(-1.5f, -6.5f, -5.0f));
     head_anchor.addOrReplaceChild("head1", CubeListBuilder.create().texOffs(0, 11)

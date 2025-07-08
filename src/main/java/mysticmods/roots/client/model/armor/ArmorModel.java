@@ -73,41 +73,11 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
     this.leftLeg.xRot = ((float) Math.PI / 180F) * entityIn.getLeftLegPose().getX();
     this.leftLeg.yRot = ((float) Math.PI / 180F) * entityIn.getLeftLegPose().getY();
     this.leftLeg.zRot = ((float) Math.PI / 180F) * entityIn.getLeftLegPose().getZ();
-    this.leftLeg.setPos(1.9F, 11.0F, 0.0F);
+    this.leftLeg.setPos(1.9F, 0.0F, 0.0F);
     this.rightLeg.xRot = ((float) Math.PI / 180F) * entityIn.getRightLegPose().getX();
     this.rightLeg.yRot = ((float) Math.PI / 180F) * entityIn.getRightLegPose().getY();
     this.rightLeg.zRot = ((float) Math.PI / 180F) * entityIn.getRightLegPose().getZ();
-    this.rightLeg.setPos(-1.9F, 11.0F, 0.0F);
+    this.rightLeg.setPos(-1.9F, 0.0F, 0.0F);
     this.hat.copyFrom(this.head);
-  }
-
-  @Override
-  public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-    setPartVisibility(slot);
-    super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
-  }
-
-  protected void setPartVisibility(EquipmentSlot slot) {
-    setAllVisible(false);
-    switch (slot) {
-      case HEAD -> {
-        head.visible = true;
-        hat.visible = true;
-      }
-      case CHEST -> {
-        body.visible = true;
-        rightArm.visible = true;
-        leftArm.visible = true;
-      }
-      case LEGS -> {
-        body.visible = true;
-        rightLeg.visible = true;
-        leftLeg.visible = true;
-      }
-      case FEET -> {
-        rightLeg.visible = true;
-        leftLeg.visible = true;
-      }
-    }
   }
 }
