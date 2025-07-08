@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-05T12:54:59.9799824	Recipes
+// 1.21.1	2025-07-08T12:18:23.6574519	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -129,6 +129,12 @@ c257a07c96766b9335fd6a455ec97c288a2245ff data/roots/advancement/recipes/food/coo
 105cad969e9e42f5fccdb35f04801569eb79d364 data/roots/advancement/recipes/food/cooked_venison.json
 a082e21f954e25b7361c621f9c384b915f7bfcd5 data/roots/advancement/recipes/food/cooked_venison_from_campfire_cooking.json
 17a6230dc9147bc9356fae92de0db72d9e471cb8 data/roots/advancement/recipes/food/cooked_venison_from_smoking.json
+57abd4a6965402bce93aa8400b40ba1861da736d data/roots/advancement/recipes/food/cordial/apple_cordial.json
+4d699fe9a70ca2f2b68403574ab24d79e7987304 data/roots/advancement/recipes/food/cordial/cactus_syrup.json
+ee449acc78d1faeb9bd6724b3f6e9c5a2de174dc data/roots/advancement/recipes/food/cordial/dandelion_cordial.json
+813c3ee6a690ca60cefac06262b3a17ad9fc6f63 data/roots/advancement/recipes/food/cordial/lilac_cordial.json
+12079cecabb418dd3b9ccb24aba01a34486d3e24 data/roots/advancement/recipes/food/cordial/peony_cordial.json
+7db15d79a5e47f1f5b58953b90b8673ed89f55cb data/roots/advancement/recipes/food/cordial/rose_cordial.json
 9e8781d47a0fc75367fd65e66340684d57ca0e76 data/roots/advancement/recipes/food/stewed_eggplant.json
 179005b0226cb6da2ac6a0d277dc5c1f119e21c6 data/roots/advancement/recipes/food/stuffed_aubergine.json
 eb22a7a1d96f6a15225236b3caa1f4ad04db5d6a data/roots/advancement/recipes/food/vegetable_juice.json
@@ -469,6 +475,12 @@ fb18150f8eb40a210340724f5fe7a973ab262f6f data/roots/recipe/copper_nugget_from_co
 ea4d6122b8a74c2ee5ecd657974678fbc70ec066 data/roots/recipe/copper_pickaxe.json
 01d09408f85a7cf5d8c4d434f1c42543070a2b9f data/roots/recipe/copper_shovel.json
 c3d583c9f32d65ad52809ad79e827556f1d2143e data/roots/recipe/copper_sword.json
+3d69192e9716dd6981abb800ba213ffeda9bb2f4 data/roots/recipe/cordial/apple_cordial.json
+cef27eea46a150528d226153517953900ef094c0 data/roots/recipe/cordial/cactus_syrup.json
+9d874a7b73cbe6a07b464528c75cb24bc770caaa data/roots/recipe/cordial/dandelion_cordial.json
+ad3ca6e43826ba6f62b738c25f1e08fd9cdd4fec data/roots/recipe/cordial/lilac_cordial.json
+7b57b08a9049a70c8a1abbd3c1a21348556f8187 data/roots/recipe/cordial/peony_cordial.json
+f3347f293dd49707c2cf6f1c35f7f6595fef5727 data/roots/recipe/cordial/rose_cordial.json
 b2b07ab2524a44de34b2c77b43f2d39b86396926 data/roots/recipe/decorative_pyre_from_pyre_and_lever.json
 70bf1d4edd07285f6277beb282af457afaa6e6a4 data/roots/recipe/decorative_soul_pyre_from_soul_pyre_and_lever.json
 5f99ab95fe3d19cc4dd55d982234f4b95772a595 data/roots/recipe/diamond_knife.json

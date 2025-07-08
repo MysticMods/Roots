@@ -107,6 +107,12 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.COPPER_NUGGET).add(ModItems.COPPER_NUGGET.get());
 
     this.tag(RootsTags.Items.ADJUSTABLE_ITEM).add(ModItems.GRAMARY.get());
+    this.tag(RootsTags.Items.APPLES).add(Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
+    this.tag(RootsTags.Items.DANDELIONS).add(Items.DANDELION);
+    this.tag(RootsTags.Items.LILACS).add(Items.LILAC);
+    this.tag(RootsTags.Items.POPPIES).add(Items.POPPY);
+    this.tag(RootsTags.Items.PEONIES).add(Items.PEONY);
+    this.tag(RootsTags.Items.ROSES).add(Items.ROSE_BUSH);
 
     this.copy(RootsTags.Blocks.NETHER_DOORS, RootsTags.Items.NETHER_DOORS);
     this.copy(RootsTags.Blocks.SOILS, RootsTags.Items.SOILS);

@@ -489,6 +489,12 @@ public class RootsTags {
 
     public static final TagKey<Item> NETHER_DOORS = modTag("doors/nether");
     public static final TagKey<Item> ADJUSTABLE_ITEM = modTag("adjustable_item");
+    public static final TagKey<Item> APPLES = modTag("apples");
+    public static final TagKey<Item> DANDELIONS = modTag("dandelions");
+    public static final TagKey<Item> LILACS = modTag("lilacs");
+    public static final TagKey<Item> ROSES = modTag("roses");
+    public static final TagKey<Item> PEONIES = modTag("peonies");
+    public static final TagKey<Item> POPPIES = modTag("poppies");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

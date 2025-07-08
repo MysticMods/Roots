@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-07T11:51:11.3429677	Roots Item Tags
+// 1.21.1	2025-07-08T12:18:23.6513796	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/curios/tags/item/tome.json
@@ -31,6 +31,7 @@ ca4be7f2a2f75c90936b26662964abad4c1f46d1 data/minecraft/tags/item/head_armor.jso
 bf77bddf53a2fdf31168d5839627632f0c96c0ff data/minecraft/tags/item/swords.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/roots/tags/item/adjustable_item.json
 87f3beeddef89647fae4b5de6f8f86178e11f390 data/roots/tags/item/antlers.json
+ba8b96a34596290b8bdcf2417e6b081408e0e2ca data/roots/tags/item/apples.json
 a000fcaeb8818c9664e2b088d9cfcbf1c9edf080 data/roots/tags/item/armor/antler.json
 717aa42eb4d9f9f28cbad53dd736c1ba21de2da3 data/roots/tags/item/armor/beetle.json
 7bd2a5224a7849d3c3512a35e810d8c6f9ba43f6 data/roots/tags/item/armor/copper.json
@@ -99,6 +100,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/item/crops/pereskia.jso
 314ec0136f8dbb967b704dda383c03d9e2057910 data/roots/tags/item/crops/stalicripe.json
 9572b957ea3e17cd5ad572e6ceabd95ba9a86fae data/roots/tags/item/crops/wildewheet.json
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/item/crops/wildroot.json
+a51e4f26a7259126cca5e414a5d07a3ad46e0817 data/roots/tags/item/dandelions.json
 ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/item/decorative_pyres.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/disable_disarming.json
 3ff1373c0ed2034d76fc6aa9c28b453d89f050dd data/roots/tags/item/doors/nether.json
@@ -130,6 +132,7 @@ e9fdf8ddb1256a33128e181d1c6f39c027944fd4 data/roots/tags/item/herbs/spiritleaf.j
 b1b4c38e5bcca0cfa734df1c87c4a3e1a56b2d5a data/roots/tags/item/herbs/wildewheet.json
 23b0cf7706593177366ab2bc2553a24687215595 data/roots/tags/item/herbs/wildroot.json
 2cc69a8ceea7c1f8652a69c6679b3791a8307b95 data/roots/tags/item/knives.json
+24bb5b9e453fc9f489476b3942f4a99dee8bae58 data/roots/tags/item/lilacs.json
 047b7c7631a4b09bd9bbdf8c77cfe781370cd790 data/roots/tags/item/logs/runed.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/item/logs/runed/acacia.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/item/logs/runed/birch.json
@@ -151,6 +154,7 @@ a0f512d942a5e0f1365b3fcea384de8dffce2a51 data/roots/tags/item/pedestals/grove.js
 c5d89cdbb8b3fe577eed9820640231ff10ee85d8 data/roots/tags/item/pedestals/limited.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/item/pedestals/ritual.json
 08f6581e2fabaae228e3ee44c68f32d91fedbf63 data/roots/tags/item/pelt.json
+8b1b34109ab9d91c4a1e445c4acfb7302f1dd153 data/roots/tags/item/peonies.json
 f848d81ab12aa420895973949d7dd762e5a36acf data/roots/tags/item/pillars/any.json
 307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/item/pillars/log/acacia.json
 84f44f11a710757dc91be87d29f5b393478b83e7 data/roots/tags/item/pillars/log/any.json
@@ -166,6 +170,7 @@ c6d64392f19c3ab3c5d775941e0be342c11f81e7 data/roots/tags/item/pillars/log/warped
 e193f473f605776c34de80b92a855d59614ef692 data/roots/tags/item/pillars/runes/any.json
 e48d858e3d3974b791109f0ebc13f854f1fd3436 data/roots/tags/item/pillars/runes/rune.json
 78d10f476ff2a556d1134f349ebb6e16d3f40922 data/roots/tags/item/pillars/runes/runed.json
+b24eda5f3a7b62df0c451d4de620ebf87ba5ffb8 data/roots/tags/item/poppies.json
 013c834800190efb8c750604831c502fd8f189fc data/roots/tags/item/pouches.json
 ae4117882af5a5a5d43ce988fa9906246bcdbf96 data/roots/tags/item/pouches/all.json
 c42cd05d45cb4e4c36ad0e2116c8ba8abb98af20 data/roots/tags/item/pouches/creative.json
@@ -175,6 +180,7 @@ ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/item/pyre_activation.js
 56c0c94575f95db61092fa29c297d258f3c8a658 data/roots/tags/item/quivers.json
 0181a639f41b0ab0d567c1e41fe790b23cefebce data/roots/tags/item/ritual/blooming/eligible_flowers.json
 aec04f51c04443c2e39f8137830a11be1ef0e9a1 data/roots/tags/item/ritual/blooming/eligible_pedestal_flowers.json
+495599a2a1babcaf6c074ed5ffc795e99b7748aa data/roots/tags/item/roses.json
 ed812d11a070d92ca88d1d889a167aa4dcda4159 data/roots/tags/item/rotten_flesh.json
 55bed570a04ad9cf0548ee9d75e129d42ca7dc99 data/roots/tags/item/runed_log_herbs.json
 b3f0d68ad05349c00594d33d8d0832643f45d54d data/roots/tags/item/runed_obsidian.json

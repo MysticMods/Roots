@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "tag": "c:crops/cactus"
+    },
+    "B": {
+      "tag": "roots:bottles"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "1S1",
+    "BWB",
+    "BSB"
+  ],
+  "result": {
+    "count": 4,
+    "id": "roots:cactus_syrup"
+  }
+}

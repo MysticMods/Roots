@@ -25,7 +25,6 @@ import java.util.ServiceLoader;
 // - Geas
 //    What other mobs will continue attacking when they lose a target?
 // - Runic tools
-// - Juice recipes
 // - Big Barrow loot chests
 // - Big Barrow redesign, breading
 // - Wildwood hanging sign? Wildwood sign?

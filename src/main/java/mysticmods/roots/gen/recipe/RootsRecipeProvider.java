@@ -25,14 +25,18 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
@@ -2339,6 +2343,14 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(Items.KELP)
                 .requires(Items.KELP)), c, RootsAPI.rl("summon/cod"));
 
+    cordial(c, ModItems.APPLE_CORDIAL, RootsTags.Items.APPLES, 4);
+    cordial(c, ModItems.DANDELION_CORDIAL, RootsTags.Items.DANDELIONS, 4);
+    cordial(c, ModItems.LILAC_CORDIAL, RootsTags.Items.LILACS, 4);
+    cordial(c, ModItems.PEONY_CORDIAL, RootsTags.Items.PEONIES, 4);
+    cordial(c, ModItems.ROSE_CORDIAL, RootsTags.Items.ROSES, 4);
+
+    cordial(c, ModItems.CACTUS_SYRUP, Tags.Items.CROPS_CACTUS, 4);
+
   }
 
   public static class RecipeSaver {
@@ -2373,5 +2385,19 @@ public class RootsRecipeProvider extends RecipeProvider {
     simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.RAW_SQUID.get(), ModItems.COOKED_SQUID.get(), 0.35F);
     simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.FLOUR.get(), Items.BREAD, 0.35F);
     simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.PERESKIA_BULB.get(), ModItems.COOKED_PERESKIA.get(), 0.35F);
+  }
+
+  protected static void cordial (RecipeOutput c, Holder<Item> result, TagKey<Item> ingredient, int amount) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, result.value(), amount)
+        .pattern("1S1")
+        .pattern("BWB")
+        .pattern("BSB")
+        .define('1', ingredient)
+        .define('S', Items.SUGAR)
+        .define('B', RootsTags.Items.BOTTLES)
+        .define('W', Items.WATER_BUCKET)
+        .unlockedBy("has_sugar", has(Items.SUGAR))
+        .unlockedBy("has_ingredient", has(ingredient))
+        .save(c, RootsAPI.rl("cordial/" + result.getKey().location().getPath()));
   }
 }
