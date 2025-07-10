@@ -20,6 +20,7 @@ import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
+import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -37,10 +38,14 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
@@ -114,7 +119,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
 
   @Override
   protected boolean canOutputTo(BlockState state, BlockPos pos) {
-    return !state.is(RootsTags.Blocks.PEDESTALS);
+    return !state.is(RootsTags.Blocks.PEDESTALS) && !state.is(Blocks.DISPENSER);
   }
 
   @Override
@@ -155,7 +160,11 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       lastUuid = null;
       lastRecipe = cachedRecipe;
       List<TaggedPedestalCrafting.ItemPosition> positions = playerCrafting.getItemsAndPositions();
-      PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new StartGroveCraftingFX(getBlockPos(), positions));
+      if (player instanceof FakePlayer) {
+        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new StartGroveCraftingFX(getBlockPos(), positions));
+      } else {
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new StartGroveCraftingFX(getBlockPos(), positions));
+      }
       List<ItemStack> results = cachedRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popAndAnimateItems);
       storedItems.addAll(results);

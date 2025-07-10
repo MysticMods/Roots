@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModSounds;
@@ -37,9 +38,11 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
@@ -153,12 +156,25 @@ public class KnifeItem extends TieredItem {
       BlockPos target = blockSource.pos().relative(facing);
       ServerLevel level = blockSource.level();
       state = level.getBlockState(target);
+
+      Player fakePlayer = FakePlayerFactory.get(level, FakePlayerUtil.ROOTS);
+      fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, item);
+
+      BlockEntity blockEntity = level.getBlockEntity(target);
+      if (blockEntity instanceof GroveCrafterBlockEntity groveCrafter) {
+        if (groveCrafter.isCrafting()) {
+          return item;
+        }
+        if (groveCrafter.use(state, level, target, fakePlayer, null, InteractionHand.MAIN_HAND, item).consumesAction()) {
+          return item;
+        }
+      }
+
       if (!state.is(ModBlocks.CREEPING_GROVE_MOSS)) {
         return item;
       }
 
-      Player fakePlayer = FakePlayerFactory.get(level, FakePlayerUtil.ROOTS);
-      fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, item);
+
       LootParams.Builder builder = new LootParams.Builder(level)
           .withParameter(LootContextParams.ORIGIN, blockSource.center())
           .withParameter(LootContextParams.BLOCK_STATE, state)
