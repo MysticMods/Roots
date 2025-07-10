@@ -15,12 +15,9 @@ import java.util.ServiceLoader;
 
 // TODO: Main TODO list
 // Can throw a herb pouch out while editing it
-// Can move herb pouch while editing it
-// Petal shell effect icon
 // Edit the beetle armor layers for overlap
 // Planting roots plants doesn't trigger a seedy place
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
-// Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
 // - Geas
 //    What other mobs will continue attacking when they lose a target?
@@ -28,7 +25,6 @@ import java.util.ServiceLoader;
 // - Big Barrow loot chests
 // - Big Barrow redesign, breading
 // - Wildwood hanging sign? Wildwood sign?
-// - The pestle is held wrongly
 // - Leash attachment points
 // - Entity carry layers for all mobs
 // - Transmutation recipes

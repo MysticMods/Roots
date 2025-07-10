@@ -141,12 +141,13 @@ public class KnifeItem extends TieredItem {
     stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
   }
 
+  // TODO: Activate grove crafter
   public static class KnifeDispenseBehaviour extends DefaultDispenseItemBehavior {
     @Override
     protected ItemStack execute(BlockSource blockSource, ItemStack item) {
       BlockState state = blockSource.state();
       if (!state.hasProperty(DispenserBlock.FACING)) {
-        return ItemStack.EMPTY;
+        return item;
       }
       Direction facing = state.getValue(DispenserBlock.FACING);
       BlockPos target = blockSource.pos().relative(facing);
@@ -176,7 +177,7 @@ public class KnifeItem extends TieredItem {
       } else {
         for (ItemStack r : result) {
           ItemStack r2 = ItemHandlerHelper.insertItem(cap, r, false);
-          if (!result.isEmpty()) {
+          if (!r2.isEmpty()) {
             ItemUtil.Spawn.spawnItem(level, above, r2);
           }
         }

@@ -12,19 +12,26 @@ import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityCrafting;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -34,25 +41,32 @@ import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 // TODO: HORSES, DONKEYS, ETC.
 public class RunicShearsItem extends ShearsItem {
-  private AABB aoeBoundingBox;
+  private static AABB aoeBoundingBox;
 
   public RunicShearsItem(Properties pProperties) {
     super(pProperties);
   }
 
-  private AABB getBoundingBox() {
+  private static AABB getBoundingBox() {
     if (aoeBoundingBox == null) {
       aoeBoundingBox = new AABB(-ConfigManager.AOE_BOUNDING_BOX_X.getAsInt(), -ConfigManager.AOE_BOUNDING_BOX_Y.getAsInt(), -ConfigManager.AOE_BOUNDING_BOX_Z.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_X.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_Y.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_Z.getAsInt());
     }
@@ -69,6 +83,7 @@ public class RunicShearsItem extends ShearsItem {
           return InteractionResult.CONSUME;
         }
 
+        // TODO: Conditions are never tested
         MinecraftServer server = entity.level().getServer();
         if (server == null) {
           return InteractionResult.FAIL;
@@ -195,6 +210,132 @@ public class RunicShearsItem extends ShearsItem {
       return InteractionResult.sidedSuccess(level.isClientSide);
     } else {
       return InteractionResult.PASS;
+    }
+  }
+
+  public static class RunicShearsDispenseBehaviour extends DefaultDispenseItemBehavior {
+    @Override
+    protected ItemStack execute(BlockSource blockSource, ItemStack item) {
+      ServerLevel serverLevel = blockSource.level();
+      BlockState state = blockSource.state();
+      if (!state.hasProperty(DispenserBlock.FACING)) {
+        return item;
+      }
+
+      Direction direction = state.getValue(DispenserBlock.FACING);
+      BlockPos target = blockSource.pos().relative(direction);
+      BlockState targetState = serverLevel.getBlockState(target);
+
+      Player fakePlayer = FakePlayerFactory.get(serverLevel, FakePlayerUtil.ROOTS);
+      fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, item);
+
+      BlockPos above = blockSource.pos().above();
+      IItemHandler cap = serverLevel.getCapability(Capabilities.ItemHandler.BLOCK, above, null);
+
+      BlockHitResult hit = new BlockHitResult(target.getCenter(), direction, target, false);
+      UseOnContext useOnContext = new UseOnContext(serverLevel, fakePlayer, InteractionHand.MAIN_HAND, item, hit);
+      SimpleWorldCrafting crafting = new SimpleWorldCrafting(fakePlayer, serverLevel, target, targetState, useOnContext);
+      RecipeHolder<RunicBlockRecipe> recipe = ResolvedRecipes.RUNIC_BLOCK.findRecipe(crafting, serverLevel);
+      if (recipe != null) {
+        ConditionResult conditionResult = recipe.value()
+            .checkConditions(serverLevel, fakePlayer, PyreBlockEntity.getPyreBoundingBox(), target);
+        if (conditionResult.anyFailed()) {
+          return item;
+        }
+
+        if (!recipe.value().hasOutput(serverLevel.registryAccess())) {
+          return item;
+        }
+
+        serverLevel.playSound(null, target, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+        item.hurtAndBreak(recipe.value()
+            .getDurabilityCost(), fakePlayer, EquipmentSlot.MAINHAND);
+
+        List<ItemStack> results = recipe.value()
+            .assembleOutputs(crafting, serverLevel.getRandom(), serverLevel.registryAccess(), null);
+        if (cap != null) {
+          for (ItemStack r : results) {
+            ItemStack r2 = ItemHandlerHelper.insertItem(cap, r, false);
+            if (!r2.isEmpty()) {
+              ItemUtil.Spawn.spawnItem(serverLevel, above, r2);
+            }
+          }
+        } else {
+          for (ItemStack r : results) {
+            ItemUtil.Spawn.spawnItem(serverLevel, above, r);
+          }
+        }
+        return item;
+      }
+
+      // Now test for entities
+      for (LivingEntity livingEntity : serverLevel.getEntitiesOfClass(LivingEntity.class, new AABB(target), EntitySelector
+          .NO_SPECTATORS)) {
+        RunicEntityCrafting entityCrafting = new RunicEntityCrafting(livingEntity, fakePlayer, serverLevel, InteractionHand.MAIN_HAND, item);
+        RecipeHolder<RunicEntityRecipe> entityRecipe = ResolvedRecipes.RUNIC_ENTITY.findRecipe(entityCrafting, serverLevel);
+        if (entityRecipe != null) {
+          MinecraftServer server = serverLevel.getServer();
+          if (server == null) {
+            return item;
+          }
+
+          if (EntityCooldowns.hasExpired(livingEntity, ModAttachments.RUNIC_SHEARS_ENTITY_COOLDOWN)) {
+            EntityCooldowns.setExpiresAt(livingEntity, ModAttachments.RUNIC_SHEARS_ENTITY_COOLDOWN, server.getTickCount() + entityRecipe.value()
+                .getCooldown());
+            serverLevel.playSound(null, target, SoundEvents.AXE_STRIP, SoundSource.PLAYERS, 0.5f, serverLevel.getRandom()
+                .nextFloat() * 0.25f + 0.6f);
+            item.hurtAndBreak(entityRecipe.value()
+                .getDurabilityCost(), fakePlayer, EquipmentSlot.MAINHAND);
+            List<ItemStack> results = entityRecipe.value()
+                .assembleOutputs(entityCrafting, serverLevel.getRandom(), serverLevel.registryAccess(), null);
+            // TODO: Store in chest instead
+            if (cap != null) {
+              for (ItemStack r : results) {
+                ItemStack r2 = ItemHandlerHelper.insertItem(cap, r, false);
+                if (!r2.isEmpty()) {
+                  ItemUtil.Spawn.spawnItem(serverLevel, above, r2);
+                }
+              }
+            } else {
+              for (ItemStack r : results) {
+                ItemUtil.Spawn.spawnItem(serverLevel, above, r);
+              }
+            }
+          }
+          return item;
+        }
+        if (livingEntity instanceof IShearable shearableTarget) {
+          BlockPos pos = livingEntity.blockPosition();
+          AABB aabb = getBoundingBox().move(pos);
+          boolean anySheared = false;
+          List<ItemStack> drops = new ArrayList<>();
+          for (LivingEntity newTarget : serverLevel.getEntitiesOfClass(LivingEntity.class, aabb)) {
+            if (newTarget instanceof IShearable newShearable && newShearable.isShearable(fakePlayer, item, serverLevel, pos)) {
+              drops.addAll(newShearable.onSheared(fakePlayer, item, serverLevel, pos));
+              newTarget.gameEvent(GameEvent.SHEAR, fakePlayer);
+              anySheared = true;
+            }
+          }
+          if (anySheared) {
+            item.hurtAndBreak(1, fakePlayer, EquipmentSlot.MAINHAND);
+          }
+          if (cap != null) {
+            for (ItemStack r : drops) {
+              ItemStack r2 = ItemHandlerHelper.insertItem(cap, r, false);
+              if (!r2.isEmpty()) {
+                ItemUtil.Spawn.spawnItem(serverLevel, above, r2);
+              }
+            }
+          } else {
+            for (ItemStack r : drops) {
+              ItemUtil.Spawn.spawnItem(serverLevel, above, r);
+            }
+          }
+        }
+        return item;
+      }
+      return item;
     }
   }
 }

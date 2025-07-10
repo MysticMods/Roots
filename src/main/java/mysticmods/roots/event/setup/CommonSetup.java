@@ -7,6 +7,7 @@ import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.P;
 import mysticmods.roots.item.KnifeItem;
 import mysticmods.roots.item.RootsCauldronInteractions;
+import mysticmods.roots.item.RunicShearsItem;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
 import net.minecraft.world.level.block.Blocks;
@@ -69,6 +70,7 @@ public class CommonSetup {
       DispenserBlock.registerBehavior(ModItems.NETHERITE_KNIFE.get(), behaviour);
 
       DispenserBlock.registerBehavior(ModItems.WOODEN_SHEARS.get(), new ShearsDispenseItemBehavior());
+      DispenserBlock.registerBehavior(ModItems.RUNIC_SHEARS.get(), new RunicShearsItem.RunicShearsDispenseBehaviour());
 
       CauldronInteraction.WATER.map().put(ModItems.APOTHECARY_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
       CauldronInteraction.WATER.map().put(ModItems.COMPONENT_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
