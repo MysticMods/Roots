@@ -22,6 +22,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -41,6 +42,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -97,6 +99,15 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
         pyre.light(player);
       }
     }
+  }
+
+  @Override
+  public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
+    if (state.getValue(PyreBlock.LIT) && !context.getLevel().isClientSide() && context.getLevel().getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
+      pyre.stopRitual(false);
+      return state.setValue(PyreBlock.BURNING, false).setValue(PyreBlock.LIT, false);
+    }
+    return super.getToolModifiedState(state, context, itemAbility, simulate);
   }
 
   @Override
