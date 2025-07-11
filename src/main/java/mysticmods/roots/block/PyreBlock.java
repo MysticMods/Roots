@@ -19,6 +19,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -89,13 +90,12 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
     BlockPos blockpos = hit.getBlockPos();
     // TODO: #888
     if (!level.isClientSide
-        && projectile.isOnFire()
-        && projectile.mayInteract(level, blockpos)
-        && !state.getValue(PyreBlock.LIT)
-        && !state.getValue(WATERLOGGED)
         && projectile.getOwner() instanceof Player player
         && level.getBlockEntity(blockpos) instanceof PyreBlockEntity pyre) {
-      pyre.light(player);
+
+      if (projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !state.getValue(PyreBlock.LIT) && !state.getValue(PyreBlock.WATERLOGGED)) {
+        pyre.light(player);
+      }
     }
   }
 

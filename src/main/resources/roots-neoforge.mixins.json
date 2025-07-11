@@ -6,6 +6,7 @@
     "MixinMerchantMenu",
     "MixinMobEffectInstance",
     "MixinRecipeBuilder",
+    "MixinThrownPotion",
     "accessor.AccessorMixinBlockLootSubProvider",
     "accessor.AccessorMixinCropBlock",
     "accessor.AccessorMixinGrowingPlantBlock",
