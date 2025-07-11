@@ -57,7 +57,7 @@ public class RenderUtil {
   }
 
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, BlockPos position) {
-    renderAABB(pPoseStack, bufferSource, position, null, null);
+    renderAABB(pPoseStack, bufferSource, position, null, null, null);
   }
 
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, BlockPos position) {
@@ -65,7 +65,7 @@ public class RenderUtil {
   }
 
   // This doesn't require multiple AABB creations every render frame
-  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable Frustum frustum, @Nullable Camera camera) {
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable BlockPos colorPos, @Nullable Frustum frustum, @Nullable Camera camera) {
     double minX = position.getX();
     double minY = position.getY();
     double minZ = position.getZ();
@@ -91,7 +91,7 @@ public class RenderUtil {
 
     VertexConsumer consumer = bufferSource.getBuffer(RenderType.lines());
     PoseStack.Pose pose = pPoseStack.last();
-    ColorHelper.Color color = ColorHelper.color(position);
+    ColorHelper.Color color = ColorHelper.color(colorPos == null ? position : colorPos);
 
     for (int[] edge : BOX_EDGES) {
       int a = edge[0];

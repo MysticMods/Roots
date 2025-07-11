@@ -54,7 +54,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
         BlockPos origin = pBlockEntity.getBlockPos();
         BlockPos offset = boundPos.subtract(origin);
-        RenderUtil.renderAABB(pPoseStack, pBufferSource, offset);
+        RenderUtil.renderAABB(pPoseStack, pBufferSource, origin, offset, null, null);
       }
     }
 

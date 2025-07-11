@@ -37,6 +37,7 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
       AABB bounds = pBlockEntity.getAABB();
       if (bounds != null) {
         RenderUtil.renderAABB(pPoseStack, pBufferSource, bounds, pBlockEntity.getBlockPos());
+        RenderUtil.renderAABB(pPoseStack, pBufferSource, BlockPos.ZERO, pBlockEntity.getBlockPos(), null, null);
       }
     }
     renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick);

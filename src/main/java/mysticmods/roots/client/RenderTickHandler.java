@@ -117,7 +117,7 @@ public class RenderTickHandler {
       ItemStack gramary = RootsClientAPI.getGramary();
       BlockPos gramaryPos = gramary.get(ModAttachments.BOUND_POSITION);
       if (gramaryPos != null && !gramaryPos.equals(BlockPos.ZERO)) {
-        RenderUtil.renderAABB(event.getPoseStack(), renderer, gramaryPos, event.getFrustum(), event.getCamera());
+        RenderUtil.renderAABB(event.getPoseStack(), renderer, gramaryPos, gramaryPos, event.getFrustum(), event.getCamera());
       }
     }
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
