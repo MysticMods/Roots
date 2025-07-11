@@ -52,7 +52,6 @@ public interface IRitualInstance extends RitualLike {
 
     @Override
     public int getLifetime() {
-      // TODO: Maybe not this
       return getDuration();
     }
 
