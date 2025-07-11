@@ -544,7 +544,6 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> RUNIC_SHEARS_OVERRIDE = modTag("runic_shears_override");
 
-    // TODO: Sylvan leather sis also a thing?
     public static final TagKey<EntityType<?>> SYLVAN_LEATHER = modTag("sylvan_leather");
 
     public static final TagKey<EntityType<?>> FORCE_HOSTILE = modTag("force_hostile");
