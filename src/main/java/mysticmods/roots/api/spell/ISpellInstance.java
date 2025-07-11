@@ -67,7 +67,6 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   // Returns length of cooldown
   default int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
-    // TODO: Cooldown reduction and and cost reduction are applied here
     int cooldown = getSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
     double costReduction = RootsAPI.getInstance().getCostReduction(pPlayer);
     double cooldownReduction = RootsAPI.getInstance().getCooldownReduction(pPlayer);

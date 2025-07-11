@@ -17,6 +17,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -52,7 +53,8 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
   public PyreBlock(Properties builder) {
     super(builder);
-    registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(BURNING, false).setValue(WATERLOGGED, false));
+    registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(BURNING, false)
+        .setValue(WATERLOGGED, false));
   }
 
   @Override
@@ -86,13 +88,15 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
   protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
     BlockPos blockpos = hit.getBlockPos();
     // TODO: #888
-/*    if (!level.isClientSide
+    if (!level.isClientSide
         && projectile.isOnFire()
         && projectile.mayInteract(level, blockpos)
-        && !state.getValue(LIT)
-        && !state.getValue(WATERLOGGED)) {
-      level.setBlock(blockpos, state.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
-    }*/
+        && !state.getValue(PyreBlock.LIT)
+        && !state.getValue(WATERLOGGED)
+        && projectile.getOwner() instanceof Player player
+        && level.getBlockEntity(blockpos) instanceof PyreBlockEntity pyre) {
+      pyre.light(player);
+    }
   }
 
   @Override
