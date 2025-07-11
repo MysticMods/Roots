@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Durability cost
 public class RunicBlockCategory extends RootsRecipeBaseCategory<RunicBlockRecipe> {
   public RunicBlockCategory(IGuiHelper helper) {
     super(RootsJEIPlugin.RUNIC_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/runic_block.png"), () -> new ItemStack(ModItems.RUNIC_SHEARS.get()), Component.translatable("roots.jei.runic_block"));
