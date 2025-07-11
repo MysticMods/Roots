@@ -14,7 +14,6 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-// TODO: Protect turtle eggs
 public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   @Override
   default void accept(GroveContext context) {
