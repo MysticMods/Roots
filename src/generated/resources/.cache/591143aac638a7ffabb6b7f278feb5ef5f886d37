@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-07T11:51:11.3449567	Item Models: roots
+// 1.21.1	2025-07-11T15:38:45.1332405	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -262,7 +262,24 @@ b48da5338d6df199a05029fe52defa82b3042c55 assets/roots/models/item/strange_ooze.j
 94154ab2fc29a76b2075c14847710e02785413e4 assets/roots/models/item/stripped_wildwood_wood.json
 75a4376dc4f58209c6914ef28676354a24e92d32 assets/roots/models/item/stuffed_aubergine.json
 18fdf50fa0dfbed4d9877386814f9ba8becc6200 assets/roots/models/item/sylvan_leather.json
-4208237195fa7d08c34e3a9c4a633c8dafee7b5a assets/roots/models/item/sylvan_pouch.json
+72518f8500f0626d40c18f9b2c688c95af9b0ab4 assets/roots/models/item/sylvan_pouch.json
+ad6ae3289b3d755bcb3d57559b5dbd0cfcdd0774 assets/roots/models/item/sylvan_pouch_black.json
+b232c240476cfde7026da13b223b802da3fd9a39 assets/roots/models/item/sylvan_pouch_blue.json
+e9510bccba4c61f5eee4c333a98980077efa235c assets/roots/models/item/sylvan_pouch_brown.json
+fc5d1e6c0e11be750670987b66dc2e8cd7dd5d61 assets/roots/models/item/sylvan_pouch_cyan.json
+7c7570f8c6fa927ce9ce4541758b054ef79690c0 assets/roots/models/item/sylvan_pouch_gray.json
+eaddafaf298977b9c1ce63dcfea6138d47ff5f8c assets/roots/models/item/sylvan_pouch_green.json
+3e4ac3c27bddf3bb37121914f3135657ab48d9d9 assets/roots/models/item/sylvan_pouch_light_blue.json
+e4286236710201dd24497740a585defa1b2ee50d assets/roots/models/item/sylvan_pouch_light_gray.json
+b4c781ba15278d0ac0d12c911aebba6d86f04092 assets/roots/models/item/sylvan_pouch_lime.json
+aa97d9f35fd1bb83eba67e77bd6a8cd5182bd32f assets/roots/models/item/sylvan_pouch_magenta.json
+242e360e010657cbb86fef9dc1bdaff1d925cdc9 assets/roots/models/item/sylvan_pouch_orange.json
+30a62170546bfcd5f41310302be548373d7f9792 assets/roots/models/item/sylvan_pouch_pink.json
+72be3f140f8d4cd5a09737addba923eef3a99d99 assets/roots/models/item/sylvan_pouch_purple.json
+2fd2411c4526892199d4604df4d4966b1ab06809 assets/roots/models/item/sylvan_pouch_red.json
+15e5338992ab83fc862316347f038d44835eab9d assets/roots/models/item/sylvan_pouch_undyed.json
+17b68a7884216ce6cc4439039134b73067b24bcb assets/roots/models/item/sylvan_pouch_white.json
+bee4b672bc38e04442fe33fd0e4462f725b7f9a4 assets/roots/models/item/sylvan_pouch_yellow.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/tan_sprout_spawn_egg.json
 ab91c5fb468f89dc5c9d4f93ab4e86592126e160 assets/roots/models/item/terran_soil.json
 9ac737c965f9e6f55e4479561c55b6dd74eaa3c8 assets/roots/models/item/thatch.json

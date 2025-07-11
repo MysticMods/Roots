@@ -16,8 +16,6 @@ import java.util.Locale;
 import java.util.function.IntFunction;
 
 public class Cost {
-  public static final List<Cost> NO_COSTS = List.of();
-
   private final CostType type;
   private final Holder<Herb> herb;
   private final double value;
@@ -33,7 +31,6 @@ public class Cost {
     this.herb = herb;
     this.value = value;
   }
-
 
   public CostType getType() {
     return type;

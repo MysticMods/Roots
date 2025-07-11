@@ -1,5 +1,109 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "roots:item/sylvan_pouch_white",
+      "predicate": {
+        "roots:string_color": 0.0
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_orange",
+      "predicate": {
+        "roots:string_color": 0.0625
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_magenta",
+      "predicate": {
+        "roots:string_color": 0.125
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_light_blue",
+      "predicate": {
+        "roots:string_color": 0.1875
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_yellow",
+      "predicate": {
+        "roots:string_color": 0.25
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_lime",
+      "predicate": {
+        "roots:string_color": 0.3125
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_pink",
+      "predicate": {
+        "roots:string_color": 0.375
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_gray",
+      "predicate": {
+        "roots:string_color": 0.4375
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_light_gray",
+      "predicate": {
+        "roots:string_color": 0.5
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_cyan",
+      "predicate": {
+        "roots:string_color": 0.5625
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_purple",
+      "predicate": {
+        "roots:string_color": 0.625
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_blue",
+      "predicate": {
+        "roots:string_color": 0.6875
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_brown",
+      "predicate": {
+        "roots:string_color": 0.75
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_green",
+      "predicate": {
+        "roots:string_color": 0.8125
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_red",
+      "predicate": {
+        "roots:string_color": 0.875
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_black",
+      "predicate": {
+        "roots:string_color": 0.9375
+      }
+    },
+    {
+      "model": "roots:item/sylvan_pouch_undyed",
+      "predicate": {
+        "roots:undyed": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "roots:item/pouches/sylvan_pouch"
   }

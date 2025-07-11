@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "roots:item/pouches/sylvan_pouch_main_layer",
+    "layer1": "roots:item/pouches/strings/purple"
+  }
+}

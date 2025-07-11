@@ -9,6 +9,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -164,7 +165,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
     withExistingParent(ModBlocks.RED_FAIRY_HUT.getKey().location().getPath(), modLoc("block/red_fairy_hut_inventory"));
     withExistingParent(ModBlocks.BROWN_FAIRY_HUT.getKey().location()
         .getPath(), modLoc("block/brown_fairy_hut_inventory"));
-    withExistingParent(ModBlocks.CRIMSON_FAIRY_HUT.getKey().location().getPath(), modLoc("block/crimson_fairy_hut_inventory"));
+    withExistingParent(ModBlocks.CRIMSON_FAIRY_HUT.getKey().location()
+        .getPath(), modLoc("block/crimson_fairy_hut_inventory"));
     withExistingParent(ModBlocks.WARPED_FAIRY_HUT.getKey().location()
         .getPath(), modLoc("block/warped_fairy_hut_inventory"));
     simpleBlockItem(ModBlocks.FUNGAL_TRANSMUTER.get());
@@ -250,19 +252,50 @@ public class RootsItemModelProvider extends ItemModelProvider {
         .texture("layer0", modLoc("item/pouches/herb_pouch_main_layer"))
         .texture("layer1", modLoc("item/pouches/herb_pouch_clasp_layer"));
     getBuilder("roots:herb_pouch").parent(generated)
-        .texture("layer0", modLoc("item/pouches/herb_pouch")).override().predicate(ClientSetup.UNDYED, 1).model(coloured).end();
+        .texture("layer0", modLoc("item/pouches/herb_pouch")).override().predicate(ClientSetup.UNDYED, 1)
+        .model(coloured).end();
     coloured = getBuilder("roots:apothecary_pouch_coloured")
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/pouches/apothecary_pouch_main_layer"))
         .texture("layer1", modLoc("item/pouches/apothecary_pouch_clasp_layer"));
     getBuilder("roots:apothecary_pouch").parent(generated)
-        .texture("layer0", modLoc("item/pouches/apothecary_pouch")).override().predicate(ClientSetup.UNDYED, 1).model(coloured).end();
+        .texture("layer0", modLoc("item/pouches/apothecary_pouch")).override().predicate(ClientSetup.UNDYED, 1)
+        .model(coloured).end();
     coloured = getBuilder("roots:component_pouch_coloured")
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/pouches/component_pouch_main_layer"))
         .texture("layer1", modLoc("item/pouches/component_pouch_clasp_layer"));
     getBuilder("roots:component_pouch").parent(generated)
-        .texture("layer0", modLoc("item/pouches/component_pouch")).override().predicate(ClientSetup.UNDYED, 1).model(coloured).end();
+        .texture("layer0", modLoc("item/pouches/component_pouch")).override().predicate(ClientSetup.UNDYED, 1)
+        .model(coloured).end();
+
+    ModelFile undyed = getBuilder("roots:sylvan_pouch_undyed")
+        .parent(generated)
+        .texture("layer0", modLoc("item/pouches/sylvan_pouch_main_layer"));
+
+    ItemModelBuilder.OverrideBuilder base = getBuilder("roots:sylvan_pouch")
+        .parent(generated)
+        .texture("layer0", modLoc("item/pouches/sylvan_pouch")).override();
+
+    // Generate one override + model per DyeColor
+    for (DyeColor color : DyeColor.values()) {
+      String colorName = color.getName(); // e.g., "red", "light_blue"
+      String modelName = "roots:sylvan_pouch_" + colorName;
+
+      ModelFile colored = getBuilder(modelName)
+          .parent(generated)
+          .texture("layer0", modLoc("item/pouches/sylvan_pouch_main_layer"))
+          .texture("layer1", modLoc("item/pouches/strings/" + colorName));
+
+      base = base
+          .predicate(ClientSetup.STRING_COLOR, color.getId() / 16f)
+          .model(colored)
+          .end().override();
+    }
+
+    base.predicate(ClientSetup.UNDYED, 1)
+        .model(undyed)
+        .end();
 
 
     subfolder(ModItems.COOKED_PERESKIA, "food");

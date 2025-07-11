@@ -123,8 +123,6 @@ public class ClientSetup {
       }
       return -1;
     }, ModItems.HERB_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
-    // TODO: Different string colours
-    ModItems.SYLVAN_POUCH.get();
     event.register((p_92687_, p_92688_) -> {
       BlockState blockstate = ((BlockItem) p_92687_.getItem()).getBlock().defaultBlockState();
       return GRASS.getColor(blockstate, null, null, p_92688_);
@@ -215,6 +213,7 @@ public class ClientSetup {
     event.registerRecipeCategoryFinder(ModRecipes.KNIFE.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.RUNIC_BLOCK.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.RUNIC_ENTITY.get(), (o) -> RecipeBookCategories.UNKNOWN);
+    event.registerRecipeCategoryFinder(ModRecipes.SUMMON_CREATURES.get(), (o) -> RecipeBookCategories.UNKNOWN);
   }
 
   // TODO: Fallback to default particle shader if Iris or whatever
