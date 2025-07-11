@@ -90,7 +90,6 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
   @Override
   protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
     BlockPos blockpos = hit.getBlockPos();
-    // TODO: #888
     if (!level.isClientSide
         && projectile.getOwner() instanceof Player player
         && level.getBlockEntity(blockpos) instanceof PyreBlockEntity pyre) {
