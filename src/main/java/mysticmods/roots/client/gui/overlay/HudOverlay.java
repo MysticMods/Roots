@@ -8,6 +8,7 @@ import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.block.GroveStoneBlock;
@@ -33,6 +34,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
+import java.util.Collections;
 import java.util.List;
 
 public class HudOverlay {
@@ -81,7 +83,6 @@ public class HudOverlay {
       int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
       int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
 
-
       boolean empty = pyre.getInventory().isEmpty();
 
       if (!empty) {
@@ -112,13 +113,16 @@ public class HudOverlay {
       Component comp1 = Component.empty();
       Component comp2 = Component.empty();
       Component comp3 = Component.empty();
+      List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null && activeRitual == null) {
         output = nextRitual != null ? nextRitual.getIcon() : cachedRecipe.getResultItem(mc.level.registryAccess());
         comp1 = Component.translatable("roots.hud.pyre.begin1");
         comp2 = Component.translatable(nextRitual != null ? "roots.hud.pyre.begin2" : "roots.hud.pyre.begin3", nextRitual != null ? nextRitual.getName() : output.getHoverName());
+        outputs = cachedRecipe.getChanceOutputs();
       } else if (cachedRecipe != null && cachedRecipe == lastRecipe) {
         output = nextRitual != null ? nextRitual.getIcon() : cachedRecipe.getResultItem(mc.level.registryAccess());
+        outputs = cachedRecipe.getChanceOutputs();
         if (active) {
           comp1 = nextRitual != null ? nextRitual.getName() : output.getHoverName();
           comp2 = Component.translatable("roots.hud.pyre.auto1");
@@ -128,6 +132,7 @@ public class HudOverlay {
         }
       } else if (lastRecipe != null) {
         output = lastRitual != null ? lastRitual.getIcon() : lastRecipe.getResultItem(mc.level.registryAccess());
+        outputs = lastRecipe.getChanceOutputs();
         comp1 = Component.translatable("roots.hud.pyre.restart1");
         comp2 = Component.translatable("roots.hud.pyre.restart2");
         comp3 = nextRitual != null ? nextRitual.getName() : output.getHoverName();
@@ -135,6 +140,21 @@ public class HudOverlay {
 
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
+
+      int ny = y + 18;
+
+      for (ChanceOutput chanceOutput : outputs) {
+        graphics.renderItem(chanceOutput.getOutput(), x, ny, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), x, ny);
+        Component comp4 = Component.translatable("roots.tooltip.chance", String.format("%.2f", chanceOutput.getChance() * 100));
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableBlend();
+        graphics.drawString(mc.font, comp4, x - 15, ny, 16777215, true);
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableBlend();
+        ny += 18;
+      }
+
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
       graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
@@ -162,15 +182,33 @@ public class HudOverlay {
       ItemStack output = ItemStack.EMPTY;
       Component comp1 = Component.empty();
       Component comp2 = Component.empty();
+      List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null && !groveCrafter.isCrafting()) {
         output = cachedRecipe.getResultItem(mc.level.registryAccess());
+        outputs = cachedRecipe.getChanceOutputs();
         comp1 = Component.translatable("roots.hud.grove_crafter");
         comp2 = output.getHoverName();
       }
 
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
+
+      int ny = y + 18;
+
+      for (ChanceOutput chanceOutput : outputs) {
+        graphics.renderItem(chanceOutput.getOutput(), x, ny, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), x, ny);
+        Component comp4 = Component.translatable("roots.tooltip.chance", String.format("%.2f", chanceOutput.getChance() * 100));
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableBlend();
+        graphics.drawString(mc.font, comp4, x - 15, ny, 16777215, true);
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableBlend();
+
+        ny += 18;
+      }
+
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
       graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
@@ -285,6 +323,7 @@ public class HudOverlay {
       Component comp2 = Component.empty();
       Component comp3 = Component.empty();
       Component comp4 = Component.empty();
+      List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null) {
         Either<ItemStack, Spell> outputItemOrSpell = cachedRecipe.getOutputItemOrSpell(mc.level.registryAccess());
@@ -293,6 +332,7 @@ public class HudOverlay {
         } else {
           output = outputItemOrSpell.left().orElse(ItemStack.EMPTY);
         }
+        outputs = cachedRecipe.getChanceOutputs();
         comp1 = Component.translatable("roots.hud.mortar.crafting1");
         int val = (cachedRecipe.getTimes() - mortar.getUses());
         if (val == 1) {
@@ -303,6 +343,7 @@ public class HudOverlay {
         comp3 = spell != null ? spell.getStyledName() : getItemNameWithCount(output);
       } else if (lastRecipe != null && empty) {
         Either<ItemStack, Spell> outputItemOrSpell = lastRecipe.getOutputItemOrSpell(mc.level.registryAccess());
+        outputs = lastRecipe.getChanceOutputs();
         if (outputItemOrSpell.left().isEmpty()) {
           spell = outputItemOrSpell.right().orElse(null);
         } else {
@@ -322,6 +363,20 @@ public class HudOverlay {
 
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
+
+      int ny = y + 18;
+
+      for (ChanceOutput chanceOutput : outputs) {
+        graphics.renderItem(chanceOutput.getOutput(), x, ny, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), x, ny);
+        String comp5 = String.format("%s%%", chanceOutput.getChance() * 100);
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableBlend();
+        graphics.drawString(mc.font, "~", x - 12, ny + 8, 16777215, true);
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableBlend();
+        ny += 16;
+      }
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
       graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
