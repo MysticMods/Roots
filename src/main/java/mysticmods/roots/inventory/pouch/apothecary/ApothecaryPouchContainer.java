@@ -20,7 +20,7 @@ public class ApothecaryPouchContainer extends PouchContainer {
     // Item slots
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 6; ++column) {
-        this.addSlot(new Slot(inventory, column + row * 5, 18 + column * 18, 19 + row * 24));
+        this.addSlot(new Slot(inventory, column + row * 6, 18 + column * 18, 19 + row * 24));
       }
     }
 
