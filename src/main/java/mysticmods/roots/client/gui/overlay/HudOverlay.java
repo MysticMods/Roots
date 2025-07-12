@@ -141,19 +141,30 @@ public class HudOverlay {
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
 
-      int ny = y + 18;
+      int baseX = x - 24;
+      int baseY = y + 18;
+      int columnSpacing = 25;
+      int rowSpacing = 18;
+      int itemsPerRow = 2;
 
-      for (ChanceOutput chanceOutput : outputs) {
-        graphics.renderItem(chanceOutput.getOutput(), x, ny, 0);
-        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), x, ny);
-        Component comp4 = Component.translatable("roots.tooltip.chance", String.format("%.2f", chanceOutput.getChance() * 100));
+      for (int i = 0; i < outputs.size(); i++) {
+        ChanceOutput chanceOutput = outputs.get(i);
+        int col = i % itemsPerRow;
+        int row = i / itemsPerRow;
+
+        int xPos = baseX + col * columnSpacing;
+        int yPos = baseY + row * rowSpacing;
+
+        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
-        graphics.drawString(mc.font, comp4, x - 15, ny, 16777215, true);
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
-        ny += 18;
       }
+
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
@@ -194,20 +205,31 @@ public class HudOverlay {
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
 
-      int ny = y + 18;
 
-      for (ChanceOutput chanceOutput : outputs) {
-        graphics.renderItem(chanceOutput.getOutput(), x, ny, 0);
-        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), x, ny);
-        Component comp4 = Component.translatable("roots.tooltip.chance", String.format("%.2f", chanceOutput.getChance() * 100));
+      int baseX = x - 24;
+      int baseY = y + 18;
+      int columnSpacing = 25;
+      int rowSpacing = 18;
+      int itemsPerRow = 2;
+
+      for (int i = 0; i < outputs.size(); i++) {
+        ChanceOutput chanceOutput = outputs.get(i);
+        int col = i % itemsPerRow;
+        int row = i / itemsPerRow;
+
+        int xPos = baseX + col * columnSpacing;
+        int yPos = baseY + row * rowSpacing;
+
+        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
-        graphics.drawString(mc.font, comp4, x - 15, ny, 16777215, true);
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
-
-        ny += 18;
       }
+
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
@@ -364,19 +386,30 @@ public class HudOverlay {
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
 
-      int ny = y + 18;
+      int baseX = x - 24;
+      int baseY = y + 18;
+      int columnSpacing = 25;
+      int rowSpacing = 18;
+      int itemsPerRow = 2;
 
-      for (ChanceOutput chanceOutput : outputs) {
-        graphics.renderItem(chanceOutput.getOutput(), x, ny, 0);
-        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), x, ny);
-        String comp5 = String.format("%s%%", chanceOutput.getChance() * 100);
+      for (int i = 0; i < outputs.size(); i++) {
+        ChanceOutput chanceOutput = outputs.get(i);
+        int col = i % itemsPerRow;
+        int row = i / itemsPerRow;
+
+        int xPos = baseX + col * columnSpacing;
+        int yPos = baseY + row * rowSpacing;
+
+        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
-        graphics.drawString(mc.font, "~", x - 12, ny + 8, 16777215, true);
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
-        ny += 16;
       }
+
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
       graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
