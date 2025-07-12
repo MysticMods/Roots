@@ -1,5 +1,6 @@
 package mysticmods.roots.api.grove;
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -118,22 +119,34 @@ public interface GrovePower {
     RADIAL_DIFFERENT_SAME_TAG,
     RADIAL_NOT_MATCHING;
 
-    public static Codec<Symmetry> CODEC = StringRepresentable.fromEnum(Symmetry::values);
+    public static final Codec<Symmetry> CODEC = StringRepresentable.fromEnum(Symmetry::values);
 
     @Nullable
-    public BlockPos getPaired(BlockPos start, BlockPos center) {
+    public BlockPos getPairedPosition(BlockPos start, BlockPos center) {
       if (this == NONE) {
         return null;
       }
 
       int y = start.getY();
+      int dx = start.getX() - center.getX();
+      int dz = start.getZ() - center.getZ();
 
-      start = new BlockPos(start.getX(), 0, start.getZ());
-      center = new BlockPos(center.getX(), 0, center.getZ());
+      return new BlockPos(center.getX() - dx, y, center.getZ() - dz);
+    }
 
-      BlockPos newPos = start.subtract(center).multiply(-1).offset(center);
+    private boolean matches (Level level, TagKey<Block> tag, BlockState state, BlockPos newPos) {
+      BlockState newState = level.getBlockState(newPos);
+      if (this == RADIAL_SAME_BLOCK) {
+        return newState.is(state.getBlock());
+      } else if (this == RADIAL_SAME_BLOCK_OR_TAG) {
+        return newState.is(tag);
+      } else if (this == RADIAL_DIFFERENT_SAME_TAG) {
+        return newState.is(tag) && !newState.is(state.getBlock());
+      } else if (this == RADIAL_NOT_MATCHING) {
+        return !newState.is(tag);
+      }
 
-      return new BlockPos(newPos.getX(), y, newPos.getZ());
+      return false;
     }
 
     public boolean matches (Level level, TagKey<Block> tag, BlockPos start, BlockPos center) {
@@ -142,21 +155,27 @@ public interface GrovePower {
         return false;
       }
 
-      BlockPos newPos = getPaired(start, center);
+      BlockPos newPos = getPairedPosition(start, center);
       if (newPos == null) {
         return true;
       }
 
-      BlockState newState = level.getBlockState(newPos);
-      if (this == RADIAL_SAME_BLOCK) {
-        return newState.is(state.getBlock());
-      } else if (this == RADIAL_SAME_BLOCK_OR_TAG) {
-        return newState.is(tag);
-      } else if (this == RADIAL_DIFFERENT_SAME_TAG) {
-        return newState.is(tag) && !newState.is(state.getBlock());
+      return matches(level, tag, state, newPos);
+    }
+
+    public Pair<Boolean, BlockPos> matchesWithPair(Level level, TagKey<Block> tag, BlockPos start, BlockPos center) {
+      BlockState state = level.getBlockState(start);
+      BlockPos paired = getPairedPosition(start, center);
+
+      if (!state.is(tag)) {
+        return Pair.of(false, paired);
       }
 
-      return false;
+      if (paired == null) {
+        return Pair.of(true, null);
+      }
+
+      return Pair.of(matches(level, tag, start, center), paired);
     }
 
     @Override

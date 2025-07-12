@@ -73,7 +73,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_CRAFTER.get(), GroveCrafterBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.PYRE.get(), PyreBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.VISIBLE.get(), VisibleBlockEntityRenderer::new);
-    event.registerBlockEntityRenderer(ModBlockEntities.GROVE_STONE.get(), BoundedBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.GROVE_STONE.get(), GroveStoneBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.ENCHANTED_TURF.get(), EnchantedTurfBlockEntityRenderer::new);
   }

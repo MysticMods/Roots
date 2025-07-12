@@ -43,11 +43,6 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
     renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick);
   }
 
-  protected boolean isInsideBounds(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
-    Vec3 projectedView = context.getBlockEntityRenderDispatcher().camera.getPosition();
-    return minX <= projectedView.x && projectedView.x <= maxX && minY <= projectedView.y && projectedView.y <= maxY && minZ <= projectedView.z && projectedView.z <= maxZ;
-  }
-
   protected Component getTextToRender(T blockEntity) {
     return Component.empty();
   }
@@ -91,6 +86,7 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
     return true;
   }
 
+  // TODO: What's the point of having both?
   @Override
   public AABB getRenderBoundingBox(T blockEntity) {
     return renderBounds.move(blockEntity.getBlockPos());

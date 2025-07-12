@@ -1,7 +1,6 @@
 package mysticmods.roots.blockentity;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -15,7 +14,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -70,7 +68,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     }
   }
 
-  public void setRank (int rank) {
+  public void setRank(int rank) {
     this.resetBounds();
   }
 
@@ -126,25 +124,52 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     return consumedThisTick;
   }
 
+  public List<BlockPos> getGeneratorPositions(BlockPos pPos) {
+    BoundingBox box = getBoundingBox();
+    if (box == null) {
+      return Collections.emptyList();
+    }
+    box = box.moved(pPos.getX(), pPos.getY(), pPos.getZ());
+    return new ArrayList<>(BlockPos.betweenClosedStream(box).map(BlockPos::immutable).toList());
+  }
+
+  public List<GrovePower.GenerationEntry> getGenerationEntries() {
+    List<GrovePower.GenerationEntry> entries = getGrove().getData(DataMaps.GROVE_GENERATION_ENTRIES);
+    if (entries == null) {
+      return Collections.emptyList();
+    }
+    return entries;
+  }
+
+  public Map<GenerationEntry, BlockTracker> buildTrackers() {
+    List<GrovePower.GenerationEntry> entries = getGenerationEntries();
+    if (entries.isEmpty()) {
+      return Collections.emptyMap();
+    }
+    Map<GenerationEntry, BlockTracker> trackers = new Object2ObjectOpenHashMap<>();
+    entries.forEach(o -> trackers.put(o, BlockTracker.create(o.maxCount())));
+    return trackers;
+  }
+
   @Override
   public void generateTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     generatedLastTick = generatedThisTick;
     generatedThisTick = 0;
-    BoundingBox box = getBoundingBox();
-    if (box == null) {
-      return;
-    }
-    box = box.moved(pPos.getX(), pPos.getY(), pPos.getZ());
 
-    List<GrovePower.GenerationEntry> entries = getGrove().getData(DataMaps.GROVE_GENERATION_ENTRIES);
-    if (entries == null) {
+    List<GrovePower.GenerationEntry> entries = getGenerationEntries();
+    if (entries.isEmpty()) {
       return;
     }
 
-    List<BlockPos> generatorPositions = new ArrayList<>(BlockPos.betweenClosedStream(box).map(BlockPos::immutable)
-        .toList());
-    Map<GenerationEntry, BlockTracker> trackers = new Object2ObjectOpenHashMap<>();
-    entries.forEach(o -> trackers.put(o, BlockTracker.create(o.maxCount())));
+    List<BlockPos> generatorPositions = getGeneratorPositions(pPos);
+    if (generatorPositions.isEmpty()) {
+      return;
+    }
+
+    Map<GenerationEntry, BlockTracker> trackers = buildTrackers();
+    if (trackers.isEmpty()) {
+      return;
+    }
 
     for (BlockPos pos : generatorPositions) {
       BlockState stateAt = pLevel.getBlockState(pos);

@@ -6,13 +6,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class ColorHelper {
   private final static Cache<BlockPos, Color> COLOR_CACHE = CacheBuilder.newBuilder().build();
   private final static RandomSource random = RandomSource.create();
   private final static Color DEFAULT_COLOR = new Color(1f, 0.5f, 0.5f);
+
+  public static final Color GREEN = new Color(0.0f, 1.0f, 0.0f);
+  public static final Color RED = new Color(1.0f, 0.0f, 0.0f);
 
   public static Color color(BlockPos position) {
     try {
