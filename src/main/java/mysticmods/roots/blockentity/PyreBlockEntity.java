@@ -241,6 +241,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return;
     }
 
+    if (this.currentRitual.getPredicates().isEmpty()) {
+      this.cache = null;
+      return;
+    }
+
     BlockPos p = getBlockPos();
 
     if (cache == null || !this.cache.getPosition().equals(p)) {
@@ -532,7 +537,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           stopRitual();
         }
       } else {
-        cache.initCache(pLevel, currentRitual.getPredicates());
+        if (cache != null) {
+          cache.initCache(pLevel, currentRitual.getPredicates());
+        }
         currentRitual.tick(pLevel, pPos, pState, this, cache, this.getRandom());
         BlockState newState = pState;
         if (pState.is(RootsTags.Blocks.PYRES)) {
