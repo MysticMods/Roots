@@ -111,26 +111,32 @@ public class CastingItem extends Item {
         }
       }
 
+      boolean lastSuccess;
+
       if (spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks) < 0) {
         // This means the psell didn't cast
         // TODO: Kind of decide something about this
         /*        RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());*/
-        CastingSuccessCache.note(pStack, false);
+        lastSuccess = false;
       } else {
-        CastingSuccessCache.note(pStack, true);
+        lastSuccess = true;
       }
+
+      CastingSuccessCache.note(pStack, lastSuccess);
 
       if (ticks % 2 == 0) {
         Vec3 stop = spell.getBlockTarget(pPlayer);
-        IRootsPacket packet;
+        IRootsPacket packet = null;
 
         if (stop != null) {
-          Vec3 lookDir = pPlayer.getViewVector(1.0f);
-          Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
-          double sideOffset = 0.3;
-          Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
-          Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
-          packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+          if (lastSuccess) {
+            Vec3 lookDir = pPlayer.getViewVector(1.0f);
+            Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
+            double sideOffset = 0.3;
+            Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
+            Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
+            packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+          }
         } else {
           if (CastingSuccessCache.isASuccess(pStack)) {
             packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), ticks);
@@ -139,7 +145,9 @@ public class CastingItem extends Item {
           }
         }
 
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, packet);
+        if (packet != null) {
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, packet);
+        }
       }
 
       // TODO: Properly handle operations
