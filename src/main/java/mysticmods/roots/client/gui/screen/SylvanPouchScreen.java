@@ -14,7 +14,7 @@ public class SylvanPouchScreen extends AbstractContainerScreen<SylvanPouchContai
 
   public SylvanPouchScreen(SylvanPouchContainer menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
-    imageHeight = 207;
+    imageHeight = 231;
     imageWidth = 239;
   }
 
