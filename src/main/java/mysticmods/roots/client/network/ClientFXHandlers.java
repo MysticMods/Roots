@@ -438,6 +438,7 @@ public class ClientFXHandlers {
       angle = RootsParticleOptions.RANDOM.nextDouble() * (2 * Math.PI);
       minecraft.level.addParticle(
           RootsParticleOptions.builder(ModParticles.CHANNEL_FAIL).color(col2, col1).entityId(casterId).build(),
+          true,
           caster.getX(),
           caster.getY(),
           caster.getZ(),
@@ -463,6 +464,7 @@ public class ClientFXHandlers {
               col1,
               col2).entityId(
               casterId).build(),
+          true,
           start.x,
           start.y,
           start.z,
@@ -476,6 +478,7 @@ public class ClientFXHandlers {
               col2,
               col1).entityId(
               casterId).build(),
+          true,
           start.x,
           start.y,
           start.z,
@@ -499,6 +502,7 @@ public class ClientFXHandlers {
               ModParticles.CHANNEL_TARGET).color(
               col1,
               col2).build(),
+          true,
           start.x,
           start.y,
           start.z,
@@ -511,6 +515,7 @@ public class ClientFXHandlers {
               ModParticles.CHANNEL_TARGET).color(
               col2,
               col1).build(),
+          true,
           start.x,
           start.y,
           start.z,
