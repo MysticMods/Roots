@@ -60,16 +60,22 @@ public abstract class TwoRadiusSpell extends Spell {
     return radiusZX;
   }
 
+  @Override
   public BoundingBox getBoundingBox() {
     if (boundingBox == null) {
-      boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX(), getRadiusY(), getRadiusZ());
+      boundingBox = new BoundingBox(-getRadiusX()-1, -getRadiusY()-1, -getRadiusZ()-1, getRadiusX(), getRadiusY(), getRadiusZ()).inflatedBy(1);
     }
     return boundingBox;
   }
 
+  @Override
   public AABB getAABB() {
     if (aabb == null) {
-      aabb = AABB.of(getBoundingBox());
+      BoundingBox box = getBoundingBox();
+      if (box == null) {
+        return null;
+      }
+      aabb = AABB.of(box);
     }
     return aabb;
   }

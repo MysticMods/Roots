@@ -38,9 +38,9 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
       groveStoneBoundingBox = new BoundingBox(-ConfigManager.GROVE_STONE_POWER_RANGE_X.getAsInt(),
           -ConfigManager.GROVE_STONE_POWER_RANGE_Y.getAsInt(),
           -ConfigManager.GROVE_STONE_POWER_RANGE_Z.getAsInt(),
-          ConfigManager.GROVE_STONE_POWER_RANGE_X.getAsInt()+1,
-          ConfigManager.GROVE_STONE_POWER_RANGE_Y.getAsInt()+1,
-          ConfigManager.GROVE_STONE_POWER_RANGE_Z.getAsInt()+1);
+          ConfigManager.GROVE_STONE_POWER_RANGE_X.getAsInt(),
+          ConfigManager.GROVE_STONE_POWER_RANGE_Y.getAsInt(),
+          ConfigManager.GROVE_STONE_POWER_RANGE_Z.getAsInt());
     }
     return groveStoneBoundingBox;
   }

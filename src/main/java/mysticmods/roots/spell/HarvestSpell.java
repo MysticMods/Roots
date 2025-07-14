@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.Set;
 
 public class HarvestSpell extends TwoRadiusSpell {
-  private BoundingBox box;
-
   public HarvestSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x39fd1c, 0xc5e91c);
   }
@@ -55,7 +53,6 @@ public class HarvestSpell extends TwoRadiusSpell {
 
   @Override
   public void initialize(Holder<Spell> holder) {
-    this.box = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX() + 1, getRadiusY() + 1, getRadiusZ() + 1);
   }
 
   @Override
@@ -93,7 +90,7 @@ public class HarvestSpell extends TwoRadiusSpell {
     final Block block = tempBlock;
 
     FakePlayerUtil.buildItems(pLevel, pLevel.getRandom());
-    BoundingBox search = box.moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
+    BoundingBox search = getBoundingBox().moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
     List<BlockPos> positions = new ArrayList<>();
     BlockPos.betweenClosedStream(search).forEach(pos -> {
       BlockState state = pLevel.getBlockState(pos);

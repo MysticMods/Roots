@@ -65,6 +65,10 @@ public class RenderUtil {
   }
 
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera) {
+    renderAABB(pPoseStack, bufferSource, position, color, frustum, camera, false);
+  }
+
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera, boolean always) {
     double minX = position.getX();
     double minY = position.getY();
     double minZ = position.getZ();
@@ -88,7 +92,7 @@ public class RenderUtil {
       maxZ -= camPos.z;
     }
 
-    VertexConsumer consumer = bufferSource.getBuffer(RenderType.lines());
+    VertexConsumer consumer = bufferSource.getBuffer(always ? RootsRenderTypes.ALWAYS_VISIBLE_LINES : RenderType.lines());
     PoseStack.Pose pose = pPoseStack.last();
 
     for (int[] edge : BOX_EDGES) {
@@ -123,15 +127,31 @@ public class RenderUtil {
   }
 
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable BlockPos position, @Nullable Frustum frustum, @Nullable Camera camera) {
+    renderAABB(pPoseStack, bufferSource, bounds, position, position, frustum, camera);
+  }
+
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable BlockPos position, @Nullable BlockPos colorPosition, @Nullable Frustum frustum, @Nullable Camera camera) {
+    if (position == null){
+      position = BlockPos.containing(bounds.getCenter());
+    }
+    ColorHelper.Color color = ColorHelper.color(colorPosition == null ? position : colorPosition);
+    renderAABB(pPoseStack, bufferSource, bounds, null, color, frustum, camera);
+  }
+
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable Vec3 center, @NotNull ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera) {
+    renderAABB(pPoseStack, bufferSource, bounds, center, color, frustum, camera, false);
+  }
+
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable Vec3 center, @NotNull ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera, boolean always) {
+    if (center != null) {
+      bounds = bounds.move(center);
+    }
+
     if (frustum != null && !frustum.isVisible(bounds)) {
       return;
     }
 
     pPoseStack.pushPose();
-
-    if (position == null) {
-      position = BlockPos.containing(bounds.getCenter());
-    }
 
     double offsetX = 0, offsetY = 0, offsetZ = 0;
     if (camera != null) {
@@ -148,9 +168,8 @@ public class RenderUtil {
     double maxY = bounds.maxY + offsetY;
     double maxZ = bounds.maxZ + offsetZ;
 
-    VertexConsumer consumer = bufferSource.getBuffer(RenderType.lines());
+    VertexConsumer consumer = bufferSource.getBuffer(always? RootsRenderTypes.ALWAYS_VISIBLE_LINES : RenderType.lines());
     PoseStack.Pose pose = pPoseStack.last();
-    ColorHelper.Color color = ColorHelper.color(position);
 
     for (int[] edge : BOX_EDGES) {
       int a = edge[0];

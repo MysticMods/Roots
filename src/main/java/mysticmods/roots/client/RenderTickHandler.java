@@ -109,10 +109,11 @@ public class RenderTickHandler {
 
   @SubscribeEvent
   public static void onRenderStage(RenderLevelStageEvent event) {
+    Minecraft mc = Minecraft.getInstance();
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
       clientTicks += event.getPartialTick().getGameTimeDeltaPartialTick(false);
     }
-    MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
+    MultiBufferSource.BufferSource renderer = mc.renderBuffers().bufferSource();
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.BIND_POSITION)) {
       ItemStack gramary = RootsClientAPI.getGramary();
       BlockPos gramaryPos = gramary.get(ModAttachments.BOUND_POSITION);
@@ -131,7 +132,7 @@ public class RenderTickHandler {
       renderer.endLastBatch();
 
       renderingDelayedParticles = true;
-      var allParticles = ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).rootsGetParticles();
+      var allParticles = ((AccessorMixinParticleEngine) mc.particleEngine).rootsGetParticles();
 
       Frustum frustum = event.getFrustum();
       float partialTick = getPartialTick();
@@ -167,9 +168,26 @@ public class RenderTickHandler {
         renderer.endBatch(renderType);
       }
       RenderSystem.disableBlend();
+      renderingDelayedParticles = false;
     }
+    if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES) {
+      // Render the bounding box if necessary
+      if (mc.getEntityRenderDispatcher().shouldRenderHitBoxes() && mc.player != null && mc.player.isCrouching()) {
+        Player player = mc.player;
 
-    renderingDelayedParticles = false;
+        ItemStack item = player.getMainHandItem();
+        if (item.has(ModAttachments.SPELL_STORAGE)) {
+          SpellStorage storage = item.get(ModAttachments.SPELL_STORAGE);
+          if (storage != null && storage.getCurrentSpell() != null) {
+            ISpellInstance spell = storage.getCurrentSpell();
+            AABB bounds = spell.getAABB();
+            if (bounds != null) {
+              RenderUtil.renderAABB(event.getPoseStack(), mc.renderBuffers().bufferSource(), bounds,player.getPosition(event.getPartialTick().getGameTimeDeltaPartialTick(false)), ColorHelper.BLUE, event.getFrustum(), event.getCamera(), true);
+            }
+          }
+        }
+      }
+    }
   }
 
   @SubscribeEvent

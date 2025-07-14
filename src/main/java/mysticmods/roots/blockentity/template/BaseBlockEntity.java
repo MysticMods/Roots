@@ -138,7 +138,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
       return null;
     }
     if (boundingBox == null) {
-      boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX()+1, getRadiusY()+1, getRadiusZ()+1);
+      boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX(), getRadiusY(), getRadiusZ());
     }
     return boundingBox;
   }

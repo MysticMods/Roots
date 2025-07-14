@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -81,6 +82,11 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   @Nullable
   default Vec3 getBlockTarget(Player pPlayer) {
     return getSpell().getBlockTarget(pPlayer);
+  }
+
+  @Nullable
+  default AABB getAABB () {
+    return getSpell().getAABB();
   }
 
   @Nullable

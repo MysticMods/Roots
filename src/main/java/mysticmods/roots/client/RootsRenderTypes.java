@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.OptionalDouble;
 import java.util.function.Function;
 
 import static net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE;
@@ -145,4 +146,21 @@ public class RootsRenderTypes {
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .setOutputState(RenderType.PARTICLES_TARGET)
           .createCompositeState(false));
+
+  public static final RenderType ALWAYS_VISIBLE_LINES = RenderType.create(
+      "always_visible_lines",
+      DefaultVertexFormat.POSITION_COLOR_NORMAL,
+      VertexFormat.Mode.LINES,
+      1536,
+      RenderType.CompositeState.builder()
+          .setShaderState(RenderType.RENDERTYPE_LINES_SHADER)
+          .setLineState(new RenderStateShard.LineStateShard(OptionalDouble.empty()))
+          .setLayeringState(RenderType.VIEW_OFFSET_Z_LAYERING)
+          .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
+          .setOutputState(RenderType.ITEM_ENTITY_TARGET)
+          .setWriteMaskState(RenderType.COLOR_DEPTH_WRITE)
+          .setCullState(RenderType.NO_CULL)
+          .setDepthTestState(RenderStateShard.NO_DEPTH_TEST)
+          .createCompositeState(false)
+  );
 }
