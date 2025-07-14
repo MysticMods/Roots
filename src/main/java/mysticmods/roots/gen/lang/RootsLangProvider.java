@@ -376,7 +376,7 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.FAIRY_GROVE_STONE);
     addBlock(ModBlocks.FUNGAL_GROVE_STONE);
     addBlock(ModBlocks.INCENSE_BURNER);
-    addBlock(ModBlocks.STONE_ALTAR);
+/*    addBlock(ModBlocks.STONE_ALTAR);*/
     addBlock(ModBlocks.MORTAR);
     addBlock(ModBlocks.PYRE);
     addBlock(ModBlocks.SOUL_PYRE);

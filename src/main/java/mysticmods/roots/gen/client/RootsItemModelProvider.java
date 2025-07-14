@@ -173,7 +173,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     withExistingParent(ModBlocks.BAFFLECAP_FAIRY_HUT.getKey().location()
         .getPath(), modLoc("block/bafflecap_fairy_hut_inventory"));
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
-    simpleBlockItem(ModBlocks.STONE_ALTAR.get());
+/*    simpleBlockItem(ModBlocks.STONE_ALTAR.get());*/
     simpleBlockItem(ModBlocks.MORTAR.get());
     simpleBlockItem(ModBlocks.PYRE.get());
     simpleBlockItem(ModBlocks.SOUL_PYRE.get());

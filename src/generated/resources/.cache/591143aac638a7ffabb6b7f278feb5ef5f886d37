@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-11T15:38:45.1332405	Item Models: roots
+// 1.21.1	2025-07-14T14:42:56.1742829	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -255,7 +255,6 @@ a1befa04f566bee36903477cfe9652b5e306b655 assets/roots/models/item/staff.json
 5a929348fda9aa77e8f53beb544ea3f216bcebe9 assets/roots/models/item/stalicripe.json
 3c94bcaaf7009d4d301a6ba18645a6fbfa590f42 assets/roots/models/item/stewed_eggplant.json
 ffd0dd13123a5ff1afecc71ec7f9ed4b19fe01b4 assets/roots/models/item/stonepetal.json
-f03bc4d2926c46fc4628f279e4145ceb7c8defc8 assets/roots/models/item/stone_altar.json
 863e61188bcedc40f1e90a29e1bccbc888067024 assets/roots/models/item/stone_knife.json
 b48da5338d6df199a05029fe52defa82b3042c55 assets/roots/models/item/strange_ooze.json
 0a0edad27f33509be58c3387f932c7ea33f12fd2 assets/roots/models/item/stripped_wildwood_log.json
