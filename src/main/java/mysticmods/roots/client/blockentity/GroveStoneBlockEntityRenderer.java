@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +31,7 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
     if (!state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(GroveStoneBlock.RANK) && state.hasProperty(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.RANK) > 0) {
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
         BlockPos pPos = pBlockEntity.getBlockPos();
-        List<BlockPos> generatorPositions = pBlockEntity.getGeneratorPositions(pPos);
+        List<BlockPos> generatorPositions = pBlockEntity.getValidPositions(pPos);
         List<GrovePower.GenerationEntry> entries = pBlockEntity.getGenerationEntries();
         if (generatorPositions.isEmpty() || entries.isEmpty()) {
           return;
