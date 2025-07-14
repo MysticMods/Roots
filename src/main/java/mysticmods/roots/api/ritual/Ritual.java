@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -80,13 +81,19 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   public void removed (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
-  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, PositionCache cache, RandomSource random) {
+  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, @Nullable PositionCache cache, RandomSource random) {
     int dur = getDuration() - blockEntity.getLifetime();
     functionalTick(pLevel, pPos, pState, cache, blockEntity, dur, random);
-    animationTick(pLevel, pPos, pState, cache.getBoundingBox(), blockEntity, dur, random);
+    BoundingBox box;
+    if (cache == null) {
+      box = getBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
+    } else {
+      box = cache.getBoundingBox();
+    }
+    animationTick(pLevel, pPos, pState, box, blockEntity, dur, random);
   }
 
-  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
+  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   // Still executed on the server
   protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
