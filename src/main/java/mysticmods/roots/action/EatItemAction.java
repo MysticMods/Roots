@@ -40,7 +40,9 @@ public class EatItemAction implements GroveAction {
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       if (type == GroveReputationEntry.SubEntryType.ITEM) {
-        return item().is(TagKey.create(Registries.ITEM, tag));
+        return this.item().is(TagKey.create(Registries.ITEM, tag));
+      } else if (type == GroveReputationEntry.SubEntryType.EXACT_ITEM) {
+        return this.item().getItemHolder().is(tag);
       }
       return false;
     }

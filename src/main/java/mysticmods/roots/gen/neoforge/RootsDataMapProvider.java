@@ -525,7 +525,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     ), false);
     // TODO: What items?
     builder20.add(ModActions.EAT_ITEM, List.of(
-        new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("eat_rotten_flesh"), new GroveReputation(20, 0, 0, 0), GroveReputationEntry.SubEntryType.EXACT_ITEM, RootsTags.Items.ROTTEN_FLESH)
+        new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("eat_rotten_flesh"), new GroveReputation(20, 0, 0, 0), GroveReputationEntry.SubEntryType.ITEM, RootsTags.Items.ROTTEN_FLESH)
     ), false);
     builder20.add(ModActions.HARVEST_BEE_HIVE, List.of(
         new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("harvest_bee_hive"), new GroveReputation(10, 8, 4, 2))
