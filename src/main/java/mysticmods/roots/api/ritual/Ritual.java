@@ -84,18 +84,18 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, @Nullable PositionCache cache, RandomSource random) {
     int dur = getDuration() - blockEntity.getLifetime();
     functionalTick(pLevel, pPos, pState, cache, blockEntity, dur, random);
-    BoundingBox box;
+/*    BoundingBox box;
     if (cache == null) {
       box = getBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
     } else {
       box = cache.getBoundingBox();
     }
-    animationTick(pLevel, pPos, pState, box, blockEntity, dur, random);
+    animationTick(pLevel, pPos, pState, box, blockEntity, dur, random);*/
   }
 
   protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
-  // Still executed on the server
+  @Deprecated
   protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   protected void rebuildBounds() {
