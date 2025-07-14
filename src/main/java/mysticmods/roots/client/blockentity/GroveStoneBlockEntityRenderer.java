@@ -31,9 +31,9 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
     if (!state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(GroveStoneBlock.RANK) && state.hasProperty(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.RANK) > 0) {
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
         BlockPos pPos = pBlockEntity.getBlockPos();
-        List<BlockPos> generatorPositions = pBlockEntity.getValidPositions(pPos);
+        Set<BlockPos> generatorPositions = pBlockEntity.cachedGeneratorPositions;
         List<GrovePower.GenerationEntry> entries = pBlockEntity.getGenerationEntries();
-        if (generatorPositions.isEmpty() || entries.isEmpty()) {
+        if (generatorPositions == null || generatorPositions.isEmpty() || entries.isEmpty()) {
           return;
         }
 

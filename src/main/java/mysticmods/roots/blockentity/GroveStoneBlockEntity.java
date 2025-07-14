@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 // TODO: Handle rank changes
@@ -156,7 +157,10 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     return trackers;
   }
 
+  @Nullable
   private Set<BlockPos> consumerPositions = null;
+  @Nullable
+  public Set<BlockPos> cachedGeneratorPositions = null;
 
   @Override
   public void generateTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
@@ -179,6 +183,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     }
 
     consumerPositions = new HashSet<>();
+    cachedGeneratorPositions = new HashSet<>();
 
     for (BlockPos pos : generatorPositions) {
       BlockState stateAt = pLevel.getBlockState(pos);
@@ -193,6 +198,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
       if (generators == null) {
         continue;
       }
+      cachedGeneratorPositions.add(pos);
       for (GenerationEntry entry : entries) {
         Symmetry sym = entry.symmetry();
         if (sym.matches(pLevel, entry.tag(), pos, pPos)) {
@@ -218,6 +224,10 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     consumedThisTick = 0;
 
     if (generatedThisTick == 0) {
+      return;
+    }
+
+    if (consumerPositions == null) {
       return;
     }
 
