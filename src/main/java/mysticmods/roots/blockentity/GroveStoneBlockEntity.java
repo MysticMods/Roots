@@ -19,10 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // TODO: Handle rank changes
 public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, GrovePower, IGroveInstance {
@@ -151,6 +148,8 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     return trackers;
   }
 
+  private Set<BlockPos> lastGeneratorPositions = null;
+
   @Override
   public void generateTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     generatedLastTick = generatedThisTick;
@@ -171,6 +170,8 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
       return;
     }
 
+    lastGeneratorPositions = new HashSet<>();
+
     for (BlockPos pos : generatorPositions) {
       BlockState stateAt = pLevel.getBlockState(pos);
       if (stateAt.isAir()) {
@@ -180,6 +181,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
       if (generators == null) {
         continue;
       }
+      lastGeneratorPositions.add(pos);
       for (GenerationEntry entry : entries) {
         Symmetry sym = entry.symmetry();
         if (sym.matches(pLevel, entry.tag(), pos, pPos)) {
@@ -197,6 +199,9 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     }
   }
 
+  private BoundingBox movedBox = null;
+  private List<BlockPos> consumerPositions = null;
+
   @Override
   public void consumeTick(ServerLevel level, BlockPos pPos, BlockState state) {
     consumedLastTick = consumedThisTick;
@@ -210,14 +215,21 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
 
     long tick = level.getGameTime();
 
-    BoundingBox box = getGroveStoneBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
+    if (movedBox == null) {
+      movedBox = getGroveStoneBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
+    }
 
-    List<BlockPos> consumerPositions = new ArrayList<>(BlockPos.betweenClosedStream(box).map(BlockPos::immutable)
-        .toList());
+    if (consumerPositions == null) {
+      consumerPositions = new ArrayList<>(BlockPos.betweenClosedStream(movedBox).map(BlockPos::immutable)
+          .toList());
+    }
 
     for (BlockPos pos : consumerPositions) {
       if (available <= 0) {
         break;
+      }
+      if (lastGeneratorPositions.contains(pos)) {
+        continue;
       }
       BlockState stateAt = level.getBlockState(pos);
       if (stateAt.isAir()) {
