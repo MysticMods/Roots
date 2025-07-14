@@ -19,7 +19,7 @@ public class SylvanPouchMenu extends PouchMenu {
 
   @Override
   public int getContainerSize() {
-    return 27;
+    return 36;
   }
 
   @Override

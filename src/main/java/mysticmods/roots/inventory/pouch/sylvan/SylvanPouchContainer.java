@@ -12,23 +12,23 @@ import net.minecraft.world.inventory.Slot;
 
 public class SylvanPouchContainer extends PouchContainer {
   public SylvanPouchContainer(int containerId, Inventory inventory) {
-    this(containerId, inventory, new SimpleContainer(27));
+    this(containerId, inventory, new SimpleContainer(36));
   }
 
   public SylvanPouchContainer(int containerId, Inventory playerInventory, Container inventory) {
     super(ModContainers.SYLVAN_POUCH.get(), containerId, inventory);
 
     // Item slots
-    for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 5; ++column) {
-        this.addSlot(new Slot(inventory, column + row * 5, 19 + column * 21, 19 + row * 24));
+    for (int row = 0; row < 4; ++row) {
+      for (int column = 0; column < 4; ++column) {
+        this.addSlot(new Slot(inventory, column + row * 4, 19 + column * 21, 19 + row * 24));
       }
     }
 
     // Herb slots
     for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 4; ++column) {
-        this.addSlot(new PouchSlot(inventory, column + row * 4 + 15, 142 + column * 21, 19 + row * 24));
+      for (int column = 0; column < 5; ++column) {
+        this.addSlot(new PouchSlot(inventory, column + row * 5 + 15, 142 + column * 21, 19 + row * 24));
       }
     }
 
