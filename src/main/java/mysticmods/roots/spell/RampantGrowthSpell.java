@@ -36,7 +36,6 @@ import java.util.Set;
 
 public class RampantGrowthSpell extends TwoRadiusSpell {
   private int interval, count;
-  private BoundingBox box;
 
   public RampantGrowthSpell(ChatFormatting color, CostInstance costs) {
     super(Type.CONTINUOUS, color, costs, 0x157318, 0x13c3eb);
@@ -62,7 +61,6 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.interval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
     this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);
-    this.box = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX() + 1, getRadiusY() + 1, getRadiusZ() + 1);
   }
 
   @Override
@@ -108,7 +106,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
 
       boolean offHand = getDataValue(instance, "mode") == 3 && !offHandItem.isEmpty() && tempBlock != null;
 
-      BoundingBox search = box.moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
+      BoundingBox search = getBoundingBox().moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
       List<BlockPos> positions = new ArrayList<>();
       BlockPos.betweenClosedStream(search).forEach(pos -> {
         BlockState state = pLevel.getBlockState(pos);
