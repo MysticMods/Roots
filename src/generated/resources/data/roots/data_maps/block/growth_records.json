@@ -60,6 +60,16 @@
       "maximumAge": 7,
       "ticks": 2
     },
+    "minecraft:cave_vines": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow_down",
+      "cropBlock": "minecraft:cave_vines",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 25,
+      "ticks": 2
+    },
     "minecraft:chorus_flower": {
       "ageProperty": {
         "ageProperty": "age"

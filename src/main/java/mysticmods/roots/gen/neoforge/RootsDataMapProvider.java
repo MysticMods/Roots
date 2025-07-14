@@ -396,7 +396,9 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     builder15.add(Blocks.CHORUS_FLOWER.builtInRegistryHolder(), new GrowthRecord(Blocks.CHORUS_FLOWER, Optional.of(ChorusFlowerBlock.AGE), ChorusFlowerBlock.DEAD_AGE, 2, ModTests.ALWAYS_CAN_GROW_UP.get(), ModTests.ANY_LIGHT.get()), false);
 
+    builder15.add(Blocks.CAVE_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.CAVE_VINES, Optional.of(CaveVinesBlock.AGE), CaveVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_DOWN.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(Blocks.CAVE_VINES_PLANT.builtInRegistryHolder(), new HarvestRecord(Blocks.CAVE_VINES_PLANT, Optional.empty(), Optional.empty(), -1, ModTests.CAN_HARVEST_GLOW_BERRIES.get(), ModTests.HARVEST_GLOW_BERRIES.get()), false);
+    builder16.add(Blocks.CAVE_VINES.builtInRegistryHolder(), new HarvestRecord(Blocks.CAVE_VINES, Optional.empty(), Optional.empty(), -1, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_GLOW_BERRIES.get()), false);
 
     builder15.add(ModBlocks.WILDROOT_CROP, new GrowthRecord(ModBlocks.WILDROOT_CROP.get(), Optional.of(ThreeStageCropBlock.AGE), ThreeStageCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(ModBlocks.WILDROOT_CROP, HarvestRecord.of(ModBlocks.WILDROOT_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
