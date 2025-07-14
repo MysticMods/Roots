@@ -26,6 +26,7 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
@@ -55,6 +56,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<RunicBlockRecipe> RUNIC_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_recipe"), RunicBlockRecipe.class);
   public static final RecipeType<RunicEntityRecipe> RUNIC_ENTITY_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_entity_recipe"), RunicEntityRecipe.class);
   public static final RecipeType<SproutGiftRecipe> SPROUT_GIFTS = new RecipeType<>(RootsAPI.rl("sprout_gift_recipe"), SproutGiftRecipe.class);
+  public static final RecipeType<SummonCreaturesRecipe> SUMMON_CREATURES = new RecipeType<>(RootsAPI.rl("summon_creatures_recipe"), SummonCreaturesRecipe.class);
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -67,11 +69,13 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new RunicBlockCategory(guiHelper));
     registration.addRecipeCategories(new RunicEntityCategory(guiHelper));
     registration.addRecipeCategories(new SproutGiftCategory(guiHelper));
+    registration.addRecipeCategories(new SummonCreaturesCategory(guiHelper));
   }
 
   @Override
   public void registerRecipes(IRecipeRegistration registration) {
     Level level = Minecraft.getInstance().level;
+    // TODO: Recipe sorting?
     registration.addRecipes(GROVE_RECIPE_TYPE, ResolvedRecipes.GROVE.getRecipes(level).stream().map(RecipeHolder::value)
         .toList());
     registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
@@ -91,6 +95,9 @@ public class RootsJEIPlugin implements IModPlugin {
     IVanillaRecipeFactory factory = registration.getJeiHelpers().getVanillaRecipeFactory();
     registration.addRecipes(RecipeTypes.ANVIL, RootsRepairRecipes.getRootsAnvilRepairRecipes(factory, registration.getIngredientManager()));
     registration.addRecipes(SPROUT_GIFTS, SproutGiftRecipe.getRecipes());
+    registration.addRecipes(SUMMON_CREATURES, ResolvedRecipes.SUMMON_CREATURES.getRecipes(level).stream()
+        .map(RecipeHolder::value)
+        .toList());
   }
 
   @Override
@@ -102,6 +109,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.AUBERGINE.get(), SPROUT_GIFTS);
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_ENTITY_RECIPE_TYPE);
+    registration.addRecipeCatalysts(SUMMON_CREATURES, ModItems.RITUAL_SUMMON_CREATURES.get());
   }
 
   @Override
