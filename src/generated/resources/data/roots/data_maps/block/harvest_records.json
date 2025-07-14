@@ -36,7 +36,7 @@
     },
     "minecraft:cave_vines": {
       "ageProperty": {},
-      "canHarvestFunction": "roots:single_crop_age",
+      "canHarvestFunction": "roots:can_harvest_glow_berries",
       "cropBlock": "minecraft:cave_vines",
       "harvestFunction": "roots:harvest_glow_berries",
       "maximumAge": -1
