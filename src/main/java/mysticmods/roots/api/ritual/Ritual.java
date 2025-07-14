@@ -92,7 +92,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   protected void rebuildBounds() {
-    boundingBox = new BoundingBox(-getRadiusXZ(), -getRadiusY(), -getRadiusXZ(), getRadiusXZ(), getRadiusY(), getRadiusXZ());
+    boundingBox = new BoundingBox(-getRadiusXZ(), -getRadiusY(), -getRadiusXZ(), getRadiusXZ()+1, getRadiusY()+1, getRadiusXZ()+1);
     aabb = AABB.of(getBoundingBox());
   }
 

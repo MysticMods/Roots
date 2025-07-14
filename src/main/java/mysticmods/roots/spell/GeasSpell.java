@@ -62,6 +62,7 @@ public class GeasSpell extends Spell {
       double x = pPlayer.getX() + look.x * 3.0 * (float) i;
       double y = pPlayer.getY() + pPlayer.getEyeHeight() + look.y * 3.0 * (float) i;
       double z = pPlayer.getZ() + look.z * 3.0 * (float) i;
+      // TODO: What is this
       List<Entity> entities = pLevel.getEntities(pPlayer, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), EntityUtils.isHostileTo(pPlayer));
       for (Entity entity : entities) {
         if (!(entity instanceof LivingEntity living)) {
