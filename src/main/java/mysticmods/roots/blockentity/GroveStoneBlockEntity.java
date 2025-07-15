@@ -8,6 +8,7 @@ import mysticmods.roots.api.grove.*;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -29,6 +30,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
   private int consumedThisTick = 0;
 
   private static BoundingBox groveStoneBoundingBox = null;
+  private static int groveStoneSearchRadius = -1;
 
   public static BoundingBox getGroveStoneBoundingBox() {
     if (groveStoneBoundingBox == null) {
@@ -40,6 +42,15 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
           ConfigManager.GROVE_STONE_POWER_RANGE_Z.getAsInt());
     }
     return groveStoneBoundingBox;
+  }
+
+  public static int getGroveStoneSearchRadius() {
+    if (groveStoneSearchRadius == -1) {
+      groveStoneSearchRadius = ConfigManager.GROVE_STONE_POWER_RANGE_X.getAsInt() *
+          ConfigManager.GROVE_STONE_POWER_RANGE_Y.getAsInt() *
+          ConfigManager.GROVE_STONE_POWER_RANGE_Z.getAsInt();
+    }
+    return groveStoneSearchRadius;
   }
 
   public GroveStoneBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -225,12 +236,11 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
 
     long tick = level.getGameTime();
 
+    List<BlockPos> consumerPositions = level.getData(ModAttachments.GROVE_CONSUMERS).query(pPos, getGroveStoneSearchRadius());
+
     for (BlockPos pos : consumerPositions) {
       if (available <= 0) {
         break;
-      }
-      if (consumerPositions.contains(pos)) {
-        continue;
       }
       BlockState stateAt = level.getBlockState(pos);
       if (stateAt.isAir()) {

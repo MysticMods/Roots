@@ -3,6 +3,7 @@ package mysticmods.roots.block;
 import mysticmods.roots.blockentity.AmplifierBlockEntity;
 import mysticmods.roots.blockentity.EnchantedTurfBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
@@ -30,6 +31,14 @@ public class EnchantedTurfBlock extends GrassBlock implements EntityBlock {
       return BaseBlockEntity::serverTick;
     } else {
       return BaseBlockEntity::clientTick;
+    }
+  }
+
+  @Override
+  protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    super.onRemove(state, level, pos, newState, movedByPiston);
+    if (!newState.is(state.getBlock())) {
+      level.getData(ModAttachments.GROVE_CONSUMERS).remove(pos);
     }
   }
 }

@@ -1,6 +1,7 @@
 package mysticmods.roots.blockentity;
 
 import com.google.common.collect.ImmutableList;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
@@ -10,6 +11,7 @@ import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.network.client.fx.GrowthFXPacket;
 import mysticmods.roots.util.TagUtil;
@@ -75,6 +77,17 @@ public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerT
     if (tag != null) {
       loadAdditional(tag, provider);
     }
+  }
+
+  @Override
+  public void onLoad() {
+    super.onLoad();
+    if (getLevel() == null) {
+      RootsAPI.LOG.error("I feel like this is a broken contract: onLoad called without a level for {}", this);
+      return;
+    }
+
+    getLevel().getData(ModAttachments.GROVE_CONSUMERS).add(getBlockPos());
   }
 
   @Override

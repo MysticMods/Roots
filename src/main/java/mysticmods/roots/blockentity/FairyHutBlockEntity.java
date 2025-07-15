@@ -17,6 +17,7 @@ import mysticmods.roots.block.FairyHutBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.entity.other.FairyHutEntity;
 import mysticmods.roots.init.ModActions;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.ritual.ProtectionRitual;
@@ -98,6 +99,17 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (pState.getValue(FairyHutBlock.ACTIVE)) {
     }
+  }
+
+  @Override
+  public void onLoad() {
+    super.onLoad();
+    if (getLevel() == null) {
+      RootsAPI.LOG.error("I feel like this is a broken contract: onLoad called without a level for {}", this);
+      return;
+    }
+
+    getLevel().getData(ModAttachments.GROVE_CONSUMERS).add(getBlockPos());
   }
 
   private void resetOffers () {

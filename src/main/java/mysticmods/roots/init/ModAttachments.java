@@ -6,6 +6,7 @@ import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.item.GramaryItem;
+import mysticmods.roots.util.SpatialMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
@@ -40,6 +41,8 @@ public class ModAttachments {
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> SQUID_MILKING_COOLDOWN = ATTACHMENTS.register("squid_milking_cooldown", ModAttachments::createIntegerAttachmentType);
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<RitualInformation>> RITUAL_INFORMATION = ATTACHMENTS.register("ritual_information", () -> AttachmentType.builder(RitualInformation::new)
       .serialize(RitualInformation.CODEC).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<SpatialMap>> GROVE_CONSUMERS = ATTACHMENTS.register("grove_consumers", () -> AttachmentType.builder(SpatialMap::new)
+      .build());
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());

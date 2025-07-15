@@ -5,6 +5,7 @@ import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.FairyHutBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
@@ -198,5 +199,13 @@ public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleW
       return 6;
     }
     return 0;
+  }
+
+  @Override
+  protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    super.onRemove(state, level, pos, newState, movedByPiston);
+    if (!newState.is(state.getBlock())) {
+      level.getData(ModAttachments.GROVE_CONSUMERS).remove(pos);
+    }
   }
 }
