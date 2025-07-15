@@ -6,6 +6,7 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.impl.RootsAPIImpl;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.PacketHandler;
+import net.minecraft.server.level.ChunkTrackingView;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
