@@ -1,0 +1,20 @@
+{
+        "render_type": "translucent",
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "roots:block/wildwood_door_top",
+		"top": "roots:block/wildwood_door_top"
+	},
+	"elements": [
+		{
+			"from": [0, 3, 3],
+			"to": [3, 13, 13],
+			"faces": {
+				"east": {"uv": [13, 3, 3, 13], "texture": "#top"},
+				"west": {"uv": [3, 3, 13, 13], "texture": "#top", "cullface": "west"}
+			}
+		}
+	]
+}

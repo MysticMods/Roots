@@ -1,4 +1,5 @@
-// 1.21.1	2025-07-05T12:54:59.9779789	Roots Entity Type Tags
+// 1.21.1	2025-07-16T16:11:44.044676	Roots Entity Type Tags
+c03cca07eaef993ac03a34f8983b4c79477d2c8b data/minecraft/tags/entity_type/arrows.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/allow_casting_tool_right_click.json

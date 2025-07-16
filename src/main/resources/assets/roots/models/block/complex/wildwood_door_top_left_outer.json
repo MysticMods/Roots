@@ -1,0 +1,61 @@
+{
+        "render_type": "cutout",
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "roots:block/wildwood_door_top",
+		"top": "roots:block/wildwood_door_top"
+	},
+	"elements": [
+		{
+			"from": [0, 3, 3],
+			"to": [3, 13, 13],
+			"faces": {
+				"east": {"uv": [13, 3, 3, 13], "texture": "#top"},
+				"west": {"uv": [3, 3, 13, 13], "texture": "#top", "cullface": "west"}
+			}
+		},
+		{
+			"from": [0, 3, 0],
+			"to": [3, 13, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -13]},
+			"faces": {
+				"north": {"uv": [3, 3, 0, 13], "texture": "#top", "cullface": "north"},
+				"east": {"uv": [3, 3, 0, 13], "texture": "#top"},
+				"west": {"uv": [0, 3, 3, 13], "texture": "#top", "cullface": "west"}
+			}
+		},
+		{
+			"from": [0, 3, 13],
+			"to": [3, 13, 16],
+			"faces": {
+				"east": {"uv": [16, 3, 13, 13], "texture": "#top"},
+				"south": {"uv": [0, 3, 3, 13], "texture": "#top", "cullface": "south"},
+				"west": {"uv": [13, 3, 16, 13], "texture": "#top", "cullface": "west"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [3, 3, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -13, 0]},
+			"faces": {
+				"north": {"uv": [3, 13, 0, 16], "texture": "#top", "cullface": "north"},
+				"east": {"uv": [16, 13, 0, 16], "texture": "#top"},
+				"south": {"uv": [0, 13, 3, 16], "texture": "#top", "cullface": "south"},
+				"west": {"uv": [0, 13, 16, 16], "texture": "#top", "cullface": "west"}
+			}
+		},
+		{
+			"from": [0, 13, 0],
+			"to": [3, 16, 16],
+			"faces": {
+				"north": {"uv": [3, 0, 0, 3], "texture": "#top", "cullface": "north"},
+				"east": {"uv": [16, 0, 0, 3], "texture": "#top"},
+				"south": {"uv": [0, 0, 3, 3], "texture": "#top", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 3], "texture": "#top", "cullface": "west"},
+				"up": {"uv": [0, 3, 16, 0], "rotation": 90, "texture": "#top", "cullface": "up"}
+			}
+		}
+	]
+}

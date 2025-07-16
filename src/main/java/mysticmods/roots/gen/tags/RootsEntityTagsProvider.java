@@ -172,6 +172,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.PLAYERS).add(EntityType.PLAYER);
 
     this.tag(RootsTags.Entities.SHOULD_RENDER_HUD).add(EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.CAMEL, EntityType.LLAMA, EntityType.VILLAGER);
+    this.tag(EntityTypeTags.ARROWS).add(ModEntities.LIVING_ARROW.get());
   }
 
   @Override
