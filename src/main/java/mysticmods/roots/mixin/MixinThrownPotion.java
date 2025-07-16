@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinThrownPotion {
   @Inject(method="dowseFire", at=@At("TAIL"))
   private void rootsDowseFire (BlockPos pos, CallbackInfo ci, @Local BlockState state) {
-    if (state.is(RootsTags.Blocks.PYRES) && state.hasProperty(PyreBlock.LIT) && state.getValue(PyreBlock.LIT) && ((ThrownPotion) (Object) this).level().getBlockEntity(pos) instanceof PyreBlockEntity pyre) {
+    if (state.is(RootsTags.Blocks.PYRES) && state.hasProperty(PyreBlock.BURNING) && state.getValue(PyreBlock.BURNING) && ((ThrownPotion) (Object) this).level().getBlockEntity(pos) instanceof PyreBlockEntity pyre) {
       pyre.stopRitual(false);
     }
   }

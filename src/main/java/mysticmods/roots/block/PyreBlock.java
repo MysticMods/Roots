@@ -94,7 +94,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
         && projectile.getOwner() instanceof Player player
         && level.getBlockEntity(blockpos) instanceof PyreBlockEntity pyre) {
 
-      if (projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !state.getValue(PyreBlock.LIT) && !state.getValue(PyreBlock.WATERLOGGED)) {
+      if (projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !state.getValue(PyreBlock.BURNING) && !state.getValue(PyreBlock.WATERLOGGED)) {
         pyre.light(player);
       }
     }
@@ -102,7 +102,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
   @Override
   public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
-    if (state.getValue(PyreBlock.LIT) && !context.getLevel().isClientSide() && context.getLevel().getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
+    if (state.getValue(PyreBlock.BURNING) && !context.getLevel().isClientSide() && context.getLevel().getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
       pyre.stopRitual(false);
       return state.setValue(PyreBlock.BURNING, false).setValue(PyreBlock.LIT, false);
     }

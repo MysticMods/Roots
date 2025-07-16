@@ -532,7 +532,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
             .matches(playerlessCrafting, pLevel))) {
           stopRitual(false);
           // Start
-          light(getLastPlayer());
+          if (!light(getLastPlayer()).consumesAction()) {
+            stopRitual(true);
+          }
         } else {
           stopRitual();
         }
