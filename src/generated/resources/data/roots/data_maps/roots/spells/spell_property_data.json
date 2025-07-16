@@ -281,8 +281,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How long before the player can cast the spell again",
-          "default_value": 80,
-          "value": 80
+          "default_value": 20,
+          "value": 20
         }
       },
       {
@@ -301,6 +301,15 @@
           "comment": "How long the spell will last",
           "default_value": 400,
           "value": 400
+        }
+      },
+      {
+        "id": "roots:geas/max_cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The maximum cooldown for the geas spell when scaling based off maximum health.",
+          "default_value": 800,
+          "value": 800
         }
       }
     ],

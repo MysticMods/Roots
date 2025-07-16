@@ -28,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class GeasSpell extends Spell {
-  private int count, duration;
+  private int count, duration, maxCooldown;
 
   public GeasSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x802020, 0x202020);
@@ -44,12 +44,16 @@ public class GeasSpell extends Spell {
     super.buildProperties(result);
     result.add(ModSpells.GEAS_COUNT);
     result.add(ModSpells.GEAS_DURATION);
+    result.add(ModSpells.GEAS_MAX_COOLDOWN);
   }
 
   @Override
   public void initialize(Holder<Spell> holder) {
-    this.count = holder.getData(DataMaps.SPELL_PROPERTY_DATA).get(ModSpells.GEAS_COUNT);
-    this.duration = holder.getData(DataMaps.SPELL_PROPERTY_DATA).get(ModSpells.GEAS_DURATION);
+    var dataMap = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
+
+    this.count = dataMap.get(ModSpells.GEAS_COUNT);
+    this.duration = dataMap.get(ModSpells.GEAS_DURATION);
+    this.maxCooldown = dataMap.get(ModSpells.GEAS_MAX_COOLDOWN);
   }
 
   @Override
@@ -57,6 +61,8 @@ public class GeasSpell extends Spell {
     int affected = 0;
 
     Vec3 look = pPlayer.getLookAngle();
+
+    float hpAffected = 0;
 
     for (int i = 0; i < 20; i++) {
       double x = pPlayer.getX() + look.x * 3.0 * (float) i;
@@ -74,6 +80,7 @@ public class GeasSpell extends Spell {
         }
 
         affected += affect(pPlayer, living);
+        hpAffected += living.getMaxHealth();
       }
     }
 
@@ -82,7 +89,8 @@ public class GeasSpell extends Spell {
       return 0;
     }
 
-    return cooldown;
+    double scaleFactor = Math.sqrt(hpAffected) * 1.5;
+    return (int) Math.min(cooldown * scaleFactor, maxCooldown);
   }
 
   private int affect(Player player, LivingEntity entity) {
