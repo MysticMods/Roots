@@ -3,8 +3,10 @@ package mysticmods.roots.client.gui.overlay;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.IGroveInstance;
@@ -16,15 +18,22 @@ import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -34,7 +43,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class HudOverlay {
@@ -68,9 +79,57 @@ public class HudOverlay {
     } else {
       EntityHitResult trace = ((EntityHitResult) mc.hitResult);
 
-      if (trace.getEntity().getType().is(RootsTags.Entities.SHOULD_RENDER_HUD)) {
+      if (trace.getEntity().getType()
+          .is(RootsTags.Entities.SHOULD_RENDER_HUD) && trace.getEntity() instanceof LivingEntity living) {
+        renderEntity(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, living);
 
       }
+    }
+  }
+
+  private static List<Holder<Attribute>> ATTRIBUTES_HOLDER = null;
+
+  private static void renderEntity(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker deltaTracker, Minecraft mc, EntityHitResult trace, LivingEntity entity) {
+    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFO)) {
+
+      Level level = mc.level;
+      if (mc.player == null || level == null) {
+        return;
+      }
+
+      int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
+      int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
+
+      y += 10;
+      x += 30;
+
+      List<Component> components = new ArrayList<>();
+      if (ATTRIBUTES_HOLDER == null) {
+        ATTRIBUTES_HOLDER = new ArrayList<>();
+        BuiltInRegistries.ATTRIBUTE.getTag(RootsTags.Atrtibutes.GRAMARY_ATTRIBUTES)
+            .ifPresent(o -> o.forEach(v -> ATTRIBUTES_HOLDER.add(v)));
+        ATTRIBUTES_HOLDER.sort(Comparator.comparing(o -> o.getKey().location().toString()));
+      }
+
+      for (Holder<Attribute> o : ATTRIBUTES_HOLDER) {
+        AttributeInstance instance = entity.getAttribute(o);
+        if (instance != null) {
+          String visualValue = String.format("%.2f", instance.getValue());
+          ChatFormatting style = o.value().getStyle(true);
+          Component name = Component.translatable(o.value().getDescriptionId());
+          name.getStyle().applyFormat(style);
+          components.add(Component.translatable("roots.hud.attributes", name, visualValue));
+        }
+      }
+
+      RenderSystem.disableDepthTest();
+      RenderSystem.disableBlend();
+      for (Component comp : components) {
+        graphics.drawString(mc.font, comp, x + 25, y, 16777215, true);
+        y += 12;
+      }
+      RenderSystem.enableDepthTest();
+      RenderSystem.enableBlend();
     }
   }
 
