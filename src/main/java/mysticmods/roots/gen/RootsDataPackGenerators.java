@@ -73,7 +73,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = "roots", bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class RootsDataPackGenerators {
   // Salts used for the randomization of structure placements
   public static final int HUT_SALT = 8266497;
