@@ -73,9 +73,8 @@ public class ReputationStorage implements ICleanable {
   }
 
   public int adjust(Grove grove, GroveReputation reputation) {
-    int[] reps = {reputation.gain1(), reputation.gain2(), reputation.gain3(), reputation.gain4()};
     int rank = getRank(grove);
-    return increaseReputation(grove, reps[rank]);
+    return increaseReputation(grove, reputation.byIndex(rank));
   }
 
   public int increaseReputation(Grove grove, int reputation) {

@@ -14,7 +14,8 @@
           "gain1": 500,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -31,7 +32,8 @@
           "gain1": 500,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       }
@@ -44,7 +46,8 @@
           "gain1": 10,
           "gain2": 8,
           "gain3": 4,
-          "gain4": 1
+          "gain4": 1,
+          "gain5": 1
         },
         "unique": false
       },
@@ -61,7 +64,8 @@
           "gain1": 20,
           "gain2": 10,
           "gain3": 5,
-          "gain4": 1
+          "gain4": 1,
+          "gain5": 1
         },
         "unique": false
       }
@@ -80,7 +84,8 @@
           "gain1": 50,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       }
@@ -99,7 +104,8 @@
           "gain1": 100,
           "gain2": 10,
           "gain3": 1,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       },
@@ -116,7 +122,8 @@
           "gain1": 100,
           "gain2": 10,
           "gain3": 1,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       }
@@ -129,7 +136,8 @@
           "gain1": 100,
           "gain2": 20,
           "gain3": 10,
-          "gain4": 10
+          "gain4": 10,
+          "gain5": 10
         },
         "unique": false
       }
@@ -148,7 +156,8 @@
           "gain1": 20,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       }
@@ -161,7 +170,8 @@
           "gain1": 10,
           "gain2": 8,
           "gain3": 4,
-          "gain4": 2
+          "gain4": 2,
+          "gain5": 2
         },
         "unique": false
       },
@@ -172,7 +182,8 @@
           "gain1": 10,
           "gain2": 5,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       }
@@ -185,7 +196,8 @@
           "gain1": 50,
           "gain2": 10,
           "gain3": 5,
-          "gain4": 1
+          "gain4": 1,
+          "gain5": 1
         },
         "unique": false
       }
@@ -198,7 +210,8 @@
           "gain1": 5,
           "gain2": 2,
           "gain3": 1,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       },
@@ -209,7 +222,8 @@
           "gain1": 15,
           "gain2": 8,
           "gain3": 2,
-          "gain4": 1
+          "gain4": 1,
+          "gain5": 1
         },
         "unique": false
       }
@@ -222,7 +236,8 @@
           "gain1": 10,
           "gain2": 8,
           "gain3": 4,
-          "gain4": 2
+          "gain4": 2,
+          "gain5": 2
         },
         "unique": false
       }
@@ -241,7 +256,8 @@
           "gain1": -2,
           "gain2": -8,
           "gain3": -10,
-          "gain4": -20
+          "gain4": -20,
+          "gain5": -20
         },
         "unique": false
       },
@@ -258,7 +274,8 @@
           "gain1": 10,
           "gain2": 5,
           "gain3": 2,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       },
@@ -275,7 +292,8 @@
           "gain1": 50,
           "gain2": 40,
           "gain3": 30,
-          "gain4": 20
+          "gain4": 20,
+          "gain5": 20
         },
         "unique": false
       },
@@ -292,7 +310,8 @@
           "gain1": 50,
           "gain2": 40,
           "gain3": 30,
-          "gain4": 20
+          "gain4": 20,
+          "gain5": 20
         },
         "unique": false
       },
@@ -309,7 +328,8 @@
           "gain1": -5,
           "gain2": -8,
           "gain3": -10,
-          "gain4": -20
+          "gain4": -20,
+          "gain5": -20
         },
         "unique": false
       },
@@ -326,7 +346,8 @@
           "gain1": 10,
           "gain2": 8,
           "gain3": 6,
-          "gain4": 2
+          "gain4": 2,
+          "gain5": 2
         },
         "unique": false
       },
@@ -343,7 +364,8 @@
           "gain1": 0,
           "gain2": -2,
           "gain3": -5,
-          "gain4": -10
+          "gain4": -10,
+          "gain5": -10
         },
         "unique": false
       }
@@ -362,7 +384,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -379,7 +402,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -396,7 +420,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -413,7 +438,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -430,7 +456,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -447,7 +474,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -464,7 +492,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -481,7 +510,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -498,7 +528,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -515,7 +546,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -532,7 +564,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -549,7 +582,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -566,7 +600,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -583,7 +618,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -600,7 +636,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -617,7 +654,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -634,7 +672,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -651,7 +690,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -668,7 +708,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -685,7 +726,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -702,7 +744,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -719,7 +762,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -736,7 +780,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -753,7 +798,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -770,7 +816,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -787,7 +834,8 @@
           "gain1": 250,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       }
@@ -800,7 +848,8 @@
           "gain1": 2,
           "gain2": 1,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       }
@@ -819,7 +868,8 @@
           "gain1": 2,
           "gain2": 1,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       }
@@ -838,7 +888,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -855,7 +906,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -872,7 +924,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -889,7 +942,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -906,7 +960,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -923,7 +978,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -940,7 +996,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -957,7 +1014,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -974,7 +1032,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -991,7 +1050,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -1008,7 +1068,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -1025,7 +1086,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -1042,7 +1104,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -1059,7 +1122,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       },
@@ -1076,7 +1140,8 @@
           "gain1": 100,
           "gain2": 0,
           "gain3": 0,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": true
       }
@@ -1089,7 +1154,8 @@
           "gain1": 10,
           "gain2": 8,
           "gain3": 5,
-          "gain4": 2
+          "gain4": 2,
+          "gain5": 2
         },
         "unique": false
       }
@@ -1102,7 +1168,8 @@
           "gain1": 0,
           "gain2": 5,
           "gain3": 1,
-          "gain4": 1
+          "gain4": 1,
+          "gain5": 1
         },
         "unique": false
       }
@@ -1115,7 +1182,8 @@
           "gain1": 4,
           "gain2": 2,
           "gain3": 1,
-          "gain4": 0
+          "gain4": 0,
+          "gain5": 0
         },
         "unique": false
       }
@@ -1128,7 +1196,8 @@
           "gain1": 20,
           "gain2": 15,
           "gain3": 8,
-          "gain4": 2
+          "gain4": 2,
+          "gain5": 2
         },
         "unique": false
       }
