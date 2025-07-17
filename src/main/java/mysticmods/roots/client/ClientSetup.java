@@ -59,7 +59,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.io.IOException;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT, bus= EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
   @SubscribeEvent
   public static void clientSetup(FMLClientSetupEvent event) {
