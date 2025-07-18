@@ -19,7 +19,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
@@ -49,14 +48,14 @@ import java.util.List;
 
 public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleWaterloggedBlock {
   // Active -> flames of some description
-  public static final BooleanProperty BURNING = BooleanProperty.create("burning");
+  public static final BooleanProperty ACTIVE = BooleanProperty.create("burning");
   // Lit -> producing light!
   public static final BooleanProperty LIT = BooleanProperty.create("lit");
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public PyreBlock(Properties builder) {
     super(builder);
-    registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(BURNING, false)
+    registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(ACTIVE, false)
         .setValue(WATERLOGGED, false));
   }
 
@@ -68,7 +67,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PyreBlock.LIT, PyreBlock.BURNING, PyreBlock.WATERLOGGED);
+    pBuilder.add(PyreBlock.LIT, PyreBlock.ACTIVE, PyreBlock.WATERLOGGED);
   }
 
   @Nullable
@@ -94,7 +93,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
         && projectile.getOwner() instanceof Player player
         && level.getBlockEntity(blockpos) instanceof PyreBlockEntity pyre) {
 
-      if (projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !state.getValue(PyreBlock.BURNING) && !state.getValue(PyreBlock.WATERLOGGED)) {
+      if (projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !state.getValue(PyreBlock.ACTIVE) && !state.getValue(PyreBlock.WATERLOGGED)) {
         pyre.light(player);
       }
     }
@@ -102,9 +101,9 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
   @Override
   public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
-    if (state.getValue(PyreBlock.BURNING) && !context.getLevel().isClientSide() && context.getLevel().getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
+    if (state.getValue(PyreBlock.ACTIVE) && !context.getLevel().isClientSide() && context.getLevel().getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
       pyre.stopRitual(false);
-      return state.setValue(PyreBlock.BURNING, false).setValue(PyreBlock.LIT, false);
+      return state.setValue(PyreBlock.ACTIVE, false).setValue(PyreBlock.LIT, false);
     }
     return super.getToolModifiedState(state, context, itemAbility, simulate);
   }
@@ -131,7 +130,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING)) {
+    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.ACTIVE)) {
       double x = pPos.getX() + 0.5f;
       double y = pPos.getY() + 0.5f;
       double z = pPos.getZ() + 0.5f;

@@ -119,7 +119,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return InteractionResult.CONSUME;
     }
 
-    if (currentRitual != ModRituals.CRAFTING.get() && (lifetime > 0 || getBlockState().getValue(PyreBlock.BURNING))) {
+    if (currentRitual != ModRituals.CRAFTING.get() && (lifetime > 0 || getBlockState().getValue(PyreBlock.ACTIVE))) {
       Optional<IFluidHandlerItem> optFluid = FluidUtil.getFluidHandler(inHand);
       if (optFluid.isPresent()) {
         IFluidHandlerItem fluidHandler = optFluid.get();
@@ -148,7 +148,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
-      if (!state.getValue(PyreBlock.BURNING)) {
+      if (!state.getValue(PyreBlock.ACTIVE)) {
         InteractionResult result = light(player);
         if (result.indicateItemUse() && inHand.isDamageableItem() && !player.isCreative()) {
           inHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
@@ -502,7 +502,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     setCurrentRitual(null);
     this.lifetime = -1;
     setChanged();
-    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.BURNING, false)
+    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.ACTIVE, false)
         .setValue(PyreBlock.LIT, !doLight), 3);
   }
 
@@ -552,8 +552,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           if (currentRitual.providesLight() && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
             newState = newState.setValue(PyreBlock.LIT, true);
           }
-          if (pState.hasProperty(PyreBlock.BURNING) && !pState.getValue(PyreBlock.BURNING)) {
-            newState = newState.setValue(PyreBlock.BURNING, true);
+          if (pState.hasProperty(PyreBlock.ACTIVE) && !pState.getValue(PyreBlock.ACTIVE)) {
+            newState = newState.setValue(PyreBlock.ACTIVE, true);
           }
 
           if (newState != pState) {

@@ -6,10 +6,8 @@ import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.projectile.ThrownPotion;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -18,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinThrownPotion {
   @Inject(method="dowseFire", at=@At("TAIL"))
   private void rootsDowseFire (BlockPos pos, CallbackInfo ci, @Local BlockState state) {
-    if (state.is(RootsTags.Blocks.PYRES) && state.hasProperty(PyreBlock.BURNING) && state.getValue(PyreBlock.BURNING) && ((ThrownPotion) (Object) this).level().getBlockEntity(pos) instanceof PyreBlockEntity pyre) {
+    if (state.is(RootsTags.Blocks.PYRES) && state.hasProperty(PyreBlock.ACTIVE) && state.getValue(PyreBlock.ACTIVE) && ((ThrownPotion) (Object) this).level().getBlockEntity(pos) instanceof PyreBlockEntity pyre) {
       pyre.stopRitual(false);
     }
   }

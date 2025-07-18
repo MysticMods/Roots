@@ -221,7 +221,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile pyre = models().withExistingParent("pyre", modLoc("block/complex/pyre")).renderType("cutout");
     ModelFile pyreLit = models().withExistingParent("pyre_lit", modLoc("block/complex/pyre_lit")).renderType("cutout");
     getVariantBuilder(ModBlocks.PYRE.get()).forAllStates(state -> {
-      if (state.getValue(PyreBlock.BURNING)) {
+      if (state.getValue(PyreBlock.ACTIVE)) {
         return ConfiguredModel.builder().modelFile(pyreLit).build();
       } else {
         return ConfiguredModel.builder().modelFile(pyre).build();
@@ -232,7 +232,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile soulPyreLit = models().withExistingParent("soul_pyre_lit", modLoc("block/complex/soul_pyre_lit"))
         .renderType("cutout");
     getVariantBuilder(ModBlocks.SOUL_PYRE.get()).forAllStates(state -> {
-      if (state.getValue(PyreBlock.BURNING)) {
+      if (state.getValue(PyreBlock.ACTIVE)) {
         return ConfiguredModel.builder().modelFile(soulPyreLit).build();
       } else {
         return ConfiguredModel.builder().modelFile(soulPyre).build();
@@ -245,7 +245,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile reinforcedPyreLit = models().withExistingParent("reinforced_pyre_lit", modLoc("block/complex/reinforced_pyre_lit"))
         .renderType("cutout");
     getVariantBuilder(ModBlocks.REINFORCED_PYRE.get()).forAllStates(state -> {
-      if (state.getValue(PyreBlock.BURNING)) {
+      if (state.getValue(PyreBlock.ACTIVE)) {
         return ConfiguredModel.builder().modelFile(reinforcedPyreLit).build();
       } else {
         return ConfiguredModel.builder().modelFile(reinforcedPyre).build();
@@ -257,7 +257,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile soulReinforcedPyreLit = models().withExistingParent("reinforced_soul_pyre_lit", modLoc("block/complex/reinforced_soul_pyre_lit"))
         .renderType("cutout");
     getVariantBuilder(ModBlocks.REINFORCED_SOUL_PYRE.get()).forAllStates(state -> {
-      if (state.getValue(PyreBlock.BURNING)) {
+      if (state.getValue(PyreBlock.ACTIVE)) {
         return ConfiguredModel.builder().modelFile(soulReinforcedPyreLit).build();
       } else {
         return ConfiguredModel.builder().modelFile(soulReinforcedPyre).build();

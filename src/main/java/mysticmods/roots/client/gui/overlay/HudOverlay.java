@@ -3,7 +3,6 @@ package mysticmods.roots.client.gui.overlay;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.client.RootsClientAPI;
@@ -137,7 +136,7 @@ public class HudOverlay {
   public static void renderPyre(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {
     Level level = mc.level;
     if (level.getBlockEntity(trace.getBlockPos()) instanceof PyreBlockEntity pyre) {
-      boolean active = state.getValue(PyreBlock.BURNING);
+      boolean active = state.getValue(PyreBlock.ACTIVE);
 
       int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
       int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);

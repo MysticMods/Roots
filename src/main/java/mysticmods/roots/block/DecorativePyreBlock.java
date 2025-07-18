@@ -19,13 +19,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class DecorativePyreBlock extends Block {
   public DecorativePyreBlock(Properties builder) {
     super(builder);
-    registerDefaultState(defaultBlockState().setValue(PyreBlock.LIT, true).setValue(PyreBlock.BURNING, true));
+    registerDefaultState(defaultBlockState().setValue(PyreBlock.LIT, true).setValue(PyreBlock.ACTIVE, true));
   }
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PyreBlock.LIT, PyreBlock.BURNING);
+    pBuilder.add(PyreBlock.LIT, PyreBlock.ACTIVE);
   }
 
   @Override
