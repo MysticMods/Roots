@@ -284,4 +284,9 @@ public class WildfireEntity extends Projectile {
   protected void doPostHurtEffects(LivingEntity target) {
 
   }
+
+  @Override
+  public boolean isOnFire() {
+    return true;
+  }
 }
