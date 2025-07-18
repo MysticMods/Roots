@@ -80,7 +80,7 @@ public class HarvestSpell extends TwoRadiusSpell {
     boolean held = getDataValue(instance, "mode") == 2;
 
     ItemStack offHandItem = pPlayer.getOffhandItem();
-    Block tempBlock = offHandItem.getItemHolder().getData(DataMaps.SEED_TO_CROP);
+    Block tempBlock = offHandItem.getItemHolder().getData(DataMaps.HARVEST_SEED_TO_CROP);
     if (tempBlock == null) {
       if (offHandItem.getItem() instanceof BlockItem blockItem) {
         tempBlock = blockItem.getBlock();

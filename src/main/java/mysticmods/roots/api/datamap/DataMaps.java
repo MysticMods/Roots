@@ -4,9 +4,6 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.ReputationRanks;
@@ -102,7 +99,10 @@ public class DataMaps {
   public static final DataMapType<Block, Integer> OPERATION_COST = DataMapType.builder(RootsAPI.rl("shatter_operation_cost"), Registries.BLOCK, Codec.INT)
       .synced(Codec.INT, false)
       .build();
-  public static final DataMapType<Item, Block> SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
+  public static final DataMapType<Item, Block> HARVEST_SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("harvest_seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
+      .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
+      .build();
+  public static final DataMapType<Item, Block> GROWTH_SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("growth_seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
       .build();
   public static final DataMapType<Block, List<GrovePower.Generator>> GROVE_POWER_GENERATORS = DataMapType.builder(RootsAPI.rl("grove_power_generator"), Registries.BLOCK, GrovePower.Generator.LIST_CODEC)
@@ -130,7 +130,8 @@ public class DataMaps {
     event.register(GROVE_ACTION_REPUTATIONS);
     event.register(GROVE_RANKS);
     event.register(OPERATION_COST);
-    event.register(SEED_TO_CROP);
+    event.register(HARVEST_SEED_TO_CROP);
+    event.register(GROWTH_SEED_TO_CROP);
     event.register(GROVE_POWER_GENERATORS);
     event.register(GROVE_GENERATION_ENTRIES);
   }

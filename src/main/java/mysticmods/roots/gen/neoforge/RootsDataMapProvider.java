@@ -4,10 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.GroveReputationEntry;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.condition.GroveStoneCondition;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.condition.PillarCondition;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.datamap.SproutGift;
@@ -19,7 +15,6 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.RitualModifier;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
-import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.block.crop.FourStageCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.growth.GrowthRecord;
@@ -498,11 +493,19 @@ public class RootsDataMapProvider extends DataMapProvider {
       builder22.add(block.builtInRegistryHolder(), 1, false);
     });
 
-    var builder23 = builder(DataMaps.SEED_TO_CROP);
+    var builder23 = builder(DataMaps.HARVEST_SEED_TO_CROP);
     BuiltInRegistries.BLOCK.forEach(block -> {
       if (block instanceof CropBlock crop) {
         Item seed = ((AccessorMixinCropBlock) crop).rootsCallGetBaseSeedId().asItem();
         builder23.add(seed.builtInRegistryHolder(), block, false);
+      }
+    });
+
+    var builder23a = builder(DataMaps.GROWTH_SEED_TO_CROP);
+    BuiltInRegistries.BLOCK.forEach(block -> {
+      if (block instanceof CropBlock crop) {
+        Item seed = ((AccessorMixinCropBlock) crop).rootsCallGetBaseSeedId().asItem();
+        builder23a.add(seed.builtInRegistryHolder(), block, false);
       }
     });
 
@@ -516,6 +519,17 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder23.add(Items.MELON_SEEDS.builtInRegistryHolder(), Blocks.MELON, false);
     builder23.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN, false);
     builder23.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN, false);
+
+    builder23a.add(ModItems.PERESKIA, ModBlocks.PERESKIA_CROP.get(), false);
+    builder23a.add(ModItems.MOONGLOW, ModBlocks.MOONGLOW_CROP.get(), false);
+    builder23a.add(ModItems.SPIRITLEAF, ModBlocks.SPIRITLEAF_CROP.get(), false);
+    builder23a.add(ModItems.WILDEWHEET, ModBlocks.WILDEWHEET_CROP.get(), false);
+    builder23a.add(Items.PITCHER_PLANT.builtInRegistryHolder(), Blocks.PITCHER_CROP, false);
+    builder23a.add(Items.MELON.builtInRegistryHolder(), Blocks.MELON_STEM, false);
+    builder23a.add(Items.MELON_SLICE.builtInRegistryHolder(), Blocks.MELON_STEM, false);
+    builder23a.add(Items.MELON_SEEDS.builtInRegistryHolder(), Blocks.MELON_STEM, false);
+    builder23a.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
+    builder23a.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
 
     var builder24 = builder(DataMaps.GROVE_POWER_GENERATORS);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, List.of(
