@@ -44,7 +44,7 @@ public class ModBlocks {
 
   private static final BlockBehaviour.Properties RUNED_OBSIDIAN_PROPERTIES = BlockBehaviour.Properties.of()
       .mapColor(DyeColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
-      .strength(50.0f, 1200.0f).pushReaction(PushReaction.BLOCK);
+      .strength(5.0f, 1200.0f).pushReaction(PushReaction.BLOCK);
   public static final DeferredHolder<Block, Block> RUNED_OBSIDIAN = BLOCKS.register("runed_obsidian", () -> new Block(RUNED_OBSIDIAN_PROPERTIES));
   public static final DeferredHolder<Block, Block> CHISELED_RUNED_OBSIDIAN = BLOCKS.register("chiseled_runed_obsidian", () -> new Block(RUNED_OBSIDIAN_PROPERTIES));
   public static final DeferredHolder<Block, Block> RUNED_BRICK = BLOCKS.register("runed_brick", () -> new Block(RUNED_OBSIDIAN_PROPERTIES));
@@ -131,14 +131,17 @@ public class ModBlocks {
 
   private static final BlockBehaviour.Properties RUNESTONE_BUTTON_PROPERTIES = BlockBehaviour.Properties.of()
       .noCollission().strength(0.5F).sound(SoundType.STONE).pushReaction(PushReaction.DESTROY);
+  private static final BlockBehaviour.Properties RUNED_BUTTON_PROPERTIES = BlockBehaviour.Properties.of()
+      .noCollission().strength(0.5F, 1200f).sound(SoundType.STONE).pushReaction(PushReaction.BLOCK)
+      .mapColor(DyeColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM);
 
   public static final DeferredHolder<Block, ButtonBlock> RUNESTONE_BUTTON = BLOCKS.register("runestone_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static final DeferredHolder<Block, ButtonBlock> RUNESTONE_BRICK_BUTTON = BLOCKS.register("runestone_brick_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static final DeferredHolder<Block, ButtonBlock> RUNESTONE_TILE_BUTTON = BLOCKS.register("runestone_tile_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static final DeferredHolder<Block, ButtonBlock> MOSSY_RUNESTONE_BUTTON = BLOCKS.register("mossy_runestone_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
-  public static final DeferredHolder<Block, ButtonBlock> RUNED_BUTTON = BLOCKS.register("runed_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
-  public static final DeferredHolder<Block, ButtonBlock> RUNED_BRICK_BUTTON = BLOCKS.register("runed_brick_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
-  public static final DeferredHolder<Block, ButtonBlock> RUNED_TILE_BUTTON = BLOCKS.register("runed_tile_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
+  public static final DeferredHolder<Block, ButtonBlock> RUNED_BUTTON = BLOCKS.register("runed_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNED_BUTTON_PROPERTIES));
+  public static final DeferredHolder<Block, ButtonBlock> RUNED_BRICK_BUTTON = BLOCKS.register("runed_brick_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNED_BUTTON_PROPERTIES));
+  public static final DeferredHolder<Block, ButtonBlock> RUNED_TILE_BUTTON = BLOCKS.register("runed_tile_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNED_BUTTON_PROPERTIES));
   public static final DeferredHolder<Block, ButtonBlock> WILDWOOD_BUTTON = BLOCKS.register("wildwood_button", () -> new ButtonBlock(ModTypes.WILDWOOD_SET, 20, WILDWOOD_PLANKS_PROPERTIES));
   public static final DeferredHolder<Block, PressurePlateBlock> RUNESTONE_PRESSURE_PLATE = BLOCKS.register("runestone_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
   public static final DeferredHolder<Block, PressurePlateBlock> RUNESTONE_BRICK_PRESSURE_PLATE = BLOCKS.register("runestone_brick_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
