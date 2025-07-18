@@ -27,7 +27,7 @@ public class ElementalSoilBlock extends FarmBlock {
 
   public ElementalSoilBlock(ElementalType soilType, Properties pProperties) {
     super(pProperties);
-    this.registerDefaultState(this.defaultBlockState().setValue(ElementalType.SOIL_TYPE, soilType));
+    this.registerDefaultState(this.defaultBlockState().setValue(ElementalType.SOIL_TYPE, soilType).setValue(MOISTURE, MAX_MOISTURE));
   }
 
   @Override
@@ -67,10 +67,6 @@ public class ElementalSoilBlock extends FarmBlock {
 
   @Override
   protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-    int i = state.getValue(MOISTURE);
-    if (i != MAX_MOISTURE) {
-      level.setBlock(pos, state.setValue(MOISTURE, MAX_MOISTURE), 2);
-    }
   }
 
   @Override
