@@ -148,11 +148,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
-      InteractionResult result = light(player);
-      if (result.indicateItemUse() && inHand.isDamageableItem() && !player.isCreative()) {
-        inHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+      if (!state.getValue(PyreBlock.BURNING)) {
+        InteractionResult result = light(player);
+        if (result.indicateItemUse() && inHand.isDamageableItem() && !player.isCreative()) {
+          inHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+        }
+        return result;
       }
-      return result;
+
+      return InteractionResult.SUCCESS;
     } else {
       // insert
       ItemStack result = inventory.insert(inHand);
