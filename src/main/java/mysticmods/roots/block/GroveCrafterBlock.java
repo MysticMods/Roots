@@ -22,10 +22,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class GroveCrafterBlock extends UseDelegatedBlock implements EntityBlock {
   public static final BooleanProperty ACTIVE = StateProperties.ACTIVE;
+  public static final BooleanProperty CRAFTING = StateProperties.CRAFTING;
 
   public GroveCrafterBlock(Properties builder) {
     super(builder);
-    this.registerDefaultState(this.defaultBlockState().setValue(ACTIVE, false));
+    this.registerDefaultState(this.defaultBlockState().setValue(ACTIVE, false).setValue(CRAFTING, false));
   }
 
   @Override
@@ -52,6 +53,6 @@ public class GroveCrafterBlock extends UseDelegatedBlock implements EntityBlock 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     super.createBlockStateDefinition(builder);
-    builder.add(ACTIVE);
+    builder.add(ACTIVE, CRAFTING);
   }
 }

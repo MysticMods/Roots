@@ -11,6 +11,7 @@ import java.util.List;
 
 public class StateProperties {
   public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+  public static final BooleanProperty CRAFTING = BooleanProperty.create("crafting");
 
   public static class GroveStone {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;

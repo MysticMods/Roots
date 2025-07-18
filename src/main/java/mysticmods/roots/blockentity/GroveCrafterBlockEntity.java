@@ -104,6 +104,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
     lastPlayer = null;
     lastUuid = null;
+    level.setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.CRAFTING, false), 3);
   }
 
   public boolean isCrafting() {
@@ -172,7 +173,9 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       cachedRecipe = null;
       if (!level.isClientSide()) {
         setChanged();
-        updateViaState();
+        level.setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.CRAFTING, true), 3);
+        // I think the setBlock is sufficient because it's changing states
+        //updateViaState();
       }
 
       return InteractionResult.SUCCESS;
@@ -354,6 +357,9 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     revalidateRecipe();
     if (craftingTicks > 0) {
+      if (pState.getValue(GroveCrafterBlock.CRAFTING) != isCrafting()) {
+        level.setBlock(pPos, pState.setValue(GroveCrafterBlock.CRAFTING, isCrafting()), 3);
+      }
       craftingTicks--;
       if (craftingTicks == 0) {
         outputStoredItems(getLastPlayer());

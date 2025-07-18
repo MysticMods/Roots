@@ -1,9 +1,15 @@
 {
   "variants": {
-    "active=false": {
+    "active=false,crafting=false": {
       "model": "roots:block/grove_crafter_inactive"
     },
-    "active=true": {
+    "active=false,crafting=true": {
+      "model": "roots:block/grove_crafter_inactive"
+    },
+    "active=true,crafting=false": {
+      "model": "roots:block/grove_crafter_active"
+    },
+    "active=true,crafting=true": {
       "model": "roots:block/grove_crafter_active"
     }
   }
