@@ -102,6 +102,11 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
         }
       }
 
+      if (getBoundingBox() == null) {
+        costs.noCharge();
+        return -1;
+      }
+
       final Block block = tempBlock;
 
       boolean offHand = getDataValue(instance, "mode") == 3 && !offHandItem.isEmpty() && tempBlock != null;
