@@ -4,10 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingSuccessCache;
-import mysticmods.roots.network.client.ClientboundEntitySnapshotSyncPacket;
-import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
-import mysticmods.roots.network.client.ClientboundHerbSyncPacket;
-import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
+import mysticmods.roots.network.client.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -91,6 +88,11 @@ public class ServerTickHandler {
           player,
           ModAttachments.REPUTATION_STORAGE,
           ClientboundReputationSyncPacket::new
+      );
+      AttachmentUtil.monitorTickAndSync(
+          player,
+          ModAttachments.COOLDOWN_STORAGE,
+          ClientboundCooldownSyncPacket::new
       );
     }
     CastingSuccessCache.tick();

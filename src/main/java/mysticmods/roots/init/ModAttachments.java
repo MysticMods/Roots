@@ -34,6 +34,8 @@ public class ModAttachments {
       .serialize(HerbStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<ReputationStorage>> REPUTATION_STORAGE = ATTACHMENTS.register("reputation_storage", () -> AttachmentType.builder(ReputationStorage::new)
       .serialize(ReputationStorage.CODEC).copyOnDeath().build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<CooldownStorage>> COOLDOWN_STORAGE = ATTACHMENTS.register("cooldown_storage", () -> AttachmentType.builder(() -> new CooldownStorage())
+      .serialize(CooldownStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<SnapshotStorage>> SNAPSHOT_STORAGE = ATTACHMENTS.register("snapshot_storage", () -> AttachmentType.builder(() -> new SnapshotStorage())
       .serialize(SnapshotStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> RUNIC_SHEARS_ENTITY_COOLDOWN = ATTACHMENTS.register("runic_shears_entity_cooldown", ModAttachments::createIntegerAttachmentType);

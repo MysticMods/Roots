@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class SnapshotStorage implements ICleanable {
+public class SnapshotStorage implements ICleanable, ITicking {
   public static final Codec<SnapshotStorage> CODEC = Codec.unboundedMap(RootsRegistries.SNAPSHOT_TYPES.byNameCodec(), Snapshot.CODEC)
       .xmap(SnapshotStorage::new, SnapshotStorage::getSnapshots);
   public static final StreamCodec<RegistryFriendlyByteBuf, SnapshotStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.SNAPSHOT_TYPES), Snapshot.STREAM_CODEC), o -> o.snapshots, SnapshotStorage::new);
@@ -35,6 +35,7 @@ public class SnapshotStorage implements ICleanable {
     return snapshots;
   }
 
+  @Override
   public void tick(Entity entity) {
     Iterator<Map.Entry<SnapshotType<?>, Snapshot>> iterator = snapshots.entrySet().iterator();
     while (iterator.hasNext()) {

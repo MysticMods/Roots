@@ -18,6 +18,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class AttachmentUtil {
+  public static <T extends ICleanable & ITicking, V extends ISyncPacket<T>> void monitorTickAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, Function<T, V> packetSupplier) {
+    monitorForChange(player, attachment, (a, b) -> b.tick(a), (p, t) -> PacketDistributor.sendToPlayer(p, packetSupplier.apply(t)));
+  }
+
   public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<ServerPlayer, T> consumer, Function<T, V> packetSupplier) {
     monitorForChange(player, attachment, consumer, (p, t) -> PacketDistributor.sendToPlayer(p, packetSupplier.apply(t)));
   }

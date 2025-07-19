@@ -245,6 +245,10 @@ public class EntityEventHandler {
       var data4 = player.getData(ModAttachments.SNAPSHOT_STORAGE);
       data4.setDirty(true);
       player.setData(ModAttachments.SNAPSHOT_STORAGE, data4);
+
+      var data5 = player.getData(ModAttachments.COOLDOWN_STORAGE);
+      data5.setDirty(true);
+      player.setData(ModAttachments.COOLDOWN_STORAGE, data5);
     }
   }
 

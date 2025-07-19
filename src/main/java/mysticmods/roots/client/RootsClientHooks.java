@@ -1,10 +1,7 @@
 package mysticmods.roots.client;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
-import mysticmods.roots.api.attachment.GrantStorage;
-import mysticmods.roots.api.attachment.HerbStorage;
-import mysticmods.roots.api.attachment.ReputationStorage;
-import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
@@ -53,6 +50,19 @@ public class RootsClientHooks {
     }
 
     player.setData(ModAttachments.HERB_STORAGE, storage);
+  }
+
+  public static void setCooldownStorage(CooldownStorage storage) {
+    if (Minecraft.getInstance() == null) {
+      return;
+    }
+    Player player = Minecraft.getInstance().player;
+
+    if (player == null) {
+      return;
+    }
+
+    player.setData(ModAttachments.COOLDOWN_STORAGE, storage);
   }
 
   public static void setReputationStorage(ReputationStorage storage) {
