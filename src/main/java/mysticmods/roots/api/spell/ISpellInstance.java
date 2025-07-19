@@ -2,11 +2,13 @@ package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
+import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,8 +27,6 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   Set<SpellModifier> getEnabledModifiers();
-
-  int getCooldown();
 
   default int getMaxUse() {
     return getSpell().getMaxUse();
@@ -58,12 +58,17 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getType();
   }
 
-  default int getMaxCooldown() {
+  default int getDefaultCooldown() {
     return getSpell().getCooldown();
   }
 
-  default boolean canCast(Player pCaster) {
-    return getCooldown() <= 0;
+  default boolean canCast(Entity pCaster) {
+    if (!pCaster.hasData(RootsAPI.getInstance().getCooldownStorageType())) {
+      return true;
+    }
+
+    CooldownStorage storage = pCaster.getData(RootsAPI.getInstance().getCooldownStorageType());
+    return storage.getCooldown(this.asSpell()) <= 0;
   }
 
   // Returns length of cooldown
@@ -117,11 +122,6 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     @Override
     public Set<SpellModifier> getEnabledModifiers() {
       return Collections.emptySet();
-    }
-
-    @Override
-    public int getCooldown() {
-      return 0;
     }
 
     @Override

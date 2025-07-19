@@ -5,10 +5,7 @@ import mysticmods.roots.api.IRootsAPI;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputation;
-import mysticmods.roots.api.attachment.AttachmentUtil;
-import mysticmods.roots.api.attachment.GrantStorage;
-import mysticmods.roots.api.attachment.RitualInformation;
-import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.network.IRootsPacket;
@@ -117,5 +114,10 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public boolean logGroveActions() {
     return ConfigManager.DEBUG_GROVE_ACTIONS.getAsBoolean();
+  }
+
+  @Override
+  public AttachmentType<CooldownStorage> getCooldownStorageType() {
+    return ModAttachments.COOLDOWN_STORAGE.value();
   }
 }

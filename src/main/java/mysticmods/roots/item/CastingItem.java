@@ -2,6 +2,7 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.Costing;
@@ -15,6 +16,7 @@ import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelFailFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelJauntFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelTargetFXPacket;
+import mysticmods.roots.util.PlayerGetter;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -228,7 +230,8 @@ public class CastingItem extends Item {
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
         ModActions.SPELL_CAST.get().accept(context);
-        stack.set(ModAttachments.SPELL_STORAGE, storage.setCooldown(current, cooldown));
+        CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
+        cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
       }
     } else {
       CastingSuccessCache.clear(stack);
@@ -286,47 +289,67 @@ public class CastingItem extends Item {
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pPlayer.getUsedItemHand(), pPlayer.getItemInHand(pPlayer.getUsedItemHand()), spell, costing);
         ModActions.SPELL_CAST.get().accept(context);
-        pStack.set(ModAttachments.SPELL_STORAGE, storage.setCooldown(current, cooldown));
+        CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
+        cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
       }
     }
   }
 
   @Override
   public boolean isBarVisible(ItemStack pStack) {
+    Player player = PlayerGetter.getPlayer();
+    if (player == null) {
+      return false;
+    }
+
+    if (!player.hasData(ModAttachments.COOLDOWN_STORAGE)) {
+      return false;
+    }
+
     SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
       return false;
     }
-    int cooldown = storage.getCurrentCooldown();
-    return cooldown > 0;
+
+    SpellStorage.SpellSlot spell = storage.getCurrentSpell();
+    if (spell == null) {
+      return false;
+    }
+
+    CooldownStorage cooldownStorage = player.getData(ModAttachments.COOLDOWN_STORAGE);
+    return cooldownStorage.getCooldown(spell.asSpell()) > 0;
   }
 
   @Override
   public int getBarWidth(ItemStack pStack) {
+    Player player = PlayerGetter.getPlayer();
+    if (player == null) {
+      return 0;
+    }
+
+    if (!player.hasData(ModAttachments.COOLDOWN_STORAGE)) {
+      return 0;
+    }
+
     SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
       return 0;
     }
 
-    return Math.round((float) storage.getCurrentCooldown() * 13.0F / (float) storage.getCurrentMaxCooldown());
-
-  }
-
-  @Override
-  public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-    super.inventoryTick(stack, level, entity, slotId, isSelected);
-
-    if (level.isClientSide()) {
-      return;
+    SpellStorage.SpellSlot spell = storage.getCurrentSpell();
+    if (spell == null) {
+      return 0;
     }
 
-    SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
-    if (storage != null) {
-      SpellStorage newStorage = storage.tick();
-      if (storage != newStorage) {
-        stack.set(ModAttachments.SPELL_STORAGE, newStorage);
-      }
+    CooldownStorage cooldownStorage = player.getData(ModAttachments.COOLDOWN_STORAGE);
+    int cooldown = cooldownStorage.getCooldown(spell.asSpell());
+    if (cooldown <= 0) {
+      return 0;
     }
+
+    int maxCooldown = cooldownStorage.getMaxCooldown(spell.asSpell());
+
+    return Math.round((float) cooldown * 13.0F / (float) maxCooldown);
   }
 
   // TODO: This is probably over-simplified

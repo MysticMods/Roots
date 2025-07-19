@@ -52,7 +52,6 @@ public abstract class RootsAPI {
   public static final Set<ItemAbility> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
   public static final Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
 
-
   public static IRootsAPI getInstance() {
     if (INSTANCE == null) {
       ServiceLoader<IRootsAPI> loader = ServiceLoader.load(IRootsAPI.class, Roots.class

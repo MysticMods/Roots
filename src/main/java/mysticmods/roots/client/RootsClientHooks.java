@@ -184,4 +184,13 @@ public class RootsClientHooks {
       }
     }
   }
+
+  @Nullable
+  public static Player getPlayer () {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft == null) {
+      return null;
+    }
+    return minecraft.player;
+  }
 }

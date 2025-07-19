@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -35,7 +36,28 @@ public class TooltipUtil {
         Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
             .getStyledName();
         Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.empty();
-        Component cd = entry == null ? Component.empty() : entry.cooldown() > 0 ? Component.translatable("roots.tooltip.staff.cooldown", entry.cooldown() / 20) : Component.empty();
+
+        Component cd;
+
+        if (entry == null) {
+          cd = Component.empty();
+        } else {
+          if (context.level() != null && context.level().isClientSide()) {
+            Player player = PlayerGetter.getPlayer();
+            if (!player.hasData(ModAttachments.COOLDOWN_STORAGE)) {
+              cd = Component.empty();
+            } else {
+              int cooldown = player.getData(ModAttachments.COOLDOWN_STORAGE).getCooldown(entry.spell());
+              if (cooldown > 0) {
+                cd = Component.translatable("roots.tooltip.staff.cooldown", cooldown / 20);
+              } else {
+                cd = Component.empty();
+              }
+            }
+          } else {
+            cd = Component.empty();
+          }
+        }
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected, cd));
         tempSlot++;
       }
@@ -52,9 +74,6 @@ public class TooltipUtil {
   public static void spellDataTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
     Spell spell = instance.getSpell();
     Set<String> keys = instance.getSpell().getTooltipDataKeys();
-/*    if (!keys.isEmpty()) {
-      result.add(Component.empty());
-    }*/
     for (String key : keys) {
       int index = spell.getDataIndex(key);
       // TODO: Clean this up
