@@ -3,11 +3,16 @@ package mysticmods.roots.api.grove;
 import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.core.BlockPos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PowerTicket {
   private final TicketDefinition definition;
   private final long tick;
   private final Object2IntMap<GrovePower.Consumer> suppliedMap = new Object2IntOpenHashMap<>();
+  private final List<BlockPos> lastPoweredFrom = new ArrayList<>();
 
   private PowerTicket(TicketDefinition definition, long tick) {
     this.definition = definition;
@@ -26,10 +31,15 @@ public class PowerTicket {
         if (required <= amount) {
           amount -= required;
           suppliedMap.mergeInt(req, required, Integer::sum);
+          lastPoweredFrom.add(grove.getGrovePosition());
         }
       }
     }
     return amount;
+  }
+
+  public List<BlockPos> getPoweredFrom() {
+    return lastPoweredFrom;
   }
 
   public boolean wasFullfilled() {
