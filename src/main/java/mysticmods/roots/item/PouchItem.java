@@ -21,7 +21,9 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import org.codehaus.plexus.util.StringUtils;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class PouchItem extends Item {
   private final PouchMenuProvider provider;
@@ -61,14 +63,23 @@ public class PouchItem extends Item {
     return InteractionResultHolder.success(stack);
   }
 
+  private static final EnumMap<DyeColor, String> COLOR_NAMES = new EnumMap<>(DyeColor.class);
+
   @Override
   public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     Dyeable dye = stack.get(ModAttachments.DYEABLE);
     if (dye != null && dye != Dyeable.DEFAULT) {
+      DyeColor color = dye.color();
+      String colorName = COLOR_NAMES.get(color);
+      if (colorName == null) {
+        colorName = StringUtils.capitalise(color.getName().replace("_", " "));
+        COLOR_NAMES.put(color, colorName);
+      }
+
       tooltipComponents.add(Component.empty());
-      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.color().getName().replace("_", " ")))
-          .setStyle(Style.EMPTY.withColor(dye.color().getTextColor()).withBold(true))));
+      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", colorName)
+          .setStyle(Style.EMPTY.withColor(color.getTextColor()).withBold(true))));
     }
     if (context.level() != null && context.level().isClientSide() && stack.is(RootsTags.Items.POUCHES)) {
       tooltipComponents.add(Component.empty());
