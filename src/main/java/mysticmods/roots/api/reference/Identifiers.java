@@ -7,4 +7,5 @@ public interface Identifiers {
   String PYRE_RECIPE_GROUP = "roots_pyre";
   String RUNIC_ENTITY_RECIPE_GROUP = "roots_runic_entity";
   String RUNIC_BLOCK_RECIPE_GROUP = "roots_runic_block";
+  String TRANSMUTATION_RECIPE_GROUP = "roots_transmutation";
 }

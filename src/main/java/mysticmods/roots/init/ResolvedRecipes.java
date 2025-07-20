@@ -18,6 +18,9 @@ import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityCrafting;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import mysticmods.roots.recipe.transmutation.TransmutationCrafting;
+import mysticmods.roots.recipe.transmutation.TransmutationInventory;
+import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -55,6 +58,9 @@ public class ResolvedRecipes {
   public static final ResolvingRecipeType<Void, SimpleWorldCrafting, KnifeRecipe> KNIFE = new ResolvingRecipeType<>(ModRecipes.KNIFE, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
+  public static final ResolvingRecipeType<Void, TransmutationCrafting, TransmutationRecipe> TRANSMUTATION = new ResolvingRecipeType<>(ModRecipes.TRANSMUTATION, (o1, o2) -> Integer.compare(o1.id()
+      .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
+      .getPriority())), null);
 
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {
@@ -65,6 +71,7 @@ public class ResolvedRecipes {
     event.addListener(RUNIC_BLOCK);
     event.addListener(RUNIC_ENTITY);
     event.addListener(SUMMON_CREATURES);
+    event.addListener(TRANSMUTATION);
   }
 
   public static void reset() {
@@ -75,5 +82,6 @@ public class ResolvedRecipes {
     RUNIC_BLOCK.reset();
     RUNIC_ENTITY.reset();
     SUMMON_CREATURES.reset();
+    TRANSMUTATION.reset();
   }
 }

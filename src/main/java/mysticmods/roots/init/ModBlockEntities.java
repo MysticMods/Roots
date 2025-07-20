@@ -22,7 +22,7 @@ public class ModBlockEntities {
 
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PedestalBlockEntity>> PEDESTAL = BLOCK_ENTITIES.register("pedestal", () -> BlockEntityType.Builder.of(PedestalBlockEntity::new, ModBlocks.RITUAL_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get(), ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), ModBlocks.DISPLAY_PEDESTAL.get(), ModBlocks.GROVE_PEDESTAL.get())
       .build(null));
-  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AmplifierBlockEntity>> GROWTH_AMPLIFIER = BLOCK_ENTITIES.register("grove_amplifier", () -> BlockEntityType.Builder.of(AmplifierBlockEntity::new, ModBlocks.GROWTH_AMPLIFIER.get())
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FungalTransmuterBlockEntity>> FUNGAL_TRANSMUTER = BLOCK_ENTITIES.register("fungal_transmuter", () -> BlockEntityType.Builder.of(FungalTransmuterBlockEntity::new, ModBlocks.FUNGAL_TRANSMUTER.get())
       .build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnchantedTurfBlockEntity>> ENCHANTED_TURF = BLOCK_ENTITIES.register("enchanted_turf", () -> BlockEntityType.Builder.of(EnchantedTurfBlockEntity::new, ModBlocks.ENCHANTED_TURF.get())
       .build(null));

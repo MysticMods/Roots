@@ -17,6 +17,7 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import mysticmods.roots.snapshot.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -43,6 +44,7 @@ public class ModSerializers {
   public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", RunicBlockRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", RunicEntityRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<PouchDyeRecipe>> DYE_POUCH = RECIPE_SERIALIZERS.register("dye_pouch", () -> new SimpleCraftingRecipeSerializer<>(PouchDyeRecipe::new));
+  public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<TransmutationRecipe>> TRANSMUTATION = RECIPE_SERIALIZERS.register("transmutation", TransmutationRecipe.Serializer::new);
 
   public static final DeferredHolder<SnapshotType<?>, SkySoarerSnapshot.Type> SKY_SOARER = SNAPSHOT_TYPES.register("sky_soarer", SkySoarerSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, PetalShellSnapshot.Type> PETAL_SHELL = SNAPSHOT_TYPES.register("petal_shell", PetalShellSnapshot.Type::new);

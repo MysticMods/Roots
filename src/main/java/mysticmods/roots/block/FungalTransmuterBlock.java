@@ -1,6 +1,7 @@
 package mysticmods.roots.block;
 
 import com.mojang.serialization.MapCodec;
+import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,7 +27,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class FungalTransmuterBlock extends Block {
+public class FungalTransmuterBlock extends Block implements EntityBlock {
   public static final MapCodec<FungalTransmuterBlock> CODEC = simpleCodec(FungalTransmuterBlock::new);
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
   protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0);
@@ -94,5 +96,10 @@ public class FungalTransmuterBlock extends Block {
   @Override
   protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
     return false;
+  }
+
+  @Override
+  public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return new FungalTransmuterBlockEntity(pos, state);
   }
 }

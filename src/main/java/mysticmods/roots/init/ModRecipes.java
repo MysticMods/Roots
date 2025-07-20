@@ -8,6 +8,7 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
@@ -24,6 +25,7 @@ public class ModRecipes {
   public static DeferredHolder<RecipeType<?>, RecipeType<KnifeRecipe>> KNIFE = TYPES.register("knife", () -> RecipeType.simple(RootsAPI.rl("knife")));
   public static DeferredHolder<RecipeType<?>, RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> RecipeType.simple(RootsAPI.rl("runic_block")));
   public static DeferredHolder<RecipeType<?>, RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<TransmutationRecipe>> TRANSMUTATION = TYPES.register("transmutation", () -> RecipeType.simple(RootsAPI.rl("transmutation")));
 
   public static void register(IEventBus bus) {
     TYPES.register(bus);

@@ -214,6 +214,7 @@ public class ClientSetup {
     event.registerRecipeCategoryFinder(ModRecipes.RUNIC_BLOCK.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.RUNIC_ENTITY.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.SUMMON_CREATURES.get(), (o) -> RecipeBookCategories.UNKNOWN);
+    event.registerRecipeCategoryFinder(ModRecipes.TRANSMUTATION.get(), o -> RecipeBookCategories.UNKNOWN);
   }
 
   // TODO: Fallback to default particle shader if Iris or whatever
