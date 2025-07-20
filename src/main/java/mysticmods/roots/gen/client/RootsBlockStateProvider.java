@@ -157,9 +157,9 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile displayPedestal = models().withExistingParent("display_pedestal", modLoc("block/complex/grove_pedestal"));
     getVariantBuilder(ModBlocks.DISPLAY_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(displayPedestal).build());
-    ModelFile growthAmplifier = models().withExistingParent("growth_amplifier", modLoc("block/complex/grove_amplifier"));
-    getVariantBuilder(ModBlocks.GROWTH_AMPLIFIER.get()).forAllStates(state -> ConfiguredModel.builder()
-        .modelFile(growthAmplifier).build());
+/*    ModelFile growthAmplifier = models().withExistingParent("growth_amplifier", modLoc("block/complex/grove_amplifier"));*/
+/*    getVariantBuilder(ModBlocks.GROWTH_AMPLIFIER.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(growthAmplifier).build());*/
     // Wild roots are existing
     simpleBlock(ModBlocks.CREEPING_GROVE_MOSS.get(), models().singleTexture(ModBlocks.CREEPING_GROVE_MOSS.getKey()
             .location().getPath(), mcLoc("block/carpet"), "wool", modLoc("block/creeping_grove_moss"))

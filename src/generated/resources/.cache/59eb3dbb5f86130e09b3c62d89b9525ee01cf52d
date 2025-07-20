@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-14T14:42:56.1591019	Loot Tables
+// 1.21.1	2025-07-20T16:31:17.2549583	Loot Tables
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -26,7 +26,6 @@ bf78417bc47bdc04c69bbc23edaf51f08a6a5407 data/roots/loot_table/blocks/deepslate_
 5b8eee6c109061d6e2254ac8ced029a2b196f1d7 data/roots/loot_table/blocks/granite_quartz_ore.json
 1b005d39b1f4400666da1da551efba4ec3fb155b data/roots/loot_table/blocks/grove_crafter.json
 aec326e13de43dbe71001ba65159a31aa94bdb56 data/roots/loot_table/blocks/grove_pedestal.json
-3811527ffcdc2c8ba5d61ade2b03964b40ea8c61 data/roots/loot_table/blocks/growth_amplifier.json
 249598b59242ad37ae8c6ce4bd3b699aabe45627 data/roots/loot_table/blocks/hanging_grove_moss.json
 a1ace70d28c4f526854daa5e5473f01b307abe29 data/roots/loot_table/blocks/incense_burner.json
 aad8a1f477cef3ce2bdae07a2532f36c0449f27c data/roots/loot_table/blocks/inferno_bulb_crop.json

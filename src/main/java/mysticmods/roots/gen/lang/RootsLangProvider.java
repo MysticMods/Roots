@@ -359,7 +359,7 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.GROVE_PEDESTAL);
     addBlock(ModBlocks.WILDWOOD_PEDESTAL);
     addBlock(ModBlocks.DISPLAY_PEDESTAL);
-    addBlock(ModBlocks.GROWTH_AMPLIFIER);
+/*    addBlock(ModBlocks.GROWTH_AMPLIFIER);*/
     addBlock(ModBlocks.RED_FAIRY_HUT);
     addBlock(ModBlocks.CRIMSON_FAIRY_HUT);
     addBlock(ModBlocks.WARPED_FAIRY_HUT);

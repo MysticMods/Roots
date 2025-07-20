@@ -74,7 +74,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.PYRE.get(), PyreBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.VISIBLE.get(), VisibleBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_STONE.get(), GroveStoneBlockEntityRenderer::new);
-    event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);
+/*    event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);*/
     event.registerBlockEntityRenderer(ModBlockEntities.ENCHANTED_TURF.get(), EnchantedTurfBlockEntityRenderer::new);
   }
 
@@ -163,8 +163,8 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.METEOR, MeteorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.JERBOA, JerboaModel::createBodyLayer);
-    event.registerLayerDefinition(ModelHolder.AMPLIFIER_CENTER, AmplifierBlockEntityRenderer::createInnerLayer);
-    event.registerLayerDefinition(ModelHolder.AMPLIFIER_OUTER, AmplifierBlockEntityRenderer::createOuterLayer);
+/*    event.registerLayerDefinition(ModelHolder.AMPLIFIER_CENTER, AmplifierBlockEntityRenderer::createInnerLayer);
+    event.registerLayerDefinition(ModelHolder.AMPLIFIER_OUTER, AmplifierBlockEntityRenderer::createOuterLayer);*/
   }
 
   public static final ResourceLocation WARNING_OVERLAY = RootsAPI.rl("warning");

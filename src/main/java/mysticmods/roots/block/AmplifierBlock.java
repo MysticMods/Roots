@@ -1,8 +1,8 @@
+/*
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.blockentity.AmplifierBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
@@ -56,3 +56,4 @@ public class AmplifierBlock extends UseDelegatedBlock {
     return Shapes.AMPLIFIER;
   }
 }
+*/

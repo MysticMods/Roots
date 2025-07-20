@@ -169,7 +169,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.NYI).add(INCENSE_BURNER.get(), UNENDING_BOWL.get());
     this.tag(RootsTags.Blocks.WIP).addTag(RootsTags.Blocks.SOILS);
-    this.tag(RootsTags.Blocks.AMPLIFIERS).add(GROWTH_AMPLIFIER.get());
+    this.tag(RootsTags.Blocks.AMPLIFIERS);
     this.tag(RootsTags.Blocks.DISPLAY_PEDESTALS).add(DISPLAY_PEDESTAL.get());
     this.tag(RootsTags.Blocks.RITUAL_PEDESTALS).add(RITUAL_PEDESTAL.get(), REINFORCED_RITUAL_PEDESTAL.get());
     this.tag(RootsTags.Blocks.GROVE_PEDESTALS).add(GROVE_PEDESTAL.get(), WILDWOOD_PEDESTAL.get());
@@ -411,7 +411,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     tag(RootsTags.Blocks.GROWTH_AMPLIFIER_GRASSES).add(Blocks.TALL_GRASS, Blocks.SHORT_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
 
-    tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS).add(GROWTH_AMPLIFIER.get(), ENCHANTED_TURF.get()).add(FUNGAL_TRANSMUTER.get());
+    tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS).add(ENCHANTED_TURF.get(),FUNGAL_TRANSMUTER.get());
 
     tag(RootsTags.Blocks.NETHER_DOORS).add(Blocks.CRIMSON_DOOR, Blocks.WARPED_DOOR);
   }

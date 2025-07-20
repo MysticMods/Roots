@@ -1,6 +1,5 @@
 package mysticmods.roots.block;
 
-import mysticmods.roots.blockentity.AmplifierBlockEntity;
 import mysticmods.roots.blockentity.EnchantedTurfBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModAttachments;

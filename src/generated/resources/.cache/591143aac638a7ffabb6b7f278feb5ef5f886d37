@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-14T14:42:56.1742829	Item Models: roots
+// 1.21.1	2025-07-20T16:31:17.2733041	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -82,7 +82,6 @@ a29b76b795c7b9db9d670c008740b58bb3a77e2d assets/roots/models/item/gramary.json
 2f13055795ba9015e6c0dbfc42f5574ccc04dd42 assets/roots/models/item/grove_moss.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/grove_pedestal.json
 97deb2b89129d391d5fdd1bb246a72b35fc3a06a assets/roots/models/item/grove_spores.json
-0c5672c076d20ebab759b98069f4cdf6b0386bb6 assets/roots/models/item/growth_amplifier.json
 1beeb16114aedeaa02e4ce5f88499e58ef183814 assets/roots/models/item/hanging_grove_moss.json
 dbf4c4d63cb7b6030aa3cd51c09a4f621b1b4b7a assets/roots/models/item/herb_pouch.json
 94d1d49a0b267468e50cbd64225ae18927dd3df6 assets/roots/models/item/herb_pouch_coloured.json

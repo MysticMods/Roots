@@ -1,10 +1,10 @@
+/*
 package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.blockentity.AmplifierBlockEntity;
 import mysticmods.roots.client.model.ModelHolder;
 import mysticmods.roots.util.SimpleNoise;
 import net.minecraft.client.model.geom.ModelPart;
@@ -93,3 +93,4 @@ public class AmplifierBlockEntityRenderer implements BlockEntityRenderer<Amplifi
     pPoseStack.popPose();
   }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.RootsTags;
@@ -91,6 +92,7 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
+*/
 /*
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
@@ -142,7 +144,8 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
         }
       }
     }
-*/
+*//*
+
 
     return InteractionResult.SUCCESS;
   }
@@ -198,6 +201,7 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
   // TODO: Block ticker
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
+*/
 /*    if (isPowered()) {
       if (poweredTicks < 80) {
         poweredTicks++;
@@ -226,7 +230,8 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
         PacketDistributor.sendToPlayersTrackingChunk(pLevel, new ChunkPos(pPos), new GrowthAmplifierFXPacket(center, getBlockPos()));
         poweredTicks = 0;
       }
-    }*/
+    }*//*
+
   }
 
   @Override
@@ -240,6 +245,7 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
     this.rotationAccumulator += baseSpeed * speedMod;
   }
 
+*/
 /*  @Override
   public boolean isPowered() {
     return powered;
@@ -257,5 +263,7 @@ public class AmplifierBlockEntity extends UseDelegatedBlockEntity implements Inv
   @Override
   public int getRequiredPower(IGroveInstance grove) {
     return 30;
-  }*/
+  }*//*
+
 }
+*/

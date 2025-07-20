@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-14T14:42:56.1712628	Roots Item Tags
+// 1.21.1	2025-07-20T16:31:17.2692595	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/curios/tags/item/tome.json
@@ -147,7 +147,7 @@ cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/item/logs/runed/wildwoo
 1b76b7887fbceab43d0a517275981c378378e349 data/roots/tags/item/logs/wildwood.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/item/mortars.json
 33c51847dc0e01980184ec1a4eb8d222662d792f data/roots/tags/item/mortar_activation.json
-09eee9916894afd3e3a862522fdf6cdd7ecdf64a data/roots/tags/item/nyi.json
+b91d1ffc0a7a5e6767d9d73a95e14861d5f67a7e data/roots/tags/item/nyi.json
 c55106d54db2ac749ccc95747891b03f570d8fc3 data/roots/tags/item/pedestals.json
 45c768b93d7e13a13dd2a41a896005c7e3960523 data/roots/tags/item/pedestals/display.json
 a0f512d942a5e0f1365b3fcea384de8dffce2a51 data/roots/tags/item/pedestals/grove.json

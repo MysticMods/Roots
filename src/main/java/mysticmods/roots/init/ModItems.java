@@ -177,7 +177,7 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> WILDWOOD_PEDESTAL = ITEMS.register("wildwood_pedestal", () -> new BlockItem(ModBlocks.WILDWOOD_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO; Contents
   public static DeferredHolder<Item, BlockItem> DISPLAY_PEDESTAL = ITEMS.register("display_pedestal", () -> new BlockItem(ModBlocks.DISPLAY_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
-  public static DeferredHolder<Item, BlockItem> GROWTH_AMPLIFIER = ITEMS.register("growth_amplifier", () -> new BlockItem(ModBlocks.GROWTH_AMPLIFIER.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
+/*  public static DeferredHolder<Item, BlockItem> GROWTH_AMPLIFIER = ITEMS.register("growth_amplifier", () -> new BlockItem(ModBlocks.GROWTH_AMPLIFIER.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));*/
   public static DeferredHolder<Item, BlockItem> RED_FAIRY_HUT = ITEMS.register("red_fairy_hut", () -> new BlockItem(ModBlocks.RED_FAIRY_HUT.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> BROWN_FAIRY_HUT = ITEMS.register("brown_fairy_hut", () -> new BlockItem(ModBlocks.BROWN_FAIRY_HUT.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> BAFFLECAP_FAIRY_HUT = ITEMS.register("bafflecap_fairy_hut", () -> new BlockItem(ModBlocks.BAFFLECAP_FAIRY_HUT.get(), new Item.Properties()));

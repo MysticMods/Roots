@@ -151,7 +151,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.WILDWOOD_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.DISPLAY_PEDESTAL, new FurnaceFuel(300), false);
-    builder10.add(ModItems.GROWTH_AMPLIFIER, new FurnaceFuel(300), false);
+/*    builder10.add(ModItems.GROWTH_AMPLIFIER, new FurnaceFuel(300), false);*/
     builder10.add(ModItems.INFERNO_BULB, new FurnaceFuel(600), false);
     builder10.add(ModItems.MAGMATIC_SOIL, new FurnaceFuel(900), false);
     builder10.add(ModItems.WILDWOOD_PLANKS, new FurnaceFuel(300), false);
