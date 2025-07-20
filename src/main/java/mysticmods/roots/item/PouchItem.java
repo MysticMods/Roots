@@ -67,7 +67,7 @@ public class PouchItem extends Item {
     Dyeable dye = stack.get(ModAttachments.DYEABLE);
     if (dye != null && dye != Dyeable.DEFAULT) {
       tooltipComponents.add(Component.empty());
-      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.color().getName()))
+      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.color().getName().replace("_", " ")))
           .setStyle(Style.EMPTY.withColor(dye.color().getTextColor()).withBold(true))));
     }
     if (context.level() != null && context.level().isClientSide() && stack.is(RootsTags.Items.POUCHES)) {
