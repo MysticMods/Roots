@@ -76,6 +76,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_STONE.get(), GroveStoneBlockEntityRenderer::new);
 /*    event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);*/
     event.registerBlockEntityRenderer(ModBlockEntities.ENCHANTED_TURF.get(), EnchantedTurfBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.FUNGAL_TRANSMUTER.get(), FungalTransmuterBlockEntityRenderer::new);
   }
 
   private static final BlockColor GRASS =
