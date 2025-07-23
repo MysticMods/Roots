@@ -202,7 +202,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
       PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
       lastRecipe = cachedRecipe;
-      storedItems.clear();
+      lastPlayer = player; // This is where the grove crafter does it.
+      lastUuid = null; // TODO: Is it handled elsewhere?
+      storedItems.clear(); // TODO: Is this correct?
       if (currentRitual == ModRituals.CRAFTING.get()) {
         storedItems.addAll(cachedRecipe.value()
             .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
@@ -394,6 +396,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         ItemStack.parse(provider, incomingStoredItems.getCompound(i)).ifPresent(storedItems::add);
       }
     }
+    lastUuid = null;
+    lastPlayer = null;
     if (pTag.hasUUID("last_player")) {
       lastUuid = pTag.getUUID("last_player");
       if (getLevel() != null) {

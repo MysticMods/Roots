@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ConfigManager {
@@ -71,6 +72,8 @@ public class ConfigManager {
   public static ModConfigSpec.BooleanValue AQUA_BUBBLE_OVERLAY;
   public static ModConfigSpec.BooleanValue WARNING_OVERLAY;
 
+  public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_POWER_PER_TICK;
+  public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_MAX_STORED_POWER;
 
   public static ModConfigSpec COMMON_CONFIG;
   public static ModConfigSpec CLIENT_CONFIG;
@@ -163,6 +166,12 @@ public class ConfigManager {
         .define("drop_wildroot", true);
     DROP_GROVE_SPORES = COMMON_BUILDER.comment("whether or not grove spores should drop from grass")
         .define("drop_grove_spores", true);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.push("fungal_transmuter");
+    FUNGAL_TRANSMUTER_POWER_PER_TICK = COMMON_BUILDER.comment("the amount of power the Fungal Transmuter will consume per tick")
+        .defineInRange("fungal_transmuter_power_per_tick", 50, 1, Integer.MAX_VALUE);
+    FUNGAL_TRANSMUTER_MAX_STORED_POWER = COMMON_BUILDER.comment("the maximum amount of power the Fungal Transmuter can store")
+        .defineInRange("fungal_transmuter_max_stored_power", 50 * 100, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
 
     CLIENT_BUILDER.push("debug");

@@ -566,6 +566,7 @@
   "roots.tooltip.token.spell": "Spell: %s",
   "roots.tooltip.token.unlock": "Right-Click to unlock.",
   "roots.tooltip.token.unlocked": "You've already unlocked this.",
+  "roots.transmutation.not_enough_power": "Not enough Grove Power to transmute this item. Current power: %s, required: %s",
   "roots.wip": "[Work In Progress]",
   "spell.roots.acid_cloud": "Acid Cloud",
   "spell.roots.aqua_bubble": "Aqua Bubble",

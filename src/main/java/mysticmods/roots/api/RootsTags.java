@@ -323,6 +323,7 @@ public class RootsTags {
     public static final TagKey<Item> QUIVERS = modTag("quivers");
 
     public static final TagKey<Item> GROVE_CRAFTER_ACTIVATION = modTag("grove_crafter_activation");
+    public static final TagKey<Item> FUNGAL_TRANSMUTER_ACTIVATION = modTag("fungal_transmuter_activation");
     public static final TagKey<Item> MORTAR_ACTIVATION = modTag("mortar_activation");
     public static final TagKey<Item> PYRE_ACTIVATION = modTag("pyre_activation");
 

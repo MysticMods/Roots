@@ -785,6 +785,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.item.gramary.bound_block_position", "Bound Gramary to position %s/%s/%s");
 
     add("roots.item.gramary.with_mode", "Gramary (%s)");
+
+    add("roots.transmutation.not_enough_power", "Not enough Grove Power to transmute this item. Current power: %s, required: %s");
   }
 
   // TODO: Translations for damage

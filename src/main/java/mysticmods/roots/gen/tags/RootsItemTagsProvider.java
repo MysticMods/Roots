@@ -221,7 +221,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.copy(RootsTags.Blocks.CROPS, RootsTags.Items.CROPS);
 
-    this.tag(RootsTags.Items.GROVE_CRAFTER_ACTIVATION).add(Items.STICK).addTag(RootsTags.Items.KNIVES);
+    this.tag(RootsTags.Items.GROVE_CRAFTER_ACTIVATION).addTag(RootsTags.Items.KNIVES);
+    this.tag(RootsTags.Items.FUNGAL_TRANSMUTER_ACTIVATION).addTag(RootsTags.Items.KNIVES);
     this.tag(RootsTags.Items.PYRE_ACTIVATION).add(Items.FLINT_AND_STEEL);
 
     this.tag(RootsTags.Items.MOONGLOW_HERB).addTag(RootsTags.Items.MOONGLOW_CROP);

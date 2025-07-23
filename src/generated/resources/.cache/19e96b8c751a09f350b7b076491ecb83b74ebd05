@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-20T16:31:17.2579566	Block States: roots
+// 1.21.1	2025-07-22T16:23:54.4568205	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -21,7 +21,7 @@ d256cf7816bc89f7c5f024790771665e58ad52e2 assets/roots/blockstates/elemental_soil
 885a01d5168acf7e3230780304b39fe1acad3e17 assets/roots/blockstates/enchanted_turf.json
 2ff89adfb5c91a7a06d6657888b28ebd92a7b2ba assets/roots/blockstates/fairy_grove_stone.json
 46d9d1e7bc9d011b57d166b8800d0653333d2ae8 assets/roots/blockstates/fungal_grove_stone.json
-004a6fad7f5f303e9000ae649928bf115c555c79 assets/roots/blockstates/fungal_transmuter.json
+41572223c6e62f057f948750ae0db4ddf08f4c31 assets/roots/blockstates/fungal_transmuter.json
 8689bdbdd69fd55eafb855074519c75569eff8e5 assets/roots/blockstates/granite_quartz_ore.json
 fb1c6dd7234fa07231b74cf05e280d1b0cdbd1c4 assets/roots/blockstates/grove_crafter.json
 7f7849a45d6a7635bf3aa74d137358e27a542df5 assets/roots/blockstates/grove_pedestal.json

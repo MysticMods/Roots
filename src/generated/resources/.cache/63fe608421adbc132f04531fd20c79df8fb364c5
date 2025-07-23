@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-20T16:31:17.2692595	Roots Item Tags
+// 1.21.1	2025-07-22T16:23:54.4669487	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/curios/tags/item/tome.json
@@ -109,7 +109,8 @@ ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/item/decorative_pyres.j
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json
 7c23110fe0420d3a96fab43595db02c682e00c68 data/roots/tags/item/foraging_eligible.json
 d17a97ae6e613b481dec932c38e92f9776fcf84c data/roots/tags/item/functional_pyres.json
-39ecf884f3bb83a88b7d180276a7ac692c52fc00 data/roots/tags/item/grove_crafter_activation.json
+80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/roots/tags/item/fungal_transmuter_activation.json
+80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/roots/tags/item/grove_crafter_activation.json
 0b84a7b844d869f56ca22683e394d08ece1c1d7e data/roots/tags/item/grove_stones.json
 fe934ceccc4232fc0d8a73f6ae26291c0403badb data/roots/tags/item/grove_stones/elemental.json
 b0e60b9a7562b461a7ff4e1d6e2e8c6460f2ff40 data/roots/tags/item/grove_stones/fairy.json

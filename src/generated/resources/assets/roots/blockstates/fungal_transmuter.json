@@ -1,17 +1,32 @@
 {
   "variants": {
-    "facing=east": {
+    "active=false,facing=east": {
       "model": "roots:block/fungal_transmuter",
       "y": 270
     },
-    "facing=north": {
+    "active=false,facing=north": {
       "model": "roots:block/fungal_transmuter",
       "y": 180
     },
-    "facing=south": {
+    "active=false,facing=south": {
       "model": "roots:block/fungal_transmuter"
     },
-    "facing=west": {
+    "active=false,facing=west": {
+      "model": "roots:block/fungal_transmuter",
+      "y": 90
+    },
+    "active=true,facing=east": {
+      "model": "roots:block/fungal_transmuter",
+      "y": 270
+    },
+    "active=true,facing=north": {
+      "model": "roots:block/fungal_transmuter",
+      "y": 180
+    },
+    "active=true,facing=south": {
+      "model": "roots:block/fungal_transmuter"
+    },
+    "active=true,facing=west": {
       "model": "roots:block/fungal_transmuter",
       "y": 90
     }

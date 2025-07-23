@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/pumpkin_to_melon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_pumpkin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:crops/pumpkin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_pumpkin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/pumpkin_to_melon"
+    ]
+  }
+}

@@ -160,6 +160,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       lastPlayer = player;
       lastUuid = null;
       lastRecipe = cachedRecipe;
+      // TODO: We never cleared storedItems here, unlike the pyre
       List<TaggedPedestalCrafting.ItemPosition> positions = playerCrafting.getItemsAndPositions();
       if (player instanceof FakePlayer) {
         PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new StartGroveCraftingFX(getBlockPos(), positions));

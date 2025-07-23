@@ -5,6 +5,8 @@ public class Constants {
   public static final int PEDESTAL_ANIMATION_TICKS = 20 * 2;
   public static final int BASE_GROVE_CRAFTER_ANIMATION_TICKS = 20 * 6;
 
+  public static final int FUNGAL_TRANSMUTER_ANIMATION_TICKS = 20 * 5; // How long the Fungal Transmuter animation lasts
+
   public static final int GROVE_CRAFTING_ANIMATION_TICKS = PEDESTAL_ANIMATION_TICKS + BASE_GROVE_CRAFTER_ANIMATION_TICKS; // Total value for both, used for the item particles
 
   public static final int GROVE_PARTICLE_PEDESTAL_DELAY = PEDESTAL_ANIMATION_TICKS; // How long the particles are hidden for

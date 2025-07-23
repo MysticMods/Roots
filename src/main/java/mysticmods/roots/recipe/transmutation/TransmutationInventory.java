@@ -4,6 +4,6 @@ import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 
 public class TransmutationInventory extends RecipeInventory {
   public TransmutationInventory() {
-    super(1);
+    super(25);
   }
 }

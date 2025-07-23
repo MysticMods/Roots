@@ -49,6 +49,23 @@ public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory,
     return ModRecipes.TRANSMUTATION.get();
   }
 
+  public static Builder create() {
+    return new Builder();
+  }
+
+  public static class Builder {
+    private int power;
+
+    public Builder powerRequired(int power) {
+      this.power = power;
+      return this;
+    }
+
+    public TransmutationRecipe build(BaseRecipeData.Builder data) {
+      return new TransmutationRecipe(data.build(), power);
+    }
+  }
+
   public static class Serializer implements RecipeSerializer<TransmutationRecipe> {
     @Override
     public MapCodec<TransmutationRecipe> codec() {

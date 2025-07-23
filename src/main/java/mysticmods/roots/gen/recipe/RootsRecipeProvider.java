@@ -19,6 +19,7 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import mysticmods.roots.test.entity.EntityTagTest;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -34,6 +35,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -2351,6 +2353,10 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     cordial(c, ModItems.CACTUS_SYRUP, Tags.Items.CROPS_CACTUS, 4);
 
+    RecipeSaver.saver().unlockedBy("has_pumpkin", has(Tags.Items.CROPS_PUMPKIN))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.MELON))
+            .requires(Tags.Items.CROPS_PUMPKIN)), c, RootsAPI.rl("transmute/pumpkin_to_melon"));
   }
 
   public static class RecipeSaver {

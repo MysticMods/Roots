@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.TagKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,19 @@ public class PowerTicket {
       }
     }
     return true;
+  }
+
+  public int getSupplied(TagKey<Grove> tag) {
+    for (GrovePower.Consumer consumer : definition.requests()) {
+      if (consumer.tag().equals(tag)) {
+        return suppliedMap.getInt(consumer);
+      }
+    }
+    return 0;
+  }
+
+  public int getSupplied(GrovePower.Consumer consumer) {
+    return suppliedMap.getInt(consumer);
   }
 
   public long getTick() {
