@@ -57,6 +57,9 @@ public class FungalTransmuterBlockEntityRenderer extends BoundedBlockEntityRende
 
     ItemStack inSlot;
     RecipeHolder<TransmutationRecipe> recipe = pBlockEntity.getCachedRecipe();
+    if (recipe == null && pBlockEntity.isCrafting()) {
+      recipe = pBlockEntity.getLastRecipe();
+    }
     if (recipe == null) {
       inSlot = ItemStack.EMPTY;
     } else {

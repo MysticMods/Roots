@@ -81,6 +81,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   private final TransmutationCrafting playerlessCrafting = new TransmutationCrafting(inventory, this, null);
   private final List<ItemStack> storedItems = new ArrayList<>();
+  private final List<ItemStack> animatedItems = new ArrayList<>();
   private PowerTicket ticket = null;
   private RecipeHolder<TransmutationRecipe> lastRecipe = null;
   private RecipeHolder<TransmutationRecipe> cachedRecipe = null;
@@ -181,7 +182,11 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       storedItems.removeIf(ItemStack::isEmpty);
       // TODO: Store the animated items
 
-      List<ItemStack> processed = cachedRecipe.value().process(inventory.getItemsAndClear());
+      animatedItems.clear();
+      List<ItemStack> items = inventory.getItemsAndClear();
+      items.forEach(o -> animatedItems.add(o.copy()));
+
+      List<ItemStack> processed = cachedRecipe.value().process(items);
       processed = outputAdjacent(processed);
       for (ItemStack stack : processed) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
@@ -262,6 +267,14 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   }
 
   @Override
+  public List<ItemStack> getNonEmptyItems() {
+    if (!animatedItems.isEmpty()) {
+      return animatedItems;
+    }
+    return InventoryBlockEntity.super.getNonEmptyItems();
+  }
+
+  @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.saveAdditional(pTag, lookup);
     if (cachedRecipe != null) {
@@ -276,8 +289,17 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
         storedItems.add(stack.save(lookup, new CompoundTag()));
       }
     }
+    ListTag animatedItems = new ListTag();
+    for (ItemStack stack : this.animatedItems) {
+      if (!stack.isEmpty()) {
+        animatedItems.add(stack.save(lookup, new CompoundTag()));
+      }
+    }
     if (!storedItems.isEmpty()) {
       pTag.put("stored_items", storedItems);
+    }
+    if (!animatedItems.isEmpty()) {
+      pTag.put("animated_items", animatedItems);
     }
     pTag.putInt("stored_power", storedPower);
     pTag.put("inventory", inventory.serializeNBT(lookup));
@@ -318,6 +340,14 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       for (int i = 0; i < storedItemsList.size(); i++) {
         ItemStack.parse(registries, storedItemsList.getCompound(i))
             .ifPresent(storedItems::add);
+      }
+    }
+    animatedItems.clear();
+    if (tag.contains("animated_items", CompoundTag.TAG_LIST)) {
+      ListTag animatedItemsList = tag.getList("animated_items", CompoundTag.TAG_COMPOUND);
+      for (int i = 0; i < animatedItemsList.size(); i++) {
+        ItemStack.parse(registries, animatedItemsList.getCompound(i))
+            .ifPresent(animatedItems::add);
       }
     }
     lastUuid = null;
@@ -406,6 +436,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       );
       ModActions.CRAFT_RECIPE.get().accept(context);
     }
+    animatedItems.clear();
     lastPlayer = null;
     lastUuid = null;
     level.setBlock(getBlockPos(), getBlockState().setValue(FungalTransmuterBlock.ACTIVE, false), 3);
