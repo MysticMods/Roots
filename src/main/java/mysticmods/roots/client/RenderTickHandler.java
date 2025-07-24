@@ -2,9 +2,10 @@ package mysticmods.roots.client;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -30,13 +31,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -52,12 +56,35 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.event.GameShuttingDownEvent;
+import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Queue;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class RenderTickHandler {
+  private static RenderTarget CRUMBLE_TARGET = null;
+
+  public static RenderTarget getCrumbleTarget () {
+    if (CRUMBLE_TARGET == null) {
+      CRUMBLE_TARGET = new TextureTarget(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight(), true, Minecraft.ON_OSX);
+      CRUMBLE_TARGET.setClearColor(0, 0, 0, 0);
+      if (Minecraft.getInstance().getMainRenderTarget().isStencilEnabled()) {
+        CRUMBLE_TARGET.enableStencil();
+      }
+    }
+    return CRUMBLE_TARGET;
+  }
+
+  public static void destroyRenderTargets () {
+    if (CRUMBLE_TARGET != null) {
+      CRUMBLE_TARGET.destroyBuffers();
+      CRUMBLE_TARGET = null;
+    }
+  }
+
   private static float clientTicks = 0;
 
   private static boolean outliningArea = false;
@@ -191,11 +218,32 @@ public class RenderTickHandler {
   }
 
   @SubscribeEvent
+  public static void onShutDown (GameShuttingDownEvent event) {
+    if (!RenderSystem.isOnRenderThread()) {
+      RenderSystem.recordRenderCall(RenderTickHandler::destroyRenderTargets);
+    } else {
+      destroyRenderTargets();
+    }
+  }
+
+  private static int lastWidth = -1;
+  private static int lastHeight = -1;
+
+  @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post post) {
     HerbOverlay.tick();
     BeamManager.tick();
     // TODO: Check pausing
     ScreenParticleEngine.tick();
+
+    Minecraft mc = Minecraft.getInstance();
+    int width = mc.getWindow().getWidth();
+    int height = mc.getWindow().getHeight();
+    if (width != lastWidth || height != lastHeight) {
+      lastWidth = width;
+      lastHeight = height;
+      destroyRenderTargets();
+    }
   }
 
   // This is stolen from Mekanism
@@ -250,5 +298,75 @@ public class RenderTickHandler {
 
   public static float getClientTicks() {
     return clientTicks;
+  }
+
+  public static void renderStaticCrumble(
+      ItemStack stack,
+      ItemDisplayContext displayContext,
+      int combinedLight,
+      int combinedOverlay,
+      PoseStack poseStack,
+      MultiBufferSource bufferSource,
+      @Nullable Level level,
+      int seed
+  ) {
+    Minecraft mc = Minecraft.getInstance();
+    ItemRenderer itemRenderer = mc.getItemRenderer();
+
+    mc.getMainRenderTarget().unbindWrite();
+    RenderTarget crumbleTarget = getCrumbleTarget();
+    crumbleTarget.bindWrite(true);
+    RenderSystem.clear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
+
+    MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
+
+    poseStack.pushPose();
+    itemRenderer.renderStatic(null, stack, displayContext, false, poseStack, buffer, level, combinedLight, combinedOverlay, seed);
+    buffer.endBatch();
+    poseStack.popPose();
+
+    RenderSystem.setShader(GameRenderer::getPositionColorShader);
+    RenderSystem.enableBlend();
+    RenderSystem.defaultBlendFunc();
+
+    Tesselator tess = Tesselator.getInstance();
+    BufferBuilder buff2 = tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+    buff2.addVertex(-0.5f, -0.5f, 0).setColor(255, 0, 0, 255);
+    buff2.addVertex( 0.5f, -0.5f, 0).setColor(255, 0, 0, 255);
+    buff2.addVertex( 0.5f,  0.5f, 0).setColor(255, 0, 0, 255);
+    buff2.addVertex(-0.5f,  0.5f, 0).setColor(255, 0, 0, 255);
+
+    MeshData meshdata = buff2.build();
+    if (meshdata != null) {
+      BufferUploader.drawWithShader(meshdata);
+    }
+
+    mc.getMainRenderTarget().bindWrite(false);
+  }
+
+  public static void crumble (int progress) {
+    RenderSystem.disableCull();
+    RenderSystem.depthMask(false);
+    RenderSystem.enableBlend();
+    RenderSystem.defaultBlendFunc();
+
+    RenderSystem.setShader(RootsShaders::getCrumblingShader);
+    RenderSystem.setShaderTexture(0, getCrumbleTarget().getColorTextureId());
+
+    Tesselator tess = Tesselator.getInstance();
+    BufferBuilder buffer = tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+    buffer.addVertex(-1, 1, 0).setUv(0, 0).setColor(255, 255, 255, 255);
+    buffer.addVertex(1, 1, 0).setUv(1, 0).setColor(255, 255, 255, 255);
+    buffer.addVertex(1, -1, 0).setUv(1, 1).setColor(255, 255, 255, 255);
+    buffer.addVertex(-1, -1, 0).setUv(0, 1).setColor(255, 255, 255, 255);
+
+    MeshData meshdata = buffer.build();
+    if (meshdata != null) {
+      BufferUploader.drawWithShader(meshdata);
+    }
+
+    RenderSystem.depthMask(true);
+    RenderSystem.disableBlend();
+    RenderSystem.enableCull();
   }
 }

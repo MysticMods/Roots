@@ -1,11 +1,15 @@
 package mysticmods.roots.client.blockentity;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.network.chat.Component;
@@ -72,8 +76,9 @@ public class FungalTransmuterBlockEntityRenderer extends BoundedBlockEntityRende
       pPoseStack.translate(0.5, 1.3 + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
       pPoseStack.scale(1.2f, 1.2f, 1.2f);
       pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-      Minecraft.getInstance().getItemRenderer()
-          .renderStatic(inSlot, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      RenderTickHandler.renderStaticCrumble(inSlot, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      RenderSystem.setShaderTexture(0, RenderTickHandler.getCrumbleTarget().getColorTextureId());
+      RenderTickHandler.crumble(1);
       pPoseStack.popPose();
     }
   }

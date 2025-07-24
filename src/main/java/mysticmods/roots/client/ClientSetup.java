@@ -222,6 +222,7 @@ public class ClientSetup {
   @SubscribeEvent
   public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.LOW_DISCARD_PARTICLE_SHADER_LOCATION, DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.LOW_DISCARD_PARTICLE_SHADER = s);
+    event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.CRUMBLE_SHADER_LOCATION, DefaultVertexFormat.POSITION_TEX_COLOR), (s) -> RootsShaders.CRUMBLE_SHADER = s);
   }
 
   @SubscribeEvent

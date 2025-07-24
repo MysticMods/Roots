@@ -1,5 +1,5 @@
 {
-    "vertex": "particle",
+    "vertex": "roots:low_particle_discard",
     "fragment": "roots:low_particle_discard",
     "samplers": [
         { "name": "Sampler0" },
