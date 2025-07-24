@@ -749,8 +749,17 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.hud.pyre.begin2", "start %s");
     add("roots.hud.pyre.begin3", "craft %s");
 
+    add("roots.hud.transmuter.begin1", "Right-click with");
+    add("roots.hud.transmuter.begin2", "knife to");
+    add("roots.hud.transmuter.begin3", "craft %s");
+
     add("roots.hud.pyre.restart1", "Sneak-Right-Click with");
     add("roots.hud.pyre.restart2", "empty hand to repeat");
+
+    add("roots.hud.transmuter.restart1", "Sneak-Right-Click with");
+    add("roots.hud.transmuter.restart2", "empty hand to repeat");
+
+    add("roots.hud.transmuter.power", "Stored Power: %s/%s");
 
     add("roots.hud.mortar.repeat1", "Sneak-Right-Click with");
     add("roots.hud.mortar.repeat2", "empty hand to refill");

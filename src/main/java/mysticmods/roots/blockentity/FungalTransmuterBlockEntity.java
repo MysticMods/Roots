@@ -121,6 +121,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     } else if (stack.isEmpty() && player.isCrouching()) {
       if (lastRecipe != null) {
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
+        revalidateRecipe();
       }
     } else if (stack.is(RootsTags.Items.FUNGAL_TRANSMUTER_ACTIVATION)) {
       if (!state.getValue(FungalTransmuterBlock.ACTIVE)) {
@@ -177,7 +178,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       lastRecipe = cachedRecipe;
       storedItems.clear();
 
-      storedItems.addAll(cachedRecipe.value()
+      storedItems.addAll(lastRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
       storedItems.removeIf(ItemStack::isEmpty);
       // TODO: Store the animated items
@@ -186,7 +187,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       List<ItemStack> items = inventory.getItemsAndClear();
       items.forEach(o -> animatedItems.add(o.copy()));
 
-      List<ItemStack> processed = cachedRecipe.value().process(items);
+      List<ItemStack> processed = lastRecipe.value().process(items);
       processed = outputAdjacent(processed);
       for (ItemStack stack : processed) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
@@ -486,6 +487,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     this.poweredLastTick = ticket.wasFullfilled();
     int oldPower = this.storedPower;
     this.storedPower += ticket.getSupplied(RootsTags.Groves.FUNGAL);
+    this.storedPower = Math.min(this.storedPower, getMaxPower());
     if (this.storedPower != oldPower) {
       this.setChanged();
       this.updateViaState();
@@ -523,5 +525,13 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   @Override
   public void setBlockCapabilityCache(BlockCapabilityCache<IItemHandler, Direction> blockCapabilityCache) {
     this.capabilityCache = blockCapabilityCache;
+  }
+
+  public int getPower() {
+    return storedPower;
+  }
+
+  public int getMaxPower () {
+    return ConfigManager.FUNGAL_TRANSMUTER_MAX_STORED_POWER.getAsInt();
   }
 }

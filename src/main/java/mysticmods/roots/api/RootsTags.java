@@ -241,6 +241,7 @@ public class RootsTags {
     public static final TagKey<Block> GROVE_CRAFTER_HUD_RENDERER = modTag("grove_crafter_hud_layer");
     public static final TagKey<Block> MORTAR_HUD_RENDERER = modTag("mortar_hud_layer");
     public static final TagKey<Block> GROVE_STONE_HUD_RENDERER = modTag("grove_stone_hud_layer");
+    public static final TagKey<Block> TRANSMUTER_HUD_RENDERER = modTag("transmuter_hud_layer");
 
     public static final TagKey<Block> HUTS = modTag("huts");
 

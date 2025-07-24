@@ -14,6 +14,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.block.PyreBlock;
+import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -21,6 +22,7 @@ import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -74,6 +76,8 @@ public class HudOverlay {
         renderMortar(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
       } else if (state.is(RootsTags.Blocks.GROVE_STONE_HUD_RENDERER)) {
         renderGroveStone(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
+      } else if (state.is(RootsTags.Blocks.TRANSMUTER_HUD_RENDERER)) {
+        renderTransmuter(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
       }
     } else {
       EntityHitResult trace = ((EntityHitResult) mc.hitResult);
@@ -226,6 +230,103 @@ public class HudOverlay {
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
+      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
+      graphics.drawString(mc.font, comp3, x + 25, y + 24, 16777215, true);
+      RenderSystem.enableDepthTest();
+      RenderSystem.enableBlend();
+    }
+  }
+
+  public static void renderTransmuter(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {
+    Level level = mc.level;
+    if (level.getBlockEntity(trace.getBlockPos()) instanceof FungalTransmuterBlockEntity transmuter) {
+      int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
+      int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
+
+      boolean crafting = transmuter.isCrafting();
+
+      boolean empty = transmuter.getInventory().isEmpty();
+
+      if (!empty) {
+        float angle = -90;
+        int radius = 24;
+        List<ItemStack> nonEmpty = transmuter.getNonEmptyItems();
+        float anglePer = 360f / nonEmpty.size();
+
+        for (ItemStack stack : nonEmpty) {
+          double xPos = x + Math.cos(angle * Math.PI / 180) * radius - 8;
+          double yPos = y + Math.sin(angle * Math.PI / 180) * radius - 8;
+          graphics.renderItem(stack, (int) xPos, (int) yPos, 0);
+          graphics.renderItemDecorations(mc.font, stack, (int) xPos, (int) yPos);
+          angle += anglePer;
+        }
+      }
+
+      y += 10;
+      x += 30;
+
+      TransmutationRecipe cachedRecipe = transmuter.getCachedRecipe() == null ? null : transmuter.getCachedRecipe()
+          .value();
+      TransmutationRecipe lastRecipe = transmuter.getLastRecipe() == null ? null : transmuter.getLastRecipe().value();
+
+      ItemStack output = ItemStack.EMPTY;
+      Component comp1 = Component.empty();
+      Component comp2 = Component.empty();
+      Component comp3 = Component.empty();
+      Component comp4 = Component.translatable("roots.hud.transmuter.power", transmuter.getPower(), transmuter.getMaxPower());
+      List<ChanceOutput> outputs = Collections.emptyList();
+
+      if (cachedRecipe != null) {
+        output = cachedRecipe.getResultItem(mc.level.registryAccess());
+        comp1 = Component.translatable("roots.hud.transmuter.begin1");
+        comp2 = Component.translatable("roots.hud.transmuter.begin2");
+        comp3 = Component.translatable("roots.hud.transmuter.begin3", output.getHoverName());
+        outputs = cachedRecipe.getChanceOutputs();
+      } else if (lastRecipe != null && empty) {
+        output = lastRecipe.getResultItem(mc.level.registryAccess());
+        outputs = lastRecipe.getChanceOutputs();
+        if (crafting) {
+
+        } else {
+
+        }
+        comp1 = Component.translatable("roots.hud.transmuter.restart1");
+        comp2 = Component.translatable("roots.hud.transmuter.restart2");
+        comp3 = output.getHoverName();
+      }
+
+      graphics.renderItem(output, x, y, 0);
+      graphics.renderItemDecorations(mc.font, output, x, y);
+
+      int baseX = x - 24;
+      int baseY = y + 18;
+      int columnSpacing = 25;
+      int rowSpacing = 18;
+      int itemsPerRow = 2;
+
+      for (int i = 0; i < outputs.size(); i++) {
+        ChanceOutput chanceOutput = outputs.get(i);
+        int col = i % itemsPerRow;
+        int row = i / itemsPerRow;
+
+        int xPos = baseX + col * columnSpacing;
+        int yPos = baseY + row * rowSpacing;
+
+        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableBlend();
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableBlend();
+      }
+
+
+      RenderSystem.disableDepthTest();
+      RenderSystem.disableBlend();
+      graphics.drawString(mc.font, comp4, x + 25, y - 12, 16777215, true);
       graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
       graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
       graphics.drawString(mc.font, comp3, x + 25, y + 24, 16777215, true);
