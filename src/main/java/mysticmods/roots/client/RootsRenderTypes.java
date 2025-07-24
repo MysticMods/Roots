@@ -51,6 +51,10 @@ public class RootsRenderTypes {
           .createCompositeState(false)
   );
 
+  public static final RenderStateShard.ShaderStateShard SMART_CRUMBLING_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getSmartCrumblingShader);
+
+  public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
+
   public static final RenderStateShard.ShaderStateShard PARTICLE_LOW_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(() -> {
     // TODO: Check for Iris/etc here
     if (true) {
@@ -59,8 +63,6 @@ public class RootsRenderTypes {
       return GameRenderer.getParticleShader();
     }
   });
-
-  public static final RenderStateShard.ShaderStateShard CRUMBLE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getCrumblingShader);
 
   public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =
       p_286159_ -> {
