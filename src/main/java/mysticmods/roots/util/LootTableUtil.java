@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.mixin.accessor.*;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LootTableUtil {
-  public static List<ChanceOutput> parseLootTable(LootTable table, HolderLookup.Provider provider) {
+  public static List<ChanceOutput> parseLootTable(LootTable table, HolderGetter.Provider provider) {
     List<ChanceOutput> outputs = new ArrayList<>();
 
     List<LootPool> pools = ((AccessorMixinLootTable) table).rootsGetPools();

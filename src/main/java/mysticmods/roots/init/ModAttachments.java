@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.util.SpatialMap;
@@ -20,6 +21,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class ModAttachments {
@@ -34,7 +36,7 @@ public class ModAttachments {
       .serialize(HerbStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<ReputationStorage>> REPUTATION_STORAGE = ATTACHMENTS.register("reputation_storage", () -> AttachmentType.builder(ReputationStorage::new)
       .serialize(ReputationStorage.CODEC).copyOnDeath().build());
-  public static final DeferredHolder<AttachmentType<?>, AttachmentType<CooldownStorage>> COOLDOWN_STORAGE = ATTACHMENTS.register("cooldown_storage", () -> AttachmentType.builder(() -> new CooldownStorage())
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<CooldownStorage>> COOLDOWN_STORAGE = ATTACHMENTS.register("cooldown_storage", () -> AttachmentType.builder(CooldownStorage::new)
       .serialize(CooldownStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<SnapshotStorage>> SNAPSHOT_STORAGE = ATTACHMENTS.register("snapshot_storage", () -> AttachmentType.builder(() -> new SnapshotStorage())
       .serialize(SnapshotStorage.CODEC).copyOnDeath().build());
@@ -45,6 +47,7 @@ public class ModAttachments {
       .serialize(RitualInformation.CODEC).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<SpatialMap>> GROVE_CONSUMERS = ATTACHMENTS.register("grove_consumers", () -> AttachmentType.builder(SpatialMap::new)
       .build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalHarvestRecipe.Cache>> ANIMAL_HARVEST_RECIPE_CACHE = ATTACHMENTS.register("animal_harvest_recipe_cache", () -> AttachmentType.builder(() -> new AnimalHarvestRecipe.Cache(new ArrayList<>())).serialize(AnimalHarvestRecipe.CACHE_CODEC).build());
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());

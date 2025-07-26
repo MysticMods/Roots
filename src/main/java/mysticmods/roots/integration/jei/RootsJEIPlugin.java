@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
@@ -20,7 +21,7 @@ import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityHelper;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
-import mysticmods.roots.integration.jei.fake.AnimalHarvestRecipe;
+import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
 import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -100,7 +101,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipes(SUMMON_CREATURES_RECIPE_TYPE, ResolvedRecipes.SUMMON_CREATURES.getRecipes(level).stream()
         .map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(ANIMAL_HARVEST_RECIPE_TYPE, AnimalHarvestRecipe.getRecipes());
+    registration.addRecipes(ANIMAL_HARVEST_RECIPE_TYPE, ClientRecipes.ANIMAL_HARVEST_RECIPES);
   }
 
   @Override

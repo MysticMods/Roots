@@ -81,6 +81,7 @@ public class PacketHandler {
     registrar.play(StartGroveCraftingFX.TYPE, StartGroveCraftingFX.CODEC);
     registrar.play(GrowthAmplifierFXPacket.TYPE, GrowthAmplifierFXPacket.CODEC);
     registrar.play(ClientboundCooldownSyncPacket.TYPE, ClientboundCooldownSyncPacket.CODEC);
+    registrar.play(ClientboundAnimalHarvestSyncPacket.TYPE, ClientboundAnimalHarvestSyncPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

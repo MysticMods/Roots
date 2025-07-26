@@ -7,6 +7,7 @@ import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -23,6 +24,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class RootsClientHooks {
+  public static void setAnimalHarvestRecipes(List<AnimalHarvestRecipe> recipes) {
+    ClientRecipes.ANIMAL_HARVEST_RECIPES = recipes;
+  }
+
   public static void setGrantStorage(GrantStorage storage) {
     if (Minecraft.getInstance() == null) {
       return;
