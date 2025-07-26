@@ -191,7 +191,7 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
         column = 0;
       }
       builder.addSlot(RecipeIngredientRole.OUTPUT, 97 + column * 17, 2 + row * 17)
-          .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i))
+          .addItemStack(outputs.get(i).output()).setSlotName(String.valueOf(i))
           .addRichTooltipCallback(this.richestTooltip(recipe));
       column++;
     }

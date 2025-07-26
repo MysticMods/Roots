@@ -14,18 +14,14 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
-import mysticmods.roots.integration.jei.categories.widget.CooldownWidget;
-import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
-import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
@@ -33,7 +29,7 @@ import java.util.List;
 
 public class SummonCreaturesCategory extends RootsRecipeBaseCategory<SummonCreaturesRecipe> {
   public SummonCreaturesCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.SUMMON_CREATURES, helper, 166, 128, RootsAPI.rl("textures/gui/jei/summon_creatures.png"), () -> new ItemStack(ModItems.RITUAL_SUMMON_CREATURES.get()), Component.translatable("roots.jei.summon_creatures"));
+    super(RootsJEIPlugin.SUMMON_CREATURES_RECIPE_TYPE, helper, 166, 128, RootsAPI.rl("textures/gui/jei/summon_creatures.png"), () -> new ItemStack(ModItems.RITUAL_SUMMON_CREATURES.get()), Component.translatable("roots.jei.summon_creatures"));
   }
 
   @Override
@@ -42,12 +38,12 @@ public class SummonCreaturesCategory extends RootsRecipeBaseCategory<SummonCreat
 
     EntityType<?> entityType = recipe.getEntity();
 
-    var collector = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
+    var collector = builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT);
     collector.addIngredients(Ingredient.of(DeferredSpawnEggItem.byId(entityType)));
 
     List<RootsEntityType> types = List.of(new RootsEntityType(entityType));
 
-    builder.addSlot(RecipeIngredientRole.INPUT, 117, 26)
+    builder.addSlot(RecipeIngredientRole.OUTPUT, 117, 26)
         .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.ENTITY_RENDERER)
         .addIngredients(RootsJEIPlugin.ENTITY_TYPE, types);
 

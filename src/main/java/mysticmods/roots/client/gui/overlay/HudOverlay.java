@@ -217,8 +217,8 @@ public class HudOverlay {
         int xPos = baseX + col * columnSpacing;
         int yPos = baseY + row * rowSpacing;
 
-        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
-        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+        graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
@@ -313,8 +313,8 @@ public class HudOverlay {
         int xPos = baseX + col * columnSpacing;
         int yPos = baseY + row * rowSpacing;
 
-        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
-        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+        graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
@@ -379,8 +379,8 @@ public class HudOverlay {
         int xPos = baseX + col * columnSpacing;
         int yPos = baseY + row * rowSpacing;
 
-        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
-        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+        graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
@@ -559,8 +559,8 @@ public class HudOverlay {
         int xPos = baseX + col * columnSpacing;
         int yPos = baseY + row * rowSpacing;
 
-        graphics.renderItem(chanceOutput.getOutput(), xPos, yPos, 0);
-        graphics.renderItemDecorations(mc.font, chanceOutput.getOutput(), xPos, yPos);
+        graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
+        graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();

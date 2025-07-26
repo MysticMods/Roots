@@ -26,6 +26,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -567,5 +568,8 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder25.add(ModGroves.TWILIGHT, List.of(
         new GrovePower.GenerationEntry(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, GrovePower.Symmetry.RADIAL_NOT_MATCHING)
     ), false);
+
+    var builder26 = builder(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
+    builder26.add(EntityType.TURTLE.builtInRegistryHolder(), List.of(RootsAPI.TURTLE_SCUTE), false);
   }
 }

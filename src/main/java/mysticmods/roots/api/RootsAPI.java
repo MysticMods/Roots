@@ -33,6 +33,8 @@ public abstract class RootsAPI {
   public static final ResourceKey<LootTable> STANDING_STONES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("chests/standing_stones"));
   public static final ResourceKey<LootTable> TENTACLES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("entities/squid/tentacles"));
 
+  public static final ResourceKey<LootTable> TURTLE_SCUTE = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath("minecraft", "entities/turtle/scute"));
+
   public static ResourceLocation rl(String path) {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);
   }

@@ -12,21 +12,18 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChanceOutput {
+public record ChanceOutput(ItemStack output, float chance) {
   public static final Codec<ChanceOutput> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-      ItemStack.STRICT_CODEC.fieldOf("output").forGetter(ChanceOutput::getOutput),
-      Codec.FLOAT.fieldOf("chance").forGetter(ChanceOutput::getChance)
+      ItemStack.STRICT_CODEC.fieldOf("output").forGetter(ChanceOutput::output),
+      Codec.FLOAT.fieldOf("chance").forGetter(ChanceOutput::chance)
   ).apply(instance, ChanceOutput::new));
   public static final Codec<List<ChanceOutput>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, ChanceOutput> STREAM_CODEC = StreamCodec.composite(
-      ItemStack.STREAM_CODEC, ChanceOutput::getOutput,
-      ByteBufCodecs.FLOAT, ChanceOutput::getChance,
+      ItemStack.STREAM_CODEC, ChanceOutput::output,
+      ByteBufCodecs.FLOAT, ChanceOutput::chance,
       ChanceOutput::new
   );
   public static final StreamCodec<RegistryFriendlyByteBuf, List<ChanceOutput>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
-
-  private final ItemStack output;
-  private final float chance;
 
   public ChanceOutput(ItemStack output, float chance) {
     this.output = output;
@@ -43,14 +40,6 @@ public class ChanceOutput {
     }
 
     return ItemStack.EMPTY;
-  }
-
-  public ItemStack getOutput() {
-    return output;
-  }
-
-  public float getChance() {
-    return chance;
   }
 
   public ChanceOutput copy() {

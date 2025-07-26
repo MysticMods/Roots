@@ -45,10 +45,7 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -60,7 +57,31 @@ import java.util.stream.Stream;
 
 public class RootsLootTableProvider {
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY), new LootTableProvider.SubProviderEntry(ChestLootTablesFixer::new, LootContextParamSets.CHEST)), provider);
+    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES, RootsAPI.TURTLE_SCUTE), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY), new LootTableProvider.SubProviderEntry(ChestLootTablesFixer::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsAdditionalEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
+  }
+
+  public static class RootsAdditionalEntityLootTables implements LootTableSubProvider {
+
+    private final HolderLookup.Provider provider;
+
+    public RootsAdditionalEntityLootTables(HolderLookup.Provider provider) {
+      this.provider = provider;
+    }
+
+    @Override
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
+      consumer.accept(
+          RootsAPI.TURTLE_SCUTE,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(LootItem.lootTableItem(Items.TURTLE_SCUTE)
+                      .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                      .when(LootItemRandomChanceCondition.randomChance(0.1f)).setWeight(1))
+                  .add(EmptyLootItem.emptyItem().setWeight(15))
+              )
+              .setParamSet(LootContextParamSets.ENTITY)
+      );
+    }
   }
 
   public static class RootsEntityLootTables extends EntityLootSubProvider {

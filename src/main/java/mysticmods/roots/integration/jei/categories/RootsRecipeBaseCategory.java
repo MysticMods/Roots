@@ -83,7 +83,7 @@ public abstract class RootsRecipeBaseCategory<T> implements IRecipeCategory<T> {
           int num = Integer.parseInt(slot);
           if (num >= 0 && num < getChanceOutputs(recipe).size()) {
             ChanceOutput output = getChanceOutputs(recipe).get(num);
-            builder.add(Component.translatable("roots.tooltip.chance", String.format("%.2f", output.getChance() * 100)));
+            builder.add(Component.translatable("roots.tooltip.chance", String.format("%.2f", output.chance() * 100)));
           }
         } catch (NumberFormatException ignored) {
 

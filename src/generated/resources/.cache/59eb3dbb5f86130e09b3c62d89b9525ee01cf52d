@@ -1,4 +1,5 @@
-// 1.21.1	2025-07-20T16:31:17.2549583	Loot Tables
+// 1.21.1	2025-07-26T13:44:07.3465735	Loot Tables
+3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json

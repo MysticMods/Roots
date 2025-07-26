@@ -44,10 +44,7 @@ import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AnimalHarvestRitual extends Ritual {
   private int count, glowDuration, lootingValue, itemStackCountLimit, itemStackLimit;
@@ -56,11 +53,12 @@ public class AnimalHarvestRitual extends Ritual {
   private final Set<EntityType<?>> emptyLoot = new ObjectLinkedOpenHashSet<>();
   private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
 
+  private final Map<EntityType<?>, List<LootTable>> additionalLootTables = new HashMap<>();
+
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     FakePlayerUtil.buildItems(pLevel, randomSource);
 
-    IntSet marked = new IntOpenHashSet();
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
@@ -84,6 +82,18 @@ public class AnimalHarvestRitual extends Ritual {
         }
       }
     }
+  }
+
+  private boolean checkEntity (LootTable table, List<LootTable> additionalTables, LivingEntity entity) {
+    boolean result = checkEntity(table, entity);
+
+    for (LootTable additional : additionalTables) {
+      if (checkEntity(additional, entity) && !result) {
+        result = true;
+      }
+    }
+
+    return result;
   }
 
   private boolean checkEntity(LootTable table, LivingEntity entity) {
@@ -111,7 +121,26 @@ public class AnimalHarvestRitual extends Ritual {
   protected List<ItemStack> getDrops(LivingEntity entity, RandomSource pRandom) {
     ResourceKey<LootTable> resourcelocation = entity.getLootTable();
     LootTable loottable = entity.level().getServer().reloadableRegistries().getLootTable(resourcelocation);
-    if (!checkEntity(loottable, entity)) {
+
+    List<LootTable> additionalTables = additionalLootTables.get(entity.getType());
+    if (additionalTables == null) {
+      var additional = entity.getType().builtInRegistryHolder().getData(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
+      if (additional == null || additional.isEmpty()) {
+        additionalTables = Collections.emptyList();
+      } else {
+
+        additionalTables = new ArrayList<>();
+        for (ResourceKey<LootTable> key : additional) {
+          LootTable additionalTable = entity.level().getServer().reloadableRegistries().getLootTable(key);
+          if (additionalTable != LootTable.EMPTY) {
+            additionalTables.add(additionalTable);
+          }
+        }
+      }
+      additionalLootTables.put(entity.getType(), additionalTables);
+    }
+
+    if (!checkEntity(loottable, additionalTables, entity)) {
       return Collections.emptyList();
     }
     DamageSources pDamageSources = entity.damageSources();
@@ -134,6 +163,12 @@ public class AnimalHarvestRitual extends Ritual {
         .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, fakePlayer);
 
     List<ItemStack> randomItems = loottable.getRandomItems(lootParamsBuilder.create(LootContextParamSets.ENTITY));
+    for (LootTable additionalTable : additionalTables) {
+      if (additionalTable == LootTable.EMPTY) {
+        continue;
+      }
+      randomItems.addAll(additionalTable.getRandomItems(lootParamsBuilder.create(LootContextParamSets.ENTITY)));
+    }
     if (randomItems.isEmpty()) {
       RootsAPI.LOG.error("Generated empty loot for entity {}.", entity);
     }

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class SproutGiftCategory extends RootsRecipeBaseCategory<SproutGiftRecipe> {
   public SproutGiftCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.SPROUT_GIFTS, helper, 128, 163, RootsAPI.rl("textures/gui/jei/loot.png"), () -> new ItemStack(ModItems.AUBERGINE.get()), Component.translatable("roots.jei.sprout_gifts"));
+    super(RootsJEIPlugin.SPROUT_GIFTS_RECIPE_TYPE, helper, 128, 163, RootsAPI.rl("textures/gui/jei/loot.png"), () -> new ItemStack(ModItems.AUBERGINE.get()), Component.translatable("roots.jei.sprout_gifts"));
   }
 
   @Override
@@ -53,7 +53,7 @@ public class SproutGiftCategory extends RootsRecipeBaseCategory<SproutGiftRecipe
         column = 0;
       }
       builder.addSlot(RecipeIngredientRole.OUTPUT, 2 + column * 18, 72 + row * 18)
-          .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i))
+          .addItemStack(outputs.get(i).output()).setSlotName(String.valueOf(i))
           .addRichTooltipCallback(this.richestTooltip(recipe));
       column++;
     }

@@ -43,7 +43,7 @@ public record SproutGiftRecipe(EntityType<?> sprout, List<ChanceOutput> outputs)
         float weight = ((float) gift.chance() / (float) total);
         outputs.add(new ChanceOutput(new ItemStack(gift.item()), weight));
       }
-      outputs.sort(Comparator.comparingDouble(ChanceOutput::getChance));
+      outputs.sort(Comparator.comparingDouble(ChanceOutput::chance));
       recipes.add(new SproutGiftRecipe(type, outputs));
     }
     return recipes;

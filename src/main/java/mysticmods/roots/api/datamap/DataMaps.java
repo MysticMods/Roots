@@ -19,9 +19,12 @@ import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
@@ -75,12 +78,6 @@ public class DataMaps {
   public static final DataMapType<Ritual, PropertyDataMap> RITUAL_PROPERTY_DATA = DataMapType.builder(RootsAPI.rl("ritual_property_data"), RootsRegistries.Keys.RITUALS, PropertyDataMap.CODEC)
       .synced(PropertyDataMap.CODEC, false)
       .build();
-/*  public static final DataMapType<ILevelCondition, CanonicalRepresentation> LEVEL_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("level_condition_canons"), RootsRegistries.Keys.LEVEL_CONDITIONS, CanonicalRepresentation.CODEC)
-      .synced(CanonicalRepresentation.CODEC, false)
-      .build();
-  public static final DataMapType<IPlayerCondition, CanonicalRepresentation> PLAYER_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("player_condition_canons"), RootsRegistries.Keys.PLAYER_CONDITIONS, CanonicalRepresentation.CODEC)
-      .synced(CanonicalRepresentation.CODEC, false)
-      .build();*/
   public static final DataMapType<Item, List<SproutGift>> SPROUT_BREEDING_ITEM_CHANCE = DataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, SproutGift.LIST_CODEC)
       .synced(SproutGift.LIST_CODEC, false)
       .build();
@@ -109,7 +106,11 @@ public class DataMaps {
       .synced(GrovePower.Generator.LIST_CODEC, false).build();
   public static final DataMapType<Grove, List<GrovePower.GenerationEntry>> GROVE_GENERATION_ENTRIES = DataMapType.builder(RootsAPI.rl("grove_generation_entries"), RootsRegistries.Keys.GROVES, GrovePower.GenerationEntry.LIST_CODEC)
       .synced(GrovePower.GenerationEntry.LIST_CODEC, false).build();
+  public static final DataMapType<EntityType<?>, List<ResourceKey<LootTable>>> ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES = DataMapType.builder(RootsAPI.rl("additional_animal_harvest_loot_tables"), Registries.ENTITY_TYPE, ResourceKey.codec(Registries.LOOT_TABLE).listOf())
+      .synced(ResourceKey.codec(Registries.LOOT_TABLE).listOf(), false)
+      .build();
 
+  // TODO: Move this out of the API
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
     event.register(SPELL_COST_DATA);
@@ -134,6 +135,7 @@ public class DataMaps {
     event.register(GROWTH_SEED_TO_CROP);
     event.register(GROVE_POWER_GENERATORS);
     event.register(GROVE_GENERATION_ENTRIES);
+    event.register(ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {

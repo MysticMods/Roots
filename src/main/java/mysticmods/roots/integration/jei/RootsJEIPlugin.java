@@ -20,6 +20,7 @@ import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityHelper;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
+import mysticmods.roots.integration.jei.fake.AnimalHarvestRecipe;
 import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
 import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -30,7 +31,6 @@ import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -55,8 +55,9 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<PyreRecipe> PYRE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("pyre_recipe"), PyreRecipe.class);
   public static final RecipeType<RunicBlockRecipe> RUNIC_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_recipe"), RunicBlockRecipe.class);
   public static final RecipeType<RunicEntityRecipe> RUNIC_ENTITY_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_entity_recipe"), RunicEntityRecipe.class);
-  public static final RecipeType<SproutGiftRecipe> SPROUT_GIFTS = new RecipeType<>(RootsAPI.rl("sprout_gift_recipe"), SproutGiftRecipe.class);
-  public static final RecipeType<SummonCreaturesRecipe> SUMMON_CREATURES = new RecipeType<>(RootsAPI.rl("summon_creatures_recipe"), SummonCreaturesRecipe.class);
+  public static final RecipeType<SproutGiftRecipe> SPROUT_GIFTS_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("sprout_gift_recipe"), SproutGiftRecipe.class);
+  public static final RecipeType<SummonCreaturesRecipe> SUMMON_CREATURES_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("summon_creatures_recipe"), SummonCreaturesRecipe.class);
+  public static final RecipeType<AnimalHarvestRecipe> ANIMAL_HARVEST_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("animal_harvest_recipe"), AnimalHarvestRecipe.class);
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -70,6 +71,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new RunicEntityCategory(guiHelper));
     registration.addRecipeCategories(new SproutGiftCategory(guiHelper));
     registration.addRecipeCategories(new SummonCreaturesCategory(guiHelper));
+    registration.addRecipeCategories(new AnimalHarvestCategory(guiHelper));
   }
 
   @Override
@@ -94,10 +96,11 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipes(RecipeTypes.CRAFTING, DyeRecipeGenerator.generate());
     IVanillaRecipeFactory factory = registration.getJeiHelpers().getVanillaRecipeFactory();
     registration.addRecipes(RecipeTypes.ANVIL, RootsRepairRecipes.getRootsAnvilRepairRecipes(factory, registration.getIngredientManager()));
-    registration.addRecipes(SPROUT_GIFTS, SproutGiftRecipe.getRecipes());
-    registration.addRecipes(SUMMON_CREATURES, ResolvedRecipes.SUMMON_CREATURES.getRecipes(level).stream()
+    registration.addRecipes(SPROUT_GIFTS_RECIPE_TYPE, SproutGiftRecipe.getRecipes());
+    registration.addRecipes(SUMMON_CREATURES_RECIPE_TYPE, ResolvedRecipes.SUMMON_CREATURES.getRecipes(level).stream()
         .map(RecipeHolder::value)
         .toList());
+    registration.addRecipes(ANIMAL_HARVEST_RECIPE_TYPE, AnimalHarvestRecipe.getRecipes());
   }
 
   @Override
@@ -106,10 +109,11 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalysts(MORTAR_RECIPE_TYPE, ModBlocks.MORTAR.get(), ModItems.PESTLE.get());
     registration.addRecipeCatalysts(PYRE_RECIPE_TYPE, ModBlocks.PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get());
     registration.addRecipeCatalysts(KNIFE_RECIPE_TYPE, ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.WOODEN_KNIFE.get());
-    registration.addRecipeCatalyst(ModItems.AUBERGINE.get(), SPROUT_GIFTS);
+    registration.addRecipeCatalyst(ModItems.AUBERGINE.get(), SPROUT_GIFTS_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_ENTITY_RECIPE_TYPE);
-    registration.addRecipeCatalysts(SUMMON_CREATURES, ModItems.RITUAL_SUMMON_CREATURES.get());
+    registration.addRecipeCatalysts(SUMMON_CREATURES_RECIPE_TYPE, ModItems.RITUAL_SUMMON_CREATURES.get());
+    registration.addRecipeCatalyst(ModItems.RITUAL_ANIMAL_HARVEST.get(), ANIMAL_HARVEST_RECIPE_TYPE);
   }
 
   @Override

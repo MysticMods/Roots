@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-20T16:31:17.2723213	Data Maps
+// 1.21.1	2025-07-26T13:44:07.3541081	Data Maps
 dd3d79292b26f2d1b2a3eeb4cb4550e54b0d6c2e data/neoforge/data_maps/item/compostables.json
 59bfc4bf0cbbd2d0dc3a7853e0140dc8b82e7710 data/neoforge/data_maps/item/furnace_fuels.json
 46746a8f88510697331184e08ff6415d9bdb50fc data/roots/data_maps/block/grove_power_generator.json
@@ -6,6 +6,7 @@ dd3d79292b26f2d1b2a3eeb4cb4550e54b0d6c2e data/neoforge/data_maps/item/compostabl
 4a45f5a12cb0ea3923635aed22a2f06b1c30b79b data/roots/data_maps/block/harvest_records.json
 a4976012f490edf0a64f62ffb07959ca92aa0e03 data/roots/data_maps/block/shatter_operation_cost.json
 9bedf2851a606a541c2b0a4ed6c635d406ba1392 data/roots/data_maps/block/stem_blocks.json
+ced2a47ebed6d9eecf98d2b90d7943c3345a8ab8 data/roots/data_maps/entity_type/additional_animal_harvest_loot_tables.json
 c5801a7097a989da5c59d60f033b7c01e366c988 data/roots/data_maps/item/growth_seed_to_crop.json
 adb55cb48d2519a40f452aadfad8c46c3c07de64 data/roots/data_maps/item/harvest_seed_to_crop.json
 26f578a3dff09716ddf6ffc6423ee5fe95de396a data/roots/data_maps/item/herb_item_data.json
