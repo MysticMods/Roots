@@ -534,19 +534,19 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     var builder24 = builder(DataMaps.GROVE_POWER_GENERATORS);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Groves.FAIRY, 5)), false);
+        new GrovePower.Generator(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, RootsTags.Groves.FAIRY, 5)), false);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_PATHS, List.of(
-        new GrovePower.Generator(RootsTags.Groves.FAIRY, 1)), false);
+        new GrovePower.Generator(RootsTags.Blocks.FAIRY_GROVE_PATHS, RootsTags.Groves.FAIRY, 1)), false);
     builder24.add(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Groves.ELEMENTAL, 5)), false);
+        new GrovePower.Generator(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
     builder24.add(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Groves.SPROUTING, 5)), false);
+        new GrovePower.Generator(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, RootsTags.Groves.SPROUTING, 5)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Groves.FUNGAL, 5)), false);
+        new GrovePower.Generator(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, RootsTags.Groves.FUNGAL, 5)), false);
     builder24.add(RootsTags.Blocks.WILD_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Groves.WILD, 5)), false);
+        new GrovePower.Generator(RootsTags.Blocks.WILD_GROVE_GENERATORS, RootsTags.Groves.WILD, 5)), false);
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Groves.TWILIGHT, 5)), false);
+        new GrovePower.Generator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
 
     var builder25 = builder(DataMaps.GROVE_GENERATION_ENTRIES);
     builder25.add(ModGroves.FAIRY, List.of(

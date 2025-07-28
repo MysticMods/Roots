@@ -2,42 +2,49 @@
   "values": {
     "#roots:grove_generators/elemental": [
       {
+        "blockTag": "roots:grove_generators/elemental",
         "tag": "roots:elemental",
         "value": 5
       }
     ],
     "#roots:grove_generators/fairy": [
       {
+        "blockTag": "roots:grove_generators/fairy",
         "tag": "roots:fairy",
         "value": 5
       }
     ],
     "#roots:grove_generators/fairy/paths": [
       {
+        "blockTag": "roots:grove_generators/fairy/paths",
         "tag": "roots:fairy",
         "value": 1
       }
     ],
     "#roots:grove_generators/fungal": [
       {
+        "blockTag": "roots:grove_generators/fungal",
         "tag": "roots:fungal",
         "value": 5
       }
     ],
     "#roots:grove_generators/sprouting": [
       {
+        "blockTag": "roots:grove_generators/sprouting",
         "tag": "roots:sprouting",
         "value": 5
       }
     ],
     "#roots:grove_generators/twilight": [
       {
+        "blockTag": "roots:grove_generators/twilight",
         "tag": "roots:twilight",
         "value": 5
       }
     ],
     "#roots:grove_generators/wild": [
       {
+        "blockTag": "roots:grove_generators/wild",
         "tag": "roots:wild",
         "value": 5
       }
