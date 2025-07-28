@@ -1,0 +1,27 @@
+{
+  "values": {
+    "roots:arrive_dimension": "minecraft:end_portal_frame",
+    "roots:bred_animal": "minecraft:wheat",
+    "roots:brush_block": "minecraft:brush",
+    "roots:craft_item": "minecraft:crafting_table",
+    "roots:craft_recipe": "minecraft:crafter",
+    "roots:crop_growth": "minecraft:bone_meal",
+    "roots:cure_villager": "minecraft:golden_apple",
+    "roots:eat_item": "minecraft:bowl",
+    "roots:fill_compost": "minecraft:composter",
+    "roots:geas": "roots:spell_geas",
+    "roots:grow_huge_mushroom": "minecraft:brown_mushroom",
+    "roots:harvest_bee_hive": "minecraft:honeycomb",
+    "roots:kill_entity": "minecraft:iron_sword",
+    "roots:learn_spell": "roots:pestle",
+    "roots:learn_spell_modifier": "roots:mortar",
+    "roots:milk_cow": "minecraft:milk_bucket",
+    "roots:shatter_block": "minecraft:iron_pickaxe",
+    "roots:spell_cast": "roots:staff",
+    "roots:start_ritual": "roots:fire_starter",
+    "roots:tame_animal": "minecraft:lead",
+    "roots:trade_fairy_hut": "roots:brown_fairy_hut",
+    "roots:trade_piglin": "minecraft:piglin_spawn_egg",
+    "roots:trade_villager": "minecraft:villager_spawn_egg"
+  }
+}

@@ -23,6 +23,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,7 +36,6 @@ import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataMaps {
   public static final DataMapType<Block, Block> STEM_BLOCKS = DataMapType.builder(RootsAPI.rl("stem_blocks"), Registries.BLOCK, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
@@ -110,34 +110,11 @@ public class DataMaps {
           .listOf())
       .synced(ResourceKey.codec(Registries.LOOT_TABLE).listOf(), false)
       .build();
+  public static final DataMapType<GroveAction, Item> GROVE_ACTION_ICONS = DataMapType.builder(RootsAPI.rl("grove_action_icons"), RootsRegistries.Keys.GROVE_ACTIONS, BuiltInRegistries.ITEM.byNameCodec())
+      .synced(BuiltInRegistries.ITEM.byNameCodec(), false)
+      .build();
 
-  // TODO: Move this out of the API
-  @SubscribeEvent
-  public static void registerDataMaps(RegisterDataMapTypesEvent event) {
-    event.register(SPELL_COST_DATA);
-    event.register(SPELL_MODIFIER_COST_DATA);
-    event.register(RITUAL_MODIFIER_COST_DATA);
-    event.register(HERB_ITEM_DATA);
-    event.register(SPELL_PROPERTY_DATA);
-    event.register(RITUAL_PROPERTY_DATA);
-    event.register(RITUAL_DISPLAY_ITEM);
-    event.register(RITUAL_MODIFIER_RITUAL);
-    event.register(SPELL_DISPLAY_ITEM);
-    event.register(SPELL_MODIFIER_PARENT);
-    event.register(SPELL_MODIFIER_SPELL);
-    event.register(SPROUT_BREEDING_ITEM_CHANCE);
-    event.register(GROWTH_RECORDS);
-    event.register(HARVEST_RECORDS);
-    event.register(STEM_BLOCKS);
-    event.register(GROVE_ACTION_REPUTATIONS);
-    event.register(GROVE_RANKS);
-    event.register(OPERATION_COST);
-    event.register(HARVEST_SEED_TO_CROP);
-    event.register(GROWTH_SEED_TO_CROP);
-    event.register(GROVE_POWER_GENERATORS);
-    event.register(GROVE_GENERATION_ENTRIES);
-    event.register(ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
-  }
+  // Additional data maps need to be added to the register event in `DataHandler`
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {
     return (registry, first, firstValue, second, secondValue) -> {

@@ -18,6 +18,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -43,22 +44,15 @@ public interface GrovePower {
     TagKey<Grove> tag();
 
     int value();
-
-    static <T extends Congen> MapCodec<T> codec(BiFunction<TagKey<Grove>, Integer, T> builder) {
-      return RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(RootsRegistries.Keys.GROVES)
-              .fieldOf("tag").forGetter(Congen::tag),
-          Codec.INT.fieldOf("value").forGetter(Congen::value)).apply(instance, builder));
-    }
-
-    static <T extends Congen> StreamCodec<ByteBuf, T> streamCodec(BiFunction<TagKey<Grove>, Integer, T> builder) {
-      return StreamCodec.composite(ExtraStreamCodecs.tagStreamCodec(RootsRegistries.Keys.GROVES), Congen::tag, ByteBufCodecs.VAR_INT, Congen::value, builder);
-    }
   }
 
-  record Generator(TagKey<Grove> tag, int value) implements Congen {
-    public static final MapCodec<Generator> MAP_CODEC = Congen.codec(Generator::new);
+  record Generator(TagKey<Block> blockTag, TagKey<Grove> tag, int value) implements Congen {
+    public static final MapCodec<Generator> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK).fieldOf("blockTag").forGetter(Generator::blockTag), TagKey.codec(RootsRegistries.Keys.GROVES)
+            .fieldOf("tag").forGetter(Congen::tag),
+        Codec.INT.fieldOf("value").forGetter(Congen::value)).apply(instance, Generator::new));
+
     public static final Codec<Generator> CODEC = MAP_CODEC.codec();
-    public static final StreamCodec<ByteBuf, Generator> STREAM_CODEC = Congen.streamCodec(Generator::new);
+    public static final StreamCodec<ByteBuf, Generator> STREAM_CODEC = StreamCodec.composite(ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC, Generator::blockTag, ExtraStreamCodecs.tagStreamCodec(RootsRegistries.Keys.GROVES), Congen::tag, ByteBufCodecs.VAR_INT, Congen::value, Generator::new);
     public static final Codec<List<Generator>> LIST_CODEC = CODEC.listOf();
     public static final StreamCodec<ByteBuf, List<Generator>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
@@ -72,9 +66,11 @@ public interface GrovePower {
   }
 
   record Consumer(TagKey<Grove> tag, int value) implements Congen {
-    public static final MapCodec<Consumer> MAP_CODEC = Congen.codec(Consumer::new);
+    public static final MapCodec<Consumer> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(RootsRegistries.Keys.GROVES)
+                .fieldOf("tag").forGetter(Congen::tag),
+            Codec.INT.fieldOf("value").forGetter(Congen::value)).apply(instance, Consumer::new));
     public static final Codec<Consumer> CODEC = MAP_CODEC.codec();
-    public static final StreamCodec<ByteBuf, Consumer> STREAM_CODEC = Congen.streamCodec(Consumer::new);
+    public static final StreamCodec<ByteBuf, Consumer> STREAM_CODEC = StreamCodec.composite(ExtraStreamCodecs.tagStreamCodec(RootsRegistries.Keys.GROVES), Congen::tag, ByteBufCodecs.VAR_INT, Congen::value, Consumer::new);
     public static final Codec<List<Consumer>> LIST_CODEC = CODEC.listOf();
     public static final StreamCodec<ByteBuf, List<Consumer>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
   }

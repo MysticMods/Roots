@@ -571,5 +571,30 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     var builder26 = builder(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
     builder26.add(EntityType.TURTLE.builtInRegistryHolder(), List.of(RootsAPI.TURTLE_SCUTE), false);
+
+    var builder27 = builder(DataMaps.GROVE_ACTION_ICONS);
+    builder27.add(ModActions.CROP_GROWTH, Items.BONE_MEAL, false);
+    builder27.add(ModActions.SPELL_CAST, ModItems.STAFF.get(), false);
+    builder27.add(ModActions.START_RITUAL, ModItems.FIRE_STARTER.get(), false);
+    builder27.add(ModActions.CRAFT_RECIPE, Items.CRAFTER, false);
+    builder27.add(ModActions.CRAFT_ITEM, Items.CRAFTING_TABLE, false);
+    builder27.add(ModActions.BRED_ANIMAL, Items.WHEAT, false);
+    builder27.add(ModActions.SHATTER_BLOCK, Items.IRON_PICKAXE, false);
+    builder27.add(ModActions.KILL_ENTITY, Items.IRON_SWORD, false);
+    builder27.add(ModActions.TAME_ANIMAL, Items.LEAD, false);
+    builder27.add(ModActions.TRADE_VILLAGER, Items.VILLAGER_SPAWN_EGG, false);
+    builder27.add(ModActions.TRADE_FAIRY_HUT, ModItems.BROWN_FAIRY_HUT.get(), false);
+    builder27.add(ModActions.CURE_VILLAGER, Items.GOLDEN_APPLE, false);
+    builder27.add(ModActions.TRADE_PIGLIN, Items.PIGLIN_SPAWN_EGG, false);
+    builder27.add(ModActions.EAT_ITEM, Items.BOWL, false);
+    builder27.add(ModActions.HARVEST_BEE_HIVE, Items.HONEYCOMB, false);
+    builder27.add(ModActions.FILL_COMPOST, Items.COMPOSTER, false);
+    builder27.add(ModActions.GROW_HUGE_MUSHROOM, Items.BROWN_MUSHROOM, false);
+    builder27.add(ModActions.ARRIVE_DIMENSION, Items.END_PORTAL_FRAME, false);
+    builder27.add(ModActions.MILK_COW, Items.MILK_BUCKET, false);
+    builder27.add(ModActions.GEAS, ModItems.SPELL_GEAS.get(), false);
+    builder27.add(ModActions.LEARN_SPELL, ModItems.PESTLE.get(), false);
+    builder27.add(ModActions.LEARN_SPELL_MODIFIER, ModItems.MORTAR.get(), false);
+    builder27.add(ModActions.BRUSH_BLOCK, Items.BRUSH, false);
   }
 }
