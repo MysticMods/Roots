@@ -744,6 +744,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.jei.text.durability", "Durability: %s");
     add("roots.jei.text.cooldown", "Cooldown: %ss");
     add("roots.jei.sprout_gifts", "Rewards for Breeding Sprouts");
+    add("roots.jei.animal_harvest", "Animal Harvest");
+    add("roots.jei.animal_harvest.info", "Note: Outputs shown are default and may vary based on mod interactions.");
 
     add("roots.hud.pyre.begin1", "Light pyre to");
     add("roots.hud.pyre.begin2", "start %s");

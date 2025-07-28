@@ -10,6 +10,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
+import mysticmods.roots.integration.jei.categories.widget.InfoWidget;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvestRecipe> {
   public AnimalHarvestCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.ANIMAL_HARVEST_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/runic_entity.png"), () -> new ItemStack(ModItems.RUNIC_SHEARS.get()), Component.translatable("roots.jei.runic_entity"));
+    super(RootsJEIPlugin.ANIMAL_HARVEST_RECIPE_TYPE, helper, 165, 83, RootsAPI.rl("textures/gui/jei/animal_harvest.png"), () -> new ItemStack(ModItems.RITUAL_ANIMAL_HARVEST.get()), Component.translatable("roots.jei.animal_harvest"));
   }
 
   @Override
@@ -65,5 +66,7 @@ public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvest
   @Override
   public void createRecipeExtras(IRecipeExtrasBuilder builder, AnimalHarvestRecipe recipe, IFocusGroup focuses) {
     super.createRecipeExtras(builder, recipe, focuses);
+
+    builder.addWidget(new InfoWidget(104-11, 2, Component.translatable("roots.jei.animal_harvest.info")));
   }
 }

@@ -465,6 +465,8 @@
   "roots.item.gramary.mode.none": "None",
   "roots.item.gramary.with_mode": "Gramary (%s)",
   "roots.item.staff.with_spell": "Staff (%s)",
+  "roots.jei.animal_harvest": "Animal Harvest",
+  "roots.jei.animal_harvest.info": "Note: Outputs shown are default and may vary based on mod interactions.",
   "roots.jei.grove_crafting": "Grove Crafting",
   "roots.jei.knife_crafting": "Knife Carving",
   "roots.jei.mortar_crafting": "Mortar Crafting",
