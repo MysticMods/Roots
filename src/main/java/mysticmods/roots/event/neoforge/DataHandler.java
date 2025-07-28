@@ -3,8 +3,8 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.network.client.ClientboundAnimalHarvestSyncPacket;
+import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.core.Holder;
 import net.minecraft.server.MinecraftServer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,7 +16,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class DataHandler {
-  private static void callInit (Holder<?> holder) {
+  private static void callInit(Holder<?> holder) {
     if (holder.value() instanceof IDataMapInitialize<?> init) {
       init.performInit(holder);
     }
@@ -44,7 +44,7 @@ public class DataHandler {
   }
 
   @SubscribeEvent
-  public static void onDataPackSync (OnDatapackSyncEvent event) {
+  public static void onDataPackSync(OnDatapackSyncEvent event) {
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     var cache = server.overworld().getData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get());
     if (cache.recipes().isEmpty()) {

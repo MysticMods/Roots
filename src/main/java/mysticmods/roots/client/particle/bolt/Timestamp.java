@@ -24,7 +24,7 @@ public class Timestamp {
     return new Timestamp(newTicks, newPartial);
   }
 
-  public float partial () {
+  public float partial() {
     return partial;
   }
 

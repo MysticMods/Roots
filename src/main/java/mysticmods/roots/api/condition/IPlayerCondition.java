@@ -7,11 +7,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 import java.util.List;
 
 public interface IPlayerCondition {
@@ -26,13 +24,13 @@ public interface IPlayerCondition {
 
   IPlayerConditionType<?> type();
 
-  String getName ();
+  String getName();
 
   default Component getNameComponent() {
     return Component.translatable("player_condition.roots." + getName());
   }
 
-  default Component getDescriptionComponent () {
+  default Component getDescriptionComponent() {
     return Component.translatable("player_condition.roots." + getName() + ".description");
   }
 }

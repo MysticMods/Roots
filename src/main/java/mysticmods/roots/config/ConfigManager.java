@@ -9,7 +9,6 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ConfigManager {
@@ -154,10 +153,12 @@ public class ConfigManager {
     COMMON_BUILDER.push("debug");
     DEBUG_REPUTATION = COMMON_BUILDER.comment("if true, will send messages for all reputation gains and losses")
         .define("debug_reputation", false);
-    DEBUG_GROVE_ACTIONS = COMMON_BUILDER.comment("if true, will report in the message log whenever a Grove Action has been fired").define("debug_grove_actions", false);
+    DEBUG_GROVE_ACTIONS = COMMON_BUILDER.comment("if true, will report in the message log whenever a Grove Action has been fired")
+        .define("debug_grove_actions", false);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("ritual_conflict");
-    RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]").defineEnum("ritual_resolution_type", RitualInformation.RitualResolutionType.AGE_PRIORITY);
+    RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]")
+        .defineEnum("ritual_resolution_type", RitualInformation.RitualResolutionType.AGE_PRIORITY);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("grass_drops");
     DROP_AUBERGINE_SEEDS = COMMON_BUILDER.comment("whether or not aubergine seeds should drop from grass")
@@ -185,7 +186,8 @@ public class ConfigManager {
     CLIENT_BUILDER.push("overlays");
     AQUA_BUBBLE_OVERLAY = CLIENT_BUILDER.comment("if true, the aqua bubble overlay will be displayed in first person while the player has an active Aqua Bubble effect")
         .define("aqua_bubble_overlay", true);
-    WARNING_OVERLAY = CLIENT_BUILDER.comment("if true, the warning overlay will be displayed whenever a mob targets you while holding the Alertness charm (or equipped in a suitable Curios slot)").define("warning_overlay", true);
+    WARNING_OVERLAY = CLIENT_BUILDER.comment("if true, the warning overlay will be displayed whenever a mob targets you while holding the Alertness charm (or equipped in a suitable Curios slot)")
+        .define("warning_overlay", true);
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
   }

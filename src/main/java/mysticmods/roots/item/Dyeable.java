@@ -15,7 +15,7 @@ public record Dyeable(@Nullable DyeColor color) {
   public static final MapCodec<Dyeable> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       DyeColor.CODEC.optionalFieldOf("color", null).forGetter(Dyeable::color)
   ).apply(instance, Dyeable::new));
-  public static final StreamCodec<ByteBuf, Dyeable> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.optional(DyeColor.STREAM_CODEC), o -> Optional.ofNullable(o.color()), (o ) -> Dyeable.fromColor(o.orElse(null)));
+  public static final StreamCodec<ByteBuf, Dyeable> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.optional(DyeColor.STREAM_CODEC), o -> Optional.ofNullable(o.color()), (o) -> Dyeable.fromColor(o.orElse(null)));
   public static final Codec<Dyeable> CODEC = MAP_CODEC.codec();
 
   public static final Dyeable DEFAULT = new Dyeable(null);

@@ -50,9 +50,11 @@ public class ModSerializers {
   public static final DeferredHolder<SnapshotType<?>, PetalShellSnapshot.Type> PETAL_SHELL = SNAPSHOT_TYPES.register("petal_shell", PetalShellSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, ExtensionSnapshot.Type> EXTENSION = SNAPSHOT_TYPES.register("extension", ExtensionSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, TemporalMorassEntitySnapshot.Type> TEMPORAL_MORASS = SNAPSHOT_TYPES.register("temporal_morass", TemporalMorassEntitySnapshot.Type::new);
+
   static {
     SNAPSHOT_TYPES.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
   }
+
   public static final DeferredHolder<SnapshotType<?>, AquaBubbleSnapshot.Type> AQUA_BUBBLE = SNAPSHOT_TYPES.register("aqua_bubble", AquaBubbleSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, RoseThornsEntitySnapshot.Type> ROSE_THORNS = SNAPSHOT_TYPES.register("rose_thorns", RoseThornsEntitySnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, WildfireEntitySnapshot.Type> WILDFIRE = SNAPSHOT_TYPES.register("wildfire", WildfireEntitySnapshot.Type::new);

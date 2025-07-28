@@ -3,7 +3,6 @@ package mysticmods.roots.api.condition;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.registries.Registries;
@@ -11,14 +10,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.ByIdMap;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 
-import java.util.Locale;
-import java.util.function.IntFunction;
-
-public record PillarType (String name, TagKey<Block> pillar, TagKey<Block> capstone) {
+public record PillarType(String name, TagKey<Block> pillar, TagKey<Block> capstone) {
   public static final PillarType ACACIA = new PillarType("acacia", RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.ACACIA_CAPSTONES);
   public static final PillarType BIRCH = new PillarType("birch", RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.BIRCH_CAPSTONES);
   public static final PillarType DARK_OAK = new PillarType("dark_oak", RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Blocks.DARK_OAK_CAPSTONES);

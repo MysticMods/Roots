@@ -64,12 +64,15 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
     }
   }
 
-  public Progress getProgress (int reputation) {
+  public Progress getProgress(int reputation) {
     int rank = getRank(reputation);
     int progress = getCurrentRankProgress(reputation);
     int nextRank = getCurrentRankMax(reputation);
     return new Progress(rank, progress, nextRank, reputation);
   }
 
-  public record Progress (int rank, int progress, int nextRank, int total) {};
+  public record Progress(int rank, int progress, int nextRank, int total) {
+  }
+
+  ;
 }

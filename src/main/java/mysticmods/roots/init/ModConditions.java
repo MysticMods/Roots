@@ -4,11 +4,11 @@ import com.google.common.base.Suppliers;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.*;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.condition.*;
-import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -39,12 +39,14 @@ public class ModConditions {
   private static final String WILDROOT_CROP = "mature_wildroot_crop";
   public static final Supplier<ILevelCondition> MATURE_WILDROOT_CROP = Suppliers.memoize(() -> new BlockStatePropertyCondition(WILDROOT_CROP, new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
       .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
+
   static {
     SPECIAL_REPRESENTATIONS.put(WILDROOT_CROP, Suppliers.memoize(() -> new CanonicalRepresentation(
         Blocks.FARMLAND,
         new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
             .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
   }
+
   public static final Supplier<ILevelCondition> OVERGROWTH = Suppliers.memoize(OvergrowthCondition::getInstance);
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 1));

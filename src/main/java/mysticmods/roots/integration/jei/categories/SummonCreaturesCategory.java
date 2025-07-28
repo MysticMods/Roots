@@ -67,7 +67,7 @@ public class SummonCreaturesCategory extends RootsRecipeBaseCategory<SummonCreat
       }
       builder.addSlot(RecipeIngredientRole.INPUT, 2 + column * 17, 2 + row * 17)
           .addIngredients(inputs.get(i)).setSlotName(String.valueOf(i));
-/*          .addRichTooltipCallback(this.richestTooltip(recipe));*/
+      /*          .addRichTooltipCallback(this.richestTooltip(recipe));*/
       column++;
     }
   }

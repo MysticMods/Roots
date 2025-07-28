@@ -5,7 +5,6 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.item.Dyeable;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;

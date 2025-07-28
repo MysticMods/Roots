@@ -2,11 +2,9 @@ package mysticmods.roots.effect;
 
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.network.client.fx.PetalShellFXPacket;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 public class PetalShellEffect extends SimpleEffect {
   public PetalShellEffect(MobEffectCategory pCategory, int pColor) {
@@ -16,7 +14,10 @@ public class PetalShellEffect extends SimpleEffect {
   @Override
   public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
     if (livingEntity.level().isClientSide()) {
-      livingEntity.level().addParticle(RootsParticleOptions.builder(ModParticles.PETAL_SHELL).color(ModSpells.PETAL_SHELL).entityId(livingEntity.getId()).build(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
+      livingEntity.level()
+          .addParticle(RootsParticleOptions.builder(ModParticles.PETAL_SHELL).color(ModSpells.PETAL_SHELL)
+              .entityId(livingEntity.getId())
+              .build(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
     }
 
     return super.applyEffectTick(livingEntity, amplifier);

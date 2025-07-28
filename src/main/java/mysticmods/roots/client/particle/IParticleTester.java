@@ -4,5 +4,5 @@ import net.minecraft.client.particle.Particle;
 
 @FunctionalInterface
 public interface IParticleTester {
-  boolean test (Particle particle);
+  boolean test(Particle particle);
 }

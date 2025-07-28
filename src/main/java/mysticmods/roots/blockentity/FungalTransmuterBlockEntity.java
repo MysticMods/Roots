@@ -531,7 +531,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     return storedPower;
   }
 
-  public int getMaxPower () {
+  public int getMaxPower() {
     return ConfigManager.FUNGAL_TRANSMUTER_MAX_STORED_POWER.getAsInt();
   }
 }

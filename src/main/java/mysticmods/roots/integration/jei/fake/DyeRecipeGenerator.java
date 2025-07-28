@@ -5,7 +5,6 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.item.Dyeable;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

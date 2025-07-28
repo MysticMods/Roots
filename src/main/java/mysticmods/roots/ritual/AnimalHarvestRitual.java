@@ -1,7 +1,5 @@
 package mysticmods.roots.ritual;
 
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
@@ -84,7 +82,7 @@ public class AnimalHarvestRitual extends Ritual {
     }
   }
 
-  private boolean checkEntity (LootTable table, List<LootTable> additionalTables, LivingEntity entity) {
+  private boolean checkEntity(LootTable table, List<LootTable> additionalTables, LivingEntity entity) {
     boolean result = checkEntity(table, entity);
 
     for (LootTable additional : additionalTables) {

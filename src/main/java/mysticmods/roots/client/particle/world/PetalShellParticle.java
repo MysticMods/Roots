@@ -86,14 +86,14 @@ public class PetalShellParticle extends TextureSheetParticle {
 
     this.maxCount = snapshot.getCount();
 
-if (rolls == null || rolls.length < count) {
-  rolls = new float[Math.max(count, maxCount)][3];
-  for (int i = 0; i < rolls.length; i++) {
-    rolls[i][0] = 0.05f + (random.nextFloat() - 0.5f) * 0.05f;
-    rolls[i][1] = 0;
-    rolls[i][2] = 0;
-  }
-}
+    if (rolls == null || rolls.length < count) {
+      rolls = new float[Math.max(count, maxCount)][3];
+      for (int i = 0; i < rolls.length; i++) {
+        rolls[i][0] = 0.05f + (random.nextFloat() - 0.5f) * 0.05f;
+        rolls[i][1] = 0;
+        rolls[i][2] = 0;
+      }
+    }
 
     this.xo = this.x;
     this.yo = this.y;
@@ -135,7 +135,7 @@ if (rolls == null || rolls.length < count) {
     double radius = 0.8f;
     double height = 1.0f;
     double anglePerShell = Math.PI * 2 / count;
-    double angleOffset = Math.toRadians((entity.tickCount + partialTicks)% 360);
+    double angleOffset = Math.toRadians((entity.tickCount + partialTicks) % 360);
 
     int newCount = count;
 

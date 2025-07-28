@@ -7,7 +7,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ServerboundOpenPouchPacket () implements IRootsPacket {
+public record ServerboundOpenPouchPacket() implements IRootsPacket {
   public static final ServerboundOpenPouchPacket INSTANCE = new ServerboundOpenPouchPacket();
   public static final Type<ServerboundOpenPouchPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_open_pouch"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundOpenPouchPacket> CODEC =

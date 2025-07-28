@@ -70,7 +70,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   }
 
   // This function is called when a ritual stops and is not about to immediately restart.
-  public void stops (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+  public void stops(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
   // This function is always called when a ritual stops, even if it is about to immediately restart; it is also called whenever the pyre is broken.
@@ -78,7 +78,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   }
 
   // This function is only called when the pyre is broken
-  public void removed (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+  public void removed(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, @Nullable PositionCache cache, RandomSource random) {

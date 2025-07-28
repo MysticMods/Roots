@@ -1,15 +1,15 @@
 package mysticmods.roots.network.client.fx;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.network.ClientFXHandlers;
 import mysticmods.roots.api.network.IRootsPacket;
+import mysticmods.roots.client.network.ClientFXHandlers;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record AnimalHarvestFXPacket (int entityId) implements IRootsPacket {
+public record AnimalHarvestFXPacket(int entityId) implements IRootsPacket {
   public static final CustomPacketPayload.Type<AnimalHarvestFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_fx/animal_harvest"));
   public static final StreamCodec<FriendlyByteBuf, AnimalHarvestFXPacket> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, AnimalHarvestFXPacket::entityId, AnimalHarvestFXPacket::new);
 

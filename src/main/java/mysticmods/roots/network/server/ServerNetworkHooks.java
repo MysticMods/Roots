@@ -7,7 +7,6 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import net.minecraft.network.chat.Component;
@@ -19,36 +18,36 @@ import net.minecraft.world.item.ItemStack;
 import javax.annotation.Nullable;
 
 public class ServerNetworkHooks {
-  public static void openPouch (Player player) {
-      ItemStack stack = ItemStack.EMPTY;
-      for (ItemStack curioStack : RootsAPI.getInstance().getCurios(player, RootsTags.Items.POUCHES)) {
-        stack = curioStack;
-        break;
-      }
-      if (!stack.is(RootsTags.Items.POUCHES)) {
-        player.getItemInHand(InteractionHand.MAIN_HAND);
-      }
-      if (!stack.is(RootsTags.Items.POUCHES)) {
-        stack = player.getItemInHand(InteractionHand.OFF_HAND);
-      }
-      if (!stack.is(RootsTags.Items.POUCHES)) {
-        Inventory inv = player.getInventory();
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-          stack = inv.getItem(i);
-          if (stack.is(RootsTags.Items.POUCHES)) {
-            break;
-          }
+  public static void openPouch(Player player) {
+    ItemStack stack = ItemStack.EMPTY;
+    for (ItemStack curioStack : RootsAPI.getInstance().getCurios(player, RootsTags.Items.POUCHES)) {
+      stack = curioStack;
+      break;
+    }
+    if (!stack.is(RootsTags.Items.POUCHES)) {
+      player.getItemInHand(InteractionHand.MAIN_HAND);
+    }
+    if (!stack.is(RootsTags.Items.POUCHES)) {
+      stack = player.getItemInHand(InteractionHand.OFF_HAND);
+    }
+    if (!stack.is(RootsTags.Items.POUCHES)) {
+      Inventory inv = player.getInventory();
+      for (int i = 0; i < inv.getContainerSize(); i++) {
+        stack = inv.getItem(i);
+        if (stack.is(RootsTags.Items.POUCHES)) {
+          break;
         }
       }
-      if (!stack.is(RootsTags.Items.POUCHES)) {
-        return;
-      }
+    }
+    if (!stack.is(RootsTags.Items.POUCHES)) {
+      return;
+    }
 
-      if (!(stack.getItem() instanceof PouchItem pouchItem)) {
-        return;
-      }
+    if (!(stack.getItem() instanceof PouchItem pouchItem)) {
+      return;
+    }
 
-      player.openMenu(pouchItem.getMenuProvider().createMenu(stack));
+    player.openMenu(pouchItem.getMenuProvider().createMenu(stack));
   }
 
   public static void setSpellData(Player player, InteractionHand hand, int index, int value) {

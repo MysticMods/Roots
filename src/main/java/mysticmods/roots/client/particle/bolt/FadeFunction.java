@@ -32,13 +32,11 @@ public interface FadeFunction {
         float t = lifeScale / fadeIn;
         end = (int) (totalBolts * t);
         start = 0;
-      }
-      else if (lifeScale > (1 - fadeOut)) {
+      } else if (lifeScale > (1 - fadeOut)) {
         float t = (lifeScale - (1 - fadeOut)) / fadeOut;
         start = (int) (totalBolts * t);
         end = totalBolts;
-      }
-      else {
+      } else {
         start = 0;
         end = totalBolts;
       }
@@ -47,13 +45,13 @@ public interface FadeFunction {
     };
   }
 
-  static FadeFunction outFade (float fade) {
+  static FadeFunction outFade(float fade) {
     return (totalBolts, lifeScale) -> {
       if (lifeScale < (1 - fade)) {
         return new RenderBounds(0, totalBolts);
       }
       float t = (lifeScale - (1 - fade)) / fade;
-      int visible = (int)(totalBolts * (1 - t));
+      int visible = (int) (totalBolts * (1 - t));
       int start = Math.max(0, totalBolts - visible);
       return new RenderBounds(start, totalBolts);
     };

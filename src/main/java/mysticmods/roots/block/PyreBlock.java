@@ -101,7 +101,8 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
   @Override
   public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
-    if (state.getValue(PyreBlock.ACTIVE) && !context.getLevel().isClientSide() && context.getLevel().getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
+    if (state.getValue(PyreBlock.ACTIVE) && !context.getLevel().isClientSide() && context.getLevel()
+        .getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
       pyre.stopRitual(false);
       return state.setValue(PyreBlock.ACTIVE, false).setValue(PyreBlock.LIT, false);
     }

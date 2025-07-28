@@ -11,7 +11,6 @@ import mysticmods.roots.item.GroveSporesItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +27,7 @@ public record OvergrowthCondition() implements ILevelCondition {
   public static final Codec<OvergrowthCondition> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, OvergrowthCondition> STREAM_CODEC = StreamCodec.unit(INSTANCE);
 
-  public static OvergrowthCondition getInstance () {
+  public static OvergrowthCondition getInstance() {
     return INSTANCE;
   }
 

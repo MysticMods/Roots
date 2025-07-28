@@ -40,15 +40,15 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getCosts();
   }
 
-  default CostInstance.ChargeType getChargeType () {
+  default CostInstance.ChargeType getChargeType() {
     return getCosts().chargeType();
   }
 
-  default int getMaximumOperations () {
+  default int getMaximumOperations() {
     return getSpell().getMaximumOperations();
   }
 
-  Set<ICosted> getChildren ();
+  Set<ICosted> getChildren();
 
   default boolean hasModifier(SpellModifier modifier) {
     return getEnabledModifiers().contains(modifier);
@@ -90,7 +90,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   @Nullable
-  default AABB getAABB () {
+  default AABB getAABB() {
     return getSpell().getAABB();
   }
 

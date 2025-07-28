@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<GroveStoneBlockEntity>  {
+public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<GroveStoneBlockEntity> {
   public GroveStoneBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }

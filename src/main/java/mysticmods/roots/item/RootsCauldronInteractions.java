@@ -3,10 +3,8 @@ package mysticmods.roots.item;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.cauldron.CauldronInteraction;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 
 public class RootsCauldronInteractions {

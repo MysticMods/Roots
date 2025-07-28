@@ -1,18 +1,13 @@
 package mysticmods.roots;
 
-import mysticmods.roots.api.IRootsAPI;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.config.ConfigManager;
-import mysticmods.roots.impl.RootsAPIImpl;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.PacketHandler;
-import net.minecraft.server.level.ChunkTrackingView;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-
-import java.util.ServiceLoader;
 
 // TODO: Main TODO list
 // Can throw a herb pouch out while editing it

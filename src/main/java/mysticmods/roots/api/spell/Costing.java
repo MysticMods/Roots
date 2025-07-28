@@ -67,7 +67,7 @@ public class Costing {
     this.operationsCount = operations;
   }
 
-  public double discount () {
+  public double discount() {
     return this.discount;
   }
 

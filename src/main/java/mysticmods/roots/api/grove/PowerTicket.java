@@ -72,7 +72,7 @@ public class PowerTicket {
     return tick;
   }
 
-  public boolean isValid (long tick) {
+  public boolean isValid(long tick) {
     return this.tick == tick;
   }
 

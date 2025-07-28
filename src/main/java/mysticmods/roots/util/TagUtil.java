@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 
 public class TagUtil {
   @Nullable
-  public static <T> T getRandomElement (Level level, TagKey<T> tag) {
+  public static <T> T getRandomElement(Level level, TagKey<T> tag) {
     Registry<T> registry = level.registryAccess().registry(tag.registry()).orElse(null);
     if (registry == null) {
       return null;

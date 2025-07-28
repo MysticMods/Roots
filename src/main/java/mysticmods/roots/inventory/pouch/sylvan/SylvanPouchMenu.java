@@ -2,7 +2,6 @@ package mysticmods.roots.inventory.pouch.sylvan;
 
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.inventory.pouch.PouchMenu;
-import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchContainer;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;

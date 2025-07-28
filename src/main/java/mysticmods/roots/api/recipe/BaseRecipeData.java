@@ -43,7 +43,8 @@ public class BaseRecipeData {
       IPlayerCondition.LIST_CODEC.optionalFieldOf("player_conditions", Collections.emptyList())
           .forGetter(o -> o.playerConditions),
       ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY).forGetter(o -> o.result),
-      ChanceOutput.LIST_CODEC.optionalFieldOf("chance_outputs", Collections.emptyList()).forGetter(o -> o.chanceOutputs),
+      ChanceOutput.LIST_CODEC.optionalFieldOf("chance_outputs", Collections.emptyList())
+          .forGetter(o -> o.chanceOutputs),
       Unlock.LIST_CODEC.optionalFieldOf("unlocks", Collections.emptyList()).forGetter(o -> o.unlocks),
       Codec.INT.fieldOf("priority").forGetter(o -> o.priority)
   ).apply(instance, BaseRecipeData::new));

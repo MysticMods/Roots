@@ -48,7 +48,7 @@ public class LivingArrowEntity extends AbstractArrow {
 
   @Override
   public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-    super.shoot(x, y, z, velocity*VELOCITY_MODIFIER, inaccuracy);
+    super.shoot(x, y, z, velocity * VELOCITY_MODIFIER, inaccuracy);
     if (velocity / 3.0f >= LOWER_CRIT_THRESHOLD) {
       this.setCritArrow(true);
     }

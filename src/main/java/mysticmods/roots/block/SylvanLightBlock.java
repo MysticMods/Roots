@@ -3,7 +3,6 @@ package mysticmods.roots.block;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.SylvanLightBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
-import mysticmods.roots.init.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;

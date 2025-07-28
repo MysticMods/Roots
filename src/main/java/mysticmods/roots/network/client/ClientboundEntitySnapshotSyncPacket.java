@@ -2,8 +2,8 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.SnapshotStorage;
-import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.api.network.ISyncPacket;
+import mysticmods.roots.client.RootsClientHooks;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

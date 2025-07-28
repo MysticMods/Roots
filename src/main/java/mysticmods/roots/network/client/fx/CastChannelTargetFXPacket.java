@@ -2,10 +2,10 @@ package mysticmods.roots.network.client.fx;
 
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.network.ClientFXHandlers;
-import mysticmods.roots.api.network.IRootsPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

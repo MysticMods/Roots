@@ -5,12 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.BiFunction;
-
 import mysticmods.roots.client.RootsRenderTypes;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
@@ -20,6 +14,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.BiFunction;
 
 // TODO:
 // - Add a way to specify that bolts should be unique, this means PositionProvider has to implement some equality system:
@@ -40,7 +40,6 @@ public class BoltRenderer {
   private final Minecraft minecraft = Minecraft.getInstance();
 
   private final Map<Object, BoltOwnerData> boltOwners = new Object2ObjectOpenHashMap<>();
-
 
 
   public boolean hasBoltsToRender() {
@@ -109,7 +108,8 @@ public class BoltRenderer {
       BoltOwnerData data = boltOwners.computeIfAbsent(owner, o -> new BoltOwnerData());
       data.lastBolt = newBoltData;
       Timestamp timestamp = new Timestamp(minecraft.level.getGameTime(), partialTicks);
-      if ((!data.lastBolt.getSpawnFunction().isConsecutive() || data.bolts.isEmpty()) && timestamp.isPassed(data.lastBoltTimestamp, data.lastBoltDelay)) {
+      if ((!data.lastBolt.getSpawnFunction()
+          .isConsecutive() || data.bolts.isEmpty()) && timestamp.isPassed(data.lastBoltTimestamp, data.lastBoltDelay)) {
         // TODO: `IBoltEffect` should provide the constructor
         if (newBoltData instanceof DynamicBoltEffect) {
           data.addBolt(new DynamicBoltInstance((DynamicBoltEffect) newBoltData, timestamp), timestamp, random);
@@ -215,7 +215,7 @@ public class BoltRenderer {
     }
   }
 
-  public static RenderType fromRenderPreset (RenderPreset preset) {
+  public static RenderType fromRenderPreset(RenderPreset preset) {
     return renderPresets.getOrDefault(preset, RootsRenderTypes.ROOTS_LIGHTNING);
   }
 }

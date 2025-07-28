@@ -6,19 +6,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
 
 public interface IGroveInstance extends Bounded, IProvidesTick {
-  Grove asGrove ();
+  Grove asGrove();
 
   int getRank();
 
-  int getMaxRank ();
+  int getMaxRank();
 
   GrovePower getPower();
 
-  default boolean is (TagKey<Grove> tag) {
+  default boolean is(TagKey<Grove> tag) {
     return asGrove().is(tag);
   }
 
-  default BlockPos getGrovePosition () {
+  default BlockPos getGrovePosition() {
     return BlockPos.ZERO;
   }
 }

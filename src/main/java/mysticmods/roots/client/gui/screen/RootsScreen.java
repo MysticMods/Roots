@@ -86,7 +86,7 @@ public abstract class RootsScreen extends Screen {
     drawBackground(graphics, mouseX, mouseY, partialTicks, width1, height1, fileWidth, fileHeight);
   }
 
-  public void drawBackground (GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, int uvW, int uvH, int maxW, int maxH) {
+  public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, int uvW, int uvH, int maxW, int maxH) {
     ResourceLocation resourceLocation = getBackground();
     graphics.blit(resourceLocation, 0, 0, 0, 0, uvW, uvH, maxW, maxH);
   }

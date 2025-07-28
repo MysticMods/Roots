@@ -28,7 +28,7 @@ public interface Bounded {
   }
 
   @Nullable
-  default AABB getAABB () {
+  default AABB getAABB() {
     return null;
   }
 }

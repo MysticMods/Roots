@@ -50,7 +50,7 @@ public interface ILevelCondition {
 
   ILevelConditionType<?> type();
 
-  String getName ();
+  String getName();
 
   default Component getNameComponent() {
     return Component.translatable("level_condition.roots." + getName());

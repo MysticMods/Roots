@@ -177,7 +177,7 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> WILDWOOD_PEDESTAL = ITEMS.register("wildwood_pedestal", () -> new BlockItem(ModBlocks.WILDWOOD_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO; Contents
   public static DeferredHolder<Item, BlockItem> DISPLAY_PEDESTAL = ITEMS.register("display_pedestal", () -> new BlockItem(ModBlocks.DISPLAY_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
-/*  public static DeferredHolder<Item, BlockItem> GROWTH_AMPLIFIER = ITEMS.register("growth_amplifier", () -> new BlockItem(ModBlocks.GROWTH_AMPLIFIER.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));*/
+  /*  public static DeferredHolder<Item, BlockItem> GROWTH_AMPLIFIER = ITEMS.register("growth_amplifier", () -> new BlockItem(ModBlocks.GROWTH_AMPLIFIER.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));*/
   public static DeferredHolder<Item, BlockItem> RED_FAIRY_HUT = ITEMS.register("red_fairy_hut", () -> new BlockItem(ModBlocks.RED_FAIRY_HUT.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> BROWN_FAIRY_HUT = ITEMS.register("brown_fairy_hut", () -> new BlockItem(ModBlocks.BROWN_FAIRY_HUT.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> BAFFLECAP_FAIRY_HUT = ITEMS.register("bafflecap_fairy_hut", () -> new BlockItem(ModBlocks.BAFFLECAP_FAIRY_HUT.get(), new Item.Properties()));
@@ -195,7 +195,7 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> ELEMENTAL_GROVE_STONE = ITEMS.register("elemental_grove_stone", () -> new BlockItem(ModBlocks.ELEMENTAL_GROVE_STONE.get(), new Item.Properties()));
   // TODO: Info
   public static DeferredHolder<Item, BlockItem> INCENSE_BURNER = ITEMS.register("incense_burner", () -> new BlockItem(ModBlocks.INCENSE_BURNER.get(), new Item.Properties()));
-/*  public static DeferredHolder<Item, BlockItem> STONE_ALTAR = ITEMS.register("stone_altar", () -> new BlockItem(ModBlocks.STONE_ALTAR.get(), new Item.Properties()));*/
+  /*  public static DeferredHolder<Item, BlockItem> STONE_ALTAR = ITEMS.register("stone_altar", () -> new BlockItem(ModBlocks.STONE_ALTAR.get(), new Item.Properties()));*/
   public static DeferredHolder<Item, BlockItem> MORTAR = ITEMS.register("mortar", () -> new BlockItem(ModBlocks.MORTAR.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO: Contents
   public static DeferredHolder<Item, BlockItem> PYRE = ITEMS.register("pyre", () -> new BlockItem(ModBlocks.PYRE.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
@@ -291,21 +291,31 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> MANGROVE_BARK = ITEMS.register("mangrove_bark", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> MIXED_BARK = ITEMS.register("mixed_bark", () -> new Item(new Item.Properties()));
 
-  public static final DeferredHolder<Item, PouchItem> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new PouchItem(ApothecaryPouchMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.APOTHECARY_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
-  public static final DeferredHolder<Item, PouchItem> COMPONENT_POUCH = ITEMS.register("component_pouch", () -> new PouchItem(ComponentPouchMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.COMPONENT_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+  public static final DeferredHolder<Item, PouchItem> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new PouchItem(ApothecaryPouchMenu::new, new Item.Properties().stacksTo(1)
+      .component(ModAttachments.APOTHECARY_POUCH_CONTENTS, ItemContainerContents.EMPTY)
+      .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+  public static final DeferredHolder<Item, PouchItem> COMPONENT_POUCH = ITEMS.register("component_pouch", () -> new PouchItem(ComponentPouchMenu::new, new Item.Properties().stacksTo(1)
+      .component(ModAttachments.COMPONENT_POUCH_CONTENTS, ItemContainerContents.EMPTY)
+      .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
   public static final DeferredHolder<Item, CreativeComponentPouch> CREATIVE_POUCH = ITEMS.register("creative_pouch", () -> new CreativeComponentPouch(new Item.Properties().stacksTo(1)
       .rarity(Rarity.EPIC)));
-  public static final DeferredHolder<Item, PouchItem> SYLVAN_POUCH = ITEMS.register("sylvan_pouch", () -> new PouchItem(SylvanPouchMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.SYLVAN_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+  public static final DeferredHolder<Item, PouchItem> SYLVAN_POUCH = ITEMS.register("sylvan_pouch", () -> new PouchItem(SylvanPouchMenu::new, new Item.Properties().stacksTo(1)
+      .component(ModAttachments.SYLVAN_POUCH_CONTENTS, ItemContainerContents.EMPTY)
+      .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+
   static {
     ITEMS.addAlias(RootsAPI.rl("fey_pouch"), RootsAPI.rl("sylvan_pouch"));
   }
+
   public static final DeferredHolder<Item, PouchItem> HERB_POUCH = ITEMS.register("herb_pouch", () -> new PouchItem(HerbPouchMenu::new, new Item.Properties().stacksTo(1)
       .component(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.EMPTY)
       .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
 
   public static final DeferredHolder<Item, FireStarterItem> FIRE_STARTER = ITEMS.register("fire_starter", () -> new FireStarterItem(new Item.Properties()));
   // TODO: What are we doing with this
-  public static final DeferredHolder<Item, GramaryItem> GRAMARY = ITEMS.register("gramary", () -> new GramaryItem(new Item.Properties().stacksTo(1).component(ModAttachments.GRAMARY_MODE, GramaryItem.GramaryMode.NONE).component(ModAttachments.BOUND_POSITION, BlockPos.ZERO)));
+  public static final DeferredHolder<Item, GramaryItem> GRAMARY = ITEMS.register("gramary", () -> new GramaryItem(new Item.Properties().stacksTo(1)
+      .component(ModAttachments.GRAMARY_MODE, GramaryItem.GramaryMode.NONE)
+      .component(ModAttachments.BOUND_POSITION, BlockPos.ZERO)));
   public static final DeferredHolder<Item, LivingArrowItem> LIVING_ARROW = ITEMS.register("living_arrow", () -> new LivingArrowItem(new Item.Properties()));
   public static final DeferredHolder<Item, LivingAxeItem> LIVING_AXE = ITEMS.register("living_axe", () -> new LivingAxeItem(RootsAPI.LIVING_TOOL_TIER, new Item.Properties().attributes(LivingSwordItem.createAttributes(RootsAPI.LIVING_TOOL_TIER, 6.0f, -3.2f))));
   public static final DeferredHolder<Item, LivingHoeItem> LIVING_HOE = ITEMS.register("living_hoe", () -> new LivingHoeItem(RootsAPI.LIVING_TOOL_TIER, new Item.Properties().attributes(LivingHoeItem.createAttributes(RootsAPI.LIVING_TOOL_TIER, 0f, -3.f))));
@@ -321,12 +331,14 @@ public class ModItems {
   public static final DeferredHolder<Item, SwordItem> RUNED_SWORD = ITEMS.register("runed_sword", () -> new SwordItem(RootsAPI.RUNED_TIER, new Item.Properties().attributes(SwordItem.createAttributes(RootsAPI.RUNED_TIER, 3.0f, -2.4f))));
   public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
-  public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get()).component(ModAttachments.ITEM_UUID, ModAttachments.DEFAULT_UUID)
+  public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
+      .component(ModAttachments.ITEM_UUID, ModAttachments.DEFAULT_UUID)
       .stacksTo(1)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
       .stacksTo(1)));
-  public static final DeferredHolder<Item, PouchItem> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new PouchItem(QuiverMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
+  public static final DeferredHolder<Item, PouchItem> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new PouchItem(QuiverMenu::new, new Item.Properties().stacksTo(1)
+      .component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
   public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = ITEMS.register("wooden_knife", () -> new KnifeItem(Tiers.WOOD, new Item.Properties().component(ModAttachments.FORAGING, 1)
@@ -349,9 +361,11 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> RELIQUARY = ITEMS.register("reliquary", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
   public static final DeferredHolder<Item, Item> SPIRIT_BAG = ITEMS.register("spirit_bag", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
   public static final DeferredHolder<Item, Item> SYLVAN_LEATHER = ITEMS.register("sylvan_leather", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+
   static {
     ITEMS.addAlias(RootsAPI.rl("fey_leather"), RootsAPI.rl("sylvan_leather"));
   }
+
   public static final DeferredHolder<Item, EffectUseItem> GLASS_EYE = ITEMS.register("glass_eye", () -> new EffectUseItem(MobEffects.NIGHT_VISION, 0, 20 * 30, new Item.Properties()));
   public static final DeferredHolder<Item, Item> LIFE_ESSENCE = ITEMS.register("life_essence", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> MYSTIC_FEATHER = ITEMS.register("mystic_feather", () -> new Item(new Item.Properties()));
@@ -400,9 +414,11 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DISARM = ITEMS.register("spell_disarm", () -> spell(ModSpells.DISARM));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_EXTENSION = ITEMS.register("spell_extension", () -> spell(ModSpells.EXTENSION));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SYLVAN_LIGHT = ITEMS.register("spell_sylvan_light", () -> spell(ModSpells.SYLVAN_LIGHT));
+
   static {
     ITEMS.addAlias(RootsAPI.rl("spell_dwt_light"), RootsAPI.rl("spell_sylvan_light"));
   }
+
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_GEAS = ITEMS.register("spell_geas", () -> spell(ModSpells.GEAS));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_GROWTH_INFUSION = ITEMS.register("spell_growth_infusion", () -> spell(ModSpells.GROWTH_INFUSION));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_HARVEST = ITEMS.register("spell_harvest", () -> spell(ModSpells.HARVEST));
@@ -422,9 +438,11 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SKY_SOARER = ITEMS.register("spell_sky_soarer", () -> spell(ModSpells.SKY_SOARER));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_STORM_CLOUD = ITEMS.register("spell_storm_cloud", () -> spell(ModSpells.STORM_CLOUD));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_TEMPORAL_MORASS = ITEMS.register("spell_temporal_morass", () -> spell(ModSpells.TEMPORAL_MORASS));
+
   static {
     ITEMS.addAlias(RootsAPI.rl("spell_time_stop"), RootsAPI.rl("spell_temporal_morass"));
   }
+
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_WILDFIRE = ITEMS.register("spell_wildfire", () -> spell(ModSpells.WILDFIRE));
 
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_ANIMAL_HARVEST = ITEMS.register("ritual_animal_harvest", () -> ritual(ModRituals.ANIMAL_HARVEST));

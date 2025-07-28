@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -217,15 +216,20 @@ public class ModBlocks {
       .requiresCorrectToolForDrops()));*/
 
   public static final DeferredHolder<Block, FairyHutBlock> RED_FAIRY_HUT = BLOCKS.register("red_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
+      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> BROWN_FAIRY_HUT = BLOCKS.register("brown_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.BROWN).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
+      .mapColor(DyeColor.BROWN).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> BAFFLECAP_FAIRY_HUT = BLOCKS.register("bafflecap_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.YELLOW).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
+      .mapColor(DyeColor.YELLOW).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> CRIMSON_FAIRY_HUT = BLOCKS.register("crimson_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
+      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> WARPED_FAIRY_HUT = BLOCKS.register("warped_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
+      .mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(FairyHutBlock::lightLevel)));
 
   public static final DeferredHolder<Block, FungalTransmuterBlock> FUNGAL_TRANSMUTER = BLOCKS.register("fungal_transmuter", () -> new FungalTransmuterBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0f, 6.0f)
@@ -271,7 +275,7 @@ public class ModBlocks {
   public static final DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
-/*  public static final DeferredHolder<Block, AltarBlock> STONE_ALTAR = BLOCKS.register("stone_altar", () -> new AltarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0f, 6.0f).forceSolidOn()));*/
+  /*  public static final DeferredHolder<Block, AltarBlock> STONE_ALTAR = BLOCKS.register("stone_altar", () -> new AltarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0f, 6.0f).forceSolidOn()));*/
   public static final DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BlockBehaviour.Properties.of()
       .strength(1.0f, 6.0f).forceSolidOn().dynamicShape().noOcclusion()));
   public static final DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()

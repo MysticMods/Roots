@@ -1,7 +1,6 @@
 package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchContainer;
 import mysticmods.roots.inventory.pouch.component.ComponentPouchContainer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

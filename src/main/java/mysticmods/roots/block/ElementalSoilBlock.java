@@ -27,7 +27,8 @@ public class ElementalSoilBlock extends FarmBlock {
 
   public ElementalSoilBlock(ElementalType soilType, Properties pProperties) {
     super(pProperties);
-    this.registerDefaultState(this.defaultBlockState().setValue(ElementalType.SOIL_TYPE, soilType).setValue(MOISTURE, MAX_MOISTURE));
+    this.registerDefaultState(this.defaultBlockState().setValue(ElementalType.SOIL_TYPE, soilType)
+        .setValue(MOISTURE, MAX_MOISTURE));
   }
 
   @Override

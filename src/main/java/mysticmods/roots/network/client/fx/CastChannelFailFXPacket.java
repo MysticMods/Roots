@@ -1,6 +1,5 @@
 package mysticmods.roots.network.client.fx;
 
-import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -10,7 +9,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record CastChannelFailFXPacket(Spell spell, int casterId, int ticks) implements IRootsPacket {

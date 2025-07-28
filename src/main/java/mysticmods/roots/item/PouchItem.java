@@ -6,7 +6,6 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
@@ -23,7 +22,6 @@ import org.codehaus.plexus.util.StringUtils;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public class PouchItem extends Item {
   private final PouchMenuProvider provider;
@@ -33,11 +31,11 @@ public class PouchItem extends Item {
     this.provider = provider;
   }
 
-  public PouchMenuProvider getMenuProvider () {
+  public PouchMenuProvider getMenuProvider() {
     return provider;
   }
 
-  public DataComponentType<ItemContainerContents> getComponent () {
+  public DataComponentType<ItemContainerContents> getComponent() {
     Holder<Item> holder = this.builtInRegistryHolder();
     if (holder.is(ModItems.APOTHECARY_POUCH)) {
       return ModAttachments.APOTHECARY_POUCH_CONTENTS.get();
@@ -89,6 +87,6 @@ public class PouchItem extends Item {
 
   @FunctionalInterface
   public interface PouchMenuProvider {
-    MenuProvider createMenu (ItemStack pouch);
+    MenuProvider createMenu(ItemStack pouch);
   }
 }

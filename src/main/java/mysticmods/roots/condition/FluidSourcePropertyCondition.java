@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
@@ -25,7 +24,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 public record FluidSourcePropertyCondition(String name, TagKey<Fluid> fluidTag) implements ILevelCondition {
-  public static final MapCodec<FluidSourcePropertyCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.STRING.fieldOf("name").forGetter(FluidSourcePropertyCondition::name), TagKey.codec(Registries.FLUID).fieldOf("fluidTag").forGetter(FluidSourcePropertyCondition::fluidTag)).apply(instance, FluidSourcePropertyCondition::new));
+  public static final MapCodec<FluidSourcePropertyCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.STRING.fieldOf("name")
+      .forGetter(FluidSourcePropertyCondition::name), TagKey.codec(Registries.FLUID).fieldOf("fluidTag")
+      .forGetter(FluidSourcePropertyCondition::fluidTag)).apply(instance, FluidSourcePropertyCondition::new));
   public static final Codec<FluidSourcePropertyCondition> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, FluidSourcePropertyCondition> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, FluidSourcePropertyCondition::name, ExtraStreamCodecs.FLUID_TAG_STREAM_CODEC, FluidSourcePropertyCondition::fluidTag, FluidSourcePropertyCondition::new);
 
@@ -54,7 +55,7 @@ public record FluidSourcePropertyCondition(String name, TagKey<Fluid> fluidTag) 
   }
 
   @Override
-  public String getName () {
+  public String getName() {
     return name;
   }
 

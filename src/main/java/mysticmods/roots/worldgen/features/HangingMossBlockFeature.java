@@ -1,7 +1,6 @@
 package mysticmods.roots.worldgen.features;
 
 import com.mojang.serialization.Codec;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.HangingGroveMossBlock;
 import mysticmods.roots.init.ModBlocks;

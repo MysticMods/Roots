@@ -116,7 +116,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     wallBlock(ModBlocks.RUNED_TILE_WALL.get(), blockTexture(ModBlocks.RUNED_TILE.get()));
     simpleBlock(ModBlocks.ELEMENTAL_SOIL.get());
     ModelFile aqueousPillar = models().cubeBottomTop(ModBlocks.AQUEOUS_SOIL.getKey().location()
-        .getPath(), modLoc("block/water_soil_side"),modLoc("block/elemental_soil"), modLoc("block/water_soil_top"));
+        .getPath(), modLoc("block/water_soil_side"), modLoc("block/elemental_soil"), modLoc("block/water_soil_top"));
     getVariantBuilder(ModBlocks.AQUEOUS_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(aqueousPillar).build());
     ModelFile caelicPillar = models().cubeBottomTop(ModBlocks.CAELIC_SOIL.getKey().location()
@@ -137,8 +137,10 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile reinforcedRitualPedestal = models().withExistingParent("reinforced_ritual_pedestal", modLoc("block/complex/reinforced_ritual_pedestal"));
     getVariantBuilder(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(reinforcedRitualPedestal).build());
-    ModelFile existingModel = models().withExistingParent("enchanted_turf", mcLoc("block/grass_block")).renderType("cutout");
-    getVariantBuilder(ModBlocks.ENCHANTED_TURF.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(existingModel).build());
+    ModelFile existingModel = models().withExistingParent("enchanted_turf", mcLoc("block/grass_block"))
+        .renderType("cutout");
+    getVariantBuilder(ModBlocks.ENCHANTED_TURF.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(existingModel).build());
     ModelFile existingGroveCrafterActive = models().withExistingParent("grove_crafter_active", modLoc("block/complex/grove_crafter_active"));
     ModelFile existingGroveCrafterInactive = models().withExistingParent("grove_crafter_inactive", modLoc("block/complex/grove_crafter_inactive"));
     getVariantBuilder(ModBlocks.GROVE_CRAFTER.get()).forAllStates(state -> {
@@ -157,7 +159,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile displayPedestal = models().withExistingParent("display_pedestal", modLoc("block/complex/grove_pedestal"));
     getVariantBuilder(ModBlocks.DISPLAY_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(displayPedestal).build());
-/*    ModelFile growthAmplifier = models().withExistingParent("growth_amplifier", modLoc("block/complex/grove_amplifier"));*/
+    /*    ModelFile growthAmplifier = models().withExistingParent("growth_amplifier", modLoc("block/complex/grove_amplifier"));*/
 /*    getVariantBuilder(ModBlocks.GROWTH_AMPLIFIER.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(growthAmplifier).build());*/
     // Wild roots are existing
@@ -285,7 +287,8 @@ public class RootsBlockStateProvider extends BlockStateProvider {
 
     ModelFile sylvanLight = models().getExistingFile(modLoc("block/sylvan_light"));
 
-    getVariantBuilder(ModBlocks.SYLVAN_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(sylvanLight)
+    getVariantBuilder(ModBlocks.SYLVAN_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(sylvanLight)
         .build());
 
     crop(ModBlocks.WILDROOT_CROP, false);
@@ -357,7 +360,8 @@ public class RootsBlockStateProvider extends BlockStateProvider {
           model.texture("particle", texture);
 
           if (state.getValue(FairyHutBlock.HALF) == DoubleBlockHalf.LOWER) {
-            models().withExistingParent(material + "_fairy_hut_inventory", modLoc("block/complex/house_full")).texture("4", texture).texture("particle", texture);
+            models().withExistingParent(material + "_fairy_hut_inventory", modLoc("block/complex/house_full"))
+                .texture("4", texture).texture("particle", texture);
           }
 
           Direction dir = state.getValue(FairyHutBlock.FACING);
@@ -369,12 +373,12 @@ public class RootsBlockStateProvider extends BlockStateProvider {
         });
   }
 
-  private void groveStone (Holder<Block> holder) {
+  private void groveStone(Holder<Block> holder) {
     getVariantBuilder(holder.value())
         .forAllStates(state -> {
           boolean valid = state.getValue(StateProperties.ACTIVE);
           String partName = state.getValue(GroveStoneBlock.PART).getSerializedName();
-          String groveType = ((GroveStoneBlock)state.getBlock()).getGrove().getKey().location().getPath();
+          String groveType = ((GroveStoneBlock) state.getBlock()).getGrove().getKey().location().getPath();
           String name = groveType + "_grove_stone_" + partName;
           if (valid) {
             name = name + "_valid";
@@ -388,7 +392,8 @@ public class RootsBlockStateProvider extends BlockStateProvider {
             models().withExistingParent("primal_grove_stone_inventory", modLoc("block/complex/grove_stone_full"));
           } else {
             active = modLoc("block/ob_stone_active_" + groveType);
-            models().withExistingParent(groveType + "_grove_stone_inventory", modLoc("block/complex/grove_stone_full")).texture("monolith", active).texture("particle", active);
+            models().withExistingParent(groveType + "_grove_stone_inventory", modLoc("block/complex/grove_stone_full"))
+                .texture("monolith", active).texture("particle", active);
           }
 
           if (valid) {

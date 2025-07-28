@@ -7,7 +7,6 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.IGroveConsumer;
-import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;

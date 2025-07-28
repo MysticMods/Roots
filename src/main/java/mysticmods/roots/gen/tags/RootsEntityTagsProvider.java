@@ -155,23 +155,28 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
 
     this.tag(RootsTags.Entities.WITHERS).add(EntityType.WITHER);
     this.tag(RootsTags.Entities.DRAGONS).add(EntityType.ENDER_DRAGON);
-    this.tag(RootsTags.Entities.TRADERS).add(EntityType.PIGLIN, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.ZOMBIE_VILLAGER);
+    this.tag(RootsTags.Entities.TRADERS)
+        .add(EntityType.PIGLIN, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.ZOMBIE_VILLAGER);
     this.tag(RootsTags.Entities.UNDEAD).addTag(EntityTypeTags.UNDEAD);
-    this.tag(RootsTags.Entities.SPROUTS).add(ModEntities.GREEN_SPROUT.get(), ModEntities.SNOW_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.TAN_SPROUT.get(), ModEntities.RED_SPROUT.get(), ModEntities.MELODY_SPROUT.get());
+    this.tag(RootsTags.Entities.SPROUTS)
+        .add(ModEntities.GREEN_SPROUT.get(), ModEntities.SNOW_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.TAN_SPROUT.get(), ModEntities.RED_SPROUT.get(), ModEntities.MELODY_SPROUT.get());
     this.tag(RootsTags.Entities.HELL_ANIMALS);
     this.tag(RootsTags.Entities.SNOW_ANIMALS).add(ModEntities.SNOW_SPROUT.get());
     this.tag(RootsTags.Entities.END_ANIMALS).add(ModEntities.MELODY_SPROUT.get());
     this.tag(RootsTags.Entities.MELODY_SPROUT).add(ModEntities.MELODY_SPROUT.get());
     this.tag(RootsTags.Entities.SNOW_SPROUT).add(ModEntities.SNOW_SPROUT.get());
-    this.tag(RootsTags.Entities.SPECIAL_SPROUTS).addTags(RootsTags.Entities.MELODY_SPROUT, RootsTags.Entities.SNOW_SPROUT);
+    this.tag(RootsTags.Entities.SPECIAL_SPROUTS)
+        .addTags(RootsTags.Entities.MELODY_SPROUT, RootsTags.Entities.SNOW_SPROUT);
     this.tag(RootsTags.Entities.RED_SPROUT).add(ModEntities.RED_SPROUT.get());
     this.tag(RootsTags.Entities.TAN_SPROUT).add(ModEntities.TAN_SPROUT.get());
     this.tag(RootsTags.Entities.GREEN_SPROUT).add(ModEntities.GREEN_SPROUT.get());
     this.tag(RootsTags.Entities.PURPLE_SPROUT).add(ModEntities.PURPLE_SPROUT.get());
-    this.tag(RootsTags.Entities.NORMAL_SPROUTS).addTags(RootsTags.Entities.GREEN_SPROUT, RootsTags.Entities.RED_SPROUT, RootsTags.Entities.TAN_SPROUT, RootsTags.Entities.PURPLE_SPROUT);
+    this.tag(RootsTags.Entities.NORMAL_SPROUTS)
+        .addTags(RootsTags.Entities.GREEN_SPROUT, RootsTags.Entities.RED_SPROUT, RootsTags.Entities.TAN_SPROUT, RootsTags.Entities.PURPLE_SPROUT);
     this.tag(RootsTags.Entities.PLAYERS).add(EntityType.PLAYER);
 
-    this.tag(RootsTags.Entities.SHOULD_RENDER_HUD).add(EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.CAMEL, EntityType.LLAMA, EntityType.VILLAGER);
+    this.tag(RootsTags.Entities.SHOULD_RENDER_HUD)
+        .add(EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.CAMEL, EntityType.LLAMA, EntityType.VILLAGER);
     this.tag(EntityTypeTags.ARROWS).add(ModEntities.LIVING_ARROW.get());
   }
 

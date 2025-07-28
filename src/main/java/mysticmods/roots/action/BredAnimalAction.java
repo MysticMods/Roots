@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class BredAnimalAction implements GroveAction {
   @Override
-  public void log (GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("BredAnimalAction fired by '{}' with offspring '{}' from first parent '{}' and second parent '{}'",
         context.player().getName().getString(), context.target().getName().getString(), context.secondary().getName()
             .getString(), context.tertiary().getName().getString());

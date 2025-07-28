@@ -65,7 +65,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -73,7 +72,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus= EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class RootsDataPackGenerators {
   // Salts used for the randomization of structure placements
   public static final int HUT_SALT = 8266497;

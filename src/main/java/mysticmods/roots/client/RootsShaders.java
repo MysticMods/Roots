@@ -15,7 +15,7 @@ public class RootsShaders {
     return LOW_DISCARD_PARTICLE_SHADER;
   }
 
-  public static ShaderInstance getSmartCrumblingShader () {
+  public static ShaderInstance getSmartCrumblingShader() {
     return SMART_CRUMBLING_SHADER;
   }
 }

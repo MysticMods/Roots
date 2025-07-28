@@ -19,7 +19,6 @@ import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityCrafting;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.transmutation.TransmutationCrafting;
-import mysticmods.roots.recipe.transmutation.TransmutationInventory;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

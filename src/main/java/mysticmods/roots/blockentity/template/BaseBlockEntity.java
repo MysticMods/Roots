@@ -43,7 +43,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
     super(pType, pWorldPosition, pBlockState);
   }
 
-  public RandomSource getRandom () {
+  public RandomSource getRandom() {
     if (getLevel() == null) {
       return RandomSource.create();
     }
@@ -52,7 +52,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
   }
 
   @Nullable
-  public Object getParticleHolder () {
+  public Object getParticleHolder() {
     return particleHolder;
   }
 
@@ -64,7 +64,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
     return true;
   }
 
-  protected BoundingBox getPedestalBoundingBox () {
+  protected BoundingBox getPedestalBoundingBox() {
     return getBoundingBox();
   }
 
@@ -96,7 +96,8 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
       return;
     }
     BlockPos pos = getBlockPos();
-    ((ServerLevel) level).getServer().getPlayerList().broadcast(null, pos.getX(), pos.getY(), pos.getZ(), 64, level.dimension(), packet);
+    ((ServerLevel) level).getServer().getPlayerList()
+        .broadcast(null, pos.getX(), pos.getY(), pos.getZ(), 64, level.dimension(), packet);
   }
 
   @Nullable
@@ -125,7 +126,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
     super.saveAdditional(pTag, lookup);
   }
 
-  protected void resetBounds () {
+  protected void resetBounds() {
     boundingBox = null;
     aabb = null;
   }
@@ -144,7 +145,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
   }
 
   @Override
-  public AABB getAABB () {
+  public AABB getAABB() {
     if (!isBounded()) {
       return null;
     }

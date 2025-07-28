@@ -7,10 +7,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
-@EventBusSubscriber(modid= RootsAPI.MODID, bus= EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class BrewingEventHandler {
   @SubscribeEvent
-  public static void onBrewingRecipe (RegisterBrewingRecipesEvent event) {
+  public static void onBrewingRecipe(RegisterBrewingRecipesEvent event) {
     event.getBuilder().addContainerRecipe(Items.SPLASH_POTION, ModItems.BAFFLECAP.get(), Items.LINGERING_POTION);
   }
 }

@@ -29,7 +29,8 @@ public class PositionCache {
   }
 
   public PositionCache(BlockPos position, BoundingBox boundingBox) {
-    this(position, boundingBox, new ArrayList<>(BlockPos.betweenClosedStream(boundingBox).map(BlockPos::immutable).toList()));
+    this(position, boundingBox, new ArrayList<>(BlockPos.betweenClosedStream(boundingBox).map(BlockPos::immutable)
+        .toList()));
   }
 
   public BlockPos getPosition() {

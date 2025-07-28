@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class ArriveDimensionAction implements GroveAction {
   @Override
-  public void log (GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("ArriveDimensionAction fired by '{}' in dimension '{}'", context.player().getName()
         .getString(), context.level().dimension().location());
   }

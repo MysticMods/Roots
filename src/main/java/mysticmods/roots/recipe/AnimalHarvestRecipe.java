@@ -22,21 +22,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record AnimalHarvestRecipe(EntityType<?> entity, List<ChanceOutput> loot) {
-  public record Cache (List<AnimalHarvestRecipe> recipes) {}
+  public record Cache(List<AnimalHarvestRecipe> recipes) {
+  }
 
   public static final MapCodec<AnimalHarvestRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(AnimalHarvestRecipe::entity),
       ChanceOutput.LIST_CODEC.fieldOf("loot").forGetter(AnimalHarvestRecipe::loot)
-    ).apply(instance, AnimalHarvestRecipe::new));
+  ).apply(instance, AnimalHarvestRecipe::new));
   public static final Codec<AnimalHarvestRecipe> CODEC = MAP_CODEC.codec();
   public static final Codec<AnimalHarvestRecipe.Cache> CACHE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
       AnimalHarvestRecipe.CODEC.listOf().fieldOf("recipes").forGetter(AnimalHarvestRecipe.Cache::recipes)
-    ).apply(instance, AnimalHarvestRecipe.Cache::new));
+  ).apply(instance, AnimalHarvestRecipe.Cache::new));
 
   public static final StreamCodec<RegistryFriendlyByteBuf, AnimalHarvestRecipe> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(Registries.ENTITY_TYPE), AnimalHarvestRecipe::entity, ChanceOutput.LIST_STREAM_CODEC, AnimalHarvestRecipe::loot, AnimalHarvestRecipe::new);
   public static final StreamCodec<RegistryFriendlyByteBuf, List<AnimalHarvestRecipe>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
-  public static AnimalHarvestRecipe.Cache getServerRecipes (HolderGetter.Provider provider) {
+  public static AnimalHarvestRecipe.Cache getServerRecipes(HolderGetter.Provider provider) {
     var lootTableLookup = provider.lookupOrThrow(Registries.LOOT_TABLE);
 
     List<AnimalHarvestRecipe> recipes = new ArrayList<>();

@@ -30,7 +30,7 @@ public interface SegmentSpreader {
     };
   }
 
-  static SegmentSpreader memoryMinimumAngle (float memoryFactor, double minimumAngle) {
+  static SegmentSpreader memoryMinimumAngle(float memoryFactor, double minimumAngle) {
     double minRadians = Math.cos(Math.toRadians(minimumAngle));
 
     return (perpendicularDist, randVec, maxDiff, spreadScale, progress, rand) -> {

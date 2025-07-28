@@ -25,7 +25,7 @@ public abstract class MixinEntity implements IMixinParticleHolder {
 
   @Nullable
   @Override
-  public Particle roots_1_21$getParticle (ParticleType<?> type, IParticleTester tester) {
+  public Particle roots_1_21$getParticle(ParticleType<?> type, IParticleTester tester) {
     if (roots_1_21$particleSetMap == null) {
       return null;
     }
@@ -35,7 +35,7 @@ public abstract class MixinEntity implements IMixinParticleHolder {
       return null;
     }
 
-    particles.removeIf(o -> ((AccessorMixinParticle)o).roots_1_21$isRemoved());
+    particles.removeIf(o -> ((AccessorMixinParticle) o).roots_1_21$isRemoved());
 
     for (Particle particle : particles) {
       if (tester.test(particle)) {
@@ -57,7 +57,7 @@ public abstract class MixinEntity implements IMixinParticleHolder {
       return null;
     }
 
-    if (((AccessorMixinParticle)result).roots_1_21$isRemoved()) {
+    if (((AccessorMixinParticle) result).roots_1_21$isRemoved()) {
       roots_1_21$particleMap.remove(type);
       return null;
     }
@@ -72,13 +72,13 @@ public abstract class MixinEntity implements IMixinParticleHolder {
     }
 
     Particle current = roots_1_21$getParticle(type);
-    if (current == null || ((AccessorMixinParticle)current).roots_1_21$isRemoved()) {
+    if (current == null || ((AccessorMixinParticle) current).roots_1_21$isRemoved()) {
       roots_1_21$particleMap.put(type, particle);
     }
   }
 
   @Override
-  public void roots_1_21$setParticle (ParticleType<?> type, Particle particle, IParticleTester tester) {
+  public void roots_1_21$setParticle(ParticleType<?> type, Particle particle, IParticleTester tester) {
     if (roots_1_21$particleSetMap == null) {
       roots_1_21$particleSetMap = new Object2ObjectLinkedOpenHashMap<>();
     }
@@ -90,7 +90,7 @@ public abstract class MixinEntity implements IMixinParticleHolder {
     Set<Particle> particles = roots_1_21$particleSetMap.computeIfAbsent(type, k -> new ObjectLinkedOpenHashSet<>());
 
     Particle existing = roots_1_21$getParticle(type, tester);
-    if (existing == null || ((AccessorMixinParticle)existing).roots_1_21$isRemoved()) {
+    if (existing == null || ((AccessorMixinParticle) existing).roots_1_21$isRemoved()) {
       particles.add(particle);
     }
   }

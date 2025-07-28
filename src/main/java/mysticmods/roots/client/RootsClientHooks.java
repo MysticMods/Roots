@@ -7,8 +7,8 @@ import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.item.TokenItem;
+import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -167,7 +167,7 @@ public class RootsClientHooks {
     return KeyBindings.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
   }
 
-  public static Component getPouchKeyBind () {
+  public static Component getPouchKeyBind() {
     return KeyBindings.OPEN_POUCH.getKey().getDisplayName();
   }
 
@@ -191,7 +191,7 @@ public class RootsClientHooks {
   }
 
   @Nullable
-  public static Player getPlayer () {
+  public static Player getPlayer() {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft == null) {
       return null;

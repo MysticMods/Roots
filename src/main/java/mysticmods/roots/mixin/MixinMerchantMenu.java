@@ -16,8 +16,8 @@ public class MixinMerchantMenu {
   @Final
   private Merchant trader;
 
-  @Inject(method="playTradeSound", at=@At("HEAD"), cancellable = true)
-  private void RootsPlayTradeSound (CallbackInfo ci) {
+  @Inject(method = "playTradeSound", at = @At("HEAD"), cancellable = true)
+  private void RootsPlayTradeSound(CallbackInfo ci) {
     if (!(trader instanceof Entity)) {
       // Prevent crash with non-Entity traders (e.g., fairy huts)
       ci.cancel();

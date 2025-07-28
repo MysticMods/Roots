@@ -22,9 +22,9 @@ import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityHelper;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
-import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
 import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
+import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -78,7 +78,8 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new SummonCreaturesCategory(guiHelper));
     registration.addRecipeCategories(new AnimalHarvestCategory(guiHelper));
 
-    INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11).setTextureSize(9, 11).build();
+    INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
+        .setTextureSize(9, 11).build();
 
   }
 
@@ -88,26 +89,33 @@ public class RootsJEIPlugin implements IModPlugin {
   public void registerRecipes(IRecipeRegistration registration) {
     Level level = Minecraft.getInstance().level;
     // TODO: Recipe sorting?
-    registration.addRecipes(GROVE_RECIPE_TYPE, ResolvedRecipes.GROVE.getRecipes(level).stream().sorted(RECIPE_COMPARATOR).map(RecipeHolder::value)
+    registration.addRecipes(GROVE_RECIPE_TYPE, ResolvedRecipes.GROVE.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR).map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream().sorted(RECIPE_COMPARATOR)
+    registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR)
         .map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(PYRE_RECIPE_TYPE, ResolvedRecipes.PYRE.getRecipes(level).stream().sorted(RECIPE_COMPARATOR).map(RecipeHolder::value)
-        .toList());
-    registration.addRecipes(KNIFE_RECIPE_TYPE, ResolvedRecipes.KNIFE.getRecipes(level).stream().sorted(RECIPE_COMPARATOR).map(RecipeHolder::value)
-        .toList());
-    registration.addRecipes(RUNIC_RECIPE_TYPE, ResolvedRecipes.RUNIC_BLOCK.getRecipes(level).stream().sorted(RECIPE_COMPARATOR)
+    registration.addRecipes(PYRE_RECIPE_TYPE, ResolvedRecipes.PYRE.getRecipes(level).stream().sorted(RECIPE_COMPARATOR)
         .map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(RUNIC_ENTITY_RECIPE_TYPE, ResolvedRecipes.RUNIC_ENTITY.getRecipes(level).stream().sorted(RECIPE_COMPARATOR)
+    registration.addRecipes(KNIFE_RECIPE_TYPE, ResolvedRecipes.KNIFE.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR).map(RecipeHolder::value)
+        .toList());
+    registration.addRecipes(RUNIC_RECIPE_TYPE, ResolvedRecipes.RUNIC_BLOCK.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR)
+        .map(RecipeHolder::value)
+        .toList());
+    registration.addRecipes(RUNIC_ENTITY_RECIPE_TYPE, ResolvedRecipes.RUNIC_ENTITY.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR)
         .map(RecipeHolder::value)
         .toList());
     registration.addRecipes(RecipeTypes.CRAFTING, DyeRecipeGenerator.generate());
     IVanillaRecipeFactory factory = registration.getJeiHelpers().getVanillaRecipeFactory();
     registration.addRecipes(RecipeTypes.ANVIL, RootsRepairRecipes.getRootsAnvilRepairRecipes(factory, registration.getIngredientManager()));
     registration.addRecipes(SPROUT_GIFTS_RECIPE_TYPE, SproutGiftRecipe.getRecipes());
-    registration.addRecipes(SUMMON_CREATURES_RECIPE_TYPE, ResolvedRecipes.SUMMON_CREATURES.getRecipes(level).stream().sorted(RECIPE_COMPARATOR)
+    registration.addRecipes(SUMMON_CREATURES_RECIPE_TYPE, ResolvedRecipes.SUMMON_CREATURES.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR)
         .map(RecipeHolder::value)
         .toList());
     registration.addRecipes(ANIMAL_HARVEST_RECIPE_TYPE, ClientRecipes.ANIMAL_HARVEST_RECIPES);

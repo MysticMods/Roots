@@ -2,11 +2,8 @@ package mysticmods.roots.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.model.BeetleModel;
 import mysticmods.roots.client.model.JerboaModel;
 import mysticmods.roots.client.model.ModelHolder;
-import mysticmods.roots.client.model.armor.ArmorModel;
-import mysticmods.roots.entity.BeetleEntity;
 import mysticmods.roots.entity.JerboaEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

@@ -35,14 +35,14 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
     return excludeTag;
   }
 
-  public record ItemPosition (BlockPos position, ItemStack item) {
+  public record ItemPosition(BlockPos position, ItemStack item) {
     public static final StreamCodec<RegistryFriendlyByteBuf, ItemPosition> STREAM_CODEC = StreamCodec.composite(
         BlockPos.STREAM_CODEC, ItemPosition::position,
         ItemStack.STREAM_CODEC, ItemPosition::item,
         ItemPosition::new);
   }
 
-  public List<ItemPosition> getItemsAndPositions () {
+  public List<ItemPosition> getItemsAndPositions() {
     List<ItemPosition> itemsAndPositions = new ArrayList<>();
     if (getBlockEntity() == null) {
       return Collections.emptyList();
@@ -53,7 +53,7 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
     return itemsAndPositions;
   }
 
-  public List<ItemStack> popItems () {
+  public List<ItemStack> popItems() {
     List<ItemStack> result = new ArrayList<>();
     if (getBlockEntity() == null) {
       return result;

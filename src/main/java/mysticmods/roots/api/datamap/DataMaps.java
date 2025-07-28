@@ -106,7 +106,8 @@ public class DataMaps {
       .synced(GrovePower.Generator.LIST_CODEC, false).build();
   public static final DataMapType<Grove, List<GrovePower.GenerationEntry>> GROVE_GENERATION_ENTRIES = DataMapType.builder(RootsAPI.rl("grove_generation_entries"), RootsRegistries.Keys.GROVES, GrovePower.GenerationEntry.LIST_CODEC)
       .synced(GrovePower.GenerationEntry.LIST_CODEC, false).build();
-  public static final DataMapType<EntityType<?>, List<ResourceKey<LootTable>>> ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES = DataMapType.builder(RootsAPI.rl("additional_animal_harvest_loot_tables"), Registries.ENTITY_TYPE, ResourceKey.codec(Registries.LOOT_TABLE).listOf())
+  public static final DataMapType<EntityType<?>, List<ResourceKey<LootTable>>> ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES = DataMapType.builder(RootsAPI.rl("additional_animal_harvest_loot_tables"), Registries.ENTITY_TYPE, ResourceKey.codec(Registries.LOOT_TABLE)
+          .listOf())
       .synced(ResourceKey.codec(Registries.LOOT_TABLE).listOf(), false)
       .build();
 

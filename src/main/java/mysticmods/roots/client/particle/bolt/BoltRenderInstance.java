@@ -10,7 +10,7 @@ public interface BoltRenderInstance {
 
   boolean tick(Timestamp timestamp);
 
-  IBoltEffect getBolt ();
+  IBoltEffect getBolt();
 
   default SpawnFunction getSpawnFunction() {
     return getBolt().getSpawnFunction();

@@ -5,7 +5,10 @@ import net.minecraft.SharedConstants;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class BoltEffect implements IBoltEffect {
 

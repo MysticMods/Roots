@@ -49,7 +49,7 @@ public class SylvanLightParticle extends TextureSheetParticle {
         this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
       }
 
-      this.alpha = 1.0f - f * f *f;
+      this.alpha = 1.0f - f * f * f;
     }
   }
 

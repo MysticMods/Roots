@@ -36,7 +36,7 @@ public abstract class RootsRecipeBaseCategory<T> implements IRecipeCategory<T> {
     this.title = title;
   }
 
-  public List<ChanceOutput> getChanceOutputs (T recipe) {
+  public List<ChanceOutput> getChanceOutputs(T recipe) {
     if (recipe instanceof RootsRecipe<?, ?> rootsRecipe) {
       return rootsRecipe.getCachedOutputs();
     }

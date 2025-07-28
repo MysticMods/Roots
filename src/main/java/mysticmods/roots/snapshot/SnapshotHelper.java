@@ -22,7 +22,7 @@ public class SnapshotHelper {
   }
 
   @Nullable
-  public static <T extends Snapshot> T getSnapshot (Entity entity, SnapshotType<T> serializer) {
+  public static <T extends Snapshot> T getSnapshot(Entity entity, SnapshotType<T> serializer) {
     SnapshotStorage storage = entity.getData(ModAttachments.SNAPSHOT_STORAGE);
     return storage.getSnapshot(entity, serializer);
   }

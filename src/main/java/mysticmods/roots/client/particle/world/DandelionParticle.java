@@ -54,7 +54,8 @@ public class DandelionParticle extends RootsParticle {
     if (!this.removed) {
       float f = (float) this.age / (float) this.lifetime;
       if (this.age % 8 == 0 && f < 0.8f) {
-        RootsParticleOptions opts = random.nextBoolean() ? RootsParticleOptions.builder(ModParticles.PETAL).color(col1, col2).build() : RootsParticleOptions.builder(ModParticles.PETAL).color(col2, col1).build();
+        RootsParticleOptions opts = random.nextBoolean() ? RootsParticleOptions.builder(ModParticles.PETAL)
+            .color(col1, col2).build() : RootsParticleOptions.builder(ModParticles.PETAL).color(col2, col1).build();
         level.addParticle(opts, this.x, this.y, this.z, (random.nextDouble() - 0.5) * 0.01, (0 - random.nextDouble()) * 0.01, (random.nextDouble() - 0.5) * 0.01);
       }
     }

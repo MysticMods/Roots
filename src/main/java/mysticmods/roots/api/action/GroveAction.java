@@ -27,19 +27,19 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
     return reputation;
   }
 
-  void log (GroveContext context);
+  void log(GroveContext context);
 
   boolean test(GroveContext context);
 
-  default boolean shouldLog () {
+  default boolean shouldLog() {
     return RootsAPI.getInstance().logGroveActions();
   }
 
-  default boolean testAndLog (GroveContext context) {
+  default boolean testAndLog(GroveContext context) {
     if (shouldLog()) {
       log(context);
     }
-    return test (context);
+    return test(context);
   }
 
   default void reward(GroveContext context) {

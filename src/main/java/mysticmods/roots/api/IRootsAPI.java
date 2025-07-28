@@ -20,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public interface IRootsAPI {
@@ -36,9 +35,9 @@ public interface IRootsAPI {
 
   List<ItemStack> getCurios(Player player, TagKey<Item> tag);
 
-  ItemStack getTome (Player player);
+  ItemStack getTome(Player player);
 
-  default GramaryItem.GramaryMode getTomeMode (Player player) {
+  default GramaryItem.GramaryMode getTomeMode(Player player) {
     ItemStack tome = getTome(player);
     if (tome.isEmpty()) {
       return GramaryItem.GramaryMode.NONE;
@@ -47,13 +46,15 @@ public interface IRootsAPI {
     return GramaryItem.getMode(tome);
   }
 
-  double getCostReduction (Player player);
-  double getCooldownReduction (Player player);
+  double getCostReduction(Player player);
 
-  IRootsPacket getEntityDiscardPacket (ResourceKey<AttachmentType<?>> attachmentType, Entity entity);
-  IRootsPacket getBlockEntityDiscardPacket (ResourceKey<AttachmentType<?>> attachmentType, BlockEntity entity);
+  double getCooldownReduction(Player player);
 
-  boolean logGroveActions ();
+  IRootsPacket getEntityDiscardPacket(ResourceKey<AttachmentType<?>> attachmentType, Entity entity);
 
-  AttachmentType<CooldownStorage> getCooldownStorageType ();
+  IRootsPacket getBlockEntityDiscardPacket(ResourceKey<AttachmentType<?>> attachmentType, BlockEntity entity);
+
+  boolean logGroveActions();
+
+  AttachmentType<CooldownStorage> getCooldownStorageType();
 }

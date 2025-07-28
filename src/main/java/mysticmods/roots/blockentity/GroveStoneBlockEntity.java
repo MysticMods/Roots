@@ -227,7 +227,6 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
   }
 
 
-
   @Override
   public void consumeTick(ServerLevel level, BlockPos pPos, BlockState state) {
     consumedLastTick = consumedThisTick;
@@ -241,7 +240,8 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
 
     long tick = level.getGameTime();
 
-    List<BlockPos> consumerPositions = level.getData(ModAttachments.GROVE_CONSUMERS).query(pPos, getGroveStoneSearchRadius());
+    List<BlockPos> consumerPositions = level.getData(ModAttachments.GROVE_CONSUMERS)
+        .query(pPos, getGroveStoneSearchRadius());
 
     for (BlockPos pos : consumerPositions) {
       if (available <= 0) {

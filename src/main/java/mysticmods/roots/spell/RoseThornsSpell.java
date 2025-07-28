@@ -1,6 +1,5 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;

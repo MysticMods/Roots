@@ -88,7 +88,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
   protected void updateSprite(float f) {
   }
 
-  protected void updateMovement (float f) {
+  protected void updateMovement(float f) {
     if (defaultMovement) {
       this.yd = this.yd - 0.04 * (double) this.gravity;
       this.move(this.xd, this.yd, this.zd);
@@ -111,7 +111,7 @@ public abstract class RootsParticle extends TextureSheetParticle {
     return (float) this.age / (float) this.lifetime;
   }
 
-  protected boolean isDelayedRender () {
+  protected boolean isDelayedRender() {
     if (!ConfigManager.DELAYED_PARTICLES.get()) {
       return false;
     }

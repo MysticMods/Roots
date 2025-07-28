@@ -1,12 +1,9 @@
 package mysticmods.roots.client;
 
-import com.machinezoo.noexception.throwing.ThrowingRunnable;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.client.RootsClientAPI;
-import mysticmods.roots.api.grove.GrovePower;
-import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.item.GramaryItem;
@@ -24,7 +21,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
@@ -38,7 +34,8 @@ public class ClientEvents {
 
   @SubscribeEvent
   public static void onEntityRender(RenderLivingEvent.Post<?, ?> event) {
-    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFO) && event.getEntity().getType().is(RootsTags.Entities.SHOULD_RENDER_HUD)) {
+    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFO) && event.getEntity().getType()
+        .is(RootsTags.Entities.SHOULD_RENDER_HUD)) {
 
     }
 

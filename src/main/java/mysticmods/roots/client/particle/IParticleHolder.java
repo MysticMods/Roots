@@ -21,7 +21,7 @@ public interface IParticleHolder {
   void setParticle(ParticleType<?> type, Particle particle, IParticleTester tester);
 
   @Nullable
-  static IParticleHolder getHolder (Level level, BlockPos pos) {
+  static IParticleHolder getHolder(Level level, BlockPos pos) {
     if (!level.isClientSide()) {
       throw new IllegalStateException("Cannot get particle holder on server side");
     }
@@ -41,7 +41,7 @@ public interface IParticleHolder {
   }
 
   @Nullable
-  static IParticleHolder getHolder (Entity entity) {
+  static IParticleHolder getHolder(Entity entity) {
     if (entity instanceof IParticleHolder holder) {
       return holder;
     }
@@ -50,7 +50,7 @@ public interface IParticleHolder {
   }
 
   @Nullable
-  static IParticleHolder getHolder (int entityId) {
+  static IParticleHolder getHolder(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     return getHolder(entity);

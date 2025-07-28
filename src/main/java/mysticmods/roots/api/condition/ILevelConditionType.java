@@ -6,7 +6,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 
 public interface ILevelConditionType<T extends ILevelCondition> {
-  Codec<T> codec ();
+  Codec<T> codec();
+
   MapCodec<T> mapCodec();
-  StreamCodec<RegistryFriendlyByteBuf, T> streamCodec ();
+
+  StreamCodec<RegistryFriendlyByteBuf, T> streamCodec();
 }

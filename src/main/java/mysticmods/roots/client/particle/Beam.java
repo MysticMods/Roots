@@ -2,35 +2,40 @@ package mysticmods.roots.client.particle;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector4f;
 
 public interface Beam {
   int MAX_DISTANCE = 24 * 24;
 
-  default Vec3 getStart () {
+  default Vec3 getStart() {
     return getStart(0f);
   }
-  default Vec3 getStop () {
+
+  default Vec3 getStop() {
     return getStop(0f);
   }
-  Vec3 getStart (float partialTicks);
-  Vec3 getStop (float partialTicks);
-  int getAge ();
-  int getMaxAge ();
 
-  void tick ();
+  Vec3 getStart(float partialTicks);
 
-  void remove ();
-  boolean isRemoved ();
+  Vec3 getStop(float partialTicks);
 
-  BeamColor getStyle ();
+  int getAge();
+
+  int getMaxAge();
+
+  void tick();
+
+  void remove();
+
+  boolean isRemoved();
+
+  BeamColor getStyle();
 
   abstract class BeamBase implements Beam {
     protected int age;
     protected final int maxAge;
     protected boolean removed;
 
-    public BeamBase (int maxAge) {
+    public BeamBase(int maxAge) {
       this.maxAge = maxAge;
       this.age = 0;
       this.removed = false;
@@ -134,13 +139,16 @@ public interface Beam {
   }
 
   interface BeamColor {
-    int getRed ();
-    int getGreen ();
-    int getBlue ();
-    int getAlpha ();
+    int getRed();
+
+    int getGreen();
+
+    int getBlue();
+
+    int getAlpha();
   }
 
-  record BeamAlpha (int alpha) implements BeamColor {
+  record BeamAlpha(int alpha) implements BeamColor {
 
     @Override
     public int getRed() {
@@ -163,7 +171,7 @@ public interface Beam {
     }
   }
 
-  record BeamColorVec4 (int r, int g, int b, int a) implements BeamColor {
+  record BeamColorVec4(int r, int g, int b, int a) implements BeamColor {
     @Override
     public int getRed() {
       return r();

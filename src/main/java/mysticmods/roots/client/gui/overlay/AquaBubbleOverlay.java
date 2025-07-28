@@ -32,7 +32,7 @@ public class AquaBubbleOverlay {
     RenderSystem.disableDepthTest();
     RenderSystem.depthMask(false);
     RenderSystem.enableBlend();
-/*    RenderSystem.defaultBlendFunc();*/
+    /*    RenderSystem.defaultBlendFunc();*/
     RenderSystem.blendFuncSeparate(
         GlStateManager.SourceFactor.SRC_ALPHA,
         GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,

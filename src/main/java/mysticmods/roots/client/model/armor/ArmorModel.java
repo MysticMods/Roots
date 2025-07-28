@@ -1,7 +1,5 @@
 package mysticmods.roots.client.model.armor;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.model.ModelHolder;
 import mysticmods.roots.client.player.RenderArmEventHandler;

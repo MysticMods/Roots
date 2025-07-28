@@ -89,11 +89,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     return false;
   }
 
-  public RecipeHolder<MortarRecipe> getCachedRecipe () {
+  public RecipeHolder<MortarRecipe> getCachedRecipe() {
     return cachedRecipe;
   }
 
-  public RecipeHolder<MortarRecipe> getLastRecipe () {
+  public RecipeHolder<MortarRecipe> getLastRecipe() {
     return lastRecipe;
   }
 

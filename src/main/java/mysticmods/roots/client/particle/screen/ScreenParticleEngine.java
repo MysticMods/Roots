@@ -41,7 +41,7 @@ public class ScreenParticleEngine {
     }
   };
 
-  public static boolean hasHudParticles () {
+  public static boolean hasHudParticles() {
     return hudParticles.values().stream().anyMatch(list -> !list.isEmpty());
   }
 

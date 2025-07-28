@@ -1,9 +1,6 @@
 package mysticmods.roots.client.particle.screen.base;
 
-import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.util.Mth;
 import org.joml.AxisAngle4f;

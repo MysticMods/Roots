@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 
 public class RootsClientAPI {
-  public static ItemStack getGramary () {
+  public static ItemStack getGramary() {
     Minecraft mc = Minecraft.getInstance();
     if (mc.player == null) {
       return ItemStack.EMPTY;
@@ -15,7 +15,7 @@ public class RootsClientAPI {
     return RootsAPI.getInstance().getTome(mc.player);
   }
 
-  public static GramaryItem.GramaryMode getGramaryMode () {
+  public static GramaryItem.GramaryMode getGramaryMode() {
     Minecraft mc = Minecraft.getInstance();
     if (mc.player == null) {
       return GramaryItem.GramaryMode.NONE;
@@ -24,7 +24,7 @@ public class RootsClientAPI {
     return RootsAPI.getInstance().getTomeMode(mc.player);
   }
 
-  public static boolean isGramaryMode (GramaryItem.GramaryMode mode) {
+  public static boolean isGramaryMode(GramaryItem.GramaryMode mode) {
     return getGramaryMode() == mode;
   }
 }

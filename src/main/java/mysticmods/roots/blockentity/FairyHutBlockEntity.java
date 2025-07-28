@@ -10,7 +10,6 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.IGroveConsumer;
-import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.FairyHutBlock;
@@ -81,7 +80,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     super(ModBlockEntities.FAIRY_HUT.get(), pWorldPosition, pBlockState);
   }
 
-  private static VillagerProfession professionFromState (BlockState state) {
+  private static VillagerProfession professionFromState(BlockState state) {
     if (state.is(RootsTags.Blocks.RED_HUTS)) {
       return VillagerProfession.WEAPONSMITH;
     } else if (state.is(RootsTags.Blocks.BROWN_HUTS)) {
@@ -112,7 +111,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     getLevel().getData(ModAttachments.GROVE_CONSUMERS).add(getBlockPos());
   }
 
-  private void resetOffers () {
+  private void resetOffers() {
     this.getOffers().forEach(MerchantOffer::resetUses);
   }
 
@@ -133,7 +132,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     }
   }
 
-  private void updateDemand () {
+  private void updateDemand() {
     this.getOffers().forEach(MerchantOffer::updateDemand);
   }
 

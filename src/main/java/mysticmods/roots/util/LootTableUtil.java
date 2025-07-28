@@ -5,7 +5,6 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.mixin.accessor.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -31,11 +30,11 @@ public class LootTableUtil {
       List<LootPoolEntryContainer> entries = ((AccessorMixinLootPool) pool).rootsGetEntries();
       for (LootPoolEntryContainer entry : entries) {
         if (entry instanceof LootPoolSingletonContainer singletonContainer) {
-          if (singletonContainer instanceof TagEntry tagEntry && ((AccessorMixinTagEntry)tagEntry).rootsGetExpand()) {
-              TagKey<Item> tag = ((AccessorMixinTagEntry) tagEntry).rootsGetTag();
-              for (Holder<Item> holder : BuiltInRegistries.ITEM.getTagOrEmpty(tag)) {
-                totalWeight += ((AccessorMixinLootPoolSingletonContainer) singletonContainer).rootsGetWeight();
-              }
+          if (singletonContainer instanceof TagEntry tagEntry && ((AccessorMixinTagEntry) tagEntry).rootsGetExpand()) {
+            TagKey<Item> tag = ((AccessorMixinTagEntry) tagEntry).rootsGetTag();
+            for (Holder<Item> holder : BuiltInRegistries.ITEM.getTagOrEmpty(tag)) {
+              totalWeight += ((AccessorMixinLootPoolSingletonContainer) singletonContainer).rootsGetWeight();
+            }
           } else {
             totalWeight += ((AccessorMixinLootPoolSingletonContainer) singletonContainer).rootsGetWeight();
           }

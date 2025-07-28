@@ -5,7 +5,7 @@ import java.util.Set;
 public interface ICostedParent extends ICosted {
   Set<ICosted> getChildren();
 
-  default boolean hasChild (ICosted child) {
+  default boolean hasChild(ICosted child) {
     return getChildren().contains(child);
   }
 }

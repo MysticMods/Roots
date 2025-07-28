@@ -18,7 +18,7 @@ public class ModAttributes {
 
   public static final DeferredHolder<Attribute, Attribute> FORAGING = ATTRIBUTES.register("foraging", () -> new RangedAttribute("roots.foraging", 0.0D, 0.0D, Double.MAX_VALUE).setSyncable(true));
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     ATTRIBUTES.register(bus);
   }
 }

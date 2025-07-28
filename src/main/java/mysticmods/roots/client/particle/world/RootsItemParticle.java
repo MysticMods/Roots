@@ -1,14 +1,9 @@
 package mysticmods.roots.client.particle.world;
 
-import mysticmods.roots.particle.RootsParticleOptions;
-import mysticmods.roots.util.VecUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
 
 public abstract class RootsItemParticle extends RootsParticle {
   protected final float uo, vo;

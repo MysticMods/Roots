@@ -388,7 +388,7 @@ public class RootsLootTableProvider {
       dropSelf(ModBlocks.GROVE_PEDESTAL.get());
       dropSelf(ModBlocks.WILDWOOD_PEDESTAL.get());
       dropSelf(ModBlocks.DISPLAY_PEDESTAL.get());
-/*      dropSelf(ModBlocks.GROWTH_AMPLIFIER.get());*/
+      /*      dropSelf(ModBlocks.GROWTH_AMPLIFIER.get());*/
       add(ModBlocks.WILD_ROOTS.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
               .setRolls(ConstantValue.exactly(1f))
@@ -429,7 +429,7 @@ public class RootsLootTableProvider {
       add(ModBlocks.BAFFLECAP_BLOCK.get(), createSilkTouchDispatchTable(ModBlocks.BAFFLECAP_BLOCK.get(), applyExplosionDecay(ModBlocks.BAFFLECAP_BLOCK.get(), LootItem.lootTableItem(ModItems.BAFFLECAP.get())
           .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f))))));
       dropSelf(ModBlocks.INCENSE_BURNER.get());
-/*      dropSelf(ModBlocks.STONE_ALTAR.get());*/
+      /*      dropSelf(ModBlocks.STONE_ALTAR.get());*/
       dropSelf(ModBlocks.MORTAR.get());
       dropSelf(ModBlocks.PYRE.get());
       dropSelf(ModBlocks.REINFORCED_PYRE.get());
@@ -622,7 +622,7 @@ public class RootsLootTableProvider {
       ));
     }
 
-    protected void addFairyHouseDrops (Holder<Block> house, Holder<Item> houseItem) {
+    protected void addFairyHouseDrops(Holder<Block> house, Holder<Item> houseItem) {
       add(house.value(), applyExplosionDecay(houseItem.value(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
               .when(new LootItemBlockStatePropertyCondition.Builder(house.value()).setProperties(StatePropertiesPredicate.Builder.properties()
@@ -631,7 +631,7 @@ public class RootsLootTableProvider {
                   .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))));
     }
 
-    protected void addGroveStoneDrops (Holder<Block> groveStone, Holder<Item> groveStoneItem) {
+    protected void addGroveStoneDrops(Holder<Block> groveStone, Holder<Item> groveStoneItem) {
       add(groveStone.value(), applyExplosionDecay(groveStoneItem.value(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
               .when(new LootItemBlockStatePropertyCondition.Builder(groveStone.value()).setProperties(StatePropertiesPredicate.Builder.properties()

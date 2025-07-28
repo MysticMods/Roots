@@ -21,7 +21,6 @@ import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
@@ -42,7 +41,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
@@ -165,7 +163,8 @@ public class KnifeItem extends TieredItem {
         if (groveCrafter.isCrafting()) {
           return item;
         }
-        if (groveCrafter.use(state, level, target, fakePlayer, null, InteractionHand.MAIN_HAND, item).consumesAction()) {
+        if (groveCrafter.use(state, level, target, fakePlayer, null, InteractionHand.MAIN_HAND, item)
+            .consumesAction()) {
           return item;
         }
       }

@@ -25,28 +25,31 @@ import java.util.Optional;
 
 public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
                                    int entityId, int casterId, int fastForward,
-                                   @Nullable ItemStack item, @Nullable BlockPos pos, int delay) implements ParticleOptions {
+                                   @Nullable ItemStack item, @Nullable BlockPos pos,
+                                   int delay) implements ParticleOptions {
   public static final RandomSource RANDOM = RandomSource.create();
 
   private static final Codec<ItemStack> ITEM_CODEC = Codec.withAlternative(ItemStack.SINGLE_ITEM_CODEC, ItemStack.ITEM_NON_AIR_CODEC, ItemStack::new);
   private static final Codec<double[]> DOUBLE_ARRAY_CODEC = Codec.DOUBLE.listOf().xmap(
       list -> list.stream().mapToDouble(Double::doubleValue).toArray(),
       array -> Arrays.stream(array).boxed().toList());
-  private static final StreamCodec<ByteBuf, double[]> DOUBLE_ARRAY_STREAM_CODEC = ByteBufCodecs.DOUBLE.apply(ByteBufCodecs.list()).map(
-      list -> list.stream().mapToDouble(Double::doubleValue).toArray(),
-      array -> Arrays.stream(array).boxed().toList());
+  private static final StreamCodec<ByteBuf, double[]> DOUBLE_ARRAY_STREAM_CODEC = ByteBufCodecs.DOUBLE.apply(ByteBufCodecs.list())
+      .map(
+          list -> list.stream().mapToDouble(Double::doubleValue).toArray(),
+          array -> Arrays.stream(array).boxed().toList());
 
   public static MapCodec<RootsParticleOptions> codec(ParticleType<?> type) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
-        Codec.INT.fieldOf("color1").forGetter(RootsParticleOptions::color1),
-        Codec.INT.fieldOf("color2").forGetter(RootsParticleOptions::color2),
-        Codec.INT.fieldOf("entityId").forGetter(RootsParticleOptions::entityId),
-        Codec.INT.fieldOf("casterId").forGetter(RootsParticleOptions::casterId),
-        Codec.INT.fieldOf("fastForward").forGetter(RootsParticleOptions::fastForward),
-        ITEM_CODEC.optionalFieldOf("item").forGetter(o -> Optional.ofNullable(o.item())),
-        BlockPos.CODEC.optionalFieldOf("pos").forGetter(o -> Optional.ofNullable(o.pos())),
-        Codec.INT.fieldOf("decay").forGetter(RootsParticleOptions::delay)
-    ).apply(instance, (a, b, c, d, e, f, g, h) -> new RootsParticleOptions(type, a, b, c, d, e, f.orElse(null), g.orElse(null), h)));
+            Codec.INT.fieldOf("color1").forGetter(RootsParticleOptions::color1),
+            Codec.INT.fieldOf("color2").forGetter(RootsParticleOptions::color2),
+            Codec.INT.fieldOf("entityId").forGetter(RootsParticleOptions::entityId),
+            Codec.INT.fieldOf("casterId").forGetter(RootsParticleOptions::casterId),
+            Codec.INT.fieldOf("fastForward").forGetter(RootsParticleOptions::fastForward),
+            ITEM_CODEC.optionalFieldOf("item").forGetter(o -> Optional.ofNullable(o.item())),
+            BlockPos.CODEC.optionalFieldOf("pos").forGetter(o -> Optional.ofNullable(o.pos())),
+            Codec.INT.fieldOf("decay").forGetter(RootsParticleOptions::delay)
+        )
+        .apply(instance, (a, b, c, d, e, f, g, h) -> new RootsParticleOptions(type, a, b, c, d, e, f.orElse(null), g.orElse(null), h)));
   }
 
   public static StreamCodec<RegistryFriendlyByteBuf, RootsParticleOptions> streamCodec(ParticleType<?> type) {
@@ -109,7 +112,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder delay (int delay) {
+    public Builder delay(int delay) {
       this.delay = delay;
       return this;
     }
@@ -121,7 +124,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder spawn (double... spawn) {
+    public Builder spawn(double... spawn) {
       if (spawn.length != 3) {
         throw new IllegalArgumentException("Spawn array must have exactly 3 elements, got: " + spawn.length);
       }
@@ -129,22 +132,22 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder x (double x) {
+    public Builder x(double x) {
       this.spawn[0] = x;
       return this;
     }
 
-    public Builder y (double y) {
+    public Builder y(double y) {
       this.spawn[1] = y;
       return this;
     }
 
-    public Builder z (double z) {
+    public Builder z(double z) {
       this.spawn[2] = z;
       return this;
     }
 
-    public Builder velocity (double... velocity) {
+    public Builder velocity(double... velocity) {
       if (velocity.length != 3) {
         throw new IllegalArgumentException("Velocity array must have exactly 3 elements, got: " + velocity.length);
       }
@@ -152,17 +155,17 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder vx (double vx) {
+    public Builder vx(double vx) {
       this.velocity[0] = vx;
       return this;
     }
 
-    public Builder vy (double vy) {
+    public Builder vy(double vy) {
       this.velocity[1] = vy;
       return this;
     }
 
-    public Builder vz (double vz) {
+    public Builder vz(double vz) {
       this.velocity[2] = vz;
       return this;
     }
@@ -205,7 +208,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder color (int[] color) {
+    public Builder color(int[] color) {
       if (color.length == 1) {
         return this.color(color[0]);
       } else if (color.length == 2) {

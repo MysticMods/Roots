@@ -2,13 +2,11 @@ package mysticmods.roots.entity.other;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.*;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;

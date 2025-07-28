@@ -2,7 +2,6 @@ package mysticmods.roots.api.recipe;
 
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import mysticmods.roots.api.recipe.inventory.RecipeInputWrapper;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import net.minecraft.server.level.ServerPlayer;

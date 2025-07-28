@@ -13,7 +13,7 @@ public record GroveReputation(int gain1, int gain2, int gain3, int gain4, int ga
       Codec.INT.fieldOf("gain5").forGetter(GroveReputation::gain5)
   ).apply(instance, GroveReputation::new));
 
-  public GroveReputation (int gain1) {
+  public GroveReputation(int gain1) {
     this(gain1, 0, 0, 0, 0);
   }
 
@@ -39,7 +39,7 @@ public record GroveReputation(int gain1, int gain2, int gain3, int gain4, int ga
     return new GroveReputation(g1, g2, g3, g4, g5);
   }
 
-  public int byIndex (int index) {
+  public int byIndex(int index) {
     return switch (index) {
       case 0 -> gain1;
       case 1 -> gain2;

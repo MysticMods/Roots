@@ -12,9 +12,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -27,12 +25,12 @@ import java.util.List;
 public class ServerTickHandler {
   // This mimics the pattern in `ServerLifecycleHooks` to ensure the cache is cleared whenever the current server is changed.
   @SubscribeEvent
-  public static void onServerAboutToStart (ServerAboutToStartEvent event) {
+  public static void onServerAboutToStart(ServerAboutToStartEvent event) {
     CastingSuccessCache.clear();
   }
 
   @SubscribeEvent
-  public static void onServerStopping (ServerStoppedEvent event) {
+  public static void onServerStopping(ServerStoppedEvent event) {
     CastingSuccessCache.clear();
   }
 

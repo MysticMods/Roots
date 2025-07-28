@@ -35,7 +35,8 @@ public interface GrovePower {
   int getUsedPower();
 
   void generateTick(ServerLevel level, BlockPos pos, BlockState state);
-  void consumeTick (ServerLevel level, BlockPos pos, BlockState state);
+
+  void consumeTick(ServerLevel level, BlockPos pos, BlockState state);
 
   @SuppressWarnings("SpellCheckingInspection")
   sealed interface Congen permits Generator, Consumer {
@@ -86,7 +87,7 @@ public interface GrovePower {
       this.maxCount = maxCount;
     }
 
-    public boolean count (Block block) {
+    public boolean count(Block block) {
       if (countMap.containsKey(block)) {
         int currentValue = countMap.getInt(block);
         if (currentValue >= maxCount) {
@@ -99,12 +100,12 @@ public interface GrovePower {
       return true;
     }
 
-    public static BlockTracker create (int maxCount) {
+    public static BlockTracker create(int maxCount) {
       return new BlockTracker(maxCount);
     }
   }
 
-  static Set<Block> getAllBlocks (TagKey<Block> tag) {
+  static Set<Block> getAllBlocks(TagKey<Block> tag) {
     Set<Block> blocks = new ObjectOpenHashSet<>();
     for (Holder<Block> holder : BuiltInRegistries.BLOCK.getTagOrEmpty(tag)) {
       blocks.add(holder.value());
@@ -134,7 +135,7 @@ public interface GrovePower {
       return new BlockPos(center.getX() - dx, y, center.getZ() - dz);
     }
 
-    private boolean matches (Level level, TagKey<Block> tag, BlockState state, BlockPos newPos) {
+    private boolean matches(Level level, TagKey<Block> tag, BlockState state, BlockPos newPos) {
       BlockState newState = level.getBlockState(newPos);
       if (this == RADIAL_SAME_BLOCK) {
         return newState.is(state.getBlock());
@@ -149,7 +150,7 @@ public interface GrovePower {
       return false;
     }
 
-    public boolean matches (Level level, TagKey<Block> tag, BlockPos start, BlockPos center) {
+    public boolean matches(Level level, TagKey<Block> tag, BlockPos start, BlockPos center) {
       BlockState state = level.getBlockState(start);
       if (!state.is(tag)) {
         return false;

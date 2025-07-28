@@ -4,7 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.item.Dyeable;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;

@@ -1,6 +1,5 @@
 package mysticmods.roots.entity.projectile;
 
-import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSerializers;
@@ -9,7 +8,6 @@ import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.snapshot.WildfireEntitySnapshot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;

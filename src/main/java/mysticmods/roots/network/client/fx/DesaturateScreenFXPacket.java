@@ -9,7 +9,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record DesaturateScreenFXPacket(float heartsStart, float heartsNow, int foodStartLevel, int foodNewLevel) implements IRootsPacket {
+public record DesaturateScreenFXPacket(float heartsStart, float heartsNow, int foodStartLevel,
+                                       int foodNewLevel) implements IRootsPacket {
   public static final CustomPacketPayload.Type<DesaturateScreenFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_fx/desaturate_screen"));
   public static final StreamCodec<FriendlyByteBuf, DesaturateScreenFXPacket> CODEC = StreamCodec.composite(
       ByteBufCodecs.FLOAT, DesaturateScreenFXPacket::heartsStart,

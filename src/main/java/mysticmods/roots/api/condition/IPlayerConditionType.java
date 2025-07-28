@@ -7,6 +7,8 @@ import net.minecraft.network.codec.StreamCodec;
 
 public interface IPlayerConditionType<T extends IPlayerCondition> {
   Codec<T> codec();
-MapCodec<T> mapCodec();
+
+  MapCodec<T> mapCodec();
+
   StreamCodec<RegistryFriendlyByteBuf, T> streamCodec();
 }

@@ -63,7 +63,7 @@ public abstract class TwoRadiusSpell extends Spell {
   @Override
   public BoundingBox getBoundingBox() {
     if (boundingBox == null) {
-      boundingBox = new BoundingBox(-getRadiusX()-1, -getRadiusY()-1, -getRadiusZ()-1, getRadiusX(), getRadiusY(), getRadiusZ()).inflatedBy(1);
+      boundingBox = new BoundingBox(-getRadiusX() - 1, -getRadiusY() - 1, -getRadiusZ() - 1, getRadiusX(), getRadiusY(), getRadiusZ()).inflatedBy(1);
     }
     return boundingBox;
   }

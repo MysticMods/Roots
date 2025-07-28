@@ -12,15 +12,12 @@ import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
 import mysticmods.roots.integration.jei.categories.widget.InfoWidget;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvestRecipe> {
@@ -39,8 +36,8 @@ public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvest
 
     var collector = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
 
-      SpawnEggItem inputItem = DeferredSpawnEggItem.byId(recipe.entity());
-      collector.addIngredients(Ingredient.of(inputItem));
+    SpawnEggItem inputItem = DeferredSpawnEggItem.byId(recipe.entity());
+    collector.addIngredients(Ingredient.of(inputItem));
 
     List<RootsEntityType> types = List.of(new RootsEntityType(recipe.entity()));
 
@@ -67,6 +64,6 @@ public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvest
   public void createRecipeExtras(IRecipeExtrasBuilder builder, AnimalHarvestRecipe recipe, IFocusGroup focuses) {
     super.createRecipeExtras(builder, recipe, focuses);
 
-    builder.addWidget(new InfoWidget(104-11, 2, Component.translatable("roots.jei.animal_harvest.info")));
+    builder.addWidget(new InfoWidget(104 - 11, 2, Component.translatable("roots.jei.animal_harvest.info")));
   }
 }

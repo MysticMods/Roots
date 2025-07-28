@@ -5,7 +5,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsTags;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -23,9 +22,10 @@ public record GroveType(String name, TagKey<Block> tag) {
   public static final GroveType TWILIGHT = new GroveType("twilight", RootsTags.Blocks.GROVE_STONE_TWILIGHT);
   public static final GroveType WILD = new GroveType("wild", RootsTags.Blocks.GROVE_STONE_WILD);
 
-  public static final MapCodec<GroveType> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.STRING.fieldOf("name").forGetter(GroveType::name),
-          TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(GroveType::tag)
-      ).apply(instance, GroveType::new));
+  public static final MapCodec<GroveType> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.STRING.fieldOf("name")
+          .forGetter(GroveType::name),
+      TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(GroveType::tag)
+  ).apply(instance, GroveType::new));
   public static final Codec<GroveType> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, GroveType> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, GroveType::name, ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC, GroveType::tag, GroveType::new);
 }

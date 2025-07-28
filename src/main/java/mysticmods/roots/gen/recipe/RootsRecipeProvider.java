@@ -38,7 +38,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
@@ -1240,14 +1239,14 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/animal_harvest"));
 
     RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
-            .save(PyreRecipe.Builder.create().ritual(ModRituals.AUGMENTATION)
-                .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS)
-                    .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
-                    .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
-                    .requires(RootsTags.Items.WILDWOOD_LOGS)
-                    .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
-                    .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
-                    .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/augmentation"));
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.AUGMENTATION)
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS)
+                .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
+                .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
+                .requires(RootsTags.Items.WILDWOOD_LOGS)
+                .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
+                .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
+                .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/augmentation"));
 
     RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.GATHERING).build(
@@ -2393,7 +2392,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.PERESKIA_BULB.get(), ModItems.COOKED_PERESKIA.get(), 0.35F);
   }
 
-  protected static void cordial (RecipeOutput c, Holder<Item> result, TagKey<Item> ingredient, int amount) {
+  protected static void cordial(RecipeOutput c, Holder<Item> result, TagKey<Item> ingredient, int amount) {
     ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, result.value(), amount)
         .pattern("1S1")
         .pattern("BWB")

@@ -124,7 +124,7 @@ public class RootsModEvents {
       event.accept(ModItems.WILDWOOD_PEDESTAL.get());
       event.accept(ModItems.DISPLAY_PEDESTAL.get());
 
-/*      event.accept(ModItems.GROWTH_AMPLIFIER.get());*/
+      /*      event.accept(ModItems.GROWTH_AMPLIFIER.get());*/
 
       event.accept(ModItems.RED_FAIRY_HUT.get());
       event.accept(ModItems.BROWN_FAIRY_HUT.get());
@@ -375,7 +375,7 @@ public class RootsModEvents {
 
 
   @SubscribeEvent
-  public static void onAttributes (EntityAttributeModificationEvent event) {
+  public static void onAttributes(EntityAttributeModificationEvent event) {
     event.add(EntityType.PLAYER, ModAttributes.COOLDOWN_REDUCTION);
     event.add(EntityType.PLAYER, ModAttributes.COST_REDUCTION);
     event.add(EntityType.PLAYER, ModAttributes.FORAGING);

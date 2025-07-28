@@ -11,7 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -34,7 +33,8 @@ public class TradeFairyHutAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, FairyHutBlockEntity blockEntity, BlockPos position, BlockState blockState,
+  public record Context(ServerLevel level, ServerPlayer player, FairyHutBlockEntity blockEntity, BlockPos position,
+                        BlockState blockState,
                         MerchantOffer offer) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(
         GroveContext.LEVEL,

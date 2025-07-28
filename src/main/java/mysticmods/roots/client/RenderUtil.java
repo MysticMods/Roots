@@ -131,7 +131,7 @@ public class RenderUtil {
   }
 
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable BlockPos position, @Nullable BlockPos colorPosition, @Nullable Frustum frustum, @Nullable Camera camera) {
-    if (position == null){
+    if (position == null) {
       position = BlockPos.containing(bounds.getCenter());
     }
     ColorHelper.Color color = ColorHelper.color(colorPosition == null ? position : colorPosition);
@@ -168,7 +168,7 @@ public class RenderUtil {
     double maxY = bounds.maxY + offsetY;
     double maxZ = bounds.maxZ + offsetZ;
 
-    VertexConsumer consumer = bufferSource.getBuffer(always? RootsRenderTypes.ALWAYS_VISIBLE_LINES : RenderType.lines());
+    VertexConsumer consumer = bufferSource.getBuffer(always ? RootsRenderTypes.ALWAYS_VISIBLE_LINES : RenderType.lines());
     PoseStack.Pose pose = pPoseStack.last();
 
     for (int[] edge : BOX_EDGES) {

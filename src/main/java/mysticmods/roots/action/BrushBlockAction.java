@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class BrushBlockAction implements GroveAction {
   @Override
-  public void log (GroveContext context) {
+  public void log(GroveContext context) {
     RootsAPI.LOG.error("BrushBlockAction fired by '{}' at '{}' on block '{}' with item '{}'",
         context.player().getName().getString(), context.position(), context.blockState(), context.item()
             .getDisplayName().getString());

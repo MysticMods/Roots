@@ -21,7 +21,7 @@ public class VecUtil {
     return new Vec3((start.x + stop.x) / 2.0, (start.y + stop.y) / 2.0, (start.z + stop.z) / 2.0);
   }
 
-  public static Vector2f bezier (Vector2f startPos, Vector2f control1, Vector2f control2, Vector2f endPos, double t) {
+  public static Vector2f bezier(Vector2f startPos, Vector2f control1, Vector2f control2, Vector2f endPos, double t) {
     t = Mth.clamp(t, 0.0, 1.0);
     double u = 1.0 - t;
 
@@ -32,7 +32,7 @@ public class VecUtil {
     return new Vector2f(p0.x + p1.x + p2.x + p3.x, p0.y + p1.y + p2.y + p3.y);
   }
 
-  public static Vector2f midpoint (Vector2f start, Vector2f stop) {
+  public static Vector2f midpoint(Vector2f start, Vector2f stop) {
     return new Vector2f((start.x + stop.x) / 2.0f, (start.y + stop.y) / 2.0f);
   }
 

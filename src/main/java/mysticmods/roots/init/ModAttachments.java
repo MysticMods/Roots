@@ -4,9 +4,9 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
-import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.item.GramaryItem;
+import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.util.SpatialMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
@@ -47,7 +47,8 @@ public class ModAttachments {
       .serialize(RitualInformation.CODEC).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<SpatialMap>> GROVE_CONSUMERS = ATTACHMENTS.register("grove_consumers", () -> AttachmentType.builder(SpatialMap::new)
       .build());
-  public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalHarvestRecipe.Cache>> ANIMAL_HARVEST_RECIPE_CACHE = ATTACHMENTS.register("animal_harvest_recipe_cache", () -> AttachmentType.builder(() -> new AnimalHarvestRecipe.Cache(new ArrayList<>())).serialize(AnimalHarvestRecipe.CACHE_CODEC).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalHarvestRecipe.Cache>> ANIMAL_HARVEST_RECIPE_CACHE = ATTACHMENTS.register("animal_harvest_recipe_cache", () -> AttachmentType.builder(() -> new AnimalHarvestRecipe.Cache(new ArrayList<>()))
+      .serialize(AnimalHarvestRecipe.CACHE_CODEC).build());
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());

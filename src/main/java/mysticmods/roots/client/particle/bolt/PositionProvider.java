@@ -20,7 +20,7 @@ public interface PositionProvider {
     return start.distanceToSqr(stop);
   }
 
-  default boolean isDynamic () {
+  default boolean isDynamic() {
     return true;
   }
 

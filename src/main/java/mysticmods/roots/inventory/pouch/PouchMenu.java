@@ -19,6 +19,7 @@ public abstract class PouchMenu implements Container, MenuProvider {
     this.inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
     this.readFromStack(this.inventoryItem);
   }
+
   @Override
   public boolean isEmpty() {
     return inventory.isEmpty() || inventory.stream().allMatch(ItemStack::isEmpty);

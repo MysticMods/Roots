@@ -11,10 +11,10 @@ import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 
-@EventBusSubscriber(modid= RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class VillagerEventHandler {
   @SubscribeEvent
-  public static void onVillagerTrades (VillagerTradesEvent event) {
+  public static void onVillagerTrades(VillagerTradesEvent event) {
     if (event.getType() == VillagerProfession.BUTCHER) {
       // Novice
       event.getTrades().get(1).add(
@@ -58,7 +58,7 @@ public class VillagerEventHandler {
   }
 
   @SubscribeEvent
-  public static void onWanderingTrade (WandererTradesEvent event) {
+  public static void onWanderingTrade(WandererTradesEvent event) {
     event.getRareTrades().add(
         new BasicItemListing(18, new ItemStack(ModItems.ALERTNESS_CHARM), 1, 0, 0.05f)
     );

@@ -35,7 +35,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -44,13 +43,14 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.ClientHooks;
-import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.event.RenderHighlightEvent;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.util.Map;
@@ -182,7 +182,9 @@ public class RenderTickHandler {
             ISpellInstance spell = storage.getCurrentSpell();
             AABB bounds = spell.getAABB();
             if (bounds != null) {
-              RenderUtil.renderAABB(event.getPoseStack(), mc.renderBuffers().bufferSource(), bounds,player.getPosition(event.getPartialTick().getGameTimeDeltaPartialTick(false)), ColorHelper.BLUE, event.getFrustum(), event.getCamera(), true);
+              RenderUtil.renderAABB(event.getPoseStack(), mc.renderBuffers()
+                  .bufferSource(), bounds, player.getPosition(event.getPartialTick()
+                  .getGameTimeDeltaPartialTick(false)), ColorHelper.BLUE, event.getFrustum(), event.getCamera(), true);
             }
           }
         }

@@ -25,7 +25,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 public class DamageHandler {
   // TODO: See Mob::~1498, this needs to handle setLastHurtMob and playAttackSound?
   @SubscribeEvent
-  public static void onIncomingDamageEvent (LivingIncomingDamageEvent event) {
+  public static void onIncomingDamageEvent(LivingIncomingDamageEvent event) {
     LivingEntity entity = event.getEntity();
     if (entity.hasEffect(ModEffects.PETAL_SHELL)) {
       MobEffectInstance instance = entity.getEffect(ModEffects.PETAL_SHELL);
