@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 // TODO: More
@@ -24,7 +26,17 @@ public class WardingRitual extends Ritual {
   private int potionDuration, potionAmplifier;
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public boolean requiresCache() {
+    return true;
+  }
+
+  @Override
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB());
       for (LivingEntity entity : entities) {

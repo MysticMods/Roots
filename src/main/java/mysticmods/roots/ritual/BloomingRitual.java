@@ -1,6 +1,7 @@
 package mysticmods.roots.ritual;
 
 import com.mojang.datafixers.util.Pair;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +58,12 @@ public class BloomingRitual extends Ritual {
   // TODO:
   @SuppressWarnings("deprecation")
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
     if (duration % getInterval() == 0) {
       List<Pair<BlockPos, PedestalBlockEntity>> pedestals = blockEntity.pedestals(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
 

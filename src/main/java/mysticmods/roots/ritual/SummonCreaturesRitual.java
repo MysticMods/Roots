@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class SummonCreaturesRitual extends Ritual {
@@ -41,7 +42,7 @@ public class SummonCreaturesRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       PyrePedestalCrafting crafting = blockEntity.getPedestalCrafting();
       RecipeHolder<SummonCreaturesRecipe> recipe = ResolvedRecipes.SUMMON_CREATURES.findRecipe(crafting, pLevel);

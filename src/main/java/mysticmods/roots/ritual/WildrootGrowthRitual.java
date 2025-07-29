@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.BiPredicate;
 
@@ -41,7 +43,12 @@ public class WildrootGrowthRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
     if (duration % interval == 0) {
       ServerLevel level = (ServerLevel) pLevel;
 

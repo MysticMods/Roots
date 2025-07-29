@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -39,7 +41,12 @@ public class HeavyStormsRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
     if (duration % getInterval() == 0) {
       // TODO: Weather in modded dimensions
       ServerLevel serverLevel = (ServerLevel) pLevel;

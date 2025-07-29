@@ -247,7 +247,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return;
     }
 
-    if (this.currentRitual.getPredicates().isEmpty()) {
+    if (!this.currentRitual.requiresCache()) {
       this.cache = null;
       return;
     }

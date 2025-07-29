@@ -18,13 +18,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class HealingAuraRitual extends Ritual {
   private float playerHeal, entityHeal;
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       List<Player> players = pLevel.getEntitiesOfClass(Player.class, pCache.getAABB());
       for (Player player : players) {
@@ -84,5 +85,10 @@ public class HealingAuraRitual extends Ritual {
   @Override
   protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
     return ModRituals.HEALING_AURA_INTERVAL;
+  }
+
+  @Override
+  public boolean requiresCache() {
+    return true;
   }
 }

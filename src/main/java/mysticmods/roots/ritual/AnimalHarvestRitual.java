@@ -42,6 +42,7 @@ import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class AnimalHarvestRitual extends Ritual {
@@ -54,7 +55,12 @@ public class AnimalHarvestRitual extends Ritual {
   private final Map<EntityType<?>, List<LootTable>> additionalLootTables = new HashMap<>();
 
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
     FakePlayerUtil.buildItems(pLevel, randomSource);
 
     if (duration % getInterval() == 0) {

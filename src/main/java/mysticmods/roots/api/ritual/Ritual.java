@@ -218,4 +218,8 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   protected abstract PropertyHolder<Property.IntegerProperty> getRadiusYProperty();
 
   protected abstract PropertyHolder<Property.IntegerProperty> getIntervalProperty();
+
+  public boolean requiresCache () {
+    return !getPredicates().isEmpty();
+  }
 }

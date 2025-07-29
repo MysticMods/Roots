@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class WindwallRitual extends Ritual {
@@ -41,7 +43,17 @@ public class WindwallRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public boolean requiresCache() {
+    return true;
+  }
+
+  @Override
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
     if (duration % getInterval() == 0) {
       List<Entity> entities = pLevel.getEntities(null, pCache.getAABB());
       for (Entity entity : entities) {

@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.grove.Grove;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.BiPredicate;
 
@@ -37,7 +39,12 @@ public class GroveSupplicationRitual extends Ritual {
   }
 
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
     if (duration % getInterval() == 0) {
       if (blockEntity.getBoundingBox() != null) {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
