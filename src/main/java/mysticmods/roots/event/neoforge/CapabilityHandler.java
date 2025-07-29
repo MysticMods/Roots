@@ -19,7 +19,7 @@ import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class CapabilityHandler {
   @SubscribeEvent
   public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {

@@ -7,7 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class BrewingEventHandler {
   @SubscribeEvent
   public static void onBrewingRecipe(RegisterBrewingRecipesEvent event) {

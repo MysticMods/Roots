@@ -25,7 +25,7 @@ import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class ClientEvents {
   @SubscribeEvent
   public static void onRecipeUpdate(RecipesUpdatedEvent event) {

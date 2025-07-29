@@ -9,7 +9,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class ActionEventsHandler {
   @SubscribeEvent
   public static void craftEvent(PlayerEvent.ItemCraftedEvent event) {

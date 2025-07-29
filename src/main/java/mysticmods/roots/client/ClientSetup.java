@@ -58,7 +58,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.io.IOException;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class ClientSetup {
   @SubscribeEvent
   public static void clientSetup(FMLClientSetupEvent event) {

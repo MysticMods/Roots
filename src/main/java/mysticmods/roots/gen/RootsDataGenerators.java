@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class RootsDataGenerators {
   @SubscribeEvent
   public static void gatherData(GatherDataEvent event) {

@@ -12,7 +12,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class ClientSetup {
   public static final ResourceLocation STRING_COLOR = RootsAPI.rl("string_color");
   public static final ResourceLocation UNDYED = RootsAPI.rl("undyed");
