@@ -85,6 +85,11 @@ public class PouchItem extends Item {
     }
   }
 
+  @Override
+  public boolean canFitInsideContainerItems() {
+    return false;
+  }
+
   @FunctionalInterface
   public interface PouchMenuProvider {
     MenuProvider createMenu(ItemStack pouch);

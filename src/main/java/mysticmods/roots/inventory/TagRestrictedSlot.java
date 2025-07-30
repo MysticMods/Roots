@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 
-public class TagRestrictedSlot extends Slot {
+public class TagRestrictedSlot extends ContainerRestrictedSlot {
   private final TagKey<Item> tag;
 
   public TagRestrictedSlot(TagKey<Item> tag, Container container, int slot, int x, int y) {
