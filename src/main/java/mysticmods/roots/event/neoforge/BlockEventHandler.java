@@ -2,10 +2,13 @@ package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.item.RunicShearsItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -13,16 +16,19 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class BlockEventHandler {
-  @SubscribeEvent
+  // Needs to be HIGHEST to ensure Architectury's events are lower priority
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
     Player player = event.getEntity();
     InteractionHand hand = event.getHand();
@@ -32,6 +38,20 @@ public class BlockEventHandler {
       if (!block.is(RootsTags.Blocks.ALLOW_CASTING_TOOL_RIGHT_CLICK)) {
         event.setUseItem(TriState.TRUE);
         event.setUseBlock(TriState.FALSE);
+      }
+    }
+    // Specific work-around for runic shears & right-click harvest mods
+    if (heldItem.is(RootsTags.Items.RUNIC_SHEARS)) {
+      BlockState block = player.level().getBlockState(event.getPos());
+      if (block.is(BlockTags.CROPS)) {
+        UseOnContext context = new UseOnContext(player, hand, event.getHitVec());
+        InteractionResult result = heldItem.useOn(context);
+        // A pass indicates that there was no recipe
+        // Any other result is considered a successful recipe
+        if (result != InteractionResult.PASS) {
+          event.setCanceled(true);
+          event.setCancellationResult(result);
+        }
       }
     }
   }

@@ -187,6 +187,7 @@ public class RunicShearsItem extends ShearsItem {
       level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 
       if (player instanceof ServerPlayer) {
+        // TODO: This may be triggered twice, already handled in ServerPlayerGameMode
         CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockpos, itemstack);
       }
 
