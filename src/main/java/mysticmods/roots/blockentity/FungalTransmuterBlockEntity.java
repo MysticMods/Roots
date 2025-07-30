@@ -159,6 +159,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
             .getPower()), true);
         return InteractionResult.FAIL;
       }
+      storedPower -= cachedRecipe.value().getPower();
       ConditionResult result = cachedRecipe.value()
           .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), getBlockPos());
       if (result.anyFailed()) {
