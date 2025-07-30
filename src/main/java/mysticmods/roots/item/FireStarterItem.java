@@ -1,6 +1,7 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -60,9 +61,9 @@ public class FireStarterItem extends Item {
         boolean doPyre = false;
         BlockPos pyrePos = blockpos;
 
-        if (stateAt.is(RootsTags.Blocks.PYRES)) {
+        if (stateAt.is(RootsTags.Blocks.PYRES) && stateAt.hasProperty(PyreBlock.ACTIVE) && !stateAt.getValue(PyreBlock.ACTIVE)) {
           doPyre = true;
-        } else if (relativeState.is(RootsTags.Blocks.PYRES)) { // The block above might have been hit
+        } else if (relativeState.is(RootsTags.Blocks.PYRES) && relativeState.hasProperty(PyreBlock.ACTIVE) && !relativeState.getValue(PyreBlock.ACTIVE)) { // The block above might have been hit
           pyrePos = relative;
           doPyre = true;
         }
