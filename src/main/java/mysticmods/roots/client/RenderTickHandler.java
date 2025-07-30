@@ -56,7 +56,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import java.util.Map;
 import java.util.Queue;
 
-@EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID)
 public class RenderTickHandler {
   private static float clientTicks = 0;
 

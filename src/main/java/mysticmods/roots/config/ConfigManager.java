@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class ConfigManager {
 
   private static final ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();

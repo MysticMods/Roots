@@ -22,7 +22,7 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import java.util.Arrays;
 import java.util.List;
 
-@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class KeyBindings {
   public static final String CATEGORY = "key.category.roots.general";
 
