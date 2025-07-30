@@ -968,16 +968,16 @@ public class RootsRecipeProvider extends RecipeProvider {
         .build(runedObsidianBuilder.multiplty(2)), c, RootsAPI.rl("grove/runed_obsidian_8"));
 
     saver = RecipeSaver.saver().unlockedBy("has_sugar_cane", has(Tags.Items.CROPS_SUGAR_CANE));
-    MortarRecipe.Builder mortarbuilder = MortarRecipe.Builder.create().times(1);
+    MortarRecipe.Builder mortarbuilder = MortarRecipe.Builder.create().times(5);
     BaseRecipeData.Builder sugarbuilder = BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_SUGAR_CANE)
         .result(Items.SUGAR, 1).chanceOutput(Items.SUGAR, 0.5f);
 
     saver.save(mortarbuilder.build(sugarbuilder), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_1"));
-    saver.save(mortarbuilder.times(2)
+    saver.save(mortarbuilder.times(5)
         .build(sugarbuilder.multiplty(2)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_2"));
-    saver.save(mortarbuilder.times(3)
+    saver.save(mortarbuilder.times(5)
         .build(sugarbuilder.multiplty(3)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_3"));
-    saver.save(mortarbuilder.times(4)
+    saver.save(mortarbuilder.times(5)
         .build(sugarbuilder.multiplty(4)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_4"));
     saver.save(mortarbuilder.times(5)
         .build(sugarbuilder.multiplty(5)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_5"));
@@ -1136,72 +1136,72 @@ public class RootsRecipeProvider extends RecipeProvider {
     saver = RecipeSaver.saver().unlockedBy("has_wheat", has(Tags.Items.CROPS_WHEAT));
 
     saver.save(flourBuilder.build(flourData), c, RootsAPI.rl("mortar/flour"));
-    saver.save(flourBuilder.times(2).build(flourData.multiplty(2)), c, RootsAPI.rl("mortar/flour_2"));
-    saver.save(flourBuilder.times(3).build(flourData.multiplty(3)), c, RootsAPI.rl("mortar/flour_3"));
-    saver.save(flourBuilder.times(4).build(flourData.multiplty(4)), c, RootsAPI.rl("mortar/flour_4"));
+    saver.save(flourBuilder.times(5).build(flourData.multiplty(2)), c, RootsAPI.rl("mortar/flour_2"));
+    saver.save(flourBuilder.times(5).build(flourData.multiplty(3)), c, RootsAPI.rl("mortar/flour_3"));
+    saver.save(flourBuilder.times(5).build(flourData.multiplty(4)), c, RootsAPI.rl("mortar/flour_4"));
     saver.save(flourBuilder.times(5).build(flourData.multiplty(5)), c, RootsAPI.rl("mortar/flour_5"));
 
-    MortarRecipe.Builder runicDustBuilder = MortarRecipe.Builder.create().times(5);
+    MortarRecipe.Builder runicDustBuilder = MortarRecipe.Builder.create().times(10);
     BaseRecipeData.Builder runicDustData = BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE)
         .result(ModItems.RUNIC_DUST, 1);
     saver = RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE));
 
     saver.save(runicDustBuilder.build(runicDustData), c, RootsAPI.rl("mortar/runic_dust"));
-    saver.save(runicDustBuilder.times(2).build(runicDustData.multiplty(2)), c, RootsAPI.rl("mortar/runic_dust_2"));
-    saver.save(runicDustBuilder.times(3).build(runicDustData.multiplty(3)), c, RootsAPI.rl("mortar/runic_dust_3"));
-    saver.save(runicDustBuilder.times(4).build(runicDustData.multiplty(4)), c, RootsAPI.rl("mortar/runic_dust_4"));
-    saver.save(runicDustBuilder.times(5).build(runicDustData.multiplty(5)), c, RootsAPI.rl("mortar/runic_dust_5"));
+    saver.save(runicDustBuilder.times(10).build(runicDustData.multiplty(2)), c, RootsAPI.rl("mortar/runic_dust_2"));
+    saver.save(runicDustBuilder.times(10).build(runicDustData.multiplty(3)), c, RootsAPI.rl("mortar/runic_dust_3"));
+    saver.save(runicDustBuilder.times(10).build(runicDustData.multiplty(4)), c, RootsAPI.rl("mortar/runic_dust_4"));
+    saver.save(runicDustBuilder.times(10).build(runicDustData.multiplty(5)), c, RootsAPI.rl("mortar/runic_dust_5"));
 
-    MortarRecipe.Builder stringBuilder = MortarRecipe.Builder.create().times(1);
+    MortarRecipe.Builder stringBuilder = MortarRecipe.Builder.create().times(7);
     BaseRecipeData.Builder stringData = BaseRecipeData.Builder.create().requires(ItemTags.WOOL)
         .result(Items.STRING.builtInRegistryHolder(), 1);
     saver = RecipeSaver.saver().unlockedBy("has_wool", has(ItemTags.WOOL));
 
     saver.save(stringBuilder.build(stringData), c, RootsAPI.rl("mortar/string_from_wool"));
-    saver.save(stringBuilder.times(2).build(stringData.multiplty(2)), c, RootsAPI.rl("mortar/string_from_wool_2"));
-    saver.save(stringBuilder.times(3).build(stringData.multiplty(3)), c, RootsAPI.rl("mortar/string_from_wool_3"));
-    saver.save(stringBuilder.times(4).build(stringData.multiplty(4)), c, RootsAPI.rl("mortar/string_from_wool_4"));
-    saver.save(stringBuilder.times(5).build(stringData.multiplty(5)), c, RootsAPI.rl("mortar/string_from_wool_5"));
+    saver.save(stringBuilder.times(7).build(stringData.multiplty(2)), c, RootsAPI.rl("mortar/string_from_wool_2"));
+    saver.save(stringBuilder.times(7).build(stringData.multiplty(3)), c, RootsAPI.rl("mortar/string_from_wool_3"));
+    saver.save(stringBuilder.times(7).build(stringData.multiplty(4)), c, RootsAPI.rl("mortar/string_from_wool_4"));
+    saver.save(stringBuilder.times(7).build(stringData.multiplty(5)), c, RootsAPI.rl("mortar/string_from_wool_5"));
 
-    MortarRecipe.Builder bonemealBuilder = MortarRecipe.Builder.create().times(1);
+    MortarRecipe.Builder bonemealBuilder = MortarRecipe.Builder.create().times(10);
     BaseRecipeData.Builder bonemealData = BaseRecipeData.Builder.create().requires(Tags.Items.BONES)
         .result(Items.BONE_MEAL.builtInRegistryHolder(), 3).chanceOutput(Items.BONE_MEAL, 0.5f);
     saver = RecipeSaver.saver().unlockedBy("has_bones", has(Tags.Items.BONES));
 
     saver.save(bonemealBuilder.build(bonemealData), c, RootsAPI.rl("mortar/bonemeal_from_bones"));
-    saver.save(bonemealBuilder.times(2)
+    saver.save(bonemealBuilder.times(10)
         .build(bonemealData.multiplty(2)), c, RootsAPI.rl("mortar/bonemeal_from_bones_2"));
-    saver.save(bonemealBuilder.times(3)
+    saver.save(bonemealBuilder.times(10)
         .build(bonemealData.multiplty(3)), c, RootsAPI.rl("mortar/bonemeal_from_bones_3"));
-    saver.save(bonemealBuilder.times(4)
+    saver.save(bonemealBuilder.times(10)
         .build(bonemealData.multiplty(4)), c, RootsAPI.rl("mortar/bonemeal_from_bones_4"));
-    saver.save(bonemealBuilder.times(5)
+    saver.save(bonemealBuilder.times(10)
         .build(bonemealData.multiplty(5)), c, RootsAPI.rl("mortar/bonemeal_from_bones_5"));
 
-    MortarRecipe.Builder flintBuilder = MortarRecipe.Builder.create().times(1);
+    MortarRecipe.Builder flintBuilder = MortarRecipe.Builder.create().times(10);
     BaseRecipeData.Builder flintData = BaseRecipeData.Builder.create().requires(Tags.Items.GRAVELS)
         .result(Items.FLINT.builtInRegistryHolder(), 1);
     saver = RecipeSaver.saver().unlockedBy("has_flint", has(RootsTags.Items.FLINT));
 
     saver.save(flintBuilder.build(flintData), c, RootsAPI.rl("mortar/flint_from_gravel"));
-    saver.save(flintBuilder.times(2).build(flintData.multiplty(2)), c, RootsAPI.rl("mortar/flint_from_gravel_2"));
-    saver.save(flintBuilder.times(3).build(flintData.multiplty(3)), c, RootsAPI.rl("mortar/flint_from_gravel_3"));
-    saver.save(flintBuilder.times(4).build(flintData.multiplty(4)), c, RootsAPI.rl("mortar/flint_from_gravel_4"));
-    saver.save(flintBuilder.times(5).build(flintData.multiplty(5)), c, RootsAPI.rl("mortar/flint_from_gravel_5"));
+    saver.save(flintBuilder.times(10).build(flintData.multiplty(2)), c, RootsAPI.rl("mortar/flint_from_gravel_2"));
+    saver.save(flintBuilder.times(10).build(flintData.multiplty(3)), c, RootsAPI.rl("mortar/flint_from_gravel_3"));
+    saver.save(flintBuilder.times(10).build(flintData.multiplty(4)), c, RootsAPI.rl("mortar/flint_from_gravel_4"));
+    saver.save(flintBuilder.times(10).build(flintData.multiplty(5)), c, RootsAPI.rl("mortar/flint_from_gravel_5"));
 
-    MortarRecipe.Builder magmaCreamFromMagmaBlockBuilder = MortarRecipe.Builder.create().times(1);
+    MortarRecipe.Builder magmaCreamFromMagmaBlockBuilder = MortarRecipe.Builder.create().times(10);
     BaseRecipeData.Builder magmaCreamFromMagmaBlockData = BaseRecipeData.Builder.create().requires(Items.MAGMA_BLOCK)
         .result(Items.MAGMA_CREAM.builtInRegistryHolder(), 4);
     saver = RecipeSaver.saver().unlockedBy("has_magma_block", has(Items.MAGMA_BLOCK));
 
     saver.save(magmaCreamFromMagmaBlockBuilder.build(magmaCreamFromMagmaBlockData), c, RootsAPI.rl("mortar/magma_cream_from_magma_block"));
-    saver.save(magmaCreamFromMagmaBlockBuilder.times(2)
+    saver.save(magmaCreamFromMagmaBlockBuilder.times(10)
         .build(magmaCreamFromMagmaBlockData.multiplty(2)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_2"));
-    saver.save(magmaCreamFromMagmaBlockBuilder.times(3)
+    saver.save(magmaCreamFromMagmaBlockBuilder.times(10)
         .build(magmaCreamFromMagmaBlockData.multiplty(3)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_3"));
-    saver.save(magmaCreamFromMagmaBlockBuilder.times(4)
+    saver.save(magmaCreamFromMagmaBlockBuilder.times(10)
         .build(magmaCreamFromMagmaBlockData.multiplty(4)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_4"));
-    saver.save(magmaCreamFromMagmaBlockBuilder.times(5)
+    saver.save(magmaCreamFromMagmaBlockBuilder.times(10)
         .build(magmaCreamFromMagmaBlockData.multiplty(5)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_5"));
 
     RecipeSaver.saver().unlockedBy("has_torch", has(Items.TORCH)).save(GroveRecipe.Builder.create()
@@ -1842,33 +1842,33 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_ink_bottle", has(ModItems.INK_BOTTLE.get()))
         .save(c, RootsAPI.rl("writable_book_ink_bottle"));
 
-    MortarRecipe.Builder blazePowder1 = MortarRecipe.Builder.create().times(1);
+    MortarRecipe.Builder blazePowder1 = MortarRecipe.Builder.create().times(10);
     BaseRecipeData.Builder blazePowderData = BaseRecipeData.Builder.create().requires(Tags.Items.RODS_BLAZE)
         .result(Items.BLAZE_POWDER.builtInRegistryHolder(), 2).chanceOutput(Items.BLAZE_POWDER, 0.5f);
     saver = RecipeSaver.saver().unlockedBy("has_blaze_rod", has(Tags.Items.RODS_BLAZE));
 
     saver.save(blazePowder1.build(blazePowderData), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod"));
-    saver.save(blazePowder1.times(2)
+    saver.save(blazePowder1.times(10)
         .build(blazePowderData.multiplty(2)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_2"));
-    saver.save(blazePowder1.times(3)
+    saver.save(blazePowder1.times(10)
         .build(blazePowderData.multiplty(3)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_3"));
-    saver.save(blazePowder1.times(4)
+    saver.save(blazePowder1.times(10)
         .build(blazePowderData.multiplty(4)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_4"));
-    saver.save(blazePowder1.times(5)
+    saver.save(blazePowder1.times(10)
         .build(blazePowderData.multiplty(5)), c, RootsAPI.rl("mortar/blaze_powder_from_blaze_rod_5"));
 
     blazePowderData = BaseRecipeData.Builder.create().requires(Items.MAGMA_CREAM).result(Items.SLIME_BALL, 1)
         .chanceOutput(Items.BLAZE_POWDER, 1f);
     saver = RecipeSaver.saver().unlockedBy("has_magma_cream", has(Items.MAGMA_CREAM));
-    saver.save(MortarRecipe.Builder.create().times(1)
+    saver.save(MortarRecipe.Builder.create().times(10)
         .build(blazePowderData), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream"));
-    saver.save(MortarRecipe.Builder.create().times(2)
+    saver.save(MortarRecipe.Builder.create().times(10)
         .build(blazePowderData.multiplty(2)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_2"));
-    saver.save(MortarRecipe.Builder.create().times(3)
+    saver.save(MortarRecipe.Builder.create().times(10)
         .build(blazePowderData.multiplty(3)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_3"));
-    saver.save(MortarRecipe.Builder.create().times(4)
+    saver.save(MortarRecipe.Builder.create().times(10)
         .build(blazePowderData.multiplty(4)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_4"));
-    saver.save(MortarRecipe.Builder.create().times(5)
+    saver.save(MortarRecipe.Builder.create().times(10)
         .build(blazePowderData.multiplty(5)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_5"));
 
     // Grove Stones
