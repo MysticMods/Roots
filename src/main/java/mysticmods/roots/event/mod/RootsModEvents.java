@@ -373,7 +373,6 @@ public class RootsModEvents {
     }
   }
 
-
   @SubscribeEvent
   public static void onAttributes(EntityAttributeModificationEvent event) {
     event.add(EntityType.PLAYER, ModAttributes.COOLDOWN_REDUCTION);

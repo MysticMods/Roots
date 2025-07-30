@@ -31,7 +31,6 @@ public class ClientSetup {
       ItemProperties.register(ModItems.APOTHECARY_POUCH.get(), UNDYED, func);
       ItemProperties.register(ModItems.COMPONENT_POUCH.get(), UNDYED, func);
       ItemProperties.register(ModItems.HERB_POUCH.get(), UNDYED, func);
-      //ItemProperties.register(ModItems.SYLVAN_POUCH.get(), UNDYED, func);
 
       @SuppressWarnings("deprecation")
       ItemPropertyFunction func2 = (stack, level, entity, seed) -> {
