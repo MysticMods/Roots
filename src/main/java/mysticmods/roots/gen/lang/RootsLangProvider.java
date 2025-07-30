@@ -793,7 +793,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.hud.transmuter.restart1", "Sneak-Right-Click with");
     add("roots.hud.transmuter.restart2", "empty hand to repeat");
 
-    add("roots.hud.transmuter.power", "Stored Power: %s/%s");
+    add("roots.hud.transmuter.power", "Needs %s Power (%s)");
 
     add("roots.hud.mortar.repeat1", "Sneak-Right-Click with");
     add("roots.hud.mortar.repeat2", "empty hand to refill");

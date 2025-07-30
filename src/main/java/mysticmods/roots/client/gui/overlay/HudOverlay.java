@@ -270,11 +270,12 @@ public class HudOverlay {
           .value();
       TransmutationRecipe lastRecipe = transmuter.getLastRecipe() == null ? null : transmuter.getLastRecipe().value();
 
+      int requiredPower = 0;
+
       ItemStack output = ItemStack.EMPTY;
       Component comp1 = Component.empty();
       Component comp2 = Component.empty();
       Component comp3 = Component.empty();
-      Component comp4 = Component.translatable("roots.hud.transmuter.power", transmuter.getPower(), transmuter.getMaxPower());
       List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null) {
@@ -282,6 +283,7 @@ public class HudOverlay {
         comp1 = Component.translatable("roots.hud.transmuter.begin1");
         comp2 = Component.translatable("roots.hud.transmuter.begin2");
         comp3 = Component.translatable("roots.hud.transmuter.begin3", output.getHoverName());
+        requiredPower = cachedRecipe.getPower();
         outputs = cachedRecipe.getChanceOutputs();
       } else if (lastRecipe != null && empty) {
         output = lastRecipe.getResultItem(mc.level.registryAccess());
@@ -291,6 +293,7 @@ public class HudOverlay {
         } else {
 
         }
+        requiredPower = lastRecipe.getPower();
         comp1 = Component.translatable("roots.hud.transmuter.restart1");
         comp2 = Component.translatable("roots.hud.transmuter.restart2");
         comp3 = output.getHoverName();
@@ -304,6 +307,8 @@ public class HudOverlay {
       int columnSpacing = 25;
       int rowSpacing = 18;
       int itemsPerRow = 2;
+
+      Component comp4 = Component.translatable("roots.hud.transmuter.power", requiredPower, transmuter.getPower()/*, transmuter.getMaxPower()*/);
 
       for (int i = 0; i < outputs.size(); i++) {
         ChanceOutput chanceOutput = outputs.get(i);
@@ -326,7 +331,7 @@ public class HudOverlay {
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, comp4, x + 25, y - 12, 16777215, true);
+      graphics.drawString(mc.font, comp4, x + 25, y - 24, 16777215, true);
       graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
       graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
       graphics.drawString(mc.font, comp3, x + 25, y + 24, 16777215, true);
