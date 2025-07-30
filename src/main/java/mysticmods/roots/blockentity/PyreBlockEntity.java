@@ -174,6 +174,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   public InteractionResult light(Player player) {
+    if (getBlockState().hasProperty(PyreBlock.ACTIVE) && getBlockState().getValue(PyreBlock.ACTIVE)) {
+      // Already lit
+      return InteractionResult.SUCCESS_NO_ITEM_USED;
+    }
+
     if (cachedRecipe == null) {
       revalidateRecipe();
     }
