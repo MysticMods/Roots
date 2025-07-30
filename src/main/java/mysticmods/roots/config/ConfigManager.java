@@ -170,7 +170,7 @@ public class ConfigManager {
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("fungal_transmuter");
     FUNGAL_TRANSMUTER_POWER_PER_TICK = COMMON_BUILDER.comment("the amount of power the Fungal Transmuter will consume per tick")
-        .defineInRange("fungal_transmuter_power_per_tick", 50, 1, Integer.MAX_VALUE);
+        .defineInRange("fungal_transmuter_power_per_tick", 1, 1, Integer.MAX_VALUE);
     FUNGAL_TRANSMUTER_MAX_STORED_POWER = COMMON_BUILDER.comment("the maximum amount of power the Fungal Transmuter can store")
         .defineInRange("fungal_transmuter_max_stored_power", 50 * 100, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
