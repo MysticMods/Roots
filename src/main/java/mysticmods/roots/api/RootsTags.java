@@ -749,6 +749,7 @@ public class RootsTags {
 
   public static class DamageTypes {
     public static final TagKey<DamageType> IS_LAVA = modTag("is_lava");
+    public static final TagKey<DamageType> PETAL_SHELL_IGNORES = modTag("petal_shell_ignores");
 
     static TagKey<DamageType> modTag(String name) {
       return TagKey.create(Registries.DAMAGE_TYPE, RootsAPI.rl(name));

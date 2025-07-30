@@ -19,6 +19,8 @@ public class RootsDamageTagsProvider extends DamageTypeTagsProvider {
   @Override
   protected void addTags(HolderLookup.Provider provider) {
     tag(RootsTags.DamageTypes.IS_LAVA).add(DamageTypes.LAVA);
+    tag(RootsTags.DamageTypes.PETAL_SHELL_IGNORES).add(DamageTypes.CACTUS, DamageTypes.CAMPFIRE, DamageTypes.HOT_FLOOR, DamageTypes.SWEET_BERRY_BUSH);
+
   }
 
   @Override

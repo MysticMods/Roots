@@ -317,12 +317,14 @@ public class EntityEventHandler {
       if (instance == null) {
         return;
       }
-      if (instance.getAmplifier() == 0) {
-        entity.removeEffect(ModEffects.PETAL_SHELL);
-      } else {
-        MobEffectInstance newInstance = new MobEffectInstance(ModEffects.PETAL_SHELL, instance.getDuration(), instance.getAmplifier() - 1, false, false);
-        entity.removeEffect(ModEffects.PETAL_SHELL);
-        entity.addEffect(newInstance);
+      if (!event.getSource().is(RootsTags.DamageTypes.PETAL_SHELL_IGNORES)) {
+        if (instance.getAmplifier() == 0) {
+          entity.removeEffect(ModEffects.PETAL_SHELL);
+        } else {
+          MobEffectInstance newInstance = new MobEffectInstance(ModEffects.PETAL_SHELL, instance.getDuration(), instance.getAmplifier() - 1, false, false);
+          entity.removeEffect(ModEffects.PETAL_SHELL);
+          entity.addEffect(newInstance);
+        }
       }
       event.setCanceled(true);
     }
