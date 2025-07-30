@@ -58,6 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+// TODO: Change this to function more as a "valid recipe" -> "start" -> "consume power" -> "craft" -> "output" system.
 public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer, InventoryBlockEntity, RefillProvider {
   private static PowerTicket.TicketDefinition TICKET_DEFINITION = null;
 
