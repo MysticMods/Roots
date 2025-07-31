@@ -60,6 +60,7 @@ public class DataEventHandler {
     event.register(DataMaps.GROVE_GENERATION_ENTRIES);
     event.register(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
     event.register(DataMaps.GROVE_ACTION_ICONS);
+    event.register(DataMaps.AUGMENTATION_DATA);
   }
 
   private static void callInit(Holder<?> holder) {

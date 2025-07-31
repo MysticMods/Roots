@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin.accessor;
+package mysticmods.roots.mixin.client.accessor;
 
 import net.minecraft.client.renderer.culling.Frustum;
 import org.spongepowered.asm.mixin.Mixin;

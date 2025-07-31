@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin.accessor;
+package mysticmods.roots.mixin.client.accessor;
 
 import net.minecraft.client.renderer.ItemModelShaper;
 import net.minecraft.client.renderer.entity.ItemRenderer;

@@ -4,10 +4,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -41,6 +44,8 @@ public class FungalTransmuterBlockEntityRenderer extends BoundedBlockEntityRende
 
     List<ItemStack> items = pBlockEntity.getNonEmptyItems();
 
+    ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+
     for (int i = 0; i < items.size(); i++) {
       ItemStack item = items.get(i);
       pPoseStack.pushPose();
@@ -50,8 +55,8 @@ public class FungalTransmuterBlockEntityRenderer extends BoundedBlockEntityRende
       pPoseStack.translate(-0.5, 0, 0);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
-      Minecraft.getInstance().getItemRenderer()
-          .renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      BakedModel baked = itemRenderer.getModel(item, Minecraft.getInstance().level, null, 0);
+      RenderUtil.renderItemDissolve(Minecraft.getInstance().getItemRenderer(), item, ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, baked, 0.5f);
       pPoseStack.popPose();
     }
 

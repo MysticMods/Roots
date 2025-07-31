@@ -3,6 +3,9 @@ package mysticmods.roots.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -10,6 +13,9 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.function.Function;
 
@@ -51,7 +57,7 @@ public class RootsRenderTypes {
           .createCompositeState(false)
   );
 
-  public static final RenderStateShard.ShaderStateShard SMART_CRUMBLING_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getSmartCrumblingShader);
+  public static final RenderStateShard.ShaderStateShard DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDissolveShader);
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
 
@@ -163,4 +169,82 @@ public class RootsRenderTypes {
           .setDepthTestState(RenderStateShard.NO_DEPTH_TEST)
           .createCompositeState(false)
   );
+
+  private static final ResourceLocation DISSOLVE_TEXTURE = RootsAPI.rl("textures/misc/dissolve.png");
+
+  public static final RenderType DISSOLVE = RenderType.create(
+      "roots_dissolve",
+      DefaultVertexFormat.BLOCK,
+      VertexFormat.Mode.QUADS,
+      256,
+      false,
+      true,
+      RenderType.CompositeState.builder()
+          .setShaderState(DISSOLVE_SHADER)
+          .setTextureState(new RenderStateShard.TextureStateShard(DISSOLVE_TEXTURE, false, false))
+          .setTransparencyState(RenderType.NO_TRANSPARENCY)
+/*          .setLightmapState(RenderType.NO_LIGHTMAP)*/
+/*          .setOverlayState(RenderType.NO_OVERLAY)*/
+          .setWriteMaskState(RenderType.DEPTH_WRITE)
+          .setCullState(RenderType.NO_CULL)
+          .setDepthTestState(RenderType.LEQUAL_DEPTH_TEST)
+          .createCompositeState(false)
+  );
+
+  private static final Map<RenderType, RenderType> DISSOLVE_DEPTH_MAP = new HashMap<>();
+
+  public static RenderType getDissolveDepth(RenderType renderType) {
+    RenderType result = DISSOLVE_DEPTH_MAP.get(renderType);
+    if (result != null) {
+      return result;
+    }
+
+    RenderType.CompositeState state = ((AccessorMixinCompositeRenderType) renderType).rootsGetState();
+    Optional<RenderType> outline = ((AccessorMixinCompositeRenderType) renderType).rootsGetOutline();
+    boolean isOutline = ((AccessorMixinCompositeRenderType) renderType).rootsIsOutline();
+
+
+    RenderStateShard.EmptyTextureStateShard textureStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetTextureState();
+    RenderStateShard.ShaderStateShard shaderStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetShaderState();
+    RenderStateShard.TransparencyStateShard transparencyStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetTransparencyState();
+    RenderStateShard.DepthTestStateShard depthTestStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetDepthTestState();
+    RenderStateShard.CullStateShard cullStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetCullState();
+    RenderStateShard.LightmapStateShard lightmapStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetLightmapState();
+    RenderStateShard.OverlayStateShard overlayStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetOverlayState();
+    RenderStateShard.LayeringStateShard layeringStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetLayeringState();
+    RenderStateShard.OutputStateShard outputStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetOutputState();
+    RenderStateShard.TexturingStateShard texturingStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetTexturingState();
+    RenderStateShard.WriteMaskStateShard writeMaskStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetWriteMaskState();
+    RenderStateShard.LineStateShard lineStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetLineState();
+    RenderStateShard.ColorLogicStateShard colorLogicStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetColorLogicState();
+    RenderType.OutlineProperty outlineProperty = ((AccessorMixinCompositeState) (Object) state).rootsGetOutlineProperty();
+
+    result = AccessorMixinCompositeRenderType.rootsCreateCompositeRenderType(
+        renderType.name + "_dissolve_depth",
+        renderType.format,
+        renderType.mode,
+        renderType.bufferSize,
+        renderType.affectsCrumbling,
+        renderType.sortOnUpload,
+        AccessorMixinCompositeState.rootsCreateCompositeState(
+            textureStateShard,
+            shaderStateShard,
+            transparencyStateShard,
+            RenderStateShard.EQUAL_DEPTH_TEST,
+            cullStateShard,
+            lightmapStateShard,
+            overlayStateShard,
+            layeringStateShard,
+            outputStateShard,
+            texturingStateShard,
+            writeMaskStateShard,
+            lineStateShard,
+            colorLogicStateShard,
+            outlineProperty
+        )
+    );
+
+    DISSOLVE_DEPTH_MAP.put(renderType, result);
+    return result;
+  }
 }

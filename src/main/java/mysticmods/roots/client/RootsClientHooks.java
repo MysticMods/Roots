@@ -1,5 +1,8 @@
 package mysticmods.roots.client;
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormatElement;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.herb.Herb;
@@ -19,6 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.lwjgl.opengl.GL30;
 
 import javax.annotation.Nullable;
 import java.util.List;

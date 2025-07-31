@@ -2,21 +2,23 @@ package mysticmods.roots.client;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
+import com.mojang.math.MatrixUtil;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.blockentity.ColorHelper;
-import mysticmods.roots.mixin.accessor.AccessorMixinFrustum;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinFrustum;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -24,20 +26,30 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.ClientHooks;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
@@ -385,5 +397,89 @@ public class RenderUtil {
           .withStyle(ChatFormatting.DARK_GRAY));
     }
     return components;
+  }
+
+  private static final ModelResourceLocation TRIDENT_MODEL = ModelResourceLocation.inventory(ResourceLocation.withDefaultNamespace("trident"));
+  public static final ModelResourceLocation TRIDENT_IN_HAND_MODEL = ModelResourceLocation.inventory(ResourceLocation.withDefaultNamespace("trident_in_hand"));
+  private static final ModelResourceLocation SPYGLASS_MODEL = ModelResourceLocation.inventory(ResourceLocation.withDefaultNamespace("spyglass"));
+  public static final ModelResourceLocation SPYGLASS_IN_HAND_MODEL = ModelResourceLocation.inventory(
+      ResourceLocation.withDefaultNamespace("spyglass_in_hand")
+  );
+
+  public static void renderItemDissolve(ItemRenderer itemRenderer, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel p_model, float dissolveProgress) {
+    if (!itemStack.isEmpty()) {
+      poseStack.pushPose();
+      boolean flag = displayContext == ItemDisplayContext.GUI || displayContext == ItemDisplayContext.GROUND || displayContext == ItemDisplayContext.FIXED;
+      if (flag) {
+        if (itemStack.is(Items.TRIDENT)) {
+          p_model = itemRenderer.getItemModelShaper().getModelManager().getModel(TRIDENT_MODEL);
+        } else if (itemStack.is(Items.SPYGLASS)) {
+          p_model = itemRenderer.getItemModelShaper().getModelManager().getModel(SPYGLASS_MODEL);
+        }
+      }
+
+      p_model = ClientHooks.handleCameraTransforms(poseStack, p_model, displayContext, leftHand);
+      poseStack.translate(-0.5F, -0.5F, -0.5F);
+      if (!p_model.isCustomRenderer() && (!itemStack.is(Items.TRIDENT) || flag)) {
+        boolean flag1;
+        if (displayContext != ItemDisplayContext.GUI && !displayContext.firstPerson() && itemStack.getItem() instanceof BlockItem blockitem) {
+          Block block = blockitem.getBlock();
+          flag1 = !(block instanceof HalfTransparentBlock) && !(block instanceof StainedGlassPaneBlock);
+        } else {
+          flag1 = true;
+        }
+
+        if (!(bufferSource instanceof MultiBufferSource.BufferSource bufferSource2)) {
+          throw new IllegalArgumentException("BufferSource must be a BufferSource, got: " + bufferSource.getClass().getName());
+        }
+
+        ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
+        Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
+        if (uniform != null) {
+          uniform.set(0.7f);
+        }
+
+        for (var model : p_model.getRenderPasses(itemStack, flag1)) {
+          VertexConsumer vertexconsumer2 = bufferSource2.getBuffer(RootsRenderTypes.DISSOLVE);
+          itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer2);
+          bufferSource2.endBatch(RootsRenderTypes.DISSOLVE);
+        }
+
+        MultiBufferSource bufferSource3 = new DepthWrappedMultiBufferSource(bufferSource2);
+
+        for (var model : p_model.getRenderPasses(itemStack, flag1)) {
+          for (var rendertype1 : model.getRenderTypes(itemStack, flag1)) {
+            var rendertype = RootsRenderTypes.getDissolveDepth(rendertype1);
+            VertexConsumer vertexconsumer;
+            if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
+              PoseStack.Pose posestack$pose = poseStack.last().copy();
+              if (displayContext == ItemDisplayContext.GUI) {
+                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
+              } else if (displayContext.firstPerson()) {
+                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
+              }
+
+              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource3, rendertype, posestack$pose);
+            } else if (flag1) {
+              vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource3, rendertype, true, itemStack.hasFoil());
+            } else {
+              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource3, rendertype, true, itemStack.hasFoil());
+            }
+
+            itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+          }
+        }
+      } else {
+        // TODO:
+        net.neoforged.neoforge.client.extensions.common.IClientItemExtensions.of(itemStack).getCustomRenderer()
+            .renderByItem(itemStack, displayContext, poseStack, bufferSource, combinedLight, combinedOverlay);
+      }
+
+      poseStack.popPose();
+    }
+  }
+
+  private static boolean hasAnimatedTexture(ItemStack stack) {
+    return stack.is(ItemTags.COMPASSES) || stack.is(Items.CLOCK);
   }
 }

@@ -34,10 +34,12 @@
     "action.MixinPiglinAi"
   ],
   "client": [
-    "accessor.AccessorMixinFrustum",
-    "accessor.AccessorMixinItemRenderer",
+    "client.accessor.AccessorMixinCompositeState",
+    "client.accessor.AccessorMixinFrustum",
+    "client.accessor.AccessorMixinItemRenderer",
     "client.MixinEntity",
     "client.MixinLocalPlayer",
+    "client.accessor.AccessorMixinCompositeRenderType",
     "client.accessor.AccessorMixinEntityRenderer",
     "client.accessor.AccessorMixinLevelRenderer",
     "client.accessor.AccessorMixinParticle",
