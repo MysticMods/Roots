@@ -1,0 +1,16 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/melon"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:cactus"
+    }
+  },
+  "power": 600
+}

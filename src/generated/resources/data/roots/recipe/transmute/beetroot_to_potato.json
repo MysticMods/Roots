@@ -1,0 +1,16 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/beetroot"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:potato"
+    }
+  },
+  "power": 600
+}

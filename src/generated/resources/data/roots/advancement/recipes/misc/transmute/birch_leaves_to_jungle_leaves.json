@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/birch_leaves_to_jungle_leaves"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_birch_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:birch_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_birch_leaves"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/birch_leaves_to_jungle_leaves"
+    ]
+  }
+}

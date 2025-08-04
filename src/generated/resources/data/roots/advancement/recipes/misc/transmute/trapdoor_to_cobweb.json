@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/trapdoor_to_cobweb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_trapdoor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:trapdoors"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_trapdoor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/trapdoor_to_cobweb"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:nuggets/gold"
+      },
+      {
+        "tag": "c:nuggets/gold"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:silver_nugget"
+    }
+  },
+  "power": 166
+}

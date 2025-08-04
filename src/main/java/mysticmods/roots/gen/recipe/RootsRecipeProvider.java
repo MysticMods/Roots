@@ -2352,10 +2352,136 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     cordial(c, ModItems.CACTUS_SYRUP, Tags.Items.CROPS_CACTUS, 4);
 
+    // Former Chrysopoeia recipes
+
+    RecipeSaver.saver().unlockedBy("has_gold", has(Tags.Items.INGOTS_GOLD))
+        .save(TransmutationRecipe.create().powerRequired(1500).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(ModItems.SILVER_INGOT.get()))
+            .requires(Tags.Items.INGOTS_GOLD)
+            .requires(Tags.Items.INGOTS_GOLD)), c, RootsAPI.rl("transmute/gold_to_silver"));
+
+    RecipeSaver.saver().unlockedBy("has_silver", has(RootsTags.Items.SILVER_INGOT))
+        .save(TransmutationRecipe.create().powerRequired(1500).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.GOLD_INGOT))
+            .requires(RootsTags.Items.SILVER_INGOT)
+            .requires(RootsTags.Items.SILVER_INGOT)), c, RootsAPI.rl("transmute/silver_to_gold"));
+
+    RecipeSaver.saver().unlockedBy("has_gold", has(Tags.Items.NUGGETS_GOLD))
+        .save(TransmutationRecipe.create().powerRequired(1500 / 9).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(ModItems.SILVER_NUGGET.get()))
+            .requires(Tags.Items.NUGGETS_GOLD)
+            .requires(Tags.Items.NUGGETS_GOLD)), c, RootsAPI.rl("transmute/gold_to_silver_nugget"));
+
+    RecipeSaver.saver().unlockedBy("has_silver", has(RootsTags.Items.SILVER_INGOT))
+        .save(TransmutationRecipe.create().powerRequired(1500 / 9).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.GOLD_NUGGET))
+            .requires(RootsTags.Items.SILVER_INGOT)
+            .requires(RootsTags.Items.SILVER_INGOT)), c, RootsAPI.rl("transmute/silver_to_gold_nugget"));
+
+
+    RecipeSaver.saver().unlockedBy("has_rotten_flesh", has(RootsTags.Items.ROTTEN_FLESH))
+        .save(TransmutationRecipe.create().powerRequired(900).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.LEATHER))
+            .requires(RootsTags.Items.ROTTEN_FLESH)
+            .requires(RootsTags.Items.ROTTEN_FLESH)
+            .requires(RootsTags.Items.ROTTEN_FLESH)), c, RootsAPI.rl("transmute/rotten_flesh_to_leather"));
+
+    // 1.12 transmutation recipes
+
+    // TODO: Multi-recipes for singles
     RecipeSaver.saver().unlockedBy("has_pumpkin", has(Tags.Items.CROPS_PUMPKIN))
         .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
             .result(new ItemStack(Items.MELON))
             .requires(Tags.Items.CROPS_PUMPKIN)), c, RootsAPI.rl("transmute/pumpkin_to_melon"));
+
+    RecipeSaver.saver().unlockedBy("has_dead_bush", has(Items.DEAD_BUSH))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.COCOA_BEANS, 3))
+            .requires(Items.DEAD_BUSH)), c, RootsAPI.rl("transmute/dead_bush_to_cocoa"));
+
+    RecipeSaver.saver().unlockedBy("has_birch_leaves", has(Items.BIRCH_LEAVES))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.JUNGLE_LEAVES))
+            .requires(Items.BIRCH_LEAVES)), c, RootsAPI.rl("transmute/birch_leaves_to_jungle_leaves"));
+
+    RecipeSaver.saver().unlockedBy("has_birch_logs", has(ItemTags.BIRCH_LOGS))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.JUNGLE_LOG))
+            .requires(ItemTags.BIRCH_LOGS)), c, RootsAPI.rl("transmute/birch_logs_to_jungle_logs"));
+
+    RecipeSaver.saver().unlockedBy("has_melon", has(Tags.Items.CROPS_MELON))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.CACTUS))
+            .requires(Tags.Items.CROPS_MELON)), c, RootsAPI.rl("transmute/melon_to_cactus"));
+
+    RecipeSaver.saver().unlockedBy("has_cocoa", has(Tags.Items.CROPS_CARROT))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.CARROT))
+            .requires(Tags.Items.CROPS_CARROT)), c, RootsAPI.rl("transmute/cocoa_to_carrot"));
+
+    RecipeSaver.saver().unlockedBy("has_carrot", has(Tags.Items.CROPS_CARROT))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.BEETROOT_SEEDS))
+            .requires(Tags.Items.CROPS_CARROT)), c, RootsAPI.rl("transmute/carrot_to_beetroot_seeds"));
+
+    RecipeSaver.saver().unlockedBy("has_beetroot", has(Tags.Items.CROPS_BEETROOT))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.POTATO))
+            .requires(Tags.Items.CROPS_BEETROOT)), c, RootsAPI.rl("transmute/beetroot_to_potato"));
+
+    RecipeSaver.saver().unlockedBy("has_trapdoor", has(ItemTags.TRAPDOORS))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.COBWEB))
+            .requires(ItemTags.TRAPDOORS)), c, RootsAPI.rl("transmute/trapdoor_to_cobweb"));
+
+    RecipeSaver.saver().unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.LILY_PAD))
+            .requires(ItemTags.WOOL_CARPETS)), c, RootsAPI.rl("transmute/carpet_to_lilypad"));
+
+    RecipeSaver.saver().unlockedBy("has_cactus", has(Tags.Items.CROPS_CACTUS))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.PUMPKIN))
+            .requires(Tags.Items.CROPS_CACTUS)), c, RootsAPI.rl("transmute/cactus_to_pumpkin"));
+
+    RecipeSaver.saver().unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.VINE))
+            .requires(Tags.Items.DUSTS_REDSTONE)), c, RootsAPI.rl("transmute/redstone_to_vine"));
+
+    RecipeSaver.saver().unlockedBy("has_redstone_block", has(Tags.Items.STORAGE_BLOCKS_REDSTONE))
+        .save(TransmutationRecipe.create().powerRequired(2000).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.GLOWSTONE))
+            .requires(Tags.Items.STORAGE_BLOCKS_REDSTONE)), c, RootsAPI.rl("transmute/redstone_block_to_glowstone"));
+
+    RecipeSaver.saver().unlockedBy("has_lily_pad", has(Items.LILY_PAD))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.SNOW))
+            .requires(Items.LILY_PAD)), c, RootsAPI.rl("transmute/lily_pad_to_snow"));
+
+    RecipeSaver.saver().unlockedBy("has_lever", has(RootsTags.Items.LEVERS))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.BROWN_MUSHROOM))
+            .requires(RootsTags.Items.LEVERS)), c, RootsAPI.rl("transmute/lever_to_brown_mushroom"));
+
+    RecipeSaver.saver().unlockedBy("has_redstone_torch", has(Items.REDSTONE_TORCH))
+        .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
+            .result(new ItemStack(Items.RED_MUSHROOM))
+            .requires(Items.REDSTONE_TORCH)), c, RootsAPI.rl("transmute/redstone_torch_to_red_mushroom"));
+
+    RecipeSaver.saver().unlockedBy("has_bone_meal", has(Tags.Items.FERTILIZERS))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.FUNGAL_TRANSMUTER.get(), 1)
+                .condition(ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get())
+                .condition(ModConditions.FUNGAL_RANK_1.get())
+                .requires(Tags.Items.FERTILIZERS)
+                .requires(ItemTags.LOGS)
+                .requires(Tags.Items.INGOTS_IRON)
+                .requires(RootsTags.Items.WILDWOOD_BARK)
+                .requires(RootsTags.Items.WILDWOOD_BARK)
+                .requires(RootsTags.Items.WILDWOOD_BARK)
+            ), c, RootsAPI.rl("grove/fungal_transmuter"));
   }
 
   public static class RecipeSaver {

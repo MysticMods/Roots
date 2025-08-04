@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/beetroot_to_potato"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_beetroot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:crops/beetroot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_beetroot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/beetroot_to_potato"
+    ]
+  }
+}

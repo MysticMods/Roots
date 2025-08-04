@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/lever_to_brown_mushroom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_lever": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:levers"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_lever"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/lever_to_brown_mushroom"
+    ]
+  }
+}

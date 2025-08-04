@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/silver_to_gold"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_silver": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/silver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_silver"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/silver_to_gold"
+    ]
+  }
+}

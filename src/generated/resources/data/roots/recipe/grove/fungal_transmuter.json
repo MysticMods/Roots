@@ -1,0 +1,47 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:fertilizers"
+      },
+      {
+        "tag": "minecraft:logs"
+      },
+      {
+        "tag": "c:ingots/iron"
+      },
+      {
+        "tag": "roots:barks/wildwood"
+      },
+      {
+        "tag": "roots:barks/wildwood"
+      },
+      {
+        "tag": "roots:barks/wildwood"
+      }
+    ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "fungal",
+          "tag": "roots:grove_stones/fungal"
+        },
+        "require_active": true
+      }
+    ],
+    "player_conditions": [
+      {
+        "type": "roots:grove_rank_condition",
+        "grove": "roots:fungal",
+        "minimum_rank": 1
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:fungal_transmuter"
+    }
+  }
+}

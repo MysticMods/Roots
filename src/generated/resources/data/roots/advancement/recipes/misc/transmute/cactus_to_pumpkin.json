@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/cactus_to_pumpkin"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_cactus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:crops/cactus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_cactus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/cactus_to_pumpkin"
+    ]
+  }
+}

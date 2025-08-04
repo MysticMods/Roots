@@ -1,0 +1,16 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:storage_blocks/redstone"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:glowstone"
+    }
+  },
+  "power": 2000
+}

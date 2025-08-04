@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/carpet_to_lilypad"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_carpet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:wool_carpets"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_carpet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/carpet_to_lilypad"
+    ]
+  }
+}

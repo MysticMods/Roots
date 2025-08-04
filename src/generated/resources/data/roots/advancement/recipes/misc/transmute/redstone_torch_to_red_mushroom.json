@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:transmute/redstone_torch_to_red_mushroom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_redstone_torch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:redstone_torch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_redstone_torch"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:transmute/redstone_torch_to_red_mushroom"
+    ]
+  }
+}

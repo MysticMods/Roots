@@ -1,0 +1,16 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:dusts/redstone"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:vine"
+    }
+  },
+  "power": 600
+}

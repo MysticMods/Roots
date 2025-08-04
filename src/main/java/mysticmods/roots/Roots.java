@@ -10,7 +10,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO: Main TODO list
-// Can throw a herb pouch out while editing it
 // Edit the beetle armor layers for overlap
 // Planting roots plants doesn't trigger a seedy place
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
@@ -23,7 +22,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Wildwood hanging sign? Wildwood sign?
 // - Leash attachment points
 // - Entity carry layers for all mobs
-// - Transmutation recipes
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;

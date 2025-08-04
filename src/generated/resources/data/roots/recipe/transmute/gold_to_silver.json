@@ -1,0 +1,19 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:ingots/gold"
+      },
+      {
+        "tag": "c:ingots/gold"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:silver_ingot"
+    }
+  },
+  "power": 1500
+}
