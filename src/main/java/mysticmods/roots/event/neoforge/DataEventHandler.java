@@ -69,15 +69,19 @@ public class DataEventHandler {
     }
   }
 
+  public static void rebuildAnimalHarvestCache () {
+    MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+    if (server != null) {
+      server.overworld()
+          .setData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get(), AnimalHarvestRecipe.getServerRecipes(server.reloadableRegistries()
+              .lookup()));
+    }
+  }
+
   @SubscribeEvent
   public static void onDataReloaded(DataMapsUpdatedEvent event) {
     if (event.getCause() == DataMapsUpdatedEvent.UpdateCause.SERVER_RELOAD) {
-      MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-      if (server != null) {
-        server.overworld()
-            .setData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get(), AnimalHarvestRecipe.getServerRecipes(server.reloadableRegistries()
-                .lookup()));
-      }
+      rebuildAnimalHarvestCache();
     }
 
     var reference = event.getRegistry().getAny().orElse(null);
@@ -95,14 +99,17 @@ public class DataEventHandler {
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     var cache = server.overworld().getData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get());
     if (cache.recipes().isEmpty()) {
-      return;
+      rebuildAnimalHarvestCache();
+      cache = server.overworld().getData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get());
     }
+    if (!cache.recipes().isEmpty()) {
+      // TODO: "Empty recipes" sync packet
+      ClientboundAnimalHarvestSyncPacket packet = new ClientboundAnimalHarvestSyncPacket(cache.recipes());
 
-    ClientboundAnimalHarvestSyncPacket packet = new ClientboundAnimalHarvestSyncPacket(cache.recipes());
-
-    event.getRelevantPlayers().forEach(o -> {
-      o.connection.send(packet);
-    });
+      event.getRelevantPlayers().forEach(o -> {
+        o.connection.send(packet);
+      });
+    }
   }
 
   @SubscribeEvent
