@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.IDataMapInitialize;
+import mysticmods.roots.client.particle.world.RootsParticle;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
@@ -72,9 +73,12 @@ public class DataEventHandler {
   public static void rebuildAnimalHarvestCache () {
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     if (server != null) {
+      RootsAPI.LOG.error("Rebuilding animal harvest recipe cache on server reload");
       server.overworld()
           .setData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get(), AnimalHarvestRecipe.getServerRecipes(server.reloadableRegistries()
               .lookup()));
+    } else {
+      RootsAPI.LOG.error("Unable to rebuild animal harvest recipe cache, server is null");
     }
   }
 
@@ -99,6 +103,7 @@ public class DataEventHandler {
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     var cache = server.overworld().getData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get());
     if (cache.recipes().isEmpty()) {
+      RootsAPI.LOG.error("Animal harvest recipe cache is empty, rebuilding it on datapack sync");
       rebuildAnimalHarvestCache();
       cache = server.overworld().getData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get());
     }
@@ -107,8 +112,11 @@ public class DataEventHandler {
       ClientboundAnimalHarvestSyncPacket packet = new ClientboundAnimalHarvestSyncPacket(cache.recipes());
 
       event.getRelevantPlayers().forEach(o -> {
+        RootsAPI.LOG.error("Sending animal harvest sync packet to player: {}", o.getGameProfile().getName());
         o.connection.send(packet);
       });
+    } else {
+      RootsAPI.LOG.error("Animal harvest recipe cache is still empty after rebuild, no sync packet sent");
     }
   }
 

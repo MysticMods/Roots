@@ -2,6 +2,7 @@ package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
+import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingSuccessCache;
 import mysticmods.roots.network.client.*;
@@ -27,11 +28,13 @@ public class ServerTickHandler {
   @SubscribeEvent
   public static void onServerAboutToStart(ServerAboutToStartEvent event) {
     CastingSuccessCache.clear();
+    ClientRecipes.clear();
   }
 
   @SubscribeEvent
   public static void onServerStopping(ServerStoppedEvent event) {
     CastingSuccessCache.clear();
+    ClientRecipes.clear();
   }
 
   @SubscribeEvent

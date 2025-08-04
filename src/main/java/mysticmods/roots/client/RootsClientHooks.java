@@ -1,9 +1,7 @@
 package mysticmods.roots.client;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormatElement;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.client.gui.overlay.HerbOverlay;
@@ -22,13 +20,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.lwjgl.opengl.GL30;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class RootsClientHooks {
   public static void setAnimalHarvestRecipes(List<AnimalHarvestRecipe> recipes) {
+    RootsAPI.LOG.error("Setting animal harvest recipes on client: {}", recipes);
     ClientRecipes.ANIMAL_HARVEST_RECIPES = recipes;
   }
 
