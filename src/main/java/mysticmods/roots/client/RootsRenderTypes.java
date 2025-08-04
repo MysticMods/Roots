@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -183,8 +184,6 @@ public class RootsRenderTypes {
           .setShaderState(DISSOLVE_SHADER)
           .setTextureState(new RenderStateShard.TextureStateShard(DISSOLVE_TEXTURE, false, false))
           .setTransparencyState(RenderType.NO_TRANSPARENCY)
-/*          .setLightmapState(RenderType.NO_LIGHTMAP)*/
-/*          .setOverlayState(RenderType.NO_OVERLAY)*/
           .setWriteMaskState(RenderType.DEPTH_WRITE)
           .setCullState(RenderType.NO_CULL)
           .setDepthTestState(RenderType.LEQUAL_DEPTH_TEST)
@@ -200,21 +199,18 @@ public class RootsRenderTypes {
     }
 
     RenderType.CompositeState state = ((AccessorMixinCompositeRenderType) renderType).rootsGetState();
-    Optional<RenderType> outline = ((AccessorMixinCompositeRenderType) renderType).rootsGetOutline();
-    boolean isOutline = ((AccessorMixinCompositeRenderType) renderType).rootsIsOutline();
 
 
     RenderStateShard.EmptyTextureStateShard textureStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetTextureState();
     RenderStateShard.ShaderStateShard shaderStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetShaderState();
     RenderStateShard.TransparencyStateShard transparencyStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetTransparencyState();
-    RenderStateShard.DepthTestStateShard depthTestStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetDepthTestState();
     RenderStateShard.CullStateShard cullStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetCullState();
     RenderStateShard.LightmapStateShard lightmapStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetLightmapState();
     RenderStateShard.OverlayStateShard overlayStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetOverlayState();
     RenderStateShard.LayeringStateShard layeringStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetLayeringState();
     RenderStateShard.OutputStateShard outputStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetOutputState();
     RenderStateShard.TexturingStateShard texturingStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetTexturingState();
-    RenderStateShard.WriteMaskStateShard writeMaskStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetWriteMaskState();
+    RenderStateShard.WriteMaskStateShard writeMaskStateShard = RenderType.COLOR_WRITE; //((AccessorMixinCompositeState) (Object) state).rootsGetWriteMaskState();
     RenderStateShard.LineStateShard lineStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetLineState();
     RenderStateShard.ColorLogicStateShard colorLogicStateShard = ((AccessorMixinCompositeState) (Object) state).rootsGetColorLogicState();
     RenderType.OutlineProperty outlineProperty = ((AccessorMixinCompositeState) (Object) state).rootsGetOutlineProperty();
