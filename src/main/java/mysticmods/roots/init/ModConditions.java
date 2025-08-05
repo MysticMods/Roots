@@ -22,7 +22,6 @@ public class ModConditions {
   private static final DeferredRegister<ILevelConditionType<?>> LEVEL = DeferredRegister.create(RootsRegistries.LEVEL_CONDITIONS, RootsAPI.MODID);
   private static final DeferredRegister<IPlayerConditionType<?>> PLAYER = DeferredRegister.create(RootsRegistries.PLAYER_CONDITIONS, RootsAPI.MODID);
 
-  // TODO: This needs to not be a map
   public static final Map<String, Supplier<CanonicalRepresentation>> SPECIAL_REPRESENTATIONS = new Object2ObjectOpenHashMap<>();
   public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<GroveStoneCondition>> GROVE_STONE_CONDITION_TYPE = LEVEL.register("grove_stone_condition", GroveStoneCondition.Type::new);
   public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<PillarCondition>> PILLAR_CONDITION_TYPE = LEVEL.register("pillar_condition", PillarCondition.Type::new);

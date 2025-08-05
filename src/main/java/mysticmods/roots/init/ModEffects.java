@@ -27,8 +27,7 @@ public class ModEffects {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
   }
 
-  public static final DeferredHolder<MobEffect, AquaBubbleEffect> AQUA_BUBBLE = REGISTER.register("aqua_bubble", () -> (AquaBubbleEffect) new AquaBubbleEffect(MobEffectCategory.BENEFICIAL, 0x00ffff));
-  /*      .addAttributeModifier(Attributes.MAX_ABSORPTION, RootsAPI.rl("aqua_bubble_absorb"), AttributeModifier.Operation.ADD_VALUE, (o) -> o / 0.5));*/
+  public static final DeferredHolder<MobEffect, AquaBubbleEffect> AQUA_BUBBLE = REGISTER.register("aqua_bubble", () -> new AquaBubbleEffect(MobEffectCategory.BENEFICIAL, 0x00ffff));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

@@ -2378,7 +2378,6 @@ public class RootsRecipeProvider extends RecipeProvider {
             .requires(RootsTags.Items.SILVER_INGOT)
             .requires(RootsTags.Items.SILVER_INGOT)), c, RootsAPI.rl("transmute/silver_to_gold_nugget"));
 
-
     RecipeSaver.saver().unlockedBy("has_rotten_flesh", has(RootsTags.Items.ROTTEN_FLESH))
         .save(TransmutationRecipe.create().powerRequired(900).build(BaseRecipeData.Builder.create()
             .result(new ItemStack(Items.LEATHER))

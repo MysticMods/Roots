@@ -57,12 +57,6 @@ public record WorldCondition(String name, Shift shift, WorldTest test,
     return test.test(stateAt, random);
   }
 
-  // TODO: I don't actually seem to be using this
-  @Nullable
-  public BlockPos resolvePosition(BlockPos position) {
-    return !modifyPosition ? null : shift == Shift.NONE ? position : shift.apply(position);
-  }
-
   public enum Shift implements Function<BlockPos, BlockPos>, StringRepresentable {
     NONE(null),
     ABOVE(Direction.UP),
