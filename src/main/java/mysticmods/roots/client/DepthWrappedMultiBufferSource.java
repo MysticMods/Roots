@@ -13,6 +13,7 @@ public class DepthWrappedMultiBufferSource implements MultiBufferSource {
 
   @Override
   public VertexConsumer getBuffer(RenderType renderType) {
+    // TODO: Properly handle incompatible render types
     return delegate.getBuffer(RootsRenderTypes.getDissolveDepth(renderType));
   }
 }

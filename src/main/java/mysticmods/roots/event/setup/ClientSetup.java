@@ -42,7 +42,6 @@ public class ClientSetup {
       };
 
       ItemProperties.register(ModItems.SYLVAN_POUCH.get(), STRING_COLOR, func2);
-
     });
   }
 }

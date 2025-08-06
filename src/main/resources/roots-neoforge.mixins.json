@@ -34,16 +34,17 @@
     "action.MixinPiglinAi"
   ],
   "client": [
-    "client.accessor.AccessorMixinCompositeState",
-    "client.accessor.AccessorMixinFrustum",
-    "client.accessor.AccessorMixinItemRenderer",
     "client.MixinEntity",
     "client.MixinLocalPlayer",
     "client.accessor.AccessorMixinCompositeRenderType",
+    "client.accessor.AccessorMixinCompositeState",
     "client.accessor.AccessorMixinEntityRenderer",
+    "client.accessor.AccessorMixinFrustum",
+    "client.accessor.AccessorMixinItemRenderer",
     "client.accessor.AccessorMixinLevelRenderer",
     "client.accessor.AccessorMixinParticle",
-    "client.accessor.AccessorMixinParticleEngine"
+    "client.accessor.AccessorMixinParticleEngine",
+    "client.accessor.AccessorMixinTextureAtlas"
   ],
   "injectors": {
     "defaultRequire": 1

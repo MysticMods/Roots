@@ -52,6 +52,8 @@ neoForge {
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'renderdoc.path', 'C:\\Program Files\\RenderDoc\\renderdoc.dll'
+            systemProperty 'renderdoc.enabled', 'true'
             jvmArguments.add("-Xmx4G")
             jvmArguments.add("-Xms2G")
             //jvmArguments.add("-XX:+CreateCoredumpOnCrash")

@@ -1,13 +1,15 @@
 #version 150
 
+#moj_import <fog.glsl>
+
 uniform sampler2D NoiseTexture;
 uniform float DissolveThreshold;
-uniform float NoiseScale;
 
-in vec3 modelPos;
+in vec2 texCoord0;
 
 void main() {
-    vec2 uv = modelPos.xy * NoiseScale;
-    float alpha = texture(NoiseTexture, uv).a;
-    if (alpha < DissolveThreshold) discard;
+    vec4 color = texture(NoiseTexture, texCoord0);
+    if (color.a < DissolveThreshold) {
+        discard;
+    }
 }

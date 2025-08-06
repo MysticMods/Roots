@@ -97,6 +97,9 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   private int storedPower = -1;
   private int craftingTicks = 0;
 
+  public float dissolveProgress = 0f;
+  public float oDissolveProgress = 0f;
+
   private BlockCapabilityCache<IItemHandler, Direction> capabilityCache;
 
   public FungalTransmuterBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
@@ -371,6 +374,13 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     if (!revalidatedRecipes) {
       revalidateRecipe();
       revalidatedRecipes = true;
+    }
+    if (dissolveProgress > 1) {
+      dissolveProgress = 0f;
+      oDissolveProgress = 0f;
+    } else {
+      oDissolveProgress = dissolveProgress;
+      dissolveProgress += 0.02f;
     }
   }
 

@@ -163,8 +163,6 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.METEOR, MeteorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.JERBOA, JerboaModel::createBodyLayer);
-/*    event.registerLayerDefinition(ModelHolder.AMPLIFIER_CENTER, AmplifierBlockEntityRenderer::createInnerLayer);
-    event.registerLayerDefinition(ModelHolder.AMPLIFIER_OUTER, AmplifierBlockEntityRenderer::createOuterLayer);*/
   }
 
   public static final ResourceLocation WARNING_OVERLAY = RootsAPI.rl("warning");

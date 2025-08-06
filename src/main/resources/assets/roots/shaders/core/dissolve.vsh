@@ -1,5 +1,6 @@
 #version 150
 
+#moj_import <light.glsl>
 #moj_import <fog.glsl>
 
 in vec3 Position;
@@ -9,14 +10,12 @@ in ivec2 UV1;
 in ivec2 UV2;
 in vec3 Normal;
 
-uniform sampler2D NoiseTexture;
-
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 
-out vec3 modelPos;
+out vec2 texCoord0;
 
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-    modelPos = Position;
+    texCoord0 = UV0;
 }

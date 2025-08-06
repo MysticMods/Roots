@@ -8,25 +8,48 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinEntityRenderer;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinTextureAtlas;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityAttachment;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
+import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class ClientEvents {
+  private static Vec2 BLOCKS_ATLAS_SIZE = null;
+
+  public static Vec2 getBlocksAtlasSize() {
+    if (BLOCKS_ATLAS_SIZE == null) {
+      RootsAPI.LOG.error("Blocks atlas size not initialized, fetching from Minecraft instance.");
+      TextureAtlas atlas = Minecraft.getInstance().getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS);
+      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas)atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas)atlas).rootsGetHeight());
+    }
+    return BLOCKS_ATLAS_SIZE;
+  }
+
+  @SubscribeEvent
+  public static void onTextureStitch (TextureAtlasStitchedEvent event) {
+    TextureAtlas atlas = event.getAtlas();
+    if (atlas.location().equals(TextureAtlas.LOCATION_BLOCKS)) {
+      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas)atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas)atlas).rootsGetHeight());
+    }
+  }
+
   @SubscribeEvent
   public static void onRecipeUpdate(RecipesUpdatedEvent event) {
     ResolvedRecipes.reset();
