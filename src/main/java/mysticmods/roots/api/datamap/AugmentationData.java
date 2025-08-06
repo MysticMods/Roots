@@ -19,6 +19,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 import java.util.Locale;
 
+// Used to store configurable data for the Augmentation ritual.
+// Attributes must be tagged roots:augmentable in addition to having this data map entry
 public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Operation operation,
                                double largeAmplifierValue, double smallAmplifierValue, float largeAmplifierChance,
                                int maxLargeAmplifiers, int maxSmallAmplifiers) {
@@ -51,12 +53,39 @@ public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Op
         .toLowerCase(Locale.ROOT) + "/" + count);
   }
 
-  public Info getInfo(LivingEntity entity) {
+  public AugmentationInfo getCachedInfo(LivingEntity entity) {
+    if (entity == null || !entity.isAlive()) {
+      return AugmentationInfo.EMPTY;
+    }
+
+    if (!entity.hasData(RootsAPI.getInstance().getAugmentationInfoType())) {
+      var result = getInfo(entity);
+      entity.getData(RootsAPI.getInstance().getAugmentationInfoType()).put(attribute(), result);
+      return result;
+    }
+
+    var data = entity.getData(RootsAPI.getInstance().getAugmentationInfoType());
+    if (!data.isEmpty()) {
+      var result = data.get(attribute());
+      if (result != null) {
+        return result;
+      }
+    }
+    var result = getInfo(entity);
+    data.put(attribute(), result);
+    return result;
+  }
+
+  public AugmentationInfo getInfo(LivingEntity entity) {
+    if (entity == null || !entity.isAlive()) {
+      return AugmentationInfo.EMPTY;
+    }
+
     int smallCount = 0;
     int largeCount = 0;
     AttributeInstance instance = entity.getAttribute(attribute());
     if (instance == null) {
-      return Info.EMPTY;
+      return AugmentationInfo.EMPTY;
     }
     String attrName = attribute().getKey().location().getPath();
     for (AttributeModifier modifier : instance.getModifiers()) {
@@ -71,14 +100,7 @@ public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Op
         }
       }
     }
-    return new Info(smallCount, largeCount);
-  }
 
-  public record Info(int smallCount, int largeCount) {
-    public static Info EMPTY = new Info(0, 0);
-
-    public boolean isEmpty() {
-      return smallCount == 0 && largeCount == 0;
-    }
+    return new AugmentationInfo(smallCount, largeCount);
   }
 }

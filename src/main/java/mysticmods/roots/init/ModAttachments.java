@@ -4,16 +4,19 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.datamap.AugmentationInfo;
 import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.util.SpatialMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -22,6 +25,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class ModAttachments {
@@ -49,6 +54,8 @@ public class ModAttachments {
       .build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalHarvestRecipe.Cache>> ANIMAL_HARVEST_RECIPE_CACHE = ATTACHMENTS.register("animal_harvest_recipe_cache", () -> AttachmentType.builder(() -> new AnimalHarvestRecipe.Cache(new ArrayList<>()))
       .serialize(AnimalHarvestRecipe.CACHE_CODEC).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<Map<Holder<Attribute>, AugmentationInfo>>> AUGMENTATION_INFO = ATTACHMENTS.register("augmentation_data", () -> AttachmentType.<Map<Holder<Attribute>, AugmentationInfo>>builder(() -> new HashMap<>())
+      .serialize(AugmentationInfo.DATA_MAP_CODEC).build());
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
