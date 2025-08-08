@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-08T13:29:15.4634527	Recipes
+// 1.21.1	2025-08-08T13:40:53.7000374	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -153,6 +153,7 @@ ce8e6adb59643c75106aec325883534abbaac62f data/roots/advancement/recipes/misc/cop
 85624f47992a6ed671b795ed31231f869c0ff488 data/roots/advancement/recipes/misc/decorative_soul_pyre_from_soul_pyre_and_lever.json
 d6d1be53bf19040b5a83f95222bca894da1b6223 data/roots/advancement/recipes/misc/display_pedestal.json
 19ff6d88f9ee9ac4348a62f2c0bc95ab1d99c30a data/roots/advancement/recipes/misc/fire_starter.json
+82107267372151aafab4d1a89cf5e9186cf8124c data/roots/advancement/recipes/misc/gramary.json
 3a5dd25357a23e0a0d6dca6e3a2b209a3073b21f data/roots/advancement/recipes/misc/gray_dye_from_stonepetal.json
 6de8f977eedc12b01ee57d266884e998daab2a51 data/roots/advancement/recipes/misc/grove/apothecary_pouch.json
 02baa5e18fd42a3110877584508d93a775206a4b data/roots/advancement/recipes/misc/grove/bafflecap_fairy_hut.json
@@ -510,6 +511,7 @@ b2b07ab2524a44de34b2c77b43f2d39b86396926 data/roots/recipe/decorative_pyre_from_
 96e905b7ed33114e7cf495b474f2e380e781e3a1 data/roots/recipe/dye_pouch.json
 e834f8252ee64a0b64be8e2ec7c60e85110e2b76 data/roots/recipe/fire_starter.json
 7f0d77b703f0685e9aab823b05967f9bddffcd69 data/roots/recipe/golden_knife.json
+823c21bfcee29f3ca6c4b6a757eb08dc18eebc1f data/roots/recipe/gramary.json
 9ec2a8b155c3abc2224e0ccf530cd5499f45662c data/roots/recipe/gray_dye_from_stonepetal.json
 aed40653728a43072b60e3e16ad2292b7041f785 data/roots/recipe/grove/apothecary_pouch.json
 b7da93066cc6728db8d064819dd0db2b7370d1f8 data/roots/recipe/grove/bafflecap_fairy_hut.json

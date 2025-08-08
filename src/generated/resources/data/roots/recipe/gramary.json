@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "tag": "roots:crops/wildroot"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "LHL",
+    "LLL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:gramary"
+  }
+}

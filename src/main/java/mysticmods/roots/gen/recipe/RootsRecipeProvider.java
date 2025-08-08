@@ -2484,6 +2484,15 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.WILDWOOD_BARK)
                 .requires(RootsTags.Items.WILDWOOD_BARK)
             ), c, RootsAPI.rl("grove/fungal_transmuter"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GRAMARY.get())
+        .pattern("LLL")
+        .pattern("LHL")
+        .pattern("LLL")
+        .define('L', ItemTags.LOGS)
+        .define('H', RootsTags.Items.WILDROOT_CROP)
+        .unlockedBy("has_wildroot", has(RootsTags.Items.WILDROOT_CROP))
+        .save(c, RootsAPI.rl("gramary"));
   }
 
   public static class RecipeSaver {
