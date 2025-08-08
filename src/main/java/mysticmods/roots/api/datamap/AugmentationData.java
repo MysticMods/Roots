@@ -12,6 +12,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -48,9 +49,53 @@ public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Op
     LARGE, SMALL;
   }
 
+  public boolean augment (LivingEntity entity, RandomSource random) {
+    var info = getCachedInfo(entity);
+
+    if (cantAugment(info)) {
+      return false;
+    }
+
+    AttributeInstance instance = entity.getAttribute(attribute());
+    if (instance == null) {
+      return false;
+    }
+
+    if (info.largeCount() < maxLargeAmplifiers) {
+      if (random.nextFloat() < largeAmplifierChance) {
+        var modifier = new AttributeModifier(generateName(Size.LARGE, info.largeCount() + 1),
+            largeAmplifierValue, operation);
+        instance.addPermanentModifier(modifier);
+        info = new AugmentationInfo(info.smallCount(), info.largeCount()+1);
+        setCachedInfo(entity, info);
+        return true;
+      }
+    }
+
+    if (info.smallCount() < maxSmallAmplifiers) {
+      var modifier = new AttributeModifier(generateName(Size.SMALL, info.smallCount() + 1),
+          smallAmplifierValue, operation);
+      instance.addPermanentModifier(modifier);
+      info = new AugmentationInfo(info.smallCount() + 1, info.largeCount());
+      setCachedInfo(entity, info);
+      return true;
+    }
+
+    return false;
+  }
+
   private ResourceLocation generateName(Size size, int count) {
     return RootsAPI.rl(attribute().getKey().location().getPath() + "/" + size.name()
         .toLowerCase(Locale.ROOT) + "/" + count);
+  }
+
+  private void setCachedInfo (LivingEntity entity, AugmentationInfo info) {
+    if (entity == null || !entity.isAlive()) {
+      return;
+    }
+
+    var data = entity.getData(RootsAPI.getInstance().getAugmentationInfoType());
+    data.put(attribute(), info);
   }
 
   public AugmentationInfo getCachedInfo(LivingEntity entity) {
@@ -76,7 +121,11 @@ public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Op
     return result;
   }
 
-  public AugmentationInfo getInfo(LivingEntity entity) {
+  private boolean cantAugment(AugmentationInfo info) {
+    return info.smallCount() >= maxSmallAmplifiers || info.largeCount() >= maxLargeAmplifiers;
+  }
+
+  private AugmentationInfo getInfo(LivingEntity entity) {
     if (entity == null || !entity.isAlive()) {
       return AugmentationInfo.EMPTY;
     }

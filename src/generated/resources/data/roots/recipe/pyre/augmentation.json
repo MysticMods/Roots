@@ -3,22 +3,19 @@
   "data": {
     "ingredients": [
       {
-        "tag": "roots:logs/wildwood"
+        "item": "minecraft:golden_apple"
       },
       {
-        "tag": "roots:logs/wildwood"
+        "tag": "roots:crops/spiritleaf"
       },
       {
-        "tag": "roots:logs/wildwood"
+        "tag": "c:ingots/silver"
       },
       {
-        "tag": "roots:logs/wildwood"
+        "tag": "roots:barks/birch"
       },
       {
-        "tag": "roots:logs/wildwood"
-      },
-      {
-        "tag": "roots:logs/wildwood"
+        "tag": "roots:barks/spruce"
       }
     ],
     "level_conditions": [
@@ -48,6 +45,13 @@
           "name": "any_rune",
           "pillar": "roots:pillars/runes/any"
         }
+      }
+    ],
+    "player_conditions": [
+      {
+        "type": "roots:grove_rank_condition",
+        "grove": "roots:wild",
+        "minimum_rank": 1
       }
     ],
     "priority": 0

@@ -98,8 +98,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The length of the ritual",
-          "default_value": 1200,
-          "value": 1200
+          "default_value": 220,
+          "value": 220
         }
       },
       {
@@ -125,6 +125,24 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 200,
+          "value": 200
+        }
+      },
+      {
+        "id": "roots:augmentation/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of entities to augment per interval.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:augmentation/glow_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The duration of the glow effect applied to entities that have been augmented.",
           "default_value": 20,
           "value": 20
         }

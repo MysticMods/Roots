@@ -1240,10 +1240,13 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.AUGMENTATION)
-            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS)
-                .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
-                .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
-                .requires(RootsTags.Items.WILDWOOD_LOGS)
+            .build(BaseRecipeData.Builder.create()
+                .requires(Items.GOLDEN_APPLE)
+                .requires(RootsTags.Items.SPIRITLEAF_CROP)
+                .requires(RootsTags.Items.SILVER_INGOT)
+                .requires(RootsTags.Items.BIRCH_BARK)
+                .requires(RootsTags.Items.SPRUCE_BARK)
+                .condition(ModConditions.WILD_RANK_1.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/augmentation"));

@@ -1,5 +1,7 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
@@ -10,7 +12,15 @@ import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -19,8 +29,53 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class AugmentationRitual extends Ritual {
+  private int count, glowDuration;
+
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache()) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
+    HolderSet<Attribute> attributes = BuiltInRegistries.ATTRIBUTE.getTag(RootsTags.Atrtibutes.AUGMENTABLE).orElse(null);
+    if (attributes == null) {
+      RootsAPI.LOG.error("Ritual {} requires attributes from the AUGMENTABLE tag but none were found. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
+
+    if (duration % getInterval() == 0) {
+      List<LivingEntity> entities = blockEntity.getLevel()
+          .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
+              .and((o) -> o.getType().is(RootsTags.Entities.AUGMENTABLE) && !o.getType()
+                  .is(RootsTags.Entities.AUGMENTABLE_EXCLUDE)));
+      if (entities.isEmpty()) {
+        return;
+      }
+      int adjusted = 0;
+      // TODO: Start the loop over again to handle the count
+      outer: for (LivingEntity entity : entities) {
+        if (adjusted >= count) {
+          break;
+        }
+
+        for (Holder<Attribute> attribute : attributes) {
+          var data = attribute.getData(DataMaps.AUGMENTATION_DATA);
+          if (data == null) {
+            RootsAPI.LOG.error("Ritual {} requires augmentation data for attribute {} but none was found. This will cause the ritual to not function correctly.", getOrCreateDescriptionId(), attribute);
+            continue;
+          }
+
+          if (data.augment(entity, randomSource)) {
+            adjusted++;
+            if (glowDuration > 0) {
+              entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
+            }
+            continue outer;
+          }
+        }
+      }
+    }
   }
 
   @Override
@@ -31,11 +86,15 @@ public class AugmentationRitual extends Ritual {
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
+    properties.add(ModRituals.AUGMENTATION_COUNT);
+    properties.add(ModRituals.AUGMENTATION_GLOW_DURATION);
   }
 
   @Override
   public void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    glowDuration = properties.get(ModRituals.AUGMENTATION_GLOW_DURATION);
+    count = properties.get(ModRituals.AUGMENTATION_COUNT);
   }
 
   @Override

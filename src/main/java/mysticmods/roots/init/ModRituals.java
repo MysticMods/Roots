@@ -32,10 +32,12 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_STACK_COUNT_LIMIT = P.recordProperty("animal_harvest/stack_count_limit", Property.ofInt(1, "If multiple items are dropped, the maximum number of items will be selected at random and the others discarded. Set to -1 to allow all items to drop."));
 
   public static final DeferredHolder<Ritual, AugmentationRitual> AUGMENTATION = RITUAL.register("augmentation", AugmentationRitual::new);
-  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_DURATION = P.recordProperty("augmentation/duration", Property.ofInt(1200, RitualProperties.DURATION));
-  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_INTERVAL = P.recordProperty("augmentation/interval", Property.ofInt(20, RitualProperties.INTERVAL));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_DURATION = P.recordProperty("augmentation/duration", Property.ofInt(220, RitualProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_INTERVAL = P.recordProperty("augmentation/interval", Property.ofInt(200, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_RADIUS_XZ = P.recordProperty("augmentation/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_RADIUS_Y = P.recordProperty("augmentation/radius_y", Property.ofInt(6, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_COUNT = P.recordProperty("augmentation/count", Property.ofInt(1, "The number of entities to augment per interval."));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_GLOW_DURATION = P.recordProperty("augmentation/glow_duration", Property.ofInt(20, "The duration of the glow effect applied to entities that have been augmented."));
 
   public static final DeferredHolder<Ritual, BloomingRitual> BLOOMING = RITUAL.register("blooming", BloomingRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_DURATION = P.recordProperty("blooming/duration", Property.ofInt(3200, RitualProperties.DURATION));

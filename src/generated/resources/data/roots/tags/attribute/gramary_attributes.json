@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:generic.jump_strength",
+    "minecraft:generic.attack_damage",
     "minecraft:generic.max_health",
     "minecraft:generic.movement_speed"
   ]

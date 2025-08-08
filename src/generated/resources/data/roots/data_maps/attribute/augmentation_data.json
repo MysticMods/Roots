@@ -1,0 +1,40 @@
+{
+  "values": {
+    "minecraft:generic.attack_damage": {
+      "attribute": "minecraft:generic.attack_damage",
+      "large_amplifier_chance": 0.2,
+      "large_amplifier_value": 1.0,
+      "max_large_amplifiers": 2,
+      "max_small_amplifiers": 3,
+      "operation": "add_value",
+      "small_amplifier_value": 0.5
+    },
+    "minecraft:generic.jump_strength": {
+      "attribute": "minecraft:generic.jump_strength",
+      "large_amplifier_chance": 0.3,
+      "large_amplifier_value": 0.06,
+      "max_large_amplifiers": 4,
+      "max_small_amplifiers": 6,
+      "operation": "add_value",
+      "small_amplifier_value": 0.03
+    },
+    "minecraft:generic.max_health": {
+      "attribute": "minecraft:generic.max_health",
+      "large_amplifier_chance": 0.2,
+      "large_amplifier_value": 2.0,
+      "max_large_amplifiers": 2,
+      "max_small_amplifiers": 3,
+      "operation": "add_value",
+      "small_amplifier_value": 1.0
+    },
+    "minecraft:generic.movement_speed": {
+      "attribute": "minecraft:generic.movement_speed",
+      "large_amplifier_chance": 0.2,
+      "large_amplifier_value": 0.08,
+      "max_large_amplifiers": 2,
+      "max_small_amplifiers": 3,
+      "operation": "add_value",
+      "small_amplifier_value": 0.03
+    }
+  }
+}

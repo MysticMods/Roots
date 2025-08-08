@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.GroveReputationEntry;
+import mysticmods.roots.api.datamap.AugmentationData;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.datamap.SproutGift;
@@ -27,6 +28,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -37,6 +40,7 @@ import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import org.w3c.dom.Attr;
 
 import java.util.List;
 import java.util.Optional;
@@ -596,5 +600,11 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder27.add(ModActions.LEARN_SPELL, ModItems.PESTLE.get(), false);
     builder27.add(ModActions.LEARN_SPELL_MODIFIER, ModItems.MORTAR.get(), false);
     builder27.add(ModActions.BRUSH_BLOCK, Items.BRUSH, false);
+
+    var builder28 = builder(DataMaps.AUGMENTATION_DATA);
+    builder28.add(Attributes.JUMP_STRENGTH, new AugmentationData(Attributes.JUMP_STRENGTH, AttributeModifier.Operation.ADD_VALUE, 0.06, 0.03, 0.3f, 4, 6), false);
+    builder28.add(Attributes.ATTACK_DAMAGE, new AugmentationData(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADD_VALUE, 1, 0.5, 0.2f, 2, 3), false);
+    builder28.add(Attributes.MAX_HEALTH, new AugmentationData(Attributes.MAX_HEALTH, AttributeModifier.Operation.ADD_VALUE, 2, 1, 0.2f, 2, 3), false);
+    builder28.add(Attributes.MOVEMENT_SPEED, new AugmentationData(Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.ADD_VALUE, 0.08, 0.03, 0.2f, 2, 3), false);
   }
 }
