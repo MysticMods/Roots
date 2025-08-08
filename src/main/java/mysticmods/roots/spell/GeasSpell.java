@@ -1,6 +1,7 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.action.GeasAction;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -18,6 +19,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,9 +28,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class GeasSpell extends Spell {
   private int count, duration, maxCooldown;
+  private double maxHealth;
 
   public GeasSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x802020, 0x202020);
@@ -45,6 +49,7 @@ public class GeasSpell extends Spell {
     result.add(ModSpells.GEAS_COUNT);
     result.add(ModSpells.GEAS_DURATION);
     result.add(ModSpells.GEAS_MAX_COOLDOWN);
+    result.add(ModSpells.GEAS_MAX_HEALTH);
   }
 
   @Override
@@ -54,6 +59,7 @@ public class GeasSpell extends Spell {
     this.count = dataMap.get(ModSpells.GEAS_COUNT);
     this.duration = dataMap.get(ModSpells.GEAS_DURATION);
     this.maxCooldown = dataMap.get(ModSpells.GEAS_MAX_COOLDOWN);
+    this.maxHealth = dataMap.get(ModSpells.GEAS_MAX_HEALTH);
   }
 
   @Override
@@ -64,14 +70,19 @@ public class GeasSpell extends Spell {
 
     float hpAffected = 0;
 
+    // TODO: Improve this dramatically
     for (int i = 0; i < 20; i++) {
       double x = pPlayer.getX() + look.x * 3.0 * (float) i;
       double y = pPlayer.getY() + pPlayer.getEyeHeight() + look.y * 3.0 * (float) i;
       double z = pPlayer.getZ() + look.z * 3.0 * (float) i;
-      // TODO: What is this
-      List<Entity> entities = pLevel.getEntities(pPlayer, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), EntityUtils.isHostileTo(pPlayer));
+      // TODO: Make geas predicate "static" (excluding player) and obey maxHealth.
+      List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), EntitySelector.NO_SPECTATORS.and(Entity::isAlive).and(EntityUtils.isHostileTo(pPlayer).and(o -> !o.getType().is(RootsTags.Entities.GEAS_EXCLUDE))));
       for (Entity entity : entities) {
         if (!(entity instanceof LivingEntity living)) {
+          continue;
+        }
+
+        if (living.getMaxHealth() > this.maxHealth) {
           continue;
         }
 

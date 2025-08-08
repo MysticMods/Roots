@@ -311,6 +311,15 @@
           "default_value": 800,
           "value": 800
         }
+      },
+      {
+        "id": "roots:geas/max_health",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The maximum health an entity can have for the geas spell to affect it.",
+          "default_value": 50.0,
+          "value": 50.0
+        }
       }
     ],
     "roots:growth_infusion": [

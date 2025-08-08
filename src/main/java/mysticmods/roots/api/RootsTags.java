@@ -558,6 +558,8 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> WINDWALL_FORCE_EXCLUDE = modTag("windwall_force_exclude");
     public static final TagKey<EntityType<?>> WINDWALL_FORCE_INCLUDE = modTag("windwall_force_include");
 
+    public static final TagKey<EntityType<?>> GEAS_EXCLUDE = modTag("geas_exclude");
+
     public static final TagKey<EntityType<?>> ZOMBIE_VILLAGERS = modTag("zombie_villagers");
     public static final TagKey<EntityType<?>> ZOMBIE_VILLAGERS_EXCLUDE = modTag("zombie_villagers_exclude");
 

@@ -75,6 +75,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.AUGMENTABLE)
         .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.LLAMA, EntityType.CAMEL, EntityType.WOLF)
         .add(ModEntities.FENNEC.get());
+    this.tag(RootsTags.Entities.AUGMENTABLE_EXCLUDE);
     this.tag(RootsTags.Entities.ANIMAL_HARVEST)
         .add(
             EntityType.ALLAY,
@@ -145,6 +146,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.ZOMBIE_VILLAGERS_EXCLUDE);
     this.tag(RootsTags.Entities.WINDWALL_FORCE_EXCLUDE);
     this.tag(RootsTags.Entities.WINDWALL_FORCE_INCLUDE);
+    this.tag(RootsTags.Entities.GEAS_EXCLUDE);
     this.tag(RootsTags.Entities.TEMPORAL_MORASS_EXCLUDE).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.ROSE_THORNS_EXCLUDE).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.ALERTNESS).add(EntityType.CREEPER);

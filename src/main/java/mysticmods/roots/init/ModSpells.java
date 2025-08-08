@@ -113,6 +113,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> GEAS_MAX_COOLDOWN = P.recordProperty("geas/max_cooldown", Property.ofInt(80 * 10, "The maximum cooldown for the geas spell when scaling based off maximum health."));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_DURATION = P.recordProperty("geas/duration", Property.ofInt(400, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_COUNT = P.recordProperty("geas/count", Property.ofInt(1, SpellProperties.COUNT));
+  public static final PropertyHolder<Property.DoubleProperty> GEAS_MAX_HEALTH = P.recordProperty("geas/max_health", Property.ofDouble(50, "The maximum health an entity can have for the geas spell to affect it."));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("control_undead"), RootsAPI.rl("summon_undead"));
