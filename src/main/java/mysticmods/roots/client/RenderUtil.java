@@ -1,11 +1,11 @@
 package mysticmods.roots.client;
 
+import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.mojang.math.MatrixUtil;
 import mysticmods.roots.api.RootsAPI;
@@ -44,7 +44,6 @@ import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.ClientHooks;
 import org.jetbrains.annotations.NotNull;
@@ -427,13 +426,16 @@ public class RenderUtil {
         }
 
         if (!(bufferSource instanceof MultiBufferSource.BufferSource bufferSource2)) {
-          throw new IllegalArgumentException("BufferSource must be a BufferSource, got: " + bufferSource.getClass().getName());
+          throw new IllegalArgumentException("BufferSource must be a BufferSource, got: " + bufferSource.getClass()
+              .getName());
         }
+
+        // Now writing to the dissolve render target
 
         ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
         Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
         if (uniform != null) {
-          uniform.set(dissolveProgress);
+          uniform.set(0f); //dissolveProgress);
         }
 
         for (var model : p_model.getRenderPasses(itemStack, flag1)) {
@@ -466,6 +468,8 @@ public class RenderUtil {
             itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
           }
         }
+
+        blitAndClear();
       } else {
         // TODO:
         net.neoforged.neoforge.client.extensions.common.IClientItemExtensions.of(itemStack).getCustomRenderer()
@@ -478,5 +482,35 @@ public class RenderUtil {
 
   private static boolean hasAnimatedTexture(ItemStack stack) {
     return stack.is(ItemTags.COMPASSES) || stack.is(Items.CLOCK);
+  }
+
+  public static void blitAndClear() {
+    if (!RenderTickHandler.hasDissolveTarget()) {
+      RootsAPI.LOG.error("Attempted to blit dissolve texture without a render target set up!");
+      return;
+    }
+    RenderTarget renderTarget = RenderTickHandler.getDissolveTarget();
+
+    RenderSystem.assertOnRenderThread();
+    RenderSystem.disableDepthTest();
+    //RenderSystem.disableBlend();
+    RenderSystem.depthMask(false);
+    RenderSystem.colorMask(true, true, true, true);
+    RenderSystem.viewport(0, 0, renderTarget.width, renderTarget.height);
+
+    ShaderInstance shaderinstance = RootsShaders.getDissolveBlitShader();
+/*    ShaderInstance shaderinstance = Objects.requireNonNull(Minecraft.getInstance().gameRenderer.blitShader, "Blit shader not loaded");*/
+    shaderinstance.setSampler("DiffuseSampler", renderTarget.getColorTextureId());
+    shaderinstance.setSampler("DepthSampler", renderTarget.getDepthTextureId());
+    shaderinstance.apply();
+    BufferBuilder bufferbuilder = RenderSystem.renderThreadTesselator()
+        .begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLIT_SCREEN);
+    bufferbuilder.addVertex(0.0F, 0.0F, 0.0F);
+    bufferbuilder.addVertex(1.0F, 0.0F, 0.0F);
+    bufferbuilder.addVertex(1.0F, 1.0F, 0.0F);
+    bufferbuilder.addVertex(0.0F, 1.0F, 0.0F);
+    BufferUploader.draw(bufferbuilder.buildOrThrow());
+    shaderinstance.clear();
+    renderTarget.clear(Minecraft.ON_OSX);
   }
 }

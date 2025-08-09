@@ -23,6 +23,12 @@ import java.util.function.Function;
 import static net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE;
 
 public class RootsRenderTypes {
+  public static final RenderStateShard.OutputStateShard DISSOLVE_TARGET = new RenderStateShard.OutputStateShard("dissolve_target", () -> {
+    RenderTickHandler.getDissolveTarget().bindWrite(false);
+  }, () -> {
+    Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
+  });
+
   private static final RenderStateShard.LayeringStateShard CUSTOM_POLYGON_OFFSET_LAYERING = new RenderStateShard.LayeringStateShard(
       "polygon_offset_layering", () -> {
     RenderSystem.polygonOffset(-0.25F, -10.0F);
@@ -187,6 +193,7 @@ public class RootsRenderTypes {
           .setWriteMaskState(RenderType.DEPTH_WRITE)
           .setCullState(RenderType.NO_CULL)
           .setDepthTestState(RenderType.LEQUAL_DEPTH_TEST)
+          .setOutputState(DISSOLVE_TARGET)
           .createCompositeState(false)
   );
 
@@ -231,7 +238,7 @@ public class RootsRenderTypes {
             lightmapStateShard,
             overlayStateShard,
             layeringStateShard,
-            outputStateShard,
+            DISSOLVE_TARGET,
             texturingStateShard,
             writeMaskStateShard,
             lineStateShard,

@@ -1,0 +1,10 @@
+{
+    "vertex": "roots:dissolve_blit",
+    "fragment": "roots:dissolve_blit",
+    "samplers": [
+        { "name": "DiffuseSampler" },
+        { "name": "DepthSampler" }
+    ],
+    "uniforms": [
+    ]
+}

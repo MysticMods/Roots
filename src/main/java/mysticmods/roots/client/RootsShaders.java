@@ -6,9 +6,11 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RootsShaders {
   public static final ResourceLocation DISSOLVE_SHADER_LOCATION = RootsAPI.rl("dissolve");
+  public static final ResourceLocation DISSOLVE_BLIT_SHADER_LOCATION = RootsAPI.rl("dissolve_blit");
   public static final ResourceLocation LOW_DISCARD_PARTICLE_SHADER_LOCATION = RootsAPI.rl("low_particle_discard");
   public static ShaderInstance LOW_DISCARD_PARTICLE_SHADER;
   public static ShaderInstance DISSOLVE_SHADER;
+  public static ShaderInstance DISSOLVE_BLIT_SHADER;
 
   public static ShaderInstance getLowDiscardParticleShader() {
     return LOW_DISCARD_PARTICLE_SHADER;
@@ -16,5 +18,9 @@ public class RootsShaders {
 
   public static ShaderInstance getDissolveShader() {
     return DISSOLVE_SHADER;
+  }
+
+  public static ShaderInstance getDissolveBlitShader() {
+    return DISSOLVE_BLIT_SHADER;
   }
 }
