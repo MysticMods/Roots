@@ -2,9 +2,6 @@ package mysticmods.roots.client;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.mojang.blaze3d.pipeline.RenderTarget;
-import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -55,40 +52,12 @@ import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import net.neoforged.neoforge.event.GameShuttingDownEvent;
 
 import java.util.Map;
 import java.util.Queue;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID)
 public class RenderTickHandler {
-  private static RenderTarget DISSOLVE_TARGET = null;
-
-  public static boolean hasDissolveTarget() {
-    return DISSOLVE_TARGET != null;
-  }
-
-  public static RenderTarget getDissolveTarget() {
-    if (DISSOLVE_TARGET == null) {
-      Minecraft mc = Minecraft.getInstance();
-      Window mainWindow = mc.getWindow();
-      DISSOLVE_TARGET = new TextureTarget(mainWindow.getWidth(), mainWindow.getHeight(), true, Minecraft.ON_OSX);
-      DISSOLVE_TARGET.setClearColor(0, 0, 0, 0);
-      if (mc.getMainRenderTarget().isStencilEnabled()) {
-        DISSOLVE_TARGET.enableStencil();
-      }
-      DISSOLVE_TARGET.clear(Minecraft.ON_OSX);
-    }
-    return DISSOLVE_TARGET;
-  }
-
-  public static void destroyRenderTargets () {
-    if (DISSOLVE_TARGET != null) {
-      DISSOLVE_TARGET.destroyBuffers();
-      DISSOLVE_TARGET = null;
-    }
-  }
-
   private static float clientTicks = 0;
 
   private static boolean outliningArea = false;
@@ -125,18 +94,6 @@ public class RenderTickHandler {
   public static void renderBeam(Beam beam) {
     BeamManager.addBeam(beam);
   }
-
-  @SubscribeEvent
-  public static void onShutDown (GameShuttingDownEvent event) {
-    if (!RenderSystem.isOnRenderThread()) {
-      RenderSystem.recordRenderCall(RenderTickHandler::destroyRenderTargets);
-    } else {
-      destroyRenderTargets();
-    }
-  }
-
-  private static int lastWidth = -1;
-  private static int lastHeight = -1;
 
   @SubscribeEvent
   public static void onRenderGui(RenderGuiLayerEvent.Post event) {
@@ -241,16 +198,6 @@ public class RenderTickHandler {
     BeamManager.tick();
     // TODO: Check pausing
     ScreenParticleEngine.tick();
-
-    Minecraft mc = Minecraft.getInstance();
-    Window window = mc.getWindow();
-    int height = window.getHeight();
-    int width = window.getWidth();
-    if (lastWidth != width || lastHeight != height) {
-      lastWidth = width;
-      lastHeight = height;
-      destroyRenderTargets();
-    }
   }
 
   // This is stolen from Mekanism

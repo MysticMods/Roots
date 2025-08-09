@@ -220,7 +220,6 @@ public class ClientSetup {
   public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.LOW_DISCARD_PARTICLE_SHADER_LOCATION, DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.LOW_DISCARD_PARTICLE_SHADER = s);
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.DISSOLVE_SHADER_LOCATION, DefaultVertexFormat.BLOCK), (s) -> RootsShaders.DISSOLVE_SHADER = s);
-    event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.DISSOLVE_BLIT_SHADER_LOCATION, DefaultVertexFormat.BLIT_SCREEN), (s) -> RootsShaders.DISSOLVE_BLIT_SHADER = s);
   }
 
   @SubscribeEvent
