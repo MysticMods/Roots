@@ -23,6 +23,8 @@ public class ModLoot {
 
   public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LOOT_ITEM_BLOCK_BELOW_TAG_CONDITION_TYPE = LOOT_ITEM_CONDITIONS.register("block_below_tag", () -> new LootItemConditionType(LootItemBlockBelowTagCondition.CODEC));
 
+  public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LOOT_ITEM_FULLY_GROWN_CROP_CONDITION_TYPE = LOOT_ITEM_CONDITIONS.register("fully_grown_crop", () -> new LootItemConditionType(FullyGrownCropCondition.CODEC));
+
   public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LOOT_ITEM_CONFIG_SPECIFIC_CONDITION_TYPE = LOOT_ITEM_CONDITIONS.register("config_specific", () -> new LootItemConditionType(ConfigSpecificLootCondition.CODEC));
 
   public static final DeferredHolder<LootItemConditionType, LootItemConditionType> HAS_HORNS = LOOT_ITEM_CONDITIONS.register("has_horns", () -> new LootItemConditionType(HasHornsCondition.CODEC));

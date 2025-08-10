@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Set;
 
-public class LootItemBlockBelowTagCondition  implements LootItemCondition {
+public class LootItemBlockBelowTagCondition implements LootItemCondition {
   private final TagKey<Block> tag;
 
   public static final MapCodec<LootItemBlockTagCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK)

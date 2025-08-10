@@ -37,8 +37,8 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(LootItemBlockBelowTagCondition.tag(RootsTags.Blocks.ELEMENTAL_SOIL));
     conditions.add(LootItemBlockTagCondition.tag(BlockTags.CROPS));
+    conditions.add(FullyGrownCropCondition.fullyGrownCrop());
     conditions.add(new ConfigSpecificLootCondition("elemental_crop_extra_drops"));
-    // TODO: Only fully grown crops, whoops
     return conditions.toArray(LootItemCondition[]::new);
   }
 

@@ -10,6 +10,9 @@
       "tag": "minecraft:crops"
     },
     {
+      "condition": "roots:fully_grown_crop"
+    },
+    {
       "condition": "roots:config_specific",
       "name": "elemental_crop_extra_drops"
     }
