@@ -12,7 +12,8 @@
     "roots:grove_spores_from_waterlogged_foreagable_double_blocks",
     "roots:wildroot_from_forageable_single_blocks",
     "roots:wildroot_from_foragable_double_blocks",
-    "roots:squid_tentacles"
+    "roots:squid_tentacles",
+    "roots:elemental_crop_extra_drops"
   ],
   "replace": false
 }

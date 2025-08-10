@@ -117,6 +117,12 @@ public class DataMaps {
   public static final DataMapType<Attribute, AugmentationData> AUGMENTATION_DATA = DataMapType.builder(RootsAPI.rl("augmentation_data"), Registries.ATTRIBUTE, AugmentationData.CODEC)
       .synced(AugmentationData.CODEC, false)
       .build();
+  public static final DataMapType<Block, Item> EXTRA_CROP_DATA = DataMapType.builder(RootsAPI.rl("extra_crop_data"), Registries.BLOCK, BuiltInRegistries.ITEM.byNameCodec())
+      .synced(BuiltInRegistries.ITEM.byNameCodec(), false)
+      .build();
+  public static final DataMapType<Block, Float> EXTRA_CROP_CHANCE = DataMapType.builder(RootsAPI.rl("extra_crop_chance"), Registries.BLOCK, Codec.FLOAT)
+      .synced(Codec.FLOAT, false)
+      .build();
 
   // Additional data maps need to be added to the register event in `DataEventHandler`
 

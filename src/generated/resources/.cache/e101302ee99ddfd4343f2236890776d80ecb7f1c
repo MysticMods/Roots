@@ -1,7 +1,8 @@
-// 1.21.1	2025-07-16T16:11:44.0424534	Global Loot Modifiers : roots
-2d34c12a0bbcc02a4a3bd28439336a9be1139ad1 data/neoforge/loot_modifiers/global_loot_modifiers.json
+// 1.21.1	2025-08-10T15:05:22.2501695	Global Loot Modifiers : roots
+5e1186ca21a60a381a70f8df8a8963f4617f3594 data/neoforge/loot_modifiers/global_loot_modifiers.json
 27aa35d6c83709f46601726e123fb714f75317eb data/roots/loot_modifiers/aubergine_from_short_grass.json
 e8b34537478a941bb46325095d3a92e36b500391 data/roots/loot_modifiers/aubergine_from_tall_grass.json
+0bb30c203c26c6a517a537cce6c3cf2d141d85d5 data/roots/loot_modifiers/elemental_crop_extra_drops.json
 c8d0d237649e3e83d3670a4a7c1e05679b0276e9 data/roots/loot_modifiers/grove_spores_from_foragable_double_blocks.json
 bb44218f56d058145089e159b264b965190a0fa3 data/roots/loot_modifiers/grove_spores_from_forageable_single_blocks.json
 12867cd961e310c4d0e0fa5a8fb95d48e0ce0e0e data/roots/loot_modifiers/grove_spores_from_short_grass.json

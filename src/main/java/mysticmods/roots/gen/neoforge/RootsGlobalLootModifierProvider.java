@@ -3,15 +3,14 @@ package mysticmods.roots.gen.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.loot.conditions.ConfigSpecificLootCondition;
-import mysticmods.roots.loot.conditions.ForagingRandomChanceCondition;
-import mysticmods.roots.loot.conditions.LootItemBlockTagCondition;
-import mysticmods.roots.loot.conditions.WaterloggedBlockCondition;
+import mysticmods.roots.loot.conditions.*;
 import mysticmods.roots.loot.modifiers.AddGrassDropsModifier;
+import mysticmods.roots.loot.modifiers.ElementalCropExtraDropsModifier;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.EntityTypePredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -32,6 +31,15 @@ import java.util.concurrent.CompletableFuture;
 public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider {
   public RootsGlobalLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
     super(output, registries, RootsAPI.MODID);
+  }
+
+  private LootItemCondition[] getCropExtraConditions () {
+    List<LootItemCondition> conditions = new ArrayList<>();
+    conditions.add(LootItemBlockBelowTagCondition.tag(RootsTags.Blocks.ELEMENTAL_SOIL));
+    conditions.add(LootItemBlockTagCondition.tag(BlockTags.CROPS));
+    conditions.add(new ConfigSpecificLootCondition("elemental_crop_extra_drops"));
+    // TODO: Only fully grown crops, whoops
+    return conditions.toArray(LootItemCondition[]::new);
   }
 
   private LootItemCondition[] getGrassConditions(TagKey<Block> tag, float chance, @Nullable String configName) {
@@ -88,5 +96,7 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
         LootContext.EntityTarget.THIS,
         EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(RootsTags.Entities.ADD_TENTACLE_LOOT))
     ).build()}, RootsAPI.TENTACLES));
+
+    this.add("elemental_crop_extra_drops", new ElementalCropExtraDropsModifier(getCropExtraConditions()));
   }
 }

@@ -59,6 +59,9 @@ public class ConfigManager {
   public static ModConfigSpec.BooleanValue DROP_WILDROOT;
   public static ModConfigSpec.BooleanValue DROP_GROVE_SPORES;
 
+  public static ModConfigSpec.BooleanValue ELEMENTAL_CROP_EXTRA_DROPS;
+  public static ModConfigSpec.DoubleValue ELEMENTAL_CROP_EXTRA_DROPS_CHANCE;
+
   public static ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
 
   public static ModConfigSpec.BooleanValue DEBUG_REPUTATION;
@@ -167,6 +170,12 @@ public class ConfigManager {
         .define("drop_wildroot", true);
     DROP_GROVE_SPORES = COMMON_BUILDER.comment("whether or not grove spores should drop from grass")
         .define("drop_grove_spores", true);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.push("elemental_soil");
+    ELEMENTAL_CROP_EXTRA_DROPS = COMMON_BUILDER.comment("whether or not elemental crops should have a chance to drop extra items when harvested")
+        .define("elemental_crop_extra_drops", true);
+    ELEMENTAL_CROP_EXTRA_DROPS_CHANCE = COMMON_BUILDER.comment("the chance for elemental crops to drop extra items when harvested, if enabled and a specific drop chance isn't already specified in the data map")
+        .defineInRange("elemental_crop_extra_drops_chance", 0.1, 0.0, 1.0);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("fungal_transmuter");
     FUNGAL_TRANSMUTER_POWER_PER_TICK = COMMON_BUILDER.comment("the amount of power the Fungal Transmuter will consume per tick")

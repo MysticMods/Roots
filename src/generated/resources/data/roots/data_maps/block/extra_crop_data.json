@@ -1,0 +1,16 @@
+{
+  "values": {
+    "minecraft:beetroots": "minecraft:beetroot",
+    "minecraft:carrots": "minecraft:carrot",
+    "minecraft:cocoa": "minecraft:cocoa_beans",
+    "minecraft:nether_wart": "minecraft:nether_wart",
+    "minecraft:potatoes": "minecraft:potato",
+    "minecraft:wheat": "minecraft:wheat",
+    "roots:aubergine_crop": "roots:aubergine",
+    "roots:moonglow_crop": "roots:moonglow",
+    "roots:pereskia_crop": "roots:pereskia",
+    "roots:spiritleaf_crop": "roots:spiritleaf",
+    "roots:wildewheet_crop": "roots:wildewheet",
+    "roots:wildroot_crop": "roots:wildroot"
+  }
+}

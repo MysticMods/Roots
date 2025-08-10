@@ -606,5 +606,19 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder28.add(Attributes.ATTACK_DAMAGE, new AugmentationData(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADD_VALUE, 1, 0.5, 0.2f, 2, 3), false);
     builder28.add(Attributes.MAX_HEALTH, new AugmentationData(Attributes.MAX_HEALTH, AttributeModifier.Operation.ADD_VALUE, 2, 1, 0.2f, 2, 3), false);
     builder28.add(Attributes.MOVEMENT_SPEED, new AugmentationData(Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.ADD_VALUE, 0.08, 0.03, 0.2f, 2, 3), false);
+
+    var builder29 = builder(DataMaps.EXTRA_CROP_DATA);
+    builder29.add(Blocks.BEETROOTS.builtInRegistryHolder(), Items.BEETROOT, false);
+    builder29.add(Blocks.CARROTS.builtInRegistryHolder(), Items.CARROT, false);
+    builder29.add(Blocks.POTATOES.builtInRegistryHolder(), Items.POTATO, false);
+    builder29.add(Blocks.WHEAT.builtInRegistryHolder(), Items.WHEAT, false);
+    builder29.add(Blocks.NETHER_WART.builtInRegistryHolder(), Items.NETHER_WART, false);
+    builder29.add(Blocks.COCOA.builtInRegistryHolder(), Items.COCOA_BEANS, false);
+    builder29.add(ModBlocks.AUBERGINE_CROP, ModItems.AUBERGINE.value(), false);
+    builder29.add(ModBlocks.PERESKIA_CROP, ModItems.PERESKIA.value(), false);
+    builder29.add(ModBlocks.MOONGLOW_CROP, ModItems.MOONGLOW.value(), false);
+    builder29.add(ModBlocks.SPIRITLEAF_CROP, ModItems.SPIRITLEAF.value(), false);
+    builder29.add(ModBlocks.WILDEWHEET_CROP, ModItems.WILDEWHEET.value(), false);
+    builder29.add(ModBlocks.WILDROOT_CROP, ModItems.WILDROOT.value(), false);
   }
 }

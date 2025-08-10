@@ -18,12 +18,14 @@ public record ConfigSpecificLootCondition(String name) implements LootItemCondit
     return ModLoot.LOOT_ITEM_CONFIG_SPECIFIC_CONDITION_TYPE.get();
   }
 
+  // TODO: API this?
   @Override
   public boolean test(LootContext lootContext) {
     return switch (this.name) {
       case "aubergine" -> ConfigManager.DROP_AUBERGINE_SEEDS.getAsBoolean();
       case "wildroot" -> ConfigManager.DROP_WILDROOT.getAsBoolean();
       case "grove_spores" -> ConfigManager.DROP_GROVE_SPORES.getAsBoolean();
+      case "elemental_crop_extra_drops" -> ConfigManager.ELEMENTAL_CROP_EXTRA_DROPS.getAsBoolean();
       default -> throw new IllegalStateException("Invalid value: " + this.name);
     };
   }

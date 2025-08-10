@@ -1,0 +1,17 @@
+{
+  "type": "roots:elemental_crop_extra_drops",
+  "conditions": [
+    {
+      "condition": "roots:block_tag",
+      "tag": "roots:soils/elemental"
+    },
+    {
+      "condition": "roots:block_tag",
+      "tag": "minecraft:crops"
+    },
+    {
+      "condition": "roots:config_specific",
+      "name": "elemental_crop_extra_drops"
+    }
+  ]
+}
