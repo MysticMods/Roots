@@ -74,7 +74,7 @@ public class GroveSupplicationRitual extends Ritual {
 
             int currentRank = state.getValue(GroveStoneBlock.RANK);
             if (rank > 0 && rank > currentRank) {
-              newState = state.setValue(GroveStoneBlock.RANK, rank);
+              newState = newState.setValue(GroveStoneBlock.RANK, rank);
             }
 
             if (newState != state) {
