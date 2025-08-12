@@ -9,6 +9,7 @@ import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.TokenItem;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinGui;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -25,6 +26,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class RootsClientHooks {
+  public static void clearTooltipItem () {
+    ((AccessorMixinGui)Minecraft.getInstance().gui).rootsSetLastToolHighlight(ItemStack.EMPTY);
+  }
+
   public static void setAnimalHarvestRecipes(List<AnimalHarvestRecipe> recipes) {
     RootsAPI.LOG.error("Setting animal harvest recipes on client: {}", recipes);
     ClientRecipes.ANIMAL_HARVEST_RECIPES = recipes;

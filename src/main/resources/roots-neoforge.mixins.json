@@ -41,6 +41,7 @@
     "client.accessor.AccessorMixinCompositeState",
     "client.accessor.AccessorMixinEntityRenderer",
     "client.accessor.AccessorMixinFrustum",
+    "client.accessor.AccessorMixinGui",
     "client.accessor.AccessorMixinItemRenderer",
     "client.accessor.AccessorMixinLevelRenderer",
     "client.accessor.AccessorMixinParticle",

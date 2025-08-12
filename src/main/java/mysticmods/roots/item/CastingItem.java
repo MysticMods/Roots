@@ -12,6 +12,7 @@ import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.network.client.ClientboundClearHighlightPacket;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelFailFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelJauntFXPacket;
@@ -203,6 +204,9 @@ public class CastingItem extends Item {
           stack.set(ModAttachments.SPELL_STORAGE, newStorage);
         }
         CastingSuccessCache.clear(stack);
+        if (pUsedHand == InteractionHand.MAIN_HAND) {
+          PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundClearHighlightPacket.INSTANCE);
+        }
         return InteractionResultHolder.success(stack);
       } else {
         return InteractionResultHolder.fail(stack);

@@ -82,6 +82,7 @@ public class PacketHandler {
     registrar.play(GrowthAmplifierFXPacket.TYPE, GrowthAmplifierFXPacket.CODEC);
     registrar.play(ClientboundCooldownSyncPacket.TYPE, ClientboundCooldownSyncPacket.CODEC);
     registrar.play(ClientboundAnimalHarvestSyncPacket.TYPE, ClientboundAnimalHarvestSyncPacket.CODEC);
+    registrar.play(ClientboundClearHighlightPacket.TYPE, ClientboundClearHighlightPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
