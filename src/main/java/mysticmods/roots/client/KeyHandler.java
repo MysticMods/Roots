@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.server.ServerboundCycleTomePacket;
 import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
@@ -30,16 +31,25 @@ public class KeyHandler {
     }
 
     while (KeyBindings.OPEN_REPUTATION.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Opening reputation screen via keybind");
+      }
       RootsClientHooks.openReputation();
       return;
     }
 
     while (KeyBindings.OPEN_POUCH.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Opening pouch via keybind");
+      }
       PacketDistributor.sendToServer(ServerboundOpenPouchPacket.INSTANCE);
       return;
     }
 
     while (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean())  {
+        RootsAPI.LOG.error("Opening spell library via keybind");
+      }
       int inventorySlot = -1;
       InteractionHand hand = InteractionHand.MAIN_HAND;
       ItemStack stack = mc.player.getItemInHand(hand);
@@ -69,12 +79,21 @@ public class KeyHandler {
     int op = -1;
 
     while (KeyBindings.INCREASE_SPELL.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Increasing spell data via keybind");
+      }
       op = 2;
     }
     while (KeyBindings.DECREASE_SPELL.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Decreasing spell data via keybind");
+      }
       op = 1;
     }
     while (KeyBindings.CYCLE_ADJUSTABLE.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Cycling adjustable spell data via keybind");
+      }
       op = 0;
     }
 
@@ -85,6 +104,9 @@ public class KeyHandler {
     if (op == 0) {
       ItemStack tome = RootsAPI.getInstance().getTome(mc.player);
       if (!tome.isEmpty()) {
+        if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+          RootsAPI.LOG.error("Cycling tome via keybind");
+        }
         PacketDistributor.sendToServer(ServerboundCycleTomePacket.INSTANCE);
         return;
       }
@@ -98,6 +120,9 @@ public class KeyHandler {
       stack = mc.player.getOffhandItem();
       hand = InteractionHand.OFF_HAND;
       if (!stack.has(ModAttachments.SPELL_STORAGE)) {
+        if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+          RootsAPI.LOG.error("No spell storage found in main or off hand");
+        }
         return;
       }
     }
@@ -105,11 +130,17 @@ public class KeyHandler {
     // The context enforces the spell selection
     SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell storage found in item stack");
+      }
       return;
     }
 
     ISpellInstance spell = storage.getCurrentSpell();
     if (spell == null) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell selected in spell storage");
+      }
       return;
     }
 
@@ -118,12 +149,14 @@ public class KeyHandler {
     int index = source.getDataSlotValue(spell);
     if (op == 1 || op == 2) {
       if (index == -1) {
+        if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+          RootsAPI.LOG.error("Spell does not have adjustable data");
+        }
         return;
       }
     } else if (op == 0) {
       index = 0;
     }
-
 
     int max = source.getDataMaximumValue(index);
     int current = source.getDataValue(spell, index);
@@ -141,7 +174,14 @@ public class KeyHandler {
       }
     }
 
+    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+      RootsAPI.LOG.error("Spell data change: hand={}, index={}, current={}, newCurrent={}", hand, index, current, newCurrent);
+    }
+
     if (newCurrent != current) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Sending spell data change to server");
+      }
       PacketDistributor.sendToServer(new ServerboundSetSpellDataPacket(hand, index, newCurrent));
     }
   }
