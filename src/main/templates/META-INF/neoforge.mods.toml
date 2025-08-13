@@ -1,0 +1,58 @@
+modLoader="javafml" #mandatory
+
+loaderVersion="${loader_version_range}" #mandatory
+
+license="${mod_license}"
+
+# A URL to refer people to when problems occur with this mod
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+
+[[mods]]
+
+# The modid of the mod
+modId="${mod_id}"
+
+# The version number of the mod
+version="${mod_version}"
+
+# A display name for the mod
+displayName="${mod_name}"
+
+# A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+
+# A URL for the "homepage" for this mod, displayed in the mod UI
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+
+# A file name (in the root of the mod JAR) containing a logo for display
+#logoFile="examplemod.png" #optional
+
+# A text field displayed in the mod UI
+#credits="" #optional
+
+# A text field displayed in the mod UI
+authors="${mod_authors}"
+
+description='''${mod_description}'''
+
+enumExtensions="META-INF/enumextensions.json"
+
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge" #mandatory
+    type="required" #mandatory
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
