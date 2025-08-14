@@ -142,7 +142,7 @@ public class HerbOverlay {
       if (!mc.player.getOffhandItem().isEmpty()) {
         barWidth += 58;
       }
-      x += (float) (((barWidth / 2.0) * -1 + (col * 45)) - 75);
+      x += (float) (((barWidth / 2.0) * -1 + (col * 45)) - 20);
 
       ItemStack stack = getStack();
 
