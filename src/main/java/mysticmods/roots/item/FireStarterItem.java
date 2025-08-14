@@ -27,6 +27,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbility;
 
 public class FireStarterItem extends Item {
   public FireStarterItem(Properties props) {
@@ -80,7 +81,20 @@ public class FireStarterItem extends Item {
         } else {
           UseOnContext context = new UseOnContext(player, player.getUsedItemHand(), ray);
           BlockState blockstate2 = stateAt.getToolModifiedState(context, net.neoforged.neoforge.common.ItemAbilities.FIRESTARTER_LIGHT, false);
-          if (blockstate2 == null) {
+          BlockState blockstate3 = relativeState.getToolModifiedState(context, net.neoforged.neoforge.common.ItemAbilities.FIRESTARTER_LIGHT, false);
+          if (blockstate2 != null) {
+            level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
+                .nextFloat() * 0.4F + 0.8F);
+            level.setBlock(blockpos, blockstate2, 11);
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockpos);
+            used = true;
+          } else if (blockstate3 != null) {
+            level.playSound(player, relative, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
+                .nextFloat() * 0.4F + 0.8F);
+            level.setBlock(relative, blockstate3, 11);
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, relative);
+            used = true;
+          } else {
             BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
             if (BaseFireBlock.canBePlacedAt(level, blockpos1, context.getHorizontalDirection())) {
               level.playSound(player, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
@@ -94,12 +108,6 @@ public class FireStarterItem extends Item {
 
               used = true;
             }
-          } else {
-            level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
-                .nextFloat() * 0.4F + 0.8F);
-            level.setBlock(blockpos, blockstate2, 11);
-            level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockpos);
-            used = true;
           }
         }
 
@@ -122,6 +130,11 @@ public class FireStarterItem extends Item {
   @Override
   public int getUseDuration(ItemStack stack, LivingEntity entity) {
     return 20;
+  }
+
+  @Override
+  public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+    return itemAbility == net.neoforged.neoforge.common.ItemAbilities.FIRESTARTER_LIGHT;
   }
 
   @Override
