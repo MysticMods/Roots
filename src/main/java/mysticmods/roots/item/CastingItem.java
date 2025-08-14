@@ -170,12 +170,15 @@ public class CastingItem extends Item {
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
     if (pLevel.isClientSide()) {
+      if (pUsedHand == InteractionHand.MAIN_HAND && !pPlayer.getOffhandItem().isEmpty()) {
+        return InteractionResultHolder.pass(stack);
+      }
       return InteractionResultHolder.consume(stack);
     }
 
     SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
-      return InteractionResultHolder.fail(stack);
+      return InteractionResultHolder.pass(stack);
     }
 
     int current = storage.currentSlot();
@@ -183,7 +186,7 @@ public class CastingItem extends Item {
 
     if (pPlayer.isShiftKeyDown()) {
       if (storage.isEmpty()) {
-        return InteractionResultHolder.fail(stack);
+        return InteractionResultHolder.pass(stack);
       }
 
       int newSlot = current + 1;
@@ -209,7 +212,7 @@ public class CastingItem extends Item {
         }
         return InteractionResultHolder.success(stack);
       } else {
-        return InteractionResultHolder.fail(stack);
+        return InteractionResultHolder.pass(stack);
       }
 
 
@@ -217,7 +220,7 @@ public class CastingItem extends Item {
 
     ISpellInstance spell = storage.getSpell(current);
     if (spell == null || !spell.canCast(pPlayer)) {
-      return InteractionResultHolder.fail(stack);
+      return InteractionResultHolder.pass(stack);
     }
 
     Costing costing = new Costing(spell, pPlayer);
@@ -225,7 +228,7 @@ public class CastingItem extends Item {
       // TODO: display a warning
       pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
       RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getSpell().getName());
-      return InteractionResultHolder.fail(stack);
+      return InteractionResultHolder.pass(stack);
     }
 
     if (spell.getType() == Spell.Type.INSTANT) {
@@ -235,13 +238,15 @@ public class CastingItem extends Item {
         ModActions.SPELL_CAST.get().accept(context);
         CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
         cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
+        return InteractionResultHolder.success(stack);
       }
     } else {
       CastingSuccessCache.clear(stack);
       pPlayer.startUsingItem(pUsedHand);
+      return InteractionResultHolder.success(stack);
     }
 
-    return InteractionResultHolder.success(stack);
+    return InteractionResultHolder.pass(stack);
   }
 
   @Override
