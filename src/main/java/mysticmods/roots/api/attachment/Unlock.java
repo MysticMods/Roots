@@ -46,6 +46,10 @@ public interface Unlock<T> {
     return new SpellUnlock(value);
   }
 
+  static SpellUnlock spell (Spell value) {
+    return new SpellUnlock(value.builtInRegistryHolder());
+  }
+
   static ModifierUnlock modifier(Holder<SpellModifier> value) {
     return new ModifierUnlock(value);
   }

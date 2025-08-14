@@ -7,7 +7,9 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
+import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
@@ -55,6 +57,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class RootsCommand {
@@ -115,6 +118,87 @@ public class RootsCommand {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.usage"), false);
       return 1;
     });
+    builder.then(Commands.literal("library").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.usage"), false);
+      return 1;
+    }).then(Commands.literal("add").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.add.usage"), false);
+      return 1;
+    }).then(suggestSpells().executes(c -> {
+      if (!c.getSource().isPlayer()) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.no_player"));
+        return 0;
+      }
+      ServerPlayer player = c.getSource().getPlayerOrException();
+      GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
+      ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
+      Spell spell = RootsRegistries.SPELLS.get(spellID);
+      if (spell == null) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
+        return 0;
+      }
+      if (grants.hasSpell(spell)) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.add.failure", spell.getStyledName()));
+        return 0;
+      }
+      grants.unlock(player, Unlock.spell(spell));
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.add.success", spell.getStyledName()), false);
+      return 1;
+
+    }))).then(Commands.literal("remove").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.remove.usage"), false);
+      return 1;
+    }).then(suggestSpells().executes(c -> {
+      if (!c.getSource().isPlayer()) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.no_player"));
+        return 0;
+      }
+      ServerPlayer player = c.getSource().getPlayerOrException();
+      GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
+      ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
+      Spell spell = RootsRegistries.SPELLS.get(spellID);
+      if (spell == null) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
+        return 0;
+      }
+      if (!grants.hasSpell(spell)) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.remove.failure", spell.getStyledName()));
+        return 0;
+      }
+      grants.removeSpell(player, spell);
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.remove.success", spell.getStyledName()), false);
+      return 1;
+    }))).then(Commands.literal("clear").executes(c -> {
+      if (!c.getSource().isPlayer()) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.no_player"));
+        return 0;
+      }
+      ServerPlayer player = c.getSource().getPlayerOrException();
+      GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
+      if (grants.clearSpells(player)) {
+        c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.clear.success"), false);
+      } else {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.clear.failure"));
+      }
+      return 1;
+    })).then(Commands.literal("list").executes(c -> {
+      if (!c.getSource().isPlayer()) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.no_player"));
+        return 0;
+      }
+      ServerPlayer player = c.getSource().getPlayerOrException();
+      GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
+      Set<Spell> spells = grants.getSpells();
+      if (spells.isEmpty()) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.library.list.empty"));
+        return 0;
+      }
+      for (Spell spell : spells) {
+        c.getSource()
+            .sendSuccess(() -> Component.translatable("roots.commands.library.list.entry", spell.getStyledName()), false);
+      }
+      return 1;
+    })));
     builder.then(Commands.literal("staff").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.staff.usage"), false);
       return 1;
@@ -331,7 +415,8 @@ public class RootsCommand {
           totals.put(herb.getValue(), 0.165);
         }
         RootsAPI.getInstance().syncHerbs(c.getSource().getPlayer(), totals);
-        c.getSource().sendSuccess(() -> Component.translatable("roots.commands.alerts.synced", c.getSource().getDisplayName()), false);
+        c.getSource().sendSuccess(() -> Component.translatable("roots.commands.alerts.synced", c.getSource()
+            .getDisplayName()), false);
         return 1;
       } else {
         c.getSource().sendFailure(Component.translatable("roots.commands.alerts.no_player"));

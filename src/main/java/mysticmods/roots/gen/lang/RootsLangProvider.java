@@ -836,6 +836,18 @@ public class RootsLangProvider extends LanguageProvider {
 
     add("roots.commands.alerts.synced", "Synced herb alerts for %s for all herbs (0.165)");
     add("roots.commands.alerts.synced.herb", "Cannot sync herb alerts for non-player command senders.");
+    add("roots.commands.library.usage", "Usage: /roots library <add|remove|list|clear> <spell>");
+    add("roots.commands.library.add.usage", "Usage: /roots library add <spell>");
+    add("roots.commands.library.remove.usage", "Usage: /roots library remove <spell>");
+    add("roots.commands.library.clear.success", "Cleared spell library.");
+    add("roots.commands.library.clear.failure", "Spell library is already empty.");
+    add("roots.commands.library.list.entry", "Library entry: %s");
+    add("roots.commands.library.list.empty", "Spell library is empty.");
+    add("roots.commands.library.add.success", "Added spell %s to library.");
+    add("roots.commands.library.add.failure", "Failed to add spell %s to library. Spell not found or already in library.");
+    add("roots.commands.library.remove.success", "Removed spell %s from library.");
+    add("roots.commands.library.remove.failure", "Failed to remove spell %s from library. Spell not found or not in library.");
+    add("roots.commands.library.no_player", "Command can only be executed by a player.");
   }
 
   // TODO: Translations for damage

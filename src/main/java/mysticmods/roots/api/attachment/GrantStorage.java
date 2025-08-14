@@ -74,6 +74,26 @@ public class GrantStorage implements ICleanable {
     return false;
   }
 
+  public boolean clearSpells (ServerPlayer player) {
+    if (grantedSpells.isEmpty()) {
+      return false;
+    }
+
+    grantedSpells.clear();
+    setDirty(true);
+    return true;
+  }
+
+  public boolean clearModifiers(ServerPlayer player) {
+    if (grantedModifiers.isEmpty()) {
+      return false;
+    }
+
+    grantedModifiers.clear();
+    setDirty(true);
+    return true;
+  }
+
   public boolean unlock(ServerPlayer player, Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       Spell spell = value.value();
