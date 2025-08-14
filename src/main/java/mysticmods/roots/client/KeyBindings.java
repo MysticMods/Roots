@@ -6,6 +6,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -28,6 +29,8 @@ public class KeyBindings {
 
   public static final CastingTaggedSpell ADJUSTABLE = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_SPELL);
   public static final HasTomeSlotAdjustable HAS_ADJUSTABLE_TOME = new HasTomeSlotAdjustable();
+
+  public static final LibraryKeyConflictContext IN_LIBRARY = new LibraryKeyConflictContext();
 
   public static final IKeyConflictContext HAS_ANY_ADJUSTABLE = new MultiKeyConflictContext(ADJUSTABLE, HAS_ADJUSTABLE_TOME);
 
@@ -55,6 +58,27 @@ public class KeyBindings {
     event.register(CYCLE_ADJUSTABLE);
     event.register(OPEN_POUCH);
     event.register(OPEN_REPUTATION);
+  }
+
+  public static class LibraryKeyConflictContext implements IKeyConflictContext {
+    @Override
+    public boolean isActive() {
+      Minecraft minecraft = Minecraft.getInstance();
+      if (minecraft.screen == null) {
+        return false;
+      }
+
+      if (minecraft.player == null) {
+        return false;
+      }
+
+      return (minecraft.screen instanceof StaffScreen);
+    }
+
+    @Override
+    public boolean conflicts(IKeyConflictContext other) {
+      return this == other;
+    }
   }
 
   public static class MultiKeyConflictContext implements IKeyConflictContext {

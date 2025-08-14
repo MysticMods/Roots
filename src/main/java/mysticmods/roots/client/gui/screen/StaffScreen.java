@@ -1,5 +1,6 @@
 package mysticmods.roots.client.gui.screen;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -9,6 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.server.ServerboundClearStaffSlotPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
 import net.minecraft.client.Minecraft;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
+import java.awt.im.InputContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -151,6 +154,27 @@ public class StaffScreen extends RootsScreen {
         selectedStaff = sButton.getId();
       }
     }
+  }
+
+  @Override
+  public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+    if (keyCode == InputConstants.KEY_DELETE) {
+      StaffSpellButton toDeleteButton = null;
+      for (StaffSpellButton button : staffSpellButtons) {
+        if (isMouseInRelativeRange(lastMouseX, lastMouseY, button.getX(), button.getY(), button.getWidth(), button.getHeight())) {
+          toDeleteButton = button;
+          break;
+        }
+      }
+      if (toDeleteButton != null) {
+        selectedLibrary = -1;
+        selectedStaff = -1;
+        int slot = toDeleteButton.getId();
+        PacketDistributor.sendToServer(new ServerboundClearStaffSlotPacket(hand, inventorySlot, slot));
+        return true;
+      }
+    }
+    return super.keyPressed(keyCode, scanCode, modifiers);
   }
 
   public boolean isSelected(Button pButton) {

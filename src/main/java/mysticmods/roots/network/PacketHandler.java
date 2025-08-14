@@ -34,6 +34,7 @@ public class PacketHandler {
     registrar.play(ServerboundSetSpellDataPacket.TYPE, ServerboundSetSpellDataPacket.CODEC);
     registrar.play(ServerboundOpenPouchPacket.TYPE, ServerboundOpenPouchPacket.CODEC);
     registrar.play(ServerboundCycleTomePacket.TYPE, ServerboundCycleTomePacket.CODEC);
+    registrar.play(ServerboundClearStaffSlotPacket.TYPE, ServerboundClearStaffSlotPacket.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {

@@ -16,6 +16,7 @@ public abstract class RootsScreen extends Screen {
   protected List<Component> tooltip;
   protected ItemStack tooltipItem = ItemStack.EMPTY;
   protected int guiLeft, guiTop, guiRight, guiBottom;
+  protected int lastMouseX, lastMouseY;
 
   protected RootsScreen(Component pTitle) {
     super(pTitle);
@@ -35,6 +36,7 @@ public abstract class RootsScreen extends Screen {
     return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
   }
 
+  // TODO: renderWithTooltip?
   public void drawTooltip(GuiGraphics guiGraphics, int x, int y) {
     if (tooltipItem != null && !tooltipItem.isEmpty()) {
       ItemStack itemstack = this.tooltipItem;
@@ -63,6 +65,8 @@ public abstract class RootsScreen extends Screen {
 
   @Override
   public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+    this.lastMouseX = pMouseX;
+    this.lastMouseY = pMouseY;
     this.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     PoseStack stack = graphics.pose();
     resetTooltip();

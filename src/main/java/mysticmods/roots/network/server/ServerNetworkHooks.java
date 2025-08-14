@@ -127,6 +127,34 @@ public class ServerNetworkHooks {
     }
   }
 
+  public static void clearSpellSlot(Player player, @Nullable InteractionHand hand, int inventorySlot, int staffSlot) {
+    ItemStack stack;
+    if (hand != null) {
+      stack = player.getItemInHand(hand);
+    } else {
+      stack = player.getInventory().getItem(inventorySlot);
+    }
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell storage found in item stack");
+      }
+      return;
+    }
+    SpellStorage existing = stack.get(ModAttachments.SPELL_STORAGE);
+    if (existing == null) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell storage found in item stack");
+      }
+      return;
+    }
+
+    // TODO: Validate that the player has the spell
+    stack.set(ModAttachments.SPELL_STORAGE, existing.clearSpell(staffSlot));
+    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+      RootsAPI.LOG.error("Setting spell slot {} to null", staffSlot);
+    }
+  }
+
   public static void swapSpellSlots(Player player, @Nullable InteractionHand hand, int inventorySlot, int slot1, int slot2) {
     ItemStack stack;
     if (hand != null) {
