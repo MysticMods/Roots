@@ -833,6 +833,9 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.item.gramary.with_mode", "Gramary (%s)");
 
     add("roots.transmutation.not_enough_power", "Not enough Grove Power to transmute this item. Current power: %s, required: %s");
+
+    add("roots.commands.alerts.synced", "Synced herb alerts for %s for all herbs (0.165)");
+    add("roots.commands.alerts.synced.herb", "Cannot sync herb alerts for non-player command senders.");
   }
 
   // TODO: Translations for damage

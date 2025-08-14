@@ -4,11 +4,14 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -29,6 +32,7 @@ import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -50,6 +54,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class RootsCommand {
@@ -319,6 +324,20 @@ public class RootsCommand {
       }
       return 1;
     })));
+    builder.then(Commands.literal("alerts").executes(c -> {
+      if (c.getSource().isPlayer()) {
+        Object2DoubleOpenHashMap<Herb> totals = new Object2DoubleOpenHashMap<>();
+        for (Map.Entry<ResourceKey<Herb>, Herb> herb : RootsRegistries.HERBS.entrySet()) {
+          totals.put(herb.getValue(), 0.165);
+        }
+        RootsAPI.getInstance().syncHerbs(c.getSource().getPlayer(), totals);
+        c.getSource().sendSuccess(() -> Component.translatable("roots.commands.alerts.synced", c.getSource().getDisplayName()), false);
+        return 1;
+      } else {
+        c.getSource().sendFailure(Component.translatable("roots.commands.alerts.no_player"));
+        return 0;
+      }
+    }));
     builder.then(Commands.literal("reputation").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.usage"), false);
       return 1;

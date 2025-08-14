@@ -407,6 +407,8 @@
   "roots.advancements.pacifist.title": "An Untrue Pacifist",
   "roots.advancements.root.description": "An introduction to the magic of the wilds.",
   "roots.advancements.root.title": "Roots",
+  "roots.commands.alerts.synced": "Synced herb alerts for %s for all herbs (0.165)",
+  "roots.commands.alerts.synced.herb": "Cannot sync herb alerts for non-player command senders.",
   "roots.commands.pyre.failed_condition": "Failed to place condition: %s",
   "roots.commands.pyre.no_player": "Must be executed by a player to use this command",
   "roots.commands.pyre.no_space": "No space to place pyre.",
