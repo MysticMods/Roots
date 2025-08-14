@@ -120,7 +120,7 @@ public class Costing {
       ItemStack inSlot = curios.get(i);
       if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
         foundCreativePouch = true;
-        return herbMap;
+        continue;
       }
       IItemHandler cap = inSlot.getCapability(Capabilities.ItemHandler.ITEM, null);
       if (cap != null) {
@@ -139,9 +139,7 @@ public class Costing {
   }
 
   public boolean canAfford(Player player, boolean checkModifiers) {
-    if (player.isCreative() || foundCreativePouch) {
-      return true;
-    }
+    boolean creative = player.isCreative() || foundCreativePouch;
     this.herbMapCache = herbMap(player);
     calculateCosts(checkModifiers, false, true, false);
 
@@ -157,7 +155,7 @@ public class Costing {
             count += herbEntry.count;
           }
         }
-        if (remainder > count) {
+        if (remainder > count && !creative) {
           return false;
         }
       }
@@ -176,9 +174,7 @@ public class Costing {
 
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
   public boolean charge(Player player, boolean tick) {
-    if (player.isCreative() || foundCreativePouch) {
-      return true;
-    }
+    boolean isCreative = player.isCreative() || foundCreativePouch;
     if (player.level().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
@@ -198,71 +194,73 @@ public class Costing {
     List<ItemStack> curios = RootsAPI.getInstance().getCurios(player, RootsTags.Items.CURIOS_BELTS);
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
 
-    for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
-      double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
-      if (remainder != 0) {
-        int toConsume = Mth.ceil(remainder);
-        for (HerbEntry herbEntry : herbMapCache.getOrDefault(entry.getKey(), List.of())) {
-          if (herbEntry.type == HerbEntryType.INVENTORY) {
-            ItemStack stack = playerInventory.getItem(herbEntry.slot);
-            if (stack.getCount() >= toConsume) {
-              stack.shrink(toConsume);
-              toConsume = 0;
-              playerInventory.setItem(herbEntry.slot, stack);
-              herbEntry.count = stack.getCount();
-              break;
+    if (!isCreative) {
+      for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
+        double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
+        if (remainder != 0) {
+          int toConsume = Mth.ceil(remainder);
+          for (HerbEntry herbEntry : herbMapCache.getOrDefault(entry.getKey(), List.of())) {
+            if (herbEntry.type == HerbEntryType.INVENTORY) {
+              ItemStack stack = playerInventory.getItem(herbEntry.slot);
+              if (stack.getCount() >= toConsume) {
+                stack.shrink(toConsume);
+                toConsume = 0;
+                playerInventory.setItem(herbEntry.slot, stack);
+                herbEntry.count = stack.getCount();
+                break;
+              } else {
+                toConsume -= stack.getCount();
+                stack.setCount(0);
+                playerInventory.setItem(herbEntry.slot, ItemStack.EMPTY);
+                herbEntry.count = 0;
+              }
+            } else if (herbEntry.type == HerbEntryType.CURIOS_CAPABILITY) {
+              ItemStack capStack = curios.get(herbEntry.slot);
+              IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
+              if (thisCap == null) {
+                continue;
+              }
+              ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex);
+              if (capItem.getCount() >= toConsume) {
+                thisCap.extractItem(herbEntry.subindex, toConsume, false);
+                toConsume = 0;
+                herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
+                break;
+              } else {
+                thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
+                toConsume -= capItem.getCount();
+                herbEntry.count = capItem.getCount();
+              }
             } else {
-              toConsume -= stack.getCount();
-              stack.setCount(0);
-              playerInventory.setItem(herbEntry.slot, ItemStack.EMPTY);
-              herbEntry.count = 0;
+              ItemStack capStack = playerInventory.getItem(herbEntry.slot);
+              IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
+              if (thisCap == null) {
+                RootsAPI.LOG.error("No capability found for {}", capStack);
+                continue;
+              }
+              ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex);
+              if (capItem.getCount() >= toConsume) {
+                thisCap.extractItem(herbEntry.subindex, toConsume, false);
+                toConsume = 0;
+                herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
+                break;
+              } else {
+                thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
+                toConsume -= capItem.getCount();
+                herbEntry.count = capItem.getCount();
+              }
             }
-          } else if (herbEntry.type == HerbEntryType.CURIOS_CAPABILITY) {
-            ItemStack capStack = curios.get(herbEntry.slot);
-            IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
-            if (thisCap == null) {
-              continue;
-            }
-            ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex);
-            if (capItem.getCount() >= toConsume) {
-              thisCap.extractItem(herbEntry.subindex, toConsume, false);
-              toConsume = 0;
-              herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
+            if (toConsume <= 0) {
               break;
-            } else {
-              thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
-              toConsume -= capItem.getCount();
-              herbEntry.count = capItem.getCount();
-            }
-          } else {
-            ItemStack capStack = playerInventory.getItem(herbEntry.slot);
-            IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
-            if (thisCap == null) {
-              RootsAPI.LOG.error("No capability found for {}", capStack);
-              continue;
-            }
-            ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex);
-            if (capItem.getCount() >= toConsume) {
-              thisCap.extractItem(herbEntry.subindex, toConsume, false);
-              toConsume = 0;
-              herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
-              break;
-            } else {
-              thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
-              toConsume -= capItem.getCount();
-              herbEntry.count = capItem.getCount();
             }
           }
-          if (toConsume <= 0) {
-            break;
+          if (toConsume > 0) {
+            RootsAPI.LOG.info("Remainder left over! OH NO! {}", toConsume);
           }
+          cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
+          playerInventory.setChanged();
+          player.inventoryMenu.sendAllDataToRemote();
         }
-        if (toConsume > 0) {
-          RootsAPI.LOG.info("Remainder left over! OH NO! {}", toConsume);
-        }
-        cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
-        playerInventory.setChanged();
-        player.inventoryMenu.sendAllDataToRemote();
       }
     }
 
@@ -272,7 +270,7 @@ public class Costing {
       for (HerbEntry herbEntry : herbMapCache.getOrDefault(herb, List.of())) {
         totals.put(herb, totals.getDouble(herb) + herbEntry.count);
       }
-      totals.put(herb, totals.getDouble(herb) + cap.amount(herb));
+      totals.put(herb, totals.getDouble(herb) + cap.amount(herb) + (isCreative ? totalCosts.getDouble(herb) : 0));
     }
 
     RootsAPI.getInstance().syncHerbs(player, totals);
