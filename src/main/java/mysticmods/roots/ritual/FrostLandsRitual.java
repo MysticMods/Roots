@@ -192,6 +192,7 @@ public class FrostLandsRitual extends Ritual {
         if (pos != null) {
           SnowGolem golem = EntityType.SNOW_GOLEM.create(pLevel);
           if (golem != null) {
+            golem.setPumpkin(false);
             golem.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
             pLevel.addFreshEntity(golem);
           }
