@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-08T13:40:53.7000374	Recipes
+// 1.21.1	2025-08-16T14:00:12.0897334	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -386,7 +386,7 @@ d5ef0dfbf5d1b3032f986670e7dfcc8f983f0377 data/roots/advancement/recipes/misc/ter
 f3557336331bed123704fb4cc76c629f166e8610 data/roots/advancement/recipes/misc/transmute/cactus_to_pumpkin.json
 ce3591d3ea42c365af43c56c025a4c62047cadb9 data/roots/advancement/recipes/misc/transmute/carpet_to_lilypad.json
 34ebbe41ca9d3b65e8e857e15605887471ac7cdd data/roots/advancement/recipes/misc/transmute/carrot_to_beetroot_seeds.json
-6b62edc8a5b7aaa4fdce21c0374c894ca219bd62 data/roots/advancement/recipes/misc/transmute/cocoa_to_carrot.json
+ec674311951821fb173587288b6ac36634f8a102 data/roots/advancement/recipes/misc/transmute/cocoa_to_carrot.json
 48b9b9681b9360af07504f9f36e4adc08160406a data/roots/advancement/recipes/misc/transmute/dead_bush_to_cocoa.json
 c20f17366f142a9d4ef4e61d945f46cabd549417 data/roots/advancement/recipes/misc/transmute/gold_to_silver.json
 28636fc9f1a56d46dd2f77937214c7ed9b777f22 data/roots/advancement/recipes/misc/transmute/gold_to_silver_nugget.json
@@ -845,7 +845,7 @@ e82bf1f159cb6cced7c27e4bb81683ba0c81b339 data/roots/recipe/transmute/birch_logs_
 db6de86ff9f3b9badd23793f82980c1946417004 data/roots/recipe/transmute/cactus_to_pumpkin.json
 1e5e142d3ec870bd77f85934de6d6d53cfd6f08d data/roots/recipe/transmute/carpet_to_lilypad.json
 d4f3bc583e7a5933a7d6cd1aadcf9df390a551c1 data/roots/recipe/transmute/carrot_to_beetroot_seeds.json
-36a21b544a91257231fadee0db8541855102d53f data/roots/recipe/transmute/cocoa_to_carrot.json
+67d2a48357996fc3da453fe07a48984a9891f209 data/roots/recipe/transmute/cocoa_to_carrot.json
 17fa37a1ac6899b51c1cbbc34d25f7944d3c7ab6 data/roots/recipe/transmute/dead_bush_to_cocoa.json
 f71906006e123ae9cb992f76a1115fde71fabdf7 data/roots/recipe/transmute/gold_to_silver.json
 d5f1200cd71dd130bf0233363bfd9380a39f390e data/roots/recipe/transmute/gold_to_silver_nugget.json

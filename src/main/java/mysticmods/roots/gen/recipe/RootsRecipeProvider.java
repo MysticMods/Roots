@@ -2416,10 +2416,10 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(new ItemStack(Items.CACTUS))
             .requires(Tags.Items.CROPS_MELON)), c, RootsAPI.rl("transmute/melon_to_cactus"));
 
-    RecipeSaver.saver().unlockedBy("has_cocoa", has(Tags.Items.CROPS_CARROT))
+    RecipeSaver.saver().unlockedBy("has_cocoa", has(Tags.Items.CROPS_COCOA_BEAN))
         .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
             .result(new ItemStack(Items.CARROT))
-            .requires(Tags.Items.CROPS_CARROT)), c, RootsAPI.rl("transmute/cocoa_to_carrot"));
+            .requires(Tags.Items.CROPS_COCOA_BEAN)), c, RootsAPI.rl("transmute/cocoa_to_carrot"));
 
     RecipeSaver.saver().unlockedBy("has_carrot", has(Tags.Items.CROPS_CARROT))
         .save(TransmutationRecipe.create().powerRequired(600).build(BaseRecipeData.Builder.create()
