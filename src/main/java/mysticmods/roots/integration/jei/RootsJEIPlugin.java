@@ -32,6 +32,7 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -63,6 +64,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<SproutGiftRecipe> SPROUT_GIFTS_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("sprout_gift_recipe"), SproutGiftRecipe.class);
   public static final RecipeType<SummonCreaturesRecipe> SUMMON_CREATURES_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("summon_creatures_recipe"), SummonCreaturesRecipe.class);
   public static final RecipeType<AnimalHarvestRecipe> ANIMAL_HARVEST_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("animal_harvest_recipe"), AnimalHarvestRecipe.class);
+  public static final RecipeType<TransmutationRecipe> TRANSMUTATION_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("transmutation_recipe"), TransmutationRecipe.class);
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -77,6 +79,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new SproutGiftCategory(guiHelper));
     registration.addRecipeCategories(new SummonCreaturesCategory(guiHelper));
     registration.addRecipeCategories(new AnimalHarvestCategory(guiHelper));
+    registration.addRecipeCategories(new FungalTransmuterCategory(guiHelper));
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
@@ -119,6 +122,10 @@ public class RootsJEIPlugin implements IModPlugin {
         .map(RecipeHolder::value)
         .toList());
     registration.addRecipes(ANIMAL_HARVEST_RECIPE_TYPE, ClientRecipes.ANIMAL_HARVEST_RECIPES);
+    registration.addRecipes(TRANSMUTATION_RECIPE_TYPE, ResolvedRecipes.TRANSMUTATION.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR)
+        .map(RecipeHolder::value)
+        .toList());
   }
 
   @Override
@@ -132,6 +139,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_ENTITY_RECIPE_TYPE);
     registration.addRecipeCatalysts(SUMMON_CREATURES_RECIPE_TYPE, ModItems.RITUAL_SUMMON_CREATURES.get());
     registration.addRecipeCatalyst(ModItems.RITUAL_ANIMAL_HARVEST.get(), ANIMAL_HARVEST_RECIPE_TYPE);
+    registration.addRecipeCatalyst(ModItems.FUNGAL_TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE);
   }
 
   @Override
