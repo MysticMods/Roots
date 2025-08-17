@@ -465,9 +465,21 @@ public class RenderUtil {
           }
         }
       } else {
-        // TODO:
-        net.neoforged.neoforge.client.extensions.common.IClientItemExtensions.of(itemStack).getCustomRenderer()
-            .renderByItem(itemStack, displayContext, poseStack, bufferSource, combinedLight, combinedOverlay);
+        if (!(bufferSource instanceof MultiBufferSource.BufferSource bufferSource2)) {
+          throw new IllegalArgumentException("MultiBufferSource isn't a BufferSource");
+        }
+        IClientItemExtensions itemExtensions = IClientItemExtensions.of(itemStack);
+
+        DissolveBufferSource dissolve = new DissolveBufferSource(bufferSource2);
+        itemExtensions.getCustomRenderer()
+            .renderByItem(itemStack, displayContext, poseStack, dissolve, combinedLight, combinedOverlay);
+        for (RenderType type : dissolve.getUsedRenderTypes()) {
+          bufferSource2.endBatch(type);
+        }
+
+        MultiBufferSource bufferSource3 = new DepthWrappedMultiBufferSource(bufferSource2);
+        itemExtensions.getCustomRenderer()
+            .renderByItem(itemStack, displayContext, poseStack, bufferSource3, combinedLight, combinedOverlay);
       }
 
       poseStack.popPose();
