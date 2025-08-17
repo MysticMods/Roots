@@ -45,6 +45,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
@@ -425,43 +426,69 @@ public class RenderUtil {
         }
 
         if (!(bufferSource instanceof MultiBufferSource.BufferSource bufferSource2)) {
-          throw new IllegalArgumentException("BufferSource must be a BufferSource, got: " + bufferSource.getClass().getName());
+          throw new IllegalArgumentException("BufferSource must be a BufferSource, got: " + bufferSource.getClass()
+              .getName());
         }
 
-        ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
-        Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
-        if (uniform != null) {
-          uniform.set(dissolveProgress);
+        boolean dissolveFallback = true;
+
+        if (!p_model.isGui3d()) {
+          List<BakedModel> renderPasses = p_model.getRenderPasses(itemStack, flag1);
+          if (renderPasses.size() == 1) {
+            BakedModel pass = renderPasses.getFirst();
+            if (!pass.isCustomRenderer() && !pass.isGui3d()) {
+              List<RenderType> rendertype = pass.getRenderTypes(itemStack, flag1);
+              if (rendertype.size() == 1) {
+                RenderType type = rendertype.getFirst();
+                if (type == Sheets.cutoutBlockSheet()) {
+
+                } else if (type == Sheets.translucentItemSheet()) {
+
+                } else if (type == Sheets.translucentCullBlockSheet()) {
+
+                }
+              }
+            }
+          }
+
         }
 
-        for (var model : p_model.getRenderPasses(itemStack, flag1)) {
-          VertexConsumer vertexconsumer2 = bufferSource2.getBuffer(RootsRenderTypes.DISSOLVE);
-          itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer2);
-          bufferSource2.endBatch(RootsRenderTypes.DISSOLVE);
-        }
+        if (dissolveFallback) {
+          ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
+          Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
+          if (uniform != null) {
+            uniform.set(dissolveProgress);
+          }
 
-        MultiBufferSource bufferSource3 = new DepthWrappedMultiBufferSource(bufferSource2);
+          for (var model : p_model.getRenderPasses(itemStack, flag1)) {
+            VertexConsumer vertexconsumer2 = bufferSource2.getBuffer(RootsRenderTypes.DISSOLVE);
+            itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer2);
+            bufferSource2.endBatch(RootsRenderTypes.DISSOLVE);
+          }
 
-        for (var model : p_model.getRenderPasses(itemStack, flag1)) {
-          for (var rendertype1 : model.getRenderTypes(itemStack, flag1)) {
-            var rendertype = RootsRenderTypes.getDissolveDepth(rendertype1);
-            VertexConsumer vertexconsumer;
-            if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
-              PoseStack.Pose posestack$pose = poseStack.last().copy();
-              if (displayContext == ItemDisplayContext.GUI) {
-                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
-              } else if (displayContext.firstPerson()) {
-                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
+          MultiBufferSource bufferSource3 = new DepthWrappedMultiBufferSource(bufferSource2);
+
+          for (var model : p_model.getRenderPasses(itemStack, flag1)) {
+            for (var rendertype1 : model.getRenderTypes(itemStack, flag1)) {
+              var rendertype = RootsRenderTypes.getDissolveDepth(rendertype1);
+              VertexConsumer vertexconsumer;
+              if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
+                PoseStack.Pose posestack$pose = poseStack.last().copy();
+                if (displayContext == ItemDisplayContext.GUI) {
+                  MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
+                } else if (displayContext.firstPerson()) {
+                  MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
+                }
+
+                vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource3, rendertype, posestack$pose);
+              } else if (flag1) {
+                vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource3, rendertype, true, itemStack.hasFoil());
+              } else {
+                vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource3, rendertype, true, itemStack.hasFoil());
               }
 
-              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource3, rendertype, posestack$pose);
-            } else if (flag1) {
-              vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource3, rendertype, true, itemStack.hasFoil());
-            } else {
-              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource3, rendertype, true, itemStack.hasFoil());
+              itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
             }
-
-            itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
           }
         }
       } else {
