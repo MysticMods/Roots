@@ -3,6 +3,7 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.blockentity.VisibleBlockEntity;
+import mysticmods.roots.client.ColorHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

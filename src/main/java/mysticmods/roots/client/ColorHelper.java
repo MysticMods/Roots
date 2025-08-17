@@ -1,4 +1,4 @@
-package mysticmods.roots.client.blockentity;
+package mysticmods.roots.client;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

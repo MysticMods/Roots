@@ -9,7 +9,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.client.blockentity.ColorHelper;
 import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.BeamManager;

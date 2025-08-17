@@ -7,6 +7,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
+import mysticmods.roots.client.ColorHelper;
 import mysticmods.roots.client.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
