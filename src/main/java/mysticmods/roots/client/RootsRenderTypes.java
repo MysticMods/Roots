@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import java.util.OptionalDouble;
 import java.util.function.Function;
 
 import static net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE;
+import static net.minecraft.client.renderer.RenderStateShard.RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL_SHADER;
 
 public class RootsRenderTypes {
   private static final RenderStateShard.LayeringStateShard CUSTOM_POLYGON_OFFSET_LAYERING = new RenderStateShard.LayeringStateShard(
@@ -57,6 +59,10 @@ public class RootsRenderTypes {
           .setTransparencyState(RenderType.ADDITIVE_TRANSPARENCY)
           .createCompositeState(false)
   );
+
+  public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_CUTOUT_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntityCutoutDissolveShader);
+
+  public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntityTranslucentCullDissolveShader);
 
   public static final RenderStateShard.ShaderStateShard DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDissolveShader);
 
@@ -171,7 +177,7 @@ public class RootsRenderTypes {
           .createCompositeState(false)
   );
 
-  private static final ResourceLocation DISSOLVE_TEXTURE = RootsAPI.rl("textures/misc/dissolve.png");
+  public static final ResourceLocation DISSOLVE_TEXTURE = RootsAPI.rl("textures/misc/dissolve.png");
 
   public static final RenderType DISSOLVE = RenderType.create(
       "roots_dissolve",
@@ -189,6 +195,33 @@ public class RootsRenderTypes {
           .setDepthTestState(RenderType.LEQUAL_DEPTH_TEST)
           .createCompositeState(false)
   );
+
+  public static final RenderType ENTITY_CUTOUT_DISSOLVE = RenderType.create("roots_entity_cutout_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, RenderType.CompositeState.builder()
+      .setShaderState(RENDERTYPE_ENTITY_CUTOUT_DISSOLVE_SHADER)
+      .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
+      .setTransparencyState(RenderType.NO_TRANSPARENCY)
+      .setLightmapState(RenderType.LIGHTMAP)
+      .setOverlayState(RenderType.OVERLAY)
+      .createCompositeState(true));
+
+  public static final RenderType ITEM_ENTITY_TRANSLUCENT_CULL_DISSOLVE = RenderType.create("roots_item_entity_translucent_cull_dissolve, ", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, RenderType.CompositeState.builder()
+      .setShaderState(RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL_SHADER)
+      .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
+      .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
+/*      .setOutputState(RenderType.ITEM_ENTITY_TARGET)*/
+      .setLightmapState(RenderType.LIGHTMAP)
+      .setOverlayState(RenderType.OVERLAY)
+      .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
+      .createCompositeState(true));
+
+  public static final RenderType ENTITY_TRANSLUCENT_CULL_DISSOLVE = RenderType.create("roots_entity_translucent_cull_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true,
+      RenderType.CompositeState.builder()
+          .setShaderState(RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL_SHADER)
+          .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
+          .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
+          .setLightmapState(RenderType.LIGHTMAP)
+          .setOverlayState(RenderType.OVERLAY)
+          .createCompositeState(true));
 
   private static final Map<RenderType, RenderType> DISSOLVE_DEPTH_MAP = new HashMap<>();
 
@@ -243,4 +276,34 @@ public class RootsRenderTypes {
     DISSOLVE_DEPTH_MAP.put(renderType, result);
     return result;
   }
+
+/*  public static class TextureWithDissolveStateShard extends RenderStateShard.EmptyTextureStateShard {
+    private final Optional<ResourceLocation> texture;
+    protected boolean blur;
+    protected boolean mipmap;
+
+    public TextureWithDissolveStateShard(ResourceLocation texture, int index, boolean blur, boolean mipmap) {
+      super(() -> {
+        TextureManager texturemanager = Minecraft.getInstance().getTextureManager();
+        texturemanager.getTexture(texture).setFilter(blur, mipmap);
+        RenderSystem.setShaderTexture(0, texture);
+        texturemanager.getTexture(DISSOLVE_TEXTURE).setFilter(false, false);
+        RenderSystem.setShaderTexture(index, DISSOLVE_TEXTURE);
+      }, () -> {
+      });
+      this.texture = Optional.of(texture);
+      this.blur = blur;
+      this.mipmap = mipmap;
+    }
+
+    @Override
+    public String toString() {
+      return this.name + "[" + this.texture + "(blur=" + this.blur + ", mipmap=" + this.mipmap + ")]";
+    }
+
+    @Override
+    protected Optional<ResourceLocation> cutoutTexture() {
+      return this.texture;
+    }
+  }*/
 }

@@ -403,6 +403,12 @@ public class RenderUtil {
   );
 
   public static void renderItemDissolve(ItemRenderer itemRenderer, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel p_model, float dissolveProgress) {
+    RenderSystem.runAsFancy(() ->
+        renderItemDissolveInternal(itemRenderer, itemStack, displayContext, leftHand, poseStack, bufferSource, combinedLight, combinedOverlay, p_model, dissolveProgress)
+    );
+  }
+
+  private static void renderItemDissolveInternal(ItemRenderer itemRenderer, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel p_model, float dissolveProgress) {
     if (!itemStack.isEmpty()) {
       poseStack.pushPose();
       boolean flag = displayContext == ItemDisplayContext.GUI || displayContext == ItemDisplayContext.GROUND || displayContext == ItemDisplayContext.FIXED;
@@ -440,17 +446,53 @@ public class RenderUtil {
               List<RenderType> rendertype = pass.getRenderTypes(itemStack, flag1);
               if (rendertype.size() == 1) {
                 RenderType type = rendertype.getFirst();
+                ShaderInstance shader;
                 if (type == Sheets.cutoutBlockSheet()) {
-
+                  type = RootsRenderTypes.ENTITY_CUTOUT_DISSOLVE;
+                  shader = RootsShaders.getRenderTypeEntityCutoutDissolveShader();
                 } else if (type == Sheets.translucentItemSheet()) {
-
+                  type = RootsRenderTypes.ITEM_ENTITY_TRANSLUCENT_CULL_DISSOLVE;
+                  shader = RootsShaders.getRenderTypeEntityTranslucentCullDissolveShader();
                 } else if (type == Sheets.translucentCullBlockSheet()) {
+                  type = RootsRenderTypes.ENTITY_TRANSLUCENT_CULL_DISSOLVE;
+                  shader = RootsShaders.getRenderTypeEntityTranslucentCullDissolveShader();
+                } else {
+                  shader = null;
+                }
 
+                if (shader != null) {
+                  Uniform uniform = shader.getUniform("DissolveThreshold");
+                  if (uniform != null) {
+                    uniform.set(dissolveProgress * 1.2f);
+                  }
+                  shader.setSampler("NoiseTexture", Minecraft.getInstance().getTextureManager().getTexture(RootsRenderTypes.DISSOLVE_TEXTURE));
+                  shader.apply();
+
+                  VertexConsumer vertexconsumer;
+
+                  // Handle animation, glint
+                  if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
+                    PoseStack.Pose posestack$pose = poseStack.last().copy();
+                    if (displayContext == ItemDisplayContext.GUI) {
+                      MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
+                    } else if (displayContext.firstPerson()) {
+                      MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
+                    }
+
+                    vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource2, type, posestack$pose);
+                  } else if (flag1) {
+                    vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource2, type, true, itemStack.hasFoil());
+                  } else {
+                    vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource2, type, true, itemStack.hasFoil());
+                  }
+
+                  itemRenderer.renderModelLists(pass, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+                  bufferSource2.endLastBatch();
+                  dissolveFallback = false;
                 }
               }
             }
           }
-
         }
 
         if (dissolveFallback) {
