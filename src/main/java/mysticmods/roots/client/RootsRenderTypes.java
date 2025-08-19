@@ -6,23 +6,17 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.function.Function;
-
-import static net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE;
-import static net.minecraft.client.renderer.RenderStateShard.RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL_SHADER;
 
 public class RootsRenderTypes {
   private static final RenderStateShard.LayeringStateShard CUSTOM_POLYGON_OFFSET_LAYERING = new RenderStateShard.LayeringStateShard(
@@ -44,7 +38,7 @@ public class RootsRenderTypes {
       RenderType.CompositeState.builder()
           .setShaderState(RenderType.RENDERTYPE_GLINT_SHADER)
           .setTextureState(new RenderStateShard.TextureStateShard(ItemRenderer.ENCHANTED_GLINT_ITEM, true, false))
-          .setWriteMaskState(COLOR_WRITE)
+          .setWriteMaskState(RenderStateShard.COLOR_WRITE)
           .setCullState(RenderType.NO_CULL)
           .setDepthTestState(RenderType.LEQUAL_DEPTH_TEST)
           .setTransparencyState(RenderType.GLINT_TRANSPARENCY)
@@ -154,7 +148,7 @@ public class RootsRenderTypes {
           .setShaderState(PARTICLE_LOW_DISCARD_SHADER)
           .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
-          .setWriteMaskState(COLOR_WRITE)
+          .setWriteMaskState(RenderStateShard.COLOR_WRITE)
           .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
           .setLightmapState(RenderStateShard.LIGHTMAP)
           .setOutputState(RenderType.PARTICLES_TARGET)
@@ -205,7 +199,7 @@ public class RootsRenderTypes {
       .createCompositeState(true));
 
   public static final RenderType ITEM_ENTITY_TRANSLUCENT_CULL_DISSOLVE = RenderType.create("roots_item_entity_translucent_cull_dissolve, ", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, RenderType.CompositeState.builder()
-      .setShaderState(RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL_SHADER)
+      .setShaderState(RootsRenderTypes.RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE_SHADER)
       .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
       .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
 /*      .setOutputState(RenderType.ITEM_ENTITY_TARGET)*/
@@ -216,7 +210,7 @@ public class RootsRenderTypes {
 
   public static final RenderType ENTITY_TRANSLUCENT_CULL_DISSOLVE = RenderType.create("roots_entity_translucent_cull_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true,
       RenderType.CompositeState.builder()
-          .setShaderState(RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL_SHADER)
+          .setShaderState(RootsRenderTypes.RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE_SHADER)
           .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
           .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
           .setLightmapState(RenderType.LIGHTMAP)

@@ -539,6 +539,12 @@ public class RenderUtil {
         }
         IClientItemExtensions itemExtensions = IClientItemExtensions.of(itemStack);
 
+        ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
+        Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
+        if (uniform != null) {
+          uniform.set(dissolveProgress);
+        }
+
         DissolveBufferSource dissolve = new DissolveBufferSource(bufferSource2);
         itemExtensions.getCustomRenderer()
             .renderByItem(itemStack, displayContext, poseStack, dissolve, combinedLight, combinedOverlay);
