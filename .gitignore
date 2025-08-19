@@ -40,3 +40,5 @@ common/src/generated/resources/.cache/*
 datapacks/*/.cache/
 datapacks/*/*.zip
 datapacks/*.zip
+review/*
+run/*
