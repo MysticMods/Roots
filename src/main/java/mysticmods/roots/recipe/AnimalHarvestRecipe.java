@@ -41,7 +41,8 @@ public record AnimalHarvestRecipe(EntityType<?> entity, List<ChanceOutput> loot)
     var lootTableLookup = provider.lookupOrThrow(Registries.LOOT_TABLE);
 
     List<AnimalHarvestRecipe> recipes = new ArrayList<>();
-    for (Holder<EntityType<?>> holder : BuiltInRegistries.ENTITY_TYPE.getTagOrEmpty(RootsTags.Entities.ANIMAL_HARVEST)) {
+    var entities = provider.lookupOrThrow(Registries.ENTITY_TYPE).getOrThrow(RootsTags.Entities.ANIMAL_HARVEST);
+    for (Holder<EntityType<?>> holder : entities) {
       if (holder.is(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE)) {
         continue;
       }

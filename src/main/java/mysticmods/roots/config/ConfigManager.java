@@ -68,6 +68,7 @@ public class ConfigManager {
   public static ModConfigSpec.BooleanValue DEBUG_GROVE_ACTIONS;
   public static ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
   public static ModConfigSpec.BooleanValue DEBUG_KEYBINDS;
+  public static ModConfigSpec.BooleanValue DEBUG_JEI;
 
   public static ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
 
@@ -160,6 +161,8 @@ public class ConfigManager {
     DEBUG_GROVE_ACTIONS = COMMON_BUILDER.comment("if true, will report in the message log whenever a Grove Action has been fired")
         .define("debug_grove_actions", false);
     DEBUG_KEYBINDS = COMMON_BUILDER.comment("if true, will print debug information about keybinds to the message log").define("debug_keybinds", false);
+    DEBUG_JEI = COMMON_BUILDER.comment("if true, will print debug information about server->client recipe syncs to the message log")
+        .define("debug_jei", false);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("ritual_conflict");
     RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]")

@@ -5,6 +5,7 @@ import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.client.particle.world.RootsParticle;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
@@ -23,13 +24,16 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.registries.datamaps.DataMapsUpdatedEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import org.checkerframework.checker.index.qual.SubstringIndexBottom;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -72,24 +76,8 @@ public class DataEventHandler {
     }
   }
 
-  public static void rebuildAnimalHarvestCache () {
-    MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-    if (server != null) {
-      RootsAPI.LOG.error("Rebuilding animal harvest recipe cache on server reload");
-      server.overworld()
-          .setData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get(), AnimalHarvestRecipe.getServerRecipes(server.reloadableRegistries()
-              .lookup()));
-    } else {
-      RootsAPI.LOG.error("Unable to rebuild animal harvest recipe cache, server is null");
-    }
-  }
-
   @SubscribeEvent
   public static void onDataReloaded(DataMapsUpdatedEvent event) {
-    if (event.getCause() == DataMapsUpdatedEvent.UpdateCause.SERVER_RELOAD) {
-      rebuildAnimalHarvestCache();
-    }
-
     var reference = event.getRegistry().getAny().orElse(null);
     if (reference == null) {
       return;
@@ -101,24 +89,35 @@ public class DataEventHandler {
   }
 
   @SubscribeEvent
-  public static void onDataPackSync(OnDatapackSyncEvent event) {
-    MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-    var cache = server.overworld().getData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get());
-    if (cache.recipes().isEmpty()) {
-      RootsAPI.LOG.error("Animal harvest recipe cache is empty, rebuilding it on datapack sync");
-      rebuildAnimalHarvestCache();
-      cache = server.overworld().getData(ModAttachments.ANIMAL_HARVEST_RECIPE_CACHE.get());
+  public static void onTagSync (TagsUpdatedEvent event) {
+    if (event.getUpdateCause() != TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
+      LootTableHandler.cached = AnimalHarvestRecipe.getServerRecipes(event.getRegistryAccess().asGetterLookup());
     }
-    if (!cache.recipes().isEmpty()) {
-      // TODO: "Empty recipes" sync packet
-      ClientboundAnimalHarvestSyncPacket packet = new ClientboundAnimalHarvestSyncPacket(cache.recipes());
+  }
 
-      event.getRelevantPlayers().forEach(o -> {
-        RootsAPI.LOG.error("Sending animal harvest sync packet to player: {}", o.getGameProfile().getName());
-        o.connection.send(packet);
-      });
+  @SubscribeEvent
+  public static void onDataPackSync(OnDatapackSyncEvent event) {
+    if (LootTableHandler.cached != null) {
+      var cache = LootTableHandler.cached;
+      if (!cache.recipes().isEmpty()) {
+        ClientboundAnimalHarvestSyncPacket packet = new ClientboundAnimalHarvestSyncPacket(cache.recipes());
+
+        event.getRelevantPlayers().forEach(o -> {
+          if (ConfigManager.DEBUG_JEI.getAsBoolean()) {
+            RootsAPI.LOG.error("Sending animal harvest sync packet to player: {}", o.getGameProfile().getName());
+          }
+          o.connection.send(packet);
+        });
+      } else {
+        if (ConfigManager.DEBUG_JEI.getAsBoolean()) {
+          // TODO: "Empty recipes" sync packet
+          RootsAPI.LOG.error("Animal harvest recipe cache is empty at datapack sync event, no sync packet sent");
+        }
+      }
     } else {
-      RootsAPI.LOG.error("Animal harvest recipe cache is still empty after rebuild, no sync packet sent");
+      if (ConfigManager.DEBUG_JEI.getAsBoolean()) {
+        RootsAPI.LOG.error("Animal harvest recipe cache is null on datapack sync event");
+      }
     }
   }
 
