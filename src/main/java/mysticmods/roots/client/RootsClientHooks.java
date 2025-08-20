@@ -184,7 +184,13 @@ public class RootsClientHooks {
   public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     Minecraft minecraft = Minecraft.getInstance();
 
-    if (minecraft.screen instanceof StaffScreen || minecraft.player == null) {
+    if (minecraft.screen instanceof StaffScreen) {
+      if (stack.has(ModAttachments.DELETABLE)) {
+        tooltipComponents.add(Component.empty());
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.delete"));
+      }
+      return;
+    } else if (minecraft.player == null) {
       return;
     }
 

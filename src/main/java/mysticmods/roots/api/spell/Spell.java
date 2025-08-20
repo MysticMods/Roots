@@ -16,6 +16,7 @@ import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -28,6 +29,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -61,6 +63,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected String descriptionId;
 
   protected ItemStack icon;
+  protected ItemStack staffIcon;
 
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
   private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
@@ -316,6 +319,9 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
       RootsAPI.LOG.error("Icon is missing for spell: {}", holder.getKey());
       icon = ItemStack.EMPTY;
     }
+    staffIcon = icon.copy();
+    // TODO: Move Deletable into the API
+    staffIcon.set(ModAttachments.DELETABLE, Unit.INSTANCE);
     initializeProperties(holder);
     initialize(holder);
     fillDataMaximumValues(dataIndexMaximums);
@@ -323,6 +329,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
       // TODO: Rampant growth breaks this contract?
       RootsAPI.LOG.error("Key-to-data index and data index maximum mismatch: {}", holder.getKey());
     }
+  }
+
+  public ItemStack getStaffIcon () {
+    return staffIcon;
   }
 
   public ItemStack getIcon() {

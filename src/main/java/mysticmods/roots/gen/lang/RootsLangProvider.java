@@ -63,6 +63,7 @@ public class RootsLangProvider extends LanguageProvider {
 
     add("roots.tooltip.token.spell", "Spell: %s");
     add("roots.tooltip.token.modifier", "Modifier: %s");
+    add("roots.tooltip.token.delete", "[Press DEL to remove this slot]");
     add("roots.tooltip.token.unlock", "Right-Click to unlock.");
     add("roots.tooltip.token.unlocked", "You've already unlocked this.");
     add("roots.tooltip.token.available_modifiers", "Available modifiers:");

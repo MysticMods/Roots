@@ -1,5 +1,6 @@
 package mysticmods.roots.client.gui.buttons;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.screen.StaffScreen;
@@ -17,6 +18,13 @@ public class StaffSpellButton extends TypedButton<ISpellInstance, StaffScreen> {
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_spell_slot.png");
   private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/staff_spell_slot_highlight.png");
+
+  public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+    if (spellSupplier.get() == null) {
+      return;
+    }
+    parentScreen.fillTooltip(spellSupplier.get().asSpell().getStaffIcon());
+  }
 
   public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     int x1 = getX() - 2;

@@ -588,6 +588,7 @@
   "roots.tooltip.staff.selected": "Selected Slot: %s",
   "roots.tooltip.staff.spell_in_slot": "%s: %s%s%s",
   "roots.tooltip.token.available_modifiers": "Available modifiers:",
+  "roots.tooltip.token.delete": "[Press DEL to remove this slot]",
   "roots.tooltip.token.enabled_modifiers": "Enabled modifiers:",
   "roots.tooltip.token.modifier": "Modifier: %s",
   "roots.tooltip.token.ritual": "Ritual: %s",
