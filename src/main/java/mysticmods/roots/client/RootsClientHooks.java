@@ -7,6 +7,7 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinGui;
@@ -31,7 +32,9 @@ public class RootsClientHooks {
   }
 
   public static void setAnimalHarvestRecipes(List<AnimalHarvestRecipe> recipes) {
-    RootsAPI.LOG.error("Setting animal harvest recipes on client: {}", recipes);
+    if (ConfigManager.DEBUG_JEI.getAsBoolean()) {
+      RootsAPI.LOG.error("Setting animal harvest recipes on client: {}", recipes);
+    }
     ClientRecipes.ANIMAL_HARVEST_RECIPES = recipes;
   }
 
