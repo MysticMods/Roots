@@ -55,10 +55,10 @@ public class FungalTransmuterBlockEntityRenderer extends BoundedBlockEntityRende
       pPoseStack.translate(-0.5, 0, 0);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
-      /*Minecraft.getInstance().getItemRenderer()
-          .renderStatic(item, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);*/
-      BakedModel baked = itemRenderer.getModel(item, Minecraft.getInstance().level, null, 0);
-      RenderUtil.renderItemDissolve(Minecraft.getInstance().getItemRenderer(), item, ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, baked, Mth.lerp(pPartialTick, pBlockEntity.oDissolveProgress, pBlockEntity.dissolveProgress));
+      Minecraft.getInstance().getItemRenderer()
+          .renderStatic(item, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+/*      BakedModel baked = itemRenderer.getModel(item, Minecraft.getInstance().level, null, 0);
+      RenderUtil.renderItemDissolve(Minecraft.getInstance().getItemRenderer(), item, ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, baked, Mth.lerp(pPartialTick, pBlockEntity.oDissolveProgress, pBlockEntity.dissolveProgress));*/
       pPoseStack.popPose();
     }
 
