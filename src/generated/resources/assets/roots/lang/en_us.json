@@ -449,6 +449,8 @@
   "roots.drinks.slow_regen": "Gives a burst of revitalizing energy.",
   "roots.drinks.sour": "Sour and awful to drink! Leaves you hungry.",
   "roots.drinks.wakefulness": "Perks you up, night or day; shoos those scary phantoms away!",
+  "roots.gui.reputation": "Grove Reputations",
+  "roots.gui.spell_library": "Spell Library",
   "roots.hud.attributes": "%s: %s",
   "roots.hud.grove_crafter": "Right-Click to start crafting",
   "roots.hud.grove_power.grove": "%s, rank %s/%s",

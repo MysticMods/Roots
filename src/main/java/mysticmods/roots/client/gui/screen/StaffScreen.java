@@ -23,7 +23,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
-import java.awt.im.InputContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -46,6 +45,9 @@ public class StaffScreen extends RootsScreen {
 
   private SpellStorage getStorage() {
     Player player = getMinecraft().player;
+    if (player == null) {
+      return null;
+    }
     ItemStack stack = hand == null ? player.getInventory().getItem(inventorySlot) : player.getItemInHand(hand);
     if (stack.isEmpty() || !stack.has(ModAttachments.SPELL_STORAGE)) {
       return null;
@@ -60,7 +62,11 @@ public class StaffScreen extends RootsScreen {
 
   private Supplier<Spell> librarySlot(final int index) {
     return () -> {
-      GrantStorage grants = getMinecraft().player.getData(ModAttachments.GRANT_STORAGE);
+      Player player = getMinecraft().player;
+      if (player == null) {
+        return null;
+      }
+      GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
       List<LibrarySpell> spellInfo = grants.getLibrarySpells();
       if (index < 0 || index >= spellInfo.size()) {
         return null;
@@ -80,7 +86,9 @@ public class StaffScreen extends RootsScreen {
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), index++, guiLeft + 55, guiTop + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), index, guiLeft + 60, guiTop + 33)));
 
-    createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
+    if (getMinecraft().player != null) {
+      createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
+    }
   }
 
   private void createLibraryButtons(GrantStorage grants) {
@@ -188,8 +196,10 @@ public class StaffScreen extends RootsScreen {
 
   public static void open(@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
-    Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
-    Minecraft.getInstance().setScreen(newScreen);
+    if (Minecraft.getInstance().gameMode != null && Minecraft.getInstance().player != null) {
+      Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
+      Minecraft.getInstance().setScreen(newScreen);
+    }
   }
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");

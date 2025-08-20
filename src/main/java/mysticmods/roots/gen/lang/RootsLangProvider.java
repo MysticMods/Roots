@@ -850,6 +850,9 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.commands.library.remove.success", "Removed spell %s from library.");
     add("roots.commands.library.remove.failure", "Failed to remove spell %s from library. Spell not found or not in library.");
     add("roots.commands.library.no_player", "Command can only be executed by a player.");
+
+    add("roots.gui.spell_library", "Spell Library");
+    add("roots.gui.reputation", "Grove Reputations");
   }
 
   // TODO: Translations for damage

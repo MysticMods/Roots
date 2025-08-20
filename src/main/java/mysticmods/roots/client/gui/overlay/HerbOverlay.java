@@ -116,7 +116,7 @@ public class HerbOverlay {
       }
 
       float progress;
-      
+
       int maxColumns = Math.min(3, Math.max(1, graphics.guiWidth() / 3 / (COL_WIDTH + 5))); // 5px padding
       int row = slot / maxColumns;
       int col = slot % maxColumns;
