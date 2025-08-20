@@ -60,6 +60,7 @@ public class HerbOverlay {
     private static final int TIME_VISIBLE = 8 * 20;
     private static final int MAX_TIME = TIME_VISIBLE;
     private static final int ANIMATION_TIME = 5;
+    private static final int COL_WIDTH = 45;
 
     private int ticks = 0;
     private final Herb herb;
@@ -115,9 +116,10 @@ public class HerbOverlay {
       }
 
       float progress;
-
-      int row = slot / 3;
-      int col = slot % 3;
+      
+      int maxColumns = Math.min(3, Math.max(1, graphics.guiWidth() / 3 / (COL_WIDTH + 5))); // 5px padding
+      int row = slot / maxColumns;
+      int col = slot % maxColumns;
 
       int anim_time = ANIMATION_TIME * (row + 1);
 
@@ -130,19 +132,17 @@ public class HerbOverlay {
       float anim = -progress * (progress - 2) * 20f;
 
 
-      float x = graphics.guiWidth() / 2.0f;
+      float x;
       float y = graphics.guiHeight() - anim;
 
       if (row != 0) {
         y -= row * 20;
       }
 
-      // TODO: This needs to be made configurable.
-      int barWidth = 250 + 58;
-      if (!mc.player.getOffhandItem().isEmpty()) {
-        barWidth += 58;
+      if (!mc.player.getOffhandItem().isEmpty() && maxColumns == 3) {
+        y -= 20;
       }
-      x += (float) (((barWidth / 2.0) * -1 + (col * 45)) - 20);
+      x = 5 + (col * 45);
 
       ItemStack stack = getStack();
 
@@ -152,7 +152,7 @@ public class HerbOverlay {
       String s = String.format("%.1f", amount);
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, s, 19.0f, 3.5f, 16777215, true);
+      graphics.drawString(mc.font, s, 18.0f, 3.5f, 16777215, true);
       pose.popPose();
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();

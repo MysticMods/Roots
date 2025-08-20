@@ -412,7 +412,7 @@ public class RootsCommand {
       if (c.getSource().isPlayer()) {
         Object2DoubleOpenHashMap<Herb> totals = new Object2DoubleOpenHashMap<>();
         for (Map.Entry<ResourceKey<Herb>, Herb> herb : RootsRegistries.HERBS.entrySet()) {
-          totals.put(herb.getValue(), 0.165);
+          totals.put(herb.getValue(), 64.165);
         }
         RootsAPI.getInstance().syncHerbs(c.getSource().getPlayer(), totals);
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.alerts.synced", c.getSource()
