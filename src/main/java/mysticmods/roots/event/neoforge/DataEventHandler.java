@@ -4,7 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.IDataMapInitialize;
-import mysticmods.roots.client.particle.world.RootsParticle;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
@@ -14,7 +13,6 @@ import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,7 +22,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
@@ -32,8 +29,6 @@ import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.registries.datamaps.DataMapsUpdatedEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
-import org.checkerframework.checker.index.qual.SubstringIndexBottom;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -91,14 +86,14 @@ public class DataEventHandler {
   @SubscribeEvent
   public static void onTagSync (TagsUpdatedEvent event) {
     if (event.getUpdateCause() != TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
-      LootTableHandler.cached = AnimalHarvestRecipe.getServerRecipes(event.getRegistryAccess().asGetterLookup());
+      AnimalHarvestRecipe.cached = AnimalHarvestRecipe.getServerRecipes(event.getRegistryAccess().asGetterLookup());
     }
   }
 
   @SubscribeEvent
   public static void onDataPackSync(OnDatapackSyncEvent event) {
-    if (LootTableHandler.cached != null) {
-      var cache = LootTableHandler.cached;
+    if (AnimalHarvestRecipe.cached != null) {
+      var cache = AnimalHarvestRecipe.cached;
       if (!cache.recipes().isEmpty()) {
         ClientboundAnimalHarvestSyncPacket packet = new ClientboundAnimalHarvestSyncPacket(cache.recipes());
 

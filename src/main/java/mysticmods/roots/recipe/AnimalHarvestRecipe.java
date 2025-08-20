@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record AnimalHarvestRecipe(EntityType<?> entity, List<ChanceOutput> loot) {
+  public static Cache cached = null;
+
   public record Cache(List<AnimalHarvestRecipe> recipes) {
   }
 
