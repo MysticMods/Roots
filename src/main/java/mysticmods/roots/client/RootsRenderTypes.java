@@ -172,6 +172,7 @@ public class RootsRenderTypes {
   );
 
   public static final ResourceLocation DISSOLVE_TEXTURE = RootsAPI.rl("textures/misc/dissolve.png");
+  public static final ResourceLocation ITEM_DISSOLVE_TEXTURE = RootsAPI.rl("textures/misc/item_dissolve.png");
 
   public static final RenderType DISSOLVE = RenderType.create(
       "roots_dissolve",

@@ -396,11 +396,7 @@ public class RenderUtil {
   }
 
   private static final ModelResourceLocation TRIDENT_MODEL = ModelResourceLocation.inventory(ResourceLocation.withDefaultNamespace("trident"));
-  public static final ModelResourceLocation TRIDENT_IN_HAND_MODEL = ModelResourceLocation.inventory(ResourceLocation.withDefaultNamespace("trident_in_hand"));
   private static final ModelResourceLocation SPYGLASS_MODEL = ModelResourceLocation.inventory(ResourceLocation.withDefaultNamespace("spyglass"));
-  public static final ModelResourceLocation SPYGLASS_IN_HAND_MODEL = ModelResourceLocation.inventory(
-      ResourceLocation.withDefaultNamespace("spyglass_in_hand")
-  );
 
   public static void renderItemDissolve(ItemRenderer itemRenderer, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel p_model, float dissolveProgress) {
     RenderSystem.runAsFancy(() ->
@@ -463,9 +459,9 @@ public class RenderUtil {
                 if (shader != null) {
                   Uniform uniform = shader.getUniform("DissolveThreshold");
                   if (uniform != null) {
-                    uniform.set(dissolveProgress * 1.2f);
+                    uniform.set(dissolveProgress);
                   }
-                  shader.setSampler("NoiseTexture", Minecraft.getInstance().getTextureManager().getTexture(RootsRenderTypes.DISSOLVE_TEXTURE));
+                  shader.setSampler("NoiseTexture", Minecraft.getInstance().getTextureManager().getTexture(RootsRenderTypes.ITEM_DISSOLVE_TEXTURE));
                   shader.apply();
 
                   VertexConsumer vertexconsumer;

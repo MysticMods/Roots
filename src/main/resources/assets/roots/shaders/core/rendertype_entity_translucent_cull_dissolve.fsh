@@ -19,7 +19,9 @@ in vec2 texCoord1;
 out vec4 fragColor;
 
 void main() {
-    vec4 noise = texture(NoiseTexture, texCoord0);
+    vec2 atlasSize = vec2(textureSize(Sampler0, 0));
+    vec2 atlasCoord = texCoord0 * atlasSize;
+    vec4 noise = texture(NoiseTexture, fract(atlasCoord / 16.0));
     if (noise.a < DissolveThreshold) {
         discard;
     }
