@@ -51,7 +51,9 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
             jvmArguments.add("-Xmx4G")
             jvmArguments.add("-Xms2G")
+            // For attaching IDEA debugger when using renderdoc.
             jvmArguments.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005")
+            // Enable these for debugging purposes
             //jvmArguments.add("-XX:+CreateCoredumpOnCrash")
             //jvmArguments.add("-XX:+HeapDumpOnOutOfMemoryError")
         }
