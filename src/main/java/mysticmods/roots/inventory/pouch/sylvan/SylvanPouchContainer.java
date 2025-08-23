@@ -2,6 +2,7 @@ package mysticmods.roots.inventory.pouch.sylvan;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModContainers;
+import mysticmods.roots.inventory.ContainerRestrictedSlot;
 import mysticmods.roots.inventory.TagRestrictedSlot;
 import mysticmods.roots.inventory.pouch.PouchContainer;
 import mysticmods.roots.inventory.pouch.PouchSlot;
@@ -21,7 +22,7 @@ public class SylvanPouchContainer extends PouchContainer {
     // Item slots
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        this.addSlot(new Slot(inventory, column + row * 4, 19 + column * 21, 19 + row * 24));
+        this.addSlot(new ContainerRestrictedSlot(inventory, column + row * 4, 19 + column * 21, 19 + row * 24));
       }
     }
 

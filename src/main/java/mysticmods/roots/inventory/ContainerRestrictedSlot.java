@@ -11,6 +11,6 @@ public class ContainerRestrictedSlot extends Slot {
 
   @Override
   public boolean mayPlace(ItemStack stack) {
-    return !stack.getItem().canFitInsideContainerItems();
+    return stack.getItem().canFitInsideContainerItems();
   }
 }
