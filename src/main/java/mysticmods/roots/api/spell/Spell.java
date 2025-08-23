@@ -320,8 +320,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
       icon = ItemStack.EMPTY;
     }
     staffIcon = icon.copy();
-    // TODO: Move Deletable into the API
-    staffIcon.set(ModAttachments.DELETABLE, Unit.INSTANCE);
+    staffIcon.set(RootsAPI.getInstance().getDeletableType(), Unit.INSTANCE);
     initializeProperties(holder);
     initialize(holder);
     fillDataMaximumValues(dataIndexMaximums);

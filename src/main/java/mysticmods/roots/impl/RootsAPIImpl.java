@@ -15,10 +15,12 @@ import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.integration.curios.CuriosIntegration;
 import mysticmods.roots.network.client.*;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
@@ -127,5 +129,10 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public AttachmentType<Map<Holder<Attribute>, AugmentationInfo>> getAugmentationInfoType() {
     return ModAttachments.AUGMENTATION_INFO.value();
+  }
+
+  @Override
+  public DataComponentType<Unit> getDeletableType() {
+    return ModAttachments.DELETABLE.value();
   }
 }

@@ -11,10 +11,13 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.item.GramaryItem;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
@@ -62,4 +65,5 @@ public interface IRootsAPI {
 
   AttachmentType<CooldownStorage> getCooldownStorageType();
   AttachmentType<Map<Holder<Attribute>, AugmentationInfo>> getAugmentationInfoType();
+  DataComponentType<Unit> getDeletableType ();
 }
