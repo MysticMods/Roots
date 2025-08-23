@@ -52,7 +52,7 @@ public class CastingItem extends Item {
       throw new IllegalArgumentException("CastingItem.getUUID can only be called on a staff item");
     }
     UUID current = stack.get(ModAttachments.ITEM_UUID);
-    if (current == null || current.equals(ModAttachments.DEFAULT_UUID)) {
+    if (current == null) {
       UUID newUUID = UUID.randomUUID();
       stack.set(ModAttachments.ITEM_UUID, newUUID);
       return newUUID;

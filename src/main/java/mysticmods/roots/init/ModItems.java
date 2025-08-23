@@ -332,12 +332,11 @@ public class ModItems {
   public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
-      .component(ModAttachments.ITEM_UUID, ModAttachments.DEFAULT_UUID)
       .stacksTo(1)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
       .stacksTo(1)));
-  public static final DeferredHolder<Item, PouchItem> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new PouchItem(QuiverMenu::new, new Item.Properties().stacksTo(1)
+  public static final DeferredHolder<Item, QuiverItem> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new QuiverItem(new Item.Properties().stacksTo(1)
       .component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
   public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));

@@ -6,6 +6,7 @@
     "MixinBeehiveBlock",
     "MixinMerchantMenu",
     "MixinMobEffectInstance",
+    "MixinProjectileWeaponItem",
     "MixinRecipeBuilder",
     "MixinThrownPotion",
     "MixinWitherBoss",

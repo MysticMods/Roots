@@ -41,18 +41,8 @@ public class BooleanRingBuffer40 {
     return buffer[(start + index) % buffer.length] == 1;
   }
 
-  /**
-   * Returns the current number of items stored (max 10).
-   */
   public int size() {
     return size;
-  }
-
-  /**
-   * Returns true if the buffer is full.
-   */
-  public boolean isFull() {
-    return size == buffer.length;
   }
 
   public void replaceLast(boolean value) {

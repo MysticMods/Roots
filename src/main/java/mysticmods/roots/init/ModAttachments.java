@@ -92,6 +92,8 @@ public class ModAttachments {
       .networkSynchronized(BlockPos.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Unit>> DELETABLE = COMPONENTS.register("deletable", () -> new DataComponentType.Builder<Unit>().persistent(Unit.CODEC)
       .networkSynchronized(StreamCodec.unit(Unit.INSTANCE)).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<QuiverRecord>> QUIVER_RECORD = COMPONENTS.register("quiver_record", () -> new DataComponentType.Builder<QuiverRecord>().persistent(QuiverRecord.CODEC)
+      .networkSynchronized(QuiverRecord.STREAM_CODEC).build());
 
   public static final UUID DEFAULT_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 

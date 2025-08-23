@@ -14,7 +14,9 @@ import mysticmods.roots.network.client.ClientboundSyncGeasPacket;
 import mysticmods.roots.network.client.fx.AlertnessFXPacket;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.QuiverUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -24,6 +26,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -34,12 +37,14 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.ArrowNockEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
@@ -371,6 +376,19 @@ public class EntityEventHandler {
     KillEntityAction.Context context = new KillEntityAction.Context(player.serverLevel(), player, target, directEntity, source);
     ModActions.KILL_ENTITY.get().accept(context);
   }
+
+  // Decrementing is handled via MixinProjectileWeaponItem
+  @SubscribeEvent
+  public static void onFindProjectile(LivingGetProjectileEvent event) {
+    if (event.getEntity() instanceof Player player && !player.level().isClientSide()) {
+      ItemStack arrow = QuiverUtil.getArrow(player);
+      if (!arrow.isEmpty()) {
+        event.setProjectileItemStack(arrow);
+      }
+    }
+  }
+
+
 
   // "Update" tick event handled in MixinLivingEntity
 }
