@@ -475,6 +475,7 @@ public class RootsTags {
     public static final TagKey<Item> CHARM_ALERT = modTag("charms/alertness");
 
     public static final TagKey<Item> CURIOS_CHARMS = curiosTag("charm");
+    public static final TagKey<Item> CURIOS_BACKS = curiosTag("back");
     public static final TagKey<Item> CURIOS_TOMES = curiosTag("tome");
     public static final TagKey<Item> CURIOS_BELTS = curiosTag("belt");
 
