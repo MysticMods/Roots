@@ -36,10 +36,7 @@ public class CuriosIntegration {
           result.add(stack);
         }
       }
-
-      return result;
-    } else {
-      return Collections.emptyList();
     }
+    return result;
   }
 }
