@@ -20,13 +20,13 @@ public class QuiverItem extends PouchItem {
 
   @Override
   public int getBarWidth(ItemStack stack) {
-    return Math.round(13.0F - (float) QuiverUtil.countArrows(stack) * 13.0F / (float) MAX_ARROWS);
+    return Math.round(13.0F - (float) (MAX_ARROWS - QuiverUtil.countArrows(stack)) * 13.0F / (float) MAX_ARROWS);
   }
 
   @Override
   public int getBarColor(ItemStack stack) {
     float stackMaxDamage = (float) MAX_ARROWS;
-    float f = Math.max(0.0F, (stackMaxDamage - (float) QuiverUtil.countArrows(stack)) / stackMaxDamage);
+    float f = Math.max(0.0F, ((float) QuiverUtil.countArrows(stack)) / stackMaxDamage);
     return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
   }
 }
