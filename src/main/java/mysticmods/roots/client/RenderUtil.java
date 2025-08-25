@@ -6,11 +6,15 @@ import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import com.mojang.math.MatrixUtil;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinFrustum;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -51,6 +55,7 @@ import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Supplier;
 
 public class RenderUtil {
   private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
@@ -404,160 +409,225 @@ public class RenderUtil {
     );
   }
 
-  private static void renderItemDissolveInternal(ItemRenderer itemRenderer, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel p_model, float dissolveProgress) {
-    if (!itemStack.isEmpty()) {
-      poseStack.pushPose();
-      boolean flag = displayContext == ItemDisplayContext.GUI || displayContext == ItemDisplayContext.GROUND || displayContext == ItemDisplayContext.FIXED;
-      if (flag) {
-        if (itemStack.is(Items.TRIDENT)) {
-          p_model = itemRenderer.getItemModelShaper().getModelManager().getModel(TRIDENT_MODEL);
-        } else if (itemStack.is(Items.SPYGLASS)) {
-          p_model = itemRenderer.getItemModelShaper().getModelManager().getModel(SPYGLASS_MODEL);
+  private static final Set<RenderType> EQUAL_RENDER_TYPES = new HashSet<>();
+  private static final Set<RenderType> OTHER_RENDER_TYPES = new HashSet<>();
+
+  public static boolean isEqualRenderType (RenderType type) {
+    if (EQUAL_RENDER_TYPES.contains(type)) {
+      return true;
+    }
+    if (OTHER_RENDER_TYPES.contains(type)) {
+      return false;
+    }
+    boolean equal = ((AccessorMixinCompositeState)(Object)((AccessorMixinCompositeRenderType)type).rootsGetState()).rootsGetDepthTestState().equals(RenderType.EQUAL_DEPTH_TEST);
+    if (equal) {
+      EQUAL_RENDER_TYPES.add(type);
+    } else {
+      OTHER_RENDER_TYPES.add(type);
+    }
+    return equal;
+  }
+
+  private static final Map<RenderType, RenderTypeInformation> RENDER_TYPE_INFO_CACHE = Util.make(new HashMap<>(), map -> {
+    map.put(Sheets.cutoutBlockSheet(), new RenderTypeInformation(RootsRenderTypes.BLOCK_SHEET_ENTITY_CUTOUT_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutDissolveShader));
+    map.put(Sheets.solidBlockSheet(), new RenderTypeInformation(RootsRenderTypes.BLOCK_SHEET_ENTITY_SOLID_DISSOLVE, RootsShaders::getRenderTypeEntitySolidDissolveShader));
+    map.put(Sheets.bedSheet(), new RenderTypeInformation(RootsRenderTypes.BED_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntitySolidDissolveShader));
+    map.put(Sheets.chestSheet(), new RenderTypeInformation(RootsRenderTypes.CHEST_SHEET_ENTITY_CUTOUT_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutDissolveShader));
+    map.put(Sheets.translucentItemSheet(), new RenderTypeInformation(RootsRenderTypes.ITEM_ENTITY_TRANSLUCENT_CULL_DISSOLVE, RootsShaders::getRenderTypeEntityTranslucentCullDissolveShader));
+    map.put(Sheets.translucentCullBlockSheet(), new RenderTypeInformation(RootsRenderTypes.ENTITY_TRANSLUCENT_CULL_DISSOLVE, RootsShaders::getRenderTypeEntityTranslucentCullDissolveShader));
+    map.put(Sheets.bannerSheet(), new RenderTypeInformation(RootsRenderTypes.BANNER_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityNoOutlineDissolveShader));
+    map.put(Sheets.shieldSheet(), new RenderTypeInformation(RootsRenderTypes.SHIELD_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityNoOutlineDissolveShader));
+    map.put(Sheets.shulkerBoxSheet(), new RenderTypeInformation(RootsRenderTypes.SHULKER_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutNoCullDissolveShader));
+    map.put(Sheets.signSheet(), new RenderTypeInformation(RootsRenderTypes.SIGN_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutNoCullDissolveShader));
+    map.put(Sheets.hangingSignSheet(), new RenderTypeInformation(RootsRenderTypes.SIGN_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutNoCullDissolveShader));
+  });
+  // TODO: Clear this on reload
+  private static final Set<BakedModel> DISSOLVE_FALLBACK_MODELS = new HashSet<>();
+
+  public static boolean isCompatibleRenderType (RenderType type) {
+    if (RENDER_TYPE_INFO_CACHE.containsKey(type)) {
+      return true;
+    }
+    if (type.mode() != VertexFormat.Mode.QUADS) {
+      return false;
+    }
+    RenderType.CompositeState state = ((AccessorMixinCompositeRenderType)type).rootsGetState();
+    if (((AccessorMixinCompositeState)(Object)state).rootsGetTextureState() instanceof RenderStateShard.MultiTextureStateShard) {
+      return false;
+    }
+
+    // There will be other considerations
+    return true;
+  }
+
+  private static void renderItemDissolveInternal(ItemRenderer itemRenderer, ItemStack itemStack, ItemDisplayContext displayContext, boolean isLeftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel bakedModel, float dissolveProgress) {
+    if (itemStack.isEmpty()) {
+      return;
+    }
+    if (!(bufferSource instanceof MultiBufferSource.BufferSource bufferSource2)) {
+      // Fallback
+      RootsAPI.LOG.error("BufferSource must be a BufferSource, got: {}, falling back on default item renderer.", bufferSource.getClass());
+      itemRenderer.render(itemStack, displayContext, isLeftHand, poseStack, bufferSource, combinedLight, combinedOverlay, bakedModel);
+      return;
+    }
+
+    poseStack.pushPose();
+    boolean nonInvOrHand = displayContext == ItemDisplayContext.GUI || displayContext == ItemDisplayContext.GROUND || displayContext == ItemDisplayContext.FIXED;
+    if (nonInvOrHand) {
+      // Adjust model based on ItemRenderer::render
+      if (itemStack.is(Items.TRIDENT)) {
+        bakedModel = itemRenderer.getItemModelShaper().getModelManager().getModel(TRIDENT_MODEL);
+      } else if (itemStack.is(Items.SPYGLASS)) {
+        bakedModel = itemRenderer.getItemModelShaper().getModelManager().getModel(SPYGLASS_MODEL);
+      }
+    }
+
+    bakedModel = ClientHooks.handleCameraTransforms(poseStack, bakedModel, displayContext, isLeftHand);
+    poseStack.translate(-0.5F, -0.5F, -0.5F);
+    //
+    if (!DISSOLVE_FALLBACK_MODELS.contains(bakedModel) && !bakedModel.isCustomRenderer() && (!itemStack.is(Items.TRIDENT) || nonInvOrHand)) {
+      boolean fabulous;
+      if (displayContext != ItemDisplayContext.GUI && !displayContext.firstPerson() && itemStack.getItem() instanceof BlockItem blockitem) {
+        Block block = blockitem.getBlock();
+        fabulous = !(block instanceof HalfTransparentBlock) && !(block instanceof StainedGlassPaneBlock);
+      } else {
+        fabulous = true;
+      }
+
+      // "Fabulous" seems weird here
+      List<BakedModel> renderPasses = bakedModel.getRenderPasses(itemStack, fabulous);
+
+      boolean dissolveFallback = false;
+
+      for (BakedModel pass : renderPasses) {
+        if (pass.isCustomRenderer()) {
+          // Any custom renderer needs to be handled with the wrapped BufferSource
+          DISSOLVE_FALLBACK_MODELS.add(bakedModel);
+          dissolveFallback = true;
+          break;
         }
       }
 
-      p_model = ClientHooks.handleCameraTransforms(poseStack, p_model, displayContext, leftHand);
-      poseStack.translate(-0.5F, -0.5F, -0.5F);
-      if (!p_model.isCustomRenderer() && (!itemStack.is(Items.TRIDENT) || flag)) {
-        boolean flag1;
-        if (displayContext != ItemDisplayContext.GUI && !displayContext.firstPerson() && itemStack.getItem() instanceof BlockItem blockitem) {
-          Block block = blockitem.getBlock();
-          flag1 = !(block instanceof HalfTransparentBlock) && !(block instanceof StainedGlassPaneBlock);
-        } else {
-          flag1 = true;
-        }
-
-        if (!(bufferSource instanceof MultiBufferSource.BufferSource bufferSource2)) {
-          throw new IllegalArgumentException("BufferSource must be a BufferSource, got: " + bufferSource.getClass()
-              .getName());
-        }
-
-        boolean dissolveFallback = true;
-
-        if (!p_model.isGui3d()) {
-          List<BakedModel> renderPasses = p_model.getRenderPasses(itemStack, flag1);
-          if (renderPasses.size() == 1) {
-            BakedModel pass = renderPasses.getFirst();
-            if (!pass.isCustomRenderer() && !pass.isGui3d()) {
-              List<RenderType> rendertype = pass.getRenderTypes(itemStack, flag1);
-              if (rendertype.size() == 1) {
-                RenderType type = rendertype.getFirst();
-                ShaderInstance shader;
-                if (type == Sheets.cutoutBlockSheet()) {
-                  type = RootsRenderTypes.ENTITY_CUTOUT_DISSOLVE;
-                  shader = RootsShaders.getRenderTypeEntityCutoutDissolveShader();
-                } else if (type == Sheets.translucentItemSheet()) {
-                  type = RootsRenderTypes.ITEM_ENTITY_TRANSLUCENT_CULL_DISSOLVE;
-                  shader = RootsShaders.getRenderTypeEntityTranslucentCullDissolveShader();
-                } else if (type == Sheets.translucentCullBlockSheet()) {
-                  type = RootsRenderTypes.ENTITY_TRANSLUCENT_CULL_DISSOLVE;
-                  shader = RootsShaders.getRenderTypeEntityTranslucentCullDissolveShader();
-                } else {
-                  shader = null;
-                }
-
-                if (shader != null) {
-                  Uniform uniform = shader.getUniform("DissolveThreshold");
-                  if (uniform != null) {
-                    uniform.set(dissolveProgress);
-                  }
-                  shader.setSampler("NoiseTexture", Minecraft.getInstance().getTextureManager().getTexture(RootsRenderTypes.ITEM_DISSOLVE_TEXTURE));
-                  shader.apply();
-
-                  VertexConsumer vertexconsumer;
-
-                  // Handle animation, glint
-                  if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
-                    PoseStack.Pose posestack$pose = poseStack.last().copy();
-                    if (displayContext == ItemDisplayContext.GUI) {
-                      MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
-                    } else if (displayContext.firstPerson()) {
-                      MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
-                    }
-
-                    vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource2, type, posestack$pose);
-                  } else if (flag1) {
-                    vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource2, type, true, itemStack.hasFoil());
-                  } else {
-                    vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource2, type, true, itemStack.hasFoil());
-                  }
-
-                  itemRenderer.renderModelLists(pass, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
-                  bufferSource2.endLastBatch();
-                  dissolveFallback = false;
-                }
-              }
+      if (!dissolveFallback) {
+        for (BakedModel pass : renderPasses) {
+          List<RenderType> rendertypes = pass.getRenderTypes(itemStack, fabulous);
+          for (RenderType type : rendertypes) {
+            if (!isEqualRenderType(type) && !RENDER_TYPE_INFO_CACHE.containsKey(type)) {
+              dissolveFallback = true;
+              DISSOLVE_FALLBACK_MODELS.add(bakedModel);
+              break;
             }
           }
-        }
-
-        if (dissolveFallback) {
-          ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
-          Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
-          if (uniform != null) {
-            uniform.set(dissolveProgress);
+          if (dissolveFallback) {
+            break;
           }
+          for (RenderType passType : rendertypes) {
+            RenderType type;
+            VertexConsumer vertexconsumer;
+            if (!isEqualRenderType(passType)) {
+              RenderTypeInformation info = RENDER_TYPE_INFO_CACHE.get(passType);
+              ShaderInstance shader = info.shader.get();
+              type = info.newType();
 
-          for (var model : p_model.getRenderPasses(itemStack, flag1)) {
-            VertexConsumer vertexconsumer2 = bufferSource2.getBuffer(RootsRenderTypes.DISSOLVE);
-            itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer2);
-            bufferSource2.endBatch(RootsRenderTypes.DISSOLVE);
-          }
+              Uniform uniform = shader.getUniform("DissolveThreshold");
+              if (uniform != null) {
+                uniform.set(dissolveProgress);
+              }
+              shader.setSampler("NoiseTexture", Minecraft.getInstance().getTextureManager()
+                  .getTexture(RootsRenderTypes.ITEM_DISSOLVE_TEXTURE));
+              shader.apply();
+            } else {
+              type = passType;
+            }
 
-          MultiBufferSource bufferSource3 = new DepthWrappedMultiBufferSource(bufferSource2);
-
-          for (var model : p_model.getRenderPasses(itemStack, flag1)) {
-            for (var rendertype1 : model.getRenderTypes(itemStack, flag1)) {
-              var rendertype = RootsRenderTypes.getDissolveDepth(rendertype1);
-              VertexConsumer vertexconsumer;
-              if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
-                PoseStack.Pose posestack$pose = poseStack.last().copy();
-                if (displayContext == ItemDisplayContext.GUI) {
-                  MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
-                } else if (displayContext.firstPerson()) {
-                  MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
-                }
-
-                vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource3, rendertype, posestack$pose);
-              } else if (flag1) {
-                vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource3, rendertype, true, itemStack.hasFoil());
-              } else {
-                vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource3, rendertype, true, itemStack.hasFoil());
+            // Handle animation, glint
+            if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
+              PoseStack.Pose posestack$pose = poseStack.last().copy();
+              if (displayContext == ItemDisplayContext.GUI) {
+                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
+              } else if (displayContext.firstPerson()) {
+                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
               }
 
-              itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource2, type, posestack$pose);
+            } else if (fabulous) {
+              vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource2, type, true, itemStack.hasFoil());
+            } else {
+              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource2, type, true, itemStack.hasFoil());
             }
+
+            itemRenderer.renderModelLists(pass, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+            bufferSource2.endLastBatch();
           }
         }
-      } else {
-        if (!(bufferSource instanceof MultiBufferSource.BufferSource bufferSource2)) {
-          throw new IllegalArgumentException("MultiBufferSource isn't a BufferSource");
-        }
-        IClientItemExtensions itemExtensions = IClientItemExtensions.of(itemStack);
+      }
 
+      if (dissolveFallback) {
         ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
         Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
         if (uniform != null) {
           uniform.set(dissolveProgress);
         }
 
-        DissolveBufferSource dissolve = new DissolveBufferSource(bufferSource2);
-        itemExtensions.getCustomRenderer()
-            .renderByItem(itemStack, displayContext, poseStack, dissolve, combinedLight, combinedOverlay);
-        for (RenderType type : dissolve.getUsedRenderTypes()) {
-          bufferSource2.endBatch(type);
+        for (var model : bakedModel.getRenderPasses(itemStack, fabulous)) {
+          VertexConsumer vertexconsumer2 = bufferSource2.getBuffer(RootsRenderTypes.DISSOLVE);
+          itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer2);
+          bufferSource2.endBatch(RootsRenderTypes.DISSOLVE);
         }
 
         MultiBufferSource bufferSource3 = new DepthWrappedMultiBufferSource(bufferSource2);
-        itemExtensions.getCustomRenderer()
-            .renderByItem(itemStack, displayContext, poseStack, bufferSource3, combinedLight, combinedOverlay);
+
+        for (var model : bakedModel.getRenderPasses(itemStack, fabulous)) {
+          for (var rendertype1 : model.getRenderTypes(itemStack, fabulous)) {
+            var rendertype = RootsRenderTypes.getDissolveDepth(rendertype1);
+            VertexConsumer vertexconsumer;
+            if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
+              PoseStack.Pose posestack$pose = poseStack.last().copy();
+              if (displayContext == ItemDisplayContext.GUI) {
+                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
+              } else if (displayContext.firstPerson()) {
+                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
+              }
+
+              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource3, rendertype1, posestack$pose);
+            } else if (fabulous) {
+              vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource3, rendertype1, true, itemStack.hasFoil());
+            } else {
+              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource3, rendertype1, true, itemStack.hasFoil());
+            }
+
+            itemRenderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+          }
+        }
+      }
+    } else {
+      IClientItemExtensions itemExtensions = IClientItemExtensions.of(itemStack);
+
+      ShaderInstance dissolveShader = RootsShaders.getDissolveShader();
+      Uniform uniform = dissolveShader.getUniform("DissolveThreshold");
+      if (uniform != null) {
+        uniform.set(dissolveProgress);
       }
 
-      poseStack.popPose();
+      DissolveBufferSource dissolve = new DissolveBufferSource(bufferSource2);
+      itemExtensions.getCustomRenderer()
+          .renderByItem(itemStack, displayContext, poseStack, dissolve, combinedLight, combinedOverlay);
+      for (RenderType type : dissolve.getUsedRenderTypes()) {
+        bufferSource2.endBatch(type);
+      }
+
+      MultiBufferSource bufferSource3 = new DepthWrappedMultiBufferSource(bufferSource2);
+      itemExtensions.getCustomRenderer()
+          .renderByItem(itemStack, displayContext, poseStack, bufferSource3, combinedLight, combinedOverlay);
     }
+
+    poseStack.popPose();
   }
 
   private static boolean hasAnimatedTexture(ItemStack stack) {
     return stack.is(ItemTags.COMPASSES) || stack.is(Items.CLOCK);
+  }
+
+  private record RenderTypeInformation(RenderType newType, Supplier<ShaderInstance> shader) {
   }
 }

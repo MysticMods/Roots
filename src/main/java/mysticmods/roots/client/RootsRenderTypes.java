@@ -6,9 +6,11 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
+import net.minecraft.Util;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.OptionalDouble;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class RootsRenderTypes {
@@ -57,6 +60,12 @@ public class RootsRenderTypes {
   public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_CUTOUT_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntityCutoutDissolveShader);
 
   public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntityTranslucentCullDissolveShader);
+
+  public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_NO_OUTLINE_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntityNoOutlineDissolveShader);
+
+  public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_CUTOUT_NO_CULL_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntityCutoutNoCullDissolveShader);
+
+  public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_SOLID_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntitySolidDissolveShader);
 
   public static final RenderStateShard.ShaderStateShard DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDissolveShader);
 
@@ -191,19 +200,24 @@ public class RootsRenderTypes {
           .createCompositeState(false)
   );
 
-  public static final RenderType ENTITY_CUTOUT_DISSOLVE = RenderType.create("roots_entity_cutout_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, RenderType.CompositeState.builder()
-      .setShaderState(RENDERTYPE_ENTITY_CUTOUT_DISSOLVE_SHADER)
-      .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
-      .setTransparencyState(RenderType.NO_TRANSPARENCY)
-      .setLightmapState(RenderType.LIGHTMAP)
-      .setOverlayState(RenderType.OVERLAY)
-      .createCompositeState(true));
+  public static final Function<ResourceLocation, RenderType> ENTITY_CUTOUT_DISSOLVE = Util.memoize(s -> {
+    RenderType.CompositeState state = RenderType.CompositeState.builder()
+        .setShaderState(RENDERTYPE_ENTITY_CUTOUT_DISSOLVE_SHADER)
+        .setTextureState(new RenderStateShard.TextureStateShard(s, false, false))
+        .setTransparencyState(RenderType.NO_TRANSPARENCY)
+        .setLightmapState(RenderType.LIGHTMAP)
+        .setOverlayState(RenderType.OVERLAY)
+        .createCompositeState(true);
+    return RenderType.create("roots_entity_cutout_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, state);
+  });
+
+  public static final RenderType BLOCK_SHEET_ENTITY_CUTOUT_DISSOLVE = ENTITY_CUTOUT_DISSOLVE.apply(TextureAtlas.LOCATION_BLOCKS);
+  public static final RenderType CHEST_SHEET_ENTITY_CUTOUT_DISSOLVE = ENTITY_CUTOUT_DISSOLVE.apply(Sheets.CHEST_SHEET);
 
   public static final RenderType ITEM_ENTITY_TRANSLUCENT_CULL_DISSOLVE = RenderType.create("roots_item_entity_translucent_cull_dissolve, ", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, RenderType.CompositeState.builder()
       .setShaderState(RootsRenderTypes.RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE_SHADER)
       .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
       .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
-/*      .setOutputState(RenderType.ITEM_ENTITY_TARGET)*/
       .setLightmapState(RenderType.LIGHTMAP)
       .setOverlayState(RenderType.OVERLAY)
       .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
@@ -217,6 +231,57 @@ public class RootsRenderTypes {
           .setLightmapState(RenderType.LIGHTMAP)
           .setOverlayState(RenderType.OVERLAY)
           .createCompositeState(true));
+
+  public static final Function<ResourceLocation, RenderType> ENTITY_NO_OUTLINE = Util.memoize(
+      s -> {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+            .setShaderState(RENDERTYPE_ENTITY_NO_OUTLINE_DISSOLVE_SHADER)
+            .setTextureState(new RenderStateShard.TextureStateShard(s, false, false))
+            .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
+            .setCullState(RenderStateShard.NO_CULL)
+            .setLightmapState(RenderStateShard.LIGHTMAP)
+            .setOverlayState(RenderStateShard.OVERLAY)
+            .setWriteMaskState(RenderStateShard.COLOR_WRITE)
+            .createCompositeState(false);
+        return RenderType.create("roots_entity_no_outline_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, false, true, rendertype$compositestate);
+      }
+  );
+
+  public static final RenderType BANNER_SHEET_DISSOLVE = ENTITY_NO_OUTLINE.apply(Sheets.BED_SHEET);
+  public static final RenderType SHIELD_SHEET_DISSOLVE = ENTITY_NO_OUTLINE.apply(Sheets.SHIELD_SHEET);
+
+  public static final BiFunction<ResourceLocation, Boolean, RenderType> ENTITY_CUTOUT_NO_CULL = Util.memoize(
+      (s, outline) -> {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+            .setShaderState(RENDERTYPE_ENTITY_CUTOUT_NO_CULL_DISSOLVE_SHADER)
+            .setTextureState(new RenderStateShard.TextureStateShard(s, false, false))
+            .setTransparencyState(RenderType.NO_TRANSPARENCY)
+            .setCullState(RenderStateShard.NO_CULL)
+            .setLightmapState(RenderStateShard.LIGHTMAP)
+            .setOverlayState(RenderStateShard.OVERLAY)
+            .createCompositeState(outline);
+        return RenderType.create("roots_entity_cutout_no_cull_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, false, rendertype$compositestate);
+      }
+  );
+
+  public static final RenderType SHULKER_SHEET_DISSOLVE = ENTITY_CUTOUT_NO_CULL.apply(Sheets.SHULKER_SHEET, true);
+  public static final RenderType SIGN_SHEET_DISSOLVE = ENTITY_CUTOUT_NO_CULL.apply(Sheets.SIGN_SHEET, true);
+
+  public static final Function<ResourceLocation, RenderType> ENTITY_SOLID_DISSOLVE = Util.memoize(
+      s -> {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+            .setShaderState(RENDERTYPE_ENTITY_SOLID_DISSOLVE_SHADER)
+            .setTextureState(new RenderStateShard.TextureStateShard(s, false, false))
+            .setTransparencyState(RenderType.NO_TRANSPARENCY)
+            .setLightmapState(RenderStateShard.LIGHTMAP)
+            .setOverlayState(RenderStateShard.OVERLAY)
+            .createCompositeState(true);
+        return RenderType.create("roots_entity_solid_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, false, rendertype$compositestate);
+      }
+  );
+
+  public static final RenderType BLOCK_SHEET_ENTITY_SOLID_DISSOLVE = ENTITY_CUTOUT_DISSOLVE.apply(TextureAtlas.LOCATION_BLOCKS);
+  public static final RenderType BED_SHEET_DISSOLVE = ENTITY_SOLID_DISSOLVE.apply(Sheets.BED_SHEET);
 
   private static final Map<RenderType, RenderType> DISSOLVE_DEPTH_MAP = new HashMap<>();
 
