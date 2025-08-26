@@ -485,7 +485,7 @@ public class RenderUtil {
     bakedModel = ClientHooks.handleCameraTransforms(poseStack, bakedModel, displayContext, isLeftHand);
     poseStack.translate(-0.5F, -0.5F, -0.5F);
     //
-    if (!DISSOLVE_FALLBACK_MODELS.contains(bakedModel) && !bakedModel.isCustomRenderer() && (!itemStack.is(Items.TRIDENT) || nonInvOrHand)) {
+    if (!bakedModel.isCustomRenderer() && (!itemStack.is(Items.TRIDENT) || nonInvOrHand)) {
       boolean fabulous;
       if (displayContext != ItemDisplayContext.GUI && !displayContext.firstPerson() && itemStack.getItem() instanceof BlockItem blockitem) {
         Block block = blockitem.getBlock();
@@ -499,67 +499,71 @@ public class RenderUtil {
 
       boolean dissolveFallback = false;
 
-      for (BakedModel pass : renderPasses) {
-        if (pass.isCustomRenderer()) {
-          // Any custom renderer needs to be handled with the wrapped BufferSource
-          DISSOLVE_FALLBACK_MODELS.add(bakedModel);
-          dissolveFallback = true;
-          break;
-        }
-      }
-
-      if (!dissolveFallback) {
+      if (!DISSOLVE_FALLBACK_MODELS.contains(bakedModel)) {
         for (BakedModel pass : renderPasses) {
-          List<RenderType> rendertypes = pass.getRenderTypes(itemStack, fabulous);
-          for (RenderType type : rendertypes) {
-            if (!isEqualRenderType(type) && !RENDER_TYPE_INFO_CACHE.containsKey(type)) {
-              dissolveFallback = true;
-              DISSOLVE_FALLBACK_MODELS.add(bakedModel);
-              break;
-            }
-          }
-          if (dissolveFallback) {
+          if (pass.isCustomRenderer()) {
+            // Any custom renderer needs to be handled with the wrapped BufferSource
+            DISSOLVE_FALLBACK_MODELS.add(bakedModel);
+            dissolveFallback = true;
             break;
           }
-          for (RenderType passType : rendertypes) {
-            RenderType type;
-            VertexConsumer vertexconsumer;
-            if (!isEqualRenderType(passType)) {
-              RenderTypeInformation info = RENDER_TYPE_INFO_CACHE.get(passType);
-              ShaderInstance shader = info.shader.get();
-              type = info.newType();
+        }
 
-              Uniform uniform = shader.getUniform("DissolveThreshold");
-              if (uniform != null) {
-                uniform.set(dissolveProgress);
+        if (!dissolveFallback) {
+          for (BakedModel pass : renderPasses) {
+            List<RenderType> rendertypes = pass.getRenderTypes(itemStack, fabulous);
+            for (RenderType type : rendertypes) {
+              if (!isEqualRenderType(type) && !RENDER_TYPE_INFO_CACHE.containsKey(type)) {
+                dissolveFallback = true;
+                DISSOLVE_FALLBACK_MODELS.add(bakedModel);
+                break;
               }
-              shader.setSampler("NoiseTexture", Minecraft.getInstance().getTextureManager()
-                  .getTexture(RootsRenderTypes.ITEM_DISSOLVE_TEXTURE));
-              shader.apply();
-            } else {
-              type = passType;
             }
+            if (dissolveFallback) {
+              break;
+            }
+            for (RenderType passType : rendertypes) {
+              RenderType type;
+              VertexConsumer vertexconsumer;
+              if (!isEqualRenderType(passType)) {
+                RenderTypeInformation info = RENDER_TYPE_INFO_CACHE.get(passType);
+                ShaderInstance shader = info.shader.get();
+                type = info.newType();
 
-            // Handle animation, glint
-            if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
-              PoseStack.Pose posestack$pose = poseStack.last().copy();
-              if (displayContext == ItemDisplayContext.GUI) {
-                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
-              } else if (displayContext.firstPerson()) {
-                MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
+                Uniform uniform = shader.getUniform("DissolveThreshold");
+                if (uniform != null) {
+                  uniform.set(dissolveProgress);
+                }
+                shader.setSampler("NoiseTexture", Minecraft.getInstance().getTextureManager()
+                    .getTexture(RootsRenderTypes.ITEM_DISSOLVE_TEXTURE));
+                shader.apply();
+              } else {
+                type = passType;
               }
 
-              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource2, type, posestack$pose);
-            } else if (fabulous) {
-              vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource2, type, true, itemStack.hasFoil());
-            } else {
-              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource2, type, true, itemStack.hasFoil());
-            }
+              // Handle animation, glint
+              if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
+                PoseStack.Pose posestack$pose = poseStack.last().copy();
+                if (displayContext == ItemDisplayContext.GUI) {
+                  MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.5F);
+                } else if (displayContext.firstPerson()) {
+                  MatrixUtil.mulComponentWise(posestack$pose.pose(), 0.75F);
+                }
 
-            itemRenderer.renderModelLists(pass, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
-            bufferSource2.endLastBatch();
+                vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource2, type, posestack$pose);
+              } else if (fabulous) {
+                vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource2, type, true, itemStack.hasFoil());
+              } else {
+                vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource2, type, true, itemStack.hasFoil());
+              }
+
+              itemRenderer.renderModelLists(pass, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+              bufferSource2.endLastBatch();
+            }
           }
         }
+      } else {
+        dissolveFallback = true;
       }
 
       if (dissolveFallback) {
@@ -579,7 +583,6 @@ public class RenderUtil {
 
         for (var model : bakedModel.getRenderPasses(itemStack, fabulous)) {
           for (var rendertype1 : model.getRenderTypes(itemStack, fabulous)) {
-            var rendertype = RootsRenderTypes.getDissolveDepth(rendertype1);
             VertexConsumer vertexconsumer;
             if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
               PoseStack.Pose posestack$pose = poseStack.last().copy();
