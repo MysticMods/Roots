@@ -67,6 +67,8 @@ public class RootsRenderTypes {
 
   public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_SOLID_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntitySolidDissolveShader);
 
+  public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_TRANSLUCENT_DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getRenderTypeEntityTranslucentDissolveShader);
+
   public static final RenderStateShard.ShaderStateShard DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDissolveShader);
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
@@ -232,6 +234,15 @@ public class RootsRenderTypes {
           .setOverlayState(RenderType.OVERLAY)
           .createCompositeState(true));
 
+  public static final RenderType ENTITY_TRANSLUCENT_DISSOLVE = RenderType.create("roots_entity_translucent_dissolve", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true,
+      RenderType.CompositeState.builder()
+          .setShaderState(RootsRenderTypes.RENDERTYPE_ENTITY_TRANSLUCENT_DISSOLVE_SHADER)
+          .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
+          .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
+          .setLightmapState(RenderType.LIGHTMAP)
+          .setOverlayState(RenderType.OVERLAY)
+          .createCompositeState(true));
+
   public static final Function<ResourceLocation, RenderType> ENTITY_NO_OUTLINE = Util.memoize(
       s -> {
         RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
@@ -280,7 +291,8 @@ public class RootsRenderTypes {
       }
   );
 
-  public static final RenderType BLOCK_SHEET_ENTITY_SOLID_DISSOLVE = ENTITY_CUTOUT_DISSOLVE.apply(TextureAtlas.LOCATION_BLOCKS);
+  // ???
+  public static final RenderType BLOCK_SHEET_ENTITY_SOLID_DISSOLVE = ENTITY_SOLID_DISSOLVE.apply(TextureAtlas.LOCATION_BLOCKS);
   public static final RenderType BED_SHEET_DISSOLVE = ENTITY_SOLID_DISSOLVE.apply(Sheets.BED_SHEET);
 
   private static final Map<RenderType, RenderType> DISSOLVE_DEPTH_MAP = new HashMap<>();

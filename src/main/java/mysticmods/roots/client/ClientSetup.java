@@ -225,6 +225,7 @@ public class ClientSetup {
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.RENDERTYPE_ENTITY_NO_OUTLINE_DISSOLVE, DefaultVertexFormat.NEW_ENTITY), (s) -> RootsShaders.RENDERTYPE_ENTITY_NO_OUTLINE_DISSOLVE_SHADER = s);
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.RENDERTYPE_ENTITY_CUTOUT_NO_CULL_DISSOLVE, DefaultVertexFormat.NEW_ENTITY), (s) -> RootsShaders.RENDERTYPE_ENTITY_CUTOUT_NO_CULL_DISSOLVE_SHADER = s);
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.RENDERTYPE_ENTITY_SOLID_DISSOLVE, DefaultVertexFormat.NEW_ENTITY), (s) -> RootsShaders.RENDERTYPE_ENTITY_SOLID_DISSOLVE_SHADER = s);
+    event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.RENDERTYPE_ENTITY_TRANSLUCENT_DISSOLVE, DefaultVertexFormat.NEW_ENTITY), (s) -> RootsShaders.RENDERTYPE_ENTITY_TRANSLUCENT_DISSOLVE_SHADER = s);
   }
 
   @SubscribeEvent

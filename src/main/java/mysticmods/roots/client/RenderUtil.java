@@ -49,6 +49,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.client.NeoForgeRenderTypes;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
@@ -440,6 +441,9 @@ public class RenderUtil {
     map.put(Sheets.shulkerBoxSheet(), new RenderTypeInformation(RootsRenderTypes.SHULKER_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutNoCullDissolveShader));
     map.put(Sheets.signSheet(), new RenderTypeInformation(RootsRenderTypes.SIGN_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutNoCullDissolveShader));
     map.put(Sheets.hangingSignSheet(), new RenderTypeInformation(RootsRenderTypes.SIGN_SHEET_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutNoCullDissolveShader));
+    map.put(NeoForgeRenderTypes.ITEM_LAYERED_SOLID.get(), new RenderTypeInformation(RootsRenderTypes.BLOCK_SHEET_ENTITY_SOLID_DISSOLVE, RootsShaders::getRenderTypeEntitySolidDissolveShader));
+    map.put(NeoForgeRenderTypes.ITEM_LAYERED_CUTOUT.get(), new RenderTypeInformation(RootsRenderTypes.BLOCK_SHEET_ENTITY_CUTOUT_DISSOLVE, RootsShaders::getRenderTypeEntityCutoutDissolveShader));
+    map.put(NeoForgeRenderTypes.ITEM_LAYERED_TRANSLUCENT.get(), new RenderTypeInformation(RootsRenderTypes.ENTITY_TRANSLUCENT_DISSOLVE, RootsShaders::getRenderTypeEntityTranslucentDissolveShader));
   });
   // TODO: Clear this on reload
   private static final Set<BakedModel> DISSOLVE_FALLBACK_MODELS = new HashSet<>();
@@ -497,9 +501,9 @@ public class RenderUtil {
       // "Fabulous" seems weird here
       List<BakedModel> renderPasses = bakedModel.getRenderPasses(itemStack, fabulous);
 
-      boolean dissolveFallback = false;
+      boolean dissolveFallback = DISSOLVE_FALLBACK_MODELS.contains(bakedModel);
 
-      if (!DISSOLVE_FALLBACK_MODELS.contains(bakedModel)) {
+      if (!dissolveFallback) {
         for (BakedModel pass : renderPasses) {
           if (pass.isCustomRenderer()) {
             // Any custom renderer needs to be handled with the wrapped BufferSource
@@ -562,8 +566,6 @@ public class RenderUtil {
             }
           }
         }
-      } else {
-        dissolveFallback = true;
       }
 
       if (dissolveFallback) {
