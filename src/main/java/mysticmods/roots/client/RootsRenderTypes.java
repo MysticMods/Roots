@@ -7,6 +7,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
 import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -22,6 +23,33 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class RootsRenderTypes {
+  private static boolean offMainTarget = false;
+
+  public static void setOffMainTarget() {
+    RootsRenderTypes.offMainTarget = true;
+  }
+
+  public static void resetOffMainTarget() {
+    RootsRenderTypes.offMainTarget = false;
+  }
+
+  public static final Function<RenderStateShard.OutputStateShard, RenderStateShard.OutputStateShard> VARIABLE_RENDER_TARGET = Util.memoize((type) -> {
+    if (type.name.equals("variable_target")) {
+      return type;
+    }
+    return new RenderStateShard.OutputStateShard("variable_target", () -> {
+      if (offMainTarget) {
+      } else {
+        type.setupRenderState();
+      }
+    }, () -> {
+      if (offMainTarget) {
+      } else {
+        type.clearRenderState();
+      }
+    });
+  });
+
   private static final RenderStateShard.LayeringStateShard CUSTOM_POLYGON_OFFSET_LAYERING = new RenderStateShard.LayeringStateShard(
       "polygon_offset_layering", () -> {
     RenderSystem.polygonOffset(-0.25F, -10.0F);
