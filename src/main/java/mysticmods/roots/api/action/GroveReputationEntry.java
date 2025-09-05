@@ -34,24 +34,24 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
   }
 
   public enum SubEntryType implements StringRepresentable {
-    BLOCK,
-    OLD_BLOCK,
-    ITEM,
-    EXACT_ITEM,
-    OLD_ITEM,
-    TARGET_ENTITY,
-    SECONDARY_ENTITY,
-    TERTIARY_ENTITY,
-    RITUAL,
-    EXACT_RITUAL,
-    RITUAL_MODIFIER,
-    SPELL,
-    EXACT_SPELL,
-    SPELL_MODIFIER,
-    RECIPE,
-    DAMAGE,
-    DIMENSION,
-    ALWAYS;
+    BLOCK, // TagKey<Block> -> TagKey<Item>
+    OLD_BLOCK, // TagKey<Block> -> TagKey<Item>
+    ITEM, // TagKey<Item>
+    EXACT_ITEM, // ItemStack
+    OLD_ITEM, // TagKey<Item>
+    TARGET_ENTITY, // EntityType or TagKey<EntityType<?>>
+    SECONDARY_ENTITY, // EntityType or TagKey<EntityType<?>>
+    TERTIARY_ENTITY, // EntityType or TagKey<EntityType<?>>
+    RITUAL, // Ritual or TagKey<Ritual> -> TagKey<Item>
+    EXACT_RITUAL, // Ritual or ItemStack
+    RITUAL_MODIFIER, // NA
+    SPELL, // TagKey<Spell> -> TagKey<Item>
+    EXACT_SPELL, // Spell -> ItemStack
+    SPELL_MODIFIER, // NA
+    RECIPE, // ItemStack
+    DAMAGE, // DamageType -> ItemStack map
+    DIMENSION, // Dimension -> ItemStack map
+    ALWAYS; // Symbol for always
 
     public static final Codec<SubEntryType> CODEC = StringRepresentable.fromEnum(SubEntryType::values);
 
