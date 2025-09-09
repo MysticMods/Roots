@@ -57,6 +57,10 @@ public record PartialBlockState(Block block,
     }
   }
 
+  public Set<String> getProperties() {
+    return this.propertyMap.keySet();
+  }
+
   private void guessStates(BlockState template) {
     if (this.propertyMap.isEmpty()) {
       BlockState defaultState = template.getBlock().defaultBlockState();

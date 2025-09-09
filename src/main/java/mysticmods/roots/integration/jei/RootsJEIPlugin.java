@@ -13,15 +13,17 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.categories.*;
-import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityHelper;
-import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
-import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
+import mysticmods.roots.integration.jei.categories.ingredient.block.*;
+import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityHelper;
+import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityRenderer;
+import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityType;
 import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
 import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
@@ -49,6 +51,10 @@ public class RootsJEIPlugin implements IModPlugin {
   public static IDrawable INFO_DRAWABLE;
 
   public static final IIngredientType<RootsEntityType> ENTITY_TYPE = () -> RootsEntityType.class;
+  // Block
+  public static final IIngredientType<SimpleBlockType> BLOCK_TYPE = () -> SimpleBlockType.class;
+  // PartialBlockState
+  public static final IIngredientType<BlockStateType> BLOCK_STATE_TYPE = () -> BlockStateType.class;
 
   @Override
   public ResourceLocation getPluginUid() {
@@ -163,11 +169,17 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   public static final RootsEntityRenderer ENTITY_RENDERER = new RootsEntityRenderer(32);
+  public static final RootsBlockRenderer<SimpleBlockType> BLOCK_RENDERER = new RootsBlockRenderer<>();
+  public static final RootsBlockRenderer<BlockStateType> BLOCK_STATE_RENDERER = new RootsBlockRenderer<>();
 
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
     registration.register(ENTITY_TYPE, Collections.emptyList(), new RootsEntityHelper(), new RootsEntityRenderer(16), BuiltInRegistries.ENTITY_TYPE.byNameCodec()
         .xmap(RootsEntityType::new, RootsEntityType::entity));
+    registration.register(BLOCK_TYPE, Collections.emptyList(), new RootsBlockHelper<>(BLOCK_TYPE), BLOCK_RENDERER, BuiltInRegistries.BLOCK.byNameCodec()
+        .xmap(SimpleBlockType::new, IBlockType::block));
+    registration.register(BLOCK_STATE_TYPE, Collections.emptyList(), new RootsBlockHelper<>(BLOCK_STATE_TYPE), BLOCK_STATE_RENDERER, PartialBlockState.CODEC
+        .xmap(BlockStateType::new, BlockStateType::partial));
   }
 
   public static IJeiRuntime runtime = null;

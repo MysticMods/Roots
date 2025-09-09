@@ -32,7 +32,7 @@ public record WorldTestWidget(int xOffset, int yOffset, int width, int height, B
 
   @Override
   public void drawWidget(GuiGraphics guiGraphics, double mouseX, double mouseY) {
-    RenderUtil.renderBlock(guiGraphics, state, 12, 10, 0, 45f, 10f);
+    RenderUtil.renderBlock(guiGraphics, state, 12, 9, 0, 45f, 10f);
   }
 
   @Override

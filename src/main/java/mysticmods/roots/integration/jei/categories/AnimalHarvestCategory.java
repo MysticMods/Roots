@@ -9,7 +9,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
+import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityType;
 import mysticmods.roots.integration.jei.categories.widget.InfoWidget;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.network.chat.Component;

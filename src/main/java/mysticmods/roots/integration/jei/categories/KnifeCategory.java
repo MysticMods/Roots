@@ -64,32 +64,30 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
     HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
 
     Set<Block> skippedInputs = new HashSet<>();
-    Set<Block> skippedOutputs = new HashSet<>();
-    for (RecipeHolder<KnifeRecipe> recipe2 : ResolvedRecipes.KNIFE.getRecipes(Minecraft.getInstance().level)) {
-      if (recipe2.value().equals(DynamicBarkRecipe.INSTANCE)) {
+    for (RecipeHolder<KnifeRecipe> recipeHolder : ResolvedRecipes.KNIFE.getRecipes(Minecraft.getInstance().level)) {
+      if (recipeHolder.value().equals(DynamicBarkRecipe.INSTANCE)) {
         continue;
       }
 
-      KnifeRecipe recipe3 = recipe2.value();
-      ItemStack result = recipe3.getResultItem(provider);
+      KnifeRecipe recipe = recipeHolder.value();
+      ItemStack result = recipe.getResultItem(provider);
       if (!result.is(RootsTags.Items.BARKS)) {
         continue;
       }
 
-      if (recipe3.getStateMapper() != null) {
-        for (Map.Entry<Block, Block> entry : recipe3.getStateMapper().mapBlock().entrySet()) {
+      if (recipe.getStateMapper() != null) {
+        for (Map.Entry<Block, Block> entry : recipe.getStateMapper().mapBlock().entrySet()) {
           skippedInputs.add(entry.getKey());
-          skippedOutputs.add(entry.getValue());
         }
-      } else if (recipe3.getTest() != null && recipe3.getOutputState() != null) {
-        skippedInputs.add(recipe3.getTest().getBlockState(provider).getBlock());
-        skippedOutputs.add(recipe3.getOutputState().getBlock());
+      } else if (recipe.getTest() != null && recipe.getOutputState() != null) {
+        skippedInputs.add(recipe.getTest().getBlockState(provider).getBlock());
       }
     }
 
     List<ItemStack> inputs = new ArrayList<>();
     List<ItemStack> outputs = new ArrayList<>();
 
+    // This is the dynamic recipe
     if (BuiltInRegistries.BLOCK.getTag(BlockTags.LOGS).isPresent()) {
       UseOnContext fakeContext = new UseOnContext(Minecraft.getInstance().level, null, InteractionHand.MAIN_HAND, knife, BlockHitResult.miss(Vec3.ZERO, Direction.UP, BlockPos.ZERO));
 

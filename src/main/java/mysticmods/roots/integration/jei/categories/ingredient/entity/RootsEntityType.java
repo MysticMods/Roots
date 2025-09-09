@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.ingredient;
+package mysticmods.roots.integration.jei.categories.ingredient.entity;
 
 import net.minecraft.world.entity.EntityType;
 
