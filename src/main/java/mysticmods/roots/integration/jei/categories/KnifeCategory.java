@@ -14,6 +14,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.ingredient.block.SimpleBlockType;
 import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
@@ -49,8 +50,9 @@ import java.util.*;
 public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
   private static ItemStack knife;
 
-  private static Ingredient dynamicInputs;
-  private static Ingredient dynamicOutputs;
+  private static List<SimpleBlockType> dynamicInput;
+  private static List<SimpleBlockType> dynamicOutput;
+  private static boolean dynamicIngredientsDone = false;
 
   public KnifeCategory(IGuiHelper helper) {
     super(RootsJEIPlugin.KNIFE_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/bark_carving.png"), () -> new ItemStack(ModItems.SILVER_KNIFE.get()), Component.translatable("roots.jei.knife_crafting"));
@@ -84,8 +86,8 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
       }
     }
 
-    List<ItemStack> inputs = new ArrayList<>();
-    List<ItemStack> outputs = new ArrayList<>();
+    List<Block> inputs = new ArrayList<>();
+    List<Block> outputs = new ArrayList<>();
 
     // This is the dynamic recipe
     if (BuiltInRegistries.BLOCK.getTag(BlockTags.LOGS).isPresent()) {
@@ -105,12 +107,13 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
           }
         }
 
-        inputs.add(new ItemStack(block));
-        outputs.add(new ItemStack(result.getBlock()));
+        inputs.add(block);
+        outputs.add(result.getBlock());
       }
 
-      dynamicInputs = Ingredient.of(inputs.toArray(ItemStack[]::new));
-      dynamicOutputs = Ingredient.of(outputs.toArray(ItemStack[]::new));
+      dynamicInput = inputs.stream().map(SimpleBlockType::new).toList();
+      dynamicOutput = outputs.stream().map(SimpleBlockType::new).toList();
+      dynamicIngredientsDone = true;
     }
   }
 
@@ -124,18 +127,20 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
     HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
     if (recipe.getStateMapper() != null) {
       OutputStateMapper mapper = recipe.getStateMapper();
-      List<ItemLike> inputs = new ArrayList<>();
-      List<ItemLike> outputs = new ArrayList<>();
+      List<SimpleBlockType> inputs = new ArrayList<>();
+      List<SimpleBlockType> outputs = new ArrayList<>();
 
       mapper.mapBlock().forEach((a, b) -> {
-        inputs.add(a);
-        outputs.add(b);
+        inputs.add(new SimpleBlockType(a));
+        outputs.add(new SimpleBlockType(b));
       });
 
       builder.addSlot(RecipeIngredientRole.INPUT, 7, 34)
-          .addIngredients(Ingredient.of(inputs.toArray(new ItemLike[0])));
+          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, inputs)
+          .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
       builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
-          .addIngredients(Ingredient.of(outputs.toArray(new ItemLike[0])));
+          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, outputs)
+          .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
 
       if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
         builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
@@ -143,14 +148,16 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
       }
     } else {
       if (recipe == DynamicBarkRecipe.INSTANCE) {
-        if (dynamicInputs == null) {
+        if (!dynamicIngredientsDone) {
           generateDynamicIngredients();
         }
 
         builder.addSlot(RecipeIngredientRole.INPUT, 7, 34)
-            .addIngredients(dynamicInputs);
+            .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicInput)
+            .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
-            .addIngredients(dynamicOutputs);
+            .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicOutput)
+            .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
       } else {
         var acceptor = builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT);
 

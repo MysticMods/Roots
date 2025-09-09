@@ -56,6 +56,7 @@ public class TagUtil {
         .findFirst();
   }
 
+  // Copied from Jei
   private static <VALUE> boolean areEquivalent(HolderSet.Named<VALUE> tag, List<VALUE> values) {
     int count = tag.size();
     if (count != values.size()) {
