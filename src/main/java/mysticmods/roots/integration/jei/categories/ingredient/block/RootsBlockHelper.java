@@ -8,6 +8,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 import javax.annotation.Nullable;
@@ -64,5 +65,13 @@ public class RootsBlockHelper<T extends IBlockType> implements IIngredientHelper
       return "unnamed";
     }
     return name.toString();
+  }
+
+  @Override
+  public ItemStack getCheatItemStack(T ingredient) {
+    if (ingredient.stack().isEmpty()) {
+      return ItemStack.EMPTY;
+    }
+    return ingredient.stack().copy();
   }
 }

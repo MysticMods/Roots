@@ -10,6 +10,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -60,5 +63,15 @@ public class RootsEntityHelper implements IIngredientHelper<RootsEntityType> {
       return "unnamed";
     }
     return name.toString();
+  }
+
+  @Override
+  public ItemStack getCheatItemStack(RootsEntityType ingredient) {
+    SpawnEggItem item = DeferredSpawnEggItem.byId(ingredient.entity());
+    if (item == null) {
+      return ItemStack.EMPTY;
+    }
+
+    return new ItemStack(item);
   }
 }
