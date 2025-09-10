@@ -3,32 +3,24 @@ package mysticmods.roots.integration.jei.categories;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
-import mysticmods.roots.api.test.world.BlockMatchWorldTest;
-import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
-import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.ingredient.block.BlockStateType;
 import mysticmods.roots.integration.jei.categories.ingredient.block.SimpleBlockType;
 import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
-import mysticmods.roots.integration.jei.categories.widget.WorldTestWidget;
 import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
-import mysticmods.roots.recipe.knife.OutputStateMapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +35,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -123,90 +114,28 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
     }
   }
 
-  // TODO: State mappers are just block -> block so these can be blocks
-  // TODO: The dynamic recipe could just have a canonical representation of a block tag
-  // but it would also need to know what blocks aren't being included
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, KnifeRecipe recipe, IFocusGroup iFocusGroup) {
     super.setRecipe(builder, recipe, iFocusGroup);
 
-    HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
-    if (recipe.getStateMapper() != null) {
-      OutputStateMapper mapper = recipe.getStateMapper();
-      List<SimpleBlockType> inputs = new ArrayList<>();
-      List<SimpleBlockType> outputs = new ArrayList<>();
+    if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
+      builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
+          .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
+    }
 
-      mapper.mapBlock().forEach((a, b) -> {
-        inputs.add(new SimpleBlockType(a));
-        outputs.add(new SimpleBlockType(b));
-      });
+    if (recipe == DynamicBarkRecipe.INSTANCE) {
+      if (!dynamicIngredientsDone) {
+        generateDynamicIngredients();
+      }
 
       builder.addSlot(RecipeIngredientRole.INPUT, 7, 34)
-          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, inputs)
+          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicInput)
           .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
       builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
-          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, outputs)
+          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicOutput)
           .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
-
-      if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
-            .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
-      }
     } else {
-      if (recipe == DynamicBarkRecipe.INSTANCE) {
-        if (!dynamicIngredientsDone) {
-          generateDynamicIngredients();
-        }
-
-        builder.addSlot(RecipeIngredientRole.INPUT, 7, 34)
-            .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicInput)
-            .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
-            .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicOutput)
-            .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
-      } else {
-        if (recipe.getOutputState() != null) {
-          builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
-              .addIngredient(RootsJEIPlugin.BLOCK_STATE_TYPE, new BlockStateType(recipe.getOutputState()))
-              .setCustomRenderer(RootsJEIPlugin.BLOCK_STATE_TYPE, RootsJEIPlugin.BLOCK_STATE_RENDERER);
-        }
-
-        var slot = builder.addSlot(RecipeIngredientRole.INPUT, 7, 34);
-        if (recipe.getTest() != null && recipe.getStateMapper() == null) {
-          switch (recipe.getTest()) {
-            case BlockMatchWorldTest blockMatchWorldTest ->
-                slot.addIngredient(RootsJEIPlugin.BLOCK_TYPE, new SimpleBlockType(blockMatchWorldTest.getBlock()))
-                    .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
-            case PartialBlockStateMatchWorldTest partialBlockStateMatchWorldTest ->
-                slot.addIngredient(RootsJEIPlugin.BLOCK_STATE_TYPE, new BlockStateType(partialBlockStateMatchWorldTest.getPartialBlockState()))
-                    .setCustomRenderer(RootsJEIPlugin.BLOCK_STATE_TYPE, RootsJEIPlugin.BLOCK_STATE_RENDERER);
-            case TagMatchWorldTest tagMatchWorldTest -> {
-              List<SimpleBlockType> ingredient = new ArrayList<>();
-              BuiltInRegistries.BLOCK.getTag(tagMatchWorldTest.getTag()).ifPresent(tag -> {
-                for (Holder<Block> holder : tag) {
-                  ingredient.add(new SimpleBlockType(holder.value()));
-                }
-              });
-              slot.addIngredients(RootsJEIPlugin.BLOCK_TYPE, ingredient)
-                  .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
-            }
-            default -> {
-              if (recipe.getTest().getIngredient() != null) {
-                slot.addIngredients(recipe.getTest().getIngredient());
-              } else {
-                slot.addIngredient(RootsJEIPlugin.BLOCK_STATE_TYPE, new BlockStateType(recipe.getTest()
-                        .getBlockState(provider)))
-                    .setCustomRenderer(RootsJEIPlugin.BLOCK_STATE_TYPE, RootsJEIPlugin.BLOCK_STATE_RENDERER);
-              }
-            }
-          }
-        }
-
-        if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
-          builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
-              .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
-        }
-      }
+      WorldRecipeUtil.setWorldRecipe(builder, recipe, iFocusGroup, 7, 34, 73, 34);
     }
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();

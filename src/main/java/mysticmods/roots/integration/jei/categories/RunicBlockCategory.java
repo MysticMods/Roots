@@ -34,50 +34,11 @@ public class RunicBlockCategory extends RootsRecipeBaseCategory<RunicBlockRecipe
     super(RootsJEIPlugin.RUNIC_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/runic_block.png"), () -> new ItemStack(ModItems.RUNIC_SHEARS.get()), Component.translatable("roots.jei.runic_block"));
   }
 
-  // TODO: State mappers are just block -> block so these can be blocks
-  // TODO: The dynamic recipe could just have a canonical representation of a block tag
-  // but it would also need to know what blocks aren't being included
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, RunicBlockRecipe recipe, IFocusGroup iFocusGroup) {
     super.setRecipe(builder, recipe, iFocusGroup);
 
-    HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
-    if (recipe.getStateMapper() != null) {
-      OutputStateMapper mapper = recipe.getStateMapper();
-      List<ItemLike> inputs = new ArrayList<>();
-      List<ItemLike> outputs = new ArrayList<>();
-
-      mapper.mapBlock().forEach((a, b) -> {
-        inputs.add(a);
-        outputs.add(b);
-      });
-
-      // 35 -> 39
-
-      builder.addSlot(RecipeIngredientRole.INPUT, 7, 26)
-          .addIngredients(Ingredient.of(inputs.toArray(new ItemLike[0])));
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 26)
-          .addIngredients(Ingredient.of(outputs.toArray(new ItemLike[0])));
-    } else {
-      var acceptor = builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT);
-
-      if (recipe.getOutputState() != null) {
-        // TODO: Create a recipe that uses this
-        BlockState output = recipe.getOutputState().build();
-        acceptor.addIngredients(Ingredient.of(output.getBlock()));
-      }
-
-      acceptor = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
-
-      if (recipe.getTest() != null && recipe.getStateMapper() == null) {
-        if (recipe.getTest().getIngredient() != null) {
-          acceptor.addIngredients(recipe.getTest().getIngredient());
-        } else {
-          BlockState output = recipe.getTest().getBlockState(provider);
-          acceptor.addIngredients(Ingredient.of(output.getBlock()));
-        }
-      }
-    }
+    WorldRecipeUtil.setWorldRecipe(builder, recipe, iFocusGroup, 7, 26, 73, 25);
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();
 
@@ -125,16 +86,6 @@ public class RunicBlockCategory extends RootsRecipeBaseCategory<RunicBlockRecipe
     for (IPlayerCondition condition : recipe.getPlayerConditions()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
-    }
-
-    if (recipe.getOutputState() != null) {
-      // TODO: Create a recipe that uses this
-      BlockState output = recipe.getOutputState().build();
-      builder.addWidget(new WorldTestWidget(69, 21, 24, 24, output, new ItemStack(output.getBlock())));
-    }
-    if (recipe.getTest() != null && recipe.getStateMapper() == null) {
-      BlockState output = recipe.getTest().getBlockState(provider);
-      builder.addWidget(new WorldTestWidget(3, 21, 24, 24, output, new ItemStack(output.getBlock())));
     }
   }
 }
