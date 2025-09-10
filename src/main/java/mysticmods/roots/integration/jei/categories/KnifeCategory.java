@@ -3,17 +3,23 @@ package mysticmods.roots.integration.jei.categories;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.test.world.BlockMatchWorldTest;
+import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
+import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.ingredient.block.BlockStateType;
 import mysticmods.roots.integration.jei.categories.ingredient.block.SimpleBlockType;
 import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
@@ -159,22 +165,40 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
             .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicOutput)
             .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
       } else {
-        var acceptor = builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT);
-
         if (recipe.getOutputState() != null) {
-          // TODO: Create a recipe that uses this
-          BlockState output = recipe.getOutputState().build();
-          acceptor.addIngredients(Ingredient.of(output.getBlock()));
+          builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
+              .addIngredient(RootsJEIPlugin.BLOCK_STATE_TYPE, new BlockStateType(recipe.getOutputState()))
+              .setCustomRenderer(RootsJEIPlugin.BLOCK_STATE_TYPE, RootsJEIPlugin.BLOCK_STATE_RENDERER);
         }
 
-        acceptor = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
-
+        var slot = builder.addSlot(RecipeIngredientRole.INPUT, 7, 34);
         if (recipe.getTest() != null && recipe.getStateMapper() == null) {
-          if (recipe.getTest().getIngredient() != null) {
-            acceptor.addIngredients(recipe.getTest().getIngredient());
-          } else {
-            BlockState output = recipe.getTest().getBlockState(provider);
-            acceptor.addIngredients(Ingredient.of(output.getBlock()));
+          switch (recipe.getTest()) {
+            case BlockMatchWorldTest blockMatchWorldTest ->
+                slot.addIngredient(RootsJEIPlugin.BLOCK_TYPE, new SimpleBlockType(blockMatchWorldTest.getBlock()))
+                    .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
+            case PartialBlockStateMatchWorldTest partialBlockStateMatchWorldTest ->
+                slot.addIngredient(RootsJEIPlugin.BLOCK_STATE_TYPE, new BlockStateType(partialBlockStateMatchWorldTest.getPartialBlockState()))
+                    .setCustomRenderer(RootsJEIPlugin.BLOCK_STATE_TYPE, RootsJEIPlugin.BLOCK_STATE_RENDERER);
+            case TagMatchWorldTest tagMatchWorldTest -> {
+              List<SimpleBlockType> ingredient = new ArrayList<>();
+              BuiltInRegistries.BLOCK.getTag(tagMatchWorldTest.getTag()).ifPresent(tag -> {
+                for (Holder<Block> holder : tag) {
+                  ingredient.add(new SimpleBlockType(holder.value()));
+                }
+              });
+              slot.addIngredients(RootsJEIPlugin.BLOCK_TYPE, ingredient)
+                  .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
+            }
+            default -> {
+              if (recipe.getTest().getIngredient() != null) {
+                slot.addIngredients(recipe.getTest().getIngredient());
+              } else {
+                slot.addIngredient(RootsJEIPlugin.BLOCK_STATE_TYPE, new BlockStateType(recipe.getTest()
+                        .getBlockState(provider)))
+                    .setCustomRenderer(RootsJEIPlugin.BLOCK_STATE_TYPE, RootsJEIPlugin.BLOCK_STATE_RENDERER);
+              }
+            }
           }
         }
 
@@ -206,8 +230,6 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
   public void createRecipeExtras(IRecipeExtrasBuilder builder, KnifeRecipe recipe, IFocusGroup focuses) {
     super.createRecipeExtras(builder, recipe, focuses);
 
-    HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
-
     if (recipe.getDurabilityCost() != -1) {
       Component durability = Component.translatable("roots.jei.text.durability", recipe.getDurabilityCost());
       builder.addWidget(new DurabilityWidget(recipe.getDurabilityCost(), 44, 55, durability));
@@ -232,18 +254,6 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
     for (IPlayerCondition condition : recipe.getPlayerConditions()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
-    }
-
-    if (recipe != DynamicBarkRecipe.INSTANCE) {
-      if (recipe.getOutputState() != null) {
-        // TODO: Create a recipe that uses this
-        BlockState output = recipe.getOutputState().build();
-        builder.addWidget(new WorldTestWidget(69, 29, 24, 24, output, new ItemStack(output.getBlock())));
-      }
-      if (recipe.getTest() != null && recipe.getStateMapper() == null) {
-        BlockState output = recipe.getTest().getBlockState(provider);
-        builder.addWidget(new WorldTestWidget(3, 29, 24, 24, output, new ItemStack(output.getBlock())));
-      }
     }
   }
 }

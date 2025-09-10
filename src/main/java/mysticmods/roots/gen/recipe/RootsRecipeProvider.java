@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.BaseRecipeData;
+import mysticmods.roots.api.test.world.BlockMatchWorldTest;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
@@ -41,10 +42,12 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SeaPickleBlock;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -774,6 +777,20 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(c, RootsAPI.rl("copper_nugget_from_copper_ingot"));
 
     // TODO: recycling recipes ^^^
+
+    // JEI TEST RECIPES
+/*    RecipeSaver.saver().unlockedBy("has_something", has(Items.STICK)).save(KnifeRecipe.Builder.create()
+        .test(new BlockMatchWorldTest(Blocks.AMETHYST_BLOCK))
+        .outputState(new PartialBlockState(Blocks.BUDDING_AMETHYST))
+        .build(BaseRecipeData.Builder.create()
+            *//*.result(Items.STICK, 2)*//*), c, RootsAPI.rl("knife/budding_amethyst_from_amethyst_block"));
+
+    RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
+        .test(new PartialBlockStateMatchWorldTest(new PartialBlockState(Blocks.SEA_PICKLE.defaultBlockState().setValue(SeaPickleBlock.PICKLES, 4), List.of("pickles"))))
+        .outputState(new PartialBlockState(Blocks.SEA_PICKLE.defaultBlockState().setValue(SeaPickleBlock.PICKLES, 1), List.of("pickles")))
+        .build(BaseRecipeData.Builder.create()
+            .priority(100)
+            .result(Items.SEA_PICKLE, 3)), c, RootsAPI.rl("knife/sea_pickle_shenanigans"));*/
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.OAK_LOGS_TO_STRIP))
