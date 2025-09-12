@@ -7,13 +7,12 @@ import mysticmods.roots.init.ModHerbs;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class RootsHerbTagsProvider extends IntrinsicHolderTagsProvider<Herb> {
-
-
-  public RootsHerbTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
+  public RootsHerbTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, ExistingFileHelper existingFileHelper) {
     super(output, RootsRegistries.Keys.HERBS, provider, p_256665_ -> p_256665_.builtInRegistryHolder()
         .getKey(), modId, existingFileHelper);
   }
