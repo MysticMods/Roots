@@ -8,6 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 
 import java.util.function.Function;
 
+// TODO: Actually use this
 public record RitualInstanceData(IntArrayList data) {
   public static final Codec<RitualInstanceData> CODEC = Codec.INT.listOf().xmap(IntArrayList::new, Function.identity())
       .xmap(RitualInstanceData::new, RitualInstanceData::data);
