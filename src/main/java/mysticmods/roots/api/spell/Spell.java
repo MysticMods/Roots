@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -61,9 +62,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected Style style;
   protected ChatFormatting textColor;
   protected String descriptionId;
-
-  protected ItemStack icon;
-  protected ItemStack staffIcon;
 
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
   private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
@@ -314,13 +312,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   @Override
   public void init(Holder<Spell> holder) {
     costs = holder.getData(DataMaps.SPELL_COST_DATA);
-    icon = holder.getData(DataMaps.SPELL_DISPLAY_ITEM);
-    if (icon == null || icon.isEmpty()) {
-      RootsAPI.LOG.error("Icon is missing for spell: {}", holder.getKey());
-      icon = ItemStack.EMPTY;
-    }
-    staffIcon = icon.copy();
-    staffIcon.set(RootsAPI.getInstance().getDeletableType(), Unit.INSTANCE);
     initializeProperties(holder);
     initialize(holder);
     fillDataMaximumValues(dataIndexMaximums);
@@ -331,11 +322,11 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   }
 
   public ItemStack getStaffIcon () {
-    return staffIcon;
+    return RootsItemCallbacks.getLibraryItemStack(this);
   }
 
   public ItemStack getIcon() {
-    return icon;
+    return RootsItemCallbacks.getItemStack(this);
   }
 
   public abstract int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);

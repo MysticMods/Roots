@@ -6,6 +6,8 @@ import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModTabs;
 import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.api.RootsItemCallbacks;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +15,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
+import net.neoforged.neoforge.registries.ModifyRegistriesEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class RootsModEvents {
@@ -378,5 +381,10 @@ public class RootsModEvents {
     event.add(EntityType.PLAYER, ModAttributes.COOLDOWN_REDUCTION);
     event.add(EntityType.PLAYER, ModAttributes.COST_REDUCTION);
     event.add(EntityType.PLAYER, ModAttributes.FORAGING);
+  }
+
+  @SubscribeEvent
+  public static void onModifyRegistry (ModifyRegistriesEvent event) {
+    event.getRegistry(Registries.ITEM).addCallback(RootsItemCallbacks.getInstance());
   }
 }

@@ -181,7 +181,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(RootsTags.Items.RUNED_LOGS, new FurnaceFuel(300), false);
     builder10.add(RootsTags.Items.BARKS_THAT_BURN, new FurnaceFuel(100), false);
 
-    Builder<ItemStack, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
+/*    Builder<ItemStack, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
     Builder<ItemStack, Spell> builder12 = builder(DataMaps.SPELL_DISPLAY_ITEM).replace(false);
 
     BuiltInRegistries.ITEM.entrySet().forEach(o -> {
@@ -194,7 +194,7 @@ public class RootsDataMapProvider extends DataMapProvider {
           builder12.add(spell.getSpell().builtInRegistryHolder(), new ItemStack(o.getValue()), false);
         }
       }
-    });
+    });*/
 
     var builder14 = builder(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
     // Requires finding a world-generated crop

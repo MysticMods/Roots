@@ -2,6 +2,7 @@ package mysticmods.roots.api.ritual;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
@@ -46,8 +47,6 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   protected int radiusXZ = 0;
   protected int radiusY = 0;
   protected int interval = 0;
-
-  protected ItemStack icon;
 
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
@@ -145,11 +144,6 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
 
   @Override
   public void init(Holder<Ritual> holder) {
-    icon = holder.getData(DataMaps.RITUAL_DISPLAY_ITEM);
-    if (icon == null || icon.isEmpty()) {
-      RootsAPI.LOG.error("Icon is missing for ritual: {}", holder.getKey());
-      icon = ItemStack.EMPTY;
-    }
     initProperties(holder);
     initialize(holder);
     rebuildBounds();
@@ -160,7 +154,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   }
 
   public ItemStack getIcon() {
-    return icon;
+    return RootsItemCallbacks.getItemStack(this);
   }
 
   public int getDuration() {

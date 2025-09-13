@@ -41,12 +41,6 @@ public class DataMaps {
   public static final DataMapType<Block, Block> STEM_BLOCKS = DataMapType.builder(RootsAPI.rl("stem_blocks"), Registries.BLOCK, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
       .build();
-  public static final DataMapType<Ritual, ItemStack> RITUAL_DISPLAY_ITEM = DataMapType.builder(RootsAPI.rl("ritual_item_data"), RootsRegistries.Keys.RITUALS, ItemStack.CODEC)
-      .synced(ItemStack.CODEC, false)
-      .build();
-  public static final DataMapType<Spell, ItemStack> SPELL_DISPLAY_ITEM = DataMapType.builder(RootsAPI.rl("spell_item_data"), RootsRegistries.Keys.SPELLS, ItemStack.CODEC)
-      .synced(ItemStack.CODEC, false)
-      .build();
   public static final DataMapType<SpellModifier, SpellModifier> SPELL_MODIFIER_PARENT = DataMapType.builder(RootsAPI.rl("spell_modifier_parent"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELL_MODIFIERS.byNameCodec())
       .synced(RootsRegistries.SPELL_MODIFIERS.byNameCodec(), false)
       .build();

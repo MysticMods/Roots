@@ -42,9 +42,7 @@ public class DataEventHandler {
     event.register(DataMaps.HERB_ITEM_DATA);
     event.register(DataMaps.SPELL_PROPERTY_DATA);
     event.register(DataMaps.RITUAL_PROPERTY_DATA);
-    event.register(DataMaps.RITUAL_DISPLAY_ITEM);
     event.register(DataMaps.RITUAL_MODIFIER_RITUAL);
-    event.register(DataMaps.SPELL_DISPLAY_ITEM);
     event.register(DataMaps.SPELL_MODIFIER_PARENT);
     event.register(DataMaps.SPELL_MODIFIER_SPELL);
     event.register(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
