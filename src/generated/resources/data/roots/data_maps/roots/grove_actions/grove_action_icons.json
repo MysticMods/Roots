@@ -9,7 +9,7 @@
     "roots:cure_villager": "minecraft:golden_apple",
     "roots:eat_item": "minecraft:bowl",
     "roots:fill_compost": "minecraft:composter",
-    "roots:geas": "roots:spell_geas",
+    "roots:geas": "roots:geas",
     "roots:grow_huge_mushroom": "minecraft:brown_mushroom",
     "roots:harvest_bee_hive": "minecraft:honeycomb",
     "roots:kill_entity": "minecraft:iron_sword",

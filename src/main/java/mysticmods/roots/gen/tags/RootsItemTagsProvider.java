@@ -2,12 +2,15 @@ package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -15,12 +18,23 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings({"NullableProblems", "unchecked"})
 public class RootsItemTagsProvider extends ItemTagsProvider {
-  public RootsItemTagsProvider(PackOutput p_275343_, CompletableFuture<HolderLookup.Provider> p_275729_, CompletableFuture<TagLookup<Block>> p_275322_, @org.jetbrains.annotations.Nullable ExistingFileHelper existingFileHelper) {
-    super(p_275343_, p_275729_, p_275322_, RootsAPI.MODID, existingFileHelper);
+  private final CompletableFuture<TagLookup<Ritual>> ritualTags;
+  private final CompletableFuture<TagLookup<Spell>> spellTags;
+  private final Map<TagKey<Ritual>, TagKey<Item>> ritualTagsToCopy = new HashMap<>();
+  private final Map<TagKey<Spell>, TagKey<Item>> spellTagsToCopy = new HashMap<>();
+
+  public RootsItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagLookup<Block>> blockTags, CompletableFuture<TagLookup<Spell>> spellTags, CompletableFuture<TagLookup<Ritual>> ritualRags, @Nullable ExistingFileHelper existingFileHelper) {
+    super(output, provider, blockTags, RootsAPI.MODID, existingFileHelper);
+    this.ritualTags = ritualRags;
+    this.spellTags = spellTags;
   }
 
   @Override
@@ -364,11 +378,68 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS);
     manualCopy(RootsTags.Blocks.BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS);
     manualCopy(RootsTags.Blocks.SPREADING_MUSHROOMS);
+
+    copySpell(RootsTags.Spells.ADJUSTABLE_SPELL);
+    copySpell(RootsTags.Spells.FAIRY);
+    copySpell(RootsTags.Spells.FUNGAL);
+    copySpell(RootsTags.Spells.ELEMENTAL);
+    copySpell(RootsTags.Spells.SPROUTING);
+    copySpell(RootsTags.Spells.PRIMAL);
+    copySpell(RootsTags.Spells.TWILIGHT);
+    copySpell(RootsTags.Spells.WILD);
+    copySpell(RootsTags.Spells.HOLLOW);
+    copySpell(RootsTags.Spells.GEAS_ACTION);
+
+    copyRitual(RootsTags.Rituals.FUNGAL);
+    copyRitual(RootsTags.Rituals.SPROUTING);
+    copyRitual(RootsTags.Rituals.ELEMENTAL);
+    copyRitual(RootsTags.Rituals.PRIMAL);
+    copyRitual(RootsTags.Rituals.TWILIGHT);
+    copyRitual(RootsTags.Rituals.WILD);
+    copyRitual(RootsTags.Rituals.FAIRY);
+    copyRitual(RootsTags.Rituals.HOLLOW);
+  }
+
+  protected void copySpell (TagKey<Spell> spellTag) {
+    TagKey<Item> itemTag = TagKey.create(Registries.ITEM, spellTag.location());
+    copySpell(spellTag, itemTag);
+  }
+
+  protected void copySpell (TagKey<Spell> spellTag, TagKey<Item> itemTag) {
+    this.spellTagsToCopy.put(spellTag, itemTag);
+  }
+
+  protected void copyRitual (TagKey<Ritual> ritualTag) {
+    TagKey<Item> itemTag = TagKey.create(Registries.ITEM, ritualTag.location());
+    copyRitual(ritualTag, itemTag);
+  }
+
+  protected void copyRitual (TagKey<Ritual> ritualTag, TagKey<Item> itemTag) {
+    this.ritualTagsToCopy.put(ritualTag, itemTag);
   }
 
   protected void manualCopy(TagKey<Block> blockTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, blockTag.location());
     copy(blockTag, itemTag);
+  }
+
+  @Override
+  protected CompletableFuture<HolderLookup.Provider> createContentsProvider() {
+    return super.createContentsProvider().thenCombine(this.ritualTags, (provider, tags) -> {
+      this.ritualTagsToCopy.forEach((rTag, iTag) -> {
+        TagBuilder tagbuilder = this.getOrCreateRawBuilder(iTag);
+        Optional<TagBuilder> optional = tags.apply(rTag);
+        optional.orElseThrow(() -> new IllegalStateException("Missing ritual item tag " + iTag.location())).build().forEach(tagbuilder::add);
+      });
+      return provider;
+    }).thenCombine(this.spellTags, (provider, tags) -> {
+      this.spellTagsToCopy.forEach((rTag, iTag) -> {
+        TagBuilder tagbuilder = this.getOrCreateRawBuilder(iTag);
+        Optional<TagBuilder> optional = tags.apply(rTag);
+        optional.orElseThrow(() -> new IllegalStateException("Missing spell item tag " + iTag.location())).build().forEach(tagbuilder::add);
+      });
+      return provider;
+    });
   }
 
   @Override

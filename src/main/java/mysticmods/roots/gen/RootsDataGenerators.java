@@ -43,7 +43,6 @@ public class RootsDataGenerators {
 
     RootsBlockTagProvider blocks;
     generator.addProvider(event.includeServer(), blocks = new RootsBlockTagProvider(output, provider, helper));
-    generator.addProvider(event.includeServer(), new RootsItemTagsProvider(output, provider, blocks.contentsGetter(), helper));
     generator.addProvider(event.includeClient(), new RootsAtlasProvider(output, provider, helper));
     generator.addProvider(true, RootsLootTableProvider.create(output, provider));
     generator.addProvider(event.includeServer(), new RootsEntityTagsProvider(output, provider, helper));
@@ -52,9 +51,11 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementProvider())));
     generator.addProvider(event.includeServer(), new RootsDataMapProvider(output, provider));
     generator.addProvider(event.includeServer(), new RootsHerbTagsProvider(output, provider, RootsAPI.MODID, helper));
-    generator.addProvider(event.includeServer(), new RootsSpellTagsProvider(output, provider, RootsAPI.MODID, helper));
+    RootsSpellTagsProvider spellTagsProvider;
+    generator.addProvider(event.includeServer(), spellTagsProvider = new RootsSpellTagsProvider(output, provider, RootsAPI.MODID, helper));
     generator.addProvider(event.includeServer(), new RootsGroveTagsProvider(output, provider, RootsAPI.MODID, helper));
-    generator.addProvider(event.includeServer(), new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
+    RootsRitualTagsProvider ritualTagsProvider;
+    generator.addProvider(event.includeServer(), ritualTagsProvider = new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
     generator.addProvider(event.includeServer(), new RootsStructureTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsBiomeTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsBlockStateProvider(output, helper));
@@ -67,5 +68,7 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsDamageTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsAttributeTagsProvider(output, provider, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
+
+    generator.addProvider(event.includeServer(), new RootsItemTagsProvider(output, provider, blocks.contentsGetter(), spellTagsProvider.contentsGetter(), ritualTagsProvider.contentsGetter(), helper));
   }
 }
