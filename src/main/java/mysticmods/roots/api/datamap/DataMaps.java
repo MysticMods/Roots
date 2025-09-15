@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
@@ -17,7 +17,6 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -25,17 +24,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapValueMerger;
-import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,10 +98,10 @@ public class DataMaps {
   public static final DataMapType<Item, Block> GROWTH_SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("growth_seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
       .build();
-  public static final DataMapType<Block, List<GrovePower.Generator>> GROVE_POWER_GENERATORS = DataMapType.builder(RootsAPI.rl("grove_power_generator"), Registries.BLOCK, GrovePower.Generator.LIST_CODEC)
-      .synced(GrovePower.Generator.LIST_CODEC, false).build();
-  public static final DataMapType<Grove, List<GrovePower.GenerationEntry>> GROVE_GENERATION_ENTRIES = DataMapType.builder(RootsAPI.rl("grove_generation_entries"), RootsRegistries.Keys.GROVES, GrovePower.GenerationEntry.LIST_CODEC)
-      .synced(GrovePower.GenerationEntry.LIST_CODEC, false).build();
+  public static final DataMapType<Block, List<GrovePowerGenerator.Generator>> GROVE_POWER_GENERATORS = DataMapType.builder(RootsAPI.rl("grove_power_generator"), Registries.BLOCK, GrovePowerGenerator.Generator.LIST_CODEC)
+      .synced(GrovePowerGenerator.Generator.LIST_CODEC, false).build();
+  public static final DataMapType<Grove, List<GrovePowerGenerator.GenerationEntry>> GROVE_GENERATION_ENTRIES = DataMapType.builder(RootsAPI.rl("grove_generation_entries"), RootsRegistries.Keys.GROVES, GrovePowerGenerator.GenerationEntry.LIST_CODEC)
+      .synced(GrovePowerGenerator.GenerationEntry.LIST_CODEC, false).build();
   public static final DataMapType<EntityType<?>, List<ResourceKey<LootTable>>> ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES = DataMapType.builder(RootsAPI.rl("additional_animal_harvest_loot_tables"), Registries.ENTITY_TYPE, ResourceKey.codec(Registries.LOOT_TABLE)
           .listOf())
       .synced(ResourceKey.codec(Registries.LOOT_TABLE).listOf(), false)

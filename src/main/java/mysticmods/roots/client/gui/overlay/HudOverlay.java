@@ -7,7 +7,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.ritual.Ritual;
@@ -438,7 +438,7 @@ public class HudOverlay {
       y += 10;
       x += 30;
 
-      GrovePower powerPower = groveInstance.getPower();
+      GrovePowerGenerator powerPower = groveInstance.getPower();
       Grove grove = groveInstance.asGrove();
 
       Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank(), groveInstance.getMaxRank());

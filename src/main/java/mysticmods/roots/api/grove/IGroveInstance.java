@@ -12,7 +12,7 @@ public interface IGroveInstance extends Bounded, IProvidesTick {
 
   int getMaxRank();
 
-  GrovePower getPower();
+  GrovePowerGenerator getPower();
 
   default boolean is(TagKey<Grove> tag) {
     return asGrove().is(tag);

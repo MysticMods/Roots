@@ -9,7 +9,7 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.RefillProvider;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.api.recipe.ConditionResult;
@@ -64,7 +64,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   private static PowerTicket.TicketDefinition getTicketDefinition() {
     if (TICKET_DEFINITION == null) {
-      TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePower.Consumer(RootsTags.Groves.FUNGAL, ConfigManager.FUNGAL_TRANSMUTER_POWER_PER_TICK.getAsInt())));
+      TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePowerGenerator.Consumer(RootsTags.Groves.FUNGAL, ConfigManager.FUNGAL_TRANSMUTER_POWER_PER_TICK.getAsInt())));
     }
     return TICKET_DEFINITION;
   }

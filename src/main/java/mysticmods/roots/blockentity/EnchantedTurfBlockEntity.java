@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
@@ -34,7 +34,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
-  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePower.Consumer(RootsTags.Groves.ANY, 60)));
+  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePowerGenerator.Consumer(RootsTags.Groves.ANY, 60)));
 
   private PowerTicket ticket;
   private boolean poweredLastTick = false;

@@ -23,7 +23,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import java.util.*;
 
 // TODO: Handle rank changes
-public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, GrovePower, IGroveInstance {
+public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, GrovePowerGenerator, IGroveInstance {
   private int generatedLastTick = 0;
   private int consumedLastTick = 0;
   private int generatedThisTick = 0;
@@ -154,8 +154,8 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     return positions;
   }
 
-  public List<GrovePower.GenerationEntry> getGenerationEntries() {
-    List<GrovePower.GenerationEntry> entries = getGrove().getData(DataMaps.GROVE_GENERATION_ENTRIES);
+  public List<GrovePowerGenerator.GenerationEntry> getGenerationEntries() {
+    List<GrovePowerGenerator.GenerationEntry> entries = getGrove().getData(DataMaps.GROVE_GENERATION_ENTRIES);
     if (entries == null) {
       return Collections.emptyList();
     }
@@ -163,7 +163,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
   }
 
   public Map<GenerationEntry, BlockTracker> buildTrackers() {
-    List<GrovePower.GenerationEntry> entries = getGenerationEntries();
+    List<GrovePowerGenerator.GenerationEntry> entries = getGenerationEntries();
     if (entries.isEmpty()) {
       return Collections.emptyMap();
     }
@@ -179,7 +179,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     generatedLastTick = generatedThisTick;
     generatedThisTick = 0;
 
-    List<GrovePower.GenerationEntry> entries = getGenerationEntries();
+    List<GrovePowerGenerator.GenerationEntry> entries = getGenerationEntries();
     if (entries.isEmpty()) {
       return;
     }
@@ -284,7 +284,7 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
   }
 
   @Override
-  public GrovePower getPower() {
+  public GrovePowerGenerator getPower() {
     return this;
   }
 

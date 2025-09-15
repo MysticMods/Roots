@@ -8,7 +8,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.api.reference.Constants;
@@ -53,7 +53,7 @@ import java.util.UUID;
 
 public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer, Merchant {
   private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(
-      ImmutableList.of(new GrovePower.Consumer(RootsTags.Groves.FAIRY, 15))
+      ImmutableList.of(new GrovePowerGenerator.Consumer(RootsTags.Groves.FAIRY, 15))
   );
 
   private boolean wasPoweredLastTick = false;

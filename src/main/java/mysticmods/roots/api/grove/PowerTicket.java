@@ -12,7 +12,7 @@ import java.util.List;
 public class PowerTicket {
   private final TicketDefinition definition;
   private final long tick;
-  private final Object2IntMap<GrovePower.Consumer> suppliedMap = new Object2IntOpenHashMap<>();
+  private final Object2IntMap<GrovePowerGenerator.Consumer> suppliedMap = new Object2IntOpenHashMap<>();
   private final List<BlockPos> lastPoweredFrom = new ArrayList<>();
 
   private PowerTicket(TicketDefinition definition, long tick) {
@@ -24,7 +24,7 @@ public class PowerTicket {
     if (amount <= 0) {
       return amount;
     }
-    for (GrovePower.Consumer req : definition.requests()) {
+    for (GrovePowerGenerator.Consumer req : definition.requests()) {
       if (grove.is(req.tag())) {
         int fullRequired = req.value();
         int amountSupplied = suppliedMap.getInt(req);
@@ -44,7 +44,7 @@ public class PowerTicket {
   }
 
   public boolean wasFullfilled() {
-    for (GrovePower.Consumer req : definition.requests()) {
+    for (GrovePowerGenerator.Consumer req : definition.requests()) {
       if (!suppliedMap.containsKey(req)) {
         return false;
       }
@@ -56,7 +56,7 @@ public class PowerTicket {
   }
 
   public int getSupplied(TagKey<Grove> tag) {
-    for (GrovePower.Consumer consumer : definition.requests()) {
+    for (GrovePowerGenerator.Consumer consumer : definition.requests()) {
       if (consumer.tag().equals(tag)) {
         return suppliedMap.getInt(consumer);
       }
@@ -64,7 +64,7 @@ public class PowerTicket {
     return 0;
   }
 
-  public int getSupplied(GrovePower.Consumer consumer) {
+  public int getSupplied(GrovePowerGenerator.Consumer consumer) {
     return suppliedMap.getInt(consumer);
   }
 
@@ -76,7 +76,7 @@ public class PowerTicket {
     return this.tick == tick;
   }
 
-  public record TicketDefinition(ImmutableList<GrovePower.Consumer> requests) {
+  public record TicketDefinition(ImmutableList<GrovePowerGenerator.Consumer> requests) {
     public PowerTicket create(long tick) {
       return new PowerTicket(this, tick);
     }

@@ -8,7 +8,7 @@ import mysticmods.roots.api.datamap.AugmentationData;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.datamap.SproutGift;
-import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -21,7 +21,6 @@ import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
 import mysticmods.roots.init.*;
-import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,7 +30,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -40,7 +38,6 @@ import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
-import org.w3c.dom.Attr;
 
 import java.util.List;
 import java.util.Optional;
@@ -538,39 +535,39 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     var builder24 = builder(DataMaps.GROVE_POWER_GENERATORS);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, RootsTags.Groves.FAIRY, 5)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, RootsTags.Groves.FAIRY, 5)), false);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_PATHS, List.of(
-        new GrovePower.Generator(RootsTags.Blocks.FAIRY_GROVE_PATHS, RootsTags.Groves.FAIRY, 1)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.FAIRY_GROVE_PATHS, RootsTags.Groves.FAIRY, 1)), false);
     builder24.add(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
     builder24.add(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, RootsTags.Groves.SPROUTING, 5)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, RootsTags.Groves.SPROUTING, 5)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, RootsTags.Groves.FUNGAL, 5)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, RootsTags.Groves.FUNGAL, 5)), false);
     builder24.add(RootsTags.Blocks.WILD_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Blocks.WILD_GROVE_GENERATORS, RootsTags.Groves.WILD, 5)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.WILD_GROVE_GENERATORS, RootsTags.Groves.WILD, 5)), false);
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
-        new GrovePower.Generator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
 
     var builder25 = builder(DataMaps.GROVE_GENERATION_ENTRIES);
     builder25.add(ModGroves.FAIRY, List.of(
-        new GrovePower.GenerationEntry(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, 2, GrovePower.Symmetry.RADIAL_SAME_BLOCK),
-        new GrovePower.GenerationEntry(RootsTags.Blocks.FAIRY_GROVE_PATHS, 30, GrovePower.Symmetry.RADIAL_SAME_BLOCK)
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, 2, GrovePowerGenerator.Symmetry.RADIAL_SAME_BLOCK),
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.FAIRY_GROVE_PATHS, 30, GrovePowerGenerator.Symmetry.RADIAL_SAME_BLOCK)
     ), false);
     builder25.add(ModGroves.ELEMENTAL, List.of(
-        new GrovePower.GenerationEntry(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, 2, GrovePower.Symmetry.RADIAL_DIFFERENT_SAME_TAG)
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, 2, GrovePowerGenerator.Symmetry.RADIAL_DIFFERENT_SAME_TAG)
     ), false);
     builder25.add(ModGroves.SPROUTING, List.of(
-        new GrovePower.GenerationEntry(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, 3, GrovePower.Symmetry.NONE)
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, 3, GrovePowerGenerator.Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.FUNGAL, List.of(
-        new GrovePower.GenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, 2, GrovePower.Symmetry.NONE)
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, 2, GrovePowerGenerator.Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.WILD, List.of(
-        new GrovePower.GenerationEntry(RootsTags.Blocks.WILD_GROVE_GENERATORS, 2, GrovePower.Symmetry.NONE)
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.WILD_GROVE_GENERATORS, 2, GrovePowerGenerator.Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.TWILIGHT, List.of(
-        new GrovePower.GenerationEntry(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, GrovePower.Symmetry.RADIAL_NOT_MATCHING)
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, GrovePowerGenerator.Symmetry.RADIAL_NOT_MATCHING)
     ), false);
 
     var builder26 = builder(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);

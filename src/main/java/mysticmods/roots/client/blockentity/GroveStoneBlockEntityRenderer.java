@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.grove.GrovePower;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.client.ColorHelper;
@@ -33,7 +33,7 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
         BlockPos pPos = pBlockEntity.getBlockPos();
         List<BlockPos> generatorPositions = pBlockEntity.getValidPositions(pPos);
-        List<GrovePower.GenerationEntry> entries = pBlockEntity.getGenerationEntries();
+        List<GrovePowerGenerator.GenerationEntry> entries = pBlockEntity.getGenerationEntries();
         if (generatorPositions.isEmpty() || entries.isEmpty()) {
           return;
         }
@@ -54,12 +54,12 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
             continue;
           }
 
-          for (GrovePower.GenerationEntry entry : entries) {
+          for (GrovePowerGenerator.GenerationEntry entry : entries) {
             BlockState current = pBlockEntity.getLevel().getBlockState(pos);
             if (!current.is(entry.tag())) {
               continue;
             }
-            GrovePower.Symmetry sym = entry.symmetry();
+            GrovePowerGenerator.Symmetry sym = entry.symmetry();
             Pair<Boolean, BlockPos> match = sym.matchesWithPair(pBlockEntity.getLevel(), entry.tag(), pos, pPos);
             marked.add(pos);
             BlockPos relativePos = pos.subtract(origin);
