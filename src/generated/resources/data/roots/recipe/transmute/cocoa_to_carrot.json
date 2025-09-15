@@ -6,11 +6,16 @@
         "tag": "c:crops/cocoa_bean"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 600
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:carrot"
     }
-  },
-  "power": 600
+  }
 }

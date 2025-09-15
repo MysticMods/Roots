@@ -6,11 +6,16 @@
         "item": "minecraft:birch_leaves"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 600
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:jungle_leaves"
     }
-  },
-  "power": 600
+  }
 }

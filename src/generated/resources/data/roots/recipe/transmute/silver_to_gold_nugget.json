@@ -9,11 +9,16 @@
         "tag": "c:ingots/silver"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 166
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:gold_nugget"
     }
-  },
-  "power": 166
+  }
 }

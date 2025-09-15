@@ -6,11 +6,16 @@
         "tag": "c:storage_blocks/redstone"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 2000
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:glowstone"
     }
-  },
-  "power": 2000
+  }
 }

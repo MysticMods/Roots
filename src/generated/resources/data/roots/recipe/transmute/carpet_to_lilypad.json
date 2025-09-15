@@ -6,11 +6,16 @@
         "tag": "minecraft:wool_carpets"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 600
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:lily_pad"
     }
-  },
-  "power": 600
+  }
 }

@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
+import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.HolderLookup;
@@ -61,6 +62,14 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return Collections.emptyList();
     }
     return this.data.unlocks;
+  }
+
+  @Override
+  public List<GroveNumber> getPowerRequirements () {
+    if (this.data.powerRequirements == null) {
+      return Collections.emptyList();
+    }
+    return this.data.powerRequirements;
   }
 
   @Override

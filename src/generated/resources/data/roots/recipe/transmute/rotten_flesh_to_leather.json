@@ -12,11 +12,16 @@
         "tag": "roots:rotten_flesh"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 900
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:leather"
     }
-  },
-  "power": 900
+  }
 }

@@ -6,11 +6,16 @@
         "tag": "c:crops/beetroot"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 600
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:potato"
     }
-  },
-  "power": 600
+  }
 }

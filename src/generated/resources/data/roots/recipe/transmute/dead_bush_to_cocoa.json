@@ -6,11 +6,16 @@
         "item": "minecraft:dead_bush"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 600
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 3,
       "id": "minecraft:cocoa_beans"
     }
-  },
-  "power": 600
+  }
 }

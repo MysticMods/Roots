@@ -6,11 +6,16 @@
         "tag": "c:crops/melon"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 600
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "minecraft:cactus"
     }
-  },
-  "power": 600
+  }
 }

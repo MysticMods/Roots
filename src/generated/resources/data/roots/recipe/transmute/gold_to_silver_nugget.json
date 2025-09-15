@@ -9,11 +9,16 @@
         "tag": "c:nuggets/gold"
       }
     ],
+    "power_requirements": [
+      {
+        "grove": "roots:fungal",
+        "value": 166
+      }
+    ],
     "priority": 0,
     "result": {
       "count": 1,
       "id": "roots:silver_nugget"
     }
-  },
-  "power": 166
+  }
 }

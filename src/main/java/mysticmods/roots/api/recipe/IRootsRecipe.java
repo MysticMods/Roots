@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
+import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.util.SetUtils;
@@ -47,6 +48,10 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   }
 
   default List<Unlock<?>> getUnlocks() {
+    return Collections.emptyList();
+  }
+
+  default List<GroveNumber> getPowerRequirements() {
     return Collections.emptyList();
   }
 
