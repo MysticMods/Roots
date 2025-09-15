@@ -13,6 +13,8 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.init.ModAttachments;
@@ -20,10 +22,14 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.categories.*;
-import mysticmods.roots.integration.jei.categories.ingredient.block.*;
-import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityHelper;
-import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityRenderer;
-import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityType;
+import mysticmods.roots.integration.jei.ingredient.block.*;
+import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityHelper;
+import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityRenderer;
+import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
+import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualHelper;
+import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualRenderer;
+import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellHelper;
+import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellRenderer;
 import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
 import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
@@ -55,6 +61,8 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<SimpleBlockType> BLOCK_TYPE = () -> SimpleBlockType.class;
   // PartialBlockState
   public static final IIngredientType<BlockStateType> BLOCK_STATE_TYPE = () -> BlockStateType.class;
+  public static final IIngredientType<Spell> SPELL_TYPE = () -> Spell.class;
+  public static final IIngredientType<Ritual> RITUAL_TYPE = () -> Ritual.class;
 
   @Override
   public ResourceLocation getPluginUid() {
@@ -168,18 +176,23 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.registerSubtypeInterpreter(ModItems.SYLVAN_POUCH.get(), colorInterpreter);
   }
 
-  public static final RootsEntityRenderer ENTITY_RENDERER = new RootsEntityRenderer(32);
+  public static final RootsEntityRenderer MAIN_ENTITY_RENDERER = new RootsEntityRenderer(32);
+  public static final RootsEntityRenderer SMALL_ENTITY_RENDERER = new RootsEntityRenderer(16);
   public static final RootsBlockRenderer<SimpleBlockType> BLOCK_RENDERER = new RootsBlockRenderer<>();
   public static final RootsBlockRenderer<BlockStateType> BLOCK_STATE_RENDERER = new RootsBlockRenderer<>();
+  public static final RootsSpellRenderer SPELL_RENDERER = new RootsSpellRenderer();
+  public static final RootsRitualRenderer RITUAL_RENDERER = new RootsRitualRenderer();
 
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
-    registration.register(ENTITY_TYPE, Collections.emptyList(), new RootsEntityHelper(), new RootsEntityRenderer(16), BuiltInRegistries.ENTITY_TYPE.byNameCodec()
+    registration.register(ENTITY_TYPE, Collections.emptyList(), new RootsEntityHelper(), SMALL_ENTITY_RENDERER, BuiltInRegistries.ENTITY_TYPE.byNameCodec()
         .xmap(RootsEntityType::new, RootsEntityType::entity));
     registration.register(BLOCK_TYPE, Collections.emptyList(), new RootsBlockHelper<>(BLOCK_TYPE), BLOCK_RENDERER, BuiltInRegistries.BLOCK.byNameCodec()
         .xmap(SimpleBlockType::new, IBlockType::block));
     registration.register(BLOCK_STATE_TYPE, Collections.emptyList(), new RootsBlockHelper<>(BLOCK_STATE_TYPE), BLOCK_STATE_RENDERER, PartialBlockState.CODEC
         .xmap(BlockStateType::new, BlockStateType::partial));
+    registration.register(SPELL_TYPE, Collections.emptyList(), new RootsSpellHelper(), SPELL_RENDERER, Spell.CODEC);
+    registration.register(RITUAL_TYPE, Collections.emptyList(), new RootsRitualHelper(), RITUAL_RENDERER, Ritual.CODEC);
   }
 
   public static IJeiRuntime runtime = null;

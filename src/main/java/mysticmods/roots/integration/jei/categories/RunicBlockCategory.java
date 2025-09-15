@@ -12,21 +12,15 @@ import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
-import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
-import mysticmods.roots.integration.jei.categories.widget.WorldTestWidget;
-import mysticmods.roots.recipe.knife.OutputStateMapper;
+import mysticmods.roots.integration.jei.widget.DurabilityWidget;
+import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
+import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RunicBlockCategory extends RootsRecipeBaseCategory<RunicBlockRecipe> {

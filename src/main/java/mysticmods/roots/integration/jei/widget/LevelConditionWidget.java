@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.widget;
+package mysticmods.roots.integration.jei.widget;
 
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.widgets.IRecipeWidget;

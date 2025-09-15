@@ -17,6 +17,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -24,7 +25,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,9 +38,13 @@ import net.neoforged.neoforge.registries.datamaps.DataMapValueMerger;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DataMaps {
+  public static final Map<ResourceKey<Level>,ItemStack> DIMENSION_LOOKUP = new HashMap<>();
+
   public static final DataMapType<Block, Block> STEM_BLOCKS = DataMapType.builder(RootsAPI.rl("stem_blocks"), Registries.BLOCK, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
       .build();
@@ -117,6 +124,29 @@ public class DataMaps {
   public static final DataMapType<Block, Float> EXTRA_CROP_CHANCE = DataMapType.builder(RootsAPI.rl("extra_crop_chance"), Registries.BLOCK, Codec.FLOAT)
       .synced(Codec.FLOAT, false)
       .build();
+  public static final DataMapType<Item, List<ResourceKey<Level>>> DIMENSION_ITEM = DataMapType.builder(RootsAPI.rl("dimension_item"), Registries.ITEM, ResourceKey.codec(Registries.DIMENSION)
+          .listOf())
+      .synced(ResourceKey.codec(Registries.DIMENSION).listOf(), true)
+      .build();
+
+  public static ItemStack getDimensionItem (ResourceKey<Level> dimension) {
+    if (DIMENSION_LOOKUP.isEmpty()) {
+      BuiltInRegistries.ITEM.holders().forEach(o -> {
+        List<ResourceKey<Level>> keys = o.getData(DataMaps.DIMENSION_ITEM);
+        if (keys != null) {
+          for (ResourceKey<Level> key : keys) {
+            if (DIMENSION_LOOKUP.containsKey(key)) {
+              RootsAPI.LOG.warn("Multiple items registered for dimension {}: {} and {}", key, DIMENSION_LOOKUP.get(key), o.value());
+            } else {
+              DIMENSION_LOOKUP.put(key, new ItemStack(o.value()));
+            }
+          }
+        }
+      });
+    }
+
+    return DIMENSION_LOOKUP.getOrDefault(dimension, ItemStack.EMPTY);
+  }
 
   // Additional data maps need to be added to the register event in `DataEventHandler`
 

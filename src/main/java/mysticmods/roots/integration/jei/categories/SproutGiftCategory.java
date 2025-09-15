@@ -9,7 +9,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityType;
+import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +39,7 @@ public class SproutGiftCategory extends RootsRecipeBaseCategory<SproutGiftRecipe
     collector.addIngredients(Ingredient.of(inputItem));
     List<RootsEntityType> types = List.of(new RootsEntityType(recipe.sprout()));
     builder.addSlot(RecipeIngredientRole.INPUT, 47, 12)
-        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.ENTITY_RENDERER)
+        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.MAIN_ENTITY_RENDERER)
         .addIngredients(RootsJEIPlugin.ENTITY_TYPE, types);
 
     int row = 0;

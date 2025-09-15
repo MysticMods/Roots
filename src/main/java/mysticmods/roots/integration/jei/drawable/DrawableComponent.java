@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.drawable;
+package mysticmods.roots.integration.jei.drawable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.gui.drawable.IDrawable;

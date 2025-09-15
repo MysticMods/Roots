@@ -13,6 +13,7 @@ import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -61,6 +62,7 @@ public class DataEventHandler {
     event.register(DataMaps.AUGMENTATION_DATA);
     event.register(DataMaps.EXTRA_CROP_DATA);
     event.register(DataMaps.EXTRA_CROP_CHANCE);
+    event.register(DataMaps.DIMENSION_ITEM);
   }
 
   private static void callInit(Holder<?> holder) {
@@ -74,6 +76,10 @@ public class DataEventHandler {
     var reference = event.getRegistry().getAny().orElse(null);
     if (reference == null) {
       return;
+    }
+
+    if (event.getRegistry().key().equals(Registries.ITEM)) {
+      DataMaps.DIMENSION_LOOKUP.clear();
     }
 
     if (reference.value() instanceof IDataMapInitialize<?>) {

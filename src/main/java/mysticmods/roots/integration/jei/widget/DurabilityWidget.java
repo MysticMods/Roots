@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.widget;
+package mysticmods.roots.integration.jei.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.gui.builder.ITooltipBuilder;

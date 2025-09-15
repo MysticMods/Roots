@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.ingredient.block;
+package mysticmods.roots.integration.jei.ingredient.block;
 
 import mysticmods.roots.api.test.world.PartialBlockState;
 import net.minecraft.ChatFormatting;

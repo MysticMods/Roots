@@ -39,15 +39,15 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
     ITEM, // TagKey<Item>
     EXACT_ITEM, // ItemStack
     OLD_ITEM, // TagKey<Item>
-    TARGET_ENTITY, // EntityType or TagKey<EntityType<?>>
-    SECONDARY_ENTITY, // EntityType or TagKey<EntityType<?>>
-    TERTIARY_ENTITY, // EntityType or TagKey<EntityType<?>>
-    RITUAL, // Ritual or TagKey<Ritual> -> TagKey<Item>
-    EXACT_RITUAL, // Ritual or ItemStack
+    TARGET_ENTITY, // TagKey<EntityType<?>>
+    SECONDARY_ENTITY, // TagKey<EntityType<?>>
+    TERTIARY_ENTITY, // TagKey<EntityType<?>>
+    RITUAL, // TagKey<Ritual> -> TagKey<Item>
+    EXACT_RITUAL, // Ritual
     RITUAL_MODIFIER, // NA
     SPELL, // TagKey<Spell> -> TagKey<Item>
-    EXACT_SPELL, // Spell -> ItemStack
-    SPELL_MODIFIER, // NA
+    EXACT_SPELL, // Spell
+    SPELL_MODIFIER,
     RECIPE, // ItemStack
     DAMAGE, // DamageType -> ItemStack map
     DIMENSION, // Dimension -> ItemStack map

@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.ingredient.block;
+package mysticmods.roots.integration.jei.ingredient.block;
 
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import mysticmods.roots.api.RootsAPI;

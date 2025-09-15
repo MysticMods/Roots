@@ -1,17 +1,20 @@
-package mysticmods.roots.integration.jei.categories.widget;
+package mysticmods.roots.integration.jei.widget;
 
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.widgets.IRecipeWidget;
-import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.network.chat.Component;
 
-public class InfoWidget implements IRecipeWidget {
+public class GrovePowerWidget implements IRecipeWidget {
   private final Component tooltip;
   private final int x, y;
+  private final int cost;
 
-  public InfoWidget(int x, int y, Component tooltip) {
+  public GrovePowerWidget(int cost, int x, int y, Component tooltip) {
+    this.cost = cost;
     this.y = y;
     this.x = x;
     this.tooltip = tooltip;
@@ -31,6 +34,8 @@ public class InfoWidget implements IRecipeWidget {
 
   @Override
   public void drawWidget(GuiGraphics guiGraphics, double mouseX, double mouseY) {
-    RootsJEIPlugin.INFO_DRAWABLE.draw(guiGraphics, 0, 0);
+    Minecraft minecraft = Minecraft.getInstance();
+    Font fontRenderer = minecraft.font;
+    guiGraphics.drawString(fontRenderer, String.valueOf(cost), 0, 4, 0xe0e0e0);
   }
 }

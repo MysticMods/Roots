@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.ingredient.entity;
+package mysticmods.roots.integration.jei.ingredient.entity;
 
 import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
@@ -18,6 +18,7 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class RootsEntityHelper implements IIngredientHelper<RootsEntityType> {
 
@@ -37,9 +38,18 @@ public class RootsEntityHelper implements IIngredientHelper<RootsEntityType> {
     return type.entity().getDescription().getString();
   }
 
-  @SuppressWarnings("removal")
   @Override
-  public String getUniqueId(RootsEntityType type, UidContext context) {
+  public Stream<ResourceLocation> getTagStream(RootsEntityType ingredient) {
+    return ingredient.entity().getTags().map(TagKey::location);
+  }
+
+  @Override
+  public String getUniqueId(RootsEntityType ingredient, UidContext context) {
+    return getUid(ingredient, context);
+  }
+
+  @Override
+  public String getUid(RootsEntityType type, UidContext context) {
     return Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(type.entity())).toString();
   }
 

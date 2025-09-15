@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.ingredient.entity;
+package mysticmods.roots.integration.jei.ingredient.entity;
 
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.ingredients.IIngredientRenderer;

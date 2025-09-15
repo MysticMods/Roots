@@ -9,8 +9,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityType;
-import mysticmods.roots.integration.jei.categories.widget.InfoWidget;
+import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
+import mysticmods.roots.integration.jei.widget.InfoWidget;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +42,7 @@ public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvest
     List<RootsEntityType> types = List.of(new RootsEntityType(recipe.entity()));
 
     builder.addSlot(RecipeIngredientRole.INPUT, 12, 26)
-        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.ENTITY_RENDERER)
+        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.MAIN_ENTITY_RENDERER)
         .addIngredients(RootsJEIPlugin.ENTITY_TYPE, types);
 
     int row = 0;

@@ -12,11 +12,11 @@ import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityType;
-import mysticmods.roots.integration.jei.categories.widget.CooldownWidget;
-import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
-import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
+import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
+import mysticmods.roots.integration.jei.widget.CooldownWidget;
+import mysticmods.roots.integration.jei.widget.DurabilityWidget;
+import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
+import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -48,7 +48,7 @@ public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityReci
     List<RootsEntityType> types = recipe.getEntityTest().getEntityTypes().stream().map(RootsEntityType::new).toList();
 
     builder.addSlot(RecipeIngredientRole.INPUT, 12, 26)
-        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.ENTITY_RENDERER)
+        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.MAIN_ENTITY_RENDERER)
         .addIngredients(RootsJEIPlugin.ENTITY_TYPE, types);
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();

@@ -13,9 +13,9 @@ import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.ingredient.entity.RootsEntityType;
-import mysticmods.roots.integration.jei.categories.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.categories.widget.PlayerConditionWidget;
+import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
+import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
+import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -44,7 +44,7 @@ public class SummonCreaturesCategory extends RootsRecipeBaseCategory<SummonCreat
     List<RootsEntityType> types = List.of(new RootsEntityType(entityType));
 
     builder.addSlot(RecipeIngredientRole.OUTPUT, 117, 26)
-        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.ENTITY_RENDERER)
+        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.MAIN_ENTITY_RENDERER)
         .addIngredients(RootsJEIPlugin.ENTITY_TYPE, types);
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();
