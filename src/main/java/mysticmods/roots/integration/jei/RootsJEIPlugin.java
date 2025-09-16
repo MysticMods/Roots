@@ -13,6 +13,8 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.test.world.PartialBlockState;
@@ -23,6 +25,12 @@ import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.integration.jei.ingredient.block.*;
+import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageHelper;
+import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
+import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageType;
+import mysticmods.roots.integration.jei.ingredient.dimension.DimensionType;
+import mysticmods.roots.integration.jei.ingredient.dimension.RootsDimensionHelper;
+import mysticmods.roots.integration.jei.ingredient.dimension.RootsDimensionRenderer;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityHelper;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
@@ -63,6 +71,10 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<BlockStateType> BLOCK_STATE_TYPE = () -> BlockStateType.class;
   public static final IIngredientType<Spell> SPELL_TYPE = () -> Spell.class;
   public static final IIngredientType<Ritual> RITUAL_TYPE = () -> Ritual.class;
+  public static final IIngredientType<DimensionType> DIMENSION_TYPE = () -> DimensionType.class;
+  public static final IIngredientType<RootsDamageType> DAMAGE_TYPE = () -> RootsDamageType.class;
+  public static final IIngredientType<Grove> GROVE_TYPE = () -> Grove.class;
+  public static final IIngredientType<GroveNumber> GROVE_NUMBER_TYPE = () -> GroveNumber.class;
 
   @Override
   public ResourceLocation getPluginUid() {
@@ -182,6 +194,8 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RootsBlockRenderer<BlockStateType> BLOCK_STATE_RENDERER = new RootsBlockRenderer<>();
   public static final RootsSpellRenderer SPELL_RENDERER = new RootsSpellRenderer();
   public static final RootsRitualRenderer RITUAL_RENDERER = new RootsRitualRenderer();
+  public static final RootsDimensionRenderer DIMENSION_RENDERER = new RootsDimensionRenderer();
+  public static final RootsDamageRenderer DAMAGE_RENDERER = new RootsDamageRenderer();
 
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
@@ -193,6 +207,8 @@ public class RootsJEIPlugin implements IModPlugin {
         .xmap(BlockStateType::new, BlockStateType::partial));
     registration.register(SPELL_TYPE, Collections.emptyList(), new RootsSpellHelper(), SPELL_RENDERER, Spell.CODEC);
     registration.register(RITUAL_TYPE, Collections.emptyList(), new RootsRitualHelper(), RITUAL_RENDERER, Ritual.CODEC);
+    registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, DimensionType.CODEC);
+    registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
   }
 
   public static IJeiRuntime runtime = null;

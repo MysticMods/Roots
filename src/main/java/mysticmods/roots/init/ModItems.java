@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchMenu;
@@ -513,12 +514,25 @@ public class ModItems {
     ITEMS.addAlias(RootsAPI.rl("ritual_windwall"), RootsAPI.rl("windwall"));
   }
 
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_ELEMENTAL = ITEMS.register("elemental", () -> grove(ModGroves.ELEMENTAL));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_FAIRY = ITEMS.register("fairy", () -> grove(ModGroves.FAIRY));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_FUNGAL = ITEMS.register("fungal", () -> grove(ModGroves.FUNGAL));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_PRIMAL = ITEMS.register("primal", () -> grove(ModGroves.PRIMAL));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_SPROUTING = ITEMS.register("sprouting", () -> grove(ModGroves.SPROUTING));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_TWILIGHT = ITEMS.register("twilight", () -> grove(ModGroves.TWILIGHT));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_WILD = ITEMS.register("wild", () -> grove(ModGroves.WILD));
+
+
   private static TokenItem.SpellTokenItem spell(Holder<Spell> spell) {
     return new TokenItem.SpellTokenItem(spell.getKey(), new Item.Properties().stacksTo(1));
   }
 
   private static TokenItem.RitualTokenItem ritual(Holder<Ritual> ritual) {
     return new TokenItem.RitualTokenItem(ritual.getKey(), new Item.Properties().stacksTo(1));
+  }
+
+  private static TokenItem.GroveTokenItem grove (Holder<Grove> grove) {
+    return new TokenItem.GroveTokenItem(grove.getKey(), new Item.Properties().stacksTo(1));
   }
 
   public static void register(IEventBus bus) {

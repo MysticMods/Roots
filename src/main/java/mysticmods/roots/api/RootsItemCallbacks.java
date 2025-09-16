@@ -1,5 +1,6 @@
 package mysticmods.roots.api;
 
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
@@ -24,6 +25,8 @@ public class RootsItemCallbacks implements AddCallback<Item>, ClearCallback<Item
   private static final Map<SpellModifier, Item> SPELL_MODIFIER_ITEM_MAP = new HashMap<>();
   private static final Map<Ritual, Item> RITUAL_TO_ITEM_MAP = new HashMap<>();
   private static final Map<Ritual, ItemStack> RITUAL_TO_ITEMSTACK_MAP = new HashMap<>();
+  private static final Map<Grove, Item> GROVE_TO_ITEM_MAP = new HashMap<>();
+  private static final Map<Grove, ItemStack> GROVE_TO_ITEMSTACK_MAP = new HashMap<>();
 
   public static RootsItemCallbacks getInstance() {
     return INSTANCE;
@@ -40,6 +43,9 @@ public class RootsItemCallbacks implements AddCallback<Item>, ClearCallback<Item
     } else if (value instanceof TokenItem.RitualTokenItem ritualToken) {
       RITUAL_TO_ITEM_MAP.put(ritualToken.getRitual(), ritualToken);
       RITUAL_TO_ITEMSTACK_MAP.put(ritualToken.getRitual(), new ItemStack(ritualToken));
+    } else if (value instanceof TokenItem.GroveTokenItem groveToken) {
+      GROVE_TO_ITEM_MAP.put(groveToken.getGrove(), groveToken);
+      GROVE_TO_ITEMSTACK_MAP.put(groveToken.getGrove(), new ItemStack(groveToken));
     }
   }
 
@@ -49,6 +55,11 @@ public class RootsItemCallbacks implements AddCallback<Item>, ClearCallback<Item
       SPELL_TO_ITEM_MAP.clear();
       SPELL_MODIFIER_ITEM_MAP.clear();
       RITUAL_TO_ITEM_MAP.clear();
+      GROVE_TO_ITEM_MAP.clear();
+      GROVE_TO_ITEMSTACK_MAP.clear();
+      SPELL_TO_ITEMSTACK_MAP.clear();
+      SPELL_TO_LIBRARY_ITEMSTACK_MAP.clear();
+      RITUAL_TO_ITEMSTACK_MAP.clear();
     }
   }
 
@@ -74,5 +85,13 @@ public class RootsItemCallbacks implements AddCallback<Item>, ClearCallback<Item
 
   public static Item getItem(Ritual ritual) {
     return RITUAL_TO_ITEM_MAP.getOrDefault(ritual, Items.AIR);
+  }
+
+  public static Item getItem (Grove grove) {
+    return GROVE_TO_ITEM_MAP.getOrDefault(grove, Items.AIR);
+  }
+
+  public static ItemStack getItemStack (Grove grove) {
+    return GROVE_TO_ITEMSTACK_MAP.getOrDefault(grove, ItemStack.EMPTY);
   }
 }

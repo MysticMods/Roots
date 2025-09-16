@@ -1,9 +1,11 @@
 package mysticmods.roots.api.grove;
 
+import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.gen.tags.RootsItemTagsProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -11,6 +13,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
@@ -48,6 +51,10 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
       return getDefaultRanks();
     }
     return reputationRanks;
+  }
+
+  public ItemStack getIcon () {
+    return RootsItemCallbacks.getItemStack(this);
   }
 
   public int getColor1() {

@@ -4,6 +4,7 @@
     "roots:summon_creatures",
     "roots:gathering",
     "roots:augmentation",
-    "roots:nondetection"
+    "roots:nondetection",
+    "roots:wild"
   ]
 }

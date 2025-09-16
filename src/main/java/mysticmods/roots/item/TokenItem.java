@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -123,8 +124,31 @@ public abstract class TokenItem extends Item {
     }
   }
 
+  public static class GroveTokenItem extends TokenItem {
+    private final ResourceKey<Grove> grove;
+
+    public GroveTokenItem(ResourceKey<Grove> grove, Properties properties) {
+      super(properties);
+      this.grove = grove;
+    }
+
+    public Grove getGrove() {
+      return RootsRegistries.GROVES.get(grove);
+    }
+
+    @Override
+    public String getDescriptionId(ItemStack stack) {
+      return getGrove().getDescriptionId();
+    }
+
+    @Override
+    public @Nullable Unlock<?> getUnlock() {
+      return null;
+    }
+  }
+
   public enum TokenType implements StringRepresentable {
-    SPELL, MODIFIER, RITUAL;
+    SPELL, MODIFIER, RITUAL, GROVE;
 
     public static final Codec<TokenType> CODEC = StringRepresentable.fromEnum(TokenType::values);
     public static final StreamCodec<ByteBuf, TokenType> STREAM_CODEC = ByteBufCodecs.VAR_INT.map(TokenType::fromOrdinal, TokenType::ordinal);

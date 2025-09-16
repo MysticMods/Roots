@@ -2,6 +2,7 @@ package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModItems;
@@ -28,13 +29,16 @@ import java.util.concurrent.CompletableFuture;
 public class RootsItemTagsProvider extends ItemTagsProvider {
   private final CompletableFuture<TagLookup<Ritual>> ritualTags;
   private final CompletableFuture<TagLookup<Spell>> spellTags;
+  private final CompletableFuture<TagLookup<Grove>> groveTags;
   private final Map<TagKey<Ritual>, TagKey<Item>> ritualTagsToCopy = new HashMap<>();
   private final Map<TagKey<Spell>, TagKey<Item>> spellTagsToCopy = new HashMap<>();
+  private final Map<TagKey<Grove>, TagKey<Item>> groveTagsToCopy = new HashMap<>();
 
-  public RootsItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagLookup<Block>> blockTags, CompletableFuture<TagLookup<Spell>> spellTags, CompletableFuture<TagLookup<Ritual>> ritualRags, @Nullable ExistingFileHelper existingFileHelper) {
+  public RootsItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagLookup<Block>> blockTags, CompletableFuture<TagLookup<Spell>> spellTags, CompletableFuture<TagLookup<Ritual>> ritualRags, CompletableFuture<TagLookup<Grove>> groveTags, @Nullable ExistingFileHelper existingFileHelper) {
     super(output, provider, blockTags, RootsAPI.MODID, existingFileHelper);
     this.ritualTags = ritualRags;
     this.spellTags = spellTags;
+    this.groveTags = groveTags;
   }
 
   @Override
@@ -398,6 +402,23 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     copyRitual(RootsTags.Rituals.WILD);
     copyRitual(RootsTags.Rituals.FAIRY);
     copyRitual(RootsTags.Rituals.HOLLOW);
+
+    copyGrove(RootsTags.Groves.FAIRY);
+    copyGrove(RootsTags.Groves.FUNGAL);
+    copyGrove(RootsTags.Groves.ELEMENTAL);
+    copyGrove(RootsTags.Groves.SPROUTING);
+    copyGrove(RootsTags.Groves.PRIMAL);
+    copyGrove(RootsTags.Groves.TWILIGHT);
+    copyGrove(RootsTags.Groves.WILD);
+  }
+
+  protected void copyGrove (TagKey<Grove> groveTag) {
+    TagKey<Item> itemTag = TagKey.create(Registries.ITEM, groveTag.location());
+    copyGrove(groveTag, itemTag);
+  }
+
+  protected void copyGrove (TagKey<Grove> groveTag, TagKey<Item> itemTag) {
+    this.groveTagsToCopy.put(groveTag, itemTag);
   }
 
   protected void copySpell (TagKey<Spell> spellTag) {
@@ -437,6 +458,13 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
         TagBuilder tagbuilder = this.getOrCreateRawBuilder(iTag);
         Optional<TagBuilder> optional = tags.apply(rTag);
         optional.orElseThrow(() -> new IllegalStateException("Missing spell item tag " + iTag.location())).build().forEach(tagbuilder::add);
+      });
+      return provider;
+    }).thenCombine(this.groveTags, (provider, tags) -> {
+      this.groveTagsToCopy.forEach((rTag, iTag) -> {
+        TagBuilder tagbuilder = this.getOrCreateRawBuilder(iTag);
+        Optional<TagBuilder> optional = tags.apply(rTag);
+        optional.orElseThrow(() -> new IllegalStateException("Missing grove item tag " + iTag.location())).build().forEach(tagbuilder::add);
       });
       return provider;
     });

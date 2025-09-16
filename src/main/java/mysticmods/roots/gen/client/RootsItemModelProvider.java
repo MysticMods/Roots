@@ -390,11 +390,12 @@ public class RootsItemModelProvider extends ItemModelProvider {
     BuiltInRegistries.ITEM.entrySet().forEach(entry -> {
       Item item = entry.getValue();
       if (entry.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
-        if (entry.getKey().location().getPath().startsWith("spell_") && item instanceof TokenItem.SpellTokenItem) {
+        if (item instanceof TokenItem.SpellTokenItem) {
           spell(item.builtInRegistryHolder());
-        } else if (entry.getKey().location().getPath()
-            .startsWith("ritual_") && item instanceof TokenItem.RitualTokenItem) {
+        } else if (item instanceof TokenItem.RitualTokenItem) {
           ritual(item.builtInRegistryHolder());
+        } else if (item instanceof TokenItem.GroveTokenItem) {
+          grove(item.builtInRegistryHolder());
         }
       }
     });
@@ -426,7 +427,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
 
   public ItemModelBuilder spell(Holder<Item> itemHolder) {
     ResourceLocation item = itemHolder.getKey().location();
-    String spellLocation = "item/spells/" + item.getPath().replace("spell_", "");
+    String spellLocation = "item/spells/" + item.getPath(); //.replace("spell_", "");
     return getBuilder(item.toString())
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), spellLocation));
@@ -434,9 +435,17 @@ public class RootsItemModelProvider extends ItemModelProvider {
 
   public ItemModelBuilder ritual(Holder<Item> itemHolder) {
     ResourceLocation item = itemHolder.getKey().location();
-    String spellLocation = "item/rituals/" + item.getPath().replace("ritual_", "");
+    String spellLocation = "item/rituals/" + item.getPath(); //.replace("ritual_", "");
     return getBuilder(item.toString())
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), spellLocation));
+  }
+
+  public ItemModelBuilder grove (Holder<Item> itemHolder) {
+    ResourceLocation item = itemHolder.getKey().location();
+    String groveLocation = "item/groves/" + item.getPath(); //.replace("grove_", "");
+    return getBuilder(item.toString())
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), groveLocation));
   }
 }
