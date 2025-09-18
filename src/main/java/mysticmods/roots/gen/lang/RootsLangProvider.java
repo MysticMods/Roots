@@ -781,6 +781,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.jei.text.cooldown", "Cooldown: %ss");
     add("roots.jei.sprout_gifts", "Rewards for Breeding Sprouts");
     add("roots.jei.animal_harvest", "Animal Harvest");
+    add("roots.jei.grove_reputaiton", "Grove Reputation");
     add("roots.jei.animal_harvest.info", "Note: Outputs shown are default and may vary based on mod interactions.");
     add("roots.jei.fungal_transmuter", "Fungal Transmutation");
     add("roots.jei.text.grove_power", "Fungal Grove Power required: %s");

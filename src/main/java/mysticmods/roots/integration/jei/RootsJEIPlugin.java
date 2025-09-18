@@ -1,5 +1,6 @@
 package mysticmods.roots.integration.jei;
 
+import com.electronwill.nightconfig.core.conversion.SpecIntInRange;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -13,8 +14,12 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.action.GroveAction;
+import mysticmods.roots.api.action.GroveReputationEntry;
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.test.world.PartialBlockState;
@@ -24,6 +29,7 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.categories.*;
+import mysticmods.roots.integration.jei.fake.GroveWithReputation;
 import mysticmods.roots.integration.jei.ingredient.block.*;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageHelper;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
@@ -34,6 +40,7 @@ import mysticmods.roots.integration.jei.ingredient.dimension.RootsDimensionRende
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityHelper;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
+import mysticmods.roots.integration.jei.ingredient.grove.*;
 import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualHelper;
 import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualRenderer;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellHelper;
@@ -57,8 +64,10 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 @JeiPlugin
 public class RootsJEIPlugin implements IModPlugin {
@@ -75,6 +84,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<RootsDamageType> DAMAGE_TYPE = () -> RootsDamageType.class;
   public static final IIngredientType<Grove> GROVE_TYPE = () -> Grove.class;
   public static final IIngredientType<GroveNumber> GROVE_NUMBER_TYPE = () -> GroveNumber.class;
+  public static final IIngredientType<GroveAction> GROVE_ACTION_TYPE = () -> GroveAction.class;
 
   @Override
   public ResourceLocation getPluginUid() {
@@ -91,6 +101,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<SummonCreaturesRecipe> SUMMON_CREATURES_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("summon_creatures_recipe"), SummonCreaturesRecipe.class);
   public static final RecipeType<AnimalHarvestRecipe> ANIMAL_HARVEST_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("animal_harvest_recipe"), AnimalHarvestRecipe.class);
   public static final RecipeType<TransmutationRecipe> TRANSMUTATION_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("transmutation_recipe"), TransmutationRecipe.class);
+  public static final RecipeType<GroveWithReputation> GROVE_REPUTATION_ENTRY_TYPE = new RecipeType<>(RootsAPI.rl("grove_reputation_entry"), GroveWithReputation.class);
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -106,12 +117,14 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new SummonCreaturesCategory(guiHelper));
     registration.addRecipeCategories(new AnimalHarvestCategory(guiHelper));
     registration.addRecipeCategories(new FungalTransmuterCategory(guiHelper));
+    registration.addRecipeCategories(new GroveWithReputationCategory(guiHelper));
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
 
   }
 
+  // SORT THEM ALPHABETICALLY >:0
   public static final Comparator<RecipeHolder<?>> RECIPE_COMPARATOR = Comparator.comparing(o -> o.id().toString());
 
   @Override
@@ -152,6 +165,18 @@ public class RootsJEIPlugin implements IModPlugin {
         .sorted(RECIPE_COMPARATOR)
         .map(RecipeHolder::value)
         .toList());
+    List<GroveWithReputation> recipes = new ArrayList<>();
+    for (GroveAction entry : RootsRegistries.GROVE_ACTIONS) {
+      List<GroveReputationEntry> entries = entry.builtInRegistryHolder().getData(DataMaps.GROVE_ACTION_REPUTATIONS);
+      if (entries == null) {
+        RootsAPI.LOG.error("Grove action {} has no reputation entries", entry);
+        continue;
+      }
+      for (GroveReputationEntry gEntry : entries) {
+        recipes.add(new GroveWithReputation(entry, gEntry));
+      }
+    }
+    registration.addRecipes(GROVE_REPUTATION_ENTRY_TYPE, recipes);
   }
 
   @Override
@@ -196,6 +221,9 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RootsRitualRenderer RITUAL_RENDERER = new RootsRitualRenderer();
   public static final RootsDimensionRenderer DIMENSION_RENDERER = new RootsDimensionRenderer();
   public static final RootsDamageRenderer DAMAGE_RENDERER = new RootsDamageRenderer();
+  public static final RootsGroveNumberRenderer GROVE_NUMBER_RENDERER = new RootsGroveNumberRenderer();
+  public static final RootsGroveRenderer GROVE_RENDERER = new RootsGroveRenderer();
+  public static final RootsGroveActionRenderer GROVE_ACTION_RENDERER = new RootsGroveActionRenderer();
 
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
@@ -209,6 +237,9 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(RITUAL_TYPE, Collections.emptyList(), new RootsRitualHelper(), RITUAL_RENDERER, Ritual.CODEC);
     registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, DimensionType.CODEC);
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
+    registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
+    registration.register(GROVE_NUMBER_TYPE, Collections.emptyList(), new RootsGroveNumberHelper(), GROVE_NUMBER_RENDERER, GroveNumber.CODEC);
+    registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream().toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
   }
 
   public static IJeiRuntime runtime = null;

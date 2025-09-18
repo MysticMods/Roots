@@ -42,6 +42,7 @@ public class RootsDamageHelper implements IIngredientHelper<RootsDamageType> {
     return ingredient.type().tags().map(TagKey::location);
   }
 
+  @SuppressWarnings("removal")
   @Override
   public String getUniqueId(RootsDamageType ingredient, UidContext context) {
     return getUid(ingredient, context);

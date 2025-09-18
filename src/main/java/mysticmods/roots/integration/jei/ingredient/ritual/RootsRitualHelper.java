@@ -41,6 +41,7 @@ public class RootsRitualHelper implements IIngredientHelper<Ritual> {
     return ingredient.builtInRegistryHolder().tags().map(TagKey::location);
   }
 
+  @SuppressWarnings("removal")
   @Override
   public String getUniqueId(Ritual ingredient, UidContext context) {
     return getUid(ingredient, context);

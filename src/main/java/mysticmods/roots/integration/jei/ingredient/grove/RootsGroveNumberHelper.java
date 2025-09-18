@@ -4,6 +4,7 @@ import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.util.TagUtil;
@@ -18,51 +19,51 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class RootsGroveHelper implements IIngredientHelper<Grove> {
+public class RootsGroveNumberHelper implements IIngredientHelper<GroveNumber> {
   @Override
-  public Optional<TagKey<?>> getTagKeyEquivalent(Collection<Grove> ingredients) {
+  public Optional<TagKey<?>> getTagKeyEquivalent(Collection<GroveNumber> ingredients) {
     Registry<Grove> registry = RootsRegistries.GROVES;
-    return TagUtil.getTagEquivalent(ingredients, Function.identity(), registry::getTags);
+    return TagUtil.getTagEquivalent(ingredients, GroveNumber::grove, registry::getTags);
   }
 
   @Override
-  public IIngredientType<Grove> getIngredientType() {
-    return RootsJEIPlugin.GROVE_TYPE;
+  public IIngredientType<GroveNumber> getIngredientType() {
+    return RootsJEIPlugin.GROVE_NUMBER_TYPE;
   }
 
   @Override
-  public String getDisplayName(Grove type) {
-    return type.getName().getString();
+  public String getDisplayName(GroveNumber type) {
+    return type.grove().getName().getString();
   }
 
   @Override
-  public Stream<ResourceLocation> getTagStream(Grove ingredient) {
-    return ingredient.builtInRegistryHolder().tags().map(TagKey::location);
+  public Stream<ResourceLocation> getTagStream(GroveNumber ingredient) {
+    return ingredient.grove().builtInRegistryHolder().tags().map(TagKey::location);
   }
 
   @SuppressWarnings("removal")
   @Override
-  public String getUniqueId(Grove ingredient, UidContext context) {
+  public String getUniqueId(GroveNumber ingredient, UidContext context) {
     return getUid(ingredient, context);
   }
 
   @Override
-  public String getUid(Grove type, UidContext context) {
+  public String getUid(GroveNumber type, UidContext context) {
     return getResourceLocation(type).toString();
   }
 
   @Override
-  public ResourceLocation getResourceLocation(Grove type) {
-    return Objects.requireNonNull(RootsRegistries.GROVES.getKey(type));
+  public ResourceLocation getResourceLocation(GroveNumber type) {
+    return Objects.requireNonNull(RootsRegistries.GROVES.getKey(type.grove()));
   }
 
   @Override
-  public Grove copyIngredient(Grove type) {
+  public GroveNumber copyIngredient(GroveNumber type) {
     return type;
   }
 
   @Override
-  public String getErrorInfo(@Nullable Grove type) {
+  public String getErrorInfo(@Nullable GroveNumber type) {
     if (type == null) {
       return "null";
     }

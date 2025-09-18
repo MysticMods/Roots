@@ -34,6 +34,7 @@ public class RootsDimensionHelper implements IIngredientHelper<DimensionType> {
     return name.getString();
   }
 
+  @SuppressWarnings("removal")
   @Override
   public String getUniqueId(DimensionType ingredient, UidContext context) {
     return getUid(ingredient, context);

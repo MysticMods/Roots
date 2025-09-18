@@ -43,6 +43,7 @@ public class RootsEntityHelper implements IIngredientHelper<RootsEntityType> {
     return ingredient.entity().getTags().map(TagKey::location);
   }
 
+  @SuppressWarnings("removal")
   @Override
   public String getUniqueId(RootsEntityType ingredient, UidContext context) {
     return getUid(ingredient, context);

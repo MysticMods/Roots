@@ -1,6 +1,7 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModItems;
@@ -385,6 +386,6 @@ public class RootsModEvents {
 
   @SubscribeEvent
   public static void onModifyRegistry (ModifyRegistriesEvent event) {
-    event.getRegistry(Registries.ITEM).addCallback(RootsItemCallbacks.getInstance());
+    // NO-OP
   }
 }

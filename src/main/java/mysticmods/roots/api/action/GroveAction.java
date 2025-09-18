@@ -70,7 +70,7 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   }
 
   default List<GroveReputationEntry> getReputationEntries() {
-    List<GroveReputationEntry> result = builtinRegistryHolder().getData(DataMaps.GROVE_ACTION_REPUTATIONS);
+    List<GroveReputationEntry> result = builtInRegistryHolder().getData(DataMaps.GROVE_ACTION_REPUTATIONS);
     if (result == null) {
       RootsAPI.LOG.error("Grove action " + this + " has no reputation entries");
       return Collections.emptyList();
@@ -79,33 +79,33 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
     return result;
   }
 
-  default Holder<GroveAction> builtinRegistryHolder() {
+  default Holder<GroveAction> builtInRegistryHolder() {
     return RootsRegistries.GROVE_ACTIONS.wrapAsHolder(this);
   }
 
   @Deprecated
   default boolean is(Holder<GroveAction> holder) {
-    return builtinRegistryHolder().is(holder);
+    return builtInRegistryHolder().is(holder);
   }
 
   @Deprecated
   default boolean is(GroveAction action) {
-    return builtinRegistryHolder().is(action.builtinRegistryHolder());
+    return builtInRegistryHolder().is(action.builtInRegistryHolder());
   }
 
   default boolean is(ResourceLocation location) {
-    return builtinRegistryHolder().is(location);
+    return builtInRegistryHolder().is(location);
   }
 
   default boolean is(ResourceKey<GroveAction> resourceKey) {
-    return builtinRegistryHolder().is(resourceKey);
+    return builtInRegistryHolder().is(resourceKey);
   }
 
   default boolean is(Predicate<ResourceKey<GroveAction>> predicate) {
-    return builtinRegistryHolder().is(predicate);
+    return builtInRegistryHolder().is(predicate);
   }
 
   default boolean is(TagKey<GroveAction> tagKey) {
-    return builtinRegistryHolder().is(tagKey);
+    return builtInRegistryHolder().is(tagKey);
   }
 }
