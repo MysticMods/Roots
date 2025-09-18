@@ -43,7 +43,7 @@ public class ClientEvents {
   }
 
   @SubscribeEvent
-  public static void onTextureStitch (TextureAtlasStitchedEvent event) {
+  public static void onTextureStitched (TextureAtlasStitchedEvent event) {
     TextureAtlas atlas = event.getAtlas();
     if (atlas.location().equals(TextureAtlas.LOCATION_BLOCKS)) {
       BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas)atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas)atlas).rootsGetHeight());

@@ -121,7 +121,6 @@ public class RootsJEIPlugin implements IModPlugin {
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
-
   }
 
   // SORT THEM ALPHABETICALLY >:0

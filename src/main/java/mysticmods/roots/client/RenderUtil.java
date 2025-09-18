@@ -388,7 +388,7 @@ public class RenderUtil {
     }
     if (entity == EntityType.ENDER_DRAGON) stack.translate(0.0D, -4.0D, 0.0D);
     if (entity == EntityType.WITHER) stack.translate(0.0D, 8.0D, 0.0D);
-    if (entity == EntityType.SQUID || entity == EntityType.GLOW_SQUID) stack.translate(0.0D, -19.0D, 0.0D);
+    if (entity == EntityType.SQUID || entity == EntityType.GLOW_SQUID) stack.translate(0.0D, -0.0D, 0.0D);
     if (entity == EntityType.ELDER_GUARDIAN) stack.scale(0.6F, 0.6F, 0.6F);
   }
 
