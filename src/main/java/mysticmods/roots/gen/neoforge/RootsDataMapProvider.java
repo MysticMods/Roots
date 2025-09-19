@@ -617,5 +617,11 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder29.add(ModBlocks.SPIRITLEAF_CROP, ModItems.SPIRITLEAF.value(), false);
     builder29.add(ModBlocks.WILDEWHEET_CROP, ModItems.WILDEWHEET.value(), false);
     builder29.add(ModBlocks.WILDROOT_CROP, ModItems.WILDROOT.value(), false);
+
+    var builder30 = builder(DataMaps.DIMENSION_ITEM);
+
+    builder30.add(Items.GRASS_BLOCK.builtInRegistryHolder(), List.of(Level.OVERWORLD), false);
+    builder30.add(Items.ANCIENT_DEBRIS.builtInRegistryHolder(), List.of(Level.NETHER), false);
+    builder30.add(Items.END_PORTAL_FRAME.builtInRegistryHolder(), List.of(Level.END), false);
   }
 }

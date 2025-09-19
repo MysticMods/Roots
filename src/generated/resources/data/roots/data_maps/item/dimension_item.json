@@ -1,0 +1,13 @@
+{
+  "values": {
+    "minecraft:ancient_debris": [
+      "minecraft:the_nether"
+    ],
+    "minecraft:end_portal_frame": [
+      "minecraft:the_end"
+    ],
+    "minecraft:grass_block": [
+      "minecraft:overworld"
+    ]
+  }
+}
