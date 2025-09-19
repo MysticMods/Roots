@@ -12,7 +12,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.block.SimpleBlockType;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageType;
-import mysticmods.roots.integration.jei.ingredient.dimension.DimensionType;
+import mysticmods.roots.integration.jei.ingredient.dimension.RootsDimensionType;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -106,7 +106,7 @@ public class RootsIngredientHelper {
           builder.addIngredients(RootsJEIPlugin.ENTITY_TYPE, RootsEntityType.fromTag(TagKey.create(Registries.ENTITY_TYPE, location)))
               .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.SMALL_ENTITY_RENDERER);
       case DIMENSION -> {
-        DimensionType dim = new DimensionType(location);
+        RootsDimensionType dim = new RootsDimensionType(location);
         if (!dim.icon().isEmpty()) {
           invis.addItemStack(dim.icon());
 

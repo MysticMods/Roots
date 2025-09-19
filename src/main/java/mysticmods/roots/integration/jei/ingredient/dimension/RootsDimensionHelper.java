@@ -9,42 +9,42 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class RootsDimensionHelper implements IIngredientHelper<DimensionType> {
+public class RootsDimensionHelper implements IIngredientHelper<RootsDimensionType> {
 
   @Override
-  public IIngredientType<DimensionType> getIngredientType() {
+  public IIngredientType<RootsDimensionType> getIngredientType() {
     return RootsJEIPlugin.DIMENSION_TYPE;
   }
 
   @Override
-  public String getDisplayName(DimensionType type) {
-    Component name = Component.translatable("dimension." + type.dimension().location().toString().replace(":", "."));
+  public String getDisplayName(RootsDimensionType type) {
+    Component name = type.getName();
     return name.getString();
   }
 
   @SuppressWarnings("removal")
   @Override
-  public String getUniqueId(DimensionType ingredient, UidContext context) {
+  public String getUniqueId(RootsDimensionType ingredient, UidContext context) {
     return getUid(ingredient, context);
   }
 
   @Override
-  public String getUid(DimensionType type, UidContext context) {
+  public String getUid(RootsDimensionType type, UidContext context) {
     return type.dimension().toString();
   }
 
   @Override
-  public ResourceLocation getResourceLocation(DimensionType type) {
+  public ResourceLocation getResourceLocation(RootsDimensionType type) {
     return type.dimension().location();
   }
 
   @Override
-  public DimensionType copyIngredient(DimensionType type) {
+  public RootsDimensionType copyIngredient(RootsDimensionType type) {
     return type;
   }
 
   @Override
-  public String getErrorInfo(@Nullable DimensionType type) {
+  public String getErrorInfo(@Nullable RootsDimensionType type) {
     if (type == null) {
       return "null";
     }

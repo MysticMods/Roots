@@ -35,7 +35,7 @@ import mysticmods.roots.integration.jei.ingredient.block.*;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageHelper;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageType;
-import mysticmods.roots.integration.jei.ingredient.dimension.DimensionType;
+import mysticmods.roots.integration.jei.ingredient.dimension.RootsDimensionType;
 import mysticmods.roots.integration.jei.ingredient.dimension.RootsDimensionHelper;
 import mysticmods.roots.integration.jei.ingredient.dimension.RootsDimensionRenderer;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityHelper;
@@ -79,7 +79,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<BlockStateType> BLOCK_STATE_TYPE = () -> BlockStateType.class;
   public static final IIngredientType<Spell> SPELL_TYPE = () -> Spell.class;
   public static final IIngredientType<Ritual> RITUAL_TYPE = () -> Ritual.class;
-  public static final IIngredientType<DimensionType> DIMENSION_TYPE = () -> DimensionType.class;
+  public static final IIngredientType<RootsDimensionType> DIMENSION_TYPE = () -> RootsDimensionType.class;
   public static final IIngredientType<RootsDamageType> DAMAGE_TYPE = () -> RootsDamageType.class;
   public static final IIngredientType<Grove> GROVE_TYPE = () -> Grove.class;
   public static final IIngredientType<GroveNumber> GROVE_NUMBER_TYPE = () -> GroveNumber.class;
@@ -233,7 +233,7 @@ public class RootsJEIPlugin implements IModPlugin {
         .xmap(BlockStateType::new, BlockStateType::partial));
     registration.register(SPELL_TYPE, Collections.emptyList(), new RootsSpellHelper(), SPELL_RENDERER, Spell.CODEC);
     registration.register(RITUAL_TYPE, Collections.emptyList(), new RootsRitualHelper(), RITUAL_RENDERER, Ritual.CODEC);
-    registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, DimensionType.CODEC);
+    registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, RootsDimensionType.CODEC);
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
     registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
     registration.register(GROVE_NUMBER_TYPE, Collections.emptyList(), new RootsGroveNumberHelper(), GROVE_NUMBER_RENDERER, GroveNumber.CODEC);
