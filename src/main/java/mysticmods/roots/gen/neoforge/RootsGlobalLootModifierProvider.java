@@ -33,7 +33,7 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
     super(output, registries, RootsAPI.MODID);
   }
 
-  private LootItemCondition[] getCropExtraConditions () {
+  private LootItemCondition[] getCropExtraConditions() {
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(LootItemBlockBelowTagCondition.tag(RootsTags.Blocks.ELEMENTAL_SOIL));
     conditions.add(LootItemBlockTagCondition.tag(BlockTags.CROPS));

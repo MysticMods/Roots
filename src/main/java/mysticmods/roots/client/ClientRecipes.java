@@ -5,7 +5,6 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ClientRecipes {

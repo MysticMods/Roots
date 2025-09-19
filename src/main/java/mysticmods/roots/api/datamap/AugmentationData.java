@@ -49,7 +49,7 @@ public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Op
     LARGE, SMALL;
   }
 
-  public boolean augment (LivingEntity entity, RandomSource random) {
+  public boolean augment(LivingEntity entity, RandomSource random) {
     var info = getCachedInfo(entity);
 
     if (cantAugment(info)) {
@@ -66,7 +66,7 @@ public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Op
         var modifier = new AttributeModifier(generateName(Size.LARGE, info.largeCount() + 1),
             largeAmplifierValue, operation);
         instance.addPermanentModifier(modifier);
-        info = new AugmentationInfo(info.smallCount(), info.largeCount()+1);
+        info = new AugmentationInfo(info.smallCount(), info.largeCount() + 1);
         setCachedInfo(entity, info);
         return true;
       }
@@ -89,7 +89,7 @@ public record AugmentationData(Holder<Attribute> attribute, AttributeModifier.Op
         .toLowerCase(Locale.ROOT) + "/" + count);
   }
 
-  private void setCachedInfo (LivingEntity entity, AugmentationInfo info) {
+  private void setCachedInfo(LivingEntity entity, AugmentationInfo info) {
     if (entity == null || !entity.isAlive()) {
       return;
     }

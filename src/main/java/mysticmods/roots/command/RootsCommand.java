@@ -142,7 +142,8 @@ public class RootsCommand {
         return 0;
       }
       grants.unlock(player, Unlock.spell(spell));
-      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.add.success", spell.getStyledName()), false);
+      c.getSource()
+          .sendSuccess(() -> Component.translatable("roots.commands.library.add.success", spell.getStyledName()), false);
       return 1;
 
     }))).then(Commands.literal("remove").executes(c -> {
@@ -162,11 +163,13 @@ public class RootsCommand {
         return 0;
       }
       if (!grants.hasSpell(spell)) {
-        c.getSource().sendFailure(Component.translatable("roots.commands.library.remove.failure", spell.getStyledName()));
+        c.getSource()
+            .sendFailure(Component.translatable("roots.commands.library.remove.failure", spell.getStyledName()));
         return 0;
       }
       grants.removeSpell(player, spell);
-      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.remove.success", spell.getStyledName()), false);
+      c.getSource()
+          .sendSuccess(() -> Component.translatable("roots.commands.library.remove.success", spell.getStyledName()), false);
       return 1;
     }))).then(Commands.literal("clear").executes(c -> {
       if (!c.getSource().isPlayer()) {

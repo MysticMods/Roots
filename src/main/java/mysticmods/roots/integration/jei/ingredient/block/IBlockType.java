@@ -9,13 +9,14 @@ import java.util.List;
 
 public interface IBlockType {
   ItemStack stack();
+
   BlockState state();
 
-  default Block block () {
+  default Block block() {
     return state().getBlock();
   }
 
-  default List<Component> additionalTooltipLines () {
+  default List<Component> additionalTooltipLines() {
     return List.of();
   }
 }

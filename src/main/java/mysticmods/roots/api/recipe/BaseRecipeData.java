@@ -156,12 +156,12 @@ public class BaseRecipeData {
       return this;
     }
 
-    public Builder requires (GroveNumber number) {
+    public Builder requires(GroveNumber number) {
       this.powerRequirements.add(number);
       return this;
     }
 
-    public Builder requires (Grove grove, int value) {
+    public Builder requires(Grove grove, int value) {
       this.powerRequirements.add(new GroveNumber(grove, value));
       return this;
     }

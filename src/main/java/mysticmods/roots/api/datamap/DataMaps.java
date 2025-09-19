@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataMaps {
-  public static final Map<ResourceKey<Level>,ItemStack> DIMENSION_LOOKUP = new HashMap<>();
+  public static final Map<ResourceKey<Level>, ItemStack> DIMENSION_LOOKUP = new HashMap<>();
 
   public static final DataMapType<Block, Block> STEM_BLOCKS = DataMapType.builder(RootsAPI.rl("stem_blocks"), Registries.BLOCK, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), true)
@@ -123,7 +123,7 @@ public class DataMaps {
       .synced(ResourceKey.codec(Registries.DIMENSION).listOf(), true)
       .build();
 
-  public static ItemStack getDimensionItem (ResourceKey<Level> dimension) {
+  public static ItemStack getDimensionItem(ResourceKey<Level> dimension) {
     if (DIMENSION_LOOKUP.isEmpty()) {
       BuiltInRegistries.ITEM.holders().forEach(o -> {
         List<ResourceKey<Level>> keys = o.getData(DataMaps.DIMENSION_ITEM);

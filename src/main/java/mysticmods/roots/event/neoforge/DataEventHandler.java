@@ -88,7 +88,7 @@ public class DataEventHandler {
   }
 
   @SubscribeEvent
-  public static void onTagSync (TagsUpdatedEvent event) {
+  public static void onTagSync(TagsUpdatedEvent event) {
     if (event.getUpdateCause() != TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
       AnimalHarvestRecipe.cached = AnimalHarvestRecipe.getServerRecipes(event.getRegistryAccess().asGetterLookup());
     }

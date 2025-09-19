@@ -97,7 +97,6 @@ public class Color {
    *
    * @param to    color to blend with
    * @param scale a scale (0 -> 1) defining the effect of the second color
-   *
    * @return blended color
    */
   public Color blend(Color to, double scale) {

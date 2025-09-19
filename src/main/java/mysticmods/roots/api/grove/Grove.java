@@ -5,7 +5,6 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.gen.tags.RootsItemTagsProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -54,7 +53,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
     return reputationRanks;
   }
 
-  public ItemStack getIcon () {
+  public ItemStack getIcon() {
     return RootsItemCallbacks.getItemStack(this);
   }
 

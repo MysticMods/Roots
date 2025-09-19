@@ -412,30 +412,30 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     copyGrove(RootsTags.Groves.WILD);
   }
 
-  protected void copyGrove (TagKey<Grove> groveTag) {
+  protected void copyGrove(TagKey<Grove> groveTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, groveTag.location());
     copyGrove(groveTag, itemTag);
   }
 
-  protected void copyGrove (TagKey<Grove> groveTag, TagKey<Item> itemTag) {
+  protected void copyGrove(TagKey<Grove> groveTag, TagKey<Item> itemTag) {
     this.groveTagsToCopy.put(groveTag, itemTag);
   }
 
-  protected void copySpell (TagKey<Spell> spellTag) {
+  protected void copySpell(TagKey<Spell> spellTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, spellTag.location());
     copySpell(spellTag, itemTag);
   }
 
-  protected void copySpell (TagKey<Spell> spellTag, TagKey<Item> itemTag) {
+  protected void copySpell(TagKey<Spell> spellTag, TagKey<Item> itemTag) {
     this.spellTagsToCopy.put(spellTag, itemTag);
   }
 
-  protected void copyRitual (TagKey<Ritual> ritualTag) {
+  protected void copyRitual(TagKey<Ritual> ritualTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, ritualTag.location());
     copyRitual(ritualTag, itemTag);
   }
 
-  protected void copyRitual (TagKey<Ritual> ritualTag, TagKey<Item> itemTag) {
+  protected void copyRitual(TagKey<Ritual> ritualTag, TagKey<Item> itemTag) {
     this.ritualTagsToCopy.put(ritualTag, itemTag);
   }
 
@@ -450,21 +450,24 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
       this.ritualTagsToCopy.forEach((rTag, iTag) -> {
         TagBuilder tagbuilder = this.getOrCreateRawBuilder(iTag);
         Optional<TagBuilder> optional = tags.apply(rTag);
-        optional.orElseThrow(() -> new IllegalStateException("Missing ritual item tag " + iTag.location())).build().forEach(tagbuilder::add);
+        optional.orElseThrow(() -> new IllegalStateException("Missing ritual item tag " + iTag.location())).build()
+            .forEach(tagbuilder::add);
       });
       return provider;
     }).thenCombine(this.spellTags, (provider, tags) -> {
       this.spellTagsToCopy.forEach((rTag, iTag) -> {
         TagBuilder tagbuilder = this.getOrCreateRawBuilder(iTag);
         Optional<TagBuilder> optional = tags.apply(rTag);
-        optional.orElseThrow(() -> new IllegalStateException("Missing spell item tag " + iTag.location())).build().forEach(tagbuilder::add);
+        optional.orElseThrow(() -> new IllegalStateException("Missing spell item tag " + iTag.location())).build()
+            .forEach(tagbuilder::add);
       });
       return provider;
     }).thenCombine(this.groveTags, (provider, tags) -> {
       this.groveTagsToCopy.forEach((rTag, iTag) -> {
         TagBuilder tagbuilder = this.getOrCreateRawBuilder(iTag);
         Optional<TagBuilder> optional = tags.apply(rTag);
-        optional.orElseThrow(() -> new IllegalStateException("Missing grove item tag " + iTag.location())).build().forEach(tagbuilder::add);
+        optional.orElseThrow(() -> new IllegalStateException("Missing grove item tag " + iTag.location())).build()
+            .forEach(tagbuilder::add);
       });
       return provider;
     });

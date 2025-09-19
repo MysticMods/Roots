@@ -441,7 +441,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
         .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), spellLocation));
   }
 
-  public ItemModelBuilder grove (Holder<Item> itemHolder) {
+  public ItemModelBuilder grove(Holder<Item> itemHolder) {
     ResourceLocation item = itemHolder.getKey().location();
     String groveLocation = "item/groves/" + item.getPath(); //.replace("grove_", "");
     return getBuilder(item.toString())

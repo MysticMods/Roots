@@ -160,7 +160,8 @@ public class ConfigManager {
         .define("debug_reputation", false);
     DEBUG_GROVE_ACTIONS = COMMON_BUILDER.comment("if true, will report in the message log whenever a Grove Action has been fired")
         .define("debug_grove_actions", false);
-    DEBUG_KEYBINDS = COMMON_BUILDER.comment("if true, will print debug information about keybinds to the message log").define("debug_keybinds", false);
+    DEBUG_KEYBINDS = COMMON_BUILDER.comment("if true, will print debug information about keybinds to the message log")
+        .define("debug_keybinds", false);
     DEBUG_JEI = COMMON_BUILDER.comment("if true, will print debug information about server->client recipe syncs to the message log")
         .define("debug_jei", false);
     COMMON_BUILDER.pop();

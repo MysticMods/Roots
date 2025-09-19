@@ -7,7 +7,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
 import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;

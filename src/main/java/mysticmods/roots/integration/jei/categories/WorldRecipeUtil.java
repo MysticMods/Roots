@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorldRecipeUtil {
-  public static void setWorldRecipe (IRecipeLayoutBuilder builder, WorldRecipe<?> recipe, IFocusGroup iFocusGroup, int inputX, int inputY, int outputX, int outputY) {
+  public static void setWorldRecipe(IRecipeLayoutBuilder builder, WorldRecipe<?> recipe, IFocusGroup iFocusGroup, int inputX, int inputY, int outputX, int outputY) {
     HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
     if (recipe.getStateMapper() != null) {
       OutputStateMapper mapper = recipe.getStateMapper();

@@ -74,7 +74,7 @@ public class GrantStorage implements ICleanable {
     return false;
   }
 
-  public boolean clearSpells (ServerPlayer player) {
+  public boolean clearSpells(ServerPlayer player) {
     if (grantedSpells.isEmpty()) {
       return false;
     }

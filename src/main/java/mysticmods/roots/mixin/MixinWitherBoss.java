@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WitherBoss.class)
 public class MixinWitherBoss {
-  @Inject(method="setAlternativeTarget",at=@At("HEAD"),cancellable = true)
+  @Inject(method = "setAlternativeTarget", at = @At("HEAD"), cancellable = true)
   private void roots$setAlternativeTarget(int targetOffset, int newId, CallbackInfo ci) {
     // Handle the "alternative target" system for the Wither in relation to Geas
     if (((WitherBoss) (Object) this).hasEffect(ModEffects.GEAS)) {

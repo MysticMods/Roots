@@ -12,7 +12,6 @@ import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.item.GramaryItem;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -64,6 +63,8 @@ public interface IRootsAPI {
   boolean logGroveActions();
 
   AttachmentType<CooldownStorage> getCooldownStorageType();
+
   AttachmentType<Map<Holder<Attribute>, AugmentationInfo>> getAugmentationInfoType();
-  DataComponentType<Unit> getDeletableType ();
+
+  DataComponentType<Unit> getDeletableType();
 }

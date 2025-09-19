@@ -27,8 +27,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class RootsClientHooks {
-  public static void clearTooltipItem () {
-    ((AccessorMixinGui)Minecraft.getInstance().gui).rootsSetLastToolHighlight(ItemStack.EMPTY);
+  public static void clearTooltipItem() {
+    ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetLastToolHighlight(ItemStack.EMPTY);
   }
 
   public static void setAnimalHarvestRecipes(List<AnimalHarvestRecipe> recipes) {

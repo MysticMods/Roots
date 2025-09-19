@@ -1,6 +1,5 @@
 package mysticmods.roots.integration.jei;
 
-import com.electronwill.nightconfig.core.conversion.SpecIntInRange;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -29,7 +28,9 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.categories.*;
+import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
 import mysticmods.roots.integration.jei.fake.GroveWithReputation;
+import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.integration.jei.ingredient.block.*;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageHelper;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
@@ -45,8 +46,6 @@ import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualHelper;
 import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualRenderer;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellHelper;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellRenderer;
-import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
-import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
@@ -238,7 +237,8 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
     registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
     registration.register(GROVE_NUMBER_TYPE, Collections.emptyList(), new RootsGroveNumberHelper(), GROVE_NUMBER_RENDERER, GroveNumber.CODEC);
-    registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream().toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
+    registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()
+        .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
   }
 
   public static IJeiRuntime runtime = null;

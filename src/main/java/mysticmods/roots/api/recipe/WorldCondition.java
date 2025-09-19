@@ -15,7 +15,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.TriPredicate;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Locale;

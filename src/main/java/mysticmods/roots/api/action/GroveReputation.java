@@ -3,8 +3,6 @@ package mysticmods.roots.api.action;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.ints.IntIterable;
-import it.unimi.dsi.fastutil.ints.IntIterator;
 
 import java.util.stream.IntStream;
 
@@ -54,7 +52,7 @@ public record GroveReputation(int gain1, int gain2, int gain3, int gain4, int ga
     };
   }
 
-  public IntStream stream () {
+  public IntStream stream() {
     return IntStream.of(gain1, gain2, gain3, gain4, gain5);
   }
 }

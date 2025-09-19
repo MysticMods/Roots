@@ -7,13 +7,10 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
-import java.nio.ByteBuffer;
 import java.util.UUID;
 
-public record QuiverRecord (UUID quiverId, int slotId) {
+public record QuiverRecord(UUID quiverId, int slotId) {
   public static final MapCodec<QuiverRecord> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
           UUIDUtil.CODEC.fieldOf("quiver_id").forGetter(QuiverRecord::quiverId),

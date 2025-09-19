@@ -54,7 +54,8 @@ public class AugmentationRitual extends Ritual {
       }
       int adjusted = 0;
       // TODO: Start the loop over again to handle the count
-      outer: for (LivingEntity entity : entities) {
+      outer:
+      for (LivingEntity entity : entities) {
         if (adjusted >= count) {
           break;
         }

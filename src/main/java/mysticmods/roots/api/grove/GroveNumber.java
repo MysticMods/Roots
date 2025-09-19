@@ -9,7 +9,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
-public record GroveNumber (Grove grove, int value) {
+public record GroveNumber(Grove grove, int value) {
   public static final MapCodec<GroveNumber> MAP_CODEC = RecordCodecBuilder.mapCodec(
       c -> c.group(
           RootsRegistries.GROVES.byNameCodec().fieldOf("grove").forGetter(GroveNumber::grove),

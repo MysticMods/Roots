@@ -47,7 +47,7 @@ public class KeyHandler {
     }
 
     while (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean())  {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Opening spell library via keybind");
       }
       int inventorySlot = -1;

@@ -17,7 +17,6 @@ import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.init.ModAttachments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -30,7 +29,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -321,7 +319,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     }
   }
 
-  public ItemStack getStaffIcon () {
+  public ItemStack getStaffIcon() {
     return RootsItemCallbacks.getLibraryItemStack(this);
   }
 

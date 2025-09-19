@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import com.mojang.math.MatrixUtil;
-import com.mojang.serialization.Keyable;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
@@ -414,14 +413,15 @@ public class RenderUtil {
   private static final Set<RenderType> EQUAL_RENDER_TYPES = new HashSet<>();
   private static final Set<RenderType> OTHER_RENDER_TYPES = new HashSet<>();
 
-  public static boolean isEqualRenderType (RenderType type) {
+  public static boolean isEqualRenderType(RenderType type) {
     if (EQUAL_RENDER_TYPES.contains(type)) {
       return true;
     }
     if (OTHER_RENDER_TYPES.contains(type)) {
       return false;
     }
-    boolean equal = ((AccessorMixinCompositeState)(Object)((AccessorMixinCompositeRenderType)type).rootsGetState()).rootsGetDepthTestState().equals(RenderType.EQUAL_DEPTH_TEST);
+    boolean equal = ((AccessorMixinCompositeState) (Object) ((AccessorMixinCompositeRenderType) type).rootsGetState()).rootsGetDepthTestState()
+        .equals(RenderType.EQUAL_DEPTH_TEST);
     if (equal) {
       EQUAL_RENDER_TYPES.add(type);
     } else {
@@ -449,15 +449,15 @@ public class RenderUtil {
   // TODO: Clear this on reload
   private static final Set<BakedModel> DISSOLVE_FALLBACK_MODELS = new HashSet<>();
 
-  public static boolean isCompatibleRenderType (RenderType type) {
+  public static boolean isCompatibleRenderType(RenderType type) {
     if (RENDER_TYPE_INFO_CACHE.containsKey(type)) {
       return true;
     }
     if (type.mode() != VertexFormat.Mode.QUADS) {
       return false;
     }
-    RenderType.CompositeState state = ((AccessorMixinCompositeRenderType)type).rootsGetState();
-    if (((AccessorMixinCompositeState)(Object)state).rootsGetTextureState() instanceof RenderStateShard.MultiTextureStateShard) {
+    RenderType.CompositeState state = ((AccessorMixinCompositeRenderType) type).rootsGetState();
+    if (((AccessorMixinCompositeState) (Object) state).rootsGetTextureState() instanceof RenderStateShard.MultiTextureStateShard) {
       return false;
     }
 

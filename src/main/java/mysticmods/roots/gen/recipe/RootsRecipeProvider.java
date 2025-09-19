@@ -5,7 +5,6 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.recipe.BaseRecipeData;
-import mysticmods.roots.api.test.world.BlockMatchWorldTest;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
@@ -43,12 +42,10 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.SeaPickleBlock;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -2378,7 +2375,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_gold", has(Tags.Items.INGOTS_GOLD))
         .save(TransmutationRecipe.create().build(BaseRecipeData.Builder.create()
             .result(new ItemStack(ModItems.SILVER_INGOT.get()))
-                .requires(new GroveNumber(ModGroves.FUNGAL.get(), 1500))
+            .requires(new GroveNumber(ModGroves.FUNGAL.get(), 1500))
             .requires(Tags.Items.INGOTS_GOLD)
             .requires(Tags.Items.INGOTS_GOLD)), c, RootsAPI.rl("transmute/gold_to_silver"));
 

@@ -6,13 +6,11 @@ import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveReputationEntry;
-import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.block.SimpleBlockType;
-import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageType;
 import mysticmods.roots.integration.jei.ingredient.dimension.DimensionType;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
@@ -21,7 +19,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -30,7 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +43,7 @@ public class RootsIngredientHelper {
         .map(Holder::value).toList();
   }
 
-  public static IRecipeSlotBuilder fillSubEntrySlot (IIngredientAcceptor<?> invis, IRecipeSlotBuilder builder, GroveReputationEntry.SubEntryType type, ResourceLocation location) {
+  public static IRecipeSlotBuilder fillSubEntrySlot(IIngredientAcceptor<?> invis, IRecipeSlotBuilder builder, GroveReputationEntry.SubEntryType type, ResourceLocation location) {
     switch (type) {
       case BLOCK, OLD_BLOCK ->
           builder.addIngredients(RootsJEIPlugin.BLOCK_TYPE, SimpleBlockType.fromTag(TagKey.create(Registries.BLOCK, location)))
@@ -143,7 +139,7 @@ public class RootsIngredientHelper {
     return builder;
   }
 
-  public static IRecipeSlotBuilder subEntrySlot (IRecipeLayoutBuilder recipeBuilder, RecipeIngredientRole role, int x, int y, GroveReputationEntry.SubEntry entry) {
+  public static IRecipeSlotBuilder subEntrySlot(IRecipeLayoutBuilder recipeBuilder, RecipeIngredientRole role, int x, int y, GroveReputationEntry.SubEntry entry) {
     ResourceLocation location = entry.name();
     GroveReputationEntry.SubEntryType type = entry.type();
     IRecipeSlotBuilder builder = recipeBuilder.addSlot(role, x, y);

@@ -28,7 +28,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class GeasSpell extends Spell {
   private int count, duration, maxCooldown;
@@ -76,7 +75,8 @@ public class GeasSpell extends Spell {
       double y = pPlayer.getY() + pPlayer.getEyeHeight() + look.y * 3.0 * (float) i;
       double z = pPlayer.getZ() + look.z * 3.0 * (float) i;
       // TODO: Make geas predicate "static" (excluding player) and obey maxHealth.
-      List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), EntitySelector.NO_SPECTATORS.and(Entity::isAlive).and(EntityUtils.isHostileTo(pPlayer).and(o -> !o.getType().is(RootsTags.Entities.GEAS_EXCLUDE))));
+      List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
+          .and(EntityUtils.isHostileTo(pPlayer).and(o -> !o.getType().is(RootsTags.Entities.GEAS_EXCLUDE))));
       for (Entity entity : entities) {
         if (!(entity instanceof LivingEntity living)) {
           continue;

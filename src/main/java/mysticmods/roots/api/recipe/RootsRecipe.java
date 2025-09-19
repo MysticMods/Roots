@@ -65,7 +65,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public List<GroveNumber> getPowerRequirements () {
+  public List<GroveNumber> getPowerRequirements() {
     if (this.data.powerRequirements == null) {
       return Collections.emptyList();
     }

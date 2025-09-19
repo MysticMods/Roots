@@ -1,7 +1,6 @@
 package mysticmods.roots.api.ritual;
 
 import com.mojang.serialization.Codec;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -214,7 +213,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
 
   protected abstract PropertyHolder<Property.IntegerProperty> getIntervalProperty();
 
-  public boolean requiresCache () {
+  public boolean requiresCache() {
     return !getPredicates().isEmpty();
   }
 }

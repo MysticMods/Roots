@@ -14,11 +14,12 @@ public record SimpleBlockType(BlockState state, ItemStack stack) implements IBlo
   public SimpleBlockType(Block block) {
     this(block.defaultBlockState(), new ItemStack(block));
   }
+
   public SimpleBlockType(Holder<Block> block) {
     this(block.value());
   }
 
-  public static List<SimpleBlockType> fromTag (TagKey<Block> tag) {
+  public static List<SimpleBlockType> fromTag(TagKey<Block> tag) {
     List<SimpleBlockType> result = new ArrayList<>();
     BuiltInRegistries.BLOCK.getTagOrEmpty(tag).forEach(o -> result.add(new SimpleBlockType(o)));
     return result;

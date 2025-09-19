@@ -10,7 +10,6 @@ import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchMenu;
 import mysticmods.roots.inventory.pouch.component.ComponentPouchMenu;
 import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
 import mysticmods.roots.inventory.pouch.sylvan.SylvanPouchMenu;
-import mysticmods.roots.inventory.quiver.QuiverMenu;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
 import net.minecraft.Util;
@@ -531,7 +530,7 @@ public class ModItems {
     return new TokenItem.RitualTokenItem(ritual.getKey(), new Item.Properties().stacksTo(1));
   }
 
-  private static TokenItem.GroveTokenItem grove (Holder<Grove> grove) {
+  private static TokenItem.GroveTokenItem grove(Holder<Grove> grove) {
     return new TokenItem.GroveTokenItem(grove.getKey(), new Item.Properties().stacksTo(1));
   }
 

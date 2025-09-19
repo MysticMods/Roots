@@ -24,8 +24,8 @@ public class RootsEntityHelper implements IIngredientHelper<RootsEntityType> {
 
   @Override
   public Optional<TagKey<?>> getTagKeyEquivalent(Collection<RootsEntityType> ingredients) {
-		Registry<EntityType<?>> registry = BuiltInRegistries.ENTITY_TYPE;
-		return TagUtil.getTagEquivalent(ingredients, RootsEntityType::entity, registry::getTags);
+    Registry<EntityType<?>> registry = BuiltInRegistries.ENTITY_TYPE;
+    return TagUtil.getTagEquivalent(ingredients, RootsEntityType::entity, registry::getTags);
   }
 
   @Override

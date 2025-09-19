@@ -16,7 +16,6 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class RootsGroveNumberHelper implements IIngredientHelper<GroveNumber> {

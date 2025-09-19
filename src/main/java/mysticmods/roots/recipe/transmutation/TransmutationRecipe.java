@@ -37,7 +37,7 @@ public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory,
     }
   }
 
-  public int getPower () {
+  public int getPower() {
     return cachedPowerRequirement;
   }
 

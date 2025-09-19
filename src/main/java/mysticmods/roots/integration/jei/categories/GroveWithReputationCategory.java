@@ -77,12 +77,15 @@ public class GroveWithReputationCategory implements IRecipeCategory<GroveWithRep
       i++;
     }
 
-    var slot = builder.addSlot(RecipeIngredientRole.OUTPUT, 192, 2).setCustomRenderer(RootsJEIPlugin.GROVE_NUMBER_TYPE, RootsJEIPlugin.GROVE_NUMBER_RENDERER);
+    var slot = builder.addSlot(RecipeIngredientRole.OUTPUT, 192, 2)
+        .setCustomRenderer(RootsJEIPlugin.GROVE_NUMBER_TYPE, RootsJEIPlugin.GROVE_NUMBER_RENDERER);
 
     if (recipe.entry().unique()) {
-      slot.addIngredient(RootsJEIPlugin.GROVE_NUMBER_TYPE, new GroveNumber(recipe.entry().grove(), recipe.entry().reputation().gain1()));
+      slot.addIngredient(RootsJEIPlugin.GROVE_NUMBER_TYPE, new GroveNumber(recipe.entry().grove(), recipe.entry()
+          .reputation().gain1()));
     } else {
-      List<GroveNumber> outputs = recipe.entry().reputation().stream().mapToObj(f -> new GroveNumber(recipe.entry().grove(), f)).toList();
+      List<GroveNumber> outputs = recipe.entry().reputation().stream()
+          .mapToObj(f -> new GroveNumber(recipe.entry().grove(), f)).toList();
       slot.addIngredients(RootsJEIPlugin.GROVE_NUMBER_TYPE, outputs);
     }
 

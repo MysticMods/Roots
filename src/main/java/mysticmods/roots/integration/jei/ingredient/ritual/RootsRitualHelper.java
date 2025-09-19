@@ -22,8 +22,8 @@ import java.util.stream.Stream;
 public class RootsRitualHelper implements IIngredientHelper<Ritual> {
   @Override
   public Optional<TagKey<?>> getTagKeyEquivalent(Collection<Ritual> ingredients) {
-		Registry<Ritual> registry = RootsRegistries.RITUALS;
-		return TagUtil.getTagEquivalent(ingredients, Function.identity(), registry::getTags);
+    Registry<Ritual> registry = RootsRegistries.RITUALS;
+    return TagUtil.getTagEquivalent(ingredients, Function.identity(), registry::getTags);
   }
 
   @Override

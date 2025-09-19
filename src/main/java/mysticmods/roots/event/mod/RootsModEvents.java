@@ -1,14 +1,11 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModTabs;
 import mysticmods.roots.item.Dyeable;
-import mysticmods.roots.api.RootsItemCallbacks;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -385,7 +382,7 @@ public class RootsModEvents {
   }
 
   @SubscribeEvent
-  public static void onModifyRegistry (ModifyRegistriesEvent event) {
+  public static void onModifyRegistry(ModifyRegistriesEvent event) {
     // NO-OP
   }
 }

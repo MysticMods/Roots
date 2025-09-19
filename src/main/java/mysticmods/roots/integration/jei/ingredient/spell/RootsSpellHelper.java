@@ -22,8 +22,8 @@ import java.util.stream.Stream;
 public class RootsSpellHelper implements IIngredientHelper<Spell> {
   @Override
   public Optional<TagKey<?>> getTagKeyEquivalent(Collection<Spell> ingredients) {
-		Registry<Spell> registry = RootsRegistries.SPELLS;
-		return TagUtil.getTagEquivalent(ingredients, Function.identity(), registry::getTags);
+    Registry<Spell> registry = RootsRegistries.SPELLS;
+    return TagUtil.getTagEquivalent(ingredients, Function.identity(), registry::getTags);
   }
 
   @Override

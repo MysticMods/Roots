@@ -3,7 +3,6 @@ package mysticmods.roots.network.server;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
-import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -14,7 +13,8 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public record ServerboundClearStaffSlotPacket(@Nullable InteractionHand hand, int inventorySlot, int staffSlot) implements IRootsPacket {
+public record ServerboundClearStaffSlotPacket(@Nullable InteractionHand hand, int inventorySlot,
+                                              int staffSlot) implements IRootsPacket {
   public static final Type<ServerboundClearStaffSlotPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_clear_staff_slot"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundClearStaffSlotPacket> CODEC =
       StreamCodec.composite(

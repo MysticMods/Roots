@@ -37,16 +37,16 @@ public class ClientEvents {
     if (BLOCKS_ATLAS_SIZE == null) {
       RootsAPI.LOG.error("Blocks atlas size not initialized, fetching from Minecraft instance.");
       TextureAtlas atlas = Minecraft.getInstance().getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS);
-      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas)atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas)atlas).rootsGetHeight());
+      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas) atlas).rootsGetHeight());
     }
     return BLOCKS_ATLAS_SIZE;
   }
 
   @SubscribeEvent
-  public static void onTextureStitched (TextureAtlasStitchedEvent event) {
+  public static void onTextureStitched(TextureAtlasStitchedEvent event) {
     TextureAtlas atlas = event.getAtlas();
     if (atlas.location().equals(TextureAtlas.LOCATION_BLOCKS)) {
-      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas)atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas)atlas).rootsGetHeight());
+      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas) atlas).rootsGetHeight());
     }
   }
 
