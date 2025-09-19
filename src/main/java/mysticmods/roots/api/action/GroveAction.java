@@ -3,7 +3,10 @@ package mysticmods.roots.api.action;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -14,35 +17,45 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
+public abstract class GroveAction implements Consumer<GroveContext>, GroveContextUser {
+  private String descriptionId;
+
   @Override
-  default void accept(GroveContext context) {
+  public void accept(GroveContext context) {
     validate(context);
     if (testAndLog(context)) {
       reward(context);
     }
   }
 
-  default GroveReputation modify(GroveContext context, GroveReputation reputation) {
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("grove_action", builtInRegistryHolder().getKey().location());
+    }
+
+    return this.descriptionId;
+  }
+
+  public GroveReputation modify(GroveContext context, GroveReputation reputation) {
     return reputation;
   }
 
-  void log(GroveContext context);
+  public abstract void log(GroveContext context);
 
-  boolean test(GroveContext context);
+  public abstract boolean test(GroveContext context);
 
-  default boolean shouldLog() {
+  public boolean shouldLog() {
     return RootsAPI.getInstance().logGroveActions();
   }
 
-  default boolean testAndLog(GroveContext context) {
+  public boolean testAndLog(GroveContext context) {
     if (shouldLog()) {
       log(context);
     }
     return test(context);
   }
 
-  default void reward(GroveContext context) {
+  public void reward(GroveContext context) {
     for (GroveReputationEntry entry : getReputationEntries()) {
       boolean doReward = true;
       for (GroveReputationEntry.SubEntry subEntry : entry.entries()) {
@@ -61,7 +74,7 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
     }
   }
 
-  default void validate(GroveContext context) {
+  public void validate(GroveContext context) {
     for (GroveContext.Parameter type : getUsedParameters()) {
       if (!GroveContext.hasParameter(context, type)) {
         throw new NoSuchElementException("Missing required parameter '" + type.name() + "' in context '" + context + "' for action '" + this + "'");
@@ -69,7 +82,7 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
     }
   }
 
-  default List<GroveReputationEntry> getReputationEntries() {
+  public List<GroveReputationEntry> getReputationEntries() {
     List<GroveReputationEntry> result = builtInRegistryHolder().getData(DataMaps.GROVE_ACTION_REPUTATIONS);
     if (result == null) {
       RootsAPI.LOG.error("Grove action " + this + " has no reputation entries");
@@ -79,33 +92,33 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
     return result;
   }
 
-  default Holder<GroveAction> builtInRegistryHolder() {
+  public Holder<GroveAction> builtInRegistryHolder() {
     return RootsRegistries.GROVE_ACTIONS.wrapAsHolder(this);
   }
 
   @Deprecated
-  default boolean is(Holder<GroveAction> holder) {
+  public boolean is(Holder<GroveAction> holder) {
     return builtInRegistryHolder().is(holder);
   }
 
   @Deprecated
-  default boolean is(GroveAction action) {
+  public boolean is(GroveAction action) {
     return builtInRegistryHolder().is(action.builtInRegistryHolder());
   }
 
-  default boolean is(ResourceLocation location) {
+  public boolean is(ResourceLocation location) {
     return builtInRegistryHolder().is(location);
   }
 
-  default boolean is(ResourceKey<GroveAction> resourceKey) {
+  public boolean is(ResourceKey<GroveAction> resourceKey) {
     return builtInRegistryHolder().is(resourceKey);
   }
 
-  default boolean is(Predicate<ResourceKey<GroveAction>> predicate) {
+  public boolean is(Predicate<ResourceKey<GroveAction>> predicate) {
     return builtInRegistryHolder().is(predicate);
   }
 
-  default boolean is(TagKey<GroveAction> tagKey) {
+  public boolean is(TagKey<GroveAction> tagKey) {
     return builtInRegistryHolder().is(tagKey);
   }
 }
