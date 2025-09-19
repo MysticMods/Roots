@@ -180,6 +180,10 @@ public class RootsLangProvider extends LanguageProvider {
       }
     }
 
+    RootsRegistries.GROVE_ACTIONS.entrySet().forEach(o -> {
+      add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
+    });
+
     RootsRegistries.SPELLS.entrySet().forEach(o -> {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
           for (String n : o.getValue().getDataKeys()) {
