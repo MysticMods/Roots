@@ -108,10 +108,12 @@ public class ReputationStorage implements ICleanable {
     return false;
   }
 
+  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
+  @Override
   public boolean isDirty() {
     return dirty;
   }

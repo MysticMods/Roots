@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Set;
 
-public class TradePiglinAction implements GroveAction {
+public class TradePiglinAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("TradePiglinAction triggered by '{}' with item '{}'", context.player().getName()

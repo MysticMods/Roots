@@ -27,6 +27,7 @@ public record WaterloggedBlockCondition() implements LootItemCondition {
     return Set.of(LootContextParams.BLOCK_STATE);
   }
 
+  @Override
   public boolean test(LootContext context) {
     BlockState blockstate = context.getParamOrNull(LootContextParams.BLOCK_STATE);
     return blockstate != null && (blockstate.hasProperty(BlockStateProperties.WATERLOGGED) && blockstate.getValue(BlockStateProperties.WATERLOGGED));

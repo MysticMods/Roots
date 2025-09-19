@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Set;
 
-public class EatItemAction implements GroveAction {
+public class EatItemAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("EeatItemAction triggered by '{}' for item '{}'", context.player().getName()

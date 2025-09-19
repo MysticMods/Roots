@@ -14,7 +14,7 @@ import net.minecraft.world.entity.Entity;
 
 import java.util.Set;
 
-public class KillEntityAction implements GroveAction {
+public class KillEntityAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("KillEntityAction triggered by '{}' with entity '{}'", context.player().getName()

@@ -60,6 +60,7 @@ public class SproutPortalParticle extends PortalParticle {
       this.sprite = sprite;
     }
 
+    @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       Entity entity = null;
       if (type.entityId() != -1) {

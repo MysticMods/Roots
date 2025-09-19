@@ -69,10 +69,12 @@ public class CooldownStorage implements ICleanable, ITicking {
     return cooldownMap.isEmpty();
   }
 
+  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
+  @Override
   public boolean isDirty() {
     return dirty;
   }

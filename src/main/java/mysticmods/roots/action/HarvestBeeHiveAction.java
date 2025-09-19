@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 
-public class HarvestBeeHiveAction implements GroveAction {
+public class HarvestBeeHiveAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("HarvestBeeHiveAction triggered by '{}' at '{}' using item '{}'", context.player().getName()

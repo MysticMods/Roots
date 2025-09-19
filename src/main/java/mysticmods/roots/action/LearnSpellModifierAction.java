@@ -13,7 +13,7 @@ import net.minecraft.tags.TagKey;
 
 import java.util.Set;
 
-public class LearnSpellModifierAction implements GroveAction {
+public class LearnSpellModifierAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("LearnSpellModifierAction fired by '{}' with spell modifier '{}'",

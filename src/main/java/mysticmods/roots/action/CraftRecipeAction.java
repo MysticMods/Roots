@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.Set;
 
-public class CraftRecipeAction implements GroveAction {
+public class CraftRecipeAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("CraftRecipeAction fired by '{}' with recipe '{}'",

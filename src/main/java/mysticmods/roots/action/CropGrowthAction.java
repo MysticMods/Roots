@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class CropGrowthAction implements GroveAction {
+public class CropGrowthAction extends GroveAction {
 
 
   @Override

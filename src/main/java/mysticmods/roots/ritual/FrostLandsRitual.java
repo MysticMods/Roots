@@ -287,6 +287,7 @@ public class FrostLandsRitual extends Ritual {
     return false;
   }
 
+  @Override
   protected void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModRituals.FROST_LANDS_INTERVAL_HEAL);

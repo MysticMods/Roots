@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Set;
 
-public class ArriveDimensionAction implements GroveAction {
+public class ArriveDimensionAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("ArriveDimensionAction fired by '{}' in dimension '{}'", context.player().getName()

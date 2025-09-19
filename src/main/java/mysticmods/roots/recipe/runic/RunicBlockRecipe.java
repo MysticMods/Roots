@@ -78,6 +78,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   }
 
   // TODO:
+  @Override
   public List<String> getSkipProperties() {
     return skipProperties;
   }

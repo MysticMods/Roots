@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 
-public class BrushBlockAction implements GroveAction {
+public class BrushBlockAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("BrushBlockAction fired by '{}' at '{}' on block '{}' with item '{}'",

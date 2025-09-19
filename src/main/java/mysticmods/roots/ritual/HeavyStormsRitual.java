@@ -101,6 +101,7 @@ public class HeavyStormsRitual extends Ritual {
     weatherDuration = properties.get(ModRituals.HEAVY_STORMS_WEATHER_DURATION);
   }
 
+  @Override
   protected void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);

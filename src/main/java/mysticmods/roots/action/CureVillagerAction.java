@@ -14,7 +14,7 @@ import net.minecraft.world.entity.npc.Villager;
 
 import java.util.Set;
 
-public class CureVillagerAction implements GroveAction {
+public class CureVillagerAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("CureVillageAction triggered by '{}' for entity '{}'", context.player().getName()

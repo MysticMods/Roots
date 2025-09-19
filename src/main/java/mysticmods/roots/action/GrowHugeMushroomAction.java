@@ -6,7 +6,7 @@ import mysticmods.roots.api.action.GroveContext;
 
 import java.util.Set;
 
-public class GrowHugeMushroomAction implements GroveAction {
+public class GrowHugeMushroomAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("GrowHugeMushroomAction fired by '{}' with new block state '{}'",

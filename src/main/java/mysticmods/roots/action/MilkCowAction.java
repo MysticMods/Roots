@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Set;
 
-public class MilkCowAction implements GroveAction {
+public class MilkCowAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("MilkCowAction triggered by '{}' with item '{}' creating item '{}' on entity '{}'",

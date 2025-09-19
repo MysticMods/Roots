@@ -44,6 +44,7 @@ public class ExtraStreamCodecs {
       final Function7<T1, T2, T3, T4, T5, T6, T7, C> function72) {
     return new StreamCodec<B, C>() {
 
+      @Override
       public C decode(B object) {
         Object object2 = arg.decode(object);
         Object object3 = arg2.decode(object);
@@ -55,6 +56,7 @@ public class ExtraStreamCodecs {
         return function72.apply((T1) object2, (T2) object3, (T3) object4, (T4) object5, (T5) object6, (T6) object7, (T7) object8);
       }
 
+      @Override
       public void encode(B object, C object2) {
         arg.encode(object, function.apply(object2));
         arg2.encode(object, function2.apply(object2));
@@ -79,6 +81,7 @@ public class ExtraStreamCodecs {
       final Function8<T1, T2, T3, T4, T5, T6, T7, T8, C> function72) {
     return new StreamCodec<B, C>() {
 
+      @Override
       public C decode(B object) {
         Object object2 = arg.decode(object);
         Object object3 = arg2.decode(object);
@@ -91,6 +94,7 @@ public class ExtraStreamCodecs {
         return function72.apply((T1) object2, (T2) object3, (T3) object4, (T4) object5, (T5) object6, (T6) object7, (T7) object8, (T8) object9);
       }
 
+      @Override
       public void encode(B object, C object2) {
         arg.encode(object, function.apply(object2));
         arg2.encode(object, function2.apply(object2));
@@ -117,6 +121,7 @@ public class ExtraStreamCodecs {
       final Function9<T1, T2, T3, T4, T5, T6, T7, T8, T9, C> function72) {
     return new StreamCodec<B, C>() {
 
+      @Override
       public C decode(B object) {
         Object object2 = arg.decode(object);
         Object object3 = arg2.decode(object);
@@ -130,6 +135,7 @@ public class ExtraStreamCodecs {
         return function72.apply((T1) object2, (T2) object3, (T3) object4, (T4) object5, (T5) object6, (T6) object7, (T7) object8, (T8) object9, (T9) object10);
       }
 
+      @Override
       public void encode(B object, C object2) {
         arg.encode(object, function.apply(object2));
         arg2.encode(object, function2.apply(object2));
@@ -158,6 +164,7 @@ public class ExtraStreamCodecs {
       final Function10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, C> function72) {
     return new StreamCodec<B, C>() {
 
+      @Override
       public C decode(B object) {
         Object object2 = arg.decode(object);
         Object object3 = arg2.decode(object);
@@ -172,6 +179,7 @@ public class ExtraStreamCodecs {
         return function72.apply((T1) object2, (T2) object3, (T3) object4, (T4) object5, (T5) object6, (T6) object7, (T7) object8, (T8) object9, (T9) object10, (T10) object11);
       }
 
+      @Override
       public void encode(B object, C object2) {
         arg.encode(object, function.apply(object2));
         arg2.encode(object, function2.apply(object2));

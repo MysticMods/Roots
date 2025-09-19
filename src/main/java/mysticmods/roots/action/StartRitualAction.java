@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.Set;
 
-public class StartRitualAction implements GroveAction {
+public class StartRitualAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("StartRitualAction fired by '{}' with ritual '{}'",

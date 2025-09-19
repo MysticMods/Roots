@@ -23,6 +23,7 @@ public class WildfireRenderer extends EntityRenderer<WildfireEntity> {
     this.model = new MeteorModel(context.bakeLayer(ModelHolder.METEOR));
   }
 
+  @Override
   public void render(WildfireEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
     poseStack.pushPose();
 /*    poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));

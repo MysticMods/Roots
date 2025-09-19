@@ -19,6 +19,7 @@ public class StaffSpellButton extends TypedButton<ISpellInstance, StaffScreen> {
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_spell_slot.png");
   private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/staff_spell_slot_highlight.png");
 
+  @Override
   public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
     if (spellSupplier.get() == null) {
       return;
@@ -26,6 +27,7 @@ public class StaffSpellButton extends TypedButton<ISpellInstance, StaffScreen> {
     parentScreen.fillTooltip(spellSupplier.get().asSpell().getStaffIcon());
   }
 
+  @Override
   public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     int x1 = getX() - 2;
     int y1 = getY() - 2;

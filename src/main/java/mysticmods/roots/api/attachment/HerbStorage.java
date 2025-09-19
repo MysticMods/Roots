@@ -68,10 +68,12 @@ public class HerbStorage implements ICleanable {
     return herbMap.isEmpty();
   }
 
+  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
+  @Override
   public boolean isDirty() {
     return dirty;
   }

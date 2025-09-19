@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 
-public class TradeFairyHutAction implements GroveAction {
+public class TradeFairyHutAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("TradeFairyHut triggered by '{}' with offer '{}'", context.player().getName()

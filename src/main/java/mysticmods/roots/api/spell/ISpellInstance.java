@@ -32,22 +32,27 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getMaxUse();
   }
 
+  @Override
   default CostInstance getDefaultCosts() {
     return getSpell().getDefaultCosts();
   }
 
+  @Override
   default CostInstance getCosts() {
     return getSpell().getCosts();
   }
 
+  @Override
   default CostInstance.ChargeType getChargeType() {
     return getCosts().chargeType();
   }
 
+  @Override
   default int getMaximumOperations() {
     return getSpell().getMaximumOperations();
   }
 
+  @Override
   Set<ICosted> getChildren();
 
   default boolean hasModifier(SpellModifier modifier) {

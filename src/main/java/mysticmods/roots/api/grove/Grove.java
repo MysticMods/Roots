@@ -34,6 +34,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
     this.color2 = color2;
   }
 
+  @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
       this.descriptionId = Util.makeDescriptionId("grove", builtInRegistryHolder().getKey().location());

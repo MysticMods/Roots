@@ -47,6 +47,7 @@ public class SnapshotStorage implements ICleanable, ITicking {
     }
   }
 
+  @Override
   public boolean isDirty() {
     return dirty;
   }
@@ -56,6 +57,7 @@ public class SnapshotStorage implements ICleanable, ITicking {
     return snapshots.isEmpty();
   }
 
+  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }

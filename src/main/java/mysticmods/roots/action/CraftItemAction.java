@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Set;
 
-public class CraftItemAction implements GroveAction {
+public class CraftItemAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("CraftItemAction fired by '{}' with item '{}'",

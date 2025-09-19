@@ -421,6 +421,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return inventory;
   }
 
+  @Override
   public RandomSource getRandom() {
     return getLevel().getRandom();
   }

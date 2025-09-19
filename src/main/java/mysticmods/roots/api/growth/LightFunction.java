@@ -15,6 +15,7 @@ public interface LightFunction {
       this.lightValue = lightValue;
     }
 
+    @Override
     public boolean test(Level level, BlockPos blockPos, BlockState blockState) {
       return level.getRawBrightness(blockPos, 0) < lightValue;
     }
@@ -27,12 +28,14 @@ public interface LightFunction {
       this.lightValue = lightValue;
     }
 
+    @Override
     public boolean test(Level level, BlockPos blockPos, BlockState blockState) {
       return level.getRawBrightness(blockPos, 0) > lightValue;
     }
   }
 
   class AnyLightFunction implements LightFunction {
+    @Override
     public boolean test(Level level, BlockPos blockPos, BlockState blockState) {
       return true;
     }

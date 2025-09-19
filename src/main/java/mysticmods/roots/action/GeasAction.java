@@ -13,7 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Set;
 
-public class GeasAction implements GroveAction {
+public class GeasAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("GeasAction triggered by '{}' applied to '{}",

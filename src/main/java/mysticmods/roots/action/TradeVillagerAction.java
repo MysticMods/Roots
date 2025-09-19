@@ -14,7 +14,7 @@ import net.minecraft.world.item.trading.MerchantOffer;
 
 import java.util.Set;
 
-public class TradeVillagerAction implements GroveAction {
+public class TradeVillagerAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("TradeVillagerAction triggered by '{}' with offer '{}'", context.player().getName()

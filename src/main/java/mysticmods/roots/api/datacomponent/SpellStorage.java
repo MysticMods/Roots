@@ -279,6 +279,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return getEnabledModifiers().stream().map(o -> (ICosted) o).collect(Collectors.toSet());
     }
 
+    @Override
     public boolean hasModifier(SpellModifier modifier) {
       return enabledModifiers.contains(modifier);
     }

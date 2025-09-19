@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 
 import java.util.Set;
 
-public class BredAnimalAction implements GroveAction {
+public class BredAnimalAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("BredAnimalAction fired by '{}' with offspring '{}' from first parent '{}' and second parent '{}'",

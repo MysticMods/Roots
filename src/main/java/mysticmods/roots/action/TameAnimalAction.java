@@ -11,7 +11,7 @@ import net.minecraft.world.entity.animal.Animal;
 
 import java.util.Set;
 
-public class TameAnimalAction implements GroveAction {
+public class TameAnimalAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("TameAnimalAction triggered by '{}' on entity '{}'", context.player().getName()

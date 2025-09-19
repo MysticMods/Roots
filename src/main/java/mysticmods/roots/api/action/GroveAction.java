@@ -2,6 +2,7 @@ package mysticmods.roots.api.action;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -17,7 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public abstract class GroveAction implements Consumer<GroveContext>, GroveContextUser {
+public abstract class GroveAction implements Consumer<GroveContext>, GroveContextUser, IDescribed {
   private String descriptionId;
 
   @Override
@@ -28,6 +29,7 @@ public abstract class GroveAction implements Consumer<GroveContext>, GroveContex
     }
   }
 
+  @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
       this.descriptionId = Util.makeDescriptionId("grove_action", builtInRegistryHolder().getKey().location());

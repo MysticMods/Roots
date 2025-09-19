@@ -78,8 +78,10 @@ public abstract class PouchMenu implements Container, MenuProvider {
     }
   }
 
+  @Override
   public abstract int getContainerSize();
 
+  @Override
   public abstract Component getDisplayName();
 
   public abstract void readFromStack(ItemStack stack);

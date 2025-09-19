@@ -33,6 +33,7 @@ public class Herb implements IStyled {
     return RootsRegistries.HERBS.wrapAsHolder(this);
   }
 
+  @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
       this.descriptionId = Util.makeDescriptionId("herb", builtInRegistryHolder().getKey().location());

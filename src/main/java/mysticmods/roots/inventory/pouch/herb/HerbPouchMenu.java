@@ -26,11 +26,13 @@ public class HerbPouchMenu extends PouchMenu {
     return Component.translatable("roots.container.herb_pouch");
   }
 
+  @Override
   public void readFromStack(ItemStack stack) {
     inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
     stack.getOrDefault(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.EMPTY).copyInto(inventory);
   }
 
+  @Override
   public void writeToStack(ItemStack stack) {
     stack.set(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.fromItems(inventory));
   }

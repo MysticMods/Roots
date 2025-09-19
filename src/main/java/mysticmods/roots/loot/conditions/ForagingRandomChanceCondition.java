@@ -37,6 +37,7 @@ public record ForagingRandomChanceCondition(NumberProvider chance) implements Lo
     return ModLoot.FORAGING_RANDOM_CHANCE.get();
   }
 
+  @Override
   public boolean test(LootContext context) {
     ItemStack itemstack = context.getParamOrNull(LootContextParams.TOOL);
     if (itemstack == null || !itemstack.canPerformAction(RootsAPI.FORAGE)) {

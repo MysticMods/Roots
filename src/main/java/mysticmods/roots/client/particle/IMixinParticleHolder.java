@@ -12,18 +12,22 @@ public interface IMixinParticleHolder extends IParticleHolder {
 
   void roots_1_21$setParticle(ParticleType<?> type, Particle particle, IParticleTester tester);
 
+  @Override
   default Particle getParticle(ParticleType<?> type) {
     return roots_1_21$getParticle(type);
   }
 
+  @Override
   default Particle getParticle(ParticleType<?> type, IParticleTester tester) {
     return roots_1_21$getParticle(type, tester);
   }
 
+  @Override
   default void setParticle(ParticleType<?> type, Particle particle) {
     roots_1_21$setParticle(type, particle);
   }
 
+  @Override
   default void setParticle(ParticleType<?> type, Particle particle, IParticleTester tester) {
     roots_1_21$setParticle(type, particle, tester);
   }

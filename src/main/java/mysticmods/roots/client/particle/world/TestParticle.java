@@ -155,6 +155,7 @@ public class TestParticle extends TextureSheetParticle {
       return super.getQuadSize(scaleFactor);
     }
 
+    @Override
     protected void renderRotatedQuad(VertexConsumer buffer, Quaternionf quaternion, float x, float y, float z, float partialTicks) {
       float f = this.getQuadSize(partialTicks);
       float f1 = this.getU0();

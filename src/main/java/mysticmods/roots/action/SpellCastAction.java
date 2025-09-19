@@ -22,7 +22,7 @@ import java.util.Set;
  * This action is triggered whenever a spell is successfully cast,
  * and has been charged.
  */
-public class SpellCastAction implements GroveAction {
+public class SpellCastAction extends GroveAction {
   @Override
   public boolean test(GroveContext context) {
     return context.costing().shouldCharge();
@@ -33,7 +33,7 @@ public class SpellCastAction implements GroveAction {
     if (context.spell().getSpell().getChargeType() == CostInstance.ChargeType.OPERATION) {
       return reputation.multiply(context.costing().operations());
     }
-    return GroveAction.super.modify(context, reputation);
+    return super.modify(context, reputation);
   }
 
   @Override

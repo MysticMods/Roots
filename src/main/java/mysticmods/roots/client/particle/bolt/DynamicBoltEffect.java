@@ -56,6 +56,7 @@ public class DynamicBoltEffect implements IBoltEffect {
    * @param size starting size of bolt segments
    * @return this
    */
+  @Override
   public DynamicBoltEffect size(float size) {
     this.size = size;
     return this;
@@ -67,6 +68,7 @@ public class DynamicBoltEffect implements IBoltEffect {
    * @param spawnFunction spawn function to use
    * @return this
    */
+  @Override
   public DynamicBoltEffect spawn(SpawnFunction spawnFunction) {
     this.spawnFunction = spawnFunction;
     return this;
@@ -78,6 +80,7 @@ public class DynamicBoltEffect implements IBoltEffect {
    * @param fadeFunction fade function to use
    * @return this
    */
+  @Override
   public DynamicBoltEffect fade(FadeFunction fadeFunction) {
     this.fadeFunction = fadeFunction;
     return this;
@@ -89,27 +92,33 @@ public class DynamicBoltEffect implements IBoltEffect {
    * @param lifespan lifespan to use in ticks
    * @return this
    */
+  @Override
   public DynamicBoltEffect lifespan(int lifespan) {
     this.lifespan = lifespan;
     return this;
   }
 
+  @Override
   public int getLifespan() {
     return lifespan;
   }
 
+  @Override
   public SpawnFunction getSpawnFunction() {
     return spawnFunction;
   }
 
+  @Override
   public FadeFunction getFadeFunction() {
     return fadeFunction;
   }
 
+  @Override
   public Color getColor() {
     return renderInfo.color;
   }
 
+  @Override
   public List<BoltQuads> generate(float partialTicks) {
     RandomSource random = RandomSource.create(this.seed);
     Vec3 start = this.provider.getStart(partialTicks);

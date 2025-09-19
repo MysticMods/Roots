@@ -35,6 +35,7 @@ public class AirBubbleParticle extends BubbleParticle {
       this.sprite = sprites;
     }
 
+    @Override
     public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       BubbleParticle bubbleparticle = new AirBubbleParticle(level, x, y, z, xSpeed, ySpeed, zSpeed);
       bubbleparticle.pickSprite(this.sprite);

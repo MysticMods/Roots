@@ -34,6 +34,7 @@ public class HealParticle extends RootsParticle {
       this.sprite = sprites;
     }
 
+    @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       HealParticle healParticle = new HealParticle(level, x, y, z, xSpeed, ySpeed, zSpeed);
       healParticle.pickSprite(this.sprite);

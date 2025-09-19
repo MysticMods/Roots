@@ -48,6 +48,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   protected int radiusY = 0;
   protected int interval = 0;
 
+  @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
       this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());

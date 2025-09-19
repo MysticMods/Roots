@@ -46,6 +46,7 @@ public class BoltEffect implements IBoltEffect {
    * @param count amount of bolts to render
    * @return this
    */
+  @Override
   public IBoltEffect count(int count) {
     this.count = count;
     return this;
@@ -57,6 +58,7 @@ public class BoltEffect implements IBoltEffect {
    * @param size starting size of bolt segments
    * @return this
    */
+  @Override
   public BoltEffect size(float size) {
     this.size = size;
     return this;
@@ -68,6 +70,7 @@ public class BoltEffect implements IBoltEffect {
    * @param spawnFunction spawn function to use
    * @return this
    */
+  @Override
   public BoltEffect spawn(SpawnFunction spawnFunction) {
     this.spawnFunction = spawnFunction;
     return this;
@@ -79,6 +82,7 @@ public class BoltEffect implements IBoltEffect {
    * @param fadeFunction fade function to use
    * @return this
    */
+  @Override
   public IBoltEffect fade(FadeFunction fadeFunction) {
     this.fadeFunction = fadeFunction;
     return this;
@@ -90,6 +94,7 @@ public class BoltEffect implements IBoltEffect {
    * @param lifespan lifespan to use in ticks
    * @return this
    */
+  @Override
   public BoltEffect lifespan(int lifespan) {
     this.lifespan = lifespan;
     return this;

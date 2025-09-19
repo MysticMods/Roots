@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 
-public class ShatterBlockAction implements GroveAction {
+public class ShatterBlockAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("ShatterBlockAction triggered by '{}' at '{}' with block '{}'", context.player().getName()
