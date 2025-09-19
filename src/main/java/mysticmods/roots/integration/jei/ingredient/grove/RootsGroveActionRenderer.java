@@ -6,6 +6,8 @@ import mezz.jei.api.ingredients.IIngredientRenderer;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,20 +58,17 @@ public class RootsGroveActionRenderer implements IIngredientRenderer<GroveAction
   @SuppressWarnings("removal")
   @Override
   public List<Component> getTooltip(GroveAction ingredient, TooltipFlag tooltipFlag) {
-    return Collections.emptyList();
-/*    Minecraft minecraft = Minecraft.getInstance();
-    Player player = minecraft.player;
-    Item.TooltipContext tooltipContext = Item.TooltipContext.of(minecraft.level);
-    return ingredient.getIcon().getTooltipLines(tooltipContext, player, tooltipFlag);*/
+    List<Component> result = new ArrayList<>();
+    result.add(ingredient.getName());
+    if (tooltipFlag.isAdvanced()) {
+      result.add(Component.literal(RootsRegistries.GROVE_ACTIONS.getKey(ingredient).toString()).withStyle(ChatFormatting.DARK_GRAY));
+    }
+    return result;
   }
 
   @Override
   public void getTooltip(ITooltipBuilder tooltip, GroveAction ingredient, TooltipFlag tooltipFlag) {
-/*    Minecraft minecraft = Minecraft.getInstance();
-    Player player = minecraft.player;
-    Item.TooltipContext tooltipContext = Item.TooltipContext.of(minecraft.level);
-    List<Component> tooltipLines = ingredient.getIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
-    tooltip.addAll(tooltipLines);*/
+    tooltip.addAll(getTooltip(ingredient, tooltipFlag));
   }
 
   @Override
