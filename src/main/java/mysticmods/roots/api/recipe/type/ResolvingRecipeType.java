@@ -35,7 +35,9 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
 
   protected List<RecipeHolder<T>> getRecipesList(Level level) {
     RecipeManager manager = level.getRecipeManager();
-    return manager.getAllRecipesFor(type.get());
+    List<RecipeHolder<T>> val = new ArrayList<>(manager.getAllRecipesFor(type.get()));
+    val.sort(comparator);
+    return val;
   }
 
   public List<RecipeHolder<T>> getRecipes(Level level) {
@@ -43,15 +45,6 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
       cache = getRecipesList(level);
     }
     if (cache != null) {
-      if (!sorted) {
-        try {
-          cache.sort(comparator);
-        } catch (UnsupportedOperationException exception) {
-          cache = new ArrayList<>(cache);
-          cache.sort(comparator);
-        }
-        sorted = true;
-      }
       return cache;
     } else {
       return Collections.emptyList();
