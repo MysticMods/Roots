@@ -14,6 +14,7 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -28,6 +29,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class GeasSpell extends Spell {
   private int count, duration, maxCooldown;
@@ -61,38 +64,33 @@ public class GeasSpell extends Spell {
     this.maxHealth = dataMap.get(ModSpells.GEAS_MAX_HEALTH);
   }
 
+  private static final Function<Player, Predicate<Entity>> GEAS_PREDICATE = Util.memoize((pPlayer) -> EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
+      .and(EntityUtils.isHostileTo(pPlayer).and(o -> !o.getType().is(RootsTags.Entities.GEAS_EXCLUDE))));
+
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int affected = 0;
-
-    Vec3 look = pPlayer.getLookAngle();
-
     float hpAffected = 0;
 
-    // TODO: Improve this dramatically
-    for (int i = 0; i < 20; i++) {
-      double x = pPlayer.getX() + look.x * 3.0 * (float) i;
-      double y = pPlayer.getY() + pPlayer.getEyeHeight() + look.y * 3.0 * (float) i;
-      double z = pPlayer.getZ() + look.z * 3.0 * (float) i;
-      // TODO: Make geas predicate "static" (excluding player) and obey maxHealth.
-      List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
-          .and(EntityUtils.isHostileTo(pPlayer).and(o -> !o.getType().is(RootsTags.Entities.GEAS_EXCLUDE))));
-      for (Entity entity : entities) {
-        if (!(entity instanceof LivingEntity living)) {
-          continue;
-        }
-
-        if (living.getMaxHealth() > this.maxHealth) {
-          continue;
-        }
-
-        if (affected == this.count) {
-          break;
-        }
-
-        affected += affect(pPlayer, living);
-        hpAffected += living.getMaxHealth();
+    double x = pPlayer.getX();
+    double y = pPlayer.getY();
+    double z = pPlayer.getZ();
+    List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), GEAS_PREDICATE.apply(pPlayer));
+    for (Entity entity : entities) {
+      if (!(entity instanceof LivingEntity living)) {
+        continue;
       }
+
+      if (living.getMaxHealth() > this.maxHealth) {
+        continue;
+      }
+
+      if (affected == this.count) {
+        break;
+      }
+
+      affected += affect(pPlayer, living);
+      hpAffected += living.getMaxHealth();
     }
 
     if (affected == 0) {
