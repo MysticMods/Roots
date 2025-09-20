@@ -5,6 +5,8 @@
     "minecraft:mule",
     "minecraft:camel",
     "minecraft:llama",
-    "minecraft:villager"
+    "minecraft:villager",
+    "minecraft:wolf",
+    "roots:fennec"
   ]
 }

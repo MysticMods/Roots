@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-08T13:43:32.0103029	Roots Entity Type Tags
+// 1.21.1	2025-09-20T15:23:31.7418944	Roots Entity Type Tags
 c03cca07eaef993ac03a34f8983b4c79477d2c8b data/minecraft/tags/entity_type/arrows.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
@@ -20,7 +20,7 @@ ee75b90db1cfb03a8ce6da87690f062a665055c4 data/roots/tags/entity_type/healable_ic
 29671cfa11d074462c259806e9d60468451e3cdb data/roots/tags/entity_type/rituals/animal_harvest/exclude.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/rose_thorns_exclude.json
 9717909a6109cd9ec9ea5ab3263ee9a5294e63bc data/roots/tags/entity_type/runic_shears_override.json
-5aa1e3a7945b47f0a5fd409010bcbfaf83fb9a67 data/roots/tags/entity_type/should_render_hud.json
+660580089893a7c77b8b59d506e85c6872ff31d6 data/roots/tags/entity_type/should_render_hud.json
 b9316b35927bc11406131118efbee4d9bc15f237 data/roots/tags/entity_type/snow_animals.json
 05430a8b8e8dca2114bbaddac120df103aa795ec data/roots/tags/entity_type/sprouts.json
 7b614260da126eebdd8094b61fe1ef093df96a89 data/roots/tags/entity_type/sprouts/green.json
