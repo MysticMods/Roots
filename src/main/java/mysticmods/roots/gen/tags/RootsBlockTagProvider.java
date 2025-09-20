@@ -55,6 +55,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(BlockTags.FENCE_GATES).add(WILDWOOD_GATE.get());
     this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(WILDWOOD_GATE.get());
 
+    this.tag(Tags.Blocks.ORES).addTags(RootsTags.Blocks.SILVER_ORE, RootsTags.Blocks.QUARTZ_ORE);
+
     this.tag(BlockTags.BUTTONS)
         .add(RUNED_BUTTON.get(), RUNED_TILE_BUTTON.get(), RUNED_BRICK_BUTTON.get(), MOSSY_RUNESTONE_BUTTON.get(), RUNESTONE_BUTTON.get(), RUNESTONE_BRICK_BUTTON.get(), RUNESTONE_TILE_BUTTON.get());
     this.tag(BlockTags.WOODEN_BUTTONS).add(WILDWOOD_BUTTON.get());

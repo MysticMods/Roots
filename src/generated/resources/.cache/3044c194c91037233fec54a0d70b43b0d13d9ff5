@@ -1,8 +1,9 @@
-// 1.21.1	2025-09-20T15:26:46.1318184	Roots Block Tags
+// 1.21.1	2025-09-20T15:28:53.4531997	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
+9928ca2b67514c12a6ff8b4e35226181fc625783 data/c/tags/block/ores.json
 cd69f25ff26a2b62c306b9fea7903c3c7e0aef0a data/c/tags/block/ores/quartz.json
 1b2c32c0bda6979f866230c4cf4d6839e6458654 data/c/tags/block/ores/silver.json
 459c049b3972ac3906b4b224acfb2830965bf92c data/c/tags/block/storage_blocks/raw_silver.json
