@@ -11,6 +11,10 @@
     "roots:bafflecap_block",
     "roots:potted_bafflecap",
     "minecraft:mycelium",
-    "minecraft:podzol"
+    "minecraft:podzol",
+    "minecraft:warped_fungus",
+    "minecraft:crimson_fungus",
+    "minecraft:potted_warped_fungus",
+    "minecraft:potted_crimson_fungus"
   ]
 }
