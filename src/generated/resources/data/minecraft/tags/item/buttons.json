@@ -1,0 +1,11 @@
+{
+  "values": [
+    "roots:runed_button",
+    "roots:runed_tile_button",
+    "roots:runed_brick_button",
+    "roots:mossy_runestone_button",
+    "roots:runestone_button",
+    "roots:runestone_brick_button",
+    "roots:runestone_tile_button"
+  ]
+}

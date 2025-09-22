@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
+import static mysticmods.roots.init.ModItems.*;
+
 @SuppressWarnings({"NullableProblems", "unchecked"})
 public final class RootsItemTagsProvider extends ItemTagsProvider {
   private final CompletableFuture<TagLookup<Ritual>> ritualTags;
@@ -410,36 +412,78 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copyGrove(RootsTags.Groves.PRIMAL);
     copyGrove(RootsTags.Groves.TWILIGHT);
     copyGrove(RootsTags.Groves.WILD);
+
+    // Additions manually copied from RootsBlockTagProvider
+    this.tag(ItemTags.SLABS)
+        .add(RUNED_SLAB.get(), RUNED_BRICK_SLAB.get(), RUNED_TILE_SLAB.get(), RUNESTONE_SLAB.get(), RUNESTONE_BRICK_SLAB.get(), RUNESTONE_TILE_SLAB.get(), MOSSY_RUNESTONE_SLAB.get(), WILDWOOD_BUTTON.get());
+    this.tag(ItemTags.WOODEN_SLABS).add(WILDWOOD_SLAB.get());
+    this.tag(ItemTags.WOODEN_STAIRS).add(WILDWOOD_STAIRS.get());
+    this.tag(ItemTags.STAIRS)
+        .add(RUNESTONE_STAIRS.get(), RUNESTONE_BRICK_STAIRS.get(), RUNESTONE_TILE_STAIRS.get(), MOSSY_RUNESTONE_STAIRS.get(), RUNED_STAIRS.get(), RUNED_TILE_STAIRS.get(), RUNED_BRICK_STAIRS.get());
+    this.tag(ItemTags.WALLS)
+        .add(RUNED_WALL.get(), RUNED_BRICK_WALL.get(), RUNED_TILE_WALL.get(), RUNESTONE_WALL.get(), RUNESTONE_BRICK_WALL.get(), RUNESTONE_TILE_WALL.get(), MOSSY_RUNESTONE_WALL.get());
+    this.tag(ItemTags.WOODEN_FENCES).add(WILDWOOD_FENCE.get());
+    this.tag(Tags.Items.FENCES_WOODEN).add(WILDWOOD_FENCE.get());
+
+    this.tag(ItemTags.FENCE_GATES).add(WILDWOOD_GATE.get());
+    this.tag(Tags.Items.FENCE_GATES_WOODEN).add(WILDWOOD_GATE.get());
+
+    this.tag(Tags.Items.ORES).addTags(RootsTags.Items.SILVER_ORE, RootsTags.Items.QUARTZ_ORE);
+
+    this.tag(ItemTags.BUTTONS)
+        .add(RUNED_BUTTON.get(), RUNED_TILE_BUTTON.get(), RUNED_BRICK_BUTTON.get(), MOSSY_RUNESTONE_BUTTON.get(), RUNESTONE_BUTTON.get(), RUNESTONE_BRICK_BUTTON.get(), RUNESTONE_TILE_BUTTON.get());
+    this.tag(ItemTags.WOODEN_BUTTONS).add(WILDWOOD_BUTTON.get());
+    this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(WILDWOOD_PRESSURE_PLATE.get());
+
+    this.tag(ItemTags.WOODEN_DOORS).add(WILDWOOD_DOOR.get());
+    this.tag(ItemTags.WOODEN_TRAPDOORS).add(WILDWOOD_TRAPDOOR.get());
+
+    this.tag(ItemTags.PLANKS).add(WILDWOOD_PLANKS.get());
+    this.tag(ItemTags.SAPLINGS).add(WILDWOOD_SAPLING.get());
+    this.tag(ItemTags.ACACIA_LOGS).add(RUNED_ACACIA_LOG.get());
+    this.tag(ItemTags.BIRCH_LOGS).add(RUNED_BIRCH_LOG.get());
+    this.tag(ItemTags.JUNGLE_LOGS).add(RUNED_JUNGLE_LOG.get());
+    this.tag(ItemTags.OAK_LOGS).add(RUNED_OAK_LOG.get());
+    this.tag(ItemTags.DARK_OAK_LOGS).add(RUNED_DARK_OAK_LOG.get());
+    this.tag(ItemTags.CRIMSON_STEMS).add(RUNED_CRIMSON_STEM.get());
+    this.tag(ItemTags.WARPED_STEMS).add(RUNED_WARPED_STEM.get());
+    this.tag(ItemTags.LEAVES).add(WILDWOOD_LEAVES.get());
+    this.tag(ItemTags.MANGROVE_LOGS).add(RUNED_MANGROVE_LOG.get());
+
+    this.tag(ItemTags.SPRUCE_LOGS).add(RUNED_SPRUCE_LOG.get());
+    this.tag(ItemTags.LOGS_THAT_BURN).addTags(RootsTags.Items.WILDWOOD_LOGS);
+    //noinspection unchecked
+    this.tag(ItemTags.LOGS).addTags(RootsTags.Items.WILDWOOD_LOGS);
   }
 
-  protected void copyGrove(TagKey<Grove> groveTag) {
+  private void copyGrove(TagKey<Grove> groveTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, groveTag.location());
     copyGrove(groveTag, itemTag);
   }
 
-  protected void copyGrove(TagKey<Grove> groveTag, TagKey<Item> itemTag) {
+  private void copyGrove(TagKey<Grove> groveTag, TagKey<Item> itemTag) {
     this.groveTagsToCopy.put(groveTag, itemTag);
   }
 
-  protected void copySpell(TagKey<Spell> spellTag) {
+  private void copySpell(TagKey<Spell> spellTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, spellTag.location());
     copySpell(spellTag, itemTag);
   }
 
-  protected void copySpell(TagKey<Spell> spellTag, TagKey<Item> itemTag) {
+  private void copySpell(TagKey<Spell> spellTag, TagKey<Item> itemTag) {
     this.spellTagsToCopy.put(spellTag, itemTag);
   }
 
-  protected void copyRitual(TagKey<Ritual> ritualTag) {
+  private void copyRitual(TagKey<Ritual> ritualTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, ritualTag.location());
     copyRitual(ritualTag, itemTag);
   }
 
-  protected void copyRitual(TagKey<Ritual> ritualTag, TagKey<Item> itemTag) {
+  private void copyRitual(TagKey<Ritual> ritualTag, TagKey<Item> itemTag) {
     this.ritualTagsToCopy.put(ritualTag, itemTag);
   }
 
-  protected void manualCopy(TagKey<Block> blockTag) {
+  private void manualCopy(TagKey<Block> blockTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, blockTag.location());
     copy(blockTag, itemTag);
   }

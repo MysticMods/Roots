@@ -1,0 +1,11 @@
+{
+  "values": [
+    "roots:runed_wall",
+    "roots:runed_brick_wall",
+    "roots:runed_tile_wall",
+    "roots:runestone_wall",
+    "roots:runestone_brick_wall",
+    "roots:runestone_tile_wall",
+    "roots:mossy_runestone_wall"
+  ]
+}

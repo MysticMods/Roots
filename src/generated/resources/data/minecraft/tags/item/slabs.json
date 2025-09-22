@@ -1,0 +1,12 @@
+{
+  "values": [
+    "roots:runed_slab",
+    "roots:runed_brick_slab",
+    "roots:runed_tile_slab",
+    "roots:runestone_slab",
+    "roots:runestone_brick_slab",
+    "roots:runestone_tile_slab",
+    "roots:mossy_runestone_slab",
+    "roots:wildwood_button"
+  ]
+}
