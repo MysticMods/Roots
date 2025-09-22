@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-20T15:28:53.4531997	Roots Block Tags
+// 1.21.1	2025-09-22T14:36:55.0779694	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -108,7 +108,9 @@ eddcaa86bbcac9fa0953dab3bd03a9f687ecbed6 data/roots/tags/block/grove_crafter_hud
 d66fd5801ed493567186dbdb2f7d2d91f4497aee data/roots/tags/block/grove_generators/elemental.json
 c05e998c718feb7c79e577ca9f09edc7225b3d22 data/roots/tags/block/grove_generators/fairy.json
 d5140d1e8bd6a91f904fd01a209a5dad3cc34f23 data/roots/tags/block/grove_generators/fairy/paths.json
-c841a5ab5f3a5ce14dcab2d6953046174bce304a data/roots/tags/block/grove_generators/fungal.json
+190dcd5a6f0ceccc64a1223ebf8ceaf05f2fa789 data/roots/tags/block/grove_generators/fungal/dirt.json
+d97765bbcd0f5e1bc4884fc37ca0e9da6e3a99f7 data/roots/tags/block/grove_generators/fungal/mushrooms.json
+4907132c5a1fed8179656d02c1db06a26243de22 data/roots/tags/block/grove_generators/fungal/other.json
 e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/block/grove_generators/sprouting.json
 fdf434e3111509bd2720d8ce34fe694fd85712c9 data/roots/tags/block/grove_generators/twilight.json
 fdf0229f5dd8b82a9a07d37302c8eab1ed4ebeab data/roots/tags/block/grove_generators/wild.json

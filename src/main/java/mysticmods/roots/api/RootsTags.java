@@ -233,7 +233,9 @@ public class RootsTags {
     public static final TagKey<Block> FAIRY_GROVE_PATHS = modTag("grove_generators/fairy/paths");
     public static final TagKey<Block> WILD_GROVE_GENERATORS = modTag("grove_generators/wild");
     public static final TagKey<Block> SPROUTING_GROVE_GENERATORS = modTag("grove_generators/sprouting");
-    public static final TagKey<Block> FUNGAL_GROVE_GENERATORS = modTag("grove_generators/fungal");
+    public static final TagKey<Block> FUNGAL_GROVE_MUSHROOM_GENERATORS = modTag("grove_generators/fungal/mushrooms");
+    public static final TagKey<Block> FUNGAL_GROVE_DIRT_GENERATORS = modTag("grove_generators/fungal/dirt");
+    public static final TagKey<Block> FUNGAL_GROVE_OTHER_GENERATORS = modTag("grove_generators/fungal/other");
     public static final TagKey<Block> TWILIGHT_GROVE_GENERATORS = modTag("grove_generators/twilight");
     public static final TagKey<Block> ELEMENTAL_GROVE_GENERATORS = modTag("grove_generators/elemental");
 

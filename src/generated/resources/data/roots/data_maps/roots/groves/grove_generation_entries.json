@@ -21,8 +21,16 @@
     ],
     "roots:fungal": [
       {
-        "max_count": 2,
-        "tag": "roots:grove_generators/fungal"
+        "max_count": 5,
+        "tag": "roots:grove_generators/fungal/mushrooms"
+      },
+      {
+        "max_count": 5,
+        "tag": "roots:grove_generators/fungal/dirt"
+      },
+      {
+        "max_count": 8,
+        "tag": "roots:grove_generators/fungal/other"
       }
     ],
     "roots:sprouting": [

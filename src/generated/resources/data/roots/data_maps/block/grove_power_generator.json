@@ -21,11 +21,25 @@
         "value": 1
       }
     ],
-    "#roots:grove_generators/fungal": [
+    "#roots:grove_generators/fungal/dirt": [
       {
-        "blockTag": "roots:grove_generators/fungal",
+        "blockTag": "roots:grove_generators/fungal/dirt",
+        "tag": "roots:fungal",
+        "value": 3
+      }
+    ],
+    "#roots:grove_generators/fungal/mushrooms": [
+      {
+        "blockTag": "roots:grove_generators/fungal/mushrooms",
         "tag": "roots:fungal",
         "value": 5
+      }
+    ],
+    "#roots:grove_generators/fungal/other": [
+      {
+        "blockTag": "roots:grove_generators/fungal/other",
+        "tag": "roots:fungal",
+        "value": 3
       }
     ],
     "#roots:grove_generators/sprouting": [

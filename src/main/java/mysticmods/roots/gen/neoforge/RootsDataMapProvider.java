@@ -542,8 +542,12 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GrovePowerGenerator.Generator(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
     builder24.add(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, List.of(
         new GrovePowerGenerator.Generator(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, RootsTags.Groves.SPROUTING, 5)), false);
-    builder24.add(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, List.of(
-        new GrovePowerGenerator.Generator(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, RootsTags.Groves.FUNGAL, 5)), false);
+    builder24.add(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, List.of(
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, RootsTags.Groves.FUNGAL, 5)), false);
+    builder24.add(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, List.of(
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
+    builder24.add(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, List.of(
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
     builder24.add(RootsTags.Blocks.WILD_GROVE_GENERATORS, List.of(
         new GrovePowerGenerator.Generator(RootsTags.Blocks.WILD_GROVE_GENERATORS, RootsTags.Groves.WILD, 5)), false);
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
@@ -561,7 +565,9 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, 3, GrovePowerGenerator.Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.FUNGAL, List.of(
-        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, 2, GrovePowerGenerator.Symmetry.NONE)
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, 5, GrovePowerGenerator.Symmetry.NONE),
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, 5, GrovePowerGenerator.Symmetry.NONE),
+        new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, 8, GrovePowerGenerator.Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.WILD, List.of(
         new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.WILD_GROVE_GENERATORS, 2, GrovePowerGenerator.Symmetry.NONE)
