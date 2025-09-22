@@ -13,6 +13,7 @@ import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinGui;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -213,5 +214,12 @@ public class RootsClientHooks {
       return null;
     }
     return minecraft.player;
+  }
+
+  public static void stopUsingItem (Screen newScreen) {
+    if (Minecraft.getInstance().gameMode != null && Minecraft.getInstance().player != null) {
+      Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
+      Minecraft.getInstance().setScreen(newScreen);
+    }
   }
 }

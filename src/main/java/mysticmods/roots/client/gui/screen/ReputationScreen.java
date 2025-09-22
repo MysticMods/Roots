@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.ReputationRanks;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModGroves;
 import net.minecraft.client.Minecraft;
@@ -27,8 +28,7 @@ public class ReputationScreen extends RootsScreen {
   }
 
   public static void open() {
-    ReputationScreen newScreen = new ReputationScreen();
-    Minecraft.getInstance().setScreen(newScreen);
+    RootsClientHooks.stopUsingItem(new ReputationScreen());
   }
 
   @Override

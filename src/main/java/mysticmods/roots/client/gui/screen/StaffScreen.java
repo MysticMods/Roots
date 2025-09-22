@@ -7,6 +7,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
 import mysticmods.roots.init.ModAttachments;
@@ -195,11 +196,7 @@ public class StaffScreen extends RootsScreen {
   }
 
   public static void open(@Nullable InteractionHand hand, int inventorySlot) {
-    StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
-    if (Minecraft.getInstance().gameMode != null && Minecraft.getInstance().player != null) {
-      Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
-      Minecraft.getInstance().setScreen(newScreen);
-    }
+    RootsClientHooks.stopUsingItem(new StaffScreen(hand, inventorySlot));
   }
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");
