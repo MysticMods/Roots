@@ -101,8 +101,8 @@
         "grove": "roots:sprouting",
         "name": "roots:sprout_crop_growth",
         "reputation": {
-          "gain1": 100,
-          "gain2": 10,
+          "gain1": 10,
+          "gain2": 5,
           "gain3": 1,
           "gain4": 0,
           "gain5": 0
@@ -119,8 +119,8 @@
         "grove": "roots:elemental",
         "name": "roots:elemental_crop_growth",
         "reputation": {
-          "gain1": 100,
-          "gain2": 10,
+          "gain1": 10,
+          "gain2": 5,
           "gain3": 1,
           "gain4": 0,
           "gain5": 0

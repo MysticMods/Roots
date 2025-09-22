@@ -371,8 +371,8 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     var builder20 = builder(DataMaps.GROVE_ACTION_REPUTATIONS);
     builder20.add(ModActions.CROP_GROWTH, List.of(
-        new GroveReputationEntry(ModGroves.SPROUTING.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(100, 10, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.SPROUT_REPUTATION_CROPS),
-        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(100, 10, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS)
+        new GroveReputationEntry(ModGroves.SPROUTING.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(10, 5, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.SPROUT_REPUTATION_CROPS),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(10, 5, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS)
     ), false);
 
     int first_spell_reward = 250;
