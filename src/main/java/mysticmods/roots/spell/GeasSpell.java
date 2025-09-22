@@ -83,6 +83,10 @@ public class GeasSpell extends Spell {
       entities.sort(Comparator.comparingDouble((Entity e) -> e.distanceToSqr(playerPos)));
     }
     for (Entity entity : entities) {
+      if (affected == this.count) {
+        break;
+      }
+
       if (!(entity instanceof LivingEntity living)) {
         continue;
       }
@@ -91,12 +95,12 @@ public class GeasSpell extends Spell {
         continue;
       }
 
-      if (affected == this.count) {
-        break;
-      }
+      int thisAffected = affect(pPlayer, living);
 
-      affected += affect(pPlayer, living);
-      hpAffected += living.getMaxHealth();
+      if (thisAffected > 0) {
+        affected += thisAffected;
+        hpAffected += living.getMaxHealth();
+      }
     }
 
     if (affected == 0) {
