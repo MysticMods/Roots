@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import com.google.common.collect.Comparators;
 import mysticmods.roots.action.GeasAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -76,6 +78,10 @@ public class GeasSpell extends Spell {
     double y = pPlayer.getY();
     double z = pPlayer.getZ();
     List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), GEAS_PREDICATE.apply(pPlayer));
+    if (!entities.isEmpty()) {
+      Vec3 playerPos = Vec3.atCenterOf(pPlayer.blockPosition());
+      entities.sort(Comparator.comparingDouble((Entity e) -> e.distanceToSqr(playerPos)));
+    }
     for (Entity entity : entities) {
       if (!(entity instanceof LivingEntity living)) {
         continue;
