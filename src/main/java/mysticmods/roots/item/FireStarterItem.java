@@ -62,20 +62,22 @@ public class FireStarterItem extends Item {
         boolean doPyre = false;
         BlockPos pyrePos = blockpos;
 
-        if (stateAt.is(RootsTags.Blocks.PYRES) && stateAt.hasProperty(PyreBlock.ACTIVE) && !stateAt.getValue(PyreBlock.ACTIVE)) {
-          doPyre = true;
-        } else if (relativeState.is(RootsTags.Blocks.PYRES) && relativeState.hasProperty(PyreBlock.ACTIVE) && !relativeState.getValue(PyreBlock.ACTIVE)) { // The block above might have been hit
-          pyrePos = relative;
-          doPyre = true;
-        }
+        if (stateAt.is(RootsTags.Blocks.PYRES)) {
+          if (stateAt.hasProperty(PyreBlock.ACTIVE) && !stateAt.getValue(PyreBlock.ACTIVE)) {
+            doPyre = true;
+          } else if (relativeState.is(RootsTags.Blocks.PYRES) && relativeState.hasProperty(PyreBlock.ACTIVE) && !relativeState.getValue(PyreBlock.ACTIVE)) { // The block above might have been hit
+            pyrePos = relative;
+            doPyre = true;
+          }
 
-        if (doPyre) {
-          BlockEntity be = level.getBlockEntity(pyrePos);
-          if (be instanceof PyreBlockEntity pbe) {
-            if (pbe.light(player) != InteractionResult.SUCCESS_NO_ITEM_USED) {
-              level.playSound(player, pyrePos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
-                  .nextFloat() * 0.4F + 0.8F);
-              used = true;
+          if (doPyre) {
+            BlockEntity be = level.getBlockEntity(pyrePos);
+            if (be instanceof PyreBlockEntity pbe) {
+              if (pbe.light(player) != InteractionResult.SUCCESS_NO_ITEM_USED) {
+                level.playSound(player, pyrePos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
+                    .nextFloat() * 0.4F + 0.8F);
+                used = true;
+              }
             }
           }
         } else {
