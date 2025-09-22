@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RootsParticleProvider extends ParticleDescriptionProvider {
+public final class RootsParticleProvider extends ParticleDescriptionProvider {
   public RootsParticleProvider(PackOutput output, ExistingFileHelper fileHelper) {
     super(output, fileHelper);
   }

@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings({"NullableProblems", "unchecked"})
-public class RootsItemTagsProvider extends ItemTagsProvider {
+public final class RootsItemTagsProvider extends ItemTagsProvider {
   private final CompletableFuture<TagLookup<Ritual>> ritualTags;
   private final CompletableFuture<TagLookup<Spell>> spellTags;
   private final CompletableFuture<TagLookup<Grove>> groveTags;

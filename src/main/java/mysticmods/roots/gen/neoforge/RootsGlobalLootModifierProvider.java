@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider {
+public final class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider {
   public RootsGlobalLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
     super(output, registries, RootsAPI.MODID);
   }

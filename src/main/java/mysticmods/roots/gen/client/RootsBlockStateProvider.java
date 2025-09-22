@@ -18,7 +18,7 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-public class RootsBlockStateProvider extends BlockStateProvider {
+public final class RootsBlockStateProvider extends BlockStateProvider {
   public RootsBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
     super(output, RootsAPI.MODID, exFileHelper);
   }

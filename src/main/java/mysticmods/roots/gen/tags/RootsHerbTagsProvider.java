@@ -11,7 +11,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsHerbTagsProvider extends IntrinsicHolderTagsProvider<Herb> {
+public final class RootsHerbTagsProvider extends IntrinsicHolderTagsProvider<Herb> {
   public RootsHerbTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, ExistingFileHelper existingFileHelper) {
     super(output, RootsRegistries.Keys.HERBS, provider, p_256665_ -> p_256665_.builtInRegistryHolder()
         .getKey(), modId, existingFileHelper);

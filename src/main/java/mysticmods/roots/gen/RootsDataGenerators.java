@@ -33,7 +33,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
-public class RootsDataGenerators {
+public final class RootsDataGenerators {
   @SubscribeEvent
   public static void gatherData(GatherDataEvent event) {
     DataGenerator generator = event.getGenerator();

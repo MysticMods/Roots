@@ -44,7 +44,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("deprecation")
-public class RootsDataMapProvider extends DataMapProvider {
+public final class RootsDataMapProvider extends DataMapProvider {
   public RootsDataMapProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
     super(packOutput, lookupProvider);
   }

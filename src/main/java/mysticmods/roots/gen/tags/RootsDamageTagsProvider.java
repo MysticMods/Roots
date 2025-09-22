@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsDamageTagsProvider extends DamageTypeTagsProvider {
+public final class RootsDamageTagsProvider extends DamageTypeTagsProvider {
   public RootsDamageTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
     super(output, lookupProvider, RootsAPI.MODID, existingFileHelper);
   }

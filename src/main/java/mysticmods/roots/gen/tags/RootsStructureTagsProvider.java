@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsStructureTagsProvider extends StructureTagsProvider {
+public final class RootsStructureTagsProvider extends StructureTagsProvider {
   public RootsStructureTagsProvider(PackOutput arg, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
     super(arg, completableFuture, RootsAPI.MODID, existingFileHelper);
   }

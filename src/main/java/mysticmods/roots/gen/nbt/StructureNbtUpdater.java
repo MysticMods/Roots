@@ -28,7 +28,7 @@ import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 // Source: https://github.com/BluSunrize/ImmersiveEngineering/blob/1.20.1/src/datagen/java/blusunrize/immersiveengineering/data/StructureUpdater.java
-public class StructureNbtUpdater implements DataProvider {
+public final class StructureNbtUpdater implements DataProvider {
   private final String basePath;
   private final String modid;
   private final PackOutput output;

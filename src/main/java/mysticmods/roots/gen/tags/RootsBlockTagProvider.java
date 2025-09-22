@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 import static mysticmods.roots.init.ModBlocks.*;
 
 @SuppressWarnings("unchecked")
-public class RootsBlockTagProvider extends BlockTagsProvider {
+public final class RootsBlockTagProvider extends BlockTagsProvider {
   public RootsBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
     super(output, lookupProvider, RootsAPI.MODID, existingFileHelper);
   }

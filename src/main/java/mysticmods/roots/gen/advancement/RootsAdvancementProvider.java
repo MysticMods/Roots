@@ -15,7 +15,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Consumer;
 
-public class RootsAdvancementProvider implements AdvancementProvider.AdvancementGenerator {
+public final class RootsAdvancementProvider implements AdvancementProvider.AdvancementGenerator {
   @Override
   public void generate(HolderLookup.Provider arg, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
     AdvancementHolder root = Advancement.Builder.advancement()

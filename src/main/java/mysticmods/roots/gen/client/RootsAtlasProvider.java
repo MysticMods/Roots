@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.data.SpriteSourceProvider;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-public class RootsAtlasProvider extends SpriteSourceProvider {
+public final class RootsAtlasProvider extends SpriteSourceProvider {
   public RootsAtlasProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper fileHelper) {
     super(output, lookupProvider, RootsAPI.MODID, fileHelper);
   }

@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 
-public class RootsLangProvider extends LanguageProvider {
+public final class RootsLangProvider extends LanguageProvider {
   public RootsLangProvider(PackOutput output) {
     super(output, RootsAPI.MODID, "en_us");
   }

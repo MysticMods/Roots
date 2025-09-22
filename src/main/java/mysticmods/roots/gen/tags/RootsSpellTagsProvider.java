@@ -10,7 +10,7 @@ import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Spell> {
+public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Spell> {
 
   public RootsSpellTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
     super(output, RootsRegistries.Keys.SPELLS, provider, p_256665_ -> p_256665_.builtInRegistryHolder()

@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsAttributeTagsProvider extends IntrinsicHolderTagsProvider<Attribute> {
+public final class RootsAttributeTagsProvider extends IntrinsicHolderTagsProvider<Attribute> {
 
   public RootsAttributeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
     super(output, Registries.ATTRIBUTE, provider, p_256665_ -> BuiltInRegistries.ATTRIBUTE.getResourceKey(p_256665_)

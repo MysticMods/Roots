@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 @SuppressWarnings("DataFlowIssue")
-public class RootsItemModelProvider extends ItemModelProvider {
+public final class RootsItemModelProvider extends ItemModelProvider {
   public RootsItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
     super(output, RootsAPI.MODID, existingFileHelper);
   }

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsBlockEntityTagsProvider extends IntrinsicHolderTagsProvider<BlockEntityType<?>> {
+public final class RootsBlockEntityTagsProvider extends IntrinsicHolderTagsProvider<BlockEntityType<?>> {
   public RootsBlockEntityTagsProvider(PackOutput arg, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
     super(arg, Registries.BLOCK_ENTITY_TYPE, completableFuture, (BlockEntityType<?> arg2) -> arg2.builtInRegistryHolder()
         .key(), RootsAPI.MODID, existingFileHelper);

@@ -49,7 +49,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class RootsRecipeProvider extends RecipeProvider {
+public final class RootsRecipeProvider extends RecipeProvider {
   public RootsRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
     super(output, registries);
   }

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
+public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
   public RootsEntityTagsProvider(PackOutput arg, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
     super(arg, completableFuture, RootsAPI.MODID, existingFileHelper);
   }

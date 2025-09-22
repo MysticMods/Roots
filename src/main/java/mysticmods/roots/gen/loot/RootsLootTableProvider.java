@@ -55,7 +55,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
-public class RootsLootTableProvider {
+public final class RootsLootTableProvider {
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
     return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES, RootsAPI.TURTLE_SCUTE), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY), new LootTableProvider.SubProviderEntry(ChestLootTablesFixer::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsAdditionalEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
   }

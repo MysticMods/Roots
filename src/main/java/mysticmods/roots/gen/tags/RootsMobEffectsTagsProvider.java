@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsMobEffectsTagsProvider extends TagsProvider<MobEffect> {
+public final class RootsMobEffectsTagsProvider extends TagsProvider<MobEffect> {
   public RootsMobEffectsTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
     super(output, Registries.MOB_EFFECT, lookupProvider, RootsAPI.MODID, existingFileHelper);
   }

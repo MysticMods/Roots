@@ -10,7 +10,7 @@ import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
 
-public class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Grove> {
+public final class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Grove> {
 
 
   public RootsGroveTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
