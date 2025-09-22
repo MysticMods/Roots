@@ -69,6 +69,7 @@ public class GeasSpell extends Spell {
   private static final Function<Player, Predicate<Entity>> GEAS_PREDICATE = Util.memoize((pPlayer) -> EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
       .and(EntityUtils.isHostileTo(pPlayer).and(o -> !o.getType().is(RootsTags.Entities.GEAS_EXCLUDE))));
 
+  // TODO: Make this configurable
   private static final AABB bounds = new AABB(-4, -4, -4, 5, 5, 5);
 
   @Override
