@@ -79,6 +79,7 @@ public class GeasSpell extends Spell {
 
     Vec3 playerPos = pPlayer.position();
 
+    // TODO: Check if bounds.move negates the need for -4/+5
     List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, bounds.move(playerPos), GEAS_PREDICATE.apply(pPlayer));
     if (!entities.isEmpty()) {
       entities.sort(Comparator.comparingDouble((Entity e) -> e.distanceToSqr(playerPos)));
