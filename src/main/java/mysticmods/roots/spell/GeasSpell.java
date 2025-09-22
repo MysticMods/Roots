@@ -69,17 +69,17 @@ public class GeasSpell extends Spell {
   private static final Function<Player, Predicate<Entity>> GEAS_PREDICATE = Util.memoize((pPlayer) -> EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
       .and(EntityUtils.isHostileTo(pPlayer).and(o -> !o.getType().is(RootsTags.Entities.GEAS_EXCLUDE))));
 
+  private static final AABB bounds = new AABB(-4, -4, -4, 5, 5, 5);
+
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int affected = 0;
     float hpAffected = 0;
 
-    double x = pPlayer.getX();
-    double y = pPlayer.getY();
-    double z = pPlayer.getZ();
-    List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, new AABB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0), GEAS_PREDICATE.apply(pPlayer));
+    Vec3 playerPos = pPlayer.position();
+
+    List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, bounds.move(playerPos), GEAS_PREDICATE.apply(pPlayer));
     if (!entities.isEmpty()) {
-      Vec3 playerPos = Vec3.atCenterOf(pPlayer.blockPosition());
       entities.sort(Comparator.comparingDouble((Entity e) -> e.distanceToSqr(playerPos)));
     }
     for (Entity entity : entities) {
