@@ -53,7 +53,7 @@ public class CropGrowthAction extends GroveAction {
     int oldAge = context.oldBlockState().getValue(age);
     int newAge = context.blockState().getValue(age);
 
-    if (newAge > oldAge) {
+    if (newAge == record.maximumAge() && oldAge != newAge) {
       if (shouldLog()) {
         RootsAPI.LOG.error("CropGrowthAction fired by '{}' with new block state '{}'",
             context.player().getName().getString(), context.blockState());
