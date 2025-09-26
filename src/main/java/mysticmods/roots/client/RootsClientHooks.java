@@ -14,6 +14,7 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinGui;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
+import mysticmods.roots.util.LightDrifterUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -234,6 +235,7 @@ public class RootsClientHooks {
     if (!mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       // Entity will be discarded by the server
       mc.player.removeData(ModAttachments.DRIFTER_CLIENT_STORAGE);
+      mc.setCameraEntity(mc.player);
       return;
     }
 
@@ -241,5 +243,10 @@ public class RootsClientHooks {
     storage.setEntityId(entityId);
     // ??? Necessary? TODO
     mc.player.setData(ModAttachments.DRIFTER_CLIENT_STORAGE, storage);
+
+    LightDrifterEntity drifter = LightDrifterUtil.getLightDrifterEntity(mc.player);
+    if (drifter != null) {
+      mc.setCameraEntity(drifter);
+    }
   }
 }

@@ -2,10 +2,13 @@ package mysticmods.roots.entity.other;
 
 import com.google.common.primitives.Floats;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.init.ModEntities;
+import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
 import mysticmods.roots.network.server.ServerboundMoveLightDrifterPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,6 +17,7 @@ import net.minecraft.world.entity.TraceableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -50,10 +54,13 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
 
   public Vec3 lastKnownClientMovement;
 
-  // TODO: Setting the owner
+  public LightDrifterEntity (EntityType<LightDrifterEntity> type, Level level, Player owner) {
+    this(type, level);
+    setOwner(owner);
+  }
 
-  public LightDrifterEntity(EntityType<?> entityType, Level level) {
-    super(entityType, level);
+  public LightDrifterEntity(EntityType<LightDrifterEntity> entityEntityType, Level level) {
+    super(entityEntityType, level);
     this.noPhysics = true;
     this.setNoGravity(true);
   }
@@ -78,6 +85,7 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
         if (!player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
           this.remove(RemovalReason.DISCARDED);
         }
+        PacketDistributor.sendToPlayer((ServerPlayer) player, new ClientboundLightDrifterSyncPacket(this.getId()));
       } else {
         this.remove(RemovalReason.DISCARDED);
       }
@@ -130,6 +138,7 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
       this.lastGoodX = this.getX();
       this.lastGoodY = this.getY();
       this.lastGoodZ = this.getZ();
+      this.hasImpulse = true;
     }
   }
 

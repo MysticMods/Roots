@@ -76,7 +76,7 @@ public class ModEntities {
       .sized(1.9f, 1.9f).clientTrackingRange(4).updateInterval(10).build("wildfire"));
   public static final DeferredHolder<EntityType<?>, EntityType<TemporalMorassEntity>> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> EntityType.Builder.of(TemporalMorassEntity::new, MobCategory.MISC)
       .sized(6f, 3f).clientTrackingRange(4).updateInterval(10).build("temporal_morass"));
-  public static final DeferredHolder<EntityType<?>, EntityType<LightDrifterEntity>> LIGHT_DRIFTER = REGISTER.register("light_drifter", () -> EntityType.Builder.of(LightDrifterEntity::new, MobCategory.MISC)
+  public static final DeferredHolder<EntityType<?>, EntityType<LightDrifterEntity>> LIGHT_DRIFTER = REGISTER.register("light_drifter", () -> EntityType.Builder.<LightDrifterEntity>of(LightDrifterEntity::new, MobCategory.MISC)
       .sized(0.5f, 0.5f).clientTrackingRange(4).updateInterval(10).build("light_drifter"));
 
   public static final DeferredHolder<EntityType<?>, EntityType<FairyHutEntity>> FAIRY_HUT = REGISTER.register("fairy_hut", () -> EntityType.Builder.of(FairyHutEntity::new, MobCategory.MISC)
