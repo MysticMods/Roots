@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LocalPlayer.class)
-public class MixinLocalPlayer {
+public class MixinLocalPlayer$StaffChannel {
   @Shadow
   protected int sprintTriggerTime;
 

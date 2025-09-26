@@ -54,10 +54,18 @@ public class ModAttachments {
       .serialize(RitualInformation.CODEC).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<SpatialMap>> GROVE_CONSUMERS = ATTACHMENTS.register("grove_consumers", () -> AttachmentType.builder(SpatialMap::new)
       .build());
+  // TODO: Unused?
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<AnimalHarvestRecipe.Cache>> ANIMAL_HARVEST_RECIPE_CACHE = ATTACHMENTS.register("animal_harvest_recipe_cache", () -> AttachmentType.builder(() -> new AnimalHarvestRecipe.Cache(new ArrayList<>()))
       .serialize(AnimalHarvestRecipe.CACHE_CODEC).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<Map<Holder<Attribute>, AugmentationInfo>>> AUGMENTATION_INFO = ATTACHMENTS.register("augmentation_data", () -> AttachmentType.<Map<Holder<Attribute>, AugmentationInfo>>builder(() -> new HashMap<>())
       .serialize(AugmentationInfo.DATA_MAP_CODEC).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<LightDrifterStorage>> DRIFTER_CLIENT_STORAGE = ATTACHMENTS.register("drifter_client_storage", () -> AttachmentType.builder(LightDrifterStorage::new).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<LightDrifterStorage>> DRIFTER_SERVER_STORAGE = ATTACHMENTS.register("drifter_server_storage", () -> AttachmentType.builder(LightDrifterStorage::new)
+      .serialize(LightDrifterStorage.CODEC).copyOnDeath().build());
+
+  private static AttachmentType<Integer> createIntegerAttachmentType() {
+    return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();
+  }
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
@@ -94,12 +102,6 @@ public class ModAttachments {
       .networkSynchronized(StreamCodec.unit(Unit.INSTANCE)).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<QuiverRecord>> QUIVER_RECORD = COMPONENTS.register("quiver_record", () -> new DataComponentType.Builder<QuiverRecord>().persistent(QuiverRecord.CODEC)
       .networkSynchronized(QuiverRecord.STREAM_CODEC).build());
-
-  public static final UUID DEFAULT_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
-
-  private static AttachmentType<Integer> createIntegerAttachmentType() {
-    return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();
-  }
 
   public static void register(IEventBus bus) {
     ATTACHMENTS.register(bus);

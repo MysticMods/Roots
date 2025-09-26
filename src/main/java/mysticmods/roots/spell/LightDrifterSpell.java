@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -14,7 +15,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
+
 public class LightDrifterSpell extends Spell {
+  private int duration;
+
   public LightDrifterSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xf2ee96, 0x96dbf2);
   }
@@ -26,7 +31,14 @@ public class LightDrifterSpell extends Spell {
 
   @Override
   public void initialize(Holder<Spell> holder) {
+    var map = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.duration = map.get(ModSpells.LIGHT_DRIFTER_DURATION);
+  }
 
+  @Override
+  public void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModSpells.LIGHT_DRIFTER_DURATION);
   }
 
   @Override

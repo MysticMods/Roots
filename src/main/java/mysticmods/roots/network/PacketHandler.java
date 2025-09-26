@@ -35,6 +35,9 @@ public class PacketHandler {
     registrar.play(ServerboundOpenPouchPacket.TYPE, ServerboundOpenPouchPacket.CODEC);
     registrar.play(ServerboundCycleTomePacket.TYPE, ServerboundCycleTomePacket.CODEC);
     registrar.play(ServerboundClearStaffSlotPacket.TYPE, ServerboundClearStaffSlotPacket.CODEC);
+    registrar.play(ServerboundMoveLightDrifterPacket.Pos.TYPE, ServerboundMoveLightDrifterPacket.Pos.CODEC);
+    registrar.play(ServerboundMoveLightDrifterPacket.PosRot.TYPE, ServerboundMoveLightDrifterPacket.PosRot.CODEC);
+    registrar.play(ServerboundMoveLightDrifterPacket.Rot.TYPE, ServerboundMoveLightDrifterPacket.Rot.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {
@@ -84,6 +87,7 @@ public class PacketHandler {
     registrar.play(ClientboundCooldownSyncPacket.TYPE, ClientboundCooldownSyncPacket.CODEC);
     registrar.play(ClientboundAnimalHarvestSyncPacket.TYPE, ClientboundAnimalHarvestSyncPacket.CODEC);
     registrar.play(ClientboundClearHighlightPacket.TYPE, ClientboundClearHighlightPacket.CODEC);
+    registrar.play(ClientboundLightDrifterSyncPacket.TYPE, ClientboundLightDrifterSyncPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

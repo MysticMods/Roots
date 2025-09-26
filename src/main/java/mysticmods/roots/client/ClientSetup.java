@@ -145,6 +145,7 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.METEOR.value(), MeteorRenderer::new);
     event.registerEntityRenderer(ModEntities.WILDFIRE.value(), WildfireRenderer::new);
     event.registerEntityRenderer(ModEntities.TEMPORAL_MORASS.value(), NoopRenderer::new);
+    event.registerEntityRenderer(ModEntities.LIGHT_DRIFTER.value(), NoopRenderer::new);
     event.registerEntityRenderer(ModEntities.ROSE_THORNS.value(), RoseThornsRenderer::new);
     event.registerEntityRenderer(ModEntities.LIVING_ARROW.value(), LivingArrowRenderer::new);
     event.registerEntityRenderer(ModEntities.JERBOA.value(), JerboaRenderer::new);

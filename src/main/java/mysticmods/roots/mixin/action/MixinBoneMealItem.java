@@ -3,6 +3,7 @@ package mysticmods.roots.mixin.action;
 import com.llamalad7.mixinextras.sugar.Local;
 import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.init.ModActions;
+import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

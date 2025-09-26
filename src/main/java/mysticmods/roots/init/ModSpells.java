@@ -43,6 +43,7 @@ public class ModSpells {
   // Light Drifter (600 cooldown)
   public static final DeferredHolder<Spell, LightDrifterSpell> LIGHT_DRIFTER = spell(Spells.LIGHT_DRIFTER, LightDrifterSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_COOLDOWN = P.recordProperty("light_drifter/cooldown", Property.ofInt(600, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_DURATION = P.recordProperty("light_drifter/duration", Property.ofInt(20 * 10, SpellProperties.DURATION));
 
   // Magnetism (350 cooldown)
   public static final DeferredHolder<Spell, MagnetismSpell> MAGNETISM = spell(Spells.MAGNETISM, MagnetismSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0016)))); // TODO: Operation or cast?

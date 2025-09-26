@@ -594,6 +594,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addEntity(ModEntities.LIVING_ARROW);
     addEntity(ModEntities.METEOR);
     addEntity(ModEntities.TEMPORAL_MORASS);
+    addEntity(ModEntities.LIGHT_DRIFTER);
     addEntity(ModEntities.WILDFIRE);
     addEntity(ModEntities.ROSE_THORNS);
 

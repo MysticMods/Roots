@@ -8,7 +8,9 @@ import mysticmods.roots.client.gui.overlay.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.config.ConfigManager;
+import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinGui;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
@@ -221,5 +223,23 @@ public class RootsClientHooks {
       Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
       Minecraft.getInstance().setScreen(newScreen);
     }
+  }
+
+  public static void setLightDrifterSync(int entityId) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.player == null) {
+      return;
+    }
+
+    if (!mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      // Entity will be discarded by the server
+      mc.player.removeData(ModAttachments.DRIFTER_CLIENT_STORAGE);
+      return;
+    }
+
+    LightDrifterStorage storage = mc.player.getData(ModAttachments.DRIFTER_CLIENT_STORAGE);
+    storage.setEntityId(entityId);
+    // ??? Necessary? TODO
+    mc.player.setData(ModAttachments.DRIFTER_CLIENT_STORAGE, storage);
   }
 }

@@ -456,6 +456,15 @@
           "default_value": 600,
           "value": 600
         }
+      },
+      {
+        "id": "roots:light_drifter/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 200,
+          "value": 200
+        }
       }
     ],
     "roots:magnetism": [

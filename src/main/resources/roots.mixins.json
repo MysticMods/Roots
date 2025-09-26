@@ -38,7 +38,8 @@
   ],
   "client": [
     "client.MixinEntity",
-    "client.MixinLocalPlayer",
+    "client.MixinLocalPlayer$LightDrifter",
+    "client.MixinLocalPlayer$StaffChannel",
     "client.accessor.AccessorMixinCompositeRenderType",
     "client.accessor.AccessorMixinCompositeState",
     "client.accessor.AccessorMixinEntityRenderer",

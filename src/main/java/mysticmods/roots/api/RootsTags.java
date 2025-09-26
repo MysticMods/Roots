@@ -597,6 +597,8 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> SHOULD_RENDER_HUD = modTag("should_render_hud");
     public static final TagKey<EntityType<?>> PLAYERS = modTag("players");
 
+    public static final TagKey<EntityType<?>> LIGHT_DRIFTER = modTag("light_drifter");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }

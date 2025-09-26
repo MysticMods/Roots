@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class RoseThornsEntity extends Entity implements TraceableEntity {
-  @javax.annotation.Nullable
+  @Nullable
   private UUID ownerUUID;
-  @javax.annotation.Nullable
+  @Nullable
   private Entity cachedOwner;
   private static final EntityDataAccessor<Integer> LIFETIME = SynchedEntityData.defineId(RoseThornsEntity.class, EntityDataSerializers.INT);
   private AABB aabb;

@@ -22,6 +22,7 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SimpleEffect> GEAS = REGISTER.register("geas", () -> new GeasEffect(MobEffectCategory.BENEFICIAL, 0x850101, true));
   public static final DeferredHolder<MobEffect, SenseDangerEffect> SENSE_DANGER = REGISTER.register("sense_danger", SenseDangerEffect::new);
   public static final DeferredHolder<MobEffect, SimpleEffect> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x00008b, false));
+  public static final DeferredHolder<MobEffect, SimpleEffect> LIGHT_DRIFTER = REGISTER.register("light_drifter", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0xded666, true));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
