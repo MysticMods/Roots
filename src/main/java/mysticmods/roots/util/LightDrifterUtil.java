@@ -24,7 +24,7 @@ public class LightDrifterUtil {
       Entity e = level.getEntity(storage.entityId());
       if (e instanceof LightDrifterEntity drifter) {
         return drifter;
-      } else {
+      } else if (storage.entityId() != -1) {
         RootsAPI.LOG.error("Light Drifter entity with ID {} not a LightDrifterEntity, is instead {}", storage.entityId(), e);
         return null;
       }
@@ -39,10 +39,11 @@ public class LightDrifterUtil {
       Entity e = serverLevel.getEntity(storage.id());
       if (e instanceof LightDrifterEntity drifter) {
         return drifter;
-      } else {
+      } else if (storage.entityId() != -1) {
         RootsAPI.LOG.error("Light Drifter entity with ID {} not a LightDrifterEntity, is instead {}", storage.entityId(), e);
         return null;
       }
     }
+    return null;
   }
 }

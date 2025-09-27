@@ -11,6 +11,7 @@ import mysticmods.roots.entity.projectile.MeteorEntity;
 import mysticmods.roots.entity.projectile.WildfireEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
@@ -119,6 +120,7 @@ public class ModEntities {
     event.put(ModEntities.MELODY_SPROUT.get(), SproutEntity.attributes().build());
     event.put(ModEntities.OWL.get(), OwlEntity.attributes().build());
     event.put(ModEntities.DUCK.get(), DuckEntity.attributes().build());
+    event.put(ModEntities.LIGHT_DRIFTER.get(), LivingEntity.createLivingAttributes().build());
   }
 
   public static void register(IEventBus bus) {

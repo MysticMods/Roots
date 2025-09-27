@@ -10,19 +10,18 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.TraceableEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.UUID;
 
-public class LightDrifterEntity extends Entity implements TraceableEntity {
+public class LightDrifterEntity extends LivingEntity implements TraceableEntity {
   @Nullable
   private UUID ownerUUID;
   @Nullable
@@ -39,8 +38,6 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
   public float xBob;
   public float yBobO;
   public float xBobO;
-  public float xxa;
-  public float zza;
 
   // These values are only used on the server.
   private double firstGoodX;
@@ -77,6 +74,25 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
   }
 
   @Override
+  public boolean isControlledByLocalInstance() {
+    Entity owner = getOwner();
+    if (owner instanceof Player player) {
+      return player.isLocalPlayer();
+    }
+    return isEffectiveAi();
+  }
+
+  @Override
+  public boolean isEffectiveAi() {
+    Entity owner = getOwner();
+    if (owner instanceof Player player && player.isLocalPlayer()) {
+      return true;
+    }
+
+    return !level().isClientSide();
+  }
+
+  @Override
   public void baseTick() {
     super.baseTick();
     if (!this.level().isClientSide() && !this.isRemoved()) {
@@ -84,8 +100,10 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
       if (owner instanceof Player player) {
         if (!player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
           this.remove(RemovalReason.DISCARDED);
+          return;
         }
         PacketDistributor.sendToPlayer((ServerPlayer) player, new ClientboundLightDrifterSyncPacket(this.getId()));
+        ((ServerPlayer)player).setCamera(null);
       } else {
         this.remove(RemovalReason.DISCARDED);
       }
@@ -94,15 +112,22 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
 
   @Override
   public void tick() {
-    super.tick();
-    if (!this.level().isClientSide() && !this.isRemoved()) {
-      this.resetPosition();
-      this.xo = this.getX();
-      this.yo = this.getY();
-      this.zo = this.getZ();
-      this.absMoveTo(this.firstGoodX, this.firstGoodY, this.firstGoodZ, this.getYRot(), this.getXRot());
-      this.moveTickCount++;
+    if (this.level().hasChunkAt(this.getBlockX(), this.getBlockZ())) {
+      super.tick();
+      if (!this.level().isClientSide() && !this.isRemoved()) {
+        this.resetPosition();
+        this.xo = this.getX();
+        this.yo = this.getY();
+        this.zo = this.getZ();
+        this.absMoveTo(this.firstGoodX, this.firstGoodY, this.firstGoodZ, this.getYRot(), this.getXRot());
+        this.moveTickCount++;
+      }
     }
+  }
+
+  @Override
+  public HumanoidArm getMainArm() {
+    return null;
   }
 
   public void handleMovePlayer(ServerboundMoveLightDrifterPacket packet) {
@@ -158,22 +183,37 @@ public class LightDrifterEntity extends Entity implements TraceableEntity {
 
   @Override
   protected void defineSynchedData(SynchedEntityData.Builder builder) {
-
+    super.defineSynchedData(builder);
   }
 
   @Override
-  protected void addAdditionalSaveData(CompoundTag compound) {
+  public void addAdditionalSaveData(CompoundTag compound) {
     if (this.ownerUUID != null) {
       compound.putUUID("Owner", this.ownerUUID);
     }
   }
 
   @Override
-  protected void readAdditionalSaveData(CompoundTag compound) {
+  public void readAdditionalSaveData(CompoundTag compound) {
     if (compound.hasUUID("Owner")) {
       this.ownerUUID = compound.getUUID("Owner");
       this.cachedOwner = null;
     }
+  }
+
+  @Override
+  public Iterable<ItemStack> getArmorSlots() {
+    return List.of();
+  }
+
+  @Override
+  public ItemStack getItemBySlot(EquipmentSlot slot) {
+    return ItemStack.EMPTY;
+  }
+
+  @Override
+  public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
+
   }
 
   @Override
