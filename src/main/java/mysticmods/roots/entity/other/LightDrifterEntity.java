@@ -2,11 +2,15 @@ package mysticmods.roots.entity.other;
 
 import com.google.common.primitives.Floats;
 import mysticmods.roots.init.ModEffects;
-import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
 import mysticmods.roots.network.server.ServerboundMoveLightDrifterPacket;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -19,9 +23,12 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class LightDrifterEntity extends LivingEntity implements TraceableEntity {
+  protected static final EntityDataAccessor<Optional<UUID>> OWNER = SynchedEntityData.defineId(LightDrifterEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+
   @Nullable
   private UUID ownerUUID;
   @Nullable
@@ -51,7 +58,7 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
 
   public Vec3 lastKnownClientMovement;
 
-  public LightDrifterEntity (EntityType<LightDrifterEntity> type, Level level, Player owner) {
+  public LightDrifterEntity(EntityType<LightDrifterEntity> type, Level level, Player owner) {
     this(type, level);
     setOwner(owner);
   }
@@ -103,7 +110,7 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
           return;
         }
         PacketDistributor.sendToPlayer((ServerPlayer) player, new ClientboundLightDrifterSyncPacket(this.getId()));
-        ((ServerPlayer)player).setCamera(null);
+        ((ServerPlayer) player).setCamera(null);
       } else {
         this.remove(RemovalReason.DISCARDED);
       }
@@ -127,7 +134,7 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
 
   @Override
   public HumanoidArm getMainArm() {
-    return null;
+    return HumanoidArm.LEFT;
   }
 
   public void handleMovePlayer(ServerboundMoveLightDrifterPacket packet) {
@@ -184,6 +191,7 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
   @Override
   protected void defineSynchedData(SynchedEntityData.Builder builder) {
     super.defineSynchedData(builder);
+    builder.define(OWNER, Optional.empty());
   }
 
   @Override
@@ -226,6 +234,7 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
 
   public void setOwner(@Nullable Entity owner) {
     if (owner != null) {
+      this.entityData.set(OWNER, Optional.of(owner.getUUID()));
       this.ownerUUID = owner.getUUID();
       this.cachedOwner = owner;
     }
@@ -233,10 +242,14 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
 
   @Nullable
   public Entity getOwner() {
+    Optional<UUID> opt = this.entityData.get(OWNER);
     if (this.cachedOwner != null && !this.cachedOwner.isRemoved()) {
       return this.cachedOwner;
     } else if (this.ownerUUID != null && this.level() instanceof ServerLevel serverlevel) {
       this.cachedOwner = serverlevel.getEntity(this.ownerUUID);
+      return this.cachedOwner;
+    } else if (opt.isPresent()) {
+      this.cachedOwner = level().getPlayerByUUID(opt.get());
       return this.cachedOwner;
     } else {
       return null;

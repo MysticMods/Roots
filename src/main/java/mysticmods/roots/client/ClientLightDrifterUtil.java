@@ -23,10 +23,10 @@ public class ClientLightDrifterUtil {
     boolean flag1 = Mth.lengthSquared(d4, d0, d1) > Mth.square(2.0E-4) || entity.positionReminder >= 20;
     boolean flag2 = d2 != 0.0 || d3 != 0.0;
     if (flag1 && flag2) {
-      RootsAPI.LOG.error("Player {}'s light drifter moved to {}, {}, {} ({}), {}, {} ({}); sending full pos/rot packet", player.getName().getString(), entity.getX(), entity.getY(), entity.getZ(), d4, entity.getYRot(), entity.getXRot(), d3);
+      //RootsAPI.LOG.error("Player {}'s light drifter moved to {}, {}, {} ({}), {}, {} ({}); sending full pos/rot packet", player.getName().getString(), entity.getX(), entity.getY(), entity.getZ(), d4, entity.getYRot(), entity.getXRot(), d3);
       PacketDistributor.sendToServer(new ServerboundMoveLightDrifterPacket.PosRot(entity.getId(), entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot(), entity.onGround()));
     } else if (flag1) {
-      RootsAPI.LOG.error("Player {}'s light drifter moved to {}, {}, {} ({}); sending pos packet", player.getName().getString(), entity.getX(), entity.getY(), entity.getZ(), d4);
+      //RootsAPI.LOG.error("Player {}'s light drifter moved to {}, {}, {} ({}); sending pos packet", player.getName().getString(), entity.getX(), entity.getY(), entity.getZ(), d4);
       PacketDistributor.sendToServer(new ServerboundMoveLightDrifterPacket.Pos(entity.getId(), entity.getX(), entity.getY(), entity.getZ(), entity.onGround()));
     } else if (flag2) {
       RootsAPI.LOG.error("Player {}'s light drifter rotated to {}, {} ({}); sending rot packet", player.getName().getString(), entity.getYRot(), entity.getXRot(), d2);
@@ -46,20 +46,28 @@ public class ClientLightDrifterUtil {
     }
   }
 
+  public static void turnPlayer (LocalPlayer player, double d0, double d1) {
+    LightDrifterEntity entity = LightDrifterUtil.getLightDrifterEntity(player);
+    if (entity == null) {
+      return;
+    }
+    entity.turn(d0, d1);
+  }
+
   public static void serverAiStep(LocalPlayer player) {
     LightDrifterEntity entity = LightDrifterUtil.getLightDrifterEntity(player);
     if (entity == null) {
       return;
     }
 
-    entity.xxa = player.input.leftImpulse;
-    entity.zza = player.input.forwardImpulse;
+    entity.xxa = -player.input.leftImpulse;
+    entity.zza = -player.input.forwardImpulse;
     entity.yBobO = entity.yBob;
     entity.xBobO = entity.xBob;
     entity.xBob = entity.xBob + (entity.getXRot() - entity.xBob) * 0.5F;
     entity.yBob = entity.yBob + (entity.getYRot() - entity.yBob) * 0.5F;
     if (entity.xxa != 0.0f || entity.zza != 0.0f) {
-      RootsAPI.LOG.error("Player {}'s light drifter is moving ({} forward, {} strafe)", player.getName().getString(), entity.zza, entity.xxa);
+      //RootsAPI.LOG.error("Player {}'s light drifter is moving ({} forward, {} strafe)", player.getName().getString(), entity.zza, entity.xxa);
     }
   }
 

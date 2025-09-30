@@ -57,7 +57,6 @@ public class LightDrifterSpell extends Spell {
     drifter.setYRot(pPlayer.getYRot());
     pLevel.addFreshEntity(drifter);
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new ClientboundLightDrifterSyncPacket(drifter.getId()));
-    ((ServerPlayer)pPlayer).setCamera(drifter);
     return cooldown;
   }
 }

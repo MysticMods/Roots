@@ -232,7 +232,7 @@ public class RootsClientHooks {
       return;
     }
 
-    if (!mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+    if (!mc.player.hasEffect(ModEffects.LIGHT_DRIFTER) || entityId == -1) {
       // Entity will be discarded by the server
       mc.player.removeData(ModAttachments.DRIFTER_CLIENT_STORAGE);
       mc.setCameraEntity(mc.player);
