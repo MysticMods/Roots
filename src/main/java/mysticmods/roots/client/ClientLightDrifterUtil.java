@@ -60,8 +60,8 @@ public class ClientLightDrifterUtil {
       return;
     }
 
-    entity.xxa = -player.input.leftImpulse;
-    entity.zza = -player.input.forwardImpulse;
+    entity.xxa = player.input.leftImpulse;
+    entity.zza = player.input.forwardImpulse;
     entity.yBobO = entity.yBob;
     entity.xBobO = entity.xBob;
     entity.xBob = entity.xBob + (entity.getXRot() - entity.xBob) * 0.5F;
@@ -89,7 +89,7 @@ public class ClientLightDrifterUtil {
     if (j != 0) {
       // TODO: Is this sufficient to sync
       RootsAPI.LOG.error("Player {}'s light drifter is moving vertically ({}); applying motion", player.getName().getString(), j);
-      entity.setDeltaMovement(entity.getDeltaMovement().add(0.0, (float) j * 0.05f * 3.0F, 0.0));
+      entity.setDeltaMovement(entity.getDeltaMovement().add(0.0, (float) j * 0.02f * 3.0F, 0.0));
     }
   }
 }

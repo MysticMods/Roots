@@ -41,6 +41,7 @@
     "client.MixinLocalPlayer$LightDrifter",
     "client.MixinLocalPlayer$StaffChannel",
     "client.MixinMouseHandler$LightDrifter",
+    "client.MixinPlayerRenderer",
     "client.accessor.AccessorMixinCompositeRenderType",
     "client.accessor.AccessorMixinCompositeState",
     "client.accessor.AccessorMixinEntityRenderer",
@@ -55,5 +56,8 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "minVersion": "0.8"
+  "minVersion": "0.8",
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  }
 }

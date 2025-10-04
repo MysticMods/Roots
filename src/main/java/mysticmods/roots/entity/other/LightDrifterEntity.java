@@ -5,12 +5,9 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
 import mysticmods.roots.network.server.ServerboundMoveLightDrifterPacket;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -254,6 +251,16 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
     } else {
       return null;
     }
+  }
+
+  @Override
+  public float getViewXRot(float partialTick) {
+    return super.getViewXRot(partialTick);
+  }
+
+  @Override
+  public float getViewYRot(float partialTick) {
+    return partialTick == 1.0F ? this.getYRot() : Mth.lerp(partialTick, this.yRotO, this.getYRot());
   }
 
   private static boolean containsInvalidValues(double x, double y, double z, float yRot, float xRot) {

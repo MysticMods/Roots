@@ -1,26 +1,64 @@
 package mysticmods.roots.mixin.client;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.blaze3d.shaders.Effect;
 import mysticmods.roots.client.ClientLightDrifterUtil;
+import mysticmods.roots.init.ModEffects;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Holder;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.effect.MobEffect;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LocalPlayer.class)
-public class MixinLocalPlayer$LightDrifter {
-  @Inject(method="aiStep",at=@At(value = "INVOKE", target="Lnet/minecraft/client/player/AbstractClientPlayer;aiStep()V"))
-  public void roots$onAiStep(CallbackInfo ci) {
+public abstract class MixinLocalPlayer$LightDrifter {
+  @WrapMethod(method = "aiStep")
+  public void roots$onAiStep(Operation<Void> original) {
+    original.call();
     ClientLightDrifterUtil.aiStep((LocalPlayer) (Object) this);
   }
 
-  @Inject(method="sendPosition",at=@At("TAIL"))
-  public void roots$onSendPosition(CallbackInfo ci) {
+  @WrapMethod(method = "sendPosition")
+  public void roots$syncPosition(Operation<Void> original) {
+    original.call();
     ClientLightDrifterUtil.syncPosition((LocalPlayer) (Object) this);
   }
 
-  @Inject(method="serverAiStep", at=@At("TAIL"))
-  public void roots$onServerAiStep(CallbackInfo ci) {
+  @WrapMethod(method = "serverAiStep")
+  public void roots$onServerAiStep(Operation<Void> original) {
+    original.call();
     ClientLightDrifterUtil.serverAiStep((LocalPlayer) (Object) this);
   }
+
+  @WrapMethod(method = "sendIsSprintingIfNeeded")
+  public void roots$onSendIsSprintingIfNeeded(Operation<Void> original) {
+    if (!((LocalPlayer) (Object) this).hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      original.call();
+    }
+  }
+
+/*  @WrapOperation(method="sendPosition", at=@At(value="INVOKE", target="Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V"))
+  private void roots$onSendPosition(ClientPacketListener instance, Packet packet, Operation<Void> original) {
+    if (!((LocalPlayer) (Object) this).hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      original.call(instance, packet);
+    }
+  }*/
+/*
+  @WrapOperation(method="sendPosition", at=@At(value="FIELD", opcode = Opcodes.PUTFIELD, target="Lnet/minecraft/client/player/LocalPlayer;wasShiftKeyDown:Z"))
+  private void roots$onSendPosition(LocalPlayer instance, boolean value, Operation<Void> original) {
+    if (!instance.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      original.call(instance, value);
+    }
+  }*/
 }
