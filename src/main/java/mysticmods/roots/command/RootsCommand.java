@@ -119,12 +119,12 @@ public class RootsCommand {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.usage"), false);
       return 1;
     });
-    builder.then(Commands.literal("reset")).executes(c -> {
+    builder.then(Commands.literal("reset").executes(c -> {
       ServerPlayer player = c.getSource().getPlayerOrException();
       CooldownStorage storage = player.getData(ModAttachments.COOLDOWN_STORAGE);
       storage.reset();
       return 1;
-    });
+    }));
     builder.then(Commands.literal("library").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.library.usage"), false);
       return 1;
