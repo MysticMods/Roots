@@ -1,4 +1,60 @@
 package mysticmods.roots.event.neoforge;
 
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.init.ModEffects;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.PauseScreen;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class LightDrifterHandler {
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onMousePre(InputEvent.MouseButton.Pre event) {
+    Minecraft mc = Minecraft.getInstance();
+    // TODO: Is this enough?
+    if (mc.screen instanceof PauseScreen) {
+      return;
+    }
+    if (mc.player != null && mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      event.setCanceled(true);
+    }
+  }
+
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onMouseScroll(InputEvent.MouseScrollingEvent event) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.screen != null) {
+      return;
+    }
+    if (mc.player != null && mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      event.setCanceled(true);
+    }
+  }
+
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onMouseInteract(InputEvent.InteractionKeyMappingTriggered event) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.screen != null) {
+      return;
+    }
+    if (mc.player != null && mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      event.setCanceled(true);
+      event.setSwingHand(false);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onLayerRender (RenderGuiLayerEvent.Pre event) {
+    if (event.getName().equals(VanillaGuiLayers.EXPERIENCE_BAR)) {
+      if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+        event.setCanceled(true);
+      }
+    }
+  }
 }
