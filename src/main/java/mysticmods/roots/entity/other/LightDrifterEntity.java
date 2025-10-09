@@ -263,6 +263,11 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
     return partialTick == 1.0F ? this.getYRot() : Mth.lerp(partialTick, this.yRotO, this.getYRot());
   }
 
+  @Override
+  public boolean onClimbable() {
+    return false;
+  }
+
   private static boolean containsInvalidValues(double x, double y, double z, float yRot, float xRot) {
     return Double.isNaN(x) || Double.isNaN(y) || Double.isNaN(z) || !Floats.isFinite(xRot) || !Floats.isFinite(yRot);
   }
