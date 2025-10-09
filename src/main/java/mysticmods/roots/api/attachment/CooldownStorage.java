@@ -79,6 +79,12 @@ public class CooldownStorage implements ICleanable, ITicking {
     return dirty;
   }
 
+  public void reset () {
+    cooldownMap.clear();
+    maxCooldownMap.clear();
+    setDirty(true);
+  }
+
   @Override
   public void tick(Entity entity) {
     Iterator<Object2IntMap.Entry<Spell>> iterator = cooldownMap.object2IntEntrySet().iterator();

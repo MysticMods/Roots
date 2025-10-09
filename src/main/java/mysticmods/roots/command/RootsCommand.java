@@ -7,6 +7,7 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.Unlock;
@@ -116,6 +117,12 @@ public class RootsCommand {
   public static LiteralArgumentBuilder<CommandSourceStack> builder(LiteralArgumentBuilder<CommandSourceStack> builder) {
     builder.executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.usage"), false);
+      return 1;
+    });
+    builder.then(Commands.literal("reset")).executes(c -> {
+      ServerPlayer player = c.getSource().getPlayerOrException();
+      CooldownStorage storage = player.getData(ModAttachments.COOLDOWN_STORAGE);
+      storage.reset();
       return 1;
     });
     builder.then(Commands.literal("library").executes(c -> {
