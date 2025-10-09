@@ -134,6 +134,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("roots.subtitles.item.knife.strip", "Knife strips");
 
+    add("roots.commands.reset", "Successfully reset your spell cooldowns!");
     add("roots.commands.usage", "Usage: /roots staff | ritual | pyre | activate");
     add("roots.commands.staff.usage", "Usage: /roots staff <spell>");
     add("roots.commands.staff.spell_not_found", "Spell not found: %s");

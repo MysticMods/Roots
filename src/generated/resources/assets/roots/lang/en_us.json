@@ -460,6 +460,7 @@
   "roots.commands.reputation.set": "Reputation for %s with %s grove set to [%s] %s.",
   "roots.commands.reputation.set.usage": "Usage: /roots reputation <player> <grove> set <amount>",
   "roots.commands.reputation.usage": "Usage: /roots reputation <player> <grove>  <set <amount> | add <amount> | remove <amount>>",
+  "roots.commands.reset": "Successfully reset your spell cooldowns!",
   "roots.commands.ritual.failed_condition": "Failed to place condition: %s",
   "roots.commands.ritual.no_player": "Must be executed by a player to use this command",
   "roots.commands.ritual.no_space": "No space to place pyre.",
