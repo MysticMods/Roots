@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.attachment.LightDrifterStorage;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -8,11 +9,13 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.entity.other.LightDrifterEntity;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -50,12 +53,16 @@ public class LightDrifterSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    pPlayer.addEffect(new MobEffectInstance(ModEffects.LIGHT_DRIFTER, duration));
     LightDrifterEntity drifter = new LightDrifterEntity(ModEntities.LIGHT_DRIFTER.get(), pLevel, pPlayer);
-    drifter.setPos(pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
+    drifter.setPos(pPlayer.getX(), pPlayer.getY()+1.8, pPlayer.getZ());
     drifter.setXRot(pPlayer.getXRot());
     drifter.setYRot(pPlayer.getYRot());
     pLevel.addFreshEntity(drifter);
+    LightDrifterStorage storage = new LightDrifterStorage();
+    storage.setId(drifter.getUUID());
+    storage.setEntityId(drifter.getId());
+    pPlayer.setData(ModAttachments.DRIFTER_SERVER_STORAGE, storage);
+    pPlayer.addEffect(new MobEffectInstance(ModEffects.LIGHT_DRIFTER, duration));
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new ClientboundLightDrifterSyncPacket(drifter.getId()));
     return cooldown;
   }
