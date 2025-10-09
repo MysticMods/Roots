@@ -81,6 +81,7 @@ public class ClientLightDrifterUtil {
     }
 
     if (j != 0) {
+      // TODO: Decay vertical velocity faster somehow
       entity.setDeltaMovement(entity.getDeltaMovement().add(0.0, (float) j * 0.02f * 2.5F, 0.0));
     }
   }
