@@ -7,6 +7,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.network.server.ServerboundCycleTomePacket;
 import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
@@ -30,7 +31,7 @@ public class KeyHandler {
       return;
     }
 
-    while (KeyBindings.OPEN_REPUTATION.consumeClick()) {
+    if (KeyBindings.OPEN_REPUTATION.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Opening reputation screen via keybind");
       }
@@ -38,7 +39,11 @@ public class KeyHandler {
       return;
     }
 
-    while (KeyBindings.OPEN_POUCH.consumeClick()) {
+    if (mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      return;
+    }
+
+    if (KeyBindings.OPEN_POUCH.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Opening pouch via keybind");
       }
@@ -46,7 +51,7 @@ public class KeyHandler {
       return;
     }
 
-    while (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
+    if (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Opening spell library via keybind");
       }
@@ -78,19 +83,19 @@ public class KeyHandler {
 
     int op = -1;
 
-    while (KeyBindings.INCREASE_SPELL.consumeClick()) {
+    if (KeyBindings.INCREASE_SPELL.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Increasing spell data via keybind");
       }
       op = 2;
     }
-    while (KeyBindings.DECREASE_SPELL.consumeClick()) {
+    if (KeyBindings.DECREASE_SPELL.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Decreasing spell data via keybind");
       }
       op = 1;
     }
-    while (KeyBindings.CYCLE_ADJUSTABLE.consumeClick()) {
+    if (KeyBindings.CYCLE_ADJUSTABLE.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Cycling adjustable spell data via keybind");
       }
