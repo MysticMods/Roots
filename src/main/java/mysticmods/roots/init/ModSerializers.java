@@ -58,6 +58,7 @@ public class ModSerializers {
   public static final DeferredHolder<SnapshotType<?>, AquaBubbleSnapshot.Type> AQUA_BUBBLE = SNAPSHOT_TYPES.register("aqua_bubble", AquaBubbleSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, RoseThornsEntitySnapshot.Type> ROSE_THORNS = SNAPSHOT_TYPES.register("rose_thorns", RoseThornsEntitySnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, WildfireEntitySnapshot.Type> WILDFIRE = SNAPSHOT_TYPES.register("wildfire", WildfireEntitySnapshot.Type::new);
+  public static final DeferredHolder<SnapshotType<?>, LightDrifterSnapshot.Type> LIGHT_DRIFTER = SNAPSHOT_TYPES.register("light_drifter", LightDrifterSnapshot.Type::new);
 
   // Integer
   public static final DeferredHolder<PropertySerializer<?>, PropertySerializer<Property.IntegerProperty>> INTEGER_PROPERTY_SERIALIZER = PROPERTY_SERIALIZERS.register("integer_property", Property.IntegerProperty.Serializer::new);

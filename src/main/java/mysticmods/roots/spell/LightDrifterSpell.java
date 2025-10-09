@@ -9,11 +9,10 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.entity.other.LightDrifterEntity;
-import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModEffects;
-import mysticmods.roots.init.ModEntities;
-import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.init.*;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
+import mysticmods.roots.snapshot.LightDrifterSnapshot;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -28,7 +27,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.List;
 
 public class LightDrifterSpell extends Spell {
-  private int duration;
+  private int duration, maxDistance;
 
   public LightDrifterSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xf2ee96, 0x96dbf2);
@@ -43,12 +42,14 @@ public class LightDrifterSpell extends Spell {
   public void initialize(Holder<Spell> holder) {
     var map = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.duration = map.get(ModSpells.LIGHT_DRIFTER_DURATION);
+    this.maxDistance = map.get(ModSpells.LIGHT_DRIFTER_DISTANCE);
   }
 
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.LIGHT_DRIFTER_DURATION);
+    properties.add(ModSpells.LIGHT_DRIFTER_DISTANCE);
   }
 
   @Override
@@ -62,6 +63,10 @@ public class LightDrifterSpell extends Spell {
     storage.setId(drifter.getUUID());
     storage.setEntityId(drifter.getId());
     pPlayer.setData(ModAttachments.DRIFTER_SERVER_STORAGE, storage);
+    LightDrifterSnapshot snapshot = new LightDrifterSnapshot(pPlayer, duration + 60, duration, maxDistance, pPlayer.getUUID());
+    SnapshotHelper.addLiving(pPlayer, ModSerializers.LIGHT_DRIFTER.get(), snapshot);
+    LightDrifterSnapshot snapshot2 = new LightDrifterSnapshot(drifter, duration + 60, duration, maxDistance, pPlayer.getUUID());
+    SnapshotHelper.addLiving(drifter, ModSerializers.LIGHT_DRIFTER.get(), snapshot2);
     pPlayer.addEffect(new MobEffectInstance(ModEffects.LIGHT_DRIFTER, duration));
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new ClientboundLightDrifterSyncPacket(drifter.getId()));
     return cooldown;

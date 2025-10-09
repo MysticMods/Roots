@@ -50,6 +50,7 @@ public class WildfireEntitySnapshot extends Snapshot {
 
   @Override
   public boolean isExpired(Entity entity) {
+    // TODO: At what point does this happen?
     if (this.decay == -1) {
       return false;
     }
