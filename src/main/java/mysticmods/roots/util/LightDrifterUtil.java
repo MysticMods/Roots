@@ -5,13 +5,31 @@ import mysticmods.roots.api.attachment.LightDrifterStorage;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.snapshot.LightDrifterSnapshot;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("resource")
 public class LightDrifterUtil {
+  @Nullable
+  public static LightDrifterSnapshot getSnapshot (Player player) {
+    if (!player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      return null;
+    }
+    LightDrifterEntity entity = getLightDrifterEntity(player);
+    if (entity == null) {
+      return null;
+    }
+
+    return SnapshotHelper.getSnapshot(entity, ModSerializers.LIGHT_DRIFTER.get());
+  }
+
+  @Nullable
   public static LightDrifterEntity getLightDrifterEntity(Player player) {
     if (!player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       return null;

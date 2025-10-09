@@ -2,8 +2,11 @@ package mysticmods.roots.entity.other;
 
 import com.google.common.primitives.Floats;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
 import mysticmods.roots.network.server.ServerboundMoveLightDrifterPacket;
+import mysticmods.roots.snapshot.LightDrifterSnapshot;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -69,6 +72,35 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
   @Override
   public boolean onGround() {
     return false;
+  }
+
+  @Override
+  public void travel(Vec3 travelVector) {
+    super.travel(travelVector);
+  }
+
+  @Override
+  public void move(MoverType type, Vec3 pos) {
+    // On the client, prevent moving further than `maxDistance` away from the player
+    if (this.level().isClientSide()) {
+      LightDrifterSnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.LIGHT_DRIFTER.get());
+      if (snapshot == null) {
+        return;
+      }
+
+      Player player = this.level().getPlayerByUUID(snapshot.getPlayer());
+      if (player == null) {
+        return;
+      }
+
+      Vec3 current = player.position();
+      Vec3 newCurrent = position().add(pos);
+      if (current.distanceToSqr(newCurrent) >= snapshot.getMaxDistance()) {
+        return;
+      }
+    }
+
+    super.move(type, pos);
   }
 
   // Server

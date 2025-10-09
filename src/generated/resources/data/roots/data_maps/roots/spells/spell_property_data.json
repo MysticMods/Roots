@@ -465,6 +465,15 @@
           "default_value": 600,
           "value": 600
         }
+      },
+      {
+        "id": "roots:light_drifter/distance",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The maximum distance from the player that the light drifter can travel before being recalled.",
+          "default_value": 2500,
+          "value": 2500
+        }
       }
     ],
     "roots:magnetism": [
