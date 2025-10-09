@@ -40,6 +40,7 @@
     "client.MixinEntity",
     "client.MixinLocalPlayer$LightDrifter",
     "client.MixinLocalPlayer$StaffChannel",
+    "client.MixinMinecraft$LightDrifter",
     "client.MixinMouseHandler$LightDrifter",
     "client.MixinPlayerRenderer",
     "client.accessor.AccessorMixinCompositeRenderType",
