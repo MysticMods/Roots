@@ -4,6 +4,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -11,6 +12,15 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class LightDrifterEffect extends SimpleEffect{
   public LightDrifterEffect(MobEffectCategory category, int color, boolean hiddenByDefault) {
     super(category, color, hiddenByDefault);
+  }
+
+  @Override
+  public void onMobHurt(LivingEntity livingEntity, int amplifier, DamageSource damageSource, float amount) {
+    super.onMobHurt(livingEntity, amplifier, damageSource, amount);
+    if (amount > 0 && livingEntity instanceof ServerPlayer player) {
+      player.removeData(ModAttachments.DRIFTER_SERVER_STORAGE);
+      PacketDistributor.sendToPlayer(player, new ClientboundLightDrifterSyncPacket(-1));
+    }
   }
 
   @Override
