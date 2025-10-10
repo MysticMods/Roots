@@ -76,7 +76,11 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
 
   @Override
   public void travel(Vec3 travelVector) {
+    double d2 = this.getDeltaMovement().y;
     super.travel(travelVector);
+    Vec3 vec31 = this.getDeltaMovement();
+    this.setDeltaMovement(vec31.x, d2 * 0.6, vec31.z);
+    this.resetFallDistance();
   }
 
   @Override
