@@ -1,6 +1,7 @@
 package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.PauseScreen;
@@ -11,6 +12,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class LightDrifterHandler {
@@ -55,6 +57,14 @@ public class LightDrifterHandler {
       if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
         event.setCanceled(true);
       }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onTeleportDimension (EntityTeleportEvent event) {
+    // Light Drifters cannot change dimensions
+    if (event.getEntity().getType().is(RootsTags.Entities.LIGHT_DRIFTER)) {
+      event.setCanceled(true);
     }
   }
 }
