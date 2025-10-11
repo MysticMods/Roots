@@ -34,6 +34,7 @@ public class KeyBindings {
 
   public static final IKeyConflictContext HAS_ANY_ADJUSTABLE = new MultiKeyConflictContext(ADJUSTABLE, HAS_ADJUSTABLE_TOME);
 
+  public static final KeyMapping CANCEL_LIGHT_DRIFTER = new KeyMapping("key.roots.cancel_light_drifter", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_TAB, CATEGORY);
   public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_K, CATEGORY);
   public static final KeyMapping OPEN_POUCH = new KeyMapping("key.roots.open_pouch", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
   public static final KeyMapping OPEN_REPUTATION = new KeyMapping("key.roots.open_reputation", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
@@ -58,6 +59,7 @@ public class KeyBindings {
     event.register(CYCLE_ADJUSTABLE);
     event.register(OPEN_POUCH);
     event.register(OPEN_REPUTATION);
+    event.register(CANCEL_LIGHT_DRIFTER);
   }
 
   public static class LibraryKeyConflictContext implements IKeyConflictContext {
