@@ -38,7 +38,6 @@
   ],
   "client": [
     "client.MixinEntity",
-    "client.MixinKeyboardHandler$LightDrifter",
     "client.MixinLocalPlayer$LightDrifter",
     "client.MixinLocalPlayer$StaffChannel",
     "client.MixinMinecraft$LightDrifter",

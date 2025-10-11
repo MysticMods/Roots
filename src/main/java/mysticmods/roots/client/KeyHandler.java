@@ -11,6 +11,7 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.network.server.ServerboundCycleTomePacket;
 import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,12 +25,31 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class KeyHandler {
+  private static long cancelLightDrifter = -1L;
+
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post event) {
     Minecraft mc = Minecraft.getInstance();
     if (mc.player == null) {
       return;
     }
+
+    if (mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      if (KeyBindings.CANCEL_LIGHT_DRIFTER.consumeClick()) {
+        if (cancelLightDrifter < 0L) {
+          cancelLightDrifter = Util.getMillis();
+        }
+      } else {
+        cancelLightDrifter = -1L;
+      }
+
+      if ((10000L - (Util.getMillis() - cancelLightDrifter)) > 0L) {
+        // TODO: Cancel light drifter
+      }
+    } else {
+      cancelLightDrifter = -1L;
+    }
+
 
     if (KeyBindings.OPEN_REPUTATION.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
