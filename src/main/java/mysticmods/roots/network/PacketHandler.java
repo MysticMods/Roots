@@ -38,6 +38,7 @@ public class PacketHandler {
     registrar.play(ServerboundMoveLightDrifterPacket.Pos.TYPE, ServerboundMoveLightDrifterPacket.Pos.CODEC);
     registrar.play(ServerboundMoveLightDrifterPacket.PosRot.TYPE, ServerboundMoveLightDrifterPacket.PosRot.CODEC);
     registrar.play(ServerboundMoveLightDrifterPacket.Rot.TYPE, ServerboundMoveLightDrifterPacket.Rot.CODEC);
+    registrar.play(ServerboundCancelLightDrifterPacket.TYPE, ServerboundCancelLightDrifterPacket.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {

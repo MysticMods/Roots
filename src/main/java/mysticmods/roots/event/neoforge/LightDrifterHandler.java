@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.ClientLightDrifterUtil;
 import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.client.KeyHandler;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
@@ -94,13 +95,13 @@ public class LightDrifterHandler {
       Component overlayMessageString = Component.translatable("roots.gui.light_drifter_overlay", Mth.ceil(distance + 0.5), Mth.sqrt(snapshot.getMaxDistance())).withStyle(ChatFormatting.BOLD);
       minecraft.getProfiler().push("overlayMessage");
       int yShift = Math.max(gui.leftHeight, gui.rightHeight) + (68 - 59);
-      int j = ChatFormatting.YELLOW.getColor().intValue();
+      @SuppressWarnings("DataFlowIssue") int j = ChatFormatting.YELLOW.getColor();
       guiGraphics.pose().pushPose();
       guiGraphics.pose()
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
       int k = font.width(overlayMessageString);
       guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -20, k, j);
-      overlayMessageString = Component.translatable("roots.gui.light_drifter_cancel", KeyBindings.CANCEL_LIGHT_DRIFTER.getTranslatedKeyMessage());
+      overlayMessageString = Component.translatable(KeyHandler.isCancelingLightDrifter()  ? "roots.gui.light_drifter_continue_canceling": "roots.gui.light_drifter_cancel", KeyBindings.CANCEL_LIGHT_DRIFTER.getTranslatedKeyMessage()).withStyle(ChatFormatting.BOLD);
       k = font.width(overlayMessageString);
       guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -34, k, j);
       guiGraphics.pose().popPose();

@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import net.minecraft.network.chat.Component;
@@ -202,5 +203,9 @@ public class ServerNetworkHooks {
     if (mainHand != tome) {
       // If cycling and not in the main hand do something TODO
     }
+  }
+
+  public static void cancelLightDrifter (Player player) {
+    player.removeEffect(ModEffects.LIGHT_DRIFTER);
   }
 }

@@ -475,6 +475,7 @@
   "roots.drinks.sour": "Sour and awful to drink! Leaves you hungry.",
   "roots.drinks.wakefulness": "Perks you up, night or day; shoos those scary phantoms away!",
   "roots.gui.light_drifter_cancel": "Hold [%s] to cancel Light Drifter.",
+  "roots.gui.light_drifter_continue_canceling": "Continue holding [%s] to cancel Light Drifter.",
   "roots.gui.light_drifter_overlay": "Drifting %s/%s blocks from your body!",
   "roots.gui.reputation": "Grove Reputations",
   "roots.gui.spell_library": "Spell Library",

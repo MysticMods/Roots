@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.network.server.ServerboundCancelLightDrifterPacket;
 import mysticmods.roots.network.server.ServerboundCycleTomePacket;
 import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
@@ -25,7 +26,11 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class KeyHandler {
-  private static long cancelLightDrifter = -1L;
+  private static int cancelLightDrifter = -1;
+
+  public static boolean isCancelingLightDrifter () {
+    return cancelLightDrifter > 0;
+  }
 
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post event) {
@@ -35,19 +40,22 @@ public class KeyHandler {
     }
 
     if (mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
-      if (KeyBindings.CANCEL_LIGHT_DRIFTER.consumeClick()) {
-        if (cancelLightDrifter < 0L) {
-          cancelLightDrifter = Util.getMillis();
+      if (KeyBindings.CANCEL_LIGHT_DRIFTER.isDown()) {
+        if (cancelLightDrifter == -1) {
+          cancelLightDrifter = 1;
+        } else {
+          cancelLightDrifter++;
         }
       } else {
-        cancelLightDrifter = -1L;
+        cancelLightDrifter = -1;
       }
 
-      if ((10000L - (Util.getMillis() - cancelLightDrifter)) > 0L) {
-        // TODO: Cancel light drifter
+      if (cancelLightDrifter > 40) {
+        PacketDistributor.sendToServer(ServerboundCancelLightDrifterPacket.INSTANCE);
+        cancelLightDrifter = -1;
       }
     } else {
-      cancelLightDrifter = -1L;
+      cancelLightDrifter = -1;
     }
 
 
