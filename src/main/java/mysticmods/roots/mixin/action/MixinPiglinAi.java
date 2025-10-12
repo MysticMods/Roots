@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.List;
 
-// TODO: Unsure about this
 @Mixin(PiglinAi.class)
 public class MixinPiglinAi {
   @WrapOperation(method = "stopHoldingOffHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/piglin/PiglinAi;getBarterResponseItems(Lnet/minecraft/world/entity/monster/piglin/Piglin;)Ljava/util/List;"))
@@ -24,9 +23,10 @@ public class MixinPiglinAi {
     if (!result.isEmpty()) {
       piglin.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_PLAYER).ifPresent(player -> {
         if (player instanceof ServerPlayer serverPlayer) {
-          ItemStack item = result.getFirst();
-          TradePiglinAction.Context context = new TradePiglinAction.Context(serverPlayer.serverLevel(), serverPlayer, piglin, item);
-          ModActions.TRADE_PIGLIN.get().accept(context);
+          for (ItemStack item : result) {
+            TradePiglinAction.Context context = new TradePiglinAction.Context(serverPlayer.serverLevel(), serverPlayer, piglin, item);
+            ModActions.TRADE_PIGLIN.get().accept(context);
+          }
         }
       });
     }
