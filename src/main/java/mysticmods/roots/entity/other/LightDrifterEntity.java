@@ -174,11 +174,20 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
     if (this.isRemoved()) {
       return;
     }
+    LightDrifterSnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.LIGHT_DRIFTER.get());
+    if (snapshot == null) {
+      return;
+    }
     if (containsInvalidValues(packet.getX(0.0), packet.getY(0.0), packet.getZ(0.0), packet.getYRot(0.0F), packet.getXRot(0.0F))) {
       return;
     } else {
       if (this.moveTickCount == 0) {
         this.resetPosition();
+      }
+
+      Player player = level().getPlayerByUUID(snapshot.getPlayer());
+      if (player == null) {
+        return;
       }
 
       double d0 = clampHorizontal(packet.getX(this.getX()));
@@ -189,10 +198,14 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
       double d3 = this.getX();
       double d4 = this.getY();
       double d5 = this.getZ();
+      if (player.distanceToSqr(d0, d1, d2) > snapshot.getMaxDistance()) {
+        this.absMoveTo(this.firstGoodX, this.firstGoodY, this.firstGoodZ, f, f1);
+        return;
+      }
+
       double d6 = d0 - this.lastGoodX;
       double d7 = d1 - this.lastGoodY;
       double d8 = d2 - this.lastGoodZ;
-
       this.move(MoverType.PLAYER, new Vec3(d6, d7, d8));
 
       this.absMoveTo(d0, d1, d2, f, f1);
