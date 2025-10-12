@@ -20,7 +20,7 @@ public class MixinLocalPlayer$StaffChannel {
   private void RootsModifyChannelMovementSpeedForward(Input input, float newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
-      input.forwardImpulse = newValue;
+      original.call(input, newValue);
     }
   }
 
@@ -28,7 +28,7 @@ public class MixinLocalPlayer$StaffChannel {
   private void RootsModifyChannelMovementSpeedLeft(Input input, float newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
-      input.leftImpulse = newValue;
+      original.call(input, newValue);
     }
   }
 
@@ -36,7 +36,7 @@ public class MixinLocalPlayer$StaffChannel {
   private void RootsModifyChannelMovementSpeedSprint(LocalPlayer player, int newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
-      this.sprintTriggerTime = newValue;
+      original.call(player, newValue);
     }
   }
 }

@@ -1,5 +1,7 @@
 package mysticmods.roots.mixin.action;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import mysticmods.roots.action.CureVillagerAction;
 import mysticmods.roots.init.ModActions;
 import net.minecraft.advancements.critereon.CuredZombieVillagerTrigger;
@@ -13,8 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CuredZombieVillagerTrigger.class)
 public class MixinCuredZombieVillagerTrigger {
-  @Inject(method = "trigger", at = @At("HEAD"))
-  private void RootsTriggerCureZombieVillager(ServerPlayer player, Zombie zombie, Villager villager, CallbackInfo ci) {
+  @WrapMethod(method = "trigger")
+  private void RootsTriggerCureZombieVillager(ServerPlayer player, Zombie zombie, Villager villager, Operation<Void> original) {
+    original.call(player, zombie, villager);
     CureVillagerAction.Context context = new CureVillagerAction.Context(player.serverLevel(), player, villager, zombie);
     ModActions.CURE_VILLAGER.get().accept(context);
 

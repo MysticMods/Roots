@@ -47,18 +47,4 @@ public abstract class MixinLocalPlayer$LightDrifter {
       original.call();
     }
   }
-
-/*  @WrapOperation(method="sendPosition", at=@At(value="INVOKE", target="Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V"))
-  private void roots$onSendPosition(ClientPacketListener instance, Packet packet, Operation<Void> original) {
-    if (!((LocalPlayer) (Object) this).hasEffect(ModEffects.LIGHT_DRIFTER)) {
-      original.call(instance, packet);
-    }
-  }*/
-/*
-  @WrapOperation(method="sendPosition", at=@At(value="FIELD", opcode = Opcodes.PUTFIELD, target="Lnet/minecraft/client/player/LocalPlayer;wasShiftKeyDown:Z"))
-  private void roots$onSendPosition(LocalPlayer instance, boolean value, Operation<Void> original) {
-    if (!instance.hasEffect(ModEffects.LIGHT_DRIFTER)) {
-      original.call(instance, value);
-    }
-  }*/
 }

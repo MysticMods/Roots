@@ -1,5 +1,7 @@
 package mysticmods.roots.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.trading.Merchant;
@@ -16,11 +18,11 @@ public class MixinMerchantMenu {
   @Final
   private Merchant trader;
 
-  @Inject(method = "playTradeSound", at = @At("HEAD"), cancellable = true)
-  private void RootsPlayTradeSound(CallbackInfo ci) {
-    if (!(trader instanceof Entity)) {
+  @WrapMethod(method = "playTradeSound")
+  private void RootsPlayTradeSound(Operation<Void> original) {
+    if (trader instanceof Entity) {
       // Prevent crash with non-Entity traders (e.g., fairy huts)
-      ci.cancel();
+      original.call();
     }
   }
 }

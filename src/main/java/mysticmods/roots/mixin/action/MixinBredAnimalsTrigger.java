@@ -1,5 +1,7 @@
 package mysticmods.roots.mixin.action;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import mysticmods.roots.action.BredAnimalAction;
 import mysticmods.roots.init.ModActions;
 import net.minecraft.advancements.critereon.BredAnimalsTrigger;
@@ -13,8 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BredAnimalsTrigger.class)
 public class MixinBredAnimalsTrigger {
-  @Inject(method = "trigger", at = @At("HEAD"))
-  public void RootsTriggerAnimalBreeding(ServerPlayer player, Animal parent, Animal partner, AgeableMob child, CallbackInfo ci) {
+  @WrapMethod(method = "trigger")
+  public void RootsTriggerAnimalBreeding(ServerPlayer player, Animal parent, Animal partner, AgeableMob child, Operation<Void> original) {
+    original.call(player, parent, partner, child);
     BredAnimalAction.Context context = new BredAnimalAction.Context(player.serverLevel(), player, child, parent, partner);
     ModActions.BRED_ANIMAL.get().accept(context);
   }
