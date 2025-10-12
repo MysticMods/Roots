@@ -1,5 +1,7 @@
 package mysticmods.roots.mixin.action;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import mysticmods.roots.action.BrushBlockAction;
 import mysticmods.roots.init.ModActions;
 import net.minecraft.core.Direction;
@@ -18,13 +20,13 @@ public class MixinBrushableBlockEntity {
   @Shadow
   private ItemStack item;
 
-  @Inject(method = "brush", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BrushableBlockEntity;brushingCompleted(Lnet/minecraft/world/entity/player/Player;)V"))
-  private void RootsOnBlockBrush(long startTick, Player player, Direction hitDirection, CallbackInfoReturnable<Boolean> cir) {
-    if (!(player instanceof ServerPlayer serverPlayer)) {
-      return;
+  @WrapOperation(method = "brush", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BrushableBlockEntity;brushingCompleted(Lnet/minecraft/world/entity/player/Player;)V"))
+  private void RootsOnBlockBrush(BrushableBlockEntity instance, Player player, Operation<Void> original) {
+    if (player instanceof ServerPlayer serverPlayer) {
+      BrushableBlockEntity blockEntity = (BrushableBlockEntity) (Object) this;
+      BrushBlockAction.Context context = new BrushBlockAction.Context(serverPlayer.serverLevel(), serverPlayer, blockEntity.getBlockPos(), blockEntity.getBlockState(), item, blockEntity);
+      ModActions.BRUSH_BLOCK.get().accept(context);
     }
-    BrushableBlockEntity blockEntity = (BrushableBlockEntity) (Object) this;
-    BrushBlockAction.Context context = new BrushBlockAction.Context(serverPlayer.serverLevel(), serverPlayer, blockEntity.getBlockPos(), blockEntity.getBlockState(), item, blockEntity);
-    ModActions.BRUSH_BLOCK.get().accept(context);
+    original.call(instance, player);
   }
 }
