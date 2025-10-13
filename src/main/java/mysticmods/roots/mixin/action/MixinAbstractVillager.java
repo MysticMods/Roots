@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(AbstractVillager.class)
 public class MixinAbstractVillager {
 
+  // TODO: Convert this to a tag
   @WrapMethod(method = "notifyTrade")
   public void RootsNotifyTradeStart(MerchantOffer offer, Operation<Void> original) {
     if (!(((AbstractVillager) (Object) this).getTradingPlayer() instanceof ServerPlayer player)) {
