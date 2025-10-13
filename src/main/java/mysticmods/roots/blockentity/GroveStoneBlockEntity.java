@@ -70,10 +70,11 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     generateTick(pLevel, pPos, pState);
     consumeTick(pLevel, pPos, pState);
 
-    if (generatedThisTick != generatedLastTick || consumedThisTick != consumedLastTick) {
+    // Temporarily disabled for #1194
+/*    if (generatedThisTick != generatedLastTick || consumedThisTick != consumedLastTick) {*/
       setChanged();
       updateViaState();
-    }
+/*    }*/
   }
 
   public void setRank(int rank) {
@@ -172,8 +173,6 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     return trackers;
   }
 
-  private Set<BlockPos> consumerPositions = null;
-
   @Override
   public void generateTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     generatedLastTick = generatedThisTick;
@@ -194,15 +193,12 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
       return;
     }
 
-    consumerPositions = new HashSet<>();
-
     for (BlockPos pos : generatorPositions) {
       BlockState stateAt = pLevel.getBlockState(pos);
       if (stateAt.isAir()) {
         continue;
       }
       if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
-        consumerPositions.add(pos);
         continue;
       }
       List<Generator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_POWER_GENERATORS);
