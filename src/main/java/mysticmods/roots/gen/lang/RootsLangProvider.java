@@ -211,7 +211,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("level_condition.roots." + ModConditions.FAIRY_GROVE_STONE_ACTIVE.get().getName(), "Active Fairy Grove Stone");
     add("level_condition.roots." + ModConditions.FAIRY_GROVE_STONE_ACTIVE.get()
         .getName() + ".description", "A Fairy Grove Stone that has been activated by the ritual Grove Supplication.");
-    add("level_condition.roots" + ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get().getName(), "Active Fungal Grove Stone");
+    add("level_condition.roots." + ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get().getName(), "Active Fungal Grove Stone");
     add("level_condition.roots." + ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get()
         .getName() + ".description", "A Fungal Grove Stone that has been activated by the ritual Grove Supplication.");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_INACTIVE.get().getName(), "Inactive Grove Stone");
