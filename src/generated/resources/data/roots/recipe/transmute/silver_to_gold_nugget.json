@@ -3,10 +3,10 @@
   "data": {
     "ingredients": [
       {
-        "tag": "c:ingots/silver"
+        "tag": "c:nuggets/silver"
       },
       {
-        "tag": "c:ingots/silver"
+        "tag": "c:nuggets/silver"
       }
     ],
     "power_requirements": [

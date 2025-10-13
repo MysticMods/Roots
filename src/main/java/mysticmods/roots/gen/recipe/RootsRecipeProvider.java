@@ -2397,8 +2397,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .save(TransmutationRecipe.create().build(BaseRecipeData.Builder.create()
             .result(new ItemStack(Items.GOLD_NUGGET))
             .requires(new GroveNumber(ModGroves.FUNGAL.get(), 1500 / 9))
-            .requires(RootsTags.Items.SILVER_INGOT)
-            .requires(RootsTags.Items.SILVER_INGOT)), c, RootsAPI.rl("transmute/silver_to_gold_nugget"));
+            .requires(RootsTags.Items.SILVER_NUGGET)
+            .requires(RootsTags.Items.SILVER_NUGGET)), c, RootsAPI.rl("transmute/silver_to_gold_nugget"));
 
     RecipeSaver.saver().unlockedBy("has_rotten_flesh", has(RootsTags.Items.ROTTEN_FLESH))
         .save(TransmutationRecipe.create().build(BaseRecipeData.Builder.create()

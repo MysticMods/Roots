@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-15T13:33:39.8295226	Recipes
+// 1.21.1	2025-10-13T13:39:33.404327	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -858,7 +858,7 @@ d3756d3087127add931038e96f692edcc6471fd6 data/roots/recipe/transmute/redstone_bl
 ac401cb458902b77e7fda8c22fc9843556e35db6 data/roots/recipe/transmute/redstone_to_vine.json
 06a6292cb463f68237c723d05aabf1b937231922 data/roots/recipe/transmute/rotten_flesh_to_leather.json
 af33c915d469ab2edef2a6350f78de1987c9a548 data/roots/recipe/transmute/silver_to_gold.json
-f2e884a40956171188572e9980c86d101e35a43a data/roots/recipe/transmute/silver_to_gold_nugget.json
+f30660f853cc3a020d892a4848d2074de28a4a16 data/roots/recipe/transmute/silver_to_gold_nugget.json
 2bd895a8652b6f2fc1095cd09b8b9ac5c19df80e data/roots/recipe/transmute/trapdoor_to_cobweb.json
 8cef38408365f141afffa8bbe9896e9d4f3aa600 data/roots/recipe/vegetable_juice.json
 fecb822745bae5e88d7a8c6bc50623889777a282 data/roots/recipe/vinegar.json
