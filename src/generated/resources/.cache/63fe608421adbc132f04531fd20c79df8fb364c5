@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-22T13:11:13.1095771	Roots Item Tags
+// 1.21.1	2025-10-13T13:32:36.4271122	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -39,6 +39,7 @@ ca4be7f2a2f75c90936b26662964abad4c1f46d1 data/minecraft/tags/item/head_armor.jso
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/item/logs.json
 ef2660ba58fc43338d6d70441af55ca58e7f28d3 data/minecraft/tags/item/logs_that_burn.json
 e16c92e31940c0c62767ba46b55ac10f3e133b58 data/minecraft/tags/item/mangrove_logs.json
+197b02041670b4212ac4004c7609b1ca8e1a2b8f data/minecraft/tags/item/meat.json
 0ac25de6437faa2cb2f6995d75aaf74b415934a6 data/minecraft/tags/item/oak_logs.json
 13779c2da19740afaf64895b4637a5a4542d7222 data/minecraft/tags/item/pickaxes.json
 3c841c97e7e2fcbeb86c1ff92141c065010ffdae data/minecraft/tags/item/piglin_loved.json

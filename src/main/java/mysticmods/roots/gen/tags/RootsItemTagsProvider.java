@@ -454,6 +454,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(ItemTags.LOGS_THAT_BURN).addTags(RootsTags.Items.WILDWOOD_LOGS);
     //noinspection unchecked
     this.tag(ItemTags.LOGS).addTags(RootsTags.Items.WILDWOOD_LOGS);
+
+    this.tag(ItemTags.MEAT).add(COOKED_SQUID.get(), RAW_SQUID.get(), COOKED_VENISON.get(), VENISON.get());
   }
 
   private void copyGrove(TagKey<Grove> groveTag) {
