@@ -29,7 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import java.util.List;
 
 public class RoseThornsSpell extends Spell {
-  private static final AABB entityBoundsCheck = new AABB(-1, -1, -1, 1, 1, 1);
+  private static final AABB entityBoundsCheck = new AABB(-1.5, -1.5, -1.5, 1.5, 1.5, 1.5);
   private double radiusZX, radiusY;
   private int duration;
   private float damage;
