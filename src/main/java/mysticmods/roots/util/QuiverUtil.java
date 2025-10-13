@@ -5,6 +5,7 @@ import mysticmods.roots.api.attachment.QuiverRecord;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.integration.curios.CuriosIntegration;
 import net.minecraft.core.NonNullList;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -71,7 +72,7 @@ public class QuiverUtil {
     int index = record.slotId();
     if (index >= 0 && index < contents.size()) {
       ItemStack stack = contents.get(index);
-      if (!stack.isEmpty() && stack.is(Items.ARROW)) {
+      if (!stack.isEmpty() && stack.is(ItemTags.ARROWS)) {
         stack.shrink(1);
         if (stack.isEmpty()) {
           contents.set(index, ItemStack.EMPTY);
@@ -99,7 +100,7 @@ public class QuiverUtil {
     ItemStack arrow = ItemStack.EMPTY;
     for (int i = 0; i < contents.size(); i++) {
       ItemStack stack = contents.get(i);
-      if (stack.is(Items.ARROW)) {
+      if (stack.is(ItemTags.ARROWS)) {
         arrow = stack.copy();
         // Important: setting the count to 1 is required to ensure that the arrow is "consumed" properly in `ProjectileWeaponItem.useAmmo`.
         arrow.setCount(1);
