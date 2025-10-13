@@ -209,7 +209,6 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
       this.move(MoverType.PLAYER, new Vec3(d6, d7, d8));
 
       this.absMoveTo(d0, d1, d2, f, f1);
-      // We need to set a maximum distance that the drifter can travel from the player before being reset
       Vec3 vec3 = new Vec3(this.getX() - d3, this.getY() - d4, this.getZ() - d5);
       this.setOnGroundWithMovement(packet.isOnGround(), vec3);
       this.setKnownMovement(vec3);
