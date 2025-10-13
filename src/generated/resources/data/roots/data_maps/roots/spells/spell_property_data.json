@@ -15,8 +15,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "Radius",
-          "default_value": 4,
-          "value": 4
+          "default_value": 2,
+          "value": 2
         }
       },
       {
