@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class TooltipUtil {
@@ -96,7 +97,7 @@ public class TooltipUtil {
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
     }
     result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + cos.getChargeType()
-        .name().toLowerCase())));
+        .name().toLowerCase(Locale.ROOT))));
   }
 }
 

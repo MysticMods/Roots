@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 import javax.annotation.Nullable;
+import java.util.Locale;
 
 public enum ElementalType implements StringRepresentable {
   FIRE(RootsTags.Blocks.FIRE_SOIL),
@@ -23,7 +24,7 @@ public enum ElementalType implements StringRepresentable {
 
   ElementalType(TagKey<Block> tag) {
     this.tag = tag;
-    this.name = this.name().toLowerCase();
+    this.name = this.name().toLowerCase(Locale.ROOT);
   }
 
   @Nullable
