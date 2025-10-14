@@ -6,6 +6,8 @@ import mysticmods.roots.action.TameAnimalAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.EntityCooldowns;
+import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.effect.SimpleEffect;
 import mysticmods.roots.init.*;
@@ -381,6 +383,40 @@ public class EntityEventHandler {
       if (!arrow.isEmpty()) {
         event.setProjectileItemStack(arrow);
       }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onRightClickItem (PlayerInteractEvent.RightClickItem event) {
+    if (event.getHand() != InteractionHand.OFF_HAND) {
+      return;
+    }
+
+    Player player = event.getEntity();
+    ItemStack item = event.getItemStack();
+    if (item.getFoodProperties(player) == null) {
+      return;
+    }
+
+    ItemStack heldItem = player.getMainHandItem();
+    if (!heldItem.is(RootsTags.Items.CASTING_TOOLS)) {
+      return;
+    }
+
+    SpellStorage storage = heldItem.get(ModAttachments.SPELL_STORAGE);
+    if (storage == null) {
+      return;
+    }
+
+    ISpellInstance spell = storage.getCurrentSpell();
+
+    if (spell == null) {
+      return;
+    }
+
+    if (spell.asSpell().is(RootsTags.Spells.BLOCKS_OFF_HAND_EATING)) {
+      event.setCancellationResult(InteractionResult.PASS);
+      event.setCanceled(true);
     }
   }
 
