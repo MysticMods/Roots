@@ -26,7 +26,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AugmentationRitual extends Ritual {
   private int count, glowDuration;
@@ -44,6 +46,8 @@ public class AugmentationRitual extends Ritual {
       return;
     }
 
+    List<Holder<Attribute>> attributes1 = attributes.stream().collect(Collectors.toList());
+
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
@@ -60,7 +64,8 @@ public class AugmentationRitual extends Ritual {
           break;
         }
 
-        for (Holder<Attribute> attribute : attributes) {
+        while (!attributes1.isEmpty()) {
+          Holder<Attribute> attribute = attributes1.remove(randomSource.nextInt(attributes1.size()));
           var data = attribute.getData(DataMaps.AUGMENTATION_DATA);
           if (data == null) {
             RootsAPI.LOG.error("Ritual {} requires augmentation data for attribute {} but none was found. This will cause the ritual to not function correctly.", getOrCreateDescriptionId(), attribute);
