@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-13T13:39:33.404327	Recipes
+// 1.21.1	2025-10-14T19:43:05.0444517	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -192,6 +192,7 @@ f6888b5ac7d9af759a450cfef7f97504ea036c57 data/roots/advancement/recipes/misc/gro
 cc4936bdfd8419faea598c0b11ac81ccf208ee88 data/roots/advancement/recipes/misc/grove/runic_shears.json
 fd0a1c2802531c3aabab31682c9a178ec0d221ae data/roots/advancement/recipes/misc/grove/warped_fairy_hut.json
 b54b98baede2dd3ae16bb57cc7eeb17217aa7a6e data/roots/advancement/recipes/misc/grove/wildwood_pedestal.json
+bf68918d2d7e2d9b1867d0104b229ac8a1b45acd data/roots/advancement/recipes/misc/grove/wildwood_quiver.json
 122d4a2d3686eb2e1db3a7085f0169b00c5e85a4 data/roots/advancement/recipes/misc/grove_crafter.json
 f1b7a68081f8bb1c317d5d6016c0df0bf9ec493c data/roots/advancement/recipes/misc/grove_pedestal.json
 1259b53ef3df5ec01cf8f947e77989de259dc879 data/roots/advancement/recipes/misc/knife/acacia_bark_from_acacia_log.json
@@ -550,6 +551,7 @@ aee66d441e9af49b41e2407bdd4f960c79764e63 data/roots/recipe/grove/runestone_9.jso
 0b14510e990c1fd2c80383f77712d2e57605ae87 data/roots/recipe/grove/runic_shears.json
 c8a2f3e8e49c35f5791d71ba5be3e925ba3e1bae data/roots/recipe/grove/warped_fairy_hut.json
 65d7013642ba660cc8bb28e979176693f2defb58 data/roots/recipe/grove/wildwood_pedestal.json
+44c79fdf124165dce4a246f4f82bebebde811a41 data/roots/recipe/grove/wildwood_quiver.json
 d66821b5bc1aed99fbb28bf7611fbe362591d991 data/roots/recipe/grove_crafter.json
 00d11decd717c1e41bac77424b9e7aa8699238d1 data/roots/recipe/grove_pedestal.json
 b87182eda80d7534e34ee0090dd1fcada3587d48 data/roots/recipe/herb_pouch.json

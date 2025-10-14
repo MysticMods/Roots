@@ -1,0 +1,36 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:logs/wildwood"
+      },
+      {
+        "tag": "roots:logs/wildwood"
+      },
+      {
+        "tag": "roots:logs/wildwood"
+      },
+      {
+        "tag": "c:strings"
+      },
+      {
+        "tag": "minecraft:arrows"
+      },
+      {
+        "tag": "roots:crops/spiritleaf"
+      },
+      {
+        "tag": "roots:crops/wildewheet"
+      },
+      {
+        "tag": "roots:crops/pereskia"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:wildwood_quiver"
+    }
+  }
+}

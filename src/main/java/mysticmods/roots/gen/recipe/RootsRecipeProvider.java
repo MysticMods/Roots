@@ -2529,6 +2529,20 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .define('H', RootsTags.Items.WILDROOT_CROP)
         .unlockedBy("has_wildroot", has(RootsTags.Items.WILDROOT_CROP))
         .save(c, RootsAPI.rl("gramary"));
+
+    RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.WILDWOOD_QUIVER.get(), 1)
+                .requires(RootsTags.Items.WILDWOOD_LOGS)
+                .requires(RootsTags.Items.WILDWOOD_LOGS)
+                .requires(RootsTags.Items.WILDWOOD_LOGS)
+                .requires(Tags.Items.STRINGS)
+                .requires(ItemTags.ARROWS)
+                .requires(RootsTags.Items.SPIRITLEAF_CROP)
+                .requires(RootsTags.Items.WILDEWHEET_CROP)
+                .requires(RootsTags.Items.PERESKIA_CROP)
+            ), c, RootsAPI.rl("grove/wildwood_quiver"));
   }
 
   public static class RecipeSaver {
