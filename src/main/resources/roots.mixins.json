@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MixinBeehiveBlock",
+    "MixinItem",
     "MixinMerchantMenu",
     "MixinMobEffectInstance",
     "MixinProjectileWeaponItem",

@@ -647,6 +647,7 @@ public class RootsTags {
 
     public static final TagKey<Spell> GEAS_ACTION = modTag("action/geas");
 
+    public static final TagKey<Spell> BLOCKS_OFF_HAND_EATING = modTag("blocks_off_hand_eating");
 
     static TagKey<Spell> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));

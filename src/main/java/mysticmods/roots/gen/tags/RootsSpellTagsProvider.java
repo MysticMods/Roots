@@ -41,6 +41,8 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
     this.tag(RootsTags.Spells.HOLLOW);
 
     this.tag(RootsTags.Spells.GEAS_ACTION).add(ModSpells.GEAS.get());
+
+    this.tag(RootsTags.Spells.BLOCKS_OFF_HAND_EATING).add(ModSpells.RAMPANT_GROWTH.get(), ModSpells.GROWTH_INFUSION.get());
   }
 
   @Override
