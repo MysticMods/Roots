@@ -429,7 +429,16 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("inflict_geas"), new GroveReputation(50, 10, 5, 1, 1))
     ), false);
     builder20.add(ModActions.CRAFT_ITEM, List.of(
-        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("create_runic_shears"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.RUNIC_SHEARS.getId())))
+        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("create_runic_shears"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.RUNIC_SHEARS.getId()))),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_cloud_berry"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.CLOUD_BERRY.getId()))),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_inferno_bulb"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.INFERNO_BULB.getId()))),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_stalicripe"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.STALICRIPE.getId()))),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_dewgonia"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.DEWGONIA.getId()))),
+        new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("create_baffle_cap"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.BAFFLECAP.getId()))),
+        new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("create_pereskia"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.PERESKIA.getId()))),
+        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("create_wildewheet"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.WILDEWHEET.getId()))),
+        new GroveReputationEntry(ModGroves.SPROUTING.value(), RootsAPI.rl("create_spirit_leaf"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.SPIRITLEAF.getId()))),
+        new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("create_moonglow"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.MOONGLOW.getId())))
     ), false);
     builder20.add(ModActions.BRED_ANIMAL, List.of(
         new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("bred_animal"), new GroveReputation(10, 8, 4, 1, 1)),

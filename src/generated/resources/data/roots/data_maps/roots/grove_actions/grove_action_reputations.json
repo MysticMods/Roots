@@ -88,6 +88,168 @@
           "gain5": 0
         },
         "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:cloud_berry"
+          }
+        ],
+        "grove": "roots:elemental",
+        "name": "roots:create_cloud_berry",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:inferno_bulb"
+          }
+        ],
+        "grove": "roots:elemental",
+        "name": "roots:create_inferno_bulb",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:stalicripe"
+          }
+        ],
+        "grove": "roots:elemental",
+        "name": "roots:create_stalicripe",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:dewgonia"
+          }
+        ],
+        "grove": "roots:elemental",
+        "name": "roots:create_dewgonia",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:bafflecap"
+          }
+        ],
+        "grove": "roots:fungal",
+        "name": "roots:create_baffle_cap",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:pereskia"
+          }
+        ],
+        "grove": "roots:fairy",
+        "name": "roots:create_pereskia",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:wildewheet"
+          }
+        ],
+        "grove": "roots:wild",
+        "name": "roots:create_wildewheet",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:spiritleaf"
+          }
+        ],
+        "grove": "roots:sprouting",
+        "name": "roots:create_spirit_leaf",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:moonglow"
+          }
+        ],
+        "grove": "roots:twilight",
+        "name": "roots:create_moonglow",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
       }
     ],
     "roots:crop_growth": [
