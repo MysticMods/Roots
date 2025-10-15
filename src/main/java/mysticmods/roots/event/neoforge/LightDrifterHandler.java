@@ -19,6 +19,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
@@ -28,6 +29,9 @@ import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class LightDrifterHandler {
@@ -66,17 +70,25 @@ public class LightDrifterHandler {
     }
   }
 
+  public static final Set<ResourceLocation> SKIP_DURING_LIGHT_DRIFTER = new HashSet<>();
+
   @SubscribeEvent
   public static void onLayerRender(RenderGuiLayerEvent.Pre event) {
+    if (SKIP_DURING_LIGHT_DRIFTER.isEmpty()) {
+      SKIP_DURING_LIGHT_DRIFTER.add(ResourceLocation.fromNamespaceAndPath("appleskin", "hunger_restored"));
+      SKIP_DURING_LIGHT_DRIFTER.add(VanillaGuiLayers.EXPERIENCE_BAR);
+      SKIP_DURING_LIGHT_DRIFTER.add(VanillaGuiLayers.EXPERIENCE_LEVEL);
+    }
+
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.player == null || !minecraft.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       return;
     }
 
-    if (event.getName().equals(VanillaGuiLayers.EXPERIENCE_BAR)) {
+    if (SKIP_DURING_LIGHT_DRIFTER.contains(event.getName())) {
       event.setCanceled(true);
     } else if (event.getName().equals(VanillaGuiLayers.OVERLAY_MESSAGE)) {
-
+      // TODO: Migrate this to a proper overlay
       LightDrifterEntity entity = LightDrifterUtil.getLightDrifterEntity(minecraft.player);
       if (entity == null) {
         return;
