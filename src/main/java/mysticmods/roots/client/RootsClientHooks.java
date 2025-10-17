@@ -249,4 +249,13 @@ public class RootsClientHooks {
       mc.setCameraEntity(drifter);
     }
   }
+
+  public static void stopPlayerMovement() {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.player != null) {
+      mc.player.zza = 0;
+      mc.player.xxa = 0;
+      mc.player.setJumping(false);
+    }
+  }
 }

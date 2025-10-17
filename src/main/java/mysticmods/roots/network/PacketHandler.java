@@ -89,6 +89,7 @@ public class PacketHandler {
     registrar.play(ClientboundAnimalHarvestSyncPacket.TYPE, ClientboundAnimalHarvestSyncPacket.CODEC);
     registrar.play(ClientboundClearHighlightPacket.TYPE, ClientboundClearHighlightPacket.CODEC);
     registrar.play(ClientboundLightDrifterSyncPacket.TYPE, ClientboundLightDrifterSyncPacket.CODEC);
+    registrar.play(ClientboundStopPlayerMovementPacket.TYPE, ClientboundStopPlayerMovementPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

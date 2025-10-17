@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
+import mysticmods.roots.network.client.ClientboundStopPlayerMovementPacket;
 import mysticmods.roots.snapshot.LightDrifterSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
@@ -54,6 +55,9 @@ public class LightDrifterSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+    pPlayer.setDeltaMovement(0, 0, 0);
+    pPlayer.hasImpulse = true;
+    PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundStopPlayerMovementPacket.INSTANCE);
     LightDrifterEntity drifter = new LightDrifterEntity(ModEntities.LIGHT_DRIFTER.get(), pLevel, pPlayer);
     drifter.setPos(pPlayer.getX(), pPlayer.getY()+1.8, pPlayer.getZ());
     drifter.setXRot(pPlayer.getXRot());
