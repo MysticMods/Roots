@@ -28,6 +28,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.client.settings.KeyMappingLookup;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
 
 import java.util.HashSet;
@@ -42,7 +43,7 @@ public class LightDrifterHandler {
     if (mc.screen != null && mc.screen.isPauseScreen()) {
       return;
     }
-    if (mc.player != null && mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+    if (mc.player != null && mc.player.hasEffect(ModEffects.LIGHT_DRIFTER) && event.getAction() != InputConstants.RELEASE) {
       event.setCanceled(true);
     }
   }

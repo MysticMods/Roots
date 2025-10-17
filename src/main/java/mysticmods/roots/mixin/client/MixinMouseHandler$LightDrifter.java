@@ -15,7 +15,8 @@ public class MixinMouseHandler$LightDrifter {
   private void roots$turnPlayer(LocalPlayer instance, double d0, double d1, Operation<Void> original) {
     if (!instance.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       original.call(instance, d0, d1);
+    } else {
+      ClientLightDrifterUtil.turnPlayer(instance, d0, d1);
     }
-    ClientLightDrifterUtil.turnPlayer(instance, d0, d1);
   }
 }
