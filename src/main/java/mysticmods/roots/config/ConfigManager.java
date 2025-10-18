@@ -2,13 +2,17 @@ package mysticmods.roots.config;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.RitualInformation;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ConfigManager {
@@ -78,6 +82,8 @@ public class ConfigManager {
 
   public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_POWER_PER_TICK;
   public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_MAX_STORED_POWER;
+
+  public static ModConfigSpec.ConfigValue<List<? extends String>> GUI_LAYER_SKIP;
 
   public static ModConfigSpec COMMON_CONFIG;
   public static ModConfigSpec CLIENT_CONFIG;
@@ -203,8 +209,26 @@ public class ConfigManager {
         .define("aqua_bubble_overlay", true);
     WARNING_OVERLAY = CLIENT_BUILDER.comment("if true, the warning overlay will be displayed whenever a mob targets you while holding the Alertness charm (or equipped in a suitable Curios slot)")
         .define("warning_overlay", true);
+    CLIENT_BUILDER.pop();
+    CLIENT_BUILDER.push("light_drifter_overlays");
+    List<String> skips = Arrays.asList(ResourceLocation.fromNamespaceAndPath("appleskin", "hunger_restored").toString(), VanillaGuiLayers.EXPERIENCE_BAR.toString(), VanillaGuiLayers.EXPERIENCE_LEVEL.toString());
+    GUI_LAYER_SKIP = CLIENT_BUILDER.comment("a list of resourcelocations of gui layer elements that should be skipped while light drifter is active").defineListAllowEmpty("gui_layer_skip", skips, () -> "", o -> o instanceof String s && ResourceLocation.tryParse(s) != null);
+    CLIENT_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
+  }
+
+  private static Set<ResourceLocation> CLIENT_LAYER_SKIPS = null;
+
+  public static Set<ResourceLocation> getClientLayerSkips () {
+    if (CLIENT_LAYER_SKIPS == null) {
+      CLIENT_LAYER_SKIPS = GUI_LAYER_SKIP.get().stream().map(ResourceLocation::tryParse).collect(java.util.stream.Collectors.toSet());
+    }
+    return CLIENT_LAYER_SKIPS;
+  }
+
+  public static boolean shouldSkipLayer (ResourceLocation layer) {
+    return getClientLayerSkips().contains(layer);
   }
 
   @SubscribeEvent
@@ -219,5 +243,6 @@ public class ConfigManager {
 
   public static void configReload(ModConfigEvent event) {
     CONFIGS.forEach(AbstractConfig::reset);
+    CLIENT_LAYER_SKIPS = null;
   }
 }

@@ -6,6 +6,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.ClientLightDrifterUtil;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.KeyHandler;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
@@ -71,22 +72,14 @@ public class LightDrifterHandler {
     }
   }
 
-  public static final Set<ResourceLocation> SKIP_DURING_LIGHT_DRIFTER = new HashSet<>();
-
   @SubscribeEvent
   public static void onLayerRender(RenderGuiLayerEvent.Pre event) {
-    if (SKIP_DURING_LIGHT_DRIFTER.isEmpty()) {
-      SKIP_DURING_LIGHT_DRIFTER.add(ResourceLocation.fromNamespaceAndPath("appleskin", "hunger_restored"));
-      SKIP_DURING_LIGHT_DRIFTER.add(VanillaGuiLayers.EXPERIENCE_BAR);
-      SKIP_DURING_LIGHT_DRIFTER.add(VanillaGuiLayers.EXPERIENCE_LEVEL);
-    }
-
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.player == null || !minecraft.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       return;
     }
 
-    if (SKIP_DURING_LIGHT_DRIFTER.contains(event.getName())) {
+    if (ConfigManager.shouldSkipLayer(event.getName())) {
       event.setCanceled(true);
     } else if (event.getName().equals(VanillaGuiLayers.OVERLAY_MESSAGE)) {
       // TODO: Migrate this to a proper overlay
