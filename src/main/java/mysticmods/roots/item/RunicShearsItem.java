@@ -107,16 +107,17 @@ public class RunicShearsItem extends ShearsItem {
       }
     }
     // TODO: AOE shearing
-    if (entity instanceof IShearable target) {
+    if (entity instanceof IShearable) {
       if (entity.level().isClientSide()) {
         return InteractionResult.CONSUME;
       }
       BlockPos pos = entity.blockPosition();
       AABB aabb = getBoundingBox().move(pos);
       boolean anySheared = false;
-      for (LivingEntity newTarget : entity.level().getEntitiesOfClass(LivingEntity.class, aabb)) {
+      List<LivingEntity> newTargets = entity.level().getEntitiesOfClass(LivingEntity.class, aabb);
+      for (LivingEntity newTarget : newTargets) {
         if (newTarget instanceof IShearable) {
-          if (doShear(target, player, heldItem, newTarget, entity, pos, hand)) {
+          if (doShear(newTarget, player, heldItem, entity, pos, hand)) {
             anySheared = true;
           }
         }
@@ -131,17 +132,20 @@ public class RunicShearsItem extends ShearsItem {
     return InteractionResult.PASS;
   }
 
-  protected boolean doShear(IShearable target, Player player, ItemStack heldItem, LivingEntity entity, LivingEntity original, BlockPos pos, InteractionHand hand) {
-    if (target.isShearable(player, heldItem, entity.level(), pos)) {
+  protected boolean doShear(LivingEntity newTarget, Player player, ItemStack heldItem, LivingEntity original, BlockPos pos, InteractionHand hand) {
+    if (!(newTarget instanceof IShearable target)) {
+      return false;
+    }
+    if (target.isShearable(player, heldItem, newTarget.level(), pos)) {
       // EnchantmentHelper.getItemEnchantmentLevel(entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), heldItem)
-      List<ItemStack> drops = target.onSheared(player, heldItem, entity.level(), pos);
+      List<ItemStack> drops = target.onSheared(player, heldItem, newTarget.level(), pos);
       Random rand = new java.util.Random();
       drops.forEach(d -> {
         ItemEntity ent = original.spawnAtLocation(d, 1.0F);
         ent.setDeltaMovement(ent.getDeltaMovement()
             .add((rand.nextFloat() - rand.nextFloat()) * 0.1F, rand.nextFloat() * 0.05F, (rand.nextFloat() - rand.nextFloat()) * 0.1F));
       });
-      entity.gameEvent(GameEvent.SHEAR, player);
+      newTarget.gameEvent(GameEvent.SHEAR, player);
       return true;
     }
 
