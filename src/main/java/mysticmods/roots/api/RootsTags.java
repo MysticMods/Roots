@@ -599,6 +599,8 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> LIGHT_DRIFTER = modTag("light_drifter");
 
+    public static final TagKey<EntityType<?>> LIMIT_WOODEN_SHEARS_DROPS = modTag("limit_wooden_shears_drops");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }

@@ -338,7 +338,7 @@ public class ModItems {
       .stacksTo(1)));
   public static final DeferredHolder<Item, QuiverItem> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new QuiverItem(new Item.Properties().stacksTo(1)
       .component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
-  public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120)
+  public static final DeferredHolder<Item, WoodenShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new WoodenShearsItem(new Item.Properties().durability(120)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = ITEMS.register("wooden_knife", () -> new KnifeItem(Tiers.WOOD, new Item.Properties().component(ModAttachments.FORAGING, 1)
       .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.WOOD, 1f, -2.4f))));

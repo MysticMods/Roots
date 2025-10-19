@@ -177,6 +177,7 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
         .addTags(RootsTags.Entities.GREEN_SPROUT, RootsTags.Entities.RED_SPROUT, RootsTags.Entities.TAN_SPROUT, RootsTags.Entities.PURPLE_SPROUT);
     this.tag(RootsTags.Entities.PLAYERS).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.LIGHT_DRIFTER).add(ModEntities.LIGHT_DRIFTER.value());
+    this.tag(RootsTags.Entities.LIMIT_WOODEN_SHEARS_DROPS).add(EntityType.SHEEP);
 
     this.tag(RootsTags.Entities.SHOULD_RENDER_HUD)
         .add(EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.CAMEL, EntityType.LLAMA, EntityType.VILLAGER, EntityType.WOLF, ModEntities.FENNEC.get());
