@@ -543,6 +543,7 @@
   "roots.nyi": "[Not Yet Implemented]",
   "roots.reputation.decreased": "Your reputation with the %s grove has decreased by %s",
   "roots.reputation.increased": "Your reputation with the %s grove has increased by %s",
+  "roots.spell.spell_light_drifter.on_ground": "You must be standing on solid ground to cast Light Drifter.",
   "roots.subtitles.alert": "Targeted by enemy",
   "roots.subtitles.aqua_bubble_alt_end": "Aqua bubble ends",
   "roots.subtitles.block.pyre.crackle": "Pyre crackles",

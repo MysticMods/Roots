@@ -17,6 +17,7 @@ import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -55,6 +56,11 @@ public class LightDrifterSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+    if (pPlayer.isFallFlying() || !pPlayer.onGround()) {
+      pPlayer.displayClientMessage(Component.translatable("roots.spell.spell_light_drifter.on_ground"), true);
+      costs.noCharge();
+      return 0;
+    }
     pPlayer.setDeltaMovement(0, 0, 0);
     pPlayer.hasImpulse = true;
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundStopPlayerMovementPacket.INSTANCE);
