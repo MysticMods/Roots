@@ -1,0 +1,30 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:glow_berries"
+      },
+      {
+        "tag": "c:feathers"
+      },
+      {
+        "item": "minecraft:sunflower"
+      },
+      {
+        "tag": "minecraft:candles"
+      },
+      {
+        "tag": "roots:herbs/moonglow"
+      }
+    ],
+    "priority": 0,
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:light_drifter"
+      }
+    ]
+  },
+  "times": 5
+}

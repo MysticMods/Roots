@@ -1436,6 +1436,12 @@ public final class RootsRecipeProvider extends RecipeProvider {
             .requires(RootsTags.Items.RUNIC_DUST).requires(Items.SPIDER_EYE).requires(ItemTags.WOOL)
             .unlocks(Unlock.spell(ModSpells.ACID_CLOUD))), c, RootsAPI.rl("spell/acid_cloud"));
 
+    RecipeSaver.saver().unlockedBy("has_glow_berry", has(Items.GLOW_BERRIES))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(BaseRecipeData.Builder.create().requires(Items.GLOW_BERRIES).requires(Tags.Items.FEATHERS)
+                .requires(Items.SUNFLOWER).requires(ItemTags.CANDLES).requires(RootsTags.Items.MOONGLOW_HERB)
+                .unlocks(Unlock.spell(ModSpells.LIGHT_DRIFTER))), c, RootsAPI.rl("spell/light_drifter"));
+
     RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB)).save(
         MortarRecipe.Builder.create().times(5)
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.DEWGONIA_HERB)

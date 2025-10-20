@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-14T19:43:05.0444517	Recipes
+// 1.21.1	2025-10-20T13:51:32.1803621	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -323,6 +323,7 @@ e293ce2ec611d2897dd360a606316672d60d1584 data/roots/advancement/recipes/misc/spe
 55348c092e5d9c0120a01ceb7bb0a99cb33cf490 data/roots/advancement/recipes/misc/spell/harvest.json
 95cfba36dc20110f1962a7bbc6c0d3fef8ccd5fa data/roots/advancement/recipes/misc/spell/jaunt.json
 e1fb846b90609d6b53ac4f59251e4f8ff65b7e08 data/roots/advancement/recipes/misc/spell/life_drain.json
+c28f8bcb6399378032d4822fb76835cc3656af1a data/roots/advancement/recipes/misc/spell/light_drifter.json
 55c70c182d479212756fccd3a9b5e35bf471a9d4 data/roots/advancement/recipes/misc/spell/magnetism.json
 01924068f44cd655f0c85573d4d2c2483bc28e63 data/roots/advancement/recipes/misc/spell/nondetection.json
 baf615d9b31599bb68dbd9339aa77e750049f1ba data/roots/advancement/recipes/misc/spell/petal_shell.json
@@ -776,6 +777,7 @@ efa39da893029841bb0936afcb19ca95970da980 data/roots/recipe/spell/geas.json
 07420d3d2f186a2c27eae10773683c07ca748242 data/roots/recipe/spell/harvest.json
 2a7b220c9765a23f6e636c27113f6b93a08c867c data/roots/recipe/spell/jaunt.json
 84243de313d035e7003cb9b1291cd7884e5b996d data/roots/recipe/spell/life_drain.json
+2481b2b950729a3ea24f34487141239e71111766 data/roots/recipe/spell/light_drifter.json
 d588cb212056ae8acbaf21e5a5fead2993d10137 data/roots/recipe/spell/magnetism.json
 586aed70bb2ab1db30158274e85d5d63236a1099 data/roots/recipe/spell/nondetection.json
 364243925d5f9109b5b8702ccf60cb2c3c4f9228 data/roots/recipe/spell/petal_shell.json
