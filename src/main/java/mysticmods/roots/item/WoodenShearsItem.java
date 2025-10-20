@@ -27,7 +27,7 @@ public class WoodenShearsItem extends ShearsItem {
         List<ItemStack> drops = target.onSheared(player, stack, entity.level(), pos);
         // Spawn drops on the server side using spawnShearedDrop to retain vanilla mob-specific behavior
         if (!isClient) {
-          for(ItemStack drop : drops) {
+          for (ItemStack drop : drops) {
             if (entity.getType().is(RootsTags.Entities.LIMIT_WOODEN_SHEARS_DROPS)) {
               drop.setCount(1);
             }

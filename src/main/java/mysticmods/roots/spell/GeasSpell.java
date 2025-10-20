@@ -1,6 +1,5 @@
 package mysticmods.roots.spell;
 
-import com.google.common.collect.Comparators;
 import mysticmods.roots.action.GeasAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;

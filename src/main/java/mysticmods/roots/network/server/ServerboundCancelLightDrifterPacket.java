@@ -7,7 +7,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ServerboundCancelLightDrifterPacket () implements IRootsPacket {
+public record ServerboundCancelLightDrifterPacket() implements IRootsPacket {
   public static final ServerboundCancelLightDrifterPacket INSTANCE = new ServerboundCancelLightDrifterPacket();
   public static final Type<ServerboundCancelLightDrifterPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_cancel_light_drifter_packet"));
   public static final StreamCodec<ByteBuf, ServerboundCancelLightDrifterPacket> CODEC = StreamCodec.unit(INSTANCE);

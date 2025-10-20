@@ -20,7 +20,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 // TODO: Handle rank changes
 public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, GrovePowerGenerator, IGroveInstance {
@@ -71,10 +74,10 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     consumeTick(pLevel, pPos, pState);
 
     // Temporarily disabled for #1194
-/*    if (generatedThisTick != generatedLastTick || consumedThisTick != consumedLastTick) {*/
-      setChanged();
-      updateViaState();
-/*    }*/
+    /*    if (generatedThisTick != generatedLastTick || consumedThisTick != consumedLastTick) {*/
+    setChanged();
+    updateViaState();
+    /*    }*/
   }
 
   public void setRank(int rank) {

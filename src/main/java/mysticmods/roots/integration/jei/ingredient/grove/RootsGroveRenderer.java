@@ -14,7 +14,6 @@ import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RootsGroveRenderer implements IIngredientRenderer<Grove> {
@@ -43,7 +42,8 @@ public class RootsGroveRenderer implements IIngredientRenderer<Grove> {
     List<Component> result = new ArrayList<>();
     result.add(ingredient.getStyledName());
     if (tooltipFlag.isAdvanced()) {
-      result.add(Component.literal(RootsRegistries.GROVES.getKey(ingredient).toString()).withStyle(ChatFormatting.DARK_GRAY));
+      result.add(Component.literal(RootsRegistries.GROVES.getKey(ingredient).toString())
+          .withStyle(ChatFormatting.DARK_GRAY));
     }
     return result;
   }

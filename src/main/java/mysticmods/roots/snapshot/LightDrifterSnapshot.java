@@ -13,7 +13,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.UUID;
 
@@ -53,21 +52,20 @@ public class LightDrifterSnapshot extends Snapshot {
   }
 
 
-
   @Override
   public SnapshotType<?> getType() {
     return ModSerializers.LIGHT_DRIFTER.get();
   }
 
-  public int getDuration () {
+  public int getDuration() {
     return duration;
   }
 
-  public int getMaxDistance () {
+  public int getMaxDistance() {
     return maxDistance;
   }
 
-  public UUID getPlayer () {
+  public UUID getPlayer() {
     return playerId;
   }
 

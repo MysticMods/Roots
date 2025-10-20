@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 // This is insufficient.
 @Mixin(AbstractClientPlayer.class)
 public class MixinAbstractClientPlayer$LightDrifter {
-  @WrapMethod(method="isSpectator")
+  @WrapMethod(method = "isSpectator")
   public boolean roots$onIsSpectator(Operation<Boolean> original) {
     // Return true if the player has the Light Drifter effect, making them behave like a spectator
     if (((AbstractClientPlayer) (Object) this).hasEffect(ModEffects.LIGHT_DRIFTER)) {

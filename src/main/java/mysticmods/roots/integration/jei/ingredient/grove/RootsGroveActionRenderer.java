@@ -20,7 +20,6 @@ import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RootsGroveActionRenderer implements IIngredientRenderer<GroveAction> {
@@ -61,7 +60,8 @@ public class RootsGroveActionRenderer implements IIngredientRenderer<GroveAction
     List<Component> result = new ArrayList<>();
     result.add(ingredient.getName());
     if (tooltipFlag.isAdvanced()) {
-      result.add(Component.literal(RootsRegistries.GROVE_ACTIONS.getKey(ingredient).toString()).withStyle(ChatFormatting.DARK_GRAY));
+      result.add(Component.literal(RootsRegistries.GROVE_ACTIONS.getKey(ingredient).toString())
+          .withStyle(ChatFormatting.DARK_GRAY));
     }
     return result;
   }

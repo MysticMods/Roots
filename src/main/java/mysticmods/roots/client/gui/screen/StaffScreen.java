@@ -14,7 +14,6 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.server.ServerboundClearStaffSlotPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

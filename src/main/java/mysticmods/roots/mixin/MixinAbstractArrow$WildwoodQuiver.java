@@ -15,7 +15,7 @@ public class MixinAbstractArrow$WildwoodQuiver {
   @Shadow
   private ItemStack pickupItemStack;
 
-  @WrapOperation(method="<init>(Lnet/minecraft/world/entity/EntityType;DDDLnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/projectile/AbstractArrow;setCustomName(Lnet/minecraft/network/chat/Component;)V"))
+  @WrapOperation(method = "<init>(Lnet/minecraft/world/entity/EntityType;DDDLnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;setCustomName(Lnet/minecraft/network/chat/Component;)V"))
   private void roots$removeItemStackComponent(AbstractArrow instance, Component component, Operation<Void> original) {
     original.call(instance, component);
     // Remove the quiver record from the arrow's pick-up stack allowing it to stack properly

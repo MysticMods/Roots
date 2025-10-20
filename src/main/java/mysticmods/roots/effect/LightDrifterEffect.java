@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class LightDrifterEffect extends SimpleEffect{
+public class LightDrifterEffect extends SimpleEffect {
   public LightDrifterEffect(MobEffectCategory category, int color, boolean hiddenByDefault) {
     super(category, color, hiddenByDefault);
   }

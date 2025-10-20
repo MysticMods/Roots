@@ -3,7 +3,6 @@ package mysticmods.roots.event.neoforge;
 import com.mojang.blaze3d.platform.InputConstants;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.client.ClientLightDrifterUtil;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.KeyHandler;
 import mysticmods.roots.config.ConfigManager;
@@ -14,13 +13,11 @@ import mysticmods.roots.snapshot.LightDrifterSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.util.LightDrifterUtil;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
@@ -29,11 +26,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import net.neoforged.neoforge.client.settings.KeyMappingLookup;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class LightDrifterHandler {
@@ -98,7 +91,8 @@ public class LightDrifterHandler {
       GuiGraphics guiGraphics = event.getGuiGraphics();
       Gui gui = minecraft.gui;
       Font font = gui.getFont();
-      Component overlayMessageString = Component.translatable("roots.gui.light_drifter_overlay", Mth.ceil(distance + 0.5), Mth.sqrt(snapshot.getMaxDistance())).withStyle(ChatFormatting.BOLD);
+      Component overlayMessageString = Component.translatable("roots.gui.light_drifter_overlay", Mth.ceil(distance + 0.5), Mth.sqrt(snapshot.getMaxDistance()))
+          .withStyle(ChatFormatting.BOLD);
       minecraft.getProfiler().push("overlayMessage");
       int yShift = Math.max(gui.leftHeight, gui.rightHeight) + (68 - 59);
       @SuppressWarnings("DataFlowIssue") int j = ChatFormatting.YELLOW.getColor();
@@ -107,7 +101,8 @@ public class LightDrifterHandler {
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
       int k = font.width(overlayMessageString);
       guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -20, k, j);
-      overlayMessageString = Component.translatable(KeyHandler.isCancelingLightDrifter()  ? "roots.gui.light_drifter_continue_canceling": "roots.gui.light_drifter_cancel", KeyBindings.CANCEL_LIGHT_DRIFTER.getTranslatedKeyMessage()).withStyle(ChatFormatting.BOLD);
+      overlayMessageString = Component.translatable(KeyHandler.isCancelingLightDrifter() ? "roots.gui.light_drifter_continue_canceling" : "roots.gui.light_drifter_cancel", KeyBindings.CANCEL_LIGHT_DRIFTER.getTranslatedKeyMessage())
+          .withStyle(ChatFormatting.BOLD);
       k = font.width(overlayMessageString);
       guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -34, k, j);
       guiGraphics.pose().popPose();

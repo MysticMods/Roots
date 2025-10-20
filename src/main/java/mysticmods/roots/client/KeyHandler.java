@@ -12,7 +12,6 @@ import mysticmods.roots.network.server.ServerboundCancelLightDrifterPacket;
 import mysticmods.roots.network.server.ServerboundCycleTomePacket;
 import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,7 +27,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class KeyHandler {
   private static int cancelLightDrifter = -1;
 
-  public static boolean isCancelingLightDrifter () {
+  public static boolean isCancelingLightDrifter() {
     return cancelLightDrifter > 0;
   }
 

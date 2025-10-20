@@ -5,7 +5,6 @@ import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import mysticmods.roots.api.RootsTags;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +22,7 @@ public class MixinGui$Tome {
 
   @Definition(id = "getSelected", method = "Lnet/minecraft/world/entity/player/Inventory;getSelected()Lnet/minecraft/world/item/ItemStack;")
   @Expression("?.getSelected()")
-  @WrapOperation(method="tick()V", at= @At(value = "MIXINEXTRAS:EXPRESSION"))
+  @WrapOperation(method = "tick()V", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
   private ItemStack roots$preventClearingTomeTooltipIfNecessary(Inventory instance, Operation<ItemStack> original) {
     if (this.toolHighlightTimer > 0 && this.lastToolHighlight.is(RootsTags.Items.GRAMARIES)) {
       return this.lastToolHighlight;

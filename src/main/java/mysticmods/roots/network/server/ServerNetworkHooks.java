@@ -207,7 +207,7 @@ public class ServerNetworkHooks {
     }
   }
 
-  public static void cancelLightDrifter (Player player) {
+  public static void cancelLightDrifter(Player player) {
     player.removeEffect(ModEffects.LIGHT_DRIFTER);
   }
 }

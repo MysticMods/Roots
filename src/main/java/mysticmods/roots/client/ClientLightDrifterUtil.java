@@ -1,6 +1,5 @@
 package mysticmods.roots.client;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.network.server.ServerboundMoveLightDrifterPacket;
 import mysticmods.roots.util.LightDrifterUtil;
@@ -43,7 +42,7 @@ public class ClientLightDrifterUtil {
     }
   }
 
-  public static void turnPlayer (LocalPlayer player, double d0, double d1) {
+  public static void turnPlayer(LocalPlayer player, double d0, double d1) {
     LightDrifterEntity entity = LightDrifterUtil.getLightDrifterEntity(player);
     if (entity == null) {
       return;

@@ -14,7 +14,6 @@ import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber> {
@@ -54,7 +53,8 @@ public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber
     result.add(ingredient.grove().getStyledName());
     result.add(Component.literal(String.valueOf(ingredient.value())));
     if (tooltipFlag.isAdvanced()) {
-      result.add(Component.literal(RootsRegistries.GROVES.getKey(ingredient.grove()).toString()).withStyle(ChatFormatting.DARK_GRAY));
+      result.add(Component.literal(RootsRegistries.GROVES.getKey(ingredient.grove()).toString())
+          .withStyle(ChatFormatting.DARK_GRAY));
     }
     return result;
   }

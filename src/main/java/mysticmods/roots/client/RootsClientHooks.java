@@ -220,7 +220,7 @@ public class RootsClientHooks {
     return minecraft.player;
   }
 
-  public static void stopUsingItem (Screen newScreen) {
+  public static void stopUsingItem(Screen newScreen) {
     if (Minecraft.getInstance().gameMode != null && Minecraft.getInstance().player != null) {
       Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
       Minecraft.getInstance().setScreen(newScreen);
@@ -271,7 +271,8 @@ public class RootsClientHooks {
         }
 
         ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetLastToolHighlight(tome);
-        ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetToolHighlightTimer((int)(40.0 * mc.options.notificationDisplayTime().get()));
+        ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetToolHighlightTimer((int) (40.0 * mc.options.notificationDisplayTime()
+            .get()));
       }
     }
   }

@@ -79,7 +79,7 @@ public class CooldownStorage implements ICleanable, ITicking {
     return dirty;
   }
 
-  public void reset () {
+  public void reset() {
     cooldownMap.clear();
     maxCooldownMap.clear();
     setDirty(true);

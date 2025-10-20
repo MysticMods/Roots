@@ -218,8 +218,10 @@ public class ConfigManager {
         .define("warning_overlay", true);
     CLIENT_BUILDER.pop();
     CLIENT_BUILDER.push("light_drifter_overlays");
-    List<String> skips = Arrays.asList(ResourceLocation.fromNamespaceAndPath("appleskin", "hunger_restored").toString(), VanillaGuiLayers.EXPERIENCE_BAR.toString(), VanillaGuiLayers.EXPERIENCE_LEVEL.toString());
-    GUI_LAYER_SKIP = CLIENT_BUILDER.comment("a list of resourcelocations of gui layer elements that should be skipped while light drifter is active").defineListAllowEmpty("gui_layer_skip", skips, () -> "", o -> o instanceof String s && ResourceLocation.tryParse(s) != null);
+    List<String> skips = Arrays.asList(ResourceLocation.fromNamespaceAndPath("appleskin", "hunger_restored")
+        .toString(), VanillaGuiLayers.EXPERIENCE_BAR.toString(), VanillaGuiLayers.EXPERIENCE_LEVEL.toString());
+    GUI_LAYER_SKIP = CLIENT_BUILDER.comment("a list of resourcelocations of gui layer elements that should be skipped while light drifter is active")
+        .defineListAllowEmpty("gui_layer_skip", skips, () -> "", o -> o instanceof String s && ResourceLocation.tryParse(s) != null);
     CLIENT_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
@@ -227,14 +229,15 @@ public class ConfigManager {
 
   private static Set<ResourceLocation> CLIENT_LAYER_SKIPS = null;
 
-  public static Set<ResourceLocation> getClientLayerSkips () {
+  public static Set<ResourceLocation> getClientLayerSkips() {
     if (CLIENT_LAYER_SKIPS == null) {
-      CLIENT_LAYER_SKIPS = GUI_LAYER_SKIP.get().stream().map(ResourceLocation::tryParse).collect(java.util.stream.Collectors.toSet());
+      CLIENT_LAYER_SKIPS = GUI_LAYER_SKIP.get().stream().map(ResourceLocation::tryParse)
+          .collect(java.util.stream.Collectors.toSet());
     }
     return CLIENT_LAYER_SKIPS;
   }
 
-  public static boolean shouldSkipLayer (ResourceLocation layer) {
+  public static boolean shouldSkipLayer(ResourceLocation layer) {
     return getClientLayerSkips().contains(layer);
   }
 

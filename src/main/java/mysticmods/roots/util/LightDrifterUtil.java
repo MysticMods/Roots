@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("resource")
 public class LightDrifterUtil {
   @Nullable
-  public static LightDrifterSnapshot getSnapshot (Player player) {
+  public static LightDrifterSnapshot getSnapshot(Player player) {
     if (!player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       return null;
     }

@@ -387,7 +387,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onRightClickItem (PlayerInteractEvent.RightClickItem event) {
+  public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
     if (event.getHand() != InteractionHand.OFF_HAND) {
       return;
     }

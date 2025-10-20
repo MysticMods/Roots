@@ -123,7 +123,7 @@ public class RootsCommand {
       ServerPlayer player = c.getSource().getPlayerOrException();
       CooldownStorage storage = player.getData(ModAttachments.COOLDOWN_STORAGE);
       storage.reset();
-      c.getSource().sendSuccess(() ->Component.translatable("roots.commands.reset"), false);
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reset"), false);
       return 1;
     }));
     builder.then(Commands.literal("library").executes(c -> {

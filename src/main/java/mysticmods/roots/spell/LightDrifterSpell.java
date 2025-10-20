@@ -15,7 +15,6 @@ import mysticmods.roots.network.client.ClientboundStopPlayerMovementPacket;
 import mysticmods.roots.snapshot.LightDrifterSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -65,7 +64,7 @@ public class LightDrifterSpell extends Spell {
     pPlayer.hasImpulse = true;
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundStopPlayerMovementPacket.INSTANCE);
     LightDrifterEntity drifter = new LightDrifterEntity(ModEntities.LIGHT_DRIFTER.get(), pLevel, pPlayer);
-    drifter.setPos(pPlayer.getX(), pPlayer.getY()+1.8, pPlayer.getZ());
+    drifter.setPos(pPlayer.getX(), pPlayer.getY() + 1.8, pPlayer.getZ());
     drifter.setXRot(pPlayer.getXRot());
     drifter.setYRot(pPlayer.getYRot());
     pLevel.addFreshEntity(drifter);

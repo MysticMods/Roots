@@ -59,7 +59,8 @@ public class ModAttachments {
       .serialize(AnimalHarvestRecipe.CACHE_CODEC).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<Map<Holder<Attribute>, AugmentationInfo>>> AUGMENTATION_INFO = ATTACHMENTS.register("augmentation_data", () -> AttachmentType.<Map<Holder<Attribute>, AugmentationInfo>>builder(() -> new HashMap<>())
       .serialize(AugmentationInfo.DATA_MAP_CODEC).build());
-  public static final DeferredHolder<AttachmentType<?>, AttachmentType<LightDrifterStorage>> DRIFTER_CLIENT_STORAGE = ATTACHMENTS.register("drifter_client_storage", () -> AttachmentType.builder(LightDrifterStorage::new).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<LightDrifterStorage>> DRIFTER_CLIENT_STORAGE = ATTACHMENTS.register("drifter_client_storage", () -> AttachmentType.builder(LightDrifterStorage::new)
+      .build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<LightDrifterStorage>> DRIFTER_SERVER_STORAGE = ATTACHMENTS.register("drifter_server_storage", () -> AttachmentType.builder(LightDrifterStorage::new)
       .serialize(LightDrifterStorage.CODEC).copyOnDeath().build());
 
