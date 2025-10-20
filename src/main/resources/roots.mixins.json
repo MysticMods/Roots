@@ -39,6 +39,7 @@
   ],
   "client": [
     "client.MixinEntity",
+    "client.MixinGui$Tome",
     "client.MixinLocalPlayer$LightDrifter",
     "client.MixinLocalPlayer$StaffChannel",
     "client.MixinMinecraft$LightDrifter",

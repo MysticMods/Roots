@@ -1,8 +1,8 @@
-// 1.21.1	2025-10-13T13:32:36.4271122	Roots Item Tags
+// 1.21.1	2025-10-20T14:03:51.8348693	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
-ab20a21d53e05a57775e73f20f619a4476b10429 data/curios/tags/item/tome.json
+01942008774c1f7952c4c7014e58916950d57030 data/curios/tags/item/tome.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/item/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/item/fence_gates/wooden.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -145,6 +145,7 @@ ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/item/decorative_pyres.j
 d17a97ae6e613b481dec932c38e92f9776fcf84c data/roots/tags/item/functional_pyres.json
 b8a772562923991f5f28045f85c332af35e9772b data/roots/tags/item/fungal.json
 80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/roots/tags/item/fungal_transmuter_activation.json
+ab20a21d53e05a57775e73f20f619a4476b10429 data/roots/tags/item/gramaries.json
 80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/roots/tags/item/grove_crafter_activation.json
 0b84a7b844d869f56ca22683e394d08ece1c1d7e data/roots/tags/item/grove_stones.json
 fe934ceccc4232fc0d8a73f6ae26291c0403badb data/roots/tags/item/grove_stones/elemental.json

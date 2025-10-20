@@ -481,6 +481,8 @@ public class RootsTags {
     public static final TagKey<Item> CURIOS_TOMES = curiosTag("tome");
     public static final TagKey<Item> CURIOS_BELTS = curiosTag("belt");
 
+    public static final TagKey<Item> GRAMARIES = modTag("gramaries");
+
     public static final TagKey<Item> BEETLE_ARMOR = modTag("armor/beetle");
     public static final TagKey<Item> ANTLER_ARMOR = modTag("armor/antler");
     public static final TagKey<Item> COPPER_ARMOR = modTag("armor/copper");

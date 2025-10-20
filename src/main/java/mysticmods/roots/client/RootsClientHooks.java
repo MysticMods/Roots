@@ -2,6 +2,7 @@ package mysticmods.roots.client;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.client.gui.overlay.HerbOverlay;
@@ -256,6 +257,22 @@ public class RootsClientHooks {
       mc.player.zza = 0;
       mc.player.xxa = 0;
       mc.player.setJumping(false);
+    }
+  }
+
+  public static void showTomeTooltip() {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.player != null) {
+      if (!mc.player.getMainHandItem().is(RootsTags.Items.GRAMARIES) && !mc.player.getOffhandItem()
+          .is(RootsTags.Items.GRAMARIES)) {
+        ItemStack tome = RootsAPI.getInstance().getTome(mc.player);
+        if (tome.isEmpty()) {
+          return;
+        }
+
+        ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetLastToolHighlight(tome);
+        ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetToolHighlightTimer((int)(40.0 * mc.options.notificationDisplayTime().get()));
+      }
     }
   }
 }

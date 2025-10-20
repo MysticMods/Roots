@@ -11,11 +11,14 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
+import mysticmods.roots.network.client.ClientboundChangeTomeMode;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
@@ -199,9 +202,8 @@ public class ServerNetworkHooks {
       RootsAPI.LOG.error("Cycling tome to from mode {} to mode {}", current, newMode);
     }
 
-    ItemStack mainHand = player.getMainHandItem();
-    if (mainHand != tome) {
-      // If cycling and not in the main hand do something TODO
+    if (tome != player.getMainHandItem() && tome != player.getOffhandItem()) {
+      PacketDistributor.sendToPlayer((ServerPlayer) player, ClientboundChangeTomeMode.INSTANCE);
     }
   }
 
