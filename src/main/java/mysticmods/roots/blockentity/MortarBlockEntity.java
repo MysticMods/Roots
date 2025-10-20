@@ -12,6 +12,7 @@ import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -35,6 +36,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -223,6 +225,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
+    ItemCooldowns cooldowns = player.getCooldowns();
     if (inHand.isEmpty() && !player.isCrouching()) {
       // extract
       ItemStack popped = inventory.pop();
@@ -236,60 +239,65 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
         }
       }
     } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION) && !inventory.isEmpty()) {
-      if (cachedRecipe == null) {
-        revalidateRecipe();
-      }
-      // TODO: Provider better feedback to the player
-      if (cachedRecipe != null && cachedRecipe.value().matches(playerlessCrafting, level)) {
-        ConditionResult conditionResult = cachedRecipe.value()
-            .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
-        if (conditionResult.anyFailed()) {
-          conditionResult.report(player);
-          return InteractionResult.FAIL;
+      if (player.isFakePlayer() || !cooldowns.isOnCooldown(inHand.getItem())) {
+        if (cachedRecipe == null) {
+          revalidateRecipe();
         }
-        UnlockResult failedUnlocks = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
-        if (failedUnlocks.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
-          RootsAPI.LOG.info("Grants failed and recipe has no output");
-          failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant {}", o));
-          failedUnlocks.report();
-          return InteractionResult.FAIL;
-        }
+        // TODO: Provider better feedback to the player
+        if (cachedRecipe != null && cachedRecipe.value().matches(playerlessCrafting, level)) {
+          ConditionResult conditionResult = cachedRecipe.value()
+              .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
+          if (conditionResult.anyFailed()) {
+            conditionResult.report(player);
+            return InteractionResult.FAIL;
+          }
+          UnlockResult failedUnlocks = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
+          if (failedUnlocks.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
+            RootsAPI.LOG.info("Grants failed and recipe has no output");
+            failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant {}", o));
+            failedUnlocks.report();
+            return InteractionResult.FAIL;
+          }
 
-        uses++;
-        getLevel().playSound(null, getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0f, 0.6f);
-        setChanged();
+          uses++;
+          getLevel().playSound(null, getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0f, 0.6f);
+          setChanged();
+          if (!player.isFakePlayer() && ConfigManager.PESTLE_COOLDOWN.getAsInt() != -1) {
+            cooldowns.addCooldown(inHand.getItem(), ConfigManager.PESTLE_COOLDOWN.getAsInt());
+          }
 
-        if (uses >= cachedRecipe.value().getTimes()) {
-          MortarCrafting playerCrafting = new MortarCrafting(inventory, this, player);
-          lastRecipe = cachedRecipe;
-          previousRecipeItems.clear();
-          previousRecipeItems.addAll(inventory.getItemsCopy());
-          List<ItemStack> results = cachedRecipe.value()
-              .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear);
-          for (ItemStack stack : results) {
-            CraftItemAction.Context context = new CraftItemAction.Context(
-                (ServerLevel) this.getLevel(),
+          if (uses >= cachedRecipe.value().getTimes()) {
+            MortarCrafting playerCrafting = new MortarCrafting(inventory, this, player);
+            lastRecipe = cachedRecipe;
+            previousRecipeItems.clear();
+            previousRecipeItems.addAll(inventory.getItemsCopy());
+            List<ItemStack> results = cachedRecipe.value()
+                .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear);
+            for (ItemStack stack : results) {
+              CraftItemAction.Context context = new CraftItemAction.Context(
+                  (ServerLevel) this.getLevel(),
+                  (ServerPlayer) player,
+                  stack
+              );
+              ModActions.CRAFT_ITEM.get().accept(context);
+            }
+            for (ItemStack stack : results) {
+              ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+            }
+            CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+                (ServerLevel) level,
                 (ServerPlayer) player,
-                stack
+                lastRecipe.id(),
+                lastRecipe.value(),
+                this
             );
-            ModActions.CRAFT_ITEM.get().accept(context);
+            ModActions.CRAFT_RECIPE.get().accept(context);
+            uses = -1;
+            cachedRecipe = null;
           }
-          for (ItemStack stack : results) {
-            ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
-          }
-          CraftRecipeAction.Context context = new CraftRecipeAction.Context(
-              (ServerLevel) level,
-              (ServerPlayer) player,
-              lastRecipe.id(),
-              lastRecipe.value(),
-              this
-          );
-          ModActions.CRAFT_RECIPE.get().accept(context);
-          uses = -1;
-          cachedRecipe = null;
-        }
 
-        updateViaState();
+          updateViaState();
+        }
       } else {
         return InteractionResult.FAIL;
       }

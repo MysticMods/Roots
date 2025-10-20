@@ -83,6 +83,9 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_POWER_PER_TICK;
   public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_MAX_STORED_POWER;
 
+  public static ModConfigSpec.IntValue PESTLE_COOLDOWN;
+
+
   public static ModConfigSpec.ConfigValue<List<? extends String>> GUI_LAYER_SKIP;
 
   public static ModConfigSpec COMMON_CONFIG;
@@ -194,6 +197,10 @@ public class ConfigManager {
         .defineInRange("fungal_transmuter_power_per_tick", 1, 1, Integer.MAX_VALUE);
     FUNGAL_TRANSMUTER_MAX_STORED_POWER = COMMON_BUILDER.comment("the maximum amount of power the Fungal Transmuter can store")
         .defineInRange("fungal_transmuter_max_stored_power", 50 * 100, 1, Integer.MAX_VALUE);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.comment("Configuration options relating to the mortar & pestle").push("mortar");
+    PESTLE_COOLDOWN = COMMON_BUILDER.comment("the cooldown in ticks after using a pestle on a mortar, -1 for no cooldown")
+        .defineInRange("pestle_cooldown", 20, -1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
 
     CLIENT_BUILDER.push("debug");
