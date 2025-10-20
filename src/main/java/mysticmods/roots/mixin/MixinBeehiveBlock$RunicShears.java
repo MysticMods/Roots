@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(BeehiveBlock.class)
-public class MixinBeehiveBlock {
+public class MixinBeehiveBlock$RunicShears {
   @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BeehiveBlock;angerNearbyBees(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"))
   private void roots$cancelAngerNearbyBees(BeehiveBlock instance, Level bee, BlockPos list1, Operation<Void> original, @Local(argsOnly = true) ItemStack stack) {
     if (!stack.is(RootsTags.Items.RUNIC_SHEARS)) {

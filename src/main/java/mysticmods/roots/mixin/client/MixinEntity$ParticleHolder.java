@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Mixin(Entity.class)
-public abstract class MixinEntity implements IMixinParticleHolder {
+public abstract class MixinEntity$ParticleHolder implements IMixinParticleHolder {
   @Unique
   Map<ParticleType<?>, Particle> roots_1_21$particleMap = null;
 

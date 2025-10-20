@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(MobEffectInstance.class)
-public class MixinMobEffectInstance {
+public class MixinMobEffectInstance$DefaultInvisiblePotion {
   @Unique
   private boolean roots_1_21$checkedParticles = false;
 

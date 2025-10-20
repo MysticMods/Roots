@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(PlayerRenderer.class)
-public class MixinPlayerRenderer {
+public class MixinPlayerRenderer$LightDrifter {
   @WrapOperation(method="setModelProperties", at=@At(value = "FIELD", opcode = Opcodes.PUTFIELD, target="Lnet/minecraft/client/model/PlayerModel;crouching:Z"))
   private void roots$onSetModelProperties(PlayerModel<AbstractClientPlayer> instance, boolean value, Operation<Void> original, @Local(argsOnly = true) AbstractClientPlayer player) {
     if (!player.hasEffect(ModEffects.LIGHT_DRIFTER)) {

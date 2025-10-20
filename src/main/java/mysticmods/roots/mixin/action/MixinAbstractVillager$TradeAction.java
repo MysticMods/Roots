@@ -11,7 +11,7 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(AbstractVillager.class)
-public class MixinAbstractVillager {
+public class MixinAbstractVillager$TradeAction {
 
   // TODO: Convert this to a tag
   @WrapMethod(method = "notifyTrade")

@@ -5,7 +5,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.init.ModActions;
-import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,11 +19,9 @@ import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BoneMealItem.class)
-public class MixinBoneMealItem {
+public class MixinBoneMealItem$GrowAction {
   @WrapOperation(method = "applyBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BonemealableBlock;performBonemeal(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/util/RandomSource;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"))
   private static void RootsActionApplyBonemeal(BonemealableBlock instance, ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState, Operation<Void> original, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) Player player, @Local BlockState originalState) {
     original.call(instance, serverLevel, randomSource, blockPos, blockState);

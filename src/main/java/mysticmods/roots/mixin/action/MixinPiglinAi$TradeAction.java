@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.List;
 
 @Mixin(PiglinAi.class)
-public class MixinPiglinAi {
+public class MixinPiglinAi$TradeAction {
   @WrapOperation(method = "stopHoldingOffHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/piglin/PiglinAi;getBarterResponseItems(Lnet/minecraft/world/entity/monster/piglin/Piglin;)Ljava/util/List;"))
   private static List<ItemStack> RootsStopHoldingOffHandItem(Piglin piglin, Operation<List<ItemStack>> original) {
     List<ItemStack> result = original.call(piglin);

@@ -8,12 +8,9 @@ import net.minecraft.advancements.critereon.ConsumeItemTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ConsumeItemTrigger.class)
-public class MixinConsumeItemTrigger {
+public class MixinConsumeItemTrigger$EatItemAction {
   @WrapMethod(method = "trigger")
   private void RootsTriggerConsumeItem(ServerPlayer player, ItemStack stack, Operation<Void> original) {
     original.call(player, stack);

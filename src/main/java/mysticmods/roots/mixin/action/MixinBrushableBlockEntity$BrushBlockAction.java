@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import mysticmods.roots.action.BrushBlockAction;
 import mysticmods.roots.init.ModActions;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -12,11 +11,9 @@ import net.minecraft.world.level.block.entity.BrushableBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BrushableBlockEntity.class)
-public class MixinBrushableBlockEntity {
+public class MixinBrushableBlockEntity$BrushBlockAction {
   @Shadow
   private ItemStack item;
 
