@@ -9,7 +9,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
+import mysticmods.roots.recipe.fake.SproutGiftRecipe;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

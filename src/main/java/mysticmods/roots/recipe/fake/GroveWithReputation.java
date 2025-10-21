@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.fake;
+package mysticmods.roots.recipe.fake;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

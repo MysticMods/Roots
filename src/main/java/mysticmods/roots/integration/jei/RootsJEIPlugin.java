@@ -28,9 +28,10 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.categories.*;
-import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
-import mysticmods.roots.integration.jei.fake.GroveWithReputation;
-import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
+import mysticmods.roots.recipe.fake.DyeRecipeGenerator;
+import mysticmods.roots.recipe.fake.EntityInteractionRecipe;
+import mysticmods.roots.recipe.fake.GroveWithReputation;
+import mysticmods.roots.recipe.fake.SproutGiftRecipe;
 import mysticmods.roots.integration.jei.ingredient.block.*;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageHelper;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
@@ -101,6 +102,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<AnimalHarvestRecipe> ANIMAL_HARVEST_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("animal_harvest_recipe"), AnimalHarvestRecipe.class);
   public static final RecipeType<TransmutationRecipe> TRANSMUTATION_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("transmutation_recipe"), TransmutationRecipe.class);
   public static final RecipeType<GroveWithReputation> GROVE_REPUTATION_ENTRY_TYPE = new RecipeType<>(RootsAPI.rl("grove_reputation_entry"), GroveWithReputation.class);
+  public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = new RecipeType<>(RootsAPI.rl("entity_interaction_recipe"), EntityInteractionRecipe.class);
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -117,6 +119,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new AnimalHarvestCategory(guiHelper));
     registration.addRecipeCategories(new FungalTransmuterCategory(guiHelper));
     registration.addRecipeCategories(new GroveWithReputationCategory(guiHelper));
+    registration.addRecipeCategories(new EntityInteractionCategory(guiHelper));
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();

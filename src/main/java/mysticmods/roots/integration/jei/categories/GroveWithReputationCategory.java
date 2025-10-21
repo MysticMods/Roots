@@ -14,7 +14,7 @@ import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.fake.GroveWithReputation;
+import mysticmods.roots.recipe.fake.GroveWithReputation;
 import mysticmods.roots.integration.jei.ingredient.RootsIngredientHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.fake;
+package mysticmods.roots.recipe.fake;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModAttachments;
