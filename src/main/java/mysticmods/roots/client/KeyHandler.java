@@ -146,7 +146,7 @@ public class KeyHandler {
         return;
       }
     }
-    
+
     if (!stack.has(ModAttachments.SPELL_STORAGE)) {
       stack = mc.player.getOffhandItem();
       hand = InteractionHand.OFF_HAND;
