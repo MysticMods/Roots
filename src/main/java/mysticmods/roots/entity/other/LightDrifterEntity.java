@@ -1,6 +1,7 @@
 package mysticmods.roots.entity.other;
 
 import com.google.common.primitives.Floats;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
@@ -13,7 +14,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -67,6 +70,30 @@ public class LightDrifterEntity extends LivingEntity implements TraceableEntity 
     super(entityEntityType, level);
     this.noPhysics = true;
     this.setNoGravity(true);
+  }
+
+  @Override
+  public boolean hurt(DamageSource source, float amount) {
+    boolean result = super.hurt(source, amount);
+    if (result) {
+      if (!level().isClientSide()) {
+        RootsAPI.LOG.error("Light Drifter took damage from source {}, amount {}", source.getMsgId(), amount);
+
+        LightDrifterSnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.LIGHT_DRIFTER.get());
+        if (snapshot != null) {
+          Player player = this.level().getPlayerByUUID(snapshot.getPlayer());
+          if (player != null) {
+            player.removeEffect(ModEffects.LIGHT_DRIFTER);
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  @Override
+  public boolean isInvulnerableTo(DamageSource source) {
+    return !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
   }
 
   @Override
