@@ -8,6 +8,7 @@ import mysticmods.roots.api.datamap.AugmentationInfo;
 import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
+import mysticmods.roots.recipe.pyre.PyrePedestalRecipe;
 import mysticmods.roots.util.SpatialMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -63,6 +64,8 @@ public class ModAttachments {
       .build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<LightDrifterStorage>> DRIFTER_SERVER_STORAGE = ATTACHMENTS.register("drifter_server_storage", () -> AttachmentType.builder(LightDrifterStorage::new)
       .serialize(LightDrifterStorage.CODEC).copyOnDeath().build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<PyrePedestalRecipe.PyrePedestalRecipeHolder>> CACHED_PEDESTAL_RECIPE = ATTACHMENTS.register("cached_pyre_pedestal_recipe", () -> AttachmentType.builder(() -> PyrePedestalRecipe.NULL)
+      .serialize(PyrePedestalRecipe.CODEC).sync(PyrePedestalRecipe.STREAM_CODEC).build());
 
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();

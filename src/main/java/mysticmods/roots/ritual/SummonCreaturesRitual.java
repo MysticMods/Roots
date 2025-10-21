@@ -6,9 +6,11 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
+import mysticmods.roots.recipe.pyre.PyrePedestalRecipe;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.PositionCache;
@@ -43,9 +45,28 @@ public class SummonCreaturesRitual extends Ritual {
 
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    PyrePedestalCrafting crafting = blockEntity.getPedestalCrafting();
+    PyrePedestalRecipe.PyrePedestalRecipeHolder cachedRecipe = blockEntity.getData(ModAttachments.CACHED_PEDESTAL_RECIPE);
+    RecipeHolder<SummonCreaturesRecipe> recipe = null;
+    boolean matchedCache = false;
+    if (!cachedRecipe.isEmpty() && cachedRecipe.value() instanceof SummonCreaturesRecipe summonRecipe) {
+      if (summonRecipe.matches(crafting, pLevel)) {
+        recipe = new RecipeHolder<>(cachedRecipe.id(), summonRecipe);
+        matchedCache = true;
+      }
+    }
+    if (recipe == null) {
+      recipe = ResolvedRecipes.SUMMON_CREATURES.findRecipe(crafting, pLevel);
+    }
+    if (!matchedCache) {
+      if (recipe != null) {
+        blockEntity.setData(ModAttachments.CACHED_PEDESTAL_RECIPE, PyrePedestalRecipe.of(recipe));
+      } else {
+        blockEntity.setData(ModAttachments.CACHED_PEDESTAL_RECIPE, PyrePedestalRecipe.NULL);
+      }
+    }
+
     if (duration % getInterval() == 0) {
-      PyrePedestalCrafting crafting = blockEntity.getPedestalCrafting();
-      RecipeHolder<SummonCreaturesRecipe> recipe = ResolvedRecipes.SUMMON_CREATURES.findRecipe(crafting, pLevel);
       if (recipe != null && recipe.value().getEntity() != null) {
         if (blockEntity.getLastPlayer() != null) {
           UnlockResult failedGrants = recipe.value().checkUnlocks(pLevel, (ServerPlayer) blockEntity.getLastPlayer());

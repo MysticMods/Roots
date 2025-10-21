@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 // TODO
-public class SummonCreaturesRecipe extends RootsTileRecipe<PedestalInventoryWrapper, PyreBlockEntity, PyrePedestalCrafting> {
+public class SummonCreaturesRecipe extends PyrePedestalRecipe {
   public static MapCodec<SummonCreaturesRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
       BuiltInRegistries.ENTITY_TYPE.byNameCodec().optionalFieldOf("entity")
