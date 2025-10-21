@@ -13,11 +13,13 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -56,10 +58,13 @@ import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
+import mysticmods.roots.test.entity.EntityTagTest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -178,6 +183,9 @@ public class RootsJEIPlugin implements IModPlugin {
       }
     }
     registration.addRecipes(GROVE_REPUTATION_ENTRY_TYPE, recipes);
+    List<EntityInteractionRecipe> entityInteractionRecipes = new ArrayList<>();
+    entityInteractionRecipes.add(new EntityInteractionRecipe(new EntityTagTest(RootsTags.Entities.SQUID), Ingredient.of(RootsTags.Items.BOTTLES), List.of(new ChanceOutput(new ItemStack(ModItems.INK_BOTTLE), 1.0f)), 20 * 15));
+    registration.addRecipes(ENTITY_INTERACTION_TYPE, entityInteractionRecipes);
   }
 
   @Override
@@ -192,6 +200,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalysts(SUMMON_CREATURES_RECIPE_TYPE, ModItems.RITUAL_SUMMON_CREATURES.get());
     registration.addRecipeCatalyst(ModItems.RITUAL_ANIMAL_HARVEST.get(), ANIMAL_HARVEST_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.FUNGAL_TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE);
+    registration.addRecipeCatalyst(Items.GLASS_BOTTLE, ENTITY_INTERACTION_TYPE);
   }
 
   @Override

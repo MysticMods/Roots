@@ -779,6 +779,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.wip", "[Work In Progress]");
 
     // JEI
+    add("roots.jei.entity_interaction", "Entity Item Interaction");
     add("roots.jei.summon_creatures", "Summon Creatures");
     add("roots.jei.runic_entity", "Runic Shears (Entity)");
     add("roots.jei.runic_block", "Runic Shears (Block)");

@@ -63,6 +63,8 @@ public class EntityInteractionCategory extends RootsRecipeBaseCategory<EntityInt
     int row = 0;
     int column = 0;
 
+    builder.addSlot(RecipeIngredientRole.INPUT, 74, 34).addIngredients(recipe.input());
+
     for (int i = 0; i < outputs.size(); i++) {
       if (i % 4 == 0 && i != 0) {
         row++;
