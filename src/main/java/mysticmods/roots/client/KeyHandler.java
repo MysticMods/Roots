@@ -133,7 +133,10 @@ public class KeyHandler {
       return;
     }
 
-    if (op == 0) {
+    InteractionHand hand = InteractionHand.MAIN_HAND;
+    ItemStack stack = mc.player.getMainHandItem();
+
+    if (op == 0 && !stack.has(ModAttachments.SPELL_STORAGE)) {
       ItemStack tome = RootsAPI.getInstance().getTome(mc.player);
       if (!tome.isEmpty()) {
         if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
@@ -143,11 +146,7 @@ public class KeyHandler {
         return;
       }
     }
-
-
-    InteractionHand hand = InteractionHand.MAIN_HAND;
-    ItemStack stack = mc.player.getMainHandItem();
-
+    
     if (!stack.has(ModAttachments.SPELL_STORAGE)) {
       stack = mc.player.getOffhandItem();
       hand = InteractionHand.OFF_HAND;
