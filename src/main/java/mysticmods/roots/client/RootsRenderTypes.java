@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
 import net.minecraft.Util;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.ModList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -98,14 +100,11 @@ public class RootsRenderTypes {
 
   public static final RenderStateShard.ShaderStateShard DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDissolveShader);
 
-  public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
-
   public static final RenderStateShard.ShaderStateShard PARTICLE_LOW_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(() -> {
-    // TODO: Check for Iris/etc here
-    if (true) {
-      return RootsShaders.getLowDiscardParticleShader();
-    } else {
+    if (((ModList.get().isLoaded("iris") && !ModList.get().isLoaded("monocle")) || ConfigManager.DISABLE_CUSTOM_PARTICLE_SHADER.get()) && !ConfigManager.FORCE_CUSTOM_PARTICLE_SHADER.get()) {
       return GameRenderer.getParticleShader();
+    } else {
+      return RootsShaders.getLowDiscardParticleShader();
     }
   });
 

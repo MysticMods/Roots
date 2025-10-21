@@ -85,6 +85,10 @@ public class ConfigManager {
 
   public static ModConfigSpec.IntValue PESTLE_COOLDOWN;
 
+  public static ModConfigSpec.BooleanValue DISABLE_CUSTOM_PARTICLE_SHADER;
+  public static ModConfigSpec.BooleanValue DISABLE_PATICLES;
+  public static ModConfigSpec.BooleanValue FORCE_CUSTOM_PARTICLE_SHADER;
+
 
   public static ModConfigSpec.ConfigValue<List<? extends String>> GUI_LAYER_SKIP;
 
@@ -222,6 +226,14 @@ public class ConfigManager {
         .toString(), VanillaGuiLayers.EXPERIENCE_BAR.toString(), VanillaGuiLayers.EXPERIENCE_LEVEL.toString());
     GUI_LAYER_SKIP = CLIENT_BUILDER.comment("a list of resourcelocations of gui layer elements that should be skipped while light drifter is active")
         .defineListAllowEmpty("gui_layer_skip", skips, () -> "", o -> o instanceof String s && ResourceLocation.tryParse(s) != null);
+    CLIENT_BUILDER.pop();
+    CLIENT_BUILDER.comment("options relating to particles").push("particle");
+    DISABLE_CUSTOM_PARTICLE_SHADER = CLIENT_BUILDER.comment("if true, the custom particle shader used for some Roots particles will be disabled; please note that with Iris running, this option may have no effect as Iris disables custom shaders by default")
+        .define("disable_custom_particle_shader", false);
+    FORCE_CUSTOM_PARTICLE_SHADER = CLIENT_BUILDER.comment("the opposite of `disable_custom_particle_shader` and will override that value: forces the custom particle shader to be loaded even if iris is loaded and would normally prevent it from being used")
+        .define("force_custom_particle_shader", false);
+    DISABLE_PATICLES = CLIENT_BUILDER.comment("if true, all Roots particles will be disabled")
+        .define("disable_particles", false);
     CLIENT_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
