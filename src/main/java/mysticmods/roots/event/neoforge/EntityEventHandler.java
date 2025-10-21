@@ -399,7 +399,7 @@ public class EntityEventHandler {
     }
 
     ItemStack heldItem = player.getMainHandItem();
-    if (!heldItem.is(RootsTags.Items.CASTING_TOOLS)) {
+    if (!heldItem.has(ModAttachments.SPELL_STORAGE)) {
       return;
     }
 
@@ -415,7 +415,7 @@ public class EntityEventHandler {
     }
 
     if (spell.asSpell().is(RootsTags.Spells.BLOCKS_OFF_HAND_EATING)) {
-      event.setCancellationResult(InteractionResult.PASS);
+      event.setCancellationResult(InteractionResult.FAIL);
       event.setCanceled(true);
     }
   }
