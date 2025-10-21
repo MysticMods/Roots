@@ -1,6 +1,7 @@
 package mysticmods.roots.entity.other;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSerializers;
@@ -49,20 +50,22 @@ public class TemporalMorassEntity extends Entity {
   @Override
   public void tick() {
     super.tick();
-    if ((tickCount == 5 || (tickCount % 40 == 0 && getLifetime() > 39)) && this.level().isClientSide()) {
-      AABB aabb = this.getAabb();
-      if (aabb != null) {
-        for (int i = 0; i < 150; i++) {
-          double x = Mth.lerp(this.random.nextDouble(), aabb.minX, aabb.maxX);
-          double y = Mth.lerp(this.random.nextDouble(), aabb.minY, aabb.maxY);
-          double z = Mth.lerp(this.random.nextDouble(), aabb.minZ, aabb.maxZ);
-          this.level().addParticle(
-              RootsParticleOptions.builder(ModParticles.TEMPORAL_MORASS).color(ModSpells.TEMPORAL_MORASS)
-                  .swapColors(random)
-                  .build(),
-              x, y, z,
-              this.getX(), this.getY(), this.getZ()
-          );
+    if (!ConfigManager.DISABLE_PATICLES.get()) {
+      if ((tickCount == 5 || (tickCount % 40 == 0 && getLifetime() > 39)) && this.level().isClientSide()) {
+        AABB aabb = this.getAabb();
+        if (aabb != null) {
+          for (int i = 0; i < 150; i++) {
+            double x = Mth.lerp(this.random.nextDouble(), aabb.minX, aabb.maxX);
+            double y = Mth.lerp(this.random.nextDouble(), aabb.minY, aabb.maxY);
+            double z = Mth.lerp(this.random.nextDouble(), aabb.minZ, aabb.maxZ);
+            this.level().addParticle(
+                RootsParticleOptions.builder(ModParticles.TEMPORAL_MORASS).color(ModSpells.TEMPORAL_MORASS)
+                    .swapColors(random)
+                    .build(),
+                x, y, z,
+                this.getX(), this.getY(), this.getZ()
+            );
+          }
         }
       }
     }

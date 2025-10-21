@@ -1,6 +1,7 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
@@ -49,16 +50,18 @@ public class DecorativePyreBlock extends Block {
 
     int color2 = pState.is(ModBlocks.DECORATIVE_SOUL_PYRE) ? 0x088f92 : 0x8b3100;
 
-    if (pRandom.nextInt(4) == 0) {
-      pLevel.addParticle(
-          RootsParticleOptions.builder(ModParticles.PYRE).color(color1, color2).build(),
-          x + (pRandom.nextFloat() - 0.5f) * 0.3f,
-          y + 0.1f + (pRandom.nextFloat()) * 0.2f,
-          z + (pRandom.nextFloat() - 0.5f) * 0.3f,
-          0,
-          0,
-          0
-      );
+    if (!ConfigManager.DISABLE_PATICLES.get()) {
+      if (pRandom.nextInt(4) == 0) {
+        pLevel.addParticle(
+            RootsParticleOptions.builder(ModParticles.PYRE).color(color1, color2).build(),
+            x + (pRandom.nextFloat() - 0.5f) * 0.3f,
+            y + 0.1f + (pRandom.nextFloat()) * 0.2f,
+            z + (pRandom.nextFloat() - 0.5f) * 0.3f,
+            0,
+            0,
+            0
+        );
+      }
     }
   }
 }

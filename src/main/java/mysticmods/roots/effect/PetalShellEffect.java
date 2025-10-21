@@ -1,5 +1,6 @@
 package mysticmods.roots.effect;
 
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
@@ -13,7 +14,7 @@ public class PetalShellEffect extends SimpleEffect {
 
   @Override
   public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-    if (livingEntity.level().isClientSide()) {
+    if (livingEntity.level().isClientSide() && !ConfigManager.DISABLE_PATICLES.get()) {
       livingEntity.level()
           .addParticle(RootsParticleOptions.builder(ModParticles.PETAL_SHELL).color(ModSpells.PETAL_SHELL)
               .entityId(livingEntity.getId())

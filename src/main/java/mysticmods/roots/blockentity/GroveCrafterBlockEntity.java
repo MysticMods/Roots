@@ -14,6 +14,7 @@ import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.GroveCrafterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.condition.GroveStoneCondition;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
@@ -392,6 +393,9 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     if (!revalidatedRecipes) {
       revalidateRecipe();
       revalidatedRecipes = true;
+    }
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
     }
     if (isCrafting() && craftingTicks % 4 == 0) {
       float progress = 1.0f - (craftingTicks / (float) Constants.GROVE_CRAFTING_ANIMATION_TICKS); // 0 to 1

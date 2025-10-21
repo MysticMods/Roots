@@ -9,6 +9,7 @@ import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.VoxelUtil;
@@ -199,6 +200,9 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
 
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     if (pState.getValue(PART) == StateProperties.Part.TOP && pState.getValue(ACTIVE)) {
       Direction facing = pState.getValue(FACING);
       Vec3 center = new Vec3(pPos.getX() + 0.5, pPos.getY() + 0.3, pPos.getZ() + 0.5);
@@ -228,6 +232,9 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   }
 
   private void spawnParticle(Level pLevel, RandomSource pRandom, Vec3 center, int col1, int col2, double baseAngle, double angleOffset) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     double finalAngle = baseAngle + angleOffset;
     double distance = 1.7 + pRandom.nextDouble() * 0.3;
 

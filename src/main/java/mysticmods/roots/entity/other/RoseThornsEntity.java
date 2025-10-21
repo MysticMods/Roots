@@ -2,6 +2,7 @@ package mysticmods.roots.entity.other;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
@@ -84,7 +85,7 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
       this.move(MoverType.SELF, this.getDeltaMovement());
     }
 
-    if (this.level().isClientSide()) {
+    if (this.level().isClientSide() && !ConfigManager.DISABLE_PATICLES.get()) {
       if (this.random.nextInt(6) == 0) {
         this.level().addParticle(RootsParticleOptions.builder(ModParticles.ROSE_THORNS).color(ModSpells.ROSE_THORNS)
                 .swapColors(this.random).build(),

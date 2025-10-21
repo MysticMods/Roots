@@ -5,6 +5,7 @@ import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModParticles;
@@ -131,6 +132,9 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.ACTIVE)) {
       double x = pPos.getX() + 0.5f;
       double y = pPos.getY() + 0.5f;

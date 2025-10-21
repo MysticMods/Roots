@@ -1,5 +1,6 @@
 package mysticmods.roots.entity.projectile;
 
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSerializers;
@@ -143,19 +144,21 @@ public class WildfireEntity extends Projectile {
     double d5 = vec3.x;
     double d6 = vec3.y;
     double d1 = vec3.z;
-    for (int i = 0; i < 8; i++) {
-      level().addParticle(
-          RootsParticleOptions.builder(
-              ModParticles.WILDFIRE).color(
-              0xe87a21,
-              0xc10000).build(),
-          getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
-          getY(),
-          getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,
-          d5,
-          d6,
-          d1
-      );
+    if (!ConfigManager.DISABLE_PATICLES.get()) {
+      for (int i = 0; i < 8; i++) {
+        level().addParticle(
+            RootsParticleOptions.builder(
+                ModParticles.WILDFIRE).color(
+                0xe87a21,
+                0xc10000).build(),
+            getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
+            getY(),
+            getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,
+            d5,
+            d6,
+            d1
+        );
+      }
     }
 
     double d7 = this.getX() + d5;

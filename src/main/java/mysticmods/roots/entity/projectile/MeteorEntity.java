@@ -1,5 +1,6 @@
 package mysticmods.roots.entity.projectile;
 
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.core.BlockPos;
@@ -64,20 +65,22 @@ public class MeteorEntity extends Entity {
         this.hasImpulse = true;
       }
 
-      if (this.level().isClientSide()) {
-        for (int i = 0; i < 9; i++) {
-          level().addParticle(
-              RootsParticleOptions.builder(
-                  ModParticles.METEOR).color(
-                  0xe87a21,
-                  0xc10000).build(),
-              getX() + (this.random.nextFloat() - 0.5f) * 0.35f,
-              getY(),
-              getZ() + (this.random.nextFloat() - 0.5f) * 0.35f,
-              0,
-              -0.01f,
-              0
-          );
+      if (!ConfigManager.DISABLE_PATICLES.get()) {
+        if (this.level().isClientSide()) {
+          for (int i = 0; i < 9; i++) {
+            level().addParticle(
+                RootsParticleOptions.builder(
+                    ModParticles.METEOR).color(
+                    0xe87a21,
+                    0xc10000).build(),
+                getX() + (this.random.nextFloat() - 0.5f) * 0.35f,
+                getY(),
+                getZ() + (this.random.nextFloat() - 0.5f) * 0.35f,
+                0,
+                -0.01f,
+                0
+            );
+          }
         }
       }
 

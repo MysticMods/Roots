@@ -1,6 +1,7 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
@@ -32,6 +33,10 @@ public class SylvanLightBlockEntity extends BlockEntity implements ClientTickBlo
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     this.ticks++;
+
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
 
     if (ticks % 2 == 0) {
       if (random.nextInt(3) == 0) {

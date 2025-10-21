@@ -7,6 +7,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.blockentity.inventory.LimitedItemStackHandler;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSpells;
@@ -235,6 +236,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     if (this.animationTicks > 0) {
       this.visualAnimationTicks += 1.0f;
 
