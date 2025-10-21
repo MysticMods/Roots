@@ -31,6 +31,9 @@ import java.util.List;
 
 public class ClientFXHandlers {
   public static void castChannelJaunt(Spell spell, int casterId, int ticks) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     if (caster != null) {
@@ -62,6 +65,9 @@ public class ClientFXHandlers {
   }
 
   public static void petalShell(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 
@@ -106,6 +112,9 @@ public class ClientFXHandlers {
   }
 
   public static void castMagnetism(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -142,6 +151,9 @@ public class ClientFXHandlers {
   }
 
   public static void castShatter(int entityId, List<BlockPos> positions) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -183,6 +195,9 @@ public class ClientFXHandlers {
   }
 
   public static void castExtension(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -217,6 +232,9 @@ public class ClientFXHandlers {
 
   // TODO: This probably doesn't need to be an emitter
   public static void castSkySorarer(int entityId, int duration) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 
@@ -230,6 +248,9 @@ public class ClientFXHandlers {
   }
 
   public static void dandelionWinds(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -290,6 +311,9 @@ public class ClientFXHandlers {
   }
 
   public static void acidCloud(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     int color1 = ModSpells.ACID_CLOUD.get().getColor1();
     int color2 = ModSpells.ACID_CLOUD.get().getColor2();
@@ -316,6 +340,9 @@ public class ClientFXHandlers {
   }
 
   public static void disarm(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     int color1 = ModSpells.DISARM.get().getColor1();
     int color2 = ModSpells.DISARM.get().getColor2();
@@ -327,6 +354,9 @@ public class ClientFXHandlers {
   }
 
   public static void spiral(BlockPos position, double radius, double angle, int color1, int color2) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.SPIRAL).color(color1, color2).build(),
         position.getX() + 0.5f,
@@ -335,6 +365,9 @@ public class ClientFXHandlers {
   }
 
   public static void animalHarvest(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -373,6 +406,9 @@ public class ClientFXHandlers {
   }
 
   public static void aquaBubble(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -392,6 +428,9 @@ public class ClientFXHandlers {
   }
 
   public static void castAquaBubble(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -411,6 +450,9 @@ public class ClientFXHandlers {
   }
 
   public static void castChannelFail(Spell spell, int casterId, int ticks) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     if (caster != null) {
@@ -448,6 +490,9 @@ public class ClientFXHandlers {
   }
 
   public static void castChannel(Spell spell, int casterId, int ticks) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     Player player = minecraft.player;
@@ -490,6 +535,9 @@ public class ClientFXHandlers {
   }
 
   public static void castChannelTarget(Spell spell, int casterId, Vec3 start, Vec3 stop, int ticks) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     Player player = minecraft.player;
@@ -527,6 +575,9 @@ public class ClientFXHandlers {
   }
 
   public static void rampantGrowth(BlockPos location) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.level != null) {
       for (int i = 0; i < 2; i++) {
@@ -551,6 +602,9 @@ public class ClientFXHandlers {
   }
 
   public static void growth(BlockPos location) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.level != null) {
       for (int i = 0; i < 1; i++) {
@@ -575,6 +629,9 @@ public class ClientFXHandlers {
   }
 
   public static void alert(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     if (ConfigManager.ALERTNESS_VISUAL.getAsBoolean()) {
       WarningOverlay.warningTicks = ConfigManager.ALERTNESS_DURATION.getAsInt();
     }
@@ -589,6 +646,9 @@ public class ClientFXHandlers {
   }
 
   public static void addEntityBeam(int entityId1, int entityId2) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft mc = Minecraft.getInstance();
     if (mc == null) {
       return;
@@ -603,6 +663,9 @@ public class ClientFXHandlers {
   }
 
   public static void createBolt(int renderer, LightningPreset preset, int start, int end, int segments) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity1 = minecraft.level.getEntity(start);
     Entity entity2 = minecraft.level.getEntity(end);
@@ -617,12 +680,18 @@ public class ClientFXHandlers {
   }
 
   public static void createBolt(int renderer, LightningPreset preset, Vec3 start, Vec3 end, int segments) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     if (preset.getShouldAdd().getAsBoolean()) {
       RenderTickHandler.renderBolt(renderer, preset.getBoltCreator().create(PositionProvider.of(start, end), segments));
     }
   }
 
   public static void createBolt(int renderer, LightningPreset preset, int start, Vec3 end, int segments) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity1 = minecraft.level.getEntity(start);
     if (entity1 == null) {
@@ -636,6 +705,9 @@ public class ClientFXHandlers {
   }
 
   public static void castLifeDrain(int entityId, double distance, int angle) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
@@ -663,6 +735,9 @@ public class ClientFXHandlers {
   }
 
   public static void drainLife(int entityId, int casterId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     Entity caster = minecraft.level.getEntity(casterId);
@@ -683,6 +758,9 @@ public class ClientFXHandlers {
   }
 
   public static void harvestPositions(List<BlockPos> positions) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
 
     for (BlockPos pos : positions) {
@@ -693,6 +771,9 @@ public class ClientFXHandlers {
   }
 
   public static void desaturate(float heartsStart, float heartsNow, int oldFood, int newFood) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft == null || oldFood == 0 || heartsNow <= heartsStart) {
       return;
@@ -748,6 +829,9 @@ public class ClientFXHandlers {
 
 
   public static void heal(int entityId, float amount) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     if (entity == null) {
@@ -776,6 +860,9 @@ public class ClientFXHandlers {
   }
 
   public static void nondetection(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 
@@ -791,6 +878,9 @@ public class ClientFXHandlers {
   }
 
   public static void sanctuary(int entityId, int radiusInt) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 
@@ -824,6 +914,9 @@ public class ClientFXHandlers {
   }
 
   public static void saturate(int entityId, int oldFood, int newFood) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft == null || newFood == oldFood) {
       return;
@@ -859,6 +952,9 @@ public class ClientFXHandlers {
   }
 
   public static void startGroveCrafting(BlockPos groveCrafter, List<TaggedPedestalCrafting.ItemPosition> positions) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Minecraft minecraft = Minecraft.getInstance();
     Vec3 dest = Vec3.atBottomCenterOf(groveCrafter).add(0, 1.05, 0);
 
@@ -893,6 +989,9 @@ public class ClientFXHandlers {
   }
 
   public static void growthAmplifierGrew(BlockPos amplifier, Vec3 target) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
     Level level = Minecraft.getInstance().level;
     RandomSource random = RootsParticleOptions.RANDOM;
 
