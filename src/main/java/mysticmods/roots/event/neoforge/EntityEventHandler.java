@@ -39,6 +39,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
@@ -388,6 +389,15 @@ public class EntityEventHandler {
 
   @SubscribeEvent
   public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+    onItemInteract(event);
+  }
+
+  @SubscribeEvent
+  public static void onRightClickBlock (PlayerInteractEvent.RightClickBlock event) {
+    onItemInteract(event);
+  }
+
+  private static void onItemInteract (PlayerInteractEvent event) {
     if (event.getHand() != InteractionHand.OFF_HAND) {
       return;
     }
@@ -415,11 +425,15 @@ public class EntityEventHandler {
     }
 
     if (spell.asSpell().is(RootsTags.Spells.BLOCKS_OFF_HAND_EATING)) {
-      event.setCancellationResult(InteractionResult.FAIL);
-      event.setCanceled(true);
+      if (event instanceof PlayerInteractEvent.RightClickItem cancellableEvent) {
+        cancellableEvent.setCancellationResult(InteractionResult.FAIL);
+        cancellableEvent.setCanceled(true);
+      } else if (event instanceof PlayerInteractEvent.RightClickBlock cancellableEvent) {
+        cancellableEvent.setCancellationResult(InteractionResult.FAIL);
+        cancellableEvent.setCanceled(true);
+      }
     }
   }
-
 
   // "Update" tick event handled in MixinLivingEntity
 }
