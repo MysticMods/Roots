@@ -54,8 +54,7 @@
     "client.accessor.AccessorMixinLevelRenderer",
     "client.accessor.AccessorMixinParticle",
     "client.accessor.AccessorMixinParticleEngine",
-    "client.accessor.AccessorMixinTextureAtlas",
-    "MixinLivingEntity$DebugStaff"
+    "client.accessor.AccessorMixinTextureAtlas"
   ],
   "injectors": {
     "defaultRequire": 1
