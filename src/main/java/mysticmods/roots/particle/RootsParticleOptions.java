@@ -7,6 +7,7 @@ import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.config.ConfigManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
@@ -17,6 +18,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
@@ -99,7 +101,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
         entityId, casterId, fastForward, delay;
     private ItemStack item = null;
     private BlockPos pos = null;
-    private double[] spawn = new double[]{0.0, 0.0, 0.0};
+    private double[] start = new double[]{0.0, 0.0, 0.0};
     private double[] velocity = new double[]{0.0, 0.0, 0.0};
     private boolean forceSpawn = false;
 
@@ -124,26 +126,26 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder spawn(double... spawn) {
-      if (spawn.length != 3) {
-        throw new IllegalArgumentException("Spawn array must have exactly 3 elements, got: " + spawn.length);
+    public Builder start(double... start) {
+      if (start.length != 3) {
+        throw new IllegalArgumentException("Start array must have exactly 3 elements, got: " + start.length);
       }
-      this.spawn = spawn;
+      this.start = start;
       return this;
     }
 
     public Builder x(double x) {
-      this.spawn[0] = x;
+      this.start[0] = x;
       return this;
     }
 
     public Builder y(double y) {
-      this.spawn[1] = y;
+      this.start[1] = y;
       return this;
     }
 
     public Builder z(double z) {
-      this.spawn[2] = z;
+      this.start[2] = z;
       return this;
     }
 
@@ -173,6 +175,10 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     public Builder forceSpawn() {
       this.forceSpawn = true;
       return this;
+    }
+
+    public Builder force () {
+      return this.forceSpawn();
     }
 
     public Builder swapColors(RandomSource random) {
@@ -244,10 +250,17 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     }
 
     public void spawn(Level level) {
-      if (spawn[0] == 0.0 && spawn[1] == 0.0 && spawn[2] == 0.0) {
+      if (ConfigManager.DISABLE_PATICLES.get()) {
+        return;
+      }
+      if (start[0] == 0.0 && start[1] == 0.0 && start[2] == 0.0) {
         RootsAPI.LOG.error("Attempted to spawn particle with zero spawn coordinates. Was this intentional? Particle: {}", this);
       }
-      level.addParticle(build(), forceSpawn, spawn[0], spawn[1], spawn[2], velocity[0], velocity[1], velocity[2]);
+      level.addParticle(build(), forceSpawn, start[0], start[1], start[2], velocity[0], velocity[1], velocity[2]);
+    }
+
+    public Builder start(Vec3 spot) {
+      return start(spot.x, spot.y, spot.z);
     }
   }
 
