@@ -247,16 +247,12 @@ publishMods {
     def gitCommit = getExecOutput(['git', 'log', '-n', '1', '--pretty=tformat:%h'])
     def gitPrevCommit = project.findProperty("git_previous_commit") ?: env["GIT_PREVIOUS_COMMIT"]
 
-    String changelog = ""
+    changelog = ""
 
     if (gitCommit && gitPrevCommit) {
         changelog += getExecOutput(['git', 'log', "--pretty=tformat:- %s [(%h)](${gitRepo}/commit/%h)", '' + gitPrevCommit + '..' + gitCommit])
+        changelog = changelog.take(500)
     }
-
-    // Limit the changelog to 500 characters
-    changelog = changelog.take(500)
-
-
 
     type = ALPHA
     modLoaders.add("neoforge")
