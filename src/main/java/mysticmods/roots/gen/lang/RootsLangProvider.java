@@ -866,8 +866,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.gui.spell_library", "Spell Library");
     add("roots.gui.reputation", "Grove Reputations");
     add("roots.gui.light_drifter_overlay", "Drifting %s/%s blocks from your body!");
-    add("roots.gui.light_drifter_cancel", "Hold [%s] to cancel Light Drifter.");
-    add("roots.gui.light_drifter_continue_canceling", "Continue holding [%s] to cancel Light Drifter.");
+    add("roots.gui.effect_cancel", "Hold [%s] to cancel %s.");
+    add("roots.gui.effect_continue_canceling", "Continue holding [%s] to cancel %s.");
   }
 
   // TODO: Translations for damage

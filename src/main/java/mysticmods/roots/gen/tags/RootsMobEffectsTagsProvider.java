@@ -18,11 +18,15 @@ public final class RootsMobEffectsTagsProvider extends TagsProvider<MobEffect> {
     super(output, Registries.MOB_EFFECT, lookupProvider, RootsAPI.MODID, existingFileHelper);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   protected void addTags(HolderLookup.Provider provider) {
     tag(RootsTags.MobEffects.SUPPRESS_PARTICLES);
     tag(RootsTags.MobEffects.PURITY_FORCE_EXCLUDE);
     tag(RootsTags.MobEffects.PURITY_FORCE_INCLUDE);
     tag(RootsTags.MobEffects.GEAS).add(ModEffects.GEAS.getKey());
+    tag(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT).add(ModEffects.SKY_SOARER.getKey());
+    tag(RootsTags.MobEffects.DELAYED_CANCEL_EFFECT).add(ModEffects.LIGHT_DRIFTER.getKey());
+    tag(RootsTags.MobEffects.CANCELLABLE_EFFECTS).addTags(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT, RootsTags.MobEffects.DELAYED_CANCEL_EFFECT);
   }
 }

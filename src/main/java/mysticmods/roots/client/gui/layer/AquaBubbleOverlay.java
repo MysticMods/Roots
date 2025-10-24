@@ -1,4 +1,4 @@
-package mysticmods.roots.client.gui.overlay;
+package mysticmods.roots.client.gui.layer;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;

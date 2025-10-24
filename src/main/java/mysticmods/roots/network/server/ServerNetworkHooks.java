@@ -12,9 +12,11 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -209,5 +211,13 @@ public class ServerNetworkHooks {
 
   public static void cancelLightDrifter(Player player) {
     player.removeEffect(ModEffects.LIGHT_DRIFTER);
+  }
+
+  public static void cancelEffect(Player player, Holder<MobEffect> effect) {
+    if (!effect.is(RootsTags.MobEffects.CANCELLABLE_EFFECTS)) {
+      return;
+    }
+
+    player.removeEffect(effect);
   }
 }

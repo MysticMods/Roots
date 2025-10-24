@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.client.gui.overlay.HerbOverlay;
+import mysticmods.roots.client.gui.layer.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.config.ConfigManager;

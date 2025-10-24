@@ -523,6 +523,10 @@ public class RootsTags {
     public static final TagKey<MobEffect> PURITY_FORCE_INCLUDE = modTag("purity_force_include");
     public static final TagKey<MobEffect> GEAS = modTag("geas");
 
+    public static final TagKey<MobEffect> INSTANT_CANCEL_EFFECT = modTag("instant_cancel_effects");
+    public static final TagKey<MobEffect> DELAYED_CANCEL_EFFECT = modTag("delayed_cancel_effects");
+    public static final TagKey<MobEffect> CANCELLABLE_EFFECTS = modTag("cancellable_effects");
+
     static TagKey<MobEffect> modTag(String name) {
       return TagKey.create(Registries.MOB_EFFECT, RootsAPI.rl(name));
     }

@@ -1,4 +1,4 @@
-package mysticmods.roots.client.gui.overlay;
+package mysticmods.roots.client.gui.layer;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;

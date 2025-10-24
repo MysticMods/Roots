@@ -8,12 +8,15 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
-import mysticmods.roots.network.server.ServerboundCancelLightDrifterPacket;
+import mysticmods.roots.network.server.ServerboundCancelEffectPacket;
 import mysticmods.roots.network.server.ServerboundCycleTomePacket;
 import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -25,10 +28,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class KeyHandler {
-  private static int cancelLightDrifter = -1;
+  private static int cancelEffect = -1;
 
-  public static boolean isCancelingLightDrifter() {
-    return cancelLightDrifter > 0;
+  public static boolean isCancelingEffect() {
+    return cancelEffect > 0;
   }
 
   @SubscribeEvent
@@ -38,25 +41,38 @@ public class KeyHandler {
       return;
     }
 
-    if (mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
-      if (KeyBindings.CANCEL_LIGHT_DRIFTER.isDown()) {
-        if (cancelLightDrifter == -1) {
-          cancelLightDrifter = 1;
-        } else {
-          cancelLightDrifter++;
-        }
-      } else {
-        cancelLightDrifter = -1;
-      }
+    boolean foundEffect = false;
 
-      if (cancelLightDrifter > 40) {
-        PacketDistributor.sendToServer(ServerboundCancelLightDrifterPacket.INSTANCE);
-        cancelLightDrifter = -1;
+    for (MobEffectInstance instance : mc.player.getActiveEffects()) {
+      Holder<MobEffect> effect = instance.getEffect();
+      if (effect.is(RootsTags.MobEffects.CANCELLABLE_EFFECTS)) {
+        foundEffect = true;
+        // TODO: Should this be consumeClick?
+        if (KeyBindings.CANCEL_EFFECT.isDown()) {
+          if (effect.is(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT)) {
+            PacketDistributor.sendToServer(new ServerboundCancelEffectPacket(effect));
+            cancelEffect = -1;
+          } else {
+            if (cancelEffect == -1) {
+              cancelEffect = 1;
+            } else {
+              cancelEffect++;
+            }
+          }
+        } else {
+          cancelEffect = -1;
+        }
+
+        if (cancelEffect > 40) {
+          PacketDistributor.sendToServer(new ServerboundCancelEffectPacket(effect));
+          cancelEffect = -1;
+        }
       }
-    } else {
-      cancelLightDrifter = -1;
     }
 
+    if (!foundEffect) {
+      cancelEffect = -1;
+    }
 
     if (KeyBindings.OPEN_REPUTATION.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {

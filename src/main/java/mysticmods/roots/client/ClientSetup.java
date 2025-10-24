@@ -5,10 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.blockentity.*;
-import mysticmods.roots.client.gui.overlay.AquaBubbleOverlay;
-import mysticmods.roots.client.gui.overlay.HerbOverlay;
-import mysticmods.roots.client.gui.overlay.HudOverlay;
-import mysticmods.roots.client.gui.overlay.WarningOverlay;
+import mysticmods.roots.client.gui.layer.*;
 import mysticmods.roots.client.gui.screen.*;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.model.*;
@@ -170,6 +167,8 @@ public class ClientSetup {
   public static final ResourceLocation HERB_ALERT_OVERLAY = RootsAPI.rl("herb_alert");
   public static final ResourceLocation HUD_OVERLAY = RootsAPI.rl("hud");
   public static final ResourceLocation AQUA_BUBBLE_OVERLAY = RootsAPI.rl("aqua_bubble");
+  public static final ResourceLocation LIGHT_DRIFTER_OVERLAY = RootsAPI.rl("light_drifter");
+  public static final ResourceLocation CANCEL_EFFECT_OVERLAY = RootsAPI.rl("cancel_effect");
 
   @SubscribeEvent
   public static void registerGuiLayers(RegisterGuiLayersEvent event) {
@@ -177,6 +176,8 @@ public class ClientSetup {
     event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, WARNING_OVERLAY, WarningOverlay::render);
     event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, AQUA_BUBBLE_OVERLAY, AquaBubbleOverlay::render);
     event.registerBelow(VanillaGuiLayers.HOTBAR, HERB_ALERT_OVERLAY, HerbOverlay::render);
+    event.registerBelow(VanillaGuiLayers.OVERLAY_MESSAGE, LIGHT_DRIFTER_OVERLAY, LightDrifterPositionOverlay::render);
+    event.registerBelow(VanillaGuiLayers.OVERLAY_MESSAGE, CANCEL_EFFECT_OVERLAY, CancelEffectOverlay::render);
   }
 
   @SubscribeEvent

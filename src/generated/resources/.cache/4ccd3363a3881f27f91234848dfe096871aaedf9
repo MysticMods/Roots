@@ -1,5 +1,8 @@
-// 1.21.1	2025-05-05T16:59:05.0724631	Tags for minecraft:mob_effect mod id roots
+// 1.21.1	2025-10-24T13:00:31.341212	Tags for minecraft:mob_effect mod id roots
+c7e9025c21f04f407f8be6c697be2aa29b0cbc2a data/roots/tags/mob_effect/cancellable_effects.json
+87161597ae632a1b44b89a4e3e3ec670bf8b0e69 data/roots/tags/mob_effect/delayed_cancel_effects.json
 98fc9b37dbbb32c844dea8e7fc87e5735b16f31b data/roots/tags/mob_effect/geas.json
+47898419dd600b94f1be23fcdf608353b6bcbab6 data/roots/tags/mob_effect/instant_cancel_effects.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/mob_effect/purity_force_exclude.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/mob_effect/purity_force_include.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/mob_effect/suppress_particles.json
