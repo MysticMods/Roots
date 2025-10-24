@@ -26,6 +26,8 @@ public class CancelEffectOverlay {
 
     Holder<MobEffect> cancelEffect = null;
 
+    boolean instant = false;
+
     for (MobEffectInstance instance : player.getActiveEffects()) {
       if (instance.getEffect().is(RootsTags.MobEffects.CANCELLABLE_EFFECTS)) {
         cancelEffect = instance.getEffect();
@@ -37,6 +39,8 @@ public class CancelEffectOverlay {
       return;
     }
 
+    instant = cancelEffect.is(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT);
+
     Gui gui = minecraft.gui;
     Font font = gui.getFont();
     minecraft.getProfiler().push("overlayMessage");
@@ -45,7 +49,7 @@ public class CancelEffectOverlay {
     guiGraphics.pose().pushPose();
     guiGraphics.pose()
         .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-    Component overlayMessageString = Component.translatable(KeyHandler.isCancelingEffect() ? "roots.gui.effect_continue_canceling" : "roots.gui.effect_cancel", KeyBindings.CANCEL_EFFECT.getTranslatedKeyMessage(), Component.translatable(cancelEffect.value().getDescriptionId()))
+    Component overlayMessageString = Component.translatable(instant ? "roots.gui.effect_cancel"  : KeyHandler.isCancelingEffect() ? "roots.gui.effect_continue_canceling" : "roots.gui.effect_start_canceling", KeyBindings.CANCEL_EFFECT.getTranslatedKeyMessage(), Component.translatable(cancelEffect.value().getDescriptionId()))
         .withStyle(ChatFormatting.BOLD);
     int k = font.width(overlayMessageString);
     guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -34, k, j);
