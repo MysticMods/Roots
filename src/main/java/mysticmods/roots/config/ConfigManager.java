@@ -95,6 +95,10 @@ public class ConfigManager {
   public static ModConfigSpec COMMON_CONFIG;
   public static ModConfigSpec CLIENT_CONFIG;
 
+  private static ResourceLocation appleSkin (String name) {
+    return ResourceLocation.fromNamespaceAndPath("appleskin", name);
+  }
+
   static {
     COMMON_BUILDER.comment("magnetism-related configuration").push("magnetism");
     EXPERIENCE_ORBS = COMMON_BUILDER.comment("whether or not experience orbs should be teleported when using magnetism")
@@ -222,8 +226,7 @@ public class ConfigManager {
         .define("warning_overlay", true);
     CLIENT_BUILDER.pop();
     CLIENT_BUILDER.push("light_drifter_overlays");
-    List<String> skips = Arrays.asList(ResourceLocation.fromNamespaceAndPath("appleskin", "hunger_restored")
-        .toString(), VanillaGuiLayers.EXPERIENCE_BAR.toString(), VanillaGuiLayers.EXPERIENCE_LEVEL.toString());
+    List<String> skips = Arrays.asList(appleSkin("health_restored").toString(), appleSkin("hunger_restored").toString(), appleSkin("saturation_level").toString(), appleSkin("exhaustion_level").toString(), VanillaGuiLayers.EXPERIENCE_BAR.toString(), VanillaGuiLayers.EXPERIENCE_LEVEL.toString());
     GUI_LAYER_SKIP = CLIENT_BUILDER.comment("a list of resourcelocations of gui layer elements that should be skipped while light drifter is active")
         .defineListAllowEmpty("gui_layer_skip", skips, () -> "", o -> o instanceof String s && ResourceLocation.tryParse(s) != null);
     CLIENT_BUILDER.pop();
