@@ -301,7 +301,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       } else {
         return InteractionResult.FAIL;
       }
-    } else if (!onlyMortar()) {
+    } else if (!onlyMortar() && !cooldowns.isOnCooldown(inHand.getItem())) {
       // insert
       player.setItemInHand(hand, inventory.insert(inHand));
     } else {
