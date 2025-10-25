@@ -205,7 +205,9 @@ public class ServerNetworkHooks {
     }
 
     if (tome != player.getMainHandItem() && tome != player.getOffhandItem()) {
-      PacketDistributor.sendToPlayer((ServerPlayer) player, ClientboundChangeTomeMode.INSTANCE);
+      //PacketDistributor.sendToPlayer((ServerPlayer) player, ClientboundChangeTomeMode.INSTANCE);
+      // This is handled directly in the Curios integration in CuriosEventHandler.
+      // As otherwise the itemstack sync happens later than this packet.
     }
   }
 

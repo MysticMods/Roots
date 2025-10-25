@@ -1,17 +1,21 @@
 package mysticmods.roots.util;
 
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -19,6 +23,12 @@ import java.util.function.Predicate;
  */
 @SuppressWarnings("unused")
 public class ItemUtil {
+  private static final Function<TagKey<Item>, Predicate<ItemStack>> TAG_PREDICATE = Util.memoize(tag -> o -> o.is(tag));
+
+  public static Predicate<ItemStack> tag (TagKey<Item> tag) {
+    return TAG_PREDICATE.apply(tag);
+  }
+
   /**
    * Compares two itemstacks without considering their size.
    *
