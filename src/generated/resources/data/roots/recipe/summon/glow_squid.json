@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:glow_squid"
+  "entity": {
+    "type": "minecraft:glow_squid"
+  }
 }

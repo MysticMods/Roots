@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "roots:melody_sprout"
+  "entity": {
+    "type": "roots:melody_sprout"
+  }
 }

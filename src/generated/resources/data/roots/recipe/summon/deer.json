@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "roots:deer"
+  "entity": {
+    "type": "roots:deer"
+  }
 }

@@ -3,6 +3,7 @@ package mysticmods.roots.ritual;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.recipe.ComplexEntityType;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -61,13 +62,15 @@ public class SummonCreaturesRitual extends Ritual {
     if (!matchedCache) {
       if (recipe != null) {
         blockEntity.setData(ModAttachments.CACHED_PEDESTAL_RECIPE, PyrePedestalRecipe.of(recipe));
+        blockEntity.setData(ModAttachments.CACHED_PYRE_ENTITY, recipe.value().getEntity());
       } else {
         blockEntity.setData(ModAttachments.CACHED_PEDESTAL_RECIPE, PyrePedestalRecipe.NULL);
+        blockEntity.setData(ModAttachments.CACHED_PYRE_ENTITY, ComplexEntityType.EMPTY);
       }
     }
 
     if (duration % getInterval() == 0) {
-      if (recipe != null && recipe.value().getEntity() != null) {
+      if (recipe != null && !recipe.value().getEntity().isEmpty()) {
         if (blockEntity.getLastPlayer() != null) {
           UnlockResult failedGrants = recipe.value().checkUnlocks(pLevel, (ServerPlayer) blockEntity.getLastPlayer());
           if (failedGrants.anyFailed() && !recipe.value().hasOutput(pLevel.registryAccess())) {

@@ -13,9 +13,11 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.integration.curios.CuriosIntegration;
+import mysticmods.roots.mixin.accessor.AccessorMixinEntity;
 import mysticmods.roots.network.client.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -134,5 +137,10 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public DataComponentType<Unit> getDeletableType() {
     return ModAttachments.DELETABLE.value();
+  }
+
+  @Override
+  public void readAdditionalSavedData(Entity entity, @NotNull CompoundTag tag) {
+    ((AccessorMixinEntity)entity).roots$ReadAdditionalSaveData(tag);
   }
 }

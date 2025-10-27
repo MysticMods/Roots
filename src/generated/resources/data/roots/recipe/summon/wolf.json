@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:wolf"
+  "entity": {
+    "type": "minecraft:wolf"
+  }
 }

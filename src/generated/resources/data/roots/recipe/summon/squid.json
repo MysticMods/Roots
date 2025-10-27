@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:squid"
+  "entity": {
+    "type": "minecraft:squid"
+  }
 }

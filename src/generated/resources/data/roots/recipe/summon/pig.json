@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:pig"
+  "entity": {
+    "type": "minecraft:pig"
+  }
 }

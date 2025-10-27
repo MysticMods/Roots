@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:cat"
+  "entity": {
+    "type": "minecraft:cat"
+  }
 }

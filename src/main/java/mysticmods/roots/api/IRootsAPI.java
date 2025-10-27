@@ -12,6 +12,7 @@ import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.item.GramaryItem;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,6 +25,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -67,4 +70,6 @@ public interface IRootsAPI {
   AttachmentType<Map<Holder<Attribute>, AugmentationInfo>> getAugmentationInfoType();
 
   DataComponentType<Unit> getDeletableType();
+
+  void readAdditionalSavedData(Entity entity, @NotNull CompoundTag tag);
 }

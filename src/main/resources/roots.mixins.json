@@ -13,6 +13,7 @@
     "MixinWitherBoss$Geas",
     "accessor.AccessorMixinBlockLootSubProvider",
     "accessor.AccessorMixinCropBlock",
+    "accessor.AccessorMixinEntity",
     "accessor.AccessorMixinGrowingPlantBlock",
     "accessor.AccessorMixinLivingEntity",
     "accessor.AccessorMixinLootItem",

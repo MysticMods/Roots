@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:tadpole"
+  "entity": {
+    "type": "minecraft:tadpole"
+  }
 }

@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:armadillo"
+  "entity": {
+    "type": "minecraft:armadillo"
+  }
 }

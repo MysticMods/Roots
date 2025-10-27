@@ -638,6 +638,8 @@ public class RootsTags {
     public static final TagKey<Ritual> WILD = modTag("wild");
     public static final TagKey<Ritual> HOLLOW = modTag("hollow");
 
+    public static final TagKey<Ritual> SUMMON_CREATURES = modTag("summon_creatures");
+
     static TagKey<Ritual> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.RITUALS, RootsAPI.rl(name));
     }

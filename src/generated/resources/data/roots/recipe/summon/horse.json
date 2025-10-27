@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:horse"
+  "entity": {
+    "type": "minecraft:horse"
+  }
 }

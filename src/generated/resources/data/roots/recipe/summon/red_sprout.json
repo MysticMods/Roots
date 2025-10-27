@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "roots:red_sprout"
+  "entity": {
+    "type": "roots:red_sprout"
+  }
 }

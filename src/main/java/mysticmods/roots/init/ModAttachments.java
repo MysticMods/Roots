@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.datamap.AugmentationInfo;
+import mysticmods.roots.api.recipe.ComplexEntityType;
 import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
@@ -66,6 +67,8 @@ public class ModAttachments {
       .serialize(LightDrifterStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<PyrePedestalRecipe.PyrePedestalRecipeHolder>> CACHED_PEDESTAL_RECIPE = ATTACHMENTS.register("cached_pyre_pedestal_recipe", () -> AttachmentType.builder(() -> PyrePedestalRecipe.NULL)
       .serialize(PyrePedestalRecipe.CODEC).sync(PyrePedestalRecipe.STREAM_CODEC).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<ComplexEntityType>> CACHED_PYRE_ENTITY = ATTACHMENTS.register("cached_pyre_entity", () -> AttachmentType.builder(() -> ComplexEntityType.EMPTY)
+      .serialize(ComplexEntityType.CODEC).sync(ComplexEntityType.STREAM_CODEC).build());
 
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();

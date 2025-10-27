@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "roots:duck"
+  "entity": {
+    "type": "roots:duck"
+  }
 }

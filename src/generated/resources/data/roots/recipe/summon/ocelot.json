@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:ocelot"
+  "entity": {
+    "type": "minecraft:ocelot"
+  }
 }

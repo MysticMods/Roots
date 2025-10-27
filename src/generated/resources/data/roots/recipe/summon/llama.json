@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:llama"
+  "entity": {
+    "type": "minecraft:llama"
+  }
 }

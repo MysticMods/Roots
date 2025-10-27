@@ -10,6 +10,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
+import mysticmods.roots.api.recipe.ComplexEntityType;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
@@ -36,12 +37,13 @@ public class SummonCreaturesCategory extends RootsRecipeBaseCategory<SummonCreat
   public void setRecipe(IRecipeLayoutBuilder builder, SummonCreaturesRecipe recipe, IFocusGroup iFocusGroup) {
     super.setRecipe(builder, recipe, iFocusGroup);
 
-    EntityType<?> entityType = recipe.getEntity();
+    ComplexEntityType entityType = recipe.getEntity();
 
+    // TODO: ???
     var collector = builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT);
-    collector.addIngredients(Ingredient.of(DeferredSpawnEggItem.byId(entityType)));
+    collector.addIngredients(Ingredient.of(DeferredSpawnEggItem.byId(entityType.type())));
 
-    List<RootsEntityType> types = List.of(new RootsEntityType(entityType));
+    List<RootsEntityType> types = List.of(new RootsEntityType(entityType.type()));
 
     builder.addSlot(RecipeIngredientRole.OUTPUT, 117, 26)
         .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.MAIN_ENTITY_RENDERER)

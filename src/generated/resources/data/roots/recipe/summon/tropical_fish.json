@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:tropical_fish"
+  "entity": {
+    "type": "minecraft:tropical_fish"
+  }
 }

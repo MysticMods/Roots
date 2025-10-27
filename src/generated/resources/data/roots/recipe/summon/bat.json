@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:bat"
+  "entity": {
+    "type": "minecraft:bat"
+  }
 }

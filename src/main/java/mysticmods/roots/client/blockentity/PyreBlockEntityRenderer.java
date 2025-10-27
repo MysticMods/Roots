@@ -91,7 +91,6 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       inSlot = pBlockEntity.getCurrentRitual().getIcon();
     }
 
-
     if (!inSlot.isEmpty()) {
       int loc = pBlockEntity.getBlockPos().hashCode();
       pPoseStack.pushPose();

@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:mule"
+  "entity": {
+    "type": "minecraft:mule"
+  }
 }

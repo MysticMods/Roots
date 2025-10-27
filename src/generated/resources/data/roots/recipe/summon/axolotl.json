@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:axolotl"
+  "entity": {
+    "type": "minecraft:axolotl"
+  }
 }

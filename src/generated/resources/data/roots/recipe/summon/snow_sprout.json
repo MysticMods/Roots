@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "roots:snow_sprout"
+  "entity": {
+    "type": "roots:snow_sprout"
+  }
 }

@@ -14,5 +14,7 @@
     ],
     "priority": 0
   },
-  "entity": "minecraft:frog"
+  "entity": {
+    "type": "minecraft:frog"
+  }
 }
