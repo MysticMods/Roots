@@ -32,6 +32,7 @@ public record PropertyDataMap(List<PropertyHolder<? extends Property<?>>> proper
       if (property.id().equals(holder.id())) {
         //noinspection unchecked
         myHolder = (PropertyHolder<T>) property;
+        break;
       }
     }
     if (myHolder == null) {
