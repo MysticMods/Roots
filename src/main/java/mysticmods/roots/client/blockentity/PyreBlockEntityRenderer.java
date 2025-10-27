@@ -2,19 +2,25 @@ package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.client.RootsClientAPI;
+import mysticmods.roots.api.recipe.ComplexEntityType;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.RenderUtil;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.SpawnerRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -22,8 +28,11 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.List;
 
 public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBlockEntity> {
+  private final EntityRenderDispatcher entityRenderer;
+
   public PyreBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
+    this.entityRenderer = context.getEntityRenderer();
   }
 
   @Override
@@ -89,6 +98,19 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       }
     } else {
       inSlot = pBlockEntity.getCurrentRitual().getIcon();
+
+      if (pBlockEntity.getCurrentRitual().is(RootsTags.Rituals.SUMMON_CREATURES)) {
+        ComplexEntityType entity = pBlockEntity.getData(ModAttachments.CACHED_PYRE_ENTITY);
+        if (!entity.isEmpty()) {
+          Entity cached = entity.cachedEntity(pBlockEntity.getLevel());
+          if (cached != null) {
+            pPoseStack.pushPose();
+            pPoseStack.translate(0, 1.9, 0);
+            SpawnerRenderer.renderEntityInSpawner(pPartialTick, pPoseStack, pBufferSource, pPackedLight, cached, entityRenderer, 0, 0);
+            pPoseStack.popPose();
+          }
+        }
+      }
     }
 
     if (!inSlot.isEmpty()) {
