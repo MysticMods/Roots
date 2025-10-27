@@ -76,6 +76,12 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
         .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.LLAMA, EntityType.CAMEL, EntityType.WOLF)
         .add(ModEntities.FENNEC.get());
     this.tag(RootsTags.Entities.AUGMENTABLE_EXCLUDE);
+
+    this.tag(RootsTags.Entities.AUGMENTABLE_JUMP_STRENGTH).add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL);
+    this.tag(RootsTags.Entities.AUGMENTABLE_ATTACK_DAMAGE).add(EntityType.WOLF, ModEntities.FENNEC.get());
+    this.tag(RootsTags.Entities.AUGMENTABLE_MAX_HEALTH).add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
+    this.tag(RootsTags.Entities.AUGMENTABLE_MOVEMENT_SPEED).add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
+
     this.tag(RootsTags.Entities.ANIMAL_HARVEST)
         .add(
             EntityType.ALLAY,

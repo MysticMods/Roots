@@ -545,8 +545,6 @@ public class RootsTags {
   }
 
   public static class Entities extends RootsTags {
-    public static final TagKey<EntityType<?>> AUGMENTABLE = modTag("augmentable");
-    public static final TagKey<EntityType<?>> AUGMENTABLE_EXCLUDE = modTag("augmentable_exclude");
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST = modTag("animal_harvest_entities");
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST_EXCLUDE = modTag("rituals/animal_harvest/exclude");
     public static final TagKey<EntityType<?>> PACIFIST = modTag("pacifist");
@@ -606,6 +604,17 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> LIGHT_DRIFTER = modTag("light_drifter");
 
     public static final TagKey<EntityType<?>> LIMIT_WOODEN_SHEARS_DROPS = modTag("limit_wooden_shears_drops");
+
+
+    @Deprecated
+    public static final TagKey<EntityType<?>> AUGMENTABLE = modTag("augmentable");
+    public static final TagKey<EntityType<?>> AUGMENTABLE_EXCLUDE = modTag("augmentable_exclude");
+    public static final TagKey<EntityType<?>> AUGMENTABLE_JUMP_STRENGTH = modTag("augmentable/jump_strength");
+    public static final TagKey<EntityType<?>> AUGMENTABLE_MAX_HEALTH = modTag("augmentable/max_health");
+    public static final TagKey<EntityType<?>> AUGMENTABLE_MOVEMENT_SPEED = modTag("augmentable/movement_speed");
+    public static final TagKey<EntityType<?>> AUGMENTABLE_ATTACK_DAMAGE = modTag("augmentable/attack_damage");
+    // Currently unused
+    public static final TagKey<EntityType<?>> AUGMENTABLE_ARMOR = modTag("augmentable/armor");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

@@ -60,6 +60,7 @@ public class DataEventHandler {
     event.register(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
     event.register(DataMaps.GROVE_ACTION_ICONS);
     event.register(DataMaps.AUGMENTATION_DATA);
+    event.register(DataMaps.ENTITY_AUGMENTATION_DATA);
     event.register(DataMaps.EXTRA_CROP_DATA);
     event.register(DataMaps.EXTRA_CROP_CHANCE);
     event.register(DataMaps.DIMENSION_ITEM);

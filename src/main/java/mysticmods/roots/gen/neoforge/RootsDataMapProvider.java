@@ -638,5 +638,12 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder30.add(Items.GRASS_BLOCK.builtInRegistryHolder(), List.of(Level.OVERWORLD), false);
     builder30.add(Items.ANCIENT_DEBRIS.builtInRegistryHolder(), List.of(Level.NETHER), false);
     builder30.add(Items.END_PORTAL_FRAME.builtInRegistryHolder(), List.of(Level.END), false);
+
+    var builder31 = builder(DataMaps.ENTITY_AUGMENTATION_DATA);
+    builder31.add(RootsTags.Entities.AUGMENTABLE_JUMP_STRENGTH, List.of(Attributes.JUMP_STRENGTH), false);
+    builder31.add(RootsTags.Entities.AUGMENTABLE_ATTACK_DAMAGE, List.of(Attributes.ATTACK_DAMAGE), false);
+    builder31.add(RootsTags.Entities.AUGMENTABLE_MOVEMENT_SPEED, List.of(Attributes.MOVEMENT_SPEED), false);
+    builder31.add(RootsTags.Entities.AUGMENTABLE_ATTACK_DAMAGE, List.of(Attributes.ATTACK_DAMAGE), false);
+    builder31.add(RootsTags.Entities.AUGMENTABLE_MAX_HEALTH, List.of(Attributes.MAX_HEALTH), false);
   }
 }

@@ -17,6 +17,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -111,6 +112,9 @@ public class DataMaps {
       .build();
   public static final DataMapType<Attribute, AugmentationData> AUGMENTATION_DATA = DataMapType.builder(RootsAPI.rl("augmentation_data"), Registries.ATTRIBUTE, AugmentationData.CODEC)
       .synced(AugmentationData.CODEC, true)
+      .build();
+  public static final DataMapType<EntityType<?>, List<Holder<Attribute>>> ENTITY_AUGMENTATION_DATA = DataMapType.builder(RootsAPI.rl("entity_augmentation_data"), Registries.ENTITY_TYPE, Attribute.CODEC.listOf())
+      .synced(Attribute.CODEC.listOf(), true)
       .build();
   public static final DataMapType<Block, Item> EXTRA_CROP_DATA = DataMapType.builder(RootsAPI.rl("extra_crop_data"), Registries.BLOCK, BuiltInRegistries.ITEM.byNameCodec())
       .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
