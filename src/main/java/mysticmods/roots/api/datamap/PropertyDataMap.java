@@ -21,6 +21,7 @@ public record PropertyDataMap(List<PropertyHolder<? extends Property<?>>> proper
     PropertyHolder<T> myHolder = null;
     for (PropertyHolder<?> property : properties) {
       if (property.id().equals(holder.id())) {
+        //noinspection unchecked
         myHolder = (PropertyHolder<T>) property;
       }
     }
