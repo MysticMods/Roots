@@ -16,7 +16,7 @@ public record PropertyDataMap(List<PropertyHolder<? extends Property<?>>> proper
   public static Codec<PropertyDataMap> CODEC = PropertyHolder.FULL_LIST_CODEC.xmap(PropertyDataMap::new, PropertyDataMap::properties);
   public static StreamCodec<RegistryFriendlyByteBuf, PropertyDataMap> STREAM_CODEC = StreamCodec.composite(PropertyHolder.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.properties, PropertyDataMap::new);
 
-  public PropertyDataMap {
+  public PropertyDataMap (List<PropertyHolder<?>> properties) {
     Set<ResourceLocation> ids = new HashSet<>();
     for (PropertyHolder<?> property : properties) {
       if (ids.contains(property.id())) {
@@ -24,6 +24,7 @@ public record PropertyDataMap(List<PropertyHolder<? extends Property<?>>> proper
       }
       ids.add(property.id());
     }
+    this.properties = properties;
   }
 
   public <V, T extends Property<V>> V get(PropertyHolder<T> holder) {
