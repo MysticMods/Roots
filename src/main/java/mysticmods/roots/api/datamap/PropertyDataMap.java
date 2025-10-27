@@ -12,11 +12,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public record PropertyDataMap(List<PropertyHolder<? extends Property<?>>> properties) {
+public record PropertyDataMap(List<PropertyHolder<?>> properties) {
   public static Codec<PropertyDataMap> CODEC = PropertyHolder.FULL_LIST_CODEC.xmap(PropertyDataMap::new, PropertyDataMap::properties);
   public static StreamCodec<RegistryFriendlyByteBuf, PropertyDataMap> STREAM_CODEC = StreamCodec.composite(PropertyHolder.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.properties, PropertyDataMap::new);
 
-  public PropertyDataMap (List<PropertyHolder<?>> properties) {
+  public PropertyDataMap {
     Set<ResourceLocation> ids = new HashSet<>();
     for (PropertyHolder<?> property : properties) {
       if (ids.contains(property.id())) {
@@ -24,7 +24,6 @@ public record PropertyDataMap(List<PropertyHolder<? extends Property<?>>> proper
       }
       ids.add(property.id());
     }
-    this.properties = properties;
   }
 
   public <V, T extends Property<V>> V get(PropertyHolder<T> holder) {
