@@ -99,6 +99,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
     } else {
       inSlot = pBlockEntity.getCurrentRitual().getIcon();
 
+      // TODO: Debug cache update
       if (pBlockEntity.getCurrentRitual().is(RootsTags.Rituals.SUMMON_CREATURES)) {
         ComplexEntityType entity = pBlockEntity.getData(ModAttachments.CACHED_PYRE_ENTITY);
         if (!entity.isEmpty()) {
