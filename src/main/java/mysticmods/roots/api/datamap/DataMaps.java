@@ -43,14 +43,6 @@ public class DataMaps {
   public static final DataMapType<Block, Block> STEM_BLOCKS = DataMapType.builder(RootsAPI.rl("stem_blocks"), Registries.BLOCK, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), true)
       .build();
-  public static final DataMapType<SpellModifier, SpellModifier> SPELL_MODIFIER_PARENT = DataMapType.builder(RootsAPI.rl("spell_modifier_parent"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELL_MODIFIERS.byNameCodec())
-      .synced(RootsRegistries.SPELL_MODIFIERS.byNameCodec(), true)
-      .build();
-  public static final DataMapType<SpellModifier, Spell> SPELL_MODIFIER_SPELL = DataMapType.builder(RootsAPI.rl("spell_modifier_spell"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELLS.byNameCodec())
-      .synced(RootsRegistries.SPELLS.byNameCodec(), true)
-      .build();
-  public static final DataMapType<RitualModifier, Ritual> RITUAL_MODIFIER_RITUAL = DataMapType.builder(RootsAPI.rl("ritual_modifier_ritual"), RootsRegistries.Keys.RITUAL_MODIFIERS, RootsRegistries.RITUALS.byNameCodec())
-      .synced(RootsRegistries.RITUALS.byNameCodec(), true).build();
   public static final AdvancedDataMapType<Spell, CostInstance, CostRemover<Spell>> SPELL_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_cost_data"), RootsRegistries.Keys.SPELLS, CostRemover.CODEC)
       .synced(CostRemover.CODEC, true)
       .merger(costMerger())

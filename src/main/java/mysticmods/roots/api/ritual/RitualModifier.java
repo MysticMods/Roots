@@ -18,19 +18,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
-public class RitualModifier implements IDescribed, ICosted, /*IParentChild<RitualModifier>, */TooltipComponent, IDataMapInitialize<RitualModifier> {
+public class RitualModifier implements IDescribed, ICosted, TooltipComponent, IDataMapInitialize<RitualModifier> {
   public static final Codec<RitualModifier> CODEC = RootsRegistries.RITUAL_MODIFIERS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, RitualModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUAL_MODIFIERS);
 
-  protected final Holder<Ritual> ritual;
+  protected final TagKey<Ritual> rituals;
   protected final CostInstance defaultCosts;
+  protected final List<Ritual> cachedRituals = new ArrayList<>();
   protected CostInstance costs;
   private String descriptionId;
 
-  public RitualModifier(Holder<Ritual> ritual, CostInstance defaultCosts) {
-    this.ritual = ritual;
+  public RitualModifier(TagKey<Ritual> rituals, CostInstance defaultCosts) {
+    this.rituals = rituals;
     this.defaultCosts = defaultCosts;
   }
 
@@ -44,20 +47,30 @@ public class RitualModifier implements IDescribed, ICosted, /*IParentChild<Ritua
     return costs == null ? defaultCosts : costs;
   }
 
-  public Holder<Ritual> getRitual() {
-    return ritual;
+  public TagKey<Ritual> getRitualsTag() {
+    return rituals;
+  }
+
+  public List<Ritual> getRituals () {
+    if (cachedRituals.isEmpty()) {
+      RootsRegistries.RITUALS.getTag(getRitualsTag()).ifPresent(o -> o.forEach(v -> cachedRituals.add(v.value())));
+    }
+    if (cachedRituals.isEmpty()) {
+      RootsAPI.LOG.error("TagKey {} resolves to empty", getRitualsTag());
+    }
+    return cachedRituals;
   }
 
   @Override
   public void init(Holder<RitualModifier> holder) {
-    Ritual parent = holder.getData(DataMaps.RITUAL_MODIFIER_RITUAL);
+/*    Ritual parent = holder.getData(DataMaps.RITUAL_MODIFIER_RITUAL);
     if (parent == null) {
       RootsAPI.LOG.error("RitualModifier {} has no parent ritual!", holder.getKey());
     } else if (parent != this.ritual.value()) {
       RootsAPI.LOG.error("RitualModifier {} has a parent ritual that is not the same as the ritual it is attached to!", holder.getKey());
     } else {
       ritual.value().addModifier(this);
-    }
+    }*/
 /*    RitualModifier modifierParent = holder.getData(DataMaps.SPELL_MODIFIER_PARENT);
     if (modifierParent == null) {
       // NOP

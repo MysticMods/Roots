@@ -92,23 +92,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
       builder5.add(ritual.builtInRegistryHolder(), new PropertyDataMap(ritual.getProperties()), false);
     });
 
-    Builder<Spell, SpellModifier> builder7 = builder(DataMaps.SPELL_MODIFIER_SPELL).replace(false);
-    RootsRegistries.SPELL_MODIFIERS.stream().forEach(modifier -> {
-      builder7.add(modifier.builtInRegistryHolder(), modifier.getSpell().value(), false);
-    });
-
-    Builder<Ritual, RitualModifier> builder19 = builder(DataMaps.RITUAL_MODIFIER_RITUAL).replace(false);
-    RootsRegistries.RITUAL_MODIFIERS.stream().forEach(modifier -> {
-      builder19.add(modifier.builtInRegistryHolder(), modifier.getRitual().value(), false);
-    });
-
-    Builder<SpellModifier, SpellModifier> builder8 = builder(DataMaps.SPELL_MODIFIER_PARENT).replace(false);
-    RootsRegistries.SPELL_MODIFIERS.stream().forEach(modifier -> {
-      if (modifier.getParent() != null) {
-        builder8.add(modifier.builtInRegistryHolder(), modifier.getParent(), false);
-      }
-    });
-
     Builder<Compostable, Item> builder9 = builder(NeoForgeDataMaps.COMPOSTABLES).replace(false);
     builder9.add(ModItems.WILDWOOD_LEAVES, new Compostable(0.3f), false);
     builder9.add(ModItems.WILDWOOD_SAPLING, new Compostable(0.6f), false);

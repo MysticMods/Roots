@@ -20,27 +20,28 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellModifier>, TooltipComponent, IDataMapInitialize<SpellModifier> {
+public class SpellModifier implements IDescribed, ICosted, TooltipComponent, IDataMapInitialize<SpellModifier> {
   public static final Codec<SpellModifier> CODEC = RootsRegistries.SPELL_MODIFIERS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
 
   @Nullable
-  protected final Holder<SpellModifier> parent;
-  protected final Set<SpellModifier> children = new HashSet<>();
-  protected final Holder<Spell> spell;
+  protected final ResourceKey<SpellModifier> parent;
+  protected final ResourceKey<Spell> spell;
   protected final CostInstance defaultCosts;
+  protected Holder<Spell> cachedSpell;
+  protected Holder<SpellModifier> cachedParent;
   protected CostInstance costs;
   private String descriptionId;
 
   // Modifier with parent
-  public SpellModifier(@Nullable Holder<SpellModifier> parent, Holder<Spell> spell, CostInstance defaultCosts) {
+  public SpellModifier(@Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> spell, CostInstance defaultCosts) {
     this.spell = spell;
     this.parent = parent;
     this.defaultCosts = defaultCosts;
   }
 
   // Modifier with no parent
-  public SpellModifier(Holder<Spell> spell, CostInstance defaultCosts) {
+  public SpellModifier(ResourceKey<Spell> spell, CostInstance defaultCosts) {
     this(null, spell, defaultCosts);
   }
 
@@ -55,32 +56,39 @@ public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellMod
   }
 
   public Holder<Spell> getSpell() {
-    return spell;
+    if (cachedSpell == null) {
+      cachedSpell = RootsRegistries.SPELLS.getHolderOrThrow(spell);
+    }
+    return cachedSpell;
   }
 
   @Override
   public void init(Holder<SpellModifier> holder) {
-    Spell parent = holder.getData(DataMaps.SPELL_MODIFIER_SPELL);
-    if (parent == null) {
+    Spell spellParent = RootsRegistries.SPELLS.get(spell);
+    if (spellParent == null) {
       RootsAPI.LOG.error("SpellModifier {} has no parent spell!", holder.getKey());
-    } else if (parent != this.spell.value()) {
-      RootsAPI.LOG.error("SpellModifier {} has a parent spell that is not the same as the spell it is attached to!", holder.getKey());
     } else {
-      spell.value().addModifier(this);
+      spellParent.addModifier(this);
+      cachedSpell = spellParent.builtInRegistryHolder();
     }
-    SpellModifier modifierParent = holder.getData(DataMaps.SPELL_MODIFIER_PARENT);
-    if (modifierParent == null) {
-      // NOP
-    } else if (modifierParent != this.parent) {
-      RootsAPI.LOG.error("SpellModifier {} has a parent modifier that is not the same as the parent it was constructed with!", holder.getKey());
-    } else {
-      modifierParent.addChild(this);
+    SpellModifier modifierParent = RootsRegistries.SPELL_MODIFIERS.get(parent);
+    if (modifierParent != null) {
+      cachedParent = modifierParent.builtInRegistryHolder();
     }
     this.costs = holder.getData(DataMaps.SPELL_MODIFIER_COST_DATA);
   }
 
   public Holder<SpellModifier> builtInRegistryHolder() {
     return RootsRegistries.SPELL_MODIFIERS.wrapAsHolder(this);
+  }
+
+  @Nullable
+  public Holder<SpellModifier> getParent () {
+    return cachedParent;
+  }
+
+  public Holder<Spell> getSpellParent () {
+    return cachedSpell;
   }
 
   public boolean is(ResourceLocation key) {
@@ -97,25 +105,6 @@ public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellMod
 
   public boolean is(TagKey<SpellModifier> key) {
     return builtInRegistryHolder().is(key);
-  }
-
-  @Override
-  @Nullable
-  public SpellModifier getParent() {
-    if (parent == null) {
-      return null;
-    }
-    return parent.value();
-  }
-
-  @Override
-  public Set<SpellModifier> getChildren() {
-    return children;
-  }
-
-  @Override
-  public void addChild(SpellModifier child) {
-    children.add(child);
   }
 
   @Override
