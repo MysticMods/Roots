@@ -64,20 +64,6 @@ public class RenderTickHandler {
 
   private static boolean renderingDelayedParticles = false;
 
-  public static final ImmutableList<ParticleRenderType> DELAYED_RENDER_ORDER = ImmutableList.of(
-      RootsParticleRenderTypes.OPAQUE,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH
-  );
-
-  private static final ImmutableMap<ParticleRenderType, RenderType> DELAYED_PARTICLE_RENDER_TYPES = ImmutableMap.of(
-      RootsParticleRenderTypes.OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK
-  );
-
   public static boolean isRenderingDelayedParticles() {
     return renderingDelayedParticles;
   }
@@ -137,14 +123,14 @@ public class RenderTickHandler {
       float partialTick = getPartialTick();
       Camera camera = event.getCamera();
 
-      for (ParticleRenderType type : DELAYED_RENDER_ORDER) {
+      for (ParticleRenderType type : RootsParticleRenderTypes.DELAYED_RENDER_ORDER) {
         Queue<Particle> particles = allParticles.get(type);
 
         if (particles == null || particles.isEmpty()) {
           continue;
         }
 
-        RenderType renderType = DELAYED_PARTICLE_RENDER_TYPES.get(type);
+        RenderType renderType = RootsParticleRenderTypes.DELAYED_PARTICLE_RENDER_TYPES.get(type);
         if (renderType == null) {
           RootsAPI.LOG.error("No render type found for particle render type: {}", type);
           continue;

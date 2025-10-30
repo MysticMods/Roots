@@ -1,26 +1,44 @@
 package mysticmods.roots.client.particle.render;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import mysticmods.roots.client.RootsRenderTypes;
 import mysticmods.roots.client.RootsShaders;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 
 public class RootsParticleRenderTypes {
+  // TODO: Move these out
+  public static final ImmutableList<ParticleRenderType> DELAYED_RENDER_ORDER = ImmutableList.of(
+      RootsParticleRenderTypes.OPAQUE,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH
+  );
+
+  public static final ImmutableMap<ParticleRenderType, RenderType> DELAYED_PARTICLE_RENDER_TYPES = ImmutableMap.of(
+      RootsParticleRenderTypes.OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
+      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK
+  );
+
   public interface RootsParticleRenderType extends ParticleRenderType {
     default boolean isDelayed() {
       return false;
     }
   }
-
 
   // Normal render types
   public static RootsParticleRenderType GLOW = new RootsParticleRenderType() {
