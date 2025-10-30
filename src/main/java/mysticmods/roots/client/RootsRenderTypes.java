@@ -11,6 +11,7 @@ import net.minecraft.Util;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
@@ -23,16 +24,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class RootsRenderTypes {
-  // Duplicated from Sheets to prevent early loading
-  public static final ResourceLocation SHULKER_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/shulker_boxes.png");
-  public static final ResourceLocation BED_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/beds.png");
-  public static final ResourceLocation BANNER_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/banner_patterns.png");
-  public static final ResourceLocation SHIELD_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/shield_patterns.png");
-  public static final ResourceLocation SIGN_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/signs.png");
-  public static final ResourceLocation CHEST_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/chest.png");
-  public static final ResourceLocation ARMOR_TRIMS_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/armor_trims.png");
-  public static final ResourceLocation DECORATED_POT_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/decorated_pot.png");
-
   private static boolean offMainTarget = false;
 
   public static void setOffMainTarget() {
@@ -110,8 +101,7 @@ public class RootsRenderTypes {
   public static final RenderStateShard.ShaderStateShard DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDissolveShader);
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_LOW_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(() -> {
-    if (((ModList.get().isLoaded("iris") && !ModList.get()
-        .isLoaded("monocle")) || ConfigManager.DISABLE_CUSTOM_PARTICLE_SHADER.get()) && !ConfigManager.FORCE_CUSTOM_PARTICLE_SHADER.get()) {
+    if (((ModList.get().isLoaded("iris") && !ModList.get().isLoaded("monocle")) || ConfigManager.DISABLE_CUSTOM_PARTICLE_SHADER.get()) && !ConfigManager.FORCE_CUSTOM_PARTICLE_SHADER.get()) {
       return GameRenderer.getParticleShader();
     } else {
       return RootsShaders.getLowDiscardParticleShader();
@@ -250,8 +240,7 @@ public class RootsRenderTypes {
   });
 
   public static final RenderType BLOCK_SHEET_ENTITY_CUTOUT_DISSOLVE = ENTITY_CUTOUT_DISSOLVE.apply(TextureAtlas.LOCATION_BLOCKS);
-
-  public static final RenderType CHEST_SHEET_ENTITY_CUTOUT_DISSOLVE = ENTITY_CUTOUT_DISSOLVE.apply(CHEST_SHEET);
+  public static final RenderType CHEST_SHEET_ENTITY_CUTOUT_DISSOLVE = ENTITY_CUTOUT_DISSOLVE.apply(Sheets.CHEST_SHEET);
 
   public static final RenderType ITEM_ENTITY_TRANSLUCENT_CULL_DISSOLVE = RenderType.create("roots_item_entity_translucent_cull_dissolve, ", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, RenderType.CompositeState.builder()
       .setShaderState(RootsRenderTypes.RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE_SHADER)
@@ -295,8 +284,8 @@ public class RootsRenderTypes {
       }
   );
 
-  public static final RenderType BANNER_SHEET_DISSOLVE = ENTITY_NO_OUTLINE.apply(BED_SHEET);
-  public static final RenderType SHIELD_SHEET_DISSOLVE = ENTITY_NO_OUTLINE.apply(SHIELD_SHEET);
+  public static final RenderType BANNER_SHEET_DISSOLVE = ENTITY_NO_OUTLINE.apply(Sheets.BED_SHEET);
+  public static final RenderType SHIELD_SHEET_DISSOLVE = ENTITY_NO_OUTLINE.apply(Sheets.SHIELD_SHEET);
 
   public static final BiFunction<ResourceLocation, Boolean, RenderType> ENTITY_CUTOUT_NO_CULL = Util.memoize(
       (s, outline) -> {
@@ -312,8 +301,8 @@ public class RootsRenderTypes {
       }
   );
 
-  public static final RenderType SHULKER_SHEET_DISSOLVE = ENTITY_CUTOUT_NO_CULL.apply(SHULKER_SHEET, true);
-  public static final RenderType SIGN_SHEET_DISSOLVE = ENTITY_CUTOUT_NO_CULL.apply(SIGN_SHEET, true);
+  public static final RenderType SHULKER_SHEET_DISSOLVE = ENTITY_CUTOUT_NO_CULL.apply(Sheets.SHULKER_SHEET, true);
+  public static final RenderType SIGN_SHEET_DISSOLVE = ENTITY_CUTOUT_NO_CULL.apply(Sheets.SIGN_SHEET, true);
 
   public static final Function<ResourceLocation, RenderType> ENTITY_SOLID_DISSOLVE = Util.memoize(
       s -> {
@@ -330,7 +319,7 @@ public class RootsRenderTypes {
 
   // ???
   public static final RenderType BLOCK_SHEET_ENTITY_SOLID_DISSOLVE = ENTITY_SOLID_DISSOLVE.apply(TextureAtlas.LOCATION_BLOCKS);
-  public static final RenderType BED_SHEET_DISSOLVE = ENTITY_SOLID_DISSOLVE.apply(BED_SHEET);
+  public static final RenderType BED_SHEET_DISSOLVE = ENTITY_SOLID_DISSOLVE.apply(Sheets.BED_SHEET);
 
   private static final Map<RenderType, RenderType> DISSOLVE_DEPTH_MAP = new HashMap<>();
 
