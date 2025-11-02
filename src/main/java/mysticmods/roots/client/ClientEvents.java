@@ -24,10 +24,14 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class ClientEvents {
@@ -40,6 +44,16 @@ public class ClientEvents {
       BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas) atlas).rootsGetHeight());
     }
     return BLOCKS_ATLAS_SIZE;
+  }
+
+  @SubscribeEvent
+  public static void onLevelDestroyed (LevelEvent.Unload event) {
+    RenderUtil.clearEntityMap();
+  }
+
+  @SubscribeEvent
+  public static void onClientLogOut (ClientPlayerNetworkEvent.LoggingOut event) {
+    RenderUtil.clearEntityMap();
   }
 
   @SubscribeEvent

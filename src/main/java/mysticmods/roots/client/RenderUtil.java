@@ -289,6 +289,10 @@ public class RenderUtil {
   private static final Set<EntityType<?>> IGNORED_ENTITIES = new HashSet<>();
   private static final Map<EntityType<?>, Entity> ENTITY_MAP = new HashMap<>();
 
+  public static void clearEntityMap () {
+    ENTITY_MAP.clear();
+  }
+
   @Nullable
   public static Entity fetchEntity(EntityType<?> type, @Nullable Level level) {
     if (level != null && !IGNORED_ENTITIES.contains(type)) {
