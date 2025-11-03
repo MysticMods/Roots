@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinEntityRenderer;
@@ -18,17 +19,17 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityAttachment;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
-import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
-import net.neoforged.neoforge.client.event.RenderLivingEvent;
-import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
@@ -44,6 +45,13 @@ public class ClientEvents {
       BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas) atlas).rootsGetHeight());
     }
     return BLOCKS_ATLAS_SIZE;
+  }
+
+  @SubscribeEvent
+  public static void onRenderNameTag (RenderNameTagEvent event) {
+    if (event.getEntity().getType().equals(EntityType.PLAYER) && event.getEntity() instanceof Player player && player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      event.setCanRender(TriState.TRUE);
+    }
   }
 
   @SubscribeEvent
