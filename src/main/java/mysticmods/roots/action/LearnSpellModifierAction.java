@@ -4,8 +4,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,15 +30,16 @@ public class LearnSpellModifierAction extends GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, SpellModifier spellModifier) implements GroveContext {
+  public record Context(ServerLevel level, ServerPlayer player, Modifier spellModifier) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.SPELL_MODIFIER);
 
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       if (type == GroveReputationEntry.SubEntryType.SPELL) {
-        return spellModifier().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+        return false;
+        //return spellModifier().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
       } else if (type == GroveReputationEntry.SubEntryType.SPELL_MODIFIER) {
-        return spellModifier().is(TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, tag));
+        return spellModifier().is(TagKey.create(RootsRegistries.Keys.MODIFIERS, tag));
       }
       return false;
     }

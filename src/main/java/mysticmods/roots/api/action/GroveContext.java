@@ -1,10 +1,10 @@
 package mysticmods.roots.api.action;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -156,7 +156,17 @@ public interface GroveContext {
   }
 
   @Nullable
-  default SpellModifier spellModifier() {
+  default Modifier spellModifier() {
+    return null;
+  }
+
+  @Nullable
+  default Modifier ritualModifier () {
+    return null;
+  }
+
+  @Nullable
+  default Modifier genericModifier () {
     return null;
   }
 

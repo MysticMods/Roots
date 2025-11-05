@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.IDataMapInitialize;
@@ -39,7 +40,6 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
 
   protected String descriptionId;
 
-  protected final Set<RitualModifier> modifiers = new HashSet<>();
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration = 0;
@@ -179,14 +179,6 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
 
   public AABB getAABB() {
     return aabb;
-  }
-
-  public Set<RitualModifier> getModifiers() {
-    return modifiers;
-  }
-
-  public void addModifier(RitualModifier modifier) {
-    modifiers.add(modifier);
   }
 
   public boolean is(ResourceLocation key) {

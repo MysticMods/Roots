@@ -128,9 +128,9 @@ public class RootsRepairRecipes {
     }
     List<String> strings = new ArrayList<>();
     for (Holder<Enchantment> e : enchantments.keySet()) {
-      Optional<ResourceKey<Enchantment>> enchantmentResourceKey = e.unwrapKey();
-      if (enchantmentResourceKey.isPresent()) {
-        String s = enchantmentResourceKey.orElseThrow().location() + ".lvl" + enchantments.getLevel(e);
+      ResourceKey<Enchantment> enchantmentResourceKey = e.getKey();
+      if (enchantmentResourceKey != null) {
+        String s = enchantmentResourceKey.location() + ".lvl" + enchantments.getLevel(e);
         strings.add(s);
       }
     }

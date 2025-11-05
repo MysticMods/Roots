@@ -5,9 +5,9 @@ import com.google.common.collect.ImmutableBiMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -50,7 +50,7 @@ public interface Unlock<T> {
     return new SpellUnlock(value.builtInRegistryHolder());
   }
 
-  static ModifierUnlock modifier(Holder<SpellModifier> value) {
+  static ModifierUnlock modifier(Holder<Modifier> value) {
     return new ModifierUnlock(value);
   }
 
@@ -78,11 +78,11 @@ public interface Unlock<T> {
     }
   }
 
-  record ModifierUnlock(Holder<SpellModifier> value) implements Unlock<SpellModifier> {
+  record ModifierUnlock(Holder<Modifier> value) implements Unlock<Modifier> {
 
-    public static final MapCodec<ModifierUnlock> CODEC = RootsRegistries.SPELL_MODIFIERS.holderByNameCodec()
+    public static final MapCodec<ModifierUnlock> CODEC = RootsRegistries.MODIFIERS.holderByNameCodec()
         .fieldOf("defaultValue").xmap(ModifierUnlock::new, ModifierUnlock::value);
-    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELL_MODIFIERS)
+    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.MODIFIERS)
         .map(ModifierUnlock::new, ModifierUnlock::value);
     public static final UnlockType TYPE = new UnlockType(CODEC, STREAM_CODEC);
 

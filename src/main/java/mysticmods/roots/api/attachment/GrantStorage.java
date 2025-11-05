@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.action.LearnSpellAction;
 import mysticmods.roots.action.LearnSpellModifierAction;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.*;
@@ -27,16 +28,16 @@ public class GrantStorage implements ICleanable {
       instance -> instance.group(
           RootsRegistries.SPELLS.byNameCodec().listOf().fieldOf("grantedSpells")
               .forGetter(o -> new ArrayList<>(o.grantedSpells)),
-          RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().fieldOf("grantedModifiers")
+          RootsRegistries.MODIFIERS.byNameCodec().listOf().fieldOf("grantedModifiers")
               .forGetter(o -> new ArrayList<>(o.grantedModifiers))).apply(instance, GrantStorage::new));
   public static final Codec<GrantStorage> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, GrantStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS)
-      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)
+      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.MODIFIERS)
       .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedModifiers), GrantStorage::new);
 
   private boolean dirty = true;
   private final Set<Spell> grantedSpells;
-  private final Set<SpellModifier> grantedModifiers;
+  private final Set<Modifier> grantedModifiers;
 
   private List<LibrarySpell> librarySpells = null;
   private Map<Spell, List<LibraryModifier>> libraryModifiers = null;
@@ -46,12 +47,12 @@ public class GrantStorage implements ICleanable {
     grantedModifiers = new ObjectLinkedOpenHashSet<>();
   }
 
-  public GrantStorage(Set<Spell> grantedSpells, Set<SpellModifier> grantedModifiers) {
+  public GrantStorage(Set<Spell> grantedSpells, Set<Modifier> grantedModifiers) {
     this.grantedSpells = new ObjectLinkedOpenHashSet<>(grantedSpells);
     this.grantedModifiers = new ObjectLinkedOpenHashSet<>(grantedModifiers);
   }
 
-  public GrantStorage(List<Spell> spells, List<SpellModifier> spellModifiers) {
+  public GrantStorage(List<Spell> spells, List<Modifier> spellModifiers) {
     this.grantedSpells = new ObjectLinkedOpenHashSet<>(spells);
     this.grantedModifiers = new ObjectLinkedOpenHashSet<>(spellModifiers);
   }
@@ -60,14 +61,14 @@ public class GrantStorage implements ICleanable {
     return grantedSpells.contains(spell);
   }
 
-  public boolean hasModifier(SpellModifier modifier) {
+  public boolean hasModifier(Modifier modifier) {
     return grantedModifiers.contains(modifier);
   }
 
   public boolean canUnlock(Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       return !grantedSpells.contains(value.value());
-    } else if (unlock instanceof Unlock.ModifierUnlock(Holder<SpellModifier> value)) {
+    } else if (unlock instanceof Unlock.ModifierUnlock(Holder<Modifier> value)) {
       return !grantedModifiers.contains(value.value());
     }
 
@@ -98,8 +99,8 @@ public class GrantStorage implements ICleanable {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       Spell spell = value.value();
       unlockSpell(player, spell);
-    } else if (unlock instanceof Unlock.ModifierUnlock(Holder<SpellModifier> value)) {
-      SpellModifier modifier = value.value();
+    } else if (unlock instanceof Unlock.ModifierUnlock(Holder<Modifier> value)) {
+      Modifier modifier = value.value();
       unlockModifier(player, modifier);
     }
 
@@ -115,7 +116,7 @@ public class GrantStorage implements ICleanable {
     }
   }
 
-  private void unlockModifier(ServerPlayer player, SpellModifier modifier) {
+  private void unlockModifier(ServerPlayer player, Modifier modifier) {
     if (grantedModifiers.add(modifier)) {
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);

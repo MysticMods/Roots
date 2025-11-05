@@ -1,6 +1,7 @@
 package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.RitualLike;
+import mysticmods.roots.api.modifier.Modifier;
 import net.minecraft.network.chat.MutableComponent;
 
 import javax.annotation.Nullable;
@@ -20,9 +21,9 @@ public interface IRitualInstance extends RitualLike {
     return getRitual().getDuration();
   }
 
-  Set<RitualModifier> getEnabledModifiers();
+  Set<Modifier> getEnabledModifiers();
 
-  default boolean hasModifier(RitualModifier modifier) {
+  default boolean hasModifier(Modifier modifier) {
     return getEnabledModifiers().contains(modifier);
   }
 
@@ -56,7 +57,7 @@ public interface IRitualInstance extends RitualLike {
     }
 
     @Override
-    public Set<RitualModifier> getEnabledModifiers() {
+    public Set<Modifier> getEnabledModifiers() {
       return Collections.emptySet();
     }
   }

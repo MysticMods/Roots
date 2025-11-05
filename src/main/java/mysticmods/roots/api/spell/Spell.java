@@ -50,7 +50,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   protected final Type type;
   protected final CostInstance defaultCosts;
-  protected final Set<SpellModifier> modifiers = new HashSet<>();
   protected CostInstance costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
@@ -249,11 +248,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     }
     return costs;
   }
-
-  public Set<SpellModifier> getModifiers() {
-    return modifiers;
-  }
-
   public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 
   public PropertyHolder<Property.DoubleProperty> getReachProperty() {
@@ -270,10 +264,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public Type getType() {
     return type;
-  }
-
-  public void addModifier(SpellModifier modifier) {
-    modifiers.add(modifier);
   }
 
   public void buildProperties(List<PropertyHolder<?>> properties) {

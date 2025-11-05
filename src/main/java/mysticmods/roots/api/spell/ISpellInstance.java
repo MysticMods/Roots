@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.network.chat.MutableComponent;
@@ -26,7 +27,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getStyledName();
   }
 
-  Set<SpellModifier> getEnabledModifiers();
+  Set<Modifier> getEnabledModifiers();
 
   default int getMaxUse() {
     return getSpell().getMaxUse();
@@ -55,7 +56,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   @Override
   Set<ICosted> getChildren();
 
-  default boolean hasModifier(SpellModifier modifier) {
+  default boolean hasModifier(Modifier modifier) {
     return getEnabledModifiers().contains(modifier);
   }
 
@@ -125,7 +126,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     }
 
     @Override
-    public Set<SpellModifier> getEnabledModifiers() {
+    public Set<Modifier> getEnabledModifiers() {
       return Collections.emptySet();
     }
 

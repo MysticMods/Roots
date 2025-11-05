@@ -3,7 +3,6 @@ package mysticmods.roots.api;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Unit;
