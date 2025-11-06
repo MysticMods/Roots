@@ -8,60 +8,60 @@ import net.minecraft.resources.ResourceKey;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class ModifierNode<T> {
-  private static final Interner<ModifierNode<?>> VALUES = Interners.newWeakInterner();
+public class ModifierNode<V, T extends Modifier<V, T>> {
+  private static final Interner<ModifierNode<?, ?>> VALUES = Interners.newWeakInterner();
 
-  private final ResourceKey<Modifier<T>> modifier;
+  private final ResourceKey<T> modifier;
   @Nullable
-  private ModifierNode<T> parent;
-  private final Set<ModifierNode<T>> children = new ReferenceOpenHashSet<>();
+  private ModifierNode<V, T> parent;
+  private final Set<ModifierNode<V, T>> children = new ReferenceOpenHashSet<>();
 
-  protected ModifierNode(ResourceKey<Modifier<T>> modifier, @Nullable ModifierNode<T> parent) {
+  protected ModifierNode(ResourceKey<T> modifier, @Nullable ModifierNode<V, T> parent) {
     this.modifier = modifier;
     this.parent = parent;
   }
 
-  protected ModifierNode(ResourceKey<Modifier<T>> modifier) {
+  protected ModifierNode(ResourceKey<T> modifier) {
     this(modifier, null);
   }
 
   @SuppressWarnings("unchecked")
-  public static <T> ModifierNode<T> create(ResourceKey<Modifier<T>> modifier) {
-    return (ModifierNode<T>) VALUES.intern(new ModifierNode<>(modifier));
+  public static <V, T extends Modifier<V, T>> ModifierNode<V, T> create(ResourceKey<T> modifier) {
+    return (ModifierNode<V, T>) VALUES.intern(new ModifierNode<>(modifier));
   }
 
-  public static <T> ModifierNode<T> create(ResourceKey<Modifier<T>> modifier, ModifierNode<T> parent) {
+  public static <V, T extends Modifier<V, T>> ModifierNode<V, T> create(ResourceKey<T> modifier, ModifierNode<V, T> parent) {
     return create(modifier).parent(parent);
   }
 
-  public ResourceKey<Modifier<T>> modifier() {
+  public ResourceKey<T> modifier() {
     return modifier;
   }
 
   @Nullable
-  public ModifierNode<T> parent() {
+  public ModifierNode<V, T> parent() {
     return parent;
   }
 
-  public ModifierNode<T> parent(ModifierNode<T> parent) {
+  public ModifierNode<V, T> parent(ModifierNode<V, T> parent) {
     this.parent = parent;
     return this;
   }
 
-  public ModifierNode<T> root() {
+  public ModifierNode<V, T> root() {
     return getRoot(this);
   }
 
-  public Iterable<ModifierNode<T>> children() {
+  public Iterable<ModifierNode<V, T>> children() {
     return this.children;
   }
 
-  public void addChild(ModifierNode<T> child) {
+  public void addChild(ModifierNode<V, T> child) {
     this.children.add(child);
   }
 
-  public static <T> ModifierNode<T> getRoot(ModifierNode<T> node) {
-    ModifierNode<T> modifierNode = node;
+  public static <V, T extends Modifier<V, T>> ModifierNode<V, T> getRoot(ModifierNode<V, T> node) {
+    ModifierNode<V, T> modifierNode = node;
 
     while (modifierNode != null && modifierNode.parent() != null) {
       modifierNode = modifierNode.parent();
@@ -75,7 +75,7 @@ public class ModifierNode<T> {
     if (this == o) {
       return true;
     } else {
-      if (o instanceof ModifierNode<?> other) {
+      if (o instanceof ModifierNode<?, ?> other) {
         return other.modifier.equals(this.modifier);
       }
     }

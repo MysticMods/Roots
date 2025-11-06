@@ -39,7 +39,7 @@ public class LearnSpellModifierAction extends GroveAction {
         return false;
         //return spellModifier().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
       } else if (type == GroveReputationEntry.SubEntryType.SPELL_MODIFIER) {
-        return spellModifier().is(TagKey.create(RootsRegistries.Keys.MODIFIERS, tag));
+        return spellModifier().is(TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, tag));
       }
       return false;
     }

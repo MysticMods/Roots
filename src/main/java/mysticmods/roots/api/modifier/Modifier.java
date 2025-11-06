@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
 import net.minecraft.Util;
@@ -14,20 +15,20 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
-public abstract class Modifier<T> implements IDescribed, TooltipComponent, IModifier<T>, IDataMapInitialize<Modifier<T>> {
+public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T>, ICosted {
   protected final ResourceKey<Grove> grove;
   @Nullable
-  protected final ResourceKey<Modifier<T>> parent;
-  protected final ResourceKey<T> applicable;
+  protected final ResourceKey<T> parent;
+  protected final ResourceKey<V> applicable;
   private String descriptionId;
 
-  public Modifier(ResourceKey<Grove> grove, @NotNull ResourceKey<Modifier<T>> parent, ResourceKey<T> applicable) {
+  public Modifier(ResourceKey<Grove> grove, @NotNull ResourceKey<T> parent, ResourceKey<V> applicable) {
     this.grove = grove;
     this.parent = parent;
     this.applicable = applicable;
   }
 
-  public Modifier(ResourceKey<Grove> grove, ResourceKey<T> applicable) {
+  public Modifier(ResourceKey<Grove> grove, ResourceKey<V> applicable) {
     this.grove = grove;
     this.applicable = applicable;
     this.parent = null;
@@ -35,16 +36,16 @@ public abstract class Modifier<T> implements IDescribed, TooltipComponent, IModi
 
   @Override
   @Nullable
-  public ResourceKey<Modifier<T>> getParent() {
+  public ResourceKey<T> getParent() {
     return parent;
   }
 
   @Override
-  public ResourceKey<T> getApplicable() {
+  public ResourceKey<V> getApplicable() {
     return applicable;
   }
 
-  public abstract Holder<Modifier<T>> builtInRegistryHolder();
+  public abstract Holder<T> builtInRegistryHolder();
 
   protected abstract String getSignifier();
 
@@ -61,20 +62,15 @@ public abstract class Modifier<T> implements IDescribed, TooltipComponent, IModi
     return builtInRegistryHolder().is(key);
   }
 
-  public boolean is(ResourceKey<Modifier<T>> key) {
+  public boolean is(ResourceKey<T> key) {
     return builtInRegistryHolder().is(key);
   }
 
-  public boolean is(Predicate<ResourceKey<Modifier<T>>> key) {
+  public boolean is(Predicate<ResourceKey<T>> key) {
     return builtInRegistryHolder().is(key);
   }
 
-  public boolean is(TagKey<Modifier<T>> key) {
+  public boolean is(TagKey<T> key) {
     return builtInRegistryHolder().is(key);
-  }
-
-  @Override
-  public void init(Holder<Modifier<T>> holder) {
-
   }
 }

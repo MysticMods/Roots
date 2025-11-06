@@ -80,9 +80,9 @@ public interface Unlock<T> {
 
   record ModifierUnlock(Holder<Modifier> value) implements Unlock<Modifier> {
 
-    public static final MapCodec<ModifierUnlock> CODEC = RootsRegistries.MODIFIERS.holderByNameCodec()
+    public static final MapCodec<ModifierUnlock> CODEC = RootsRegistries.SPELL_MODIFIERS.holderByNameCodec()
         .fieldOf("defaultValue").xmap(ModifierUnlock::new, ModifierUnlock::value);
-    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.MODIFIERS)
+    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELL_MODIFIERS)
         .map(ModifierUnlock::new, ModifierUnlock::value);
     public static final UnlockType TYPE = new UnlockType(CODEC, STREAM_CODEC);
 

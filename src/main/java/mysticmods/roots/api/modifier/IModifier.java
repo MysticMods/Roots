@@ -4,9 +4,9 @@ import net.minecraft.resources.ResourceKey;
 
 import javax.annotation.Nullable;
 
-public interface IModifier<T> {
+public interface IModifier<V, T extends IModifier<V, T>> {
   @Nullable
-  ResourceKey<Modifier<T>> getParent();
+  ResourceKey<T> getParent();
 
-  ResourceKey<T> getApplicable();
+  ResourceKey<V> getApplicable();
 }

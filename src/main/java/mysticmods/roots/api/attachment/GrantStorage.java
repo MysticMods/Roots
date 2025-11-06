@@ -28,11 +28,11 @@ public class GrantStorage implements ICleanable {
       instance -> instance.group(
           RootsRegistries.SPELLS.byNameCodec().listOf().fieldOf("grantedSpells")
               .forGetter(o -> new ArrayList<>(o.grantedSpells)),
-          RootsRegistries.MODIFIERS.byNameCodec().listOf().fieldOf("grantedModifiers")
+          RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().fieldOf("grantedModifiers")
               .forGetter(o -> new ArrayList<>(o.grantedModifiers))).apply(instance, GrantStorage::new));
   public static final Codec<GrantStorage> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, GrantStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS)
-      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.MODIFIERS)
+      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)
       .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedModifiers), GrantStorage::new);
 
   private boolean dirty = true;

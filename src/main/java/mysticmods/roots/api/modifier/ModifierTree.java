@@ -8,13 +8,13 @@ import net.minecraft.resources.ResourceKey;
 import java.util.Map;
 import java.util.Set;
 
-public class ModifierTree<T> {
-  private final Holder<T> object;
-  private final Map<ResourceKey<Modifier>, Modifier> modifiers = new Object2ObjectOpenHashMap<>();
-  private final Set<ModifierNode> rootNodes = new ObjectOpenHashSet<>();
-  private final Set<ModifierNode> allNodes = new ObjectOpenHashSet<>();
+public class ModifierTree<V, T extends Modifier<V, T>> {
+  private final Holder<V> object;
+  private final Map<ResourceKey<T>, T> modifiers = new Object2ObjectOpenHashMap<>();
+  private final Set<ModifierNode<V, T>> rootNodes = new ObjectOpenHashSet<>();
+  private final Set<ModifierNode<V, T>> allNodes = new ObjectOpenHashSet<>();
 
-  public ModifierTree(Holder<T> object) {
+  public ModifierTree(Holder<V> object) {
     this.object = object;
   }
 
