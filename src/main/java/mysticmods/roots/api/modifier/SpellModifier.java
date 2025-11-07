@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Holder;
@@ -29,5 +30,15 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   @Override
   public void init(Holder<SpellModifier> holder) {
 
+  }
+
+  @Override
+  public CostInstance getDefaultCosts() {
+    return null;
+  }
+
+  @Override
+  public CostInstance getCosts() {
+    return null;
   }
 }

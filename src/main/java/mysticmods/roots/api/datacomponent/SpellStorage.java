@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -235,7 +236,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return slots;
   }
 
-  public record SpellSlot(UUID spellId, int slot, Spell spell, Set<Modifier> enabledModifiers,
+  public record SpellSlot(UUID spellId, int slot, Spell spell, Set<SpellModifier> enabledModifiers,
                           SpellInstanceData data) implements ISpellInstance {
     public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         UUIDUtil.CODEC.fieldOf("spellId").forGetter(SpellSlot::spellId),

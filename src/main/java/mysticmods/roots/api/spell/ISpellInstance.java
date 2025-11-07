@@ -5,8 +5,10 @@ import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedParent;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +29,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getStyledName();
   }
 
-  Set<Modifier> getEnabledModifiers();
+  Set<SpellModifier> getEnabledModifiers();
 
   default int getMaxUse() {
     return getSpell().getMaxUse();
@@ -54,10 +56,16 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   @Override
-  Set<ICosted> getChildren();
+  default Set<? extends ICosted> getChildren() {
+    return getEnabledModifiers();
+  }
 
-  default boolean hasModifier(Modifier modifier) {
+  default boolean hasModifier(SpellModifier modifier) {
     return getEnabledModifiers().contains(modifier);
+  }
+
+  default boolean hasModifier (Holder<SpellModifier> modifier) {
+    return hasModifier(modifier.value());
   }
 
   default Spell.Type getType() {
@@ -126,13 +134,18 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     }
 
     @Override
-    public Set<Modifier> getEnabledModifiers() {
+    public Set<SpellModifier> getEnabledModifiers() {
       return Collections.emptySet();
     }
 
     @Override
-    public Set<ICosted> getChildren() {
-      return Collections.emptySet();
+    public boolean hasModifier(SpellModifier modifier) {
+      return false;
+    }
+
+    @Override
+    public boolean hasModifier(Holder<SpellModifier> modifier) {
+      return false;
     }
   }
 }
