@@ -10,6 +10,7 @@ import mysticmods.roots.action.LearnSpellAction;
 import mysticmods.roots.action.LearnSpellModifierAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.*;
@@ -37,7 +38,7 @@ public class GrantStorage implements ICleanable {
 
   private boolean dirty = true;
   private final Set<Spell> grantedSpells;
-  private final Set<Modifier> grantedModifiers;
+  private final Set<SpellModifier> grantedModifiers;
 
   private List<LibrarySpell> librarySpells = null;
   private Map<Spell, List<LibraryModifier>> libraryModifiers = null;
@@ -47,12 +48,12 @@ public class GrantStorage implements ICleanable {
     grantedModifiers = new ObjectLinkedOpenHashSet<>();
   }
 
-  public GrantStorage(Set<Spell> grantedSpells, Set<Modifier> grantedModifiers) {
+  public GrantStorage(Set<Spell> grantedSpells, Set<SpellModifier> grantedModifiers) {
     this.grantedSpells = new ObjectLinkedOpenHashSet<>(grantedSpells);
     this.grantedModifiers = new ObjectLinkedOpenHashSet<>(grantedModifiers);
   }
 
-  public GrantStorage(List<Spell> spells, List<Modifier> spellModifiers) {
+  public GrantStorage(List<Spell> spells, List<SpellModifier> spellModifiers) {
     this.grantedSpells = new ObjectLinkedOpenHashSet<>(spells);
     this.grantedModifiers = new ObjectLinkedOpenHashSet<>(spellModifiers);
   }

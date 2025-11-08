@@ -73,4 +73,25 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   public boolean is(TagKey<T> key) {
     return builtInRegistryHolder().is(key);
   }
+
+  public abstract ModifierRecord<V, T> record ();
+
+  public ModifierRecord<V, T> record (boolean enabled, boolean disabled) {
+    ModifierRecord<V, T> record = record();
+    record.setDisabled(disabled);
+    record.setEnabled(enabled);
+    return record;
+  }
+
+  public interface ModifierRecord<V, T extends Modifier<V, T>> {
+    Holder<T> modifier();
+
+    boolean enabled();
+
+    void setEnabled(boolean enabled);
+
+    boolean disabled();
+
+    void setDisabled(boolean disabled);
+  }
 }

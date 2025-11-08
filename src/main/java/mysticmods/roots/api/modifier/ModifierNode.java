@@ -9,19 +9,19 @@ import javax.annotation.Nullable;
 import java.util.Set;
 
 public class ModifierNode<V, T extends Modifier<V, T>> {
-  private static final Interner<ModifierNode<?, ?>> VALUES = Interners.newWeakInterner();
+  private static final Interner<ModifierNode<?, ?>> VALUES = Interners.newStrongInterner();
 
   private final ResourceKey<T> modifier;
   @Nullable
   private ModifierNode<V, T> parent;
   private final Set<ModifierNode<V, T>> children = new ReferenceOpenHashSet<>();
 
-  protected ModifierNode(ResourceKey<T> modifier, @Nullable ModifierNode<V, T> parent) {
+  private ModifierNode(ResourceKey<T> modifier, @Nullable ModifierNode<V, T> parent) {
     this.modifier = modifier;
     this.parent = parent;
   }
 
-  protected ModifierNode(ResourceKey<T> modifier) {
+  private ModifierNode(ResourceKey<T> modifier) {
     this(modifier, null);
   }
 
