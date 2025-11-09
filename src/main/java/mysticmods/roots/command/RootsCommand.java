@@ -237,7 +237,7 @@ public class RootsCommand {
       }
       for (int i = 0; i < storage.maxSlot(); i++) {
         if (storage.getSpell(i) == null) {
-          staff.set(ModAttachments.SPELL_STORAGE, storage.setSpell(i, spell, spell.getModifiers()));
+          staff.set(ModAttachments.SPELL_STORAGE, storage.setSpell(i, spell));
           if (newStaff) {
             player.addItem(staff);
           } else {

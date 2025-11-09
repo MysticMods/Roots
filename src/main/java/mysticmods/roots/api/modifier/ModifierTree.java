@@ -7,9 +7,9 @@ import net.minecraft.resources.ResourceKey;
 import java.util.Map;
 import java.util.Set;
 
-public class ModifierTree<V, C extends Modifier<V, C>, T extends Modifier.ModifierRecord<V, C>> {
+public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Holder<V> object;
-  private final Map<ResourceKey<C>, T> modifiers = new Object2ObjectOpenHashMap<>();
+  private final Map<ResourceKey<C>, C> modifiers = new Object2ObjectOpenHashMap<>();
   private final Map<ResourceKey<C>, ModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
   private final Set<ModifierNode<V, C>> rootNodes = new ReferenceOpenHashSet<>();
   private final Set<ModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
@@ -34,8 +34,7 @@ public class ModifierTree<V, C extends Modifier<V, C>, T extends Modifier.Modifi
 
     ModifierNode<V, C> node = ModifierNode.create(modifier.getKey());
     allNodes.add(node);
-    //noinspection unchecked
-    modifiers.put(modifier.getKey(), (T) mod.record());
+    modifiers.put(modifier.getKey(), mod);
     nodes.put(modifier.getKey(), node);
 
     if (mod.getParent() == null) {
@@ -63,7 +62,7 @@ public class ModifierTree<V, C extends Modifier<V, C>, T extends Modifier.Modifi
 
   public void resolveChildren () {
     for (ModifierNode<V, C> node : allNodes) {
-      C record = modifiers.get(node.modifier()).modifier().value();
+      C record = modifiers.get(node.modifier());
       ModifierNode<V, C> parentNode = getNode(record.getParent());
       parentNode.addChild(node);
     }
