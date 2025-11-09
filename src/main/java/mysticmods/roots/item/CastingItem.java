@@ -3,6 +3,7 @@ package mysticmods.roots.item;
 import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.CooldownStorage;
+import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.Costing;
@@ -319,7 +320,7 @@ public class CastingItem extends Item {
       return false;
     }
 
-    SpellStorage.SpellSlot spell = storage.getCurrentSpell();
+    SpellSlot spell = storage.getCurrentSpell();
     if (spell == null) {
       return false;
     }
@@ -344,7 +345,7 @@ public class CastingItem extends Item {
       return 0;
     }
 
-    SpellStorage.SpellSlot spell = storage.getCurrentSpell();
+    SpellSlot spell = storage.getCurrentSpell();
     if (spell == null) {
       return 0;
     }

@@ -5,14 +5,9 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.registry.ICosted;
-import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstanceData;
-import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) {
   private static final List<SpellSlot> EMPTY_SLOTS = new ArrayList<>(Arrays.asList(new SpellSlot[]{null, null, null, null, null}));
@@ -236,94 +230,4 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return slots;
   }
 
-  public record SpellSlot(UUID spellId, int slot, Spell spell, Set<SpellModifier> enabledModifiers,
-                          SpellInstanceData data) implements ISpellInstance {
-    public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-        UUIDUtil.CODEC.fieldOf("spellId").forGetter(SpellSlot::spellId),
-        Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
-        RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
-        RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().xmap(HashSet::new, ArrayList::new)
-            .fieldOf("enabledModifiers").forGetter(o -> new HashSet<>(o.enabledModifiers)),
-        SpellInstanceData.CODEC.fieldOf("data").forGetter(o -> o.data)
-    ).apply(instance, SpellSlot::new));
-    public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
-        UUIDUtil.STREAM_CODEC, SpellSlot::spellId,
-        ByteBufCodecs.VAR_INT, SpellSlot::slot,
-        ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), SpellSlot::spell,
-        ByteBufCodecs.collection(HashSet::new, ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)), SpellSlot::enabledModifiers,
-        SpellInstanceData.STREAM_CODEC, SpellSlot::data,
-        SpellSlot::new
-    );
-    public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
-
-    public SpellSlot(UUID spellId, int slot, Spell spell, Set<SpellModifier> enabledModifiers) {
-      this(spellId, slot, spell, enabledModifiers, new SpellInstanceData(spell.getDataSlots() + 1));
-    }
-
-    @Override
-    public @Nullable SpellInstanceData getSpellData() {
-      return data();
-    }
-
-    @Override
-    public Spell getSpell() {
-      return spell();
-    }
-
-    @Override
-    public Set<SpellModifier> getEnabledModifiers() {
-      return enabledModifiers();
-    }
-
-    @Override
-    public Set<ICosted> getChildren() {
-      return getEnabledModifiers().stream().map(o -> (ICosted) o).collect(Collectors.toSet());
-    }
-
-    @Override
-    public boolean hasModifier(SpellModifier modifier) {
-      return enabledModifiers.contains(modifier);
-    }
-
-    public SpellSlot withData(int index, int value) {
-      IntArrayList newData = new IntArrayList(data.data());
-
-      newData.ensureCapacity(spell.getDataSlots() + 1);
-      newData.set(index, value);
-      return new SpellSlot(spellId, slot, spell, enabledModifiers, new SpellInstanceData(newData));
-    }
-
-    public SpellSlot withData(SpellInstanceData data) {
-      if (data.equals(this.data)) {
-        return this;
-      }
-      return new SpellSlot(spellId, slot, spell, enabledModifiers, data);
-    }
-
-    public SpellSlot withoutModifier(SpellModifier modifier) {
-      if (!hasModifier(modifier)) {
-        return copy();
-      }
-      Set<SpellModifier> modifiers = new HashSet<>(enabledModifiers);
-      modifiers.remove(modifier);
-      return new SpellSlot(spellId, slot, spell, modifiers, data);
-    }
-
-    public SpellSlot withModifier(SpellModifier modifier) {
-      if (hasModifier(modifier)) {
-        return copy();
-      }
-      Set<SpellModifier> modifiers = new HashSet<>(enabledModifiers);
-      modifiers.add(modifier);
-      return new SpellSlot(spellId, slot, spell, modifiers, data);
-    }
-
-    public SpellSlot withSlot(int slot) {
-      return new SpellSlot(spellId, slot, spell, enabledModifiers, data);
-    }
-
-    public SpellSlot copy() {
-      return new SpellSlot(spellId, slot, spell, enabledModifiers, data);
-    }
-  }
 }

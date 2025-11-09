@@ -1,6 +1,7 @@
 package mysticmods.roots.util;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.spell.Costing;
@@ -31,7 +32,7 @@ public class TooltipUtil {
       }
       pTooltipComponents.add(Component.empty());
       int tempSlot = 0;
-      for (SpellStorage.SpellSlot entry : storage.getSpells()) {
+      for (SpellSlot entry : storage.getSpells()) {
         // TODO: Spell data
         int slotId = tempSlot + 1;
         Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
