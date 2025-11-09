@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
@@ -10,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -20,19 +22,26 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   @Nullable
   protected final ResourceKey<T> parent;
   protected final ResourceKey<V> applicable;
+  protected final CostInstance defaultCosts;
+  @Nullable
+  protected CostInstance costs;
   private String descriptionId;
 
-  public Modifier(ResourceKey<Grove> grove, @NotNull ResourceKey<T> parent, ResourceKey<V> applicable) {
+  public Modifier(ResourceKey<Grove> grove, CostInstance defaultCosts, @NotNull ResourceKey<T> parent, ResourceKey<V> applicable) {
     this.grove = grove;
     this.parent = parent;
     this.applicable = applicable;
+    this.defaultCosts = defaultCosts;
   }
 
-  public Modifier(ResourceKey<Grove> grove, ResourceKey<V> applicable) {
+  public Modifier(ResourceKey<Grove> grove, CostInstance defaultCosts, ResourceKey<V> applicable) {
     this.grove = grove;
     this.applicable = applicable;
     this.parent = null;
+    this.defaultCosts = defaultCosts;
   }
+
+  protected abstract DataMapType<T, CostInstance> getDataMapType();
 
   @Override
   @Nullable
@@ -72,5 +81,26 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
 
   public boolean is(TagKey<T> key) {
     return builtInRegistryHolder().is(key);
+  }
+
+  @Override
+  public CostInstance getDefaultCosts() {
+    return defaultCosts;
+  }
+
+  @Override
+  public CostInstance getCosts() {
+    if (costs == null) {
+      return getDefaultCosts();
+    }
+    return costs;
+  }
+
+  @Override
+  public void init(Holder<T> holder) {
+    var costs = holder.getData(getDataMapType());
+    if (costs != null) {
+      this.costs = costs;
+    }
   }
 }
