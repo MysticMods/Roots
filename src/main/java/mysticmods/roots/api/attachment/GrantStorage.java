@@ -4,16 +4,16 @@ import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.action.LearnSpellAction;
 import mysticmods.roots.action.LearnSpellModifierAction;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.*;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.LibrarySpell;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModActions;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -22,7 +22,10 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 public class GrantStorage implements ICleanable {
   public static final MapCodec<GrantStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
@@ -41,7 +44,6 @@ public class GrantStorage implements ICleanable {
   private final Set<SpellModifier> grantedModifiers;
 
   private List<LibrarySpell> librarySpells = null;
-  private Map<Spell, List<LibraryModifier>> libraryModifiers = null;
 
   public GrantStorage() {
     grantedSpells = new ObjectLinkedOpenHashSet<>();
@@ -62,14 +64,14 @@ public class GrantStorage implements ICleanable {
     return grantedSpells.contains(spell);
   }
 
-  public boolean hasModifier(Modifier modifier) {
+  public boolean hasModifier(SpellModifier modifier) {
     return grantedModifiers.contains(modifier);
   }
 
   public boolean canUnlock(Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       return !grantedSpells.contains(value.value());
-    } else if (unlock instanceof Unlock.ModifierUnlock(Holder<Modifier> value)) {
+    } else if (unlock instanceof Unlock.SpellModifierUnlock(Holder<SpellModifier> value)) {
       return !grantedModifiers.contains(value.value());
     }
 
@@ -100,8 +102,8 @@ public class GrantStorage implements ICleanable {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       Spell spell = value.value();
       unlockSpell(player, spell);
-    } else if (unlock instanceof Unlock.ModifierUnlock(Holder<Modifier> value)) {
-      Modifier modifier = value.value();
+    } else if (unlock instanceof Unlock.SpellModifierUnlock(Holder<SpellModifier> value)) {
+      SpellModifier modifier = value.value();
       unlockModifier(player, modifier);
     }
 
@@ -117,7 +119,7 @@ public class GrantStorage implements ICleanable {
     }
   }
 
-  private void unlockModifier(ServerPlayer player, Modifier modifier) {
+  private void unlockModifier(ServerPlayer player, SpellModifier modifier) {
     if (grantedModifiers.add(modifier)) {
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
@@ -158,7 +160,7 @@ public class GrantStorage implements ICleanable {
     return librarySpells;
   }
 
-  public List<LibraryModifier> getLibraryModifiers(Spell checkSpell) {
+/*  public List<LibraryModifier> getLibraryModifiers(Spell checkSpell) {
     if (libraryModifiers == null) {
       libraryModifiers = new Object2ObjectLinkedOpenHashMap<>();
     }
@@ -170,7 +172,7 @@ public class GrantStorage implements ICleanable {
       result.sort(Comparator.comparing(LibraryModifier::enabled));
       return result;
     });
-  }
+  }*/
 
   @Override
   public boolean isEmpty() {

@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Holder;
@@ -21,7 +22,7 @@ import java.util.List;
 public interface Unlock<T> {
   BiMap<ResourceLocation, UnlockType> TYPES = ImmutableBiMap.of(
       RootsAPI.rl("spell"), SpellUnlock.TYPE,
-      RootsAPI.rl("spell_modifier"), ModifierUnlock.TYPE
+      RootsAPI.rl("spell_modifier"), SpellModifierUnlock.TYPE
   );
   Codec<Unlock<?>> CODEC = ResourceLocation.CODEC.xmap(TYPES::get, TYPES.inverse()::get)
       .dispatch(Unlock::unlockType, UnlockType::codec);
@@ -50,8 +51,8 @@ public interface Unlock<T> {
     return new SpellUnlock(value.builtInRegistryHolder());
   }
 
-  static ModifierUnlock modifier(Holder<Modifier> value) {
-    return new ModifierUnlock(value);
+  static SpellModifierUnlock modifier(Holder<SpellModifier> value) {
+    return new SpellModifierUnlock(value);
   }
 
   record SpellUnlock(Holder<Spell> value) implements Unlock<Spell> {
@@ -78,12 +79,12 @@ public interface Unlock<T> {
     }
   }
 
-  record ModifierUnlock(Holder<Modifier> value) implements Unlock<Modifier> {
+  record SpellModifierUnlock(Holder<SpellModifier> value) implements Unlock<SpellModifier> {
 
-    public static final MapCodec<ModifierUnlock> CODEC = RootsRegistries.SPELL_MODIFIERS.holderByNameCodec()
-        .fieldOf("defaultValue").xmap(ModifierUnlock::new, ModifierUnlock::value);
-    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELL_MODIFIERS)
-        .map(ModifierUnlock::new, ModifierUnlock::value);
+    public static final MapCodec<SpellModifierUnlock> CODEC = RootsRegistries.SPELL_MODIFIERS.holderByNameCodec()
+        .fieldOf("defaultValue").xmap(SpellModifierUnlock::new, SpellModifierUnlock::value);
+    public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELL_MODIFIERS)
+        .map(SpellModifierUnlock::new, SpellModifierUnlock::value);
     public static final UnlockType TYPE = new UnlockType(CODEC, STREAM_CODEC);
 
     @Override
