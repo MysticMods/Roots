@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstanceData;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -99,7 +100,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     }
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
-    newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, modifiers));
+    newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, new SpellModifierSet(modifiers)));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
@@ -110,7 +111,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     }
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
-    newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, Set.of()));
+    newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, SpellModifierSet.EMPTY));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
