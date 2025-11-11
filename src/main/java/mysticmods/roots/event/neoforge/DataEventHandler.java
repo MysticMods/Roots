@@ -3,7 +3,10 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.modifier.ModifierTrees;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.IDataMapInitialize;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
@@ -13,6 +16,7 @@ import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -28,6 +32,8 @@ import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.registries.ModifyRegistriesEvent;
+import net.neoforged.neoforge.registries.callback.BakeCallback;
 import net.neoforged.neoforge.registries.datamaps.DataMapsUpdatedEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +41,12 @@ import org.jetbrains.annotations.Nullable;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class DataEventHandler {
+  @SubscribeEvent
+  public static void modifyRegistries (ModifyRegistriesEvent event) {
+    event.getRegistry(RootsRegistries.Keys.SPELL_MODIFIERS)
+        .addCallback((BakeCallback<SpellModifier>) registry -> ModifierTrees.initialize());
+  }
+
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
     event.register(DataMaps.SPELL_COST_DATA);
