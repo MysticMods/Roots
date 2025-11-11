@@ -8,14 +8,40 @@ import java.util.Map;
 import java.util.Set;
 
 public class ModifierTree<V, C extends Modifier<V, C>> {
+  private static final Set<ResourceKey<?>> DISABLED_MODIFIERS = new ReferenceOpenHashSet<>();
+
   private final Holder<V> object;
   private final Map<ResourceKey<C>, C> modifiers = new Object2ObjectOpenHashMap<>();
   private final Map<ResourceKey<C>, ModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
   private final Set<ModifierNode<V, C>> rootNodes = new ReferenceOpenHashSet<>();
   private final Set<ModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
+  private final Object2BooleanMap<ResourceKey<C>> disabledModifiers = new Object2BooleanOpenHashMap<>();
 
   public ModifierTree(Holder<V> object) {
     this.object = object;
+  }
+
+  public boolean validate (ModifierSet<V, C, ?> modifierSet) {
+    if (modifierSet.isEmpty()) {
+      return true;
+    }
+    C firstElement = modifierSet.firstElement();
+    if (firstElement == null) {
+      return true; // Shouldn't happen?
+    }
+    if (!firstElement.getApplicable().equals(object.getKey())) {
+      return false;
+    }
+
+    if (!modifierSet.validate()) {
+      return false;
+    }
+
+    // If an element is enabled here but its children aren't enabled, that's invalid
+    Instance instance = new Instance();
+
+
+    return true;
   }
 
   public boolean addModifier (C modifier) {
@@ -60,11 +86,31 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return rootNodes;
   }
 
-  public void resolveChildren () {
-    for (ModifierNode<V, C> node : allNodes) {
-      C record = modifiers.get(node.modifier());
-      ModifierNode<V, C> parentNode = getNode(record.getParent());
-      parentNode.addChild(node);
-    }
+  public static boolean isDisabled (ResourceKey<Modifier<?, ?>> modifier) {
+    return DISABLED_MODIFIERS.contains(modifier);
+  }
+
+  public static boolean isDisabled (Modifier<?, ?> modifier) {
+    return DISABLED_MODIFIERS.contains(modifier.builtInRegistryHolder().getKey());
+  }
+
+  public static boolean isDisabled (Holder<Modifier<?, ?>> modifier) {
+    return DISABLED_MODIFIERS.contains(modifier.getKey());
+  }
+
+  public static void disableModifier (ResourceKey<Modifier<?, ?>> modifier) {
+    DISABLED_MODIFIERS.add(modifier);
+  }
+
+  public static void disableModifier (Modifier<?, ?> modifier) {
+    DISABLED_MODIFIERS.add(modifier.builtInRegistryHolder().getKey());
+  }
+
+  public static void disableModifier (Holder<Modifier<?, ?>> modifier) {
+    DISABLED_MODIFIERS.add(modifier.getKey());
+  }
+
+  public class Instance {
+    private final Object2BooleanMap<ResourceKey<C>> enabledModifiers = new Object2BooleanOpenHashMap<>();
   }
 }

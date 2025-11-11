@@ -7,7 +7,9 @@ import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,18 +21,56 @@ import java.util.stream.Stream;
 
 public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends ModifierSet<V, T, C>> implements Set<T> {
   protected final ImmutableSet<T> internal;
+  @Nullable
+  protected final T firstElement;
 
   @SafeVarargs
   public ModifierSet(T... elements) {
     this.internal = ImmutableSet.copyOf(elements);
+    if (elements.length > 0) {
+      this.firstElement = elements[0];
+    } else {
+      this.firstElement = null;
+    }
   }
 
   public ModifierSet(Collection<T> elements) {
     this.internal = ImmutableSet.copyOf(elements);
+    if (!elements.isEmpty()) {
+      this.firstElement = elements.stream().findFirst().orElse(null);
+    } else {
+      this.firstElement = null;
+    }
   }
 
   public ModifierSet(ImmutableSet<T> elements) {
     this.internal = elements;
+    if (!elements.isEmpty()) {
+      this.firstElement = elements.stream().findFirst().orElse(null);
+    } else {
+      this.firstElement = null;
+    }
+  }
+
+  @Nullable
+  public T firstElement () {
+    return this.firstElement;
+  }
+
+  public boolean validate () {
+    if (isEmpty()) {
+      return true;
+    }
+    ResourceKey<V> applicable = null;
+    for (T modifier : this) {
+      if (applicable == null) {
+        applicable = modifier.getApplicable();
+      } else if (!applicable.equals(modifier.getApplicable())) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public abstract ModifierSet<V, T, C> without(T element);
