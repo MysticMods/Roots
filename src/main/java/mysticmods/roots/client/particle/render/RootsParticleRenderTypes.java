@@ -20,19 +20,33 @@ import net.minecraft.client.renderer.texture.TextureManager;
 
 public class RootsParticleRenderTypes {
   // TODO: Move these out
-  public static final ImmutableList<ParticleRenderType> DELAYED_RENDER_ORDER = ImmutableList.of(
-      RootsParticleRenderTypes.OPAQUE,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH
-  );
+  private static ImmutableList<ParticleRenderType> DELAYED_RENDER_ORDER;
 
-  public static final ImmutableMap<ParticleRenderType, RenderType> DELAYED_PARTICLE_RENDER_TYPES = ImmutableMap.of(
-      RootsParticleRenderTypes.OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
-      RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK
-  );
+  public static ImmutableList<ParticleRenderType> getDelayedRenderOrder () {
+    if (DELAYED_RENDER_ORDER == null) {
+      DELAYED_RENDER_ORDER = ImmutableList.of(
+          RootsParticleRenderTypes.OPAQUE,
+          RootsParticleRenderTypes.DELAYED_TRANSLUCENT,
+          RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL,
+          RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH
+      );
+    }
+    return DELAYED_RENDER_ORDER;
+  }
+
+  private static ImmutableMap<ParticleRenderType, RenderType> DELAYED_PARTICLE_RENDER_TYPES;
+
+  public static ImmutableMap<ParticleRenderType, RenderType> getDelayedParticleRenderTypes () {
+    if (DELAYED_PARTICLE_RENDER_TYPES == null) {
+      DELAYED_PARTICLE_RENDER_TYPES = ImmutableMap.of(
+          RootsParticleRenderTypes.OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,
+          RootsParticleRenderTypes.DELAYED_TRANSLUCENT, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES,
+          RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_CULL, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_CULL,
+          RootsParticleRenderTypes.DELAYED_TRANSLUCENT_NO_DEPTH, RootsRenderTypes.TRANSLUCENT_DELAYED_PARTICLES_NO_MASK
+      );
+    }
+    return DELAYED_PARTICLE_RENDER_TYPES;
+  }
 
   public interface RootsParticleRenderType extends ParticleRenderType {
     default boolean isDelayed() {

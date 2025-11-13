@@ -123,14 +123,14 @@ public class RenderTickHandler {
       float partialTick = getPartialTick();
       Camera camera = event.getCamera();
 
-      for (ParticleRenderType type : RootsParticleRenderTypes.DELAYED_RENDER_ORDER) {
+      for (ParticleRenderType type : RootsParticleRenderTypes.getDelayedRenderOrder()) {
         Queue<Particle> particles = allParticles.get(type);
 
         if (particles == null || particles.isEmpty()) {
           continue;
         }
 
-        RenderType renderType = RootsParticleRenderTypes.DELAYED_PARTICLE_RENDER_TYPES.get(type);
+        RenderType renderType = RootsParticleRenderTypes.getDelayedParticleRenderTypes().get(type);
         if (renderType == null) {
           RootsAPI.LOG.error("No render type found for particle render type: {}", type);
           continue;
