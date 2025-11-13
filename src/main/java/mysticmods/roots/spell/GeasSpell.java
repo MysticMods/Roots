@@ -92,6 +92,14 @@ public class GeasSpell extends Spell {
         continue;
       }
 
+      if (living.isInvisibleTo(pPlayer)) {
+        continue;
+      }
+
+      if (!pPlayer.hasLineOfSight(living)) {
+        continue;
+      }
+
       if (living.getMaxHealth() > this.maxHealth) {
         continue;
       }
