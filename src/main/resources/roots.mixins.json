@@ -40,7 +40,7 @@
     "action.MixinPiglinAi$TradeAction"
   ],
   "client": [
-    "client.MixinCapeLayer",
+    "client.MixinCapeLayer$LightDrifter",
     "client.MixinEntity$ParticleHolder",
     "client.MixinGui$Tome",
     "client.MixinLocalPlayer$LightDrifter",
