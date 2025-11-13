@@ -33,4 +33,12 @@ public abstract class MixinLocalPlayer$LightDrifter {
       original.call();
     }
   }
+
+  @WrapMethod(method="canSpawnSprintParticle")
+  public boolean roots$onCanSpawnSprintParticle(Operation<Void> original) {
+    if (!((LocalPlayer) (Object) this).hasEffect(ModEffects.LIGHT_DRIFTER)) {
+      original.call();
+    }
+    return false;
+  }
 }
