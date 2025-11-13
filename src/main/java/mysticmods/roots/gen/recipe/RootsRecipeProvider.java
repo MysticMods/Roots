@@ -48,8 +48,11 @@ import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class RootsRecipeProvider extends RecipeProvider {
+  public static AtomicBoolean GENERATING_RECIPES = new AtomicBoolean();
+
   public RootsRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
     super(output, registries);
   }
@@ -57,6 +60,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
   @SuppressWarnings("deprecation")
   @Override
   protected void buildRecipes(RecipeOutput c, HolderLookup.Provider p) {
+    GENERATING_RECIPES.set(true);
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.ELEMENTAL_SOIL.get(), 1)
         .requires(RootsTags.Items.ELEMENTAL_SOIL)
         .unlockedBy("has_elemental_soil", has(RootsTags.Items.ELEMENTAL_SOIL))
@@ -2549,6 +2553,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.WILDEWHEET_CROP)
                 .requires(RootsTags.Items.PERESKIA_CROP)
             ), c, RootsAPI.rl("grove/wildwood_quiver"));
+    GENERATING_RECIPES.set(false);
   }
 
   public static class RecipeSaver {
