@@ -55,9 +55,6 @@ public class ModifierTrees {
   }
 
   public static void initialize() {
-    if (initialized) {
-      throw new IllegalStateException("ModifierTrees already initialized");
-    }
     ImmutableMap.Builder<ResourceKey<Ritual>, ModifierTree<Ritual, RitualModifier>> builder = ImmutableMap.builder();
     RootsRegistries.RITUALS.holders().forEach(holder -> {
       ModifierTree<Ritual, RitualModifier> tree = new ModifierTree<>(holder);
