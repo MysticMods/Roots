@@ -1,6 +1,8 @@
 package mysticmods.roots.api.modifier;
 
-import it.unimi.dsi.fastutil.objects.*;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 
@@ -15,13 +17,16 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Map<ResourceKey<C>, ModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
   private final Set<ModifierNode<V, C>> rootNodes = new ReferenceOpenHashSet<>();
   private final Set<ModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
-  private final Object2BooleanMap<ResourceKey<C>> disabledModifiers = new Object2BooleanOpenHashMap<>();
 
   public ModifierTree(Holder<V> object) {
     this.object = object;
   }
 
-  public boolean validate (ModifierSet<V, C, ?> modifierSet) {
+  public ModifierTree<V, C>.Instance validator (ModifierSet<V, C, ?> modifierSet) {
+    return new Instance(modifierSet);
+  }
+
+  public boolean validate(ModifierSet<V, C, ?> modifierSet) {
     if (modifierSet.isEmpty()) {
       return true;
     }
@@ -38,13 +43,13 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     }
 
     // If an element is enabled here but its children aren't enabled, that's invalid
-    Instance instance = new Instance();
+    Instance instance = new Instance(modifierSet);
 
 
     return true;
   }
 
-  public boolean addModifier (C modifier) {
+  public boolean addModifier(C modifier) {
     return addModifier(modifier.builtInRegistryHolder());
   }
 
@@ -74,7 +79,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return true;
   }
 
-  public ModifierNode<V, C> getNode (ResourceKey<C> key) {
+  public ModifierNode<V, C> getNode(ResourceKey<C> key) {
     ModifierNode<V, C> node = nodes.get(key);
     if (node == null) {
       throw new NullPointerException("No node for key " + key);
@@ -82,35 +87,94 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return node;
   }
 
-  public Iterable<ModifierNode<V, C>> roots () {
+  public Iterable<ModifierNode<V, C>> roots() {
     return rootNodes;
   }
 
-  public static boolean isDisabled (ResourceKey<Modifier<?, ?>> modifier) {
+  public static boolean isDisabled(ModifierNode<?, ?> node) {
+    return DISABLED_MODIFIERS.contains(node.modifier());
+  }
+
+  public static boolean isDisabled(ResourceKey<?> modifier) {
     return DISABLED_MODIFIERS.contains(modifier);
   }
 
-  public static boolean isDisabled (Modifier<?, ?> modifier) {
+  public static boolean isDisabled(Modifier<?, ?> modifier) {
     return DISABLED_MODIFIERS.contains(modifier.builtInRegistryHolder().getKey());
   }
 
-  public static boolean isDisabled (Holder<Modifier<?, ?>> modifier) {
+  public static boolean isDisabled(Holder<Modifier<?, ?>> modifier) {
     return DISABLED_MODIFIERS.contains(modifier.getKey());
   }
 
-  public static void disableModifier (ResourceKey<Modifier<?, ?>> modifier) {
+  public static void disableModifier(ResourceKey<?> modifier) {
     DISABLED_MODIFIERS.add(modifier);
   }
 
-  public static void disableModifier (Modifier<?, ?> modifier) {
+  public static void disableModifier(Modifier<?, ?> modifier) {
     DISABLED_MODIFIERS.add(modifier.builtInRegistryHolder().getKey());
   }
 
-  public static void disableModifier (Holder<Modifier<?, ?>> modifier) {
+  public static void disableModifier(Holder<Modifier<?, ?>> modifier) {
     DISABLED_MODIFIERS.add(modifier.getKey());
   }
 
+  public static void disableModifier(ModifierNode<?, ?> node) {
+    DISABLED_MODIFIERS.add(node.modifier());
+  }
+
   public class Instance {
-    private final Object2BooleanMap<ResourceKey<C>> enabledModifiers = new Object2BooleanOpenHashMap<>();
+    private final Set<ResourceKey<C>> enabledModifiers = new ReferenceOpenHashSet<>();
+
+    public Instance(Set<C> modifierSet) {
+      for (C modifier : modifierSet) {
+        enable(modifier.builtInRegistryHolder().getKey());
+      }
+    }
+
+    public Instance enable(ModifierNode<V, C> node) {
+      if (isDisabled(node)) {
+        return disable(node);
+      }
+
+      enabledModifiers.add(node.modifier());
+      ModifierNode<V, C> parent = node.parent();
+      if (parent != null && !enabledModifiers.contains(parent.modifier())) {
+        enable(parent);
+      }
+      return this;
+    }
+
+    public Instance enable(ResourceKey<C> key) {
+      ModifierNode<V, C> node = getNode(key);
+      return enable(node);
+    }
+
+    public Instance disable(ModifierNode<V, C> node) {
+      for (ModifierNode<V, C> child : node.children()) {
+        if (enabledModifiers.contains(child.modifier())) {
+          disable(child);
+        }
+      }
+      return this;
+    }
+
+    public Instance disable(ResourceKey<C> key) {
+      return disable(getNode(key));
+    }
+
+    public Instance copy () {
+      Instance copy = new Instance(new ObjectOpenHashSet<>());
+      copy.enabledModifiers.addAll(this.enabledModifiers);
+      return copy;
+    }
+
+    public Set<C> modifiersSet () {
+      Set<C> mods = new ObjectOpenHashSet<>();
+      for (ResourceKey<C> key : enabledModifiers) {
+        mods.add(modifiers.get(key));
+      }
+      return mods;
+    }
   }
 }
