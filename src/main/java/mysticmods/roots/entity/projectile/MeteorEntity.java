@@ -65,8 +65,8 @@ public class MeteorEntity extends Entity {
         this.hasImpulse = true;
       }
 
-      if (!ConfigManager.DISABLE_PATICLES.get()) {
-        if (this.level().isClientSide()) {
+      if (this.level().isClientSide()) {
+        if (!ConfigManager.DISABLE_PATICLES.get()) {
           for (int i = 0; i < 9; i++) {
             level().addParticle(
                 RootsParticleOptions.builder(

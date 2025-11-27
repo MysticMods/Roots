@@ -50,7 +50,7 @@ public class TemporalMorassEntity extends Entity {
   @Override
   public void tick() {
     super.tick();
-    if (!ConfigManager.DISABLE_PATICLES.get()) {
+    if (this.level().isClientSide && !ConfigManager.DISABLE_PATICLES.get()) {
       if ((tickCount == 5 || (tickCount % 40 == 0 && getLifetime() > 39)) && this.level().isClientSide()) {
         AABB aabb = this.getAabb();
         if (aabb != null) {

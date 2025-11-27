@@ -98,14 +98,12 @@ public class SproutEntity extends Animal {
 
   @Override
   public void aiStep() {
-    if (!ConfigManager.DISABLE_PATICLES.get()) {
-      if (this.is(RootsTags.Entities.MELODY_SPROUT)) {
-        if (this.level().isClientSide && this.random.nextInt(5) == 0) {
-          for (int i = 0; i < 2; ++i) {
-            this.level()
-                .addParticle(RootsParticleOptions.builder(ModParticles.SPROUT_PORTAL).entityId(this.getId())
-                    .build(), this.getRandomX(0.1F), this.getRandomY() - (double) 0.45F, this.getRandomZ(0.1F), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F, -this.random.nextDouble(), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F);
-          }
+    if (this.is(RootsTags.Entities.MELODY_SPROUT)) {
+      if (this.level().isClientSide && !ConfigManager.DISABLE_PATICLES.get() && this.random.nextInt(5) == 0) {
+        for (int i = 0; i < 2; ++i) {
+          this.level()
+              .addParticle(RootsParticleOptions.builder(ModParticles.SPROUT_PORTAL).entityId(this.getId())
+                  .build(), this.getRandomX(0.1F), this.getRandomY() - (double) 0.45F, this.getRandomZ(0.1F), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F, -this.random.nextDouble(), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F);
         }
       }
     }

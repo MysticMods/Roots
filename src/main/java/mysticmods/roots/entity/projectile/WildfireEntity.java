@@ -144,7 +144,7 @@ public class WildfireEntity extends Projectile {
     double d5 = vec3.x;
     double d6 = vec3.y;
     double d1 = vec3.z;
-    if (!ConfigManager.DISABLE_PATICLES.get()) {
+    if (level().isClientSide && !ConfigManager.DISABLE_PATICLES.get()) {
       for (int i = 0; i < 8; i++) {
         level().addParticle(
             RootsParticleOptions.builder(
