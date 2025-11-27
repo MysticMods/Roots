@@ -262,3 +262,25 @@ publishMods {
         minecraftVersions.add("1.21.1")
     }
 }
+
+tasks.register("tagVersion") {
+    doLast {
+        def tagName = "neoforge-${minecraft_version}-${mod_version}"
+
+        def existing = getExecOutput(["git", "tag", "--list", tagName])
+        if (existing == tagName) {
+            println "Tag $tagName already exists. Skipping."
+            return
+        }
+
+        println "Creating git tag $tagName"
+        exec {
+            commandLine "git", "tag", tagName
+        }
+
+        // Optional: push tag
+        // exec {
+        //     commandLine "git", "push", "origin", tagName
+        // }
+    }
+}
