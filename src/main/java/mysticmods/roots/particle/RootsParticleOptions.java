@@ -250,6 +250,9 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     }
 
     public void spawn(Level level) {
+      if (level.isClientSide()) {
+        return;
+      }
       if (ConfigManager.DISABLE_PATICLES.get()) {
         return;
       }
