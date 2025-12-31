@@ -400,6 +400,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.FARMLANDS).add(Blocks.FARMLAND).addTag(RootsTags.Blocks.ALL_SOIL);
     tag(BlockTags.MUSHROOM_GROW_BLOCK).addTag(RootsTags.Blocks.ALL_SOIL);
 
+    tag(BlockTags.SMALL_FLOWERS).add(STONEPETAL.get());
+
     tag(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS).add(Blocks.SNOW_BLOCK, Blocks.MAGMA_BLOCK, Blocks.LAVA, Blocks.WATER, Blocks.MUD, Blocks.OBSIDIAN, Blocks.ICE, Blocks.PACKED_ICE, Blocks.PACKED_MUD, Blocks.BLUE_ICE, Blocks.END_STONE)
         .addTags(RootsTags.Blocks.ALL_SOIL);
     tag(RootsTags.Blocks.FAIRY_GROVE_GENERATORS).addTags(BlockTags.SMALL_FLOWERS, BlockTags.TALL_FLOWERS);
