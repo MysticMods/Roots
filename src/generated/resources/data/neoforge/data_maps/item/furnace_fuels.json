@@ -1,8 +1,5 @@
 {
   "values": {
-    "#roots:logs/runed": {
-      "burn_time": 300
-    },
     "roots:display_pedestal": {
       "burn_time": 300
     },

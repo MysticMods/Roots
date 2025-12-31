@@ -322,16 +322,6 @@ public final class RootsLootTableProvider {
       dropSelf(ModBlocks.WILDWOOD_SAPLING.get());
       dropSelf(ModBlocks.STONEPETAL.get());
       add(ModBlocks.WILDWOOD_LEAVES.get(), createWildwoodLeaves(ModBlocks.WILDWOOD_LEAVES.get()));
-      dropSelf(ModBlocks.RUNED_WILDWOOD_LOG.get());
-      dropSelf(ModBlocks.RUNED_SPRUCE_LOG.get());
-      dropSelf(ModBlocks.RUNED_JUNGLE_LOG.get());
-      dropSelf(ModBlocks.RUNED_BIRCH_LOG.get());
-      dropSelf(ModBlocks.RUNED_OAK_LOG.get());
-      dropSelf(ModBlocks.RUNED_DARK_OAK_LOG.get());
-      dropSelf(ModBlocks.RUNED_ACACIA_LOG.get());
-      dropSelf(ModBlocks.RUNED_MANGROVE_LOG.get());
-      dropSelf(ModBlocks.RUNED_WARPED_STEM.get());
-      dropSelf(ModBlocks.RUNED_CRIMSON_STEM.get());
       dropSelf(ModBlocks.RUNESTONE_STAIRS.get());
       dropSelf(ModBlocks.MOSSY_RUNESTONE_STAIRS.get());
       dropSelf(ModBlocks.RUNESTONE_BRICK_STAIRS.get());

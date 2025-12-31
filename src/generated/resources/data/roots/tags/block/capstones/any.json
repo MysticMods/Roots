@@ -1,6 +1,5 @@
 {
   "values": [
-    "#roots:capstones/runes/any",
-    "#roots:capstones/log/any"
+    "#roots:capstones/runes/any"
   ]
 }

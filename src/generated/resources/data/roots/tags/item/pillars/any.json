@@ -1,6 +1,5 @@
 {
   "values": [
-    "#roots:pillars/runes/any",
-    "#roots:pillars/log/any"
+    "#roots:pillars/runes/any"
   ]
 }

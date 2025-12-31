@@ -156,7 +156,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.WOODEN_SHEARS, new FurnaceFuel(1500), false);
     builder10.add(ModItems.WILDWOOD_LADDER, new FurnaceFuel(300), false);
     builder10.add(ModItems.FIRE_STARTER, new FurnaceFuel(90), false);
-    builder10.add(RootsTags.Items.RUNED_LOGS, new FurnaceFuel(300), false);
 
     var builder14 = builder(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
     // Requires finding a world-generated crop

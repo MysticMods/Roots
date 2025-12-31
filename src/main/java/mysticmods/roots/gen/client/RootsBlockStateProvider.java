@@ -58,16 +58,6 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
             .renderType("cutout")));
     // TODO: Render type
     simpleBlock(ModBlocks.WILDWOOD_LEAVES.get());
-    axisBlock(ModBlocks.RUNED_WILDWOOD_LOG.get(), modLoc("block/runed_wildwood"), modLoc("block/wildwood_log_top"));
-    axisBlock(ModBlocks.RUNED_SPRUCE_LOG.get(), modLoc("block/runed_spruce"), mcLoc("block/spruce_log_top"));
-    axisBlock(ModBlocks.RUNED_BIRCH_LOG.get(), modLoc("block/runed_birch"), mcLoc("block/birch_log_top"));
-    axisBlock(ModBlocks.RUNED_JUNGLE_LOG.get(), modLoc("block/runed_jungle"), mcLoc("block/jungle_log_top"));
-    axisBlock(ModBlocks.RUNED_ACACIA_LOG.get(), modLoc("block/runed_acacia"), mcLoc("block/acacia_log_top"));
-    axisBlock(ModBlocks.RUNED_DARK_OAK_LOG.get(), modLoc("block/runed_dark_oak"), mcLoc("block/dark_oak_log_top"));
-    axisBlock(ModBlocks.RUNED_CRIMSON_STEM.get(), modLoc("block/runed_crimson"), mcLoc("block/crimson_stem_top"));
-    axisBlock(ModBlocks.RUNED_WARPED_STEM.get(), modLoc("block/runed_warped"), mcLoc("block/warped_stem_top"));
-    axisBlock(ModBlocks.RUNED_MANGROVE_LOG.get(), modLoc("block/runed_mangrove"), mcLoc("block/mangrove_log_top"));
-    axisBlock(ModBlocks.RUNED_OAK_LOG.get(), modLoc("block/runed_oak"), mcLoc("block/oak_log_top"));
     stairsBlock(ModBlocks.RUNESTONE_STAIRS.get(), blockTexture(ModBlocks.RUNESTONE.get()));
     stairsBlock(ModBlocks.RUNESTONE_BRICK_STAIRS.get(), blockTexture(ModBlocks.RUNESTONE_BRICK.get()));
     stairsBlock(ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), blockTexture(ModBlocks.MOSSY_RUNESTONE.get()));

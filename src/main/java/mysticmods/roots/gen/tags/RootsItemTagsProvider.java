@@ -129,17 +129,6 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Items.RUNED_OBSIDIAN);
     this.copy(RootsTags.Blocks.RUNESTONE, RootsTags.Items.RUNESTONE);
     this.copy(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Items.WILDWOOD_LOGS);
-    this.copy(RootsTags.Blocks.RUNED_LOGS, RootsTags.Items.RUNED_LOGS);
-    this.copy(RootsTags.Blocks.RUNED_ACACIA_LOG, RootsTags.Items.RUNED_ACACIA_LOG);
-    this.copy(RootsTags.Blocks.RUNED_DARK_OAK_LOG, RootsTags.Items.RUNED_DARK_OAK_LOG);
-    this.copy(RootsTags.Blocks.RUNED_OAK_LOG, RootsTags.Items.RUNED_OAK_LOG);
-    this.copy(RootsTags.Blocks.RUNED_BIRCH_LOG, RootsTags.Items.RUNED_BIRCH_LOG);
-    this.copy(RootsTags.Blocks.RUNED_JUNGLE_LOG, RootsTags.Items.RUNED_JUNGLE_LOG);
-    this.copy(RootsTags.Blocks.RUNED_SPRUCE_LOG, RootsTags.Items.RUNED_SPRUCE_LOG);
-    this.copy(RootsTags.Blocks.RUNED_MANGROVE_LOG, RootsTags.Items.RUNED_MANGROVE_LOG);
-    this.copy(RootsTags.Blocks.RUNED_WILDWOOD_LOG, RootsTags.Items.RUNED_WILDWOOD_LOG);
-    this.copy(RootsTags.Blocks.RUNED_CRIMSON_STEM, RootsTags.Items.RUNED_CRIMSON_STEM);
-    this.copy(RootsTags.Blocks.RUNED_WARPED_STEM, RootsTags.Items.RUNED_WARPED_STEM);
     this.copy(RootsTags.Blocks.GROVE_STONES, RootsTags.Items.GROVE_STONES);
     this.copy(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_PRIMAL);
     this.copy(RootsTags.Blocks.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_ELEMENTAL);
@@ -166,28 +155,6 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Items.RUNES_PILLARS);
     this.copy(RootsTags.Blocks.CAPSTONES, RootsTags.Items.CAPSTONES);
     this.copy(RootsTags.Blocks.PILLARS, RootsTags.Items.PILLARS);
-    this.copy(RootsTags.Blocks.ACACIA_CAPSTONES, RootsTags.Items.ACACIA_CAPSTONES);
-    this.copy(RootsTags.Blocks.DARK_OAK_CAPSTONES, RootsTags.Items.DARK_OAK_CAPSTONES);
-    this.copy(RootsTags.Blocks.OAK_CAPSTONES, RootsTags.Items.OAK_CAPSTONES);
-    this.copy(RootsTags.Blocks.BIRCH_CAPSTONES, RootsTags.Items.BIRCH_CAPSTONES);
-    this.copy(RootsTags.Blocks.JUNGLE_CAPSTONES, RootsTags.Items.JUNGLE_CAPSTONES);
-    this.copy(RootsTags.Blocks.SPRUCE_CAPSTONES, RootsTags.Items.SPRUCE_CAPSTONES);
-    this.copy(RootsTags.Blocks.WILDWOOD_CAPSTONES, RootsTags.Items.WILDWOOD_CAPSTONES);
-    this.copy(RootsTags.Blocks.MANGROVE_CAPSTONES, RootsTags.Items.MANGROVE_CAPSTONES);
-    this.copy(RootsTags.Blocks.CRIMSON_CAPSTONES, RootsTags.Items.CRIMSON_CAPSTONES);
-    this.copy(RootsTags.Blocks.WARPED_CAPSTONES, RootsTags.Items.WARPED_CAPSTONES);
-    this.copy(RootsTags.Blocks.LOG_PILLARS, RootsTags.Items.LOG_PILLARS);
-    this.copy(RootsTags.Blocks.LOG_CAPSTONES, RootsTags.Items.LOG_CAPSTONES);
-    this.copy(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Items.ACACIA_PILLARS);
-    this.copy(RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Items.DARK_OAK_PILLARS);
-    this.copy(RootsTags.Blocks.OAK_PILLARS, RootsTags.Items.OAK_PILLARS);
-    this.copy(RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Items.BIRCH_PILLARS);
-    this.copy(RootsTags.Blocks.JUNGLE_PILLARS, RootsTags.Items.JUNGLE_PILLARS);
-    this.copy(RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Items.SPRUCE_PILLARS);
-    this.copy(RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Items.WILDWOOD_PILLARS);
-    this.copy(RootsTags.Blocks.MANGROVE_PILLARS, RootsTags.Items.MANGROVE_PILLARS);
-    this.copy(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Items.CRIMSON_PILLARS);
-    this.copy(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Items.WARPED_PILLARS);
     this.copy(RootsTags.Blocks.STONEPETAL, RootsTags.Items.STONEPETAL);
     this.copy(RootsTags.Blocks.SHORT_GRASS, RootsTags.Items.SHORT_GRASS);
     this.copy(RootsTags.Blocks.TALL_GRASS, RootsTags.Items.TALL_GRASS);
@@ -424,17 +391,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(ItemTags.PLANKS).add(WILDWOOD_PLANKS.get());
     this.tag(ItemTags.SAPLINGS).add(WILDWOOD_SAPLING.get());
-    this.tag(ItemTags.ACACIA_LOGS).add(RUNED_ACACIA_LOG.get());
-    this.tag(ItemTags.BIRCH_LOGS).add(RUNED_BIRCH_LOG.get());
-    this.tag(ItemTags.JUNGLE_LOGS).add(RUNED_JUNGLE_LOG.get());
-    this.tag(ItemTags.OAK_LOGS).add(RUNED_OAK_LOG.get());
-    this.tag(ItemTags.DARK_OAK_LOGS).add(RUNED_DARK_OAK_LOG.get());
-    this.tag(ItemTags.CRIMSON_STEMS).add(RUNED_CRIMSON_STEM.get());
-    this.tag(ItemTags.WARPED_STEMS).add(RUNED_WARPED_STEM.get());
     this.tag(ItemTags.LEAVES).add(WILDWOOD_LEAVES.get());
-    this.tag(ItemTags.MANGROVE_LOGS).add(RUNED_MANGROVE_LOG.get());
 
-    this.tag(ItemTags.SPRUCE_LOGS).add(RUNED_SPRUCE_LOG.get());
     this.tag(ItemTags.LOGS_THAT_BURN).addTags(RootsTags.Items.WILDWOOD_LOGS);
     //noinspection unchecked
     this.tag(ItemTags.LOGS).addTags(RootsTags.Items.WILDWOOD_LOGS);

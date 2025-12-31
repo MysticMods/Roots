@@ -90,18 +90,6 @@ public class ModBlocks {
       .mapColor(MapColor.PLANT).strength(0.2f).randomTicks().sound(SoundType.GRASS).noOcclusion()
       .isSuffocating(ModBlocks::never).isViewBlocking(ModBlocks::never).ignitedByLava()
       .pushReaction(PushReaction.DESTROY).isRedstoneConductor(ModBlocks::never)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_WILDWOOD_LOG = BLOCKS.register("runed_wildwood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
-      .mapColor((state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.WOOD : MapColor.COLOR_BROWN))
-      .instrument(NoteBlockInstrument.BASS).strength(2.0f).sound(SoundType.WOOD).ignitedByLava()));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_SPRUCE_LOG = BLOCKS.register("runed_spruce_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LOG)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_JUNGLE_LOG = BLOCKS.register("runed_jungle_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LOG)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_BIRCH_LOG = BLOCKS.register("runed_birch_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LOG)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_OAK_LOG = BLOCKS.register("runed_oak_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_DARK_OAK_LOG = BLOCKS.register("runed_dark_oak_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_LOG)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_ACACIA_LOG = BLOCKS.register("runed_acacia_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_LOG)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_MANGROVE_LOG = BLOCKS.register("runed_mangrove_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_LOG)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_WARPED_STEM = BLOCKS.register("runed_warped_stem", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_STEM)));
-  public static final DeferredHolder<Block, RotatedPillarBlock> RUNED_CRIMSON_STEM = BLOCKS.register("runed_crimson_stem", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_STEM)));
   public static final DeferredHolder<Block, StairBlock> RUNESTONE_STAIRS = BLOCKS.register("runestone_stairs", () -> new StairBlock(ModBlocks.RUNESTONE.get()
       .defaultBlockState(), RUNESTONE_PROPERTIES));
   public static final DeferredHolder<Block, StairBlock> MOSSY_RUNESTONE_STAIRS = BLOCKS.register("mossy_runestone_stairs", () -> new StairBlock(ModBlocks.MOSSY_RUNESTONE.get()

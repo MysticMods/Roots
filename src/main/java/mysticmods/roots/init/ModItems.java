@@ -105,16 +105,6 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> WILDWOOD_SAPLING = ITEMS.register("wildwood_sapling", () -> new BlockItem(ModBlocks.WILDWOOD_SAPLING.get(), new Item.Properties().rarity(Rarity.EPIC)));
   public static DeferredHolder<Item, BlockItem> STONEPETAL = ITEMS.register("stonepetal", () -> new BlockItem(ModBlocks.STONEPETAL.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> WILDWOOD_LEAVES = ITEMS.register("wildwood_leaves", () -> new BlockItem(ModBlocks.WILDWOOD_LEAVES.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_WILDWOOD_LOG = ITEMS.register("runed_wildwood_log", () -> new BlockItem(ModBlocks.RUNED_WILDWOOD_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_SPRUCE_LOG = ITEMS.register("runed_spruce_log", () -> new BlockItem(ModBlocks.RUNED_SPRUCE_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_JUNGLE_LOG = ITEMS.register("runed_jungle_log", () -> new BlockItem(ModBlocks.RUNED_JUNGLE_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_BIRCH_LOG = ITEMS.register("runed_birch_log", () -> new BlockItem(ModBlocks.RUNED_BIRCH_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_OAK_LOG = ITEMS.register("runed_oak_log", () -> new BlockItem(ModBlocks.RUNED_OAK_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_DARK_OAK_LOG = ITEMS.register("runed_dark_oak_log", () -> new BlockItem(ModBlocks.RUNED_DARK_OAK_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_ACACIA_LOG = ITEMS.register("runed_acacia_log", () -> new BlockItem(ModBlocks.RUNED_ACACIA_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_MANGROVE_LOG = ITEMS.register("runed_mangrove_log", () -> new BlockItem(ModBlocks.RUNED_MANGROVE_LOG.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_WARPED_STEM = ITEMS.register("runed_warped_stem", () -> new BlockItem(ModBlocks.RUNED_WARPED_STEM.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> RUNED_CRIMSON_STEM = ITEMS.register("runed_crimson_stem", () -> new BlockItem(ModBlocks.RUNED_CRIMSON_STEM.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> RUNESTONE_STAIRS = ITEMS.register("runestone_stairs", () -> new BlockItem(ModBlocks.RUNESTONE_STAIRS.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> MOSSY_RUNESTONE_STAIRS = ITEMS.register("mossy_runestone_stairs", () -> new BlockItem(ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> RUNESTONE_BRICK_STAIRS = ITEMS.register("runestone_brick_stairs", () -> new BlockItem(ModBlocks.RUNESTONE_BRICK_STAIRS.get(), new Item.Properties()));

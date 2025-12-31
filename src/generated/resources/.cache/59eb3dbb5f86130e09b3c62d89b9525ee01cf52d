@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-26T13:44:07.3465735	Loot Tables
+// 1.21.1	2025-12-31T20:17:27.5073704	Loot Tables
 3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
@@ -51,8 +51,6 @@ c1d853ca073ad79c366534d8f010ea06f9c2eac5 data/roots/loot_table/blocks/reinforced
 efe901a4ec0b5a1ee70bfb44da0aa9d824b7addd data/roots/loot_table/blocks/reinforced_ritual_pedestal.json
 905ec5f6141b1debcd781d77f4e61a6c20ae13a3 data/roots/loot_table/blocks/reinforced_soul_pyre.json
 b53003d4d4ae960da21cfaf343722d8d9629dfd7 data/roots/loot_table/blocks/ritual_pedestal.json
-d83617cd4bc9398e50b9ccbeaeff35ed87300481 data/roots/loot_table/blocks/runed_acacia_log.json
-5149fdf6a8c82c014dc1ea65fa67f2321b31c9f1 data/roots/loot_table/blocks/runed_birch_log.json
 1cf9ce82567bff6750e77dddcd592e8ffda31ce7 data/roots/loot_table/blocks/runed_brick.json
 2f019b93b37fbb698d6e2c523073e5dab84bea77 data/roots/loot_table/blocks/runed_brick_button.json
 3bf094fabf46b21c019908fe858e546d30c6c338 data/roots/loot_table/blocks/runed_brick_pressure_plate.json
@@ -60,15 +58,9 @@ d83617cd4bc9398e50b9ccbeaeff35ed87300481 data/roots/loot_table/blocks/runed_acac
 86ce885cc76b957bd29b85a365c20b248b3777cd data/roots/loot_table/blocks/runed_brick_stairs.json
 f6cd3c6c0aa1451863450acea41f10e9d85e7874 data/roots/loot_table/blocks/runed_brick_wall.json
 05456b7790010b4fc6a7a147ed66636f7779f3b5 data/roots/loot_table/blocks/runed_button.json
-18521b150c0c657ab405b15c0d44524cd30b8ca0 data/roots/loot_table/blocks/runed_crimson_stem.json
-acd3f3a84c114dd60e3121ec59e257e31ab9b1c8 data/roots/loot_table/blocks/runed_dark_oak_log.json
-49399b0ae41b6bb2634a94e00762e539e1425acb data/roots/loot_table/blocks/runed_jungle_log.json
-2f8f3f5ba3dafdb580ed1205528e7cdd829e7a37 data/roots/loot_table/blocks/runed_mangrove_log.json
-33b88f32d529e7e71cf340e5346d8aeb6773dbba data/roots/loot_table/blocks/runed_oak_log.json
 e6823bd68ea03ab39fb5dc72bb8554ffde67ed4c data/roots/loot_table/blocks/runed_obsidian.json
 dd37046c3941f7c860839ff8bd297e58a972fc1e data/roots/loot_table/blocks/runed_pressure_plate.json
 2fe5fde42d5fb25398ac829dcc97ba9e125c7ebc data/roots/loot_table/blocks/runed_slab.json
-fac3b894b4af44843d2d475fad25d879bac4ac13 data/roots/loot_table/blocks/runed_spruce_log.json
 db7f4baf3b141f229902cf7665bc5ecf0864ca1d data/roots/loot_table/blocks/runed_stairs.json
 0cd338e2d917037db4ccd1d53859dc4477b760e2 data/roots/loot_table/blocks/runed_tile.json
 7c1c26951d3d96e6a102b7bf1fcd7153d1522f13 data/roots/loot_table/blocks/runed_tile_button.json
@@ -77,8 +69,6 @@ ca813ac5ab125eda33169e23e1ee1a41ce6db239 data/roots/loot_table/blocks/runed_tile
 0ff9af1b3d56eb9c3483a4e1f919cc0140cd4360 data/roots/loot_table/blocks/runed_tile_stairs.json
 cc952042c1d024677937f27e3d94c96c42dee93d data/roots/loot_table/blocks/runed_tile_wall.json
 ddc706284d3d3f9ee6d195ad86c8a1934dddaf3e data/roots/loot_table/blocks/runed_wall.json
-01975e68bff2a073bf3b339290721cbce4b447bf data/roots/loot_table/blocks/runed_warped_stem.json
-e10450fec32e4d896338b50303463ff0a8b9ceaf data/roots/loot_table/blocks/runed_wildwood_log.json
 4abfee2baf088b30c8c2faf85fbbdcac759e2133 data/roots/loot_table/blocks/runestone.json
 5aefd34b2427f63a511196a2566c7b07e5f42f67 data/roots/loot_table/blocks/runestone_brick.json
 bad98884d7977490a6bea461729e964643f8f029 data/roots/loot_table/blocks/runestone_brick_button.json

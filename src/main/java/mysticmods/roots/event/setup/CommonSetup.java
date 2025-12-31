@@ -45,14 +45,6 @@ public class CommonSetup {
       fire.setFlammable(ModBlocks.WILDWOOD_STAIRS.get(), 5, 20);
       fire.setFlammable(ModBlocks.WILDWOOD_LEAVES.get(), 30, 6);
       fire.setFlammable(ModBlocks.STONEPETAL.get(), 60, 100);
-      fire.setFlammable(ModBlocks.RUNED_WILDWOOD_LOG.get(), 1, 1);
-      fire.setFlammable(ModBlocks.RUNED_ACACIA_LOG.get(), 1, 1);
-      fire.setFlammable(ModBlocks.RUNED_BIRCH_LOG.get(), 1, 1);
-      fire.setFlammable(ModBlocks.RUNED_DARK_OAK_LOG.get(), 1, 1);
-      fire.setFlammable(ModBlocks.RUNED_JUNGLE_LOG.get(), 1, 1);
-      fire.setFlammable(ModBlocks.RUNED_OAK_LOG.get(), 1, 1);
-      fire.setFlammable(ModBlocks.RUNED_SPRUCE_LOG.get(), 1, 1);
-      fire.setFlammable(ModBlocks.RUNED_MANGROVE_LOG.get(), 1, 1);
       fire.setFlammable(ModBlocks.HANGING_GROVE_MOSS.get(), 1, 1);
       fire.setFlammable(ModBlocks.CREEPING_GROVE_MOSS.get(), 1, 1);
       fire.setFlammable(ModBlocks.WILD_AUBERGINE.get(), 60, 100);

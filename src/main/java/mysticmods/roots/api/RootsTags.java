@@ -70,20 +70,6 @@ public class RootsTags {
     public static final TagKey<Block> RUNESTONE = modTag("runestone");
     public static final TagKey<Block> WILDWOOD_LOGS = modTag("logs/wildwood");
 
-    // Specific types of Runed Logs
-    public static final TagKey<Block> RUNED_LOGS = modTag("logs/runed");
-    public static final TagKey<Block> RUNED_ACACIA_LOG = modTag("logs/runed/acacia");
-    public static final TagKey<Block> RUNED_DARK_OAK_LOG = modTag("logs/runed/dark_oak");
-    public static final TagKey<Block> RUNED_OAK_LOG = modTag("logs/runed/oak");
-    public static final TagKey<Block> RUNED_BIRCH_LOG = modTag("logs/runed/birch");
-    public static final TagKey<Block> RUNED_JUNGLE_LOG = modTag("logs/runed/jungle");
-    public static final TagKey<Block> RUNED_SPRUCE_LOG = modTag("logs/runed/spruce");
-
-    public static final TagKey<Block> RUNED_MANGROVE_LOG = modTag("logs/runed/mangrove");
-    public static final TagKey<Block> RUNED_WILDWOOD_LOG = modTag("logs/runed/wildwood");
-    public static final TagKey<Block> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
-    public static final TagKey<Block> RUNED_WARPED_STEM = modTag("logs/runed/warped");
-
     // Grove Stones
     public static final TagKey<Block> GROVE_STONES = modTag("grove_stones");
 
@@ -125,31 +111,6 @@ public class RootsTags {
 
     public static final TagKey<Block> CAPSTONES = modTag("capstones/any");
     public static final TagKey<Block> PILLARS = modTag("pillars/any");
-
-    public static final TagKey<Block> ACACIA_CAPSTONES = modTag("capstones/log/acacia");
-    public static final TagKey<Block> DARK_OAK_CAPSTONES = modTag("capstones/log/dark_oak");
-    public static final TagKey<Block> OAK_CAPSTONES = modTag("capstones/log/oak");
-    public static final TagKey<Block> BIRCH_CAPSTONES = modTag("capstones/log/birch");
-    public static final TagKey<Block> JUNGLE_CAPSTONES = modTag("capstones/log/jungle");
-    public static final TagKey<Block> SPRUCE_CAPSTONES = modTag("capstones/log/spruce");
-    public static final TagKey<Block> WILDWOOD_CAPSTONES = modTag("capstones/log/wildwood");
-    public static final TagKey<Block> MANGROVE_CAPSTONES = modTag("capstones/log/mangrove");
-    public static final TagKey<Block> CRIMSON_CAPSTONES = modTag("capstones/log/crimson");
-    public static final TagKey<Block> WARPED_CAPSTONES = modTag("capstones/log/warped");
-
-    public static final TagKey<Block> LOG_PILLARS = modTag("pillars/log/any");
-    public static final TagKey<Block> LOG_CAPSTONES = modTag("capstones/log/any");
-
-    public static final TagKey<Block> ACACIA_PILLARS = modTag("pillars/log/acacia");
-    public static final TagKey<Block> DARK_OAK_PILLARS = modTag("pillars/log/dark_oak");
-    public static final TagKey<Block> OAK_PILLARS = modTag("pillars/log/oak");
-    public static final TagKey<Block> BIRCH_PILLARS = modTag("pillars/log/birch");
-    public static final TagKey<Block> JUNGLE_PILLARS = modTag("pillars/log/jungle");
-    public static final TagKey<Block> SPRUCE_PILLARS = modTag("pillars/log/spruce");
-    public static final TagKey<Block> WILDWOOD_PILLARS = modTag("pillars/log/wildwood");
-    public static final TagKey<Block> MANGROVE_PILLARS = modTag("pillars/log/mangrove");
-    public static final TagKey<Block> CRIMSON_PILLARS = modTag("pillars/log/crimson");
-    public static final TagKey<Block> WARPED_PILLARS = modTag("pillars/log/warped");
 
     // Crops that should not be affected by the growth spells
     public static final TagKey<Block> GROWTH_BLACKLIST = modTag("growth/blacklist");
@@ -335,17 +296,6 @@ public class RootsTags {
     public static final TagKey<Item> RUNED_OBSIDIAN = modTag("runed_obsidian");
     public static final TagKey<Item> RUNESTONE = modTag("runestone");
     public static final TagKey<Item> WILDWOOD_LOGS = modTag("logs/wildwood");
-    public static final TagKey<Item> RUNED_LOGS = modTag("logs/runed");
-    public static final TagKey<Item> RUNED_ACACIA_LOG = modTag("logs/runed/acacia");
-    public static final TagKey<Item> RUNED_DARK_OAK_LOG = modTag("logs/runed/dark_oak");
-    public static final TagKey<Item> RUNED_OAK_LOG = modTag("logs/runed/oak");
-    public static final TagKey<Item> RUNED_BIRCH_LOG = modTag("logs/runed/birch");
-    public static final TagKey<Item> RUNED_JUNGLE_LOG = modTag("logs/runed/jungle");
-    public static final TagKey<Item> RUNED_SPRUCE_LOG = modTag("logs/runed/spruce");
-    public static final TagKey<Item> RUNED_MANGROVE_LOG = modTag("logs/runed/mangrove");
-    public static final TagKey<Item> RUNED_WILDWOOD_LOG = modTag("logs/runed/wildwood");
-    public static final TagKey<Item> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
-    public static final TagKey<Item> RUNED_WARPED_STEM = modTag("logs/runed/warped");
     public static final TagKey<Item> GROVE_STONES = modTag("grove_stones");
     public static final TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
     public static final TagKey<Item> GROVE_STONE_WILD = modTag("grove_stones/wild");
@@ -430,30 +380,7 @@ public class RootsTags {
 
     public static final TagKey<Item> CAPSTONES = modTag("capstones/any");
     public static final TagKey<Item> PILLARS = modTag("pillars/any");
-
-    public static final TagKey<Item> ACACIA_CAPSTONES = modTag("capstones/log/acacia");
-    public static final TagKey<Item> DARK_OAK_CAPSTONES = modTag("capstones/log/dark_oak");
-    public static final TagKey<Item> OAK_CAPSTONES = modTag("capstones/log/oak");
-    public static final TagKey<Item> BIRCH_CAPSTONES = modTag("capstones/log/birch");
-    public static final TagKey<Item> JUNGLE_CAPSTONES = modTag("capstones/log/jungle");
-    public static final TagKey<Item> SPRUCE_CAPSTONES = modTag("capstones/log/spruce");
-    public static final TagKey<Item> WILDWOOD_CAPSTONES = modTag("capstones/log/wildwood");
-    public static final TagKey<Item> MANGROVE_CAPSTONES = modTag("capstones/log/mangrove");
-    public static final TagKey<Item> CRIMSON_CAPSTONES = modTag("capstones/log/crimson");
-    public static final TagKey<Item> WARPED_CAPSTONES = modTag("capstones/log/warped");
-
-    public static final TagKey<Item> LOG_PILLARS = modTag("pillars/log/any");
-    public static final TagKey<Item> LOG_CAPSTONES = modTag("capstones/log/any");
-    public static final TagKey<Item> ACACIA_PILLARS = modTag("pillars/log/acacia");
-    public static final TagKey<Item> DARK_OAK_PILLARS = modTag("pillars/log/dark_oak");
-    public static final TagKey<Item> OAK_PILLARS = modTag("pillars/log/oak");
-    public static final TagKey<Item> BIRCH_PILLARS = modTag("pillars/log/birch");
-    public static final TagKey<Item> JUNGLE_PILLARS = modTag("pillars/log/jungle");
-    public static final TagKey<Item> SPRUCE_PILLARS = modTag("pillars/log/spruce");
-    public static final TagKey<Item> WILDWOOD_PILLARS = modTag("pillars/log/wildwood");
-    public static final TagKey<Item> MANGROVE_PILLARS = modTag("pillars/log/mangrove");
-    public static final TagKey<Item> CRIMSON_PILLARS = modTag("pillars/log/crimson");
-    public static final TagKey<Item> WARPED_PILLARS = modTag("pillars/log/warped");
+    
     public static final TagKey<Item> SPROUT_BREEDING_REWARDS = modTag("sprout_breeding_rewards");
 
     public static final TagKey<Item> FORAGING_ELIGIBLE = modTag("foraging_eligible");

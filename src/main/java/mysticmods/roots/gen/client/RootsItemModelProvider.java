@@ -50,16 +50,6 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.WILDWOOD_SAPLING.get());
     basicItem(ModItems.STONEPETAL.get());
     simpleBlockItem(ModBlocks.WILDWOOD_LEAVES.get());
-    simpleBlockItem(ModBlocks.RUNED_WILDWOOD_LOG.get());
-    simpleBlockItem(ModBlocks.RUNED_SPRUCE_LOG.get());
-    simpleBlockItem(ModBlocks.RUNED_BIRCH_LOG.get());
-    simpleBlockItem(ModBlocks.RUNED_JUNGLE_LOG.get());
-    simpleBlockItem(ModBlocks.RUNED_ACACIA_LOG.get());
-    simpleBlockItem(ModBlocks.RUNED_DARK_OAK_LOG.get());
-    simpleBlockItem(ModBlocks.RUNED_CRIMSON_STEM.get());
-    simpleBlockItem(ModBlocks.RUNED_WARPED_STEM.get());
-    simpleBlockItem(ModBlocks.RUNED_MANGROVE_LOG.get());
-    simpleBlockItem(ModBlocks.RUNED_OAK_LOG.get());
     simpleBlockItem(ModBlocks.RUNESTONE_STAIRS.get());
     simpleBlockItem(ModBlocks.RUNESTONE_BRICK_STAIRS.get());
     simpleBlockItem(ModBlocks.RUNESTONE_TILE_STAIRS.get());

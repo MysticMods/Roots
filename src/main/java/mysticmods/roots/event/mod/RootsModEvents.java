@@ -44,17 +44,6 @@ public class RootsModEvents {
       event.accept(ModItems.WILDWOOD_LEAVES.get());
       event.accept(ModItems.BAFFLECAP_BLOCK.get());
 
-      event.accept(ModItems.RUNED_WILDWOOD_LOG.get());
-      event.accept(ModItems.RUNED_SPRUCE_LOG.get());
-      event.accept(ModItems.RUNED_JUNGLE_LOG.get());
-      event.accept(ModItems.RUNED_BIRCH_LOG.get());
-      event.accept(ModItems.RUNED_OAK_LOG.get());
-      event.accept(ModItems.RUNED_DARK_OAK_LOG.get());
-      event.accept(ModItems.RUNED_ACACIA_LOG.get());
-      event.accept(ModItems.RUNED_MANGROVE_LOG.get());
-      event.accept(ModItems.RUNED_WARPED_STEM.get());
-      event.accept(ModItems.RUNED_CRIMSON_STEM.get());
-
       event.accept(ModItems.RUNESTONE_STAIRS.get());
       event.accept(ModItems.MOSSY_RUNESTONE_STAIRS.get());
       event.accept(ModItems.RUNESTONE_BRICK_STAIRS.get());
