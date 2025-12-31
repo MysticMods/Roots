@@ -168,18 +168,6 @@ public class RootsModEvents {
       event.accept(ModItems.GROVE_SPORES.get());
       event.accept(ModItems.AUBERGINE_SEEDS.get());
 
-      event.accept(ModItems.ACACIA_BARK.get());
-      event.accept(ModItems.BIRCH_BARK.get());
-      event.accept(ModItems.DARK_OAK_BARK.get());
-      event.accept(ModItems.JUNGLE_BARK.get());
-      event.accept(ModItems.OAK_BARK.get());
-      event.accept(ModItems.SPRUCE_BARK.get());
-      event.accept(ModItems.WILDWOOD_BARK.get());
-      event.accept(ModItems.CRIMSON_BARK.get());
-      event.accept(ModItems.WARPED_BARK.get());
-      event.accept(ModItems.MANGROVE_BARK.get());
-      event.accept(ModItems.MIXED_BARK.get());
-
       event.accept(ModItems.CARAPACE.get());
       event.accept(ModItems.PELT.get());
       event.accept(ModItems.ANTLERS.get());

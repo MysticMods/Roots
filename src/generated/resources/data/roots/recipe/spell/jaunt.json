@@ -3,7 +3,7 @@
   "data": {
     "ingredients": [
       {
-        "tag": "roots:barks/birch"
+        "tag": "minecraft:birch_logs"
       },
       {
         "item": "minecraft:redstone_torch"

@@ -9,7 +9,6 @@ import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.recipe.PouchDyeRecipe;
 import mysticmods.roots.recipe.grove.GrovePouchRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
-import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -33,7 +32,6 @@ public class ModSerializers {
   private static final DeferredRegister<PropertyType<?>> PROPERTY_TYPES = DeferredRegister.create(RootsRegistries.Keys.PROPERTY_TYPES, RootsAPI.MODID);
 
   // Recipe Serializers
-  public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", DynamicBarkRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, GroveRecipe.Serializer> GROVE_CRAFTING = RECIPE_SERIALIZERS.register("grove", GroveRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, GrovePouchRecipe.Serializer> GROVE_POUCH_CRAFTING = RECIPE_SERIALIZERS.register("grove_pouch", GrovePouchRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, MortarRecipe.Serializer> MORTAR = RECIPE_SERIALIZERS.register("mortar", MortarRecipe.Serializer::new);

@@ -6,50 +6,26 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.ingredient.block.SimpleBlockType;
 import mysticmods.roots.integration.jei.widget.DurabilityWidget;
 import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
-import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.ItemAbilities;
 
-import java.util.*;
+import java.util.List;
 
 // TODO: Durability cost
 public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
   private static ItemStack knife;
-
-  private static List<SimpleBlockType> dynamicInput;
-  private static List<SimpleBlockType> dynamicOutput;
-  private static boolean dynamicIngredientsDone = false;
 
   public KnifeCategory(IGuiHelper helper) {
     super(RootsJEIPlugin.KNIFE_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/bark_carving.png"), () -> new ItemStack(ModItems.SILVER_KNIFE.get()), Component.translatable("roots.jei.knife_crafting"));
@@ -58,59 +34,6 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
   public static void generateDynamicIngredients() {
     if (knife == null) {
       knife = new ItemStack(ModItems.NETHERITE_KNIFE);
-    }
-
-    HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
-
-    Set<Block> skippedInputs = new HashSet<>();
-    for (RecipeHolder<KnifeRecipe> recipeHolder : ResolvedRecipes.KNIFE.getRecipes(Minecraft.getInstance().level)) {
-      if (recipeHolder.value().equals(DynamicBarkRecipe.INSTANCE)) {
-        continue;
-      }
-
-      KnifeRecipe recipe = recipeHolder.value();
-      ItemStack result = recipe.getResultItem(provider);
-      if (!result.is(RootsTags.Items.BARKS)) {
-        continue;
-      }
-
-      if (recipe.getStateMapper() != null) {
-        for (Map.Entry<Block, Block> entry : recipe.getStateMapper().mapBlock().entrySet()) {
-          skippedInputs.add(entry.getKey());
-        }
-      } else if (recipe.getTest() != null && recipe.getOutputState() != null) {
-        skippedInputs.add(recipe.getTest().getBlockState(provider).getBlock());
-      }
-    }
-
-    List<Block> inputs = new ArrayList<>();
-    List<Block> outputs = new ArrayList<>();
-
-    // This is the dynamic recipe
-    if (BuiltInRegistries.BLOCK.getTag(BlockTags.LOGS).isPresent()) {
-      UseOnContext fakeContext = new UseOnContext(Minecraft.getInstance().level, null, InteractionHand.MAIN_HAND, knife, BlockHitResult.miss(Vec3.ZERO, Direction.UP, BlockPos.ZERO));
-
-      for (Holder<Block> holder : BuiltInRegistries.BLOCK.getTag(BlockTags.LOGS).get()) {
-        Block block = holder.value();
-        if (skippedInputs.contains(block)) {
-          continue;
-        }
-
-        BlockState result = block.defaultBlockState().getToolModifiedState(fakeContext, ItemAbilities.AXE_STRIP, true);
-        if (result == null) {
-          result = AxeItem.getAxeStrippingState(block.defaultBlockState());
-          if (result == null) {
-            continue;
-          }
-        }
-
-        inputs.add(block);
-        outputs.add(result.getBlock());
-      }
-
-      dynamicInput = inputs.stream().map(SimpleBlockType::new).toList();
-      dynamicOutput = outputs.stream().map(SimpleBlockType::new).toList();
-      dynamicIngredientsDone = true;
     }
   }
 
@@ -123,20 +46,7 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
           .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
     }
 
-    if (recipe == DynamicBarkRecipe.INSTANCE) {
-      if (!dynamicIngredientsDone) {
-        generateDynamicIngredients();
-      }
-
-      builder.addSlot(RecipeIngredientRole.INPUT, 7, 34)
-          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicInput)
-          .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
-          .addIngredients(RootsJEIPlugin.BLOCK_TYPE, dynamicOutput)
-          .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
-    } else {
-      WorldRecipeUtil.setWorldRecipe(builder, recipe, iFocusGroup, 7, 34, 73, 34);
-    }
+    WorldRecipeUtil.setWorldRecipe(builder, recipe, iFocusGroup, 7, 34, 73, 34);
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();
 

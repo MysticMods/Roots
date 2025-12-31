@@ -126,8 +126,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder9.add(ModItems.WILDEWHEET, new Compostable(0.9f, true), false);
     builder9.add(ModItems.PERESKIA, new Compostable(0.9f, true), false);
 
-    builder9.add(RootsTags.Items.BARKS, new Compostable(0.3f, false), false);
-
     builder9.add(ModItems.STONEPETAL, new Compostable(0.65f, false), false);
 
     // TODO: Recalculate all of these
@@ -159,22 +157,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.WILDWOOD_LADDER, new FurnaceFuel(300), false);
     builder10.add(ModItems.FIRE_STARTER, new FurnaceFuel(90), false);
     builder10.add(RootsTags.Items.RUNED_LOGS, new FurnaceFuel(300), false);
-    builder10.add(RootsTags.Items.BARKS_THAT_BURN, new FurnaceFuel(100), false);
-
-/*    Builder<ItemStack, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
-    Builder<ItemStack, Spell> builder12 = builder(DataMaps.SPELL_DISPLAY_ITEM).replace(false);
-
-    BuiltInRegistries.ITEM.entrySet().forEach(o -> {
-      if (o.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
-        if (o.getKey().location().getPath()
-            .startsWith("ritual_") && o.getValue() instanceof TokenItem.RitualTokenItem ritual) {
-          builder11.add(ritual.getRitual().builtInRegistryHolder(), new ItemStack(o.getValue()), false);
-        } else if (o.getKey().location().getPath()
-            .startsWith("spell_") && o.getValue() instanceof TokenItem.SpellTokenItem spell) {
-          builder12.add(spell.getSpell().builtInRegistryHolder(), new ItemStack(o.getValue()), false);
-        }
-      }
-    });*/
 
     var builder14 = builder(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
     // Requires finding a world-generated crop

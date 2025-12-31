@@ -1,8 +1,5 @@
 {
   "values": {
-    "#roots:barks": {
-      "chance": 0.3
-    },
     "roots:assorted_seeds": {
       "chance": 0.3
     },

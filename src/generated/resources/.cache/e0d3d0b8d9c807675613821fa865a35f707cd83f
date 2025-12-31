@@ -1,6 +1,6 @@
-// 1.21.1	2025-10-28T20:29:25.0166087	Data Maps
-dd3d79292b26f2d1b2a3eeb4cb4550e54b0d6c2e data/neoforge/data_maps/item/compostables.json
-59bfc4bf0cbbd2d0dc3a7853e0140dc8b82e7710 data/neoforge/data_maps/item/furnace_fuels.json
+// 1.21.1	2025-12-31T20:03:52.7366826	Data Maps
+469ace619bdbd133b2727700d2d67b4af2091ae8 data/neoforge/data_maps/item/compostables.json
+2e615aafaf90046c1f4d1fb34efc344d18e1dde3 data/neoforge/data_maps/item/furnace_fuels.json
 fe54b8e14dda1ec296dc4cf63f7c7fac99b24d34 data/roots/data_maps/attribute/augmentation_data.json
 623e3c448f2f5574249628ca993a88f8110338a8 data/roots/data_maps/block/extra_crop_data.json
 d7ccf42259d8f77895bdf1fdb6e6df0daf01eed9 data/roots/data_maps/block/grove_power_generator.json

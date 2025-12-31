@@ -303,20 +303,6 @@ public class RootsTags {
     public static final TagKey<Item> AUBERGINE_CROP = modTag("crops/aubergine");
     public static final TagKey<Item> BAFFLECAP_CROP = modTag("crops/bafflecap");
 
-    public static final TagKey<Item> BARKS = modTag("barks");
-    public static final TagKey<Item> BARKS_THAT_BURN = modTag("barks_that_burn");
-    public static final TagKey<Item> ACACIA_BARK = modTag("barks/acacia");
-    public static final TagKey<Item> BIRCH_BARK = modTag("barks/birch");
-    public static final TagKey<Item> DARK_OAK_BARK = modTag("barks/dark_oak");
-    public static final TagKey<Item> JUNGLE_BARK = modTag("barks/jungle");
-    public static final TagKey<Item> OAK_BARK = modTag("barks/oak");
-    public static final TagKey<Item> SPRUCE_BARK = modTag("barks/spruce");
-    public static final TagKey<Item> WILDWOOD_BARK = modTag("barks/wildwood");
-    public static final TagKey<Item> MANGROVE_BARK = modTag("barks/mangrove");
-    public static final TagKey<Item> CRIMSON_BARK = modTag("barks/crimson");
-    public static final TagKey<Item> WARPED_BARK = modTag("barks/warped");
-    public static final TagKey<Item> MIXED_BARK = modTag("barks/mixed");
-
     public static final TagKey<Item> BOTTLES = modTag("bottles");
 
     public static final TagKey<Item> POUCHES = modTag("pouches");

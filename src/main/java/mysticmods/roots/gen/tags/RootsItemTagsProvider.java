@@ -45,23 +45,6 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-    this.tag(RootsTags.Items.ACACIA_BARK).add(ModItems.ACACIA_BARK.get());
-    this.tag(RootsTags.Items.BIRCH_BARK).add(ModItems.BIRCH_BARK.get());
-    this.tag(RootsTags.Items.DARK_OAK_BARK).add(ModItems.DARK_OAK_BARK.get());
-    this.tag(RootsTags.Items.JUNGLE_BARK).add(ModItems.JUNGLE_BARK.get());
-    this.tag(RootsTags.Items.OAK_BARK).add(ModItems.OAK_BARK.get());
-    this.tag(RootsTags.Items.SPRUCE_BARK).add(ModItems.SPRUCE_BARK.get());
-    this.tag(RootsTags.Items.WILDWOOD_BARK).add(ModItems.WILDWOOD_BARK.get());
-    this.tag(RootsTags.Items.MANGROVE_BARK).add(ModItems.MANGROVE_BARK.get());
-    this.tag(RootsTags.Items.CRIMSON_BARK).add(ModItems.CRIMSON_BARK.get());
-    this.tag(RootsTags.Items.WARPED_BARK).add(ModItems.WARPED_BARK.get());
-    this.tag(RootsTags.Items.MIXED_BARK).add(ModItems.MIXED_BARK.get());
-
-    this.tag(RootsTags.Items.BARKS)
-        .addTags(RootsTags.Items.BARKS_THAT_BURN, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK);
-    this.tag(RootsTags.Items.BARKS_THAT_BURN)
-        .addTags(RootsTags.Items.ACACIA_BARK, RootsTags.Items.BIRCH_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.MANGROVE_BARK, RootsTags.Items.MIXED_BARK);
-
     this.tag(RootsTags.Items.DEER_FOOD).add(Items.WHEAT).add(ModItems.WILDEWHEET.get());
 
     this.tag(RootsTags.Items.GROVE_MOSS_CROP).add(ModItems.GROVE_MOSS.get());

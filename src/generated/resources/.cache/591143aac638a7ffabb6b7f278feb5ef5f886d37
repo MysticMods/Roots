@@ -1,5 +1,4 @@
-// 1.21.1	2025-09-16T15:23:55.0744472	Item Models: roots
-d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
+// 1.21.1	2025-12-31T20:03:52.7838161	Item Models: roots
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/acid_cloud.json
 256a7c001de142677be9aa40521882ee43ce6ed6 assets/roots/models/item/animal_harvest.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
@@ -23,7 +22,6 @@ f42677fb882a85b92f783ccf865e146136baec5e assets/roots/models/item/beetle_chestpl
 17e53dae59bb9b1fbd95862f45a29d9d6ae2bf84 assets/roots/models/item/beetle_leggings.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/beetle_spawn_egg.json
 45cab8f8d03c1a97148da1e55a8c6e9c3f4bff93 assets/roots/models/item/beetroot_salad.json
-5bee27a76eaab7d24cd6ff96cf33cfebede9500d assets/roots/models/item/birch_bark.json
 26208a71f943b4d69d284512331ef3f47ecaf089 assets/roots/models/item/blooming.json
 f771d6c3eeb5a3f90b4fe68a9c49e5a9a307fca7 assets/roots/models/item/brown_fairy_hut.json
 83545d5ae2291322b4cc1be15964acece132e692 assets/roots/models/item/cactus_syrup.json
@@ -56,11 +54,9 @@ c4d32513c1dcecd92dc99a3d8281235d3a26310e assets/roots/models/item/copper_sword.j
 0e07a20328edf61bec66fab479f508e819e7de07 assets/roots/models/item/crafting.json
 c5d4a44ac86aacfbac1a2b574d0a874f277272d4 assets/roots/models/item/creative_pouch.json
 bfa35e72bbe273df5065c9d1d6636af0fd4a96d3 assets/roots/models/item/creeping_grove_moss.json
-35fc87cc28b1be4203b67004c7b87799d323799b assets/roots/models/item/crimson_bark.json
 882e755f96756941c92aeebc70c2d717034d98b1 assets/roots/models/item/crimson_fairy_hut.json
 cb16030fdccc48ab4cd2f4242671ed2d91a7e6df assets/roots/models/item/dandelion_cordial.json
 84ebab543b659946c5aa7f19acd4075b1af77b2a assets/roots/models/item/dandelion_winds.json
-1d69b78c715766ac4ee6d247b6c8007913b29cdd assets/roots/models/item/dark_oak_bark.json
 e0ccc362bb53d6c3a59c3a5810f3f62537340644 assets/roots/models/item/decay.json
 bc6fc6f93ea204ab36f67ab5e7688fc406068b88 assets/roots/models/item/decorative_pyre.json
 037834e61485611c15efc348276f4845cfe64331 assets/roots/models/item/decorative_soul_pyre.json
@@ -114,7 +110,6 @@ f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.j
 252f3de0446f34f2f76d3462c7445a5cdd4f26ed assets/roots/models/item/iron_knife.json
 786fb86b0e3141ea3168437c9ed6f8f84c7e3e10 assets/roots/models/item/jaunt.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/jerboa_spawn_egg.json
-5a69aa2da7a46f4d23db5ee0f46b65c18210345d assets/roots/models/item/jungle_bark.json
 e6a0673051393d28b926f3caee7ce5f767b9a8e4 assets/roots/models/item/life_drain.json
 07ac679ec17fe212caece89bfa2729cba6367410 assets/roots/models/item/life_essence.json
 b86595f705c8fa38dfd5285297f61688766e3832 assets/roots/models/item/light_drifter.json
@@ -127,9 +122,7 @@ d55f477cd866819a1816a8c3a9ae80d9ad1e1bf8 assets/roots/models/item/living_shovel.
 4cdb54748f238359366a5c4e15e3d3d0285cead8 assets/roots/models/item/living_sword.json
 705bcaee0dc9fff3acd43613739aa49bf19fb6ab assets/roots/models/item/magmatic_soil.json
 76c555ec481505578b9b361b0427ae7624926615 assets/roots/models/item/magnetism.json
-b7d348bfc345b6f5c042d545a7cc1b3e86bc8800 assets/roots/models/item/mangrove_bark.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/melody_sprout_spawn_egg.json
-ecf0fb0b807eadf02730884b26ca34b67129b954 assets/roots/models/item/mixed_bark.json
 39c7e264c6891ac87bcea01113f73d93eb9e5744 assets/roots/models/item/moonglow.json
 f75bbe6c5b1bb7da95b3b4f5bb5bcf45aeb91f82 assets/roots/models/item/moonglow_seeds.json
 fcd75449b3319aaeadcff0f9b69e54c47670a01f assets/roots/models/item/mortar.json
@@ -143,7 +136,6 @@ ac602506c37d0b22017338ee187d0d4185e18825 assets/roots/models/item/mystic_feather
 1c37fc0c9675461d938e9e00da8ab2b374a3688c assets/roots/models/item/netherite_knife.json
 5aab72e09c7a13605375872bc2a9cd5427ed0c6a assets/roots/models/item/nondetection.json
 44ebd8d47e56f77557cb48346122cb570f685c99 assets/roots/models/item/no_grove_stone.json
-bb082cec1ce31e7bcd200abe6e0eef69ade972bb assets/roots/models/item/oak_bark.json
 a6a2b634e55fae5977cfd39eaca9731e8d6c34cf assets/roots/models/item/overgrowth.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/owl_spawn_egg.json
 984d4e24e66b86fe25c5680f4209e24bebb1b8df assets/roots/models/item/pelt.json
@@ -244,7 +236,6 @@ c68601e032263101e606ccc23c50554e7f1ff146 assets/roots/models/item/spirit_bag.jso
 6788ed462ef6117ca6035b1c42c7423c0ca4e96b assets/roots/models/item/spreading_forest.json
 c8dccbe669b16fc2e27b7187e6eaf1d17fd80d0f assets/roots/models/item/sprouting.json
 550103d96e0cbab0b7da821e11a165b4e1e925c5 assets/roots/models/item/sprouting_grove_stone.json
-2b1b250ab42ad09248340b485b900c393c1b7836 assets/roots/models/item/spruce_bark.json
 a1befa04f566bee36903477cfe9652b5e306b655 assets/roots/models/item/staff.json
 5a929348fda9aa77e8f53beb544ea3f216bcebe9 assets/roots/models/item/stalicripe.json
 3c94bcaaf7009d4d301a6ba18645a6fbfa590f42 assets/roots/models/item/stewed_eggplant.json
@@ -288,7 +279,6 @@ b03656e91a705b09ef920587eae3deaa4fb4dffc assets/roots/models/item/unending_bowl.
 2cf4d0007bbab1c05a9b2538114af3df538584ef assets/roots/models/item/venison.json
 72f01bc799f2f958ca71368be166f95be8a5595b assets/roots/models/item/vinegar.json
 62d51dceedd676ba453bf12f7ad4d143c522bba6 assets/roots/models/item/warding.json
-9f5d7d59437ffa13c4f4f69808e464b1fe0dc7c5 assets/roots/models/item/warped_bark.json
 feeaeee25a1be8db946a5f78106be73779e49659 assets/roots/models/item/warped_fairy_hut.json
 ec488f92ceb1c55e10ed9ce2c3f2bb318b15e32c assets/roots/models/item/wild.json
 32bd12fe6572b61ab2746f51f83792f8c79a45f9 assets/roots/models/item/wildewheet.json
@@ -298,7 +288,6 @@ d5f15af95c736c49538888947373791719c0a5bf assets/roots/models/item/wildfire.json
 51c8989827adaa180c9efd17624aae99b23dfb47 assets/roots/models/item/wildroot.json
 29d2eef26c089dcaa97086f84d656fc480fb9b93 assets/roots/models/item/wildroot_growth.json
 e653f3cb55435ece057c0564581de96be847fb27 assets/roots/models/item/wildroot_stew.json
-39ec0419a06137a3f52e386be94e325fa010517e assets/roots/models/item/wildwood_bark.json
 1236428801346b6e2b7fa4131d20d4a32364d4da assets/roots/models/item/wildwood_bow.json
 13a84f6fc16812dbf58e4396b18ac69c85de5aa2 assets/roots/models/item/wildwood_button.json
 e757dbc347e4d6ecf6d357b8b27378e6db5be13f assets/roots/models/item/wildwood_door.json

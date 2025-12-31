@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.recipe.knife;
 
 import com.mojang.serialization.MapCodec;
@@ -107,3 +108,4 @@ public class DynamicBarkRecipe extends KnifeRecipe {
     }
   }
 }
+*/

@@ -12,10 +12,10 @@
         "tag": "c:ingots/silver"
       },
       {
-        "tag": "roots:barks/birch"
+        "tag": "minecraft:birch_logs"
       },
       {
-        "tag": "roots:barks/spruce"
+        "tag": "roots:logs/wildwood"
       }
     ],
     "level_conditions": [

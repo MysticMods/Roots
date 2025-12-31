@@ -1,8 +1,5 @@
 {
   "values": {
-    "#roots:barks_that_burn": {
-      "burn_time": 100
-    },
     "#roots:logs/runed": {
       "burn_time": 300
     },

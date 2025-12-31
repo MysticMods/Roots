@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-20T14:03:51.8348693	Roots Item Tags
+// 1.21.1	2025-12-31T20:03:52.7314442	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -67,19 +67,6 @@ ba8b96a34596290b8bdcf2417e6b081408e0e2ca data/roots/tags/item/apples.json
 a000fcaeb8818c9664e2b088d9cfcbf1c9edf080 data/roots/tags/item/armor/antler.json
 717aa42eb4d9f9f28cbad53dd736c1ba21de2da3 data/roots/tags/item/armor/beetle.json
 7bd2a5224a7849d3c3512a35e810d8c6f9ba43f6 data/roots/tags/item/armor/copper.json
-6fe47a2fa2f55c3e392aa1ae1512c372e3fc8b20 data/roots/tags/item/barks.json
-f84f7ba61349a204c6cce987fd1a6ff40bdb79a6 data/roots/tags/item/barks/acacia.json
-bcad6160f09c7188906ce6d9a107dda512c3237a data/roots/tags/item/barks/birch.json
-b67fb7a6bd6864aa28b34e43e426c416dd9c9986 data/roots/tags/item/barks/crimson.json
-891074e986b786bc521981dec09ab0c70548624e data/roots/tags/item/barks/dark_oak.json
-23007902cc935efc3fa5242e3b1eb32545b46fdf data/roots/tags/item/barks/jungle.json
-f2f9e752512d7c519be02cbf3225335500a6443b data/roots/tags/item/barks/mangrove.json
-a1a905fc0c40dbeb097d5eab709a2633e8e6756d data/roots/tags/item/barks/mixed.json
-0fa3ee1018f186d6ae034d12f31102f38b03f3e7 data/roots/tags/item/barks/oak.json
-0c26a98ba7c57280bd9e86241acebe3b15efde75 data/roots/tags/item/barks/spruce.json
-8473498616c937e7a388109a090efa57399841ab data/roots/tags/item/barks/warped.json
-76ab64b1af0fd463675cc19a388b583f04d4df91 data/roots/tags/item/barks/wildwood.json
-183c59e706dc0d6cc182ac16dbd174cf3291d386 data/roots/tags/item/barks_that_burn.json
 307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/item/bark_logs/acacia.json
 e6a66df990a2e59f597879f3e0d9245712d32f88 data/roots/tags/item/bark_logs/birch.json
 2ddd875c07a1d545574ca44984d769bb007a839e data/roots/tags/item/bark_logs/crimson.json

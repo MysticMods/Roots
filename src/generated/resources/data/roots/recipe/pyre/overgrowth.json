@@ -3,10 +3,10 @@
   "data": {
     "ingredients": [
       {
-        "tag": "roots:barks"
+        "tag": "minecraft:logs"
       },
       {
-        "tag": "roots:barks"
+        "tag": "minecraft:logs"
       },
       {
         "tag": "roots:herbs/grove_moss"

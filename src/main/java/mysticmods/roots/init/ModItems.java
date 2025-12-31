@@ -279,17 +279,6 @@ public class ModItems {
   public static DeferredHolder<Item, TooltipDrinkItem> VEGETABLE_JUICE = ITEMS.register("vegetable_juice", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.VEGETABLE_JUICE)
       .craftRemainder(Items.GLASS_BOTTLE)));
   public static DeferredHolder<Item, Item> INK_BOTTLE = ITEMS.register("ink_bottle", () -> new Item(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE)));
-  public static final DeferredHolder<Item, Item> ACACIA_BARK = ITEMS.register("acacia_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> BIRCH_BARK = ITEMS.register("birch_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> DARK_OAK_BARK = ITEMS.register("dark_oak_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> JUNGLE_BARK = ITEMS.register("jungle_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> OAK_BARK = ITEMS.register("oak_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> SPRUCE_BARK = ITEMS.register("spruce_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> WILDWOOD_BARK = ITEMS.register("wildwood_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> CRIMSON_BARK = ITEMS.register("crimson_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> WARPED_BARK = ITEMS.register("warped_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> MANGROVE_BARK = ITEMS.register("mangrove_bark", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> MIXED_BARK = ITEMS.register("mixed_bark", () -> new Item(new Item.Properties()));
 
   public static final DeferredHolder<Item, PouchItem> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new PouchItem(ApothecaryPouchMenu::new, new Item.Properties().stacksTo(1)
       .component(ModAttachments.APOTHECARY_POUCH_CONTENTS, ItemContainerContents.EMPTY)

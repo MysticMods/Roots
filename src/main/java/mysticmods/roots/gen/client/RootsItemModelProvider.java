@@ -231,17 +231,6 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.VINEGAR.get());
     basicItem(ModItems.VEGETABLE_JUICE.get());
     basicItem(ModItems.INK_BOTTLE.get());
-    subfolder(ModItems.ACACIA_BARK, "bark");
-    subfolder(ModItems.BIRCH_BARK, "bark");
-    subfolder(ModItems.CRIMSON_BARK, "bark");
-    subfolder(ModItems.DARK_OAK_BARK, "bark");
-    subfolder(ModItems.JUNGLE_BARK, "bark");
-    subfolder(ModItems.MANGROVE_BARK, "bark");
-    subfolder(ModItems.OAK_BARK, "bark");
-    subfolder(ModItems.SPRUCE_BARK, "bark");
-    subfolder(ModItems.WARPED_BARK, "bark");
-    subfolder(ModItems.WILDWOOD_BARK, "bark");
-    subfolder(ModItems.MIXED_BARK, "bark");
 
     subfolder(ModItems.SYLVAN_POUCH, "pouches");
     subfolder(ModItems.CREATIVE_POUCH, "pouches");
