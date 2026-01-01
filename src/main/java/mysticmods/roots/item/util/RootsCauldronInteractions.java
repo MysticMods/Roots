@@ -1,4 +1,4 @@
-package mysticmods.roots.item;
+package mysticmods.roots.item.util;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModAttachments;
@@ -13,8 +13,8 @@ public class RootsCauldronInteractions {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     } else if (!stack.has(ModAttachments.DYEABLE)) {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    } else if (stack.get(ModAttachments.DYEABLE) != Dyeable.DEFAULT) {
-      stack.set(ModAttachments.DYEABLE, Dyeable.DEFAULT);
+    } else if (stack.get(ModAttachments.DYEABLE) != DyeableWithDefault.DEFAULT) {
+      stack.set(ModAttachments.DYEABLE, DyeableWithDefault.DEFAULT);
       player.awardStat(Stats.CLEAN_ARMOR);
       LayeredCauldronBlock.lowerFillLevel(state, level, pos);
       return ItemInteractionResult.sidedSuccess(level.isClientSide());

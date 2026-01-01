@@ -6,7 +6,7 @@ import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.datamap.AugmentationInfo;
 import mysticmods.roots.api.recipe.ComplexEntityType;
-import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.recipe.pyre.PyrePedestalRecipe;
@@ -97,8 +97,8 @@ public class ModAttachments {
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FORAGING = COMPONENTS.register("foraging", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT)
       .networkSynchronized(ByteBufCodecs.VAR_INT).build());
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Dyeable>> DYEABLE = COMPONENTS.register("dyeable", () -> new DataComponentType.Builder<Dyeable>().persistent(Dyeable.CODEC)
-      .networkSynchronized(Dyeable.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<DyeableWithDefault>> DYEABLE = COMPONENTS.register("dyeable", () -> new DataComponentType.Builder<DyeableWithDefault>().persistent(DyeableWithDefault.CODEC)
+      .networkSynchronized(DyeableWithDefault.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<UUID>> ITEM_UUID = COMPONENTS.register("uuid", () -> new DataComponentType.Builder<UUID>().persistent(UUIDUtil.CODEC)
       .networkSynchronized(UUIDUtil.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<GramaryItem.GramaryMode>> GRAMARY_MODE = COMPONENTS.register("gramary_mode", () -> new DataComponentType.Builder<GramaryItem.GramaryMode>().persistent(GramaryItem.GramaryMode.CODEC)

@@ -3,7 +3,7 @@ package mysticmods.roots.recipe.fake;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -22,11 +22,11 @@ public class DyeRecipeGenerator {
     for (Item item : Arrays.asList(ModItems.HERB_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get())) {
       List<ItemStack> colouredPouches = new ArrayList<>();
       ItemStack def = new ItemStack(item);
-      def.set(ModAttachments.DYEABLE, Dyeable.DEFAULT);
+      def.set(ModAttachments.DYEABLE, DyeableWithDefault.DEFAULT);
       colouredPouches.add(def);
       for (DyeColor dyeColor : DyeColor.values()) {
         ItemStack base = new ItemStack(item);
-        base.set(ModAttachments.DYEABLE, Dyeable.fromColor(dyeColor));
+        base.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dyeColor));
         colouredPouches.add(base);
       }
       Ingredient pouchIngredient = Ingredient.of(colouredPouches.toArray(ItemStack[]::new));
@@ -36,7 +36,7 @@ public class DyeRecipeGenerator {
         recipeIngredients.add(Ingredient.of(dyeColor.getTag()));
         ShapedRecipePattern pattern = new ShapedRecipePattern(1, 2, recipeIngredients, Optional.empty());
         ItemStack output = new ItemStack(item);
-        output.set(ModAttachments.DYEABLE, Dyeable.fromColor(dyeColor));
+        output.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dyeColor));
         recipes.add(new RecipeHolder<>(RootsAPI.rl("dye_" + item.builtInRegistryHolder().key().location()
             .getPath() + "_" + dyeColor.getName()), new ShapedRecipe("", CraftingBookCategory.MISC, pattern, output)));
       }

@@ -3,7 +3,7 @@ package mysticmods.roots.recipe;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
@@ -80,7 +80,7 @@ public class PouchDyeRecipe extends CustomRecipe {
     }
 
 
-    toModify.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye.getDyeColor()));
+    toModify.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye.getDyeColor()));
     return toModify;
   }
 

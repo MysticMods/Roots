@@ -3,7 +3,7 @@ package mysticmods.roots.event.setup;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
@@ -22,8 +22,8 @@ public class ClientSetup {
     event.enqueueWork(() -> {
       @SuppressWarnings("deprecation")
       ItemPropertyFunction func = (stack, level, entity, seed) -> {
-        Dyeable dyeable = stack.get(ModAttachments.DYEABLE);
-        if (dyeable == Dyeable.DEFAULT) {
+        DyeableWithDefault dyeable = stack.get(ModAttachments.DYEABLE);
+        if (dyeable == DyeableWithDefault.DEFAULT) {
           return 0;
         }
         return 1;
@@ -34,8 +34,8 @@ public class ClientSetup {
 
       @SuppressWarnings("deprecation")
       ItemPropertyFunction func2 = (stack, level, entity, seed) -> {
-        Dyeable dyeable = stack.get(ModAttachments.DYEABLE);
-        if (dyeable == Dyeable.DEFAULT || dyeable == null || dyeable.color() == null) {
+        DyeableWithDefault dyeable = stack.get(ModAttachments.DYEABLE);
+        if (dyeable == DyeableWithDefault.DEFAULT || dyeable == null || dyeable.color() == null) {
           return -1;
         }
         return dyeable.color().getId() / 16f;

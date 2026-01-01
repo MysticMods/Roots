@@ -23,7 +23,7 @@ import mysticmods.roots.client.particle.world.emitter.EntityEmitter;
 import mysticmods.roots.client.particle.world.emitter.SylvanLightEmitter;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
-import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import mysticmods.roots.mixin.accessor.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.color.block.BlockColor;
@@ -110,8 +110,8 @@ public class ClientSetup {
       return -1;
     }, ModItems.STAFF.get());
     event.register((stack, index) -> {
-      Dyeable dye = stack.get(ModAttachments.DYEABLE);
-      if (dye == Dyeable.DEFAULT || dye == null) {
+      DyeableWithDefault dye = stack.get(ModAttachments.DYEABLE);
+      if (dye == DyeableWithDefault.DEFAULT || dye == null) {
         return -1;
       }
       DyeColor color = dye.color();

@@ -1,4 +1,4 @@
-package mysticmods.roots.item;
+package mysticmods.roots.item.block;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;

@@ -4,7 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.item.CastingSuccessCache;
+import mysticmods.roots.item.util.CastingSuccessCache;
 import mysticmods.roots.network.client.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;

@@ -52,11 +52,10 @@ public class GramaryItem extends Item {
 
     BlockPos pos = context.getClickedPos();
 
-    boolean hasBound = false;
-
-    BlockPos boundPos = stack.get(ModAttachments.BOUND_POSITION);
-    if (!boundPos.equals(BlockPos.ZERO)) {
-      hasBound = true; // TODO: What if we actually want to bind to ZERO?
+    boolean hasBound = stack.has(ModAttachments.BOUND_POSITION);
+    BlockPos boundPos = null;
+    if (hasBound) {
+      boundPos = stack.get(ModAttachments.BOUND_POSITION);
     }
 
     BlockEntity blockEntity = level.getBlockEntity(pos);

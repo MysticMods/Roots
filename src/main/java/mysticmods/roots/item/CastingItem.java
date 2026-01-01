@@ -13,6 +13,7 @@ import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.item.util.CastingSuccessCache;
 import mysticmods.roots.network.client.ClientboundClearHighlightPacket;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelFailFXPacket;

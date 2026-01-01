@@ -1,6 +1,7 @@
-package mysticmods.roots.item;
+package mysticmods.roots.item.util;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.util.BooleanRingBuffer40;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.ItemStack;

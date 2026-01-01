@@ -6,7 +6,7 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.P;
 import mysticmods.roots.item.KnifeItem;
-import mysticmods.roots.item.RootsCauldronInteractions;
+import mysticmods.roots.item.util.RootsCauldronInteractions;
 import mysticmods.roots.item.RunicShearsItem;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;

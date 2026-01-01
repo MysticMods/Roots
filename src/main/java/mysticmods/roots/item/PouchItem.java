@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
@@ -66,8 +67,8 @@ public class PouchItem extends Item {
   @Override
   public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    Dyeable dye = stack.get(ModAttachments.DYEABLE);
-    if (dye != null && dye != Dyeable.DEFAULT) {
+    DyeableWithDefault dye = stack.get(ModAttachments.DYEABLE);
+    if (dye != null && dye != DyeableWithDefault.DEFAULT) {
       DyeColor color = dye.color();
       String colorName = COLOR_NAMES.get(color);
       if (colorName == null) {

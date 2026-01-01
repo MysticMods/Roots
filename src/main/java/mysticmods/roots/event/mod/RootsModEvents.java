@@ -5,7 +5,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModTabs;
-import mysticmods.roots.item.Dyeable;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -215,25 +215,25 @@ public class RootsModEvents {
       event.accept(ModItems.HERB_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.HERB_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
+        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
         event.accept(stack);
       }
       event.accept(ModItems.COMPONENT_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.COMPONENT_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
+        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
         event.accept(stack);
       }
       event.accept(ModItems.APOTHECARY_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.APOTHECARY_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
+        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
         event.accept(stack);
       }
       event.accept(ModItems.SYLVAN_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.SYLVAN_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
+        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
         event.accept(stack);
       }
       event.accept(ModItems.CREATIVE_POUCH.get());

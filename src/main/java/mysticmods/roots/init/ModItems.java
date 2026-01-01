@@ -11,7 +11,9 @@ import mysticmods.roots.inventory.pouch.component.ComponentPouchMenu;
 import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
 import mysticmods.roots.inventory.pouch.sylvan.SylvanPouchMenu;
 import mysticmods.roots.item.*;
+import mysticmods.roots.item.block.EnchantedTurfBlockItem;
 import mysticmods.roots.item.living.*;
+import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -229,7 +231,7 @@ public class ModItems {
   public static DeferredHolder<Item, Item> COOKED_SQUID = ITEMS.register("cooked_squid", () -> new Item(new Item.Properties().food(ModFoods.COOKED_SQUID)
   ));
   public static DeferredHolder<Item, Item> ASSORTED_SEEDS = ITEMS.register("assorted_seeds", () -> new Item(new Item.Properties()));
-  public static DeferredHolder<Item, BaseItems.FastFoodItem> COOKED_SEEDS = ITEMS.register("cooked_seeds", () -> new BaseItems.FastFoodItem(new Item.Properties().food(ModFoods.COOKED_SEEDS)
+  public static DeferredHolder<Item, FastFoodItem> COOKED_SEEDS = ITEMS.register("cooked_seeds", () -> new FastFoodItem(new Item.Properties().food(ModFoods.COOKED_SEEDS)
   ));
   public static DeferredHolder<Item, Item> COOKED_BEETROOT = ITEMS.register("cooked_beetroot", () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEETROOT)
   ));
@@ -272,15 +274,15 @@ public class ModItems {
 
   public static final DeferredHolder<Item, PouchItem> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new PouchItem(ApothecaryPouchMenu::new, new Item.Properties().stacksTo(1)
       .component(ModAttachments.APOTHECARY_POUCH_CONTENTS, ItemContainerContents.EMPTY)
-      .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+      .component(ModAttachments.DYEABLE, DyeableWithDefault.DEFAULT)));
   public static final DeferredHolder<Item, PouchItem> COMPONENT_POUCH = ITEMS.register("component_pouch", () -> new PouchItem(ComponentPouchMenu::new, new Item.Properties().stacksTo(1)
       .component(ModAttachments.COMPONENT_POUCH_CONTENTS, ItemContainerContents.EMPTY)
-      .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+      .component(ModAttachments.DYEABLE, DyeableWithDefault.DEFAULT)));
   public static final DeferredHolder<Item, CreativeComponentPouch> CREATIVE_POUCH = ITEMS.register("creative_pouch", () -> new CreativeComponentPouch(new Item.Properties().stacksTo(1)
       .rarity(Rarity.EPIC)));
   public static final DeferredHolder<Item, PouchItem> SYLVAN_POUCH = ITEMS.register("sylvan_pouch", () -> new PouchItem(SylvanPouchMenu::new, new Item.Properties().stacksTo(1)
       .component(ModAttachments.SYLVAN_POUCH_CONTENTS, ItemContainerContents.EMPTY)
-      .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+      .component(ModAttachments.DYEABLE, DyeableWithDefault.DEFAULT)));
 
   static {
     ITEMS.addAlias(RootsAPI.rl("fey_pouch"), RootsAPI.rl("sylvan_pouch"));
@@ -288,13 +290,12 @@ public class ModItems {
 
   public static final DeferredHolder<Item, PouchItem> HERB_POUCH = ITEMS.register("herb_pouch", () -> new PouchItem(HerbPouchMenu::new, new Item.Properties().stacksTo(1)
       .component(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.EMPTY)
-      .component(ModAttachments.DYEABLE, Dyeable.DEFAULT)));
+      .component(ModAttachments.DYEABLE, DyeableWithDefault.DEFAULT)));
 
   public static final DeferredHolder<Item, FireStarterItem> FIRE_STARTER = ITEMS.register("fire_starter", () -> new FireStarterItem(new Item.Properties()));
   // TODO: What are we doing with this
   public static final DeferredHolder<Item, GramaryItem> GRAMARY = ITEMS.register("gramary", () -> new GramaryItem(new Item.Properties().stacksTo(1)
-      .component(ModAttachments.GRAMARY_MODE, GramaryItem.GramaryMode.NONE)
-      .component(ModAttachments.BOUND_POSITION, BlockPos.ZERO)));
+      .component(ModAttachments.GRAMARY_MODE, GramaryItem.GramaryMode.NONE)));
   public static final DeferredHolder<Item, LivingArrowItem> LIVING_ARROW = ITEMS.register("living_arrow", () -> new LivingArrowItem(new Item.Properties()));
   public static final DeferredHolder<Item, LivingAxeItem> LIVING_AXE = ITEMS.register("living_axe", () -> new LivingAxeItem(RootsAPI.LIVING_TOOL_TIER, new Item.Properties().attributes(LivingSwordItem.createAttributes(RootsAPI.LIVING_TOOL_TIER, 6.0f, -3.2f))));
   public static final DeferredHolder<Item, LivingHoeItem> LIVING_HOE = ITEMS.register("living_hoe", () -> new LivingHoeItem(RootsAPI.LIVING_TOOL_TIER, new Item.Properties().attributes(LivingHoeItem.createAttributes(RootsAPI.LIVING_TOOL_TIER, 0f, -3.f))));
