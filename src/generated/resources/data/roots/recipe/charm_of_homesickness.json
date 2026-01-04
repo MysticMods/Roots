@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "c:bricks"
+    },
+    "E": {
+      "tag": "c:gems/emerald"
+    }
+  },
+  "pattern": [
+    " B ",
+    "BEB",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:charm_of_homesickness"
+  }
+}

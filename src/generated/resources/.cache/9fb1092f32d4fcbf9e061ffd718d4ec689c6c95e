@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-31T20:03:52.7376792	Recipes
+// 1.21.1	2026-01-04T14:47:06.7375595	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -405,6 +405,7 @@ d8ec49b1dfcf8f27bb8eb7a929b453b6668d63a5 data/roots/advancement/recipes/redstone
 f83ed44719aa37e68f3c013044c5ba0b11ade888 data/roots/advancement/recipes/redstone/wildwood_pressure_plate.json
 31d623faba41d9086bc8fffd9aa371fc1b57fd06 data/roots/advancement/recipes/redstone/wildwood_trapdoor.json
 e170585b92eb81345548be11f5db375eb568d8da data/roots/advancement/recipes/tools/charm_of_alertness.json
+16b8636c270de21206e69daf94e5f24d933bcdb2 data/roots/advancement/recipes/tools/charm_of_homesickness.json
 73e05cd80e2abf8d474890df88ca392396e05e31 data/roots/advancement/recipes/tools/copper_axe.json
 b9ed530c842b813a91b043e7f3d4399cff1118fd data/roots/advancement/recipes/tools/copper_hoe.json
 bb8eea3fc02ce64bc9c8fd3179bf642ebc51bb62 data/roots/advancement/recipes/tools/copper_knife.json
@@ -439,6 +440,7 @@ c1c7a122c91f1291d86caa560bfbb2033e96fcce data/roots/recipe/beetroot_salad.json
 5301b213ff3fc1821492c4ced8629c51895aa964 data/roots/recipe/bread_from_smoking.json
 974fd3a9fce74e804f6faf868c905ad512504e20 data/roots/recipe/caelic_soil_from_elemental_soil_and_cloud_berry.json
 abbacb702fc4f0a798ef736e1f8069d8c138e1e4 data/roots/recipe/charm_of_alertness.json
+343b9f7b0724ed35ee2365dd8d13f5d68936e85c data/roots/recipe/charm_of_homesickness.json
 093f094be74318407b5eb4d544009d9da69fe512 data/roots/recipe/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
 80fc86313aff5504f7f1359a1cfc7723e9769fd2 data/roots/recipe/chiseled_runed_obsidian_from_runed_obsidian_stonecutting.json
 9c46bc44aacae74ad5a9b3978247515ba1782a05 data/roots/recipe/chiseled_runed_obsidian_from_runed_tile.json

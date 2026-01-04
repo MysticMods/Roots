@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-31T20:17:27.5225168	Item Models: roots
+// 1.21.1	2026-01-04T14:47:06.7511114	Item Models: roots
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/acid_cloud.json
 256a7c001de142677be9aa40521882ee43ce6ed6 assets/roots/models/item/animal_harvest.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
@@ -28,6 +28,7 @@ f771d6c3eeb5a3f90b4fe68a9c49e5a9a307fca7 assets/roots/models/item/brown_fairy_hu
 db62c8b8cf515035ce028b5d63c5324bac6ea5ea assets/roots/models/item/caelic_soil.json
 af7db574ef0732a01ef2e772360ffac93b35d327 assets/roots/models/item/carapace.json
 4220a412f656a1febef7047f5422b7393b2ae9fb assets/roots/models/item/charm_of_alertness.json
+e5b9728533754242af4b50755ede43f70ca982d4 assets/roots/models/item/charm_of_homesickness.json
 08131be57b4580ad3ebfe538f34354931505a474 assets/roots/models/item/chiseled_runed_obsidian.json
 e29526db6705de201e9fd0abb2362147c501e9d6 assets/roots/models/item/chiseled_runestone.json
 6bf881661b5f681c8869b4724755c6373409720f assets/roots/models/item/cloud_berry.json

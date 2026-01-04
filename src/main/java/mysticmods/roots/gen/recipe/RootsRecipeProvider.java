@@ -1705,6 +1705,15 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_nugget", has(Tags.Items.NUGGETS))
         .save(c);
 
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.HOMESICKNSES_CHARM.get(), 1)
+        .pattern(" B ")
+        .pattern("BEB")
+        .pattern(" B ")
+        .define('B', Tags.Items.BRICKS)
+        .define('E', Tags.Items.GEMS_EMERALD)
+        .unlockedBy("has_emerald", has(Tags.Items.GEMS_EMERALD))
+        .save(c);
+
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WRITABLE_BOOK)
         .requires(Items.BOOK)
         .requires(Items.FEATHER)
