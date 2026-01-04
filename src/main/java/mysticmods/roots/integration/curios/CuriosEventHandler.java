@@ -2,6 +2,7 @@ package mysticmods.roots.integration.curios;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +17,13 @@ public class CuriosEventHandler {
   public static void onCuriosChange(CurioChangeEvent event) {
     LivingEntity entity = event.getEntity();
     if (entity instanceof ServerPlayer player && event.getTo().is(RootsTags.Items.GRAMARIES)) {
-      PacketDistributor.sendToPlayer(player, ClientboundChangeTomeMode.INSTANCE);
+      boolean changedMode = false;
+      if (event.getFrom().is(RootsTags.Items.GRAMARIES)) {
+        if (event.getFrom().get(ModAttachments.GRAMARY_MODE) != event.getTo().get(ModAttachments.GRAMARY_MODE)) {
+          changedMode = true;
+        }
+      }
+      PacketDistributor.sendToPlayer(player, new ClientboundChangeTomeMode(changedMode));
     }
   }
 }

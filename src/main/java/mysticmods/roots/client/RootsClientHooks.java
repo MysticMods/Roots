@@ -260,7 +260,7 @@ public class RootsClientHooks {
     }
   }
 
-  public static void showTomeTooltip() {
+  public static void showTomeTooltip(boolean modeChanged) {
     Minecraft mc = Minecraft.getInstance();
     if (mc.player != null) {
       if (!mc.player.getMainHandItem().is(RootsTags.Items.GRAMARIES) && !mc.player.getOffhandItem()
