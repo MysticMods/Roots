@@ -23,6 +23,7 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SenseDangerEffect> SENSE_DANGER = REGISTER.register("sense_danger", SenseDangerEffect::new);
   public static final DeferredHolder<MobEffect, SimpleEffect> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x00008b, false));
   public static final DeferredHolder<MobEffect, SimpleEffect> LIGHT_DRIFTER = REGISTER.register("light_drifter", () -> new LightDrifterEffect(MobEffectCategory.BENEFICIAL, 0xded666, true));
+  public static final DeferredHolder<MobEffect, SimpleEffect> HOMESICKNESS = REGISTER.register("homesickness", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x8b4513, false));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));

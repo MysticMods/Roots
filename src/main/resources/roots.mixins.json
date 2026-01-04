@@ -27,6 +27,7 @@
     "accessor.AccessorMixinSaplingBlock",
     "accessor.AccessorMixinTagEntry",
     "accessor.AccessorMixinZombieVillager",
+    "accessor.MixinAccessorServerGamePacketListenerImpl",
     "action.MixinAbstractVillager$TradeAction",
     "action.MixinBeehiveBlock$HarvestBeeHiveAction",
     "action.MixinBoneMealItem$GrowAction",
