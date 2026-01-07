@@ -110,11 +110,11 @@ public class ConfigManager {
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Runic Shears configuration options").push("runic_shears");
     AOE_BOUNDING_BOX_X = COMMON_BUILDER.comment("the X half value for the size of the Runic Shears aoe bounding box")
-        .defineInRange("aoe_bounding_box_x", 3, 1, Integer.MAX_VALUE);
+        .defineInRange("aoe_bounding_box_x", 10, 1, Integer.MAX_VALUE);
     AOE_BOUNDING_BOX_Y = COMMON_BUILDER.comment("the Y half value for the size of the Runic Shears aoe bounding box")
-        .defineInRange("aoe_bounding_box_y", 3, 1, Integer.MAX_VALUE);
+        .defineInRange("aoe_bounding_box_y", 5, 1, Integer.MAX_VALUE);
     AOE_BOUNDING_BOX_Z = COMMON_BUILDER.comment("the Z half value for the size of the Runic Shears aoe bounding box")
-        .defineInRange("aoe_bounding_box_z", 3, 1, Integer.MAX_VALUE);
+        .defineInRange("aoe_bounding_box_z", 10, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for Pyres and Rituals").push("pyre");
     PYRE_BOUNDS_X = COMMON_BUILDER.comment("the X half value for the size of the Pyre aoe bounding box")

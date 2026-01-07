@@ -142,8 +142,10 @@ public class RunicShearsItem extends ShearsItem {
       Random rand = new java.util.Random();
       drops.forEach(d -> {
         ItemEntity ent = original.spawnAtLocation(d, 1.0F);
-        ent.setDeltaMovement(ent.getDeltaMovement()
-            .add((rand.nextFloat() - rand.nextFloat()) * 0.1F, rand.nextFloat() * 0.05F, (rand.nextFloat() - rand.nextFloat()) * 0.1F));
+        if (ent != null) {
+          ent.setDeltaMovement(ent.getDeltaMovement()
+              .add((rand.nextFloat() - rand.nextFloat()) * 0.1F, rand.nextFloat() * 0.05F, (rand.nextFloat() - rand.nextFloat()) * 0.1F));
+        }
       });
       newTarget.gameEvent(GameEvent.SHEAR, player);
       return true;
