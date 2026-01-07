@@ -19,6 +19,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -132,7 +133,15 @@ public class DataEventHandler {
 
   @SubscribeEvent
   public static void onBrewingRecipe(RegisterBrewingRecipesEvent event) {
-    event.getBuilder().addContainerRecipe(Items.SPLASH_POTION, ModItems.BAFFLECAP.get(), Items.LINGERING_POTION);
+    event.getBuilder().addContainerRecipe(Items.SPLASH_POTION, ModItems.MOONGLOW.get(), Items.LINGERING_POTION);
+    event.getBuilder().addMix(Potions.WATER, ModItems.BAFFLECAP.get(), Potions.AWKWARD);
+    event.getBuilder().addStartMix(ModItems.CLOUD_BERRY.get(), Potions.LONG_WATER_BREATHING);
+    event.getBuilder().addStartMix(ModItems.DEWGONIA.get(), Potions.LONG_SWIFTNESS);
+    event.getBuilder().addStartMix(ModItems.INFERNO_BULB.get(), Potions.FIRE_RESISTANCE);
+    event.getBuilder().addStartMix(ModItems.PERESKIA.get(), Potions.REGENERATION);
+    event.getBuilder().addStartMix(ModItems.STONEPETAL.get(), Potions.LEAPING);
+    event.getBuilder().addStartMix(ModItems.SPIRITLEAF.get(), Potions.REGENERATION);
+    event.getBuilder().addStartMix(ModItems.WILDEWHEET.get(), Potions.NIGHT_VISION);
   }
 
 
