@@ -141,8 +141,8 @@ public class RootsTags {
     public static final TagKey<Block> SUPPORTS_HELL_SPROUT_SPAWN = modTag("supports_hell_sprout_spawn");
     public static final TagKey<Block> SUPPORTS_MELODY_SPROUT_SPAWN = modTag("supports_melody_sprout_spawn");
     public static final TagKey<Block> SUPPORTS_SNOW_SPROUT_SPAWN = modTag("supports_snow_sprout_spawn");
+    // TODO: ???
     public static final TagKey<Block> BAFFLECAP_CONVERSION = modTag("converts_to_bafflecap");
-
 
     // Don't exist, have to make
     public static final TagKey<Block> SILVER_ORE = compatTag("ores/silver"); // SKIP
@@ -150,21 +150,7 @@ public class RootsTags {
     public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver"); // SKIP
     public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver"); // SKIP
 
-
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
-
-    // Bark recipes
-    public static final TagKey<Block> OAK_LOGS_TO_STRIP = modTag("bark_logs/oak");
-    public static final TagKey<Block> BIRCH_LOGS_TO_STRIP = modTag("bark_logs/birch");
-    public static final TagKey<Block> SPRUCE_LOGS_TO_STRIP = modTag("bark_logs/spruce");
-    public static final TagKey<Block> JUNGLE_LOGS_TO_STRIP = modTag("bark_logs/jungle");
-    public static final TagKey<Block> ACACIA_LOGS_TO_STRIP = modTag("bark_logs/acacia");
-    public static final TagKey<Block> DARK_OAK_LOGS_TO_STRIP = modTag("bark_logs/dark_oak");
-    public static final TagKey<Block> MANGROVE_LOGS_TO_STRIP = modTag("bark_logs/mangrove");
-    public static final TagKey<Block> CRIMSON_STEMS_TO_STRIP = modTag("bark_logs/crimson");
-    public static final TagKey<Block> WARPED_STEMS_TO_STRIP = modTag("bark_logs/warped");
-    public static final TagKey<Block> WILDWOOD_LOGS_TO_STRIP = modTag("bark_logs/wildwood");
-    public static final TagKey<Block> GRANITE_ORE_REPLACEABLES = modTag("granite_ore_replaceables");
 
     public static final TagKey<Block> BLOOMING_ELIGIBLE_FLOWERS = modTag("ritual/blooming/eligible_flowers");
     public static final TagKey<Block> BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS = modTag("ritual/blooming/eligible_pedestal_flowers");

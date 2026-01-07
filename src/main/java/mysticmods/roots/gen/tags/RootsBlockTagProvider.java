@@ -220,16 +220,6 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(BlockTags.MINEABLE_WITH_AXE).addTags(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS)
         .add(GROVE_CRAFTER.get());
 
-    this.tag(RootsTags.Blocks.OAK_LOGS_TO_STRIP).add(Blocks.OAK_LOG, Blocks.OAK_WOOD);
-    this.tag(RootsTags.Blocks.SPRUCE_LOGS_TO_STRIP).add(Blocks.SPRUCE_LOG, Blocks.SPRUCE_WOOD);
-    this.tag(RootsTags.Blocks.BIRCH_LOGS_TO_STRIP).add(Blocks.BIRCH_LOG, Blocks.BIRCH_WOOD);
-    this.tag(RootsTags.Blocks.JUNGLE_LOGS_TO_STRIP).add(Blocks.JUNGLE_LOG, Blocks.JUNGLE_WOOD);
-    this.tag(RootsTags.Blocks.ACACIA_LOGS_TO_STRIP).add(Blocks.ACACIA_LOG, Blocks.ACACIA_WOOD);
-    this.tag(RootsTags.Blocks.DARK_OAK_LOGS_TO_STRIP).add(Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_WOOD);
-    this.tag(RootsTags.Blocks.CRIMSON_STEMS_TO_STRIP).add(Blocks.CRIMSON_STEM, Blocks.CRIMSON_HYPHAE);
-    this.tag(RootsTags.Blocks.WARPED_STEMS_TO_STRIP).add(Blocks.WARPED_STEM, Blocks.WARPED_HYPHAE);
-    this.tag(RootsTags.Blocks.MANGROVE_LOGS_TO_STRIP).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD);
-    this.tag(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP).add(WILDWOOD_LOG.get(), WILDWOOD_WOOD.get());
     this.tag(RootsTags.Blocks.GRANITE_ORE_REPLACEABLES).add(Blocks.GRANITE);
     this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS).add(
         Blocks.DANDELION,
