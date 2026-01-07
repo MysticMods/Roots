@@ -5,6 +5,8 @@
   "mixins": [
     "MixinAbstractArrow$WildwoodQuiver",
     "MixinBeehiveBlock$RunicShears",
+    "MixinBrewingStandBlockEntity",
+    "MixinBrewingStandMenu$FuelSlot",
     "MixinMerchantMenu$FairyHutTemporary",
     "MixinMobEffectInstance$DefaultInvisiblePotion",
     "MixinPlayer$LightDrifter",
