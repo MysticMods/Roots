@@ -138,9 +138,10 @@ public class DataEventHandler {
     event.getBuilder().addStartMix(ModItems.CLOUD_BERRY.get(), Potions.LONG_WATER_BREATHING);
     event.getBuilder().addStartMix(ModItems.DEWGONIA.get(), Potions.LONG_SWIFTNESS);
     event.getBuilder().addStartMix(ModItems.INFERNO_BULB.get(), Potions.FIRE_RESISTANCE);
-    event.getBuilder().addStartMix(ModItems.PERESKIA.get(), Potions.REGENERATION);
+    event.getBuilder().addStartMix(ModItems.PERESKIA.get(), Potions.STRONG_HEALING);
     event.getBuilder().addStartMix(ModItems.STONEPETAL.get(), Potions.LEAPING);
     event.getBuilder().addStartMix(ModItems.SPIRITLEAF.get(), Potions.REGENERATION);
+    event.getBuilder().addStartMix(ModItems.STALICRIPE.get(), Potions.STRENGTH);
     event.getBuilder().addStartMix(ModItems.WILDEWHEET.get(), Potions.NIGHT_VISION);
   }
 
