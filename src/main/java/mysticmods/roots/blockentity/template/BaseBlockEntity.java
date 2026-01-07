@@ -2,6 +2,7 @@ package mysticmods.roots.blockentity.template;
 
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.Bounded;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
@@ -18,6 +19,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -61,7 +63,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
   }
 
   protected boolean canOutputTo(BlockState state, BlockPos pos) {
-    return true;
+    return !state.is(RootsTags.Blocks.PEDESTALS) && !state.is(Blocks.DISPENSER);
   }
 
   protected BoundingBox getPedestalBoundingBox() {

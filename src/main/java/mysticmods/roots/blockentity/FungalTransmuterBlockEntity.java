@@ -389,11 +389,6 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   }
 
   @Override
-  protected boolean canOutputTo(BlockState state, BlockPos pos) {
-    return !state.is(Blocks.DISPENSER);
-  }
-
-  @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     // Power storage is handled separately from crafting and happens regardless
     boolean changed = false;
