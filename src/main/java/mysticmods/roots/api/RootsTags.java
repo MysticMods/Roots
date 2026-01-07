@@ -152,6 +152,8 @@ public class RootsTags {
 
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
 
+    public static final TagKey<Block> GRANITE_ORE_REPLACEABLES = modTag("granite_ore_replaceables");
+
     public static final TagKey<Block> BLOOMING_ELIGIBLE_FLOWERS = modTag("ritual/blooming/eligible_flowers");
     public static final TagKey<Block> BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS = modTag("ritual/blooming/eligible_pedestal_flowers");
 
@@ -366,7 +368,7 @@ public class RootsTags {
 
     public static final TagKey<Item> CAPSTONES = modTag("capstones/any");
     public static final TagKey<Item> PILLARS = modTag("pillars/any");
-    
+
     public static final TagKey<Item> SPROUT_BREEDING_REWARDS = modTag("sprout_breeding_rewards");
 
     public static final TagKey<Item> FORAGING_ELIGIBLE = modTag("foraging_eligible");

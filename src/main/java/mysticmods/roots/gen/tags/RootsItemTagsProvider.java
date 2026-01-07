@@ -321,17 +321,6 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.FIRE_CROPS, RootsTags.Items.FIRE_CROPS);
 
     // Manually copied tags cannot have blocks that don't have an item equivalent
-    manualCopy(RootsTags.Blocks.OAK_LOGS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.SPRUCE_LOGS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.BIRCH_LOGS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.JUNGLE_LOGS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.ACACIA_LOGS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.DARK_OAK_LOGS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.CRIMSON_STEMS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.WARPED_STEMS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP);
-    manualCopy(RootsTags.Blocks.MANGROVE_LOGS_TO_STRIP);
-
     manualCopy(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS);
     manualCopy(RootsTags.Blocks.BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS);
     manualCopy(RootsTags.Blocks.SPREADING_MUSHROOMS);
