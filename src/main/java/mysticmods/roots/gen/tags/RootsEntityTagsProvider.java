@@ -72,15 +72,21 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             ModEntities.TAN_SPROUT.get(),
             ModEntities.MELODY_SPROUT.get()
         );
-    this.tag(RootsTags.Entities.AUGMENTABLE)
-        .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.LLAMA, EntityType.CAMEL, EntityType.WOLF)
-        .add(ModEntities.FENNEC.get());
     this.tag(RootsTags.Entities.AUGMENTABLE_EXCLUDE);
 
+    this.tag(RootsTags.Entities.AUGMENTABLE_ARMOR).add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA, EntityType.WOLF);
     this.tag(RootsTags.Entities.AUGMENTABLE_JUMP_STRENGTH).add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL);
     this.tag(RootsTags.Entities.AUGMENTABLE_ATTACK_DAMAGE).add(EntityType.WOLF, ModEntities.FENNEC.get());
     this.tag(RootsTags.Entities.AUGMENTABLE_MAX_HEALTH).add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
     this.tag(RootsTags.Entities.AUGMENTABLE_MOVEMENT_SPEED).add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
+
+    this.tag(RootsTags.Entities.AUGMENTABLE_ALL).addTags(
+        RootsTags.Entities.AUGMENTABLE_ARMOR,
+        RootsTags.Entities.AUGMENTABLE_ATTACK_DAMAGE,
+        RootsTags.Entities.AUGMENTABLE_JUMP_STRENGTH,
+        RootsTags.Entities.AUGMENTABLE_MAX_HEALTH,
+        RootsTags.Entities.AUGMENTABLE_MOVEMENT_SPEED
+    );
 
     this.tag(RootsTags.Entities.ANIMAL_HARVEST)
         .add(

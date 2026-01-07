@@ -506,9 +506,7 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> LIMIT_WOODEN_SHEARS_DROPS = modTag("limit_wooden_shears_drops");
 
-
-    @Deprecated
-    public static final TagKey<EntityType<?>> AUGMENTABLE = modTag("augmentable");
+    public static final TagKey<EntityType<?>> AUGMENTABLE_ALL = modTag("augmentable");
     public static final TagKey<EntityType<?>> AUGMENTABLE_EXCLUDE = modTag("augmentable_exclude");
     public static final TagKey<EntityType<?>> AUGMENTABLE_JUMP_STRENGTH = modTag("augmentable/jump_strength");
     public static final TagKey<EntityType<?>> AUGMENTABLE_MAX_HEALTH = modTag("augmentable/max_health");

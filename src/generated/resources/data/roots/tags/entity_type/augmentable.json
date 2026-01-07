@@ -1,11 +1,9 @@
 {
   "values": [
-    "minecraft:horse",
-    "minecraft:mule",
-    "minecraft:donkey",
-    "minecraft:llama",
-    "minecraft:camel",
-    "minecraft:wolf",
-    "roots:fennec"
+    "#roots:augmentable/armor",
+    "#roots:augmentable/attack_damage",
+    "#roots:augmentable/jump_strength",
+    "#roots:augmentable/max_health",
+    "#roots:augmentable/movement_speed"
   ]
 }

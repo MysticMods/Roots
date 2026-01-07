@@ -25,7 +25,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import org.w3c.dom.Attr;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -63,7 +62,7 @@ public class AugmentationRitual extends Ritual {
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
-              .and((o) -> o.getType().is(RootsTags.Entities.AUGMENTABLE) && !o.getType()
+              .and((o) -> o.getType().is(RootsTags.Entities.AUGMENTABLE_ALL) && !o.getType()
                   .is(RootsTags.Entities.AUGMENTABLE_EXCLUDE)));
       if (entities.isEmpty()) {
         return;
