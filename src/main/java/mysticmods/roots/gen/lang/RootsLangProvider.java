@@ -731,6 +731,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.block.pyre.crackle", "Pyre crackles");
 
     add("enchantment.roots.foraging", "Foraging");
+    add("enchantment.roots.collecting", "Collecting");
 
     add("roots.nyi", "[Not Yet Implemented]");
     add("roots.wip", "[Work In Progress]");

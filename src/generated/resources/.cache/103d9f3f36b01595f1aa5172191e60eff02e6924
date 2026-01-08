@@ -1,10 +1,11 @@
-// 1.21.1	2025-05-06T14:09:40.7187677	Registries
+// 1.21.1	2026-01-08T19:12:44.6138558	Registries
 0bc455da35caed8a91dba6976f568f90d9953dfd data/roots/damage_type/acid_cloud.json
 12a245bc55ca0ff991380aad3be5f85219b9b204 data/roots/damage_type/life_drain.json
 4bce0062992bcb825820d0cdfeec90648eb7c7d3 data/roots/damage_type/meteor.json
 ad6e470b09c4eebe2f56faddb04ec946e6d1618f data/roots/damage_type/rose_thorns.json
 1efd31863e1c27d8f2e0931e33bb1c05d0b4148a data/roots/damage_type/wildfire.json
-a65184c1483f870edf64b340e4bd0e5ee9227966 data/roots/enchantment/foraging.json
+2b047798ddce75cba2e7e986839bef31ffeb5ada data/roots/enchantment/collecting.json
+baba73df732b0a4fdc6b359644051bcb95691477 data/roots/enchantment/foraging.json
 5d49d1a83648edb820b3caf2c0134aaccc7e526c data/roots/enchantment_provider/fortune_i.json
 ecdee376546ff26b669e9bdcbf3fa6e640759c52 data/roots/enchantment_provider/fortune_ii.json
 8c51f6af5d354c37ca38dc1e873fed3458f0eb78 data/roots/enchantment_provider/fortune_iii.json

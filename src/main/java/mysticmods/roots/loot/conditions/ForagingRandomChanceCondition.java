@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModLoot;
-import mysticmods.roots.util.ForagingUtil;
+import mysticmods.roots.util.EnchantmentUtil;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -52,7 +52,7 @@ public record ForagingRandomChanceCondition(NumberProvider chance) implements Lo
     }
 
     float baseChance = this.chance.getFloat(context);
-    int foraging = ForagingUtil.getForagingValue(player, itemstack);
+    int foraging = EnchantmentUtil.getForagingValue(player, itemstack);
 
     float maxMultiplier = 2f;
 

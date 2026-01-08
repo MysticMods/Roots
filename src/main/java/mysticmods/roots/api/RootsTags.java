@@ -372,6 +372,7 @@ public class RootsTags {
     public static final TagKey<Item> SPROUT_BREEDING_REWARDS = modTag("sprout_breeding_rewards");
 
     public static final TagKey<Item> FORAGING_ELIGIBLE = modTag("foraging_eligible");
+    public static final TagKey<Item> COLLECTING_ELIGIBLE = modTag("collecting_eligible");
     public static final TagKey<Item> SYLVAN_LEATHERS = modTag("sylvan_leather");
     public static final TagKey<Item> DYEABLE = modTag("dyeable");
     public static final TagKey<Item> CHARMS = modTag("charms");

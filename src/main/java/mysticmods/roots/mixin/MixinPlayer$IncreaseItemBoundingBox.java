@@ -3,7 +3,10 @@ package mysticmods.roots.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import mysticmods.roots.util.EnchantmentUtil;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -22,15 +25,20 @@ public class MixinPlayer$IncreaseItemBoundingBox {
     throw new NotImplementedException("Mixin shadowed method");
   }
 
-  // TODO: What's actually gonna use this? Enchantment? Spell?
-
-  @WrapOperation(method="aiStep", at=@At(value="INVOKE", target="Ljava/util/List;isEmpty()Z"))
+  @WrapOperation(method = "aiStep", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z"))
   private boolean lootr$increaseItemBoundingBox(List<ItemEntity> instance, Operation<Boolean> original, @Local AABB aabb) {
-    Player player = (Player) (Object) this;
     var result = original.call(instance);
-    var aabb2 = aabb.inflate(1.5, 0.5, 1.5);
-    for (ItemEntity entity : player.level().getEntitiesOfClass(ItemEntity.class, aabb2)) {
-      this.touch(entity);
+    if ((Object) this instanceof ServerPlayer player) {
+      var helm = player.getItemBySlot(EquipmentSlot.HEAD);
+      if (!helm.isEmpty()) {
+        var increase = EnchantmentUtil.getCollectingIncrease(player.serverLevel(), helm);
+        if (increase > 0) {
+          var aabb2 = aabb.inflate(increase);
+          for (ItemEntity entity : player.level().getEntitiesOfClass(ItemEntity.class, aabb2)) {
+            this.touch(entity);
+          }
+        }
+      }
     }
     return result;
   }

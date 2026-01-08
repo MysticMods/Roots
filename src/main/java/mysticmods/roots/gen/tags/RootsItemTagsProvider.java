@@ -260,6 +260,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
 
+    this.tag(RootsTags.Items.COLLECTING_ELIGIBLE).addTag(ItemTags.HEAD_ARMOR_ENCHANTABLE);
+
     this.tag(RootsTags.Items.SYLVAN_LEATHERS).add(ModItems.SYLVAN_LEATHER.get());
     this.tag(RootsTags.Items.DYEABLE)
         .add(ModItems.HERB_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.SYLVAN_POUCH.get());

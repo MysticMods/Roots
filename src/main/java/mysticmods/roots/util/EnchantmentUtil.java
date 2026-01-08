@@ -5,13 +5,18 @@ import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModEnchantment;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import org.apache.commons.lang3.mutable.MutableFloat;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class ForagingUtil {
+public class EnchantmentUtil {
   public static int getForagingValue(@Nullable Player player, ItemStack item) {
     int foraging = 0;
 
@@ -34,5 +39,14 @@ public class ForagingUtil {
     }
 
     return foraging;
+  }
+
+  public static float getCollectingIncrease(ServerLevel level, ItemStack stack) {
+    MutableFloat mutablefloat = new MutableFloat(0.0F);
+    EnchantmentHelper.runIterationOnItem(
+        stack, (ench, enchLevel) -> ench.value()
+            .modifyUnfilteredValue(ModEnchantment.COLLECTING_EFFECT.get(), level.random, enchLevel, mutablefloat)
+    );
+    return Math.max(0.0F, mutablefloat.floatValue());
   }
 }

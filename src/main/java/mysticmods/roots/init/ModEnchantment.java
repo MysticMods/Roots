@@ -12,10 +12,14 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModEnchantment {
   public static final ResourceKey<Enchantment> FORAGING = ResourceKey.create(Registries.ENCHANTMENT, RootsAPI.rl("foraging"));
+  public static final ResourceKey<Enchantment> COLLECTING = ResourceKey.create(Registries.ENCHANTMENT, RootsAPI.rl("collecting"));
 
   private static final DeferredRegister<DataComponentType<?>> REGISTER = DeferredRegister.create(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, RootsAPI.MODID);
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<EnchantmentValueEffect>> FORAGING_EFFECT = REGISTER.register("foraging", () -> new DataComponentType.Builder<EnchantmentValueEffect>().persistent(EnchantmentValueEffect.CODEC)
+      .build());
+
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<EnchantmentValueEffect>> COLLECTING_EFFECT = REGISTER.register("collecting", () -> new DataComponentType.Builder<EnchantmentValueEffect>().persistent(EnchantmentValueEffect.CODEC)
       .build());
 
   public static void register(IEventBus bus) {

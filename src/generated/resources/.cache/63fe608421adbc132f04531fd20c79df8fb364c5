@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-07T19:29:19.7431334	Roots Item Tags
+// 1.21.1	2026-01-08T17:57:35.8495526	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -67,6 +67,7 @@ c3a2b3f26c12aec67aa597e52b49cc769f00b01c data/roots/tags/item/carapace.json
 ae71dd3be1e53de12945743c7e5062e8c2460abb data/roots/tags/item/casting_tools.json
 628b2ef253afee264bc0611bf95b581da81a7b7c data/roots/tags/item/charms.json
 a60550797d049a5d0edd7e37e93a25c469166094 data/roots/tags/item/charms/alertness.json
+e5f85de2454c8fff0f10684d79e7a2a1408478e6 data/roots/tags/item/collecting_eligible.json
 bc229f680fa773a41269c1569f5a700f669eb8e5 data/roots/tags/item/cooked_seafood.json
 41d24a04cdab8abd0518a0512bc414a9169fe12d data/roots/tags/item/cooked_vegetables.json
 80156b58964e4f5bd32dfd5fb10393ac5c85f829 data/roots/tags/item/copper_items.json
