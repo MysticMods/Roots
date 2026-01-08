@@ -148,15 +148,12 @@ public class DataEventHandler {
 
   @SubscribeEvent
   public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-    event.registerBlock(Capabilities.ItemHandler.BLOCK, new IBlockCapabilityProvider<>() {
-      @Override
-      public @Nullable IItemHandler getCapability(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, Direction context) {
-        if (blockEntity instanceof InventoryBlockEntity ibe) {
-          return ibe.getInventory();
-        }
-
-        return null;
+    event.registerBlock(Capabilities.ItemHandler.BLOCK, (level, pos, state, blockEntity, context) -> {
+      if (blockEntity instanceof InventoryBlockEntity ibe) {
+        return ibe.getInventory();
       }
+
+      return null;
     }, ModBlocks.DISPLAY_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get(), ModBlocks.GROVE_PEDESTAL.get(), ModBlocks.RITUAL_PEDESTAL.get(), ModBlocks.FUNGAL_TRANSMUTER.get());
 
     event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, ModAttachments.HERB_POUCH_CONTENTS.get(), 9), ModItems.HERB_POUCH.get());
