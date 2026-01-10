@@ -2,10 +2,7 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.*;
-import mysticmods.roots.entity.other.FairyHutEntity;
-import mysticmods.roots.entity.other.LightDrifterEntity;
-import mysticmods.roots.entity.other.RoseThornsEntity;
-import mysticmods.roots.entity.other.TemporalMorassEntity;
+import mysticmods.roots.entity.other.*;
 import mysticmods.roots.entity.projectile.LivingArrowEntity;
 import mysticmods.roots.entity.projectile.MeteorEntity;
 import mysticmods.roots.entity.projectile.WildfireEntity;
@@ -89,6 +86,9 @@ public class ModEntities {
 
   public static final DeferredHolder<EntityType<?>, EntityType<RoseThornsEntity>> ROSE_THORNS = REGISTER.register("rose_thorns", () -> EntityType.Builder.of(RoseThornsEntity::new, MobCategory.MISC)
       .sized(1f, 0.4f).clientTrackingRange(4).updateInterval(10).build("rose_thorns"));
+
+  public static final DeferredHolder<EntityType<?>, EntityType<WildwoodCart>> WILDWOOD_CART = REGISTER.register("wildwood_cart", () -> EntityType.Builder.<WildwoodCart>of(WildwoodCart::new, MobCategory.MISC)
+      .sized(0.98F, 0.7F).passengerAttachments(0.1875F).clientTrackingRange(8).build("wildwood_cart"));
 
   @SubscribeEvent
   public static void registerEntitySpawns(RegisterSpawnPlacementsEvent event) {
