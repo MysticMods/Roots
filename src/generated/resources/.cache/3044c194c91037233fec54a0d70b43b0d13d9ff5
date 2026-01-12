@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-07T19:29:19.7381279	Roots Block Tags
+// 1.21.1	2026-01-12T14:16:34.8131906	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -20,8 +20,8 @@ b6d0e662abeb2be7d10b28c25db6301f5bf0ba32 data/minecraft/tags/block/climbable.jso
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/block/logs.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/block/logs_that_burn.json
 4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/minecraft/tags/block/maintains_farmland.json
-f3aa6c038036299a41660b7673b707c2e1df9eb7 data/minecraft/tags/block/mineable/axe.json
-84ad4138f81f2c32f36030da92bf0cbfdb66650c data/minecraft/tags/block/mineable/hoe.json
+3fabfb1ea3bdee7548e4caf9bf8233de31a0fdf9 data/minecraft/tags/block/mineable/axe.json
+acc4e5619cd803985b65396e3af19119b1ba58aa data/minecraft/tags/block/mineable/hoe.json
 2fa78f879290ff7575290b1d7ee87079dd58cdc5 data/minecraft/tags/block/mineable/pickaxe.json
 3253074ebcc130d3700633f73d83988a5dfe5dbc data/minecraft/tags/block/mineable/shovel.json
 07582669ffa5bc4de499f946a1d320d06685cf33 data/minecraft/tags/block/mushroom_grow_block.json
