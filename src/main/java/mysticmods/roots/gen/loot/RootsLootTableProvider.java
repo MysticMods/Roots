@@ -417,7 +417,7 @@ public final class RootsLootTableProvider {
               .add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get())
                   .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
       add(ModBlocks.BAFFLECAP_BLOCK.get(), createSilkTouchDispatchTable(ModBlocks.BAFFLECAP_BLOCK.get(), applyExplosionDecay(ModBlocks.BAFFLECAP_BLOCK.get(), LootItem.lootTableItem(ModItems.BAFFLECAP.get())
-          .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f))))));
+          .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.083f))))));
       dropSelf(ModBlocks.INCENSE_BURNER.get());
       /*      dropSelf(ModBlocks.STONE_ALTAR.get());*/
       dropSelf(ModBlocks.MORTAR.get());

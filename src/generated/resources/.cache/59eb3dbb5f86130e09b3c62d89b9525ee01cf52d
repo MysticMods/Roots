@@ -1,10 +1,10 @@
-// 1.21.1	2025-12-31T20:17:27.5073704	Loot Tables
+// 1.21.1	2026-01-12T14:22:44.1056742	Loot Tables
 3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
 d53d055fadc939e4d850a6e995abee2b8d1e6705 data/roots/loot_table/blocks/bafflecap.json
-7c79b6868224c7233f74bb64475e05f7bfaf6950 data/roots/loot_table/blocks/bafflecap_block.json
+d9477943c08884907db4df2bc707518649b891a1 data/roots/loot_table/blocks/bafflecap_block.json
 9eac29f30bec7424220c6551f8107bf00ecaa826 data/roots/loot_table/blocks/bafflecap_fairy_hut.json
 f1c0949382afc8793577cec6f42d0d934b68ecad data/roots/loot_table/blocks/brown_fairy_hut.json
 f01e7c0ac3a5c06cf21bbd8832dc1ae15a7e879d data/roots/loot_table/blocks/caelic_soil.json
