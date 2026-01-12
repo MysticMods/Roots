@@ -155,7 +155,7 @@ public class DisarmSpell extends TwoRadiusSpell {
 
   @Override
   public int getMaximumOperations() {
-    return 100;
+    return 10;
   }
 
   @Override
