@@ -14,6 +14,7 @@ import mysticmods.roots.item.PouchItem;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
@@ -192,6 +193,10 @@ public class ServerNetworkHooks {
       //PacketDistributor.sendToPlayer((ServerPlayer) player, ClientboundChangeTomeMode.INSTANCE);
       // This is handled directly in the Curios integration in CuriosEventHandler.
       // As otherwise the itemstack sync happens later than this packet.
+    } else if (current != newMode){
+      player.getServer().tell(new TickTask(2, () -> {
+        PacketDistributor.sendToPlayer((ServerPlayer) player, new ClientboundChangeTomeMode(true));
+      }));
     }
   }
 
