@@ -1,7 +1,5 @@
 package mysticmods.roots.client.gui.layer;
 
-import mysticmods.roots.client.KeyBindings;
-import mysticmods.roots.client.KeyHandler;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.snapshot.LightDrifterSnapshot;
@@ -44,10 +42,10 @@ public class LightDrifterPositionOverlay {
         .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
     int k = font.width(overlayMessageString);
     guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -20, k, j);
-    overlayMessageString = Component.translatable(KeyHandler.isCancelingEffect() ? "roots.gui.light_drifter_continue_canceling" : "roots.gui.light_drifter_cancel", KeyBindings.CANCEL_EFFECT.getTranslatedKeyMessage())
+/*    overlayMessageString = Component.translatable(KeyHandler.isCancelingEffect() ? "roots.gui.light_drifter_continue_canceling" : "roots.gui.light_drifter_cancel", KeyBindings.CANCEL_EFFECT.getTranslatedKeyMessage())
         .withStyle(ChatFormatting.BOLD);
     k = font.width(overlayMessageString);
-    guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -34, k, j);
+    guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -34, k, j);*/
     guiGraphics.pose().popPose();
     minecraft.getProfiler().pop();
   }
