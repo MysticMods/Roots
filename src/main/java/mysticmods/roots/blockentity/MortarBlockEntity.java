@@ -226,7 +226,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       return InteractionResult.CONSUME;
     }
     ItemCooldowns cooldowns = player.getCooldowns();
-    if (inHand.isEmpty() && !player.isCrouching()) {
+    if (inHand.getCount() == 1 && onlyMortar()) {
+      ItemStack stack = inventory.pop();
+      inventory.insert(inHand);
+      player.setItemInHand(hand, stack);
+    } else if (inHand.isEmpty() && !player.isCrouching()) {
       // extract
       ItemStack popped = inventory.pop();
       if (!popped.isEmpty()) {
@@ -301,7 +305,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       } else {
         return InteractionResult.FAIL;
       }
-    } else if (!onlyMortar() && !cooldowns.isOnCooldown(inHand.getItem())) {
+    } else if ((!onlyMortar() && !cooldowns.isOnCooldown(inHand.getItem())) || (!onlyMortar() && inventory.isEmpty() && inHand.is(RootsTags.Items.MORTAR_ACTIVATION))) {
       // insert
       player.setItemInHand(hand, inventory.insert(inHand));
     } else {
