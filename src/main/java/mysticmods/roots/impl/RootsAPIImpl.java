@@ -23,8 +23,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Unit;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +35,7 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +81,31 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public List<ItemStack> getCurios(Player player, TagKey<Item> tag) {
     return CuriosIntegration.getTagged(player, tag);
+  }
+
+  @Override
+  public List<ItemStack> getPouches(Player player) {
+    List<ItemStack> pouches = new ArrayList<>();
+    pouches.addAll(getCurios(player, RootsTags.Items.ALL_POUCHES));
+
+    ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
+    if (stack.is(RootsTags.Items.POUCHES)) {
+      pouches.add(stack);
+    }
+    stack = player.getItemInHand(InteractionHand.OFF_HAND);
+    if (stack.is(RootsTags.Items.POUCHES)) {
+      pouches.add(stack);
+    }
+
+    Inventory inv = player.getInventory();
+    for (int i = 0; i < inv.getContainerSize(); i++) {
+      stack = inv.getItem(i);
+      if (stack.is(RootsTags.Items.POUCHES)) {
+        pouches.add(stack);
+      }
+    }
+
+    return pouches;
   }
 
   @Override
@@ -141,6 +169,6 @@ public class RootsAPIImpl implements IRootsAPI {
 
   @Override
   public void readAdditionalSavedData(Entity entity, @NotNull CompoundTag tag) {
-    ((AccessorMixinEntity)entity).roots$ReadAdditionalSaveData(tag);
+    ((AccessorMixinEntity) entity).roots$ReadAdditionalSaveData(tag);
   }
 }

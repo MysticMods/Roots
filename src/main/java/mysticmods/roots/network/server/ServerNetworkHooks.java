@@ -23,32 +23,16 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ServerNetworkHooks {
   public static void openPouch(Player player) {
-    ItemStack stack = ItemStack.EMPTY;
-    for (ItemStack curioStack : RootsAPI.getInstance().getCurios(player, RootsTags.Items.POUCHES)) {
-      stack = curioStack;
-      break;
-    }
-    if (!stack.is(RootsTags.Items.POUCHES)) {
-      player.getItemInHand(InteractionHand.MAIN_HAND);
-    }
-    if (!stack.is(RootsTags.Items.POUCHES)) {
-      stack = player.getItemInHand(InteractionHand.OFF_HAND);
-    }
-    if (!stack.is(RootsTags.Items.POUCHES)) {
-      Inventory inv = player.getInventory();
-      for (int i = 0; i < inv.getContainerSize(); i++) {
-        stack = inv.getItem(i);
-        if (stack.is(RootsTags.Items.POUCHES)) {
-          break;
-        }
-      }
-    }
-    if (!stack.is(RootsTags.Items.POUCHES)) {
+    List<ItemStack> pouches = RootsAPI.getInstance().getPouches(player);
+    if (pouches.isEmpty()) {
       return;
     }
+
+    ItemStack stack = pouches.getFirst();
 
     if (!(stack.getItem() instanceof PouchItem pouchItem)) {
       return;

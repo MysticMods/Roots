@@ -14,6 +14,7 @@ import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ItemPickupParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -21,6 +22,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -1014,5 +1016,38 @@ public class ClientFXHandlers {
           motion.z
       );
     }
+  }
+
+  public static void pouchPickUpHerb(int entityId, ItemStack stack) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc == null || mc.player == null || mc.level == null) {
+      return;
+    }
+
+    Player player;
+
+    if (mc.level.getEntity(entityId) instanceof Player player2) {
+      player = player2;
+    } else {
+      player = mc.player;
+    }
+
+    RandomSource random = mc.player.getRandom();
+
+    mc.level.playLocalSound(
+        player.getX(),
+        player.getY(),
+        player.getZ(),
+        ModSounds.HERB_PICKUP.get(),
+        SoundSource.PLAYERS,
+        0.2F,
+        (random.nextFloat() - random.nextFloat()) * 1.4F + 2.0F,
+        false
+    );
+
+    ItemEntity entity = new ItemEntity(mc.level, player.getX(), player.getY(), player.getZ(), stack);
+
+    mc.particleEngine
+        .add(new ItemPickupParticle(mc.getEntityRenderDispatcher(), mc.renderBuffers(), mc.level, entity, player));
   }
 }

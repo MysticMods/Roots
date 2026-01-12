@@ -135,6 +135,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.entity.deer.ambient", "Deer squeals");
 
     add("roots.subtitles.item.knife.strip", "Knife strips");
+    add("roots.subtitles.item.pouch.pickup_herb", "Herb plops");
 
     add("roots.commands.reset", "Successfully reset your spell cooldowns!");
     add("roots.commands.usage", "Usage: /roots staff | ritual | pyre | activate");

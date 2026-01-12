@@ -43,6 +43,9 @@ public class ModSounds {
   // Knife
   public static final DeferredHolder<SoundEvent, SoundEvent> KNIFE_STRIP = SOUNDS.register("item.knife.strip", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("item.knife.strip")));
 
+  // Herb pickup
+  public static final DeferredHolder<SoundEvent, SoundEvent> HERB_PICKUP = SOUNDS.register("item.pouch.pickup_herb", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("item.pouch.pickup_herb")));
+
   public static void register(IEventBus bus) {
     SOUNDS.register(bus);
   }

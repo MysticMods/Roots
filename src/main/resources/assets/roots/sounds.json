@@ -686,6 +686,15 @@
       }
     ],
     "subtitle": "roots.subtitles.item.knife.strip"
+  },
+  "item.pouch.pickup_herb": {
+    "sounds": [
+      {
+        "name": "roots:item/herb_pickup",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "roots.subtitles.item.pouch.pickup_herb"
   }
 }
 

@@ -44,6 +44,8 @@ public interface IRootsAPI {
 
   List<ItemStack> getCurios(Player player, TagKey<Item> tag);
 
+  List<ItemStack> getPouches (Player player);
+
   ItemStack getTome(Player player);
 
   default GramaryItem.GramaryMode getTomeMode(Player player) {

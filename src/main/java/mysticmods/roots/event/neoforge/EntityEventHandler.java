@@ -12,12 +12,15 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.effect.SimpleEffect;
 import mysticmods.roots.init.*;
 import mysticmods.roots.integration.IntegrationUtil;
+import mysticmods.roots.item.PouchItem;
+import mysticmods.roots.network.client.ClientboundPouchPickUpHerbPacket;
 import mysticmods.roots.network.client.ClientboundSyncGeasPacket;
 import mysticmods.roots.network.client.fx.AlertnessFXPacket;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.QuiverUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -37,6 +40,7 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.ICancellableEvent;
@@ -44,6 +48,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
@@ -55,6 +60,89 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class EntityEventHandler {
+  // TODO: How do item pick-up mods handle this
+  // TODO: Is this high enough?
+  @SubscribeEvent(priority=EventPriority.HIGH)
+  public static void onItemEntityCollect (ItemEntityPickupEvent.Pre event) {
+    var entity = event.getItemEntity();
+
+    if (entity.hasPickUpDelay()) {
+      return;
+    }
+
+    ItemStack stack = entity.getItem();
+    if (!stack.is(RootsTags.Items.HERBS)) {
+      return;
+    }
+
+    ItemStack copy = stack.copy();
+
+    Player player = event.getPlayer();
+    List<ItemStack> stacks = RootsAPI.getInstance().getPouches(player);
+    boolean changed = false;
+    for (ItemStack pouch : stacks) {
+      if (!stack.isEmpty() && tryStackHerb(stack, pouch)) {
+        changed = true;
+      }
+    }
+
+    if (changed) {
+      if (stack.isEmpty()) {
+        entity.discard();
+      } else {
+        entity.setItem(stack);
+        copy.shrink(stack.getCount());
+      }
+
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new ClientboundPouchPickUpHerbPacket(player.getId(), copy));
+
+      // TODO: Notify the player that something was picked up
+      // See ClientPacketListener::handleTakeItemEntity
+    }
+  }
+
+  private static boolean tryStackHerb (ItemStack herb, ItemStack pouch) {
+    if (!(pouch.getItem() instanceof PouchItem pouchItem)) {
+      return false;
+    }
+
+    var component = pouchItem.getComponent();
+    if (component == null) {
+      return false;
+    }
+
+    var contents = pouch.get(component);
+    if (contents == null) {
+      return false;
+    }
+
+    NonNullList<ItemStack> stacks = NonNullList.withSize(contents.getSlots(), ItemStack.EMPTY);
+    contents.copyInto(stacks);
+    boolean changed = false;
+
+    for (int i = 0; i < contents.getSlots(); i++) {
+      ItemStack slotStack = stacks.get(i);
+      if (slotStack.getCount() < slotStack.getMaxStackSize() && ItemStack.isSameItemSameComponents(slotStack, herb)) {
+        int space = slotStack.getMaxStackSize() - slotStack.getCount();
+        int toTransfer = Math.min(space, herb.getCount());
+        slotStack.grow(toTransfer);
+        herb.shrink(toTransfer);
+        stacks.set(i, slotStack);
+        changed = true;
+        if (herb.isEmpty()) {
+          break;
+        }
+      }
+    }
+
+    if (changed) {
+      ItemContainerContents contents2 = ItemContainerContents.fromItems(stacks);
+      pouch.set(component, contents2);
+    }
+
+    return changed;
+  }
+
   @SubscribeEvent
   public static void onSquidMilked(PlayerInteractEvent.EntityInteract event) {
     Player player = event.getEntity();
