@@ -22,6 +22,8 @@ public class ConfigManager {
 
   public static List<AbstractConfig> CONFIGS = new ArrayList<>();
 
+  public static ModConfigSpec.DoubleValue HERB_MINIMUM_ALERT;
+
   public static ModConfigSpec.BooleanValue ALERTNESS_VISUAL;
   public static ModConfigSpec.IntValue ALERTNESS_DURATION;
   public static ModConfigSpec.BooleanValue ALERTNESS_SOUND;
@@ -148,13 +150,7 @@ public class ConfigManager {
     GROVE_STONE_POWER_RANGE_Z = COMMON_BUILDER.comment("the Z half value for the size of the Grove Stone power range")
         .defineInRange("grove_stone_power_range_z", 30, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
-    COMMON_BUILDER.comment("Options for Growth Amplifiers").push("growth_amplifier");
-    GROWTH_AMPLIFIER_BOUNDS_Z = COMMON_BUILDER.comment("the Z half value for the size of the Growth Amplifier aoe bounding box")
-        .defineInRange("growth_amplifier_bounds_z", 2, 1, Integer.MAX_VALUE);
-    GROWTH_AMPLIFIER_BOUNDS_X = COMMON_BUILDER.comment("the X half value for the size of the Growth Amplifier aoe bounding box")
-        .defineInRange("growth_amplifier_bounds_x", 2, 1, Integer.MAX_VALUE);
-    GROWTH_AMPLIFIER_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Growth Amplifier aoe bounding box")
-        .defineInRange("growth_amplifier_bounds_y", 2, 1, Integer.MAX_VALUE);
+    COMMON_BUILDER.comment("Options for enchanted turf").push("enchanted_turf");
     ENCHANTED_TURF_TICKS = COMMON_BUILDER.comment("the number of ticks the Enchanted Turf will take to create a new grass block above it")
         .defineInRange("enchanted_turf_ticks", 20 * 5, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
@@ -171,6 +167,10 @@ public class ConfigManager {
         .define("sound", true);
     ALERTNESS_TAG = COMMON_BUILDER.comment("whether or not entities should be filtered to those in the roots:alertness entity tag")
         .define("tag", false);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.push("alerts");
+    HERB_MINIMUM_ALERT = COMMON_BUILDER.comment("the minimum amount of remaining of each herb before an alert should be displayed when casting a spell [default: max(herb cost, 0.5)]")
+        .defineInRange("herb_minimum_alert", 0.5D, 0.0D, Double.MAX_VALUE);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("debug");
     DEBUG_REPUTATION = COMMON_BUILDER.comment("if true, will send messages for all reputation gains and losses")

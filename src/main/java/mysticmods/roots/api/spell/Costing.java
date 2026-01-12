@@ -9,7 +9,9 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedParent;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -266,11 +268,24 @@ public class Costing {
 
     Object2DoubleMap<Herb> totals = new Object2DoubleOpenHashMap<>();
 
+    boolean sentAlert = false;
+
     for (Herb herb : totalCosts.keySet()) {
+      double total = cap.amount(herb);
       for (HerbEntry herbEntry : herbMapCache.getOrDefault(herb, List.of())) {
-        totals.put(herb, totals.getDouble(herb) + herbEntry.count);
+        total += herbEntry.count;
+        //totals.put(herb, totals.getDouble(herb) + herbEntry.count);
       }
-      totals.put(herb, totals.getDouble(herb) + cap.amount(herb) + (isCreative ? totalCosts.getDouble(herb) : 0));
+
+      // Thus setting the config to 0 disables this
+      // Only send alerts on cast success, not ticks
+      // TODO: Maybe sent it on ticks?
+      if (total < ConfigManager.HERB_MINIMUM_ALERT.getAsDouble() && !isCreative && !tick) {
+        // TODO: Translation key
+        player.displayClientMessage(Component.literal("Low on " + herb.getName() + "!"), !sentAlert);
+        sentAlert = true;
+      }
+      totals.put(herb, total + (isCreative ? totalCosts.getDouble(herb) : 0));
     }
 
     RootsAPI.getInstance().syncHerbs(player, totals);
