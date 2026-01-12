@@ -156,6 +156,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.CAPSTONES, RootsTags.Items.CAPSTONES);
     this.copy(RootsTags.Blocks.PILLARS, RootsTags.Items.PILLARS);
     this.copy(RootsTags.Blocks.STONEPETAL, RootsTags.Items.STONEPETAL);
+    this.tag(ItemTags.SMALL_FLOWERS).addTags(RootsTags.Items.STONEPETAL);
     this.copy(RootsTags.Blocks.SHORT_GRASS, RootsTags.Items.SHORT_GRASS);
     this.copy(RootsTags.Blocks.TALL_GRASS, RootsTags.Items.TALL_GRASS);
     /*    this.copy(RootsTags.Blocks.GRASS, RootsTags.Items.GRASS); ??????? */

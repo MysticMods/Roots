@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-08T17:57:35.8495526	Roots Item Tags
+// 1.21.1	2026-01-12T14:14:52.1956557	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -40,6 +40,7 @@ ef2660ba58fc43338d6d70441af55ca58e7f28d3 data/minecraft/tags/item/logs_that_burn
 7f66c715bd67dd942ee0fd5cc43eb64a253e31c4 data/minecraft/tags/item/saplings.json
 50ec12b5ae41cf93adbfe643215052a22a52d293 data/minecraft/tags/item/shovels.json
 cd4a22c8f8804182a7d46d801d11aa71e11c5258 data/minecraft/tags/item/slabs.json
+dff6c21a637f763b1d5a3381727e46197d9a31ad data/minecraft/tags/item/small_flowers.json
 d94949d019167daa93bc2ce6dbbf3c9757d61dff data/minecraft/tags/item/stairs.json
 bf77bddf53a2fdf31168d5839627632f0c96c0ff data/minecraft/tags/item/swords.json
 0e67394a5cfefdd41f0748fa6a5e4ba0a26837dd data/minecraft/tags/item/walls.json
