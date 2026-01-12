@@ -405,7 +405,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("create_moonglow"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.MOONGLOW.getId())))
     ), false);
     builder20.add(ModActions.BRED_ANIMAL, List.of(
-        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("bred_animal"), new GroveReputation(10, 8, 4, 1, 1)),
+        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("bred_animal"), new GroveReputation(50, 8, 4, 1, 1)),
         new GroveReputationEntry(ModGroves.SPROUTING.value(), RootsAPI.rl("bred_sprouts"), new GroveReputation(20, 10, 5, 1, 1), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.SPROUTS)
     ), false);
     builder20.add(ModActions.SHATTER_BLOCK, List.of(
@@ -421,7 +421,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.SPROUTING.value(), RootsAPI.rl("kill_sprouts"), new GroveReputation(0, -2, -5, -10, -10), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.SPROUTS)
     ), false);
     builder20.add(ModActions.TAME_ANIMAL, List.of(
-        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("tame_animals"), new GroveReputation(10, 8, 5, 2, 2))
+        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("tame_animals"), new GroveReputation(50, 8, 5, 2, 2))
     ), false);
     builder20.add(ModActions.TRADE_VILLAGER, List.of(
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("trade_with_villager"), new GroveReputation(20, 15, 8, 2, 2))
@@ -440,7 +440,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("eat_rotten_flesh"), new GroveReputation(20, 0, 0, 0, 0), GroveReputationEntry.SubEntryType.ITEM, RootsTags.Items.ROTTEN_FLESH)
     ), false);
     builder20.add(ModActions.HARVEST_BEE_HIVE, List.of(
-        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("harvest_bee_hive"), new GroveReputation(10, 8, 4, 2, 2))
+        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("harvest_bee_hive"), new GroveReputation(50, 8, 4, 2, 2))
     ), false);
     builder20.add(ModActions.FILL_COMPOST, List.of(
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("fill_compost_fungal"), new GroveReputation(10, 8, 4, 2, 2)),
@@ -451,7 +451,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("grove_huge_mushroom_fungal"), new GroveReputation(15, 8, 2, 1, 1))
     ), false);
     builder20.add(ModActions.MILK_COW, List.of(
-        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("milk_cow"), new GroveReputation(2, 1, 0, 0, 0))
+        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("milk_cow"), new GroveReputation(10, 1, 0, 0, 0))
     ), false);
     builder20.add(ModActions.ARRIVE_DIMENSION, List.of(
         new GroveReputationEntry(ModGroves.HOLLOW.value(), RootsAPI.rl("arrive_in_the_end"), new GroveReputation(500), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.DIMENSION, Level.END.location()))),

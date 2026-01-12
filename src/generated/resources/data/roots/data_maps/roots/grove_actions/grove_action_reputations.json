@@ -43,7 +43,7 @@
         "grove": "roots:wild",
         "name": "roots:bred_animal",
         "reputation": {
-          "gain1": 10,
+          "gain1": 50,
           "gain2": 8,
           "gain3": 4,
           "gain4": 1,
@@ -395,7 +395,7 @@
         "grove": "roots:wild",
         "name": "roots:harvest_bee_hive",
         "reputation": {
-          "gain1": 10,
+          "gain1": 50,
           "gain2": 8,
           "gain3": 4,
           "gain4": 2,
@@ -1007,7 +1007,7 @@
         "grove": "roots:wild",
         "name": "roots:milk_cow",
         "reputation": {
-          "gain1": 2,
+          "gain1": 10,
           "gain2": 1,
           "gain3": 0,
           "gain4": 0,
@@ -1313,7 +1313,7 @@
         "grove": "roots:wild",
         "name": "roots:tame_animals",
         "reputation": {
-          "gain1": 10,
+          "gain1": 50,
           "gain2": 8,
           "gain3": 5,
           "gain4": 2,
