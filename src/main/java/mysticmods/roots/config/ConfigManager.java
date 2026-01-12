@@ -208,7 +208,7 @@ public class ConfigManager {
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Configuration options relating to the mortar & pestle").push("mortar");
     PESTLE_COOLDOWN = COMMON_BUILDER.comment("the cooldown in ticks after using a pestle on a mortar, -1 for no cooldown")
-        .defineInRange("pestle_cooldown", 20, -1, Integer.MAX_VALUE);
+        .defineInRange("pestle_cooldown", 12, -1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
 
     CLIENT_BUILDER.push("debug");
