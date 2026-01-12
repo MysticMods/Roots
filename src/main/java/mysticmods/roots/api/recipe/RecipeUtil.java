@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import mysticmods.roots.api.recipe.inventory.RecipeInputWrapper;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,7 +17,9 @@ import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class RecipeUtil {
   public static boolean matchesIngredients(Recipe<?> recipe, RecipeInput input) {
@@ -37,10 +40,9 @@ public class RecipeUtil {
     return RecipeMatcher.findMatches(inputs, recipe.getIngredients()) != null;
   }
 
-  @Nullable
-  public static Int2IntOpenHashMap getIngredientMap(Recipe<?> recipe, RecipeInput input) {
+  public static IngredientMatchResult getIngredientMap(Recipe<?> recipe, RecipeInput input) {
     Int2IntOpenHashMap map = new Int2IntOpenHashMap();
-    boolean foundOuter = true;
+    List<Ingredient> missing = new ArrayList<>();
     outer:
     for (Ingredient ingredient : recipe.getIngredients()) {
       for (int i = 0; i < input.size(); i++) {
@@ -54,13 +56,26 @@ public class RecipeUtil {
           }
         }
       }
-      foundOuter = false;
-      break;
+      missing.add(ingredient);
     }
-    if (!foundOuter) {
-      return null;
+    return new IngredientMatchResult(map, missing);
+  }
+
+  private static final class PlayerThingy implements Consumer<List<Ingredient>> {
+    private final ServerPlayer player;
+
+    public PlayerThingy(ServerPlayer player) {
+      this.player = player;
     }
-    return map;
+
+    @Override
+    public void accept(List<Ingredient> ingredients) {
+      this.player.displayClientMessage(Component.literal("Unable to refill this recipe as " + ingredients.size() + " ingredient(s) are missing."), true);
+      // TODO: Find a way to convert an ingredient into a readable string
+/*      for (Ingredient ingredient : ingredients) {
+        this.player.displayClientMessage(Component.literal("Missing: " + ingredient.toString()), true);
+      }*/
+    }
   }
 
   public static boolean refillRecipeFromPlayer(ServerPlayer player, Recipe<?> recipe, RecipeInventory inventory) {
@@ -75,10 +90,16 @@ public class RecipeUtil {
   }
 
   public static boolean refillRecipe(IItemHandler inv, Recipe<?> recipe, RecipeInventory inventory) {
-    Int2IntOpenHashMap counts = getIngredientMap(recipe, new RecipeInputWrapper(inv));
-    if (counts == null) {
+    return refillRecipe(inv, recipe, inventory, (stack) -> {});
+  }
+
+  public static boolean refillRecipe(IItemHandler inv, Recipe<?> recipe, RecipeInventory inventory, Consumer<List<Ingredient>> missingConsumer) {
+    var matchResult = getIngredientMap(recipe, new RecipeInputWrapper(inv));
+    if (!matchResult.isComplete()) {
+      missingConsumer.accept(matchResult.getMissing());
       return false;
     }
+    Int2IntOpenHashMap counts = matchResult.getSlots();
     for (Int2IntMap.Entry entry : counts.int2IntEntrySet()) {
       for (int i = 0; i < entry.getIntValue(); i++) {
         ItemStack thisStack = inv.extractItem(entry.getIntKey(), 1, false);
@@ -89,4 +110,27 @@ public class RecipeUtil {
     }
     return true;
   }
+
+  public static final class IngredientMatchResult {
+    private final Int2IntOpenHashMap slotCounts;
+    private final List<Ingredient> missing;
+
+    private IngredientMatchResult(Int2IntOpenHashMap slotCounts, List<Ingredient> missing) {
+      this.slotCounts = slotCounts;
+      this.missing = Collections.unmodifiableList(missing);
+    }
+
+    public Int2IntOpenHashMap getSlots() {
+      return slotCounts;
+    }
+
+    public List<Ingredient> getMissing() {
+      return missing;
+    }
+
+    public boolean isComplete () {
+      return missing.isEmpty();
+    }
+  }
+
 }
