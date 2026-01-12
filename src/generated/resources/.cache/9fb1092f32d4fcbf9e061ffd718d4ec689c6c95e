@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-04T14:47:06.7375595	Recipes
+// 1.21.1	2026-01-12T20:43:50.2070588	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -383,6 +383,8 @@ cab49903c9805aad7a062b1fad9542b9667de4d1 data/roots/advancement/recipes/misc/tra
 6a9090c254ae010e204f302577d7f058339b0c2a data/roots/advancement/recipes/misc/transmute/silver_to_gold.json
 eba9ec9534351f7840c6669459d9437d3a61f697 data/roots/advancement/recipes/misc/transmute/silver_to_gold_nugget.json
 3589c190377398e047ecd81ef7716e953e5338bb data/roots/advancement/recipes/misc/transmute/trapdoor_to_cobweb.json
+2f344950b1f080bd22e688e2fddb4c125e04fa46 data/roots/advancement/recipes/misc/wildwood_chest_from_logs_planks.json
+c0bedfdca305bed6199736ca8554315ec0f87039 data/roots/advancement/recipes/misc/wildwood_chest_from_planks_logs.json
 a8c7c988a505a50ca43beb3fde06bb64657e3e57 data/roots/advancement/recipes/misc/wildwood_soil_from_elemental_soil_and_wildwood_herb.json
 87a2da6c82cd14dd78a204110f31f2b8d5413ad9 data/roots/advancement/recipes/misc/writable_book_ink_bottle.json
 b905a465b19b2d3c39f88034207abbeb1e7be2f0 data/roots/advancement/recipes/redstone/mossy_runestone_button.json
@@ -830,6 +832,8 @@ fecb822745bae5e88d7a8c6bc50623889777a282 data/roots/recipe/vinegar.json
 508a73f201a27be546aae77ed3c42c462966d275 data/roots/recipe/wildewheet_bread.json
 f60e460b3ddf0756cb7dac5b20f89bb94062c7ce data/roots/recipe/wildroot_stew.json
 eba3e9eaa640ffc5dad84dcbe7bdbbfd09cc180a data/roots/recipe/wildwood_button.json
+7fd1e4c674fd294999654e631fa02817c7dcbc20 data/roots/recipe/wildwood_chest_from_logs_planks.json
+3358cb9a140fbe234dda3cf05e329efbebff3f34 data/roots/recipe/wildwood_chest_from_planks_logs.json
 74f9f67623e6e642ab547010f48cf7bc9b8ac057 data/roots/recipe/wildwood_door.json
 0a71f23e8293174c55d223ba95ebac8eebc4d0c5 data/roots/recipe/wildwood_fence.json
 61b994e7e333ea5af2b1cb0ec73294ddfec037dd data/roots/recipe/wildwood_gate.json

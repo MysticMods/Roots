@@ -372,6 +372,7 @@ public final class RootsLootTableProvider {
       dropSelf(ModBlocks.MAGMATIC_SOIL.get());
       dropSelf(ModBlocks.TERRAN_SOIL.get());
       dropSelf(ModBlocks.ENCHANTED_TURF.get());
+      dropSelf(ModBlocks.WILDWOOD_CHEST.get());
       dropSelf(ModBlocks.RITUAL_PEDESTAL.get());
       dropSelf(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get());
       dropSelf(ModBlocks.GROVE_CRAFTER.get());

@@ -180,6 +180,10 @@ public class ModBlocks {
     BLOCKS.addAlias(RootsAPI.rl("fey_light"), RootsAPI.rl("sylvan_light"));
   }
 
+  public static final DeferredHolder<Block, WildwoodChestBlock> WILDWOOD_CHEST = BLOCKS.register("wildwood_chest", () -> new WildwoodChestBlock(BlockBehaviour.Properties.of()
+      .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5f).sound(SoundType.WOOD)
+      .requiresCorrectToolForDrops()));
+
   public static final DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BlockBehaviour.Properties.of()
       .mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(2.5f).sound(SoundType.STONE)
       .requiresCorrectToolForDrops()));

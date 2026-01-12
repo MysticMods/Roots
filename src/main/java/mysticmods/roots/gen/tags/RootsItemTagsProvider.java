@@ -390,6 +390,9 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(ItemTags.LOGS).addTags(RootsTags.Items.WILDWOOD_LOGS);
 
     this.tag(ItemTags.MEAT).add(COOKED_SQUID.get(), RAW_SQUID.get(), COOKED_VENISON.get(), VENISON.get());
+
+    this.tag(Tags.Items.CHESTS_WOODEN).add(WILDWOOD_CHEST.get());
+    this.tag(RootsTags.Items.WILDWOOD_PLANKS).add(WILDWOOD_PLANKS.get());
   }
 
   private void copyGrove(TagKey<Grove> groveTag) {

@@ -388,6 +388,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.TERRAN_SOIL);
     addBlock(ModBlocks.ENCHANTED_TURF);
     addBlock(ModBlocks.SYLVAN_LIGHT);
+    addBlock(ModBlocks.WILDWOOD_CHEST);
     addBlock(ModBlocks.RITUAL_PEDESTAL);
     addBlock(ModBlocks.REINFORCED_RITUAL_PEDESTAL);
     addBlock(ModBlocks.GROVE_CRAFTER);
@@ -830,6 +831,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.gui.effect_start_canceling", "Hold [%s] to cancel %s.");
     add("roots.gui.effect_cancel", "Press [%s] to cancel %s.");
     add("roots.gui.effect_continue_canceling", "Continue holding [%s] to cancel %s.");
+
+    add("container.wildwoodchest", "Wildwood Chest");
   }
 
   // TODO: Translations for damage

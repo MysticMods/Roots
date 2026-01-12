@@ -107,6 +107,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.WIP).addTag(RootsTags.Blocks.SOILS);
     this.tag(RootsTags.Blocks.AMPLIFIERS);
     this.tag(RootsTags.Blocks.DISPLAY_PEDESTALS).add(DISPLAY_PEDESTAL.get());
+    this.tag(Tags.Blocks.CHESTS_WOODEN).add(WILDWOOD_CHEST.get());
     this.tag(RootsTags.Blocks.RITUAL_PEDESTALS).add(RITUAL_PEDESTAL.get(), REINFORCED_RITUAL_PEDESTAL.get());
     this.tag(RootsTags.Blocks.GROVE_PEDESTALS).add(GROVE_PEDESTAL.get(), WILDWOOD_PEDESTAL.get());
     //noinspection unchecked

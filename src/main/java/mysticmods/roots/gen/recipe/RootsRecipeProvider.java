@@ -421,6 +421,24 @@ public final class RootsRecipeProvider extends RecipeProvider {
     stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK.get(), ModBlocks.CHISELED_RUNED_OBSIDIAN.get());
     stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE.get(), ModBlocks.CHISELED_RUNED_OBSIDIAN.get());
 
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WILDWOOD_CHEST.get())
+        .pattern("WPW")
+        .pattern("P P")
+        .pattern("WPW")
+        .define('W', RootsTags.Items.WILDWOOD_LOGS)
+        .define('P', RootsTags.Items.WILDWOOD_PLANKS)
+        .unlockedBy("has_wildwood_log", has(RootsTags.Items.WILDWOOD_LOGS))
+        .save(c, RootsAPI.rl("wildwood_chest_from_logs_planks"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WILDWOOD_CHEST.get())
+        .pattern("WPW")
+        .pattern("P P")
+        .pattern("WPW")
+        .define('P', RootsTags.Items.WILDWOOD_LOGS)
+        .define('W', RootsTags.Items.WILDWOOD_PLANKS)
+        .unlockedBy("has_wildwood_log", has(RootsTags.Items.WILDWOOD_LOGS))
+        .save(c, RootsAPI.rl("wildwood_chest_from_planks_logs"));
+
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RITUAL_PEDESTAL.get())
         .pattern("RRR")
         .pattern(" R ")

@@ -1,8 +1,9 @@
-// 1.21.1	2026-01-12T14:14:52.1956557	Roots Item Tags
+// 1.21.1	2026-01-12T20:43:50.2014951	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 01942008774c1f7952c4c7014e58916950d57030 data/curios/tags/item/tome.json
+d26fab5781adf116b2a4d1aef4ec77fbbac91ef5 data/c/tags/item/chests/wooden.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/item/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/item/fence_gates/wooden.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -145,6 +146,7 @@ ccba87bb9ab497d3dcdbd3a532d5eae5002f0d3e data/roots/tags/item/pillars/any.json
 e193f473f605776c34de80b92a855d59614ef692 data/roots/tags/item/pillars/runes/any.json
 e48d858e3d3974b791109f0ebc13f854f1fd3436 data/roots/tags/item/pillars/runes/rune.json
 78d10f476ff2a556d1134f349ebb6e16d3f40922 data/roots/tags/item/pillars/runes/runed.json
+43fd1fad5475b5ae8ca897bfd77506ccdf7ddab7 data/roots/tags/item/planks/wildwood.json
 b24eda5f3a7b62df0c451d4de620ebf87ba5ffb8 data/roots/tags/item/poppies.json
 013c834800190efb8c750604831c502fd8f189fc data/roots/tags/item/pouches.json
 ae4117882af5a5a5d43ce988fa9906246bcdbf96 data/roots/tags/item/pouches/all.json

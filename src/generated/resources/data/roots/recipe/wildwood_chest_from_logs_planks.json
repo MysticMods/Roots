@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "roots:planks/wildwood"
+    },
+    "W": {
+      "tag": "roots:logs/wildwood"
+    }
+  },
+  "pattern": [
+    "WPW",
+    "P P",
+    "WPW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:wildwood_chest"
+  }
+}

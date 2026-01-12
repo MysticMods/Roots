@@ -93,6 +93,7 @@ public class RootsModEvents {
       event.accept(ModItems.WILDWOOD_DOOR.get());
       event.accept(ModItems.WILDWOOD_TRAPDOOR.get());
       event.accept(ModItems.WILDWOOD_LADDER.get());
+      event.accept(ModItems.WILDWOOD_CHEST.get());
 
       event.accept(ModItems.ELEMENTAL_SOIL.get());
       event.accept(ModItems.AQUEOUS_SOIL.get());

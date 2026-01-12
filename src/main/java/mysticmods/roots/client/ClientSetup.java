@@ -7,6 +7,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.blockentity.*;
 import mysticmods.roots.client.gui.layer.*;
 import mysticmods.roots.client.gui.screen.*;
+import mysticmods.roots.client.item.WildwoodChestItemRenderer;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
@@ -29,6 +30,7 @@ import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -73,6 +75,7 @@ public class ClientSetup {
     /*    event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);*/
     event.registerBlockEntityRenderer(ModBlockEntities.ENCHANTED_TURF.get(), EnchantedTurfBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.FUNGAL_TRANSMUTER.get(), FungalTransmuterBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.WILDWOOD_CHEST.get(), WildwoodChestRenderer::new);
   }
 
   private static final BlockColor GRASS =
@@ -202,7 +205,15 @@ public class ClientSetup {
       }
     };
 
+    IClientItemExtensions wildwoodChest = new IClientItemExtensions() {
+      @Override
+      public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+        return WildwoodChestItemRenderer.getInstance();
+      }
+    };
+
     event.registerItem(deferToArmorModel, ModItems.BEETLE_HELMET, ModItems.BEETLE_BOOTS, ModItems.BEETLE_CHESTPLATE, ModItems.BEETLE_LEGGINGS, ModItems.ANTLER_HAT);
+    event.registerItem(wildwoodChest, ModItems.WILDWOOD_CHEST);
   }
 
   @SubscribeEvent

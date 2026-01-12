@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-12T14:22:44.1056742	Loot Tables
+// 1.21.1	2026-01-12T20:21:56.24017	Loot Tables
 3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
@@ -104,6 +104,7 @@ f4af7ff7120d0100b6cfc844ddecec41aa4040db data/roots/loot_table/blocks/twilight_g
 97015411597c4200676a563a530597d2a181b273 data/roots/loot_table/blocks/wildewheet_crop.json
 1992b45ad9921cb0704366ad6536e3e23d95680b data/roots/loot_table/blocks/wildroot_crop.json
 e5d9bb6e33c52a49cee489bb09839cc1aad150c6 data/roots/loot_table/blocks/wildwood_button.json
+d4648e9131114a5086664ed63fadfcc5672cfe95 data/roots/loot_table/blocks/wildwood_chest.json
 496734585ddc13ef969cd9d0ed67dc79db0bc23e data/roots/loot_table/blocks/wildwood_door.json
 9ada6fddf5e7fba4297459b4f9f93d83e055d36a data/roots/loot_table/blocks/wildwood_fence.json
 6ceafc8c80c6e1fbf09f370b168e840908858756 data/roots/loot_table/blocks/wildwood_gate.json
