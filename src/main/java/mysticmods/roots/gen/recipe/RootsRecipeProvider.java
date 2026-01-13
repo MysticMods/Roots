@@ -1739,6 +1739,70 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_ink_bottle", has(ModItems.INK_BOTTLE.get()))
         .save(c, RootsAPI.rl("writable_book_ink_bottle"));
 
+    saver = RecipeSaver.saver().unlockedBy("has_fire_soil", has(RootsTags.Items.FIRE_SOIL));
+    MortarRecipe.Builder fireSoilRecipe = MortarRecipe.Builder.create().times(5);
+    BaseRecipeData.Builder fireSoilData = BaseRecipeData.Builder.create().requires(RootsTags.Items.FIRE_SOIL)
+        .result(ModItems.INFERNO_BULB)
+        .chanceOutput(ModItems.ELEMENTAL_SOIL.get(), 1);
+
+    saver.save(fireSoilRecipe.build(fireSoilData), c, RootsAPI.rl("mortar/inferno_bulb_from_fire_soil"));
+    saver.save(fireSoilRecipe.times(10)
+        .build(fireSoilData.multiplty(2)), c, RootsAPI.rl("mortar/inferno_bulb_from_fire_soil_2"));
+    saver.save(fireSoilRecipe.times(10)
+        .build(fireSoilData.multiplty(3)), c, RootsAPI.rl("mortar/inferno_bulb_from_fire_soil_3"));
+    saver.save(fireSoilRecipe.times(10)
+        .build(fireSoilData.multiplty(4)), c, RootsAPI.rl("mortar/inferno_bulb_from_fire_soil_4"));
+    saver.save(fireSoilRecipe.times(10)
+        .build(fireSoilData.multiplty(5)), c, RootsAPI.rl("mortar/inferno_bulb_from_fire_soil_5"));
+
+    saver = RecipeSaver.saver().unlockedBy("has_water_soil", has(RootsTags.Items.WATER_SOIL));
+    MortarRecipe.Builder waterSoilRecipe = MortarRecipe.Builder.create().times(5);
+    BaseRecipeData.Builder waterSoilData = BaseRecipeData.Builder.create().requires(RootsTags.Items.WATER_SOIL)
+        .result(ModItems.DEWGONIA)
+        .chanceOutput(ModItems.ELEMENTAL_SOIL, 1);
+
+    saver.save(waterSoilRecipe.build(waterSoilData), c, RootsAPI.rl("mortar/dewgonia_from_water_soil"));
+    saver.save(waterSoilRecipe.times(10)
+        .build(waterSoilData.multiplty(2)), c, RootsAPI.rl("mortar/dewgonia_from_water_soil_2"));
+    saver.save(waterSoilRecipe.times(10)
+        .build(waterSoilData.multiplty(3)), c, RootsAPI.rl("mortar/dewgonia_from_water_soil_3"));
+    saver.save(waterSoilRecipe.times(10)
+        .build(waterSoilData.multiplty(4)), c, RootsAPI.rl("mortar/dewgonia_from_water_soil_4"));
+    saver.save(waterSoilRecipe.times(10)
+        .build(waterSoilData.multiplty(5)), c, RootsAPI.rl("mortar/dewgonia_from_water_soil_5"));
+
+    saver = RecipeSaver.saver().unlockedBy("has_earth_soil", has(RootsTags.Items.EARTH_SOIL));
+    MortarRecipe.Builder earthSoilRecipe = MortarRecipe.Builder.create().times(5);
+    BaseRecipeData.Builder earthSoilData = BaseRecipeData.Builder.create().requires(RootsTags.Items.EARTH_SOIL)
+        .result(ModItems.STALICRIPE)
+        .chanceOutput(ModItems.ELEMENTAL_SOIL, 1);
+
+    saver.save(earthSoilRecipe.build(earthSoilData), c, RootsAPI.rl("mortar/stalicripe_from_earth_soil"));
+    saver.save(earthSoilRecipe.times(10)
+        .build(earthSoilData.multiplty(2)), c, RootsAPI.rl("mortar/stalicripe_from_earth_soil_2"));
+    saver.save(earthSoilRecipe.times(10)
+        .build(earthSoilData.multiplty(3)), c, RootsAPI.rl("mortar/stalicripe_from_earth_soil_3"));
+    saver.save(earthSoilRecipe.times(10)
+        .build(earthSoilData.multiplty(4)), c, RootsAPI.rl("mortar/stalicripe_from_earth_soil_4"));
+    saver.save(earthSoilRecipe.times(10)
+        .build(earthSoilData.multiplty(5)), c, RootsAPI.rl("mortar/stalicripe_from_earth_soil_5"));
+
+    saver = RecipeSaver.saver().unlockedBy("has_air_soil", has(RootsTags.Items.AIR_SOIL));
+    MortarRecipe.Builder airSoilRecipe = MortarRecipe.Builder.create().times(5);
+    BaseRecipeData.Builder airSoilData = BaseRecipeData.Builder.create().requires(RootsTags.Items.AIR_SOIL)
+        .result(ModItems.CLOUD_BERRY)
+        .chanceOutput(ModItems.ELEMENTAL_SOIL, 1);
+
+    saver.save(airSoilRecipe.build(airSoilData), c, RootsAPI.rl("mortar/cloud_berry_from_air_soil"));
+    saver.save(airSoilRecipe.times(10)
+        .build(airSoilData.multiplty(2)), c, RootsAPI.rl("mortar/cloud_berry_from_air_soil_2"));
+    saver.save(airSoilRecipe.times(10)
+        .build(airSoilData.multiplty(3)), c, RootsAPI.rl("mortar/cloud_berry_from_air_soil_3"));
+    saver.save(airSoilRecipe.times(10)
+        .build(airSoilData.multiplty(4)), c, RootsAPI.rl("mortar/cloud_berry_from_air_soil_4"));
+    saver.save(airSoilRecipe.times(10)
+        .build(airSoilData.multiplty(5)), c, RootsAPI.rl("mortar/cloud_berry_from_air_soil_5"));
+
     MortarRecipe.Builder blazePowder1 = MortarRecipe.Builder.create().times(10);
     BaseRecipeData.Builder blazePowderData = BaseRecipeData.Builder.create().requires(Tags.Items.RODS_BLAZE)
         .result(Items.BLAZE_POWDER.builtInRegistryHolder(), 2).chanceOutput(Items.BLAZE_POWDER, 0.5f);

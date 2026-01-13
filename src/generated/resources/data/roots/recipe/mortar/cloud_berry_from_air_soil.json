@@ -1,0 +1,25 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chance_outputs": [
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "roots:soils/air"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:cloud_berry"
+    }
+  },
+  "times": 5
+}

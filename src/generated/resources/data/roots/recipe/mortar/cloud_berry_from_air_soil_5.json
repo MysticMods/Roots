@@ -1,0 +1,65 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chance_outputs": [
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "roots:soils/air"
+      },
+      {
+        "tag": "roots:soils/air"
+      },
+      {
+        "tag": "roots:soils/air"
+      },
+      {
+        "tag": "roots:soils/air"
+      },
+      {
+        "tag": "roots:soils/air"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 5,
+      "id": "roots:cloud_berry"
+    }
+  },
+  "times": 10
+}

@@ -1,0 +1,45 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chance_outputs": [
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "roots:soils/water"
+      },
+      {
+        "tag": "roots:soils/water"
+      },
+      {
+        "tag": "roots:soils/water"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 3,
+      "id": "roots:dewgonia"
+    }
+  },
+  "times": 10
+}

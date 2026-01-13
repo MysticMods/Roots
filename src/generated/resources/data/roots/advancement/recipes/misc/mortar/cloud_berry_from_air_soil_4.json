@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:mortar/cloud_berry_from_air_soil_4"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_air_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:soils/air"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_air_soil"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:mortar/cloud_berry_from_air_soil_4"
+    ]
+  }
+}

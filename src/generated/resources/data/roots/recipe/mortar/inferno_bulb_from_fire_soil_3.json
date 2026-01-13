@@ -1,0 +1,45 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chance_outputs": [
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      },
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 1,
+          "id": "roots:elemental_soil"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "roots:soils/fire"
+      },
+      {
+        "tag": "roots:soils/fire"
+      },
+      {
+        "tag": "roots:soils/fire"
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 3,
+      "id": "roots:inferno_bulb"
+    }
+  },
+  "times": 10
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:mortar/dewgonia_from_water_soil"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_water_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:soils/water"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_water_soil"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:mortar/dewgonia_from_water_soil"
+    ]
+  }
+}

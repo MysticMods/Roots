@@ -64,7 +64,6 @@ public class DataEventHandler {
     event.register(DataMaps.STEM_BLOCKS);
     event.register(DataMaps.GROVE_ACTION_REPUTATIONS);
     event.register(DataMaps.GROVE_RANKS);
-    event.register(DataMaps.OPERATION_COST);
     event.register(DataMaps.HARVEST_SEED_TO_CROP);
     event.register(DataMaps.GROWTH_SEED_TO_CROP);
     event.register(DataMaps.GROVE_POWER_GENERATORS);

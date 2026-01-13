@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:mortar/stalicripe_from_earth_soil_3"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_earth_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:soils/earth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_earth_soil"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:mortar/stalicripe_from_earth_soil_3"
+    ]
+  }
+}
