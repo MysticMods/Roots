@@ -76,6 +76,8 @@ public class DataEventHandler {
     event.register(DataMaps.EXTRA_CROP_DATA);
     event.register(DataMaps.EXTRA_CROP_CHANCE);
     event.register(DataMaps.DIMENSION_ITEM);
+    event.register(DataMaps.ENTITY_AUGMENTATION_DATA);
+    event.register(DataMaps.SHATTER_COST_MULTIPLIERS);
   }
 
   private static void callInit(Holder<?> holder) {
