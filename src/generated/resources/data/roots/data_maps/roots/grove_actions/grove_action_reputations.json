@@ -281,7 +281,61 @@
         "grove": "roots:elemental",
         "name": "roots:elemental_crop_growth",
         "reputation": {
-          "gain1": 10,
+          "gain1": 50,
+          "gain2": 5,
+          "gain3": 1,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": false
+      },
+      {
+        "entries": [
+          {
+            "type": "block",
+            "name": "roots:grove/twilight/crops"
+          }
+        ],
+        "grove": "roots:twilight",
+        "name": "roots:twilight_crop_growth",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 5,
+          "gain3": 1,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": false
+      },
+      {
+        "entries": [
+          {
+            "type": "block",
+            "name": "roots:grove/fairy/crops"
+          }
+        ],
+        "grove": "roots:fairy",
+        "name": "roots:fairy_crop_growth",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 5,
+          "gain3": 1,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": false
+      },
+      {
+        "entries": [
+          {
+            "type": "block",
+            "name": "roots:grove/wild/crops"
+          }
+        ],
+        "grove": "roots:wild",
+        "name": "roots:wild_crop_growth",
+        "reputation": {
+          "gain1": 50,
           "gain2": 5,
           "gain3": 1,
           "gain4": 0,
@@ -329,7 +383,7 @@
         "grove": "roots:fungal",
         "name": "roots:fill_compost_fungal",
         "reputation": {
-          "gain1": 10,
+          "gain1": 50,
           "gain2": 8,
           "gain3": 4,
           "gain4": 2,
@@ -341,7 +395,7 @@
         "grove": "roots:sprouting",
         "name": "roots:fill_compost_sprout",
         "reputation": {
-          "gain1": 10,
+          "gain1": 50,
           "gain2": 5,
           "gain3": 0,
           "gain4": 0,
@@ -381,7 +435,7 @@
         "grove": "roots:fungal",
         "name": "roots:grove_huge_mushroom_fungal",
         "reputation": {
-          "gain1": 15,
+          "gain1": 50,
           "gain2": 8,
           "gain3": 2,
           "gain4": 1,
@@ -433,7 +487,7 @@
         "grove": "roots:twilight",
         "name": "roots:kill_pacifist_animals",
         "reputation": {
-          "gain1": 10,
+          "gain1": 50,
           "gain2": 5,
           "gain3": 2,
           "gain4": 0,
@@ -1027,7 +1081,7 @@
         "grove": "roots:elemental",
         "name": "roots:shattered_ore_block",
         "reputation": {
-          "gain1": 2,
+          "gain1": 20,
           "gain2": 1,
           "gain3": 0,
           "gain4": 0,
@@ -1327,7 +1381,7 @@
         "grove": "roots:fairy",
         "name": "roots:trade_with_fairy_hut",
         "reputation": {
-          "gain1": 0,
+          "gain1": 20,
           "gain2": 5,
           "gain3": 1,
           "gain4": 1,
@@ -1341,7 +1395,7 @@
         "grove": "roots:fairy",
         "name": "roots:trade_with_piglin",
         "reputation": {
-          "gain1": 4,
+          "gain1": 20,
           "gain2": 2,
           "gain3": 1,
           "gain4": 0,
@@ -1355,7 +1409,7 @@
         "grove": "roots:fairy",
         "name": "roots:trade_with_villager",
         "reputation": {
-          "gain1": 20,
+          "gain1": 50,
           "gain2": 15,
           "gain3": 8,
           "gain4": 2,

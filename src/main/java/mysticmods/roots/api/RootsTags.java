@@ -173,6 +173,10 @@ public class RootsTags {
 
     public static final TagKey<Block> SPROUT_REPUTATION_CROPS = modTag("grove/sprout/crops");
     public static final TagKey<Block> ELEMENTAL_REPUTATION_CROPS = modTag("grove/elemental/crops");
+    public static final TagKey<Block> TWILIGHT_REPUTATION_CROPS = modTag("grove/twilight/crops");
+    public static final TagKey<Block> FAIRY_REPUTATION_CROPS = modTag("grove/fairy/crops");
+    public static final TagKey<Block> WILD_REPUTATION_CROPS = modTag("grove/wild/crops");
+    // public static final TagKey<Block> FUNGAL_REPUTATION_CROPS = modTag("grove/fungal/crops");
 
     public static final TagKey<Block> UNDERWATER_FARMLAND = modTag("underwater_farmland");
 
