@@ -339,6 +339,9 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
         .add(ENCHANTED_TURF.get(), FUNGAL_TRANSMUTER.get());
 
     tag(RootsTags.Blocks.NETHER_DOORS).add(Blocks.CRIMSON_DOOR, Blocks.WARPED_DOOR);
+
+    this.tag(RootsTags.Blocks.TIER_00_SHATTER).add(Blocks.COBBLESTONE, Blocks.NETHERRACK).addTag(BlockTags.LEAVES);
+    this.tag(RootsTags.Blocks.TIER_05_SHATTER).addTag(BlockTags.BASE_STONE_OVERWORLD).addTag(BlockTags.BASE_STONE_NETHER).addTag(BlockTags.SAND).addTag(Tags.Blocks.GRAVELS);
   }
 
   @Override

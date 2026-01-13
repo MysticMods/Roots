@@ -207,6 +207,8 @@ public class RootsTags {
     public static final TagKey<Block> GROWTH_AMPLIFIER_GRASSES = modTag("growth_amplifier_grasses");
 
     public static final TagKey<Block> NETHER_DOORS = modTag("doors/nether");
+    public static final TagKey<Block> TIER_00_SHATTER = modTag("spell/shatter/tier_00");
+    public static final TagKey<Block> TIER_05_SHATTER = modTag("spell/shatter/tier_05");
 
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
