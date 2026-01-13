@@ -82,9 +82,6 @@ public class DataMaps {
   public static final DataMapType<Grove, ReputationRanks> GROVE_RANKS = DataMapType.builder(RootsAPI.rl("grove_ranks"), RootsRegistries.Keys.GROVES, ReputationRanks.CODEC)
       .synced(ReputationRanks.CODEC, true)
       .build();
-  public static final DataMapType<Block, Integer> OPERATION_COST = DataMapType.builder(RootsAPI.rl("shatter_operation_cost"), Registries.BLOCK, Codec.INT)
-      .synced(Codec.INT, true)
-      .build();
   public static final DataMapType<Item, Block> HARVEST_SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("harvest_seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), true)
       .build();
@@ -139,6 +136,11 @@ public class DataMaps {
     }
 
     return DIMENSION_LOOKUP.getOrDefault(dimension, ItemStack.EMPTY);
+  }
+
+  public static double getShatterCostMultiplier(Block block) {
+    var cost = block.builtInRegistryHolder().getData(DataMaps.SHATTER_COST_MULTIPLIERS);
+    return cost == null ? 1.0 : cost;
   }
 
   // Additional data maps need to be added to the register event in `DataEventHandler`

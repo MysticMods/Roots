@@ -23,6 +23,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -159,7 +160,7 @@ public class ShatterSpell extends Spell {
 
     BlockHitResult rayTraceResult = pickBlock(pPlayer);
     Map<BlockPos, BlockState> toBreak = getAffectedBlocks(pLevel, pPlayer, instance, pStack, rayTraceResult.getBlockPos(), pLevel.getBlockState(rayTraceResult.getBlockPos()), rayTraceResult);
-    int count = 0;
+    double count = 0;
     for (Map.Entry<BlockPos, BlockState> entry : toBreak.entrySet()) {
       BlockPos pos = entry.getKey();
       BlockState state = entry.getValue();
@@ -193,16 +194,12 @@ public class ShatterSpell extends Spell {
       if (pLevel.destroyBlock(pos, true, pPlayer)) {
         ShatterBlockAction.Context context = new ShatterBlockAction.Context((ServerLevel) pLevel, player, pos, state, instance);
         ModActions.SHATTER_BLOCK.get().accept(context);
-        Integer opCost = state.getBlockHolder().getData(DataMaps.OPERATION_COST);
+        count += DataMaps.getShatterCostMultiplier(state.getBlock());
         broken.add(pos);
-        if (opCost == null) {
-          count++;
-        } else {
-          count += opCost;
-        }
       }
     }
 
+    // TODO:
     /*if (!broken.isEmpty()) {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastShatterFX(pPlayer.getId(), broken));
     }*/
@@ -218,8 +215,8 @@ public class ShatterSpell extends Spell {
       costs.noCharge();
       return -1;
     } else {
-      costs.operations(count);
-      return cooldown * count;
+      costs.operations(Mth.floor(count));
+      return Mth.floor(cooldown * count);
     }
   }
 

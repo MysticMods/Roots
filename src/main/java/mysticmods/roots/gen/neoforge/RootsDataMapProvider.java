@@ -463,11 +463,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
       builder21.add(grove.builtInRegistryHolder(), grove.getDefaultRanks(), false);
     });
 
-    var builder22 = builder(DataMaps.OPERATION_COST);
-    BuiltInRegistries.BLOCK.forEach(block -> {
-      builder22.add(block.builtInRegistryHolder(), 1, false);
-    });
-
     var builder23 = builder(DataMaps.HARVEST_SEED_TO_CROP);
     BuiltInRegistries.BLOCK.forEach(block -> {
       if (block instanceof CropBlock crop) {
