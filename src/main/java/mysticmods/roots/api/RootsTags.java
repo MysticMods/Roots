@@ -69,6 +69,8 @@ public class RootsTags {
     public static final TagKey<Block> RUNED_OBSIDIAN = modTag("runed_obsidian");
     public static final TagKey<Block> RUNESTONE = modTag("runestone");
     public static final TagKey<Block> WILDWOOD_LOGS = modTag("logs/wildwood");
+    public static final TagKey<Block> WILDWOOD_PLANKS = modTag("planks/wildwood");
+    public static final TagKey<Block> WILDWOOD_CHESTS = modTag("chests/wildwood");
 
     // Grove Stones
     public static final TagKey<Block> GROVE_STONES = modTag("grove_stones");
@@ -285,6 +287,7 @@ public class RootsTags {
     public static final TagKey<Item> RUNESTONE = modTag("runestone");
     public static final TagKey<Item> WILDWOOD_LOGS = modTag("logs/wildwood");
     public static final TagKey<Item> WILDWOOD_PLANKS = modTag("planks/wildwood");
+    public static final TagKey<Item> WILDWOOD_CHESTS = modTag("chests/wildwood");
     public static final TagKey<Item> GROVE_STONES = modTag("grove_stones");
     public static final TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
     public static final TagKey<Item> GROVE_STONE_WILD = modTag("grove_stones/wild");

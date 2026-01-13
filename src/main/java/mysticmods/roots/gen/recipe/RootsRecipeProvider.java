@@ -1703,7 +1703,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
             requires(RootsTags.Items.SYLVAN_LEATHERS)
             .requires(RootsTags.Items.PERESKIA_HERB).requires(RootsTags.Items.PERESKIA_HERB)
             .requires(Tags.Items.INGOTS_GOLD).requires(Tags.Items.INGOTS_GOLD)
-            .requires(Tags.Items.CHESTS).requires(Tags.Items.CHESTS)
+            .requires(RootsTags.Items.WILDWOOD_CHESTS).requires(RootsTags.Items.WILDWOOD_CHESTS)
             .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/dye_pouch"));
 
     SpecialRecipeBuilder.special(PouchDyeRecipe::new).save(c, RootsAPI.rl("dye_pouch"));

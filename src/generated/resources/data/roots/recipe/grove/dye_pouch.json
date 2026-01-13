@@ -33,10 +33,10 @@
         "tag": "c:ingots/gold"
       },
       {
-        "tag": "c:chests"
+        "tag": "roots:chests/wildwood"
       },
       {
-        "tag": "c:chests"
+        "tag": "roots:chests/wildwood"
       }
     ],
     "level_conditions": [

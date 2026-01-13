@@ -82,6 +82,11 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.SILVER_ORE).add(SILVER_ORE.get(), DEEPSLATE_SILVER_ORE.get());
     this.tag(RootsTags.Blocks.WILDWOOD_LOGS)
         .add(WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_WOOD.get(), WILDWOOD_WOOD.get());
+    this.tag(RootsTags.Blocks.WILDWOOD_PLANKS)
+        .add(WILDWOOD_PLANKS.get());
+    this.tag(RootsTags.Blocks.WILDWOOD_CHESTS)
+        .add(WILDWOOD_CHEST.get());
+    this.tag(Tags.Blocks.CHESTS_WOODEN).addTag(RootsTags.Blocks.WILDWOOD_CHESTS);
     this.tag(RootsTags.Blocks.QUARTZ_ORE).add(GRANITE_QUARTZ_ORE.get());
     this.tag(RootsTags.Blocks.RUNED_OBSIDIAN)
         .add(RUNED_OBSIDIAN.get(), CHISELED_RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get());

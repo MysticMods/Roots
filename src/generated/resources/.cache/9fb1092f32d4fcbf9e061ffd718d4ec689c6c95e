@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-12T20:43:50.2070588	Recipes
+// 1.21.1	2026-01-13T14:06:11.5933461	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -504,7 +504,7 @@ b7da93066cc6728db8d064819dd0db2b7370d1f8 data/roots/recipe/grove/bafflecap_fairy
 985691da0958bbea8a191ba46869136bc1e9fb0e data/roots/recipe/grove/brown_fairy_hut.json
 2323545eb83ff7e49f761454764631570af64d4f data/roots/recipe/grove/component_pouch.json
 e4912c80dc6a3e13c11130cd76753a0e46d3c1fa data/roots/recipe/grove/crimson_fairy_hut.json
-23272074a680601d120618387923d30484a8c692 data/roots/recipe/grove/dye_pouch.json
+21ad74a095a0d7b3b1a1b7a40771e0852e991e71 data/roots/recipe/grove/dye_pouch.json
 c308c281b173afb965bda4355de013b567fe32b2 data/roots/recipe/grove/elemental_soil.json
 1ecd86e15a88025c1c854c58ae947cdf8a0465a1 data/roots/recipe/grove/fungal_transmuter.json
 160bc42aca7be5513892c93a7ba597356b65a431 data/roots/recipe/grove/glass_eye.json

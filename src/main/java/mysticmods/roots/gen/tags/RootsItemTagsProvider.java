@@ -129,6 +129,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Items.RUNED_OBSIDIAN);
     this.copy(RootsTags.Blocks.RUNESTONE, RootsTags.Items.RUNESTONE);
     this.copy(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Items.WILDWOOD_LOGS);
+    this.copy(RootsTags.Blocks.WILDWOOD_PLANKS, RootsTags.Items.WILDWOOD_PLANKS);
+    this.copy(RootsTags.Blocks.WILDWOOD_CHESTS, RootsTags.Items.WILDWOOD_CHESTS);
     this.copy(RootsTags.Blocks.GROVE_STONES, RootsTags.Items.GROVE_STONES);
     this.copy(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_PRIMAL);
     this.copy(RootsTags.Blocks.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_ELEMENTAL);
@@ -391,8 +393,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(ItemTags.MEAT).add(COOKED_SQUID.get(), RAW_SQUID.get(), COOKED_VENISON.get(), VENISON.get());
 
-    this.tag(Tags.Items.CHESTS_WOODEN).add(WILDWOOD_CHEST.get());
-    this.tag(RootsTags.Items.WILDWOOD_PLANKS).add(WILDWOOD_PLANKS.get());
+    this.tag(Tags.Items.CHESTS_WOODEN).addTag(RootsTags.Items.WILDWOOD_CHESTS);
   }
 
   private void copyGrove(TagKey<Grove> groveTag) {
