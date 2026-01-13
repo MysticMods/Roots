@@ -609,5 +609,9 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder31.add(RootsTags.Entities.AUGMENTABLE_MOVEMENT_SPEED, List.of(Attributes.MOVEMENT_SPEED), false);
     builder31.add(RootsTags.Entities.AUGMENTABLE_ATTACK_DAMAGE, List.of(Attributes.ATTACK_DAMAGE), false);
     builder31.add(RootsTags.Entities.AUGMENTABLE_MAX_HEALTH, List.of(Attributes.MAX_HEALTH), false);
+
+    var builder32 = builder(DataMaps.SHATTER_COST_MULTIPLIERS);
+    builder32.add(RootsTags.Blocks.TIER_00_SHATTER, 0.0, false);
+    builder32.add(RootsTags.Blocks.TIER_05_SHATTER, 0.5, false);
   }
 }

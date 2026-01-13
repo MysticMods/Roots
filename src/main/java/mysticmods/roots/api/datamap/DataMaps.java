@@ -118,6 +118,9 @@ public class DataMaps {
           .listOf())
       .synced(ResourceKey.codec(Registries.DIMENSION).listOf(), true)
       .build();
+  public static final DataMapType<Block, Double> SHATTER_COST_MULTIPLIERS = DataMapType.builder(RootsAPI.rl("shatter_cost_multipliers"), Registries.BLOCK, Codec.DOUBLE)
+      .synced(Codec.DOUBLE, true)
+      .build();
 
   public static ItemStack getDimensionItem(ResourceKey<Level> dimension) {
     if (DIMENSION_LOOKUP.isEmpty()) {
