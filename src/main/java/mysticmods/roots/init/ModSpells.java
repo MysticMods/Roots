@@ -48,8 +48,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_DISTANCE = P.recordProperty("light_drifter/distance", Property.ofInt(Mth.square(50), "The maximum distance from the player that the light drifter can travel before being recalled."));
 
   // Magnetism (350 cooldown)
-  public static final DeferredHolder<Spell, MagnetismSpell> MAGNETISM = spell(Spells.MAGNETISM, MagnetismSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0016)))); // TODO: Operation or cast?
-  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = P.recordProperty("magnetism/cooldown", Property.ofInt(60, SpellProperties.COOLDOWN));
+  public static final DeferredHolder<Spell, MagnetismSpell> MAGNETISM = spell(Spells.MAGNETISM, MagnetismSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0016))));
+  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = P.recordProperty("magnetism/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_ZX = P.recordProperty("magnetism/radius_zx", Property.ofInt(20, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_Y = P.recordProperty("magnetism/radius_y", Property.ofInt(10, SpellProperties.RADIUS_Y));
 

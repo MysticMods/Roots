@@ -482,8 +482,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How long before the player can cast the spell again",
-          "default_value": 60,
-          "value": 60
+          "default_value": 5,
+          "value": 5
         }
       },
       {
