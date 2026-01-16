@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-12T20:21:56.24017	Loot Tables
+// 1.21.1	2026-01-14T17:43:55.0436369	Loot Tables
 3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
@@ -137,6 +137,7 @@ a0b018a1b78ee5eb2db30433935670a12f2b6f01 data/roots/loot_table/entities/purple_s
 e80816804d571e7a999a45bdc29fb6caa8e05d23 data/roots/loot_table/entities/red_sprout.json
 ec67c32b647af952b4d34b8309bf51d43e23b140 data/roots/loot_table/entities/snow_sprout.json
 51a517b7e0549e110261410d4bceddb24ab49e34 data/roots/loot_table/entities/squid/tentacles.json
+960223fd20dc5b006ba1d82bd00fd944684c50ac data/roots/loot_table/entities/sylvan_spider.json
 856d0bf3f6aa2545e36de3827f58d4ad6e513015 data/roots/loot_table/entities/tan_sprout.json
 fe903b4345c9c914095e1e1318ab0e05a03e3832 data/roots/loot_table/hut.json
 45c913292a79cf3b051b92ab887056b54c7cc3b1 data/roots/loot_table/standing_stones.json

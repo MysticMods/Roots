@@ -117,6 +117,7 @@ public final class RootsLootTableProvider {
           ));
       // TODO:
       add(ModEntities.JERBOA.get(), LootTable.lootTable());
+      add(ModEntities.SYLVAN_SPIDER.get(), LootTable.lootTable());
       add(ModEntities.DEER.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
               .add(LootItem.lootTableItem(Items.LEATHER)

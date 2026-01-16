@@ -149,6 +149,7 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.ROSE_THORNS.value(), RoseThornsRenderer::new);
     event.registerEntityRenderer(ModEntities.LIVING_ARROW.value(), LivingArrowRenderer::new);
     event.registerEntityRenderer(ModEntities.JERBOA.value(), JerboaRenderer::new);
+    event.registerEntityRenderer(ModEntities.SYLVAN_SPIDER.value(), SylvanSpiderRenderer::new);
   }
 
   @SubscribeEvent
@@ -164,6 +165,7 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.METEOR, MeteorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.JERBOA, JerboaModel::createBodyLayer);
+    event.registerLayerDefinition(ModelHolder.SYLVAN_SPIDER, SylvanSpiderModel::createSpiderBodyLayer);
   }
 
   public static final ResourceLocation WARNING_OVERLAY = RootsAPI.rl("warning");
