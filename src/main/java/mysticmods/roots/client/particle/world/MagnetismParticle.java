@@ -57,6 +57,9 @@ public class MagnetismParticle extends RootsEntityParticle {
     this.xo = this.x;
     this.yo = this.y;
     this.zo = this.z;
+    if (this.radius <= 0.08f) {
+      this.remove();
+    }
     if (!this.removed) {
       if (this.entity == null || this.entity.isRemoved() || (this.living != null && this.living.isDeadOrDying())) {
         this.remove();
