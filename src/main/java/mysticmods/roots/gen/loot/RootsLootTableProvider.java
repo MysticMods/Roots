@@ -331,6 +331,7 @@ public final class RootsLootTableProvider {
       dropSelf(ModBlocks.RUNED_BRICK_STAIRS.get());
       dropSelf(ModBlocks.RUNED_TILE_STAIRS.get());
       dropSelf(ModBlocks.WILDWOOD_STAIRS.get());
+      dropSelf(ModBlocks.RUNIC_DUST.get());
       add(ModBlocks.RUNESTONE_SLAB.get(), createSlabItemTable(ModBlocks.RUNESTONE_SLAB.get()));
       add(ModBlocks.MOSSY_RUNESTONE_SLAB.get(), createSlabItemTable(ModBlocks.MOSSY_RUNESTONE_SLAB.get()));
       add(ModBlocks.RUNESTONE_BRICK_SLAB.get(), createSlabItemTable(ModBlocks.RUNESTONE_BRICK_SLAB.get()));

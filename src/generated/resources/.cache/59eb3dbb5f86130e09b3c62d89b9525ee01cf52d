@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-14T17:43:55.0436369	Loot Tables
+// 1.21.1	2026-01-16T20:39:41.4441581	Loot Tables
 3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
@@ -87,6 +87,7 @@ f0915afde2f764629134925e34c0d86197cc9f3c data/roots/loot_table/blocks/runestone_
 4228e1325120bb77b7cb745403c2c08071bee316 data/roots/loot_table/blocks/runestone_tile_stairs.json
 90fae28470095b8a75ec33198bdca8e506a1c93c data/roots/loot_table/blocks/runestone_tile_wall.json
 1b53b0d358e5bfafc65f33f819fc2bfbdd39afeb data/roots/loot_table/blocks/runestone_wall.json
+f4bf27b26d9d1f2e364a80789c7d1a6ed41b66f0 data/roots/loot_table/blocks/runic_dust.json
 7b24aadac281f8ca508f10f477b9c68e7968a750 data/roots/loot_table/blocks/silver_block.json
 eba1598aa129e6d70a946b4591784fef12c4fd08 data/roots/loot_table/blocks/silver_ore.json
 b049f4d8c057f3c99fff11bd5714acb480a59893 data/roots/loot_table/blocks/soul_pyre.json

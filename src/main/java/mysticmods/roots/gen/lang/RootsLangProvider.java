@@ -438,6 +438,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.POTTED_BAFFLECAP);
     addBlock(ModBlocks.POTTED_STONEPETAL);
     addBlock(ModBlocks.POTTED_WILDWOOD_SAPLING);
+    addBlock(ModBlocks.RUNIC_DUST);
 
     // Some potential duplicates with ModBlocks
 
@@ -528,7 +529,6 @@ public final class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.GLASS_EYE);
     addItem(ModItems.LIFE_ESSENCE);
     addItem(ModItems.MYSTIC_FEATHER);
-    addItem(ModItems.RUNIC_DUST);
     addItem(ModItems.STRANGE_OOZE);
     addItem(ModItems.ANTLER_HAT);
     addItem(ModItems.BEETLE_HELMET);
