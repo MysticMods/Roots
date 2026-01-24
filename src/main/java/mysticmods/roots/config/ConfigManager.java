@@ -23,6 +23,7 @@ public class ConfigManager {
   public static List<AbstractConfig> CONFIGS = new ArrayList<>();
 
   public static ModConfigSpec.DoubleValue HERB_MINIMUM_ALERT;
+  public static ModConfigSpec.BooleanValue POUCH_HERB_PICKUP;
 
   public static ModConfigSpec.BooleanValue ALERTNESS_VISUAL;
   public static ModConfigSpec.IntValue ALERTNESS_DURATION;
@@ -167,6 +168,10 @@ public class ConfigManager {
         .define("sound", true);
     ALERTNESS_TAG = COMMON_BUILDER.comment("whether or not entities should be filtered to those in the roots:alertness entity tag")
         .define("tag", false);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.push("pouches");
+    POUCH_HERB_PICKUP = COMMON_BUILDER.comment("whether or not pouches should automatically pick up herbs when they are picked up by the player")
+        .define("pouch_herb_pickup", true);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("alerts");
     HERB_MINIMUM_ALERT = COMMON_BUILDER.comment("the minimum amount of remaining of each herb before an alert should be displayed when casting a spell [default: max(herb cost, 0.5)]")

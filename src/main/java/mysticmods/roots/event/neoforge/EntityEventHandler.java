@@ -64,6 +64,10 @@ public class EntityEventHandler {
   // TODO: Is this high enough?
   @SubscribeEvent(priority=EventPriority.HIGH)
   public static void onItemEntityCollect (ItemEntityPickupEvent.Pre event) {
+    if (!ConfigManager.POUCH_HERB_PICKUP.get()) {
+      return;
+    }
+
     var entity = event.getItemEntity();
 
     if (entity.hasPickUpDelay()) {
