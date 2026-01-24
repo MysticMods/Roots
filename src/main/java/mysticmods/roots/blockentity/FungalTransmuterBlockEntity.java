@@ -123,7 +123,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
     } else if (stack.isEmpty() && player.isCrouching()) {
-      if (lastRecipe != null) {
+      if (lastRecipe != null && inventory.isEmpty()) {
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
         revalidateRecipe();
       }

@@ -141,7 +141,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     } else if (inHand.isEmpty() && player.isCrouching()) {
       // Try to refill
-      if (lastRecipe != null) {
+      if (lastRecipe != null && inventory.isEmpty()) {
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {

@@ -237,7 +237,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
     } else if (inHand.isEmpty() && player.isCrouching()) {
-      if (lastRecipe != null) {
+      if (lastRecipe != null && inventory.isEmpty()) {
         if (RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory)) {
           revalidateRecipe();
         }

@@ -192,7 +192,7 @@ public class HudOverlay {
           comp1 = Component.translatable("roots.hud.pyre.begin1");
           comp2 = Component.translatable(nextRitual != null ? "roots.hud.pyre.begin2" : "roots.hud.pyre.begin3", nextRitual != null ? nextRitual.getName() : output.getHoverName());
         }
-      } else if (lastRecipe != null) {
+      } else if (lastRecipe != null && empty) {
         output = lastRitual != null ? lastRitual.getIcon() : lastRecipe.getResultItem(mc.level.registryAccess());
         outputs = lastRecipe.getChanceOutputs();
         comp1 = Component.translatable("roots.hud.pyre.restart1");
