@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "default": "model:0"
+  },
+  "modelConfigs": [
+    {
+      "baseScale": 0.8,
+      "rotationY": 0,
+      "rotationX": 0,
+      "rotationZ": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "modelMainPartFieldAliases": [
+        "mysticmods.roots.client.model.FennecModel;head"
+      ],
+      "renderingFullModel": false,
+      "modelPartsRotationReset": true,
+      "layersAllowed": true
+    }
+  ]
+}
