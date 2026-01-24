@@ -33,6 +33,8 @@ public class ModLoot {
 
   public static final DeferredHolder<LootItemConditionType, LootItemConditionType> WATERLOGGED_BLOCK = LOOT_ITEM_CONDITIONS.register("waterlogged_block", () -> new LootItemConditionType(WaterloggedBlockCondition.CODEC));
 
+  public static final DeferredHolder<LootItemConditionType, LootItemConditionType> DOUBLE_PREVENTION = LOOT_ITEM_CONDITIONS.register("double_block_prevention", () -> new LootItemConditionType(DoubleBlockPreventionCondition.CODEC));
+
   public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<AddGrassDropsModifier>> ADD_GRASS_DROPS_MODIFIER = GLOBAL_LOOT_MODIFIERS.register("add_grass_drops", () -> AddGrassDropsModifier.CODEC);
   public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ElementalCropExtraDropsModifier>> ELEMENTAL_CROP_EXTRA_DROPS_MODIFIER = GLOBAL_LOOT_MODIFIERS.register("elemental_crop_extra_drops", () -> ElementalCropExtraDropsModifier.CODEC);
 

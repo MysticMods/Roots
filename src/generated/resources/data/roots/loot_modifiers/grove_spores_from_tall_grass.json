@@ -2,7 +2,7 @@
   "type": "roots:add_grass_drops",
   "conditions": [
     {
-      "chance": 0.008,
+      "chance": 1.0,
       "condition": "minecraft:random_chance"
     },
     {
@@ -12,6 +12,9 @@
     {
       "condition": "roots:config_specific",
       "name": "grove_spores"
+    },
+    {
+      "condition": "roots:double_block_prevention"
     },
     {
       "condition": "minecraft:inverted",

@@ -42,12 +42,15 @@ public final class RootsGlobalLootModifierProvider extends GlobalLootModifierPro
     return conditions.toArray(LootItemCondition[]::new);
   }
 
-  private LootItemCondition[] getGrassConditions(TagKey<Block> tag, float chance, @Nullable String configName) {
+  private LootItemCondition[] getGrassConditions(TagKey<Block> tag, float chance, @Nullable String configName, boolean doublePlant) {
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(LootItemRandomChanceCondition.randomChance(chance).build());
     conditions.add(LootItemBlockTagCondition.tag(tag));
     if (configName != null) {
       conditions.add(new ConfigSpecificLootCondition(configName));
+    }
+    if (doublePlant) {
+      conditions.add(DoubleBlockPreventionCondition.prevention());
     }
     conditions.add(InvertedLootItemCondition.invert(
         CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG)
@@ -55,7 +58,7 @@ public final class RootsGlobalLootModifierProvider extends GlobalLootModifierPro
     return conditions.toArray(LootItemCondition[]::new);
   }
 
-  private LootItemCondition[] getForagingConditions(TagKey<Block> tag, float initialChance, boolean wet, @Nullable String configName) {
+  private LootItemCondition[] getForagingConditions(TagKey<Block> tag, float initialChance, boolean wet, @Nullable String configName, boolean doublePlant) {
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(ForagingRandomChanceCondition.randomChance(initialChance).build());
     conditions.add(LootItemBlockTagCondition.tag(tag));
@@ -63,6 +66,9 @@ public final class RootsGlobalLootModifierProvider extends GlobalLootModifierPro
       conditions.add(WaterloggedBlockCondition.waterlogged().build());
     } else {
       conditions.add(InvertedLootItemCondition.invert(WaterloggedBlockCondition.waterlogged()).build());
+    }
+    if (doublePlant) {
+      conditions.add(DoubleBlockPreventionCondition.prevention());
     }
     if (configName != null) {
       conditions.add(new ConfigSpecificLootCondition(configName));
@@ -76,21 +82,21 @@ public final class RootsGlobalLootModifierProvider extends GlobalLootModifierPro
 
   @Override
   protected void start() {
-    this.add("aubergine_from_short_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.SHORT_GRASS, 0.01f, "aubergine"), ModItems.AUBERGINE_SEEDS));
-    this.add("grove_spores_from_short_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.SHORT_GRASS, 0.008f, "grove_spores"), ModItems.GROVE_SPORES));
-    this.add("wildroot_from_short_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.SHORT_GRASS, 0.004f, "wildroot"), ModItems.WILDROOT));
+    this.add("aubergine_from_short_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.SHORT_GRASS, 0.01f, "aubergine", false), ModItems.AUBERGINE_SEEDS));
+    this.add("grove_spores_from_short_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.SHORT_GRASS, 0.008f, "grove_spores", false), ModItems.GROVE_SPORES));
+    this.add("wildroot_from_short_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.SHORT_GRASS, 0.004f, "wildroot", false), ModItems.WILDROOT));
 
-    this.add("aubergine_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.01f, "aubergine"), ModItems.AUBERGINE_SEEDS));
-    this.add("grove_spores_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.008f, "grove_spores"), ModItems.GROVE_SPORES));
-    this.add("wildroot_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.004f, "wildroot"), ModItems.WILDROOT));
+    this.add("aubergine_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.01f, "aubergine", true), ModItems.AUBERGINE_SEEDS));
+    this.add("grove_spores_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.008f, "grove_spores", true), ModItems.GROVE_SPORES));
+    this.add("wildroot_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.004f, "wildroot", true), ModItems.WILDROOT));
 
-    this.add("grove_spores_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, null), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_waterlogged_foreagable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.03f, true, null), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, false, null), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_waterlogged_foreagable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.03f, true, null), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, null, false), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_waterlogged_foreagable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.03f, true, null, false), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, false, null, true), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_waterlogged_foreagable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.03f, true, null, true), ModItems.GROVE_SPORES));
 
-    this.add("wildroot_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, null), ModItems.WILDROOT));
-    this.add("wildroot_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, false, null), ModItems.WILDROOT));
+    this.add("wildroot_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, null, false), ModItems.WILDROOT));
+    this.add("wildroot_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, false, null, true), ModItems.WILDROOT));
 
     this.add("squid_tentacles", new AddTableLootModifier(new LootItemCondition[]{LootItemEntityPropertyCondition.hasProperties(
         LootContext.EntityTarget.THIS,

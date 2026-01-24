@@ -16,6 +16,9 @@
       }
     },
     {
+      "condition": "roots:double_block_prevention"
+    },
+    {
       "condition": "minecraft:inverted",
       "term": {
         "ability": "shears_dig",
