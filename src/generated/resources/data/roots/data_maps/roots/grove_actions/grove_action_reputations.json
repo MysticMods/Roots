@@ -597,7 +597,7 @@
         "grove": "roots:fairy",
         "name": "roots:learn_spell/sylvan_light",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -615,7 +615,7 @@
         "grove": "roots:fairy",
         "name": "roots:learn_spell/petal_shell",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -633,7 +633,7 @@
         "grove": "roots:fairy",
         "name": "roots:learn_spell/rose_thorns",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -651,7 +651,7 @@
         "grove": "roots:fairy",
         "name": "roots:learn_spell/sanctuary",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -669,7 +669,7 @@
         "grove": "roots:fungal",
         "name": "roots:learn_spell/acid_cloud",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -687,7 +687,7 @@
         "grove": "roots:fungal",
         "name": "roots:learn_spell/disarm",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -705,25 +705,7 @@
         "grove": "roots:fungal",
         "name": "roots:learn_spell/geas",
         "reputation": {
-          "gain1": 250,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_spell",
-            "name": "roots:geas"
-          }
-        ],
-        "grove": "roots:fungal",
-        "name": "roots:learn_spell/geas",
-        "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -741,7 +723,7 @@
         "grove": "roots:fungal",
         "name": "roots:learn_spell/summon_undead",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -759,7 +741,7 @@
         "grove": "roots:elemental",
         "name": "roots:learn_spell/aqua_bubble",
         "reputation": {
-          "gain1": 250,
+          "gain1": 71,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -777,7 +759,7 @@
         "grove": "roots:elemental",
         "name": "roots:learn_spell/dandelion_winds",
         "reputation": {
-          "gain1": 250,
+          "gain1": 71,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -795,7 +777,7 @@
         "grove": "roots:elemental",
         "name": "roots:learn_spell/radiance",
         "reputation": {
-          "gain1": 250,
+          "gain1": 71,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -813,7 +795,7 @@
         "grove": "roots:elemental",
         "name": "roots:learn_spell/shatter",
         "reputation": {
-          "gain1": 250,
+          "gain1": 71,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -831,7 +813,7 @@
         "grove": "roots:elemental",
         "name": "roots:learn_spell/storm_cloud",
         "reputation": {
-          "gain1": 250,
+          "gain1": 71,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -849,7 +831,7 @@
         "grove": "roots:elemental",
         "name": "roots:learn_spell/sky_soarer",
         "reputation": {
-          "gain1": 250,
+          "gain1": 71,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -867,7 +849,7 @@
         "grove": "roots:elemental",
         "name": "roots:learn_spell/wildfire",
         "reputation": {
-          "gain1": 250,
+          "gain1": 71,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -885,7 +867,7 @@
         "grove": "roots:sprouting",
         "name": "roots:learn_spell/desaturate",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -903,7 +885,7 @@
         "grove": "roots:sprouting",
         "name": "roots:learn_spell/saturate",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -921,7 +903,7 @@
         "grove": "roots:sprouting",
         "name": "roots:learn_spell/growth_infusion",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -939,7 +921,7 @@
         "grove": "roots:sprouting",
         "name": "roots:learn_spell/rampant_growth",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -957,7 +939,7 @@
         "grove": "roots:sprouting",
         "name": "roots:learn_spell/harvest",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -975,7 +957,7 @@
         "grove": "roots:twilight",
         "name": "roots:learn_spell/light_drifter",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -993,7 +975,7 @@
         "grove": "roots:twilight",
         "name": "roots:learn_spell/life_drain",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1011,7 +993,7 @@
         "grove": "roots:twilight",
         "name": "roots:learn_spell/jaunt",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1029,7 +1011,7 @@
         "grove": "roots:twilight",
         "name": "roots:learn_spell/temporal_morass",
         "reputation": {
-          "gain1": 250,
+          "gain1": 125,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1047,7 +1029,7 @@
         "grove": "roots:wild",
         "name": "roots:learn_spell/nondetection",
         "reputation": {
-          "gain1": 250,
+          "gain1": 500,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1101,7 +1083,7 @@
         "grove": "roots:fungal",
         "name": "roots:first_ritual/purity",
         "reputation": {
-          "gain1": 100,
+          "gain1": 200,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1119,7 +1101,7 @@
         "grove": "roots:elemental",
         "name": "roots:first_ritual/fire_storm",
         "reputation": {
-          "gain1": 100,
+          "gain1": 50,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1137,7 +1119,7 @@
         "grove": "roots:elemental",
         "name": "roots:first_ritual/frost_lands",
         "reputation": {
-          "gain1": 100,
+          "gain1": 50,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1155,7 +1137,7 @@
         "grove": "roots:elemental",
         "name": "roots:first_ritual/heavy_storms",
         "reputation": {
-          "gain1": 100,
+          "gain1": 50,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1173,7 +1155,7 @@
         "grove": "roots:elemental",
         "name": "roots:first_ritual/windwall",
         "reputation": {
-          "gain1": 100,
+          "gain1": 50,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1191,7 +1173,7 @@
         "grove": "roots:sprouting",
         "name": "roots:first_ritual/germination",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1209,7 +1191,7 @@
         "grove": "roots:sprouting",
         "name": "roots:first_ritual/spreading_forest",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1227,7 +1209,7 @@
         "grove": "roots:sprouting",
         "name": "roots:first_ritual/wildroot_growth",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1245,7 +1227,7 @@
         "grove": "roots:twilight",
         "name": "roots:first_ritual/healing_aura",
         "reputation": {
-          "gain1": 100,
+          "gain1": 200,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1263,7 +1245,7 @@
         "grove": "roots:wild",
         "name": "roots:first_ritual/animal_harvest",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1281,7 +1263,7 @@
         "grove": "roots:wild",
         "name": "roots:first_ritual/augmentation",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1299,7 +1281,7 @@
         "grove": "roots:wild",
         "name": "roots:first_ritual/gathering",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1317,7 +1299,7 @@
         "grove": "roots:fairy",
         "name": "roots:first_ritual/blooming",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1335,7 +1317,7 @@
         "grove": "roots:fairy",
         "name": "roots:first_ritual/protection",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
@@ -1353,7 +1335,7 @@
         "grove": "roots:fairy",
         "name": "roots:first_ritual/warding",
         "reputation": {
-          "gain1": 100,
+          "gain1": 66,
           "gain2": 0,
           "gain3": 0,
           "gain4": 0,
