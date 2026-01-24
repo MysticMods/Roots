@@ -23,7 +23,7 @@ public final class RootsRitualTagsProvider extends IntrinsicHolderTagsProvider<R
     this.tag(RootsTags.Rituals.NYI)
         .add(ModRituals.GERMINATION.get(), ModRituals.SPREADING_FOREST.get());
     this.tag(RootsTags.Rituals.WIP)
-        .add(ModRituals.BLOOMING.get(), ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.GATHERING.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.OVERGROWTH.get(), ModRituals.PROTECTION.get(), ModRituals.PURITY.get(), ModRituals.WILDROOT_GROWTH.get(), ModRituals.WINDWALL.get())
+        .add(ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.GATHERING.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.PROTECTION.get(), ModRituals.PURITY.get(), ModRituals.WILDROOT_GROWTH.get(), ModRituals.WINDWALL.get())
         .add(ModRituals.HEALING_AURA.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.WARDING.get());
     this.tag(RootsTags.Rituals.FUNGAL).add(ModRituals.PURITY.get());
     this.tag(RootsTags.Rituals.ELEMENTAL)
