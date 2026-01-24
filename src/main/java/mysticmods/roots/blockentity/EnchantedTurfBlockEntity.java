@@ -34,7 +34,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
-  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePowerGenerator.Consumer(RootsTags.Groves.ANY, 60)));
+  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePowerGenerator.Consumer(RootsTags.Groves.ANY, 35)));
 
   private PowerTicket ticket;
   private boolean poweredLastTick = false;
