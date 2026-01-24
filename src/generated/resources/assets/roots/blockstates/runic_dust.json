@@ -1,0 +1,262 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "none",
+        "north": "none",
+        "south": "none",
+        "west": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "side",
+        "north": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "up",
+        "north": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "up",
+        "north": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "side",
+        "north": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "side",
+        "south": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "up",
+        "south": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "side",
+        "south": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "east": "up",
+        "south": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "south": "side",
+        "west": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "south": "up",
+        "west": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "south": "side",
+        "west": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "south": "up",
+        "west": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "north": "side",
+        "west": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "north": "up",
+        "west": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "north": "up",
+        "west": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_dot"
+      },
+      "when": {
+        "north": "side",
+        "west": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side0"
+      },
+      "when": {
+        "north": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side0"
+      },
+      "when": {
+        "north": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side_alt0"
+      },
+      "when": {
+        "south": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side_alt0"
+      },
+      "when": {
+        "south": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side_alt1",
+        "y": 270
+      },
+      "when": {
+        "east": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side_alt1",
+        "y": 270
+      },
+      "when": {
+        "east": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side1",
+        "y": 270
+      },
+      "when": {
+        "west": "side"
+      }
+    },
+    {
+      "apply": {
+        "model": "roots:block/runic_dust_side1",
+        "y": 270
+      },
+      "when": {
+        "west": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/redstone_dust_up"
+      },
+      "when": {
+        "north": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/redstone_dust_up",
+        "y": 90
+      },
+      "when": {
+        "east": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/redstone_dust_up",
+        "y": 180
+      },
+      "when": {
+        "south": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/redstone_dust_up",
+        "y": 270
+      },
+      "when": {
+        "west": "up"
+      }
+    }
+  ]
+}
