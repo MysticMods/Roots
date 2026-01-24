@@ -20,9 +20,9 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
   @Override
   protected void addTags(HolderLookup.Provider provider) {
     this.tag(RootsTags.Spells.WIP)
-        .add(ModSpells.ACID_CLOUD.get(), ModSpells.AQUA_BUBBLE.get(), ModSpells.MAGNETISM.get(), ModSpells.DANDELION_WINDS.get(), ModSpells.DESATURATE.get(), ModSpells.DISARM.get(), ModSpells.EXTENSION.get(), ModSpells.NONDETECTION.get(), ModSpells.GEAS.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get(), ModSpells.LIFE_DRAIN.get(), ModSpells.ROSE_THORNS.get(), ModSpells.SANCTUARY.get(), ModSpells.SHATTER.get(), ModSpells.JAUNT.get(), ModSpells.TEMPORAL_MORASS.get(), ModSpells.WILDFIRE.get(), ModSpells.SATURATE.get(), ModSpells.LIGHT_DRIFTER.get());
+        .add(ModSpells.ACID_CLOUD.get(), ModSpells.AQUA_BUBBLE.get(), ModSpells.DANDELION_WINDS.get(), ModSpells.DESATURATE.get(), ModSpells.DISARM.get(), ModSpells.EXTENSION.get(), ModSpells.NONDETECTION.get(), ModSpells.LIFE_DRAIN.get(), ModSpells.SANCTUARY.get(), ModSpells.TEMPORAL_MORASS.get(), ModSpells.WILDFIRE.get(), ModSpells.SATURATE.get(), ModSpells.LIGHT_DRIFTER.get());
     this.tag(RootsTags.Spells.NYI)
-        .add(ModSpells.SUMMON_UNDEAD.get(), ModSpells.RADIANCE.get(), ModSpells.STORM_CLOUD.get(), ModSpells.DECAY.get());
+        .add(ModSpells.SUMMON_UNDEAD.get(), ModSpells.RADIANCE.get(), ModSpells.STORM_CLOUD.get(), ModSpells.DECAY.get(), ModSpells.JAUNT.get());
     this.tag(RootsTags.Spells.ADJUSTABLE_SPELL)
         .add(ModSpells.SHATTER.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get());
 
