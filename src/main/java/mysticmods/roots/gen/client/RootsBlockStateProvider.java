@@ -292,6 +292,7 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile sideAlt0  = models().withExistingParent("block/runic_dust_side_alt0", mcLoc("block/redstone_dust_side_alt0")).renderType("cutout");
     ModelFile sideAlt1  = models().withExistingParent("block/runic_dust_side_alt1", mcLoc("block/redstone_dust_side_alt1")).renderType("cutout");
     ModelFile side1     = models().withExistingParent("block/runic_dust_side1", mcLoc("block/redstone_dust_side1")).renderType("cutout");
+    ModelFile dustUp        = models().withExistingParent("block/runic_dust_up", mcLoc("block/redstone_dust_up")).renderType("cutout");
 
     builder.part().modelFile(side0).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.SIDE).end();
@@ -313,9 +314,6 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     builder.part().modelFile(side1).rotationY(270).addModel()
         .condition(RedStoneWireBlock.WEST, RedstoneSide.UP).end();
 
-
-    // up pieces (when a side is exactly UP)
-    ModelFile dustUp = models().getExistingFile(mcLoc("block/redstone_dust_up"));
 
     builder.part().modelFile(dustUp).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.UP).end();

@@ -89,6 +89,9 @@ public class ClientSetup {
     event.register(GRASS,
         ModBlocks.ENCHANTED_TURF.get()
     );
+    event.register((pState, pLevel, pPos, pTintIndex) -> {
+      return 0x99adad;
+    }, ModBlocks.RUNIC_DUST.get());
   }
 
   @SubscribeEvent

@@ -225,7 +225,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/redstone_dust_up"
+        "model": "roots:block/runic_dust_up"
       },
       "when": {
         "north": "up"
@@ -233,7 +233,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/redstone_dust_up",
+        "model": "roots:block/runic_dust_up",
         "y": 90
       },
       "when": {
@@ -242,7 +242,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/redstone_dust_up",
+        "model": "roots:block/runic_dust_up",
         "y": 180
       },
       "when": {
@@ -251,7 +251,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/redstone_dust_up",
+        "model": "roots:block/runic_dust_up",
         "y": 270
       },
       "when": {

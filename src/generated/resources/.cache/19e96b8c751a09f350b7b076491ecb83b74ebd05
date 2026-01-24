@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-16T20:42:33.652298	Block States: roots
+// 1.21.1	2026-01-24T20:20:02.1796057	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -85,7 +85,7 @@ b9fde8821070bd51409e0d3791bc49e2be50fdd4 assets/roots/blockstates/runestone_tile
 fcdff5ddc32bfcc07c221d7328da4371c0c7a02a assets/roots/blockstates/runestone_tile_stairs.json
 6c673fdb8810030cbc11d521977860be3e1fe8b3 assets/roots/blockstates/runestone_tile_wall.json
 c050542bb4d706c8eb11b15bcf09ecc5ba39f5df assets/roots/blockstates/runestone_wall.json
-0a74f4fbc79f27d7851d55f541af6f9b0971ab3e assets/roots/blockstates/runic_dust.json
+06a6eea8adb82d0f5ed4499f4cba540f554de881 assets/roots/blockstates/runic_dust.json
 b6b044c6f27f0e38e4ddee2571089f2e2f9f2a65 assets/roots/blockstates/silver_block.json
 03634ad1d23034f6f428d9c2e53027c402b0a168 assets/roots/blockstates/silver_ore.json
 1965f6dd0f28927a5e43c9360d1eb33468ed65f0 assets/roots/blockstates/soul_pyre.json
@@ -328,6 +328,7 @@ a0a79e102e735191f4e9d41225e597b17ff87ebb assets/roots/models/block/runic_dust_si
 50c54ad48bb33bb4a30f28fc0cc98c8e0beb97b5 assets/roots/models/block/runic_dust_side1.json
 6f2f1d8c684092e25cea0eaef8a147f551f300d7 assets/roots/models/block/runic_dust_side_alt0.json
 074c255e666e8bb78f4c726c8c63c52f571352de assets/roots/models/block/runic_dust_side_alt1.json
+0e0f988d725d318ee2ad489f8cc7340a2a5fdafa assets/roots/models/block/runic_dust_up.json
 36e4e08210afc77d5dec4966a9ced36db37c470c assets/roots/models/block/silver_block.json
 bedc80e1b51d7ada0adaa63955441601cabb2700 assets/roots/models/block/silver_ore.json
 ec65dab9e599cd74949a38a574c4e5136fce89d9 assets/roots/models/block/soul_pyre.json
