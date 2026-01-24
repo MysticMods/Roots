@@ -5,15 +5,23 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModTabs;
+import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.item.util.DyeableWithDefault;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.registries.ModifyRegistriesEvent;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class RootsModEvents {
@@ -213,6 +221,7 @@ public class RootsModEvents {
       event.accept(ModItems.RUNIC_SHEARS.get());
       event.accept(ModItems.GRAMARY.get());
       event.accept(ModItems.ALERTNESS_CHARM.get());
+      event.accept(ModItems.HOMESICKNSES_CHARM.get());
       event.accept(ModItems.HERB_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.HERB_POUCH.get());
@@ -298,6 +307,23 @@ public class RootsModEvents {
       event.accept(ModItems.PURPLE_SPROUT_SPAWN_EGG.get());
       event.accept(ModItems.SNOW_SPROUT_SPAWN_EGG.get());
       event.accept(ModItems.MELODY_SPROUT_SPAWN_EGG.get());
+
+      if (!FMLEnvironment.production) {
+        Set<Item> includedItems = new HashSet<>();
+        event.getParentEntries().forEach(o -> includedItems.add(o.getItem()));
+        event.getSearchEntries().forEach(o -> includedItems.add(o.getItem()));
+
+        BuiltInRegistries.ITEM.holders().forEach(holder -> {
+          if (Objects.requireNonNull(holder.getKey()).location().getNamespace().equals(RootsAPI.MODID)) {
+            if (holder.value() instanceof TokenItem) {
+              return;
+            }
+            if (!includedItems.contains(holder.value())) {
+              RootsAPI.LOG.error("Item {} is missing from creative tab.", holder.getKey().location());
+            }
+          }
+        });
+      }
     }
     if (event.getTab().equals(ModTabs.SPELLS_TAB.get())) {
       event.accept(ModItems.SPELL_ACID_CLOUD.get());
