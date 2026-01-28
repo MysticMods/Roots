@@ -1120,7 +1120,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.AUGMENTATION)
             .build(BaseRecipeData.Builder.create()
-                .requires(Items.GOLDEN_APPLE)
+                .requires(Items.GOLDEN_CARROT)
                 .requires(RootsTags.Items.SPIRITLEAF_CROP)
                 .requires(RootsTags.Items.SILVER_INGOT)
                 .requires(ItemTags.BIRCH_LOGS)

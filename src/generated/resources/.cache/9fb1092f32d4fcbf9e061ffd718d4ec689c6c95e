@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-13T14:58:28.4021329	Recipes
+// 1.21.1	2026-01-28T12:50:10.3159232	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -644,7 +644,7 @@ e2558a4937c853071b7b4a87cbfd6d3506c7a96d data/roots/recipe/pestle.json
 558706bf20ee533c39bfd689ce4270d00a0e6e75 data/roots/recipe/primal_grove_stone.json
 ebd352284993326d9a16b6ef0b9bf745b87af9b5 data/roots/recipe/pyre.json
 6c9dc53996a22351468c6b6e3ba82000071c31a1 data/roots/recipe/pyre/animal_harvest.json
-4384ac6176337fa43bf7718c7c93590c91bf31b8 data/roots/recipe/pyre/augmentation.json
+31f3adcc15d1d0ac452c8d31de6dbcc16fa06198 data/roots/recipe/pyre/augmentation.json
 5ee91883ee11faa151fd4b4e6388630de46f381f data/roots/recipe/pyre/bafflecap.json
 b44e5570d0d90847bf0fc4f0611beb066bf01450 data/roots/recipe/pyre/blooming.json
 51b5a9be18979d022bc205d335268875c0aa3d55 data/roots/recipe/pyre/cloud_berry.json
