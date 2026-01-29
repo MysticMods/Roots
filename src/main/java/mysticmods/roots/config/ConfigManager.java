@@ -76,6 +76,7 @@ public class ConfigManager {
   public static ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
   public static ModConfigSpec.BooleanValue DEBUG_KEYBINDS;
   public static ModConfigSpec.BooleanValue DEBUG_JEI;
+  public static ModConfigSpec.BooleanValue DEBUG_EXTENSIVE;
 
   public static ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
 
@@ -186,6 +187,8 @@ public class ConfigManager {
         .define("debug_keybinds", false);
     DEBUG_JEI = COMMON_BUILDER.comment("if true, will print debug information about server->client recipe syncs to the message log")
         .define("debug_jei", false);
+    DEBUG_EXTENSIVE = COMMON_BUILDER.comment("if true, will print more extensive debugging information about rituals and spells to the message log")
+            .define("debug_extensive", false);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("ritual_conflict");
     RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]")

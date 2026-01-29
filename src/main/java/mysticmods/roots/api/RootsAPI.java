@@ -1,6 +1,7 @@
 package mysticmods.roots.api;
 
 import mysticmods.roots.Roots;
+import mysticmods.roots.config.ConfigManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -75,5 +76,17 @@ public abstract class RootsAPI {
   public static MutableComponent holdShift() {
     return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift")
         .setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
+  }
+
+  public static void debug (String message, Object... objs) {
+    if (ConfigManager.DEBUG_EXTENSIVE.get()) {
+      LOG.error(message, objs);
+    }
+  }
+
+  public static void debug (String message) {
+    if (ConfigManager.DEBUG_EXTENSIVE.get()) {
+      LOG.error(message);
+    }
   }
 }
