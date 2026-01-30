@@ -41,6 +41,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -434,6 +437,24 @@ public class RootsCommand {
         return 0;
       }
     }));
+    builder.then(Commands.literal("horse").executes(c -> {
+          if (c.getSource().isPlayer()) {
+            ServerPlayer player = c.getSource().getPlayerOrException();
+            Horse horse = EntityType.HORSE.create(player.level());
+            if (horse != null) {
+              horse.setTamed(true);
+              horse.setOwnerUUID(player.getUUID());
+              horse.setPos(player.getX(), player.getY(), player.getZ());
+              horse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(0.9);
+              horse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.45);
+              horse.equipSaddle(new ItemStack(Items.SADDLE), player.getSoundSource());
+              horse.setCustomName(Component.literal(player.getName().getString()).append(Component.literal("'s horse")));
+              player.level().addFreshEntity(horse);
+            }
+          }
+          return 1;
+        }
+    ));
     builder.then(Commands.literal("reputation").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.usage"), false);
       return 1;
