@@ -14,6 +14,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiPredicate;
 
+// TODO: POIs
+// TODO: Document this, I can't actually remember what half of it does
 public class PositionCache {
   private final BlockPos position;
   private final AABB aabb;

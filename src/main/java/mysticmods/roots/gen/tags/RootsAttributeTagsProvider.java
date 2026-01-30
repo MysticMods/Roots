@@ -8,7 +8,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,10 +20,10 @@ public final class RootsAttributeTagsProvider extends IntrinsicHolderTagsProvide
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-    this.tag(RootsTags.Atrtibutes.GRAMARY_ATTRIBUTES)
-        .add(Attributes.JUMP_STRENGTH.value(), Attributes.ATTACK_DAMAGE.value(), Attributes.MAX_HEALTH.value(), Attributes.MOVEMENT_SPEED.value());
-    this.tag(RootsTags.Atrtibutes.AUGMENTABLE)
-        .add(Attributes.MAX_HEALTH.value(), Attributes.ATTACK_DAMAGE.value(), Attributes.JUMP_STRENGTH.value(), Attributes.MOVEMENT_SPEED.value());
+    this.tag(RootsTags.Attributes.GRAMARY_ATTRIBUTES)
+        .add(net.minecraft.world.entity.ai.attributes.Attributes.JUMP_STRENGTH.value(), net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE.value(), net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH.value(), net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED.value());
+    this.tag(RootsTags.Attributes.AUGMENTABLE)
+        .add(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH.value(), net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE.value(), net.minecraft.world.entity.ai.attributes.Attributes.JUMP_STRENGTH.value(), net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED.value());
   }
 
   @Override

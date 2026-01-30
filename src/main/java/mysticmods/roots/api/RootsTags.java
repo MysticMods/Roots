@@ -694,7 +694,7 @@ public class RootsTags {
     }
   }
 
-  public static class Atrtibutes {
+  public static class Attributes {
     public static final TagKey<Attribute> GRAMARY_ATTRIBUTES = modTag("gramary_attributes");
     public static final TagKey<Attribute> AUGMENTABLE = modTag("augmentable");
 

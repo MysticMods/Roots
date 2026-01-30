@@ -14,6 +14,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.Tags;
@@ -79,13 +80,13 @@ public abstract class RootsAPI {
   }
 
   public static void debug (String message, Object... objs) {
-    if (ConfigManager.DEBUG_EXTENSIVE.get()) {
+    if (ConfigManager.DEBUG_EXTENSIVE.get() || !FMLEnvironment.production) {
       LOG.error(message, objs);
     }
   }
 
   public static void debug (String message) {
-    if (ConfigManager.DEBUG_EXTENSIVE.get()) {
+    if (ConfigManager.DEBUG_EXTENSIVE.get() || !FMLEnvironment.production) {
       LOG.error(message);
     }
   }

@@ -102,7 +102,8 @@ public class DataMaps {
   public static final DataMapType<Attribute, AugmentationData> AUGMENTATION_DATA = DataMapType.builder(RootsAPI.rl("augmentation_data"), Registries.ATTRIBUTE, AugmentationData.CODEC)
       .synced(AugmentationData.CODEC, true)
       .build();
-  public static final DataMapType<EntityType<?>, List<Holder<Attribute>>> ENTITY_AUGMENTATION_DATA = DataMapType.builder(RootsAPI.rl("entity_augmentation_data"), Registries.ENTITY_TYPE, Attribute.CODEC.listOf())
+  public static final DataMapType<EntityType<?>, List<Holder<Attribute>>> ENTITY_AUGMENTATION_DATA = AdvancedDataMapType.builder(RootsAPI.rl("entity_augmentation_data"), Registries.ENTITY_TYPE, Attribute.CODEC.listOf())
+      .merger(DataMapValueMerger.listMerger())
       .synced(Attribute.CODEC.listOf(), true)
       .build();
   public static final DataMapType<Block, Item> EXTRA_CROP_DATA = DataMapType.builder(RootsAPI.rl("extra_crop_data"), Registries.BLOCK, BuiltInRegistries.ITEM.byNameCodec())

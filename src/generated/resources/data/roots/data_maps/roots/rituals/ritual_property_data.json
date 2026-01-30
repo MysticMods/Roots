@@ -98,8 +98,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The length of the ritual",
-          "default_value": 220,
-          "value": 220
+          "default_value": 20,
+          "value": 20
         }
       },
       {
@@ -125,8 +125,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 200,
-          "value": 200
+          "default_value": 19,
+          "value": 19
         }
       },
       {

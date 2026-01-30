@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-24T21:11:07.9426735	Data Maps
+// 1.21.1	2026-01-29T11:42:30.2136196	Data Maps
 469ace619bdbd133b2727700d2d67b4af2091ae8 data/neoforge/data_maps/item/compostables.json
 d9d7821dd7a3407bc4eae1daf10a7c2b21cd250d data/neoforge/data_maps/item/furnace_fuels.json
 fe54b8e14dda1ec296dc4cf63f7c7fac99b24d34 data/roots/data_maps/attribute/augmentation_data.json
@@ -19,7 +19,7 @@ c54276b911b7b191c291440e89f6e9283e71dad3 data/roots/data_maps/roots/groves/grove
 866b78c64be9ea79410ded8b911707ea6bf31736 data/roots/data_maps/roots/groves/grove_ranks.json
 db48458dabc1822265f98a00a424da25200ec6a3 data/roots/data_maps/roots/grove_actions/grove_action_icons.json
 b5676fa05ea2b32f50740bb534b87cf9136b7d43 data/roots/data_maps/roots/grove_actions/grove_action_reputations.json
-49f9c9a934c131d846c1148be18757497092bdca data/roots/data_maps/roots/rituals/ritual_property_data.json
+07b355464fd0e36fe6aafa06884b4ad8ccc5b91d data/roots/data_maps/roots/rituals/ritual_property_data.json
 813fb735bf77d930c172d32fd84a5f09a09bb4a8 data/roots/data_maps/roots/ritual_modifiers/ritual_modifier_cost_data.json
 5019479e9100b5611e31380fea1fd298a9c7d1b4 data/roots/data_maps/roots/spells/spell_cost_data.json
 85aba906f5c4382ce1467d57a08d13ba5a1ac8dc data/roots/data_maps/roots/spells/spell_property_data.json

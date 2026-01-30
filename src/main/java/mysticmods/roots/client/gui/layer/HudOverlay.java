@@ -109,7 +109,7 @@ public class HudOverlay {
       List<Component> components = new ArrayList<>();
       if (ATTRIBUTES_HOLDER == null) {
         ATTRIBUTES_HOLDER = new ArrayList<>();
-        BuiltInRegistries.ATTRIBUTE.getTag(RootsTags.Atrtibutes.GRAMARY_ATTRIBUTES)
+        BuiltInRegistries.ATTRIBUTE.getTag(RootsTags.Attributes.GRAMARY_ATTRIBUTES)
             .ifPresent(o -> o.forEach(v -> ATTRIBUTES_HOLDER.add(v)));
         ATTRIBUTES_HOLDER.sort(Comparator.comparing(o -> o.getKey().location().toString()));
       }
