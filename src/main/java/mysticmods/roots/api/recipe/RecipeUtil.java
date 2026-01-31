@@ -17,6 +17,7 @@ import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -38,6 +39,44 @@ public class RecipeUtil {
       return false;
     }
     return RecipeMatcher.findMatches(inputs, recipe.getIngredients()) != null;
+  }
+
+  public static boolean partiallyMatchesIngredients(Recipe<?> recipe, RecipeInput input) {
+    return partiallyMatchesIngredients(recipe, input, null);
+  }
+
+  public static boolean partiallyMatchesIngredients (Recipe<?> recipe, RecipeInput input, @Nullable Level level) {
+    List<ItemStack> inputs = new ArrayList<>();
+    for (int i = 0; i < input.size(); i++) {
+      ItemStack stack = input.getItem(i);
+      if (!stack.isEmpty()) {
+        inputs.add(stack);
+      }
+    }
+
+    if (inputs.size() == recipe.getIngredients().size()) {
+      return matchesIngredients(recipe, input, level);
+    } else if (inputs.size() > recipe.getIngredients().size()) {
+      return false;
+    }
+
+    BitSet matchedIngredients = new BitSet(recipe.getIngredients().size());
+    for (ItemStack stack : inputs) {
+      boolean found = false;
+      for (int i = 0; i < recipe.getIngredients().size(); i++)
+      {
+        if (!matchedIngredients.get(i) && recipe.getIngredients().get(i).test(stack)) {
+          matchedIngredients.set(i);
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public static IngredientMatchResult getIngredientMap(Recipe<?> recipe, RecipeInput input) {

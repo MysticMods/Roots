@@ -157,4 +157,8 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     results.removeIf(ItemStack::isEmpty);
     return results;
   }
+
+  default boolean partiallyMatches(W input, Level level) {
+    return RecipeUtil.partiallyMatchesIngredients(this, input, level);
+  }
 }

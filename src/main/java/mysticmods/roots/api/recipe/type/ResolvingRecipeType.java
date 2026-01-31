@@ -24,7 +24,6 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   protected final Comparator<? super RecipeHolder<T>> comparator;
   protected final Function<T, @org.jetbrains.annotations.Nullable V> resolver;
   private RecipeHolder<T> lastRecipe = null;
-  private boolean sorted = false;
 
   public ResolvingRecipeType(Supplier<RecipeType<T>> type, Comparator<? super RecipeHolder<T>> comparator, Function<T, @org.jetbrains.annotations.Nullable V> resolver) {
     super(GSON, "recipes");
@@ -54,6 +53,8 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   @Nullable
   public RecipeHolder<T> getRecipe(Level level, ResourceLocation location) {
     RecipeManager manager = level.getRecipeManager();
+    // INCORRECT: It can be null
+    //noinspection ConstantValue
     if (manager == null) {
       RootsAPI.LOG.error("Unable to locate recipe {}, as the recipe manager is null.", location);
       return null;
@@ -70,7 +71,16 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   public void reset() {
     cache = null;
     lastRecipe = null;
-    sorted = false;
+  }
+
+  public List<RecipeHolder<T>> getPartialMatches (C inventory, Level level) {
+    List<RecipeHolder<T>> matches = new ArrayList<>();
+    for (RecipeHolder<T> recipe : getRecipes(level)) {
+      if (recipe.value().partiallyMatches(inventory, level)) {
+        matches.add(recipe);
+      }
+    }
+    return matches;
   }
 
   @Nullable
