@@ -204,95 +204,101 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     // Multipart for the blockstate
     var builder = getMultipartBuilder(ModBlocks.RUNIC_DUST.get());
 
-    ModelFile dustDot = models().withExistingParent("block/runic_dust_dot", mcLoc("block/redstone_dust_dot")).renderType("cutout");
+    ModelFile dustDot = models().withExistingParent("block/runic_dust_dot", mcLoc("block/redstone_dust_dot"))
+        .renderType("cutout");
 
     // 1) all sides NONE
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.NONE)
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.NONE)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.NONE)
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.NONE)
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.NONE)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.NONE)
         .end();
 
     // 2) north in {SIDE,UP} AND east in {SIDE,UP}
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.SIDE) // condition is "any of", so we emit twice
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.SIDE)
         .end();
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.UP)
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.SIDE)
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.UP)
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.SIDE)
         .end();
 
     // 3) east in {SIDE,UP} AND south in {SIDE,UP}
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.SIDE)
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.SIDE)
         .end();
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.UP)
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.SIDE)
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.EAST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.EAST, RedstoneSide.UP)
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.SIDE)
         .end();
 
     // 4) south in {SIDE,UP} AND west in {SIDE,UP}
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.SIDE)
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.SIDE)
         .end();
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.UP)
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.SIDE)
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
         .condition(RedStoneWireBlock.SOUTH, RedstoneSide.UP)
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.SIDE)
         .end();
 
     // 5) west in {SIDE,UP} AND north in {SIDE,UP}
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.SIDE)
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.SIDE)
         .end();
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.UP)
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.SIDE)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.SIDE)
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.UP)
         .end();
     builder.part().modelFile(dustDot).addModel()
-        .condition(RedStoneWireBlock.WEST,  RedstoneSide.UP)
+        .condition(RedStoneWireBlock.WEST, RedstoneSide.UP)
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.SIDE)
         .end();
 
 
     // side pieces (SIDE or UP)
-    ModelFile side0     = models().withExistingParent("block/runic_dust_side0", mcLoc("block/redstone_dust_side0")).renderType("cutout");
-    ModelFile sideAlt0  = models().withExistingParent("block/runic_dust_side_alt0", mcLoc("block/redstone_dust_side_alt0")).renderType("cutout");
-    ModelFile sideAlt1  = models().withExistingParent("block/runic_dust_side_alt1", mcLoc("block/redstone_dust_side_alt1")).renderType("cutout");
-    ModelFile side1     = models().withExistingParent("block/runic_dust_side1", mcLoc("block/redstone_dust_side1")).renderType("cutout");
-    ModelFile dustUp        = models().withExistingParent("block/runic_dust_up", mcLoc("block/redstone_dust_up")).renderType("cutout");
+    ModelFile side0 = models().withExistingParent("block/runic_dust_side0", mcLoc("block/redstone_dust_side0"))
+        .renderType("cutout");
+    ModelFile sideAlt0 = models().withExistingParent("block/runic_dust_side_alt0", mcLoc("block/redstone_dust_side_alt0"))
+        .renderType("cutout");
+    ModelFile sideAlt1 = models().withExistingParent("block/runic_dust_side_alt1", mcLoc("block/redstone_dust_side_alt1"))
+        .renderType("cutout");
+    ModelFile side1 = models().withExistingParent("block/runic_dust_side1", mcLoc("block/redstone_dust_side1"))
+        .renderType("cutout");
+    ModelFile dustUp = models().withExistingParent("block/runic_dust_up", mcLoc("block/redstone_dust_up"))
+        .renderType("cutout");
 
     builder.part().modelFile(side0).addModel()
         .condition(RedStoneWireBlock.NORTH, RedstoneSide.SIDE).end();

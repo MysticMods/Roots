@@ -53,7 +53,7 @@ public class ReputationScreen extends RootsScreen {
     ReputationStorage rep = getStorage();
 
     ReputationRanks.Progress fairy = rep.getProgress(ModGroves.FAIRY.get());
-    ReputationRanks.Progress wild = rep.getProgress(ModGroves.WILD.get());
+    ReputationRanks.Progress wild = rep.getProgress(ModGroves.PRIMAL.get());
     ReputationRanks.Progress sprouting = rep.getProgress(ModGroves.SPROUTING.get());
     ReputationRanks.Progress elemental = rep.getProgress(ModGroves.ELEMENTAL.get());
     ReputationRanks.Progress twilight = rep.getProgress(ModGroves.TWILIGHT.get());
@@ -66,7 +66,7 @@ public class ReputationScreen extends RootsScreen {
 
     ReputationRanks.Progress[] progresses = new ReputationRanks.Progress[]{fairy, twilight, fungal, elemental, wild, sprouting};
     Grove[] groves = new Grove[]{
-        ModGroves.FAIRY.get(), ModGroves.TWILIGHT.get(), ModGroves.FUNGAL.get(), ModGroves.ELEMENTAL.get(), ModGroves.WILD.get(), ModGroves.SPROUTING.get()
+        ModGroves.FAIRY.get(), ModGroves.TWILIGHT.get(), ModGroves.FUNGAL.get(), ModGroves.ELEMENTAL.get(), ModGroves.PRIMAL.get(), ModGroves.SPROUTING.get()
     };
 
     for (int l = 0; l < 6; l++) {

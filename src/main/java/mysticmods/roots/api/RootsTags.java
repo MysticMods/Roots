@@ -75,8 +75,8 @@ public class RootsTags {
     // Grove Stones
     public static final TagKey<Block> GROVE_STONES = modTag("grove_stones");
 
-    public static final TagKey<Block> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
     public static final TagKey<Block> GROVE_STONE_WILD = modTag("grove_stones/wild");
+    public static final TagKey<Block> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
     public static final TagKey<Block> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
     public static final TagKey<Block> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
     public static final TagKey<Block> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");
@@ -539,13 +539,13 @@ public class RootsTags {
     public static final TagKey<Ritual> NYI = modTag("nyi");
     public static final TagKey<Ritual> WIP = modTag("wip");
 
-    public static final TagKey<Ritual> PRIMAL = modTag("primal");
+    public static final TagKey<Ritual> WILD = modTag("wild");
     public static final TagKey<Ritual> FAIRY = modTag("fairy");
     public static final TagKey<Ritual> TWILIGHT = modTag("twilight");
     public static final TagKey<Ritual> FUNGAL = modTag("fungal");
     public static final TagKey<Ritual> SPROUTING = modTag("sprouting");
     public static final TagKey<Ritual> ELEMENTAL = modTag("elemental");
-    public static final TagKey<Ritual> WILD = modTag("wild");
+    public static final TagKey<Ritual> PRIMAL = modTag("primal");
     public static final TagKey<Ritual> HOLLOW = modTag("hollow");
 
     public static final TagKey<Ritual> SUMMON_CREATURES = modTag("summon_creatures");
@@ -565,13 +565,13 @@ public class RootsTags {
 
     public static final TagKey<Spell> ADJUSTABLE_SPELL = modTag("adjustable");
 
-    public static final TagKey<Spell> PRIMAL = modTag("primal");
+    public static final TagKey<Spell> WILD = modTag("wild");
     public static final TagKey<Spell> FAIRY = modTag("fairy");
     public static final TagKey<Spell> TWILIGHT = modTag("twilight");
     public static final TagKey<Spell> FUNGAL = modTag("fungal");
     public static final TagKey<Spell> SPROUTING = modTag("sprouting");
     public static final TagKey<Spell> ELEMENTAL = modTag("elemental");
-    public static final TagKey<Spell> WILD = modTag("wild");
+    public static final TagKey<Spell> PRIMAL = modTag("primal");
     public static final TagKey<Spell> HOLLOW = modTag("hollow");
 
     public static final TagKey<Spell> GEAS_ACTION = modTag("action/geas");
@@ -618,12 +618,12 @@ public class RootsTags {
     public static final TagKey<Herb> EARTH = modTag("elemental/earth");
     public static final TagKey<Herb> AIR = modTag("elemental/air");
 
-    public static final TagKey<Herb> PRIMAL = modTag("primal");
+    public static final TagKey<Herb> WILD = modTag("wild");
     public static final TagKey<Herb> FAIRY = modTag("fairy");
     public static final TagKey<Herb> TWILIGHT = modTag("twilight");
     public static final TagKey<Herb> FUNGAL = modTag("fungal");
     public static final TagKey<Herb> SPROUTING = modTag("sprouting");
-    public static final TagKey<Herb> WILD = modTag("wild");
+    public static final TagKey<Herb> PRIMAL = modTag("primal");
     public static final TagKey<Herb> HOLLOW = modTag("hollow");
 
     static TagKey<Herb> modTag(String name) {
@@ -637,13 +637,13 @@ public class RootsTags {
 
   public static class Groves extends RootsTags {
     public static final TagKey<Grove> ANY = modTag("any");
-    public static final TagKey<Grove> PRIMAL = modTag("primal");
+    public static final TagKey<Grove> WILD = modTag("wild");
     public static final TagKey<Grove> FAIRY = modTag("fairy");
     public static final TagKey<Grove> TWILIGHT = modTag("twilight");
     public static final TagKey<Grove> FUNGAL = modTag("fungal");
     public static final TagKey<Grove> SPROUTING = modTag("sprouting");
     public static final TagKey<Grove> ELEMENTAL = modTag("elemental");
-    public static final TagKey<Grove> WILD = modTag("wild");
+    public static final TagKey<Grove> PRIMAL = modTag("primal");
 
     static TagKey<Grove> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.GROVES, RootsAPI.rl(name));

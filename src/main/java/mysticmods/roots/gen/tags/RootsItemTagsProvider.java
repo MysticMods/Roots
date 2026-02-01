@@ -335,18 +335,18 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copySpell(RootsTags.Spells.FUNGAL);
     copySpell(RootsTags.Spells.ELEMENTAL);
     copySpell(RootsTags.Spells.SPROUTING);
-    copySpell(RootsTags.Spells.PRIMAL);
-    copySpell(RootsTags.Spells.TWILIGHT);
     copySpell(RootsTags.Spells.WILD);
+    copySpell(RootsTags.Spells.TWILIGHT);
+    copySpell(RootsTags.Spells.PRIMAL);
     copySpell(RootsTags.Spells.HOLLOW);
     copySpell(RootsTags.Spells.GEAS_ACTION);
 
     copyRitual(RootsTags.Rituals.FUNGAL);
     copyRitual(RootsTags.Rituals.SPROUTING);
     copyRitual(RootsTags.Rituals.ELEMENTAL);
-    copyRitual(RootsTags.Rituals.PRIMAL);
-    copyRitual(RootsTags.Rituals.TWILIGHT);
     copyRitual(RootsTags.Rituals.WILD);
+    copyRitual(RootsTags.Rituals.TWILIGHT);
+    copyRitual(RootsTags.Rituals.PRIMAL);
     copyRitual(RootsTags.Rituals.FAIRY);
     copyRitual(RootsTags.Rituals.HOLLOW);
 
@@ -354,9 +354,9 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copyGrove(RootsTags.Groves.FUNGAL);
     copyGrove(RootsTags.Groves.ELEMENTAL);
     copyGrove(RootsTags.Groves.SPROUTING);
-    copyGrove(RootsTags.Groves.PRIMAL);
-    copyGrove(RootsTags.Groves.TWILIGHT);
     copyGrove(RootsTags.Groves.WILD);
+    copyGrove(RootsTags.Groves.TWILIGHT);
+    copyGrove(RootsTags.Groves.PRIMAL);
 
     // Additions manually copied from RootsBlockTagProvider
     this.tag(ItemTags.SLABS)

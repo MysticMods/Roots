@@ -497,10 +497,10 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_ELEMENTAL = ITEMS.register("elemental", () -> grove(ModGroves.ELEMENTAL));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_FAIRY = ITEMS.register("fairy", () -> grove(ModGroves.FAIRY));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_FUNGAL = ITEMS.register("fungal", () -> grove(ModGroves.FUNGAL));
-  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_PRIMAL = ITEMS.register("primal", () -> grove(ModGroves.PRIMAL));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_WILD = ITEMS.register("wild", () -> grove(ModGroves.WILD));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_SPROUTING = ITEMS.register("sprouting", () -> grove(ModGroves.SPROUTING));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_TWILIGHT = ITEMS.register("twilight", () -> grove(ModGroves.TWILIGHT));
-  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_WILD = ITEMS.register("wild", () -> grove(ModGroves.WILD));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_PRIMAL = ITEMS.register("primal", () -> grove(ModGroves.PRIMAL));
 
 
   private static TokenItem.SpellTokenItem spell(Holder<Spell> spell) {
