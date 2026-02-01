@@ -35,7 +35,7 @@ public class GroveWithReputationCategory implements IRecipeCategory<GroveWithRep
   }
 
   public GroveWithReputationCategory(IGuiHelper helper) {
-    this(helper, 209, 21, RootsAPI.rl("textures/gui/jei/grove_reputation_entry.png"), () -> new ItemStack(ModItems.PRIMAL_GROVE_STONE.get()), Component.translatable("roots.jei.grove_reputation"));
+    this(helper, 209, 21, RootsAPI.rl("textures/gui/jei/grove_reputation_entry.png"), () -> new ItemStack(ModItems.WILD_GROVE_STONE.get()), Component.translatable("roots.jei.grove_reputation"));
   }
 
 

@@ -54,14 +54,14 @@ public class GroveSupplicationRitual extends Ritual {
             continue;
           }
 
-          // Activate primal stones
-          if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && !state.getValue(StateProperties.ACTIVE)) {
+          // Activate wild stones
+          if (state.is(RootsTags.Blocks.GROVE_STONE_WILD) && !state.getValue(StateProperties.ACTIVE)) {
             blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true));
             continue;
           }
 
-          // Activate non-primal stones if player has the correct rank
-          if (!state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.getBlock() instanceof GroveStoneBlock groveStone && blockEntity.getLastPlayer() != null) {
+          // Activate non-wild stones if player has the correct rank
+          if (!state.is(RootsTags.Blocks.GROVE_STONE_WILD) && state.getBlock() instanceof GroveStoneBlock groveStone && blockEntity.getLastPlayer() != null) {
             Grove grove = groveStone.getGrove().value();
             Player player = blockEntity.getLastPlayer();
             int rank = ReputationHelper.getRank(player, grove);

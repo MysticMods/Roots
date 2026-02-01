@@ -740,7 +740,13 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.nyi", "[Not Yet Implemented]");
     add("roots.wip", "[Work In Progress]");
 
+    add("roots.container.herb_pouch", "Herb Pouch");
+    add("roots.commands.alerts.no_player", "Sender is not a player.");
+    add("roots.message.spell_modifier.already_learned", "Spell modifier '%s' already learned!");
+    add("message.dandelion_cordial", "You feel more alert!");
+
     // JEI
+    add("roots.jei.grove_reputation", "Grove Reputation");
     add("roots.jei.entity_interaction", "Entity Item Interaction");
     add("roots.jei.summon_creatures", "Summon Creatures");
     add("roots.jei.runic_entity", "Runic Shears (Entity)");

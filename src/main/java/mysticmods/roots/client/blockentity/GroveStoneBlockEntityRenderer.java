@@ -29,7 +29,7 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
     super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
     BlockState state = pBlockEntity.getBlockState();
     BlockPos origin = pBlockEntity.getBlockPos();
-    if (!state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(GroveStoneBlock.RANK) && state.hasProperty(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.RANK) > 0) {
+    if (!state.is(RootsTags.Blocks.GROVE_STONE_WILD) && state.hasProperty(GroveStoneBlock.RANK) && state.hasProperty(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.ACTIVE) && state.getValue(GroveStoneBlock.RANK) > 0) {
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
         BlockPos pPos = pBlockEntity.getBlockPos();
         List<BlockPos> generatorPositions = pBlockEntity.getValidPositions(pPos);
