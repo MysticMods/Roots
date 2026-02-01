@@ -40,7 +40,7 @@
     ],
     "roots:bred_animal": [
       {
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:bred_animal",
         "reputation": {
           "gain1": 50,
@@ -78,7 +78,7 @@
             "name": "roots:runic_shears"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:create_runic_shears",
         "reputation": {
           "gain1": 50,
@@ -204,7 +204,7 @@
             "name": "roots:wildewheet"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:create_wildewheet",
         "reputation": {
           "gain1": 50,
@@ -332,7 +332,7 @@
             "name": "roots:grove/wild/crops"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:wild_crop_growth",
         "reputation": {
           "gain1": 50,
@@ -446,7 +446,7 @@
     ],
     "roots:harvest_bee_hive": [
       {
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:harvest_bee_hive",
         "reputation": {
           "gain1": 50,
@@ -466,7 +466,7 @@
             "name": "roots:pacifist"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:kill_pacifist_animals",
         "reputation": {
           "gain1": -2,
@@ -1026,7 +1026,7 @@
             "name": "roots:nondetection"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:learn_spell/nondetection",
         "reputation": {
           "gain1": 500,
@@ -1040,7 +1040,7 @@
     ],
     "roots:milk_cow": [
       {
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:milk_cow",
         "reputation": {
           "gain1": 10,
@@ -1242,7 +1242,7 @@
             "name": "roots:animal_harvest"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:first_ritual/animal_harvest",
         "reputation": {
           "gain1": 66,
@@ -1260,7 +1260,7 @@
             "name": "roots:augmentation"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:first_ritual/augmentation",
         "reputation": {
           "gain1": 66,
@@ -1278,7 +1278,7 @@
             "name": "roots:gathering"
           }
         ],
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:first_ritual/gathering",
         "reputation": {
           "gain1": 66,
@@ -1346,7 +1346,7 @@
     ],
     "roots:tame_animal": [
       {
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "name": "roots:tame_animals",
         "reputation": {
           "gain1": 50,

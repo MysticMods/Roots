@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-24T13:25:28.4993583	Roots Spell Tags
+// 1.21.1	2026-02-01T16:17:51.4255166	Roots Spell Tags
 98fc9b37dbbb32c844dea8e7fc87e5735b16f31b data/roots/tags/roots/spells/action/geas.json
 2e2130e6b60640a0e9a3506b5379e76388102c48 data/roots/tags/roots/spells/adjustable.json
 998b9b77f28ebf1f186171a6fbd79ff8f83a1a64 data/roots/tags/roots/spells/blocks_off_hand_eating.json
@@ -7,8 +7,8 @@ bc5977b843234b5cf22bd18ac8d5f76a0e9a898c data/roots/tags/roots/spells/fairy.json
 3bb414e35931610276aa2847149bfa84e77984ef data/roots/tags/roots/spells/fungal.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/hollow.json
 67ffa9ca2a7dffcb89587c78d88e02c2c9c731f6 data/roots/tags/roots/spells/nyi.json
-e7643aa7ad0de90b06f2503415fd7a69cb41cff5 data/roots/tags/roots/spells/primal.json
+1005f3b4bc4202605ac6313bab7ae24d27501135 data/roots/tags/roots/spells/primal.json
 b4369415e281971edbd658ad150e69aec9015444 data/roots/tags/roots/spells/sprouting.json
 b5025534a27f7a77118d131565efad70bed47d1c data/roots/tags/roots/spells/twilight.json
-1005f3b4bc4202605ac6313bab7ae24d27501135 data/roots/tags/roots/spells/wild.json
+e7643aa7ad0de90b06f2503415fd7a69cb41cff5 data/roots/tags/roots/spells/wild.json
 412037b1e6efcef77e66c07ba6e995419384ad4d data/roots/tags/roots/spells/wip.json

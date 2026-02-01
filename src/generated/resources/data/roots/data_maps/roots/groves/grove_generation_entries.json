@@ -33,6 +33,12 @@
         "tag": "roots:grove_generators/fungal/other"
       }
     ],
+    "roots:primal": [
+      {
+        "max_count": 2,
+        "tag": "roots:grove_generators/wild"
+      }
+    ],
     "roots:sprouting": [
       {
         "max_count": 3,
@@ -44,12 +50,6 @@
         "max_count": 1,
         "symmetry": "radial_not_matching",
         "tag": "roots:grove_generators/twilight"
-      }
-    ],
-    "roots:wild": [
-      {
-        "max_count": 2,
-        "tag": "roots:grove_generators/wild"
       }
     ]
   }

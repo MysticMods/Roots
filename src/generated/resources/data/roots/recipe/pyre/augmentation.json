@@ -50,7 +50,7 @@
     "player_conditions": [
       {
         "type": "roots:grove_rank_condition",
-        "grove": "roots:wild",
+        "grove": "roots:primal",
         "minimum_rank": 1
       }
     ],

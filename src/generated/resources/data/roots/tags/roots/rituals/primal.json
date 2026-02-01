@@ -1,6 +1,8 @@
 {
   "values": [
-    "roots:overgrowth",
-    "roots:grove_supplication"
+    "roots:animal_harvest",
+    "roots:summon_creatures",
+    "roots:gathering",
+    "roots:augmentation"
   ]
 }

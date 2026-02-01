@@ -512,9 +512,9 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
 
           ResourceLocation active;
 
-          if (groveType.equals("primal")) {
+          if (groveType.equals("wild")) {
             active = modLoc("block/ob_stone_active");
-            models().withExistingParent("primal_grove_stone_inventory", modLoc("block/complex/grove_stone_full"));
+            models().withExistingParent("wild_grove_stone_inventory", modLoc("block/complex/grove_stone_full"));
           } else {
             active = modLoc("block/ob_stone_active_" + groveType);
             models().withExistingParent(groveType + "_grove_stone_inventory", modLoc("block/complex/grove_stone_full"))

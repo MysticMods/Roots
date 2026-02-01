@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-13T14:06:11.5877963	Roots Item Tags
+// 1.21.1	2026-02-01T16:17:51.4265243	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -152,7 +152,7 @@ b24eda5f3a7b62df0c451d4de620ebf87ba5ffb8 data/roots/tags/item/poppies.json
 013c834800190efb8c750604831c502fd8f189fc data/roots/tags/item/pouches.json
 ae4117882af5a5a5d43ce988fa9906246bcdbf96 data/roots/tags/item/pouches/all.json
 c42cd05d45cb4e4c36ad0e2116c8ba8abb98af20 data/roots/tags/item/pouches/creative.json
-0b4bf175c9cbfa25ab5a81f4490f7cfdd4dc08f7 data/roots/tags/item/primal.json
+469e9d242f5caa01f6abab7244072fb73cd7decb data/roots/tags/item/primal.json
 1fd81efe08e8472219d41dc2e31df32980b3e6df data/roots/tags/item/proteins.json
 07323a0aef4cb95578247a2c6ad88c7b7c6b9a80 data/roots/tags/item/pyres.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/item/pyre_activation.json
@@ -200,5 +200,5 @@ a870e030cdcec7c03084a93483c249d3ea20e677 data/roots/tags/item/tempt/jerboa.json
 e2a6f1db35ec3c01274db0b0783283566f3f980b data/roots/tags/item/tempt/sprout.json
 d50b90929595a497a379680ddd31aec01bd964e1 data/roots/tags/item/twilight.json
 de63ed9e3b03e443f31cbe2fc6660363c46675b3 data/roots/tags/item/vegetables.json
-38409b778c8f0418c5a77ee16f2638617dee07fc data/roots/tags/item/wild.json
+85ccfeae6e3fbbb90e57b461af6a3e83795e148b data/roots/tags/item/wild.json
 1e474dff3c9a520c7f8bd956ae22aaaeca853296 data/roots/tags/item/wip.json

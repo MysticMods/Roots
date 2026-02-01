@@ -59,7 +59,7 @@
     "#roots:grove_generators/wild": [
       {
         "blockTag": "roots:grove_generators/wild",
-        "tag": "roots:wild",
+        "tag": "roots:primal",
         "value": 5
       }
     ]
