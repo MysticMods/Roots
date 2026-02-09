@@ -4,6 +4,7 @@ import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.RefillProvider;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
@@ -16,6 +17,7 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.inventory.fake.mortar.MortarContainer;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -27,6 +29,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +38,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -51,7 +58,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MortarBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
+public class MortarBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, FakeMenuBlockEntity {
   private final MortarInventory inventory = new MortarInventory() {
     @Override
     protected void onContentsChanged(int slot) {
@@ -356,5 +363,10 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     if (changed) {
       updateViaState();
     }
+  }
+
+  @Override
+  public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+    return new MortarContainer(containerId, playerInventory, inventory, ContainerLevelAccess.create(getLevel(), getBlockPos()));
   }
 }

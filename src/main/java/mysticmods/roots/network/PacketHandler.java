@@ -40,6 +40,7 @@ public class PacketHandler {
     registrar.play(ServerboundMoveLightDrifterPacket.Rot.TYPE, ServerboundMoveLightDrifterPacket.Rot.CODEC);
     registrar.play(ServerboundCancelLightDrifterPacket.TYPE, ServerboundCancelLightDrifterPacket.CODEC);
     registrar.play(ServerboundCancelEffectPacket.TYPE, ServerboundCancelEffectPacket.CODEC);
+    registrar.play(ServerboundFakeMenuPacket.TYPE, ServerboundFakeMenuPacket.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {

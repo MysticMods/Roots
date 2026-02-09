@@ -3,6 +3,7 @@ package mysticmods.roots.network.server;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.GrantStorage;
+import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -12,9 +13,11 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.TickTask;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
@@ -210,5 +213,15 @@ public class ServerNetworkHooks {
     }
 
     player.removeEffect(effect);
+  }
+
+  public static void fakeMenu(Player player, BlockPos pos) {
+    if (!(player.level() instanceof ServerLevel level)) {
+      return;
+    }
+
+    if (level.getBlockEntity(pos) instanceof FakeMenuBlockEntity fme) {
+      player.openMenu(fme);
+    }
   }
 }

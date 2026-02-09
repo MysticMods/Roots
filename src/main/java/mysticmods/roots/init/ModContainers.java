@@ -1,5 +1,6 @@
 package mysticmods.roots.init;
 
+import mysticmods.roots.inventory.fake.mortar.MortarContainer;
 import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchContainer;
 import mysticmods.roots.inventory.pouch.component.ComponentPouchContainer;
 import mysticmods.roots.inventory.pouch.herb.HerbPouchContainer;
@@ -20,6 +21,7 @@ public class ModContainers {
   public static final DeferredHolder<MenuType<?>, MenuType<ComponentPouchContainer>> COMPONENT_POUCH = REGISTER.register("component_pouch", () -> new MenuType<>(ComponentPouchContainer::new, FeatureFlags.REGISTRY.allFlags()));
   public static final DeferredHolder<MenuType<?>, MenuType<SylvanPouchContainer>> SYLVAN_POUCH = REGISTER.register("sylvan_pouch", () -> new MenuType<>(SylvanPouchContainer::new, FeatureFlags.REGISTRY.allFlags()));
   public static final DeferredHolder<MenuType<?>, MenuType<QuiverContainer>> QUIVER = REGISTER.register("quiver", () -> new MenuType<>(QuiverContainer::new, FeatureFlags.REGISTRY.allFlags()));
+  public static final DeferredHolder<MenuType<?>, MenuType<MortarContainer>> MORTAR = REGISTER.register("mortar", () -> new MenuType<>(MortarContainer::new, FeatureFlags.REGISTRY.allFlags()));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);
