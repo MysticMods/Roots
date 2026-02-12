@@ -1,9 +1,10 @@
-package mysticmods.roots.inventory.fake.mortar;
+package mysticmods.roots.inventory.fake;
 
-import mysticmods.roots.blockentity.MortarBlockEntity;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModContainers;
 import mysticmods.roots.recipe.mortar.MortarInventory;
+import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.util.PlayerGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,17 +14,18 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
-public class MortarContainer extends AbstractContainerMenu {
+public class PyreContainer extends FakeContainer {
   private final ContainerLevelAccess access;
 
-  public MortarContainer(int containerId, Inventory inventory, @Nullable RegistryFriendlyByteBuf buffer) {
-    this(containerId, inventory, new MortarInventory(), PlayerGetter.getLevelAccess(buffer));
+  public PyreContainer(int containerId, Inventory inventory, @Nullable RegistryFriendlyByteBuf buffer) {
+    this(containerId, inventory, new PyreInventory(), PlayerGetter.getLevelAccess(buffer));
   }
 
-  public MortarContainer(int containerId, Inventory inventory, MortarInventory mortarInventory, ContainerLevelAccess access) {
+  public PyreContainer(int containerId, Inventory inventory, PyreInventory mortarInventory, ContainerLevelAccess access) {
     super(ModContainers.MORTAR.get(), containerId);
     this.access = access;
 
@@ -58,18 +60,18 @@ public class MortarContainer extends AbstractContainerMenu {
   }
 
   @Override
-  public ItemStack quickMoveStack(Player player, int index) {
-    return ItemStack.EMPTY;
+  protected ContainerLevelAccess getAccess() {
+    return access;
   }
 
   @Override
-  public boolean stillValid(Player player) {
-    return stillValid(this.access, player, ModBlocks.MORTAR.get());
+  protected Block getBlock() {
+    return ModBlocks.PYRE.get();
   }
 
   public boolean hasRecipe () {
-    if (access.evaluate(Level::getBlockEntity).orElse(null) instanceof MortarBlockEntity mortar) {
-      return mortar.getCachedRecipe() != null;
+    if (access.evaluate(Level::getBlockEntity).orElse(null) instanceof PyreBlockEntity pyre) {
+      return pyre.getCachedRecipe() != null;
     }
 
     return false;

@@ -27,7 +27,7 @@ import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.init.*;
 import mysticmods.roots.integration.jei.categories.*;
-import mysticmods.roots.inventory.fake.mortar.MortarContainer;
+import mysticmods.roots.inventory.fake.MortarContainer;
 import mysticmods.roots.recipe.fake.DyeRecipeGenerator;
 import mysticmods.roots.recipe.fake.EntityInteractionRecipe;
 import mysticmods.roots.recipe.fake.GroveWithReputation;
@@ -277,9 +277,13 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   public static void showRecipes (Class<?> clazz) {
-    RecipeType<?> type = recipeTypeMap.get(clazz);
-    if (type != null) {
-      get().getRuntime().getRecipesGui().showTypes(List.of(type));
+    if (clazz.equals(MortarContainer.class)) {
+      get().getRuntime().getRecipesGui().showTypes(List.of(MORTAR_RECIPE_TYPE));
+    } else {
+      RecipeType<?> type = recipeTypeMap.get(clazz);
+      if (type != null) {
+        get().getRuntime().getRecipesGui().showTypes(List.of(type));
+      }
     }
   }
 

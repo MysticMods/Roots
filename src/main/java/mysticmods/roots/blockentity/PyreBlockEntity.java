@@ -15,8 +15,10 @@ import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
+import mysticmods.roots.inventory.fake.PyreContainer;
 import mysticmods.roots.recipe.pyre.*;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.PlayerGetter;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,6 +28,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -34,7 +37,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -58,7 +64,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, BindableBlockEntity {
+public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, BindableBlockEntity, FakeMenuBlockEntity, ClearableBlockEntity {
   private static BoundingBox PYRE_BOUNDS;
 
   public static BoundingBox getPyreBoundingBox() {
@@ -623,5 +629,34 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       setChanged();
       updateViaState();
     }
+  }
+
+  @Override
+  public void clearContents() {
+    ItemStack popped = inventory.pop();
+    while (!popped.isEmpty()) {
+      ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
+      popped = inventory.pop();
+    }
+  }
+
+  @Override
+  public boolean canClear() {
+    return !inventory.isEmpty();
+  }
+
+  @Override
+  public boolean shouldShowInsert() {
+    return getCachedRecipe() != null;
+  }
+
+  @Override
+  public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+    return new PyreContainer(containerId, playerInventory, inventory, ContainerLevelAccess.create(getLevel(), getBlockPos()));
+  }
+
+  @Override
+  public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+    buffer.writeBlockPos(getBlockPos());
   }
 }
