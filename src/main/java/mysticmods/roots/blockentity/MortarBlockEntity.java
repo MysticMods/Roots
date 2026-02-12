@@ -4,10 +4,7 @@ import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
-import mysticmods.roots.api.blockentity.InventoryBlockEntity;
-import mysticmods.roots.api.blockentity.RefillProvider;
-import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.blockentity.*;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
@@ -29,6 +26,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +37,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -58,7 +57,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MortarBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, FakeMenuBlockEntity {
+public class MortarBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, FakeMenuBlockEntity, ClearableBlockEntity {
   private final MortarInventory inventory = new MortarInventory() {
     @Override
     protected void onContentsChanged(int slot) {
@@ -368,5 +367,38 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
   @Override
   public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
     return new MortarContainer(containerId, playerInventory, inventory, ContainerLevelAccess.create(getLevel(), getBlockPos()));
+  }
+
+  @Override
+  public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+    FakeMenuBlockEntity.super.writeClientSideData(menu, buffer);
+    buffer.writeBlockPos(getBlockPos());
+  }
+
+  @Override
+  public void clearContents() {
+    ItemStack popped = inventory.pop();
+    while (!popped.isEmpty()) {
+      ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
+      popped = inventory.pop();
+    }
+  }
+
+  @Override
+  public boolean canClear() {
+    return !inventory.isEmpty();
+  }
+
+  @Override
+  public boolean shouldShowInsert() {
+    if (inventory.isEmpty()) {
+      return true;
+    }
+
+    if (getCachedRecipe() != null) {
+      return true;
+    }
+
+    return false;
   }
 }

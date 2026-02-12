@@ -3,8 +3,11 @@ package mysticmods.roots.client.gui.layer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.blockentity.ClearableBlockEntity;
+import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
@@ -18,6 +21,7 @@ import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -26,6 +30,8 @@ import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.core.BlockPos;
@@ -43,13 +49,53 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID)
 public class HudOverlay {
+  private static final int MENU_POS_TIME_OUT = 20 * 5;
+
+  private static int menuPosCooldown = -1;
+
+  private static @Nullable BlockPos menu_pos = null;
+
+  private static boolean storeBlockPos(@Nullable BlockPos pos) {
+    menu_pos = pos;
+    return pos != null;
+  }
+
+  @Nullable
+  public static BlockPos getStoredBlockPos() {
+    return menu_pos;
+  }
+
+  @SubscribeEvent
+  public static void onClientTick(ClientTickEvent.Post event) {
+    if (menuPosCooldown-- <= 0) {
+      menu_pos = null;
+    }
+    if (menu_pos != null) {
+      Minecraft mc = Minecraft.getInstance();
+      if (mc == null || mc.player == null) {
+        return;
+      }
+      Player player = mc.player;
+      if (player.distanceToSqr(Vec3.atCenterOf(menu_pos)) >= 4 * 4) {
+        menu_pos = null;
+      }
+    }
+  }
+
   public static void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
     PoseStack stack = guiGraphics.pose();
     float partialTicks = deltaTracker.getRealtimeDeltaTicks();
@@ -57,7 +103,7 @@ public class HudOverlay {
     Minecraft mc = Minecraft.getInstance();
 
     // Copied from 1.12.2, I have no idea of the relevance of this.
-    if (mc.screen instanceof ChatScreen || mc.hitResult == null || mc.hitResult.getType() == HitResult.Type.MISS || mc.level == null) {
+    if (mc.screen instanceof ChatScreen || mc.hitResult == null || mc.level == null) {
       return;
     }
 
@@ -68,18 +114,31 @@ public class HudOverlay {
     if (mc.hitResult.getType() == HitResult.Type.BLOCK) {
       BlockHitResult trace = ((BlockHitResult) mc.hitResult);
       BlockState state = mc.level.getBlockState(trace.getBlockPos());
+      boolean changed;
+
       if (state.is(RootsTags.Blocks.PYRE_HUD_RENDERER)) {
         renderPyre(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
+        changed = storeBlockPos(trace.getBlockPos());
       } else if (state.is(RootsTags.Blocks.GROVE_CRAFTER_HUD_RENDERER)) {
         renderGroveCrafter(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
+        changed = storeBlockPos(trace.getBlockPos());
       } else if (state.is(RootsTags.Blocks.MORTAR_HUD_RENDERER)) {
         renderMortar(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
+        changed = storeBlockPos(trace.getBlockPos());
       } else if (state.is(RootsTags.Blocks.GROVE_STONE_HUD_RENDERER)) {
         renderGroveStone(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
+        changed = false;
       } else if (state.is(RootsTags.Blocks.TRANSMUTER_HUD_RENDERER)) {
         renderTransmuter(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
+        changed = storeBlockPos(trace.getBlockPos());
+      } else {
+        changed = false;
       }
-    } else {
+
+      if (changed) {
+        menuPosCooldown = MENU_POS_TIME_OUT;
+      }
+    } else if (mc.hitResult.getType() == HitResult.Type.ENTITY) {
       EntityHitResult trace = ((EntityHitResult) mc.hitResult);
 
       if (trace.getEntity().getType()
@@ -87,6 +146,11 @@ public class HudOverlay {
         renderEntity(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, living);
 
       }
+    }
+
+    if (getStoredBlockPos() != null) {
+      renderFakeMenu(guiGraphics, stack, partialTicks, deltaTracker, mc);
+      renderClear(guiGraphics, stack, partialTicks, deltaTracker, mc);
     }
   }
 
@@ -582,6 +646,50 @@ public class HudOverlay {
       graphics.drawString(mc.font, comp4, x + 25, y - 24, 16777215, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
+    }
+  }
+
+  public static void renderFakeMenu(GuiGraphics guiGraphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft minecraft) {
+    Level level = minecraft.level;
+    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof FakeMenuBlockEntity fake && fake.shouldShowInsert()) {
+      Gui gui = minecraft.gui;
+      Font font = gui.getFont();
+      minecraft.getProfiler().push("overlayMessage");
+      int yShift = Math.max(gui.leftHeight, gui.rightHeight) + (68 - 59);
+      @SuppressWarnings("DataFlowIssue") int j = ChatFormatting.YELLOW.getColor();
+      guiGraphics.pose().pushPose();
+      guiGraphics.pose()
+          .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
+      Component overlayMessageString = Component.translatable("roots.hud.fake_menu", KeyBindings.OPEN_FAKE_MENU.getTranslatedKeyMessage(), ((BlockEntity) fake).getBlockState()
+          .getBlock().getName());
+
+      int k = font.width(overlayMessageString);
+      guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, -6, k, j);
+      guiGraphics.pose().popPose();
+
+      minecraft.getProfiler().pop();
+    }
+  }
+
+  public static void renderClear(GuiGraphics guiGraphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft minecraft) {
+    Level level = minecraft.level;
+    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof ClearableBlockEntity clearable && clearable.canClear()) {
+      Gui gui = minecraft.gui;
+      Font font = gui.getFont();
+      minecraft.getProfiler().push("overlayMessage");
+      int yShift = Math.max(gui.leftHeight, gui.rightHeight) + (68 - 59);
+      int j = 16777215;
+      guiGraphics.pose().pushPose();
+      guiGraphics.pose()
+          .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
+      Component overlayMessageString = Component.translatable("roots.hud.clear", KeyBindings.CLEAR_CONTAINER.getTranslatedKeyMessage(), ((BlockEntity) clearable).getBlockState()
+          .getBlock().getName());
+
+      int k = font.width(overlayMessageString);
+      guiGraphics.drawStringWithBackdrop(font, overlayMessageString, -k / 2, 8, k, j);
+      guiGraphics.pose().popPose();
+
+      minecraft.getProfiler().pop();
     }
   }
 }

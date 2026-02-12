@@ -22,6 +22,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -277,5 +278,13 @@ public class RootsClientHooks {
       }
       /*    }*/
     });
+  }
+
+  public static ContainerLevelAccess getLevelAccess(BlockPos pos) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.level == null) {
+      return ContainerLevelAccess.NULL;
+    }
+    return ContainerLevelAccess.create(mc.level, pos);
   }
 }

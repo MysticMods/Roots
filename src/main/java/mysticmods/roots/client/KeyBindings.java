@@ -6,6 +6,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.gui.layer.HudOverlay;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.KeyMapping;
@@ -32,6 +33,9 @@ public class KeyBindings {
 
   public static final LibraryKeyConflictContext IN_LIBRARY = new LibraryKeyConflictContext();
 
+  // TODO:
+  public static final NearRelevantBlockEntity NEAR_RELEVANT_BLOCK_ENTITY = new NearRelevantBlockEntity();
+
   public static final IKeyConflictContext HAS_ANY_ADJUSTABLE = new MultiKeyConflictContext(ADJUSTABLE, HAS_ADJUSTABLE_TOME);
 
   public static final KeyMapping CANCEL_EFFECT = new KeyMapping("key.roots.cancel_effect", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_TAB, CATEGORY);
@@ -41,6 +45,8 @@ public class KeyBindings {
   public static final KeyMapping INCREASE_SPELL = new KeyMapping("key.roots.increase_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_RBRACKET, CATEGORY);
   public static final KeyMapping DECREASE_SPELL = new KeyMapping("key.roots.decrease_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_LBRACKET, CATEGORY);
   public static final KeyMapping CYCLE_ADJUSTABLE = new KeyMapping("key.roots.cycle_adjustable", HAS_ANY_ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
+  public static final KeyMapping OPEN_FAKE_MENU = new KeyMapping("key.roots.open_fake_menu", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
+  public static final KeyMapping CLEAR_CONTAINER = new KeyMapping("key.roots.clear_container", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
 
   public static final List<KeyMapping> MAPPINGS = Arrays.asList(
       OPEN_SPELL_LIBRARY,
@@ -48,7 +54,9 @@ public class KeyBindings {
       DECREASE_SPELL,
       CYCLE_ADJUSTABLE,
       OPEN_POUCH,
-      OPEN_REPUTATION);
+      OPEN_REPUTATION,
+      CLEAR_CONTAINER,
+      OPEN_FAKE_MENU);
 
 
   @SubscribeEvent
@@ -60,6 +68,8 @@ public class KeyBindings {
     event.register(OPEN_POUCH);
     event.register(OPEN_REPUTATION);
     event.register(CANCEL_EFFECT);
+    event.register(CLEAR_CONTAINER);
+    event.register(OPEN_FAKE_MENU);
   }
 
   public static class LibraryKeyConflictContext implements IKeyConflictContext {
@@ -172,6 +182,18 @@ public class KeyBindings {
       }
 
       return item.is(tag);
+    }
+
+    @Override
+    public boolean conflicts(IKeyConflictContext other) {
+      return this == other;
+    }
+  }
+
+  public static class NearRelevantBlockEntity implements IKeyConflictContext {
+    @Override
+    public boolean isActive() {
+      return HudOverlay.getStoredBlockPos() != null;
     }
 
     @Override

@@ -9,4 +9,6 @@ public interface FakeMenuBlockEntity extends MenuProvider {
   default @NotNull Component getDisplayName() {
     return Component.empty();
   }
+
+  boolean shouldShowInsert ();
 }

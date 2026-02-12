@@ -5,13 +5,12 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.gui.layer.HudOverlay;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
-import mysticmods.roots.network.server.ServerboundCancelEffectPacket;
-import mysticmods.roots.network.server.ServerboundCycleTomePacket;
-import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
-import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
+import mysticmods.roots.network.PacketHandler;
+import mysticmods.roots.network.server.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -72,6 +71,16 @@ public class KeyHandler {
 
     if (!foundEffect) {
       cancelEffect = -1;
+    }
+
+    if (KeyBindings.OPEN_FAKE_MENU.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
+      PacketDistributor.sendToServer(new ServerboundFakeMenuPacket(HudOverlay.getStoredBlockPos()));
+      return;
+    }
+
+    if (KeyBindings.CLEAR_CONTAINER.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
+      PacketDistributor.sendToServer(new ServerboundClearContainerPacket(HudOverlay.getStoredBlockPos()));
+      return;
     }
 
     if (KeyBindings.OPEN_REPUTATION.consumeClick()) {

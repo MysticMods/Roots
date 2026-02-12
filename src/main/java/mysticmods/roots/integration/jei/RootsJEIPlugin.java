@@ -25,11 +25,9 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.client.ClientRecipes;
-import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModBlocks;
-import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.init.*;
 import mysticmods.roots.integration.jei.categories.*;
+import mysticmods.roots.inventory.fake.mortar.MortarContainer;
 import mysticmods.roots.recipe.fake.DyeRecipeGenerator;
 import mysticmods.roots.recipe.fake.EntityInteractionRecipe;
 import mysticmods.roots.recipe.fake.GroveWithReputation;
@@ -69,13 +67,20 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @JeiPlugin
 public class RootsJEIPlugin implements IModPlugin {
+  private static RootsJEIPlugin instance;
+
+  public RootsJEIPlugin() {
+    RootsJEIPlugin.instance = this;
+  }
+
+  public static RootsJEIPlugin get() {
+    return instance;
+  }
+
   public static IDrawable INFO_DRAWABLE;
 
   public static final IIngredientType<RootsEntityType> ENTITY_TYPE = () -> RootsEntityType.class;
@@ -108,6 +113,18 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<TransmutationRecipe> TRANSMUTATION_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("transmutation_recipe"), TransmutationRecipe.class);
   public static final RecipeType<GroveWithReputation> GROVE_REPUTATION_ENTRY_TYPE = new RecipeType<>(RootsAPI.rl("grove_reputation_entry"), GroveWithReputation.class);
   public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = new RecipeType<>(RootsAPI.rl("entity_interaction_recipe"), EntityInteractionRecipe.class);
+
+  private static Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
+      MortarContainer.class, MORTAR_RECIPE_TYPE
+/*      KnifeRecipe.class, KNIFE_RECIPE_TYPE,
+      PyreRecipe.class, PYRE_RECIPE_TYPE,
+      RunicBlockRecipe.class, RUNIC_RECIPE_TYPE,
+      RunicEntityRecipe.class, RUNIC_ENTITY_RECIPE_TYPE,
+      SproutGiftRecipe.class, SPROUT_GIFTS_RECIPE_TYPE,
+      SummonCreaturesRecipe.class, SUMMON_CREATURES_RECIPE_TYPE,
+      AnimalHarvestRecipe.class, ANIMAL_HARVEST_RECIPE_TYPE,
+      TransmutationRecipe.class, TRANSMUTATION_RECIPE_TYPE*/
+  );
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -253,7 +270,18 @@ public class RootsJEIPlugin implements IModPlugin {
         .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
   }
 
-  public static IJeiRuntime runtime = null;
+  private IJeiRuntime runtime = null;
+
+  public IJeiRuntime getRuntime() {
+    return runtime;
+  }
+
+  public static void showRecipes (Class<?> clazz) {
+    RecipeType<?> type = recipeTypeMap.get(clazz);
+    if (type != null) {
+      get().getRuntime().getRecipesGui().showTypes(List.of(type));
+    }
+  }
 
   @Override
   public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
@@ -263,5 +291,12 @@ public class RootsJEIPlugin implements IModPlugin {
   @Override
   public void onRuntimeUnavailable() {
     runtime = null;
+  }
+
+  @Override
+  public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+    IModPlugin.super.registerRecipeTransferHandlers(registration);
+
+    registration.addRecipeTransferHandler(MortarContainer.class, ModContainers.MORTAR.get(), MORTAR_RECIPE_TYPE, 0, 5, 5, 36);
   }
 }

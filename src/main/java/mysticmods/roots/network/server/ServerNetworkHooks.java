@@ -3,6 +3,7 @@ package mysticmods.roots.network.server;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.GrantStorage;
+import mysticmods.roots.api.blockentity.ClearableBlockEntity;
 import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -222,6 +223,18 @@ public class ServerNetworkHooks {
 
     if (level.getBlockEntity(pos) instanceof FakeMenuBlockEntity fme) {
       player.openMenu(fme);
+    }
+  }
+
+  public static void clearContainer(Player player, BlockPos pos) {
+    if (!(player.level() instanceof ServerLevel level)) {
+      return;
+    }
+
+    if (level.getBlockEntity(pos) instanceof ClearableBlockEntity cbe) {
+      if (cbe.canClear()) {
+        cbe.clearContents();
+      }
     }
   }
 }

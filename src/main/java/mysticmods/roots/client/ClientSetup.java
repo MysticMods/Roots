@@ -72,7 +72,6 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.PYRE.get(), PyreBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.VISIBLE.get(), VisibleBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_STONE.get(), GroveStoneBlockEntityRenderer::new);
-    /*    event.registerBlockEntityRenderer(ModBlockEntities.GROWTH_AMPLIFIER.get(), AmplifierBlockEntityRenderer::new);*/
     event.registerBlockEntityRenderer(ModBlockEntities.ENCHANTED_TURF.get(), EnchantedTurfBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.FUNGAL_TRANSMUTER.get(), FungalTransmuterBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.WILDWOOD_CHEST.get(), WildwoodChestRenderer::new);
@@ -311,6 +310,7 @@ public class ClientSetup {
     event.register(ModContainers.APOTHECARY_POUCH.get(), ApothecaryPouchScreen::new);
     event.register(ModContainers.COMPONENT_POUCH.get(), ComponentPouchScreen::new);
     event.register(ModContainers.QUIVER.get(), QuiverScreen::new);
+    event.register(ModContainers.MORTAR.get(), MortarScreen::new);
   }
 
   public static final ResourceLocation GIFT_BOX_KEY = RootsAPI.rl("item/gift_box");
