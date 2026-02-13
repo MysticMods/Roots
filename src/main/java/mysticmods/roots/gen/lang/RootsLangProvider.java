@@ -754,7 +754,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.jei.knife_crafting", "Knife Carving");
     add("roots.jei.grove_crafting", "Grove Crafting");
     add("roots.jei.pyre", "Pyre");
+    add("roots.jei.ritual", "Ritual");
     add("roots.jei.mortar_crafting", "Mortar Crafting");
+    add("roots.jei.mortar_spell_carting", "Spell Crafting");
     add("roots.jei.text.durability", "Durability: %s");
     add("roots.jei.text.cooldown", "Cooldown: %ss");
     add("roots.jei.sprout_gifts", "Rewards for Breeding Sprouts");

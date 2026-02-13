@@ -5,6 +5,7 @@ import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
@@ -20,9 +21,9 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
-  public MortarCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.MORTAR_RECIPE_TYPE, helper, 185, 117, RootsAPI.rl("textures/gui/jei/mortar_and_pestle.png"), () -> new ItemStack(ModBlocks.MORTAR.get()), Component.translatable("roots.jei.mortar_crafting"));
+public abstract class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
+  public MortarCategory(RecipeType<MortarRecipe> type, Component title, IGuiHelper helper) {
+    super(type, helper, 185, 117, RootsAPI.rl("textures/gui/jei/mortar_and_pestle.png"), () -> new ItemStack(ModBlocks.MORTAR.get()), title);
   }
 
   @Override
@@ -71,6 +72,18 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
     for (IPlayerCondition condition : recipe.getPlayerConditions()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
+    }
+  }
+
+  public static class Regular extends MortarCategory {
+    public Regular(IGuiHelper helper) {
+      super(RootsJEIPlugin.MORTAR_RECIPE_TYPE, Component.translatable("roots.jei.mortar_crafting"), helper);
+    }
+  }
+
+  public static class Spell extends MortarCategory {
+    public Spell(IGuiHelper helper) {
+      super(RootsJEIPlugin.MORTAR_SPELL_RECIPE_TYPE, Component.translatable("roots.jei.mortar_spell_crafting"), helper);
     }
   }
 }

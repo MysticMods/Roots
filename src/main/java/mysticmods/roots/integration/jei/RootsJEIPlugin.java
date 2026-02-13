@@ -16,9 +16,12 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
+import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -27,11 +30,6 @@ import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.init.*;
 import mysticmods.roots.integration.jei.categories.*;
-import mysticmods.roots.inventory.fake.MortarContainer;
-import mysticmods.roots.recipe.fake.DyeRecipeGenerator;
-import mysticmods.roots.recipe.fake.EntityInteractionRecipe;
-import mysticmods.roots.recipe.fake.GroveWithReputation;
-import mysticmods.roots.recipe.fake.SproutGiftRecipe;
 import mysticmods.roots.integration.jei.ingredient.block.*;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageHelper;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
@@ -47,7 +45,13 @@ import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualHelper;
 import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualRenderer;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellHelper;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellRenderer;
+import mysticmods.roots.inventory.fake.MortarContainer;
+import mysticmods.roots.inventory.fake.PyreContainer;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
+import mysticmods.roots.recipe.fake.DyeRecipeGenerator;
+import mysticmods.roots.recipe.fake.EntityInteractionRecipe;
+import mysticmods.roots.recipe.fake.GroveWithReputation;
+import mysticmods.roots.recipe.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -57,6 +61,7 @@ import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import mysticmods.roots.test.entity.EntityTagTest;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -68,6 +73,8 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @JeiPlugin
 public class RootsJEIPlugin implements IModPlugin {
@@ -103,8 +110,10 @@ public class RootsJEIPlugin implements IModPlugin {
 
   public static final RecipeType<GroveRecipe> GROVE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("grove_recipe"), GroveRecipe.class);
   public static final RecipeType<MortarRecipe> MORTAR_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("mortar_recipe"), MortarRecipe.class);
+  public static final RecipeType<MortarRecipe> MORTAR_SPELL_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("mortar_spell_recipe"), MortarRecipe.class);
   public static final RecipeType<KnifeRecipe> KNIFE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("knife_recipe"), KnifeRecipe.class);
   public static final RecipeType<PyreRecipe> PYRE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("pyre_recipe"), PyreRecipe.class);
+  public static final RecipeType<PyreRecipe> RITUAL_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("ritual_recipe"), PyreRecipe.class);
   public static final RecipeType<RunicBlockRecipe> RUNIC_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_recipe"), RunicBlockRecipe.class);
   public static final RecipeType<RunicEntityRecipe> RUNIC_ENTITY_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_entity_recipe"), RunicEntityRecipe.class);
   public static final RecipeType<SproutGiftRecipe> SPROUT_GIFTS_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("sprout_gift_recipe"), SproutGiftRecipe.class);
@@ -115,10 +124,9 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = new RecipeType<>(RootsAPI.rl("entity_interaction_recipe"), EntityInteractionRecipe.class);
 
   private static Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
-      MortarContainer.class, MORTAR_RECIPE_TYPE
-/*      KnifeRecipe.class, KNIFE_RECIPE_TYPE,
-      PyreRecipe.class, PYRE_RECIPE_TYPE,
-      RunicBlockRecipe.class, RUNIC_RECIPE_TYPE,
+      MortarContainer.class, MORTAR_RECIPE_TYPE,
+      PyreRecipe.class, PYRE_RECIPE_TYPE
+/*      RunicBlockRecipe.class, RUNIC_RECIPE_TYPE,
       RunicEntityRecipe.class, RUNIC_ENTITY_RECIPE_TYPE,
       SproutGiftRecipe.class, SPROUT_GIFTS_RECIPE_TYPE,
       SummonCreaturesRecipe.class, SUMMON_CREATURES_RECIPE_TYPE,
@@ -131,8 +139,10 @@ public class RootsJEIPlugin implements IModPlugin {
     IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
 
     registration.addRecipeCategories(new GroveCategory(guiHelper));
-    registration.addRecipeCategories(new MortarCategory(guiHelper));
-    registration.addRecipeCategories(new PyreCategory(guiHelper));
+    registration.addRecipeCategories(new MortarCategory.Regular(guiHelper));
+    registration.addRecipeCategories(new MortarCategory.Spell(guiHelper));
+    registration.addRecipeCategories(new PyreCategory.Pyre(guiHelper));
+    registration.addRecipeCategories(new PyreCategory.Ritual(guiHelper));
     registration.addRecipeCategories(new KnifeCategory(guiHelper));
     registration.addRecipeCategories(new RunicBlockCategory(guiHelper));
     registration.addRecipeCategories(new RunicEntityCategory(guiHelper));
@@ -150,20 +160,46 @@ public class RootsJEIPlugin implements IModPlugin {
   // SORT THEM ALPHABETICALLY >:0
   public static final Comparator<RecipeHolder<?>> RECIPE_COMPARATOR = Comparator.comparing(o -> o.id().toString());
 
+  public static Function<Unlock.UnlockType, Predicate<RecipeHolder<? extends RootsTileRecipe<?, ?, ?>>>> HAS_UNLOCK = Util.memoize((type) -> recipe -> {
+    RootsTileRecipe<?, ?, ?> recipe2 = recipe.value();
+    var unlocks = recipe2.getUnlocks();
+    if (unlocks.isEmpty()) {
+      return false;
+    }
+    return unlocks.getFirst().is(type);
+  });
+
   @Override
   public void registerRecipes(IRecipeRegistration registration) {
     Level level = Minecraft.getInstance().level;
-    // TODO: Recipe sorting?
     registration.addRecipes(GROVE_RECIPE_TYPE, ResolvedRecipes.GROVE.getRecipes(level).stream()
         .sorted(RECIPE_COMPARATOR).map(RecipeHolder::value)
         .toList());
     registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
         .sorted(RECIPE_COMPARATOR)
+        .filter(HAS_UNLOCK.apply(Unlock.SpellUnlock.TYPE))
         .map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(PYRE_RECIPE_TYPE, ResolvedRecipes.PYRE.getRecipes(level).stream().sorted(RECIPE_COMPARATOR)
+    registration.addRecipes(MORTAR_SPELL_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
+        .sorted(RECIPE_COMPARATOR)
+        .filter(HAS_UNLOCK.apply(Unlock.SpellUnlock.TYPE).negate())
         .map(RecipeHolder::value)
         .toList());
+    List<PyreRecipe> pyreRecipes = new ArrayList<>();
+    List<PyreRecipe> ritualRecipes = new ArrayList();
+
+    ResolvedRecipes.PYRE.getRecipes(level).stream().sorted(RECIPE_COMPARATOR).forEach(
+        recipe -> {
+          if (recipe.value().getRitual() != null) {
+            ritualRecipes.add(recipe.value());
+          } else {
+            pyreRecipes.add(recipe.value());
+          }
+        }
+    );
+
+    registration.addRecipes(PYRE_RECIPE_TYPE, pyreRecipes);
+    registration.addRecipes(RITUAL_RECIPE_TYPE, ritualRecipes);
     registration.addRecipes(KNIFE_RECIPE_TYPE, ResolvedRecipes.KNIFE.getRecipes(level).stream()
         .sorted(RECIPE_COMPARATOR).map(RecipeHolder::value)
         .toList());
@@ -209,7 +245,9 @@ public class RootsJEIPlugin implements IModPlugin {
   public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
     registration.addRecipeCatalysts(GROVE_RECIPE_TYPE, ModBlocks.GROVE_CRAFTER.get(), ModBlocks.GROVE_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get());
     registration.addRecipeCatalysts(MORTAR_RECIPE_TYPE, ModBlocks.MORTAR.get(), ModItems.PESTLE.get());
+    registration.addRecipeCatalysts(MORTAR_SPELL_RECIPE_TYPE, ModBlocks.MORTAR.get(), ModItems.PESTLE.get());
     registration.addRecipeCatalysts(PYRE_RECIPE_TYPE, ModBlocks.PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get());
+    registration.addRecipeCatalysts(RITUAL_RECIPE_TYPE, ModBlocks.PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get());
     registration.addRecipeCatalysts(KNIFE_RECIPE_TYPE, ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.WOODEN_KNIFE.get());
     registration.addRecipeCatalyst(ModItems.AUBERGINE.get(), SPROUT_GIFTS_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_RECIPE_TYPE);
@@ -276,9 +314,11 @@ public class RootsJEIPlugin implements IModPlugin {
     return runtime;
   }
 
-  public static void showRecipes (Class<?> clazz) {
+  public static void showRecipes(Class<?> clazz) {
     if (clazz.equals(MortarContainer.class)) {
-      get().getRuntime().getRecipesGui().showTypes(List.of(MORTAR_RECIPE_TYPE));
+      get().getRuntime().getRecipesGui().showTypes(List.of(MORTAR_SPELL_RECIPE_TYPE, MORTAR_RECIPE_TYPE));
+    } else if (clazz.equals(PyreContainer.class)) {
+      get().getRuntime().getRecipesGui().showTypes(List.of(PYRE_RECIPE_TYPE, RITUAL_RECIPE_TYPE));
     } else {
       RecipeType<?> type = recipeTypeMap.get(clazz);
       if (type != null) {
@@ -302,5 +342,8 @@ public class RootsJEIPlugin implements IModPlugin {
     IModPlugin.super.registerRecipeTransferHandlers(registration);
 
     registration.addRecipeTransferHandler(MortarContainer.class, ModContainers.MORTAR.get(), MORTAR_RECIPE_TYPE, 0, 5, 5, 36);
+    registration.addRecipeTransferHandler(MortarContainer.class, ModContainers.MORTAR.get(), MORTAR_SPELL_RECIPE_TYPE, 0, 5, 5, 36);
+    registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), PYRE_RECIPE_TYPE, 0, 5, 5, 36);
+    registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), RITUAL_RECIPE_TYPE, 0, 5, 5, 36);
   }
 }

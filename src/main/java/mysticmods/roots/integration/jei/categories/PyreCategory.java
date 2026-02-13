@@ -5,6 +5,7 @@ import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
@@ -20,9 +21,9 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
-  public PyreCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.PYRE_RECIPE_TYPE, helper, 167, 124, RootsAPI.rl("textures/gui/jei/ritual_crafting.png"), () -> new ItemStack(ModBlocks.PYRE.value()), Component.translatable("roots.jei.pyre"));
+public abstract class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
+  public PyreCategory(RecipeType<PyreRecipe> type, Component title, IGuiHelper helper) {
+    super(type, helper, 167, 124, RootsAPI.rl("textures/gui/jei/ritual_crafting.png"), () -> new ItemStack(ModBlocks.PYRE.value()), title);
   }
 
   @Override
@@ -74,6 +75,18 @@ public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
     for (IPlayerCondition condition : recipe.getPlayerConditions()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
+    }
+  }
+
+  public static class Pyre extends PyreCategory {
+    public Pyre(IGuiHelper helper) {
+      super(RootsJEIPlugin.PYRE_RECIPE_TYPE, Component.translatable("roots.jei.pyre"), helper);
+    }
+  }
+
+  public static class Ritual extends PyreCategory {
+    public Ritual(IGuiHelper helper) {
+      super(RootsJEIPlugin.RITUAL_RECIPE_TYPE, Component.translatable("roots.jei.ritual"), helper);
     }
   }
 }
