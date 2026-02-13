@@ -177,16 +177,16 @@ public class RootsJEIPlugin implements IModPlugin {
         .toList());
     registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
         .sorted(RECIPE_COMPARATOR)
-        .filter(HAS_UNLOCK.apply(Unlock.SpellUnlock.TYPE))
+        .filter(HAS_UNLOCK.apply(Unlock.SpellUnlock.TYPE).negate())
         .map(RecipeHolder::value)
         .toList());
     registration.addRecipes(MORTAR_SPELL_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
         .sorted(RECIPE_COMPARATOR)
-        .filter(HAS_UNLOCK.apply(Unlock.SpellUnlock.TYPE).negate())
+        .filter(HAS_UNLOCK.apply(Unlock.SpellUnlock.TYPE))
         .map(RecipeHolder::value)
         .toList());
     List<PyreRecipe> pyreRecipes = new ArrayList<>();
-    List<PyreRecipe> ritualRecipes = new ArrayList();
+    List<PyreRecipe> ritualRecipes = new ArrayList<>();
 
     ResolvedRecipes.PYRE.getRecipes(level).stream().sorted(RECIPE_COMPARATOR).forEach(
         recipe -> {

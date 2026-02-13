@@ -25,6 +25,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
@@ -221,6 +222,10 @@ public class ServerNetworkHooks {
       return;
     }
 
+    if (player.distanceToSqr(Vec3.atCenterOf(pos)) > 4 * 4) {
+      return;
+    }
+
     if (level.getBlockEntity(pos) instanceof FakeMenuBlockEntity fme) {
       player.openMenu(fme);
     }
@@ -228,6 +233,10 @@ public class ServerNetworkHooks {
 
   public static void clearContainer(Player player, BlockPos pos) {
     if (!(player.level() instanceof ServerLevel level)) {
+      return;
+    }
+
+    if (player.distanceToSqr(Vec3.atCenterOf(pos)) > 4 * 4) {
       return;
     }
 

@@ -647,11 +647,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public boolean shouldShowInsert() {
-    return getCachedRecipe() != null;
+    return /*this.inventory.isEmpty() || */getCachedRecipe() == null;
   }
 
   @Override
-  public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+  public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
     return new PyreContainer(containerId, playerInventory, inventory, ContainerLevelAccess.create(getLevel(), getBlockPos()));
   }
 

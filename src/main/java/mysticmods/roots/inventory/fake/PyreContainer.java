@@ -26,7 +26,7 @@ public class PyreContainer extends FakeContainer {
   }
 
   public PyreContainer(int containerId, Inventory inventory, PyreInventory mortarInventory, ContainerLevelAccess access) {
-    super(ModContainers.MORTAR.get(), containerId);
+    super(ModContainers.PYRE.get(), containerId);
     this.access = access;
 
     for (int i = 0; i < mortarInventory.getSlots(); i++) {
