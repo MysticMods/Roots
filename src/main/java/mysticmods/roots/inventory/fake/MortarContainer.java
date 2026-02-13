@@ -3,6 +3,7 @@ package mysticmods.roots.inventory.fake;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModContainers;
+import mysticmods.roots.inventory.SlotSingleItem;
 import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.util.PlayerGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,7 +27,7 @@ public class MortarContainer extends FakeContainer {
     this.access = access;
 
     for (int i = 0; i < mortarInventory.getSlots(); i++) {
-      this.addSlot(new SlotItemHandler(mortarInventory, i, 20 * i, 0) {
+      this.addSlot(new SlotSingleItem(mortarInventory, 1, i, 20 * i, 0) {
         @Override
         public boolean isActive() {
           return false;

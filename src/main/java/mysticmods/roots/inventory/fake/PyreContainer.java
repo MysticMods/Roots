@@ -3,19 +3,15 @@ package mysticmods.roots.inventory.fake;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModContainers;
-import mysticmods.roots.recipe.mortar.MortarInventory;
+import mysticmods.roots.inventory.SlotSingleItem;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.util.PlayerGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class PyreContainer extends FakeContainer {
@@ -30,7 +26,7 @@ public class PyreContainer extends FakeContainer {
     this.access = access;
 
     for (int i = 0; i < mortarInventory.getSlots(); i++) {
-      this.addSlot(new SlotItemHandler(mortarInventory, i, 20 * i, 0) {
+      this.addSlot(new SlotSingleItem(mortarInventory, 1, i, 20 * i, 0) {
         @Override
         public boolean isActive() {
           return false;
@@ -69,7 +65,7 @@ public class PyreContainer extends FakeContainer {
     return ModBlocks.PYRE.get();
   }
 
-  public boolean hasRecipe () {
+  public boolean hasRecipe() {
     if (access.evaluate(Level::getBlockEntity).orElse(null) instanceof PyreBlockEntity pyre) {
       return pyre.getCachedRecipe() != null;
     }

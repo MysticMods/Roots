@@ -5,7 +5,9 @@ import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.blockentity.ClearableBlockEntity;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
+import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.recipe.ConditionResult;
@@ -19,18 +21,21 @@ import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.inventory.fake.GroveContainer;
 import mysticmods.roots.network.client.fx.StartGroveCraftingFX;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.PlayerGetter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -38,12 +43,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -53,7 +60,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity {
+public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, FakeMenuBlockEntity, ClearableBlockEntity {
   private RecipeHolder<GroveRecipe> lastRecipe = null;
   private RecipeHolder<GroveRecipe> cachedRecipe = null;
 
@@ -120,6 +127,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     return 1f - Mth.clamp((float) craftingTicks / Constants.GROVE_CRAFTING_ANIMATION_TICKS, 0f, 1f);
   }
 
+  protected List<Pair<BlockPos, PedestalBlockEntity>> getPedestals() {
+    return pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
+  }
+
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
     if (level.isClientSide()) {
@@ -135,7 +146,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     if (inHand.isEmpty() || inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
-      GroveCrafting playerCrafting = new GroveCrafting(this, player);
+      GroveCrafting playerCrafting = getCrafting(player);
       if (cachedRecipe == null) {
         cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
       }
@@ -215,7 +226,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, true), 3);
     }
 
-    List<Pair<BlockPos, PedestalBlockEntity>> pedestals = pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
+    List<Pair<BlockPos, PedestalBlockEntity>> pedestals = getPedestals();
     if (pedestals.isEmpty()) {
       cachedRecipe = null;
       if (!getLevel().isClientSide()) {
@@ -224,7 +235,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       }
       return;
     }
-    GroveCrafting playerlessCrafting = new GroveCrafting(this, null);
+    GroveCrafting playerlessCrafting = getCrafting(null); //new GroveCrafting(this, null);
 
     if (cachedRecipe == null) {
       cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());
@@ -242,6 +253,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       setChanged();
       updateViaState();
     }
+  }
+
+  public GroveCrafting getCrafting(@Nullable Player player) {
+    return new GroveCrafting(this, player);
   }
 
   @Override
@@ -415,5 +430,32 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         );
       }
     }
+  }
+
+  @Override
+  public void clearContents() {
+    getPedestals().forEach(entry -> {
+      entry.getSecond().dropContents();
+    });
+  }
+
+  @Override
+  public boolean canClear() {
+    return !getPedestals().isEmpty();
+  }
+
+  @Override
+  public boolean shouldShowInsert() {
+    return getRecipe() == null && !isCrafting();
+  }
+
+  @Override
+  public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+    return new GroveContainer(containerId, playerInventory, this.getCrafting(player), ContainerLevelAccess.create(getLevel(), getBlockPos()));
+  }
+
+  @Override
+  public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+    buffer.writeBlockPos(getBlockPos());
   }
 }

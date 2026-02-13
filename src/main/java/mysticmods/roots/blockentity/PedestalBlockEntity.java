@@ -269,4 +269,11 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       }
     }
   }
+
+  public void dropContents() {
+    ItemStack inSlot = inventory.extractItem(0, inventory.getSlotLimit(0), false);
+    if (!inSlot.isEmpty()) {
+      ItemUtil.Spawn.spawnItem(getLevel(), getBlockPos(), inSlot);
+    }
+  }
 }

@@ -15,6 +15,8 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -97,10 +99,42 @@ public class ItemUtil {
       return spawnItem(world, item);
     }
 
+
     public static ItemEntity spawnItem(Level world, ItemEntity item) {
       item.setDeltaMovement(0, 0, 0);
       world.addFreshEntity(item);
       return item;
+    }
+
+    public static List<ItemEntity> spawnItems(Level world, List<ItemEntity> item) {
+      for (ItemEntity i : item) {
+        spawnItem(world, i);
+      }
+      return item;
+    }
+
+    public static List<ItemEntity> spawnItems(Level world, BlockPos pos, List<ItemStack> stack) {
+      return spawnItems(world, pos, stack, -1);
+    }
+
+    public static List<ItemEntity> spawnItems(Level world, BlockPos pos, List<ItemStack> stack, boolean offset) {
+      return spawnItems(world, pos, stack, offset, -1);
+    }
+
+    public static List<ItemEntity> spawnItems(Level world, BlockPos pos, List<ItemStack> stack, int ticks) {
+      return spawnItems(world, pos, stack, true, ticks);
+    }
+
+    public static List<ItemEntity> spawnItems(Level world, BlockPos pos, List<ItemStack> stack, boolean offset, int ticks) {
+      return spawnItems(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, offset, stack, ticks);
+    }
+
+    public static List<ItemEntity> spawnItems(Level world, double x, double y, double z, boolean offset, List<ItemStack> stack, int ticks) {
+      List<ItemEntity> result = new ArrayList<>();
+      for (ItemStack item : stack) {
+        result.add(spawnItem(world, x, y, z, offset, item, ticks));
+      }
+      return result;
     }
   }
 }

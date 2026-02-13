@@ -20,7 +20,6 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GroveNumber;
-import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -45,6 +44,7 @@ import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualHelper;
 import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualRenderer;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellHelper;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellRenderer;
+import mysticmods.roots.inventory.fake.GroveContainer;
 import mysticmods.roots.inventory.fake.MortarContainer;
 import mysticmods.roots.inventory.fake.PyreContainer;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
@@ -125,7 +125,8 @@ public class RootsJEIPlugin implements IModPlugin {
 
   private static Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
       MortarContainer.class, MORTAR_RECIPE_TYPE,
-      PyreRecipe.class, PYRE_RECIPE_TYPE
+      PyreContainer.class, PYRE_RECIPE_TYPE,
+      GroveContainer.class, GROVE_RECIPE_TYPE
 /*      RunicBlockRecipe.class, RUNIC_RECIPE_TYPE,
       RunicEntityRecipe.class, RUNIC_ENTITY_RECIPE_TYPE,
       SproutGiftRecipe.class, SPROUT_GIFTS_RECIPE_TYPE,
@@ -345,5 +346,6 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeTransferHandler(MortarContainer.class, ModContainers.MORTAR.get(), MORTAR_SPELL_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), PYRE_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), RITUAL_RECIPE_TYPE, 0, 5, 5, 36);
+    registration.addRecipeTransferHandler(GroveContainer.class, ModContainers.GROVE.get(), GROVE_RECIPE_TYPE, 37, 20, 0, 36);
   }
 }

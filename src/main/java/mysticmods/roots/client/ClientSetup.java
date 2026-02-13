@@ -312,6 +312,7 @@ public class ClientSetup {
     event.register(ModContainers.QUIVER.get(), QuiverScreen::new);
     event.register(ModContainers.MORTAR.get(), MortarScreen::new);
     event.register(ModContainers.PYRE.get(), PyreScreen::new);
+    event.register(ModContainers.GROVE.get(), GroveScreen::new);
   }
 
   public static final ResourceLocation GIFT_BOX_KEY = RootsAPI.rl("item/gift_box");

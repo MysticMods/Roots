@@ -374,11 +374,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
 
   @Override
   public void clearContents() {
-    ItemStack popped = inventory.pop();
-    while (!popped.isEmpty()) {
-      ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
-      popped = inventory.pop();
-    }
+    ItemUtil.Spawn.spawnItems(level, getBlockPos(), inventory.getItemsAndClear());
   }
 
   @Override
