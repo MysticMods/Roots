@@ -2,6 +2,7 @@ package mysticmods.roots.recipe.transmutation;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.recipe.BaseRecipeData;
@@ -15,7 +16,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
-// TODO: VALIDATE -- CAN ONLY HAVE 25 INGREDIENTS
 public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory, FungalTransmuterBlockEntity, TransmutationCrafting> {
   public static final MapCodec<TransmutationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data)
@@ -63,6 +63,10 @@ public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory,
 
   public static class Builder {
     public TransmutationRecipe build(BaseRecipeData.Builder data) {
+      var built = data.build();
+      if (built.ingredients.size() >= RootsAPI.MAX_TRANSMUTATION_INGREDIENTS) {
+        throw new IllegalStateException("Transmutation recipe cannot have more than " + RootsAPI.MAX_TRANSMUTATION_INGREDIENTS + " ingredients");
+      }
       return new TransmutationRecipe(data.build());
     }
   }

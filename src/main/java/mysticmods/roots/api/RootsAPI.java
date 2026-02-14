@@ -25,6 +25,8 @@ import java.util.ServiceLoader;
 import java.util.Set;
 
 public abstract class RootsAPI {
+  public static final int MAX_TRANSMUTATION_INGREDIENTS = 25;
+
   private static IRootsAPI INSTANCE = null;
   public static final Tier LIVING_TOOL_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 300, 6.0f, 2.0f, 19, () -> Ingredient.of(ItemTags.LOGS));
   public static final Tier COPPER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 350, 6.0f, 2.0f, 10, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));

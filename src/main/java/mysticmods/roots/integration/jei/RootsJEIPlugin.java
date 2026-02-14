@@ -349,7 +349,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeTransferHandler(MortarContainer.class, ModContainers.MORTAR.get(), MORTAR_SPELL_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), PYRE_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), RITUAL_RECIPE_TYPE, 0, 5, 5, 36);
-    registration.addRecipeTransferHandler(TransmuterContainer.class, ModContainers.TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE, 0, 25, 25, 36);
+    registration.addRecipeTransferHandler(TransmuterContainer.class, ModContainers.TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE, 0, RootsAPI.MAX_TRANSMUTATION_INGREDIENTS, RootsAPI.MAX_TRANSMUTATION_INGREDIENTS, 36);
     registration.addRecipeTransferHandler(new GroveTransferInfo());
   }
 }
