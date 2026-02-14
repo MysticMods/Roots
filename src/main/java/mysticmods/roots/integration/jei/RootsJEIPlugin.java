@@ -44,6 +44,7 @@ import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualHelper;
 import mysticmods.roots.integration.jei.ingredient.ritual.RootsRitualRenderer;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellHelper;
 import mysticmods.roots.integration.jei.ingredient.spell.RootsSpellRenderer;
+import mysticmods.roots.integration.jei.transfer.GroveTransferInfo;
 import mysticmods.roots.inventory.fake.GroveContainer;
 import mysticmods.roots.inventory.fake.MortarContainer;
 import mysticmods.roots.inventory.fake.PyreContainer;
@@ -346,6 +347,6 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeTransferHandler(MortarContainer.class, ModContainers.MORTAR.get(), MORTAR_SPELL_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), PYRE_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), RITUAL_RECIPE_TYPE, 0, 5, 5, 36);
-    registration.addRecipeTransferHandler(GroveContainer.class, ModContainers.GROVE.get(), GROVE_RECIPE_TYPE, 37, 20, 0, 36);
+    registration.addRecipeTransferHandler(new GroveTransferInfo());
   }
 }

@@ -65,7 +65,7 @@ public class BloomingRitual extends Ritual {
     }
 
     if (duration % getInterval() == 0) {
-      List<Pair<BlockPos, PedestalBlockEntity>> pedestals = blockEntity.pedestals(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
+      List<Pair<BlockPos, PedestalBlockEntity>> pedestals = blockEntity.pedestals(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS, false);
 
       BlockItem flowerToPlace = null;
 

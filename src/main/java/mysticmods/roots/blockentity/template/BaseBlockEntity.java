@@ -70,8 +70,12 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
     return getBoundingBox();
   }
 
-  // TODO: Some sort of caching
   public List<Pair<BlockPos, PedestalBlockEntity>> pedestals(TagKey<Block> include, TagKey<Block> exclude) {
+    return pedestals(include, exclude, false);
+  }
+
+  // TODO: Some sort of caching
+  public List<Pair<BlockPos, PedestalBlockEntity>> pedestals(TagKey<Block> include, TagKey<Block> exclude, boolean allowEmpty) {
     List<Pair<BlockPos, PedestalBlockEntity>> pedestalPositions = new ArrayList<>();
     if (getPedestalBoundingBox() != null) {
       BlockPos start = getBlockPos();
@@ -81,7 +85,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
         if (state.is(include) && !state.is(exclude)) {
           if (getLevel().getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
             // Already checks for empty
-            if (!pedestal.getHeldItem().isEmpty()) {
+            if (!pedestal.getHeldItem().isEmpty() || allowEmpty) {
               pedestalPositions.add(new Pair<>(pos.immutable(), pedestal));
             }
           }

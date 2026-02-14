@@ -20,11 +20,13 @@ import java.util.List;
 public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends RootsTileCrafting<PedestalInventoryWrapper, T> {
   private final TagKey<Block> includeTag;
   private final TagKey<Block> excludeTag;
+  private final boolean allowEmpty;
 
-  public TaggedPedestalCrafting(TagKey<Block> includeTag, TagKey<Block> excludeTag, T blockEntity, @Nullable Player player) {
-    super(new PedestalInventoryWrapper(blockEntity.pedestals(includeTag, excludeTag)), blockEntity, player);
+  public TaggedPedestalCrafting(TagKey<Block> includeTag, TagKey<Block> excludeTag, T blockEntity, @Nullable Player player, boolean allowEmpty) {
+    super(new PedestalInventoryWrapper(blockEntity.pedestals(includeTag, excludeTag, allowEmpty)), blockEntity, player);
     this.includeTag = includeTag;
     this.excludeTag = excludeTag;
+    this.allowEmpty = allowEmpty;
   }
 
   public TagKey<Block> getIncludeTag() {
@@ -47,7 +49,7 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
     if (getBlockEntity() == null) {
       return Collections.emptyList();
     }
-    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag())) {
+    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag(), allowEmpty)) {
       itemsAndPositions.add(new ItemPosition(entry.getFirst(), entry.getSecond().getOne()));
     }
     return itemsAndPositions;
@@ -58,7 +60,7 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
     if (getBlockEntity() == null) {
       return result;
     }
-    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag())) {
+    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag(), allowEmpty)) {
       result.add(entry.getSecond().popOne());
     }
     return result;
@@ -69,7 +71,7 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
     if (getBlockEntity() == null) {
       return result;
     }
-    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag())) {
+    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(getIncludeTag(), getExcludeTag(), allowEmpty)) {
       entry.getSecond().animate();
       result.add(entry.getSecond().popOne());
     }

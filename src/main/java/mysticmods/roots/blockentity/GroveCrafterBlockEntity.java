@@ -128,7 +128,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   protected List<Pair<BlockPos, PedestalBlockEntity>> getPedestals() {
-    return pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
+    return pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS, false);
   }
 
   @Override
@@ -146,7 +146,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     if (inHand.isEmpty() || inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
-      GroveCrafting playerCrafting = getCrafting(player);
+      GroveCrafting playerCrafting = getCrafting(player, false);
       if (cachedRecipe == null) {
         cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
       }
@@ -235,7 +235,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       }
       return;
     }
-    GroveCrafting playerlessCrafting = getCrafting(null); //new GroveCrafting(this, null);
+    GroveCrafting playerlessCrafting = getCrafting(null, false); //new GroveCrafting(this, null);
 
     if (cachedRecipe == null) {
       cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());
@@ -255,8 +255,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
   }
 
-  public GroveCrafting getCrafting(@Nullable Player player) {
-    return new GroveCrafting(this, player);
+  public GroveCrafting getCrafting(@Nullable Player player, boolean allowEmpty) {
+    return new GroveCrafting(this, player, allowEmpty);
   }
 
   @Override
@@ -451,7 +451,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
 
   @Override
   public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-    return new GroveContainer(containerId, playerInventory, this.getCrafting(player), ContainerLevelAccess.create(getLevel(), getBlockPos()));
+    return new GroveContainer(containerId, playerInventory, this.getCrafting(player, true), ContainerLevelAccess.create(getLevel(), getBlockPos()));
   }
 
   @Override

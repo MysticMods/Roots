@@ -15,9 +15,15 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GroveContainer extends FakeContainer {
   private final ContainerLevelAccess access;
   private final GroveCrafting crafting;
+
+  private final List<Slot> recipeSlots = new ArrayList<>();
+  private final List<Slot> inventorySlots = new ArrayList<>();
 
   public GroveContainer(int containerId, Inventory inventory, @Nullable RegistryFriendlyByteBuf buffer) {
     this(containerId, inventory, null, PlayerGetter.getLevelAccess(buffer));
@@ -28,7 +34,7 @@ public class GroveContainer extends FakeContainer {
     this.access = access;
     if (crafting == null) {
       if (access.evaluate(Level::getBlockEntity).orElse(null) instanceof GroveCrafterBlockEntity crafter) {
-        this.crafting = crafter.getCrafting(inventory.player);
+        this.crafting = crafter.getCrafting(inventory.player, true);
       } else {
         throw new IllegalStateException("GroveContainer created without crafting and block entity is not a GroveCrafterBlockEntity");
       }
@@ -40,44 +46,33 @@ public class GroveContainer extends FakeContainer {
 
     for (int i1 = 0; i1 < 3; ++i1) {
       for (int k1 = 0; k1 < 9; ++k1) {
-        this.addSlot(new Slot(inventory, k1 + i1 * 9, 8 + k1 * 18, 96 + i1 * 18) {
+        inventorySlots.add(this.addSlot(new Slot(inventory, k1 + i1 * 9, 8 + k1 * 18, 96 + i1 * 18) {
           @Override
           public boolean isActive() {
             return false;
           }
-        });
+        }));
       }
     }
 
     for (int j1 = 0; j1 < 9; ++j1) {
-      this.addSlot(new Slot(inventory, j1, 8 + j1 * 18, 154) {
+      inventorySlots.add(this.addSlot(new Slot(inventory, j1, 8 + j1 * 18, 154) {
         @Override
         public boolean isActive() {
           return false;
         }
-      });
+      }));
     }
 
     var handler = this.crafting.getHandler();
 
     for (int i = 0; i < handler.getSlots(); i++) {
-      this.addSlot(new SlotItemHandler(handler, i, 20 * i, 0) {
+      recipeSlots.add(this.addSlot(new SlotItemHandler(handler, i, 20 * i, 0) {
         @Override
         public boolean isActive() {
           return false;
         }
-      });
-    }
-
-    if (handler.getSlots() < 20) {
-      for (int i = handler.getSlots(); i < 20; i++) {
-        this.addSlot(new Slot(new SimpleContainer(1), 0, 20 * i, 0) {
-          @Override
-          public boolean isActive() {
-            return false;
-          }
-        });
-      }
+      }));
     }
   }
 
@@ -99,5 +94,13 @@ public class GroveContainer extends FakeContainer {
     }
 
     return false;
+  }
+
+  public List<Slot> recipeSlots() {
+    return recipeSlots;
+  }
+
+  public List<Slot> inventorySlots() {
+    return inventorySlots;
   }
 }
