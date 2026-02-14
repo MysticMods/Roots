@@ -3,6 +3,7 @@ package mysticmods.roots.inventory.fake;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModContainers;
+import mysticmods.roots.inventory.SlotSingleItem;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.util.PlayerGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -67,7 +68,7 @@ public class GroveContainer extends FakeContainer {
     var handler = this.crafting.getHandler();
 
     for (int i = 0; i < handler.getSlots(); i++) {
-      recipeSlots.add(this.addSlot(new SlotItemHandler(handler, i, 20 * i, 0) {
+      recipeSlots.add(this.addSlot(new SlotSingleItem(handler, 1, i, 20 * i, 0) {
         @Override
         public boolean isActive() {
           return false;
