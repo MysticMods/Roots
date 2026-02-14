@@ -1,12 +1,16 @@
 package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.gui.layer.HudOverlay;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.util.Mth;
@@ -14,6 +18,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBlockEntity> {
   public static final RandomSource RANDOM = RandomSource.create();
@@ -23,6 +28,39 @@ public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBloc
 
   @Override
   public void render(MortarBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+    if (ConfigManager.HIGHLIGHT_LAST_BLOCK.getAsBoolean() && pBlockEntity.getBlockPos()
+        .equals(HudOverlay.getStoredBlockPos())) {
+      pPoseStack.pushPose();
+      VoxelShape pShape = pBlockEntity.getBlockState()
+          .getCollisionShape(pBlockEntity.getLevel(), pBlockEntity.getBlockPos());
+      VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
+      PoseStack.Pose pose = pPoseStack.last();
+
+      double pX = 0;
+      double pY = 0;
+      double pZ = 0;
+      float pRed, pGreen, pBlue;
+      float pAlpha = 1f;
+
+      pRed = 0.4f;
+      pGreen = 0.1f;
+      pBlue = 0.4f;
+
+      pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
+        float f = (float) (pMaxX - pMinX);
+        float f1 = (float) (pMaxY - pMinY);
+        float f2 = (float) (pMaxZ - pMinZ);
+        float f3 = Mth.sqrt(f * f + f1 * f1 + f2 * f2);
+        f /= f3;
+        f1 /= f3;
+        f2 /= f3;
+        pConsumer.addVertex(pose.pose(), (float) (pMinX + pX), (float) (pMinY + pY), (float) (pMinZ + pZ))
+            .setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
+        pConsumer.addVertex(pose.pose(), (float) (pMaxX + pX), (float) (pMaxY + pY), (float) (pMaxZ + pZ))
+            .setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
+      });
+      pPoseStack.popPose();
+    }
     int slot = 0;
     RandomSource random = RANDOM;
     for (ItemStack item : pBlockEntity.getNonEmptyItems()) {
