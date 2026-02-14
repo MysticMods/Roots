@@ -45,7 +45,7 @@ public class FungalTransmuterCategory extends RootsRecipeBaseCategory<Transmutat
       column++;
     }
 
-    builder.addSlot(RecipeIngredientRole.INPUT, 74, 34)
+    builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 74, 34)
         .addIngredients(Ingredient.of(ModItems.FUNGAL_TRANSMUTER.get()));
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();
