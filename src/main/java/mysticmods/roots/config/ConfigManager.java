@@ -36,6 +36,10 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Y;
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Z;
 
+  public static ModConfigSpec.BooleanValue SHOW_INSERT_MESSAGE;
+  public static ModConfigSpec.BooleanValue SHOW_DELETE_MESSAGE;
+  public static ModConfigSpec.BooleanValue HIGHLIGHT_LAST_BLOCK;
+
   public static ModConfigSpec.IntValue PYRE_BOUNDS_X;
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Y;
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
@@ -161,6 +165,7 @@ public class ConfigManager {
         .defineInRange("default_chance", 10, 1, 100);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for the Alertness charm").push("alertness");
+    // TODO: This should be in client?
     ALERTNESS_VISUAL = COMMON_BUILDER.comment("whether or not the Alertness charm should display a visual effect")
         .define("visual", true);
     ALERTNESS_DURATION = COMMON_BUILDER.comment("the duration of the Alertness charm effect in ticks")
@@ -245,6 +250,14 @@ public class ConfigManager {
         .define("force_custom_particle_shader", false);
     DISABLE_PATICLES = CLIENT_BUILDER.comment("if true, all Roots particles will be disabled")
         .define("disable_particles", false);
+    CLIENT_BUILDER.pop();
+    CLIENT_BUILDER.comment("options for insert/delete messages and block highlights").push("messages_and_highlights");
+    SHOW_INSERT_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to view eligible recipes' HUD message")
+        .define("show_insert_message", true);
+    SHOW_DELETE_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to clear block' HUD message")
+        .define("show_delete_message", true);
+    HIGHLIGHT_LAST_BLOCK = CLIENT_BUILDER.comment("if true, the current 'eligible block' for interaction (view recipes or clear container) will be highlighted")
+        .define("highlight_last_block", true);
     CLIENT_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();

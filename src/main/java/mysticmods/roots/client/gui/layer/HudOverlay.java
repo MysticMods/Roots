@@ -22,6 +22,7 @@ import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -651,7 +652,7 @@ public class HudOverlay {
 
   public static void renderFakeMenu(GuiGraphics guiGraphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft minecraft) {
     Level level = minecraft.level;
-    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof FakeMenuBlockEntity fake && fake.shouldShowInsert()) {
+    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof FakeMenuBlockEntity fake && fake.shouldShowInsert() && ConfigManager.SHOW_INSERT_MESSAGE.getAsBoolean()) {
       Gui gui = minecraft.gui;
       Font font = gui.getFont();
       minecraft.getProfiler().push("overlayMessage");
@@ -673,7 +674,7 @@ public class HudOverlay {
 
   public static void renderClear(GuiGraphics guiGraphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft minecraft) {
     Level level = minecraft.level;
-    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof ClearableBlockEntity clearable && clearable.canClear()) {
+    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof ClearableBlockEntity clearable && clearable.canClear() && ConfigManager.SHOW_DELETE_MESSAGE.getAsBoolean()) {
       Gui gui = minecraft.gui;
       Font font = gui.getFont();
       minecraft.getProfiler().push("overlayMessage");
