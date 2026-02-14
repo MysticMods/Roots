@@ -48,6 +48,7 @@ import mysticmods.roots.integration.jei.transfer.GroveTransferInfo;
 import mysticmods.roots.inventory.fake.GroveContainer;
 import mysticmods.roots.inventory.fake.MortarContainer;
 import mysticmods.roots.inventory.fake.PyreContainer;
+import mysticmods.roots.inventory.fake.TransmuterContainer;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.recipe.fake.DyeRecipeGenerator;
 import mysticmods.roots.recipe.fake.EntityInteractionRecipe;
@@ -124,10 +125,11 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<GroveWithReputation> GROVE_REPUTATION_ENTRY_TYPE = new RecipeType<>(RootsAPI.rl("grove_reputation_entry"), GroveWithReputation.class);
   public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = new RecipeType<>(RootsAPI.rl("entity_interaction_recipe"), EntityInteractionRecipe.class);
 
-  private static Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
+  private static final Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
       MortarContainer.class, MORTAR_RECIPE_TYPE,
       PyreContainer.class, PYRE_RECIPE_TYPE,
-      GroveContainer.class, GROVE_RECIPE_TYPE
+      GroveContainer.class, GROVE_RECIPE_TYPE,
+      TransmuterContainer.class, TRANSMUTATION_RECIPE_TYPE
 /*      RunicBlockRecipe.class, RUNIC_RECIPE_TYPE,
       RunicEntityRecipe.class, RUNIC_ENTITY_RECIPE_TYPE,
       SproutGiftRecipe.class, SPROUT_GIFTS_RECIPE_TYPE,
@@ -347,6 +349,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeTransferHandler(MortarContainer.class, ModContainers.MORTAR.get(), MORTAR_SPELL_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), PYRE_RECIPE_TYPE, 0, 5, 5, 36);
     registration.addRecipeTransferHandler(PyreContainer.class, ModContainers.PYRE.get(), RITUAL_RECIPE_TYPE, 0, 5, 5, 36);
+    registration.addRecipeTransferHandler(TransmuterContainer.class, ModContainers.TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE, 0, 25, 25, 36);
     registration.addRecipeTransferHandler(new GroveTransferInfo());
   }
 }

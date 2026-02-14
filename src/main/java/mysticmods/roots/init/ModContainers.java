@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.inventory.fake.GroveContainer;
 import mysticmods.roots.inventory.fake.MortarContainer;
 import mysticmods.roots.inventory.fake.PyreContainer;
+import mysticmods.roots.inventory.fake.TransmuterContainer;
 import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchContainer;
 import mysticmods.roots.inventory.pouch.component.ComponentPouchContainer;
 import mysticmods.roots.inventory.pouch.herb.HerbPouchContainer;
@@ -27,6 +28,7 @@ public class ModContainers {
   public static final DeferredHolder<MenuType<?>, MenuType<MortarContainer>> MORTAR = REGISTER.register("mortar", () -> IMenuTypeExtension.create(MortarContainer::new));
   public static final DeferredHolder<MenuType<?>, MenuType<PyreContainer>> PYRE = REGISTER.register("pyre", () -> IMenuTypeExtension.create(PyreContainer::new));
   public static final DeferredHolder<MenuType<?>, MenuType<GroveContainer>> GROVE = REGISTER.register("grove", () -> IMenuTypeExtension.create(GroveContainer::new));
+  public static final DeferredHolder<MenuType<?>, MenuType<TransmuterContainer>> TRANSMUTER = REGISTER.register("transmuter", () -> IMenuTypeExtension.create(TransmuterContainer::new));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

@@ -5,10 +5,7 @@ import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
-import mysticmods.roots.api.blockentity.InventoryBlockEntity;
-import mysticmods.roots.api.blockentity.RefillProvider;
-import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.blockentity.*;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.PowerTicket;
@@ -24,6 +21,7 @@ import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.inventory.fake.TransmuterContainer;
 import mysticmods.roots.recipe.transmutation.TransmutationCrafting;
 import mysticmods.roots.recipe.transmutation.TransmutationInventory;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
@@ -34,6 +32,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -42,12 +41,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
@@ -59,7 +60,7 @@ import java.util.List;
 import java.util.UUID;
 
 // TODO: Change this to function more as a "valid recipe" -> "start" -> "consume power" -> "craft" -> "output" system.
-public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer, InventoryBlockEntity, RefillProvider {
+public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer, InventoryBlockEntity, RefillProvider, ClearableBlockEntity, FakeMenuBlockEntity {
   private static PowerTicket.TicketDefinition TICKET_DEFINITION = null;
 
   private static PowerTicket.TicketDefinition getTicketDefinition() {
@@ -540,5 +541,32 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   public int getMaxPower() {
     return ConfigManager.FUNGAL_TRANSMUTER_MAX_STORED_POWER.getAsInt();
+  }
+
+  @Override
+  public void clearContents() {
+    for (ItemStack item : inventory.getItemsAndClear()) {
+      ItemUtil.Spawn.spawnItem(level, getBlockPos(), item);
+    }
+  }
+
+  @Override
+  public boolean canClear() {
+    return !inventory.isEmpty();
+  }
+
+  @Override
+  public boolean shouldShowInsert() {
+    return getCachedRecipe() == null;
+  }
+
+  @Override
+  public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+    return new TransmuterContainer(containerId, playerInventory, inventory, ContainerLevelAccess.create(getLevel(), getBlockPos()));
+  }
+
+  @Override
+  public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+    buffer.writeBlockPos(getBlockPos());
   }
 }
