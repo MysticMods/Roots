@@ -488,7 +488,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_lever", has(RootsTags.Items.LEVERS))
         .save(c);
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.PRIMAL_GROVE_STONE.get())
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WILD_GROVE_STONE.get())
         .pattern("RR")
         .pattern("RR")
         .pattern("RR")
@@ -1835,11 +1835,11 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .build(blazePowderData.multiplty(5)), c, RootsAPI.rl("mortar/blaze_powder_from_magma_cream_5"));
 
     // Grove Stones
-    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.SPROUTING_GROVE_STONE, 1)
-                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.WILDEWHEET_HERB)
                 .requires(RootsTags.Items.WILDEWHEET_HERB)
                 .requires(RootsTags.Items.WILDEWHEET_HERB)
@@ -1853,11 +1853,11 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .condition(ModConditions.SPROUTING_RANK_1.get())), c, RootsAPI.rl("grove/grove_stone_sprouting"));
 
     // Fungal
-    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.FUNGAL_GROVE_STONE, 1)
-                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.BAFFLECAP_HERB)
                 .requires(RootsTags.Items.BAFFLECAP_HERB)
                 .requires(RootsTags.Items.BAFFLECAP_HERB)
@@ -1871,11 +1871,11 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .condition(ModConditions.FUNGAL_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_fungal"));
 
-    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.TWILIGHT_GROVE_STONE, 1)
-                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.MOONGLOW_HERB)
                 .requires(RootsTags.Items.MOONGLOW_HERB)
                 .requires(RootsTags.Items.MOONGLOW_HERB)
@@ -1890,11 +1890,11 @@ public final class RootsRecipeProvider extends RecipeProvider {
             ), c, RootsAPI.rl("grove/grove_stone_twilight"));
 
 
-    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.ELEMENTAL_GROVE_STONE, 1)
-                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.CLOUD_BERRY_HERB)
                 .requires(RootsTags.Items.CLOUD_BERRY_HERB)
                 .requires(RootsTags.Items.INFERNO_BULB_HERB)
@@ -1908,11 +1908,11 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .condition(ModConditions.ELEMENTAL_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_elemental"));
 
-    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.FAIRY_GROVE_STONE, 1)
-                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.PERESKIA_HERB)
                 .requires(RootsTags.Items.PERESKIA_HERB)
                 .requires(RootsTags.Items.PERESKIA_HERB)
@@ -1926,11 +1926,11 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .condition(ModConditions.FAIRY_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_fairy"));
 
-    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_PRIMAL))
+    RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
-                .result(ModItems.WILD_GROVE_STONE, 1)
-                .requires(RootsTags.Items.GROVE_STONE_PRIMAL)
+                .result(ModItems.PRIMAL_GROVE_STONE, 1)
+                .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.SPIRITLEAF_HERB)
                 .requires(RootsTags.Items.SPIRITLEAF_HERB)
                 .requires(RootsTags.Items.SPIRITLEAF_HERB)

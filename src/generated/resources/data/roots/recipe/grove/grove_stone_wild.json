@@ -3,7 +3,7 @@
   "data": {
     "ingredients": [
       {
-        "tag": "roots:grove_stones/primal"
+        "tag": "roots:grove_stones/wild"
       },
       {
         "tag": "roots:herbs/spiritleaf"
@@ -53,7 +53,7 @@
     "priority": 0,
     "result": {
       "count": 1,
-      "id": "roots:wild_grove_stone"
+      "id": "roots:primal_grove_stone"
     }
   }
 }

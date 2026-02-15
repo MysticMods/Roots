@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-15T11:16:03.5995819	Recipes
+// 1.21.1	2026-02-15T13:51:06.7242387	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -164,12 +164,12 @@ a76db854de3c6c9220d3056d61748a54d32a08f7 data/roots/advancement/recipes/misc/gro
 14492e19804f8e1732b55f63171b3125198e5534 data/roots/advancement/recipes/misc/grove/elemental_soil.json
 d7f3f75006f54393b0d89353df55b256af479ef4 data/roots/advancement/recipes/misc/grove/fungal_transmuter.json
 b34f884186b0c3dc794dacf9d152356f58b43ce8 data/roots/advancement/recipes/misc/grove/glass_eye.json
-68989855c3025c53cb5491ed8230d17575ec4e2a data/roots/advancement/recipes/misc/grove/grove_stone_elemental.json
-36451b863ee3608e217102f69dad6d1324fe11fc data/roots/advancement/recipes/misc/grove/grove_stone_fairy.json
-6677376ef95c45a411c37539b12679e2acd196e5 data/roots/advancement/recipes/misc/grove/grove_stone_fungal.json
-9517f3ec233d6ffbbb88915f3cb4d8b974da6d46 data/roots/advancement/recipes/misc/grove/grove_stone_sprouting.json
-ecc0bc278a5b7bdfdf59773b436838e929d96485 data/roots/advancement/recipes/misc/grove/grove_stone_twilight.json
-b5c0bba8488f5890b3a2103f5a786cc1907dd487 data/roots/advancement/recipes/misc/grove/grove_stone_wild.json
+d1a3c741d1c92e38d1ac077387179ca7a9874212 data/roots/advancement/recipes/misc/grove/grove_stone_elemental.json
+e668d806c35a2359520ac4eba07164369e2af9e4 data/roots/advancement/recipes/misc/grove/grove_stone_fairy.json
+3e632d69ea01f65333787ea1a6daa7f9e22bee54 data/roots/advancement/recipes/misc/grove/grove_stone_fungal.json
+fc9b0e37395fda5d44976b7192c6d49cc2ce35c7 data/roots/advancement/recipes/misc/grove/grove_stone_sprouting.json
+3f93f90bda0c6a95992c7fc75b4f4f48a9f1b758 data/roots/advancement/recipes/misc/grove/grove_stone_twilight.json
+55fa5b53936d60617535a323f83acccf320a703e data/roots/advancement/recipes/misc/grove/grove_stone_wild.json
 37b6c5f9c717635e232157354765016bcb36cc55 data/roots/advancement/recipes/misc/grove/living_arrow.json
 8ec25a5368ac033e0d83b74487b93c3c7746c06b data/roots/advancement/recipes/misc/grove/living_axe.json
 fe1bd9b42c37e717800fb107a6a2584536b9aeaa data/roots/advancement/recipes/misc/grove/living_hoe.json
@@ -528,12 +528,12 @@ e4912c80dc6a3e13c11130cd76753a0e46d3c1fa data/roots/recipe/grove/crimson_fairy_h
 c308c281b173afb965bda4355de013b567fe32b2 data/roots/recipe/grove/elemental_soil.json
 1ecd86e15a88025c1c854c58ae947cdf8a0465a1 data/roots/recipe/grove/fungal_transmuter.json
 160bc42aca7be5513892c93a7ba597356b65a431 data/roots/recipe/grove/glass_eye.json
-6edae3d25fe48fdec3fa0d92c1525792b47185c8 data/roots/recipe/grove/grove_stone_elemental.json
-dcfc1616311effbc81aae6f36ab49211d00ec14b data/roots/recipe/grove/grove_stone_fairy.json
-2454ec54debd3e638ed2bb8888ab4945eac47ed8 data/roots/recipe/grove/grove_stone_fungal.json
-2e8767bfdd8126848f5cb404e7f0eca13125d7be data/roots/recipe/grove/grove_stone_sprouting.json
-d8ba20e0f41e58ef18052ccad9b58c5300a2efe1 data/roots/recipe/grove/grove_stone_twilight.json
-48d1b5c0ab736d0f6447978119e73739c222df20 data/roots/recipe/grove/grove_stone_wild.json
+320a623b7bb57652f97fe1a0828469015e456589 data/roots/recipe/grove/grove_stone_elemental.json
+c1d2cf7b92c5390e6e4536db5afebe2b71b5b364 data/roots/recipe/grove/grove_stone_fairy.json
+569387e3de7d1253f21cc1c44482803a5f8806a1 data/roots/recipe/grove/grove_stone_fungal.json
+179f1706176d3f5275b2789df1d8ad56d78903c2 data/roots/recipe/grove/grove_stone_sprouting.json
+16e2ea364edd71d782810a4ff9d6639029aa7880 data/roots/recipe/grove/grove_stone_twilight.json
+03654b0dfe2e7f7e45b0d2a320f90d043736384d data/roots/recipe/grove/grove_stone_wild.json
 cf4996c5f282cd2dca07149d9e287b83e24e889f data/roots/recipe/grove/living_arrow.json
 2069452d395d97c88a282132eb9965db369b187d data/roots/recipe/grove/living_axe.json
 a89a07af5940022033542176bff23444361b20e5 data/roots/recipe/grove/living_hoe.json
@@ -641,7 +641,7 @@ fa141db814100e18f18710b99df5633559837dab data/roots/recipe/mossy_runestone_stair
 77e91e4ef502dd3143b9c80cfcce1b4023152dc5 data/roots/recipe/mossy_runestone_wall_from_mossy_runestone_stonecutting.json
 39b6213dfac862efa1c327df134e9fba246f1f0f data/roots/recipe/moss_block_from_grove_moss.json
 e2558a4937c853071b7b4a87cbfd6d3506c7a96d data/roots/recipe/pestle.json
-558706bf20ee533c39bfd689ce4270d00a0e6e75 data/roots/recipe/primal_grove_stone.json
+5f5e805b8468b6ec278d24397b9311783af471f6 data/roots/recipe/primal_grove_stone.json
 ebd352284993326d9a16b6ef0b9bf745b87af9b5 data/roots/recipe/pyre.json
 6c9dc53996a22351468c6b6e3ba82000071c31a1 data/roots/recipe/pyre/animal_harvest.json
 959c26d23e7d611887ad2f5a119618d8c182bdab data/roots/recipe/pyre/augmentation.json
