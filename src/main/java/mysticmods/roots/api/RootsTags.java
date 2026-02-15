@@ -1,6 +1,7 @@
 package mysticmods.roots.api;
 
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.modifier.SpellModifier;
@@ -414,6 +415,7 @@ public class RootsTags {
     public static final TagKey<Item> ROSES = modTag("roses");
     public static final TagKey<Item> PEONIES = modTag("peonies");
     public static final TagKey<Item> POPPIES = modTag("poppies");
+    public static final TagKey<Item> EYES = modTag("eyes");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

@@ -1297,7 +1297,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_spider_eye", has(Items.SPIDER_EYE)).save(MortarRecipe.Builder.create().times(5)
         .build(BaseRecipeData.Builder.create().requires(Items.ROTTEN_FLESH).requires(RootsTags.Items.BAFFLECAP_HERB)
-            .requires(RootsTags.Items.RUNIC_DUST).requires(Items.SPIDER_EYE).requires(ItemTags.WOOL)
+            .requires(RootsTags.Items.RUNIC_DUST).requires(RootsTags.Items.EYES).requires(ItemTags.WOOL)
             .unlocks(Unlock.spell(ModSpells.ACID_CLOUD))), c, RootsAPI.rl("spell/acid_cloud"));
 
     RecipeSaver.saver().unlockedBy("has_glow_berry", has(Items.GLOW_BERRIES))

@@ -116,6 +116,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.POPPIES).add(Items.POPPY);
     this.tag(RootsTags.Items.PEONIES).add(Items.PEONY);
     this.tag(RootsTags.Items.ROSES).add(Items.ROSE_BUSH);
+    this.tag(RootsTags.Items.EYES).add(Items.SPIDER_EYE).add(GLASS_EYE.get());
 
     this.copy(RootsTags.Blocks.NETHER_DOORS, RootsTags.Items.NETHER_DOORS);
     this.copy(RootsTags.Blocks.SOILS, RootsTags.Items.SOILS);

@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-01T16:17:51.4290694	Recipes
+// 1.21.1	2026-02-15T11:12:04.5790523	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -769,7 +769,7 @@ fe50e1e5f4a6083cae6c0a499511ae36a06bda5f data/roots/recipe/silver_ingot_from_sil
 8142bcbbc0223f32061db514e5969af2b642040c data/roots/recipe/silver_nugget_from_silver_ingot.json
 904869d65af0103b0a7165749ccf78806b4f668a data/roots/recipe/soul_pyre.json
 cbfd45d0c7ea8f16d0cca734391f168d5a3fbc3c data/roots/recipe/soul_pyre_from_pyre.json
-4c077cd9db500940877e29458c947208b21df495 data/roots/recipe/spell/acid_cloud.json
+2379d9a167c3ebf6989c111aa7d5938a4db809e0 data/roots/recipe/spell/acid_cloud.json
 a25e78114be494cfd7e8b6e1ca5148b4f17937f6 data/roots/recipe/spell/aqua_bubble.json
 f5086607ef06c3f3560bfdc869a978c5d7e20b80 data/roots/recipe/spell/dandelion_winds.json
 3ff49a6978153281c549acc0612760afc426aa95 data/roots/recipe/spell/desaturate.json

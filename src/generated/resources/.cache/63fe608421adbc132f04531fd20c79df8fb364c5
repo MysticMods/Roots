@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-01T16:17:51.4265243	Roots Item Tags
+// 1.21.1	2026-02-15T11:12:04.5729546	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -100,6 +100,7 @@ ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/item/decorative_pyres.j
 1b81ce702cc93595adbcfc8dd9dcb1a5e932c8c6 data/roots/tags/item/dusts/runic.json
 5b28ef157c0fd6f0022f555656f0e53a177ca4d2 data/roots/tags/item/dyeable.json
 0cf221f493298e03f67d4837431386b42d293970 data/roots/tags/item/elemental.json
+606a56816253282e6bbaf68227ba9f86131c5ec3 data/roots/tags/item/eyes.json
 1a1da49dd1f282e53f8d92004d8a4f42124df9f3 data/roots/tags/item/fairy.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json
 7c23110fe0420d3a96fab43595db02c682e00c68 data/roots/tags/item/foraging_eligible.json
