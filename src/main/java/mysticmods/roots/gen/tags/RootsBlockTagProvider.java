@@ -260,6 +260,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
         Blocks.WITHER_ROSE,
         Blocks.SUNFLOWER, Blocks.LILAC, Blocks.PEONY, Blocks.ROSE_BUSH, Blocks.PITCHER_PLANT // Tall flowers
     );
+    this.tag(RootsTags.Blocks.BLOOMING_INELIGIBLE_BLOCKS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
 
     this.tag(BlockTags.MAINTAINS_FARMLAND).addTag(RootsTags.Blocks.CROPS);
 

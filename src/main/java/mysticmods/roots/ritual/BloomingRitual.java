@@ -40,7 +40,7 @@ public class BloomingRitual extends Ritual {
 
   public static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE = (level, pos) -> {
     BlockPos below = pos.below();
-    if (level.isEmptyBlock(below)) {
+    if (level.isEmptyBlock(below) || level.getBlockState(below).is(RootsTags.Blocks.BLOOMING_INELIGIBLE_BLOCKS)) {
       return false;
     }
     BlockPos above = pos.above();

@@ -159,6 +159,7 @@ public class RootsTags {
 
     public static final TagKey<Block> BLOOMING_ELIGIBLE_FLOWERS = modTag("ritual/blooming/eligible_flowers");
     public static final TagKey<Block> BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS = modTag("ritual/blooming/eligible_pedestal_flowers");
+    public static final TagKey<Block> BLOOMING_INELIGIBLE_BLOCKS = modTag("ritual/blooming/ineligible_blocks");
 
     public static final TagKey<Block> SPREADING_MUSHROOMS = modTag("spreading_mushrooms");
 
