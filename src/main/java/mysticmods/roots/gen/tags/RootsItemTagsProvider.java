@@ -108,6 +108,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(RootsTags.Items.SILVER_NUGGET).add(ModItems.SILVER_NUGGET.get());
     this.tag(RootsTags.Items.COPPER_NUGGET).add(ModItems.COPPER_NUGGET.get());
+    this.tag(Tags.Items.NUGGETS).addTag(RootsTags.Items.SILVER_NUGGET).addTag(RootsTags.Items.COPPER_NUGGET);
 
     this.tag(RootsTags.Items.ADJUSTABLE_ITEM).add(ModItems.GRAMARY.get());
     this.tag(RootsTags.Items.APPLES).add(Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);

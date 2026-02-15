@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-15T11:12:04.5729546	Roots Item Tags
+// 1.21.1	2026-02-15T11:13:29.602975	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -8,6 +8,7 @@ eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/item/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/item/fence_gates/wooden.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
+3bb15ddd4752bbc999ae948fe342625b6d481b91 data/c/tags/item/nuggets.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
 1c5f730cf01f3ab78b7d0959b9eea711842d9c1b data/c/tags/item/nuggets/silver.json
 9928ca2b67514c12a6ff8b4e35226181fc625783 data/c/tags/item/ores.json
