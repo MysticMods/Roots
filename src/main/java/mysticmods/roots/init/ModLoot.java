@@ -3,9 +3,11 @@ package mysticmods.roots.init;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.loot.conditions.*;
+import mysticmods.roots.loot.functions.FillHorns;
 import mysticmods.roots.loot.modifiers.AddGrassDropsModifier;
 import mysticmods.roots.loot.modifiers.ElementalCropExtraDropsModifier;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
@@ -16,6 +18,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class ModLoot {
   private static final DeferredRegister<LootItemConditionType> LOOT_ITEM_CONDITIONS = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, RootsAPI.MODID);
+  private static final DeferredRegister<LootItemFunctionType<?>> LOOT_ITEM_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, RootsAPI.MODID);
 
   private static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIERS = DeferredRegister.create(NeoForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS, RootsAPI.MODID);
 
@@ -38,8 +41,11 @@ public class ModLoot {
   public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<AddGrassDropsModifier>> ADD_GRASS_DROPS_MODIFIER = GLOBAL_LOOT_MODIFIERS.register("add_grass_drops", () -> AddGrassDropsModifier.CODEC);
   public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ElementalCropExtraDropsModifier>> ELEMENTAL_CROP_EXTRA_DROPS_MODIFIER = GLOBAL_LOOT_MODIFIERS.register("elemental_crop_extra_drops", () -> ElementalCropExtraDropsModifier.CODEC);
 
+  public static final DeferredHolder<LootItemFunctionType<?>, LootItemFunctionType<FillHorns>> FILL_HORNS = LOOT_ITEM_FUNCTIONS.register("fill_horns", () -> new LootItemFunctionType<>(FillHorns.CODEC));
+
   public static void register(IEventBus bus) {
     LOOT_ITEM_CONDITIONS.register(bus);
     GLOBAL_LOOT_MODIFIERS.register(bus);
+    LOOT_ITEM_FUNCTIONS.register(bus);
   }
 }

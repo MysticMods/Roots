@@ -1,5 +1,8 @@
 {
   "values": {
+    "minecraft:goat": [
+      "minecraft:entities/goat/horn"
+    ],
     "minecraft:turtle": [
       "minecraft:entities/turtle/scute"
     ]

@@ -16,15 +16,10 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.Set;
 
-public class LootItemBlockTagCondition implements LootItemCondition {
-  private final TagKey<Block> tag;
+public record LootItemBlockTagCondition(TagKey<Block> tag) implements LootItemCondition {
 
   public static final MapCodec<LootItemBlockTagCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK)
       .fieldOf("tag").forGetter(LootItemBlockTagCondition::getTag)).apply(instance, LootItemBlockTagCondition::new));
-
-  protected LootItemBlockTagCondition(TagKey<Block> tag) {
-    this.tag = tag;
-  }
 
   @Override
   public Set<LootContextParam<?>> getReferencedContextParams() {

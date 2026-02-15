@@ -1,4 +1,5 @@
-// 1.21.1	2026-01-16T20:39:41.4441581	Loot Tables
+// 1.21.1	2026-02-15T12:08:10.895119	Loot Tables
+7579a27c10309ffccfb3eccaedaf9ca50f37473a data/minecraft/loot_table/entities/goat/horn.json
 3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json

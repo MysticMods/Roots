@@ -17,6 +17,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -67,7 +68,8 @@ public class DataMaps {
   public static final DataMapType<Ritual, PropertyDataMap> RITUAL_PROPERTY_DATA = DataMapType.builder(RootsAPI.rl("ritual_property_data"), RootsRegistries.Keys.RITUALS, PropertyDataMap.CODEC)
       .synced(PropertyDataMap.CODEC, true)
       .build();
-  public static final DataMapType<Item, List<SproutGift>> SPROUT_BREEDING_ITEM_CHANCE = DataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, SproutGift.LIST_CODEC)
+  public static final DataMapType<Item, List<SproutGift>> SPROUT_BREEDING_ITEM_CHANCE = AdvancedDataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, SproutGift.LIST_CODEC)
+      .merger(DataMapValueMerger.listMerger())
       .synced(SproutGift.LIST_CODEC, true)
       .build();
   public static final DataMapType<Block, GrowthRecord> GROWTH_RECORDS = DataMapType.builder(RootsAPI.rl("growth_records"), Registries.BLOCK, GrowthRecord.CODEC)
@@ -76,7 +78,8 @@ public class DataMaps {
   public static final DataMapType<Block, HarvestRecord> HARVEST_RECORDS = DataMapType.builder(RootsAPI.rl("harvest_records"), Registries.BLOCK, HarvestRecord.CODEC)
       .synced(HarvestRecord.CODEC, true)
       .build();
-  public static final DataMapType<GroveAction, List<GroveReputationEntry>> GROVE_ACTION_REPUTATIONS = DataMapType.builder(RootsAPI.rl("grove_action_reputations"), RootsRegistries.Keys.GROVE_ACTIONS, GroveReputationEntry.LIST_CODEC)
+  public static final DataMapType<GroveAction, List<GroveReputationEntry>> GROVE_ACTION_REPUTATIONS = AdvancedDataMapType.builder(RootsAPI.rl("grove_action_reputations"), RootsRegistries.Keys.GROVE_ACTIONS, GroveReputationEntry.LIST_CODEC)
+      .merger(DataMapValueMerger.listMerger())
       .synced(GroveReputationEntry.LIST_CODEC, true)
       .build();
   public static final DataMapType<Grove, ReputationRanks> GROVE_RANKS = DataMapType.builder(RootsAPI.rl("grove_ranks"), RootsRegistries.Keys.GROVES, ReputationRanks.CODEC)
@@ -88,13 +91,16 @@ public class DataMaps {
   public static final DataMapType<Item, Block> GROWTH_SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("growth_seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), true)
       .build();
-  public static final DataMapType<Block, List<GrovePowerGenerator.Generator>> GROVE_POWER_GENERATORS = DataMapType.builder(RootsAPI.rl("grove_power_generator"), Registries.BLOCK, GrovePowerGenerator.Generator.LIST_CODEC)
+  public static final DataMapType<Block, List<GrovePowerGenerator.Generator>> GROVE_POWER_GENERATORS = AdvancedDataMapType.builder(RootsAPI.rl("grove_power_generator"), Registries.BLOCK, GrovePowerGenerator.Generator.LIST_CODEC)
+      .merger(DataMapValueMerger.listMerger())
       .synced(GrovePowerGenerator.Generator.LIST_CODEC, true).build();
-  public static final DataMapType<Grove, List<GrovePowerGenerator.GenerationEntry>> GROVE_GENERATION_ENTRIES = DataMapType.builder(RootsAPI.rl("grove_generation_entries"), RootsRegistries.Keys.GROVES, GrovePowerGenerator.GenerationEntry.LIST_CODEC)
+  public static final DataMapType<Grove, List<GrovePowerGenerator.GenerationEntry>> GROVE_GENERATION_ENTRIES = AdvancedDataMapType.builder(RootsAPI.rl("grove_generation_entries"), RootsRegistries.Keys.GROVES, GrovePowerGenerator.GenerationEntry.LIST_CODEC)
+      .merger(DataMapValueMerger.listMerger())
       .synced(GrovePowerGenerator.GenerationEntry.LIST_CODEC, true).build();
-  public static final DataMapType<EntityType<?>, List<ResourceKey<LootTable>>> ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES = DataMapType.builder(RootsAPI.rl("additional_animal_harvest_loot_tables"), Registries.ENTITY_TYPE, ResourceKey.codec(Registries.LOOT_TABLE)
+  public static final DataMapType<EntityType<?>, List<ResourceKey<LootTable>>> ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES = AdvancedDataMapType.builder(RootsAPI.rl("additional_animal_harvest_loot_tables"), Registries.ENTITY_TYPE, ResourceKey.codec(Registries.LOOT_TABLE)
           .listOf())
       .synced(ResourceKey.codec(Registries.LOOT_TABLE).listOf(), true)
+      .merger(DataMapValueMerger.listMerger())
       .build();
   public static final DataMapType<GroveAction, Item> GROVE_ACTION_ICONS = DataMapType.builder(RootsAPI.rl("grove_action_icons"), RootsRegistries.Keys.GROVE_ACTIONS, BuiltInRegistries.ITEM.byNameCodec())
       .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
@@ -112,8 +118,9 @@ public class DataMaps {
   public static final DataMapType<Block, Float> EXTRA_CROP_CHANCE = DataMapType.builder(RootsAPI.rl("extra_crop_chance"), Registries.BLOCK, Codec.FLOAT)
       .synced(Codec.FLOAT, true)
       .build();
-  public static final DataMapType<Item, List<ResourceKey<Level>>> DIMENSION_ITEM = DataMapType.builder(RootsAPI.rl("dimension_item"), Registries.ITEM, ResourceKey.codec(Registries.DIMENSION)
+  public static final DataMapType<Item, List<ResourceKey<Level>>> DIMENSION_ITEM = AdvancedDataMapType.builder(RootsAPI.rl("dimension_item"), Registries.ITEM, ResourceKey.codec(Registries.DIMENSION)
           .listOf())
+      .merger(DataMapValueMerger.listMerger())
       .synced(ResourceKey.codec(Registries.DIMENSION).listOf(), true)
       .build();
   public static final DataMapType<Block, Double> SHATTER_COST_MULTIPLIERS = DataMapType.builder(RootsAPI.rl("shatter_cost_multipliers"), Registries.BLOCK, Codec.DOUBLE)

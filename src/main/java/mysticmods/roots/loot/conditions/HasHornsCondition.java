@@ -5,26 +5,18 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.entity.DeerEntity;
 import mysticmods.roots.init.ModLoot;
+import mysticmods.roots.mixin.accessor.AccessorMixinGoat;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
-public class HasHornsCondition implements LootItemCondition {
+public record HasHornsCondition(boolean inverse) implements LootItemCondition {
   public static final MapCodec<HasHornsCondition> CODEC = RecordCodecBuilder.mapCodec(
-      instance -> instance.group(Codec.BOOL.fieldOf("inverse").forGetter(HasHornsCondition::isInverse))
+      instance -> instance.group(Codec.BOOL.fieldOf("inverse").forGetter(HasHornsCondition::inverse))
           .apply(instance, HasHornsCondition::new));
-
-  private final boolean inverse;
-
-  public HasHornsCondition(boolean inverseIn) {
-    this.inverse = inverseIn;
-  }
-
-  public boolean isInverse() {
-    return inverse;
-  }
 
   @Override
   public boolean test(LootContext lootContext) {
@@ -32,6 +24,8 @@ public class HasHornsCondition implements LootItemCondition {
     Entity looted = lootContext.getParamOrNull(LootContextParams.THIS_ENTITY);
     if (looted instanceof DeerEntity deer) {
       flag = deer.getEntityData().get(DeerEntity.hasHorns);
+    } else if (looted instanceof Goat goat) {
+      flag = goat.getEntityData().get(AccessorMixinGoat.getDataHasLeftHorn()) || goat.getEntityData().get(AccessorMixinGoat.getDataHasRightHorn());
     } else {
       flag = false;
     }

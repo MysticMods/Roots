@@ -568,6 +568,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     var builder26 = builder(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
     builder26.add(EntityType.TURTLE.builtInRegistryHolder(), List.of(RootsAPI.TURTLE_SCUTE), false);
+    builder26.add(EntityType.GOAT.builtInRegistryHolder(), List.of(RootsAPI.GOAT_HORN), false);
 
     var builder27 = builder(DataMaps.GROVE_ACTION_ICONS);
     builder27.add(ModActions.CROP_GROWTH, Items.BONE_MEAL, false);

@@ -1,8 +1,6 @@
 package mysticmods.roots.loot.conditions;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.init.ModLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -13,7 +11,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
-public class DoubleBlockPreventionCondition implements LootItemCondition {
+public record DoubleBlockPreventionCondition() implements LootItemCondition {
   private static final DoubleBlockPreventionCondition INSTANCE = new DoubleBlockPreventionCondition();
   public static final MapCodec<DoubleBlockPreventionCondition> CODEC = MapCodec.unit(() -> INSTANCE);
 

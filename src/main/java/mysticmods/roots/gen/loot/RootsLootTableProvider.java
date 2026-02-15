@@ -10,6 +10,7 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.loot.conditions.HasHornsCondition;
+import mysticmods.roots.loot.functions.FillHorns;
 import mysticmods.roots.mixin.accessor.AccessorMixinBlockLootSubProvider;
 import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
@@ -57,11 +58,10 @@ import java.util.stream.Stream;
 
 public final class RootsLootTableProvider {
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES, RootsAPI.TURTLE_SCUTE), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY), new LootTableProvider.SubProviderEntry(ChestLootTablesFixer::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsAdditionalEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
+    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES, RootsAPI.TURTLE_SCUTE, RootsAPI.GOAT_HORN), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY), new LootTableProvider.SubProviderEntry(ChestLootTablesFixer::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsAdditionalEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
   }
 
   public static class RootsAdditionalEntityLootTables implements LootTableSubProvider {
-
     private final HolderLookup.Provider provider;
 
     public RootsAdditionalEntityLootTables(HolderLookup.Provider provider) {
@@ -76,6 +76,18 @@ public final class RootsLootTableProvider {
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(Items.TURTLE_SCUTE)
                       .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                      .when(LootItemRandomChanceCondition.randomChance(0.1f)).setWeight(1))
+                  .add(EmptyLootItem.emptyItem().setWeight(15))
+              )
+              .setParamSet(LootContextParamSets.ENTITY)
+      );
+      consumer.accept(
+          RootsAPI.GOAT_HORN,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(LootItem.lootTableItem(Items.GOAT_HORN)
+                      .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                      .apply(FillHorns.fillHorns())
                       .when(LootItemRandomChanceCondition.randomChance(0.1f)).setWeight(1))
                   .add(EmptyLootItem.emptyItem().setWeight(15))
               )
