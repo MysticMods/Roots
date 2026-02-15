@@ -1033,7 +1033,9 @@ public final class RootsRecipeProvider extends RecipeProvider {
 
     MortarRecipe.Builder stringBuilder = MortarRecipe.Builder.create().times(7);
     BaseRecipeData.Builder stringData = BaseRecipeData.Builder.create().requires(ItemTags.WOOL)
-        .result(Items.STRING.builtInRegistryHolder(), 1);
+        .result(Items.STRING.builtInRegistryHolder(), 2)
+        .chanceOutput(Items.STRING, 0.5f)
+        .chanceOutput(Items.STRING, 0.25f);
     saver = RecipeSaver.saver().unlockedBy("has_wool", has(ItemTags.WOOL));
 
     saver.save(stringBuilder.build(stringData), c, RootsAPI.rl("mortar/string_from_wool"));

@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-15T11:12:04.5790523	Recipes
+// 1.21.1	2026-02-15T11:16:03.5995819	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -619,11 +619,11 @@ b985e4e41f9a82e74b5dbaa0b214f39a89b3ee54 data/roots/recipe/mortar/magma_cream_fr
 24592d7fbfaf30c8f876b96326bba1a02f68b7e9 data/roots/recipe/mortar/stalicripe_from_earth_soil_3.json
 14c349a0ffe89978fbb61b1a4ae7e53abc43e498 data/roots/recipe/mortar/stalicripe_from_earth_soil_4.json
 ffc7fb4eb472019a2dd02e9df2e1b615ffe05346 data/roots/recipe/mortar/stalicripe_from_earth_soil_5.json
-b949c4914967d9c90a0804e89952bdf1dc96dd0a data/roots/recipe/mortar/string_from_wool.json
-a34303c2ffb4ee24c74c55cc9a77e888b4e9f161 data/roots/recipe/mortar/string_from_wool_2.json
-f7b1a3fc5c6f36b41cf0c631bc9738386ce73497 data/roots/recipe/mortar/string_from_wool_3.json
-104a62e7825ad5e5570f87cdea1bad2137aaa6cb data/roots/recipe/mortar/string_from_wool_4.json
-d12dfe220db73cf69959356d523a35a87d2ccd31 data/roots/recipe/mortar/string_from_wool_5.json
+de84180696006e614659a601f51c9e939c379522 data/roots/recipe/mortar/string_from_wool.json
+962e7927def1467486d65dbec3ad619692e80833 data/roots/recipe/mortar/string_from_wool_2.json
+4258022b33a94d9928283d98f49a2de4c817ffbe data/roots/recipe/mortar/string_from_wool_3.json
+fcad85c7a712376a0c6965603d270734fb98947d data/roots/recipe/mortar/string_from_wool_4.json
+431c52e84ea4553eceada90f5568f79993246f47 data/roots/recipe/mortar/string_from_wool_5.json
 22f7dd632a702cadcbab51dbc357b4e88247e6f9 data/roots/recipe/mortar/sugar_from_sugar_cane_1.json
 4a5e472f6fd9c4385496e5c41aadfce35bdd162d data/roots/recipe/mortar/sugar_from_sugar_cane_2.json
 68652e513deb1a2b5880ea770e355f76acaaae7d data/roots/recipe/mortar/sugar_from_sugar_cane_3.json

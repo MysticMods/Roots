@@ -1,6 +1,78 @@
 {
   "type": "roots:mortar",
   "data": {
+    "chance_outputs": [
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.25,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.25,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.25,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.25,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      },
+      {
+        "chance": 0.25,
+        "output": {
+          "count": 1,
+          "id": "minecraft:string"
+        }
+      }
+    ],
     "ingredients": [
       {
         "tag": "minecraft:wool"
@@ -20,7 +92,7 @@
     ],
     "priority": 0,
     "result": {
-      "count": 5,
+      "count": 10,
       "id": "minecraft:string"
     }
   },
