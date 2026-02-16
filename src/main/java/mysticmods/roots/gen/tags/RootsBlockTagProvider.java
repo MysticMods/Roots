@@ -126,8 +126,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(RootsTags.Blocks.GROVE_MOSS).add(CREEPING_GROVE_MOSS.get(), HANGING_GROVE_MOSS.get());
 
-    this.tag(RootsTags.Blocks.GROVE_STONE_PRIMAL).add(PRIMAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_WILD).add(WILD_GROVE_STONE.get());
+    this.tag(RootsTags.Blocks.GROVE_STONE_PRIMAL).add(PRIMAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_FAIRY).add(FAIRY_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_SPROUTING).add(SPROUTING_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_TWILIGHT).add(TWILIGHT_GROVE_STONE.get());
