@@ -159,6 +159,8 @@ public class ModBlocks {
   public static final DeferredHolder<Block, WallBlock> RUNED_BRICK_WALL = BLOCKS.register("runed_brick_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static final DeferredHolder<Block, WallBlock> RUNED_TILE_WALL = BLOCKS.register("runed_tile_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static final DeferredHolder<Block, RunicWireBlock> RUNIC_DUST = BLOCKS.register("runic_dust", () -> new RunicWireBlock(BlockBehaviour.Properties.of().noCollission().instabreak().pushReaction(PushReaction.DESTROY).lightLevel(o -> 4)));
+  public static final DeferredHolder<Block, RunestoneTickerBlock> RUNESTONE_TICKER = BLOCKS.register("runestone_ticker", () -> new RunestoneTickerBlock(BlockBehaviour.Properties.of()
+      .noCollission().strength(0.5F).sound(SoundType.STONE)));
   public static final DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(ElementalType.DEFAULT, BlockBehaviour.Properties.of()
       .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.GRAVEL)));
   public static final DeferredHolder<Block, ElementalSoilBlock> AQUEOUS_SOIL = BLOCKS.register("aqueous_soil", () -> new ElementalSoilBlock(ElementalType.WATER, BlockBehaviour.Properties.of()

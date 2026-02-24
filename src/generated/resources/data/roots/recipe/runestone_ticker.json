@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "D": {
+      "tag": "c:dusts/redstone"
+    },
+    "R": {
+      "tag": "roots:runestone"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RDR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:runestone_ticker"
+  }
+}

@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-01T16:23:52.4698597	Block States: roots
+// 1.21.1	2026-02-24T20:24:01.0611991	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -78,6 +78,7 @@ a06436c4214cacb4b3e6a1aaa7a24f8b7fa6640d assets/roots/blockstates/runestone_butt
 d36fdcc3371268ca3e236c02225ae062a85e2202 assets/roots/blockstates/runestone_pressure_plate.json
 fe52a7ece064b87b8131c22b0a459d53ec78f2d7 assets/roots/blockstates/runestone_slab.json
 4b644d6621e2d4439713f47c8e53639277bb26c6 assets/roots/blockstates/runestone_stairs.json
+42a820cd76cfc8e628d24a48a8bd63f98a96eb02 assets/roots/blockstates/runestone_ticker.json
 9a9fd44143be6766c3a69997de6e3ef8bc91550d assets/roots/blockstates/runestone_tile.json
 b22a908d2fa30113654e5ce46ca4356bd63286e4 assets/roots/blockstates/runestone_tile_button.json
 b9fde8821070bd51409e0d3791bc49e2be50fdd4 assets/roots/blockstates/runestone_tile_pressure_plate.json
@@ -307,6 +308,7 @@ dce159d26e03325e31453ec6c6ea4829ea898d85 assets/roots/models/block/runestone_pre
 5439d2f72538ca30193306c07fe3a7cccac3104b assets/roots/models/block/runestone_stairs.json
 89d69f9bd2ce9ed20a63f144886273240b179cea assets/roots/models/block/runestone_stairs_inner.json
 8f4a2bf8b5169f30943070444af79d06a17daefb assets/roots/models/block/runestone_stairs_outer.json
+254799da8b623400587a42ce48c2bb1c31a52424 assets/roots/models/block/runestone_ticker.json
 d40b04cb6f4bffe7e258cbdbd9df15e1992c5218 assets/roots/models/block/runestone_tile.json
 6993e2c5556744a6e4ab68fd352a925b84beac71 assets/roots/models/block/runestone_tile_button.json
 7c43db721cc373ce7e06ea269cf77ca52255ca6e assets/roots/models/block/runestone_tile_button_pressed.json

@@ -103,6 +103,8 @@ public class RootsModEvents {
       event.accept(ModItems.WILDWOOD_LADDER.get());
       event.accept(ModItems.WILDWOOD_CHEST.get());
 
+      event.accept(ModItems.RUNESTONE_TICKER.get());
+
       event.accept(ModItems.ELEMENTAL_SOIL.get());
       event.accept(ModItems.AQUEOUS_SOIL.get());
       event.accept(ModItems.CAELIC_SOIL.get());

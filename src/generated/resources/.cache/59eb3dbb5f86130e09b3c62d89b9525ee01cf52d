@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-15T12:08:10.895119	Loot Tables
+// 1.21.1	2026-02-24T20:24:01.0571896	Loot Tables
 7579a27c10309ffccfb3eccaedaf9ca50f37473a data/minecraft/loot_table/entities/goat/horn.json
 3d195cb984737fc552cbae2c5176dc85ce84d675 data/minecraft/loot_table/entities/turtle/scute.json
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
@@ -81,6 +81,7 @@ efdc332c8f882edced5a9d16cc6a3c60841a9712 data/roots/loot_table/blocks/runestone_
 adc449963860dbea530ba8b6a6f6a79a4b8e02f2 data/roots/loot_table/blocks/runestone_pressure_plate.json
 883c6961c60fe7c32fc3f81bfc37537a612ed0c8 data/roots/loot_table/blocks/runestone_slab.json
 020b60be910c6425e75b0e62c02569c3142fcc50 data/roots/loot_table/blocks/runestone_stairs.json
+24140cadf1a12c86767ce0e292beeee7936890c8 data/roots/loot_table/blocks/runestone_ticker.json
 fd42401340cef17d67af87e7b692e4ee38e03d5a data/roots/loot_table/blocks/runestone_tile.json
 7833284770124f1765f72ec29d8d9f2fe00b8f37 data/roots/loot_table/blocks/runestone_tile_button.json
 f0915afde2f764629134925e34c0d86197cc9f3c data/roots/loot_table/blocks/runestone_tile_pressure_plate.json

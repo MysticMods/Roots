@@ -27,6 +27,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
   protected void registerModels() {
     // BLOCKS
 
+    simpleBlockItem(ModBlocks.RUNESTONE_TICKER.get());
     simpleBlockItem(ModBlocks.THATCH.get());
     simpleBlockItem(ModBlocks.RUNESTONE.get());
     simpleBlockItem(ModBlocks.MOSSY_RUNESTONE.get());

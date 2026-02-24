@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-04T14:47:06.7511114	Item Models: roots
+// 1.21.1	2026-02-24T20:29:46.2103882	Item Models: roots
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/acid_cloud.json
 256a7c001de142677be9aa40521882ee43ce6ed6 assets/roots/models/item/animal_harvest.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
@@ -200,6 +200,7 @@ c3248639a4974b639043665339311544d2c9e419 assets/roots/models/item/runestone_butt
 a578d943f6258e46e7e4b16ff5059b9861131b22 assets/roots/models/item/runestone_pressure_plate.json
 8e666e129a07d97b00f2a1336e9da7a75d741a29 assets/roots/models/item/runestone_slab.json
 e3faa02085615a4eb9318df43e05699b644368dc assets/roots/models/item/runestone_stairs.json
+30772756e60d24452e2c1baa402f5ce3c4238a73 assets/roots/models/item/runestone_ticker.json
 662b30131dca07cc21b03a931fa7bebbff97350d assets/roots/models/item/runestone_tile.json
 d76774ea1cdfb95c7a0c568549d5c002a2b499fb assets/roots/models/item/runestone_tile_button.json
 59086ce5e2da2362d0de417ba40e6a2b8dbd6da4 assets/roots/models/item/runestone_tile_pressure_plate.json

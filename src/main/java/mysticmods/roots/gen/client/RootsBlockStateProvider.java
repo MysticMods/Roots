@@ -29,6 +29,7 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
   protected void registerStatesAndModels() {
     simpleBlock(ModBlocks.THATCH.get());
     simpleBlock(ModBlocks.RUNESTONE.get());
+    simpleBlock(ModBlocks.RUNESTONE_TICKER.get(), models().cubeAll("runestone_ticker", modLoc("block/runestone")));
     simpleBlock(ModBlocks.MOSSY_RUNESTONE.get());
     simpleBlock(ModBlocks.CHISELED_RUNESTONE.get());
     simpleBlock(ModBlocks.RUNESTONE_BRICK.get());

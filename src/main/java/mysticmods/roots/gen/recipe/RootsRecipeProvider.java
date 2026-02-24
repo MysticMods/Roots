@@ -2475,6 +2475,15 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_wildroot", has(RootsTags.Items.WILDROOT_CROP))
         .save(c, RootsAPI.rl("gramary"));
 
+    ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModBlocks.RUNESTONE_TICKER.get())
+        .pattern("RRR")
+        .pattern("RDR")
+        .pattern("RRR")
+        .define('R', RootsTags.Items.RUNESTONE)
+        .define('D', Tags.Items.DUSTS_REDSTONE)
+        .unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
+        .save(c, RootsAPI.rl("runestone_ticker"));
+
     RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
