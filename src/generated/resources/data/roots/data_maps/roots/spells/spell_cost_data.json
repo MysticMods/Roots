@@ -255,21 +255,6 @@
         }
       ]
     },
-    "roots:sanctuary": {
-      "charge_type": "operation",
-      "costs": [
-        {
-          "type": "additive",
-          "defaultValue": 0.125,
-          "herb": "roots:pereskia"
-        },
-        {
-          "type": "additive",
-          "defaultValue": 0.125,
-          "herb": "roots:stalicripe"
-        }
-      ]
-    },
     "roots:saturate": {
       "charge_type": "cast",
       "costs": [

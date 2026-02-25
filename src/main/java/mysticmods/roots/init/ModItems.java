@@ -408,7 +408,7 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RADIANCE = ITEMS.register("radiance", () -> spell(ModSpells.RADIANCE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RAMPANT_GROWTH = ITEMS.register("rampant_growth", () -> spell(ModSpells.RAMPANT_GROWTH));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_ROSE_THORNS = ITEMS.register("rose_thorns", () -> spell(ModSpells.ROSE_THORNS));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SANCTUARY = ITEMS.register("sanctuary", () -> spell(ModSpells.SANCTUARY));
+/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SANCTUARY = ITEMS.register("sanctuary", () -> spell(ModSpells.SANCTUARY));*/
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SATURATE = ITEMS.register("saturate", () -> spell(ModSpells.SATURATE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SHATTER = ITEMS.register("shatter", () -> spell(ModSpells.SHATTER));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SKY_SOARER = ITEMS.register("sky_soarer", () -> spell(ModSpells.SKY_SOARER));

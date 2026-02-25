@@ -54,6 +54,7 @@ public class Roots {
     ModContainers.register(bus);
     ModActions.register(bus);
     ModAttributes.register(bus);
+    ModModifiers.register(bus);
     packetHandler = new PacketHandler(bus);
   }
 }

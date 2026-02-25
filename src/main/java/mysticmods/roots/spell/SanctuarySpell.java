@@ -25,7 +25,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.List;
 
 // TODO: Charge interval
-public class SanctuarySpell extends TwoRadiusSpell {
+/*public class SanctuarySpell extends TwoRadiusSpell {
   private float velocity;
 
   public SanctuarySpell(ChatFormatting color, CostInstance costs) {
@@ -97,4 +97,4 @@ public class SanctuarySpell extends TwoRadiusSpell {
   public CostInstance.ChargeType getChargeType() {
     return CostInstance.ChargeType.OPERATION;
   }
-}
+}*/

@@ -349,7 +349,7 @@ public class RootsModEvents {
       event.accept(ModItems.SPELL_RADIANCE.get());
       event.accept(ModItems.SPELL_RAMPANT_GROWTH.get());
       event.accept(ModItems.SPELL_ROSE_THORNS.get());
-      event.accept(ModItems.SPELL_SANCTUARY.get());
+/*      event.accept(ModItems.SPELL_SANCTUARY.get());*/
       event.accept(ModItems.SPELL_SATURATE.get());
       event.accept(ModItems.SPELL_SHATTER.get());
       event.accept(ModItems.SPELL_SKY_SOARER.get());

@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-24T20:29:46.2103882	Item Models: roots
+// 1.21.1	2026-02-25T16:55:56.6905703	Item Models: roots
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/acid_cloud.json
 256a7c001de142677be9aa40521882ee43ce6ed6 assets/roots/models/item/animal_harvest.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
@@ -210,7 +210,6 @@ b41ae896ebb09549c9988672a008f0bd1b01864b assets/roots/models/item/runestone_tile
 24e437f127d83d661b4c3d80977c8b20b8095976 assets/roots/models/item/runestone_wall.json
 046b7ac3c277dff28aa2b23060980ae829c19183 assets/roots/models/item/runic_dust.json
 e44d172ee9eeec7c6d5fe9ed4d0fbf3de80445f3 assets/roots/models/item/runic_shears.json
-a2629c81bc1ba6189c60e7bd93672aff64144e89 assets/roots/models/item/sanctuary.json
 74e314bf177c174479c4e614640c9d72ce09c7d4 assets/roots/models/item/saturate.json
 8cf2b5fd71effb1e81b02727dc22e8f1d82b5e0b assets/roots/models/item/shatter.json
 f87e922ad38abf9fac16090d3134a0ff0dff2cc6 assets/roots/models/item/silver_block.json

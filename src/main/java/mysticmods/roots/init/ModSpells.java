@@ -175,12 +175,12 @@ public class ModSpells {
   public static final PropertyHolder<Property.DoubleProperty> ROSE_THORNS_RADIUS_Y = P.recordProperty("rose_thorns/radius_y", Property.ofDouble(1, "The radius of the rose thorns effect in the Y axis."));
   public static final PropertyHolder<Property.FloatProperty> ROSE_THORNS_DAMAGE = P.recordProperty("rose_thorns/damage", Property.ofFloat(3.5f, SpellProperties.DAMAGE));
 
-  // Sanctuary (20 cooldown)
+/*  // Sanctuary (20 cooldown)
   public static final DeferredHolder<Spell, SanctuarySpell> SANCTUARY = spell(Spells.SANCTUARY, SanctuarySpell::new, ChatFormatting.LIGHT_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0125), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125)))); // Charges every time an entity is pushed back -- how much is this?
   public static final PropertyHolder<Property.IntegerProperty> SANCTUARY_COOLDOWN = P.recordProperty("sanctuary/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> SANCTUARY_RADIUS_Y = P.recordProperty("sanctuary/radius_y", Property.ofInt(5, "The radius of the sanctuary in the Y axis."));
   public static final PropertyHolder<Property.IntegerProperty> SANCTUARY_RADIUS_XZ = P.recordProperty("sanctuary/radius_xz", Property.ofInt(4, "The radius of the sanctuary in the X and Z axis."));
-  public static final PropertyHolder<Property.FloatProperty> SANCTUARY_VELOCITY = P.recordProperty("sanctuary/velocity", Property.ofFloat(0.125f, "The velocity modifier applied to entities inside the sanctuary."));
+  public static final PropertyHolder<Property.FloatProperty> SANCTUARY_VELOCITY = P.recordProperty("sanctuary/velocity", Property.ofFloat(0.125f, "The velocity modifier applied to entities inside the sanctuary."));*/
 
   // Shatter (20 cooldown)
   public static final DeferredHolder<Spell, ShatterSpell> SHATTER = spell(Spells.SHATTER, ShatterSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125)))); // Charges per block broken

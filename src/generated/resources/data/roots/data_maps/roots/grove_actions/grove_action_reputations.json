@@ -645,24 +645,6 @@
         "entries": [
           {
             "type": "exact_spell",
-            "name": "roots:sanctuary"
-          }
-        ],
-        "grove": "roots:fairy",
-        "name": "roots:learn_spell/sanctuary",
-        "reputation": {
-          "gain1": 125,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_spell",
             "name": "roots:acid_cloud"
           }
         ],

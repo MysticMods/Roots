@@ -1437,13 +1437,13 @@ public final class RootsRecipeProvider extends RecipeProvider {
                     .unlocks(Unlock.spell(ModSpells.SATURATE))), c, RootsAPI.rl("spell/saturate"));
 
     // Sanctuary
-    RecipeSaver.saver().unlockedBy("has_pereskia", has(RootsTags.Items.PERESKIA_HERB))
+/*    RecipeSaver.saver().unlockedBy("has_pereskia", has(RootsTags.Items.PERESKIA_HERB))
         .save(MortarRecipe.Builder.create().times(5)
             .build(
                 BaseRecipeData.Builder.create().requires(RootsTags.Items.PERESKIA_HERB)
                     .requires(ItemTags.SMALL_FLOWERS).requires(Items.SHIELD)
                     .requires(Items.GLOW_BERRIES).requires(Tags.Items.GEMS_AMETHYST)
-                    .unlocks(Unlock.spell(ModSpells.SANCTUARY))), c, RootsAPI.rl("spell/sanctuary"));
+                    .unlocks(Unlock.spell(ModSpells.SANCTUARY))), c, RootsAPI.rl("spell/sanctuary"));*/
 
     // Rose thorns
     RecipeSaver.saver().unlockedBy("has_rose_bush", has(Items.ROSE_BUSH))

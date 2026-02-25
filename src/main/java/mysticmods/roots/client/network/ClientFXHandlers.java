@@ -880,7 +880,7 @@ public class ClientFXHandlers {
   }
 
   public static void sanctuary(int entityId, int radiusInt) {
-    if (ConfigManager.DISABLE_PATICLES.get()) {
+/*    if (ConfigManager.DISABLE_PATICLES.get()) {
       return;
     }
     Minecraft minecraft = Minecraft.getInstance();
@@ -912,7 +912,7 @@ public class ClientFXHandlers {
           .color(ModSpells.SANCTUARY).swapColors().build();
 
       minecraft.level.addParticle(opts, spawnPos.x, spawnPos.y, spawnPos.z, 0, 0, 0);
-    }
+    }*/
   }
 
   public static void saturate(int entityId, int oldFood, int newFood) {
