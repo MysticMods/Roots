@@ -1,6 +1,5 @@
 package mysticmods.roots.api.modifier;
 
-import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IDataMapInitialize;
@@ -12,13 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T>, ICosted {
-  protected final ResourceKey<Grove> grove;
   @Nullable
   protected final ResourceKey<T> parent;
   protected final ResourceKey<V> applicable;
@@ -27,18 +24,14 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   protected CostInstance costs;
   private String descriptionId;
 
-  public Modifier(ResourceKey<Grove> grove, CostInstance defaultCosts, @NotNull ResourceKey<T> parent, ResourceKey<V> applicable) {
-    this.grove = grove;
+  public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable) {
     this.parent = parent;
     this.applicable = applicable;
     this.defaultCosts = defaultCosts;
   }
 
-  public Modifier(ResourceKey<Grove> grove, CostInstance defaultCosts, ResourceKey<V> applicable) {
-    this.grove = grove;
-    this.applicable = applicable;
-    this.parent = null;
-    this.defaultCosts = defaultCosts;
+  public Modifier(CostInstance defaultCosts, ResourceKey<V> applicable) {
+    this(defaultCosts, null, applicable);
   }
 
   protected abstract DataMapType<T, CostInstance> getDataMapType();

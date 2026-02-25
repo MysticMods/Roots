@@ -11,12 +11,12 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
 
 public class RitualModifier extends Modifier<Ritual, RitualModifier> {
-  public RitualModifier(ResourceKey<Grove> grove, CostInstance defaultCosts, @NotNull ResourceKey<RitualModifier> parent, ResourceKey<Ritual> applicable) {
-    super(grove, defaultCosts, parent, applicable);
+  public RitualModifier(CostInstance defaultCosts, @NotNull ResourceKey<RitualModifier> parent, ResourceKey<Ritual> applicable) {
+    super(defaultCosts, parent, applicable);
   }
 
-  public RitualModifier(ResourceKey<Grove> grove, CostInstance defaultCosts, ResourceKey<Ritual> applicable) {
-    super(grove, defaultCosts, applicable);
+  public RitualModifier(CostInstance defaultCosts, ResourceKey<Ritual> applicable) {
+    super(defaultCosts, applicable);
   }
 
   @Override

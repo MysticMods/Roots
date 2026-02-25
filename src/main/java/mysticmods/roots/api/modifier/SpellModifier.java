@@ -11,12 +11,12 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
 
 public class SpellModifier extends Modifier<Spell, SpellModifier> {
-  public SpellModifier(ResourceKey<Grove> grove, CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
-    super(grove, defaultCosts, parent, applicable);
+  public SpellModifier(CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
+    super(defaultCosts, parent, applicable);
   }
 
-  public SpellModifier(ResourceKey<Grove> grove, CostInstance defaultCosts, ResourceKey<Spell> applicable) {
-    super(grove, defaultCosts, applicable);
+  public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable) {
+    super(defaultCosts, applicable);
   }
 
   @Override
@@ -25,7 +25,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   }
 
   @Override
-  public Holder<mysticmods.roots.api.modifier.SpellModifier> builtInRegistryHolder() {
+  public Holder<SpellModifier> builtInRegistryHolder() {
     return RootsRegistries.SPELL_MODIFIERS.wrapAsHolder(this);
   }
 

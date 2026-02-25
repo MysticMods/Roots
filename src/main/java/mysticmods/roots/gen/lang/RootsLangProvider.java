@@ -207,6 +207,9 @@ public final class RootsLangProvider extends LanguageProvider {
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
+    RootsRegistries.RITUAL_MODIFIERS.entrySet()
+        .forEach(o -> add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
+        );
 
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get().getName(), "Active Grove Stone");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get()
