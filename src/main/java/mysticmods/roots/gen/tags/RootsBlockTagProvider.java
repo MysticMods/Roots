@@ -2,6 +2,7 @@ package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -110,6 +111,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.NYI).add(INCENSE_BURNER.get(), UNENDING_BOWL.get());
     this.tag(RootsTags.Blocks.WIP).addTag(RootsTags.Blocks.SOILS);
+    this.tag(RootsTags.Blocks.WIP).add(RUNESTONE_TICKER.get());
     this.tag(RootsTags.Blocks.AMPLIFIERS);
     this.tag(RootsTags.Blocks.DISPLAY_PEDESTALS).add(DISPLAY_PEDESTAL.get());
     this.tag(Tags.Blocks.CHESTS_WOODEN).add(WILDWOOD_CHEST.get());

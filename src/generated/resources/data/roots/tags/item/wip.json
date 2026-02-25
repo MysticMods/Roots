@@ -12,6 +12,7 @@
     "roots:crimson_fairy_hut",
     "roots:warped_fairy_hut",
     "roots:fungal_transmuter",
-    "#roots:soils"
+    "#roots:soils",
+    "roots:runestone_ticker"
   ]
 }

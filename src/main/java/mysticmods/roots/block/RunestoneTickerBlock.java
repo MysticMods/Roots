@@ -33,7 +33,11 @@ public class RunestoneTickerBlock extends Block {
 
   @Override
   protected int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-    return 15;
+    if (state.getValue(POWERED)) {
+      return 15;
+    }
+
+    return 0;
   }
 
   @Override
