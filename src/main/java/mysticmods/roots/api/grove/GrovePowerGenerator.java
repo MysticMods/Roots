@@ -60,6 +60,10 @@ public interface GrovePowerGenerator {
         return 0;
       }
 
+      if (value == Integer.MAX_VALUE) {
+        return value;
+      }
+
       return value * grove.getRank();
     }
   }
