@@ -472,8 +472,6 @@ public class HudOverlay {
   public static void renderGroveStone(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft mc, BlockHitResult trace, BlockState state) {
     Level level = mc.level;
 
-    BlockEntity blockEntity;
-
     if (!state.hasProperty(GroveStoneBlock.PART) && !state.hasProperty(GroveStoneBlock.ACTIVE)) {
       return;
     }

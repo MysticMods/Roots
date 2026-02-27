@@ -187,7 +187,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
 
   @Override
   public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-    if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL)) {
+    if (state.is(RootsTags.Blocks.GROVE_STONE_WILD)) {
       return null;
     }
 
