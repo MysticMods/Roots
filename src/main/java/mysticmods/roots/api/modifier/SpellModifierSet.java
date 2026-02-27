@@ -51,7 +51,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
         builder.add(modifier);
       }
     }
-    return new SpellModifierSet(builder.build());
+    return new SpellModifierSet(builder.build()).validated();
   }
 
   @Override
@@ -74,7 +74,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
         builder.add(modifier);
       }
     }
-    return new SpellModifierSet(builder.build());
+    return new SpellModifierSet(builder.build()).validated();
   }
 
   @Override
@@ -86,7 +86,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     ImmutableSet.Builder<SpellModifier> builder = ImmutableSet.builder();
     builder.addAll(this);
     builder.add(element);
-    return new SpellModifierSet(builder.build());
+    return new SpellModifierSet(builder.build()).validated();
   }
 
   @Override
@@ -98,7 +98,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     ImmutableSet.Builder<SpellModifier> builder = ImmutableSet.builder();
     builder.addAll(this);
     builder.addAll(elements);
-    return new SpellModifierSet(builder.build());
+    return new SpellModifierSet(builder.build()).validated();
   }
 
   public SpellModifierSet validated () {
