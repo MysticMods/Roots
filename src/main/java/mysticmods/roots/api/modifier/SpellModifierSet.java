@@ -16,8 +16,8 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
   public static final SpellModifierSet EMPTY = new SpellModifierSet();
 
   public static final Codec<SpellModifierSet> CODEC = RootsRegistries.SPELL_MODIFIERS.byNameCodec()
-      .listOf().xmap(SpellModifierSet::new, set -> set.internal.asList());
-  public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifierSet> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.collection(HashSet::new, ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)), o -> o.internal, SpellModifierSet::new);
+      .listOf().xmap(o -> new SpellModifierSet(o).validated(), set -> set.internal.asList());
+  public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifierSet> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.collection(HashSet::new, ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)), o -> o.internal, o -> new SpellModifierSet(o).validated());
 
   public SpellModifierSet(SpellModifier... elements) {
     super(elements);
