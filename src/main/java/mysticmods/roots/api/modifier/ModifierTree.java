@@ -6,11 +6,13 @@ import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 public class ModifierTree<V, C extends Modifier<V, C>> {
-  private static final Set<ResourceKey<?>> DISABLED_MODIFIERS = new ReferenceOpenHashSet<>();
+  private static final Set<ResourceKey<?>> RESTRICTED_MODIFIERS = new ReferenceOpenHashSet<>();
 
   private final Holder<V> object;
   private final Map<ResourceKey<C>, C> modifiers = new Object2ObjectOpenHashMap<>();
@@ -18,35 +20,24 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Set<ModifierNode<V, C>> rootNodes = new ReferenceOpenHashSet<>();
   private final Set<ModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
 
+  private final Set<ResourceKey<C>> parents = new ObjectOpenHashSet<>();
+
   public ModifierTree(Holder<V> object) {
     this.object = object;
   }
 
-  public ModifierTree<V, C>.Instance validator (ModifierSet<V, C, ?> modifierSet) {
-    return new Instance(modifierSet);
+  public Set<ResourceKey<C>> validateParents () {
+    Set<ResourceKey<C>> missing = new HashSet<>();
+    for (ResourceKey<C> parent : parents) {
+      if (!modifiers.containsKey(parent)) {
+        missing.add(parent);
+      }
+    }
+    return missing;
   }
 
-  public boolean validate(ModifierSet<V, C, ?> modifierSet) {
-    if (modifierSet.isEmpty()) {
-      return true;
-    }
-    C firstElement = modifierSet.firstElement();
-    if (firstElement == null) {
-      return true; // Shouldn't happen?
-    }
-    if (!firstElement.getApplicable().equals(object.getKey())) {
-      return false;
-    }
-
-    if (!modifierSet.validate()) {
-      return false;
-    }
-
-    // If an element is enabled here but its children aren't enabled, that's invalid
-    Instance instance = new Instance(modifierSet);
-
-
-    return true;
+  public ModifierTree<V, C>.Instance validator (ModifierSet<V, C, ?> modifiers) {
+    return new Instance(modifiers);
   }
 
   public boolean addModifier(C modifier) {
@@ -54,13 +45,13 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   }
 
   public boolean addModifier(Holder<C> modifier) {
-    if (modifiers.containsKey(modifier.getKey())) {
-      return false; // ???
-    }
-
     C mod = modifier.value();
     if (!mod.getApplicable().equals(this.object.getKey())) {
       return false;
+    }
+
+    if (modifiers.containsKey(modifier.getKey())) {
+      return true; // this was previously false but it's already added so it doesn't matter
     }
 
     ModifierNode<V, C> node = ModifierNode.create(modifier.getKey());
@@ -70,16 +61,16 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
     if (mod.getParent() == null) {
       rootNodes.add(node);
-      // do something if the parent isn't contained in this already
     } else {
       ModifierNode<V, C> parentNode = ModifierNode.create(mod.getParent());
       parentNode.addChild(node);
+      parents.add(mod.getParent());
     }
 
     return true;
   }
 
-  public ModifierNode<V, C> getNode(ResourceKey<C> key) {
+  private ModifierNode<V, C> getNode(ResourceKey<C> key) {
     ModifierNode<V, C> node = nodes.get(key);
     if (node == null) {
       throw new NullPointerException("No node for key " + key);
@@ -91,36 +82,40 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return rootNodes;
   }
 
-  public static boolean isDisabled(ModifierNode<?, ?> node) {
-    return DISABLED_MODIFIERS.contains(node.modifier());
+  public Iterable<ModifierNode<V, C>> all() {
+    return allNodes;
   }
 
-  public static boolean isDisabled(ResourceKey<?> modifier) {
-    return DISABLED_MODIFIERS.contains(modifier);
+  public static boolean isRestricted(ModifierNode<?, ?> node) {
+    return RESTRICTED_MODIFIERS.contains(node.modifier());
   }
 
-  public static boolean isDisabled(Modifier<?, ?> modifier) {
-    return DISABLED_MODIFIERS.contains(modifier.builtInRegistryHolder().getKey());
+  public static boolean isRestricted(ResourceKey<?> modifier) {
+    return RESTRICTED_MODIFIERS.contains(modifier);
   }
 
-  public static boolean isDisabled(Holder<Modifier<?, ?>> modifier) {
-    return DISABLED_MODIFIERS.contains(modifier.getKey());
+  public static boolean isRestricted(Modifier<?, ?> modifier) {
+    return RESTRICTED_MODIFIERS.contains(modifier.builtInRegistryHolder().getKey());
   }
 
-  public static void disableModifier(ResourceKey<?> modifier) {
-    DISABLED_MODIFIERS.add(modifier);
+  public static boolean isRestricted(Holder<Modifier<?, ?>> modifier) {
+    return RESTRICTED_MODIFIERS.contains(modifier.getKey());
   }
 
-  public static void disableModifier(Modifier<?, ?> modifier) {
-    DISABLED_MODIFIERS.add(modifier.builtInRegistryHolder().getKey());
+  public static void restrictModifier(ResourceKey<?> modifier) {
+    RESTRICTED_MODIFIERS.add(modifier);
   }
 
-  public static void disableModifier(Holder<Modifier<?, ?>> modifier) {
-    DISABLED_MODIFIERS.add(modifier.getKey());
+  public static void restrictModifier(Modifier<?, ?> modifier) {
+    RESTRICTED_MODIFIERS.add(modifier.builtInRegistryHolder().getKey());
   }
 
-  public static void disableModifier(ModifierNode<?, ?> node) {
-    DISABLED_MODIFIERS.add(node.modifier());
+  public static void restrictModifier(Holder<Modifier<?, ?>> modifier) {
+    RESTRICTED_MODIFIERS.add(modifier.getKey());
+  }
+
+  public static void restrictModifier(ModifierNode<?, ?> node) {
+    RESTRICTED_MODIFIERS.add(node.modifier());
   }
 
   public class Instance {
@@ -133,7 +128,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     }
 
     public Instance enable(ModifierNode<V, C> node) {
-      if (isDisabled(node)) {
+      if (isRestricted(node)) {
         return disable(node);
       }
 

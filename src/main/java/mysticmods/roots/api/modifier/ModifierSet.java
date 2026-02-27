@@ -57,6 +57,8 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     return this.firstElement;
   }
 
+  // This only validates applicability, not parent/child relationships
+  // nor conflicts.
   public boolean validate () {
     if (isEmpty()) {
       return true;

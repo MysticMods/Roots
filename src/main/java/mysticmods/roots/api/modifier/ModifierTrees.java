@@ -58,10 +58,15 @@ public class ModifierTrees {
     ImmutableMap.Builder<ResourceKey<Ritual>, ModifierTree<Ritual, RitualModifier>> builder = ImmutableMap.builder();
     RootsRegistries.RITUALS.holders().forEach(holder -> {
       ModifierTree<Ritual, RitualModifier> tree = new ModifierTree<>(holder);
-      for (RitualModifier modifier : RootsRegistries.RITUAL_MODIFIERS)
+      for (RitualModifier modifier : RootsRegistries.RITUAL_MODIFIERS) {
         if (modifier.getApplicable().equals(holder.getKey())) {
           tree.addModifier(modifier.builtInRegistryHolder());
         }
+      }
+      var validated = tree.validateParents();
+      if (!validated.isEmpty()) {
+        throw new IllegalStateException("Ritual " + holder.getKey() + " has modifiers with missing parents: " + validated);
+      }
       builder.put(holder.key(), tree);
     });
     RITUAL_MODIFIER_TREES = builder.build();
@@ -69,10 +74,15 @@ public class ModifierTrees {
     ImmutableMap.Builder<ResourceKey<Spell>, ModifierTree<Spell, SpellModifier>> spellBuilder = ImmutableMap.builder();
     RootsRegistries.SPELLS.holders().forEach(holder -> {
       ModifierTree<Spell, SpellModifier> tree = new ModifierTree<>(holder);
-      for (SpellModifier modifier : RootsRegistries.SPELL_MODIFIERS)
+      for (SpellModifier modifier : RootsRegistries.SPELL_MODIFIERS) {
         if (modifier.getApplicable().equals(holder.getKey())) {
           tree.addModifier(modifier.builtInRegistryHolder());
         }
+      }
+      var validated = tree.validateParents();
+      if (!validated.isEmpty()) {
+        throw new IllegalStateException("Spell " + holder.getKey() + " has modifiers with missing parents: " + validated);
+      }
       spellBuilder.put(holder.key(), tree);
     });
     SPELL_MODIFIER_TREES = spellBuilder.build();
