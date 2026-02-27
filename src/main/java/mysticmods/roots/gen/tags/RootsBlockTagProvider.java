@@ -333,6 +333,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS).add(Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, BAFFLECAP_BLOCK.get());
     tag(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS).add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, BAFFLECAP.get(), Blocks.WARPED_FUNGUS, Blocks.CRIMSON_FUNGUS);
     tag(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS).add(Blocks.CREEPER_HEAD, Blocks.CREEPER_WALL_HEAD, Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD, Blocks.PIGLIN_WALL_HEAD, Blocks.PIGLIN_HEAD, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD, Blocks.ZOMBIE_HEAD, Blocks.ZOMBIE_WALL_HEAD);
+    tag(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS).add(Blocks.BEDROCK);
 
     tag(RootsTags.Blocks.PYRE_HUD_RENDERER).addTag(RootsTags.Blocks.FUNCTIONAL_PYRES);
     tag(RootsTags.Blocks.GROVE_CRAFTER_HUD_RENDERER).addTag(RootsTags.Blocks.GROVE_CRAFTERS);

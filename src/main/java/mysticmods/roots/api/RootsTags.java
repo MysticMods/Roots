@@ -196,6 +196,8 @@ public class RootsTags {
     public static final TagKey<Block> TWILIGHT_GROVE_GENERATORS = modTag("grove_generators/twilight");
     public static final TagKey<Block> ELEMENTAL_GROVE_GENERATORS = modTag("grove_generators/elemental");
 
+    public static final TagKey<Block> CREATIVE_GROVE_GENERATORS = modTag("grove_generators/creative");
+
     public static final TagKey<Block> PYRE_HUD_RENDERER = modTag("pyre_hud_layer");
     public static final TagKey<Block> GROVE_CRAFTER_HUD_RENDERER = modTag("grove_crafter_hud_layer");
     public static final TagKey<Block> MORTAR_HUD_RENDERER = modTag("mortar_hud_layer");

@@ -1,5 +1,11 @@
 {
   "values": {
+    "#roots:any": [
+      {
+        "max_count": 1,
+        "tag": "roots:grove_generators/creative"
+      }
+    ],
     "roots:elemental": [
       {
         "max_count": 2,

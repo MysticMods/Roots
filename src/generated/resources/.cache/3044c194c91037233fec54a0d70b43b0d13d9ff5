@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-25T12:36:36.3374731	Roots Block Tags
+// 1.21.1	2026-02-27T19:13:36.9068807	Roots Block Tags
 acf57b436b049e55593c453e269baa2be7f62b93 data/c/tags/block/chests/wooden.json
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
@@ -81,6 +81,7 @@ e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/block/grove/sprout/crop
 e9fdf8ddb1256a33128e181d1c6f39c027944fd4 data/roots/tags/block/grove/wild/crops.json
 b7bd0301c8596779111dee02e5b8e2f45f3afb0f data/roots/tags/block/grove_consumers.json
 eddcaa86bbcac9fa0953dab3bd03a9f687ecbed6 data/roots/tags/block/grove_crafter_hud_layer.json
+cfab2ab481bf476a645d326b87627918009b9e50 data/roots/tags/block/grove_generators/creative.json
 d66fd5801ed493567186dbdb2f7d2d91f4497aee data/roots/tags/block/grove_generators/elemental.json
 c05e998c718feb7c79e577ca9f09edc7225b3d22 data/roots/tags/block/grove_generators/fairy.json
 d5140d1e8bd6a91f904fd01a209a5dad3cc34f23 data/roots/tags/block/grove_generators/fairy/paths.json
