@@ -113,11 +113,11 @@ public interface GrovePowerGenerator {
   }
 
   enum Symmetry implements StringRepresentable {
-    NONE,
-    RADIAL_SAME_BLOCK,
-    RADIAL_SAME_BLOCK_OR_TAG,
-    RADIAL_DIFFERENT_SAME_TAG,
-    RADIAL_NOT_MATCHING;
+    NONE,                   // \
+    RADIAL_SAME_BLOCK,      // =
+    RADIAL_SAME_BLOCK_OR_TAG, // #
+    RADIAL_DIFFERENT_SAME_TAG, //
+    RADIAL_NOT_MATCHING;  // #
 
     public static final Codec<Symmetry> CODEC = StringRepresentable.fromEnum(Symmetry::values);
 

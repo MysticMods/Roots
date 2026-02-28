@@ -807,6 +807,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("roots.hud.grove_power.grove", "%s, rank %s/%s");
     add("roots.hud.grove_power.power", "Power usage: %s/%s");
+    add("roots.hud.grove_power.invalid_rank", "[Requires rank 1 or higher.]");
 
     RootsRegistries.GROVES.entrySet().forEach(o -> {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));

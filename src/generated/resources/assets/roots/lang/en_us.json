@@ -476,6 +476,7 @@
   "roots.hud.fake_menu": "Press [%s] to view eligible %s recipes.",
   "roots.hud.grove_crafter": "Right-Click to start crafting",
   "roots.hud.grove_power.grove": "%s, rank %s/%s",
+  "roots.hud.grove_power.invalid_rank": "[Requires rank 1 or higher.]",
   "roots.hud.grove_power.power": "Power usage: %s/%s",
   "roots.hud.item_count": "%s (%s)",
   "roots.hud.mortar.crafting1": "Grind with pestle",
