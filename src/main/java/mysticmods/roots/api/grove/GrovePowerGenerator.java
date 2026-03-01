@@ -18,6 +18,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.IntFunction;
 
 public interface GrovePowerGenerator {
   int getMaxPower();
@@ -113,13 +115,15 @@ public interface GrovePowerGenerator {
   }
 
   enum Symmetry implements StringRepresentable {
-    NONE,                   // \
-    RADIAL_SAME_BLOCK,      // =
-    RADIAL_SAME_BLOCK_OR_TAG, // #
-    RADIAL_DIFFERENT_SAME_TAG, //
-    RADIAL_NOT_MATCHING;  // #
+    NONE,
+    RADIAL_SAME_BLOCK,
+    RADIAL_SAME_BLOCK_OR_TAG,
+    RADIAL_DIFFERENT_SAME_TAG,
+    RADIAL_NOT_MATCHING;
 
     public static final Codec<Symmetry> CODEC = StringRepresentable.fromEnum(Symmetry::values);
+    public static final IntFunction<Symmetry> BY_ID = ByIdMap.continuous(Symmetry::ordinal, Symmetry.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+    public static final StreamCodec<ByteBuf, Symmetry> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Symmetry::ordinal);
 
     @Nullable
     public BlockPos getPairedPosition(BlockPos start, BlockPos center) {

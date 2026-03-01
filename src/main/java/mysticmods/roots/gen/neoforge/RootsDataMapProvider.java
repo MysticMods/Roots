@@ -543,7 +543,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
         new GrovePowerGenerator.Generator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
     builder24.add(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, List.of(
-        new GrovePowerGenerator.Generator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY, Integer.MAX_VALUE)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY, 1000)), false);
 
     var builder25 = builder(DataMaps.GROVE_GENERATION_ENTRIES);
     builder25.add(ModGroves.FAIRY, List.of(

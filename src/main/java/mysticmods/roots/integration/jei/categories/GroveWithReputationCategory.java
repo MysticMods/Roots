@@ -81,11 +81,11 @@ public class GroveWithReputationCategory implements IRecipeCategory<GroveWithRep
         .setCustomRenderer(RootsJEIPlugin.GROVE_NUMBER_TYPE, RootsJEIPlugin.GROVE_NUMBER_RENDERER);
 
     if (recipe.entry().unique()) {
-      slot.addIngredient(RootsJEIPlugin.GROVE_NUMBER_TYPE, new GroveNumber(recipe.entry().grove(), recipe.entry()
+      slot.addIngredient(RootsJEIPlugin.GROVE_NUMBER_TYPE, GroveNumber.reputation(recipe.entry().grove(), recipe.entry()
           .reputation().gain1()));
     } else {
       List<GroveNumber> outputs = recipe.entry().reputation().stream()
-          .mapToObj(f -> new GroveNumber(recipe.entry().grove(), f)).toList();
+          .mapToObj(f -> GroveNumber.reputation(recipe.entry().grove(), f)).toList();
       slot.addIngredients(RootsJEIPlugin.GROVE_NUMBER_TYPE, outputs);
     }
 

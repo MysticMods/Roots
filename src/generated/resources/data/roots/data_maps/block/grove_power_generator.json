@@ -4,7 +4,7 @@
       {
         "blockTag": "roots:grove_generators/creative",
         "tag": "roots:any",
-        "value": 2147483647
+        "value": 1000
       }
     ],
     "#roots:grove_generators/elemental": [
