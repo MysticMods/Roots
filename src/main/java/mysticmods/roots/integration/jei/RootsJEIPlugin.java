@@ -50,10 +50,7 @@ import mysticmods.roots.inventory.fake.MortarContainer;
 import mysticmods.roots.inventory.fake.PyreContainer;
 import mysticmods.roots.inventory.fake.TransmuterContainer;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
-import mysticmods.roots.recipe.fake.DyeRecipeGenerator;
-import mysticmods.roots.recipe.fake.EntityInteractionRecipe;
-import mysticmods.roots.recipe.fake.GroveWithReputation;
-import mysticmods.roots.recipe.fake.SproutGiftRecipe;
+import mysticmods.roots.recipe.fake.*;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -92,18 +89,22 @@ public class RootsJEIPlugin implements IModPlugin {
 
   public static IDrawable INFO_DRAWABLE;
 
-  public static final IIngredientType<RootsEntityType> ENTITY_TYPE = () -> RootsEntityType.class;
+  private static <T> IIngredientType<T> ingredient(Class<T> clazz) {
+    return () -> clazz;
+  }
+
+  public static final IIngredientType<RootsEntityType> ENTITY_TYPE = ingredient(RootsEntityType.class);
   // Block
-  public static final IIngredientType<SimpleBlockType> BLOCK_TYPE = () -> SimpleBlockType.class;
+  public static final IIngredientType<SimpleBlockType> BLOCK_TYPE = ingredient(SimpleBlockType.class);
   // PartialBlockState
-  public static final IIngredientType<BlockStateType> BLOCK_STATE_TYPE = () -> BlockStateType.class;
-  public static final IIngredientType<Spell> SPELL_TYPE = () -> Spell.class;
-  public static final IIngredientType<Ritual> RITUAL_TYPE = () -> Ritual.class;
-  public static final IIngredientType<RootsDimensionType> DIMENSION_TYPE = () -> RootsDimensionType.class;
-  public static final IIngredientType<RootsDamageType> DAMAGE_TYPE = () -> RootsDamageType.class;
-  public static final IIngredientType<Grove> GROVE_TYPE = () -> Grove.class;
-  public static final IIngredientType<GroveNumber> GROVE_NUMBER_TYPE = () -> GroveNumber.class;
-  public static final IIngredientType<GroveAction> GROVE_ACTION_TYPE = () -> GroveAction.class;
+  public static final IIngredientType<BlockStateType> BLOCK_STATE_TYPE = ingredient(BlockStateType.class);
+  public static final IIngredientType<Spell> SPELL_TYPE = ingredient(Spell.class);
+  public static final IIngredientType<Ritual> RITUAL_TYPE = ingredient(Ritual.class);
+  public static final IIngredientType<RootsDimensionType> DIMENSION_TYPE = ingredient(RootsDimensionType.class);
+  public static final IIngredientType<RootsDamageType> DAMAGE_TYPE = ingredient(RootsDamageType.class);
+  public static final IIngredientType<Grove> GROVE_TYPE = ingredient(Grove.class);
+  public static final IIngredientType<GroveNumber> GROVE_NUMBER_TYPE = ingredient(GroveNumber.class);
+  public static final IIngredientType<GroveAction> GROVE_ACTION_TYPE = ingredient(GroveAction.class);
 
   @Override
   public ResourceLocation getPluginUid() {
@@ -124,6 +125,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<TransmutationRecipe> TRANSMUTATION_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("transmutation_recipe"), TransmutationRecipe.class);
   public static final RecipeType<GroveWithReputation> GROVE_REPUTATION_ENTRY_TYPE = new RecipeType<>(RootsAPI.rl("grove_reputation_entry"), GroveWithReputation.class);
   public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = new RecipeType<>(RootsAPI.rl("entity_interaction_recipe"), EntityInteractionRecipe.class);
+  public static final RecipeType<GrovePowerRecipe> GROVE_POWER_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("grove_power_recipe"), GrovePowerRecipe.class);
 
   private static final Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
       MortarContainer.class, MORTAR_RECIPE_TYPE,
@@ -156,6 +158,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new FungalTransmuterCategory(guiHelper));
     registration.addRecipeCategories(new GroveWithReputationCategory(guiHelper));
     registration.addRecipeCategories(new EntityInteractionCategory(guiHelper));
+    registration.addRecipeCategories(new GrovePowerCategory(guiHelper));
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
@@ -243,6 +246,7 @@ public class RootsJEIPlugin implements IModPlugin {
     List<EntityInteractionRecipe> entityInteractionRecipes = new ArrayList<>();
     entityInteractionRecipes.add(new EntityInteractionRecipe(new EntityTagTest(RootsTags.Entities.SQUID), Ingredient.of(RootsTags.Items.BOTTLES), List.of(new ChanceOutput(new ItemStack(ModItems.INK_BOTTLE), 1.0f)), 20 * 15));
     registration.addRecipes(ENTITY_INTERACTION_TYPE, entityInteractionRecipes);
+    registration.addRecipes(GROVE_POWER_RECIPE_TYPE, GrovePowerRecipe.generate());
   }
 
   @Override
@@ -260,6 +264,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.RITUAL_ANIMAL_HARVEST.get(), ANIMAL_HARVEST_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.FUNGAL_TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE);
     registration.addRecipeCatalyst(Items.GLASS_BOTTLE, ENTITY_INTERACTION_TYPE);
+    registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.PRIMAL_GROVE_STONE.get(), ModItems.SPROUTING_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
   }
 
   @Override
