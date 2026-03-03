@@ -8,6 +8,7 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -21,6 +22,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 // Tags
@@ -195,6 +200,7 @@ public class RootsTags {
     public static final TagKey<Block> FUNGAL_GROVE_OTHER_GENERATORS = modTag("grove_generators/fungal/other");
     public static final TagKey<Block> TWILIGHT_GROVE_GENERATORS = modTag("grove_generators/twilight");
     public static final TagKey<Block> ELEMENTAL_GROVE_GENERATORS = modTag("grove_generators/elemental");
+    public static final TagKey<Block> ELEMENTAL_GROVE_LIQUID_GENERATORS = modTag("grove_generators/elemental_liquid");
 
     public static final TagKey<Block> CREATIVE_GROVE_GENERATORS = modTag("grove_generators/creative");
 
@@ -642,6 +648,7 @@ public class RootsTags {
 
   public static class Groves extends RootsTags {
     public static final TagKey<Grove> ANY = modTag("any");
+    public static final TagKey<Grove> ANY_POWERABLE = modTag("any_powerable");
     public static final TagKey<Grove> WILD = modTag("wild");
     public static final TagKey<Grove> FAIRY = modTag("fairy");
     public static final TagKey<Grove> TWILIGHT = modTag("twilight");
@@ -649,6 +656,42 @@ public class RootsTags {
     public static final TagKey<Grove> SPROUTING = modTag("sprouting");
     public static final TagKey<Grove> ELEMENTAL = modTag("elemental");
     public static final TagKey<Grove> PRIMAL = modTag("primal");
+
+    public static final TagKey<Item> ANY_GROVE_STONE = modItemTag("grove_stone/any");
+    public static final TagKey<Item> ANY_POWERABLE_GROVE_STONE = modItemTag("grove_stone/any_powerable");
+    public static final TagKey<Item> WILD_GROVE_STONE = modItemTag("grove_stone/wild");
+    public static final TagKey<Item> FAIRY_GROVE_STONE = modItemTag("grove_stone/fairy");
+    public static final TagKey<Item> TWILIGHT_GROVE_STONE = modItemTag("grove_stone/twilight");
+    public static final TagKey<Item> FUNGAL_GROVE_STONE = modItemTag("grove_stone/fungal");
+    public static final TagKey<Item> SPROUTING_GROVE_STONE = modItemTag("grove_stone/sprouting");
+    public static final TagKey<Item> ELEMENTAL_GROVE_STONE = modItemTag("grove_stone/elemental");
+    public static final TagKey<Item> PRIMAL_GROVE_STONE = modItemTag("grove_stone/primal");
+
+    private static final Map<TagKey<Grove>, TagKey<Item>> GROVE_MAP = new HashMap<>();
+    static {
+      GROVE_MAP.put(ANY, ANY_GROVE_STONE);
+      GROVE_MAP.put(ANY_POWERABLE, ANY_POWERABLE_GROVE_STONE);
+      GROVE_MAP.put(WILD, WILD_GROVE_STONE);
+      GROVE_MAP.put(FAIRY, FAIRY_GROVE_STONE);
+      GROVE_MAP.put(TWILIGHT, TWILIGHT_GROVE_STONE);
+      GROVE_MAP.put(FUNGAL, FUNGAL_GROVE_STONE);
+      GROVE_MAP.put(SPROUTING, SPROUTING_GROVE_STONE);
+      GROVE_MAP.put(ELEMENTAL, ELEMENTAL_GROVE_STONE);
+      GROVE_MAP.put(PRIMAL, PRIMAL_GROVE_STONE);
+    }
+
+    public static TagKey<Item> getGroveStoneTag(Grove grove) {
+      var name = grove.builtInRegistryHolder().getKey().location().getPath();
+      return GROVE_MAP.getOrDefault(modTag(name), modItemTag("grove_stone/" + name));
+    }
+
+    public static TagKey<Item> getGroveStoneTag(TagKey<Grove> groveTag) {
+      return GROVE_MAP.computeIfAbsent(groveTag, k -> modItemTag("grove_stone/" + k.location().getPath()));
+    }
+
+    static TagKey<Item> modItemTag(String name) {
+      return TagKey.create(Registries.ITEM, RootsAPI.rl(name));
+    }
 
     static TagKey<Grove> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.GROVES, RootsAPI.rl(name));

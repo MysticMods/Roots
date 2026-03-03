@@ -20,6 +20,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -88,6 +89,7 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   public static IDrawable INFO_DRAWABLE;
+  public static EnumMap<GrovePowerGenerator.Symmetry, IDrawable> GROVE_POWER_SYMMETRY_DRAWABLES = new EnumMap<>(GrovePowerGenerator.Symmetry.class);
 
   private static <T> IIngredientType<T> ingredient(Class<T> clazz) {
     return () -> clazz;
@@ -162,6 +164,10 @@ public class RootsJEIPlugin implements IModPlugin {
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
+    for (GrovePowerGenerator.Symmetry sym : GrovePowerGenerator.Symmetry.values()) {
+      GROVE_POWER_SYMMETRY_DRAWABLES.put(sym, guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/symmetry/" + sym.name().toLowerCase(Locale.ROOT) + ".png"), 0, 0, 16, 16)
+          .setTextureSize(16, 16).build());
+    }
   }
 
   // SORT THEM ALPHABETICALLY >:0
@@ -264,7 +270,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.RITUAL_ANIMAL_HARVEST.get(), ANIMAL_HARVEST_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.FUNGAL_TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE);
     registration.addRecipeCatalyst(Items.GLASS_BOTTLE, ENTITY_INTERACTION_TYPE);
-    registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.PRIMAL_GROVE_STONE.get(), ModItems.SPROUTING_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
+    //registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.PRIMAL_GROVE_STONE.get(), ModItems.SPROUTING_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
   }
 
   @Override

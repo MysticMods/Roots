@@ -10,12 +10,14 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -332,6 +334,20 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS);
     manualCopy(RootsTags.Blocks.SPREADING_MUSHROOMS);
 
+    manualCopy(BlockTags.CROPS);
+
+    manualCopy(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.FAIRY_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.FAIRY_GROVE_PATHS);
+    manualCopy(RootsTags.Blocks.WILD_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS);
+    manualCopy(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS);
+    manualCopy(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS);
+    tag(TagKey.create(Registries.ITEM, RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS.location())).add(Items.CREEPER_HEAD,  Items.DRAGON_HEAD, Items.PIGLIN_HEAD, Items.PLAYER_HEAD, Items.ZOMBIE_HEAD);
+    tag(TagKey.create(Registries.ITEM, RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS.location())).add(Items.LAVA_BUCKET, Items.WATER_BUCKET);
+
     copySpell(RootsTags.Spells.ADJUSTABLE_SPELL);
     copySpell(RootsTags.Spells.FAIRY);
     copySpell(RootsTags.Spells.FUNGAL);
@@ -359,6 +375,34 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copyGrove(RootsTags.Groves.WILD);
     copyGrove(RootsTags.Groves.TWILIGHT);
     copyGrove(RootsTags.Groves.PRIMAL);
+
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY_POWERABLE)).addTags(
+        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_SPROUTING, RootsTags.Items.GROVE_STONE_TWILIGHT
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY)).addTags(
+        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_SPROUTING, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ELEMENTAL)).addTags(
+        RootsTags.Items.GROVE_STONE_ELEMENTAL
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.FAIRY)).addTags(
+        RootsTags.Items.GROVE_STONE_FAIRY
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.FUNGAL)).addTags(
+        RootsTags.Items.GROVE_STONE_FUNGAL
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.SPROUTING)).addTags(
+        RootsTags.Items.GROVE_STONE_SPROUTING
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.TWILIGHT)).addTags(
+        RootsTags.Items.GROVE_STONE_TWILIGHT
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.PRIMAL)).addTags(
+        RootsTags.Items.GROVE_STONE_PRIMAL
+    );
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.WILD)).addTags(
+        RootsTags.Items.GROVE_STONE_WILD
+    );
 
     // Additions manually copied from RootsBlockTagProvider
     this.tag(ItemTags.SLABS)

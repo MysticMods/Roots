@@ -10,16 +10,17 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.action.GroveReputationEntry;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.ingredient.RootsIngredientHelper;
+import mysticmods.roots.integration.jei.ingredient.block.SimpleBlockType;
+import mysticmods.roots.integration.jei.widget.SymmetryWidget;
 import mysticmods.roots.recipe.fake.GrovePowerRecipe;
-import mysticmods.roots.recipe.fake.GroveWithReputation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -36,13 +37,13 @@ public class GrovePowerCategory implements IRecipeCategory<GrovePowerRecipe> {
   }
 
   public GrovePowerCategory(IGuiHelper helper) {
-    this(helper, 209, 21, RootsAPI.rl("textures/gui/jei/grove_reputation_entry.png"), () -> new ItemStack(ModItems.WILD_GROVE_STONE.get()), Component.translatable("roots.jei.grove_reputation"));
+    this(helper, 116, 21, RootsAPI.rl("textures/gui/jei/grove_power_entry.png"), () -> new ItemStack(ModItems.WILD_GROVE_STONE.get()), Component.translatable("roots.jei.grove_power"));
   }
 
 
   @Override
-  public RecipeType<GroveWithReputation> getRecipeType() {
-    return RootsJEIPlugin.GROVE_REPUTATION_ENTRY_TYPE;
+  public RecipeType<GrovePowerRecipe> getRecipeType() {
+    return RootsJEIPlugin.GROVE_POWER_RECIPE_TYPE;
   }
 
   @Override
@@ -62,37 +63,24 @@ public class GrovePowerCategory implements IRecipeCategory<GrovePowerRecipe> {
   }
 
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, GroveWithReputation recipe, IFocusGroup iFocusGroup) {
+  public void setRecipe(IRecipeLayoutBuilder builder, GrovePowerRecipe recipe, IFocusGroup iFocusGroup) {
     builder.addSlot(RecipeIngredientRole.INPUT, 2, 2)
-        .addIngredient(RootsJEIPlugin.GROVE_ACTION_TYPE, recipe.groveAction())
-        .setCustomRenderer(RootsJEIPlugin.GROVE_TYPE, RootsJEIPlugin.GROVE_RENDERER);
-
-    int o = 42;
-    int i = 0;
-    for (GroveReputationEntry.SubEntry entry : recipe.entry().entries()) {
-      if (i > 7) {
-        RootsAPI.LOG.error("Too many entries in GroveReputationEntry {}, truncating to 8", recipe.entry().name());
-        break;
-      }
-      RootsIngredientHelper.subEntrySlot(builder, RecipeIngredientRole.INPUT, o + (i * 18), 2, entry);
-      i++;
-    }
-
-    var slot = builder.addSlot(RecipeIngredientRole.OUTPUT, 192, 2)
+        .addIngredients(RootsJEIPlugin.BLOCK_TYPE, SimpleBlockType.fromTag(recipe.blockTag()))
+        .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
+    builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addIngredients(recipe.itemIngredient());
+    builder.addSlot(RecipeIngredientRole.CATALYST, 61, 2)
+        .addIngredients(Ingredient.of(RootsTags.Groves.getGroveStoneTag(recipe.groveTag())));
+    var power = GroveNumber.power(recipe.groveTag(), recipe.power());
+    builder.addSlot(RecipeIngredientRole.OUTPUT, 99, 2)
+        .addIngredient(RootsJEIPlugin.GROVE_NUMBER_TYPE, power)
         .setCustomRenderer(RootsJEIPlugin.GROVE_NUMBER_TYPE, RootsJEIPlugin.GROVE_NUMBER_RENDERER);
-
-    if (recipe.entry().unique()) {
-      slot.addIngredient(RootsJEIPlugin.GROVE_NUMBER_TYPE, GroveNumber.reputation(recipe.entry().grove(), recipe.entry()
-          .reputation().gain1()));
-    } else {
-      List<GroveNumber> outputs = recipe.entry().reputation().stream()
-          .mapToObj(f -> GroveNumber.reputation(recipe.entry().grove(), f)).toList();
-      slot.addIngredients(RootsJEIPlugin.GROVE_NUMBER_TYPE, outputs);
-    }
-
   }
 
   @Override
-  public void createRecipeExtras(IRecipeExtrasBuilder builder, GroveWithReputation recipe, IFocusGroup focuses) {
+  public void createRecipeExtras(IRecipeExtrasBuilder builder, GrovePowerRecipe recipe, IFocusGroup focuses) {
+    IRecipeCategory.super.createRecipeExtras(builder, recipe, focuses);
+
+    builder.addWidget(new SymmetryWidget(23, 2, recipe.symmetry()));
+
   }
 }

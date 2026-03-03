@@ -14,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
@@ -185,6 +186,18 @@ public interface GrovePowerGenerator {
     @Override
     public String getSerializedName() {
       return name().toLowerCase(Locale.ROOT);
+    }
+
+    public String getTranslationKey() {
+      return "roots.symmetry." + getSerializedName();
+    }
+
+    public Component getName() {
+      return Component.translatable(getTranslationKey());
+    }
+
+    public Component getTooltip() {
+      return Component.translatable(getTranslationKey() + ".description");
     }
   }
 

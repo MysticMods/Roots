@@ -2,6 +2,7 @@ package mysticmods.roots.gen.lang;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.init.*;
@@ -849,6 +850,16 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.gui.effect_continue_canceling", "Continue holding [%s] to cancel %s.");
 
     add("container.wildwoodchest", "Wildwood Chest");
+
+    for (GrovePowerGenerator.Symmetry sym : GrovePowerGenerator.Symmetry.values()) {
+      add(sym.getTranslationKey(), toEnglishName(sym.getSerializedName()));
+    }
+
+    add(GrovePowerGenerator.Symmetry.RADIAL_NOT_MATCHING.getTranslationKey() + ".description", "Requires a non-matching block positioned radially around the grove stone.");
+    add(GrovePowerGenerator.Symmetry.RADIAL_SAME_BLOCK_OR_TAG.getTranslationKey() + ".description", "Requires a matching block or a block from the same tag positioned radially around the grove stone.");
+    add(GrovePowerGenerator.Symmetry.RADIAL_SAME_BLOCK.getTranslationKey() + ".description", "Requires an identical block positioned radially around the grove stone.");
+    add(GrovePowerGenerator.Symmetry.RADIAL_DIFFERENT_SAME_TAG.getTranslationKey() + ".description", "Requires a different block from the same tag positioned radially around the grove stone.");
+    add(GrovePowerGenerator.Symmetry.NONE.getTranslationKey() + ".description", "No symmetry required.");
   }
 
   // TODO: Translations for damage

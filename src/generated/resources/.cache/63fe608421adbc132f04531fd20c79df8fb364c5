@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-25T16:55:56.6734579	Roots Item Tags
+// 1.21.1	2026-03-03T15:02:19.6622095	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -23,6 +23,7 @@ f7e26a67b126e19a782b7725861e11547c0cb7b7 data/minecraft/tags/item/axes.json
 c6d13638c4a16cb628232a0b669ba8f156563075 data/minecraft/tags/item/buttons.json
 dc1a6015f49b370f198a3747dca9018794e42899 data/minecraft/tags/item/chest_armor.json
 4c3bfce7b1456b68f71b17c9426d9e3008caa95c data/minecraft/tags/item/chicken_food.json
+4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/minecraft/tags/item/crops.json
 a23108cfe5e1e4d7d932897fe1b83b6b1a77167e data/minecraft/tags/item/enchantable/durability.json
 a23108cfe5e1e4d7d932897fe1b83b6b1a77167e data/minecraft/tags/item/enchantable/mining.json
 a23108cfe5e1e4d7d932897fe1b83b6b1a77167e data/minecraft/tags/item/enchantable/mining_loot.json
@@ -110,6 +111,17 @@ b8a772562923991f5f28045f85c332af35e9772b data/roots/tags/item/fungal.json
 80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/roots/tags/item/fungal_transmuter_activation.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/roots/tags/item/gramaries.json
 80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/roots/tags/item/grove_crafter_activation.json
+cfab2ab481bf476a645d326b87627918009b9e50 data/roots/tags/item/grove_generators/creative.json
+9d67a0daac64c410592e97ad5a85b88eda01dae4 data/roots/tags/item/grove_generators/elemental.json
+c1d1009e74380dc6ac8c860ff88a89ca6b475718 data/roots/tags/item/grove_generators/elemental_liquid.json
+c05e998c718feb7c79e577ca9f09edc7225b3d22 data/roots/tags/item/grove_generators/fairy.json
+d5140d1e8bd6a91f904fd01a209a5dad3cc34f23 data/roots/tags/item/grove_generators/fairy/paths.json
+190dcd5a6f0ceccc64a1223ebf8ceaf05f2fa789 data/roots/tags/item/grove_generators/fungal/dirt.json
+d97765bbcd0f5e1bc4884fc37ca0e9da6e3a99f7 data/roots/tags/item/grove_generators/fungal/mushrooms.json
+4907132c5a1fed8179656d02c1db06a26243de22 data/roots/tags/item/grove_generators/fungal/other.json
+e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/item/grove_generators/sprouting.json
+bfbe237891e2a4d534e1cfc1fb4da3977ada003a data/roots/tags/item/grove_generators/twilight.json
+fdf0229f5dd8b82a9a07d37302c8eab1ed4ebeab data/roots/tags/item/grove_generators/wild.json
 0b84a7b844d869f56ca22683e394d08ece1c1d7e data/roots/tags/item/grove_stones.json
 fe934ceccc4232fc0d8a73f6ae26291c0403badb data/roots/tags/item/grove_stones/elemental.json
 b0e60b9a7562b461a7ff4e1d6e2e8c6460f2ff40 data/roots/tags/item/grove_stones/fairy.json
@@ -118,6 +130,15 @@ a10f4893aa793d9a58932b14d983daca8e055665 data/roots/tags/item/grove_stones/funga
 ecd2f0dde1c61318a3c87219ac7830a7061e71ac data/roots/tags/item/grove_stones/sprouting.json
 bbbdabc47adfef24d589a4860b387406ffacd3bd data/roots/tags/item/grove_stones/twilight.json
 ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/item/grove_stones/wild.json
+ca7e1c215d6d8325fa56477f77823d372964cb3f data/roots/tags/item/grove_stone/any.json
+00b35f9cc753c904c0fa046b6522c0ba75f47402 data/roots/tags/item/grove_stone/any_powerable.json
+e625386576cc34a0d5fae436d6bc9bb887947680 data/roots/tags/item/grove_stone/elemental.json
+5e5eb222f6818276dd0cd2ef60e3fd31f5589994 data/roots/tags/item/grove_stone/fairy.json
+fc3e96a33e014253be29c0e3749eb4132b3ae75f data/roots/tags/item/grove_stone/fungal.json
+c0e5ac26bc57a1a6ba571b21d7fab9d6bbb6d318 data/roots/tags/item/grove_stone/primal.json
+e9869f6c8cadfe09463f5204196ea71ab0c745ca data/roots/tags/item/grove_stone/sprouting.json
+92fa8b4ff37bb06af89d20389341cd7044351ef3 data/roots/tags/item/grove_stone/twilight.json
+a19988edbda56c4ff3df092fb13fc11f968c9b8a data/roots/tags/item/grove_stone/wild.json
 817a6bd7f94e13b5fa1b350c0704f567d5d98d16 data/roots/tags/item/growth_amplifier_grasses.json
 a49f80806de2f40b79a2700f33930cc814298cf8 data/roots/tags/item/herbs.json
 d6ef38e38b2457620f02a7c7cd8c35b9915bded1 data/roots/tags/item/herbs/bafflecap.json

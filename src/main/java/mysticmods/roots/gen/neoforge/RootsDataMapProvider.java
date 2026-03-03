@@ -530,6 +530,8 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GrovePowerGenerator.Generator(RootsTags.Blocks.FAIRY_GROVE_PATHS, RootsTags.Groves.FAIRY, 1)), false);
     builder24.add(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, List.of(
         new GrovePowerGenerator.Generator(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
+    builder24.add(RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS, List.of(
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
     builder24.add(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, List.of(
         new GrovePowerGenerator.Generator(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, RootsTags.Groves.SPROUTING, 5)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, List.of(
@@ -543,7 +545,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
         new GrovePowerGenerator.Generator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
     builder24.add(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, List.of(
-        new GrovePowerGenerator.Generator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY, 1000)), false);
+        new GrovePowerGenerator.Generator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY_POWERABLE, 1000)), false);
 
     var builder25 = builder(DataMaps.GROVE_GENERATION_ENTRIES);
     builder25.add(ModGroves.FAIRY, List.of(
@@ -568,7 +570,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, GrovePowerGenerator.Symmetry.RADIAL_NOT_MATCHING)
     ), false);
 
-    builder25.add(RootsTags.Groves.ANY, List.of(
+    builder25.add(RootsTags.Groves.ANY_POWERABLE, List.of(
         new GrovePowerGenerator.GenerationEntry(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, 1, GrovePowerGenerator.Symmetry.NONE)
     ), false);
 
