@@ -1,22 +1,24 @@
 package mysticmods.roots.api.modifier;
 
-import com.google.common.collect.Interner;
-import com.google.common.collect.Interners;
-import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import com.google.common.collect.MapMaker;
 import net.minecraft.resources.ResourceKey;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentMap;
 
-public class ModifierNode<V, T extends Modifier<V, T>> {
-  private static final Interner<ModifierNode<?, ?>> VALUES = Interners.newStrongInterner();
+public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<V, T> {
+  private static final ConcurrentMap<ResourceKey<?>, ModifierNode<?, ?>> VALUES = new MapMaker().weakValues().makeMap();
 
-  private final ResourceKey<T> modifier;
+  protected final ResourceKey<T> modifier;
   @Nullable
-  private ModifierNode<V, T> parent;
-  private final Set<ModifierNode<V, T>> children = new ReferenceOpenHashSet<>();
+  protected IModifierNode<V, T> parent;
+  protected final List<IModifierNode<V, T>> children = new ArrayList<>();
+  protected float x, y;
 
-  private ModifierNode(ResourceKey<T> modifier, @Nullable ModifierNode<V, T> parent) {
+  private ModifierNode(ResourceKey<T> modifier, @Nullable IModifierNode<V, T> parent) {
     this.modifier = modifier;
     this.parent = parent;
   }
@@ -26,48 +28,35 @@ public class ModifierNode<V, T extends Modifier<V, T>> {
   }
 
   @SuppressWarnings("unchecked")
-  public static <V, T extends Modifier<V, T>> ModifierNode<V, T> create(ResourceKey<T> modifier) {
-    return (ModifierNode<V, T>) VALUES.intern(new ModifierNode<>(modifier));
+  public static <V, T extends Modifier<V, T>> IModifierNode<V, T> create(ResourceKey<T> modifier) {
+    return (IModifierNode<V, T>) VALUES.computeIfAbsent(modifier, (k) -> new ModifierNode<>((ResourceKey<T>) k));
   }
 
-  public static <V, T extends Modifier<V, T>> ModifierNode<V, T> create(ResourceKey<T> modifier, ModifierNode<V, T> parent) {
-    return create(modifier).parent(parent);
+  public static <V, T extends Modifier<V, T>> IModifierNode<V, T> create(ResourceKey<T> modifier, IModifierNode<V, T> parent) {
+    return create(modifier).setParent(parent);
   }
 
+  @NotNull
   public ResourceKey<T> modifier() {
     return modifier;
   }
 
   @Nullable
-  public ModifierNode<V, T> parent() {
+  public IModifierNode<V, T> parent() {
     return parent;
   }
 
-  public ModifierNode<V, T> parent(ModifierNode<V, T> parent) {
+  public IModifierNode<V, T> setParent(IModifierNode<V, T> parent) {
     this.parent = parent;
     return this;
   }
 
-  public ModifierNode<V, T> root() {
-    return getRoot(this);
-  }
-
-  public Iterable<ModifierNode<V, T>> children() {
+  public List<IModifierNode<V, T>> children() {
     return this.children;
   }
 
-  public void addChild(ModifierNode<V, T> child) {
+  public void addChild(IModifierNode<V, T> child) {
     this.children.add(child);
-  }
-
-  public static <V, T extends Modifier<V, T>> ModifierNode<V, T> getRoot(ModifierNode<V, T> node) {
-    ModifierNode<V, T> modifierNode = node;
-
-    while (modifierNode != null && modifierNode.parent() != null) {
-      modifierNode = modifierNode.parent();
-    }
-
-    return modifierNode;
   }
 
   @Override
@@ -91,5 +80,19 @@ public class ModifierNode<V, T extends Modifier<V, T>> {
   @Override
   public String toString() {
     return this.modifier.toString();
+  }
+
+  @Override
+  public void setLocation(float x, float y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public float x() {
+    return x;
+  }
+
+  public float y  () {
+    return y;
   }
 }

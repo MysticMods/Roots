@@ -13,6 +13,8 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T>, ICosted {
@@ -20,18 +22,20 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   protected final ResourceKey<T> parent;
   protected final ResourceKey<V> applicable;
   protected final CostInstance defaultCosts;
+  protected final Set<ResourceKey<T>> conflicts;
   @Nullable
   protected CostInstance costs;
   private String descriptionId;
 
-  public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable) {
+  public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable, ResourceKey<T> ... conflicts) {
     this.parent = parent;
     this.applicable = applicable;
     this.defaultCosts = defaultCosts;
+    this.conflicts = Set.of(conflicts);
   }
 
-  public Modifier(CostInstance defaultCosts, ResourceKey<V> applicable) {
-    this(defaultCosts, null, applicable);
+  public Modifier(CostInstance defaultCosts, ResourceKey<V> applicable, ResourceKey<T> ... conflicts) {
+    this(defaultCosts, null, applicable, conflicts);
   }
 
   protected abstract DataMapType<T, CostInstance> getDataMapType();
@@ -45,6 +49,11 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   @Override
   public ResourceKey<V> getApplicable() {
     return applicable;
+  }
+
+  @Override
+  public Set<ResourceKey<T>> getConflicts() {
+    return conflicts;
   }
 
   public abstract Holder<T> builtInRegistryHolder();

@@ -3,7 +3,7 @@
     "#roots:grove_generators/creative": [
       {
         "blockTag": "roots:grove_generators/creative",
-        "tag": "roots:any",
+        "tag": "roots:any_powerable",
         "value": 1000
       }
     ],

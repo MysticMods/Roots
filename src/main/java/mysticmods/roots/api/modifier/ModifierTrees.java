@@ -67,6 +67,7 @@ public class ModifierTrees {
       if (!validated.isEmpty()) {
         throw new IllegalStateException("Ritual " + holder.getKey() + " has modifiers with missing parents: " + validated);
       }
+      tree.position();
       builder.put(holder.key(), tree);
     });
     RITUAL_MODIFIER_TREES = builder.build();
@@ -83,9 +84,11 @@ public class ModifierTrees {
       if (!validated.isEmpty()) {
         throw new IllegalStateException("Spell " + holder.getKey() + " has modifiers with missing parents: " + validated);
       }
+      tree.position();
       spellBuilder.put(holder.key(), tree);
     });
     SPELL_MODIFIER_TREES = spellBuilder.build();
+
     initialized = true;
   }
 }

@@ -1,6 +1,6 @@
 {
   "values": {
-    "#roots:any": [
+    "#roots:any_powerable": [
       {
         "max_count": 1,
         "tag": "roots:grove_generators/creative"

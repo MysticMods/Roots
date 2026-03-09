@@ -2,41 +2,45 @@ package mysticmods.roots.api.modifier;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class ModifierTree<V, C extends Modifier<V, C>> {
+public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<V, C> {
   private static final Set<ResourceKey<?>> RESTRICTED_MODIFIERS = new ReferenceOpenHashSet<>();
 
   private final Holder<V> object;
-  private final Map<ResourceKey<C>, C> modifiers = new Object2ObjectOpenHashMap<>();
-  private final Map<ResourceKey<C>, ModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
-  private final Set<ModifierNode<V, C>> rootNodes = new ReferenceOpenHashSet<>();
-  private final Set<ModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
+  private final Map<ResourceKey<C>, Holder<C>> modifiers = new Object2ObjectOpenHashMap<>();
+  private final Map<ResourceKey<C>, IModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
+  private final List<IModifierNode<V, C>> rootNodes = new ArrayList<>();
+  private final Set<IModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
 
-  private final Set<ResourceKey<C>> parents = new ObjectOpenHashSet<>();
+  private final Map<ResourceKey<C>, Set<ResourceKey<C>>> conflicts = new Object2ObjectOpenHashMap<>();
+
+  private final Map<ResourceKey<C>, Set<ResourceKey<C>>> ancestors = new Object2ObjectOpenHashMap<>();
+  private final Map<ResourceKey<C>, ModifierPositionInfo> positions = new Object2ObjectOpenHashMap<>();
+
+  private final Set<ResourceKey<C>> missing = new ObjectOpenHashSet<>();
 
   public ModifierTree(Holder<V> object) {
     this.object = object;
   }
 
-  public Set<ResourceKey<C>> validateParents () {
-    Set<ResourceKey<C>> missing = new HashSet<>();
-    for (ResourceKey<C> parent : parents) {
-      if (!modifiers.containsKey(parent)) {
-        missing.add(parent);
-      }
-    }
+  // This not being empty is a sign of invalid modifiers
+  public Set<ResourceKey<C>> validateParents() {
+    missing.removeIf(modifiers::containsKey);
     return missing;
   }
 
-  public ModifierTree<V, C>.Instance validator (ModifierSet<V, C, ?> modifiers) {
+  // TODO: Conflict validation: conflicting modifiers cannot be parents of the modifier. Basically, ensure there are no cycles in the graph.
+
+  // This being called "validator" makes little sense
+  public ModifierTree<V, C>.Instance validator(ModifierSet<V, C, ?> modifiers) {
     return new Instance(modifiers);
   }
 
@@ -54,39 +58,43 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return true; // this was previously false but it's already added so it doesn't matter
     }
 
-    ModifierNode<V, C> node = ModifierNode.create(modifier.getKey());
+    missing.remove(modifier.getKey());
+
+    IModifierNode<V, C> node = ModifierNode.create(modifier.getKey());
     allNodes.add(node);
-    modifiers.put(modifier.getKey(), mod);
+    modifiers.put(modifier.getKey(), modifier);
     nodes.put(modifier.getKey(), node);
 
+    conflicts.computeIfAbsent(modifier.getKey(), k -> new HashSet<>())
+        .addAll(mod.getConflicts());
+
+    // Ensure back-references to all conflicts are resolved
+    for (ResourceKey<C> conflict : mod.getConflicts()) {
+      conflicts.computeIfAbsent(conflict, k -> new HashSet<>())
+          .add(modifier.getKey());
+    }
+
+    var parents = ancestors.computeIfAbsent(modifier.getKey(), k -> new HashSet<>());
     if (mod.getParent() == null) {
+      node.setParent(this);
       rootNodes.add(node);
     } else {
-      ModifierNode<V, C> parentNode = ModifierNode.create(mod.getParent());
+      IModifierNode<V, C> parentNode = ModifierNode.create(mod.getParent());
       parentNode.addChild(node);
       parents.add(mod.getParent());
+      if (modifiers.get(mod.getParent()) == null) {
+        missing.add(mod.getParent());
+      }
     }
 
     return true;
   }
 
-  private ModifierNode<V, C> getNode(ResourceKey<C> key) {
-    ModifierNode<V, C> node = nodes.get(key);
-    if (node == null) {
-      throw new NullPointerException("No node for key " + key);
-    }
-    return node;
-  }
-
-  public Iterable<ModifierNode<V, C>> roots() {
-    return rootNodes;
-  }
-
-  public Iterable<ModifierNode<V, C>> all() {
+  public Set<IModifierNode<V, C>> all() {
     return allNodes;
   }
 
-  public static boolean isRestricted(ModifierNode<?, ?> node) {
+  public static boolean isRestricted(IModifierNode<?, ?> node) {
     return RESTRICTED_MODIFIERS.contains(node.modifier());
   }
 
@@ -114,60 +122,125 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     RESTRICTED_MODIFIERS.add(modifier.getKey());
   }
 
-  public static void restrictModifier(ModifierNode<?, ?> node) {
+  public static void restrictModifier(IModifierNode<?, ?> node) {
     RESTRICTED_MODIFIERS.add(node.modifier());
   }
+
+  @Override
+  public @Nullable ResourceKey<C> modifier() {
+    return null;
+  }
+
+  @Override
+  public @Nullable IModifierNode<V, C> parent() {
+    return null;
+  }
+
+  @Override
+  public IModifierNode<V, C> setParent(IModifierNode<V, C> parent) {
+    return this;
+  }
+
+  @Override
+  public List<IModifierNode<V, C>> children() {
+    return rootNodes;
+  }
+
+  @Override
+  public void addChild(IModifierNode<V, C> child) {
+    // NO-OP
+  }
+
+  public void position () {
+    ModifierNodePosition.run(this);
+  }
+
+  protected static <V, C extends Modifier<V, C>> IModifierNode<V, C> getNode(ModifierTree<V, C> tree, ResourceKey<C> key) {
+    IModifierNode<V, C> node = tree.nodes.get(key);
+    if (node == null) {
+      throw new NullPointerException("No node for key " + key);
+    }
+    return node;
+  }
+
 
   public class Instance {
     private final Set<ResourceKey<C>> enabledModifiers = new ReferenceOpenHashSet<>();
 
+    private boolean invalid = false;
+
     public Instance(Set<C> modifierSet) {
       for (C modifier : modifierSet) {
-        enable(modifier.builtInRegistryHolder().getKey());
+        if (!enable(modifier.builtInRegistryHolder().getKey())) {
+          // TODO: Conflicting modifiers in the initial set
+          invalid = true;
+        }
       }
     }
 
-    public Instance enable(ModifierNode<V, C> node) {
+    public boolean isValid() {
+      return !invalid;
+    }
+
+    public boolean enable(IModifierNode<V, C> node) {
       if (isRestricted(node)) {
         return disable(node);
       }
 
-      enabledModifiers.add(node.modifier());
-      ModifierNode<V, C> parent = node.parent();
-      if (parent != null && !enabledModifiers.contains(parent.modifier())) {
-        enable(parent);
+      Set<ResourceKey<C>> conflicts = ModifierTree.this.conflicts.get(node.modifier());
+      if (conflicts != null) {
+        for (ResourceKey<C> conflict : conflicts) {
+          if (enabledModifiers.contains(conflict)) {
+            // If we're unable to disable conflicts, we just fail
+            if (!disable(getNode(ModifierTree.this, conflict))) {
+              return false;
+            }
+          }
+        }
       }
-      return this;
+
+      IModifierNode<V, C> parent = node.parent();
+      if (parent != null && !enabledModifiers.contains(parent.modifier())) {
+        // TODO: Handle parental conflicts with children
+        if (!enable(parent)) {
+          return false;
+        }
+      }
+
+      enabledModifiers.add(node.modifier());
+      return true;
     }
 
-    public Instance enable(ResourceKey<C> key) {
-      ModifierNode<V, C> node = getNode(key);
+    public boolean enable(ResourceKey<C> key) {
+      IModifierNode<V, C> node = getNode(ModifierTree.this, key);
       return enable(node);
     }
 
-    public Instance disable(ModifierNode<V, C> node) {
-      for (ModifierNode<V, C> child : node.children()) {
+    public boolean disable(IModifierNode<V, C> node) {
+      for (IModifierNode<V, C> child : node.children()) {
         if (enabledModifiers.contains(child.modifier())) {
-          disable(child);
+          if (!disable(child)) {
+            return false;
+          }
         }
       }
-      return this;
+      return true;
     }
 
-    public Instance disable(ResourceKey<C> key) {
-      return disable(getNode(key));
+    public boolean disable(ResourceKey<C> key) {
+      return disable(getNode(ModifierTree.this, key));
     }
 
-    public Instance copy () {
+    public Instance copy() {
       Instance copy = new Instance(new ObjectOpenHashSet<>());
       copy.enabledModifiers.addAll(this.enabledModifiers);
       return copy;
     }
 
-    public Set<C> modifiersSet () {
+    public Set<C> modifiersSet() {
       Set<C> mods = new ObjectOpenHashSet<>();
       for (ResourceKey<C> key : enabledModifiers) {
-        mods.add(modifiers.get(key));
+        mods.add(modifiers.get(key).value());
       }
       return mods;
     }
