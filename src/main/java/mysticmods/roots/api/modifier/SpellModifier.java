@@ -7,6 +7,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +23,11 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   @Override
   protected DataMapType<SpellModifier, CostInstance> getDataMapType() {
     return DataMaps.SPELL_MODIFIER_COST_DATA;
+  }
+
+  @Override
+  protected DataMapType<SpellModifier, Item> getIconDataMapType() {
+    return DataMaps.SPELL_MODIFIER_ICONS;
   }
 
   @Override

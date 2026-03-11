@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -8,7 +9,7 @@ import net.minecraft.network.codec.StreamCodec;
 
 // Calculated once per ModifierTree
 public class ModifierPositionInfo {
-  public static final Codec<ModifierPositionInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+  public static final MapCodec<ModifierPositionInfo> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       Codec.FLOAT.fieldOf("x").forGetter(ModifierPositionInfo::x),
       Codec.FLOAT.fieldOf("y").forGetter(ModifierPositionInfo::y)
   ).apply(instance, ModifierPositionInfo::new));

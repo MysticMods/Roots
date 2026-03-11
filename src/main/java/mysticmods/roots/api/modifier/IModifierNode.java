@@ -23,4 +23,12 @@ public interface IModifierNode<V, T extends IModifier<V, T>> {
   default void setLocation(float x, float y) {
     // NO-OP
   }
+
+  default float x () {
+    return 0;
+  }
+
+  default float y () {
+    return 0;
+  }
 }

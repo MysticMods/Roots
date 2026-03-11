@@ -169,7 +169,7 @@ public class GrantStorage implements ICleanable {
       for (SpellModifier mod : spell.getModifiers()) {
         result.add(new LibraryModifier(mod.builtInRegistryHolder(), grantedModifiers.contains(mod)));
       }
-      result.sort(Comparator.comparing(LibraryModifier::enabled));
+      result.sort(Comparator.comparing(LibraryModifier::isEnabled));
       return result;
     });
   }*/

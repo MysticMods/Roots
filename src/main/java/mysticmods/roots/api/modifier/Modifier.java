@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 
 import javax.annotation.Nullable;
@@ -25,6 +26,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   protected final Set<ResourceKey<T>> conflicts;
   @Nullable
   protected CostInstance costs;
+  private Item icon;
   private String descriptionId;
 
   public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable, ResourceKey<T> ... conflicts) {
@@ -39,6 +41,8 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   protected abstract DataMapType<T, CostInstance> getDataMapType();
+
+  protected abstract DataMapType<T, Item> getIconDataMapType ();
 
   @Override
   @Nullable
@@ -99,10 +103,17 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   @Override
+  @Nullable
+  public Item getIcon () {
+    return icon;
+  }
+
+  @Override
   public void init(Holder<T> holder) {
     var costs = holder.getData(getDataMapType());
     if (costs != null) {
       this.costs = costs;
     }
+    this.icon = holder.getData(getIconDataMapType());
   }
 }

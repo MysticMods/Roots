@@ -1,12 +1,19 @@
 package mysticmods.roots.api.modifier;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -24,6 +31,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
 
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> ancestors = new Object2ObjectOpenHashMap<>();
   private final Map<ResourceKey<C>, ModifierPositionInfo> positions = new Object2ObjectOpenHashMap<>();
+  private final Map<ResourceKey<C>, Item> icons = new Object2ObjectOpenHashMap<>();
 
   private final Set<ResourceKey<C>> missing = new ObjectOpenHashSet<>();
 
@@ -153,6 +161,26 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
 
   public void position () {
     ModifierNodePosition.run(this);
+    for (IModifierNode<V, C> node : allNodes) {
+      positions.putIfAbsent(node.modifier(), new ModifierPositionInfo(node.x(), node.y()));
+    }
+  }
+
+  @Nullable
+  protected static <V, C extends Modifier<V, C>> Item getIcon (ModifierTree<V, C> tree, ResourceKey<C> key) {
+    Item icon = tree.icons.get(key);
+    if (icon == null) {
+      Holder<C> modifier = tree.modifiers.get(key);
+      if (modifier == null) {
+        RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", key);
+        return null;
+      }
+      tree.icons.put(key, modifier.value().getIcon());
+    }
+    if (icon == null) {
+      throw new NullPointerException("No icon for key " + key);
+    }
+    return icon;
   }
 
   protected static <V, C extends Modifier<V, C>> IModifierNode<V, C> getNode(ModifierTree<V, C> tree, ResourceKey<C> key) {
@@ -163,6 +191,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
     return node;
   }
 
+  public static final StreamCodec<RegistryFriendlyByteBuf, Map<String, ModifierInfo>> MODIFIER_INFO_STREAM_CODEC = ByteBufCodecs.map(Object2ObjectOpenHashMap::new, ByteBufCodecs.STRING_UTF8, ModifierInfo.STREAM_CODEC);
 
   public class Instance {
     private final Set<ResourceKey<C>> enabledModifiers = new ReferenceOpenHashSet<>();
@@ -244,5 +273,18 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
       }
       return mods;
     }
+  }
+
+  public record ModifierInfo (ModifierPositionInfo position, Item icon, boolean canEnable, boolean isEnabled, boolean isUnlocked) {
+    public static final Codec<ModifierInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        ModifierPositionInfo.CODEC.forGetter(ModifierInfo::position),
+        BuiltInRegistries.ITEM.byNameCodec().fieldOf("icon").forGetter(ModifierInfo::icon),
+        Codec.BOOL.fieldOf("canEnable").forGetter(ModifierInfo::canEnable),
+        Codec.BOOL.fieldOf("isEnabled").forGetter(ModifierInfo::isEnabled),
+        Codec.BOOL.fieldOf("isUnlocked").forGetter(ModifierInfo::isUnlocked)
+    ).apply(instance, ModifierInfo::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierInfo> STREAM_CODEC = StreamCodec.composite(
+        ModifierPositionInfo.STREAM_CODEC, ModifierInfo::position, ByteBufCodecs.registry(Registries.ITEM), ModifierInfo::icon, ByteBufCodecs.BOOL, ModifierInfo::canEnable, ByteBufCodecs.BOOL, ModifierInfo::isEnabled, ByteBufCodecs.BOOL, ModifierInfo::isUnlocked, ModifierInfo::new
+    );
   }
 }

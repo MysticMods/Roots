@@ -108,6 +108,9 @@ public class DataMaps {
   public static final DataMapType<SpellModifier, Item> SPELL_MODIFIER_ICONS = DataMapType.builder(RootsAPI.rl("spell_modifier_icons"), RootsRegistries.Keys.SPELL_MODIFIERS, BuiltInRegistries.ITEM.byNameCodec())
       .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
       .build();
+  public static final DataMapType<RitualModifier, Item> RITUAL_MODIFIER_ICONS = DataMapType.builder(RootsAPI.rl("ritual_modifier_icons"), RootsRegistries.Keys.RITUAL_MODIFIERS, BuiltInRegistries.ITEM.byNameCodec())
+      .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
+      .build();
   public static final DataMapType<Attribute, AugmentationData> AUGMENTATION_DATA = DataMapType.builder(RootsAPI.rl("augmentation_data"), Registries.ATTRIBUTE, AugmentationData.CODEC)
       .synced(AugmentationData.CODEC, true)
       .build();
