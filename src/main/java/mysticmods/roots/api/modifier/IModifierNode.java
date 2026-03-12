@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IModifierNode<V, T extends IModifier<V, T>> {
   @Nullable
-  ResourceKey<T> modifier();
+  ResourceKey<T> key();
 
   @Nullable
   IModifierNode<V, T> parent();

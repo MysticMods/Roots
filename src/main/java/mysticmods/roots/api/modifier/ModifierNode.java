@@ -12,19 +12,19 @@ import java.util.concurrent.ConcurrentMap;
 public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<V, T> {
   private static final ConcurrentMap<ResourceKey<?>, ModifierNode<?, ?>> VALUES = new MapMaker().weakValues().makeMap();
 
-  protected final ResourceKey<T> modifier;
+  protected final ResourceKey<T> key;
   @Nullable
   protected IModifierNode<V, T> parent;
   protected final List<IModifierNode<V, T>> children = new ArrayList<>();
   protected float x, y;
 
-  private ModifierNode(ResourceKey<T> modifier, @Nullable IModifierNode<V, T> parent) {
-    this.modifier = modifier;
+  protected ModifierNode(ResourceKey<T> key, @Nullable IModifierNode<V, T> parent) {
+    this.key = key;
     this.parent = parent;
   }
 
-  private ModifierNode(ResourceKey<T> modifier) {
-    this(modifier, null);
+  protected ModifierNode(ResourceKey<T> key) {
+    this(key, null);
   }
 
   @SuppressWarnings("unchecked")
@@ -37,8 +37,8 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
   }
 
   @NotNull
-  public ResourceKey<T> modifier() {
-    return modifier;
+  public ResourceKey<T> key() {
+    return key;
   }
 
   @Nullable
@@ -65,7 +65,7 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
       return true;
     } else {
       if (o instanceof ModifierNode<?, ?> other) {
-        return other.modifier.equals(this.modifier);
+        return other.key.equals(this.key);
       }
     }
 
@@ -74,12 +74,12 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
 
   @Override
   public int hashCode() {
-    return this.modifier.hashCode();
+    return this.key.hashCode();
   }
 
   @Override
   public String toString() {
-    return this.modifier.toString();
+    return this.key.toString();
   }
 
   @Override

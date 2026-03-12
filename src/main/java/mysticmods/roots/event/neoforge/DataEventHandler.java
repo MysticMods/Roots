@@ -72,6 +72,8 @@ public class DataEventHandler {
     event.register(DataMaps.GROVE_ACTION_ICONS);
     event.register(DataMaps.SPELL_MODIFIER_ICONS);
     event.register(DataMaps.RITUAL_MODIFIER_ICONS);
+    event.register(DataMaps.RITUAL_MODIFIER_RESTRICTED);
+    event.register(DataMaps.SPELL_MODIFIER_RESTRICTED);
     event.register(DataMaps.AUGMENTATION_DATA);
     event.register(DataMaps.EXTRA_CROP_DATA);
     event.register(DataMaps.EXTRA_CROP_CHANCE);

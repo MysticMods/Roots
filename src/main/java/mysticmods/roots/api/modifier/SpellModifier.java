@@ -31,6 +31,11 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   }
 
   @Override
+  protected DataMapType<SpellModifier, Boolean> getRestrictedDataMapType() {
+    return DataMaps.SPELL_MODIFIER_RESTRICTED;
+  }
+
+  @Override
   public Holder<SpellModifier> builtInRegistryHolder() {
     return RootsRegistries.SPELL_MODIFIERS.wrapAsHolder(this);
   }

@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -18,9 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<V, C> {
-  private static final Set<ResourceKey<?>> RESTRICTED_MODIFIERS = new ReferenceOpenHashSet<>();
-
+public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Holder<V> object;
   private final Map<ResourceKey<C>, Holder<C>> modifiers = new Object2ObjectOpenHashMap<>();
   private final Map<ResourceKey<C>, IModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
@@ -30,13 +29,21 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> conflicts = new Object2ObjectOpenHashMap<>();
 
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> ancestors = new Object2ObjectOpenHashMap<>();
+  // TODO: Can positions just be stored in the nodes? Can they be guaranteed to be transmitted?
   private final Map<ResourceKey<C>, ModifierPositionInfo> positions = new Object2ObjectOpenHashMap<>();
   private final Map<ResourceKey<C>, Item> icons = new Object2ObjectOpenHashMap<>();
 
   private final Set<ResourceKey<C>> missing = new ObjectOpenHashSet<>();
 
-  public ModifierTree(Holder<V> object) {
+  private final RootModifierNode<V, C> root;
+
+  public ModifierTree(Holder<V> object, ResourceKey<? extends Registry<C>> registry) {
     this.object = object;
+    this.root = RootModifierNode.create(object, registry);
+  }
+
+  public RootModifierNode<V, C> root() {
+    return root;
   }
 
   // This not being empty is a sign of invalid modifiers
@@ -84,7 +91,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
 
     var parents = ancestors.computeIfAbsent(modifier.getKey(), k -> new HashSet<>());
     if (mod.getParent() == null) {
-      node.setParent(this);
+      node.setParent(root);
       rootNodes.add(node);
     } else {
       IModifierNode<V, C> parentNode = ModifierNode.create(mod.getParent());
@@ -102,68 +109,21 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
     return allNodes;
   }
 
-  public static boolean isRestricted(IModifierNode<?, ?> node) {
-    return RESTRICTED_MODIFIERS.contains(node.modifier());
-  }
-
-  public static boolean isRestricted(ResourceKey<?> modifier) {
-    return RESTRICTED_MODIFIERS.contains(modifier);
-  }
-
-  public static boolean isRestricted(Modifier<?, ?> modifier) {
-    return RESTRICTED_MODIFIERS.contains(modifier.builtInRegistryHolder().getKey());
-  }
-
-  public static boolean isRestricted(Holder<Modifier<?, ?>> modifier) {
-    return RESTRICTED_MODIFIERS.contains(modifier.getKey());
-  }
-
-  public static void restrictModifier(ResourceKey<?> modifier) {
-    RESTRICTED_MODIFIERS.add(modifier);
-  }
-
-  public static void restrictModifier(Modifier<?, ?> modifier) {
-    RESTRICTED_MODIFIERS.add(modifier.builtInRegistryHolder().getKey());
-  }
-
-  public static void restrictModifier(Holder<Modifier<?, ?>> modifier) {
-    RESTRICTED_MODIFIERS.add(modifier.getKey());
-  }
-
-  public static void restrictModifier(IModifierNode<?, ?> node) {
-    RESTRICTED_MODIFIERS.add(node.modifier());
-  }
-
-  @Override
-  public @Nullable ResourceKey<C> modifier() {
-    return null;
-  }
-
-  @Override
-  public @Nullable IModifierNode<V, C> parent() {
-    return null;
-  }
-
-  @Override
-  public IModifierNode<V, C> setParent(IModifierNode<V, C> parent) {
-    return this;
-  }
-
-  @Override
-  public List<IModifierNode<V, C>> children() {
-    return rootNodes;
-  }
-
-  @Override
-  public void addChild(IModifierNode<V, C> child) {
-    // NO-OP
-  }
-
   public void position () {
     ModifierNodePosition.run(this);
     for (IModifierNode<V, C> node : allNodes) {
-      positions.putIfAbsent(node.modifier(), new ModifierPositionInfo(node.x(), node.y()));
+      positions.putIfAbsent(node.key(), new ModifierPositionInfo(node.x(), node.y()));
     }
+  }
+
+  // TODO: Handle this better because it's only in the instance
+  protected static <V, T extends Modifier<V, T>> boolean isRestricted(ModifierTree<V, T> tree, IModifierNode<V, T> node) {
+    Holder<T> modifier = tree.modifiers.get(node.key());
+    if (modifier == null) {
+      RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", node.key());
+      return false;
+    }
+    return modifier.value().isRestricted();
   }
 
   @Nullable
@@ -196,27 +156,20 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
   public class Instance {
     private final Set<ResourceKey<C>> enabledModifiers = new ReferenceOpenHashSet<>();
 
-    private boolean invalid = false;
-
     public Instance(Set<C> modifierSet) {
       for (C modifier : modifierSet) {
         if (!enable(modifier.builtInRegistryHolder().getKey())) {
           // TODO: Conflicting modifiers in the initial set
-          invalid = true;
         }
       }
     }
 
-    public boolean isValid() {
-      return !invalid;
-    }
-
     public boolean enable(IModifierNode<V, C> node) {
-      if (isRestricted(node)) {
+      if (isRestricted(ModifierTree.this, node)) {
         return disable(node);
       }
 
-      Set<ResourceKey<C>> conflicts = ModifierTree.this.conflicts.get(node.modifier());
+      Set<ResourceKey<C>> conflicts = ModifierTree.this.conflicts.get(node.key());
       if (conflicts != null) {
         for (ResourceKey<C> conflict : conflicts) {
           if (enabledModifiers.contains(conflict)) {
@@ -229,14 +182,14 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
       }
 
       IModifierNode<V, C> parent = node.parent();
-      if (parent != null && !enabledModifiers.contains(parent.modifier())) {
+      if (parent != null && !enabledModifiers.contains(parent.key())) {
         // TODO: Handle parental conflicts with children
         if (!enable(parent)) {
           return false;
         }
       }
 
-      enabledModifiers.add(node.modifier());
+      enabledModifiers.add(node.key());
       return true;
     }
 
@@ -247,7 +200,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
 
     public boolean disable(IModifierNode<V, C> node) {
       for (IModifierNode<V, C> child : node.children()) {
-        if (enabledModifiers.contains(child.modifier())) {
+        if (enabledModifiers.contains(child.key())) {
           if (!disable(child)) {
             return false;
           }
@@ -275,16 +228,17 @@ public class ModifierTree<V, C extends Modifier<V, C>> implements IModifierNode<
     }
   }
 
-  public record ModifierInfo (ModifierPositionInfo position, Item icon, boolean canEnable, boolean isEnabled, boolean isUnlocked) {
+  public record ModifierInfo (ModifierPositionInfo position, Item icon, boolean canEnable, boolean isEnabled, boolean isUnlocked, boolean isRestricted) {
     public static final Codec<ModifierInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ModifierPositionInfo.CODEC.forGetter(ModifierInfo::position),
         BuiltInRegistries.ITEM.byNameCodec().fieldOf("icon").forGetter(ModifierInfo::icon),
         Codec.BOOL.fieldOf("canEnable").forGetter(ModifierInfo::canEnable),
         Codec.BOOL.fieldOf("isEnabled").forGetter(ModifierInfo::isEnabled),
-        Codec.BOOL.fieldOf("isUnlocked").forGetter(ModifierInfo::isUnlocked)
+        Codec.BOOL.fieldOf("isUnlocked").forGetter(ModifierInfo::isUnlocked),
+        Codec.BOOL.fieldOf("isRestricted").forGetter(ModifierInfo::isRestricted)
     ).apply(instance, ModifierInfo::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, ModifierInfo> STREAM_CODEC = StreamCodec.composite(
-        ModifierPositionInfo.STREAM_CODEC, ModifierInfo::position, ByteBufCodecs.registry(Registries.ITEM), ModifierInfo::icon, ByteBufCodecs.BOOL, ModifierInfo::canEnable, ByteBufCodecs.BOOL, ModifierInfo::isEnabled, ByteBufCodecs.BOOL, ModifierInfo::isUnlocked, ModifierInfo::new
+        ModifierPositionInfo.STREAM_CODEC, ModifierInfo::position, ByteBufCodecs.registry(Registries.ITEM), ModifierInfo::icon, ByteBufCodecs.BOOL, ModifierInfo::canEnable, ByteBufCodecs.BOOL, ModifierInfo::isEnabled, ByteBufCodecs.BOOL, ModifierInfo::isUnlocked, ByteBufCodecs.BOOL, ModifierInfo::isRestricted, ModifierInfo::new
     );
   }
 }

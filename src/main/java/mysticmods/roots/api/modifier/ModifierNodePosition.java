@@ -198,7 +198,7 @@ public class ModifierNodePosition<V, C extends Modifier<V, C>> {
   }
 
   protected static <V, C extends Modifier<V, C>> void run(ModifierTree<V, C> rootNode) {
-    ModifierNodePosition<V, C> treenodeposition = new ModifierNodePosition<>(rootNode, null, null, 1, 0);
+    ModifierNodePosition<V, C> treenodeposition = new ModifierNodePosition<>(rootNode.root(), null, null, 1, 0);
     treenodeposition.firstWalk();
     float f = treenodeposition.secondWalk(0.0F, 0, treenodeposition.y);
     if (f < 0.0F) {

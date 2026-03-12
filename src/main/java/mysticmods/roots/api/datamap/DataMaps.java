@@ -10,6 +10,7 @@ import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -108,8 +109,14 @@ public class DataMaps {
   public static final DataMapType<SpellModifier, Item> SPELL_MODIFIER_ICONS = DataMapType.builder(RootsAPI.rl("spell_modifier_icons"), RootsRegistries.Keys.SPELL_MODIFIERS, BuiltInRegistries.ITEM.byNameCodec())
       .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
       .build();
+  public static final DataMapType<SpellModifier, Boolean> SPELL_MODIFIER_RESTRICTED = DataMapType.builder(RootsAPI.rl("spell_modifier_restricted"), RootsRegistries.Keys.SPELL_MODIFIERS, Codec.BOOL)
+      .synced(Codec.BOOL, true)
+      .build();
   public static final DataMapType<RitualModifier, Item> RITUAL_MODIFIER_ICONS = DataMapType.builder(RootsAPI.rl("ritual_modifier_icons"), RootsRegistries.Keys.RITUAL_MODIFIERS, BuiltInRegistries.ITEM.byNameCodec())
       .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
+      .build();
+  public static final DataMapType<RitualModifier, Boolean> RITUAL_MODIFIER_RESTRICTED = DataMapType.builder(RootsAPI.rl("ritual_modifier_restricted"), RootsRegistries.Keys.RITUAL_MODIFIERS, Codec.BOOL)
+      .synced(Codec.BOOL, true)
       .build();
   public static final DataMapType<Attribute, AugmentationData> AUGMENTATION_DATA = DataMapType.builder(RootsAPI.rl("augmentation_data"), Registries.ATTRIBUTE, AugmentationData.CODEC)
       .synced(AugmentationData.CODEC, true)

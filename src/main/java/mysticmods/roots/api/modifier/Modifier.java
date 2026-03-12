@@ -28,7 +28,9 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   protected CostInstance costs;
   private Item icon;
   private String descriptionId;
+  private boolean isRestricted = false;
 
+  @SafeVarargs
   public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable, ResourceKey<T> ... conflicts) {
     this.parent = parent;
     this.applicable = applicable;
@@ -36,6 +38,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     this.conflicts = Set.of(conflicts);
   }
 
+  @SafeVarargs
   public Modifier(CostInstance defaultCosts, ResourceKey<V> applicable, ResourceKey<T> ... conflicts) {
     this(defaultCosts, null, applicable, conflicts);
   }
@@ -43,6 +46,8 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   protected abstract DataMapType<T, CostInstance> getDataMapType();
 
   protected abstract DataMapType<T, Item> getIconDataMapType ();
+
+  protected abstract DataMapType<T, Boolean> getRestrictedDataMapType ();
 
   @Override
   @Nullable
@@ -109,11 +114,20 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   @Override
+  public boolean isRestricted() {
+    return isRestricted;
+  }
+
+  @Override
   public void init(Holder<T> holder) {
     var costs = holder.getData(getDataMapType());
     if (costs != null) {
       this.costs = costs;
     }
     this.icon = holder.getData(getIconDataMapType());
+    var mapResult = holder.getData(getRestrictedDataMapType());
+    if (mapResult != null && mapResult) {
+      this.isRestricted = true;
+    }
   }
 }

@@ -57,7 +57,7 @@ public class ModifierTrees {
   public static void initialize() {
     ImmutableMap.Builder<ResourceKey<Ritual>, ModifierTree<Ritual, RitualModifier>> builder = ImmutableMap.builder();
     RootsRegistries.RITUALS.holders().forEach(holder -> {
-      ModifierTree<Ritual, RitualModifier> tree = new ModifierTree<>(holder);
+      ModifierTree<Ritual, RitualModifier> tree = new ModifierTree<>(holder, RootsRegistries.Keys.RITUAL_MODIFIERS);
       for (RitualModifier modifier : RootsRegistries.RITUAL_MODIFIERS) {
         if (modifier.getApplicable().equals(holder.getKey())) {
           tree.addModifier(modifier.builtInRegistryHolder());
@@ -74,7 +74,7 @@ public class ModifierTrees {
 
     ImmutableMap.Builder<ResourceKey<Spell>, ModifierTree<Spell, SpellModifier>> spellBuilder = ImmutableMap.builder();
     RootsRegistries.SPELLS.holders().forEach(holder -> {
-      ModifierTree<Spell, SpellModifier> tree = new ModifierTree<>(holder);
+      ModifierTree<Spell, SpellModifier> tree = new ModifierTree<>(holder, RootsRegistries.Keys.SPELL_MODIFIERS);
       for (SpellModifier modifier : RootsRegistries.SPELL_MODIFIERS) {
         if (modifier.getApplicable().equals(holder.getKey())) {
           tree.addModifier(modifier.builtInRegistryHolder());

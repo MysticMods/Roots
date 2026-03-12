@@ -27,7 +27,12 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
 
   @Override
   protected DataMapType<RitualModifier, Item> getIconDataMapType() {
-    return DataMaps.RITUAL_MODIFIER_ICON;
+    return DataMaps.RITUAL_MODIFIER_ICONS;
+  }
+
+  @Override
+  protected DataMapType<RitualModifier, Boolean> getRestrictedDataMapType() {
+    return DataMaps.RITUAL_MODIFIER_RESTRICTED;
   }
 
   @Override
