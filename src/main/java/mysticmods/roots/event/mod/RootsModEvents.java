@@ -227,26 +227,38 @@ public class RootsModEvents {
       event.accept(ModItems.HERB_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.HERB_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
-        event.accept(stack);
+        var dyeable = DyeableWithDefault.fromColor(dye);
+        if (dyeable != null) {
+          stack.set(ModAttachments.DYEABLE, dyeable);
+          event.accept(stack);
+        }
       }
       event.accept(ModItems.COMPONENT_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.COMPONENT_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
-        event.accept(stack);
+        var dyeable = DyeableWithDefault.fromColor(dye);
+        if (dyeable != null) {
+          stack.set(ModAttachments.DYEABLE, dyeable);
+          event.accept(stack);
+        }
       }
       event.accept(ModItems.APOTHECARY_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.APOTHECARY_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
-        event.accept(stack);
+        var dyeable = DyeableWithDefault.fromColor(dye);
+        if (dyeable != null) {
+          stack.set(ModAttachments.DYEABLE, dyeable);
+          event.accept(stack);
+        }
       }
       event.accept(ModItems.SYLVAN_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.SYLVAN_POUCH.get());
-        stack.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye));
-        event.accept(stack);
+        var dyeable = DyeableWithDefault.fromColor(dye);
+        if (dyeable != null) {
+          stack.set(ModAttachments.DYEABLE, dyeable);
+          event.accept(stack);
+        }
       }
       event.accept(ModItems.CREATIVE_POUCH.get());
 

@@ -36,6 +36,7 @@ public record DyeableWithDefault(@Nullable DyeColor color) {
   public static final DyeableWithDefault RED = new DyeableWithDefault(DyeColor.RED);
   public static final DyeableWithDefault BLACK = new DyeableWithDefault(DyeColor.BLACK);
 
+  @Nullable
   public static DyeableWithDefault fromColor(@Nullable DyeColor color) {
     return switch (color) {
       case WHITE -> WHITE;
@@ -55,8 +56,9 @@ public record DyeableWithDefault(@Nullable DyeColor color) {
       case RED -> RED;
       case BLACK -> BLACK;
       // Note: see #1253. Mods may use mixins to inject into dyecolor, no default branch will cause a `MatchException` in that case.
+      case null -> DEFAULT;
       //noinspection UnnecessaryDefault
-      case null, default -> DEFAULT;
+      default -> null;
     };
   }
 }
