@@ -15,6 +15,8 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -29,8 +31,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> conflicts = new Object2ObjectOpenHashMap<>();
 
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> ancestors = new Object2ObjectOpenHashMap<>();
-  // TODO: Can positions just be stored in the nodes? Can they be guaranteed to be transmitted?
-  private final Map<ResourceKey<C>, ModifierPositionInfo> positions = new Object2ObjectOpenHashMap<>();
+
   private final Map<ResourceKey<C>, Item> icons = new Object2ObjectOpenHashMap<>();
 
   private final Set<ResourceKey<C>> missing = new ObjectOpenHashSet<>();
@@ -52,10 +53,22 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return missing;
   }
 
+  public C getModifier (ResourceKey<C> key) {
+    Holder<C> modifier = modifiers.get(key);
+    if (modifier == null) {
+      throw new NullPointerException("No modifier for key " + key);
+    }
+    return modifier.value();
+  }
+
+  public C getModifier (ModifierNode<V, C> node) {
+    return getModifier(node.key());
+  }
+
   // TODO: Conflict validation: conflicting modifiers cannot be parents of the modifier. Basically, ensure there are no cycles in the graph.
 
   // This being called "validator" makes little sense
-  public ModifierTree<V, C>.Instance validator(ModifierSet<V, C, ?> modifiers) {
+  public ModifierTree<V, C>.Instance instance(ModifierSet<V, C, ?> modifiers) {
     return new Instance(modifiers);
   }
 
@@ -111,9 +124,9 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   public void position () {
     ModifierNodePosition.run(this);
-    for (IModifierNode<V, C> node : allNodes) {
+/*    for (IModifierNode<V, C> node : allNodes) {
       positions.putIfAbsent(node.key(), new ModifierPositionInfo(node.x(), node.y()));
-    }
+    }*/
   }
 
   // TODO: Handle this better because it's only in the instance
@@ -126,8 +139,8 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return modifier.value().isRestricted();
   }
 
-  @Nullable
-  protected static <V, C extends Modifier<V, C>> Item getIcon (ModifierTree<V, C> tree, ResourceKey<C> key) {
+  @NotNull
+  public static <V, C extends Modifier<V, C>> Item getIcon (ModifierTree<V, C> tree, ResourceKey<C> key) {
     Item icon = tree.icons.get(key);
     if (icon == null) {
       Holder<C> modifier = tree.modifiers.get(key);
@@ -138,6 +151,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       tree.icons.put(key, modifier.value().getIcon());
     }
     if (icon == null) {
+      tree.icons.put(key, Items.BARRIER);
       throw new NullPointerException("No icon for key " + key);
     }
     return icon;

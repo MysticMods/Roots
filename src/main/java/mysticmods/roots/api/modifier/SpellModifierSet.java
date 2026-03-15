@@ -115,7 +115,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
       return EMPTY; // TODO: issue
     }
 
-    ModifierTree<Spell, SpellModifier>.Instance instance = tree.validator(this);
+    ModifierTree<Spell, SpellModifier>.Instance instance = tree.instance(this);
     Set<SpellModifier> validModifiers = instance.modifiersSet();
     if (validModifiers.size() == this.size() && this.containsAll(validModifiers)) {
       return this;
