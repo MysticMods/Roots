@@ -58,6 +58,15 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     this.slots = result;
   }
 
+  @Nullable
+  public SpellSlot getSlot (int slot) {
+    if (!validateSlot(slot)) {
+      return null;
+    }
+
+    return slots.get(slot);
+  }
+
   private boolean validateSlot(int slot) {
     if (slot < 0 || slot >= slots.size()) {
       RootsAPI.LOG.error("Invalid slot: {}", slot);
@@ -144,24 +153,6 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
-  @Deprecated
-  public void setCooldown(Entity entity, int slot, int cooldown) {
-    if (!validateSlot(slot)) {
-      return;
-    }
-
-    SpellSlot slotData = slots.get(slot);
-
-    if (slotData == null) {
-      return;
-    }
-
-    return;
-/*    List<SpellSlot> newSlots = new ArrayList<>(slots);
-    newSlots.set(slot, slotData.withCooldown(cooldown, cooldown));
-    return new SpellStorage(currentSlot, maxSlot, newSlots);*/
-  }
-
   public SpellStorage setCurrentSlot(int slot) {
     if (slot < 0 || slot >= maxSlot || slot == currentSlot) {
       return this;
@@ -169,7 +160,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(slot, maxSlot, slots);
   }
 
-  @Deprecated
+/*  @Deprecated
   public SpellStorage setData(int slot, IntArrayList data) {
     if (slot < 0 || slot >= maxSlot) {
       return this;
@@ -188,7 +179,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, slotData.withData(new SpellInstanceData(data)));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
-  }
+  }*/
 
   public SpellStorage setData(int slot, int index, int value) {
     if (slot < 0 || slot >= maxSlot) {

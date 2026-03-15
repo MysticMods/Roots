@@ -28,12 +28,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class StaffScreen extends RootsScreen {
-  private final InteractionHand hand;
-  private final int inventorySlot;
+  protected final InteractionHand hand;
+  protected final int inventorySlot;
   private final List<StaffSpellButton> staffSpellButtons = new ArrayList<>();
   private final List<LibrarySpellButton> librarySpellButtons = new ArrayList<>();
-  private int selectedStaff = -1;
-  private int selectedLibrary = -1;
+  protected int selectedStaff = -1;
+  protected int selectedLibrary = -1;
 
   protected StaffScreen(InteractionHand hand, int inventorySlot) {
     super(Component.translatable("roots.gui.spell_library"));
@@ -179,6 +179,19 @@ public class StaffScreen extends RootsScreen {
         selectedStaff = -1;
         int slot = toDeleteButton.getId();
         PacketDistributor.sendToServer(new ServerboundClearStaffSlotPacket(hand, inventorySlot, slot));
+        return true;
+      }
+    }
+    if (keyCode == InputConstants.KEY_INSERT) {
+      StaffSpellButton toInsertButton = null;
+      for (StaffSpellButton button : staffSpellButtons) {
+        if (isMouseInRelativeRange(lastMouseX, lastMouseY, button.getX(), button.getY(), button.getWidth(), button.getHeight())) {
+          toInsertButton = button;
+          break;
+        }
+      }
+      if (toInsertButton != null) {
+        SpellModifierScreen.open(this, toInsertButton.getId());
         return true;
       }
     }

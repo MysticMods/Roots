@@ -6,6 +6,7 @@ import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.core.Holder;
@@ -29,7 +30,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getStyledName();
   }
 
-  Set<SpellModifier> getEnabledModifiers();
+  SpellModifierSet getEnabledModifiers();
 
   default int getMaxUse() {
     return getSpell().getMaxUse();
@@ -134,8 +135,8 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     }
 
     @Override
-    public Set<SpellModifier> getEnabledModifiers() {
-      return Collections.emptySet();
+    public SpellModifierSet getEnabledModifiers() {
+      return SpellModifierSet.EMPTY;
     }
 
     @Override

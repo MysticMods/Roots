@@ -6,6 +6,9 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.attachment.GrantStorage;
+import mysticmods.roots.api.util.SetUtils;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,6 +17,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
@@ -68,7 +72,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   // TODO: Conflict validation: conflicting modifiers cannot be parents of the modifier. Basically, ensure there are no cycles in the graph.
 
   // This being called "validator" makes little sense
-  public ModifierTree<V, C>.Instance instance(ModifierSet<V, C, ?> modifiers) {
+  public ModifierTree<V, C>.Instance instance(Set<C> modifiers) {
     return new Instance(modifiers);
   }
 
@@ -122,11 +126,12 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return allNodes;
   }
 
+  public List<IModifierNode<V, C>> rootNodes () {
+    return rootNodes;
+  }
+
   public void position () {
     ModifierNodePosition.run(this);
-/*    for (IModifierNode<V, C> node : allNodes) {
-      positions.putIfAbsent(node.key(), new ModifierPositionInfo(node.x(), node.y()));
-    }*/
   }
 
   // TODO: Handle this better because it's only in the instance
@@ -151,8 +156,9 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       tree.icons.put(key, modifier.value().getIcon());
     }
     if (icon == null) {
-      tree.icons.put(key, Items.BARRIER);
-      throw new NullPointerException("No icon for key " + key);
+      icon = Items.BARRIER;
+      tree.icons.put(key, icon);
+      RootsAPI.LOG.error("No icon for key " + key, new NullPointerException("No icon for key " + key));
     }
     return icon;
   }
@@ -176,6 +182,10 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
           // TODO: Conflicting modifiers in the initial set
         }
       }
+    }
+
+    public ModifierTree<V, C> tree() {
+      return ModifierTree.this;
     }
 
     public boolean enable(IModifierNode<V, C> node) {
@@ -240,19 +250,38 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       }
       return mods;
     }
+
+    public Map<ResourceKey<C>, ModifierInfo> getModifierInfo(@Nullable Set<C> granted) {
+      Map<ResourceKey<C>, ModifierInfo> infoMap = new Object2ObjectOpenHashMap<>();
+      for (ResourceKey<C> key : modifiers.keySet()) {
+        Set<ResourceKey<C>> cons = ModifierTree.this.conflicts.get(key);
+
+        boolean canEnable = !SetUtils.containsAny(enabledModifiers, cons);
+        // It can be enabled if it isn't conflicting with any other modifier currently enabled.
+        // But what about ancestors?
+        boolean isEnabled = enabledModifiers.contains(key);
+        boolean isUnlocked;
+        if (granted == null) {
+          isUnlocked = true;
+        } else {
+          isUnlocked = granted.contains(modifiers.get(key).value());
+        }
+        boolean isRestricted = isRestricted(ModifierTree.this, getNode(ModifierTree.this, key));
+        infoMap.put(key, new ModifierInfo(canEnable, isEnabled, isUnlocked, isRestricted));
+      }
+      return infoMap;
+    }
   }
 
-  public record ModifierInfo (ModifierPositionInfo position, Item icon, boolean canEnable, boolean isEnabled, boolean isUnlocked, boolean isRestricted) {
+  public record ModifierInfo (boolean canEnable, boolean isEnabled, boolean isUnlocked, boolean isRestricted) {
     public static final Codec<ModifierInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        ModifierPositionInfo.CODEC.forGetter(ModifierInfo::position),
-        BuiltInRegistries.ITEM.byNameCodec().fieldOf("icon").forGetter(ModifierInfo::icon),
         Codec.BOOL.fieldOf("canEnable").forGetter(ModifierInfo::canEnable),
         Codec.BOOL.fieldOf("isEnabled").forGetter(ModifierInfo::isEnabled),
         Codec.BOOL.fieldOf("isUnlocked").forGetter(ModifierInfo::isUnlocked),
         Codec.BOOL.fieldOf("isRestricted").forGetter(ModifierInfo::isRestricted)
     ).apply(instance, ModifierInfo::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, ModifierInfo> STREAM_CODEC = StreamCodec.composite(
-        ModifierPositionInfo.STREAM_CODEC, ModifierInfo::position, ByteBufCodecs.registry(Registries.ITEM), ModifierInfo::icon, ByteBufCodecs.BOOL, ModifierInfo::canEnable, ByteBufCodecs.BOOL, ModifierInfo::isEnabled, ByteBufCodecs.BOOL, ModifierInfo::isUnlocked, ByteBufCodecs.BOOL, ModifierInfo::isRestricted, ModifierInfo::new
+        ByteBufCodecs.BOOL, ModifierInfo::canEnable, ByteBufCodecs.BOOL, ModifierInfo::isEnabled, ByteBufCodecs.BOOL, ModifierInfo::isUnlocked, ByteBufCodecs.BOOL, ModifierInfo::isRestricted, ModifierInfo::new
     );
   }
 }

@@ -1,9 +1,7 @@
 package mysticmods.roots.api.client;
 
-import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.modifier.ModifierNode;
-import mysticmods.roots.api.modifier.ModifierTree;
-import mysticmods.roots.api.modifier.RootModifierNode;
+import mysticmods.roots.api.modifier.*;
+import mysticmods.roots.client.gui.screen.ModifierTab;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.advancements.AdvancementWidgetType;
@@ -16,12 +14,12 @@ import java.util.List;
 
 public class ModifierWidget<V, T extends Modifier<V, T>> {
   private final ModifierTab<V, T> tab;
-  private final ModifierNode<V, T> node;
+  private final IModifierNode<V, T> node;
 
   private final ItemStack renderStack;
   private final int x, y;
 
-  public ModifierWidget(ModifierTab<V, T> tab, ModifierNode<V, T> node) {
+  public ModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
     this.tab = tab;
     this.node = node;
     this.x = Mth.floor(node.x() * 28.0f); // 28?

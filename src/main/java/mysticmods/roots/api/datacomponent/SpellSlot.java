@@ -34,6 +34,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
       SpellModifierSet.CODEC.fieldOf("enabledModifiers").forGetter(SpellSlot::enabledModifiers),
       SpellInstanceData.CODEC.fieldOf("data").forGetter(SpellSlot::data)
   ).apply(instance, SpellSlot::new)).validate(result -> {
+    // TODO: What validation needed to take place here?
     return DataResult.success(result);
   });
   public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
@@ -61,7 +62,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   @Override
-  public Set<SpellModifier> getEnabledModifiers() {
+  public SpellModifierSet getEnabledModifiers() {
     return enabledModifiers();
   }
 

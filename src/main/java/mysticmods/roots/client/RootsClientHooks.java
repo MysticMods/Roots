@@ -227,6 +227,18 @@ public class RootsClientHooks {
     }
   }
 
+  public static void popAndStopUsingItem (Screen newScreen) {
+    var mc = Minecraft.getInstance();
+    if (mc.gameMode != null && mc.player != null) {
+      if (mc.screen == null) {
+        mc.gameMode.releaseUsingItem(mc.player);
+        mc.setScreen(newScreen);
+      } else {
+        mc.pushGuiLayer(newScreen);
+      }
+    }
+  }
+
   public static void setLightDrifterSync(int entityId) {
     Minecraft mc = Minecraft.getInstance();
     if (mc.player == null) {
