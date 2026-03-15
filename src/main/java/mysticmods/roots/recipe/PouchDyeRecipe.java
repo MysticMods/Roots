@@ -39,10 +39,14 @@ public class PouchDyeRecipe extends CustomRecipe {
     ItemStack itemstack1 = items.get(0);
     ItemStack itemstack2 = items.get(1);
 
-    if (itemstack2.getItem() instanceof DyeItem && itemstack1.is(RootsTags.Items.DYEABLE)) {
-      return true;
-    } else if (itemstack1.getItem() instanceof DyeItem && itemstack2.is(RootsTags.Items.DYEABLE)) {
-      return true;
+    if (itemstack2.getItem() instanceof DyeItem dye && itemstack1.is(RootsTags.Items.DYEABLE)) {
+      if (DyeableWithDefault.fromColor(dye.getDyeColor()) != null){
+        return true;
+      }
+    } else if (itemstack1.getItem() instanceof DyeItem dye && itemstack2.is(RootsTags.Items.DYEABLE)) {
+      if (DyeableWithDefault.fromColor(dye.getDyeColor()) != null){
+        return true;
+      }
     }
 
     return false;
@@ -80,7 +84,10 @@ public class PouchDyeRecipe extends CustomRecipe {
     }
 
 
-    toModify.set(ModAttachments.DYEABLE, DyeableWithDefault.fromColor(dye.getDyeColor()));
+    var dyeable = DyeableWithDefault.fromColor(dye.getDyeColor());
+    if (dyeable != null) {
+      toModify.set(ModAttachments.DYEABLE, dyeable);
+    }
     return toModify;
   }
 
