@@ -166,6 +166,7 @@ public class StaffScreen extends RootsScreen {
 
   @Override
   public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+    // TODO: Keybind this
     if (keyCode == InputConstants.KEY_DELETE) {
       StaffSpellButton toDeleteButton = null;
       for (StaffSpellButton button : staffSpellButtons) {
@@ -182,7 +183,7 @@ public class StaffScreen extends RootsScreen {
         return true;
       }
     }
-    if (keyCode == InputConstants.KEY_INSERT) {
+/*    if (keyCode == InputConstants.KEY_INSERT) {
       StaffSpellButton toInsertButton = null;
       for (StaffSpellButton button : staffSpellButtons) {
         if (isMouseInRelativeRange(lastMouseX, lastMouseY, button.getX(), button.getY(), button.getWidth(), button.getHeight())) {
@@ -194,7 +195,7 @@ public class StaffScreen extends RootsScreen {
         SpellModifierScreen.open(this, toInsertButton.getId());
         return true;
       }
-    }
+    }*/
     return super.keyPressed(keyCode, scanCode, modifiers);
   }
 
