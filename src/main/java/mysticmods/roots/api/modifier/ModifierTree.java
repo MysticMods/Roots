@@ -6,18 +6,13 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.util.SetUtils;
-import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +39,11 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   public ModifierTree(Holder<V> object, ResourceKey<? extends Registry<C>> registry) {
     this.object = object;
-    this.root = RootModifierNode.create(object, registry);
+    this.root = RootModifierNode.create(this, object, registry);
+  }
+
+  public Holder<V> getObject () {
+    return object;
   }
 
   public RootModifierNode<V, C> root() {
@@ -57,7 +56,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return missing;
   }
 
-  public C getModifier (ResourceKey<C> key) {
+  public C getModifier(ResourceKey<C> key) {
     Holder<C> modifier = modifiers.get(key);
     if (modifier == null) {
       throw new NullPointerException("No modifier for key " + key);
@@ -65,7 +64,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return modifier.value();
   }
 
-  public C getModifier (ModifierNode<V, C> node) {
+  public C getModifier(ModifierNode<V, C> node) {
     return getModifier(node.key());
   }
 
@@ -108,12 +107,13 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
     var parents = ancestors.computeIfAbsent(modifier.getKey(), k -> new HashSet<>());
     if (mod.getParent() == null) {
-      node.setParent(root);
+      //node.setParent(root);
       rootNodes.add(node);
     } else {
       IModifierNode<V, C> parentNode = ModifierNode.create(mod.getParent());
       parentNode.addChild(node);
       parents.add(mod.getParent());
+      node.setParent(parentNode);
       if (modifiers.get(mod.getParent()) == null) {
         missing.add(mod.getParent());
       }
@@ -126,11 +126,11 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return allNodes;
   }
 
-  public List<IModifierNode<V, C>> rootNodes () {
+  public List<IModifierNode<V, C>> rootNodes() {
     return rootNodes;
   }
 
-  public void position () {
+  public void position() {
     ModifierNodePosition.run(this);
   }
 
@@ -145,22 +145,17 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   }
 
   @NotNull
-  public static <V, C extends Modifier<V, C>> Item getIcon (ModifierTree<V, C> tree, ResourceKey<C> key) {
-    Item icon = tree.icons.get(key);
-    if (icon == null) {
-      Holder<C> modifier = tree.modifiers.get(key);
-      if (modifier == null) {
-        RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", key);
-        return null;
-      }
-      tree.icons.put(key, modifier.value().getIcon());
+  public static <V, C extends Modifier<V, C>> Item getIcon(ModifierTree<V, C> tree, ResourceKey<C> key) {
+    Holder<C> modifier = tree.modifiers.get(key);
+    if (modifier == null) {
+      RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", key);
+      return Items.AIR;
     }
-    if (icon == null) {
-      icon = Items.BARRIER;
-      tree.icons.put(key, icon);
-      RootsAPI.LOG.error("No icon for key " + key, new NullPointerException("No icon for key " + key));
+    var res = modifier.value().getIcon();
+    if (res == null) {
+      return Items.AIR;
     }
-    return icon;
+    return res;
   }
 
   protected static <V, C extends Modifier<V, C>> IModifierNode<V, C> getNode(ModifierTree<V, C> tree, ResourceKey<C> key) {
@@ -273,7 +268,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     }
   }
 
-  public record ModifierInfo (boolean canEnable, boolean isEnabled, boolean isUnlocked, boolean isRestricted) {
+  public record ModifierInfo(boolean canEnable, boolean isEnabled, boolean isUnlocked, boolean isRestricted) {
     public static final Codec<ModifierInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Codec.BOOL.fieldOf("canEnable").forGetter(ModifierInfo::canEnable),
         Codec.BOOL.fieldOf("isEnabled").forGetter(ModifierInfo::isEnabled),

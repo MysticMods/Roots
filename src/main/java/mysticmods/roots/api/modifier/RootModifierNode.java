@@ -6,13 +6,17 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 public class RootModifierNode<V, T extends Modifier<V, T>> extends ModifierNode<V, T> {
   private static final ConcurrentMap<ResourceKey<?>, RootModifierNode<?, ?>> VALUES = new MapMaker().weakValues().makeMap();
 
-  protected RootModifierNode(ResourceKey<T> key) {
+  private final ModifierTree<V, T> tree;
+
+  protected RootModifierNode(ResourceKey<T> key, ModifierTree<V, T> tree) {
     super(key);
+    this.tree = tree;
   }
 
   @Override
@@ -25,10 +29,15 @@ public class RootModifierNode<V, T extends Modifier<V, T>> extends ModifierNode<
     return null;
   }
 
-  @SuppressWarnings("unchecked")
-  public static <V, T extends Modifier<V, T>> RootModifierNode<V, T> create(Holder<V> type, ResourceKey<? extends Registry<T>> registry) {
-    ResourceKey<T> key = ResourceKey.create(registry, type.getKey().location().withSuffix("_root_node"));
+  @Override
+  public List<IModifierNode<V, T>> children() {
+    return tree.rootNodes();
+  }
 
-    return (RootModifierNode<V, T>) VALUES.computeIfAbsent(key, (k) -> new RootModifierNode<>((ResourceKey<T>) k));
+  @SuppressWarnings("unchecked")
+  public static <V, T extends Modifier<V, T>> RootModifierNode<V, T> create(ModifierTree<V, T> tree, Holder<V> object, ResourceKey<? extends Registry<T>> registry) {
+    ResourceKey<T> key = ResourceKey.create(registry, object.getKey().location().withSuffix("_root_node"));
+
+    return (RootModifierNode<V, T>) VALUES.computeIfAbsent(key, (k) -> new RootModifierNode<>((ResourceKey<T>) k, tree));
   }
 }

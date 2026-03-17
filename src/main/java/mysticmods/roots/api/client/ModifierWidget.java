@@ -1,7 +1,6 @@
 package mysticmods.roots.api.client;
 
 import mysticmods.roots.api.modifier.*;
-import mysticmods.roots.client.gui.screen.ModifierTab;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.advancements.AdvancementWidgetType;
@@ -13,11 +12,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ModifierWidget<V, T extends Modifier<V, T>> {
-  private final ModifierTab<V, T> tab;
-  private final IModifierNode<V, T> node;
+  protected final ModifierTab<V, T> tab;
+  protected final IModifierNode<V, T> node;
 
-  private final ItemStack renderStack;
-  private final int x, y;
+  protected final ItemStack renderStack;
+  protected final int x, y;
 
   public ModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
     this.tab = tab;
@@ -28,17 +27,17 @@ public class ModifierWidget<V, T extends Modifier<V, T>> {
   }
 
   @Nullable
-  private ModifierWidget<V, T> parent() {
-    if (node.parent() == null || node.parent() instanceof RootModifierNode<V, T>) {
-      return null;
+  public ModifierWidget<V, T> parent() {
+    if (node.parent() == null) {
+      return tab.root();
     }
 
     return tab.getWidget(node.parent());
   }
 
-  private List<ModifierWidget<V, T>> children = null;
+  public List<ModifierWidget<V, T>> children = null;
 
-  private Iterable<ModifierWidget<V, T>> children() {
+  public Iterable<ModifierWidget<V, T>> children() {
     if (children == null) {
       if (!node.children().isEmpty()) {
         children = node.children().stream().sorted(Comparator.comparing(object -> object.key().location()))

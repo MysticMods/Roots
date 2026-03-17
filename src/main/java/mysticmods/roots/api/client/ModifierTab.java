@@ -1,10 +1,11 @@
-package mysticmods.roots.client.gui.screen;
+package mysticmods.roots.api.client;
 
-import mysticmods.roots.api.client.ModifierWidget;
 import mysticmods.roots.api.modifier.IModifierNode;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.ModifierTree;
+import mysticmods.roots.api.modifier.RootModifierNode;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 public class ModifierTab<V, T extends Modifier<V, T>> {
   private final Map<ResourceKey<T>, ModifierWidget<V, T>> widgets = new HashMap<>();
   private final ModifierTree<V, T>.Instance tree;
+  private final RootModifierWidget<V, T> root;
 
   public ModifierTab(ModifierTree<V, T>.Instance tree) {
     this.tree = tree;
@@ -22,6 +24,7 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     for (IModifierNode<V, T> node : tree.tree().all()) {
       widgets.put(node.key(), new ModifierWidget<>(this, node));
     }
+    this.root = new RootModifierWidget<>(this, tree.tree().root());
   }
 
   private List<ModifierWidget<V, T>> roots = null;
@@ -33,6 +36,10 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     return this.roots;
   }
 
+  public RootModifierWidget<V, T> root () {
+    return root;
+  }
+
   public ModifierTree<V, T> getTree() {
     return tree.tree();
   }
@@ -41,6 +48,9 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
   public ModifierWidget<V, T> getWidget(IModifierNode<V, T> node) {
     if (node == null) {
       return null;
+    }
+    if (node == root.node) {
+      return root;
     }
     return widgets.get(node.key());
   }

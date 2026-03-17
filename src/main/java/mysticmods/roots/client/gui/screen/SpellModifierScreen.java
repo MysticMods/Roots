@@ -1,15 +1,14 @@
 package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.client.ModifierTab;
 import mysticmods.roots.api.client.ModifierWidget;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.modifier.ModifierTree;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstanceData;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.gui.GuiGraphics;
@@ -50,7 +49,7 @@ public class SpellModifierScreen extends RootsScreen {
   }
 
   @Nullable
-  private ModifierTree<Spell, SpellModifier>.Instance getInstance () {
+  private ModifierTree<Spell, SpellModifier>.Instance getInstance() {
     SpellStorage storage = getStorage();
     if (storage == null) {
       return null;
@@ -79,11 +78,12 @@ public class SpellModifierScreen extends RootsScreen {
   public void drawForeground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     super.drawForeground(graphics, mouseX, mouseY, partialTicks);
 
-    for (ModifierWidget<Spell, SpellModifier> widget : tab.roots()) {
-      widget.drawConnectivity(graphics, 0, 0, true);
-      widget.drawConnectivity(graphics, 0, 0, false);
-      widget.draw(graphics, 0, 0); //guiLeft, guiTop/*, mouseX, mouseY/ partialTicks*/);
-    }
+    /*    for (ModifierWidget<Spell, SpellModifier> widget : tab.roots()) {*/
+    var widget = tab.root();
+    widget.drawConnectivity(graphics, 0, 0, true);
+    widget.drawConnectivity(graphics, 0, 0, false);
+    widget.draw(graphics, 0, 0); //guiLeft, guiTop/*, mouseX, mouseY/ partialTicks*/);
+    /*    }*/
   }
 
   @Override
@@ -101,7 +101,11 @@ public class SpellModifierScreen extends RootsScreen {
 
   @Override
   public ResourceLocation getBackground() {
+    // UNUSED
     return background;
+  }
+
+  public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, int uvW, int uvH, int maxW, int maxH) {
   }
 
   @Override
@@ -114,7 +118,7 @@ public class SpellModifierScreen extends RootsScreen {
     return 192;
   }
 
-  public static void open (StaffScreen staffScreen, int slot) {
+  public static void open(StaffScreen staffScreen, int slot) {
     open(staffScreen.hand, staffScreen.inventorySlot, slot);
   }
 

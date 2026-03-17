@@ -2,10 +2,12 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,18 +29,46 @@ public class RootsItemCallbacks {
   public static void fill() {
     for (Item value : BuiltInRegistries.ITEM) {
       if (value instanceof TokenItem.SpellTokenItem spellToken) {
-        SPELL_TO_ITEM_MAP.put(spellToken.getSpell(), spellToken);
-        SPELL_TO_ITEMSTACK_MAP.put(spellToken.getSpell(), new ItemStack(spellToken));
+        var key = spellToken.getSpell();
+        SPELL_TO_ITEM_MAP.put(key, spellToken);
+        SPELL_TO_ITEMSTACK_MAP.put(key, new ItemStack(spellToken));
         ItemStack library = new ItemStack(spellToken);
         library.set(RootsAPI.getInstance().getDeletableType(), Unit.INSTANCE);
-        SPELL_TO_LIBRARY_ITEMSTACK_MAP.put(spellToken.getSpell(), library);
+        SPELL_TO_LIBRARY_ITEMSTACK_MAP.put(key, library);
       } else if (value instanceof TokenItem.RitualTokenItem ritualToken) {
-        RITUAL_TO_ITEM_MAP.put(ritualToken.getRitual(), ritualToken);
-        RITUAL_TO_ITEMSTACK_MAP.put(ritualToken.getRitual(), new ItemStack(ritualToken));
+        var key = ritualToken.getRitual();
+        RITUAL_TO_ITEM_MAP.put(key, ritualToken);
+        RITUAL_TO_ITEMSTACK_MAP.put(key, new ItemStack(ritualToken));
       } else if (value instanceof TokenItem.GroveTokenItem groveToken) {
-        GROVE_TO_ITEM_MAP.put(groveToken.getGrove(), groveToken);
-        GROVE_TO_ITEMSTACK_MAP.put(groveToken.getGrove(), new ItemStack(groveToken));
+        var key = groveToken.getGrove();
+        GROVE_TO_ITEM_MAP.put(key, groveToken);
+        GROVE_TO_ITEMSTACK_MAP.put(key, new ItemStack(groveToken));
       }
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  public static Item getItemGeneric (ResourceKey<?> key) {
+    if (key == RootsRegistries.Keys.SPELLS) {
+      return getItem(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key));
+    } else if (key == RootsRegistries.Keys.RITUALS) {
+      return getItem(RootsRegistries.RITUALS.get((ResourceKey<Ritual>) key));
+    } else if (key == RootsRegistries.Keys.GROVES) {
+      return getItem(RootsRegistries.GROVES.get((ResourceKey<Grove>) key));
+    } else {
+      return Items.AIR;
+    }
+  }
+
+  public static ItemStack getItemStackGeneric (ResourceKey<?> key) {
+    if (key.isFor(RootsRegistries.Keys.SPELLS)) {
+      return getItemStack(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key));
+    } else if (key.isFor(RootsRegistries.Keys.RITUALS)) {
+      return getItemStack(RootsRegistries.RITUALS.get((ResourceKey<Ritual>) key));
+    } else if (key.isFor(RootsRegistries.Keys.GROVES)) {
+      return getItemStack(RootsRegistries.GROVES.get((ResourceKey<Grove>) key));
+    } else {
+      return ItemStack.EMPTY;
     }
   }
 

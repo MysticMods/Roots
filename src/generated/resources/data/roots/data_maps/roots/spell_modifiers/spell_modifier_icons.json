@@ -2,6 +2,6 @@
   "values": {
     "roots:sky_soarer/amplified": "minecraft:redstone",
     "roots:sky_soarer/amplified_2": "minecraft:glowstone_dust",
-    "roots:sky_soarer/friendly_earth": "minecraft:spectral_arrow"
+    "roots:sky_soarer/friendly_earth": "minecraft:arrow"
   }
 }

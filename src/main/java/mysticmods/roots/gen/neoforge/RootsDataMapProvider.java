@@ -644,5 +644,10 @@ public final class RootsDataMapProvider extends DataMapProvider {
     var builder32 = builder(DataMaps.SHATTER_COST_MULTIPLIERS);
     builder32.add(RootsTags.Blocks.TIER_00_SHATTER, 0.0, false);
     builder32.add(RootsTags.Blocks.TIER_05_SHATTER, 0.5, false);
+
+    var builder33 = builder(DataMaps.SPELL_MODIFIER_ICONS);
+    builder33.add(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, Items.ARROW, false);
+    builder33.add(ModModifiers.SKY_SOARER_AMPLIFIED, Items.REDSTONE, false);
+    builder33.add(ModModifiers.SKY_SOARER_AMPLIFIED_2, Items.GLOWSTONE_DUST, false);
   }
 }
