@@ -37,6 +37,7 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Z;
 
   public static ModConfigSpec.BooleanValue SHOW_INSERT_MESSAGE;
+  public static ModConfigSpec.BooleanValue SHOW_INSERT_IN_GAME_MESSAGE;
   public static ModConfigSpec.BooleanValue SHOW_DELETE_MESSAGE;
   public static ModConfigSpec.BooleanValue HIGHLIGHT_LAST_BLOCK;
 
@@ -253,9 +254,11 @@ public class ConfigManager {
     CLIENT_BUILDER.pop();
     CLIENT_BUILDER.comment("options for insert/delete messages and block highlights").push("messages_and_highlights");
     SHOW_INSERT_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to view eligible recipes' HUD message")
-        .define("show_insert_message", true);
+        .define("show_insert_overlay_message", false);
     SHOW_DELETE_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to clear block' HUD message")
         .define("show_delete_message", true);
+    SHOW_INSERT_IN_GAME_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to view eligible recipes' message that appears over eligible block entities when targeted")
+        .define("show_insert_in_game_message", true);
     HIGHLIGHT_LAST_BLOCK = CLIENT_BUILDER.comment("if true, the current 'eligible block' for interaction (view recipes or clear container) will be highlighted")
         .define("highlight_last_block", true);
     CLIENT_BUILDER.pop();

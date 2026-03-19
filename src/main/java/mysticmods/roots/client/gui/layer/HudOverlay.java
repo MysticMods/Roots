@@ -80,6 +80,10 @@ public class HudOverlay {
     return menu_pos;
   }
 
+  public static boolean isStoredBlock (BlockPos pos) {
+    return menu_pos != null && menu_pos.equals(pos);
+  }
+
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post event) {
     if (menuPosCooldown-- <= 0) {
