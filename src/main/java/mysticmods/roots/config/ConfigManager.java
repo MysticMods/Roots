@@ -98,7 +98,6 @@ public class ConfigManager {
   public static ModConfigSpec.BooleanValue DISABLE_PATICLES;
   public static ModConfigSpec.BooleanValue FORCE_CUSTOM_PARTICLE_SHADER;
 
-
   public static ModConfigSpec.ConfigValue<List<? extends String>> GUI_LAYER_SKIP;
 
   public static ModConfigSpec COMMON_CONFIG;
@@ -259,7 +258,7 @@ public class ConfigManager {
         .define("show_delete_message", true);
     SHOW_INSERT_IN_GAME_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to view eligible recipes' message that appears over eligible block entities when targeted")
         .define("show_insert_in_game_message", true);
-    HIGHLIGHT_LAST_BLOCK = CLIENT_BUILDER.comment("if true, the current 'eligible block' for interaction (view recipes or clear container) will be highlighted")
+    HIGHLIGHT_LAST_BLOCK = CLIENT_BUILDER.comment("if true, the current 'eligible block' for interaction (view recipes or clear container) will be visually highlighted")
         .define("highlight_last_block", true);
     CLIENT_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
