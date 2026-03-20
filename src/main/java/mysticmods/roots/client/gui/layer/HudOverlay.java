@@ -45,7 +45,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -65,6 +64,7 @@ import java.util.List;
 @EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID)
 public class HudOverlay {
   private static final int MENU_POS_TIME_OUT = 20 * 5;
+  public static final int TEXT_COLOR = 16777215;
 
   private static int menuPosCooldown = -1;
 
@@ -80,7 +80,7 @@ public class HudOverlay {
     return menu_pos;
   }
 
-  public static boolean isStoredBlock (BlockPos pos) {
+  public static boolean isStoredBlock(BlockPos pos) {
     return menu_pos != null && menu_pos.equals(pos);
   }
 
@@ -197,7 +197,7 @@ public class HudOverlay {
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
       for (Component comp : components) {
-        graphics.drawString(mc.font, comp, x + 25, y, 16777215, true);
+        graphics.drawString(mc.font, comp, x + 25, y, TEXT_COLOR, true);
         y += 12;
       }
       RenderSystem.enableDepthTest();
@@ -291,7 +291,7 @@ public class HudOverlay {
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
-        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, TEXT_COLOR, true);
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
       }
@@ -299,9 +299,9 @@ public class HudOverlay {
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
-      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
-      graphics.drawString(mc.font, comp3, x + 25, y + 24, 16777215, true);
+      graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp3, x + 25, y + 24, TEXT_COLOR, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
     }
@@ -392,7 +392,7 @@ public class HudOverlay {
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
-        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, TEXT_COLOR, true);
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
       }
@@ -400,10 +400,10 @@ public class HudOverlay {
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, comp4, x + 25, y - 24, 16777215, true);
-      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
-      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
-      graphics.drawString(mc.font, comp3, x + 25, y + 24, 16777215, true);
+      graphics.drawString(mc.font, comp4, x + 25, y - 24, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp3, x + 25, y + 24, TEXT_COLOR, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
     }
@@ -458,7 +458,7 @@ public class HudOverlay {
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
-        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, TEXT_COLOR, true);
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
       }
@@ -466,8 +466,8 @@ public class HudOverlay {
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
-      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
+      graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
     }
@@ -518,8 +518,8 @@ public class HudOverlay {
       graphics.renderItemDecorations(mc.font, output, x, y);*/
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
-      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
+      graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
     }
@@ -639,25 +639,37 @@ public class HudOverlay {
 
         RenderSystem.disableDepthTest();
         RenderSystem.disableBlend();
-        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, 0xFFFFFF, true);
+        graphics.drawString(mc.font, "~", xPos - 8, yPos + 8, TEXT_COLOR, true);
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
       }
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, comp1, x + 25, y, 16777215, true);
-      graphics.drawString(mc.font, comp2, x + 25, y + 12, 16777215, true);
-      graphics.drawString(mc.font, comp3, x + 25, y + 24, 16777215, true);
-      graphics.drawString(mc.font, comp4, x + 25, y - 24, 16777215, true);
+      graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp3, x + 25, y + 24, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp4, x + 25, y - 24, TEXT_COLOR, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
     }
   }
 
+  public static boolean shouldShowInsert(BlockPos pos) {
+    Minecraft mc = Minecraft.getInstance();
+    Level level = mc.level;
+    return level != null && pos != null && level.getBlockEntity(pos) instanceof FakeMenuBlockEntity fake && fake.shouldShowInsert();
+  }
+
+  public static boolean shouldShowDelete(BlockPos pos) {
+    Minecraft mc = Minecraft.getInstance();
+    Level level = mc.level;
+    return level != null && pos != null && level.getBlockEntity(pos) instanceof ClearableBlockEntity clearable && clearable.canClear();
+  }
+
   public static void renderFakeMenu(GuiGraphics guiGraphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft minecraft) {
     Level level = minecraft.level;
-    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof FakeMenuBlockEntity fake && fake.shouldShowInsert() && ConfigManager.SHOW_INSERT_MESSAGE.getAsBoolean()) {
+    if (level != null && getStoredBlockPos() != null && shouldShowInsert(getStoredBlockPos()) && ConfigManager.SHOW_INSERT_MESSAGE.getAsBoolean()) {
       Gui gui = minecraft.gui;
       Font font = gui.getFont();
       minecraft.getProfiler().push("overlayMessage");
@@ -666,7 +678,7 @@ public class HudOverlay {
       guiGraphics.pose().pushPose();
       guiGraphics.pose()
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-      Component overlayMessageString = Component.translatable("roots.hud.fake_menu", KeyBindings.OPEN_FAKE_MENU.getTranslatedKeyMessage(), ((BlockEntity) fake).getBlockState()
+      Component overlayMessageString = Component.translatable("roots.hud.fake_menu", KeyBindings.OPEN_FAKE_MENU.getTranslatedKeyMessage(), level.getBlockState(getStoredBlockPos())
           .getBlock().getName());
 
       int k = font.width(overlayMessageString);
@@ -679,16 +691,16 @@ public class HudOverlay {
 
   public static void renderClear(GuiGraphics guiGraphics, PoseStack pose, float partialTicks, DeltaTracker delta, Minecraft minecraft) {
     Level level = minecraft.level;
-    if (level != null && getStoredBlockPos() != null && level.getBlockEntity(getStoredBlockPos()) instanceof ClearableBlockEntity clearable && clearable.canClear() && ConfigManager.SHOW_DELETE_MESSAGE.getAsBoolean()) {
+    if (level != null && getStoredBlockPos() != null && shouldShowDelete(getStoredBlockPos()) && ConfigManager.SHOW_DELETE_MESSAGE.getAsBoolean()) {
       Gui gui = minecraft.gui;
       Font font = gui.getFont();
       minecraft.getProfiler().push("overlayMessage");
       int yShift = Math.max(gui.leftHeight, gui.rightHeight) + (68 - 59);
-      int j = 16777215;
+      int j = TEXT_COLOR;
       guiGraphics.pose().pushPose();
       guiGraphics.pose()
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-      Component overlayMessageString = Component.translatable("roots.hud.clear", KeyBindings.CLEAR_CONTAINER.getTranslatedKeyMessage(), ((BlockEntity) clearable).getBlockState()
+      Component overlayMessageString = Component.translatable("roots.hud.clear", KeyBindings.CLEAR_CONTAINER.getTranslatedKeyMessage(), level.getBlockState(getStoredBlockPos())
           .getBlock().getName());
 
       int k = font.width(overlayMessageString);

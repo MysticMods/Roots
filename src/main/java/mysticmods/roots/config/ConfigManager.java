@@ -39,6 +39,7 @@ public class ConfigManager {
   public static ModConfigSpec.BooleanValue SHOW_INSERT_MESSAGE;
   public static ModConfigSpec.BooleanValue SHOW_INSERT_IN_GAME_MESSAGE;
   public static ModConfigSpec.BooleanValue SHOW_DELETE_MESSAGE;
+  public static ModConfigSpec.BooleanValue SHOW_DELETE_IN_GAME_MESSAGE;
   public static ModConfigSpec.BooleanValue HIGHLIGHT_LAST_BLOCK;
 
   public static ModConfigSpec.IntValue PYRE_BOUNDS_X;
@@ -255,10 +256,12 @@ public class ConfigManager {
     SHOW_INSERT_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to view eligible recipes' HUD message")
         .define("show_insert_overlay_message", false);
     SHOW_DELETE_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to clear block' HUD message")
-        .define("show_delete_message", true);
+        .define("show_delete_message", false);
     SHOW_INSERT_IN_GAME_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to view eligible recipes' message that appears over eligible block entities when targeted")
         .define("show_insert_in_game_message", true);
-    HIGHLIGHT_LAST_BLOCK = CLIENT_BUILDER.comment("if true, the current 'eligible block' for interaction (view recipes or clear container) will be visually highlighted")
+    SHOW_DELETE_IN_GAME_MESSAGE = CLIENT_BUILDER.comment("if false, disables the 'press keybind to clear block' message that appears over eligible block entities when targeted")
+        .define("show_delete_in_game_message", true);
+    HIGHLIGHT_LAST_BLOCK = CLIENT_BUILDER.comment("if true, the most recent 'eligible block' for interaction (view recipes or clear container) will be visually highlighted")
         .define("highlight_last_block", true);
     CLIENT_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
