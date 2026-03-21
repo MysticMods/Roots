@@ -150,6 +150,7 @@ public class RenderTickHandler {
             throw new ReportedException(crashreport);
           }
         }
+        // Ends a specific render type
         renderer.endBatch(renderType);
       }
       RenderSystem.disableBlend();

@@ -238,7 +238,7 @@ public class RenderUtil {
     } else {
       itemRenderer.render(stack, ItemDisplayContext.GUI, false, poseStack, bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, itemBakedModel);
     }
-    bufferSource.endBatch();
+    //bufferSource.endBatch();
     if (flag) {
       Lighting.setupFor3DItems();
     }
@@ -280,7 +280,7 @@ public class RenderUtil {
     MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
     mc.getBlockRenderer()
         .renderSingleBlock(block, guiGraphics.pose(), bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
-    bufferSource.endBatch();
+    //bufferSource.endBatch();
     guiGraphics.pose().popPose();
 
     guiGraphics.pose().popPose();
