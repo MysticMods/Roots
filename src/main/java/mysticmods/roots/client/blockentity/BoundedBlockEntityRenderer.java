@@ -81,14 +81,14 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
         renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, 1, overlayMessageString);
       }
     }
-      if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
-        AABB bounds = pBlockEntity.getAABB();
-        if (bounds != null) {
-          RenderUtil.renderAABB(pPoseStack, pBufferSource, bounds, pBlockEntity.getBlockPos());
-          RenderUtil.renderAABB(pPoseStack, pBufferSource, BlockPos.ZERO, pBlockEntity.getBlockPos(), null, null);
-        }
+    if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
+      AABB bounds = pBlockEntity.getAABB();
+      if (bounds != null) {
+        RenderUtil.renderAABB(pPoseStack, pBufferSource, bounds, pBlockEntity.getBlockPos());
+        RenderUtil.renderAABB(pPoseStack, pBufferSource, BlockPos.ZERO, pBlockEntity.getBlockPos(), null, null);
       }
-      renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, 1.8, getTextToRender(pBlockEntity));
+    }
+    renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, 1.8, getTextToRender(pBlockEntity));
   }
 
   protected Component getTextToRender(T blockEntity) {
