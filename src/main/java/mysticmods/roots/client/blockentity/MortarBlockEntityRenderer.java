@@ -20,10 +20,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBlockEntity> {
+public class MortarBlockEntityRenderer extends BoundedBlockEntityRenderer<MortarBlockEntity> {
   public static final RandomSource RANDOM = RandomSource.create();
 
   public MortarBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    super(context);
   }
 
   @Override
@@ -91,5 +92,6 @@ public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBloc
           .renderStatic(inSlot, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
+    super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
   }
 }

@@ -255,6 +255,7 @@ public class RenderUtil {
     }
   }
 
+  // Only used for rendering icons (re #1289)
   private static MultiBufferSource transparentBuffer(MultiBufferSource.BufferSource bufferSource) {
     return (type) -> new TintWrappedVertexConsumer(bufferSource.getBuffer(TRANSLUCENT), 1.0f, 1.0f, 1.0f, 0.25f);
   }
@@ -469,6 +470,7 @@ public class RenderUtil {
     return true;
   }
 
+  // Re: #1289 this is never actually called at the minute
   private static void renderItemDissolveInternal(ItemRenderer itemRenderer, ItemStack itemStack, ItemDisplayContext displayContext, boolean isLeftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel bakedModel, float dissolveProgress) {
     if (itemStack.isEmpty()) {
       return;

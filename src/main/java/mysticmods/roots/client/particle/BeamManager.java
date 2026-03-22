@@ -7,6 +7,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.RootsRenderTypes;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
@@ -38,20 +39,27 @@ public class BeamManager {
     }
   }
 
-  public static void render(float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn) {
+  public static void render(float partialTicks, PoseStack matrixStack, MultiBufferSource.BufferSource bufferIn) {
     render(partialTicks, matrixStack, bufferIn, null);
   }
 
   private static final ResourceLocation BEAM_TEXTURE = RootsAPI.rl("textures/misc/beam_gold.png");
 
-  public static void render(float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn, @Nullable Vec3 cameraPos) {
-    VertexConsumer buffer = bufferIn.getBuffer(RootsRenderTypes.ROOTS_BEAM.apply(BEAM_TEXTURE)); // Let's just go with this
+  public static void render(float partialTicks, PoseStack matrixStack, MultiBufferSource.BufferSource bufferIn, @Nullable Vec3 cameraPos) {
+    synchronized (BEAMS) {
+      if (BEAMS.isEmpty()) {
+        return; // NO-OP to avoid buffer consumption
+      }
+    }
+    RenderType type = RootsRenderTypes.ROOTS_BEAM.apply(BEAM_TEXTURE);
+    VertexConsumer buffer = bufferIn.getBuffer(type); // Let's just go with this
     Matrix4f matrix = matrixStack.last().pose();
     synchronized (BEAMS) {
       for (Beam beam : BEAMS) {
         renderBeam(buffer, beam, matrix, cameraPos, partialTicks);
       }
     }
+    bufferIn.endBatch(type);
   }
 
   public static void renderBeam(VertexConsumer consumer, Beam beam, Matrix4f matrix, @Nullable Vec3 cameraPos, float partialTicks) {

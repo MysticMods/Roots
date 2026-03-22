@@ -1,7 +1,5 @@
 package mysticmods.roots.client;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -114,7 +112,6 @@ public class RenderTickHandler {
 
       BeamManager.render(event.getPartialTick()
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
-      renderer.endLastBatch();
 
       renderingDelayedParticles = true;
       var allParticles = ((AccessorMixinParticleEngine) mc.particleEngine).rootsGetParticles();
@@ -150,7 +147,7 @@ public class RenderTickHandler {
             throw new ReportedException(crashreport);
           }
         }
-        // Ends a specific render type
+        // For #1289: This can't be it because this code never executes unless there are particles.
         renderer.endBatch(renderType);
       }
       RenderSystem.disableBlend();

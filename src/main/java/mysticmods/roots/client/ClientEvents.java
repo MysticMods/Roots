@@ -101,6 +101,7 @@ public class ClientEvents {
             .cameraOrientation());
         poseStack.scale(0.3f * pulse, 0.3f * pulse, 0.3f * pulse);
         poseStack.translate(-0.5f, 0, -0.5f);
+        // Re: #1289 this should only execute if the entity has geas
         Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
             poseStack.last(),
             buffer.getBuffer(Sheets.translucentItemSheet()),

@@ -52,11 +52,11 @@ public class BoltRenderer {
     }
   }
 
-  public void render(float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn) {
+  public void render(float partialTicks, PoseStack matrixStack, MultiBufferSource.BufferSource bufferIn) {
     render(partialTicks, matrixStack, bufferIn, null);
   }
 
-  public void render(float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn, @Nullable Vec3 cameraPos) {
+  public void render(float partialTicks, PoseStack matrixStack, MultiBufferSource.BufferSource bufferIn, @Nullable Vec3 cameraPos) {
     Matrix4f matrix = matrixStack.last().pose();
     Timestamp timestamp = new Timestamp(minecraft.level.getGameTime(), partialTicks);
     boolean refresh = timestamp.isPassed(refreshTimestamp, (1 / REFRESH_TIME));
@@ -64,29 +64,41 @@ public class BoltRenderer {
       refreshTimestamp = timestamp;
     }
     synchronized (boltOwners) {
-      for (Iterator<Map.Entry<Object, BoltOwnerData>> iter = boltOwners.entrySet().iterator(); iter.hasNext(); ) {
-        Map.Entry<Object, BoltOwnerData> entry = iter.next();
-        BoltOwnerData data = entry.getValue();
-        // tick our bolts based on the refresh rate, removing if they're now finished
-        if (refresh) {
-          tickAndRemove(data, timestamp);
-        }
-        // TODO: This doesn't support dynamic bolts
-        if (data.bolts.isEmpty() && data.lastBolt != null && data.lastBolt.getSpawnFunction().isConsecutive()) {
-          data.addBolt(new StaticBoltInstance(data.lastBolt, timestamp), timestamp, random);
-        }
-
-        for (Map.Entry<RenderType, Set<BoltRenderInstance>> renderEntry : data.bolts.entrySet()) {
-          VertexConsumer buffer = bufferIn.getBuffer(renderEntry.getKey());
-          // render all bolts for this owner
-          for (BoltRenderInstance bolt : renderEntry.getValue()) {
-            bolt.render(matrix, buffer, timestamp, cameraPos, partialTicks);
+      if (!boltOwners.isEmpty()) {
+        // Hopefully this reduces the number of excess buffer creations (#1289)
+        // but, given that bolt owners should be entry, it's honestly not plausible
+        // that this was the actual cause.
+        RenderType lastType = null;
+        VertexConsumer lastBuffer;
+        for (Iterator<Map.Entry<Object, BoltOwnerData>> iter = boltOwners.entrySet().iterator(); iter.hasNext(); ) {
+          Map.Entry<Object, BoltOwnerData> entry = iter.next();
+          BoltOwnerData data = entry.getValue();
+          // tick our bolts based on the refresh rate, removing if they're now finished
+          if (refresh) {
+            tickAndRemove(data, timestamp);
           }
-          Minecraft.getInstance().renderBuffers().bufferSource().endBatch(renderEntry.getKey());
-        }
+          // TODO: This doesn't support dynamic bolts
+          if (data.bolts.isEmpty() && data.lastBolt != null && data.lastBolt.getSpawnFunction().isConsecutive()) {
+            data.addBolt(new StaticBoltInstance(data.lastBolt, timestamp), timestamp, random);
+          }
 
-        if (data.bolts.isEmpty() && timestamp.isPassed(data.lastUpdateTimestamp, MAX_OWNER_TRACK_TIME)) {
-          iter.remove();
+          if (!data.bolts.isEmpty()) {
+            for (Map.Entry<RenderType, Set<BoltRenderInstance>> renderEntry : data.bolts.entrySet()) {
+              if (lastType != null && lastType != renderEntry.getKey()) {
+                bufferIn.endBatch(lastType);
+              }
+              lastType = renderEntry.getKey();
+              lastBuffer = bufferIn.getBuffer(lastType);
+              // render all bolts for this owner
+              for (BoltRenderInstance bolt : renderEntry.getValue()) {
+                bolt.render(matrix, lastBuffer, timestamp, cameraPos, partialTicks);
+              }
+            }
+          }
+
+          if (data.bolts.isEmpty() && timestamp.isPassed(data.lastUpdateTimestamp, MAX_OWNER_TRACK_TIME)) {
+            iter.remove();
+          }
         }
       }
     }
