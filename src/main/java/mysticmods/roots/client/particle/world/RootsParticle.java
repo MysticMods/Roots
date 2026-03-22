@@ -118,9 +118,9 @@ public abstract class RootsParticle extends TextureSheetParticle {
     ParticleRenderType type = this.getRenderType();
     if (type instanceof RootsParticleRenderTypes.RootsParticleRenderType rootsType) {
       return delayedRender && rootsType.isDelayed();
+    } else {
+      return false;
     }
-
-    return delayedRender;
   }
 
   protected boolean shouldRender() {
