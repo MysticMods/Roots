@@ -970,12 +970,12 @@ public class ClientFXHandlers {
 
       // TODO: Delay actually spawning some of these
       int total = (7 + random.nextInt(8));
-      int baseDelay = 10; // base starting delay
-      int maxSpread = 80; // total maximum spread across the whole sequence
+      int baseDelay = 3; // base starting delay
+      int maxSpread = 70; // total maximum spread across the whole sequence
 
       for (int j = 0; j < total; j++) {
         double linearProgress = (double) j / total; // 0.0 -> 1.0
-        double curvedProgress = Math.pow(linearProgress, 0.4);
+        double curvedProgress = Math.pow(linearProgress, 0.45);
         int spreadDelay = (int) (curvedProgress * maxSpread);
         int jitter = random.nextInt(5);
         int delay = baseDelay + spreadDelay + jitter;

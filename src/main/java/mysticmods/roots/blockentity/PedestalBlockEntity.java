@@ -24,19 +24,23 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity, ServerTickBlockEntity, ClientTickBlockEntity {
   protected ItemStackHandler inventory;
   protected int limit;
 
   private ItemStack animationItem = ItemStack.EMPTY;
+  private BlockState animationState = Blocks.AIR.defaultBlockState();
   private int animationTicks = 0;
 
   public float visualAnimationTicks = 0.0f;
@@ -79,6 +83,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     if (!level.isClientSide()) {
       this.animationTicks = Constants.PEDESTAL_ANIMATION_TICKS;
       this.animationItem = inventory.getStackInSlot(0).copy();
+      if (this.animationItem.getItem() instanceof BlockItem blockItem) {
+        this.animationState = blockItem.getBlock().defaultBlockState();
+      }
       setChanged();
       updateViaState();
     }
@@ -180,6 +187,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     } else {
       animationItem = ItemStack.EMPTY;
     }
+    if (this.animationItem.getItem() instanceof BlockItem blockItem) {
+      this.animationState = blockItem.getBlock().defaultBlockState();
+    }
     this.animationTicks = pTag.getInt("animationTicks");
     if (this.animationTicks == Constants.PEDESTAL_ANIMATION_TICKS) {
       this.visualAnimationTicks = 0.0f;
@@ -200,6 +210,15 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       return this.animationItem;
     }
     return inventory.getStackInSlot(0);
+  }
+
+  @Nullable
+  public BlockState getHeldBlockState () {
+    if (this.animationTicks > 0 && !this.animationState.isAir()) {
+      return this.animationState;
+    }
+
+    return null;
   }
 
   @Override

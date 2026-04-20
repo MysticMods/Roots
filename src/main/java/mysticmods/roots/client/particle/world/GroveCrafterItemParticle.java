@@ -3,12 +3,17 @@ package mysticmods.roots.client.particle.world;
 import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.VecUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
 
 public class GroveCrafterItemParticle extends RootsItemParticle {
   private final Vec3 origin, destination, control1, control2;
@@ -52,6 +57,19 @@ public class GroveCrafterItemParticle extends RootsItemParticle {
     this.yd = motion.y;
     this.zd = motion.z;
     this.alpha = 0f;
+
+    if (item.getItem() instanceof BlockItem blockItem) {
+      BlockState state = blockItem.getBlock().defaultBlockState();
+      this.rCol = 0.6f;
+      this.bCol = 0.6f;
+      this.gCol = 0.6f;
+      if (IClientBlockExtensions.of(state).areBreakingParticlesTinted(state, level, BlockPos.containing(origin))) {
+        int i = Minecraft.getInstance().getBlockColors().getColor(state, level, BlockPos.containing(origin), 0);
+        this.rCol *= (float) (i >> 16 & 0xFF) / 255.0F;
+        this.gCol *= (float) (i >> 8 & 0xFF) / 255.0F;
+        this.bCol *= (float) (i & 0xFF) / 255.0F;
+      }
+    }
   }
 
   @Override
