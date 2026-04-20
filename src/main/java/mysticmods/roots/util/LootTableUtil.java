@@ -18,8 +18,59 @@ import net.minecraft.world.level.storage.loot.entries.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class LootTableUtil {
+  public static List<Either<Item, TagKey<Item>>> recursivelyGetItems(LootTable table, HolderGetter.Provider provider) {
+    List<Either<Item, TagKey<Item>>> result = new ArrayList<>();
+
+    List<LootPool> pools = ((AccessorMixinLootTable) table).rootsGetPools();
+
+    for (LootPool pool : pools) {
+      result.addAll(recursivelyGetItems(pool, provider));
+    }
+
+    return result;
+  }
+
+  public static List<Either<Item, TagKey<Item>>> recursivelyGetItems(LootPool pool, HolderGetter.Provider provider) {
+    List<Either<Item, TagKey<Item>>> result = new ArrayList<>();
+
+    List<LootPoolEntryContainer> entries = ((AccessorMixinLootPool) pool).rootsGetEntries();
+    result.addAll(recursivelyGetItems(entries, provider));
+
+    return result;
+  }
+
+  public static List<Either<Item, TagKey<Item>>> recursivelyGetItems(List<LootPoolEntryContainer> entries, HolderGetter.Provider provider) {
+    List<Either<Item, TagKey<Item>>> result = new ArrayList<>();
+
+    for (LootPoolEntryContainer entry : entries) {
+      if (entry instanceof EmptyLootItem) {
+        continue;
+      }
+      if (entry instanceof LootItem) {
+        result.add(Either.left(((AccessorMixinLootItem) entry).rootsGetItem().value()));
+        continue;
+      }
+      if (entry instanceof TagEntry) {
+        result.add(Either.right(((AccessorMixinTagEntry) entry).rootsGetTag()));
+        continue;
+      }
+      if (entry instanceof NestedLootTable) {
+        var key = ((AccessorMixinNestedLootTable) entry).rootsGetContents();
+        LootTable table = key.map(o -> provider.lookup(Registries.LOOT_TABLE).orElseThrow().get(o).orElseThrow()
+            .value(), Function.identity());
+        result.addAll(recursivelyGetItems(table, provider));
+        continue;
+      }
+      if (entry instanceof CompositeEntryBase) {
+        result.addAll(recursivelyGetItems(((AccessorMixinCompositeEntryBase) entry).roots$getChildren(), provider));
+      }
+    }
+    return result;
+  }
+
   public static List<ChanceOutput> parseLootTable(LootTable table, HolderGetter.Provider provider) {
     List<ChanceOutput> outputs = new ArrayList<>();
 

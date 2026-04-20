@@ -42,6 +42,9 @@ public class DumpDataCommand {
   record ItemInfo () {
   }
 
+  // Drops self
+  // Drops other item based on conditions
+
   record BlockInfo(ResourceLocation id, Set<ResourceLocation> tags, Set<BreakMode> mode, boolean requiresCorrectTool) {
     public BlockInfo(Holder<Block> block) {
       this(block.getKey().location(),

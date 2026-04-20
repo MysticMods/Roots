@@ -16,6 +16,7 @@
     "MixinThrownPotion$ExtinguishPyre",
     "MixinWitherBoss$Geas",
     "accessor.AccessorMixinBlockLootSubProvider",
+    "accessor.AccessorMixinCompositeEntryBase",
     "accessor.AccessorMixinCropBlock",
     "accessor.AccessorMixinEntity",
     "accessor.AccessorMixinGoat",
