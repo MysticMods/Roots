@@ -91,7 +91,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(RootsTags.Items.RUNIC_SHEARS).add(ModItems.RUNIC_SHEARS.get());
 
-    this.tag(RootsTags.Items.CASTING_TOOLS).add(ModItems.STAFF.get());
+    this.tag(RootsTags.Items.CREATIVE_CASTING_TOOLS).add(CREATIVE_STAFF.get());
+    this.tag(RootsTags.Items.CASTING_TOOLS).add(ModItems.STAFF.get()).addTag(RootsTags.Items.CREATIVE_CASTING_TOOLS);
 
     this.tag(RootsTags.Items.KNIVES)
         .add(ModItems.WOODEN_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get());

@@ -1,5 +1,6 @@
 {
   "values": [
-    "roots:staff"
+    "roots:staff",
+    "#roots:casting_tools/creative"
   ]
 }

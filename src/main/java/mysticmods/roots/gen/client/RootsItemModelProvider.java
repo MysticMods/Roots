@@ -306,6 +306,9 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     getBuilder(ModItems.STAFF.getKey().location().toString()).parent(handheld)
         .texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1"))
         .texture("layer2", modLoc("item/tools/staff_petal_2"));
+    getBuilder(ModItems.CREATIVE_STAFF.getKey().location().toString()).parent(handheld)
+        .texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1"))
+        .texture("layer2", modLoc("item/tools/staff_petal_2"));
 
     subfolder(ModItems.WILDWOOD_BOW, "tools");
     subfolder(ModItems.WILDWOOD_QUIVER, "tools");

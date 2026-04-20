@@ -1,10 +1,10 @@
 package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.registry.ICosted;
@@ -20,7 +20,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.Set;
 
 public interface ISpellInstance extends SpellLike, ICostedParent {
@@ -77,7 +76,11 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getCooldown();
   }
 
-  default boolean canCast(Entity pCaster) {
+  default boolean offCooldown(ItemStack castingItem, Entity pCaster) {
+    if (castingItem.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
+      return true;
+    }
+
     if (!pCaster.hasData(RootsAPI.getInstance().getCooldownStorageType())) {
       return true;
     }

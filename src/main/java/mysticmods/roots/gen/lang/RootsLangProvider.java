@@ -517,6 +517,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.RUNED_SWORD);
     addItem(ModItems.RUNIC_SHEARS);
     addItem(ModItems.STAFF);
+    addItem(ModItems.CREATIVE_STAFF);
     addItem(ModItems.WILDWOOD_BOW);
     addItem(ModItems.WILDWOOD_QUIVER);
     addItem(ModItems.WOODEN_SHEARS);

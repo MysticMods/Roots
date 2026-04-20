@@ -2,6 +2,7 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -12,7 +13,6 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModItems;
 import mysticmods.roots.item.util.CastingSuccessCache;
 import mysticmods.roots.network.client.ClientboundClearHighlightPacket;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
@@ -50,7 +50,7 @@ public class CastingItem extends Item {
   }
 
   public static UUID getUUID(ItemStack stack) {
-    if (!stack.is(ModItems.STAFF.get())) {
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
       throw new IllegalArgumentException("CastingItem.getUUID can only be called on a staff item");
     }
     UUID current = stack.get(ModAttachments.ITEM_UUID);
@@ -162,6 +162,7 @@ public class CastingItem extends Item {
       pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);
 
       if (ticks % 2 == 0) {
+        // TODO: Jaunt effect should be triggered from something else?
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelJauntFXPacket(spell.getSpell(), pPlayer.getId(), ticks));
       }
     }
@@ -221,7 +222,7 @@ public class CastingItem extends Item {
     }
 
     ISpellInstance spell = storage.getSpell(current);
-    if (spell == null || !spell.canCast(pPlayer)) {
+    if (spell == null || !spell.offCooldown(stack, pPlayer)) {
       return InteractionResultHolder.pass(stack);
     }
 
@@ -238,8 +239,10 @@ public class CastingItem extends Item {
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
         ModActions.SPELL_CAST.get().accept(context);
-        CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
-        cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
+        if (!stack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
+          CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
+          cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
+        }
         return InteractionResultHolder.success(stack);
       }
     } else {
@@ -283,8 +286,7 @@ public class CastingItem extends Item {
       return;
     }
 
-    int ticks = pStack.getUseDuration(pLivingEntity) - pTimeCharged;
-    int current = storage.currentSlot();
+    int ticksUsed = pStack.getUseDuration(pLivingEntity) - pTimeCharged;
 
     if (spell.getType() == Spell.Type.CHARGED) {
       Costing costing = new Costing(spell, pPlayer);
@@ -295,18 +297,24 @@ public class CastingItem extends Item {
         return;
       }
 
-      int cooldown = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticks);
+      int cooldown = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticksUsed);
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pPlayer.getUsedItemHand(), pPlayer.getItemInHand(pPlayer.getUsedItemHand()), spell, costing);
         ModActions.SPELL_CAST.get().accept(context);
-        CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
-        cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
+        if (!pStack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
+          CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
+          cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
+        }
       }
     }
   }
 
   @Override
   public boolean isBarVisible(ItemStack pStack) {
+    if (pStack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
+      return false;
+    }
+
     Player player = PlayerGetter.getPlayer();
     if (player == null) {
       return false;
@@ -332,6 +340,10 @@ public class CastingItem extends Item {
 
   @Override
   public int getBarWidth(ItemStack pStack) {
+    if (pStack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
+      return 0;
+    }
+
     Player player = PlayerGetter.getPlayer();
     if (player == null) {
       return 0;
@@ -390,5 +402,10 @@ public class CastingItem extends Item {
     }
 
     TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);
+  }
+
+  @Override
+  public boolean isFoil(ItemStack stack) {
+    return stack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS) || super.isFoil(stack);
   }
 }

@@ -314,6 +314,8 @@ public class ModItems {
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
       .stacksTo(1)));
+  public static final DeferredHolder<Item, CastingItem> CREATIVE_STAFF = ITEMS.register("creative_staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get()).rarity(Rarity.EPIC)
+      .stacksTo(1)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
       .stacksTo(1)));

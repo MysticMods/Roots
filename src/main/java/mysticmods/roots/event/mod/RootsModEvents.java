@@ -218,6 +218,7 @@ public class RootsModEvents {
       event.accept(ModItems.SILVER_STATER.get());
 
       event.accept(ModItems.STAFF.get());
+      event.accept(ModItems.CREATIVE_STAFF.get());
       event.accept(ModItems.FIRE_STARTER.get());
       event.accept(ModItems.WOODEN_SHEARS.get());
       event.accept(ModItems.RUNIC_SHEARS.get());

@@ -286,6 +286,7 @@ public class RootsTags {
     public static final TagKey<Item> FLINT = modTag("flint");
     public static final TagKey<Item> STONELIKE = modTag("stonelike");
     public static final TagKey<Item> CASTING_TOOLS = modTag("casting_tools");
+    public static final TagKey<Item> CREATIVE_CASTING_TOOLS = modTag("casting_tools/creative");
 
     public static final TagKey<Item> RUNESTONE_HERBS = modTag("runestone_herbs");
 

@@ -113,7 +113,7 @@ public class ClientSetup {
         }
       }
       return -1;
-    }, ModItems.STAFF.get());
+    }, ModItems.STAFF.get(), ModItems.CREATIVE_STAFF.get());
     event.register((stack, index) -> {
       DyeableWithDefault dye = stack.get(ModAttachments.DYEABLE);
       if (dye == DyeableWithDefault.DEFAULT || dye == null) {

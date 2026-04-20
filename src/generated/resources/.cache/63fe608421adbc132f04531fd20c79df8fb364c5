@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-03T15:02:19.6622095	Roots Item Tags
+// 1.21.1	2026-04-20T11:46:20.6633115	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -68,7 +68,8 @@ ede9321748dbbee6bccf55a484d49e9b7eea913c data/roots/tags/item/capstones/any.json
 17578a8ec82cf0a4f598a8656ffaa775eea0732a data/roots/tags/item/capstones/runes/rune.json
 c9349151d99d4653238fe3843b488ad43c34374a data/roots/tags/item/capstones/runes/runed.json
 c3a2b3f26c12aec67aa597e52b49cc769f00b01c data/roots/tags/item/carapace.json
-ae71dd3be1e53de12945743c7e5062e8c2460abb data/roots/tags/item/casting_tools.json
+b0e1390f2fce572f2b1519a352107e3c509e590b data/roots/tags/item/casting_tools.json
+14e409ca17a1494bdbb070dd1df996cefcb82c87 data/roots/tags/item/casting_tools/creative.json
 628b2ef253afee264bc0611bf95b581da81a7b7c data/roots/tags/item/charms.json
 a60550797d049a5d0edd7e37e93a25c469166094 data/roots/tags/item/charms/alertness.json
 d26fab5781adf116b2a4d1aef4ec77fbbac91ef5 data/roots/tags/item/chests/wildwood.json
