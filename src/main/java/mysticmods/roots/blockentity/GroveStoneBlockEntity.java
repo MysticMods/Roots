@@ -65,7 +65,22 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
   }
 
   @Override
+  public void onLoad() {
+    super.onLoad();
+    if (!getLevel().isClientSide() && getBlockState().is(RootsTags.Blocks.GROVE_STONE_WILD)) {
+      // Validate all sections (2 below)
+      // and begin the animation by sending
+      // a packet.
+      // TODO:
+    }
+  }
+
+  @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
+    if (pState.is(RootsTags.Blocks.GROVE_STONE_WILD)) {
+      return;
+    }
+
     if (!pState.getValue(GroveStoneBlock.ACTIVE) || getBoundingBox() == null) {
       return;
     }
