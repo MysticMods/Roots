@@ -306,8 +306,8 @@ public class RootsTags {
     public static final TagKey<Item> WILDWOOD_PLANKS = modTag("planks/wildwood");
     public static final TagKey<Item> WILDWOOD_CHESTS = modTag("chests/wildwood");
     public static final TagKey<Item> GROVE_STONES = modTag("grove_stones");
-    public static final TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
     public static final TagKey<Item> GROVE_STONE_WILD = modTag("grove_stones/wild");
+    public static final TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
     public static final TagKey<Item> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
     public static final TagKey<Item> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
     public static final TagKey<Item> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");

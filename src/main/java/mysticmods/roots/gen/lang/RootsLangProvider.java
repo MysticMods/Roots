@@ -250,9 +250,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_1.get().getName(), "Fairy Grove Rank 1+");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.WILD_RANK_1.get().getName(), "Wild Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.WILD_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Wild Grove of at least 1.");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_1.get().getName(), "Primal Grove Rank 1+");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_1.get()
+        .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 1.");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_1.get().getName(), "Sprouting Grove Rank 1+");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Sprouting Grove of at least 1.");
@@ -269,9 +269,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_2.get().getName(), "Fairy Grove Rank 2+");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.WILD_RANK_2.get().getName(), "Wild Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.WILD_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Wild Grove of at least 2.");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_2.get().getName(), "Primal Grove Rank 2+");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_2.get()
+        .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 2.");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_2.get().getName(), "Sprouting Grove Rank 2+");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Sprouting Grove of at least 2.");
@@ -288,9 +288,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_3.get().getName(), "Fairy Grove Rank 3+");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.WILD_RANK_3.get().getName(), "Wild Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.WILD_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Wild Grove of at least 3.");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_3.get().getName(), "Primal Grove Rank 3+");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_3.get()
+        .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 3.");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_3.get().getName(), "Sprouting Grove Rank 3+");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Sprouting Grove of at least 3.");
@@ -307,9 +307,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_4.get().getName(), "Fairy Grove Rank 4");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Fairy Grove.");
-    add("player_condition.roots." + ModConditions.WILD_RANK_4.get().getName(), "Wild Grove Rank 4");
-    add("player_condition.roots." + ModConditions.WILD_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Wild Grove.");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_4.get().getName(), "Primal Grove Rank 4");
+    add("player_condition.roots." + ModConditions.PRIMAL_RANK_4.get()
+        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Primal Grove.");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_4.get().getName(), "Sprouting Grove Rank 4");
     add("player_condition.roots." + ModConditions.SPROUTING_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Sprouting Grove.");

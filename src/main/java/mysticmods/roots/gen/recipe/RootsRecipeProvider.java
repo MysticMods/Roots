@@ -1127,7 +1127,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.SILVER_INGOT)
                 .requires(ItemTags.BIRCH_LOGS)
                 .requires(RootsTags.Items.WILDWOOD_LOGS)
-                .condition(ModConditions.WILD_RANK_1.get())
+                .condition(ModConditions.PRIMAL_RANK_1.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/augmentation"));
@@ -1941,7 +1941,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.CROPS)
                 .requires(Items.GOLDEN_AXE)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.WILD_RANK_1.get())
+                .condition(ModConditions.PRIMAL_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_wild"));
 
     RecipeSaver.saver().unlockedBy("has_red_mushroom", has(Items.RED_MUSHROOM))
