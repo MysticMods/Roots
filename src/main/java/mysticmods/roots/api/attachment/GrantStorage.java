@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.action.LearnSpellAction;
 import mysticmods.roots.action.LearnSpellModifierAction;
 import mysticmods.roots.api.RootsAPI;
@@ -20,6 +20,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.ArrayList;
@@ -33,46 +34,66 @@ public class GrantStorage implements ICleanable {
           RootsRegistries.SPELLS.byNameCodec().listOf().fieldOf("grantedSpells")
               .forGetter(o -> new ArrayList<>(o.grantedSpells)),
           RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().fieldOf("grantedModifiers")
-              .forGetter(o -> new ArrayList<>(o.grantedModifiers))).apply(instance, GrantStorage::new));
+              .forGetter(o -> new ArrayList<>(o.grantedSpellModifiers))).apply(instance, GrantStorage::new));
   public static final Codec<GrantStorage> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, GrantStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS)
       .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)
-      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedModifiers), GrantStorage::new);
+      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpellModifiers), GrantStorage::new);
 
   private boolean dirty = true;
   private final Set<Spell> grantedSpells;
-  private final Set<SpellModifier> grantedModifiers;
+  private final Set<SpellModifier> grantedSpellModifiers;
+  private final Set<ResourceKey<SpellModifier>> grantedSpellModifierResourceKeys;
 
   private List<LibrarySpell> librarySpells = null;
 
   public GrantStorage() {
-    grantedSpells = new ObjectLinkedOpenHashSet<>();
-    grantedModifiers = new ObjectLinkedOpenHashSet<>();
+    grantedSpells = new ObjectOpenHashSet<>();
+    grantedSpellModifiers = new ObjectOpenHashSet<>();
+    grantedSpellModifierResourceKeys = new ObjectOpenHashSet<>();
   }
 
-  public GrantStorage(Set<Spell> grantedSpells, Set<SpellModifier> grantedModifiers) {
-    this.grantedSpells = new ObjectLinkedOpenHashSet<>(grantedSpells);
-    this.grantedModifiers = new ObjectLinkedOpenHashSet<>(grantedModifiers);
+  public GrantStorage(Set<Spell> grantedSpells, Set<SpellModifier> grantedSpellModifiers) {
+    this.grantedSpells = new ObjectOpenHashSet<>(grantedSpells);
+    this.grantedSpellModifiers = new ObjectOpenHashSet<>(grantedSpellModifiers);
+    this.grantedSpellModifierResourceKeys = new ObjectOpenHashSet<>();
+    rebuildGrantedModifierResourceKeys();
   }
 
   public GrantStorage(List<Spell> spells, List<SpellModifier> spellModifiers) {
-    this.grantedSpells = new ObjectLinkedOpenHashSet<>(spells);
-    this.grantedModifiers = new ObjectLinkedOpenHashSet<>(spellModifiers);
+    this.grantedSpells = new ObjectOpenHashSet<>(spells);
+    this.grantedSpellModifiers = new ObjectOpenHashSet<>(spellModifiers);
+    this.grantedSpellModifierResourceKeys = new ObjectOpenHashSet<>();
+    rebuildGrantedModifierResourceKeys();
+  }
+
+  private void rebuildGrantedModifierResourceKeys() {
+    grantedSpellModifierResourceKeys.clear();
+    for (SpellModifier mod : grantedSpellModifiers) {
+      grantedSpellModifierResourceKeys.add(mod.builtInRegistryHolder().getKey());
+    }
   }
 
   public boolean hasSpell(Spell spell) {
     return grantedSpells.contains(spell);
   }
 
-  public boolean hasModifier(SpellModifier modifier) {
-    return grantedModifiers.contains(modifier);
+  public boolean hasSpellModifier(SpellModifier modifier) {
+    return grantedSpellModifiers.contains(modifier);
+  }
+
+  public boolean hasSpellModifier(ResourceKey<SpellModifier> modifierKey) {
+    if (grantedSpellModifierResourceKeys.size() != grantedSpellModifiers.size()) {
+      rebuildGrantedModifierResourceKeys();
+    }
+    return grantedSpellModifierResourceKeys.contains(modifierKey);
   }
 
   public boolean canUnlock(Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       return !grantedSpells.contains(value.value());
     } else if (unlock instanceof Unlock.SpellModifierUnlock(Holder<SpellModifier> value)) {
-      return !grantedModifiers.contains(value.value());
+      return !grantedSpellModifiers.contains(value.value());
     }
 
     return false;
@@ -83,17 +104,19 @@ public class GrantStorage implements ICleanable {
       return false;
     }
 
+    librarySpells = null;
     grantedSpells.clear();
     setDirty(true);
     return true;
   }
 
-  public boolean clearModifiers(ServerPlayer player) {
-    if (grantedModifiers.isEmpty()) {
+  public boolean clearSpellModifiers(ServerPlayer player) {
+    if (grantedSpellModifiers.isEmpty()) {
       return false;
     }
 
-    grantedModifiers.clear();
+    grantedSpellModifiers.clear();
+    grantedSpellModifierResourceKeys.clear();
     setDirty(true);
     return true;
   }
@@ -104,7 +127,7 @@ public class GrantStorage implements ICleanable {
       unlockSpell(player, spell);
     } else if (unlock instanceof Unlock.SpellModifierUnlock(Holder<SpellModifier> value)) {
       SpellModifier modifier = value.value();
-      unlockModifier(player, modifier);
+      unlockSpellModifier(player, modifier);
     }
 
     return false;
@@ -112,6 +135,7 @@ public class GrantStorage implements ICleanable {
 
   private void unlockSpell(ServerPlayer player, Spell spell) {
     if (grantedSpells.add(spell)) {
+      librarySpells = null;
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
       LearnSpellAction.Context context = new LearnSpellAction.Context(player.serverLevel(), player, ISpellInstance.of(spell));
@@ -119,23 +143,26 @@ public class GrantStorage implements ICleanable {
     }
   }
 
-  private void unlockModifier(ServerPlayer player, SpellModifier modifier) {
-    if (grantedModifiers.add(modifier)) {
+  private void unlockSpellModifier(ServerPlayer player, SpellModifier modifier) {
+    if (grantedSpellModifiers.add(modifier)) {
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
       LearnSpellModifierAction.Context context = new LearnSpellModifierAction.Context(player.serverLevel(), player, modifier);
       ModActions.LEARN_SPELL_MODIFIER.get().accept(context);
+      grantedSpellModifierResourceKeys.add(modifier.builtInRegistryHolder().getKey());
     }
   }
 
   public void removeSpell(ServerPlayer player, Spell spell) {
     if (grantedSpells.remove(spell)) {
+      librarySpells = null;
       setDirty(true);
     }
   }
 
-  public void removeModifier(SpellModifier modifier) {
-    if (grantedModifiers.remove(modifier)) {
+  public void removeSpellModifier(SpellModifier modifier) {
+    if (grantedSpellModifiers.remove(modifier)) {
+      rebuildGrantedModifierResourceKeys();
       setDirty(true);
     }
   }
@@ -145,38 +172,21 @@ public class GrantStorage implements ICleanable {
   }
 
   public Set<SpellModifier> getModifiers() {
-    return grantedModifiers;
+    return grantedSpellModifiers;
   }
 
   public List<LibrarySpell> getLibrarySpells() {
-    if (librarySpells == null) {
-      librarySpells = new ArrayList<>();
-      grantedSpells.stream().sorted(Comparator.comparing(IDescribed::getDescriptionId))
-          .forEach(o -> librarySpells.add(new LibrarySpell(o.builtInRegistryHolder(), true)));
-      RootsRegistries.SPELLS.stream().filter(o -> !grantedSpells.contains(o))
-          .sorted(Comparator.comparing(IDescribed::getDescriptionId))
-          .forEach(o -> librarySpells.add(new LibrarySpell(o.builtInRegistryHolder(), false)));
+    if (librarySpells == null || librarySpells.isEmpty()) {
+      librarySpells = RootsRegistries.SPELLS.stream().sorted(Comparator.comparing(IDescribed::getDescriptionId))
+          .map(o -> new LibrarySpell(o.builtInRegistryHolder(), grantedSpells.contains(o)))
+          .sorted(Comparator.comparing(LibrarySpell::granted).reversed()).toList();
     }
     return librarySpells;
   }
 
-/*  public List<LibraryModifier> getLibraryModifiers(Spell checkSpell) {
-    if (libraryModifiers == null) {
-      libraryModifiers = new Object2ObjectLinkedOpenHashMap<>();
-    }
-    return libraryModifiers.computeIfAbsent(checkSpell, spell -> {
-      List<LibraryModifier> result = new ArrayList<>();
-      for (SpellModifier mod : spell.getModifiers()) {
-        result.add(new LibraryModifier(mod.builtInRegistryHolder(), grantedModifiers.contains(mod)));
-      }
-      result.sort(Comparator.comparing(LibraryModifier::isEnabled));
-      return result;
-    });
-  }*/
-
   @Override
   public boolean isEmpty() {
-    return grantedSpells.isEmpty() && grantedModifiers.isEmpty();
+    return grantedSpells.isEmpty() && grantedSpellModifiers.isEmpty();
   }
 
   @Override
@@ -193,14 +203,14 @@ public class GrantStorage implements ICleanable {
   public final boolean equals(Object o) {
     if (!(o instanceof GrantStorage that)) return false;
 
-    return dirty == that.dirty && grantedSpells.equals(that.grantedSpells) && grantedModifiers.equals(that.grantedModifiers);
+    return dirty == that.dirty && grantedSpells.equals(that.grantedSpells) && grantedSpellModifiers.equals(that.grantedSpellModifiers);
   }
 
   @Override
   public int hashCode() {
     int result = Boolean.hashCode(dirty);
     result = 31 * result + grantedSpells.hashCode();
-    result = 31 * result + grantedModifiers.hashCode();
+    result = 31 * result + grantedSpellModifiers.hashCode();
     return result;
   }
 

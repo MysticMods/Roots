@@ -7,12 +7,14 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.util.SetUtils;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
@@ -244,6 +246,12 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
         mods.add(modifiers.get(key).value());
       }
       return mods;
+    }
+
+    public Map<ResourceKey<C>, ModifierInfo> getModifierInfo (@NotNull Player player) {
+      return null;
+/*      RootsAPI.getInstance().getCooldownReduction()
+      player.getData(ModAttachments.GRANT_STORAGE)*/
     }
 
     public Map<ResourceKey<C>, ModifierInfo> getModifierInfo(@Nullable Set<C> granted) {

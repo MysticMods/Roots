@@ -40,6 +40,7 @@ public interface IRootsAPI {
 
   void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique);
 
+
   RitualInformation.RitualResolutionType getRitualResolutionType();
 
   List<ItemStack> getCurios(Player player, TagKey<Item> tag);
