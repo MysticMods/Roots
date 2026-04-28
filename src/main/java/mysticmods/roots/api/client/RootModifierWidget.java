@@ -18,6 +18,7 @@ import java.util.List;
 public class RootModifierWidget<V, T extends Modifier<V, T>> extends ModifierWidget<V, T> {
   public RootModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
     super(tab, node);
+    this.renderStack = RootsItemCallbacks.getItemStackGeneric(tab.getTree().getObject().getKey());
   }
 
   @Nullable
@@ -45,16 +46,6 @@ public class RootModifierWidget<V, T extends Modifier<V, T>> extends ModifierWid
   public void drawConnectivity(GuiGraphics guiGraphics, int x, int y, boolean dropShadow) {
     for (ModifierWidget<V, T> widget : children()) {
       widget.drawConnectivity(guiGraphics, x, y, dropShadow);
-    }
-  }
-
-  @Override
-  public void draw (GuiGraphics guiGraphics, int x, int y) {
-    guiGraphics.blitSprite(AdvancementWidgetType.UNOBTAINED.frameSprite(AdvancementType.GOAL), x + this.x + 3, y + this.y, 26, 26);
-    guiGraphics.renderFakeItem(RootsItemCallbacks.getItemStackGeneric(tab.getTree().getObject().getKey()), x + this.x + 8, y + this.y + 5);
-
-    for (ModifierWidget<V, T> widget : children()) {
-      widget.draw(guiGraphics, x, y);
     }
   }
 

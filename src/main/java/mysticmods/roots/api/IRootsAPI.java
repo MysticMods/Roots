@@ -3,6 +3,7 @@ package mysticmods.roots.api;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.attachment.CooldownStorage;
+import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.AugmentationInfo;
@@ -67,6 +68,8 @@ public interface IRootsAPI {
   IRootsPacket getBlockEntityDiscardPacket(ResourceKey<AttachmentType<?>> attachmentType, BlockEntity entity);
 
   boolean logGroveActions();
+
+  AttachmentType<GrantStorage> getGrantStorageType();
 
   AttachmentType<CooldownStorage> getCooldownStorageType();
 

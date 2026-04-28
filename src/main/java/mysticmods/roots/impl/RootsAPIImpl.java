@@ -158,6 +158,11 @@ public class RootsAPIImpl implements IRootsAPI {
   }
 
   @Override
+  public AttachmentType<GrantStorage> getGrantStorageType() {
+    return ModAttachments.GRANT_STORAGE.value();
+  }
+
+  @Override
   public AttachmentType<Map<Holder<Attribute>, AugmentationInfo>> getAugmentationInfoType() {
     return ModAttachments.AUGMENTATION_INFO.value();
   }

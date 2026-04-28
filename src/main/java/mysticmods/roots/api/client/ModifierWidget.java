@@ -3,6 +3,7 @@ package mysticmods.roots.api.client;
 import mysticmods.roots.api.modifier.*;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.advancements.AdvancementWidget;
 import net.minecraft.client.gui.screens.advancements.AdvancementWidgetType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +16,7 @@ public class ModifierWidget<V, T extends Modifier<V, T>> {
   protected final ModifierTab<V, T> tab;
   protected final IModifierNode<V, T> node;
 
-  protected final ItemStack renderStack;
+  protected ItemStack renderStack;
   protected final int x, y;
 
   public ModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
@@ -80,6 +81,17 @@ public class ModifierWidget<V, T extends Modifier<V, T>> {
   }
 
   public void draw (GuiGraphics guiGraphics, int x, int y) {
+    // Widget type should change depending on tab.getModifierInfo()
+    ModifierTree.ModifierInfo info = tab.getInstance().getModifierInfo(this.node);
+    AdvancementWidgetType type;
+    if (!info.isUnlocked()) {
+    } else if (info.isRestricted()) {
+    } else if (info.isEnabled()) {
+      type = AdvancementWidgetType.OBTAINED;
+    } else if (info.canEnable()) {
+      type = AdvancementWidgetType.UNOBTAINED;
+    }
+
     guiGraphics.blitSprite(AdvancementWidgetType.UNOBTAINED.frameSprite(AdvancementType.TASK), x + this.x + 3, y + this.y, 26, 26);
     guiGraphics.renderFakeItem(renderStack, x + this.x + 8, y + this.y + 5);
 

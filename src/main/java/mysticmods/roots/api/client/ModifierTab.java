@@ -44,6 +44,10 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     return tree.tree();
   }
 
+  public ModifierTree<V, T>.Instance getInstance () {
+    return tree;
+  }
+
   @Nullable
   public ModifierWidget<V, T> getWidget(IModifierNode<V, T> node) {
     if (node == null) {

@@ -175,6 +175,11 @@ public class GrantStorage implements ICleanable {
     return grantedSpellModifiers;
   }
 
+  public Set<ResourceKey<SpellModifier>> getSpellModifierKeys () {
+    rebuildGrantedModifierResourceKeys();
+    return grantedSpellModifierResourceKeys;
+  }
+
   public List<LibrarySpell> getLibrarySpells() {
     if (librarySpells == null || librarySpells.isEmpty()) {
       librarySpells = RootsRegistries.SPELLS.stream().sorted(Comparator.comparing(IDescribed::getDescriptionId))

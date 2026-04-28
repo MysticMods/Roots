@@ -7,18 +7,15 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.util.SetUtils;
-import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -44,7 +41,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     this.root = RootModifierNode.create(this, object, registry);
   }
 
-  public Holder<V> getObject () {
+  public Holder<V> getObject() {
     return object;
   }
 
@@ -73,8 +70,8 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   // TODO: Conflict validation: conflicting modifiers cannot be parents of the modifier. Basically, ensure there are no cycles in the graph.
 
   // This being called "validator" makes little sense
-  public ModifierTree<V, C>.Instance instance(Set<C> modifiers) {
-    return new Instance(modifiers);
+  public ModifierTree<V, C>.Instance instance(Set<C> modifiers, Set<C> grantedModifiers) {
+    return new Instance(modifiers, grantedModifiers);
   }
 
   public boolean addModifier(C modifier) {
@@ -172,13 +169,16 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   public class Instance {
     private final Set<ResourceKey<C>> enabledModifiers = new ReferenceOpenHashSet<>();
+    private final Set<C> grantedModifiers;
+    private Map<ResourceKey<C>, ModifierInfo> modifierInfoCache = null;
 
-    public Instance(Set<C> modifierSet) {
+    public Instance(Set<C> modifierSet, Set<C> grantedModifiers) {
       for (C modifier : modifierSet) {
         if (!enable(modifier.builtInRegistryHolder().getKey())) {
           // TODO: Conflicting modifiers in the initial set
         }
       }
+      this.grantedModifiers = grantedModifiers;
     }
 
     public ModifierTree<V, C> tree() {
@@ -235,7 +235,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     }
 
     public Instance copy() {
-      Instance copy = new Instance(new ObjectOpenHashSet<>());
+      Instance copy = new Instance(new ObjectOpenHashSet<>(), new HashSet<>(grantedModifiers));
       copy.enabledModifiers.addAll(this.enabledModifiers);
       return copy;
     }
@@ -248,34 +248,40 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return mods;
     }
 
-    public Map<ResourceKey<C>, ModifierInfo> getModifierInfo (@NotNull Player player) {
-      return null;
-/*      RootsAPI.getInstance().getCooldownReduction()
-      player.getData(ModAttachments.GRANT_STORAGE)*/
+    public Map<ResourceKey<C>, ModifierInfo> getModifierInfoCache() {
+      if (modifierInfoCache == null) {
+        Map<ResourceKey<C>, ModifierInfo> infoMap = new Object2ObjectOpenHashMap<>();
+        for (ResourceKey<C> key : modifiers.keySet()) {
+          Set<ResourceKey<C>> cons = ModifierTree.this.conflicts.get(key);
+
+          boolean canEnable = !SetUtils.containsAny(enabledModifiers, cons);
+          // It can be enabled if it isn't conflicting with any other modifier currently enabled.
+          // But what about ancestors?
+          boolean isEnabled = enabledModifiers.contains(key);
+          boolean isUnlocked;
+          if (this.grantedModifiers == null) {
+            isUnlocked = true;
+          } else {
+            isUnlocked = this.grantedModifiers.contains(modifiers.get(key).value());
+          }
+          boolean isRestricted = isRestricted(ModifierTree.this, getNode(ModifierTree.this, key));
+          infoMap.put(key, new ModifierInfo(canEnable, isEnabled, isUnlocked, isRestricted));
+        }
+        this.modifierInfoCache = infoMap;
+      }
+      return this.modifierInfoCache;
     }
 
-    public Map<ResourceKey<C>, ModifierInfo> getModifierInfo(@Nullable Set<C> granted) {
-      Map<ResourceKey<C>, ModifierInfo> infoMap = new Object2ObjectOpenHashMap<>();
-      for (ResourceKey<C> key : modifiers.keySet()) {
-        Set<ResourceKey<C>> cons = ModifierTree.this.conflicts.get(key);
+    public ModifierInfo getModifierInfo(ResourceKey<C> key) {
+      return getModifierInfoCache().get(key);
+    }
 
-        boolean canEnable = !SetUtils.containsAny(enabledModifiers, cons);
-        // It can be enabled if it isn't conflicting with any other modifier currently enabled.
-        // But what about ancestors?
-        boolean isEnabled = enabledModifiers.contains(key);
-        boolean isUnlocked;
-        if (granted == null) {
-          isUnlocked = true;
-        } else {
-          isUnlocked = granted.contains(modifiers.get(key).value());
-        }
-        boolean isRestricted = isRestricted(ModifierTree.this, getNode(ModifierTree.this, key));
-        infoMap.put(key, new ModifierInfo(canEnable, isEnabled, isUnlocked, isRestricted));
-      }
-      return infoMap;
+    public ModifierInfo getModifierInfo(IModifierNode<V, C> node) {
+      return getModifierInfo(node.key());
     }
   }
 
+  // TODO: Can conflict
   public record ModifierInfo(boolean canEnable, boolean isEnabled, boolean isUnlocked, boolean isRestricted) {
     public static final Codec<ModifierInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Codec.BOOL.fieldOf("canEnable").forGetter(ModifierInfo::canEnable),

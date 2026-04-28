@@ -11,14 +11,17 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 public class SpellModifierScreen extends RootsScreen {
   private ModifierTab<Spell, SpellModifier> tab = null;
@@ -59,13 +62,17 @@ public class SpellModifierScreen extends RootsScreen {
       return null;
     }
     var tree = ModifierTrees.getSpell(data.getSpell());
-    return tree.instance(data.getEnabledModifiers());
+    var granted = Minecraft.getInstance().player.getData(ModAttachments.GRANT_STORAGE).getSpellModifiers();
+    return tree.instance(data.getEnabledModifiers(), granted);
   }
 
   @Override
   protected void init() {
     super.init();
+    updateTab();
+  }
 
+  protected void updateTab() {
     var instance = getInstance();
     if (instance == null) {
       return;
