@@ -2,7 +2,6 @@ package mysticmods.roots.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.reference.Shapes;

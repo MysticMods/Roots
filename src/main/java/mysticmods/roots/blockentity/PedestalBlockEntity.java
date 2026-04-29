@@ -213,7 +213,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   @Nullable
-  public BlockState getHeldBlockState () {
+  public BlockState getHeldBlockState() {
     if (this.animationTicks > 0 && !this.animationState.isAir()) {
       return this.animationState;
     }

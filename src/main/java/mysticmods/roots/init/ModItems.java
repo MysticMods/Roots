@@ -314,7 +314,8 @@ public class ModItems {
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
       .stacksTo(1)));
-  public static final DeferredHolder<Item, CastingItem> CREATIVE_STAFF = ITEMS.register("creative_staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get()).rarity(Rarity.EPIC)
+  public static final DeferredHolder<Item, CastingItem> CREATIVE_STAFF = ITEMS.register("creative_staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
+      .rarity(Rarity.EPIC)
       .stacksTo(1)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
@@ -410,7 +411,7 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RADIANCE = ITEMS.register("radiance", () -> spell(ModSpells.RADIANCE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RAMPANT_GROWTH = ITEMS.register("rampant_growth", () -> spell(ModSpells.RAMPANT_GROWTH));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_ROSE_THORNS = ITEMS.register("rose_thorns", () -> spell(ModSpells.ROSE_THORNS));
-/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SANCTUARY = ITEMS.register("sanctuary", () -> spell(ModSpells.SANCTUARY));*/
+  /*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SANCTUARY = ITEMS.register("sanctuary", () -> spell(ModSpells.SANCTUARY));*/
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SATURATE = ITEMS.register("saturate", () -> spell(ModSpells.SATURATE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SHATTER = ITEMS.register("shatter", () -> spell(ModSpells.SHATTER));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SKY_SOARER = ITEMS.register("sky_soarer", () -> spell(ModSpells.SKY_SOARER));

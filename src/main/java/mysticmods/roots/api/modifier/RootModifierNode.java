@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 public class RootModifierNode<V, T extends Modifier<V, T>> extends ModifierNode<V, T> {
-  private static final ConcurrentMap<ResourceKey<?>, RootModifierNode<?, ?>> VALUES = new MapMaker().weakValues().makeMap();
+  private static final ConcurrentMap<ResourceKey<?>, RootModifierNode<?, ?>> VALUES = new MapMaker().weakValues()
+      .makeMap();
 
   private final ModifierTree<V, T> tree;
 

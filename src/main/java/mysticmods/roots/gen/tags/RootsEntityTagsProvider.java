@@ -74,11 +74,15 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
         );
     this.tag(RootsTags.Entities.AUGMENTABLE_EXCLUDE);
 
-    this.tag(RootsTags.Entities.AUGMENTABLE_ARMOR).add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA, EntityType.WOLF);
-    this.tag(RootsTags.Entities.AUGMENTABLE_JUMP_STRENGTH).add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL);
+    this.tag(RootsTags.Entities.AUGMENTABLE_ARMOR)
+        .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA, EntityType.WOLF);
+    this.tag(RootsTags.Entities.AUGMENTABLE_JUMP_STRENGTH)
+        .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL);
     this.tag(RootsTags.Entities.AUGMENTABLE_ATTACK_DAMAGE).add(EntityType.WOLF, ModEntities.FENNEC.get());
-    this.tag(RootsTags.Entities.AUGMENTABLE_MAX_HEALTH).add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
-    this.tag(RootsTags.Entities.AUGMENTABLE_MOVEMENT_SPEED).add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
+    this.tag(RootsTags.Entities.AUGMENTABLE_MAX_HEALTH)
+        .add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
+    this.tag(RootsTags.Entities.AUGMENTABLE_MOVEMENT_SPEED)
+        .add(EntityType.WOLF, ModEntities.FENNEC.get(), EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.CAMEL, EntityType.LLAMA);
 
     this.tag(RootsTags.Entities.AUGMENTABLE_ALL).addTags(
         RootsTags.Entities.AUGMENTABLE_ARMOR,

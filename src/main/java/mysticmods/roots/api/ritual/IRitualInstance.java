@@ -1,7 +1,6 @@
 package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.RitualLike;
-import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.RitualModifier;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.MutableComponent;
@@ -29,7 +28,7 @@ public interface IRitualInstance extends RitualLike {
     return getEnabledModifiers().contains(modifier);
   }
 
-  default boolean hasModifier (Holder<RitualModifier> modifier) {
+  default boolean hasModifier(Holder<RitualModifier> modifier) {
     return getEnabledModifiers().contains(modifier.value());
   }
 

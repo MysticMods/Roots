@@ -35,7 +35,7 @@ public class AugmentationRitual extends Ritual {
   private static final Map<EntityType<?>, Set<Holder<Attribute>>> ELIGIBLE_ATTRIBUTES = new HashMap<>();
   private int count, glowDuration;
 
-  private static Set<Holder<Attribute>> getAttributes (EntityType<?> entity) {
+  private static Set<Holder<Attribute>> getAttributes(EntityType<?> entity) {
     //noinspection deprecation
     var e = entity.builtInRegistryHolder();
 
@@ -55,7 +55,8 @@ public class AugmentationRitual extends Ritual {
     }
 
     // TODO: Cache this
-    HolderSet<Attribute> attributes = BuiltInRegistries.ATTRIBUTE.getTag(RootsTags.Attributes.AUGMENTABLE).orElse(null); // All attributes must be included in the tag but that's not the only attributes that are considered
+    HolderSet<Attribute> attributes = BuiltInRegistries.ATTRIBUTE.getTag(RootsTags.Attributes.AUGMENTABLE)
+        .orElse(null); // All attributes must be included in the tag but that's not the only attributes that are considered
     if (attributes == null) {
       RootsAPI.LOG.error("Ritual {} requires attributes from the AUGMENTABLE tag but none were found. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
@@ -81,12 +82,16 @@ public class AugmentationRitual extends Ritual {
           break;
         }
 
-        List<Holder<Attribute>> attributes1 = attributes.stream().filter(ELIGIBLE_ATTRIBUTES.computeIfAbsent(entity.getType(), AugmentationRitual::getAttributes)::contains).collect(Collectors.toList());
-        RootsAPI.debug("Augmentation ritual found {} eligible attributes for entity type {}.", attributes1.size(), entity.getType().getDescriptionId());
+        List<Holder<Attribute>> attributes1 = attributes.stream()
+            .filter(ELIGIBLE_ATTRIBUTES.computeIfAbsent(entity.getType(), AugmentationRitual::getAttributes)::contains)
+            .collect(Collectors.toList());
+        RootsAPI.debug("Augmentation ritual found {} eligible attributes for entity type {}.", attributes1.size(), entity.getType()
+            .getDescriptionId());
 
         while (!attributes1.isEmpty()) {
           Holder<Attribute> attribute = attributes1.remove(randomSource.nextInt(attributes1.size()));
-          RootsAPI.debug("Pondering first attribute for entity type {}: {}", entity.getType().getDescriptionId(), attribute);
+          RootsAPI.debug("Pondering first attribute for entity type {}: {}", entity.getType()
+              .getDescriptionId(), attribute);
           var data = attribute.getData(DataMaps.AUGMENTATION_DATA);
           if (data == null) {
             RootsAPI.LOG.error("Ritual {} requires augmentation data for attribute {} but none was found. This will cause the ritual to not function correctly.", getOrCreateDescriptionId(), attribute);
@@ -94,7 +99,8 @@ public class AugmentationRitual extends Ritual {
           }
 
           if (data.augment(entity, randomSource)) {
-            RootsAPI.debug("Augmentation ritual adjusted attribute {} for entity {}.", attribute, entity.getType().getDescriptionId());
+            RootsAPI.debug("Augmentation ritual adjusted attribute {} for entity {}.", attribute, entity.getType()
+                .getDescriptionId());
             adjusted++;
             if (glowDuration > 0) {
               entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));

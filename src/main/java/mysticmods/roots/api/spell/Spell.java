@@ -13,7 +13,10 @@ import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.registry.*;
+import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.IDataMapInitialize;
+import mysticmods.roots.api.registry.IStyled;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -245,6 +248,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     }
     return costs;
   }
+
   public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 
   public PropertyHolder<Property.DoubleProperty> getReachProperty() {

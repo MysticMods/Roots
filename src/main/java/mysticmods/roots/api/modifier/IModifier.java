@@ -12,9 +12,9 @@ public interface IModifier<V, T extends IModifier<V, T>> {
 
   ResourceKey<V> getApplicable();
 
-  Set<ResourceKey<T>> getConflicts ();
+  Set<ResourceKey<T>> getConflicts();
 
-  Item getIcon ();
+  Item getIcon();
 
-  boolean isRestricted ();
+  boolean isRestricted();
 }

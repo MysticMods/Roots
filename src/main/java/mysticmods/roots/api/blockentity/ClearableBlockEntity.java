@@ -1,7 +1,7 @@
 package mysticmods.roots.api.blockentity;
 
 public interface ClearableBlockEntity {
-  void clearContents ();
+  void clearContents();
 
-  boolean canClear ();
+  boolean canClear();
 }

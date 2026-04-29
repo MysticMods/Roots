@@ -1,18 +1,11 @@
 package mysticmods.roots.api.modifier;
 
 import com.google.common.collect.ImmutableSet;
-import com.mojang.serialization.Codec;
-import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.Spell;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -53,13 +46,13 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   }
 
   @Nullable
-  public T firstElement () {
+  public T firstElement() {
     return this.firstElement;
   }
 
   // This only validates applicability, not parent/child relationships
   // nor conflicts.
-  public boolean validate () {
+  public boolean validate() {
     if (isEmpty()) {
       return true;
     }
@@ -77,11 +70,11 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
 
   public abstract ModifierSet<V, T, C> without(T element);
 
-  public abstract ModifierSet<V, T, C> without (Collection<T> elements);
+  public abstract ModifierSet<V, T, C> without(Collection<T> elements);
 
   public abstract ModifierSet<V, T, C> with(T element);
 
-  public abstract ModifierSet<V, T, C> with (Collection<T> elements);
+  public abstract ModifierSet<V, T, C> with(Collection<T> elements);
 
   public boolean has(T element) {
     return contains(element);

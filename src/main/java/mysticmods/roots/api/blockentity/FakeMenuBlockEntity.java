@@ -10,5 +10,5 @@ public interface FakeMenuBlockEntity extends MenuProvider {
     return Component.empty();
   }
 
-  boolean shouldShowInsert ();
+  boolean shouldShowInsert();
 }

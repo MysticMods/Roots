@@ -17,7 +17,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -346,7 +345,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS);
-    tag(TagKey.create(Registries.ITEM, RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS.location())).add(Items.CREEPER_HEAD,  Items.DRAGON_HEAD, Items.PIGLIN_HEAD, Items.PLAYER_HEAD, Items.ZOMBIE_HEAD);
+    tag(TagKey.create(Registries.ITEM, RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS.location())).add(Items.CREEPER_HEAD, Items.DRAGON_HEAD, Items.PIGLIN_HEAD, Items.PLAYER_HEAD, Items.ZOMBIE_HEAD);
     tag(TagKey.create(Registries.ITEM, RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS.location())).add(Items.LAVA_BUCKET, Items.WATER_BUCKET);
 
     copySpell(RootsTags.Spells.ADJUSTABLE_SPELL);

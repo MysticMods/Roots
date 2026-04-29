@@ -66,7 +66,8 @@ public class ModEntities {
       .sized(0.4f, 0.4f).eyeHeight(0.2f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("duck"));
   public static final DeferredHolder<EntityType<?>, EntityType<SylvanSpiderEntity>> SYLVAN_SPIDER = REGISTER.register("sylvan_spider", () -> EntityType.Builder.of(SylvanSpiderEntity::new, MobCategory.CREATURE)
-      .sized(1.4f, 0.9f).eyeHeight(0.65f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
+      .sized(1.4f, 0.9f).eyeHeight(0.65f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true)
+      .setUpdateInterval(3)
       .build("sylvan_spider"));
 
   public static final DeferredHolder<EntityType<?>, EntityType<LivingArrowEntity>> LIVING_ARROW = REGISTER.register("living_arrow", () -> EntityType.Builder.<LivingArrowEntity>of(LivingArrowEntity::new, MobCategory.MISC)

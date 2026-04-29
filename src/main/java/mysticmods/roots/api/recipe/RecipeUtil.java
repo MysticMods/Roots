@@ -45,7 +45,7 @@ public class RecipeUtil {
     return partiallyMatchesIngredients(recipe, input, null);
   }
 
-  public static boolean partiallyMatchesIngredients (Recipe<?> recipe, RecipeInput input, @Nullable Level level) {
+  public static boolean partiallyMatchesIngredients(Recipe<?> recipe, RecipeInput input, @Nullable Level level) {
     List<ItemStack> inputs = new ArrayList<>();
     for (int i = 0; i < input.size(); i++) {
       ItemStack stack = input.getItem(i);
@@ -63,8 +63,7 @@ public class RecipeUtil {
     BitSet matchedIngredients = new BitSet(recipe.getIngredients().size());
     for (ItemStack stack : inputs) {
       boolean found = false;
-      for (int i = 0; i < recipe.getIngredients().size(); i++)
-      {
+      for (int i = 0; i < recipe.getIngredients().size(); i++) {
         if (!matchedIngredients.get(i) && recipe.getIngredients().get(i).test(stack)) {
           matchedIngredients.set(i);
           found = true;
@@ -129,7 +128,8 @@ public class RecipeUtil {
   }
 
   public static boolean refillRecipe(IItemHandler inv, Recipe<?> recipe, RecipeInventory inventory) {
-    return refillRecipe(inv, recipe, inventory, (stack) -> {});
+    return refillRecipe(inv, recipe, inventory, (stack) -> {
+    });
   }
 
   public static boolean refillRecipe(IItemHandler inv, Recipe<?> recipe, RecipeInventory inventory, Consumer<List<Ingredient>> missingConsumer) {
@@ -167,7 +167,7 @@ public class RecipeUtil {
       return missing;
     }
 
-    public boolean isComplete () {
+    public boolean isComplete() {
       return missing.isEmpty();
     }
   }

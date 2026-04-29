@@ -177,7 +177,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
-    public Builder force () {
+    public Builder force() {
       return this.forceSpawn();
     }
 

@@ -9,7 +9,6 @@ import mysticmods.roots.client.gui.layer.HudOverlay;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
-import mysticmods.roots.network.PacketHandler;
 import mysticmods.roots.network.server.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;

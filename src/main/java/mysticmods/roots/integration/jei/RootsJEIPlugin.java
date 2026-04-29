@@ -165,7 +165,8 @@ public class RootsJEIPlugin implements IModPlugin {
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
     for (GrovePowerGenerator.Symmetry sym : GrovePowerGenerator.Symmetry.values()) {
-      GROVE_POWER_SYMMETRY_DRAWABLES.put(sym, guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/symmetry/" + sym.name().toLowerCase(Locale.ROOT) + ".png"), 0, 0, 16, 16)
+      GROVE_POWER_SYMMETRY_DRAWABLES.put(sym, guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/symmetry/" + sym.name()
+              .toLowerCase(Locale.ROOT) + ".png"), 0, 0, 16, 16)
           .setTextureSize(16, 16).build());
     }
   }

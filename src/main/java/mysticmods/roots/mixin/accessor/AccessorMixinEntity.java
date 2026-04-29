@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Entity.class)
 public interface AccessorMixinEntity {
   @Invoker("readAdditionalSaveData")
-  void roots$ReadAdditionalSaveData (CompoundTag tag);
+  void roots$ReadAdditionalSaveData(CompoundTag tag);
 }

@@ -27,7 +27,7 @@ import java.util.function.Predicate;
 public class ItemUtil {
   private static final Function<TagKey<Item>, Predicate<ItemStack>> TAG_PREDICATE = Util.memoize(tag -> o -> o.is(tag));
 
-  public static Predicate<ItemStack> tag (TagKey<Item> tag) {
+  public static Predicate<ItemStack> tag(TagKey<Item> tag) {
     return TAG_PREDICATE.apply(tag);
   }
 

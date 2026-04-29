@@ -109,7 +109,7 @@ public class ComplexEntityType {
     return result;
   }
 
-  private static boolean tryFillEntity (Entity entity, @Nullable CompoundTag tag) {
+  private static boolean tryFillEntity(Entity entity, @Nullable CompoundTag tag) {
     if (tag != null) {
       try {
         RootsAPI.getInstance().readAdditionalSavedData(entity, tag);

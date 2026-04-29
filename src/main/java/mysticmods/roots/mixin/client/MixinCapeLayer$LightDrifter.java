@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(CapeLayer.class)
 public class MixinCapeLayer$LightDrifter {
-  @ModifyExpressionValue(method="render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;FFFFFF)V", at=@At(value="INVOKE", target="Lnet/minecraft/client/player/AbstractClientPlayer;isCrouching()Z"))
-  private boolean RootsLightDrifterCrouching (boolean original, @Local(argsOnly = true) AbstractClientPlayer player) {
+  @ModifyExpressionValue(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;FFFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/AbstractClientPlayer;isCrouching()Z"))
+  private boolean RootsLightDrifterCrouching(boolean original, @Local(argsOnly = true) AbstractClientPlayer player) {
     if (player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       return false;
     }

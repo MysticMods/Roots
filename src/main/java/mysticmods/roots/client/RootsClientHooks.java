@@ -227,7 +227,7 @@ public class RootsClientHooks {
     }
   }
 
-  public static void popAndStopUsingItem (Screen newScreen) {
+  public static void popAndStopUsingItem(Screen newScreen) {
     var mc = Minecraft.getInstance();
     if (mc.gameMode != null && mc.player != null) {
       if (mc.screen == null) {

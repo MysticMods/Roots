@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(BrewingStandBlockEntity.class)
 public class MixinBrewingStandBlockEntity {
-  @WrapOperation(method="canPlaceItem", at=@At(value="INVOKE", target="Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
+  @WrapOperation(method = "canPlaceItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
   private boolean lootr$canPlaceAllowInfernoBulb(ItemStack instance, Item item, Operation<Boolean> original) {
     if (instance.is(RootsTags.Items.INFERNO_BULB_HERB)) {
       return true;
@@ -20,7 +20,7 @@ public class MixinBrewingStandBlockEntity {
     return original.call(instance, item);
   }
 
-  @WrapOperation(method="serverTick", at=@At(value="INVOKE", target="Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
+  @WrapOperation(method = "serverTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
   private static boolean lootr$allowInfernoBulb(ItemStack instance, Item item, Operation<Boolean> original) {
     if (instance.is(RootsTags.Items.INFERNO_BULB_HERB)) {
       return true;

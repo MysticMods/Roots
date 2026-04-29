@@ -43,7 +43,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
@@ -62,8 +61,8 @@ import java.util.List;
 public class EntityEventHandler {
   // TODO: How do item pick-up mods handle this
   // TODO: Is this high enough?
-  @SubscribeEvent(priority=EventPriority.HIGH)
-  public static void onItemEntityCollect (ItemEntityPickupEvent.Pre event) {
+  @SubscribeEvent(priority = EventPriority.HIGH)
+  public static void onItemEntityCollect(ItemEntityPickupEvent.Pre event) {
     if (!ConfigManager.POUCH_HERB_PICKUP.get()) {
       return;
     }
@@ -105,7 +104,7 @@ public class EntityEventHandler {
     }
   }
 
-  private static boolean tryStackHerb (ItemStack herb, ItemStack pouch) {
+  private static boolean tryStackHerb(ItemStack herb, ItemStack pouch) {
     if (!(pouch.getItem() instanceof PouchItem pouchItem)) {
       return false;
     }
@@ -485,11 +484,11 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onRightClickBlock (PlayerInteractEvent.RightClickBlock event) {
+  public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
     onItemInteract(event);
   }
 
-  private static void onItemInteract (PlayerInteractEvent event) {
+  private static void onItemInteract(PlayerInteractEvent event) {
     if (event.getHand() != InteractionHand.OFF_HAND) {
       return;
     }

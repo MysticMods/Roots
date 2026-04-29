@@ -64,7 +64,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getEnabledModifiers().contains(modifier);
   }
 
-  default boolean hasModifier (Holder<SpellModifier> modifier) {
+  default boolean hasModifier(Holder<SpellModifier> modifier) {
     return hasModifier(modifier.value());
   }
 

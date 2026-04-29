@@ -22,7 +22,8 @@ public record GroveNumber(Grove grove, int value, GroveNumberType type) {
   public static final MapCodec<GroveNumber> MAP_CODEC = RecordCodecBuilder.mapCodec(
       c -> c.group(
           RootsRegistries.GROVES.byNameCodec().fieldOf("grove")
-              .forGetter(GroveNumber::grove), Codec.INT.fieldOf("value").forGetter(GroveNumber::value), GroveNumberType.CODEC.fieldOf("type").forGetter(GroveNumber::type)
+              .forGetter(GroveNumber::grove), Codec.INT.fieldOf("value")
+              .forGetter(GroveNumber::value), GroveNumberType.CODEC.fieldOf("type").forGetter(GroveNumber::type)
       ).apply(c, GroveNumber::new)
   );
   public static final Codec<GroveNumber> CODEC = MAP_CODEC.codec();
@@ -36,7 +37,7 @@ public record GroveNumber(Grove grove, int value, GroveNumberType type) {
     return new GroveNumber(grove, value, GroveNumberType.REPUTATION);
   }
 
-  public static GroveNumber reputation (Grove grove, int value) {
+  public static GroveNumber reputation(Grove grove, int value) {
     return new GroveNumber(grove, value, GroveNumberType.REPUTATION);
   }
 
@@ -49,7 +50,8 @@ public record GroveNumber(Grove grove, int value, GroveNumberType type) {
   }
 
   public static List<GroveNumber> fromTag(TagKey<Grove> tag, int value, GroveNumberType type) {
-    return Streams.stream(RootsRegistries.GROVES.getTagOrEmpty(tag).iterator()).map(g -> new GroveNumber(g, value, type))
+    return Streams.stream(RootsRegistries.GROVES.getTagOrEmpty(tag).iterator())
+        .map(g -> new GroveNumber(g, value, type))
         .toList();
   }
 

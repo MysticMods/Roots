@@ -102,7 +102,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     return new SpellModifierSet(builder.build()).validated();
   }
 
-  public SpellModifierSet validated () {
+  public SpellModifierSet validated() {
     if (this.isEmpty()) {
       return EMPTY;
     }

@@ -2,7 +2,6 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
-import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.network.ClientFXHandlers;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

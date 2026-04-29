@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Set;
 
-public record FullyGrownCropCondition () implements LootItemCondition {
+public record FullyGrownCropCondition() implements LootItemCondition {
   public static final FullyGrownCropCondition INSTANCE = new FullyGrownCropCondition();
   public static final MapCodec<FullyGrownCropCondition> CODEC = MapCodec.unit(INSTANCE);
 

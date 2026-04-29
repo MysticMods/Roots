@@ -14,7 +14,6 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -31,7 +30,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   private boolean isRestricted = false;
 
   @SafeVarargs
-  public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable, ResourceKey<T> ... conflicts) {
+  public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable, ResourceKey<T>... conflicts) {
     this.parent = parent;
     this.applicable = applicable;
     this.defaultCosts = defaultCosts;
@@ -39,15 +38,15 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   @SafeVarargs
-  public Modifier(CostInstance defaultCosts, ResourceKey<V> applicable, ResourceKey<T> ... conflicts) {
+  public Modifier(CostInstance defaultCosts, ResourceKey<V> applicable, ResourceKey<T>... conflicts) {
     this(defaultCosts, null, applicable, conflicts);
   }
 
   protected abstract DataMapType<T, CostInstance> getDataMapType();
 
-  protected abstract DataMapType<T, Item> getIconDataMapType ();
+  protected abstract DataMapType<T, Item> getIconDataMapType();
 
-  protected abstract DataMapType<T, Boolean> getRestrictedDataMapType ();
+  protected abstract DataMapType<T, Boolean> getRestrictedDataMapType();
 
   @Override
   @Nullable
@@ -109,7 +108,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
 
   @Override
   @Nullable
-  public Item getIcon () {
+  public Item getIcon() {
     return icon;
   }
 

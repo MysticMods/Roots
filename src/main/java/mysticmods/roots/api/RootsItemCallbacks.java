@@ -48,7 +48,7 @@ public class RootsItemCallbacks {
   }
 
   @SuppressWarnings("unchecked")
-  public static Item getItemGeneric (ResourceKey<?> key) {
+  public static Item getItemGeneric(ResourceKey<?> key) {
     if (key == RootsRegistries.Keys.SPELLS) {
       return getItem(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key));
     } else if (key == RootsRegistries.Keys.RITUALS) {
@@ -60,7 +60,7 @@ public class RootsItemCallbacks {
     }
   }
 
-  public static ItemStack getItemStackGeneric (ResourceKey<?> key) {
+  public static ItemStack getItemStackGeneric(ResourceKey<?> key) {
     if (key.isFor(RootsRegistries.Keys.SPELLS)) {
       return getItemStack(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key));
     } else if (key.isFor(RootsRegistries.Keys.RITUALS)) {

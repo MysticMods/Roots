@@ -3,13 +3,7 @@ package mysticmods.roots.api.client;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.modifier.IModifierNode;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.modifier.ModifierTree;
-import mysticmods.roots.client.RootsClientHooks;
-import net.minecraft.advancements.AdvancementType;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.advancements.AdvancementWidgetType;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
@@ -49,11 +43,11 @@ public class RootModifierWidget<V, T extends Modifier<V, T>> extends ModifierWid
     }
   }
 
-  public void drawHover (GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
+  public void drawHover(GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
 
   }
 
-  public boolean isMouseOver (int x, int y, int mouseX, int mouseY) {
+  public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
     int i = x + this.x;
     int j = i + 26;
     int k = y + this.y;

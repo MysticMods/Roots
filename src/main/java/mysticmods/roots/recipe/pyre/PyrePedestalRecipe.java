@@ -31,7 +31,7 @@ public abstract class PyrePedestalRecipe extends RootsTileRecipe<PedestalInvento
     super(data);
   }
 
-  public static <T extends PyrePedestalRecipe> PyrePedestalRecipeHolder of (RecipeHolder<T> holder) {
+  public static <T extends PyrePedestalRecipe> PyrePedestalRecipeHolder of(RecipeHolder<T> holder) {
     return new PyrePedestalRecipeHolder(holder.id(), holder.value());
   }
 

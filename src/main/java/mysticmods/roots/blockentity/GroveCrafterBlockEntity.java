@@ -28,7 +28,6 @@ import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
-import mysticmods.roots.util.PlayerGetter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

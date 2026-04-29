@@ -1,6 +1,5 @@
 package mysticmods.roots.client.gui.screen;
 
-import mysticmods.roots.inventory.fake.FakeContainer;
 import mysticmods.roots.inventory.fake.GroveContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;

@@ -14,14 +14,12 @@ import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.Map;
 
 public class SpellModifierScreen extends RootsScreen {
   private ModifierTab<Spell, SpellModifier> tab = null;

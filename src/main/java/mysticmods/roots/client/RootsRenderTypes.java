@@ -101,7 +101,8 @@ public class RootsRenderTypes {
   public static final RenderStateShard.ShaderStateShard DISSOLVE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getDissolveShader);
 
   public static final RenderStateShard.ShaderStateShard PARTICLE_LOW_DISCARD_SHADER = new RenderStateShard.ShaderStateShard(() -> {
-    if (((ModList.get().isLoaded("iris") && !ModList.get().isLoaded("monocle")) || ConfigManager.DISABLE_CUSTOM_PARTICLE_SHADER.get()) && !ConfigManager.FORCE_CUSTOM_PARTICLE_SHADER.get()) {
+    if (((ModList.get().isLoaded("iris") && !ModList.get()
+        .isLoaded("monocle")) || ConfigManager.DISABLE_CUSTOM_PARTICLE_SHADER.get()) && !ConfigManager.FORCE_CUSTOM_PARTICLE_SHADER.get()) {
       return GameRenderer.getParticleShader();
     } else {
       return RootsShaders.getLowDiscardParticleShader();

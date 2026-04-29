@@ -1,7 +1,6 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
-import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
@@ -42,7 +41,8 @@ public class SylvanLightBlockEntity extends BlockEntity implements ClientTickBlo
       Vec3 spot = Vec3.atCenterOf(pPos)
           .add((random.nextDouble() - 0.5) * 0.058, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.058);
 
-      RootsParticleOptions.builder(ModParticles.LIGHT).color(color).velocity(0, random.nextFloat() * 0.003, 0).start(spot).spawn(pLevel);
+      RootsParticleOptions.builder(ModParticles.LIGHT).color(color).velocity(0, random.nextFloat() * 0.003, 0)
+          .start(spot).spawn(pLevel);
     }
   }
 }

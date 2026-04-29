@@ -23,7 +23,7 @@ public class PlayerGetter {
     return RootsClientHooks.getPlayer();
   }
 
-  public static ContainerLevelAccess getLevelAccess (BlockPos pos) {
+  public static ContainerLevelAccess getLevelAccess(BlockPos pos) {
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     if (server != null && server.isSameThread()) {
       RootsAPI.LOG.error("Attempted to get level access on server thread, this is not allowed!");
@@ -33,7 +33,7 @@ public class PlayerGetter {
     return RootsClientHooks.getLevelAccess(pos);
   }
 
-  public static ContainerLevelAccess getLevelAccess (RegistryFriendlyByteBuf buf) {
+  public static ContainerLevelAccess getLevelAccess(RegistryFriendlyByteBuf buf) {
     if (buf == null) {
       return ContainerLevelAccess.NULL;
     }

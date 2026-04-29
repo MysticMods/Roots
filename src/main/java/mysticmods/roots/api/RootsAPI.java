@@ -39,7 +39,7 @@ public abstract class RootsAPI {
   public static final ResourceKey<LootTable> TENTACLES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("entities/squid/tentacles"));
 
   public static final ResourceKey<LootTable> TURTLE_SCUTE = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath("minecraft", "entities/turtle/scute"));
-  public static final ResourceKey<LootTable> GOAT_HORN  = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath("minecraft", "entities/goat/horn"));
+  public static final ResourceKey<LootTable> GOAT_HORN = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath("minecraft", "entities/goat/horn"));
 
   public static ResourceLocation rl(String path) {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);
@@ -82,13 +82,13 @@ public abstract class RootsAPI {
         .setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
   }
 
-  public static void debug (String message, Object... objs) {
+  public static void debug(String message, Object... objs) {
     if (ConfigManager.DEBUG_EXTENSIVE.get() || !FMLEnvironment.production) {
       LOG.error(message, objs);
     }
   }
 
-  public static void debug (String message) {
+  public static void debug(String message) {
     if (ConfigManager.DEBUG_EXTENSIVE.get() || !FMLEnvironment.production) {
       LOG.error(message);
     }

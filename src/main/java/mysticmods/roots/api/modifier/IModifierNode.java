@@ -24,11 +24,11 @@ public interface IModifierNode<V, T extends IModifier<V, T>> {
     // NO-OP
   }
 
-  default float x () {
+  default float x() {
     return 0;
   }
 
-  default float y () {
+  default float y() {
     return 0;
   }
 }

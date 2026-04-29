@@ -30,8 +30,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.common.util.TriState;
-import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
@@ -48,19 +46,20 @@ public class ClientEvents {
   }
 
   @SubscribeEvent
-  public static void onRenderNameTag (RenderNameTagEvent event) {
-    if (event.getEntity().getType().equals(EntityType.PLAYER) && event.getEntity() instanceof Player player && player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+  public static void onRenderNameTag(RenderNameTagEvent event) {
+    if (event.getEntity().getType()
+        .equals(EntityType.PLAYER) && event.getEntity() instanceof Player player && player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       event.setCanRender(TriState.TRUE);
     }
   }
 
   @SubscribeEvent
-  public static void onLevelDestroyed (LevelEvent.Unload event) {
+  public static void onLevelDestroyed(LevelEvent.Unload event) {
     RenderUtil.clearEntityMap();
   }
 
   @SubscribeEvent
-  public static void onClientLogOut (ClientPlayerNetworkEvent.LoggingOut event) {
+  public static void onClientLogOut(ClientPlayerNetworkEvent.LoggingOut event) {
     RenderUtil.clearEntityMap();
   }
 

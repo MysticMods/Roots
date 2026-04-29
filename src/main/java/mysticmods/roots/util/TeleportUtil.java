@@ -5,9 +5,6 @@ import net.minecraft.network.protocol.game.ClientboundMoveVehiclePacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.TicketType;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.RelativeMovement;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.portal.DimensionTransition;
@@ -24,7 +21,7 @@ public class TeleportUtil {
     if (vehicle != null) {
       if (vehicle.level() == level) {
         vehicle.teleportTo(level, x, y, z, relativeMovements, yRot, xRot);
-        ((IVehicleMoveAccessor)player.connection).roots$handleTeleportVehicle(x, y, z, vehicle);
+        ((IVehicleMoveAccessor) player.connection).roots$handleTeleportVehicle(x, y, z, vehicle);
         player.connection.send(new ClientboundMoveVehiclePacket(vehicle));
       } else {
         vehicle.changeDimension(

@@ -3,9 +3,7 @@ package mysticmods.roots.api.client;
 import mysticmods.roots.api.modifier.IModifierNode;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.modifier.ModifierTree;
-import mysticmods.roots.api.modifier.RootModifierNode;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,14 +27,14 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
 
   private List<ModifierWidget<V, T>> roots = null;
 
-  public List<ModifierWidget<V, T>> roots () {
+  public List<ModifierWidget<V, T>> roots() {
     if (roots == null) {
       this.roots = tree.tree().rootNodes().stream().map(node -> widgets.get(node.key())).toList();
     }
     return this.roots;
   }
 
-  public RootModifierWidget<V, T> root () {
+  public RootModifierWidget<V, T> root() {
     return root;
   }
 
@@ -44,7 +42,7 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     return tree.tree();
   }
 
-  public ModifierTree<V, T>.Instance getInstance () {
+  public ModifierTree<V, T>.Instance getInstance() {
     return tree;
   }
 

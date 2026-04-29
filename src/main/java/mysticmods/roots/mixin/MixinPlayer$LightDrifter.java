@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Player.class)
 public class MixinPlayer$LightDrifter {
-  @WrapOperation(method="tick",at=@At(value="INVOKE", target = "Lnet/minecraft/world/entity/player/Player;moveCloak()V"))
-  private void RootsCancelCloakAnimation (Player instance, Operation<Void> original) {
+  @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;moveCloak()V"))
+  private void RootsCancelCloakAnimation(Player instance, Operation<Void> original) {
     if (!instance.hasEffect(ModEffects.LIGHT_DRIFTER)) {
       original.call(instance);
     }

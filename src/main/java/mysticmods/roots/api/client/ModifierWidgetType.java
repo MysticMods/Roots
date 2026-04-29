@@ -34,7 +34,7 @@ public enum ModifierWidgetType {
     this.willEnableTexture = willEnableTexture;
   }
 
-  public static ResourceLocation getTexture (ModifierInfo info) {
+  public static ResourceLocation getTexture(ModifierInfo info) {
     if (info == null) {
       return NORMAL.unlockedTexture;
     }

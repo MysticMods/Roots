@@ -92,7 +92,7 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
     return x;
   }
 
-  public float y  () {
+  public float y() {
     return y;
   }
 }

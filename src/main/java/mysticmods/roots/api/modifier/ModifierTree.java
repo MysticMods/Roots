@@ -246,11 +246,11 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return mods;
     }
 
-    public boolean enabled (ResourceKey<C> key) {
+    public boolean enabled(ResourceKey<C> key) {
       return enabledModifiers.contains(key);
     }
 
-    public boolean enabled (IModifierNode<V, C> node) {
+    public boolean enabled(IModifierNode<V, C> node) {
       return enabled(node.key());
     }
 

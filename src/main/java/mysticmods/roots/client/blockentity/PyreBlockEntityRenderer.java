@@ -15,7 +15,6 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.SpawnerRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -137,12 +136,12 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
     poseStack.translate(0.5F, 0.0F, 0.5F);
     float f = 0.53125F;
     float f1 = Math.max(entity.getBbWidth(), entity.getBbHeight());
-    if ((double)f1 > 1.0) {
+    if ((double) f1 > 1.0) {
       f /= f1;
     }
 
     poseStack.translate(0.0F, 1.8F, 0.0F);
-    poseStack.mulPose(Axis.YP.rotationDegrees((float)Mth.lerp((double)partialTick, oSpin, spin) * 10.0F));
+    poseStack.mulPose(Axis.YP.rotationDegrees((float) Mth.lerp((double) partialTick, oSpin, spin) * 10.0F));
     poseStack.translate(0.0F, -0.2F, 0.0F);
     poseStack.scale(f, f, f);
     entityRenderer.render(entity, 0.0, 0.0, 0.0, 0.0F, partialTick, poseStack, buffer, packedLight);

@@ -73,7 +73,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
     lastRecipe = null;
   }
 
-  public List<RecipeHolder<T>> getPartialMatches (C inventory, Level level) {
+  public List<RecipeHolder<T>> getPartialMatches(C inventory, Level level) {
     List<RecipeHolder<T>> matches = new ArrayList<>();
     for (RecipeHolder<T> recipe : getRecipes(level)) {
       if (recipe.value().partiallyMatches(inventory, level)) {

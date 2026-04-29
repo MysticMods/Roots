@@ -27,7 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,7 @@ public interface IRootsAPI {
 
   List<ItemStack> getCurios(Player player, TagKey<Item> tag);
 
-  List<ItemStack> getPouches (Player player);
+  List<ItemStack> getPouches(Player player);
 
   ItemStack getTome(Player player);
 

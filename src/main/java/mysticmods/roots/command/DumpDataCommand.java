@@ -11,7 +11,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -30,16 +29,16 @@ public class DumpDataCommand {
     return builder;
   }
 
-  record BiomeInfo () {
+  record BiomeInfo() {
   }
 
-  record EntityInfo () {
+  record EntityInfo() {
   }
 
-  record StructureInfo () {
+  record StructureInfo() {
   }
 
-  record ItemInfo () {
+  record ItemInfo() {
   }
 
   // Drops self

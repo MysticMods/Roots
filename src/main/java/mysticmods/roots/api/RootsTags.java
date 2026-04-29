@@ -1,14 +1,12 @@
 package mysticmods.roots.api;
 
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -24,7 +22,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -669,6 +666,7 @@ public class RootsTags {
     public static final TagKey<Item> PRIMAL_GROVE_STONE = modItemTag("grove_stone/primal");
 
     private static final Map<TagKey<Grove>, TagKey<Item>> GROVE_MAP = new HashMap<>();
+
     static {
       GROVE_MAP.put(ANY, ANY_GROVE_STONE);
       GROVE_MAP.put(ANY_POWERABLE, ANY_POWERABLE_GROVE_STONE);

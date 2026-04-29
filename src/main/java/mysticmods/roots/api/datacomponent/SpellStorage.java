@@ -3,7 +3,6 @@ package mysticmods.roots.api.datacomponent;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
@@ -12,7 +11,6 @@ import mysticmods.roots.api.spell.SpellInstanceData;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -59,7 +57,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
   }
 
   @Nullable
-  public SpellSlot getSlot (int slot) {
+  public SpellSlot getSlot(int slot) {
     if (!validateSlot(slot)) {
       return null;
     }

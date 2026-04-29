@@ -7,13 +7,11 @@ import mysticmods.roots.inventory.SlotSingleItem;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.util.PlayerGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

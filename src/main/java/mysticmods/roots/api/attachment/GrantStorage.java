@@ -175,7 +175,7 @@ public class GrantStorage implements ICleanable {
     return grantedSpellModifiers;
   }
 
-  public Set<ResourceKey<SpellModifier>> getSpellModifierKeys () {
+  public Set<ResourceKey<SpellModifier>> getSpellModifierKeys() {
     rebuildGrantedModifierResourceKeys();
     return grantedSpellModifierResourceKeys;
   }

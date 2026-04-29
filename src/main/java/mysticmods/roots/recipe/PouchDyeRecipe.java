@@ -40,11 +40,11 @@ public class PouchDyeRecipe extends CustomRecipe {
     ItemStack itemstack2 = items.get(1);
 
     if (itemstack2.getItem() instanceof DyeItem dye && itemstack1.is(RootsTags.Items.DYEABLE)) {
-      if (DyeableWithDefault.fromColor(dye.getDyeColor()) != null){
+      if (DyeableWithDefault.fromColor(dye.getDyeColor()) != null) {
         return true;
       }
     } else if (itemstack1.getItem() instanceof DyeItem dye && itemstack2.is(RootsTags.Items.DYEABLE)) {
-      if (DyeableWithDefault.fromColor(dye.getDyeColor()) != null){
+      if (DyeableWithDefault.fromColor(dye.getDyeColor()) != null) {
         return true;
       }
     }

@@ -1,9 +1,10 @@
 package mysticmods.roots.api.client;
 
-import mysticmods.roots.api.modifier.*;
-import net.minecraft.advancements.AdvancementType;
+import mysticmods.roots.api.modifier.IModifierNode;
+import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.ModifierInfo;
+import mysticmods.roots.api.modifier.ModifierTree;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.advancements.AdvancementWidgetType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -79,7 +80,7 @@ public class ModifierWidget<V, T extends Modifier<V, T>> {
     }
   }
 
-  public void draw (GuiGraphics guiGraphics, int x, int y) {
+  public void draw(GuiGraphics guiGraphics, int x, int y) {
     // Widget type should change depending on tab.getModifierInfo()
     ModifierInfo info = tab.getInstance().getModifierInfo(this.node);
 
@@ -91,11 +92,11 @@ public class ModifierWidget<V, T extends Modifier<V, T>> {
     }
   }
 
-  public void drawHover (GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
+  public void drawHover(GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
 
   }
 
-  public boolean isMouseOver (int x, int y, int mouseX, int mouseY) {
+  public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
     int i = x + this.x;
     int j = i + 26;
     int k = y + this.y;

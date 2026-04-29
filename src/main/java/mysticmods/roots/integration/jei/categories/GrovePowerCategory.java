@@ -22,7 +22,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class GrovePowerCategory implements IRecipeCategory<GrovePowerRecipe> {

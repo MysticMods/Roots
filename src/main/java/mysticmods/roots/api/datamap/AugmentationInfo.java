@@ -26,7 +26,8 @@ public record AugmentationInfo(int smallCount, int largeCount) {
       ByteBufCodecs.VAR_INT, AugmentationInfo::smallCount,
       ByteBufCodecs.VAR_INT, AugmentationInfo::largeCount,
       AugmentationInfo::new);
-  public static final Codec<Map<Holder<Attribute>, AugmentationInfo>> DATA_MAP_CODEC = Codec.unboundedMap(BuiltInRegistries.ATTRIBUTE.holderByNameCodec(), AugmentationInfo.CODEC).xmap(HashMap::new, Function.identity());
+  public static final Codec<Map<Holder<Attribute>, AugmentationInfo>> DATA_MAP_CODEC = Codec.unboundedMap(BuiltInRegistries.ATTRIBUTE.holderByNameCodec(), AugmentationInfo.CODEC)
+      .xmap(HashMap::new, Function.identity());
 
   public static AugmentationInfo EMPTY = new AugmentationInfo(0, 0);
 

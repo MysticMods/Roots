@@ -1,7 +1,6 @@
 package mysticmods.roots.inventory.fake;
 
 import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
-import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModContainers;
 import mysticmods.roots.inventory.SlotSingleItem;
@@ -14,8 +13,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class TransmuterContainer extends FakeContainer {
   private final ContainerLevelAccess access;

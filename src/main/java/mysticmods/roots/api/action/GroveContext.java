@@ -161,12 +161,12 @@ public interface GroveContext {
   }
 
   @Nullable
-  default Modifier ritualModifier () {
+  default Modifier ritualModifier() {
     return null;
   }
 
   @Nullable
-  default Modifier genericModifier () {
+  default Modifier genericModifier() {
     return null;
   }
 

@@ -22,7 +22,7 @@ public class RootsParticleRenderTypes {
   // TODO: Move these out
   private static ImmutableList<ParticleRenderType> DELAYED_RENDER_ORDER;
 
-  public static ImmutableList<ParticleRenderType> getDelayedRenderOrder () {
+  public static ImmutableList<ParticleRenderType> getDelayedRenderOrder() {
     if (DELAYED_RENDER_ORDER == null) {
       DELAYED_RENDER_ORDER = ImmutableList.of(
           RootsParticleRenderTypes.OPAQUE,
@@ -36,7 +36,7 @@ public class RootsParticleRenderTypes {
 
   private static ImmutableMap<ParticleRenderType, RenderType> DELAYED_PARTICLE_RENDER_TYPES;
 
-  public static ImmutableMap<ParticleRenderType, RenderType> getDelayedParticleRenderTypes () {
+  public static ImmutableMap<ParticleRenderType, RenderType> getDelayedParticleRenderTypes() {
     if (DELAYED_PARTICLE_RENDER_TYPES == null) {
       DELAYED_PARTICLE_RENDER_TYPES = ImmutableMap.of(
           RootsParticleRenderTypes.OPAQUE, RootsRenderTypes.DELAYED_PARTICLES,

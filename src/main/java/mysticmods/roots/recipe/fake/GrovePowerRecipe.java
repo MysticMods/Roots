@@ -35,26 +35,27 @@ public record GrovePowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
   ).apply(instance, GrovePowerRecipe::new));
   public static final StreamCodec<RegistryFriendlyByteBuf, GrovePowerRecipe> STREAM_CODEC = StreamCodec.composite(ValidatedTagKey.STREAM_CODEC, GrovePowerRecipe::tag, ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), GrovePowerRecipe::groveTag, ByteBufCodecs.VAR_INT, GrovePowerRecipe::power, GrovePowerGenerator.Symmetry.STREAM_CODEC, GrovePowerRecipe::symmetry, ByteBufCodecs.VAR_INT, GrovePowerRecipe::amount, GrovePowerRecipe::new);
 
-  public GrovePowerRecipe (TagKey<Block> blockTag, Grove groveTag, int power, GrovePowerGenerator.Symmetry symmetry, int amount) {
+  public GrovePowerRecipe(TagKey<Block> blockTag, Grove groveTag, int power, GrovePowerGenerator.Symmetry symmetry, int amount) {
     this(new ValidatedTagKey(blockTag), groveTag, power, symmetry, amount);
   }
 
-  public TagKey<Item> itemTag () {
+  public TagKey<Item> itemTag() {
     return tag.itemTag();
   }
 
-  public TagKey<Block> blockTag () {
+  public TagKey<Block> blockTag() {
     return tag.blockTag();
   }
 
-  public Ingredient itemIngredient () {
+  public Ingredient itemIngredient() {
     return tag.itemIngredient();
   }
 
   public static class ValidatedTagKey {
     private static final Interner<ValidatedTagKey> VALUES = Interners.newWeakInterner();
 
-    public static final Codec<ValidatedTagKey> CODEC = TagKey.codec(Registries.BLOCK).xmap(ValidatedTagKey::new, ValidatedTagKey::blockTag);
+    public static final Codec<ValidatedTagKey> CODEC = TagKey.codec(Registries.BLOCK)
+        .xmap(ValidatedTagKey::new, ValidatedTagKey::blockTag);
     public static final StreamCodec<ByteBuf, ValidatedTagKey> STREAM_CODEC = ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC.map(ValidatedTagKey::new, ValidatedTagKey::blockTag);
 
     private final TagKey<Block> blockTag;
@@ -63,7 +64,7 @@ public record GrovePowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
 
     private boolean checked = false;
 
-    protected ValidatedTagKey (TagKey<Block> tag) {
+    protected ValidatedTagKey(TagKey<Block> tag) {
       this.blockTag = tag;
       this.itemTag = TagKey.create(Registries.ITEM, tag.location());
     }
@@ -72,7 +73,7 @@ public record GrovePowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
       return blockTag;
     }
 
-    public TagKey<Item> itemTag () {
+    public TagKey<Item> itemTag() {
       if (!checked) {
         checked = true;
         var btag = BuiltInRegistries.BLOCK.getTag(blockTag).orElse(null);
@@ -89,14 +90,14 @@ public record GrovePowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
       return itemTag;
     }
 
-    public Ingredient itemIngredient () {
+    public Ingredient itemIngredient() {
       if (itemIngredient == null) {
         this.itemIngredient = Ingredient.of(itemTag());
       }
       return itemIngredient;
     }
 
-    public static ValidatedTagKey create (TagKey<Block> blockTag) {
+    public static ValidatedTagKey create(TagKey<Block> blockTag) {
       return VALUES.intern(new ValidatedTagKey(blockTag));
     }
   }

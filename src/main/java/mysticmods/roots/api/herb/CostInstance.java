@@ -26,7 +26,7 @@ public record CostInstance(ChargeType chargeType, List<Cost> costs) {
   public static final StreamCodec<RegistryFriendlyByteBuf, CostInstance> STREAM_CODEC = StreamCodec.composite(
       ChargeType.STREAM_CODEC, CostInstance::chargeType, Cost.STREAM_CODEC.apply(ByteBufCodecs.list()), CostInstance::costs, CostInstance::new);
 
-  public static CostInstance of (ChargeType chargeType, Cost... costs) {
+  public static CostInstance of(ChargeType chargeType, Cost... costs) {
     return new CostInstance(chargeType, List.of(costs));
   }
 
@@ -46,7 +46,7 @@ public record CostInstance(ChargeType chargeType, List<Cost> costs) {
     return of(spell.getCosts().chargeType, costs);
   }
 
-  public static CostInstance of (Spell spell, Cost... costs) {
+  public static CostInstance of(Spell spell, Cost... costs) {
     return of(spell.getCosts().chargeType, List.of(costs));
   }
 
