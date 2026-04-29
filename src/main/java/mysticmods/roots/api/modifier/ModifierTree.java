@@ -1,7 +1,5 @@
 package mysticmods.roots.api.modifier;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
@@ -248,15 +246,34 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return mods;
     }
 
+    public boolean enabled (ResourceKey<C> key) {
+      return enabledModifiers.contains(key);
+    }
+
+    public boolean enabled (IModifierNode<V, C> node) {
+      return enabled(node.key());
+    }
+
     public Map<ResourceKey<C>, ModifierInfo> getModifierInfoCache() {
       if (modifierInfoCache == null) {
         Map<ResourceKey<C>, ModifierInfo> infoMap = new Object2ObjectOpenHashMap<>();
         for (ResourceKey<C> key : modifiers.keySet()) {
           Set<ResourceKey<C>> cons = ModifierTree.this.conflicts.get(key);
 
+          IModifierNode<V, C> node = getNode(ModifierTree.this, key);
+
           boolean canEnable = !SetUtils.containsAny(enabledModifiers, cons);
-          // It can be enabled if it isn't conflicting with any other modifier currently enabled.
-          // But what about ancestors?
+          if (canEnable) {
+            IModifierNode<V, C> parent = node.parent();
+            while (parent != null) {
+              canEnable = !SetUtils.containsAny(enabledModifiers, ModifierTree.this.conflicts.get(parent.key()));
+              if (canEnable) {
+                parent = parent.parent();
+              } else {
+                break;
+              }
+            }
+          }
           boolean isEnabled = enabledModifiers.contains(key);
           boolean isUnlocked;
           if (this.grantedModifiers == null) {
@@ -264,7 +281,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
           } else {
             isUnlocked = this.grantedModifiers.contains(modifiers.get(key).value());
           }
-          boolean isRestricted = isRestricted(ModifierTree.this, getNode(ModifierTree.this, key));
+          boolean isRestricted = isRestricted(ModifierTree.this, node);
           infoMap.put(key, new ModifierInfo(canEnable, isEnabled, isUnlocked, isRestricted));
         }
         this.modifierInfoCache = infoMap;
@@ -279,18 +296,5 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     public ModifierInfo getModifierInfo(IModifierNode<V, C> node) {
       return getModifierInfo(node.key());
     }
-  }
-
-  // TODO: Can conflict
-  public record ModifierInfo(boolean canEnable, boolean isEnabled, boolean isUnlocked, boolean isRestricted) {
-    public static final Codec<ModifierInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        Codec.BOOL.fieldOf("canEnable").forGetter(ModifierInfo::canEnable),
-        Codec.BOOL.fieldOf("isEnabled").forGetter(ModifierInfo::isEnabled),
-        Codec.BOOL.fieldOf("isUnlocked").forGetter(ModifierInfo::isUnlocked),
-        Codec.BOOL.fieldOf("isRestricted").forGetter(ModifierInfo::isRestricted)
-    ).apply(instance, ModifierInfo::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierInfo> STREAM_CODEC = StreamCodec.composite(
-        ByteBufCodecs.BOOL, ModifierInfo::canEnable, ByteBufCodecs.BOOL, ModifierInfo::isEnabled, ByteBufCodecs.BOOL, ModifierInfo::isUnlocked, ByteBufCodecs.BOOL, ModifierInfo::isRestricted, ModifierInfo::new
-    );
   }
 }

@@ -9,6 +9,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -115,7 +116,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
       return EMPTY; // TODO: issue
     }
 
-    ModifierTree<Spell, SpellModifier>.Instance instance = tree.instance(this);
+    ModifierTree<Spell, SpellModifier>.Instance instance = tree.instance(this, Collections.emptySet());
     Set<SpellModifier> validModifiers = instance.modifiersSet();
     if (validModifiers.size() == this.size() && this.containsAll(validModifiers)) {
       return this;
