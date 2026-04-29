@@ -11,12 +11,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class TypedButton<S extends SpellLike, V extends RootsScreen> extends Button {
+public class SpellButton<S extends SpellLike, V extends RootsScreen> extends Button {
   protected final int id;
   protected final V parentScreen;
   protected final Supplier<S> spellSupplier;
 
-  public TypedButton(V parentScreen, @NotNull Supplier<S> spellSupplier, int id, int pX, int pY, int pWidth, int pHeight, OnPress pOnPress) {
+  public SpellButton(V parentScreen, @NotNull Supplier<S> spellSupplier, int id, int pX, int pY, int pWidth, int pHeight, OnPress pOnPress) {
     super(pX, pY, pWidth, pHeight, Component.empty(), pOnPress, DEFAULT_NARRATION);
     this.parentScreen = parentScreen;
     this.spellSupplier = spellSupplier;

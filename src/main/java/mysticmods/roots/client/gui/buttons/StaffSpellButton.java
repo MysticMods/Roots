@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class StaffSpellButton extends TypedButton<ISpellInstance, StaffScreen> {
+public class StaffSpellButton extends SpellButton<ISpellInstance, StaffScreen> {
 
   public StaffSpellButton(StaffScreen parentScreen, @NotNull Supplier<ISpellInstance> spellGetter, int id, int pX, int pY) {
     super(parentScreen, spellGetter, id, pX, pY, 16, 16, parentScreen::buttonClicked);

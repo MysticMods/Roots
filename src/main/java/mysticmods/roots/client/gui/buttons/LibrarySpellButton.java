@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Supplier;
 
-public class LibrarySpellButton extends TypedButton<Spell, StaffScreen> {
+public class LibrarySpellButton extends SpellButton<Spell, StaffScreen> {
   private final boolean transparent;
 
   public LibrarySpellButton(StaffScreen parentScreen, Supplier<Spell> spellSupplier, int id, int pX, int pY, boolean transparent) {
