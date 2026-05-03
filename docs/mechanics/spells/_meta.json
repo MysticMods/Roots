@@ -1,0 +1,114 @@
+{
+	"staves.mdx": {
+		"name": "Staves",
+		"icon": "Wand"
+	},
+	"spell-mechanics.mdx": {
+		"name": "Spell Mechanics",
+		"icon": "Wrench"
+	},
+	"acid-cloud.mdx": {
+		"name": "Acid Cloud",
+		"icon": "Skull"
+	},
+	"aqua-bubble.mdx": {
+		"name": "Aqua Bubble",
+		"icon": "Bubbles"
+	},
+	"augment.mdx": {
+		"name": "Augment",
+		"icon": "ArrowUp"
+	},
+	"control-undead.mdx": {
+		"name": "Control Undead",
+		"icon": "Bone"
+	},
+	"dandelion-winds.mdx": {
+		"name": "Dandelion Winds",
+		"icon": "Fan"
+	},
+	"desaturate.mdx": {
+		"name": "Desaturate",
+		"icon": "Ham"
+	},
+	"disarm.mdx": {
+		"name": "Disarm",
+		"icon": "Sword"
+	},
+	"extension.mdx": {
+		"name": "Extension",
+		"icon": "Ruler"
+	},
+	"fey-light.mdx": {
+		"name": "Fey Light",
+		"icon": "Sparkles"
+	},
+	"geas.mdx": {
+		"name": "Geas",
+		"icon": "BrainCircuit"
+	},
+	"growth-infusion.mdx": {
+		"name": "Growth Infusion",
+		"icon": "Shrub"
+	},
+	"harvest.mdx": {
+		"name": "Harvest",
+		"icon": "Wheat"
+	},
+	"jaunt.mdx": {
+		"name": "Jaunt",
+		"icon": "ArrowUpToLine"
+	},
+	"life-drain.mdx": {
+		"name": "Life Drain",
+		"icon": "ArrowLeftRight"
+	},
+	"light-drifter.mdx": {
+		"name": "Light Drifter",
+		"icon": "Car"
+	},
+	"magnetism.mdx": {
+		"name": "Magnetism",
+		"icon": "Magnet"
+	},
+	"non-detection.mdx": {
+		"name": "Nondetection",
+		"icon": "EyeClosed"
+	},
+	"petal-shell.mdx": {
+		"name": "Petal Shell",
+		"icon": "Flower"
+	},
+	"radiance.mdx": {
+		"name": "Radiance",
+		"icon": "Sun"
+	},
+	"sanctuary.mdx": {
+		"name": "Sanctuary",
+		"icon": "Shield"
+	},
+	"saturate.mdx": {
+		"name": "Saturate",
+		"icon": "Drumstick"
+	},
+	"shatter.mdx": {
+		"name": "Shatter",
+		"icon": "Pickaxe"
+	},
+	"sky-soarer.mdx": {
+		"name": "Sky Soarer",
+		"icon": "Feather"
+	},
+	"storm-cloud.mdx": {
+		"name": "Storm Cloud",
+		"icon": "CloudLightning"
+	},
+	"time-stop.mdx": {
+		"name": "Time Stop",
+		"icon": "Hourglass"
+	},
+	"wildfire.mdx": {
+		"name": "Wildfire",
+		"icon": "Flame"
+	}
+}

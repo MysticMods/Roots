@@ -1,18 +1,30 @@
 {
-  "getting-started": {
-    "name": "Getting Started With Roots 4!",
-    "icon": null
-  },
-  "spells": {
-    "name": "Staff & Spells",
-    "icon": null
-  },
-  "rituals": {
-    "name": "Rituals",
-    "icon": null
-  },
-  "dev": {
-    "name": "Information for Pack Developers",
-    "icon": null
-  }
+	"getting-started.mdx": {
+		"name": "Getting Started",
+		"icon": "Book"
+	},
+	"mechanics": {
+		"name": "Mechanics",
+		"icon": "Wrench"
+	},
+	"resources": {
+		"name": "Resources",
+		"icon": "Blocks"
+	},
+	"tools": {
+		"name": "Tools and Armor",
+		"icon": "Axe"
+	},
+	"world": {
+		"name": "World Generation",
+		"icon": "Earth"
+	},
+	"dev": {
+		"name": "Datapacks/Modpacks",
+		"icon": "Box"
+	},
+	"todo.mdx": {
+		"name": "TODO",
+		"icon": "ListTodo"
+	}
 }

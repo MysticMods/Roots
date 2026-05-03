@@ -151,6 +151,8 @@ dependencies {
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
+    // Version list: https://maven.sinytra.org/org/sinytra/item-asset-export-neoforge
+    runtimeOnly "org.sinytra:item-asset-export-neoforge:1.0.2+1.21"
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
@@ -225,6 +227,7 @@ wiki {
     docs {
         roots {
             root = file('docs')
+            exportedAssetNamespaces = ['roots']
         }
     }
 }
