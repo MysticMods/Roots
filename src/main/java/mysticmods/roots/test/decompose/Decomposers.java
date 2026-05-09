@@ -1,67 +1,65 @@
-/*
 package mysticmods.roots.test.decompose;
 
-import org.jetbrains.annotations.NotNull;
+import mysticmods.roots.mixin.accessor.AccessorMixinLootPool;
+import mysticmods.roots.mixin.accessor.AccessorMixinLootTable;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
 public class Decomposers {
-  public interface Decomposer<FROM, INTO> {
-    Collection<INTO> applySingle(FROM from);
+  public interface Decomposer<FROM, INTO> extends Function<List<FROM>, List<INTO>> {
+    default List<INTO> perform(FROM from) {
+      return perform(from, null);
+    }
 
-    default Collection<INTO> applyMulti(Collection<FROM> from) {
+    List<INTO> perform(FROM from, @Nullable List<INTO> result);
+
+    @Override
+    default List<INTO> apply(List<FROM> from) {
       List<INTO> result = new ArrayList<>();
       for (FROM f : from) {
-        result.addAll(applySingle(f));
+        perform(f, result);
       }
       return result;
     }
+  }
 
-    @NotNull
-    default <V> Function<V, Collection<INTO>> compose(@NotNull Function<? super V, ? extends FROM> before) {
-      return composeSingle(before);
-    }
+  public abstract class DeferringDecomposer<FROM, INTO> implements Decomposer<FROM, INTO> {
 
-    @NotNull
-    default <V> Function<V, Collection<INTO>> composeSingle(@NotNull Function<? super V, ? extends FROM> before) {
-      return Function.super.compose(before);
-    }
+  }
 
-    @NotNull
-    default <V> Function<Collection<V>, Collection<INTO>> composeMulti(@NotNull Function<? super V, ? extends FROM> before) {
-      return v -> {
-        List<INTO> result = new ArrayList<>();
-        for (V f : v) {
-          result.addAll(composeSingle(before).apply(f));
-        }
-        return result;
-      };
-    }
-
+  public static class LootTables implements Decomposer<Registry<LootTable>, LootTable> {
     @Override
-    @NotNull
-    default <V> Function<FROM, V> andThen(@NotNull Function<? super Collection<INTO>, ? extends V> after) {
-      return andThenSingle(after);
+    public List<LootTable> perform(Registry<LootTable> lootTableRegistry, @Nullable List<LootTable> result) {
+      return lootTableRegistry.stream().toList();
     }
+  }
 
-    @NotNull
-    default <V> Function<FROM, V> andThenSingle(@NotNull Function<? super Collection<INTO>, ? extends V> after) {
-      return Function.super.andThen(after);
+  public static class LootPools implements Decomposer<LootTables, LootPool> {
+    @Override
+    public List<LootPool> perform(LootTables lootTables, @Nullable List<LootPool> result) {
+      if (result == null) {
+        result = new ArrayList<>();
+      }
+      result.addAll(((AccessorMixinLootTable) lootTables).rootsGetPools());
+      return result;
     }
+  }
 
-    @NotNull
-    default <V> Function<List<FROM>, V> andThenMulti(@NotNull Function<? super Collection<INTO>, ? extends V> after) {
-      return from -> {
-        List<INTO> result = new ArrayList<>();
-        for (FROM f : from) {
-          result.addAll(applySingle(f));
-        }
-        return after.apply(result);
-      };
+  public static class LootPoolEntry implements Decomposer<LootPool, LootPoolEntryContainer> {
+    @Override
+    public List<LootPoolEntryContainer> perform(LootPool lootPool, @Nullable List<LootPoolEntryContainer> result) {
+      if (result == null) {
+        result = new ArrayList<>();
+      }
+      result.addAll(((AccessorMixinLootPool) lootPool).rootsGetEntries());
+      return result;
     }
   }
 }
-*/
