@@ -22,6 +22,13 @@ public class PriorityAssignableMap<A extends PriorityAssignable> {
     this(none, false);
   }
 
+  public PriorityAssignableMap (A none, Iterable<A> entries) {
+    this(none, false);
+    entries.forEach(all::add);
+    byClass.clear();
+  }
+
+  @Deprecated
   public void register(A priorityAssignable) {
     all.add(priorityAssignable);
     byClass.clear();

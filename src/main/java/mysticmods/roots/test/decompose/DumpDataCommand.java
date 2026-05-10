@@ -1,14 +1,23 @@
-package mysticmods.roots.command;
+package mysticmods.roots.test.decompose;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
@@ -21,11 +30,35 @@ public class DumpDataCommand {
     dispatcher.register(builder(Commands.literal("dump_data").requires(p -> p.hasPermission(2))));
   }
 
+  private static List<String> entityIds = null;
+
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestEntities() {
+    if (entityIds == null) {
+      entityIds = BuiltInRegistries.ENTITY_TYPE.keySet().stream().map(ResourceLocation::toString).toList();
+    }
+
+    return Commands.argument("entity", ResourceLocationArgument.id())
+        .suggests((c, build) -> SharedSuggestionProvider.suggest(entityIds, build));
+  }
+
   public static LiteralArgumentBuilder<CommandSourceStack> builder(LiteralArgumentBuilder<CommandSourceStack> builder) {
-    builder.executes(c -> {
-      List<BlockInfo> blocks = BuiltInRegistries.BLOCK.holders().map(BlockInfo::new).toList();
+    builder.then(suggestEntities().executes(c -> {
+      ResourceLocation entityID = ResourceLocationArgument.getId(c, "entity");
+      EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(entityID);
+      var key = type.getDefaultLootTable();
+      List<ILootPoolEntryContainerDecomposer.ItemRecord> result = Decomposers.LOOT_TABLE.perform(c.getSource().getServer().reloadableRegistries().getLootTable(key));
+
+      for (ILootPoolEntryContainerDecomposer.ItemRecord record : result) {
+        if (record.item() != null) {
+          c.getSource().sendSuccess(() -> record.item().getDescription(), false);
+        } else if (record.stack() != null) {
+          c.getSource().sendSuccess(() -> record.stack().getDisplayName(), false);
+        } else {
+          c.getSource().sendSuccess(() -> Component.literal("Tag key: " + record.tag().toString()), false);
+        }
+      }
       return 1;
-    });
+    }));
     return builder;
   }
 
