@@ -30,7 +30,7 @@ public class Decomposers {
     }
   }
 
-  public abstract class DeferringDecomposer<FROM, INTO> implements Decomposer<FROM, INTO> {
+  public static abstract class DeferringDecomposer<FROM, INTO> implements Decomposer<FROM, INTO> {
 
   }
 

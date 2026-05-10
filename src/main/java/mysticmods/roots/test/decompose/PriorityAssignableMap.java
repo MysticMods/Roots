@@ -1,4 +1,4 @@
-package mysticmods.roots.api;
+package mysticmods.roots.test.decompose;
 
 import org.jetbrains.annotations.Nullable;
 
