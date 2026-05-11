@@ -107,21 +107,6 @@ public class Decomposers {
     public LootPoolEntryContainers() {
       super(ILootPoolEntryContainerDecomposer.NONE, (Class<ILootPoolEntryContainerDecomposer<LootPoolEntryContainer>>) (Class<?>) ILootPoolEntryContainerDecomposer.class);
     }
-
-/*    @Override
-    public List<ILootPoolEntryContainerDecomposer.ItemRecord> perform(LootPoolEntryContainer from, @Nullable List<ILootPoolEntryContainerDecomposer.ItemRecord> result) {
-      if (result == null) {
-        result = new ArrayList<>();
-      }
-
-      ILootPoolEntryContainerDecomposer<LootPoolEntryContainer> individual = map.get(from);
-      if (individual == null) {
-        // TODO: Complain
-        return result;
-      }
-
-      return individual.perform(from, result);
-    }*/
   }
 
   static LootTables LOOT_TABLES = new LootTables();
