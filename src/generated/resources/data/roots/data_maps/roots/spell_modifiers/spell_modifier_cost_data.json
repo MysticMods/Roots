@@ -1,7 +1,6 @@
 {
   "values": {
     "roots:sky_soarer/amplified": {
-      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -11,7 +10,6 @@
       ]
     },
     "roots:sky_soarer/amplified_2": {
-      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -21,7 +19,6 @@
       ]
     },
     "roots:sky_soarer/friendly_earth": {
-      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
