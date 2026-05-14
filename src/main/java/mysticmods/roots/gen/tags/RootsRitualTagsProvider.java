@@ -1,5 +1,6 @@
 package mysticmods.roots.gen.tags;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -13,9 +14,9 @@ import java.util.concurrent.CompletableFuture;
 public final class RootsRitualTagsProvider extends IntrinsicHolderTagsProvider<Ritual> {
 
 
-  public RootsRitualTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
+  public RootsRitualTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
     super(output, RootsRegistries.Keys.RITUALS, provider, p_256665_ -> p_256665_.builtInRegistryHolder()
-        .getKey(), modId, existingFileHelper);
+        .getKey(), RootsAPI.MODID, existingFileHelper);
   }
 
   @Override

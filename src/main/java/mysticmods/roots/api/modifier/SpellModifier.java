@@ -31,11 +31,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
     return DataMaps.SPELL_MODIFIER_ICONS;
   }
 
-  @Override
-  protected DataMapType<SpellModifier, Boolean> getRestrictedDataMapType() {
-    return DataMaps.SPELL_MODIFIER_RESTRICTED;
-  }
-
   @Nullable
   protected Holder<Spell> getApplicableSpell() {
     return RootsRegistries.SPELLS.getHolder(getApplicable()).orElse(null);

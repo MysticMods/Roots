@@ -8,7 +8,9 @@ import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datamap.AugmentationInfo;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.network.IRootsPacket;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModAttributes;
@@ -34,6 +36,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,5 +178,17 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public void readAdditionalSavedData(Entity entity, @NotNull CompoundTag tag) {
     ((AccessorMixinEntity) entity).roots$ReadAdditionalSaveData(tag);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  @Nullable
+  public <T extends Modifier<?, ?>> TagKey<T> getRestrictedTagFor(ResourceKey<T> key) {
+    if (key.isFor(RootsRegistries.Keys.SPELL_MODIFIERS)) {
+      return (TagKey<T>) RootsTags.SpellModifiers.RESTRICTED;
+    } else if (key.isFor(RootsRegistries.Keys.RITUAL_MODIFIERS)) {
+      return (TagKey<T>) RootsTags.RitualModifiers.RESTRICTED;
+    }
+    return null;
   }
 }

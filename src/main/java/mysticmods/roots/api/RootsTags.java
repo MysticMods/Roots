@@ -597,6 +597,9 @@ public class RootsTags {
   }
 
   public static class SpellModifiers extends RootsTags {
+    public static final TagKey<SpellModifier> RESTRICTED = modTag("restricted");
+    public static final TagKey<SpellModifier> REQUIRES_UNLOCK = modTag("requires_unlock");
+
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
     static TagKey<SpellModifier> modTag(String name) {
@@ -609,6 +612,8 @@ public class RootsTags {
   }
 
   public static class RitualModifiers extends RootsTags {
+    public static final TagKey<RitualModifier> RESTRICTED = modTag("restricted");
+
     public static final TagKey<RitualModifier> NYI = modTag("nyi");
 
     static TagKey<RitualModifier> modTag(String name) {

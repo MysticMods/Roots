@@ -32,11 +32,6 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   }
 
   @Override
-  protected DataMapType<RitualModifier, Boolean> getRestrictedDataMapType() {
-    return DataMaps.RITUAL_MODIFIER_RESTRICTED;
-  }
-
-  @Override
   public Holder<RitualModifier> builtInRegistryHolder() {
     return RootsRegistries.RITUAL_MODIFIERS.wrapAsHolder(this);
   }

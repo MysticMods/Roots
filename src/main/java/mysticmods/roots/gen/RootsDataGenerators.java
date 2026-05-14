@@ -360,12 +360,12 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementProvider())));
     generator.addProvider(event.includeServer(), new RootsDataMapProvider(output, provider));
     generator.addProvider(event.includeServer(), new RootsHerbTagsProvider(output, provider, RootsAPI.MODID, helper));
-    RootsSpellTagsProvider spellTagsProvider;
-    generator.addProvider(event.includeServer(), spellTagsProvider = new RootsSpellTagsProvider(output, provider, RootsAPI.MODID, helper));
-    RootsGroveTagsProvider groveTagsProvider;
-    generator.addProvider(event.includeServer(), groveTagsProvider = new RootsGroveTagsProvider(output, provider, RootsAPI.MODID, helper));
-    RootsRitualTagsProvider ritualTagsProvider;
-    generator.addProvider(event.includeServer(), ritualTagsProvider = new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
+    RootsSpellTagsProvider spellTagsProvider = new RootsSpellTagsProvider(output, provider, helper);
+    generator.addProvider(event.includeServer(), spellTagsProvider);
+    RootsGroveTagsProvider groveTagsProvider = new RootsGroveTagsProvider(output, provider, helper);
+    generator.addProvider(event.includeServer(), groveTagsProvider);
+    RootsRitualTagsProvider ritualTagsProvider = new RootsRitualTagsProvider(output, provider, helper);
+    generator.addProvider(event.includeServer(), ritualTagsProvider);
     generator.addProvider(event.includeServer(), new RootsStructureTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsBiomeTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsBlockStateProvider(output, helper));
@@ -378,6 +378,8 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsDamageTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsAttributeTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsEnchantmentTagProvider(output, dataPackProvider, helper));
+    generator.addProvider(event.includeServer(), new RootsRitualModifierTagsProvider(output, provider, helper));
+    generator.addProvider(event.includeServer(), new RootsSpellModifierTagsProvider(output, provider, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
 
     generator.addProvider(event.includeServer(), new RootsItemTagsProvider(output, provider, blocks.contentsGetter(), spellTagsProvider.contentsGetter(), ritualTagsProvider.contentsGetter(), groveTagsProvider.contentsGetter(), helper));

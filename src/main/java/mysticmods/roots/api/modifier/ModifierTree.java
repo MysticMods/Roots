@@ -138,7 +138,12 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", node.key());
       return false;
     }
-    return modifier.value().isRestricted();
+    var tag = RootsAPI.getInstance().getRestrictedTagFor(modifier.getKey());
+    if (tag == null) {
+      RootsAPI.LOG.error("Modifier {} does not have an associated restriction tag!", node.key());
+      return false;
+    }
+    return modifier.is(tag);
   }
 
   @NotNull

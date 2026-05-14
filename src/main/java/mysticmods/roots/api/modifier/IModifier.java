@@ -15,6 +15,4 @@ public interface IModifier<V, T extends IModifier<V, T>> {
   Set<ResourceKey<T>> getConflicts();
 
   Item getIcon();
-
-  boolean isRestricted();
 }
