@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 public class LivingArrowEntity extends AbstractArrow {
   public static final double GRAVITY_MODIFIER = 0.7; // 30% less gravity
   public static final float VELOCITY_MODIFIER = 1.1f; // 10% more velocity
-  public static final float LOWER_CRIT_THRESHOLD = 0.8f; // Only need to charge to 80% for it to be considered a critical hit
+  public static final float LOWER_CRIT_THRESHOLD = 1f; // Only need to charge to 80% for it to be considered a critical hit
 
   private final ItemStack firingWeapon;
 
