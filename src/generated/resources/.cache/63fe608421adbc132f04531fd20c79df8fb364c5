@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-20T11:46:20.6633115	Roots Item Tags
+// 1.21.1	2026-05-14T11:46:30.1416844	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -210,7 +210,7 @@ f78f44ddaa59f7a5f24f66a31c23d397a6ac438b data/roots/tags/item/soils/all.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
 05bb766c4ed71aacf3743262f41dd663aa45fbff data/roots/tags/item/spreading_mushrooms.json
 aa2ac01e52e7e060077a1930f089f7bf6ecc143b data/roots/tags/item/sprouting.json
-4264e5c80b6b11afe1e6aab060254ec47bd83074 data/roots/tags/item/sprout_breeding_rewards.json
+3952bded0a5f80a81e16fa04268430b16cdd9926 data/roots/tags/item/sprout_breeding_rewards.json
 57b7b83328a785fad075c2c7377883654e583c09 data/roots/tags/item/stonelike.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/item/stonepetal.json
 116954093fc9e56a9d260c6467468298414e1634 data/roots/tags/item/sylvan_leather.json

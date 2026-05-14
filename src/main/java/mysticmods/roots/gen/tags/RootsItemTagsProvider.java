@@ -246,7 +246,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
         Items.NETHER_WART,
         Items.KELP,
         Items.SEAGRASS,
-        Items.CHORUS_PLANT
+        Items.CHORUS_FRUIT
     ).add(
         ModItems.AUBERGINE_SEEDS.get(),
         ModItems.SPIRITLEAF_SEEDS.get(),
