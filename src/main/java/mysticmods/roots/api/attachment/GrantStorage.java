@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.action.LearnSpellAction;
 import mysticmods.roots.action.LearnSpellModifierAction;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -20,7 +21,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.ArrayList;
@@ -43,35 +43,22 @@ public class GrantStorage implements ICleanable {
   private boolean dirty = true;
   private final Set<Spell> grantedSpells;
   private final Set<SpellModifier> grantedSpellModifiers;
-  private final Set<ResourceKey<SpellModifier>> grantedSpellModifierResourceKeys;
 
   private List<LibrarySpell> librarySpells = null;
 
   public GrantStorage() {
     grantedSpells = new ObjectOpenHashSet<>();
     grantedSpellModifiers = new ObjectOpenHashSet<>();
-    grantedSpellModifierResourceKeys = new ObjectOpenHashSet<>();
   }
 
   public GrantStorage(Set<Spell> grantedSpells, Set<SpellModifier> grantedSpellModifiers) {
     this.grantedSpells = new ObjectOpenHashSet<>(grantedSpells);
     this.grantedSpellModifiers = new ObjectOpenHashSet<>(grantedSpellModifiers);
-    this.grantedSpellModifierResourceKeys = new ObjectOpenHashSet<>();
-    rebuildGrantedModifierResourceKeys();
   }
 
   public GrantStorage(List<Spell> spells, List<SpellModifier> spellModifiers) {
     this.grantedSpells = new ObjectOpenHashSet<>(spells);
     this.grantedSpellModifiers = new ObjectOpenHashSet<>(spellModifiers);
-    this.grantedSpellModifierResourceKeys = new ObjectOpenHashSet<>();
-    rebuildGrantedModifierResourceKeys();
-  }
-
-  private void rebuildGrantedModifierResourceKeys() {
-    grantedSpellModifierResourceKeys.clear();
-    for (SpellModifier mod : grantedSpellModifiers) {
-      grantedSpellModifierResourceKeys.add(mod.builtInRegistryHolder().getKey());
-    }
   }
 
   public boolean hasSpell(Spell spell) {
@@ -80,13 +67,6 @@ public class GrantStorage implements ICleanable {
 
   public boolean hasSpellModifier(SpellModifier modifier) {
     return grantedSpellModifiers.contains(modifier);
-  }
-
-  public boolean hasSpellModifier(ResourceKey<SpellModifier> modifierKey) {
-    if (grantedSpellModifierResourceKeys.size() != grantedSpellModifiers.size()) {
-      rebuildGrantedModifierResourceKeys();
-    }
-    return grantedSpellModifierResourceKeys.contains(modifierKey);
   }
 
   public boolean canUnlock(Unlock<?> unlock) {
@@ -116,12 +96,11 @@ public class GrantStorage implements ICleanable {
     }
 
     grantedSpellModifiers.clear();
-    grantedSpellModifierResourceKeys.clear();
     setDirty(true);
     return true;
   }
 
-  public boolean unlock(ServerPlayer player, Unlock<?> unlock) {
+  public void unlock(ServerPlayer player, Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       Spell spell = value.value();
       unlockSpell(player, spell);
@@ -129,8 +108,6 @@ public class GrantStorage implements ICleanable {
       SpellModifier modifier = value.value();
       unlockSpellModifier(player, modifier);
     }
-
-    return false;
   }
 
   private void unlockSpell(ServerPlayer player, Spell spell) {
@@ -144,12 +121,15 @@ public class GrantStorage implements ICleanable {
   }
 
   private void unlockSpellModifier(ServerPlayer player, SpellModifier modifier) {
+    if (!modifier.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK)) {
+      RootsAPI.LOG.error("Attempted to unlock modifier {} for {}, despite modifier not being tagged `requires_unlock`", modifier.builtInRegistryHolder().getKey(), player);
+      return;
+    }
     if (grantedSpellModifiers.add(modifier)) {
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
       LearnSpellModifierAction.Context context = new LearnSpellModifierAction.Context(player.serverLevel(), player, modifier);
       ModActions.LEARN_SPELL_MODIFIER.get().accept(context);
-      grantedSpellModifierResourceKeys.add(modifier.builtInRegistryHolder().getKey());
     }
   }
 
@@ -162,7 +142,6 @@ public class GrantStorage implements ICleanable {
 
   public void removeSpellModifier(SpellModifier modifier) {
     if (grantedSpellModifiers.remove(modifier)) {
-      rebuildGrantedModifierResourceKeys();
       setDirty(true);
     }
   }
@@ -173,11 +152,6 @@ public class GrantStorage implements ICleanable {
 
   public Set<SpellModifier> getSpellModifiers() {
     return grantedSpellModifiers;
-  }
-
-  public Set<ResourceKey<SpellModifier>> getSpellModifierKeys() {
-    rebuildGrantedModifierResourceKeys();
-    return grantedSpellModifierResourceKeys;
   }
 
   public List<LibrarySpell> getLibrarySpells() {

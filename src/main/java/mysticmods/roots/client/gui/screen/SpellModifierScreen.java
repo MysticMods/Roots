@@ -60,6 +60,9 @@ public class SpellModifierScreen extends RootsScreen {
       return null;
     }
     var tree = ModifierTrees.getSpell(data.getSpell());
+    if (Minecraft.getInstance().player == null) {
+      return null;
+    }
     var granted = Minecraft.getInstance().player.getData(ModAttachments.GRANT_STORAGE).getSpellModifiers();
     return tree.instance(data.getEnabledModifiers(), granted);
   }
