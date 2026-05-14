@@ -18,14 +18,11 @@
         "tag": "minecraft:dirt"
       }
     ],
-    "level_conditions": [
+    "player_conditions": [
       {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "name": "any",
-          "tag": "roots:grove_stones"
-        },
-        "require_active": true
+        "type": "roots:grove_rank_condition",
+        "grove": "roots:elemental",
+        "minimum_rank": 1
       }
     ],
     "priority": 0,
