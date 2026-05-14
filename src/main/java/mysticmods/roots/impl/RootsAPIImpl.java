@@ -180,6 +180,7 @@ public class RootsAPIImpl implements IRootsAPI {
     ((AccessorMixinEntity) entity).roots$ReadAdditionalSaveData(tag);
   }
 
+  // TODO: Neither of these break the API namespacing, thus this method could simply be an abstract implementation for Modifier.
   @SuppressWarnings("unchecked")
   @Override
   @Nullable
@@ -192,6 +193,7 @@ public class RootsAPIImpl implements IRootsAPI {
     return null;
   }
 
+  // TODO: That said, Rituals will not necessarily require unlocks.
   @SuppressWarnings("unchecked")
   @Override
   @Nullable
