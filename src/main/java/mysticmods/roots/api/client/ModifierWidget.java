@@ -1,9 +1,6 @@
 package mysticmods.roots.api.client;
 
-import mysticmods.roots.api.modifier.IModifierNode;
-import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.modifier.ModifierInfo;
-import mysticmods.roots.api.modifier.ModifierTree;
+import mysticmods.roots.api.modifier.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +21,9 @@ public class ModifierWidget<V, T extends Modifier<V, T>> {
     this.node = node;
     this.x = Mth.floor(node.x() * 28.0f); // 28?
     this.y = Mth.floor(node.y() * 27.0f); // 27?
-    this.renderStack = new ItemStack(ModifierTree.getIcon(tab.getTree(), node.key()));
+    if (!(node instanceof RootModifierNode<V,T>)) {
+      this.renderStack = new ItemStack(ModifierTree.getIcon(tab.getTree(), node.key()));
+    }
   }
 
   @Nullable

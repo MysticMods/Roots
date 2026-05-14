@@ -67,7 +67,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   // TODO: Conflict validation: conflicting modifiers cannot be parents of the modifier. Basically, ensure there are no cycles in the graph.
 
-  // This being called "validator" makes little sense
+  // TODO: Server-side handling of 'requires unlock' modifiers
   public ModifierTree<V, C>.Instance instance(Set<C> modifiers, Set<C> grantedModifiers) {
     return new Instance(modifiers, grantedModifiers);
   }
@@ -134,7 +134,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   // TODO: Handle this better because it's only in the instance
   protected static <V, T extends Modifier<V, T>> boolean isRestricted(ModifierTree<V, T> tree, IModifierNode<V, T> node) {
     Holder<T> modifier = tree.modifiers.get(node.key());
-    if (modifier == null) {
+    if (modifier == null && node != tree.root()) {
       RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", node.key());
       return false;
     }

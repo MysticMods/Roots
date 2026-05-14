@@ -1,6 +1,7 @@
 package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.client.ModifierTab;
 import mysticmods.roots.api.client.ModifierWidget;
 import mysticmods.roots.api.datacomponent.SpellSlot;
@@ -8,6 +9,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.modifier.ModifierTree;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
@@ -64,6 +66,11 @@ public class SpellModifierScreen extends RootsScreen {
       return null;
     }
     var granted = Minecraft.getInstance().player.getData(ModAttachments.GRANT_STORAGE).getSpellModifiers();
+    RootsRegistries.SPELL_MODIFIERS.forEach(o -> {
+      if (!o.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK)) {
+        granted.add(o);
+      }
+    });
     return tree.instance(data.getEnabledModifiers(), granted);
   }
 

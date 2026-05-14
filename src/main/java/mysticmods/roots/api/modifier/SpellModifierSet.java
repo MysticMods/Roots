@@ -116,6 +116,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
       return EMPTY; // TODO: issue
     }
 
+    // TODO: We could look at including the defaults here but we never really look at that information
     ModifierTree<Spell, SpellModifier>.Instance instance = tree.instance(this, Collections.emptySet());
     Set<SpellModifier> validModifiers = instance.modifiersSet();
     if (validModifiers.size() == this.size() && this.containsAll(validModifiers)) {
