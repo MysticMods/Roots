@@ -4,8 +4,8 @@ import it.unimi.dsi.fastutil.objects.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedParent;
@@ -31,7 +31,7 @@ public class Costing {
 
   private Map<Herb, List<HerbEntry>> herbMapCache;
 
-  private final CostInstance.ChargeType chargeType;
+  private final ChargeType chargeType;
 
   private int operationsCount = 0;
   private double discount = 0;
@@ -49,7 +49,7 @@ public class Costing {
     herbMapCache = herbMap(player);
   }
 
-  public CostInstance.ChargeType getChargeType() {
+  public ChargeType getChargeType() {
     return chargeType;
   }
 
@@ -185,7 +185,7 @@ public class Costing {
       return false;
     }
 
-    if (chargeType == CostInstance.ChargeType.OPERATION && operationsCount == 0) {
+    if (chargeType == ChargeType.OPERATION && operationsCount == 0) {
       RootsAPI.LOG.error("Charging with operation costs but no operations! {}", parent);
     }
 
@@ -296,22 +296,22 @@ public class Costing {
   private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
-    CostInstance.ChargeType thisType = getChargeType();
+    ChargeType thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
       List<Cost> costs = herbCosts.get(cost.getHerb());
       if (costs == null) {
         costs = new ArrayList<>();
         herbCosts.put(cost.getHerb(), costs);
       }
-      if (thisType == CostInstance.ChargeType.OPERATION && maxOperations) {
+      if (thisType == ChargeType.OPERATION && maxOperations) {
         for (int i = 0; i < parent.getMaximumOperations(); i++) {
           costs.add(cost);
         }
-      } else if (thisType == CostInstance.ChargeType.OPERATION) {
+      } else if (thisType == ChargeType.OPERATION) {
         for (int i = 0; i < operationsCount; i++) {
           costs.add(cost);
         }
-      } else if (thisType == CostInstance.ChargeType.CAST) {
+      } else if (thisType == ChargeType.CAST) {
         costs.add(cost);
       }
     }
@@ -325,15 +325,15 @@ public class Costing {
               costs = new ArrayList<>();
               herbCosts.put(cost.getHerb(), costs);
             }
-            if (thisType == CostInstance.ChargeType.OPERATION && maxOperations) {
+            if (thisType == ChargeType.OPERATION && maxOperations) {
               for (int i = 0; i < parent.getMaximumOperations(); i++) {
                 costs.add(cost);
               }
-            } else if (thisType == CostInstance.ChargeType.OPERATION) {
+            } else if (thisType == ChargeType.OPERATION) {
               for (int i = 0; i < operationsCount; i++) {
                 costs.add(cost);
               }
-            } else if (thisType == CostInstance.ChargeType.CAST) {
+            } else if (thisType == ChargeType.CAST) {
               costs.add(cost);
             }
           }

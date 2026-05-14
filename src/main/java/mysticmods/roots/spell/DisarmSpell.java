@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -159,7 +160,7 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public CostInstance.ChargeType getChargeType() {
-    return CostInstance.ChargeType.OPERATION;
+  public ChargeType getChargeType() {
+    return ChargeType.OPERATION;
   }
 }

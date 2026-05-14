@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.attachment.CooldownStorage;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
@@ -46,7 +47,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   @Override
-  default CostInstance.ChargeType getChargeType() {
+  default ChargeType getChargeType() {
     return getCosts().chargeType();
   }
 

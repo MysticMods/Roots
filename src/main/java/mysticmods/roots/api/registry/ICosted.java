@@ -1,5 +1,6 @@
 package mysticmods.roots.api.registry;
 
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 
 // TODO: Format costs as a list of components
@@ -8,7 +9,7 @@ public interface ICosted {
 
   CostInstance getCosts();
 
-  default CostInstance.ChargeType getChargeType() {
+  default ChargeType getChargeType() {
     return getCosts().chargeType();
   }
 

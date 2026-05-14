@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -38,7 +39,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   private int interval, count;
 
   public RampantGrowthSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CONTINUOUS, color, costs, 0x157318, 0x13c3eb);
+    super(Type.CONTINUOUS, color, costs, ChargeType.OPERATION, 0x157318, 0x13c3eb);
   }
 
   @Override
@@ -163,8 +164,8 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public CostInstance.ChargeType getChargeType() {
-    return CostInstance.ChargeType.OPERATION;
+  public ChargeType getChargeType() {
+    return ChargeType.OPERATION;
   }
 
   @Override

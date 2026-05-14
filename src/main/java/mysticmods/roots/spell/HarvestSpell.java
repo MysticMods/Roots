@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -114,7 +115,7 @@ public class HarvestSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public CostInstance.ChargeType getChargeType() {
-    return CostInstance.ChargeType.OPERATION;
+  public ChargeType getChargeType() {
+    return ChargeType.OPERATION;
   }
 }

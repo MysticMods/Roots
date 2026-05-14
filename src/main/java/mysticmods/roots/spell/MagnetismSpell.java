@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -62,7 +63,7 @@ public class MagnetismSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public CostInstance.ChargeType getChargeType() {
-    return CostInstance.ChargeType.OPERATION;
+  public ChargeType getChargeType() {
+    return ChargeType.OPERATION;
   }
 }
