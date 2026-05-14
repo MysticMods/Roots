@@ -38,8 +38,9 @@ public class LifeDrainSpell extends Spell {
   private float damage, heal;
   private int angle;
 
+  // TODO: This should become an instant cast
   public LifeDrainSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CONTINUOUS, color, costs, 0x902040, 0xffc4f0);
+    super(Type.CONTINUOUS, color, costs, ChargeType.INSTANCE, 0x902040, 0xffc4f0);
   }
 
   @Override

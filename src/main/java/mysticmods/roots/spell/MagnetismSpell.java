@@ -20,7 +20,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class MagnetismSpell extends TwoRadiusSpell {
   public MagnetismSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, 0xdee129, 0xe62222);
+    super(Type.INSTANT, color, costs, ChargeType.OPERATION, 0xdee129, 0xe62222);
   }
 
   @Override

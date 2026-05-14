@@ -32,6 +32,6 @@ public record CostRemover<T>(Herb herbCost, Cost.CostType type,
     List<Cost> newCosts = new ArrayList<>(object.costs());
     newCosts.removeIf(cost -> cost.getHerb()
         .is(herbCost()) && (type() == null || cost.getType() == type()) && (value() == -1.0f || cost.getValue() == value()));
-    return Optional.of(CostInstance.of(object.chargeType(), newCosts));
+    return Optional.of(CostInstance.of(newCosts));
   }
 }

@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 public class EnslaveUndeadSpell extends Spell {
   public EnslaveUndeadSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, 0xcc6d0e, 0x9e1827);
+    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0xcc6d0e, 0x9e1827);
   }
 
   @Override

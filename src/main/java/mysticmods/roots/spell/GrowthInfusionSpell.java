@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -34,7 +35,7 @@ import java.util.List;
 // Note: VISUALS DONE!
 public class GrowthInfusionSpell extends Spell {
   public GrowthInfusionSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CONTINUOUS, color, costs, 0x30ff30, 0xc0ffc0);
+    super(Type.CONTINUOUS, color, costs, ChargeType.INSTANCE, 0x30ff30, 0xc0ffc0);
   }
 
   @Override

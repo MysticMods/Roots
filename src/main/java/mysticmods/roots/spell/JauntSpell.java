@@ -31,7 +31,7 @@ public class JauntSpell extends Spell {
   private int jauntDistance;
 
   public JauntSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CHARGED, color, costs, 0x538ad4, 0xede768);
+    super(Type.CHARGED, color, costs, ChargeType.INSTANCE, 0x538ad4, 0xede768);
   }
 
   @Override

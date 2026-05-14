@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.action.GeasAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -38,7 +39,7 @@ public class GeasSpell extends Spell {
   private double maxHealth;
 
   public GeasSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, 0x802020, 0x202020);
+    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0x802020, 0x202020);
   }
 
   @Override

@@ -9,9 +9,7 @@ public interface ICosted {
 
   CostInstance getCosts();
 
-  default ChargeType getChargeType() {
-    return getCosts().chargeType();
-  }
+  ChargeType getChargeType();
 
   default int getMaximumOperations() {
     return 1;

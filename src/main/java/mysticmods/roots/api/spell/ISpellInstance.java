@@ -46,9 +46,8 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getCosts();
   }
 
-  @Override
   default ChargeType getChargeType() {
-    return getCosts().chargeType();
+    return getSpell().getChargeType();
   }
 
   @Override

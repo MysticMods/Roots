@@ -34,7 +34,7 @@ import java.util.Set;
 
 public class HarvestSpell extends TwoRadiusSpell {
   public HarvestSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, 0x39fd1c, 0xc5e91c);
+    super(Type.INSTANT, color, costs, ChargeType.OPERATION, 0x39fd1c, 0xc5e91c);
   }
 
   @Override

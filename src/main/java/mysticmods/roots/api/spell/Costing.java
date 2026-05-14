@@ -311,11 +311,12 @@ public class Costing {
         for (int i = 0; i < operationsCount; i++) {
           costs.add(cost);
         }
-      } else if (thisType == ChargeType.CAST) {
+      } else if (thisType == ChargeType.INSTANCE) {
         costs.add(cost);
       }
     }
     if (!skipModifiers) {
+      // TODO: Does this actually work to calculate modifiers?
       for (ICosted modifier : parent.getChildren()) {
         thisType = modifier.getChargeType();
         if (!checkModifiers || modifierMap.getBoolean(modifier)) {
@@ -333,7 +334,7 @@ public class Costing {
               for (int i = 0; i < operationsCount; i++) {
                 costs.add(cost);
               }
-            } else if (thisType == ChargeType.CAST) {
+            } else if (thisType == ChargeType.INSTANCE) {
               costs.add(cost);
             }
           }

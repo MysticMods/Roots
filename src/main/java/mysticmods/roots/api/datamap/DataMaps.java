@@ -168,7 +168,7 @@ public class DataMaps {
     return (registry, first, firstValue, second, secondValue) -> {
       final List<Cost> list = new ArrayList<>(firstValue.costs());
       list.addAll(secondValue.costs());
-      return CostInstance.of(firstValue.chargeType(), list);
+      return CostInstance.of(list);
     };
   }
 }

@@ -43,7 +43,7 @@ public class ShatterSpell extends Spell {
   private int maxWidth, maxDepth, maxHeight;
 
   public ShatterSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, 0x606060, 0xc0c0c0);
+    super(Type.INSTANT, color, costs, ChargeType.OPERATION, 0x606060, 0xc0c0c0);
   }
 
   @Override

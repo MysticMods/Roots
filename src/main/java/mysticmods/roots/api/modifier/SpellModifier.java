@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
@@ -9,6 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SpellModifier extends Modifier<Spell, SpellModifier> {
   public SpellModifier(CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
@@ -34,6 +36,11 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
     return DataMaps.SPELL_MODIFIER_RESTRICTED;
   }
 
+  @Nullable
+  protected Holder<Spell> getApplicableSpell() {
+    return RootsRegistries.SPELLS.getHolder(getApplicable()).orElse(null);
+  }
+
   @Override
   public Holder<SpellModifier> builtInRegistryHolder() {
     return RootsRegistries.SPELL_MODIFIERS.wrapAsHolder(this);
@@ -42,5 +49,15 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   @Override
   protected String getSignifier() {
     return "spell_modifier";
+  }
+
+  @Override
+  public ChargeType getChargeType() {
+    var applicable = getApplicableSpell();
+    if (applicable == null) {
+      return ChargeType.INSTANCE;
+    }
+
+    return applicable.value().getChargeType();
   }
 }
