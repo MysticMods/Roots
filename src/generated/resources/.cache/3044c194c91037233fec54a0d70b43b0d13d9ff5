@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-03T15:02:19.6562137	Roots Block Tags
+// 1.21.1	2026-05-14T12:00:05.0605234	Roots Block Tags
 acf57b436b049e55593c453e269baa2be7f62b93 data/c/tags/block/chests/wooden.json
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
@@ -52,7 +52,8 @@ c9349151d99d4653238fe3843b488ad43c34374a data/roots/tags/block/capstones/runes/r
 d26fab5781adf116b2a4d1aef4ec77fbbac91ef5 data/roots/tags/block/chests/wildwood.json
 9774aedd8afeea90739d110142e98f75b3934bc5 data/roots/tags/block/converts_to_bafflecap.json
 1d43ddccd38a55edc2befc1531297e628c79e0f1 data/roots/tags/block/crafters.json
-9c1eab0308a4f51426d689a6be0217c82b24d586 data/roots/tags/block/crops.json
+3ba6e1dc8415cfc6704c2faa2e71e4923445d0d1 data/roots/tags/block/crops.json
+30ad87388dadac27637c08e0951d3e8bdf2c4b05 data/roots/tags/block/crops/aubergine.json
 eac1c12ccc5eff3fd48c81e90ef41aa076438faa data/roots/tags/block/crops/cloud_berry.json
 fcf4c04cd4e0cebb15a740303272a33e5ea0a935 data/roots/tags/block/crops/dewgonia.json
 6164e25b93ace5786d14d7f511d8a7c5a8b013d7 data/roots/tags/block/crops/elemental.json

@@ -53,6 +53,7 @@ public class RootsTags {
     public static final TagKey<Block> INFERNO_BULB_CROP = modTag("crops/inferno_bulb");
     public static final TagKey<Block> MOONGLOW_CROP = modTag("crops/moonglow");
     public static final TagKey<Block> PERESKIA_CROP = modTag("crops/pereskia");
+    public static final TagKey<Block> AUBERGINE_CROP = modTag("crops/aubergine");
 
     // General soils (filled in by ModTags)
     public static final TagKey<Block> SOILS = modTag("soils");

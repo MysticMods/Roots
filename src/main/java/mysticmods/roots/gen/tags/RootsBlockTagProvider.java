@@ -159,6 +159,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.PERESKIA_CROP).add(PERESKIA_CROP.get());
     this.tag(RootsTags.Blocks.STALICRIPE_CROP).add(STALICRIPE_CROP.get());
     this.tag(RootsTags.Blocks.WILDEWHEET_CROP).add(WILDEWHEET_CROP.get());
+    this.tag(RootsTags.Blocks.AUBERGINE_CROP).add(AUBERGINE_CROP.get());
 
     this.tag(RootsTags.Blocks.AIR_CROPS).addTag(RootsTags.Blocks.CLOUD_BERRY_CROP);
     this.tag(RootsTags.Blocks.EARTH_CROPS).addTag(RootsTags.Blocks.STALICRIPE_CROP);
@@ -171,7 +172,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
     //noinspection unchecked
     this.tag(RootsTags.Blocks.CROPS)
-        .addTags(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Blocks.WILDEWHEET_CROP, RootsTags.Blocks.WILDROOT_CROP, RootsTags.Blocks.MOONGLOW_CROP, RootsTags.Blocks.PERESKIA_CROP, RootsTags.Blocks.SPIRITLEAF_CROP);
+        .addTags(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Blocks.WILDEWHEET_CROP, RootsTags.Blocks.WILDROOT_CROP, RootsTags.Blocks.MOONGLOW_CROP, RootsTags.Blocks.PERESKIA_CROP, RootsTags.Blocks.SPIRITLEAF_CROP, RootsTags.Blocks.AUBERGINE_CROP);
 
     // From the old ModTags
     this.tag(RootsTags.Blocks.STANDING_STONE_CROPS).add(Blocks.BEETROOTS, Blocks.POTATOES, Blocks.CARROTS);

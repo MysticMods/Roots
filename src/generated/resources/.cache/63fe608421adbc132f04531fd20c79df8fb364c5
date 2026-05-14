@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-14T11:46:30.1416844	Roots Item Tags
+// 1.21.1	2026-05-14T12:00:05.0655222	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -78,7 +78,7 @@ bc229f680fa773a41269c1569f5a700f669eb8e5 data/roots/tags/item/cooked_seafood.jso
 41d24a04cdab8abd0518a0512bc414a9169fe12d data/roots/tags/item/cooked_vegetables.json
 80156b58964e4f5bd32dfd5fb10393ac5c85f829 data/roots/tags/item/copper_items.json
 1d43ddccd38a55edc2befc1531297e628c79e0f1 data/roots/tags/item/crafters.json
-9c1eab0308a4f51426d689a6be0217c82b24d586 data/roots/tags/item/crops.json
+3ba6e1dc8415cfc6704c2faa2e71e4923445d0d1 data/roots/tags/item/crops.json
 5bff826d5a121cc3d58de8147a40622c4eab5f06 data/roots/tags/item/crops/aubergine.json
 6b697bb4dbf2ca2d772c999476fb33f75dfd714a data/roots/tags/item/crops/bafflecap.json
 98545c13dddf6574110e137626bb2822902a778d data/roots/tags/item/crops/cloud_berry.json
