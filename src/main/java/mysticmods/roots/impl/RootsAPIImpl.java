@@ -191,4 +191,14 @@ public class RootsAPIImpl implements IRootsAPI {
     }
     return null;
   }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  @Nullable
+  public <T extends Modifier<?, ?>> TagKey<T> getRequiresUnlockTagFor(ResourceKey<T> key) {
+    if (key.isFor(RootsRegistries.Keys.SPELL_MODIFIERS)) {
+      return (TagKey<T>) RootsTags.SpellModifiers.REQUIRES_UNLOCK;
+    }
+    return null;
+  }
 }

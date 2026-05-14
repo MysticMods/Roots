@@ -82,4 +82,7 @@ public interface IRootsAPI {
 
   @Nullable
   <T extends Modifier<?, ?>> TagKey<T> getRestrictedTagFor(ResourceKey<T> key);
+
+  @Nullable
+  <T extends Modifier<?, ?>> TagKey<T> getRequiresUnlockTagFor(ResourceKey<T> key);
 }
