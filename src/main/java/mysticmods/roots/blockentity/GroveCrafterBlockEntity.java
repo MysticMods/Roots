@@ -144,52 +144,48 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       return InteractionResult.PASS;
     }
 
-    if (inHand.isEmpty() || inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
-      GroveCrafting playerCrafting = getCrafting(player, false);
-      if (cachedRecipe == null) {
-        cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
-      }
-      if (cachedRecipe == null) {
-        return InteractionResult.FAIL;
-      }
-      // TODO: Provider better feedback to the player
-      ConditionResult conditionResult = cachedRecipe.value()
-          .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
-      if (conditionResult.anyFailed()) {
-        conditionResult.report(player);
-        return InteractionResult.FAIL;
-      }
-      UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
-      if (failedGrants.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
-        failedGrants.report();
-        return InteractionResult.FAIL;
-      }
-      lastPlayer = player;
-      lastUuid = null;
-      lastRecipe = cachedRecipe;
-      // TODO: We never cleared storedItems here, unlike the pyre
-      List<TaggedPedestalCrafting.ItemPosition> positions = playerCrafting.getItemsAndPositions();
-      if (player instanceof FakePlayer) {
-        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new StartGroveCraftingFX(getBlockPos(), positions));
-      } else {
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new StartGroveCraftingFX(getBlockPos(), positions));
-      }
-      List<ItemStack> results = cachedRecipe.value()
-          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popAndAnimateItems);
-      storedItems.addAll(results);
-      this.craftingTicks = Constants.GROVE_CRAFTING_ANIMATION_TICKS;
-      cachedRecipe = null;
-      if (!level.isClientSide()) {
-        setChanged();
-        level.setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.CRAFTING, true), 3);
-        // I think the setBlock is sufficient because it's changing states
-        //updateViaState();
-      }
-
-      return InteractionResult.SUCCESS;
+    GroveCrafting playerCrafting = getCrafting(player, false);
+    if (cachedRecipe == null) {
+      cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
+    }
+    if (cachedRecipe == null) {
+      return InteractionResult.FAIL;
+    }
+    // TODO: Provider better feedback to the player
+    ConditionResult conditionResult = cachedRecipe.value()
+        .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
+    if (conditionResult.anyFailed()) {
+      conditionResult.report(player);
+      return InteractionResult.FAIL;
+    }
+    UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
+    if (failedGrants.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
+      failedGrants.report();
+      return InteractionResult.FAIL;
+    }
+    lastPlayer = player;
+    lastUuid = null;
+    lastRecipe = cachedRecipe;
+    // TODO: We never cleared storedItems here, unlike the pyre
+    List<TaggedPedestalCrafting.ItemPosition> positions = playerCrafting.getItemsAndPositions();
+    if (player instanceof FakePlayer) {
+      PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new StartGroveCraftingFX(getBlockPos(), positions));
+    } else {
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new StartGroveCraftingFX(getBlockPos(), positions));
+    }
+    List<ItemStack> results = cachedRecipe.value()
+        .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popAndAnimateItems);
+    storedItems.addAll(results);
+    this.craftingTicks = Constants.GROVE_CRAFTING_ANIMATION_TICKS;
+    cachedRecipe = null;
+    if (!level.isClientSide()) {
+      setChanged();
+      level.setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.CRAFTING, true), 3);
+      // I think the setBlock is sufficient because it's changing states
+      //updateViaState();
     }
 
-    return InteractionResult.PASS;
+    return InteractionResult.SUCCESS;
   }
 
   public static final GroveStoneCondition ANY_VALID_GROVE_STONE = new GroveStoneCondition(GroveType.ANY, true);
