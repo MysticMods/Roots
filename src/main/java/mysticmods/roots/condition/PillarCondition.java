@@ -58,9 +58,10 @@ public record PillarCondition(PillarType pillar,
   @Override
   public String getName() {
     String req = heightExcluding + "_high_";
-    if (pillar == PillarType.ANY || pillar == PillarType.ANY_RUNE) {
-      req = req + "pillar";
-
+    if (pillar == PillarType.ANY) {
+      req = req + "any_pillar";
+    } else if (pillar == PillarType.ANY_RUNE) {
+      req = req + "any_rune_pillar";
     } else {
       req = req + pillar.name().toLowerCase(Locale.ROOT) + "_pillar";
     }
