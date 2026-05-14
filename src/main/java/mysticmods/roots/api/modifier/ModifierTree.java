@@ -147,10 +147,10 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   }
 
   @NotNull
-  public static <V, C extends Modifier<V, C>> Item getIcon(ModifierTree<V, C> tree, ResourceKey<C> key) {
-    Holder<C> modifier = tree.modifiers.get(key);
-    if (modifier == null) {
-      RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", key);
+  public static <V, C extends Modifier<V, C>> Item getIcon(ModifierTree<V, C> tree, IModifierNode<V, C> node) {
+    Holder<C> modifier = tree.modifiers.get(node.key());
+    if (modifier == null && node != tree.root()) {
+      RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", node.key());
       return Items.AIR;
     }
     var res = modifier.value().getIcon();
