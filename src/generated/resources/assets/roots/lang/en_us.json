@@ -612,7 +612,7 @@
   "roots.symmetry.radial_same_block_or_tag.description": "Requires a matching block or a block from the same tag positioned radially around the grove stone.",
   "roots.tooltip.chance": "Chance: %s%%",
   "roots.tooltip.cost.charge_type": "[Charges %s.]",
-  "roots.tooltip.cost.charge_type.cast": "per cast",
+  "roots.tooltip.cost.charge_type.instance": "per cast",
   "roots.tooltip.cost.charge_type.operation": "per operation",
   "roots.tooltip.cost.cost_amount": "x%s",
   "roots.tooltip.cost.cost_multiplier": "+%s",
