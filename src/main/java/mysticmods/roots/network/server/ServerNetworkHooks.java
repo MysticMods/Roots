@@ -5,7 +5,9 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.blockentity.ClearableBlockEntity;
 import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
+import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
@@ -243,6 +245,71 @@ public class ServerNetworkHooks {
       if (cbe.canClear()) {
         cbe.clearContents();
       }
+    }
+  }
+
+  public static void toggleSpellModifier(Player player, InteractionHand hand, int inventorySlot, int staffSlot, Spell spell, SpellModifier modifier) {
+    ItemStack stack;
+    if (hand != null) {
+      stack = player.getItemInHand(hand);
+    } else {
+      stack = player.getInventory().getItem(inventorySlot);
+    }
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell storage found in item stack");
+      }
+      return;
+    }
+    SpellStorage existing = stack.get(ModAttachments.SPELL_STORAGE);
+    if (existing == null) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell storage found in item stack");
+      }
+      return;
+    }
+
+    GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
+    if (grants == null || !grants.hasSpell(spell)) {
+      player.displayClientMessage(Component.translatable("roots.message.spell.not_granted", spell.getStyledName()), true);
+      return;
+    }
+    if (grants == null || (modifier.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK) && !grants.hasSpellModifier(modifier))) {
+      player.displayClientMessage(Component.translatable("roots.message.spell_modifier.not_granted", modifier.getName()), true);
+      return;
+    }
+    var inSlot = existing.getSpell(staffSlot);
+    if (inSlot == null || inSlot.spell() != spell || !modifier.isFor(spell.builtInRegistryHolder().getKey())) {
+      player.displayClientMessage(Component.translatable("roots.message.spell_modifier.invalid_spell", modifier.getName(), inSlot == null ? Component.literal("no spell in slot") /* TODO: Make this into a translation string */ : inSlot.spell().getStyledName()), true);
+      return;
+    }
+
+    String type;
+    SpellSlot newSlot;
+
+    if (inSlot.hasModifier(modifier)) {
+      // Toggle off
+      type = "without";
+      newSlot = inSlot.withoutModifier(modifier);
+      if (newSlot.hasModifier(modifier)) {
+        // We were unable to toggle the modifier
+        player.displayClientMessage(Component.translatable("roots.message.spell_modifier.cannot_toggle", modifier.getName()), true);
+        return;
+      }
+    } else {
+      // Toggle on
+      type = "with";
+      newSlot = inSlot.withModifier(modifier);
+      if (!newSlot.hasModifier(modifier)) {
+        // We were unable to toggle the modifier
+        player.displayClientMessage(Component.translatable("roots.message.spell_modifier.cannot_toggle", modifier.getName()), true);
+        return;
+      }
+    }
+    // TODO: Validate that the player has the spell
+    stack.set(ModAttachments.SPELL_STORAGE, existing.setSpell(staffSlot, newSlot));
+    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+      RootsAPI.LOG.error("Setting spell slot {} to {} {} modifier {}", staffSlot, spell.getDescriptionId(), type, modifier.getDescriptionId());
     }
   }
 }

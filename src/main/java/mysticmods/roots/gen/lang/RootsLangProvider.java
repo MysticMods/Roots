@@ -112,6 +112,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.message.staff.charging_percent", "Spell charged: %s%%");
 
     add("roots.message.spell.not_granted", "You do not know the spell: %s");
+    add("roots.message.spell_modifier.not_granted", "You do not know the spell modifier: %s");
+    add("roots.message.spell_modifier.invalid_spell", "The modifier %s isn't valid for the spell currently in that slot: %s");
+    add("roots.message.spell_modifier.cannot_toggle", "Unable to toggle modifier %s!");
     add("roots.message.spell.learned", "Learned new spell: %s");
     add("roots.message.spell.already_learned", "You already know the spell: %s");
     add("roots.message.modifier.learned", "Learned new modifier: %s");

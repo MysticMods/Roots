@@ -14,6 +14,6 @@ public class SpellModifierWidget extends ModifierWidget<Spell, SpellModifier> {
 
   @Override
   protected void onClick(double mouseX, double mouseY, double button) {
-
+    
   }
 }

@@ -1,5 +1,6 @@
 package mysticmods.roots.api.datacomponent;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -56,15 +57,6 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     this.slots = result;
   }
 
-  @Nullable
-  public SpellSlot getSlot(int slot) {
-    if (!validateSlot(slot)) {
-      return null;
-    }
-
-    return slots.get(slot);
-  }
-
   private boolean validateSlot(int slot) {
     if (slot < 0 || slot >= slots.size()) {
       RootsAPI.LOG.error("Invalid slot: {}", slot);
@@ -100,14 +92,33 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return slots.size();
   }
 
-  // This function is only used internally by the command
+  // Will only be used by command, in theory?
   public SpellStorage setSpell(int slot, Spell spell, Set<SpellModifier> modifiers) {
     if (!validateSlot(slot)) {
       return this;
     }
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
+    if (newSlots.get(slot) != null) {
+      var existing = newSlots.get(slot);
+      if (existing.spell() == spell && Sets.symmetricDifference(existing.enabledModifiers(), modifiers).isEmpty()) {
+        return this;
+      }
+    }
     newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, new SpellModifierSet(modifiers)));
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
+  }
+
+  public SpellStorage setSpell(int slot, SpellSlot spell) {
+    if (!validateSlot(slot)) {
+      return this;
+    }
+
+    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    if (spell.equals(newSlots.get(slot))) {
+      return this;
+    }
+    newSlots.set(slot, spell);
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
@@ -118,6 +129,12 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     }
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
+    if (newSlots.get(slot) != null) {
+      if (newSlots.get(slot).spell() == spell) {
+        return this;
+      }
+    }
+
     newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, SpellModifierSet.EMPTY));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
