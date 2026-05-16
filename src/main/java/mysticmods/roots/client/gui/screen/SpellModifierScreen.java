@@ -69,7 +69,8 @@ public class SpellModifierScreen extends RootsScreen {
     var granted = Minecraft.getInstance().player.getData(ModAttachments.GRANT_STORAGE).getSpellModifiers();
     var typeKey = spell.builtInRegistryHolder().getKey();
     RootsRegistries.SPELL_MODIFIERS.forEach(o -> {
-      if (!o.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK) && o.isFor(typeKey)) {
+      // TODO: Uncertain about restricted modifiers here
+      if (!o.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK) && !o.is(RootsTags.SpellModifiers.RESTRICTED) && o.isFor(typeKey)) {
         granted.add(o);
       }
     });
