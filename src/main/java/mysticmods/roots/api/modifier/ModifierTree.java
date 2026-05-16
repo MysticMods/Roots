@@ -168,6 +168,14 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return node;
   }
 
+  public static <V, C extends Modifier<V, C>> Holder<C> getHolder (ModifierTree<V, C> tree, ResourceKey<C> key) {
+    var result = tree.modifiers.get(key);
+    if (result == null) {
+      throw new NullPointerException("No holder for key " + key);
+    }
+    return result;
+  }
+
   public static final StreamCodec<RegistryFriendlyByteBuf, Map<String, ModifierInfo>> MODIFIER_INFO_STREAM_CODEC = ByteBufCodecs.map(Object2ObjectOpenHashMap::new, ByteBufCodecs.STRING_UTF8, ModifierInfo.STREAM_CODEC);
 
   public class Instance {

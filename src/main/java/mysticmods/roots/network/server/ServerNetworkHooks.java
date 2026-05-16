@@ -16,6 +16,7 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
+import mysticmods.roots.network.client.ClientboundRefreshModifierScreenPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -311,5 +312,6 @@ public class ServerNetworkHooks {
     if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
       RootsAPI.LOG.error("Setting spell slot {} to {} {} modifier {}", staffSlot, spell.getDescriptionId(), type, modifier.getDescriptionId());
     }
+    PacketDistributor.sendToPlayer((ServerPlayer) player, ClientboundRefreshModifierScreenPacket.getInstance());
   }
 }

@@ -6,14 +6,15 @@ import mysticmods.roots.api.client.ModifierTab;
 import mysticmods.roots.api.client.ModifierWidget;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.modifier.IModifierNode;
 import mysticmods.roots.api.modifier.ModifierTree;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
-import mysticmods.roots.client.gui.buttons.SpellModifierWidget;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.server.ServerboundToggleSpellModifierPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -22,10 +23,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
+// TODO: Some sort of monitoring system for refreshes
 public class SpellModifierScreen extends RootsScreen {
   private ModifierTab<Spell, SpellModifier> tab = null;
   private final InteractionHand hand;
@@ -86,7 +89,7 @@ public class SpellModifierScreen extends RootsScreen {
     updateTab();
   }
 
-  protected void updateTab() {
+  public void updateTab() {
     var instance = getInstance();
     if (instance == null) {
       return;
@@ -154,5 +157,18 @@ public class SpellModifierScreen extends RootsScreen {
 
   public static void open(@Nullable InteractionHand hand, int inventorySlot, int spellSlot) {
     RootsClientHooks.popAndStopUsingItem(new SpellModifierScreen(hand, inventorySlot, spellSlot));
+  }
+
+  public class SpellModifierWidget extends ModifierWidget<Spell, SpellModifier> {
+    public SpellModifierWidget(ModifierTab<Spell, SpellModifier> tab, IModifierNode<Spell, SpellModifier> node) {
+      super(tab, node);
+    }
+
+    @Override
+    protected void onClick(double mouseX, double mouseY, double button) {
+      ServerboundToggleSpellModifierPacket packet = new ServerboundToggleSpellModifierPacket(hand, inventorySlot, spellSlot, tab.getTree()
+          .getObject().value(), ModifierTree.getHolder(tab.getTree(), node.key()).value());
+      PacketDistributor.sendToServer(packet);
+    }
   }
 }

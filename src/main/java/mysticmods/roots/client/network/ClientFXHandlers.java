@@ -3,6 +3,7 @@ package mysticmods.roots.client.network;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningOverlay;
+import mysticmods.roots.client.gui.screen.SpellModifierScreen;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.client.particle.bolt.PositionProvider;
@@ -1049,5 +1050,16 @@ public class ClientFXHandlers {
 
     mc.particleEngine
         .add(new ItemPickupParticle(mc.getEntityRenderDispatcher(), mc.renderBuffers(), mc.level, entity, player));
+  }
+
+  public static void refreshModifierScreen() {
+    Minecraft mc =Minecraft.getInstance();
+    if (mc == null || mc.player == null || mc.level == null || mc.screen == null) {
+      return;
+    }
+
+    if (mc.screen instanceof SpellModifierScreen modifierScreen) {
+      modifierScreen.updateTab();
+    }
   }
 }
