@@ -6,6 +6,7 @@ import mysticmods.roots.api.modifier.IModifierNode;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.Spell;
 
+// TODO: Make root modifier not clickable
 public class SpellModifierWidget extends ModifierWidget<Spell, SpellModifier> {
   public SpellModifierWidget(ModifierTab<Spell, SpellModifier> tab, IModifierNode<Spell, SpellModifier> node) {
     super(tab, node);

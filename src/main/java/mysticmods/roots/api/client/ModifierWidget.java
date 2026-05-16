@@ -22,6 +22,7 @@ public abstract class ModifierWidget<V, T extends Modifier<V, T>> implements Gui
   protected final int x, y;
 
   protected boolean focused = false;
+  protected boolean clickable = true;
 
   public ModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
     this.tab = tab;
@@ -104,7 +105,7 @@ public abstract class ModifierWidget<V, T extends Modifier<V, T>> implements Gui
 
   @Override
   public boolean mouseClicked(double mouseX, double mouseY, int button) {
-    if (this.isValidClickButton(button)) {
+    if (this.clickable && this.isValidClickButton(button)) {
       boolean flag = this.isMouseOver(mouseX, mouseY);
       if (flag) {
         this.playDownSound(Minecraft.getInstance().getSoundManager());

@@ -13,6 +13,7 @@ public class RootModifierWidget<V, T extends Modifier<V, T>> extends ModifierWid
   public RootModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
     super(tab, node);
     this.renderStack = RootsItemCallbacks.getItemStackGeneric(tab.getTree().getObject().getKey());
+    this.clickable = false;
   }
 
   @Nullable
