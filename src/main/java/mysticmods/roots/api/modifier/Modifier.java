@@ -90,6 +90,10 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     return builtInRegistryHolder().is(key);
   }
 
+  public boolean isFor (@Nullable ResourceKey<?> type) {
+    return applicable == type;
+  }
+
   @Override
   public CostInstance getDefaultCosts() {
     return defaultCosts;

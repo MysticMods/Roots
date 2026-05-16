@@ -61,13 +61,15 @@ public class SpellModifierScreen extends RootsScreen {
     if (data == null) {
       return null;
     }
-    var tree = ModifierTrees.getSpell(data.getSpell());
+    var spell = data.getSpell();
+    var tree = ModifierTrees.getSpell(spell);
     if (Minecraft.getInstance().player == null) {
       return null;
     }
     var granted = Minecraft.getInstance().player.getData(ModAttachments.GRANT_STORAGE).getSpellModifiers();
+    var typeKey = spell.builtInRegistryHolder().getKey();
     RootsRegistries.SPELL_MODIFIERS.forEach(o -> {
-      if (!o.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK)) {
+      if (!o.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK) && o.isFor(typeKey)) {
         granted.add(o);
       }
     });
