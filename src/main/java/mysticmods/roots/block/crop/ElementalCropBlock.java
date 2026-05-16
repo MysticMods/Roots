@@ -33,6 +33,7 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
     int i = this.getAge(pState);
     if (i < this.getMaxAge()) {
       float f = getGrowthSpeed(pState, pLevel, pPos);
+      // TODO: Should this be handled via the event instead of in the elemental crop block? PROBABLY.
       if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
         BlockState newState = this.getStateForAge(i + 1);
 
