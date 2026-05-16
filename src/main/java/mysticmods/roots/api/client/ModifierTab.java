@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,14 +16,18 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
   private final Map<ResourceKey<T>, ModifierWidget<V, T>> widgets = new HashMap<>();
   private final ModifierTree<V, T>.Instance tree;
   private final RootModifierWidget<V, T> root;
+  private final List<ModifierWidget<V, T>> children = new ArrayList<>();
 
-  public ModifierTab(ModifierTree<V, T>.Instance tree) {
+  public ModifierTab(ModifierTree<V, T>.Instance tree, WidgetBuilder<V, T> builder) {
     this.tree = tree;
 
     for (IModifierNode<V, T> node : tree.tree().all()) {
-      widgets.put(node.key(), new ModifierWidget<>(this, node));
+      var child = builder.create(this, node);
+      children.add(child);
+      widgets.put(node.key(), child);
     }
     this.root = new RootModifierWidget<>(this, tree.tree().root());
+    children.add(this.root);
   }
 
   private List<ModifierWidget<V, T>> roots = null;
@@ -57,11 +62,20 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     return widgets.get(node.key());
   }
 
+  public List<ModifierWidget<V, T>> children () {
+    return children;
+  }
+
   public void drawTooltips(GuiGraphics guiGraphics, int mouseX, int mouseY, int width, int height) {
     for (ModifierWidget<V, T> widget : widgets.values()) {
-      if (widget.isMouseOver(0, 0, mouseX, mouseY)) {
+      if (widget.isMouseOver(mouseX, mouseY)) {
         widget.drawHover(guiGraphics, 0, 0, 0, width, height);
       }
     }
+  }
+
+  @FunctionalInterface
+  public interface WidgetBuilder<V, T extends Modifier<V, T>> {
+    ModifierWidget<V, T> create (ModifierTab<V, T> tab, IModifierNode<V, T> node);
   }
 }

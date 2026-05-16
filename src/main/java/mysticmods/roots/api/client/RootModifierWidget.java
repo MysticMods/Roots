@@ -47,11 +47,8 @@ public class RootModifierWidget<V, T extends Modifier<V, T>> extends ModifierWid
 
   }
 
-  public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
-    int i = x + this.x;
-    int j = i + 26;
-    int k = y + this.y;
-    int l = k + 26;
-    return mouseX >= i && mouseX <= j && mouseY >= k && mouseY <= 1;
+  @Override
+  protected void onClick(double mouseX, double mouseY, double button) {
+    // NO-OP
   }
 }

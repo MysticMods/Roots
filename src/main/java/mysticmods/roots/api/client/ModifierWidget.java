@@ -1,7 +1,12 @@
 package mysticmods.roots.api.client;
 
 import mysticmods.roots.api.modifier.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -9,19 +14,21 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Comparator;
 import java.util.List;
 
-public class ModifierWidget<V, T extends Modifier<V, T>> {
+public abstract class ModifierWidget<V, T extends Modifier<V, T>> implements GuiEventListener {
   protected final ModifierTab<V, T> tab;
   protected final IModifierNode<V, T> node;
 
   protected ItemStack renderStack;
   protected final int x, y;
 
+  protected boolean focused = false;
+
   public ModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
     this.tab = tab;
     this.node = node;
     this.x = Mth.floor(node.x() * 28.0f); // 28?
     this.y = Mth.floor(node.y() * 27.0f); // 27?
-    if (!(node instanceof RootModifierNode<V,T>)) {
+    if (!(node instanceof RootModifierNode<V, T>)) {
       this.renderStack = new ItemStack(ModifierTree.getIcon(tab.getTree(), node));
     }
   }
@@ -95,11 +102,60 @@ public class ModifierWidget<V, T extends Modifier<V, T>> {
 
   }
 
-  public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
-    int i = x + this.x;
-    int j = i + 26;
-    int k = y + this.y;
-    int l = k + 26;
-    return mouseX >= i && mouseX <= j && mouseY >= k && mouseY <= 1;
+  @Override
+  public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    if (this.isValidClickButton(button)) {
+      boolean flag = this.isMouseOver(mouseX, mouseY);
+      if (flag) {
+        this.playDownSound(Minecraft.getInstance().getSoundManager());
+        this.onClick(mouseX, mouseY, button);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  protected abstract void onClick (double mouseX, double mouseY, double button);
+
+  public void playDownSound(SoundManager handler) {
+    handler.play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+  }
+
+  protected boolean isValidClickButton(int button) {
+    return button == 0;
+  }
+
+  public boolean isMouseOver(double mouseX, double mouseY) {
+    return mouseX >= (double) this.getX()
+        && mouseY >= (double) this.getY()
+        && mouseX < (double) (this.getX() + this.getWidth())
+        && mouseY < (double) (this.getY() + this.getHeight());
+  }
+
+  public int getHeight() {
+    return 26;
+  }
+
+  public int getWidth() {
+    return 26;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  @Override
+  public void setFocused(boolean focused) {
+    this.focused = focused;
+  }
+
+  @Override
+  public boolean isFocused() {
+    return focused;
   }
 }

@@ -80,11 +80,11 @@ public class StaffScreen extends RootsScreen {
     super.init();
 
     int index = 0;
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(0), index++, guiLeft + 2, guiTop + 33)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(1), index++, guiLeft + 7, guiTop + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(2), index++, guiLeft + 31, guiTop + 4)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), index++, guiLeft + 55, guiTop + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), index, guiLeft + 60, guiTop + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(0), index++, leftPos + 2, topPos + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(1), index++, leftPos + 7, topPos + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(2), index++, leftPos + 31, topPos + 4)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), index++, leftPos + 55, topPos + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), index, leftPos + 60, topPos + 33)));
 
     if (getMinecraft().player != null) {
       createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
@@ -101,7 +101,7 @@ public class StaffScreen extends RootsScreen {
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 8; x++) {
         if (index < spellInfo.size()) {
-          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, librarySlot(index), index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, !spellInfo.get(index)
+          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, librarySlot(index), index, leftPos + offsetX + x * 18, topPos + offsetY + y * 18, !spellInfo.get(index)
               .granted())));
           index++;
         }

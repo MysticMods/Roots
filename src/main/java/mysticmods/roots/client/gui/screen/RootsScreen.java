@@ -12,10 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public abstract class RootsScreen extends Screen {
-  protected int maxScale;
   protected List<Component> tooltip;
   protected ItemStack tooltipItem = ItemStack.EMPTY;
-  protected int guiLeft, guiTop, guiRight, guiBottom;
+  protected int leftPos, topPos;
   protected int lastMouseX, lastMouseY;
 
   protected RootsScreen(Component pTitle) {
@@ -25,11 +24,8 @@ public abstract class RootsScreen extends Screen {
   @Override
   protected void init() {
     super.init();
-    maxScale = getMinecraft().getWindow().calculateScale(0, minecraft.isEnforceUnicode());
-    guiLeft = width / 2 - getBackgroundWidth() / 2;
-    guiTop = height / 2 - getBackgroundHeight() / 2;
-    guiRight = width / 2 + getBackgroundWidth() / 2;
-    guiBottom = height / 2 + getBackgroundHeight() / 2;
+    leftPos = width / 2 - getBackgroundWidth() / 2;
+    topPos = height / 2 - getBackgroundHeight() / 2;
   }
 
   public boolean isMouseInRelativeRange(int mouseX, int mouseY, int x, int y, int w, int h) {
@@ -63,6 +59,7 @@ public abstract class RootsScreen extends Screen {
 
   public abstract int getBackgroundHeight();
 
+  // TODO: Massive todo: rewrite all of this
   @Override
   public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     this.lastMouseX = pMouseX;
@@ -71,7 +68,7 @@ public abstract class RootsScreen extends Screen {
     PoseStack stack = graphics.pose();
     resetTooltip();
     stack.pushPose();
-    stack.translate(guiLeft, guiTop, 0);
+    //stack.translate(leftPos, topPos, 0);
     RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     drawBackground(graphics, pMouseX, pMouseY, pPartialTick);
     drawForeground(graphics, pMouseX, pMouseY, pPartialTick);
@@ -92,7 +89,7 @@ public abstract class RootsScreen extends Screen {
 
   public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, int uvW, int uvH, int maxW, int maxH) {
     ResourceLocation resourceLocation = getBackground();
-    graphics.blit(resourceLocation, 0, 0, 0, 0, uvW, uvH, maxW, maxH);
+    graphics.blit(resourceLocation, leftPos, topPos, 0, 0, uvW, uvH, maxW, maxH);
   }
 
   public void drawForeground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {

@@ -12,9 +12,11 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
+import mysticmods.roots.client.gui.buttons.SpellModifierWidget;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -22,6 +24,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class SpellModifierScreen extends RootsScreen {
   private ModifierTab<Spell, SpellModifier> tab = null;
@@ -89,19 +92,17 @@ public class SpellModifierScreen extends RootsScreen {
       return;
     }
 
-    this.tab = new ModifierTab<>(instance);
+    this.tab = new ModifierTab<>(instance, SpellModifierWidget::new);
   }
 
   @Override
   public void drawForeground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     super.drawForeground(graphics, mouseX, mouseY, partialTicks);
 
-    /*    for (ModifierWidget<Spell, SpellModifier> widget : tab.roots()) {*/
     var widget = tab.root();
     widget.drawConnectivity(graphics, 0, 0, true);
     widget.drawConnectivity(graphics, 0, 0, false);
     widget.draw(graphics, 0, 0); //guiLeft, guiTop/*, mouseX, mouseY/ partialTicks*/);
-    /*    }*/
   }
 
   @Override
@@ -109,7 +110,7 @@ public class SpellModifierScreen extends RootsScreen {
     super.drawTooltip(guiGraphics, x, y);
 
     for (ModifierWidget<Spell, SpellModifier> widget : tab.roots()) {
-      if (widget.isMouseOver(0, 0, x, y)) {
+      if (widget.isMouseOver(x, y)) {
         widget.drawHover(guiGraphics, x, y, 0, 0, 0);
       }
     }
@@ -134,6 +135,17 @@ public class SpellModifierScreen extends RootsScreen {
   @Override
   public int getBackgroundHeight() {
     return 192;
+  }
+
+  @Override
+  public List<? extends GuiEventListener> children() {
+    return tab.children();
+  }
+
+  @Override
+  public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    // TODO: This is quite a hack
+    return super.mouseClicked(mouseX/* + guiLeft*/, mouseY/* + guiTop*/, button);
   }
 
   public static void open(StaffScreen staffScreen, int slot) {
