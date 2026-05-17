@@ -14,6 +14,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
+// TODO: Why are these not records?
 public class SkySoarerSnapshot extends Snapshot {
   public static MapCodec<SkySoarerSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
@@ -21,35 +22,48 @@ public class SkySoarerSnapshot extends Snapshot {
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Vec3.CODEC.fieldOf("originalMovement").forGetter(SkySoarerSnapshot::getOriginalMovement),
           Vec3.CODEC.fieldOf("vehicleOriginalMovement").forGetter(SkySoarerSnapshot::getVehicleOriginalMovement),
-          Codec.FLOAT.fieldOf("amplifier").forGetter(SkySoarerSnapshot::getAmplifier)
+          Codec.FLOAT.fieldOf("amplifier").forGetter(SkySoarerSnapshot::getAmplifier),
+          Codec.INT.fieldOf("duration").forGetter(SkySoarerSnapshot::getDuration),
+          Codec.INT.fieldOf("durationCount").forGetter(SkySoarerSnapshot::getDurationCount),
+          Codec.INT.fieldOf("amplifierCount").forGetter(SkySoarerSnapshot::getAmplifierCount)
       ).apply(instance, SkySoarerSnapshot::new)
   );
   public static Codec<SkySoarerSnapshot> CODEC = MAP_CODEC.codec();
-  public static StreamCodec<ByteBuf, SkySoarerSnapshot> STREAM_CODEC = StreamCodec.composite(
+  public static StreamCodec<ByteBuf, SkySoarerSnapshot> STREAM_CODEC = ExtraStreamCodecs.composite(
       ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ExtraStreamCodecs.VEC3, o -> o.originalMovement,
       ExtraStreamCodecs.VEC3, o -> o.vehicleOriginalMovement,
       ByteBufCodecs.FLOAT, o -> o.amplifier,
+      ByteBufCodecs.VAR_INT, o -> o.duration,
+      ByteBufCodecs.VAR_INT, o -> o.durationCount,
+      ByteBufCodecs.VAR_INT, o -> o.amplifierCount,
       SkySoarerSnapshot::new
   );
 
   private final float amplifier;
   private final Vec3 originalMovement;
   private final Vec3 vehicleOriginalMovement;
+  private final int duration, amplifierCount, durationCount;
 
-  public SkySoarerSnapshot(LivingEntity entity, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
+  public SkySoarerSnapshot(LivingEntity entity, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier, int duration, int amplifierCount, int durationCount) {
     super(entity, decay);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;
     this.vehicleOriginalMovement = vehicleOriginalMovement;
+    this.duration = duration;
+    this.amplifierCount = amplifierCount;
+    this.durationCount = durationCount;
   }
 
-  public SkySoarerSnapshot(long timestamp, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
+  public SkySoarerSnapshot(long timestamp, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier, int duration, int amplifierCount, int durationCount) {
     super(timestamp, decay);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;
     this.vehicleOriginalMovement = vehicleOriginalMovement;
+    this.duration = duration;
+    this.amplifierCount = amplifierCount;
+    this.durationCount = durationCount;
   }
 
   public Vec3 getOriginalMovement() {
@@ -62,6 +76,18 @@ public class SkySoarerSnapshot extends Snapshot {
 
   public Vec3 getVehicleOriginalMovement() {
     return vehicleOriginalMovement;
+  }
+
+  public int getDuration () {
+    return duration;
+  }
+
+  public int getDurationCount () {
+    return durationCount;
+  }
+
+  public int getAmplifierCount () {
+    return amplifierCount;
   }
 
   @Override

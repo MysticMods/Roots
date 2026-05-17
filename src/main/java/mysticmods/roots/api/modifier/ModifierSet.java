@@ -2,6 +2,7 @@ package mysticmods.roots.api.modifier;
 
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,6 +77,8 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   public abstract ModifierSet<V, T, C> with(T element);
 
   public abstract ModifierSet<V, T, C> with(Collection<T> elements);
+
+  public abstract int count (TagKey<T> tag);
 
   public boolean has(T element) {
     return contains(element);

@@ -202,9 +202,9 @@ public class ModSpells {
   public static final DeferredHolder<Spell, SkySoarerSpell> SKY_SOARER = spell(Spells.SKY_SOARER, SkySoarerSpell::new, ChatFormatting.BLUE, () -> CostInstance.of(List.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.COMPLEX_1250))));
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_COOLDOWN = P.recordProperty("sky_soarer/cooldown", Property.ofInt(39, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_AMPLIFIER = P.recordProperty("sky_soarer/amplifier", Property.ofFloat(0.9f, "The default movement speed amplifier for Sky Soarer."));
-  public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_BOOSTED_AMPLIFIER = P.recordProperty("sky_soarer/boosted_amplifier", Property.ofFloat(0.6f, "The movement speed amplifier for Sky Soarer boosted."));
+  public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_AMPLIFIER_INCREASE = P.recordProperty("sky_soarer/amplifier_increase", Property.ofFloat(0.1f, "The base amplifier value is multiplied by 1+(this value, multiplied by the number of amplifier modifiers enabled)."));
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_DURATION = P.recordProperty("sky_soarer/duration", Property.ofInt(50, SpellProperties.DURATION));
-  public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_BOOSTED_DURATION = P.recordProperty("sky_soarer/boosted_duration", Property.ofInt(28, SpellProperties.EXTENDED_DURATION));
+  public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_DURATION_INCREASE = P.recordProperty("sky_soarer/boosted_duration", Property.ofFloat(0.1f, "The base duration value is multiplied by 1+(this value, multiplied by the number of duration modifiers enabled)."));
 
   // Temporal Morass (320 cooldown)
   public static final DeferredHolder<Spell, TemporalMorassSpell> TEMPORAL_MORASS = spell(Spells.TEMPORAL_MORASS, TemporalMorassSpell::new, ChatFormatting.DARK_BLUE, () -> CostInstance.of(List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250))));

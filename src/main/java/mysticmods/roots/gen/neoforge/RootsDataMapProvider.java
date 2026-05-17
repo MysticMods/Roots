@@ -603,11 +603,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder27.add(ModActions.LEARN_SPELL_MODIFIER, ModItems.MORTAR.get(), false);
     builder27.add(ModActions.BRUSH_BLOCK, Items.BRUSH, false);
 
-    var builder27a = builder(DataMaps.SPELL_MODIFIER_ICONS);
-    builder27a.add(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, Items.SPECTRAL_ARROW, false);
-    builder27a.add(ModModifiers.SKY_SOARER_AMPLIFIED, Items.REDSTONE, false);
-    builder27a.add(ModModifiers.SKY_SOARER_AMPLIFIED_2, Items.GLOWSTONE_DUST, false);
-
     var builder28 = builder(DataMaps.AUGMENTATION_DATA);
     builder28.add(Attributes.JUMP_STRENGTH, new AugmentationData(Attributes.JUMP_STRENGTH, AttributeModifier.Operation.ADD_VALUE, 0.06, 0.03, 0.3f, 4, 6), false);
     builder28.add(Attributes.ATTACK_DAMAGE, new AugmentationData(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADD_VALUE, 1, 0.5, 0.2f, 2, 3), false);
@@ -647,7 +642,9 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     var builder33 = builder(DataMaps.SPELL_MODIFIER_ICONS);
     builder33.add(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, Items.ARROW, false);
-    builder33.add(ModModifiers.SKY_SOARER_AMPLIFIED, Items.REDSTONE, false);
+    builder33.add(ModModifiers.SKY_SOARER_AMPLIFIED_1, Items.REDSTONE, false);
     builder33.add(ModModifiers.SKY_SOARER_AMPLIFIED_2, Items.GLOWSTONE_DUST, false);
+    builder33.add(ModModifiers.SKY_SOARER_SPEEDY_1, Items.ICE, false);
+    builder33.add(ModModifiers.SKY_SOARER_SPEEDY_2, Items.PACKED_ICE, false);
   }
 }

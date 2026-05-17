@@ -1,6 +1,6 @@
 {
   "values": {
-    "roots:sky_soarer/amplified": {
+    "roots:sky_soarer/amplified_1": {
       "costs": [
         {
           "type": "additive",
@@ -24,6 +24,24 @@
           "type": "additive",
           "defaultValue": 0.125,
           "herb": "roots:stalicripe"
+        }
+      ]
+    },
+    "roots:sky_soarer/speedy_1": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:cloud_berry"
+        }
+      ]
+    },
+    "roots:sky_soarer/speedy_2": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:cloud_berry"
         }
       ]
     }

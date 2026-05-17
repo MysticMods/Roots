@@ -4,8 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.init.ModModifiers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
@@ -24,6 +23,13 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
     this.tag(RootsTags.SpellModifiers.NYI);
     this.tag(RootsTags.SpellModifiers.REQUIRES_UNLOCK);
     this.tag(RootsTags.SpellModifiers.RESTRICTED);
+
+    this.tag(RootsTags.SpellModifiers.SKY_SOARER_AMPLIFIER_INCREASES).add(
+        ModModifiers.SKY_SOARER_AMPLIFIED_1.value(), ModModifiers.SKY_SOARER_AMPLIFIED_2.value()
+    );
+    this.tag(RootsTags.SpellModifiers.SKY_SOARER_DURATION_INCREASES).add(
+        ModModifiers.SKY_SOARER_SPEEDY_1.value(), ModModifiers.SKY_SOARER_SPEEDY_2.value()
+    );
   }
 
   @Override

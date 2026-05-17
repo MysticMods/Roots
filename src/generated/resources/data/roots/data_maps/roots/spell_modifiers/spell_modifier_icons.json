@@ -1,7 +1,9 @@
 {
   "values": {
-    "roots:sky_soarer/amplified": "minecraft:redstone",
+    "roots:sky_soarer/amplified_1": "minecraft:redstone",
     "roots:sky_soarer/amplified_2": "minecraft:glowstone_dust",
-    "roots:sky_soarer/friendly_earth": "minecraft:arrow"
+    "roots:sky_soarer/friendly_earth": "minecraft:arrow",
+    "roots:sky_soarer/speedy_1": "minecraft:ice",
+    "roots:sky_soarer/speedy_2": "minecraft:packed_ice"
   }
 }

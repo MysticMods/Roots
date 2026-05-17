@@ -7,6 +7,7 @@ import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,6 +33,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     super(build);
   }
 
+  // TODO: These `without` methods don't actually do anything
   @Override
   public SpellModifierSet without(SpellModifier element) {
     if (this.isEmpty()) {
@@ -100,6 +102,17 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     builder.addAll(this);
     builder.addAll(elements);
     return new SpellModifierSet(builder.build()).validated();
+  }
+
+  @Override
+  public int count(TagKey<SpellModifier> tag) {
+    int count = 0;
+    for (SpellModifier modifier : this.internal) {
+      if (modifier.is(tag)) {
+        count++;
+      }
+    }
+    return count;
   }
 
   public SpellModifierSet validated() {

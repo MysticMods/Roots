@@ -601,6 +601,9 @@ public class RootsTags {
     public static final TagKey<SpellModifier> RESTRICTED = modTag("restricted");
     public static final TagKey<SpellModifier> REQUIRES_UNLOCK = modTag("requires_unlock");
 
+    public static final TagKey<SpellModifier> SKY_SOARER_AMPLIFIER_INCREASES = modTag("sky_soarer/amplifier_increases");
+    public static final TagKey<SpellModifier> SKY_SOARER_DURATION_INCREASES = modTag("sky_soarer/duration_increases");
+
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
     static TagKey<SpellModifier> modTag(String name) {

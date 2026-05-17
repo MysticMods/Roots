@@ -746,12 +746,12 @@
         }
       },
       {
-        "id": "roots:sky_soarer/boosted_amplifier",
+        "id": "roots:sky_soarer/amplifier_increase",
         "value": {
           "type": "roots:float_property",
-          "comment": "The movement speed amplifier for Sky Soarer boosted.",
-          "default_value": 0.6,
-          "value": 0.6
+          "comment": "The base amplifier value is multiplied by 1+(this value, multiplied by the number of amplifier modifiers enabled).",
+          "default_value": 0.1,
+          "value": 0.1
         }
       },
       {
@@ -766,10 +766,10 @@
       {
         "id": "roots:sky_soarer/boosted_duration",
         "value": {
-          "type": "roots:integer_property",
-          "comment": "How much time will be added to the standard duration when boosted",
-          "default_value": 28,
-          "value": 28
+          "type": "roots:float_property",
+          "comment": "The base duration value is multiplied by 1+(this value, multiplied by the number of duration modifiers enabled).",
+          "default_value": 0.1,
+          "value": 0.1
         }
       }
     ],
