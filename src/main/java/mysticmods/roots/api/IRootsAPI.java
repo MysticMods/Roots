@@ -78,6 +78,8 @@ public interface IRootsAPI {
 
   DataComponentType<Unit> getDeletableType();
 
+  DataComponentType<Unit> getModifiableType ();
+
   void readAdditionalSavedData(Entity entity, @NotNull CompoundTag tag);
 
   @Nullable

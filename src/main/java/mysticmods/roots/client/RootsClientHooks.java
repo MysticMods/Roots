@@ -190,9 +190,14 @@ public class RootsClientHooks {
     Minecraft minecraft = Minecraft.getInstance();
 
     if (minecraft.screen instanceof StaffScreen) {
-      if (stack.has(ModAttachments.DELETABLE)) {
+      if (stack.has(ModAttachments.DELETABLE) || stack.has(ModAttachments.MODIFIABLE)) {
         tooltipComponents.add(Component.empty());
-        tooltipComponents.add(Component.translatable("roots.tooltip.token.delete"));
+      }
+      if (stack.has(ModAttachments.DELETABLE)) {
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.delete", Component.keybind("key.roots.delete_spell")));
+      }
+      if (stack.has(ModAttachments.MODIFIABLE)) {
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.modify", Component.keybind("key.roots.modify_spell")));
       }
       return;
     } else if (minecraft.player == null) {

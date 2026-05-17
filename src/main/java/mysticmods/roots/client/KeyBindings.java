@@ -7,6 +7,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.layer.HudOverlay;
+import mysticmods.roots.client.gui.screen.SpellModifierScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.KeyMapping;
@@ -47,6 +48,8 @@ public class KeyBindings {
   public static final KeyMapping CYCLE_ADJUSTABLE = new KeyMapping("key.roots.cycle_adjustable", HAS_ANY_ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
   public static final KeyMapping OPEN_FAKE_MENU = new KeyMapping("key.roots.open_fake_menu", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
   public static final KeyMapping CLEAR_CONTAINER = new KeyMapping("key.roots.clear_container", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
+  public static final KeyMapping DELETE_SPELL = new KeyMapping("key.roots.delete_spell", IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
+  public static final KeyMapping MODIFY_SPELL = new KeyMapping("key.roots.modify_spell", IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
 
   public static final List<KeyMapping> MAPPINGS = Arrays.asList(
       OPEN_SPELL_LIBRARY,
@@ -56,7 +59,9 @@ public class KeyBindings {
       OPEN_POUCH,
       OPEN_REPUTATION,
       CLEAR_CONTAINER,
-      OPEN_FAKE_MENU);
+      OPEN_FAKE_MENU,
+      DELETE_SPELL,
+      MODIFY_SPELL);
 
 
   @SubscribeEvent
@@ -70,6 +75,8 @@ public class KeyBindings {
     event.register(CANCEL_EFFECT);
     event.register(CLEAR_CONTAINER);
     event.register(OPEN_FAKE_MENU);
+    event.register(DELETE_SPELL);
+    event.register(MODIFY_SPELL);
   }
 
   public static class LibraryKeyConflictContext implements IKeyConflictContext {
@@ -84,7 +91,7 @@ public class KeyBindings {
         return false;
       }
 
-      return (minecraft.screen instanceof StaffScreen);
+      return (minecraft.screen instanceof StaffScreen || minecraft.screen instanceof SpellModifierScreen);
     }
 
     @Override

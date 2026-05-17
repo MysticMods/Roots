@@ -176,6 +176,11 @@ public class RootsAPIImpl implements IRootsAPI {
   }
 
   @Override
+  public DataComponentType<Unit> getModifiableType () {
+    return ModAttachments.MODIFIABLE.value();
+  }
+
+  @Override
   public void readAdditionalSavedData(Entity entity, @NotNull CompoundTag tag) {
     ((AccessorMixinEntity) entity).roots$ReadAdditionalSaveData(tag);
   }
