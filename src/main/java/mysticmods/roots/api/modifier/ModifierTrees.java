@@ -91,4 +91,19 @@ public class ModifierTrees {
 
     initialized = true;
   }
+
+  public static SpellModifierSet without (Spell spell, SpellModifierSet modifiers, SpellModifier without) {
+    ModifierTree<Spell, SpellModifier> tree = getSpell(spell);
+    if (tree == null) {
+      throw new IllegalStateException("Spell " + spell.builtInRegistryHolder().getKey() + " has no modifier tree?!");
+    }
+
+    var instance = tree.instance(modifiers, null);
+
+    if (!instance.disable(without)) {
+      return modifiers;
+    }
+
+    return new SpellModifierSet(instance.modifiersSet()).validated();
+  }
 }

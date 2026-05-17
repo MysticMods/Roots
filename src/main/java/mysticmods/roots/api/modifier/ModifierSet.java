@@ -13,6 +13,7 @@ import java.util.function.IntFunction;
 import java.util.stream.Stream;
 
 public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends ModifierSet<V, T, C>> implements Set<T> {
+  // TODO: Does this need to be an ImmutableSet?
   protected final ImmutableSet<T> internal;
   @Nullable
   protected final T firstElement;

@@ -5,6 +5,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
+import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.registry.ICosted;
@@ -32,7 +33,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
       SpellModifierSet.CODEC.fieldOf("enabledModifiers").forGetter(SpellSlot::enabledModifiers),
       SpellInstanceData.CODEC.fieldOf("data").forGetter(SpellSlot::data)
   ).apply(instance, SpellSlot::new)).validate(result -> {
-    // TODO: What validation needed to take place here?
+    // TODO: Validation: remove restricted modifiers
     return DataResult.success(result);
   });
   public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
@@ -79,21 +80,22 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
 
     newData.ensureCapacity(spell.getDataSlots() + 1);
     newData.set(index, value);
-    return new SpellSlot(spellId, slot, spell, enabledModifiers, new SpellInstanceData(newData));
+    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), new SpellInstanceData(newData));
   }
 
   public SpellSlot withData(SpellInstanceData data) {
     if (data.equals(this.data)) {
       return this;
     }
-    return new SpellSlot(spellId, slot, spell, enabledModifiers, data);
+    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), data);
   }
 
   public SpellSlot withoutModifier(SpellModifier modifier) {
     if (!hasModifier(modifier)) {
       return copy();
     }
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.without(modifier), data);
+
+    return new SpellSlot(spellId, slot, spell, ModifierTrees.without(spell, enabledModifiers, modifier), data);
   }
 
   public SpellSlot withModifier(SpellModifier modifier) {
@@ -104,10 +106,10 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   public SpellSlot withSlot(int slot) {
-    return new SpellSlot(spellId, slot, spell, enabledModifiers, data);
+    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), data);
   }
 
   public SpellSlot copy() {
-    return new SpellSlot(spellId, slot, spell, enabledModifiers, data);
+    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), data);
   }
 }

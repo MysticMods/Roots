@@ -176,6 +176,16 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return result;
   }
 
+  public static <V, C extends Modifier<V, C>> ResourceKey<C> getKey (ModifierTree<V, C> tree, C value) {
+    for (Holder<C> holder : tree.modifiers.values()) {
+      if (holder.value().equals(value)) {
+        return holder.getKey();
+      }
+    }
+
+    throw new NullPointerException("No holder found for value " + value);
+  }
+
   public static final StreamCodec<RegistryFriendlyByteBuf, Map<String, ModifierInfo>> MODIFIER_INFO_STREAM_CODEC = ByteBufCodecs.map(Object2ObjectOpenHashMap::new, ByteBufCodecs.STRING_UTF8, ModifierInfo.STREAM_CODEC);
 
   public class Instance {
@@ -187,6 +197,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       for (C modifier : modifierSet) {
         if (!enable(modifier.builtInRegistryHolder().getKey())) {
           // TODO: Conflicting modifiers in the initial set
+          // TODO: This should probably throw a catchable error
         }
       }
       this.grantedModifiers = grantedModifiers;
@@ -225,9 +236,19 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return true;
     }
 
+    public boolean enable (C value) {
+      var key = getKey(ModifierTree.this, value);
+      return enable(key);
+    }
+
     public boolean enable(ResourceKey<C> key) {
       IModifierNode<V, C> node = getNode(ModifierTree.this, key);
       return enable(node);
+    }
+
+    public boolean disable (C value) {
+      var key = getKey(ModifierTree.this, value);
+      return disable(key);
     }
 
     public boolean disable(IModifierNode<V, C> node) {
@@ -238,6 +259,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
           }
         }
       }
+      enabledModifiers.remove(node.key());
       return true;
     }
 

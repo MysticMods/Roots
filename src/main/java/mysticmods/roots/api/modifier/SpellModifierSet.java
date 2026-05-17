@@ -125,4 +125,12 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
       return new SpellModifierSet(validModifiers);
     }
   }
+
+  public SpellModifierSet copy () {
+    if (this == EMPTY) {
+      return this;
+    }
+
+    return new SpellModifierSet(ImmutableSet.copyOf(internal));
+  }
 }
