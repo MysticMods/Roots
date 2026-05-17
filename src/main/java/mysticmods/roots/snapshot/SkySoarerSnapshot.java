@@ -25,7 +25,8 @@ public class SkySoarerSnapshot extends Snapshot {
           Codec.FLOAT.fieldOf("amplifier").forGetter(SkySoarerSnapshot::getAmplifier),
           Codec.INT.fieldOf("duration").forGetter(SkySoarerSnapshot::getDuration),
           Codec.INT.fieldOf("durationCount").forGetter(SkySoarerSnapshot::getDurationCount),
-          Codec.INT.fieldOf("amplifierCount").forGetter(SkySoarerSnapshot::getAmplifierCount)
+          Codec.INT.fieldOf("amplifierCount").forGetter(SkySoarerSnapshot::getAmplifierCount),
+          Codec.BOOL.fieldOf("friendlyEarth").forGetter(SkySoarerSnapshot::hasFriendlyEarth)
       ).apply(instance, SkySoarerSnapshot::new)
   );
   public static Codec<SkySoarerSnapshot> CODEC = MAP_CODEC.codec();
@@ -38,6 +39,7 @@ public class SkySoarerSnapshot extends Snapshot {
       ByteBufCodecs.VAR_INT, o -> o.duration,
       ByteBufCodecs.VAR_INT, o -> o.durationCount,
       ByteBufCodecs.VAR_INT, o -> o.amplifierCount,
+      ByteBufCodecs.BOOL, o -> o.friendlyEarth,
       SkySoarerSnapshot::new
   );
 
@@ -45,8 +47,9 @@ public class SkySoarerSnapshot extends Snapshot {
   private final Vec3 originalMovement;
   private final Vec3 vehicleOriginalMovement;
   private final int duration, amplifierCount, durationCount;
+  private final boolean friendlyEarth;
 
-  public SkySoarerSnapshot(LivingEntity entity, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier, int duration, int amplifierCount, int durationCount) {
+  public SkySoarerSnapshot(LivingEntity entity, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier, int duration, int amplifierCount, int durationCount, boolean friendlyEarth) {
     super(entity, decay);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;
@@ -54,9 +57,10 @@ public class SkySoarerSnapshot extends Snapshot {
     this.duration = duration;
     this.amplifierCount = amplifierCount;
     this.durationCount = durationCount;
+    this.friendlyEarth = friendlyEarth;
   }
 
-  public SkySoarerSnapshot(long timestamp, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier, int duration, int amplifierCount, int durationCount) {
+  public SkySoarerSnapshot(long timestamp, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier, int duration, int amplifierCount, int durationCount, boolean friendlyEarth) {
     super(timestamp, decay);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;
@@ -64,6 +68,7 @@ public class SkySoarerSnapshot extends Snapshot {
     this.duration = duration;
     this.amplifierCount = amplifierCount;
     this.durationCount = durationCount;
+    this.friendlyEarth = friendlyEarth;
   }
 
   public Vec3 getOriginalMovement() {
@@ -88,6 +93,10 @@ public class SkySoarerSnapshot extends Snapshot {
 
   public int getAmplifierCount () {
     return amplifierCount;
+  }
+
+  public boolean hasFriendlyEarth () {
+    return friendlyEarth;
   }
 
   @Override

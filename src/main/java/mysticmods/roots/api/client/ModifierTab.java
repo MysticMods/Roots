@@ -25,6 +25,7 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     }
     this.root = new RootModifierWidget<>(this, tree.tree().root());
     children.add(this.root);
+    children.sort(Comparator.comparing(o -> o.node.key().location().getPath()));
   }
 
   private List<ModifierWidget<V, T>> roots = null;

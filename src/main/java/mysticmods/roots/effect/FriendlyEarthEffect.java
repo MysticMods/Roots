@@ -11,7 +11,9 @@ public class FriendlyEarthEffect extends MobEffect {
 
   @Override
   public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-    pLivingEntity.fallDistance = 0;
+    if (!pLivingEntity.onGround()) {
+      pLivingEntity.fallDistance = 1.0f;
+    }
     return true;
   }
 

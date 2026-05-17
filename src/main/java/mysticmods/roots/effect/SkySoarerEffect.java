@@ -1,8 +1,10 @@
 package mysticmods.roots.effect;
 
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -22,11 +24,15 @@ public class SkySoarerEffect extends SimpleEffect {
           vehicle = player;
         } else {
           player.hurtMarked = true;
-          player.resetFallDistance();
+          if (sky.hasFriendlyEarth()) {
+            player.resetFallDistance();
+          }
         }
         vehicle.hasImpulse = true;
         vehicle.hurtMarked = true;
-        vehicle.resetFallDistance();
+        if (sky.hasFriendlyEarth()) {
+          vehicle.resetFallDistance();
+        }
         if (vehicle instanceof Boat) {
           vehicle.setDeltaMovement(vehicle.getLookAngle()
               .multiply(sky.getAmplifier(), 0, sky.getAmplifier()));
@@ -56,13 +62,18 @@ public class SkySoarerEffect extends SimpleEffect {
         if (vehicle != null) {
           vehicle.hasImpulse = true;
           vehicle.hurtMarked = true;
-          vehicle.fallDistance = 0f;
-          /*        vehicle.setDeltaMovement(sky.getVehicleOriginalMovement());*/
+          if (sky.hasFriendlyEarth()) {
+            vehicle.fallDistance = 1.0f;
+          }
         }
         player.hasImpulse = true;
         player.hurtMarked = true;
-        player.fallDistance = 0f;
-        /*      player.setDeltaMovement(sky.getOriginalMovement());*/
+        if (sky.hasFriendlyEarth()) {
+          player.fallDistance = 1.0f;
+          if (player instanceof LivingEntity living) {
+            living.addEffect(new MobEffectInstance(ModEffects.FRIENDLY_EARTH, 5 * 20, 0, false, false));
+          }
+        }
       });
     }
     return false;

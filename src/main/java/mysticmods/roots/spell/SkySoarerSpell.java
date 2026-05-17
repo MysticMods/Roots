@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -11,6 +12,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastSkySoarerFXPacket;
@@ -69,8 +71,9 @@ public class SkySoarerSpell extends Spell {
 
     pPlayer.addEffect(new MobEffectInstance(ModEffects.SKY_SOARER, thisDuration, 0, false, false));
     Vec3 vehicleMovement = pPlayer.getVehicle() != null ? pPlayer.getVehicle().getDeltaMovement() : Vec3.ZERO;
-    SnapshotHelper.addLiving(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, thisDuration + 40, pPlayer.getDeltaMovement(), vehicleMovement, thisAmplifier, thisDuration, durationCount, amplifierCount));
-    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastSkySoarerFXPacket(pPlayer.getId(), duration));
+    SnapshotHelper.addLiving(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, thisDuration + 40, pPlayer.getDeltaMovement(), vehicleMovement, thisAmplifier, thisDuration, durationCount, amplifierCount, instance.hasModifier(ModModifiers.SKY_SOARER_FRIENDLY_EARTH)));
+    //RootsAPI.LOG.info("Duration base: {}, this duration: {}, amplifier base: {}, this amplifier: {}", duration, thisDuration, amplifier, thisAmplifier);
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastSkySoarerFXPacket(pPlayer.getId(), thisDuration));
     return cooldown;
   }
 }
