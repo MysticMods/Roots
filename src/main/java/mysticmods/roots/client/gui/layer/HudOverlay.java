@@ -678,7 +678,7 @@ public class HudOverlay {
       guiGraphics.pose().pushPose();
       guiGraphics.pose()
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-      Component overlayMessageString = Component.translatable("roots.hud.fake_menu", KeyBindings.OPEN_FAKE_MENU.getTranslatedKeyMessage(), level.getBlockState(getStoredBlockPos())
+      Component overlayMessageString = Component.translatable("roots.hud.fake_menu", Component.keybind(KeyBindings.OPEN_FAKE_MENU.getName()), level.getBlockState(getStoredBlockPos())
           .getBlock().getName());
 
       int k = font.width(overlayMessageString);
@@ -700,7 +700,7 @@ public class HudOverlay {
       guiGraphics.pose().pushPose();
       guiGraphics.pose()
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-      Component overlayMessageString = Component.translatable("roots.hud.clear", KeyBindings.CLEAR_CONTAINER.getTranslatedKeyMessage(), level.getBlockState(getStoredBlockPos())
+      Component overlayMessageString = Component.translatable("roots.hud.clear", Component.keybind(KeyBindings.CLEAR_CONTAINER.getName()), level.getBlockState(getStoredBlockPos())
           .getBlock().getName());
 
       int k = font.width(overlayMessageString);

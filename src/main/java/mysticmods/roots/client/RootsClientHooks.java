@@ -194,10 +194,10 @@ public class RootsClientHooks {
         tooltipComponents.add(Component.empty());
       }
       if (stack.has(ModAttachments.DELETABLE)) {
-        tooltipComponents.add(Component.translatable("roots.tooltip.token.delete", Component.keybind("key.roots.delete_spell")));
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.delete", Component.keybind(KeyBindings.DELETE_SPELL.getName())));
       }
       if (stack.has(ModAttachments.MODIFIABLE)) {
-        tooltipComponents.add(Component.translatable("roots.tooltip.token.modify", Component.keybind("key.roots.modify_spell")));
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.modify", Component.keybind(KeyBindings.MODIFY_SPELL.getName())));
       }
       return;
     } else if (minecraft.player == null) {

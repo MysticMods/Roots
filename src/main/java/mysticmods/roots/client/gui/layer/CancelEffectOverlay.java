@@ -49,7 +49,7 @@ public class CancelEffectOverlay {
     guiGraphics.pose().pushPose();
     guiGraphics.pose()
         .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-    Component overlayMessageString = Component.translatable(instant ? "roots.gui.effect_cancel" : KeyHandler.isCancelingEffect() ? "roots.gui.effect_continue_canceling" : "roots.gui.effect_start_canceling", KeyBindings.CANCEL_EFFECT.getTranslatedKeyMessage(), Component.translatable(cancelEffect.value()
+    Component overlayMessageString = Component.translatable(instant ? "roots.gui.effect_cancel" : KeyHandler.isCancelingEffect() ? "roots.gui.effect_continue_canceling" : "roots.gui.effect_start_canceling", Component.keybind(KeyBindings.CANCEL_EFFECT.getName()), Component.translatable(cancelEffect.value()
             .getDescriptionId()))
         .withStyle(ChatFormatting.BOLD);
     int k = font.width(overlayMessageString);
