@@ -26,7 +26,7 @@ public class CancelEffectOverlay {
 
     Holder<MobEffect> cancelEffect = null;
 
-    boolean instant = false;
+    boolean instant;
 
     for (MobEffectInstance instance : player.getActiveEffects()) {
       if (instance.getEffect().is(RootsTags.MobEffects.CANCELLABLE_EFFECTS)) {
@@ -45,7 +45,8 @@ public class CancelEffectOverlay {
     Font font = gui.getFont();
     minecraft.getProfiler().push("overlayMessage");
     int yShift = Math.max(gui.leftHeight, gui.rightHeight) + (68 - 59);
-    @SuppressWarnings("DataFlowIssue") int j = ChatFormatting.YELLOW.getColor();
+    assert ChatFormatting.YELLOW.getColor() != null;
+    int j = ChatFormatting.YELLOW.getColor();
     guiGraphics.pose().pushPose();
     guiGraphics.pose()
         .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
