@@ -7,10 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ModifierTab<V, T extends Modifier<V, T>> {
   private final Map<ResourceKey<T>, ModifierWidget<V, T>> widgets = new HashMap<>();
@@ -34,7 +31,7 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
 
   public List<ModifierWidget<V, T>> roots() {
     if (roots == null) {
-      this.roots = tree.tree().rootNodes().stream().map(node -> widgets.get(node.key())).toList();
+      this.roots = tree.tree().rootNodes().stream().sorted(Comparator.comparing(o -> o.key().location().getPath())).map(node -> widgets.get(node.key())).toList();
     }
     return this.roots;
   }
