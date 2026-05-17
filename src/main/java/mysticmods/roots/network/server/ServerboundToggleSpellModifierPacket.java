@@ -5,17 +5,21 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.network.client.ClientboundRefreshModifierScreenPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public record ServerboundToggleSpellModifierPacket (@Nullable InteractionHand hand, int inventorySlot, int staffSlot, Spell spell, SpellModifier modifier) implements IRootsPacket {
+public record ServerboundToggleSpellModifierPacket(@Nullable InteractionHand hand, int inventorySlot, int staffSlot,
+                                                   Spell spell, SpellModifier modifier) implements IRootsPacket {
   public static final Type<ServerboundToggleSpellModifierPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_toggle_spell_modifier"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundToggleSpellModifierPacket> CODEC = StreamCodec.composite(
       ByteBufCodecs.optional(ExtraStreamCodecs.INTERACTION_HAND_CODEC), o -> Optional.ofNullable(o.hand),
@@ -34,6 +38,7 @@ public record ServerboundToggleSpellModifierPacket (@Nullable InteractionHand ha
   public void handle(IPayloadContext context) {
     ServerNetworkHooks.toggleSpellModifier(context.player(), this.hand, this.inventorySlot, this.staffSlot, this.spell, this.modifier);
     context.player().inventoryMenu.sendAllDataToRemote();
+    PacketDistributor.sendToPlayer((ServerPlayer) context.player(), ClientboundRefreshModifierScreenPacket.getInstance());
   }
 
   @Override

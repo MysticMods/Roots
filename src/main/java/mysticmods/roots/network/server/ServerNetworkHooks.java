@@ -312,6 +312,5 @@ public class ServerNetworkHooks {
     if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
       RootsAPI.LOG.error("Setting spell slot {} to {} {} modifier {}", staffSlot, spell.getDescriptionId(), type, modifier.getDescriptionId());
     }
-    PacketDistributor.sendToPlayer((ServerPlayer) player, ClientboundRefreshModifierScreenPacket.getInstance());
   }
 }
