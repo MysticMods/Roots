@@ -2,6 +2,7 @@ package mysticmods.roots.api.herb;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -14,6 +15,14 @@ public record CostInstance(List<Cost> costs) {
   public static final Codec<CostInstance> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, CostInstance> STREAM_CODEC = Cost.STREAM_CODEC.apply(ByteBufCodecs.list())
       .map(CostInstance::new, CostInstance::costs);
+
+  public static CostInstance add(Holder<Herb> herb, double value) {
+    return of(new Cost(Cost.CostType.ADDITIVE, herb, value));
+  }
+
+  public static CostInstance mult(Holder<Herb> herb, double value) {
+    return of(new Cost(Cost.CostType.MULTIPLICATIVE, herb, value));
+  }
 
   public static CostInstance of(Cost... costs) {
     return new CostInstance(List.of(costs));
