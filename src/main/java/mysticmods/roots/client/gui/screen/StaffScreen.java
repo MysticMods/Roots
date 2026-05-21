@@ -7,6 +7,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
@@ -14,6 +15,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.server.ServerboundClearStaffSlotPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
+import mysticmods.roots.network.server.debug.ServerboundDebugScreenTick;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -166,7 +168,11 @@ public class StaffScreen extends RootsScreen {
 
   @Override
   public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-    // TODO: Keybind this
+    if (keyCode == KeyBindings.OPEN_POUCH.getKey().getValue()) {
+      PacketDistributor.sendToServer(new ServerboundDebugScreenTick(hand, inventorySlot));
+      return true;
+    }
+    // TODO: Use the keybinding
     if (keyCode == InputConstants.KEY_DELETE) {
       StaffSpellButton toDeleteButton = null;
       for (StaffSpellButton button : staffSpellButtons) {

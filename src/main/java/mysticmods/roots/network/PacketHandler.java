@@ -7,6 +7,7 @@ import mysticmods.roots.network.client.fx.lightning.DynamicLightningFXPacket;
 import mysticmods.roots.network.client.fx.lightning.SemiDynamicLightningFXPacket;
 import mysticmods.roots.network.client.fx.lightning.StaticLightningFXPacket;
 import mysticmods.roots.network.server.*;
+import mysticmods.roots.network.server.debug.ServerboundDebugScreenTick;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -43,6 +44,7 @@ public class PacketHandler {
     registrar.play(ServerboundFakeMenuPacket.TYPE, ServerboundFakeMenuPacket.CODEC);
     registrar.play(ServerboundClearContainerPacket.TYPE, ServerboundClearContainerPacket.CODEC);
     registrar.play(ServerboundToggleSpellModifierPacket.TYPE, ServerboundToggleSpellModifierPacket.CODEC);
+    registrar.play(ServerboundDebugScreenTick.TYPE, ServerboundDebugScreenTick.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {

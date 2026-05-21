@@ -12,9 +12,11 @@ import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.server.ServerboundToggleSpellModifierPacket;
+import mysticmods.roots.network.server.debug.ServerboundDebugScreenTick;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -41,6 +43,15 @@ public class SpellModifierScreen extends RootsScreen {
     this.spellSlot = spellSlot;
     this.width = 256;
     this.height = 192;
+  }
+
+  @Override
+  public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+    if (keyCode == KeyBindings.OPEN_POUCH.getKey().getValue()) {
+      PacketDistributor.sendToServer(new ServerboundDebugScreenTick(hand, inventorySlot));
+      return true;
+    }
+    return super.keyPressed(keyCode, scanCode, modifiers);
   }
 
   @Nullable
