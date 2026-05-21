@@ -2,6 +2,7 @@ package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
 import net.minecraft.Util;
@@ -17,7 +18,7 @@ import javax.annotation.Nullable;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T>, ICosted {
+public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T>, ICostedChild {
   @Nullable
   protected final ResourceKey<T> parent;
   protected final ResourceKey<V> applicable;

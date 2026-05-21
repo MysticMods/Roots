@@ -8,6 +8,7 @@ import mysticmods.roots.api.herb.ChargeType;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
@@ -77,7 +78,7 @@ public class Costing {
     this.discount = discount;
   }
 
-  public void charge(ICosted modifier) {
+  public void charge(ICostedChild modifier) {
     if (!this.parent.hasChild(modifier)) {
       throw new IllegalStateException("tried to charge for a modifier (" + modifier + ") in  '" + this.parent + "' when that doesn't have that modifier enabled");
     }

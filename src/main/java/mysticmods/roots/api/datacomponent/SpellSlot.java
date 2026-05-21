@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
-import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -21,7 +21,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 // TODO: `enabledModifiers` should be immutable
 public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers,
@@ -66,8 +65,8 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   @Override
-  public Set<ICosted> getChildren() {
-    return getEnabledModifiers().stream().map(o -> (ICosted) o).collect(Collectors.toSet());
+  public Set<? extends ICostedChild> getChildren() {
+    return getEnabledModifiers();
   }
 
   @Override

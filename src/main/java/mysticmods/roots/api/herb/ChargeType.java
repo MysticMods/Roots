@@ -13,7 +13,8 @@ import java.util.function.IntFunction;
 // TODO: Move from CostInstance to Spell
 public enum ChargeType implements StringRepresentable {
   INSTANCE, // Charges per instance
-  OPERATION; // Charges amount per operation per instance
+  OPERATION,
+  CONDITIONAL; // Charges amount per operation per instance
 
   public static final Codec<ChargeType> CODEC = StringRepresentable.fromEnum(ChargeType::values);
   public static final IntFunction<ChargeType> BY_ID = ByIdMap.continuous(ChargeType::ordinal, ChargeType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);

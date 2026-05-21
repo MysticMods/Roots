@@ -9,6 +9,7 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.MutableComponent;
@@ -61,7 +62,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   @Override
-  default Set<? extends ICosted> getChildren() {
+  default Set<? extends ICostedChild> getChildren() {
     return getEnabledModifiers();
   }
 
