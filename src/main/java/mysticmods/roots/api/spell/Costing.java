@@ -318,8 +318,7 @@ public class Costing {
     }
     if (!skipModifiers) {
       // TODO: Does this actually work to calculate modifiers?
-      for (ICosted modifier : parent.getChildren()) {
-        thisType = modifier.getChargeType();
+      for (ICostedChild modifier : parent.getChildren()) {
         if (!checkModifiers || modifierMap.getBoolean(modifier)) {
           for (Cost cost : modifier.getCosts().costs()) {
             List<Cost> costs = herbCosts.get(cost.getHerb());
@@ -358,6 +357,7 @@ public class Costing {
 
         total *= cost.getValue();
       }
+      // TODO: Consider multiply base
 
       if (total <= 0) {
         continue;

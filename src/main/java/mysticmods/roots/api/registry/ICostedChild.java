@@ -1,4 +1,7 @@
 package mysticmods.roots.api.registry;
 
-public interface ICostedChild extends ICosted {
+import mysticmods.roots.api.herb.ChildChargeType;
+
+public non-sealed interface ICostedChild extends ICosted {
+  ChildChargeType getChargeType();
 }

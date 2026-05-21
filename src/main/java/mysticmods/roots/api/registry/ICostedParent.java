@@ -1,8 +1,12 @@
 package mysticmods.roots.api.registry;
 
+import mysticmods.roots.api.herb.ParentChargeType;
+
 import java.util.Set;
 
-public interface ICostedParent extends ICosted {
+public non-sealed interface ICostedParent extends ICosted {
+  ParentChargeType getChargeType();
+
   Set<? extends ICostedChild> getChildren();
 
   default boolean hasChild(ICostedChild child) {

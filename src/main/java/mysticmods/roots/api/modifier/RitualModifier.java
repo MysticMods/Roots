@@ -1,7 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.herb.ParentChargeType;
+import mysticmods.roots.api.herb.ChildChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -32,6 +32,11 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   }
 
   @Override
+  public Holder<Ritual> getApplicableHolder() {
+    return RootsRegistries.RITUALS.getHolder(getApplicable()).orElse(null);
+  }
+
+  @Override
   public Holder<RitualModifier> builtInRegistryHolder() {
     return RootsRegistries.RITUAL_MODIFIERS.wrapAsHolder(this);
   }
@@ -42,7 +47,7 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   }
 
   @Override
-  public ParentChargeType getChargeType() {
-    return ParentChargeType.INSTANCE;
+  public ChildChargeType getChargeType() {
+    return ChildChargeType.ALWAYS;
   }
 }

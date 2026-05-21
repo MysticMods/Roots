@@ -52,10 +52,14 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     return parent;
   }
 
+  // TODO: There are instances where this should use getapplicableHolder instead\
+  @Deprecated
   @Override
   public ResourceKey<V> getApplicable() {
     return applicable;
   }
+
+  public abstract Holder<V> getApplicableHolder ();
 
   @Override
   public Set<ResourceKey<T>> getConflicts() {

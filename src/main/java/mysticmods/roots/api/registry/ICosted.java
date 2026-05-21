@@ -4,12 +4,10 @@ import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 
 // TODO: Format costs as a list of components
-public interface ICosted {
+public sealed interface ICosted permits ICostedChild, ICostedParent{
   CostInstance getDefaultCosts();
 
   CostInstance getCosts();
-
-  ParentChargeType getChargeType();
 
   default int getMaximumOperations() {
     return 1;

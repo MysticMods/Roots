@@ -14,10 +14,7 @@ import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.registry.ICosted;
-import mysticmods.roots.api.registry.IDataMapInitialize;
-import mysticmods.roots.api.registry.IStyled;
-import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.registry.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -45,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell> {
+public abstract class Spell implements IStyled, ICostedParent, SpellLike, TooltipComponent, IDataMapInitialize<Spell> {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
