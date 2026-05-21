@@ -52,6 +52,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     return this.firstElement;
   }
 
+  // TODO: Why don't we use this?
   // This only validates applicability, not parent/child relationships
   // nor conflicts.
   public boolean validate() {

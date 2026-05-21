@@ -124,6 +124,10 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
       return EMPTY; // TODO: issue
     }
 
+    if (!this.validate()) {
+      return EMPTY; // TODO: This means that there is a modifier in the set whose applicable does not match the others
+    }
+
     ModifierTree<Spell, SpellModifier> tree = ModifierTrees.getSpell(this.firstElement.applicable);
     if (tree == null) {
       return EMPTY; // TODO: issue
