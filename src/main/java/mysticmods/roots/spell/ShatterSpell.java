@@ -6,7 +6,7 @@ import mysticmods.roots.action.ShatterBlockAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -43,7 +43,7 @@ public class ShatterSpell extends Spell {
   private int maxWidth, maxDepth, maxHeight;
 
   public ShatterSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.OPERATION, 0x606060, 0xc0c0c0);
+    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0x606060, 0xc0c0c0);
   }
 
   @Override
@@ -222,7 +222,7 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
-  public ChargeType getChargeType() {
-    return ChargeType.OPERATION;
+  public ParentChargeType getChargeType() {
+    return ParentChargeType.OPERATION;
   }
 }

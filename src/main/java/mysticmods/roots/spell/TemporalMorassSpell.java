@@ -1,7 +1,7 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -27,7 +27,7 @@ public class TemporalMorassSpell extends TwoRadiusSpell {
   private int duration, amplifier;
 
   public TemporalMorassSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0x404040, 0xc020ff);
+    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x404040, 0xc020ff);
   }
 
   @Override

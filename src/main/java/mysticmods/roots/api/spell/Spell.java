@@ -10,7 +10,7 @@ import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -51,7 +51,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   protected final Type type;
   protected final CostInstance defaultCosts;
-  protected final ChargeType chargeType;
+  protected final ParentChargeType chargeType;
   protected CostInstance costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
@@ -65,7 +65,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
   private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
 
-  public Spell(Type type, ChatFormatting color, CostInstance defaultCosts, ChargeType chargeType, int color1, int color2) {
+  public Spell(Type type, ChatFormatting color, CostInstance defaultCosts, ParentChargeType chargeType, int color1, int color2) {
     this.type = type;
     this.textColor = color;
     this.defaultCosts = defaultCosts;
@@ -253,7 +253,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   }
 
   @Override
-  public ChargeType getChargeType () {
+  public ParentChargeType getChargeType () {
     return chargeType;
   }
 

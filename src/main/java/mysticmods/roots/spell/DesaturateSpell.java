@@ -2,7 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -28,7 +28,7 @@ public class DesaturateSpell extends Spell {
   private float multiplier;
 
   public DesaturateSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0xb8e82a, 0xbe20a8);
+    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xb8e82a, 0xbe20a8);
   }
 
   @Override

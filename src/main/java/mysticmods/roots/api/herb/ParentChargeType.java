@@ -10,14 +10,13 @@ import net.minecraft.util.StringRepresentable;
 import java.util.Locale;
 import java.util.function.IntFunction;
 
-// TODO: Move from CostInstance to Spell
-public enum ChargeType implements StringRepresentable {
+public enum ParentChargeType implements StringRepresentable {
   INSTANCE, // Charges per instance
   OPERATION; // Charges amount per operation per instance
 
-  public static final Codec<ChargeType> CODEC = StringRepresentable.fromEnum(ChargeType::values);
-  public static final IntFunction<ChargeType> BY_ID = ByIdMap.continuous(ChargeType::ordinal, ChargeType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-  public static final StreamCodec<ByteBuf, ChargeType> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, ChargeType::ordinal);
+  public static final Codec<ParentChargeType> CODEC = StringRepresentable.fromEnum(ParentChargeType::values);
+  public static final IntFunction<ParentChargeType> BY_ID = ByIdMap.continuous(ParentChargeType::ordinal, ParentChargeType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+  public static final StreamCodec<ByteBuf, ParentChargeType> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, ParentChargeType::ordinal);
 
   @Override
   public String getSerializedName() {

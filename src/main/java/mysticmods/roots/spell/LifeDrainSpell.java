@@ -2,7 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -40,7 +40,7 @@ public class LifeDrainSpell extends Spell {
 
   // TODO: This should become an instant cast
   public LifeDrainSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CONTINUOUS, color, costs, ChargeType.INSTANCE, 0x902040, 0xffc4f0);
+    super(Type.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x902040, 0xffc4f0);
   }
 
   @Override
@@ -137,7 +137,7 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
-  public ChargeType getChargeType() {
-    return ChargeType.OPERATION;
+  public ParentChargeType getChargeType() {
+    return ParentChargeType.OPERATION;
   }
 }

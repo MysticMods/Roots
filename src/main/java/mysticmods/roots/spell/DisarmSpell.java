@@ -3,7 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -43,7 +43,7 @@ public class DisarmSpell extends TwoRadiusSpell {
   private int glowDuration, count;
 
   public DisarmSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.OPERATION, 0x3a3a3a, 0x7a0000);
+    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0x3a3a3a, 0x7a0000);
   }
 
   @Override
@@ -160,7 +160,7 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public ChargeType getChargeType() {
-    return ChargeType.OPERATION;
+  public ParentChargeType getChargeType() {
+    return ParentChargeType.OPERATION;
   }
 }

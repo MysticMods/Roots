@@ -1,6 +1,6 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 public class StormCloudSpell extends Spell {
   public StormCloudSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0x168eff, 0xffffff);
+    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x168eff, 0xffffff);
   }
 
   @Override

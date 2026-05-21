@@ -2,7 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -28,7 +28,7 @@ public class PetalShellSpell extends Spell {
   private int duration, count;
 
   public PetalShellSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0xffc0f0, 0xffffff);
+    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffc0f0, 0xffffff);
   }
 
   @Override

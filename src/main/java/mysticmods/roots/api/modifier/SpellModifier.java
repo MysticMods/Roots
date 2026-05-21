@@ -1,7 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
@@ -52,10 +52,10 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   }
 
   @Override
-  public ChargeType getChargeType() {
+  public ParentChargeType getChargeType() {
     var applicable = getApplicableSpell();
     if (applicable == null) {
-      return ChargeType.INSTANCE;
+      return ParentChargeType.INSTANCE;
     }
 
     return applicable.value().getChargeType();

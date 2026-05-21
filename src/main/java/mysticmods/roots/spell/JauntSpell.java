@@ -2,7 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -31,7 +31,7 @@ public class JauntSpell extends Spell {
   private int jauntDistance;
 
   public JauntSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CHARGED, color, costs, ChargeType.INSTANCE, 0x538ad4, 0xede768);
+    super(Type.CHARGED, color, costs, ParentChargeType.INSTANCE, 0x538ad4, 0xede768);
   }
 
   @Override
@@ -138,7 +138,7 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public ChargeType getChargeType() {
-    return ChargeType.OPERATION;
+  public ParentChargeType getChargeType() {
+    return ParentChargeType.OPERATION;
   }
 }

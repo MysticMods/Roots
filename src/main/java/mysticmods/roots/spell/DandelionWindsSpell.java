@@ -2,7 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -30,7 +30,7 @@ public class DandelionWindsSpell extends Spell {
   private double r1, r2;
 
   public DandelionWindsSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0xffff20, 0xffb020);
+    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffff20, 0xffb020);
   }
 
   @Override

@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -34,7 +34,7 @@ public class SaturateSpell extends Spell {
   private float saturationMultiplier, foodMultiplier;
 
   public SaturateSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ChargeType.INSTANCE, 0xe134f6, 0x05e82a);
+    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xe134f6, 0x05e82a);
   }
 
   @Override

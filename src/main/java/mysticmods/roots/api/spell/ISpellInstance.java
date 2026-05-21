@@ -4,11 +4,10 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.attachment.CooldownStorage;
-import mysticmods.roots.api.herb.ChargeType;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
-import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.core.Holder;
@@ -52,7 +51,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getCosts();
   }
 
-  default ChargeType getChargeType() {
+  default ParentChargeType getChargeType() {
     return getSpell().getChargeType();
   }
 
