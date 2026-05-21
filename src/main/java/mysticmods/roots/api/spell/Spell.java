@@ -12,6 +12,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.*;
@@ -42,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public abstract class Spell implements IStyled, ICostedParent, SpellLike, TooltipComponent, IDataMapInitialize<Spell> {
+public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell> {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
@@ -249,10 +250,15 @@ public abstract class Spell implements IStyled, ICostedParent, SpellLike, Toolti
     return costs;
   }
 
-  @Override
   public ParentChargeType getChargeType () {
     return chargeType;
   }
+
+  // TODO: Is this ever required?
+/*  @Override
+  public Set<? extends ICostedChild> getChildren() {
+    return ModifierTrees.getSpell(this).allModifiers();
+  }*/
 
   public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 

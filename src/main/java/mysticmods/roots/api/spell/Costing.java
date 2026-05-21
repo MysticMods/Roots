@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
+import mysticmods.roots.api.herb.ChildChargeType;
 import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
@@ -43,6 +44,11 @@ public class Costing {
     this.parent = parent;
     modifierMap.defaultReturnValue(false);
     chargeType = parent.getChargeType();
+    for (ICostedChild modifier : parent.getChildren()) {
+      if (modifier.getChargeType() == ChildChargeType.ALWAYS) {
+        charge(modifier);
+      }
+    }
   }
 
   public Costing(ICostedParent parent, Player player) {
@@ -319,10 +325,10 @@ public class Costing {
     if (!skipModifiers) {
       // TODO: Does this actually work to calculate modifiers?
       for (ICostedChild modifier : parent.getChildren()) {
-        if (!checkModifiers || modifierMap.getBoolean(modifier)) {
+        if (checkModifiers && modifierMap.getBoolean(modifier) || maxOperations) {
           for (Cost cost : modifier.getCosts().costs()) {
             List<Cost> costs = herbCosts.get(cost.getHerb());
-            if (costs == null) {
+            if (costs == null) { // TODO: Is this actually faster?
               costs = new ArrayList<>();
               herbCosts.put(cost.getHerb(), costs);
             }
@@ -378,6 +384,7 @@ public class Costing {
 
   }
 
+  // TODO: Tooltip cost
   public Object2DoubleMap<Herb> getMinimumCost() {
     int ops = this.operationsCount;
     this.operationsCount = 1;

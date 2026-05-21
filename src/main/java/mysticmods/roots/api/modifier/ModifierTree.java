@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Holder<V> object;
@@ -121,6 +123,15 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   public Set<IModifierNode<V, C>> all() {
     return allNodes;
+  }
+
+  private Set<C> allModifiers = null;
+
+  public Set<C> allModifiers () {
+    if (allModifiers == null) {
+      allModifiers = modifiers.values().stream().map(Holder::value).collect(ImmutableSet.toImmutableSet());
+    }
+    return allModifiers;
   }
 
   public List<IModifierNode<V, C>> rootNodes() {

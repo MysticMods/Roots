@@ -4,7 +4,7 @@ import mysticmods.roots.api.herb.ParentChargeType;
 
 import java.util.Set;
 
-public non-sealed interface ICostedParent extends ICosted {
+public interface ICostedParent extends ICosted {
   ParentChargeType getChargeType();
 
   Set<? extends ICostedChild> getChildren();

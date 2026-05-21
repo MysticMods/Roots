@@ -1,9 +1,12 @@
 package mysticmods.roots.util;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -70,7 +73,7 @@ public class TooltipUtil {
     result.add(spell.getStyledName());
     spellDataTooltip(context, result, spell, flag);
     result.add(Component.empty());
-    spellCostTooltip(context, result, spell, flag);
+    fullSpellCostTooltip(context, result, spell, flag);
   }
 
   public static void spellDataTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
@@ -90,15 +93,33 @@ public class TooltipUtil {
     }
   }
 
-  public static void spellCostTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
+  public static void baseModifierCostTooltip () {
+
+  }
+
+  // TODO: Handle
+  public static void baseSpellCostTooltip(Item.TooltipContext context, List<Component> result, Spell spell, TooltipFlag flag) {
+    for (Cost cost : spell.getCosts().costs()) {
+      Herb herb = cost.getHerb();
+      String herbCost = String.format("%.4f", cost.getValue());
+      result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
+    }
+    //addChargeType(context, result, spell.getChargeType(), flag);
+  }
+
+  public static void addChargeType (Item.TooltipContext context, List<Component> result, ParentChargeType type, TooltipFlag flag) {
+    result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + type
+        .name().toLowerCase(Locale.ROOT))));
+  }
+
+  public static void fullSpellCostTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     Costing cos = new Costing(spell);
     for (Object2DoubleMap.Entry<Herb> entry : cos.getMinimumCost().object2DoubleEntrySet()) {
       Herb herb = entry.getKey();
       String herbCost = String.format("%.4f", entry.getDoubleValue());
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
     }
-    result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + cos.getChargeType()
-        .name().toLowerCase(Locale.ROOT))));
+    //addChargeType(context, result, spell.getChargeType(), flag);
   }
 }
 

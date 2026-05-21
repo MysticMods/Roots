@@ -94,7 +94,7 @@ public abstract class TokenItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
       tooltipComponents.add(Component.empty());
-      TooltipUtil.spellCostTooltip(context, tooltipComponents, ISpellInstance.of(getSpell()), tooltipFlag);
+      TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
       if (context.level() != null && context.level().isClientSide()) {
         RootsClientHooks.appendTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }
