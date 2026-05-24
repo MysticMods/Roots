@@ -122,12 +122,7 @@ public class SpellModifierScreen extends RootsScreen {
   @Override
   public void drawTooltip(GuiGraphics guiGraphics, int x, int y) {
     super.drawTooltip(guiGraphics, x, y);
-
-    for (ModifierWidget<Spell, SpellModifier> widget : tab.roots()) {
-      if (widget.isMouseOver(x, y)) {
-        widget.drawHover(guiGraphics, x, y, 0, 0, 0);
-      }
-    }
+    tab.drawTooltips(guiGraphics, x, y, width, height);
   }
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");
@@ -154,7 +149,7 @@ public class SpellModifierScreen extends RootsScreen {
   // TODO: This is a bit hacky
   @Override
   public List<? extends GuiEventListener> children() {
-    return tab.children();
+    return tab.roots();
   }
 
   public void validate () {

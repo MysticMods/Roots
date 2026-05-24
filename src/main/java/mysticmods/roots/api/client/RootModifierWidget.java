@@ -44,7 +44,7 @@ public class RootModifierWidget<V, T extends Modifier<V, T>> extends ModifierWid
     }
   }
 
-  public void drawHover(GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
+  public void drawTooltip(GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
 
   }
 

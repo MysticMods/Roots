@@ -4,6 +4,7 @@ import mysticmods.roots.api.modifier.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.sounds.SoundEvents;
@@ -99,8 +100,9 @@ public abstract class ModifierWidget<V, T extends Modifier<V, T>> implements Gui
     }
   }
 
-  public void drawHover(GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
-
+  public void drawTooltip(GuiGraphics guiGraphics, int x, int y, float fade, int width, int height) {
+    var itemstack = renderStack;
+    guiGraphics.renderTooltip(Minecraft.getInstance().font, Screen.getTooltipFromItem(Minecraft.getInstance(), itemstack), itemstack.getTooltipImage(), itemstack, x, y);
   }
 
   @Override
@@ -117,7 +119,7 @@ public abstract class ModifierWidget<V, T extends Modifier<V, T>> implements Gui
     return false;
   }
 
-  protected abstract void onClick (double mouseX, double mouseY, double button);
+  protected abstract void onClick(double mouseX, double mouseY, double button);
 
   public void playDownSound(SoundManager handler) {
     handler.play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));

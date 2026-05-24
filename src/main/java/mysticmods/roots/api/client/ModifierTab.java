@@ -28,13 +28,8 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     children.sort(Comparator.comparing(o -> o.node.key().location().getPath()));
   }
 
-  private List<ModifierWidget<V, T>> roots = null;
-
   public List<ModifierWidget<V, T>> roots() {
-    if (roots == null) {
-      this.roots = tree.tree().rootNodes().stream().sorted(Comparator.comparing(o -> o.key().location().getPath())).map(node -> widgets.get(node.key())).toList();
-    }
-    return this.roots;
+    return children;
   }
 
   public RootModifierWidget<V, T> root() {
@@ -60,14 +55,10 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     return widgets.get(node.key());
   }
 
-  public List<ModifierWidget<V, T>> children () {
-    return children;
-  }
-
   public void drawTooltips(GuiGraphics guiGraphics, int mouseX, int mouseY, int width, int height) {
     for (ModifierWidget<V, T> widget : widgets.values()) {
       if (widget.isMouseOver(mouseX, mouseY)) {
-        widget.drawHover(guiGraphics, 0, 0, 0, width, height);
+        widget.drawTooltip(guiGraphics, mouseX, mouseY, 0, width, height);
       }
     }
   }
