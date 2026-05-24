@@ -280,7 +280,7 @@ public class RenderUtil {
     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
     MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
     mc.getBlockRenderer()
-        .renderSingleBlock(block, guiGraphics.pose(), bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
+        .renderSingleBlock(block, guiGraphics.pose(), bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
     //bufferSource.endBatch();
     guiGraphics.pose().popPose();
 
