@@ -1,4 +1,4 @@
-package mysticmods.roots.client.gui.screen;
+package mysticmods.roots.client.gui.screen.fake;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
@@ -14,6 +14,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.RootsClientHooks;
+import mysticmods.roots.client.gui.screen.RootsScreen;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.server.ServerboundToggleSpellModifierPacket;
 import mysticmods.roots.network.server.debug.ServerboundDebugScreenTick;
@@ -30,7 +31,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import javax.annotation.Nullable;
 import java.util.List;
 
-// TODO: Some sort of monitoring system for refreshes
 public class SpellModifierScreen extends RootsScreen {
   private ModifierTab<Spell, SpellModifier> tab = null;
   private final InteractionHand hand;
@@ -151,15 +151,16 @@ public class SpellModifierScreen extends RootsScreen {
     return 192;
   }
 
+  // TODO: This is a bit hacky
   @Override
   public List<? extends GuiEventListener> children() {
     return tab.children();
   }
 
-  @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int button) {
-    // TODO: This is quite a hack
-    return super.mouseClicked(mouseX/* + guiLeft*/, mouseY/* + guiTop*/, button);
+  public void validate () {
+    if (getStorage() == null) {
+      this.onClose();
+    }
   }
 
   public static void open(StaffScreen staffScreen, int slot) {

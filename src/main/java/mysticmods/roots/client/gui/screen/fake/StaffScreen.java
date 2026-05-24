@@ -1,4 +1,4 @@
-package mysticmods.roots.client.gui.screen;
+package mysticmods.roots.client.gui.screen.fake;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import mysticmods.roots.api.RootsAPI;
@@ -11,6 +11,7 @@ import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
+import mysticmods.roots.client.gui.screen.RootsScreen;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.server.ServerboundClearStaffSlotPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
@@ -21,6 +22,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -121,6 +123,7 @@ public class StaffScreen extends RootsScreen {
   public void buttonClicked(Button pButton) {
     if (getStorage() == null) {
       RootsAPI.LOG.error("Staff screen opened with empty item in hand {}", hand);
+      this.onClose();
       return;
     }
     if (pButton instanceof LibrarySpellButton lButton) {
@@ -233,5 +236,11 @@ public class StaffScreen extends RootsScreen {
   @Override
   public int getBackgroundHeight() {
     return 192;
+  }
+
+  public void validate () {
+    if (getStorage() == null) {
+      this.onClose();
+    }
   }
 }

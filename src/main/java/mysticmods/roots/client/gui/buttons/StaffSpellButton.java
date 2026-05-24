@@ -3,7 +3,7 @@ package mysticmods.roots.client.gui.buttons;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.client.gui.screen.StaffScreen;
+import mysticmods.roots.client.gui.screen.fake.StaffScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;

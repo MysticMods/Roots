@@ -2,7 +2,7 @@ package mysticmods.roots.client.gui.buttons;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.gui.screen.StaffScreen;
+import mysticmods.roots.client.gui.screen.fake.StaffScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 

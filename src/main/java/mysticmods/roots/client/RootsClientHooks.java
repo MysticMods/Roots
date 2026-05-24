@@ -6,7 +6,7 @@ import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.client.gui.layer.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
-import mysticmods.roots.client.gui.screen.StaffScreen;
+import mysticmods.roots.client.gui.screen.fake.StaffScreen;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.ModAttachments;
