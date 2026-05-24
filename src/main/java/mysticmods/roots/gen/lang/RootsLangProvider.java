@@ -75,8 +75,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.token.ritual", "Ritual: %s");
 
     add("roots.tooltip.cost.herb_cost", "%s %s");
-    add("roots.tooltip.cost.cost_amount", "x%s");
-    add("roots.tooltip.cost.cost_multiplier", "+%s");
+    add("roots.tooltip.cost.cost_amount", "+%s");
+    add("roots.tooltip.cost.cost_multiplier", "x%s");
     add("roots.tooltip.cost.charge_type", "[Charges %s.]");
     add("roots.tooltip.cost.charge_type.operation", "per operation");
     // TODO: ???
