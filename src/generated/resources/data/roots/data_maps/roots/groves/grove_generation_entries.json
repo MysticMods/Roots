@@ -6,6 +6,12 @@
         "tag": "roots:grove_generators/creative"
       }
     ],
+    "roots:cultivation": [
+      {
+        "max_count": 3,
+        "tag": "roots:grove_generators/cultivation"
+      }
+    ],
     "roots:elemental": [
       {
         "max_count": 2,
@@ -43,12 +49,6 @@
       {
         "max_count": 2,
         "tag": "roots:grove_generators/wild"
-      }
-    ],
-    "roots:sprouting": [
-      {
-        "max_count": 3,
-        "tag": "roots:grove_generators/sprouting"
       }
     ],
     "roots:twilight": [

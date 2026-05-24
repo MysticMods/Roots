@@ -53,28 +53,28 @@ public class ModConditions {
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 1));
   public static final Supplier<IPlayerCondition> FAIRY_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 1));
   public static final Supplier<IPlayerCondition> PRIMAL_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.PRIMAL.get(), 1));
-  public static final Supplier<IPlayerCondition> SPROUTING_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.SPROUTING.get(), 1));
+  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 1));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 1));
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 2));
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 2));
   public static final Supplier<IPlayerCondition> FAIRY_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 2));
   public static final Supplier<IPlayerCondition> PRIMAL_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.PRIMAL.get(), 2));
-  public static final Supplier<IPlayerCondition> SPROUTING_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.SPROUTING.get(), 2));
+  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 2));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 2));
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 3));
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 3));
   public static final Supplier<IPlayerCondition> FAIRY_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 3));
   public static final Supplier<IPlayerCondition> PRIMAL_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.PRIMAL.get(), 3));
-  public static final Supplier<IPlayerCondition> SPROUTING_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.SPROUTING.get(), 3));
+  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 3));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 3));
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 4));
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 4));
   public static final Supplier<IPlayerCondition> FAIRY_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 4));
   public static final Supplier<IPlayerCondition> PRIMAL_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.PRIMAL.get(), 4));
-  public static final Supplier<IPlayerCondition> SPROUTING_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.SPROUTING.get(), 4));
+  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 4));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 4));
 
   public static final DeferredHolder<IPlayerConditionType<?>, IPlayerConditionType<GroveRankReputation>> GROVE_RANK_CONDITION_TYPE = PLAYER.register("grove_rank_condition", GroveRankReputation.Type::new);

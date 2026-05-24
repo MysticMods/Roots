@@ -262,9 +262,12 @@ public class ModBlocks {
   public static final DeferredHolder<Block, GroveStoneBlock> ELEMENTAL_GROVE_STONE = BLOCKS.register("elemental_grove_stone", () -> new GroveStoneBlock(ModGroves.ELEMENTAL, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
-  public static final DeferredHolder<Block, GroveStoneBlock> SPROUTING_GROVE_STONE = BLOCKS.register("sprouting_grove_stone", () -> new GroveStoneBlock(ModGroves.SPROUTING, BlockBehaviour.Properties.of()
+  public static final DeferredHolder<Block, GroveStoneBlock> CULTIVATION_GROVE_STONE = BLOCKS.register("cultivation_grove_stone", () -> new GroveStoneBlock(ModGroves.CULTIVATION, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
+  static {
+    BLOCKS.addAlias(RootsAPI.rl("sprouting_grove_stone"), RootsAPI.rl("cultivation_grove_stone"));
+  }
   public static final DeferredHolder<Block, GroveStoneBlock> TWILIGHT_GROVE_STONE = BLOCKS.register("twilight_grove_stone", () -> new GroveStoneBlock(ModGroves.TWILIGHT, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));

@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-14T12:00:05.0655222	Roots Item Tags
+// 1.21.1	2026-05-24T11:07:07.3040835	Roots Item Tags
 615109a6de5cffeecee3e38ba5fecab192fe9806 data/curios/tags/item/back.json
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
@@ -96,6 +96,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/item/crops/pereskia.jso
 314ec0136f8dbb967b704dda383c03d9e2057910 data/roots/tags/item/crops/stalicripe.json
 9572b957ea3e17cd5ad572e6ceabd95ba9a86fae data/roots/tags/item/crops/wildewheet.json
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/item/crops/wildroot.json
+7ef664935418030402d858b461f96f4929b8d619 data/roots/tags/item/cultivation.json
 a51e4f26a7259126cca5e414a5d07a3ad46e0817 data/roots/tags/item/dandelions.json
 ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/item/decorative_pyres.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/disable_disarming.json
@@ -113,6 +114,7 @@ b8a772562923991f5f28045f85c332af35e9772b data/roots/tags/item/fungal.json
 ab20a21d53e05a57775e73f20f619a4476b10429 data/roots/tags/item/gramaries.json
 80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/roots/tags/item/grove_crafter_activation.json
 cfab2ab481bf476a645d326b87627918009b9e50 data/roots/tags/item/grove_generators/creative.json
+e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/item/grove_generators/cultivation.json
 9d67a0daac64c410592e97ad5a85b88eda01dae4 data/roots/tags/item/grove_generators/elemental.json
 c1d1009e74380dc6ac8c860ff88a89ca6b475718 data/roots/tags/item/grove_generators/elemental_liquid.json
 c05e998c718feb7c79e577ca9f09edc7225b3d22 data/roots/tags/item/grove_generators/fairy.json
@@ -120,24 +122,23 @@ d5140d1e8bd6a91f904fd01a209a5dad3cc34f23 data/roots/tags/item/grove_generators/f
 190dcd5a6f0ceccc64a1223ebf8ceaf05f2fa789 data/roots/tags/item/grove_generators/fungal/dirt.json
 d97765bbcd0f5e1bc4884fc37ca0e9da6e3a99f7 data/roots/tags/item/grove_generators/fungal/mushrooms.json
 4907132c5a1fed8179656d02c1db06a26243de22 data/roots/tags/item/grove_generators/fungal/other.json
-e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/item/grove_generators/sprouting.json
 bfbe237891e2a4d534e1cfc1fb4da3977ada003a data/roots/tags/item/grove_generators/twilight.json
 fdf0229f5dd8b82a9a07d37302c8eab1ed4ebeab data/roots/tags/item/grove_generators/wild.json
-0b84a7b844d869f56ca22683e394d08ece1c1d7e data/roots/tags/item/grove_stones.json
+8bbda51d1ba0c866b7aba2c0abd1ea079364cfd5 data/roots/tags/item/grove_stones.json
+e2bc5c6e54904bb44462411390c55115eaaf87c5 data/roots/tags/item/grove_stones/cultivation.json
 fe934ceccc4232fc0d8a73f6ae26291c0403badb data/roots/tags/item/grove_stones/elemental.json
 b0e60b9a7562b461a7ff4e1d6e2e8c6460f2ff40 data/roots/tags/item/grove_stones/fairy.json
 a10f4893aa793d9a58932b14d983daca8e055665 data/roots/tags/item/grove_stones/fungal.json
 9ce47e233dd6af731b5f5a7562ccb7fa94f97db5 data/roots/tags/item/grove_stones/primal.json
-ecd2f0dde1c61318a3c87219ac7830a7061e71ac data/roots/tags/item/grove_stones/sprouting.json
 bbbdabc47adfef24d589a4860b387406ffacd3bd data/roots/tags/item/grove_stones/twilight.json
 ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/item/grove_stones/wild.json
-ca7e1c215d6d8325fa56477f77823d372964cb3f data/roots/tags/item/grove_stone/any.json
-00b35f9cc753c904c0fa046b6522c0ba75f47402 data/roots/tags/item/grove_stone/any_powerable.json
+6d4e7f7ec7d9156d74eb3fdf710f935f2de78dd0 data/roots/tags/item/grove_stone/any.json
+c316d85c52ae704932de2ee9bf55a2479bd3adc2 data/roots/tags/item/grove_stone/any_powerable.json
+dde7ffbc820c207b8dc21b74c1c633ed56dbd81c data/roots/tags/item/grove_stone/cultivation.json
 e625386576cc34a0d5fae436d6bc9bb887947680 data/roots/tags/item/grove_stone/elemental.json
 5e5eb222f6818276dd0cd2ef60e3fd31f5589994 data/roots/tags/item/grove_stone/fairy.json
 fc3e96a33e014253be29c0e3749eb4132b3ae75f data/roots/tags/item/grove_stone/fungal.json
 c0e5ac26bc57a1a6ba571b21d7fab9d6bbb6d318 data/roots/tags/item/grove_stone/primal.json
-e9869f6c8cadfe09463f5204196ea71ab0c745ca data/roots/tags/item/grove_stone/sprouting.json
 92fa8b4ff37bb06af89d20389341cd7044351ef3 data/roots/tags/item/grove_stone/twilight.json
 a19988edbda56c4ff3df092fb13fc11f968c9b8a data/roots/tags/item/grove_stone/wild.json
 817a6bd7f94e13b5fa1b350c0704f567d5d98d16 data/roots/tags/item/growth_amplifier_grasses.json
@@ -209,7 +210,6 @@ f78f44ddaa59f7a5f24f66a31c23d397a6ac438b data/roots/tags/item/soils/all.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/item/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
 05bb766c4ed71aacf3743262f41dd663aa45fbff data/roots/tags/item/spreading_mushrooms.json
-aa2ac01e52e7e060077a1930f089f7bf6ecc143b data/roots/tags/item/sprouting.json
 3952bded0a5f80a81e16fa04268430b16cdd9926 data/roots/tags/item/sprout_breeding_rewards.json
 57b7b83328a785fad075c2c7377883654e583c09 data/roots/tags/item/stonelike.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/item/stonepetal.json

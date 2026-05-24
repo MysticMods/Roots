@@ -10,7 +10,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "roots:sprouting_grove_stone",
+          "block": "roots:cultivation_grove_stone",
           "condition": "minecraft:block_state_property",
           "properties": {
             "part": "bottom"
@@ -27,11 +27,11 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "roots:sprouting_grove_stone"
+          "name": "roots:cultivation_grove_stone"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "roots:blocks/sprouting_grove_stone"
+  "random_sequence": "roots:blocks/cultivation_grove_stone"
 }

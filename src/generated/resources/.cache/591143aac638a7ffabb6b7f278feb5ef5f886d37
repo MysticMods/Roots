@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-20T11:26:23.1124788	Item Models: roots
+// 1.21.1	2026-05-24T11:07:07.3148959	Item Models: roots
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/acid_cloud.json
 256a7c001de142677be9aa40521882ee43ce6ed6 assets/roots/models/item/animal_harvest.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
@@ -57,6 +57,8 @@ c5d4a44ac86aacfbac1a2b574d0a874f277272d4 assets/roots/models/item/creative_pouch
 a1befa04f566bee36903477cfe9652b5e306b655 assets/roots/models/item/creative_staff.json
 bfa35e72bbe273df5065c9d1d6636af0fd4a96d3 assets/roots/models/item/creeping_grove_moss.json
 882e755f96756941c92aeebc70c2d717034d98b1 assets/roots/models/item/crimson_fairy_hut.json
+8abfa7ae1746a22181c85c5231965b4a7d3f56c7 assets/roots/models/item/cultivation.json
+093caa6dc5c00d970e90c5dae7b64fec25c6ed38 assets/roots/models/item/cultivation_grove_stone.json
 cb16030fdccc48ab4cd2f4242671ed2d91a7e6df assets/roots/models/item/dandelion_cordial.json
 84ebab543b659946c5aa7f19acd4075b1af77b2a assets/roots/models/item/dandelion_winds.json
 e0ccc362bb53d6c3a59c3a5810f3f62537340644 assets/roots/models/item/decay.json
@@ -226,8 +228,6 @@ a2ba5cbc0f7f87a0b02d92dd6aa28dc025c55d8c assets/roots/models/item/soul_pyre.json
 32a9711cefcabebd0824e9eba60a1cbdcb158ee3 assets/roots/models/item/spiritleaf_seeds.json
 c68601e032263101e606ccc23c50554e7f1ff146 assets/roots/models/item/spirit_bag.json
 6788ed462ef6117ca6035b1c42c7423c0ca4e96b assets/roots/models/item/spreading_forest.json
-c8dccbe669b16fc2e27b7187e6eaf1d17fd80d0f assets/roots/models/item/sprouting.json
-550103d96e0cbab0b7da821e11a165b4e1e925c5 assets/roots/models/item/sprouting_grove_stone.json
 a1befa04f566bee36903477cfe9652b5e306b655 assets/roots/models/item/staff.json
 5a929348fda9aa77e8f53beb544ea3f216bcebe9 assets/roots/models/item/stalicripe.json
 3c94bcaaf7009d4d301a6ba18645a6fbfa590f42 assets/roots/models/item/stewed_eggplant.json

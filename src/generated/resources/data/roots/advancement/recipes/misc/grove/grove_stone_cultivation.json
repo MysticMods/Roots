@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:grove/grove_stone_sprouting"
+        "recipe": "roots:grove/grove_stone_cultivation"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:grove/grove_stone_sprouting"
+      "roots:grove/grove_stone_cultivation"
     ]
   }
 }

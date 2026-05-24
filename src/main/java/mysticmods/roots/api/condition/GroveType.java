@@ -18,7 +18,7 @@ public record GroveType(String name, TagKey<Block> tag) {
   public static final GroveType ELEMENTAL = new GroveType("elemental", RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
   public static final GroveType FAIRY = new GroveType("fairy", RootsTags.Blocks.GROVE_STONE_FAIRY);
   public static final GroveType FUNGAL = new GroveType("fungal", RootsTags.Blocks.GROVE_STONE_FUNGAL);
-  public static final GroveType SPROUTING = new GroveType("sprouting", RootsTags.Blocks.GROVE_STONE_SPROUTING);
+  public static final GroveType CULTIVATION = new GroveType("cultivation", RootsTags.Blocks.GROVE_STONE_CULTIVATION);
   public static final GroveType TWILIGHT = new GroveType("twilight", RootsTags.Blocks.GROVE_STONE_TWILIGHT);
   public static final GroveType WILD = new GroveType("wild", RootsTags.Blocks.GROVE_STONE_WILD);
 

@@ -1,5 +1,11 @@
 {
   "values": {
+    "roots:cultivation": {
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
+    },
     "roots:elemental": {
       "threshold1": 1000,
       "threshold2": 5000,
@@ -25,12 +31,6 @@
       "threshold4": 30000
     },
     "roots:primal": {
-      "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
-    },
-    "roots:sprouting": {
       "threshold1": 1000,
       "threshold2": 5000,
       "threshold3": 15000,

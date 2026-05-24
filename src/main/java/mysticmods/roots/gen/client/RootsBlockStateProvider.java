@@ -460,7 +460,7 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     groveStone(ModBlocks.FAIRY_GROVE_STONE);
     groveStone(ModBlocks.TWILIGHT_GROVE_STONE);
     groveStone(ModBlocks.ELEMENTAL_GROVE_STONE);
-    groveStone(ModBlocks.SPROUTING_GROVE_STONE);
+    groveStone(ModBlocks.CULTIVATION_GROVE_STONE);
     groveStone(ModBlocks.FUNGAL_GROVE_STONE);
 
     fairyHut(ModBlocks.RED_FAIRY_HUT);

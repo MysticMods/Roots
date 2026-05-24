@@ -7,6 +7,13 @@
         "value": 1000
       }
     ],
+    "#roots:grove_generators/cultivation": [
+      {
+        "blockTag": "roots:grove_generators/cultivation",
+        "tag": "roots:cultivation",
+        "value": 5
+      }
+    ],
     "#roots:grove_generators/elemental": [
       {
         "blockTag": "roots:grove_generators/elemental",
@@ -54,13 +61,6 @@
         "blockTag": "roots:grove_generators/fungal/other",
         "tag": "roots:fungal",
         "value": 3
-      }
-    ],
-    "#roots:grove_generators/sprouting": [
-      {
-        "blockTag": "roots:grove_generators/sprouting",
-        "tag": "roots:sprouting",
-        "value": 5
       }
     ],
     "#roots:grove_generators/twilight": [

@@ -130,12 +130,12 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.GROVE_STONE_WILD).add(WILD_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_PRIMAL).add(PRIMAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_FAIRY).add(FAIRY_GROVE_STONE.get());
-    this.tag(RootsTags.Blocks.GROVE_STONE_SPROUTING).add(SPROUTING_GROVE_STONE.get());
+    this.tag(RootsTags.Blocks.GROVE_STONE_CULTIVATION).add(CULTIVATION_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_TWILIGHT).add(TWILIGHT_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_FUNGAL).add(FUNGAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_ELEMENTAL).add(ELEMENTAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONES)
-        .addTags(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Blocks.GROVE_STONE_SPROUTING, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
+        .addTags(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Blocks.GROVE_STONE_CULTIVATION, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
     this.tag(RootsTags.Blocks.RED_HUTS).add(RED_FAIRY_HUT.get());
     this.tag(RootsTags.Blocks.BROWN_HUTS).add(BROWN_FAIRY_HUT.get());
     this.tag(RootsTags.Blocks.BAFFLECAP_HUTS).add(BAFFLECAP_FAIRY_HUT.get());
@@ -311,8 +311,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.ALLOW_CASTING_TOOL_RIGHT_CLICK);
 
     tag(RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS).addTag(RootsTags.Blocks.ELEMENTAL_CROPS);
-    // All crops for sprouting
-    tag(RootsTags.Blocks.SPROUT_REPUTATION_CROPS).addTags(BlockTags.CROPS);
+    // All crops for cultivation
+    tag(RootsTags.Blocks.CULTIVATION_REPUTATION_CROPS).addTags(BlockTags.CROPS);
     tag(RootsTags.Blocks.FAIRY_REPUTATION_CROPS).addTags(RootsTags.Blocks.PERESKIA_CROP);
     tag(RootsTags.Blocks.WILD_REPUTATION_CROPS).addTags(RootsTags.Blocks.SPIRITLEAF_CROP);
     tag(RootsTags.Blocks.TWILIGHT_REPUTATION_CROPS).addTags(RootsTags.Blocks.MOONGLOW_CROP);
@@ -327,7 +327,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS).add(Blocks.LAVA, Blocks.WATER);
     tag(RootsTags.Blocks.FAIRY_GROVE_GENERATORS).addTags(BlockTags.SMALL_FLOWERS, BlockTags.TALL_FLOWERS);
     tag(RootsTags.Blocks.FAIRY_GROVE_PATHS).add(Blocks.DIRT_PATH);
-    tag(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS).addTags(BlockTags.CROPS);
+    tag(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS).addTags(BlockTags.CROPS);
     tag(RootsTags.Blocks.WILD_GROVE_GENERATORS).add(Blocks.DRAGON_EGG);
     // TODO: Separate into two seaparte tags
     tag(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS).add(Blocks.MYCELIUM, Blocks.PODZOL);

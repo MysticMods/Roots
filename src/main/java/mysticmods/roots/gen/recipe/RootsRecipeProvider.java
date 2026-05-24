@@ -1838,7 +1838,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
-                .result(ModItems.SPROUTING_GROVE_STONE, 1)
+                .result(ModItems.CULTIVAITON_GROVE_STONE, 1)
                 .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.WILDEWHEET_HERB)
                 .requires(RootsTags.Items.WILDEWHEET_HERB)
@@ -1850,7 +1850,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.BUCKETS)
                 .requires(Items.GOLDEN_HOE)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.SPROUTING_RANK_1.get())), c, RootsAPI.rl("grove/grove_stone_sprouting"));
+                .condition(ModConditions.CULTIVATION_RANK_1.get())), c, RootsAPI.rl("grove/grove_stone_cultivation"));
 
     // Fungal
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))

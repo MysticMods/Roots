@@ -258,9 +258,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_1.get().getName(), "Primal Grove Rank 1+");
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_1.get().getName(), "Sprouting Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Sprouting Grove of at least 1.");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_1.get().getName(), "Cultivation Grove Rank 1+");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_1.get()
+        .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 1.");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_1.get().getName(), "Twilight Grove Rank 1+");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Twilight Grove of at least 1.");
@@ -277,9 +277,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_2.get().getName(), "Primal Grove Rank 2+");
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_2.get().getName(), "Sprouting Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Sprouting Grove of at least 2.");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_2.get().getName(), "Cultivation Grove Rank 2+");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_2.get()
+        .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 2.");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_2.get().getName(), "Twilight Grove Rank 2+");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Twilight Grove of at least 2.");
@@ -296,9 +296,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_3.get().getName(), "Primal Grove Rank 3+");
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_3.get().getName(), "Sprouting Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Sprouting Grove of at least 3.");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_3.get().getName(), "Cultivation Grove Rank 3+");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_3.get()
+        .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 3.");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_3.get().getName(), "Twilight Grove Rank 3+");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Twilight Grove of at least 3.");
@@ -315,9 +315,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_4.get().getName(), "Primal Grove Rank 4");
     add("player_condition.roots." + ModConditions.PRIMAL_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Primal Grove.");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_4.get().getName(), "Sprouting Grove Rank 4");
-    add("player_condition.roots." + ModConditions.SPROUTING_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Sprouting Grove.");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_4.get().getName(), "Cultivation Grove Rank 4");
+    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_4.get()
+        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Cultivation Grove.");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_4.get().getName(), "Twilight Grove Rank 4");
     add("player_condition.roots." + ModConditions.TWILIGHT_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Twilight Grove.");
@@ -419,7 +419,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.WILD_GROVE_STONE);
     addBlock(ModBlocks.TWILIGHT_GROVE_STONE);
     addBlock(ModBlocks.ELEMENTAL_GROVE_STONE);
-    addBlock(ModBlocks.SPROUTING_GROVE_STONE);
+    addBlock(ModBlocks.CULTIVATION_GROVE_STONE);
     addBlock(ModBlocks.FAIRY_GROVE_STONE);
     addBlock(ModBlocks.FUNGAL_GROVE_STONE);
     addBlock(ModBlocks.INCENSE_BURNER);

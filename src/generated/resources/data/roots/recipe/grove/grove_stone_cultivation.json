@@ -46,14 +46,14 @@
     "player_conditions": [
       {
         "type": "roots:grove_rank_condition",
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "minimum_rank": 1
       }
     ],
     "priority": 0,
     "result": {
       "count": 1,
-      "id": "roots:sprouting_grove_stone"
+      "id": "roots:cultivation_grove_stone"
     }
   }
 }

@@ -140,7 +140,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_ELEMENTAL);
     this.copy(RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FAIRY);
     this.copy(RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_FUNGAL);
-    this.copy(RootsTags.Blocks.GROVE_STONE_SPROUTING, RootsTags.Items.GROVE_STONE_SPROUTING);
+    this.copy(RootsTags.Blocks.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_CULTIVATION);
     this.copy(RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_TWILIGHT);
     this.copy(RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Items.GROVE_STONE_WILD);
     this.copy(RootsTags.Blocks.PEDESTALS, RootsTags.Items.PEDESTALS);
@@ -341,7 +341,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.FAIRY_GROVE_GENERATORS);
     manualCopy(RootsTags.Blocks.FAIRY_GROVE_PATHS);
     manualCopy(RootsTags.Blocks.WILD_GROVE_GENERATORS);
-    manualCopy(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS);
@@ -352,7 +352,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copySpell(RootsTags.Spells.FAIRY);
     copySpell(RootsTags.Spells.FUNGAL);
     copySpell(RootsTags.Spells.ELEMENTAL);
-    copySpell(RootsTags.Spells.SPROUTING);
+    copySpell(RootsTags.Spells.CULTIVATION);
     copySpell(RootsTags.Spells.WILD);
     copySpell(RootsTags.Spells.TWILIGHT);
     copySpell(RootsTags.Spells.PRIMAL);
@@ -360,7 +360,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copySpell(RootsTags.Spells.GEAS_ACTION);
 
     copyRitual(RootsTags.Rituals.FUNGAL);
-    copyRitual(RootsTags.Rituals.SPROUTING);
+    copyRitual(RootsTags.Rituals.CULTIVATION);
     copyRitual(RootsTags.Rituals.ELEMENTAL);
     copyRitual(RootsTags.Rituals.WILD);
     copyRitual(RootsTags.Rituals.TWILIGHT);
@@ -371,16 +371,16 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copyGrove(RootsTags.Groves.FAIRY);
     copyGrove(RootsTags.Groves.FUNGAL);
     copyGrove(RootsTags.Groves.ELEMENTAL);
-    copyGrove(RootsTags.Groves.SPROUTING);
+    copyGrove(RootsTags.Groves.CULTIVATION);
     copyGrove(RootsTags.Groves.WILD);
     copyGrove(RootsTags.Groves.TWILIGHT);
     copyGrove(RootsTags.Groves.PRIMAL);
 
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY_POWERABLE)).addTags(
-        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_SPROUTING, RootsTags.Items.GROVE_STONE_TWILIGHT
+        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT
     );
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY)).addTags(
-        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_SPROUTING, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
+        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
     );
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ELEMENTAL)).addTags(
         RootsTags.Items.GROVE_STONE_ELEMENTAL
@@ -391,8 +391,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.FUNGAL)).addTags(
         RootsTags.Items.GROVE_STONE_FUNGAL
     );
-    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.SPROUTING)).addTags(
-        RootsTags.Items.GROVE_STONE_SPROUTING
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.CULTIVATION)).addTags(
+        RootsTags.Items.GROVE_STONE_CULTIVATION
     );
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.TWILIGHT)).addTags(
         RootsTags.Items.GROVE_STONE_TWILIGHT

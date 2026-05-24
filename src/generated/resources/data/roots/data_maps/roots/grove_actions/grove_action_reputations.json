@@ -58,7 +58,7 @@
             "name": "roots:sprouts"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:bred_sprouts",
         "reputation": {
           "gain1": 20,
@@ -222,7 +222,7 @@
             "name": "roots:spiritleaf"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:create_spirit_leaf",
         "reputation": {
           "gain1": 50,
@@ -257,10 +257,10 @@
         "entries": [
           {
             "type": "block",
-            "name": "roots:grove/sprout/crops"
+            "name": "roots:grove/cultivation/crops"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:sprout_crop_growth",
         "reputation": {
           "gain1": 5,
@@ -392,7 +392,7 @@
         "unique": false
       },
       {
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:fill_compost_sprout",
         "reputation": {
           "gain1": 50,
@@ -420,7 +420,7 @@
     ],
     "roots:grow_huge_mushroom": [
       {
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:grove_huge_mushroom_sprout",
         "reputation": {
           "gain1": 5,
@@ -574,7 +574,7 @@
             "name": "roots:sprouts"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:kill_sprouts",
         "reputation": {
           "gain1": 0,
@@ -846,7 +846,7 @@
             "name": "roots:desaturate"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:learn_spell/desaturate",
         "reputation": {
           "gain1": 125,
@@ -864,7 +864,7 @@
             "name": "roots:saturate"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:learn_spell/saturate",
         "reputation": {
           "gain1": 125,
@@ -882,7 +882,7 @@
             "name": "roots:growth_infusion"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:learn_spell/growth_infusion",
         "reputation": {
           "gain1": 125,
@@ -900,7 +900,7 @@
             "name": "roots:rampant_growth"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:learn_spell/rampant_growth",
         "reputation": {
           "gain1": 125,
@@ -918,7 +918,7 @@
             "name": "roots:harvest"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:learn_spell/harvest",
         "reputation": {
           "gain1": 125,
@@ -1152,7 +1152,7 @@
             "name": "roots:germination"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:first_ritual/germination",
         "reputation": {
           "gain1": 66,
@@ -1170,7 +1170,7 @@
             "name": "roots:spreading_forest"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:first_ritual/spreading_forest",
         "reputation": {
           "gain1": 66,
@@ -1188,7 +1188,7 @@
             "name": "roots:wildroot_growth"
           }
         ],
-        "grove": "roots:sprouting",
+        "grove": "roots:cultivation",
         "name": "roots:first_ritual/wildroot_growth",
         "reputation": {
           "gain1": 66,

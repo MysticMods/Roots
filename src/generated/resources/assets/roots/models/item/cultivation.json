@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "roots:item/groves/sprouting"
+    "layer0": "roots:item/groves/cultivation"
   }
 }
