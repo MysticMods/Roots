@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -74,6 +75,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.token.enabled_modifiers", "Enabled modifiers:");
     add("roots.tooltip.token.ritual", "Ritual: %s");
 
+    add("roots.tooltip.spell.modifiers", "Modifiers: ");
     add("roots.tooltip.cost.herb_cost", "%s %s");
     add("roots.tooltip.cost.cost_amount", "+%s");
     add("roots.tooltip.cost.cost_multiplier", "x%s");
@@ -210,9 +212,20 @@ public final class RootsLangProvider extends LanguageProvider {
     RootsRegistries.HERBS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
-    RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o ->
-        add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
+    Pattern numbers = Pattern.compile("([0-9]+)");
+    // TODO: These need to be adjusted to
+    // a) split the '/' and ignore the spell name
+    // b) convert any numbers to be in brackets i.e., (1)
+    RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o -> {
+          var k = o.getKey().location().getPath();
+          var s = k.split("/")[1];
+          var e = toEnglishName(s);
+          //var m = numbers.matcher(e);
+
+          add(o.getValue().getDescriptionId(), e);
+        }
     );
+    // TODO: Same as above?
     RootsRegistries.RITUAL_MODIFIERS.entrySet()
         .forEach(o -> add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
         );

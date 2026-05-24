@@ -7,6 +7,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.herb.ParentChargeType;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -34,6 +35,17 @@ public class TooltipUtil {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
       pTooltipComponents.add(Component.empty());
+      // List of modifiers
+      if (spell != null) {
+        var modifiers = spell.getEnabledModifiers();
+        if (!modifiers.isEmpty()) {
+          var line = Component.translatable("roots.tooltip.spell.modifiers");
+          for (SpellModifier modifier : modifiers) {
+            line.append(modifier.getName());
+          }
+          pTooltipComponents.add(line);
+        }
+      }
       int tempSlot = 0;
       for (SpellSlot entry : storage.getSpells()) {
         // TODO: Spell data
@@ -114,7 +126,7 @@ public class TooltipUtil {
 
   public static void fullSpellCostTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     Costing cos = new Costing(spell);
-    for (Object2DoubleMap.Entry<Herb> entry : cos.getMinimumCost().object2DoubleEntrySet()) {
+    for (Object2DoubleMap.Entry<Herb> entry : cos.getTooltipCost().object2DoubleEntrySet()) {
       Herb herb = entry.getKey();
       String herbCost = String.format("%.4f", entry.getDoubleValue());
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));

@@ -21,13 +21,11 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   protected final ChildChargeType chargeType;
 
   public SpellModifier(CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
-    super(defaultCosts, parent, applicable);
-    this.chargeType = ChildChargeType.SPECIFIED;
+    this(defaultCosts, parent, applicable, ChildChargeType.ALWAYS);
   }
 
   public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable) {
-    super(defaultCosts, applicable);
-    this.chargeType = ChildChargeType.SPECIFIED;
+    this(defaultCosts, applicable, ChildChargeType.ALWAYS);
   }
 
   public SpellModifier(CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type) {

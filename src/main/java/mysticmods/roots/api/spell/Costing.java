@@ -390,7 +390,15 @@ public class Costing {
     this.operationsCount = 1;
     calculateCosts(false, true, false, false);
     this.operationsCount = ops;
-    return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
+    return new Object2DoubleOpenHashMap<>(totalCosts);
+  }
+
+  public Object2DoubleMap<Herb> getTooltipCost () {
+    int ops = this.operationsCount;
+    this.operationsCount = 1;
+    calculateCosts(true, false, false, false);
+    this.operationsCount = ops;
+    return new Object2DoubleOpenHashMap<>(totalCosts);
   }
 
   public Object2DoubleMap<Herb> getMaximumCost() {
