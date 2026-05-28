@@ -1,13 +1,16 @@
 package mysticmods.roots.api.spell;
 
-import it.unimi.dsi.fastutil.objects.*;
+import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.herb.ChildChargeType;
-import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
@@ -53,6 +56,96 @@ public class Costing {
   // (Per spell)    (Herb + double + additive/multiplicative) +
   //                ((Herb + double + additive/multiplicative) (per charged modifier))
   //                * (charge == operation ? op_count : 1)
+
+  // Costings:
+  // Per herb costs from base
+  // Per herb costs from modifier
+  // Discounts
+
+  enum CostSource {
+    SPELL, // always additive
+    MODIFIER, // multiplicative or additive
+    DISCOUNT // always multiplicative
+  }
+
+  public record CostSegment(double amount, Cost.CostType type, CostSource source) {
+    public static CostSegment spell (double amount) {
+      return new CostSegment(amount, Cost.CostType.ADDITIVE, CostSource.SPELL);
+    }
+
+    public static CostSegment discount (double amount) {
+      return new CostSegment(amount, Cost.CostType.MULTIPLICATIVE, CostSource.DISCOUNT);
+    }
+
+    public static CostSegment modifier (double amount, Cost.CostType type) {
+      return new CostSegment(amount, type, CostSource.MODIFIER);
+    }
+  }
+
+  // First, sort by cost type: additive then multiplicative (compareTo?)
+  // Iterate over and have two running totals:
+  // Total
+  // Total without modifiers
+
+  // Validate that all CostSources.SPELL = CostType.ADDITIVE
+
+  // TODO: Base spells can never be multiplicative
+
+  // Sky Soarer
+  // cloud_berry: +1.250
+  // Friendly Earth
+  // stalicripe: +0.125
+  // Amplifier 1:
+  // cloud_berry: +0.125
+  // Amplifier 2:
+  // cloud_berry +0.125
+  // Speedy 1:
+  // cloud_berry: +0.125
+  // Speedy 2:
+  // cloud_berry: *1.05
+
+  // cloud_berry: (+1.625) *1.05 -> [1.70625] * 0.98 -> 1.672125
+  // stalicripe: +0.125 -> 0.1225
+  // double: total cost   +1.70625    -> 0.45625
+  // double: total cost without modifiers +1.225    -> 0.447125
+  // double: total cost without discounts +1.70625
+
+  // Cloud Berry: +1.706 [±0.456]
+  // Stalicripe: +0.125
+
+  public static final class CostChain {
+    private final List<CostSegment> segments;
+
+
+    public CostChain(List<CostSegment> segments) {
+      this.segments = segments;
+      this.segments.sort(Comparator.comparing(CostSegment::type));
+    }
+
+    public List<CostSegment> segments() {
+      return segments;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (obj == this) return true;
+      if (obj == null || obj.getClass() != this.getClass()) return false;
+      var that = (CostChain) obj;
+      return Objects.equals(this.segments, that.segments);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(segments);
+    }
+
+    @Override
+    public String toString() {
+      return "CostChain[" +
+          "segments=" + segments + ']';
+    }
+
+  }
 
   public Costing(ICostedParent parent) {
     this.parent = parent;
@@ -407,7 +500,7 @@ public class Costing {
     return new Object2DoubleOpenHashMap<>(totalCosts);
   }
 
-  public Object2DoubleMap<Herb> getTooltipCost () {
+  public Object2DoubleMap<Herb> getTooltipCost() {
     int ops = this.operationsCount;
     this.operationsCount = 1;
     calculateCosts(true, false, false, false);
