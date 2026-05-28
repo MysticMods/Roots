@@ -209,6 +209,7 @@ public class RenderUtil {
     pPoseStack.popPose();
   }
 
+  // TODO: Overhaul all of this; where is the guiGraphics gooey goodness?
   public static void renderItemAsIcon(ItemStack stack, PoseStack poseStack, int pX, int pY, int size,
                                       boolean transparent) {
     if (stack.isEmpty()) {
@@ -217,16 +218,16 @@ public class RenderUtil {
     Minecraft instance = Minecraft.getInstance();
     ItemRenderer itemRenderer = instance.getItemRenderer();
     BakedModel itemBakedModel = itemRenderer.getModel(stack, null, null, 0);
-    TextureManager textureManager = instance.getTextureManager();
-    textureManager.getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
-    RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
-    RenderSystem.enableBlend();
-    RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+    //TextureManager textureManager = instance.getTextureManager();
+    //textureManager.getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
+    //RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
+    //RenderSystem.enableBlend();
+    //RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
     poseStack.pushPose();
-    poseStack.translate(pX, pY, -1000.0F);
-    poseStack.translate(8.0D, 8.0D, 0.0D);
-    poseStack.scale(1.0F, -1.0F, 1.0F);
-    poseStack.scale(size, size, size);
+    poseStack.translate(pX + 8, pY + 8, 100);
+    //poseStack.translate(8.0D, 8.0D, 0.0D);
+    //poseStack.scale(1.0F, -1.0F, 1.0F);
+    poseStack.scale(size, -size, size);
     //RenderSystem.applyModelViewMatrix();
     MultiBufferSource.BufferSource bufferSource = instance.renderBuffers().bufferSource();
     boolean flag = !itemBakedModel.usesBlockLight();
@@ -241,18 +242,22 @@ public class RenderUtil {
     //bufferSource.endBatch();
     if (flag) {
       Lighting.setupFor3DItems();
+    } else {
+      Lighting.setupForFlatItems();
     }
 
     if (transparent) {
-      RenderSystem.depthMask(true);
-      RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+/*      RenderSystem.depthMask(true);
+      RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);*/
     }
     poseStack.popPose();
-    RenderSystem.applyModelViewMatrix();
-    if (transparent) {
+    Lighting.setupFor3DItems();
+    //RenderSystem.applyModelViewMatrix();
+/*    if (transparent) {
       RenderSystem.disableBlend();
       RenderSystem.defaultBlendFunc();
-    }
+    }*/
+
   }
 
   // Only used for rendering icons (re #1289)

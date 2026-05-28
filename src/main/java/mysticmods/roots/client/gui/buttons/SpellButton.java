@@ -37,6 +37,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
 
       RenderUtil.renderItemAsIcon(spellSupplier.get().asSpell()
           .getIcon(), arg.pose(), this.getX(), this.getY(), 16, isTransparent());
+      arg.flush();
 
       if (parentScreen.isMouseInRelativeRange(pMouseX, pMouseY, this.getX(), this.getY(), width, height)) {
         // Draw the tooltip
@@ -45,6 +46,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
     }
   }
 
+  // TODO: Thjis should be setup tooltip
   public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
     if (spellSupplier.get() == null) {
       return;

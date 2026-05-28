@@ -59,23 +59,31 @@ public abstract class RootsScreen extends Screen {
 
   public abstract int getBackgroundHeight();
 
+  @Override
+  public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    this.renderTransparentBackground(guiGraphics);
+    this.drawBackground(guiGraphics, mouseX, mouseY, partialTick);
+  }
+
   // TODO: Massive todo: rewrite all of this
   @Override
   public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     this.lastMouseX = pMouseX;
     this.lastMouseY = pMouseY;
-    this.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     PoseStack stack = graphics.pose();
+    this.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     resetTooltip();
     stack.pushPose();
+    RenderSystem.disableDepthTest();
     //stack.translate(leftPos, topPos, 0);
     RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-    drawBackground(graphics, pMouseX, pMouseY, pPartialTick);
-    drawForeground(graphics, pMouseX, pMouseY, pPartialTick);
-    stack.popPose();
+    //drawBackground(graphics, pMouseX, pMouseY, pPartialTick);
     for (Renderable renderable : this.renderables) {
       renderable.render(graphics, pMouseX, pMouseY, pPartialTick);
     }
+    drawForeground(graphics, pMouseX, pMouseY, pPartialTick);
+    stack.popPose();
+    RenderSystem.enableDepthTest();
     drawTooltip(graphics, pMouseX, pMouseY);
   }
 

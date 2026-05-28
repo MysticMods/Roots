@@ -40,6 +40,20 @@ public class Costing {
   private boolean noCharge = false;
   private boolean foundCreativePouch = false;
 
+  // TODO: Modified spells in spell library do not correctly count modifiers (in tooltip) in costs
+  //  nor does it show modifiers
+  // TODO: Modifier list concatenates weirdly
+  // TODO: Full spell list should specify which spells are modified
+  // [*] [0] [9] [+]
+  // TODO: Hold shift for more details on staff
+  // TODO: Sort modifiers sequentially
+  // TODO: Modifier token items
+
+  // Herb costs can be as follows:
+  // (Per spell)    (Herb + double + additive/multiplicative) +
+  //                ((Herb + double + additive/multiplicative) (per charged modifier))
+  //                * (charge == operation ? op_count : 1)
+
   public Costing(ICostedParent parent) {
     this.parent = parent;
     modifierMap.defaultReturnValue(false);
