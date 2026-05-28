@@ -3,7 +3,7 @@ package mysticmods.roots.api.attachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.UniqueReputation;
@@ -26,22 +26,22 @@ public class ReputationStorage implements ICleanable {
       UniqueReputation.SET_CODEC.fieldOf("unique_reputations").forGetter(o -> o.uniqueReputations)
   ).apply(instance, ReputationStorage::new));
   public static final Codec<ReputationStorage> CODEC = MAP_CODEC.codec();
-  public static final StreamCodec<RegistryFriendlyByteBuf, ReputationStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.BOOL, o -> o.untruePacifist, ByteBufCodecs.map(Object2IntLinkedOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), ByteBufCodecs.INT), o -> o.reputations, UniqueReputation.SET_STREAM_CODEC, o -> o.uniqueReputations, ReputationStorage::new);
+  public static final StreamCodec<RegistryFriendlyByteBuf, ReputationStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.BOOL, o -> o.untruePacifist, ByteBufCodecs.map(Object2IntOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), ByteBufCodecs.INT), o -> o.reputations, UniqueReputation.SET_STREAM_CODEC, o -> o.uniqueReputations, ReputationStorage::new);
   private boolean untruePacifist = false;
 
-  private final Object2IntLinkedOpenHashMap<Grove> reputations;
+  private final Object2IntOpenHashMap<Grove> reputations;
   private final ObjectOpenHashSet<UniqueReputation> uniqueReputations;
 
   private boolean dirty = true;
 
   public ReputationStorage() {
-    reputations = new Object2IntLinkedOpenHashMap<>();
+    reputations = new Object2IntOpenHashMap<>();
     uniqueReputations = new ObjectOpenHashSet<>();
   }
 
   public ReputationStorage(boolean untruePacifist, Map<Grove, Integer> reputations, Set<UniqueReputation> uniqueReputations) {
     this.untruePacifist = untruePacifist;
-    this.reputations = new Object2IntLinkedOpenHashMap<>(reputations);
+    this.reputations = new Object2IntOpenHashMap<>(reputations);
     this.uniqueReputations = new ObjectOpenHashSet<>(uniqueReputations);
   }
 

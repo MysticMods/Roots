@@ -1,6 +1,6 @@
 package mysticmods.roots.ritual;
 
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -49,8 +49,8 @@ public class AnimalHarvestRitual extends Ritual {
   private int count, glowDuration, lootingValue, itemStackCountLimit, itemStackLimit;
   private float lootingChance;
 
-  private final Set<EntityType<?>> emptyLoot = new ObjectLinkedOpenHashSet<>();
-  private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
+  private final Set<EntityType<?>> emptyLoot = new ObjectOpenHashSet<>();
+  private final Set<EntityType<?>> normalLoot = new ObjectOpenHashSet<>();
 
   private final Map<EntityType<?>, List<LootTable>> additionalLootTables = new HashMap<>();
 

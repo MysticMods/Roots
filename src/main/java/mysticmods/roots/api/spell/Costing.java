@@ -27,9 +27,9 @@ import java.util.*;
 public class Costing {
   private final ICostedParent parent;
 
-  private final Object2DoubleMap<Herb> totalCosts = new Object2DoubleLinkedOpenHashMap<>();
+  private final Object2DoubleMap<Herb> totalCosts = new Object2DoubleOpenHashMap<>();
 
-  private final Object2BooleanMap<ICosted> modifierMap = new Object2BooleanLinkedOpenHashMap<>();
+  private final Object2BooleanMap<ICosted> modifierMap = new Object2BooleanOpenHashMap<>();
 
   private Map<Herb, List<HerbEntry>> herbMapCache;
 
@@ -403,7 +403,7 @@ public class Costing {
 
   public Object2DoubleMap<Herb> getMaximumCost() {
     calculateCosts(false, false, true, false);
-    return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
+    return new Object2DoubleOpenHashMap<>(totalCosts);
   }
 
   private static class HerbEntry {

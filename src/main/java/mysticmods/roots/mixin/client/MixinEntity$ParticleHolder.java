@@ -2,6 +2,7 @@ package mysticmods.roots.mixin.client;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.client.particle.IMixinParticleHolder;
 import mysticmods.roots.client.particle.IParticleTester;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinParticle;
@@ -87,7 +88,7 @@ public abstract class MixinEntity$ParticleHolder implements IMixinParticleHolder
       return;
     }
 
-    Set<Particle> particles = roots_1_21$particleSetMap.computeIfAbsent(type, k -> new ObjectLinkedOpenHashSet<>());
+    Set<Particle> particles = roots_1_21$particleSetMap.computeIfAbsent(type, k -> new ObjectOpenHashSet<>());
 
     Particle existing = roots_1_21$getParticle(type, tester);
     if (existing == null || ((AccessorMixinParticle) existing).roots_1_21$isRemoved()) {
