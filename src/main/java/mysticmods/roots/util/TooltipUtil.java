@@ -133,5 +133,9 @@ public class TooltipUtil {
     }
     //addChargeType(context, result, spell.getChargeType(), flag);
   }
+
+  public static void baseModifierCostTooltip(Item.TooltipContext context, List<Component> tooltipComponents, SpellModifier spellModifier, TooltipFlag tooltipFlag) {
+
+  }
 }
 

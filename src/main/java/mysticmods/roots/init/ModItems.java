@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchMenu;
@@ -33,7 +34,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class ModItems {
-  private static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
+  private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
   private static final DeferredRegister<ArmorMaterial> ARMOR = DeferredRegister.create(Registries.ARMOR_MATERIAL, RootsAPI.MODID);
 
   public static final DeferredHolder<ArmorMaterial, ArmorMaterial> ANTLER_MATERIAL = ARMOR.register("antlers", () -> new ArmorMaterial(
@@ -182,9 +183,11 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> PRIMAL_GROVE_STONE = ITEMS.register("primal_grove_stone", () -> new BlockItem(ModBlocks.PRIMAL_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> WILD_GROVE_STONE = ITEMS.register("wild_grove_stone", () -> new BlockItem(ModBlocks.WILD_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> CULTIVAITON_GROVE_STONE = ITEMS.register("cultivation_grove_stone", () -> new BlockItem(ModBlocks.CULTIVATION_GROVE_STONE.get(), new Item.Properties()));
+
   static {
     ITEMS.addAlias(RootsAPI.rl("sprouting_grove_stone"), RootsAPI.rl("cultivation_grove_stone"));
   }
+
   public static DeferredHolder<Item, BlockItem> TWILIGHT_GROVE_STONE = ITEMS.register("twilight_grove_stone", () -> new BlockItem(ModBlocks.TWILIGHT_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> FUNGAL_GROVE_STONE = ITEMS.register("fungal_grove_stone", () -> new BlockItem(ModBlocks.FUNGAL_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> FAIRY_GROVE_STONE = ITEMS.register("fairy_grove_stone", () -> new BlockItem(ModBlocks.FAIRY_GROVE_STONE.get(), new Item.Properties()));
@@ -506,12 +509,30 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_FUNGAL = ITEMS.register("fungal", () -> grove(ModGroves.FUNGAL));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_WILD = ITEMS.register("wild", () -> grove(ModGroves.WILD));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_CULTIVATION = ITEMS.register("cultivation", () -> grove(ModGroves.CULTIVATION));
+
   static {
     ITEMS.addAlias(RootsAPI.rl("sprouting"), RootsAPI.rl("cultivation"));
   }
+
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_TWILIGHT = ITEMS.register("twilight", () -> grove(ModGroves.TWILIGHT));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_PRIMAL = ITEMS.register("primal", () -> grove(ModGroves.PRIMAL));
 
+  static {
+    modifier(ITEMS, ModModifiers.SKY_SOARER_FRIENDLY_EARTH);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_AMPLIFIED_1);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_AMPLIFIED_2);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_1);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_2);
+  }
+/*
+
+  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_FRIENDLY_EARTH = modifier(ITEMS, ModModifiers.SKY_SOARER_FRIENDLY_EARTH);
+  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_AMPLIFIED_1 = ITEMS.register("sky_soarer/amplified_1", () -> modifier(ModModifiers.SKY_SOARER_AMPLIFIED_1));
+  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_AMPLIFIED_2 = ITEMS.register("sky_soarer/amplified_2", () -> modifier(ModModifiers.SKY_SOARER_AMPLIFIED_2));
+  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_SPEEDY_1 = ITEMS.register("sky_soarer/speedy_1", () -> modifier(ModModifiers.SKY_SOARER_SPEEDY_1));
+  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_SPEEDY_2 = ITEMS.register("sky_soarer/speedy_2", () -> modifier(ModModifiers.SKY_SOARER_SPEEDY_2));
+
+*/
 
   private static TokenItem.SpellTokenItem spell(Holder<Spell> spell) {
     return new TokenItem.SpellTokenItem(spell.getKey(), new Item.Properties().stacksTo(1));
@@ -523,6 +544,14 @@ public class ModItems {
 
   private static TokenItem.GroveTokenItem grove(Holder<Grove> grove) {
     return new TokenItem.GroveTokenItem(grove.getKey(), new Item.Properties().stacksTo(1));
+  }
+
+  private static TokenItem.SpellModifierTokenItem modifier(Holder<SpellModifier> modifier) {
+    return new TokenItem.SpellModifierTokenItem(modifier.getKey(), new Item.Properties().stacksTo(1));
+  }
+
+  private static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> modifier(DeferredRegister.Items reg, Holder<SpellModifier> modifier) {
+    return reg.register(modifier.getKey().location().getPath(), () -> modifier(modifier));
   }
 
   public static void register(IEventBus bus) {

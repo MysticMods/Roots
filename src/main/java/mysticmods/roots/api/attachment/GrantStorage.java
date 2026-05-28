@@ -66,14 +66,14 @@ public class GrantStorage implements ICleanable {
   }
 
   public boolean hasSpellModifier(SpellModifier modifier) {
-    return grantedSpellModifiers.contains(modifier);
+    return !(modifier.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK) && grantedSpellModifiers.contains(modifier));
   }
 
   public boolean canUnlock(Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
-      return !grantedSpells.contains(value.value());
+      return !hasSpell(value.value());
     } else if (unlock instanceof Unlock.SpellModifierUnlock(Holder<SpellModifier> value)) {
-      return !grantedSpellModifiers.contains(value.value());
+      return !hasSpellModifier(value.value());
     }
 
     return false;

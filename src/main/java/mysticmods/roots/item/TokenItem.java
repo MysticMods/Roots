@@ -3,8 +3,10 @@ package mysticmods.roots.item;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -95,6 +97,49 @@ public abstract class TokenItem extends Item {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
       tooltipComponents.add(Component.empty());
       TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
+      if (context.level() != null && context.level().isClientSide()) {
+        RootsClientHooks.appendTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+      }
+    }
+  }
+
+  public static class SpellModifierTokenItem extends TokenItem {
+    private final ResourceKey<SpellModifier> spell;
+
+    public SpellModifierTokenItem(ResourceKey<SpellModifier> spell, Properties properties) {
+      super(properties);
+      this.spell = spell;
+    }
+
+    public SpellModifier getSpellModifier() {
+      return RootsRegistries.SPELL_MODIFIERS.get(spell);
+    }
+
+    @Override
+    public String getDescriptionId(ItemStack stack) {
+      return getSpellModifier().getDescriptionId();
+    }
+
+    @Override
+    public Component getName(ItemStack stack) {
+      return getSpellModifier().getName(); //getStyledName();
+    }
+
+    @Override
+    protected @Nullable Unlock<?> getUnlock() {
+      if (getSpellModifier().is(RootsTags.SpellModifiers.REQUIRES_UNLOCK)) {
+        return new Unlock.SpellModifierUnlock(getSpellModifier().builtInRegistryHolder());
+      }
+
+      return null;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+      super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+      tooltipComponents.add(Component.empty());
+      //TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
+      TooltipUtil.baseModifierCostTooltip(context, tooltipComponents, getSpellModifier(), tooltipFlag);
       if (context.level() != null && context.level().isClientSide()) {
         RootsClientHooks.appendTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }

@@ -213,6 +213,13 @@ public class RootsClientHooks {
       } else {
         tooltipComponents.add(Component.translatable("roots.tooltip.token.unlock"));
       }
+    } else if (item instanceof TokenItem.SpellModifierTokenItem spellTokenItem) {
+      tooltipComponents.add(Component.empty());
+      if (grants.hasSpellModifier(spellTokenItem.getSpellModifier())) {
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.unlocked"));
+      } else {
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.unlock"));
+      }
     }
   }
 
