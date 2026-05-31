@@ -17,6 +17,8 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
   public final int x, y;
 
   public ModifierTab(ModifierTree<V, T>.Instance tree, WidgetBuilder<V, T> builder, int x, int y) {
+    this.x = x;
+    this.y = y;
     this.tree = tree;
 
     for (IModifierNode<V, T> node : tree.tree().all()) {
@@ -27,8 +29,6 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
     this.root = new RootModifierWidget<>(this, tree.tree().root());
     children.add(this.root);
     children.sort(Comparator.comparing(o -> o.node.key().location().getPath()));
-    this.x = x;
-    this.y = y;
   }
 
   public List<ModifierWidget<V, T>> roots() {
