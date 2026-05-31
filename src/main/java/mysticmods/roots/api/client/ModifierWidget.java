@@ -28,8 +28,8 @@ public abstract class ModifierWidget<V, T extends Modifier<V, T>> implements Gui
   public ModifierWidget(ModifierTab<V, T> tab, IModifierNode<V, T> node) {
     this.tab = tab;
     this.node = node;
-    this.x = Mth.floor(node.x() * 28.0f); // 28?
-    this.y = Mth.floor(node.y() * 27.0f); // 27?
+    this.x = tab.x + Mth.floor(node.x() * 28.0f); // 28?
+    this.y = tab.y + Mth.floor(node.y() * 27.0f); // 27?
     if (!(node instanceof RootModifierNode<V, T>)) {
       this.renderStack = new ItemStack(ModifierTree.getIcon(tab.getTree(), node));
     }

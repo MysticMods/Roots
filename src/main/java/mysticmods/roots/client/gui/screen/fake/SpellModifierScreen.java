@@ -35,9 +35,12 @@ public class SpellModifierScreen extends RootsScreen {
   private ModifierTab<Spell, SpellModifier> tab = null;
   private final InteractionHand hand;
   private final int inventorySlot, spellSlot;
+  @Nullable
+  private final StaffScreen parent;
 
-  public SpellModifierScreen(InteractionHand hand, int inventorySlot, int spellSlot) {
+  public SpellModifierScreen(@Nullable StaffScreen parent, InteractionHand hand, int inventorySlot, int spellSlot) {
     super(Component.empty());
+    this.parent = parent;
     this.hand = hand;
     this.inventorySlot = inventorySlot;
     this.spellSlot = spellSlot;
@@ -106,7 +109,11 @@ public class SpellModifierScreen extends RootsScreen {
       return;
     }
 
-    this.tab = new ModifierTab<>(instance, SpellModifierWidget::new);
+    this.tab = new ModifierTab<>(instance, SpellModifierWidget::new, leftPos, topPos);
+    if (parent != null) {
+      // TODO:
+      parent.validate();
+    }
   }
 
   @Override
@@ -155,15 +162,13 @@ public class SpellModifierScreen extends RootsScreen {
   public void validate () {
     if (getStorage() == null) {
       this.onClose();
+    } else if (this.parent != null) {
+      this.parent.validate();
     }
   }
 
   public static void open(StaffScreen staffScreen, int slot) {
-    open(staffScreen.hand, staffScreen.inventorySlot, slot);
-  }
-
-  public static void open(@Nullable InteractionHand hand, int inventorySlot, int spellSlot) {
-    RootsClientHooks.popAndStopUsingItem(new SpellModifierScreen(hand, inventorySlot, spellSlot));
+    RootsClientHooks.popAndStopUsingItem(new SpellModifierScreen(staffScreen, staffScreen.hand, staffScreen.inventorySlot, slot));
   }
 
   public class SpellModifierWidget extends ModifierWidget<Spell, SpellModifier> {
