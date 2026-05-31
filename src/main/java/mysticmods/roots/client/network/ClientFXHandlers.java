@@ -4,6 +4,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningOverlay;
 import mysticmods.roots.client.gui.screen.fake.SpellModifierScreen;
+import mysticmods.roots.client.gui.screen.fake.StaffScreen;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.client.particle.bolt.PositionProvider;
@@ -1053,13 +1054,24 @@ public class ClientFXHandlers {
   }
 
   public static void refreshModifierScreen() {
-    Minecraft mc =Minecraft.getInstance();
+    Minecraft mc = Minecraft.getInstance();
     if (mc == null || mc.player == null || mc.level == null || mc.screen == null) {
       return;
     }
 
     if (mc.screen instanceof SpellModifierScreen modifierScreen) {
       modifierScreen.updateTab();
+    }
+  }
+
+  public static void refreshStaffScreen() {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc == null || mc.player == null || mc.level == null || mc.screen == null) {
+      return;
+    }
+
+    if (mc.screen instanceof StaffScreen staffScreen) {
+      staffScreen.validate();
     }
   }
 }

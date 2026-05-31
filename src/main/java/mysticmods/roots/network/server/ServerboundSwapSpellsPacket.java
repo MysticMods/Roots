@@ -3,11 +3,14 @@ package mysticmods.roots.network.server;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
+import mysticmods.roots.network.client.ClientboundRefreshStaffScreenPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import javax.annotation.Nullable;
@@ -43,6 +46,7 @@ public record ServerboundSwapSpellsPacket(@Nullable InteractionHand hand, int in
     ServerNetworkHooks.swapSpellSlots(context.player(), this.hand, this.inventorySlot, this.slot1, this.slot2);
     // TODO: Better handling of which slots to adjust -- this.hand vs this.inventorySlot
     context.player().inventoryMenu.sendAllDataToRemote();
+    PacketDistributor.sendToPlayer((ServerPlayer) context.player(), ClientboundRefreshStaffScreenPacket.getInstance());
   }
 
   @Override

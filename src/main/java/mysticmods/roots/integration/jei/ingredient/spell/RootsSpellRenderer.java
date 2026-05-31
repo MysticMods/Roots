@@ -28,8 +28,8 @@ public class RootsSpellRenderer implements IIngredientRenderer<Spell> {
 
       Minecraft minecraft = Minecraft.getInstance();
       Font font = getFontRenderer(minecraft, ingredient);
-      guiGraphics.renderFakeItem(ingredient.getIcon(), posX, posY);
-      guiGraphics.renderItemDecorations(font, ingredient.getIcon(), posX, posY);
+      guiGraphics.renderFakeItem(ingredient.getStaffIcon(), posX, posY);
+      guiGraphics.renderItemDecorations(font, ingredient.getStaffIcon(), posX, posY);
       RenderSystem.disableBlend();
     }
   }
@@ -40,7 +40,7 @@ public class RootsSpellRenderer implements IIngredientRenderer<Spell> {
     Minecraft minecraft = Minecraft.getInstance();
     Player player = minecraft.player;
     Item.TooltipContext tooltipContext = Item.TooltipContext.of(minecraft.level);
-    return ingredient.getIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
+    return ingredient.getStaffIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
   }
 
   @Override
@@ -48,7 +48,7 @@ public class RootsSpellRenderer implements IIngredientRenderer<Spell> {
     Minecraft minecraft = Minecraft.getInstance();
     Player player = minecraft.player;
     Item.TooltipContext tooltipContext = Item.TooltipContext.of(minecraft.level);
-    List<Component> tooltipLines = ingredient.getIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
+    List<Component> tooltipLines = ingredient.getStaffIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
     tooltip.addAll(tooltipLines);
   }
 

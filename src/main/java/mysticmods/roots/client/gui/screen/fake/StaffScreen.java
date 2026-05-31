@@ -22,7 +22,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -36,6 +35,7 @@ public class StaffScreen extends RootsScreen {
   protected final int inventorySlot;
   private final List<StaffSpellButton> staffSpellButtons = new ArrayList<>();
   private final List<LibrarySpellButton> librarySpellButtons = new ArrayList<>();
+  private final List<ItemStack> staffItemCache = new ArrayList<>();
   protected int selectedStaff = -1;
   protected int selectedLibrary = -1;
 
@@ -57,7 +57,35 @@ public class StaffScreen extends RootsScreen {
       return null;
     }
 
-    return stack.get(ModAttachments.SPELL_STORAGE);
+    var storage = stack.get(ModAttachments.SPELL_STORAGE);
+
+    assert storage != null;
+
+    if (staffItemCache.isEmpty()) {
+      for (int i = 0; i < storage.maxSlot(); i++) {
+        var spell = storage.getSpell(i);
+        if (spell == null) {
+          staffItemCache.add(ItemStack.EMPTY);
+        } else {
+          var item = spell.getSpell().getStaffIcon().copy();
+          item.set(ModAttachments.SPELL_SLOT, spell);
+          staffItemCache.add(item);
+        }
+      }
+    }
+
+    return storage;
+  }
+
+  private Supplier<ItemStack> itemStackSupplier(final int index) {
+    return () -> {
+      if (index < 0 || index >= staffItemCache.size()) {
+        // ???
+        return ItemStack.EMPTY;
+      }
+
+      return staffItemCache.get(index);
+    };
   }
 
   private Supplier<ISpellInstance> staffSlot(final int index) {
@@ -84,11 +112,11 @@ public class StaffScreen extends RootsScreen {
     super.init();
 
     int index = 0;
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(0), index++, leftPos + 2, topPos + 33)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(1), index++, leftPos + 7, topPos + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(2), index++, leftPos + 31, topPos + 4)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), index++, leftPos + 55, topPos + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), index, leftPos + 60, topPos + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(0), itemStackSupplier(0), index++, leftPos + 2, topPos + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(1), itemStackSupplier(1), index++, leftPos + 7, topPos + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(2), itemStackSupplier(2), index++, leftPos + 31, topPos + 4)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), itemStackSupplier(3), index++, leftPos + 55, topPos + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), itemStackSupplier(4), index, leftPos + 60, topPos + 33)));
 
     if (getMinecraft().player != null) {
       createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
@@ -238,9 +266,11 @@ public class StaffScreen extends RootsScreen {
     return 192;
   }
 
-  public void validate () {
+  public void validate() {
     if (getStorage() == null) {
       this.onClose();
+    } else {
+      staffItemCache.clear();
     }
   }
 }

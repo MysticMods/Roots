@@ -3,11 +3,14 @@ package mysticmods.roots.network.server;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
+import mysticmods.roots.network.client.ClientboundRefreshStaffScreenPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ServerboundSetSpellDataPacket(InteractionHand hand, int index, int value) implements IRootsPacket {
@@ -23,6 +26,7 @@ public record ServerboundSetSpellDataPacket(InteractionHand hand, int index, int
   public void handle(IPayloadContext context) {
     ServerNetworkHooks.setSpellData(context.player(), this.hand, this.index, this.value);
     context.player().inventoryMenu.sendAllDataToRemote();
+    PacketDistributor.sendToPlayer((ServerPlayer) context.player(), ClientboundRefreshStaffScreenPacket.getInstance());
   }
 
   @Override

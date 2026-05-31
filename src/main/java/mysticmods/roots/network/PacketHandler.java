@@ -99,6 +99,7 @@ public class PacketHandler {
     registrar.play(ClientboundChangeTomeMode.TYPE, ClientboundChangeTomeMode.CODEC);
     registrar.play(ClientboundPouchPickUpHerbPacket.TYPE, ClientboundPouchPickUpHerbPacket.CODEC);
     registrar.play(ClientboundRefreshModifierScreenPacket.TYPE, ClientboundRefreshModifierScreenPacket.CODEC);
+    registrar.play(ClientboundRefreshStaffScreenPacket.TYPE, ClientboundRefreshStaffScreenPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

@@ -1,7 +1,6 @@
 package mysticmods.roots.util;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
-import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
@@ -36,16 +35,6 @@ public class TooltipUtil {
       }
       pTooltipComponents.add(Component.empty());
       // List of modifiers
-      if (spell != null) {
-        var modifiers = spell.getEnabledModifiers();
-        if (!modifiers.isEmpty()) {
-          var line = Component.translatable("roots.tooltip.spell.modifiers");
-          for (SpellModifier modifier : modifiers) {
-            line.append(modifier.getName());
-          }
-          pTooltipComponents.add(line);
-        }
-      }
       int tempSlot = 0;
       for (SpellSlot entry : storage.getSpells()) {
         // TODO: Spell data
@@ -81,16 +70,42 @@ public class TooltipUtil {
     }
   }
 
-  public static void spellInstanceTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
-    result.add(spell.getStyledName());
+  public static void spellInstanceTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag, boolean addName) {
+    if (addName) {
+      result.add(spell.getStyledName());
+    }
     spellDataTooltip(context, result, spell, flag);
-    result.add(Component.empty());
     fullSpellCostTooltip(context, result, spell, flag);
+    addModifierList(context, result, spell, flag);
+  }
+
+  public static void addModifierList(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
+    var modifiers = spell.getEnabledModifiers();
+    if (!modifiers.isEmpty()) {
+      result.add(Component.empty());
+      var line = Component.translatable("roots.tooltip.spell.modifiers");
+      boolean first = true;
+      for (SpellModifier modifier : modifiers) {
+        if (!first) {
+          line.append(Component.literal(", "));
+        }
+        if (first) {
+          first = false;
+        }
+        line.append(modifier.getName());
+      }
+      result.add(line);
+    }
+  }
+
+  public static void spellInstanceTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
+    spellInstanceTooltip(context, result, spell, flag, true);
   }
 
   public static void spellDataTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
     Spell spell = instance.getSpell();
     Set<String> keys = instance.getSpell().getTooltipDataKeys();
+    boolean added = false;
     for (String key : keys) {
       int index = spell.getDataIndex(key);
       // TODO: Clean this up
@@ -102,10 +117,14 @@ public class TooltipUtil {
         valC = Component.literal(String.valueOf(Math.max(1, spell.getDataValue(instance, key))));
       }
       result.add(Component.translatable("roots.tooltip.staff.data", keyC, valC));
+      added = true;
+    }
+    if (added) {
+      result.add(Component.empty());
     }
   }
 
-  public static void baseModifierCostTooltip () {
+  public static void baseModifierCostTooltip() {
 
   }
 
@@ -119,7 +138,7 @@ public class TooltipUtil {
     //addChargeType(context, result, spell.getChargeType(), flag);
   }
 
-  public static void addChargeType (Item.TooltipContext context, List<Component> result, ParentChargeType type, TooltipFlag flag) {
+  public static void addChargeType(Item.TooltipContext context, List<Component> result, ParentChargeType type, TooltipFlag flag) {
     result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + type
         .name().toLowerCase(Locale.ROOT))));
   }

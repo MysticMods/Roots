@@ -6,14 +6,18 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.screen.fake.StaffScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
 public class StaffSpellButton extends SpellButton<ISpellInstance, StaffScreen> {
 
-  public StaffSpellButton(StaffScreen parentScreen, @NotNull Supplier<ISpellInstance> spellGetter, int id, int pX, int pY) {
+  private final Supplier<ItemStack> itemGetter;
+
+  public StaffSpellButton(StaffScreen parentScreen, @NotNull Supplier<ISpellInstance> spellGetter, @NotNull Supplier<ItemStack> itemGetter, int id, int pX, int pY) {
     super(parentScreen, spellGetter, id, pX, pY, 16, 16, parentScreen::buttonClicked);
+    this.itemGetter = itemGetter;
   }
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_spell_slot.png");
@@ -21,10 +25,10 @@ public class StaffSpellButton extends SpellButton<ISpellInstance, StaffScreen> {
 
   @Override
   public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
-    if (spellSupplier.get() == null) {
+    if (itemGetter.get() == null) {
       return;
     }
-    parentScreen.fillTooltip(spellSupplier.get().asSpell().getStaffIcon());
+    parentScreen.fillTooltip(itemGetter.get());
   }
 
   @Override

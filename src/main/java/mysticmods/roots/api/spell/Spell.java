@@ -12,7 +12,6 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.*;
@@ -321,11 +320,11 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     }
   }
 
-  public ItemStack getStaffIcon() {
+  public ItemStack getLibraryIcon() {
     return RootsItemCallbacks.getLibraryItemStack(this);
   }
 
-  public ItemStack getIcon() {
+  public ItemStack getStaffIcon() {
     return RootsItemCallbacks.getItemStack(this);
   }
 

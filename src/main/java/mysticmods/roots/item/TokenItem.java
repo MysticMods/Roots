@@ -12,6 +12,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -96,7 +97,13 @@ public abstract class TokenItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
       tooltipComponents.add(Component.empty());
-      TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
+      if (stack.has(ModAttachments.SPELL_SLOT)) {
+        var slot = stack.get(ModAttachments.SPELL_SLOT);
+        assert slot != null;
+        TooltipUtil.spellInstanceTooltip(context, tooltipComponents, slot, tooltipFlag, false);
+      } else {
+        TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
+      }
       if (context.level() != null && context.level().isClientSide()) {
         RootsClientHooks.appendTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }

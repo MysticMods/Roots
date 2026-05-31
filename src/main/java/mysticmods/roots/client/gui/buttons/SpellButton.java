@@ -36,7 +36,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
       // Draw the actual spell
 
       RenderUtil.renderItemAsIcon(spellSupplier.get().asSpell()
-          .getIcon(), arg.pose(), this.getX(), this.getY(), 16, isTransparent());
+          .getStaffIcon(), arg.pose(), this.getX(), this.getY(), 16, isTransparent());
       arg.flush();
 
       if (parentScreen.isMouseInRelativeRange(pMouseX, pMouseY, this.getX(), this.getY(), width, height)) {
@@ -51,7 +51,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
     if (spellSupplier.get() == null) {
       return;
     }
-    parentScreen.fillTooltip(spellSupplier.get().asSpell().getIcon());
+    parentScreen.fillTooltip(spellSupplier.get().asSpell().getStaffIcon());
   }
 
   public boolean isTransparent() {

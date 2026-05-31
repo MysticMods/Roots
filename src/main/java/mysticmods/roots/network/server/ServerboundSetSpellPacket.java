@@ -4,11 +4,14 @@ import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.network.client.ClientboundRefreshStaffScreenPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import javax.annotation.Nullable;
@@ -43,6 +46,7 @@ public record ServerboundSetSpellPacket(@Nullable InteractionHand hand, int inve
   public void handle(IPayloadContext context) {
     ServerNetworkHooks.setSpellSlot(context.player(), this.hand, this.inventorySlot, this.staffSlot, this.spell);
     context.player().inventoryMenu.sendAllDataToRemote();
+    PacketDistributor.sendToPlayer((ServerPlayer) context.player(), ClientboundRefreshStaffScreenPacket.getInstance());
   }
 
   @Override

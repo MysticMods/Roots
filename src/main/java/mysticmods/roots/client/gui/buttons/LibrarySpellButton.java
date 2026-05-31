@@ -1,5 +1,6 @@
 package mysticmods.roots.client.gui.buttons;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.screen.fake.StaffScreen;
@@ -35,5 +36,13 @@ public class LibrarySpellButton extends SpellButton<Spell, StaffScreen> {
       int y = getY() - 1;
       graphics.blit(highlight, x, y, 0, 0, 18, 18, 18, 18);
     }
+  }
+
+  @Override
+  public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+    if (spellSupplier.get() == null) {
+      return;
+    }
+    parentScreen.fillTooltip(spellSupplier.get().asSpell().getLibraryIcon());
   }
 }

@@ -31,11 +31,11 @@ public class RootsItemCallbacks {
       if (value instanceof TokenItem.SpellTokenItem spellToken) {
         var key = spellToken.getSpell();
         SPELL_TO_ITEM_MAP.put(key, spellToken);
-        SPELL_TO_ITEMSTACK_MAP.put(key, new ItemStack(spellToken));
+        SPELL_TO_LIBRARY_ITEMSTACK_MAP.put(key, new ItemStack(spellToken));
         ItemStack library = new ItemStack(spellToken);
         library.set(RootsAPI.getInstance().getDeletableType(), Unit.INSTANCE);
         library.set(RootsAPI.getInstance().getModifiableType(), Unit.INSTANCE);
-        SPELL_TO_LIBRARY_ITEMSTACK_MAP.put(key, library);
+        SPELL_TO_ITEMSTACK_MAP.put(key, library);
       } else if (value instanceof TokenItem.RitualTokenItem ritualToken) {
         var key = ritualToken.getRitual();
         RITUAL_TO_ITEM_MAP.put(key, ritualToken);
