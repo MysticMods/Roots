@@ -45,7 +45,6 @@ public class KeyHandler {
       Holder<MobEffect> effect = instance.getEffect();
       if (effect.is(RootsTags.MobEffects.CANCELLABLE_EFFECTS)) {
         foundEffect = true;
-        // TODO: Should this be consumeClick?
         if (KeyBindings.CANCEL_EFFECT.isDown()) {
           if (effect.is(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT)) {
             PacketDistributor.sendToServer(new ServerboundCancelEffectPacket(effect));

@@ -271,7 +271,6 @@ public class RootsClientHooks {
 
     LightDrifterStorage storage = mc.player.getData(ModAttachments.DRIFTER_CLIENT_STORAGE);
     storage.setEntityId(entityId);
-    // ??? Necessary? TODO
     mc.player.setData(ModAttachments.DRIFTER_CLIENT_STORAGE, storage);
 
     LightDrifterEntity drifter = LightDrifterUtil.getLightDrifterEntity(mc.player);

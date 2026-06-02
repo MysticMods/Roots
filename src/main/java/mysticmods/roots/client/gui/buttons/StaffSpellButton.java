@@ -24,7 +24,7 @@ public class StaffSpellButton extends SpellButton<ISpellInstance, StaffScreen> {
   private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/staff_spell_slot_highlight.png");
 
   @Override
-  public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+  public void setupTooltip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
     if (itemGetter.get() == null) {
       return;
     }

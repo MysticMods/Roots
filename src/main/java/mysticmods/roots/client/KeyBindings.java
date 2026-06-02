@@ -34,7 +34,6 @@ public class KeyBindings {
 
   public static final LibraryKeyConflictContext IN_LIBRARY = new LibraryKeyConflictContext();
 
-  // TODO:
   public static final NearRelevantBlockEntity NEAR_RELEVANT_BLOCK_ENTITY = new NearRelevantBlockEntity();
 
   public static final IKeyConflictContext HAS_ANY_ADJUSTABLE = new MultiKeyConflictContext(ADJUSTABLE, HAS_ADJUSTABLE_TOME);

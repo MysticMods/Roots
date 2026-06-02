@@ -39,7 +39,7 @@ public class LibrarySpellButton extends SpellButton<Spell, StaffScreen> {
   }
 
   @Override
-  public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+  public void setupTooltip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
     if (spellSupplier.get() == null) {
       return;
     }

@@ -179,7 +179,6 @@ public class RenderTickHandler {
   public static void onClientTick(ClientTickEvent.Post post) {
     HerbOverlay.tick();
     BeamManager.tick();
-    // TODO: Check pausing
     ScreenParticleEngine.tick();
   }
 

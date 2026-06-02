@@ -7,7 +7,6 @@ import mysticmods.roots.client.gui.screen.RootsScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -42,13 +41,12 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
 
       if (parentScreen.isMouseInRelativeRange(pMouseX, pMouseY, this.getX(), this.getY(), width, height)) {
         // Draw the tooltip
-        renderToolTip(arg.pose(), pMouseX, pMouseY);
+        setupTooltip(arg.pose(), pMouseX, pMouseY);
       }
     }
   }
 
-  // TODO: Thjis should be setup tooltip
-  public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+  public void setupTooltip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
     if (spellSupplier.get() == null) {
       return;
     }

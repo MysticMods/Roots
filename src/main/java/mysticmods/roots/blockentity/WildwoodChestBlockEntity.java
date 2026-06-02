@@ -57,13 +57,11 @@ public class WildwoodChestBlockEntity extends RandomizableContainerBlockEntity i
 
     @Override
     protected void openerCountChanged(Level p_155535_, BlockPos p_155536_, BlockState p_155537_, int p_155538_, int p_155539_) {
-      // TODO
       WildwoodChestBlockEntity.this.signalOpenCount(p_155535_, p_155536_, p_155537_, 1, p_155539_);
     }
 
     @Override
     protected boolean isOwnContainer(Player player) {
-      // TODO
       if (!(player.containerMenu instanceof ChestMenu)) {
         return false;
       } else {

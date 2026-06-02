@@ -90,7 +90,6 @@ public class SpellModifierScreen extends RootsScreen {
     var granted = Minecraft.getInstance().player.getData(ModAttachments.GRANT_STORAGE).getSpellModifiers();
     var typeKey = spell.builtInRegistryHolder().getKey();
     RootsRegistries.SPELL_MODIFIERS.forEach(o -> {
-      // TODO: Uncertain about restricted modifiers here
       if (!o.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK) && !o.is(RootsTags.SpellModifiers.RESTRICTED) && o.isFor(typeKey)) {
         granted.add(o);
       }
@@ -112,7 +111,6 @@ public class SpellModifierScreen extends RootsScreen {
 
     this.tab = new ModifierTab<>(instance, SpellModifierWidget::new, leftPos, topPos);
     if (parent != null) {
-      // TODO:
       parent.validate();
     }
   }
@@ -154,7 +152,6 @@ public class SpellModifierScreen extends RootsScreen {
     return 192;
   }
 
-  // TODO: This is a bit hacky
   @Override
   public List<? extends GuiEventListener> children() {
     return tab.roots();

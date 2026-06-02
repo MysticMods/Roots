@@ -50,6 +50,11 @@ public class ScreenParticleEngine {
   }
 
   public static void tick() {
+    // TODO: Check that this works
+    // TODO: Do particles pause when the game is paused?
+    if (Minecraft.getInstance().isPaused()) {
+      return;
+    }
     hudParticles.forEach(particleConsumer);
     containerParticles.forEach(particleConsumer);
     renderedContainerParticles = false;

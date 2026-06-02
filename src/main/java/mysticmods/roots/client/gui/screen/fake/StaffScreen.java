@@ -203,8 +203,7 @@ public class StaffScreen extends RootsScreen {
       PacketDistributor.sendToServer(new ServerboundDebugScreenTick(hand, inventorySlot));
       return true;
     }
-    // TODO: Use the keybinding
-    if (keyCode == InputConstants.KEY_DELETE) {
+    if (keyCode == KeyBindings.DELETE_SPELL.getKey().getValue()) {
       StaffSpellButton toDeleteButton = null;
       for (StaffSpellButton button : staffSpellButtons) {
         if (isMouseInRelativeRange(lastMouseX, lastMouseY, button.getX(), button.getY(), button.getWidth(), button.getHeight())) {
