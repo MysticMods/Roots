@@ -74,6 +74,7 @@ public class ComplexEntityType {
       return null;
     }
     if (cachedEntity == null || cachedEntity.get() == null) {
+      // TODO: Check for the armadillo stuff here (#1150)
       Entity entity = type.create(level);
       if (entity == null) {
         cachedNull = true;

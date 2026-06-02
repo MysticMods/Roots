@@ -68,6 +68,8 @@ import java.util.UUID;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, BindableBlockEntity, FakeMenuBlockEntity, ClearableBlockEntity {
   private static BoundingBox PYRE_BOUNDS;
+  private double spin;
+  private double oSpin;
 
   public static BoundingBox getPyreBoundingBox() {
     if (PYRE_BOUNDS == null) {
@@ -494,6 +496,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
+    this.oSpin = this.spin;
+    this.spin += Math.toRadians(25);
   }
 
   @Override
@@ -656,5 +660,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
     buffer.writeBlockPos(getBlockPos());
+  }
+
+  public double getSpin() {
+    return this.spin;
+  }
+
+  public double getoSpin() {
+    return this.oSpin;
   }
 }

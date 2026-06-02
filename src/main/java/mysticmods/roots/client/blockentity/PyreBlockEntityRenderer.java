@@ -105,7 +105,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
         if (!entity.isEmpty()) {
           Entity cached = entity.cachedEntity(pBlockEntity.getLevel());
           if (cached != null) {
-            renderEntityInSpawner(pPartialTick, pPoseStack, pBufferSource, pPackedLight, cached, entityRenderer, 0, 0);
+            renderEntityInSpawner(pPartialTick, pPoseStack, pBufferSource, pPackedLight, cached, entityRenderer, pBlockEntity.getoSpin(), pBlockEntity.getSpin());
           }
         }
       }
