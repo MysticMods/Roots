@@ -6,6 +6,7 @@ import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.client.gui.layer.HerbOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
+import mysticmods.roots.client.gui.screen.fake.SpellModifierScreen;
 import mysticmods.roots.client.gui.screen.fake.StaffScreen;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.entity.other.LightDrifterEntity;
@@ -189,6 +190,9 @@ public class RootsClientHooks {
 
   public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft.player == null) {
+      return;
+    }
 
     if (minecraft.screen instanceof StaffScreen) {
       if (stack.has(ModAttachments.DELETABLE) || stack.has(ModAttachments.MODIFIABLE)) {
@@ -201,7 +205,7 @@ public class RootsClientHooks {
         tooltipComponents.add(Component.translatable("roots.tooltip.token.modify", Component.keybind(KeyBindings.MODIFY_SPELL.getName())));
       }
       return;
-    } else if (minecraft.player == null) {
+    } else if (minecraft.screen instanceof SpellModifierScreen) {
       return;
     }
 
