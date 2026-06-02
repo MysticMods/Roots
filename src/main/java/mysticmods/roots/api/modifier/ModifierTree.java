@@ -13,6 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
@@ -158,17 +159,13 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   }
 
   @NotNull
-  public static <V, C extends Modifier<V, C>> Item getIcon(ModifierTree<V, C> tree, IModifierNode<V, C> node) {
+  public static <V, C extends Modifier<V, C>> ItemStack getIcon(ModifierTree<V, C> tree, IModifierNode<V, C> node) {
     Holder<C> modifier = tree.modifiers.get(node.key());
     if (modifier == null && node != tree.root()) {
       RootsAPI.LOG.error("Modifier {} is missing from the modifier tree, but has a node.", node.key());
-      return Items.AIR;
+      return ItemStack.EMPTY;
     }
-    var res = modifier.value().getIcon();
-    if (res == null) {
-      return Items.AIR;
-    }
-    return res;
+    return modifier.value().getIcon();
   }
 
   protected static <V, C extends Modifier<V, C>> IModifierNode<V, C> getNode(ModifierTree<V, C> tree, ResourceKey<C> key) {

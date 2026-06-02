@@ -1,9 +1,13 @@
 package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.event.setup.ClientSetup;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,6 +15,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -384,6 +389,12 @@ public final class RootsItemModelProvider extends ItemModelProvider {
       }
     });
 
+    modifier(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, Items.ARROW);
+    modifier(ModModifiers.SKY_SOARER_AMPLIFIED_1, Items.REDSTONE);
+    modifier(ModModifiers.SKY_SOARER_AMPLIFIED_2, Items.GLOWSTONE_DUST);
+    modifier(ModModifiers.SKY_SOARER_SPEEDY_1, Items.ICE);
+    modifier(ModModifiers.SKY_SOARER_SPEEDY_2, Items.PACKED_ICE);
+
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));
 
@@ -392,6 +403,8 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
     getBuilder("roots:no_grove_stone").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/no_grove_stone"));
+
+
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -415,6 +428,13 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     return getBuilder(item.toString())
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), spellLocation));
+  }
+
+  public ItemModelBuilder modifier(Holder<SpellModifier> itemHolder, Item icon) {
+    ResourceLocation item = itemHolder.getKey().location();
+
+    return getBuilder(item.withPrefix("item/").toString())
+        .parent(getExistingFile(icon.builtInRegistryHolder().getKey().location()));
   }
 
   public ItemModelBuilder ritual(Holder<Item> itemHolder) {

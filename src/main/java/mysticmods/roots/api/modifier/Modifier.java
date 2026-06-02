@@ -26,7 +26,6 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   protected final Set<ResourceKey<T>> conflicts;
   @Nullable
   protected CostInstance costs;
-  private Item icon;
   private String descriptionId;
 
   @SafeVarargs
@@ -113,17 +112,10 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   @Override
-  @Nullable
-  public Item getIcon() {
-    return icon;
-  }
-
-  @Override
   public void init(Holder<T> holder) {
     var costs = holder.getData(getDataMapType());
     if (costs != null) {
       this.costs = costs;
     }
-    this.icon = holder.getData(getIconDataMapType());
   }
 }

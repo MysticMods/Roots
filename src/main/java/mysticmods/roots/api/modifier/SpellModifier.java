@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.ChildChargeType;
 import mysticmods.roots.api.herb.ParentChargeType;
@@ -12,6 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -66,5 +68,9 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
   @Override
   public ChildChargeType getChargeType() {
     return chargeType;
+  }
+
+  public ItemStack getIcon () {
+    return RootsItemCallbacks.getItemStack(this);
   }
 }

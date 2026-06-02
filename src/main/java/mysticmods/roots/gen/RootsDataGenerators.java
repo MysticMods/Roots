@@ -350,6 +350,8 @@ public final class RootsDataGenerators {
     CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
     ExistingFileHelper helper = event.getExistingFileHelper();
 
+    generator.addProvider(event.includeServer(), new RootsDataMapProvider(output, provider));
+
     RootsBlockTagProvider blocks;
     generator.addProvider(event.includeServer(), blocks = new RootsBlockTagProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsAtlasProvider(output, provider, helper));
@@ -358,7 +360,6 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsBlockEntityTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsLangProvider(output));
     generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementProvider())));
-    generator.addProvider(event.includeServer(), new RootsDataMapProvider(output, provider));
     generator.addProvider(event.includeServer(), new RootsHerbTagsProvider(output, provider, RootsAPI.MODID, helper));
     RootsSpellTagsProvider spellTagsProvider = new RootsSpellTagsProvider(output, provider, helper);
     generator.addProvider(event.includeServer(), spellTagsProvider);

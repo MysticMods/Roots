@@ -20,11 +20,12 @@ public class RootsItemCallbacks {
   private static final Map<Spell, Item> SPELL_TO_ITEM_MAP = new HashMap<>();
   private static final Map<Spell, ItemStack> SPELL_TO_ITEMSTACK_MAP = new HashMap<>();
   private static final Map<Spell, ItemStack> SPELL_TO_LIBRARY_ITEMSTACK_MAP = new HashMap<>();
-  private static final Map<SpellModifier, Item> SPELL_MODIFIER_ITEM_MAP = new HashMap<>();
+  private static final Map<SpellModifier, Item> SPELL_MODIFIER_TO_ITEM_MAP = new HashMap<>();
   private static final Map<Ritual, Item> RITUAL_TO_ITEM_MAP = new HashMap<>();
   private static final Map<Ritual, ItemStack> RITUAL_TO_ITEMSTACK_MAP = new HashMap<>();
   private static final Map<Grove, Item> GROVE_TO_ITEM_MAP = new HashMap<>();
   private static final Map<Grove, ItemStack> GROVE_TO_ITEMSTACK_MAP = new HashMap<>();
+  private static final Map<SpellModifier, ItemStack> SPELL_MODIFIER_TO_ITEMSTACK_MAP = new HashMap<>();
 
   public static void fill() {
     for (Item value : BuiltInRegistries.ITEM) {
@@ -44,6 +45,10 @@ public class RootsItemCallbacks {
         var key = groveToken.getGrove();
         GROVE_TO_ITEM_MAP.put(key, groveToken);
         GROVE_TO_ITEMSTACK_MAP.put(key, new ItemStack(groveToken));
+      } else if (value instanceof TokenItem.SpellModifierTokenItem modifierToken) {
+        var key = modifierToken.getSpellModifier();
+        SPELL_MODIFIER_TO_ITEM_MAP.put(key, modifierToken);
+        SPELL_MODIFIER_TO_ITEMSTACK_MAP.put(key, new ItemStack(modifierToken));
       }
     }
   }
@@ -56,6 +61,8 @@ public class RootsItemCallbacks {
       return getItem(RootsRegistries.RITUALS.get((ResourceKey<Ritual>) key));
     } else if (key == RootsRegistries.Keys.GROVES) {
       return getItem(RootsRegistries.GROVES.get((ResourceKey<Grove>) key));
+    } else if (key == RootsRegistries.Keys.SPELL_MODIFIERS) {
+      return getItem(RootsRegistries.SPELL_MODIFIERS.get((ResourceKey<SpellModifier>) key));
     } else {
       return Items.AIR;
     }
@@ -68,9 +75,25 @@ public class RootsItemCallbacks {
       return getItemStack(RootsRegistries.RITUALS.get((ResourceKey<Ritual>) key));
     } else if (key.isFor(RootsRegistries.Keys.GROVES)) {
       return getItemStack(RootsRegistries.GROVES.get((ResourceKey<Grove>) key));
+    } else if (key.isFor(RootsRegistries.Keys.SPELL_MODIFIERS)) {
+      return getItemStack(RootsRegistries.SPELL_MODIFIERS.get((ResourceKey<SpellModifier>) key));
     } else {
       return ItemStack.EMPTY;
     }
+  }
+
+  public static ItemStack getItemStack(SpellModifier spellModifier) {
+    if (SPELL_MODIFIER_TO_ITEMSTACK_MAP.isEmpty()) {
+      fill();
+    }
+    return SPELL_MODIFIER_TO_ITEMSTACK_MAP.getOrDefault(spellModifier, ItemStack.EMPTY);
+  }
+
+  public static Item getItem(SpellModifier spellModifier) {
+    if (SPELL_MODIFIER_TO_ITEM_MAP.isEmpty()) {
+      fill();
+    }
+    return SPELL_MODIFIER_TO_ITEM_MAP.getOrDefault(spellModifier, Items.AIR);
   }
 
   public static Item getItem(Spell spell) {
@@ -99,11 +122,6 @@ public class RootsItemCallbacks {
       fill();
     }
     return SPELL_TO_LIBRARY_ITEMSTACK_MAP.getOrDefault(spell, ItemStack.EMPTY);
-  }
-
-  public static Item getItem(SpellModifier modifier) {
-    return Items.AIR;
-    //return SPELL_MODIFIER_ITEM_MAP.getOrDefault(modifier, Items.AIR);
   }
 
   public static Item getItem(Ritual ritual) {
