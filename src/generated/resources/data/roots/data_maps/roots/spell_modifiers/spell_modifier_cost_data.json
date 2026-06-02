@@ -12,8 +12,8 @@
     "roots:sky_soarer/amplified_2": {
       "costs": [
         {
-          "type": "additive",
-          "defaultValue": 0.125,
+          "type": "multiplicative",
+          "defaultValue": 1.05,
           "herb": "roots:cloud_berry"
         }
       ]

@@ -18,4 +18,6 @@ public interface SpellCosts {
   double COMPLEX_0375 = BASE_0250 + BASE_0125;
   double COMPLEX_0188 = BASE_0125 + BASE_0063;
 
+  double MULT_105 = 1.05;
+
 }

@@ -77,8 +77,11 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("roots.tooltip.spell.modifiers", "Modifiers: ");
     add("roots.tooltip.cost.herb_cost", "%s %s");
+    add("roots.tooltip.cost.herb_cost_full", "%s %s%s");
+    add("roots.tooltip.cost.herb_cost_modified", " [±%s]");
     add("roots.tooltip.cost.cost_amount", "+%s");
-    add("roots.tooltip.cost.cost_multiplier", "x%s");
+    // ×
+    add("roots.tooltip.cost.cost_multiplier", "+%s%%");
     add("roots.tooltip.cost.charge_type", "[Charges %s.]");
     add("roots.tooltip.cost.charge_type.operation", "per operation");
     // TODO: ???

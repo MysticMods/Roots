@@ -127,8 +127,16 @@ public class TooltipUtil {
     }
   }
 
-  public static void baseModifierCostTooltip() {
-
+  public static void baseModifierCostTooltip(Item.TooltipContext context, List<Component> result, SpellModifier modifier, TooltipFlag flag) {
+    for (Cost cost : modifier.getCosts().costs()) {
+      Herb herb = cost.getHerb();
+      String herbCost = cost.getType() == Cost.CostType.ADDITIVE ? String.format("%.4f", cost.getValue()) : String.format("%.1f", (cost.getValue() - 1) * 100);
+      // TODO: Decide how to handle multiplicative costs
+      // +5%
+      // (cost.getValue() - 1) * 100;
+      var amount = cost.getType() == Cost.CostType.ADDITIVE ? "roots.tooltip.cost.cost_amount" : "roots.tooltip.cost.cost_multiplier";
+      result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable(amount, herbCost)));
+    }
   }
 
   // TODO: Handle
@@ -154,10 +162,6 @@ public class TooltipUtil {
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
     }
     //addChargeType(context, result, spell.getChargeType(), flag);
-  }
-
-  public static void baseModifierCostTooltip(Item.TooltipContext context, List<Component> tooltipComponents, SpellModifier spellModifier, TooltipFlag tooltipFlag) {
-
   }
 }
 
