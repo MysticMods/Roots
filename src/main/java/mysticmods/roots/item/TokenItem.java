@@ -9,7 +9,6 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
@@ -97,12 +96,16 @@ public abstract class TokenItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+      if (!stack.has(ModAttachments.SPELL_SLOT)) {
+        TooltipUtil.describeSpell(context, tooltipComponents, getSpell(), tooltipFlag);
+      }
       tooltipComponents.add(CommonComponents.EMPTY);
       if (stack.has(ModAttachments.SPELL_SLOT)) {
         var slot = stack.get(ModAttachments.SPELL_SLOT);
         assert slot != null;
         TooltipUtil.spellInstanceTooltip(context, tooltipComponents, slot, tooltipFlag, false);
       } else {
+
         TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
       }
       if (context.level() != null && context.level().isClientSide()) {
@@ -145,6 +148,7 @@ public abstract class TokenItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+      TooltipUtil.describeModifier(context, tooltipComponents, getSpellModifier(), tooltipFlag);
       tooltipComponents.add(CommonComponents.EMPTY);
       TooltipUtil.baseModifierCostTooltip(context, tooltipComponents, getSpellModifier(), tooltipFlag);
       if (context.level() != null && context.level().isClientSide()) {

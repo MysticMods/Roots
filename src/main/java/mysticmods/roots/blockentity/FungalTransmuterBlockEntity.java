@@ -187,7 +187,6 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       storedItems.addAll(lastRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
       storedItems.removeIf(ItemStack::isEmpty);
-      // TODO: Store the animated items
 
       animatedItems.clear();
       List<ItemStack> items = inventory.getItemsAndClear();

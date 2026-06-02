@@ -33,53 +33,6 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     super(build);
   }
 
-  // TODO: These `without` methods don't actually do anything
-  @Override
-  public SpellModifierSet without(SpellModifier element) {
-    if (this.isEmpty()) {
-      return EMPTY;
-    }
-
-    if (!this.contains(element)) {
-      return this;
-    }
-
-    if (this.size() == 1 && this.contains(element)) {
-      return EMPTY;
-    }
-
-    ImmutableSet.Builder<SpellModifier> builder = ImmutableSet.builder();
-    for (SpellModifier modifier : this.internal) {
-      if (!modifier.equals(element)) {
-        builder.add(modifier);
-      }
-    }
-    return new SpellModifierSet(builder.build()).validated();
-  }
-
-  @Override
-  public SpellModifierSet without(Collection<SpellModifier> elements) {
-    if (this.isEmpty()) {
-      return EMPTY;
-    }
-
-    if (!this.containsAll(elements)) {
-      return this;
-    }
-
-    if (this.size() == elements.size() && this.containsAll(elements)) {
-      return EMPTY;
-    }
-
-    ImmutableSet.Builder<SpellModifier> builder = ImmutableSet.builder();
-    for (SpellModifier modifier : this.internal) {
-      if (!elements.contains(modifier)) {
-        builder.add(modifier);
-      }
-    }
-    return new SpellModifierSet(builder.build()).validated();
-  }
-
   @Override
   public SpellModifierSet with(SpellModifier element) {
     if (this.contains(element)) {
@@ -121,7 +74,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     }
 
     if (this.firstElement == null) {
-      return EMPTY; // TODO: issue
+      return EMPTY;
     }
 
     if (!this.validate()) {
@@ -130,10 +83,9 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
 
     ModifierTree<Spell, SpellModifier> tree = ModifierTrees.getSpell(this.firstElement.applicable);
     if (tree == null) {
-      return EMPTY; // TODO: issue
+      return EMPTY;
     }
 
-    // TODO: We could look at including the defaults here but we never really look at that information
     ModifierTree<Spell, SpellModifier>.Instance instance = tree.instance(this, Collections.emptySet());
     Set<SpellModifier> validModifiers = instance.modifiersSet();
     if (validModifiers.size() == this.size() && this.containsAll(validModifiers)) {

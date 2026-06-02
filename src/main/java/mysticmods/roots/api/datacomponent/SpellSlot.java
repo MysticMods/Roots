@@ -22,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.UUID;
 
-// TODO: `enabledModifiers` should be immutable
 public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers,
                         SpellInstanceData data) implements ISpellInstance {
   public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.<SpellSlot>mapCodec(instance -> instance.group(

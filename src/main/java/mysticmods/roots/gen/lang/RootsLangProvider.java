@@ -3,7 +3,9 @@ package mysticmods.roots.gen.lang;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.init.*;
 import mysticmods.roots.item.GramaryItem;
@@ -211,6 +213,7 @@ public final class RootsLangProvider extends LanguageProvider {
           }
         }
     );
+
     RootsRegistries.RITUALS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
@@ -885,12 +888,27 @@ public final class RootsLangProvider extends LanguageProvider {
     add(GrovePowerGenerator.Symmetry.RADIAL_SAME_BLOCK.getTranslationKey() + ".description", "Requires an identical block positioned radially around the grove stone.");
     add(GrovePowerGenerator.Symmetry.RADIAL_DIFFERENT_SAME_TAG.getTranslationKey() + ".description", "Requires a different block from the same tag positioned radially around the grove stone.");
     add(GrovePowerGenerator.Symmetry.NONE.getTranslationKey() + ".description", "No symmetry required.");
+
+    spellDescription(ModSpells.SKY_SOARER, "Propels you through the air in the direction you are looking.");
+    modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_1, "Increases speed of boost effect.");
+    modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_2, "Increases speed of boost effect.");
+    modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_1, "Increases duration of boost effect.");
+    modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect.");
+    modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
   }
 
   // TODO: Translations for damage
 /*  public void addDamage(ResourceKey<DamageType> damage, String death, String item, String player) {
     add("death.attack.")
   } */
+
+  public void spellDescription(Holder<Spell> spell, String value) {
+    add(spell.value().getDescriptionId() + ".description", value);
+  }
+
+  public void modifierDescription (Holder<SpellModifier> spellModifier, String value) {
+    add(spellModifier.value().getDescriptionId() + ".description", value);
+  }
 
   public static String toEnglishName(String internalName) {
     return Arrays.stream(internalName.toLowerCase(Locale.ROOT).split("_"))

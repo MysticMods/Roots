@@ -68,8 +68,6 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return getModifier(node.key());
   }
 
-  // TODO: Conflict validation: conflicting modifiers cannot be parents of the modifier. Basically, ensure there are no cycles in the graph.
-
   // TODO: Server-side handling of 'requires unlock' modifiers
   public ModifierTree<V, C>.Instance instance(Set<C> modifiers, Set<C> grantedModifiers) {
     return new Instance(modifiers, grantedModifiers);

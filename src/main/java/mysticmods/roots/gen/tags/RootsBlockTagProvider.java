@@ -176,8 +176,6 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
     // From the old ModTags
     this.tag(RootsTags.Blocks.STANDING_STONE_CROPS).add(Blocks.BEETROOTS, Blocks.POTATOES, Blocks.CARROTS);
-    this.tag(RootsTags.Blocks.BAFFLECAP_CONVERSION)
-        .add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.WARPED_FUNGUS, Blocks.CRIMSON_FUNGUS);
     // This is for loot modifiers
     this.tag(RootsTags.Blocks.SHORT_GRASS).add(Blocks.SHORT_GRASS, Blocks.FERN);
     this.tag(RootsTags.Blocks.TALL_GRASS).add(Blocks.TALL_GRASS, Blocks.LARGE_FERN);

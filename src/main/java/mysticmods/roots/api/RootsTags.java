@@ -147,8 +147,6 @@ public class RootsTags {
     public static final TagKey<Block> SUPPORTS_HELL_SPROUT_SPAWN = modTag("supports_hell_sprout_spawn");
     public static final TagKey<Block> SUPPORTS_MELODY_SPROUT_SPAWN = modTag("supports_melody_sprout_spawn");
     public static final TagKey<Block> SUPPORTS_SNOW_SPROUT_SPAWN = modTag("supports_snow_sprout_spawn");
-    // TODO: ???
-    public static final TagKey<Block> BAFFLECAP_CONVERSION = modTag("converts_to_bafflecap");
 
     // Don't exist, have to make
     public static final TagKey<Block> SILVER_ORE = compatTag("ores/silver"); // SKIP

@@ -253,12 +253,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return chargeType;
   }
 
-  // TODO: Is this ever required?
-/*  @Override
-  public Set<? extends ICostedChild> getChildren() {
-    return ModifierTrees.getSpell(this).allModifiers();
-  }*/
-
   public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 
   public PropertyHolder<Property.DoubleProperty> getReachProperty() {

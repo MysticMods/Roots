@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+// Beware: this is triggered on both the server and the client so never reference client-only things
 public class TooltipUtil {
   public static void spellStaffTooltip(Item.TooltipContext context, List<Component> pTooltipComponents, ItemStack pStack, TooltipFlag flag) {
     SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
@@ -164,6 +165,14 @@ public class TooltipUtil {
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
     }
     //addChargeType(context, result, spell.getChargeType(), flag);
+  }
+
+  public static void describeSpell(Item.TooltipContext context, List<Component> tooltipComponents, Spell spell, TooltipFlag tooltipFlag) {
+    tooltipComponents.add(Component.translatable(spell.getDescriptionId() + ".description"));
+  }
+
+  public static void describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, SpellModifier spellModifier, TooltipFlag tooltipFlag) {
+    tooltipComponents.add(Component.translatable(spellModifier.getDescriptionId() + ".description"));
   }
 }
 

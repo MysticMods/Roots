@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Set;
 
+// TODO: Actually use this
 public interface IRitualInstance extends RitualLike {
   Ritual getRitual();
 

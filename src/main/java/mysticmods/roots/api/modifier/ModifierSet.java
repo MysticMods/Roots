@@ -70,11 +70,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
 
     return true;
   }
-
-  public abstract ModifierSet<V, T, C> without(T element);
-
-  public abstract ModifierSet<V, T, C> without(Collection<T> elements);
-
+  
   public abstract ModifierSet<V, T, C> with(T element);
 
   public abstract ModifierSet<V, T, C> with(Collection<T> elements);
