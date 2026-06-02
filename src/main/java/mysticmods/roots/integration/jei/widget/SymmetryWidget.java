@@ -6,6 +6,7 @@ import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenPosition;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
 public class SymmetryWidget implements IRecipeWidget {
@@ -24,7 +25,7 @@ public class SymmetryWidget implements IRecipeWidget {
   public void getTooltip(ITooltipBuilder tooltip, double mouseX, double mouseY) {
     if (mouseX > 0 && mouseX <= 16 && mouseY > 0 && mouseY <= 16) {
       tooltip.add(symmetry.getName());
-      tooltip.add(Component.empty());
+      tooltip.add(CommonComponents.EMPTY);
       tooltip.add(symmetry.getTooltip());
     }
   }

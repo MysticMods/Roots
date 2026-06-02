@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.util.Mth;
@@ -92,7 +93,7 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
   }
 
   protected Component getTextToRender(T blockEntity) {
-    return Component.empty();
+    return CommonComponents.EMPTY;
   }
 
   protected void renderText(T blockEntity, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, float partialTick, double yOffset, Component displayName) {

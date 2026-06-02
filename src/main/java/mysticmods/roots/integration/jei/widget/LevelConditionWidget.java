@@ -5,6 +5,7 @@ import mezz.jei.api.gui.widgets.IRecipeWidget;
 import mysticmods.roots.client.RenderUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenPosition;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -18,7 +19,7 @@ public record LevelConditionWidget(int xOffset, int yOffset, int width, int heig
     if (mouseX > 0 && mouseX <= width && mouseY > 0 && mouseY <= height) {
       tooltip.add(this.tooltip);
       if (description != null) {
-        tooltip.add(Component.empty());
+        tooltip.add(CommonComponents.EMPTY);
         tooltip.add(description);
       }
     }

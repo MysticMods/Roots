@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -27,48 +28,50 @@ public class TooltipUtil {
     if (storage != null) {
       pTooltipComponents.add(Component.translatable("roots.tooltip.staff.selected", (storage.currentSlot()) + 1));
       ISpellInstance spell = storage.getCurrentSpell();
-      pTooltipComponents.add(Component.empty());
+      pTooltipComponents.add(CommonComponents.EMPTY);
       if (spell != null) {
         TooltipUtil.spellInstanceTooltip(context, pTooltipComponents, spell, flag);
       } else {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
-      pTooltipComponents.add(Component.empty());
-      // List of modifiers
+      pTooltipComponents.add(CommonComponents.EMPTY);
       int tempSlot = 0;
       for (SpellSlot entry : storage.getSpells()) {
         // TODO: Spell data
         int slotId = tempSlot + 1;
+        boolean isModified = entry != null && !entry.getEnabledModifiers().isEmpty();
         Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
             .getStyledName();
-        Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.empty();
+        Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : CommonComponents.EMPTY;
 
         Component cd;
 
         if (entry == null) {
-          cd = Component.empty();
+          cd = CommonComponents.EMPTY;
         } else {
           if (context.level() != null && context.level().isClientSide()) {
             Player player = PlayerGetter.getPlayer();
             if (!player.hasData(ModAttachments.COOLDOWN_STORAGE)) {
-              cd = Component.empty();
+              cd = CommonComponents.EMPTY;
             } else {
               int cooldown = player.getData(ModAttachments.COOLDOWN_STORAGE).getCooldown(entry.spell());
               if (cooldown > 0) {
                 cd = Component.translatable("roots.tooltip.staff.cooldown", cooldown / 20);
               } else {
-                cd = Component.empty();
+                cd = CommonComponents.EMPTY;
               }
             }
           } else {
-            cd = Component.empty();
+            cd = CommonComponents.EMPTY;
           }
         }
-        pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected, cd));
+        pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, isModified ? MODIFIED_SPELL : CommonComponents.EMPTY, selected, cd));
         tempSlot++;
       }
     }
   }
+
+  public static final Component MODIFIED_SPELL = Component.translatable("roots.tooltip.staff.is_modified");
 
   public static void spellInstanceTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag, boolean addName) {
     if (addName) {
@@ -82,7 +85,7 @@ public class TooltipUtil {
   public static void addModifierList(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     var modifiers = spell.getEnabledModifiers();
     if (!modifiers.isEmpty()) {
-      result.add(Component.empty());
+      result.add(CommonComponents.EMPTY);
       var line = Component.translatable("roots.tooltip.spell.modifiers");
       boolean first = true;
       for (SpellModifier modifier : modifiers) {
@@ -120,7 +123,7 @@ public class TooltipUtil {
       added = true;
     }
     if (added) {
-      result.add(Component.empty());
+      result.add(CommonComponents.EMPTY);
     }
   }
 

@@ -18,6 +18,7 @@ import mysticmods.roots.util.LightDrifterUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -191,7 +192,7 @@ public class RootsClientHooks {
 
     if (minecraft.screen instanceof StaffScreen) {
       if (stack.has(ModAttachments.DELETABLE) || stack.has(ModAttachments.MODIFIABLE)) {
-        tooltipComponents.add(Component.empty());
+        tooltipComponents.add(CommonComponents.EMPTY);
       }
       if (stack.has(ModAttachments.DELETABLE)) {
         tooltipComponents.add(Component.translatable("roots.tooltip.token.delete", Component.keybind(KeyBindings.DELETE_SPELL.getName())));
@@ -207,14 +208,14 @@ public class RootsClientHooks {
 
     GrantStorage grants = minecraft.player.getData(ModAttachments.GRANT_STORAGE);
     if (item instanceof TokenItem.SpellTokenItem spellTokenItem) {
-      tooltipComponents.add(Component.empty());
+      tooltipComponents.add(CommonComponents.EMPTY);
       if (grants.hasSpell(spellTokenItem.getSpell())) {
         tooltipComponents.add(Component.translatable("roots.tooltip.token.unlocked"));
       } else {
         tooltipComponents.add(Component.translatable("roots.tooltip.token.unlock"));
       }
     } else if (item instanceof TokenItem.SpellModifierTokenItem spellTokenItem) {
-      tooltipComponents.add(Component.empty());
+      tooltipComponents.add(CommonComponents.EMPTY);
       if (grants.hasSpellModifier(spellTokenItem.getSpellModifier())) {
         tooltipComponents.add(Component.translatable("roots.tooltip.token.unlocked"));
       } else {

@@ -96,12 +96,14 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.staff.spell_in_slot", "%s: %s%s%s");
     add("roots.tooltip.staff.is_selected", " (Selected)");
     add("roots.tooltip.staff.data", "  %s: %s");
+    add("roots.tooltip.staff.is_modified", "*");
 
     add("roots.tooltip.staff.key_binding", "Press '%s' to open your spell library.");
     add("roots.tooltip.hold_shift", "[Hold %s for more information.]");
     add("roots.tooltip.shift", "Shift");
 
     add("roots.item.staff.with_spell", "Staff (%s)");
+    add("roots.item.staff.with_modified_spell", "Staff (%s*)");
 
     add("roots.drinks.slow_regen", "Gives a burst of revitalizing energy.");
     add("roots.drinks.wakefulness", "Perks you up, night or day; shoos those scary phantoms away!");

@@ -21,6 +21,7 @@ import mysticmods.roots.network.server.debug.ServerboundDebugScreenTick;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -39,7 +40,7 @@ public class SpellModifierScreen extends RootsScreen {
   private final StaffScreen parent;
 
   public SpellModifierScreen(@Nullable StaffScreen parent, InteractionHand hand, int inventorySlot, int spellSlot) {
-    super(Component.empty());
+    super(CommonComponents.EMPTY);
     this.parent = parent;
     this.hand = hand;
     this.inventorySlot = inventorySlot;

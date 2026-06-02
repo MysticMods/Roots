@@ -14,6 +14,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.util.TooltipUtil;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -96,7 +97,7 @@ public abstract class TokenItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-      tooltipComponents.add(Component.empty());
+      tooltipComponents.add(CommonComponents.EMPTY);
       if (stack.has(ModAttachments.SPELL_SLOT)) {
         var slot = stack.get(ModAttachments.SPELL_SLOT);
         assert slot != null;
@@ -144,7 +145,7 @@ public abstract class TokenItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-      tooltipComponents.add(Component.empty());
+      tooltipComponents.add(CommonComponents.EMPTY);
       //TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
       TooltipUtil.baseModifierCostTooltip(context, tooltipComponents, getSpellModifier(), tooltipFlag);
       if (context.level() != null && context.level().isClientSide()) {

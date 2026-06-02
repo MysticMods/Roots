@@ -7,6 +7,7 @@ import mysticmods.roots.init.ModItems;
 import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
@@ -77,12 +78,12 @@ public class PouchItem extends Item {
         COLOR_NAMES.put(color, colorName);
       }
 
-      tooltipComponents.add(Component.empty());
+      tooltipComponents.add(CommonComponents.EMPTY);
       tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", colorName)
           .setStyle(Style.EMPTY.withColor(color.getTextColor()).withBold(true))));
     }
     if (context.level() != null && context.level().isClientSide() && stack.is(RootsTags.Items.POUCHES)) {
-      tooltipComponents.add(Component.empty());
+      tooltipComponents.add(CommonComponents.EMPTY);
       tooltipComponents.add(Component.translatable("roots.tooltip.pouch.key_binding", RootsClientHooks.getPouchKeyBind()));
     }
   }

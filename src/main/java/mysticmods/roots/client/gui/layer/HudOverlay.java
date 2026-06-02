@@ -38,6 +38,7 @@ import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -241,9 +242,9 @@ public class HudOverlay {
       Ritual nextRitual = cachedRecipe != null ? cachedRecipe.getRitual() : null;
 
       ItemStack output = ItemStack.EMPTY;
-      Component comp1 = Component.empty();
-      Component comp2 = Component.empty();
-      Component comp3 = Component.empty();
+      Component comp1 = CommonComponents.EMPTY;
+      Component comp2 = CommonComponents.EMPTY;
+      Component comp3 = CommonComponents.EMPTY;
       List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null && activeRitual == null) {
@@ -342,9 +343,9 @@ public class HudOverlay {
       int requiredPower = 0;
 
       ItemStack output = ItemStack.EMPTY;
-      Component comp1 = Component.empty();
-      Component comp2 = Component.empty();
-      Component comp3 = Component.empty();
+      Component comp1 = CommonComponents.EMPTY;
+      Component comp2 = CommonComponents.EMPTY;
+      Component comp3 = CommonComponents.EMPTY;
       List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null) {
@@ -424,8 +425,8 @@ public class HudOverlay {
       GroveRecipe cachedRecipe = groveCrafter.getRecipe() == null ? null : groveCrafter.getRecipe().value();
 
       ItemStack output = ItemStack.EMPTY;
-      Component comp1 = Component.empty();
-      Component comp2 = Component.empty();
+      Component comp1 = CommonComponents.EMPTY;
+      Component comp2 = CommonComponents.EMPTY;
       List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null && !groveCrafter.isCrafting()) {
@@ -575,10 +576,10 @@ public class HudOverlay {
 
       ItemStack output = ItemStack.EMPTY;
       Spell spell = null;
-      Component comp1 = Component.empty();
-      Component comp2 = Component.empty();
-      Component comp3 = Component.empty();
-      Component comp4 = Component.empty();
+      Component comp1 = CommonComponents.EMPTY;
+      Component comp2 = CommonComponents.EMPTY;
+      Component comp3 = CommonComponents.EMPTY;
+      Component comp4 = CommonComponents.EMPTY;
       List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null) {

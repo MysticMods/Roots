@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -44,7 +45,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
         return Component.literal(String.format("%02d:%02d", minutes, seconds % 60));
       }
     }
-    return Component.empty();
+    return CommonComponents.EMPTY;
   }
 
   @Override

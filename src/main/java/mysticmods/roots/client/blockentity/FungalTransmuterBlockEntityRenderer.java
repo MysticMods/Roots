@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -33,7 +34,7 @@ public class FungalTransmuterBlockEntityRenderer extends BoundedBlockEntityRende
         return Component.literal(String.format("%02d:%02d", minutes, seconds % 60));
       }
     }*/
-    return Component.empty();
+    return CommonComponents.EMPTY;
   }
 
   @Override

@@ -115,16 +115,7 @@ public class CastingItem extends Item {
         }
       }
 
-      boolean lastSuccess;
-
-      if (spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks) < 0) {
-        // This means the psell didn't cast
-        // TODO: Kind of decide something about this
-        /*        RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());*/
-        lastSuccess = false;
-      } else {
-        lastSuccess = true;
-      }
+      boolean lastSuccess = spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks) >= 0;
 
       CastingSuccessCache.note(pStack, lastSuccess);
 
@@ -386,7 +377,8 @@ public class CastingItem extends Item {
     if (storage != null) {
       ISpellInstance spell = storage.getCurrentSpell();
       if (spell != null) {
-        return Component.translatable("roots.item.staff.with_spell", spell.getSpell().getStyledName());
+        var name = spell.getSpell().getStyledName();
+        return spell.getEnabledModifiers().isEmpty() ? Component.translatable("roots.item.staff.with_spell", name) : Component.translatable("roots.item.staff.with_modified_spell", name);
       }
     }
 

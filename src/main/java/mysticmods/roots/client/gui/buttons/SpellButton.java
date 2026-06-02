@@ -6,6 +6,7 @@ import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.client.gui.screen.RootsScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +18,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
   protected final Supplier<S> spellSupplier;
 
   public SpellButton(V parentScreen, @NotNull Supplier<S> spellSupplier, int id, int pX, int pY, int pWidth, int pHeight, OnPress pOnPress) {
-    super(pX, pY, pWidth, pHeight, Component.empty(), pOnPress, DEFAULT_NARRATION);
+    super(pX, pY, pWidth, pHeight, CommonComponents.EMPTY, pOnPress, DEFAULT_NARRATION);
     this.parentScreen = parentScreen;
     this.spellSupplier = spellSupplier;
     this.id = id;

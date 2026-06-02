@@ -3,6 +3,7 @@ package mysticmods.roots.inventory.pouch.apothecary;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.inventory.pouch.PouchMenu;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +24,7 @@ public class ApothecaryPouchMenu extends PouchMenu {
 
   @Override
   public Component getDisplayName() {
-    return Component.empty();
+    return CommonComponents.EMPTY;
   }
 
   @Override

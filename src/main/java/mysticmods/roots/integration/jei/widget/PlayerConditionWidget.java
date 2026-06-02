@@ -6,6 +6,7 @@ import mysticmods.roots.api.condition.IPlayerCondition;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenPosition;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
 public record PlayerConditionWidget(int xOffset, int yOffset, int width, int height, Component name,
@@ -27,7 +28,7 @@ public record PlayerConditionWidget(int xOffset, int yOffset, int width, int hei
   public void getTooltip(ITooltipBuilder tooltip, double mouseX, double mouseY) {
     if (mouseX > 0 && mouseX <= width && mouseY > 0 && mouseY <= height) {
       tooltip.add(name);
-      tooltip.add(Component.empty());
+      tooltip.add(CommonComponents.EMPTY);
       tooltip.add(description);
     }
   }

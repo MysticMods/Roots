@@ -1,6 +1,7 @@
 package mysticmods.roots.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -21,7 +22,7 @@ public class TooltipDrinkItem extends Item {
   @Override
   public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
     super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-    pTooltipComponents.add(Component.empty());
+    pTooltipComponents.add(CommonComponents.EMPTY);
     pTooltipComponents.add(Component.translatable(translationKey)
         .setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))));
   }
