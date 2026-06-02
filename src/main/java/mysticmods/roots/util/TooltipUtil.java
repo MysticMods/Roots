@@ -84,6 +84,8 @@ public class TooltipUtil {
 
   public static void addModifierList(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     var modifiers = spell.getEnabledModifiers();
+    // TODO: Modifiers should be sorted
+    // TODO: Modifier sets ("Amplified 1, Amplified 2") should collapse ("Amplified (2)")
     if (!modifiers.isEmpty()) {
       result.add(CommonComponents.EMPTY);
       var line = Component.translatable("roots.tooltip.spell.modifiers");
