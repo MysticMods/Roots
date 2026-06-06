@@ -465,9 +465,10 @@ public class Costing {
           continue;
         }
 
+        // TODO: Handle multiplicative base
+
         total *= cost.getValue();
       }
-      // TODO: Consider multiply base
 
       if (total <= 0) {
         continue;
