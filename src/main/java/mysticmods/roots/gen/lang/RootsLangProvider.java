@@ -895,6 +895,33 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_1, "Increases duration of boost effect.");
     modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect.");
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
+
+    spellDescription(ModSpells.ACID_CLOUD, "Creates a damaging poisonous cloud around you while channeled.");
+    spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
+    spellDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body, allowing you to float through entities and terrain for a short time and distance. Returns you to your body upon expiration.");
+    spellDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs to your location.");
+    spellDescription(ModSpells.DANDELION_WINDS, "Blows entities away from you.");
+    spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, losing maximum health.");
+    spellDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health.");
+    spellDescription(ModSpells.SATURATE, "Directly converts food and drink in your inventory to saturation and food levels. Some value is lost in this process.");
+    spellDescription(ModSpells.DISARM, "Disarms entities around you, with a chance to drop the held items.");
+    spellDescription(ModSpells.EXTENSION, "Extends your senses, allowing you to see in the dark and sense nearby enemies.");
+    spellDescription(ModSpells.NONDETECTION, "Reduces the range at which enemies can detect your presence.");
+    spellDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light.");
+    spellDescription(ModSpells.GEAS, "Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.");
+    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");
+    spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
+    spellDescription(ModSpells.RAMPANT_GROWTH, "Causes accelerated growth to all eligible blocks in a radius around you.");
+    spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
+    spellDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.");
+    spellDescription(ModSpells.PETAL_SHELL, "Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.");
+    spellDescription(ModSpells.RADIANCE, "Shoots a beam of destructive light in the direction you are facing. This beam will damage all entities that it touches.");
+    spellDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.");
+    spellDescription(ModSpells.SHATTER, "Breaks the targeted blocks. The size and dimensions of the spell can be adjusted."); // TODO: Spell description keybinds
+    spellDescription(ModSpells.JAUNT, "Teleports you a short way in the distance you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.");
+    spellDescription(ModSpells.STORM_CLOUD, "Creates a vicious cloud of storms around you. For the duration, lightning from the cloud may strike nearby enemies.");
+    spellDescription(ModSpells.TEMPORAL_MORASS, "Creates a temporary field of disruptive energy. All entities within this field will have their movement dramatically slowed.");
+    spellDescription(ModSpells.WILDFIRE, "Flings a fiery meteor in the direction you are looking. If this meteor hits an enemy, it will damage it.");
   }
 
   // TODO: Translations for damage
