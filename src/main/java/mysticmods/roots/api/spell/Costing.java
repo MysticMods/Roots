@@ -7,10 +7,7 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
-import mysticmods.roots.api.herb.ChildChargeType;
-import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.herb.ParentChargeType;
+import mysticmods.roots.api.herb.*;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
@@ -68,16 +65,16 @@ public class Costing {
     DISCOUNT // always multiplicative
   }
 
-  public record CostSegment(double amount, Cost.CostType type, CostSource source) {
+  public record CostSegment(double amount, CostType type, CostSource source) {
     public static CostSegment spell (double amount) {
-      return new CostSegment(amount, Cost.CostType.ADDITIVE, CostSource.SPELL);
+      return new CostSegment(amount, CostType.ADDITIVE, CostSource.SPELL);
     }
 
     public static CostSegment discount (double amount) {
-      return new CostSegment(amount, Cost.CostType.MULTIPLICATIVE, CostSource.DISCOUNT);
+      return new CostSegment(amount, CostType.MULTIPLICATIVE_TOTAL, CostSource.DISCOUNT);
     }
 
-    public static CostSegment modifier (double amount, Cost.CostType type) {
+    public static CostSegment modifier (double amount, CostType type) {
       return new CostSegment(amount, type, CostSource.MODIFIER);
     }
   }
@@ -457,14 +454,14 @@ public class Costing {
     for (Map.Entry<Herb, List<Cost>> entry : herbCosts.entrySet()) {
       double total = 0;
       for (Cost cost : entry.getValue()) {
-        if (cost.getType() != Cost.CostType.ADDITIVE) {
+        if (cost.getType().isMultiplicative()) {
           continue;
         }
 
         total += cost.getValue();
       }
       for (Cost cost : entry.getValue()) {
-        if (cost.getType() != Cost.CostType.MULTIPLICATIVE) {
+        if (cost.getType().isAdditive()) {
           continue;
         }
 

@@ -17,11 +17,15 @@ public record CostInstance(List<Cost> costs) {
       .map(CostInstance::new, CostInstance::costs);
 
   public static CostInstance add(Holder<Herb> herb, double value) {
-    return of(new Cost(Cost.CostType.ADDITIVE, herb, value));
+    return of(Cost.add(herb, value));
   }
 
   public static CostInstance mult(Holder<Herb> herb, double value) {
-    return of(new Cost(Cost.CostType.MULTIPLICATIVE, herb, value));
+    return of(Cost.mult(herb, value));
+  }
+
+  public static CostInstance multTotal (Holder<Herb> herb, double value) {
+    return of(Cost.multTotal(herb, value));
   }
 
   public static CostInstance of(Cost... costs) {

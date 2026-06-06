@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.CostType;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Registry;
@@ -16,13 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record CostRemover<T>(Herb herbCost, Cost.CostType type,
+public record CostRemover<T>(Herb herbCost, CostType type,
                              float value) implements DataMapValueRemover<T, CostInstance> {
   public static Codec<CostInstance> CODEC = CostInstance.CODEC;
 
   public static <T> Codec<CostRemover<T>> codec() {
     return RecordCodecBuilder.create(instance -> instance.group(RootsRegistries.HERBS.byNameCodec().fieldOf("herb")
-            .forGetter(CostRemover::herbCost), Cost.CostType.CODEC.optionalFieldOf("type", null)
+            .forGetter(CostRemover::herbCost), CostType.CODEC.optionalFieldOf("type", null)
             .forGetter(CostRemover::type), Codec.FLOAT.optionalFieldOf("defaultValue", -1.0f).forGetter(CostRemover::value))
         .apply(instance, CostRemover::new));
   }

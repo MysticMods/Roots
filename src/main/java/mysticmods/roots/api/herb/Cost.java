@@ -2,17 +2,11 @@ package mysticmods.roots.api.herb;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.ByIdMap;
-import net.minecraft.util.StringRepresentable;
-
-import java.util.Locale;
-import java.util.function.IntFunction;
 
 public class Cost {
   private final CostType type;
@@ -52,20 +46,10 @@ public class Cost {
   }
 
   public static Cost mult(Holder<Herb> herb, double value) {
-    return new Cost(CostType.MULTIPLICATIVE, herb, value);
+    return new Cost(CostType.MULTIPLICATIVE_BASE, herb, value);
   }
 
-  public enum CostType implements StringRepresentable {
-    ADDITIVE,
-    MULTIPLICATIVE;
-
-    public static final Codec<CostType> CODEC = StringRepresentable.fromEnum(CostType::values);
-    public static final IntFunction<CostType> BY_ID = ByIdMap.continuous(CostType::ordinal, CostType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-    public static final StreamCodec<ByteBuf, CostType> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, CostType::ordinal);
-
-    @Override
-    public String getSerializedName() {
-      return this.toString().toLowerCase(Locale.ROOT);
-    }
+  public static Cost multTotal (Holder<Herb> herb, double value) {
+    return new Cost(CostType.MULTIPLICATIVE_TOTAL, herb, value);
   }
 }
