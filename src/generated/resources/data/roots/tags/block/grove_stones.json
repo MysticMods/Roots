@@ -1,7 +1,7 @@
 {
   "values": [
-    "#roots:grove_stones/primal",
     "#roots:grove_stones/wild",
+    "#roots:grove_stones/primal",
     "#roots:grove_stones/fairy",
     "#roots:grove_stones/cultivation",
     "#roots:grove_stones/twilight",

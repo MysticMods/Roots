@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+// TODO: Overhaul this?
 public record GroveStoneCondition(GroveType groveType, boolean requireValid,
                                   boolean requireInvalid) implements ILevelCondition {
   public static final MapCodec<GroveStoneCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(GroveType.CODEC.fieldOf("grove_type")

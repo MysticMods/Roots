@@ -135,7 +135,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.GROVE_STONE_FUNGAL).add(FUNGAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_ELEMENTAL).add(ELEMENTAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONES)
-        .addTags(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Blocks.GROVE_STONE_CULTIVATION, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
+        .addTags(RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Blocks.GROVE_STONE_CULTIVATION, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
     this.tag(RootsTags.Blocks.RED_HUTS).add(RED_FAIRY_HUT.get());
     this.tag(RootsTags.Blocks.BROWN_HUTS).add(BROWN_FAIRY_HUT.get());
     this.tag(RootsTags.Blocks.BAFFLECAP_HUTS).add(BAFFLECAP_FAIRY_HUT.get());
