@@ -2,6 +2,7 @@ package mysticmods.roots.blockentity;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.*;
@@ -10,15 +11,20 @@ import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.ritual.GroveSupplicationRitual;
+import mysticmods.roots.util.ReputationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,11 +73,11 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
   @Override
   public void onLoad() {
     super.onLoad();
-    if (!getLevel().isClientSide() && getBlockState().is(RootsTags.Blocks.GROVE_STONE_WILD)) {
-      // Validate all sections (2 below)
-      // and begin the animation by sending
-      // a packet.
-      // TODO:
+    if (!getLevel().isClientSide()) {
+      var state = getBlockState();
+      if (state.is(RootsTags.Blocks.GROVE_STONE_WILD) && !state.getValue(GroveStoneBlock.ACTIVE)) {
+        tryActivating(null, null, null);
+      }
     }
   }
 
@@ -318,5 +324,43 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     pTag.putInt("consumedLastTick", consumedLastTick);
     pTag.putInt("generatedThisTick", generatedThisTick);
     pTag.putInt("consumedThisTick", consumedThisTick);
+  }
+
+  public void tryActivating(@Nullable GroveSupplicationRitual groveSupplicationRitual, @Nullable PyreBlockEntity blockEntity, @Nullable Player player) {
+    Level level = getLevel();
+    if (level == null || level.isClientSide()) {
+      return;
+    }
+
+    BlockPos pos = getBlockPos();
+    Grove grove = getGrove().value();
+    BlockState state = getBlockState();
+    if (player == null) {
+      if (grove.is(RootsTags.Groves.WILD)) {
+        if (state.getValue(StateProperties.ACTIVE)) {
+          return;
+        }
+        activate(level, pos, state, 0);
+
+        // TODO: Animation
+      }
+
+      return;
+    }
+    var rank = ReputationHelper.getRank(player, grove);
+  }
+
+  public static void activate(Level level, BlockPos pos, BlockState state, int rank) {
+    if (state.getValue(StateProperties.GroveStone.PART) != StateProperties.Part.TOP) {
+      throw new IllegalStateException("GroveStoneBlockEntity::activate can only be called on the block entity of a grove stone, called on " + pos + " which is " + state.getValue(StateProperties.GroveStone.PART));
+    }
+    level.setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true)
+        .setValue(StateProperties.GroveStone.RANK, rank));
+    BlockState below = level.getBlockState(pos.below());
+    level.setBlockAndUpdate(pos.below(), below.setValue(StateProperties.ACTIVE, true)
+        .setValue(StateProperties.GroveStone.RANK, rank));
+    below = level.getBlockState(pos.below().below());
+    level.setBlockAndUpdate(pos.below().below(), below.setValue(StateProperties.ACTIVE, true)
+        .setValue(StateProperties.GroveStone.RANK, rank));
   }
 }

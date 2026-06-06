@@ -18,6 +18,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
@@ -40,6 +41,8 @@ public class GroveSupplicationRitual extends Ritual {
 
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    // TODO: Move this to super.functionalTick
+    // TODO: call super.functionalTick
     if (pCache == null && requiresCache()) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
@@ -48,15 +51,13 @@ public class GroveSupplicationRitual extends Ritual {
     if (duration % getInterval() == 0) {
       if (blockEntity.getBoundingBox() != null) {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
+          if (blockEntity.getLevel().getBlockEntity(pos) instanceof GroveStoneBlockEntity groveStoneBlockEntity) {
+            groveStoneBlockEntity.tryActivating(this, blockEntity, blockEntity.getLastPlayer());
+          }
+
           BlockState state = blockEntity.getLevel().getBlockState(pos);
 
           if (!state.hasProperty(StateProperties.GroveStone.RANK) || !state.hasProperty(StateProperties.ACTIVE)) {
-            continue;
-          }
-
-          // Activate wild stones
-          if (state.is(RootsTags.Blocks.GROVE_STONE_WILD) && !state.getValue(StateProperties.ACTIVE)) {
-            blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true));
             continue;
           }
 
