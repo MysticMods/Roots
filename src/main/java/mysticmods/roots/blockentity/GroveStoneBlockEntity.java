@@ -326,10 +326,10 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     pTag.putInt("consumedThisTick", consumedThisTick);
   }
 
-  public void tryActivating(@Nullable GroveSupplicationRitual groveSupplicationRitual, @Nullable PyreBlockEntity blockEntity, @Nullable Player player) {
+  public boolean tryActivating(@Nullable GroveSupplicationRitual groveSupplicationRitual, @Nullable PyreBlockEntity blockEntity, @Nullable Player player) {
     Level level = getLevel();
     if (level == null || level.isClientSide()) {
-      return;
+      return false;
     }
 
     BlockPos pos = getBlockPos();
@@ -338,16 +338,25 @@ public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTick
     if (player == null) {
       if (grove.is(RootsTags.Groves.WILD)) {
         if (state.getValue(StateProperties.ACTIVE)) {
-          return;
+          return false;
         }
         activate(level, pos, state, 0);
 
+        return true;
         // TODO: Animation
       }
 
-      return;
+      return false;
     }
     var rank = ReputationHelper.getRank(player, grove);
+    if (rank > getRank()) {
+      activate(level, pos, state, rank);
+      return true;
+
+      // TODO: Animation
+    }
+
+    return false;
   }
 
   public static void activate(Level level, BlockPos pos, BlockState state, int rank) {

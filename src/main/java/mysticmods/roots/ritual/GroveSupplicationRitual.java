@@ -39,15 +39,17 @@ public class GroveSupplicationRitual extends Ritual {
     return PREDICATES;
   }
 
+  // TODO: singleFunctionalTick
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     // TODO: Move this to super.functionalTick
     // TODO: call super.functionalTick
-    if (pCache == null && requiresCache()) {
+    if (pCache == null/* && requiresCache()*/) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
 
+    // TODO: Look into
     if (duration % getInterval() == 0) {
       if (blockEntity.getBoundingBox() != null) {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
@@ -55,7 +57,7 @@ public class GroveSupplicationRitual extends Ritual {
             groveStoneBlockEntity.tryActivating(this, blockEntity, blockEntity.getLastPlayer());
           }
 
-          BlockState state = blockEntity.getLevel().getBlockState(pos);
+/*          BlockState state = blockEntity.getLevel().getBlockState(pos);
 
           if (!state.hasProperty(StateProperties.GroveStone.RANK) || !state.hasProperty(StateProperties.ACTIVE)) {
             continue;
@@ -85,7 +87,7 @@ public class GroveSupplicationRitual extends Ritual {
                 groveStoneEntity.setRank(rank);
               }
             }
-          }
+          }*/
         }
       }
     }
