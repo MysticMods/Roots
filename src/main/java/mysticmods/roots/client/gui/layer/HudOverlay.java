@@ -511,7 +511,7 @@ public class HudOverlay {
 
       Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank(), groveInstance.getMaxRank());
       Component comp2 = Component.translatable("roots.hud.grove_power.power", powerPower.getUsedPower(), powerPower.getMaxPower());
-      if (groveInstance.getRank() == 0) {
+      if (groveInstance.getRank() == 0 && !groveInstance.is(RootsTags.Groves.WILD)) {
         comp2 = Component.translatable("roots.hud.grove_power.invalid_rank");
       }
 
