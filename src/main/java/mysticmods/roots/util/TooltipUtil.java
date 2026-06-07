@@ -21,6 +21,7 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 // Beware: this is triggered on both the server and the client so never reference client-only things
@@ -134,16 +135,12 @@ public class TooltipUtil {
   public static void baseModifierCostTooltip(Item.TooltipContext context, List<Component> result, SpellModifier modifier, TooltipFlag flag) {
     for (Cost cost : modifier.getCosts().costs()) {
       Herb herb = cost.getHerb();
-      String herbCost = cost.getType() == CostType.ADDITIVE ? String.format("%.4f", cost.getValue()) : String.format("%.1f", (cost.getValue() - 1) * 100);
-      // TODO: Decide how to handle multiplicative costs
-      // +5%
-      // (cost.getValue() - 1) * 100;
+      String herbCost = cost.getType() == CostType.ADDITIVE ? String.format("%.4f", cost.getValue()) : String.format("%.1f", (cost.getValue()) * 100); // TODO: This doesn't work properly for reductions
       String amountKey = switch (cost.getType()) {
         case ADDITIVE -> "roots.tooltip.cost.cost_amount";
         case MULTIPLICATIVE_BASE -> "roots.tooltip.cost.cost_multiply_base";
         case MULTIPLICATIVE_TOTAL -> "roots.tooltip.cost.cost_multiply_total";
       };
-/*      var amount = cost.getType() == CostType.ADDITIVE ?  : "roots.tooltip.cost.cost_multiplier";*/
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable(amountKey, herbCost)));
     }
   }
@@ -165,10 +162,16 @@ public class TooltipUtil {
 
   public static void fullSpellCostTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     Costing cos = new Costing(spell);
-    for (Object2DoubleMap.Entry<Herb> entry : cos.getTooltipCost().object2DoubleEntrySet()) {
+    for (Map.Entry<Herb, Costing.HerbCost> entry : cos.getTooltipCost().entrySet()) {
       Herb herb = entry.getKey();
-      String herbCost = String.format("%.4f", entry.getDoubleValue());
-      result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
+      Costing.HerbCost cost = entry.getValue();
+      String herbCost = String.format("%.4f", cost.total());
+      if (cost.modifiers() != 0) {
+        String herbModifierCost = String.format("%.4f", Math.abs(cost.modifiers()));
+        result.add(Component.translatable("roots.tooltip.cost.herb_cost_full", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost), Component.translatable("roots.tooltip.cost.herb_cost_modified", herbModifierCost)));
+      } else {
+        result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
+      }
     }
     //addChargeType(context, result, spell.getChargeType(), flag);
   }

@@ -32,6 +32,7 @@ public class Costing {
   private final ICostedParent parent;
 
   private final Object2DoubleMap<Herb> totalCosts = new Object2DoubleOpenHashMap<>();
+  private final Object2DoubleMap<Herb> baseCosts = new Object2DoubleOpenHashMap<>();
 
   private final Object2BooleanMap<ICosted> modifierMap = new Object2BooleanOpenHashMap<>();
 
@@ -238,8 +239,9 @@ public class Costing {
 
   private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
+    baseCosts.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
-    Object2DoubleMap<Herb> baseCosts = new Object2DoubleOpenHashMap<>();
+    //Object2DoubleMap<Herb> baseCosts = new Object2DoubleOpenHashMap<>();
     ParentChargeType thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
       if (cost.getType().isMultiplicative()) {
@@ -269,21 +271,31 @@ public class Costing {
         if (checkModifiers && modifierMap.getBoolean(modifier) || maxOperations) {
           for (Cost cost : modifier.getCosts().costs()) {
             List<Cost> costs = herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>());
-            if (thisType == ParentChargeType.OPERATION && maxOperations) {
-              for (int i = 0; i < parent.getMaximumOperations(); i++) {
-                costs.add(cost);
+            if (thisType == ParentChargeType.OPERATION) {
+              if (cost.getType() == CostType.MULTIPLICATIVE_TOTAL) {
+                costs.add(cost); // Totals are only ever applied once
+              } else {
+                if (maxOperations) {
+                  for (int i = 0; i < parent.getMaximumOperations(); i++) {
+                    costs.add(cost);
+                  }
+                } else {
+                  for (int i = 0; i < operationsCount; i++) {
+                    costs.add(cost);
+                  }
+                }
               }
-            } else if (thisType == ParentChargeType.OPERATION) {
-              for (int i = 0; i < operationsCount; i++) {
-                costs.add(cost);
-              }
-            } else if (thisType == ParentChargeType.INSTANCE) {
+            } else {
               costs.add(cost);
             }
           }
         }
       }
     }
+    // TODO: This assumes that the List<Cost> is sorted:
+    // - Additives first
+    // - Multiplicative base second
+    // - Multiply totals last
     for (Map.Entry<Herb, List<Cost>> entry : herbCosts.entrySet()) {
       double total = 0;
       for (Cost cost : entry.getValue()) {
@@ -296,10 +308,6 @@ public class Costing {
       for (Cost cost : entry.getValue()) {
         if (cost.getType() == CostType.MULTIPLICATIVE_BASE) {
           var val = cost.getValue();
-          if (val > 0) {
-            RootsAPI.LOG.error("Cost {} is multiplicative_base but > 1", cost);
-            val = val - 1;
-          }
           total += (baseCosts.getOrDefault(entry.getKey(), 0) * val);
         }
       }
@@ -326,6 +334,7 @@ public class Costing {
       }
 
       totalCosts.put(entry.getKey(), total);
+      baseCosts.putIfAbsent(entry.getKey(), 0);
     }
   }
 
@@ -337,12 +346,22 @@ public class Costing {
     return new Object2DoubleOpenHashMap<>(totalCosts);
   }*/
 
-  public Object2DoubleMap<Herb> getTooltipCost() {
+  public Map<Herb, HerbCost> getTooltipCost() {
     int ops = this.operationsCount;
     this.operationsCount = 1;
     calculateCosts(true, false, false, false);
     this.operationsCount = ops;
-    return new Object2DoubleOpenHashMap<>(totalCosts);
+    Map<Herb, HerbCost> result = new HashMap<>();
+    for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
+      double total = entry.getDoubleValue();
+      double base = baseCosts.getOrDefault(entry.getKey(), 0);
+      result.put(entry.getKey(), new HerbCost(total, total - base));
+    }
+    return result;
+    /*    return new Object2DoubleOpenHashMap<>(totalCosts);*/
+  }
+
+  public record HerbCost(double total, double modifiers) {
   }
 
 /*  public Object2DoubleMap<Herb> getMaximumCost() {
