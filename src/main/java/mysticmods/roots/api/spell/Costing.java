@@ -42,9 +42,7 @@ public class Costing {
 
   // TODO: Modified spells in spell library do not correctly count modifiers (in tooltip) in costs
   //  nor does it show modifiers
-  // TODO: Modifier list concatenates weirdly
   // TODO: Hold shift for more details on staff
-  // TODO: Sort modifiers sequentially
 
   // Herb costs can be as follows:
   // (Per spell)    (Herb + double + additive/multiplicative) +
