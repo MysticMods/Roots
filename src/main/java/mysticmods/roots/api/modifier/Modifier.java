@@ -67,6 +67,10 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
 
   public abstract Holder<T> builtInRegistryHolder();
 
+  public ResourceKey<T> getSelf () {
+    return builtInRegistryHolder().getKey();
+  }
+
   protected abstract String getSignifier();
 
   @Override

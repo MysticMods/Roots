@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSortedSet;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
@@ -15,13 +16,13 @@ import java.util.stream.Stream;
 
 public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends ModifierSet<V, T, C>> implements Set<T> {
   // TODO: Does this need to be an ImmutableSet?
-  protected final ImmutableSet<T> internal;
+  protected final ImmutableSortedSet<T> internal;
   @Nullable
   protected final T firstElement;
 
   @SafeVarargs
   public ModifierSet(T... elements) {
-    this.internal = ImmutableSet.copyOf(elements);
+    this.internal = ImmutableSortedSet.copyOf(elements);
     if (elements.length > 0) {
       this.firstElement = elements[0];
     } else {
@@ -30,7 +31,16 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   }
 
   public ModifierSet(Collection<T> elements) {
-    this.internal = ImmutableSet.copyOf(elements);
+    this.internal = ImmutableSortedSet.copyOf(elements);
+    if (!elements.isEmpty()) {
+      this.firstElement = elements.stream().findFirst().orElse(null);
+    } else {
+      this.firstElement = null;
+    }
+  }
+
+  public ModifierSet(ImmutableSortedSet<T> elements) {
+    this.internal = elements;
     if (!elements.isEmpty()) {
       this.firstElement = elements.stream().findFirst().orElse(null);
     } else {
@@ -39,7 +49,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   }
 
   public ModifierSet(ImmutableSet<T> elements) {
-    this.internal = elements;
+    this.internal = ImmutableSortedSet.copyOf(elements);
     if (!elements.isEmpty()) {
       this.firstElement = elements.stream().findFirst().orElse(null);
     } else {
