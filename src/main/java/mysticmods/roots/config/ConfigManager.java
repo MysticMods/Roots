@@ -22,87 +22,83 @@ public class ConfigManager {
 
   public static List<AbstractConfig> CONFIGS = new ArrayList<>();
 
-  public static ModConfigSpec.DoubleValue HERB_MINIMUM_ALERT;
-  public static ModConfigSpec.BooleanValue POUCH_HERB_PICKUP;
+  public static final ModConfigSpec.DoubleValue HERB_MINIMUM_ALERT;
+  public static final ModConfigSpec.BooleanValue POUCH_HERB_PICKUP;
 
-  public static ModConfigSpec.BooleanValue ALERTNESS_VISUAL;
-  public static ModConfigSpec.IntValue ALERTNESS_DURATION;
-  public static ModConfigSpec.BooleanValue ALERTNESS_SOUND;
-  public static ModConfigSpec.BooleanValue ALERTNESS_TAG;
+  public static final ModConfigSpec.BooleanValue ALERTNESS_VISUAL;
+  public static final ModConfigSpec.IntValue ALERTNESS_DURATION;
+  public static final ModConfigSpec.BooleanValue ALERTNESS_SOUND;
+  public static final ModConfigSpec.BooleanValue ALERTNESS_TAG;
 
-  public static ModConfigSpec.BooleanValue EXPERIENCE_ORBS;
-  public static ModConfigSpec.BooleanValue PACIFIST_DISABLED;
-  public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_X;
-  public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Y;
-  public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Z;
+  public static final ModConfigSpec.BooleanValue EXPERIENCE_ORBS;
+  public static final ModConfigSpec.BooleanValue PACIFIST_DISABLED;
+  public static final ModConfigSpec.IntValue AOE_BOUNDING_BOX_X;
+  public static final ModConfigSpec.IntValue AOE_BOUNDING_BOX_Y;
+  public static final ModConfigSpec.IntValue AOE_BOUNDING_BOX_Z;
 
-  public static ModConfigSpec.BooleanValue SHOW_INSERT_MESSAGE;
-  public static ModConfigSpec.BooleanValue SHOW_INSERT_IN_GAME_MESSAGE;
-  public static ModConfigSpec.BooleanValue SHOW_DELETE_MESSAGE;
-  public static ModConfigSpec.BooleanValue SHOW_DELETE_IN_GAME_MESSAGE;
-  public static ModConfigSpec.BooleanValue HIGHLIGHT_LAST_BLOCK;
+  public static final ModConfigSpec.BooleanValue SHOW_INSERT_MESSAGE;
+  public static final ModConfigSpec.BooleanValue SHOW_INSERT_IN_GAME_MESSAGE;
+  public static final ModConfigSpec.BooleanValue SHOW_DELETE_MESSAGE;
+  public static final ModConfigSpec.BooleanValue SHOW_DELETE_IN_GAME_MESSAGE;
+  public static final ModConfigSpec.BooleanValue HIGHLIGHT_LAST_BLOCK;
 
-  public static ModConfigSpec.IntValue PYRE_BOUNDS_X;
-  public static ModConfigSpec.IntValue PYRE_BOUNDS_Y;
-  public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
+  public static final ModConfigSpec.IntValue PYRE_BOUNDS_X;
+  public static final ModConfigSpec.IntValue PYRE_BOUNDS_Y;
+  public static final ModConfigSpec.IntValue PYRE_BOUNDS_Z;
 
-  public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_X;
-  public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_Y;
-  public static ModConfigSpec.IntValue GROWTH_AMPLIFIER_BOUNDS_Z;
+  public static final ModConfigSpec.IntValue ENCHANTED_TURF_TICKS;
 
-  public static ModConfigSpec.IntValue ENCHANTED_TURF_TICKS;
+  public static final ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_ZX;
+  public static final ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_Y;
 
-  public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_ZX;
-  public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_Y;
+  public static final ModConfigSpec.IntValue RANK_2_GROVE_BOUNDS_ZX;
+  public static final ModConfigSpec.IntValue RANK_2_GROVE_BOUNDS_Y;
 
-  public static ModConfigSpec.IntValue RANK_2_GROVE_BOUNDS_ZX;
-  public static ModConfigSpec.IntValue RANK_2_GROVE_BOUNDS_Y;
+  public static final ModConfigSpec.IntValue RANK_3_GROVE_BOUNDS_ZX;
+  public static final ModConfigSpec.IntValue RANK_3_GROVE_BOUNDS_Y;
 
-  public static ModConfigSpec.IntValue RANK_3_GROVE_BOUNDS_ZX;
-  public static ModConfigSpec.IntValue RANK_3_GROVE_BOUNDS_Y;
+  public static final ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_ZX;
+  public static final ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_Y;
 
-  public static ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_ZX;
-  public static ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_Y;
+  public static final ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_X;
+  public static final ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_Y;
+  public static final ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_Z;
 
-  public static ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_X;
-  public static ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_Y;
-  public static ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_Z;
+  public static final ModConfigSpec.BooleanValue DROP_AUBERGINE_SEEDS;
+  public static final ModConfigSpec.BooleanValue DROP_WILDROOT;
+  public static final ModConfigSpec.BooleanValue DROP_GROVE_SPORES;
 
-  public static ModConfigSpec.BooleanValue DROP_AUBERGINE_SEEDS;
-  public static ModConfigSpec.BooleanValue DROP_WILDROOT;
-  public static ModConfigSpec.BooleanValue DROP_GROVE_SPORES;
+  public static final ModConfigSpec.BooleanValue ELEMENTAL_CROP_EXTRA_DROPS;
+  public static final ModConfigSpec.DoubleValue ELEMENTAL_CROP_EXTRA_DROPS_CHANCE;
 
-  public static ModConfigSpec.BooleanValue ELEMENTAL_CROP_EXTRA_DROPS;
-  public static ModConfigSpec.DoubleValue ELEMENTAL_CROP_EXTRA_DROPS_CHANCE;
+  public static final ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
 
-  public static ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
+  public static final ModConfigSpec.BooleanValue DEBUG_REPUTATION;
+  public static final ModConfigSpec.BooleanValue DEBUG_GROVE_ACTIONS;
+  public static final ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
+  public static final ModConfigSpec.BooleanValue DEBUG_KEYBINDS;
+  public static final ModConfigSpec.BooleanValue DEBUG_JEI;
+  public static final ModConfigSpec.BooleanValue DEBUG_EXTENSIVE;
 
-  public static ModConfigSpec.BooleanValue DEBUG_REPUTATION;
-  public static ModConfigSpec.BooleanValue DEBUG_GROVE_ACTIONS;
-  public static ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
-  public static ModConfigSpec.BooleanValue DEBUG_KEYBINDS;
-  public static ModConfigSpec.BooleanValue DEBUG_JEI;
-  public static ModConfigSpec.BooleanValue DEBUG_EXTENSIVE;
+  public static final ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
 
-  public static ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
+  public static final ModConfigSpec.BooleanValue DELAYED_PARTICLES;
+  public static final ModConfigSpec.BooleanValue AQUA_BUBBLE_OVERLAY;
+  public static final ModConfigSpec.BooleanValue WARNING_OVERLAY;
 
-  public static ModConfigSpec.BooleanValue DELAYED_PARTICLES;
-  public static ModConfigSpec.BooleanValue AQUA_BUBBLE_OVERLAY;
-  public static ModConfigSpec.BooleanValue WARNING_OVERLAY;
+  public static final ModConfigSpec.IntValue FUNGAL_TRANSMUTER_POWER_PER_TICK;
+  public static final ModConfigSpec.IntValue FUNGAL_TRANSMUTER_MAX_STORED_POWER;
 
-  public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_POWER_PER_TICK;
-  public static ModConfigSpec.IntValue FUNGAL_TRANSMUTER_MAX_STORED_POWER;
+  public static final ModConfigSpec.IntValue PESTLE_COOLDOWN;
 
-  public static ModConfigSpec.IntValue PESTLE_COOLDOWN;
+  public static final ModConfigSpec.BooleanValue DISABLE_CUSTOM_PARTICLE_SHADER;
+  public static final ModConfigSpec.BooleanValue DISABLE_PATICLES;
+  public static final ModConfigSpec.BooleanValue FORCE_CUSTOM_PARTICLE_SHADER;
 
-  public static ModConfigSpec.BooleanValue DISABLE_CUSTOM_PARTICLE_SHADER;
-  public static ModConfigSpec.BooleanValue DISABLE_PATICLES;
-  public static ModConfigSpec.BooleanValue FORCE_CUSTOM_PARTICLE_SHADER;
+  public static final ModConfigSpec.ConfigValue<List<? extends String>> GUI_LAYER_SKIP;
 
-  public static ModConfigSpec.ConfigValue<List<? extends String>> GUI_LAYER_SKIP;
-
-  public static ModConfigSpec COMMON_CONFIG;
-  public static ModConfigSpec CLIENT_CONFIG;
+  public static final ModConfigSpec COMMON_CONFIG;
+  public static final ModConfigSpec CLIENT_CONFIG;
 
   private static ResourceLocation appleSkin(String name) {
     return ResourceLocation.fromNamespaceAndPath("appleskin", name);
@@ -224,7 +220,6 @@ public class ConfigManager {
     PESTLE_COOLDOWN = COMMON_BUILDER.comment("the cooldown in ticks after using a pestle on a mortar, -1 for no cooldown")
         .defineInRange("pestle_cooldown", 12, -1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
-
     CLIENT_BUILDER.push("debug");
     SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
         .define("suppress_reputation_changes", true);
