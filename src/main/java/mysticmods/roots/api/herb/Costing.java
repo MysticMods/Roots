@@ -1,4 +1,4 @@
-package mysticmods.roots.api.spell;
+package mysticmods.roots.api.herb;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
@@ -7,10 +7,11 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
-import mysticmods.roots.api.herb.*;
+import mysticmods.roots.api.modifier.ChildChargeType;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
+import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.network.chat.Component;
@@ -21,7 +22,10 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 // TODO: Abstract this away from player-based
 public class Costing {
@@ -31,113 +35,16 @@ public class Costing {
 
   private final Object2BooleanMap<ICosted> modifierMap = new Object2BooleanOpenHashMap<>();
 
-  private Map<Herb, List<HerbEntry>> herbMapCache;
+  private HerbMap herbMapCache;
 
   private final ParentChargeType chargeType;
 
   private int operationsCount = 0;
   private double discount = 0;
   private boolean noCharge = false;
-  private boolean foundCreativePouch = false;
 
-  // TODO: Modified spells in spell library do not correctly count modifiers (in tooltip) in costs
-  //  nor does it show modifiers
   // TODO: Hold shift for more details on staff
-
-  // Herb costs can be as follows:
-  // (Per spell)    (Herb + double + additive/multiplicative) +
-  //                ((Herb + double + additive/multiplicative) (per charged modifier))
-  //                * (charge == operation ? op_count : 1)
-
-  // Costings:
-  // Per herb costs from base
-  // Per herb costs from modifier
-  // Discounts
-
-  enum CostSource {
-    SPELL, // always additive
-    MODIFIER, // multiplicative or additive
-    DISCOUNT // always multiplicative
-  }
-
-  public record CostSegment(double amount, CostType type, CostSource source) {
-    public static CostSegment spell (double amount) {
-      return new CostSegment(amount, CostType.ADDITIVE, CostSource.SPELL);
-    }
-
-    public static CostSegment discount (double amount) {
-      return new CostSegment(amount, CostType.MULTIPLICATIVE_TOTAL, CostSource.DISCOUNT);
-    }
-
-    public static CostSegment modifier (double amount, CostType type) {
-      return new CostSegment(amount, type, CostSource.MODIFIER);
-    }
-  }
-
-  // First, sort by cost type: additive then multiplicative (compareTo?)
-  // Iterate over and have two running totals:
-  // Total
-  // Total without modifiers
-
-  // Validate that all CostSources.SPELL = CostType.ADDITIVE
-
-  // TODO: Base spells can never be multiplicative
-
-  // Sky Soarer
-  // cloud_berry: +1.250
-  // Friendly Earth
-  // stalicripe: +0.125
-  // Amplifier 1:
-  // cloud_berry: +0.125
-  // Amplifier 2:
-  // cloud_berry +0.125
-  // Speedy 1:
-  // cloud_berry: +0.125
-  // Speedy 2:
-  // cloud_berry: *1.05
-
-  // cloud_berry: (+1.625) *1.05 -> [1.70625] * 0.98 -> 1.672125
-  // stalicripe: +0.125 -> 0.1225
-  // double: total cost   +1.70625    -> 0.45625
-  // double: total cost without modifiers +1.225    -> 0.447125
-  // double: total cost without discounts +1.70625
-
-  // Cloud Berry: +1.706 [±0.456]
-  // Stalicripe: +0.125
-
-  public static final class CostChain {
-    private final List<CostSegment> segments;
-
-
-    public CostChain(List<CostSegment> segments) {
-      this.segments = segments;
-      this.segments.sort(Comparator.comparing(CostSegment::type));
-    }
-
-    public List<CostSegment> segments() {
-      return segments;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (obj == this) return true;
-      if (obj == null || obj.getClass() != this.getClass()) return false;
-      var that = (CostChain) obj;
-      return Objects.equals(this.segments, that.segments);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(segments);
-    }
-
-    @Override
-    public String toString() {
-      return "CostChain[" +
-          "segments=" + segments + ']';
-    }
-
-  }
+  // TODO: Base spells can never be multiplicative - enforce this in the CORRECT PLACE
 
   public Costing(ICostedParent parent) {
     this.parent = parent;
@@ -148,11 +55,12 @@ public class Costing {
         charge(modifier);
       }
     }
+    herbMapCache = null;
   }
 
   public Costing(ICostedParent parent, Player player) {
     this(parent);
-    herbMapCache = herbMap(player);
+    herbMapCache = new HerbMap(player);
   }
 
   public ParentChargeType getChargeType() {
@@ -163,20 +71,12 @@ public class Costing {
     this.noCharge = true;
   }
 
-  public void increment() {
-    this.operationsCount++;
-  }
-
   public int operations() {
     return this.operationsCount;
   }
 
   public void operations(int operations) {
     this.operationsCount = operations;
-  }
-
-  public double discount() {
-    return this.discount;
   }
 
   public void discount(double discount) {
@@ -192,63 +92,8 @@ public class Costing {
     modifierMap.put(modifier, true);
   }
 
-  private Map<Herb, List<HerbEntry>> herbMap(Player player) {
-    Inventory playerInventory = player.getInventory();
-    Map<Herb, List<HerbEntry>> herbMap = new HashMap<>();
-    for (int i = 0; i < playerInventory.getContainerSize(); i++) {
-      ItemStack inSlot = playerInventory.getItem(i);
-      if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
-        foundCreativePouch = true;
-        return herbMap;
-      }
-      Herb herb = Herb.getHerb(inSlot);
-      if (herb != null) {
-        List<HerbEntry> entries = herbMap.get(herb);
-        if (entries == null) {
-          entries = new ArrayList<>();
-          herbMap.put(herb, entries);
-        }
-        entries.add(new HerbEntry(HerbEntryType.INVENTORY, herb, i, inSlot.getCount(), -1));
-      } else {
-        IItemHandler cap = inSlot.getCapability(Capabilities.ItemHandler.ITEM, null);
-        if (cap != null) {
-          for (int j = 0; j < cap.getSlots(); j++) {
-            ItemStack inSlot2 = cap.getStackInSlot(j);
-            Herb herb2 = Herb.getHerb(inSlot2);
-            if (herb2 != null) {
-              herbMap.computeIfAbsent(herb2, k -> new ArrayList<>())
-                  .add(new HerbEntry(HerbEntryType.CAPABILITY, herb2, i, inSlot2.getCount(), j));
-            }
-          }
-        }
-      }
-    }
-    List<ItemStack> curios = RootsAPI.getInstance().getCurios(player, RootsTags.Items.CURIOS_BELTS);
-    for (int i = 0; i < curios.size(); i++) {
-      ItemStack inSlot = curios.get(i);
-      if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
-        foundCreativePouch = true;
-        continue;
-      }
-      IItemHandler cap = inSlot.getCapability(Capabilities.ItemHandler.ITEM, null);
-      if (cap != null) {
-        for (int j = 0; j < cap.getSlots(); j++) {
-          ItemStack inSlot2 = cap.getStackInSlot(j);
-          Herb herb2 = Herb.getHerb(inSlot2);
-          if (herb2 != null) {
-            herbMap.computeIfAbsent(herb2, k -> new ArrayList<>())
-                .add(new HerbEntry(HerbEntryType.CURIOS_CAPABILITY, herb2, i, inSlot2.getCount(), j));
-          }
-        }
-      }
-    }
-    herbMap.forEach((a, b) -> b.sort(Comparator.comparingInt(HerbEntry::getCount)));
-    return herbMap;
-  }
-
   public boolean canAfford(Player player, boolean checkModifiers) {
-    boolean creative = player.isCreative() || foundCreativePouch;
-    this.herbMapCache = herbMap(player);
+    boolean creative = player.isCreative() || herbMapCache.foundCreativePouch();
     calculateCosts(checkModifiers, false, true, false);
 
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
@@ -257,11 +102,8 @@ public class Costing {
       double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), true);
       if (remainder != 0) {
         double count = 0;
-        List<HerbEntry> entries = herbMapCache.get(entry.getKey());
-        if (entries != null) {
-          for (HerbEntry herbEntry : entries) {
-            count += herbEntry.count;
-          }
+        for (HerbEntry herbEntry : herbMapCache.entries(entry.getKey())) {
+          count += herbEntry.count;
         }
         if (remainder > count && !creative) {
           return false;
@@ -282,7 +124,7 @@ public class Costing {
 
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
   public boolean charge(Player player, boolean tick) {
-    boolean isCreative = player.isCreative() || foundCreativePouch;
+    boolean isCreative = player.isCreative() || herbMapCache.foundCreativePouch();
     if (player.level().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
@@ -295,7 +137,6 @@ public class Costing {
       RootsAPI.LOG.error("Charging with operation costs but no operations! {}", parent);
     }
 
-    this.herbMapCache = herbMap(player);
     calculateCosts(true, false, false, tick);
 
     Inventory playerInventory = player.getInventory();
@@ -307,7 +148,7 @@ public class Costing {
         double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
         if (remainder != 0) {
           int toConsume = Mth.ceil(remainder);
-          for (HerbEntry herbEntry : herbMapCache.getOrDefault(entry.getKey(), List.of())) {
+          for (HerbEntry herbEntry : herbMapCache.entries(entry.getKey())) {
             if (herbEntry.type == HerbEntryType.INVENTORY) {
               ItemStack stack = playerInventory.getItem(herbEntry.slot);
               if (stack.getCount() >= toConsume) {
@@ -378,14 +219,10 @@ public class Costing {
 
     for (Herb herb : totalCosts.keySet()) {
       double total = cap.amount(herb);
-      for (HerbEntry herbEntry : herbMapCache.getOrDefault(herb, List.of())) {
+      for (HerbEntry herbEntry : herbMapCache.entries(herb)) {
         total += herbEntry.count;
-        //totals.put(herb, totals.getDouble(herb) + herbEntry.count);
       }
 
-      // Thus setting the config to 0 disables this
-      // Only send alerts on cast success, not ticks
-      // TODO: Maybe sent it on ticks?
       if (total < ConfigManager.HERB_MINIMUM_ALERT.getAsDouble() && !isCreative && !tick) {
         // TODO: Translation key
         player.displayClientMessage(Component.literal("Low on " + herb.getName() + "!"), !sentAlert);
@@ -402,13 +239,19 @@ public class Costing {
   private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
+    Object2DoubleMap<Herb> baseCosts = new Object2DoubleOpenHashMap<>();
     ParentChargeType thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
-      List<Cost> costs = herbCosts.get(cost.getHerb());
-      if (costs == null) {
-        costs = new ArrayList<>();
-        herbCosts.put(cost.getHerb(), costs);
+      if (cost.getType().isMultiplicative()) {
+        throw new IllegalStateException("Multiplicative costs cannot be found in the parent");
       }
+
+      var cur = baseCosts.getOrDefault(cost.getHerb(), 0.0);
+      baseCosts.put(cost.getHerb(), cur + cost.getValue());
+    }
+
+    for (Cost cost : parent.getCosts().costs()) {
+      List<Cost> costs = herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>());
       if (thisType == ParentChargeType.OPERATION && maxOperations) {
         for (int i = 0; i < parent.getMaximumOperations(); i++) {
           costs.add(cost);
@@ -422,15 +265,10 @@ public class Costing {
       }
     }
     if (!skipModifiers) {
-      // TODO: Does this actually work to calculate modifiers?
       for (ICostedChild modifier : parent.getChildren()) {
         if (checkModifiers && modifierMap.getBoolean(modifier) || maxOperations) {
           for (Cost cost : modifier.getCosts().costs()) {
-            List<Cost> costs = herbCosts.get(cost.getHerb());
-            if (costs == null) { // TODO: Is this actually faster?
-              costs = new ArrayList<>();
-              herbCosts.put(cost.getHerb(), costs);
-            }
+            List<Cost> costs = herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>());
             if (thisType == ParentChargeType.OPERATION && maxOperations) {
               for (int i = 0; i < parent.getMaximumOperations(); i++) {
                 costs.add(cost);
@@ -456,11 +294,19 @@ public class Costing {
         total += cost.getValue();
       }
       for (Cost cost : entry.getValue()) {
-        if (cost.getType().isAdditive()) {
+        if (cost.getType() == CostType.MULTIPLICATIVE_BASE) {
+          var val = cost.getValue();
+          if (val > 0) {
+            RootsAPI.LOG.error("Cost {} is multiplicative_base but > 1", cost);
+            val = val - 1;
+          }
+          total += (baseCosts.getOrDefault(entry.getKey(), 0) * val);
+        }
+      }
+      for (Cost cost : entry.getValue()) {
+        if (cost.getType() != CostType.MULTIPLICATIVE_TOTAL) {
           continue;
         }
-
-        // TODO: Handle multiplicative base
 
         total *= cost.getValue();
       }
@@ -481,17 +327,15 @@ public class Costing {
 
       totalCosts.put(entry.getKey(), total);
     }
-
   }
 
-  // TODO: Tooltip cost
-  public Object2DoubleMap<Herb> getMinimumCost() {
+/*  public Object2DoubleMap<Herb> getMinimumCost() {
     int ops = this.operationsCount;
     this.operationsCount = 1;
     calculateCosts(false, true, false, false);
     this.operationsCount = ops;
     return new Object2DoubleOpenHashMap<>(totalCosts);
-  }
+  }*/
 
   public Object2DoubleMap<Herb> getTooltipCost() {
     int ops = this.operationsCount;
@@ -501,48 +345,8 @@ public class Costing {
     return new Object2DoubleOpenHashMap<>(totalCosts);
   }
 
-  public Object2DoubleMap<Herb> getMaximumCost() {
+/*  public Object2DoubleMap<Herb> getMaximumCost() {
     calculateCosts(false, false, true, false);
     return new Object2DoubleOpenHashMap<>(totalCosts);
-  }
-
-  private static class HerbEntry {
-    public final HerbEntryType type;
-    public final Herb herb;
-    public final int slot;
-    public int count;
-    public final int subindex;
-
-    public HerbEntry(HerbEntryType type, Herb herb, int slot, int count, int subindex) {
-      this.type = type;
-      this.herb = herb;
-      this.slot = slot;
-      this.count = count;
-      this.subindex = subindex;
-    }
-
-    public HerbEntryType getType() {
-      return type;
-    }
-
-    public Herb getHerb() {
-      return herb;
-    }
-
-    public int getSlot() {
-      return slot;
-    }
-
-    public int getCount() {
-      return count;
-    }
-
-    public int getSubindex() {
-      return subindex;
-    }
-  }
-
-  private enum HerbEntryType {
-    CAPABILITY, INVENTORY, CURIOS_CAPABILITY
-  }
+  }*/
 }

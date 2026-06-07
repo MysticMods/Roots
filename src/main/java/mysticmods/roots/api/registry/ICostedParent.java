@@ -1,6 +1,6 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.herb.ParentChargeType;
+import mysticmods.roots.api.spell.ParentChargeType;
 
 import java.util.Set;
 

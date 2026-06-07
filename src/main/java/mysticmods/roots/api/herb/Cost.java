@@ -52,4 +52,13 @@ public class Cost {
   public static Cost multTotal (Holder<Herb> herb, double value) {
     return new Cost(CostType.MULTIPLICATIVE_TOTAL, herb, value);
   }
+
+  @Override
+  public String toString() {
+    return "Cost{" +
+        "type=" + type +
+        ", herb=" + herb +
+        ", value=" + value +
+        '}';
+  }
 }

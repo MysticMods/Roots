@@ -1,4 +1,4 @@
-package mysticmods.roots.api.herb;
+package mysticmods.roots.api.modifier;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;

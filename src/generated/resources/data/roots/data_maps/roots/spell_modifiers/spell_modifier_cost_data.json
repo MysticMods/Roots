@@ -13,7 +13,7 @@
       "costs": [
         {
           "type": "multiplicative_base",
-          "defaultValue": 1.05,
+          "defaultValue": 0.05,
           "herb": "roots:cloud_berry"
         }
       ]

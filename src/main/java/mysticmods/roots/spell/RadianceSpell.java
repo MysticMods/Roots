@@ -1,10 +1,10 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.herb.ParentChargeType;
+import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;

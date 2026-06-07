@@ -6,9 +6,9 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostType;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.herb.ParentChargeType;
+import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
@@ -138,8 +138,13 @@ public class TooltipUtil {
       // TODO: Decide how to handle multiplicative costs
       // +5%
       // (cost.getValue() - 1) * 100;
-      var amount = cost.getType() == CostType.ADDITIVE ? "roots.tooltip.cost.cost_amount" : "roots.tooltip.cost.cost_multiplier";
-      result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable(amount, herbCost)));
+      String amountKey = switch (cost.getType()) {
+        case ADDITIVE -> "roots.tooltip.cost.cost_amount";
+        case MULTIPLICATIVE_BASE -> "roots.tooltip.cost.cost_multiply_base";
+        case MULTIPLICATIVE_TOTAL -> "roots.tooltip.cost.cost_multiply_total";
+      };
+/*      var amount = cost.getType() == CostType.ADDITIVE ?  : "roots.tooltip.cost.cost_multiplier";*/
+      result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable(amountKey, herbCost)));
     }
   }
 
