@@ -1,15 +1,14 @@
 package mysticmods.roots.util;
 
-import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostType;
-import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.spell.ParentChargeType;
-import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.network.chat.CommonComponents;
@@ -87,22 +86,32 @@ public class TooltipUtil {
 
   public static void addModifierList(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     var modifiers = spell.getEnabledModifiers();
-    // TODO: Modifiers should be sorted
     // TODO: Modifier sets ("Amplified 1, Amplified 2") should collapse ("Amplified (2)")
     if (!modifiers.isEmpty()) {
-      result.add(CommonComponents.EMPTY);
-      var line = Component.translatable("roots.tooltip.spell.modifiers");
-      boolean first = true;
-      for (SpellModifier modifier : modifiers) {
-        if (!first) {
-          line.append(Component.literal(", "));
+      if (flag.hasShiftDown()) {
+        // TODO: This makes the tooltips to damn long
+        for (SpellModifier modifier : modifiers) {
+          result.add(CommonComponents.EMPTY);
+          result.add(modifier.getName());
+          TooltipUtil.describeModifier(context, result, modifier, flag);
+          result.add(CommonComponents.EMPTY);
+          TooltipUtil.baseModifierCostTooltip(context, result, modifier, flag);
         }
-        if (first) {
-          first = false;
+      } else {
+        result.add(CommonComponents.EMPTY);
+        var line = Component.translatable("roots.tooltip.spell.modifiers");
+        boolean first = true;
+        for (SpellModifier modifier : modifiers) {
+          if (!first) {
+            line.append(Component.literal(", "));
+          }
+          if (first) {
+            first = false;
+          }
+          line.append(modifier.getName());
         }
-        line.append(modifier.getName());
+        result.add(line);
       }
-      result.add(line);
     }
   }
 
