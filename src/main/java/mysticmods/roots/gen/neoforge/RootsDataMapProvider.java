@@ -335,11 +335,11 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     var builder20 = builder(DataMaps.GROVE_ACTION_REPUTATIONS);
     builder20.add(ModActions.CROP_GROWTH, List.of(
-        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(5, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.CULTIVATION_REPUTATION_CROPS),
-        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(50, 5, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS),
-        new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("twilight_crop_growth"), new GroveReputation(50, 5, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.TWILIGHT_REPUTATION_CROPS),
-        new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("fairy_crop_growth"), new GroveReputation(50, 5, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.FAIRY_REPUTATION_CROPS),
-        new GroveReputationEntry(ModGroves.PRIMAL.value(), RootsAPI.rl("wild_crop_growth"), new GroveReputation(50, 5, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.WILD_REPUTATION_CROPS)
+        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(2, 2, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.CULTIVATION_REPUTATION_CROPS),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS),
+        new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("twilight_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.TWILIGHT_REPUTATION_CROPS),
+        new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("fairy_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.FAIRY_REPUTATION_CROPS),
+        new GroveReputationEntry(ModGroves.PRIMAL.value(), RootsAPI.rl("wild_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.WILD_REPUTATION_CROPS)
     ), false);
 
     int first_spell_reward = 125;
