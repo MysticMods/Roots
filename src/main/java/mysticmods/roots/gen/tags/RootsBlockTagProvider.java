@@ -312,7 +312,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     // All crops for cultivation
     tag(RootsTags.Blocks.CULTIVATION_REPUTATION_CROPS).addTags(BlockTags.CROPS);
     tag(RootsTags.Blocks.FAIRY_REPUTATION_CROPS).addTags(RootsTags.Blocks.PERESKIA_CROP);
-    tag(RootsTags.Blocks.WILD_REPUTATION_CROPS).addTags(RootsTags.Blocks.SPIRITLEAF_CROP);
+    tag(RootsTags.Blocks.PRIMAL_REPUTATION_CROPS).addTags(RootsTags.Blocks.SPIRITLEAF_CROP);
     tag(RootsTags.Blocks.TWILIGHT_REPUTATION_CROPS).addTags(RootsTags.Blocks.MOONGLOW_CROP);
     tag(RootsTags.Blocks.UNDERWATER_FARMLAND).add(Blocks.DIRT, Blocks.DIRT_PATH, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.GRASS_BLOCK);
     tag(RootsTags.Blocks.FARMLANDS).add(Blocks.FARMLAND).addTag(RootsTags.Blocks.ALL_SOIL);
