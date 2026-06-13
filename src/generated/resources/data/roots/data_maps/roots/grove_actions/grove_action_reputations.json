@@ -263,8 +263,8 @@
         "grove": "roots:cultivation",
         "name": "roots:sprout_crop_growth",
         "reputation": {
-          "gain1": 5,
-          "gain2": 3,
+          "gain1": 2,
+          "gain2": 2,
           "gain3": 1,
           "gain4": 0,
           "gain5": 0
@@ -281,8 +281,8 @@
         "grove": "roots:elemental",
         "name": "roots:elemental_crop_growth",
         "reputation": {
-          "gain1": 50,
-          "gain2": 5,
+          "gain1": 4,
+          "gain2": 3,
           "gain3": 1,
           "gain4": 0,
           "gain5": 0
@@ -299,8 +299,8 @@
         "grove": "roots:twilight",
         "name": "roots:twilight_crop_growth",
         "reputation": {
-          "gain1": 50,
-          "gain2": 5,
+          "gain1": 4,
+          "gain2": 3,
           "gain3": 1,
           "gain4": 0,
           "gain5": 0
@@ -317,8 +317,8 @@
         "grove": "roots:fairy",
         "name": "roots:fairy_crop_growth",
         "reputation": {
-          "gain1": 50,
-          "gain2": 5,
+          "gain1": 4,
+          "gain2": 3,
           "gain3": 1,
           "gain4": 0,
           "gain5": 0
@@ -329,14 +329,14 @@
         "entries": [
           {
             "type": "block",
-            "name": "roots:grove/wild/crops"
+            "name": "roots:grove/primal/crops"
           }
         ],
         "grove": "roots:primal",
-        "name": "roots:wild_crop_growth",
+        "name": "roots:primal_crop_growth",
         "reputation": {
-          "gain1": 50,
-          "gain2": 5,
+          "gain1": 4,
+          "gain2": 3,
           "gain3": 1,
           "gain4": 0,
           "gain5": 0
