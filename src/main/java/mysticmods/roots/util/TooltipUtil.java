@@ -186,11 +186,19 @@ public class TooltipUtil {
   }
 
   public static void describeSpell(Item.TooltipContext context, List<Component> tooltipComponents, Spell spell, TooltipFlag tooltipFlag) {
-    tooltipComponents.add(Component.translatable(spell.getDescriptionId() + ".description"));
+    if (tooltipFlag.hasShiftDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
+      tooltipComponents.add(spell.getTooltipExtendedDescription());
+    } else {
+      tooltipComponents.add(spell.getTooltipDescription());
+    }
   }
 
   public static void describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, SpellModifier spellModifier, TooltipFlag tooltipFlag) {
-    tooltipComponents.add(Component.translatable(spellModifier.getDescriptionId() + ".description"));
+    if (tooltipFlag.hasShiftDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
+      tooltipComponents.add(spellModifier.getTooltipExtendedDescription());
+    } else {
+      tooltipComponents.add(spellModifier.getTooltipDescription());
+    }
   }
 }
 

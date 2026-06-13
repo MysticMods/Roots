@@ -1,12 +1,10 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.registry.ICosted;
-import mysticmods.roots.api.registry.ICostedChild;
-import mysticmods.roots.api.registry.IDataMapInitialize;
-import mysticmods.roots.api.registry.IDescribed;
+import mysticmods.roots.api.registry.*;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -96,6 +94,15 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
 
   public boolean is(TagKey<T> key) {
     return builtInRegistryHolder().is(key);
+  }
+
+  // ????? TODO:
+  public boolean is (T value) {
+    return this.equals(value);
+  }
+
+  public boolean is (Holder<T> value) {
+    return builtInRegistryHolder().is(value);
   }
 
   public boolean isFor (@Nullable ResourceKey<?> type) {

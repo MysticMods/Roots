@@ -10,8 +10,9 @@ import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.*;
@@ -42,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell> {
+public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribed {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
@@ -58,6 +59,9 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected Style style;
   protected ChatFormatting textColor;
   protected String descriptionId;
+  protected String descriptionTooltipId;
+  protected String descriptionTooltipExtendedId;
+  protected Component[] extendedDescription = null;
 
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
   private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
@@ -152,6 +156,28 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return null;
   }
 
+  @Override
+  public Component[] getOrCreateDescriptionComponents() {
+    if (extendedDescription == null) {
+      this.extendedDescription = createExtendedDescriptionComponents();
+    }
+
+    return this.extendedDescription;
+
+  }
+
+  // TODO: Make this abstract
+  @Deprecated(forRemoval = true)
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{};
+  }
+
+  // TODO: Make this abstract
+  @Deprecated(forRemoval = true)
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return null;
+  }
+
   public Component describeData(int index, int value) {
     if (index != 0) {
       String keyName = getDataKey(index);
@@ -212,6 +238,25 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return this.descriptionId;
   }
 
+  @Override
+  public String getOrCreateTooltipDescriptionId() {
+    if (this.descriptionTooltipId == null) {
+      this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
+    }
+
+    return this.descriptionTooltipId;
+  }
+
+
+  @Override
+  public String getOrCreateTooltipExtendedDescriptionId() {
+    if (this.descriptionTooltipExtendedId == null) {
+      this.descriptionTooltipExtendedId = getOrCreateDescriptionId() + ".description.extended";
+    }
+
+    return this.descriptionTooltipExtendedId;
+  }
+
   public int getColor1() {
     return color1;
   }
@@ -249,7 +294,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return costs;
   }
 
-  public ParentChargeType getChargeType () {
+  public ParentChargeType getChargeType() {
     return chargeType;
   }
 

@@ -3,10 +3,12 @@ package mysticmods.roots.api.modifier;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.registry.IExtendedDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -16,9 +18,13 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SpellModifier extends Modifier<Spell, SpellModifier> {
+public class SpellModifier extends Modifier<Spell, SpellModifier> implements IExtendedDescribed {
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
   protected final ChildChargeType chargeType;
+
+  protected String descriptionTooltipId;
+  protected String descriptionTooltipExtendedId;
+  protected Component[] extendedDescription = null;
 
   public SpellModifier(CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
     this(defaultCosts, parent, applicable, ChildChargeType.ALWAYS);
@@ -37,6 +43,40 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> {
     super(defaultCosts, applicable);
     this.chargeType = type;
   }
+
+  @Override
+  public Component[] getOrCreateDescriptionComponents() {
+    if (extendedDescription == null) {
+      this.extendedDescription = createExtendedDescriptionComponents();
+    }
+
+    return this.extendedDescription;
+
+  }
+
+  public Component[] createExtendedDescriptionComponents() {
+    return getApplicableHolder().value().createModifierDescriptionComponents(this);
+  }
+
+  @Override
+  public String getOrCreateTooltipDescriptionId() {
+    if (this.descriptionTooltipId == null) {
+      this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
+    }
+
+    return this.descriptionTooltipId;
+  }
+
+
+  @Override
+  public String getOrCreateTooltipExtendedDescriptionId() {
+    if (this.descriptionTooltipExtendedId == null) {
+      this.descriptionTooltipExtendedId = getOrCreateDescriptionId() + ".description.extended";
+    }
+
+    return this.descriptionTooltipExtendedId;
+  }
+
 
   @Override
   protected DataMapType<SpellModifier, CostInstance> getDataMapType() {

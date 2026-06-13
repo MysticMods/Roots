@@ -33,6 +33,8 @@ public abstract class RootsAPI {
   public static final Tier RUNED_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0f, 4.0f, 15, () -> Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN));
   public static final Tier SILVER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_GOLD_TOOL, 126, 12.0f, 0.0f, 22, () -> Ingredient.of(RootsTags.Items.SILVER_INGOT));
 
+  public static final double SPRINT_SPEED = 0.28085;
+
   public static final ResourceKey<LootTable> HUT = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("chests/hut"));
   public static final ResourceKey<LootTable> BARROW = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("chests/barrow"));
   public static final ResourceKey<LootTable> STANDING_STONES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("chests/standing_stones"));

@@ -2,6 +2,7 @@ package mysticmods.roots.effect;
 
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -71,7 +72,7 @@ public class SkySoarerEffect extends SimpleEffect {
         if (sky.hasFriendlyEarth()) {
           player.fallDistance = 1.0f;
           if (player instanceof LivingEntity living) {
-            living.addEffect(new MobEffectInstance(ModEffects.FRIENDLY_EARTH, 5 * 20, 0, false, false));
+            living.addEffect(new MobEffectInstance(ModEffects.FRIENDLY_EARTH, ModSpells.SKY_SOARER.value().getFriendlyEarthDuration(), 0, false, false));
           }
         }
       });

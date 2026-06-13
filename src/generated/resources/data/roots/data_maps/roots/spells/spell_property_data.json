@@ -771,6 +771,15 @@
           "default_value": 0.1,
           "value": 0.1
         }
+      },
+      {
+        "id": "roots:sky_soarer/friendly_earth_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "Duration of the friendly earth effect, applied when the sky soarer effect ends or is canceled, in ticks.",
+          "default_value": 100,
+          "value": 100
+        }
       }
     ],
     "roots:storm_cloud": [

@@ -1,8 +1,10 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -19,6 +21,7 @@ import mysticmods.roots.snapshot.SkySoarerSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -32,7 +35,7 @@ import java.util.List;
 
 public class SkySoarerSpell extends Spell {
   private float amplifier, amplifier_increase, duration_incrase;
-  private int duration;
+  private int duration, friendly_earth_duration;
 
   public SkySoarerSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x20c8ff, 0x2040ff);
@@ -50,6 +53,7 @@ public class SkySoarerSpell extends Spell {
     properties.add(ModSpells.SKY_SOARER_AMPLIFIER_INCREASE);
     properties.add(ModSpells.SKY_SOARER_DURATION);
     properties.add(ModSpells.SKY_SOARER_DURATION_INCREASE);
+    properties.add(ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION);
   }
 
   @Override
@@ -59,6 +63,11 @@ public class SkySoarerSpell extends Spell {
     this.amplifier_increase = properties.get(ModSpells.SKY_SOARER_AMPLIFIER_INCREASE);
     this.duration = properties.get(ModSpells.SKY_SOARER_DURATION);
     this.duration_incrase = properties.get(ModSpells.SKY_SOARER_DURATION_INCREASE);
+    this.friendly_earth_duration = properties.get(ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION);
+  }
+
+  public int getFriendlyEarthDuration () {
+    return friendly_earth_duration;
   }
 
   @Override
@@ -74,5 +83,67 @@ public class SkySoarerSpell extends Spell {
     //RootsAPI.LOG.info("Duration base: {}, this duration: {}, amplifier base: {}, this amplifier: {}", duration, thisDuration, amplifier, thisAmplifier);
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastSkySoarerFXPacket(pPlayer.getId(), thisDuration));
     return cooldown;
+  }
+
+  @SuppressWarnings("removal")
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    double inSprint = amplifier / RootsAPI.SPRINT_SPEED;
+    return new Component[]{
+        Component.literal(String.format("%.1f", inSprint)),
+        Component.literal(String.format("%.1f", amplifier)),
+        Component.literal(String.format("%.1f", duration / 20.0)),
+        Component.literal(String.valueOf(duration))
+    };
+  }
+
+  @SuppressWarnings("removal")
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    if (spellModifier.is(ModModifiers.SKY_SOARER_FRIENDLY_EARTH)) {
+      return new Component[]{
+          Component.literal(String.format("%.1f", friendly_earth_duration/20.0)),
+          Component.literal(String.valueOf(friendly_earth_duration))
+      };
+    } else if (spellModifier.is(ModModifiers.SKY_SOARER_SPEEDY_1)) {
+      double total = (1 * duration_incrase);
+      double duration = this.duration + (((double)this.duration) * total);
+      double seconds = duration / 20.0;
+
+      return new Component[]{
+          Component.literal(String.format("%.1f", total)),
+          Component.literal(String.format("%.1f", seconds)),
+          Component.literal(String.format("%.0f", duration))
+      };
+    } else if (spellModifier.is(ModModifiers.SKY_SOARER_SPEEDY_2)) {
+      double total = (2 * duration_incrase);
+      double duration = this.duration + (((double)this.duration) * total);
+      double seconds = duration / 20.0;
+
+      return new Component[]{
+          Component.literal(String.format("%.1f", total)),
+          Component.literal(String.format("%.1f", seconds)),
+          Component.literal(String.format("%.0f", duration))
+      };
+    } else if (spellModifier.is(ModModifiers.SKY_SOARER_AMPLIFIED_1)) {
+      double total = amplifier + (amplifier * (1 * amplifier_increase));
+      double inSprint = total / RootsAPI.SPRINT_SPEED;
+
+      return new Component[]{
+          Component.literal(String.format("%.1f", inSprint)),
+          Component.literal(String.format("%.1f", total))
+      };
+    } else if (spellModifier.is(ModModifiers.SKY_SOARER_AMPLIFIED_2)) {
+      double total = amplifier + (amplifier * (2 * amplifier_increase));
+      double inSprint = total / RootsAPI.SPRINT_SPEED;
+
+      return new Component[]{
+          Component.literal(String.format("%.1f", inSprint)),
+          Component.literal(String.format("%.1f", total))
+      };
+    } else {
+      RootsAPI.LOG.error("Tried to create description components for modifiers not associated with {}: {}", this, spellModifier);
+      return new Component[]{};
+    }
   }
 }

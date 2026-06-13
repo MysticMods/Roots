@@ -891,11 +891,18 @@ public final class RootsLangProvider extends LanguageProvider {
     add(GrovePowerGenerator.Symmetry.NONE.getTranslationKey() + ".description", "No symmetry required.");
 
     spellDescription(ModSpells.SKY_SOARER, "Propels you through the air in the direction you are looking.");
+    spellExtendedDescription(ModSpells.SKY_SOARER, "Propels you through the air at ×%s sprint speed [%s] for %s seconds [%s ticks] in the direction you are looking.");
     modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_1, "Increases speed of boost effect.");
+    modifierExtendedDescription(ModModifiers.SKY_SOARER_AMPLIFIED_1, "Increases boost effect to ×%s sprint speed [%s].");
     modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_2, "Increases speed of boost effect.");
+    modifierExtendedDescription(ModModifiers.SKY_SOARER_AMPLIFIED_2, "Increases boost effect to ×%s sprint speed [%s].");
     modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_1, "Increases duration of boost effect.");
+    modifierExtendedDescription(ModModifiers.SKY_SOARER_SPEEDY_1, "Increases duration of boost effect by [%s%%] to %s seconds [%s ticks].");
     modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect.");
+    modifierExtendedDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect by [%s%%] to %s seconds [%s ticks].");
+
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
+    modifierExtendedDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage for %s seconds [%s ticks] after the boost effect ends.");
 
     spellDescription(ModSpells.ACID_CLOUD, "Creates a damaging poisonous cloud around you while channeled.");
     spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
@@ -931,11 +938,19 @@ public final class RootsLangProvider extends LanguageProvider {
   } */
 
   public void spellDescription(Holder<Spell> spell, String value) {
-    add(spell.value().getDescriptionId() + ".description", value);
+    add(spell.value().getTooltipDescriptionId(), value);
+  }
+
+  public void spellExtendedDescription(Holder<Spell> spell, String value) {
+    add(spell.value().getTooltipExtendedDescriptionId(), value);
   }
 
   public void modifierDescription (Holder<SpellModifier> spellModifier, String value) {
-    add(spellModifier.value().getDescriptionId() + ".description", value);
+    add(spellModifier.value().getTooltipDescriptionId(), value);
+  }
+
+  public void modifierExtendedDescription (Holder<SpellModifier> spellModifier, String value) {
+    add(spellModifier.value().getTooltipExtendedDescriptionId(), value);
   }
 
   public static String toEnglishName(String internalName) {

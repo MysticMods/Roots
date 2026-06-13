@@ -204,6 +204,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_AMPLIFIER = P.recordProperty("sky_soarer/amplifier", Property.ofFloat(0.9f, "The default movement speed amplifier for Sky Soarer."));
   public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_AMPLIFIER_INCREASE = P.recordProperty("sky_soarer/amplifier_increase", Property.ofFloat(0.1f, "The base amplifier value is multiplied by 1+(this value, multiplied by the number of amplifier modifiers enabled)."));
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_DURATION = P.recordProperty("sky_soarer/duration", Property.ofInt(50, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_FRIENDLY_EARTH_DURATION = P.recordProperty("sky_soarer/friendly_earth_duration", Property.ofInt(5 * 20, "Duration of the friendly earth effect, applied when the sky soarer effect ends or is canceled, in ticks."));
   public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_DURATION_INCREASE = P.recordProperty("sky_soarer/boosted_duration", Property.ofFloat(0.1f, "The base duration value is multiplied by 1+(this value, multiplied by the number of duration modifiers enabled)."));
 
   // Temporal Morass (320 cooldown)
