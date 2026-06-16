@@ -210,7 +210,7 @@ public class RenderUtil {
   }
 
   // TODO: Overhaul all of this; where is the guiGraphics gooey goodness?
-  public static void renderItemAsIcon(ItemStack stack, PoseStack poseStack, int pX, int pY, int size,
+  public static void renderItemAsIcon(GuiGraphics graphics, ItemStack stack, PoseStack poseStack, int pX, int pY, int size,
                                       boolean transparent) {
     if (stack.isEmpty()) {
       RootsAPI.LOG.info("Attempted to render empty item stack {}", stack);
@@ -233,12 +233,15 @@ public class RenderUtil {
     boolean flag = !itemBakedModel.usesBlockLight();
     if (flag) {
       Lighting.setupForFlatItems();
+    } else {
+      Lighting.setupFor3DItems();
     }
     if (transparent) {
       itemRenderer.render(stack, ItemDisplayContext.GUI, false, poseStack, transparentBuffer(bufferSource), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, itemBakedModel);
     } else {
       itemRenderer.render(stack, ItemDisplayContext.GUI, false, poseStack, bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, itemBakedModel);
     }
+    graphics.flush();
     //bufferSource.endBatch();
     if (flag) {
       Lighting.setupFor3DItems();
@@ -246,18 +249,7 @@ public class RenderUtil {
       Lighting.setupForFlatItems();
     }
 
-    if (transparent) {
-/*      RenderSystem.depthMask(true);
-      RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);*/
-    }
     poseStack.popPose();
-    Lighting.setupFor3DItems();
-    //RenderSystem.applyModelViewMatrix();
-/*    if (transparent) {
-      RenderSystem.disableBlend();
-      RenderSystem.defaultBlendFunc();
-    }*/
-
   }
 
   // Only used for rendering icons (re #1289)

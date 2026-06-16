@@ -35,7 +35,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
     if (visible) {
       // Draw the actual spell
 
-      RenderUtil.renderItemAsIcon(spellSupplier.get().asSpell()
+      RenderUtil.renderItemAsIcon(arg, spellSupplier.get().asSpell()
           .getStaffIcon(), arg.pose(), this.getX(), this.getY(), 16, isTransparent());
       arg.flush();
 
