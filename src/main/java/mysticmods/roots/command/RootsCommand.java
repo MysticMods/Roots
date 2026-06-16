@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
@@ -15,6 +16,7 @@ import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -27,13 +29,19 @@ import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import net.minecraft.Util;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceArgument;
+import net.minecraft.commands.arguments.ResourceKeyArgument;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.commands.synchronization.SuggestionProviders;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -69,36 +77,38 @@ public class RootsCommand {
     dispatcher.register(builder(Commands.literal("roots").requires(p -> p.hasPermission(2))));
   }
 
-  private static List<String> spellIds = null;
-  private static List<String> ritualIds = null;
   private static List<String> craftingRecipeIds = null;
-  private static List<String> groveIds = null;
 
-  private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestGroves() {
-    if (groveIds == null) {
-      groveIds = RootsRegistries.GROVES.keySet().stream().map(ResourceLocation::toString).toList();
-    }
+  public static final SuggestionProvider<CommandSourceStack> GROVES = SuggestionProviders.register(RootsAPI.rl("groves"), provider("grove", RootsRegistries.GROVES));
+  public static final SuggestionProvider<CommandSourceStack> SPELLS = SuggestionProviders.register(RootsAPI.rl("spells"), provider("spell", RootsRegistries.SPELLS));
+  public static final SuggestionProvider<CommandSourceStack> SPELL_MODIFIERS = SuggestionProviders.register(RootsAPI.rl("spell_modifiers"), provider("spell_modifier", RootsRegistries.SPELL_MODIFIERS));
+  public static final SuggestionProvider<CommandSourceStack> RITUALS = SuggestionProviders.register(RootsAPI.rl("rituals"), provider("ritual", RootsRegistries.RITUALS));
 
-    return Commands.argument("grove", ResourceLocationArgument.id())
-        .suggests((c, build) -> SharedSuggestionProvider.suggest(groveIds, build));
+  public static <T> SuggestionProvider<SharedSuggestionProvider> provider(String name, Registry<T> registry) {
+    return (provider, builder) -> SharedSuggestionProvider.suggestResource(
+        registry.stream(),
+        builder,
+        registry::getKey,
+        func -> Component.translatable(Util.makeDescriptionId(name, registry.getKey(func)))
+    );
   }
 
-  private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
-    if (spellIds == null) {
-      spellIds = RootsRegistries.SPELLS.keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList());
-    }
-    return Commands.argument("spell", ResourceLocationArgument.id())
-        .suggests((c, build) -> SharedSuggestionProvider.suggest(spellIds, build));
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceKey<Grove>> suggestGroves() {
+    return Commands.argument("grove", ResourceKeyArgument.key(RootsRegistries.Keys.GROVES)).suggests(GROVES);
   }
 
-  private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestRituals() {
-    if (ritualIds == null) {
-      ritualIds = RootsRegistries.RITUALS.keySet().stream().map(ResourceLocation::toString)
-          .collect(Collectors.toList());
-    }
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceKey<Spell>> suggestSpells() {
+    return Commands.argument("spell", ResourceKeyArgument.key(RootsRegistries.Keys.SPELLS)).suggests(SPELLS);
+  }
 
-    return Commands.argument("ritual", ResourceLocationArgument.id())
-        .suggests((c, build) -> SharedSuggestionProvider.suggest(ritualIds, build));
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceKey<Ritual>> suggestRituals() {
+    return Commands.argument("ritual", ResourceKeyArgument.key(RootsRegistries.Keys.RITUALS))
+        .suggests(RITUALS);
+  }
+
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceKey<SpellModifier>> suggestSpellModifiers() {
+    return Commands.argument("spell_modifier", ResourceKeyArgument.key(RootsRegistries.Keys.SPELL_MODIFIERS))
+        .suggests(SPELL_MODIFIERS);
   }
 
   private static List<String> getCraftingRecipeIds() {
@@ -142,10 +152,10 @@ public class RootsCommand {
       }
       ServerPlayer player = c.getSource().getPlayerOrException();
       GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
-      ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
-      Spell spell = RootsRegistries.SPELLS.get(spellID);
+      Holder<Spell> spellHolder = ResourceArgument.getResource(c, "spell", RootsRegistries.Keys.SPELLS);
+      var spell = spellHolder.value();
       if (spell == null) {
-        c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
+        c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spell.getKey().toString()));
         return 0;
       }
       if (grants.hasSpell(spell)) {
