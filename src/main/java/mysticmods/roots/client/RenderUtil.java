@@ -253,6 +253,7 @@ public class RenderUtil {
   }
 
   // Only used for rendering icons (re #1289)
+  // TODO: Shouldn't this use `type` instead of `translucent`?
   private static MultiBufferSource transparentBuffer(MultiBufferSource.BufferSource bufferSource) {
     return (type) -> new TintWrappedVertexConsumer(bufferSource.getBuffer(TRANSLUCENT), 1.0f, 1.0f, 1.0f, 0.25f);
   }
