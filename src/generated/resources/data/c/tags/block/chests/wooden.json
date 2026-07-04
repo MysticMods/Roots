@@ -1,5 +1,6 @@
 {
   "values": [
+    "roots:wildwood_chest",
     "#roots:chests/wildwood",
     "roots:wildwood_chest"
   ]
