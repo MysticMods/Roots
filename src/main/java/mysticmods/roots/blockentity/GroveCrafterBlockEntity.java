@@ -168,11 +168,14 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     lastRecipe = cachedRecipe;
     // TODO: We never cleared storedItems here, unlike the pyre
     List<TaggedPedestalCrafting.ItemPosition> positions = playerCrafting.getItemsAndPositions();
-    if (player instanceof FakePlayer) {
-      PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new StartGroveCraftingFX(getBlockPos(), positions));
-    } else {
-      PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new StartGroveCraftingFX(getBlockPos(), positions));
-    }
+    // Guard against #1348
+    positions.removeIf(o -> o.item().isEmpty());
+    var packet = new StartGroveCraftingFX(getBlockPos(), positions);
+/*    if (player instanceof FakePlayer) {*/
+      PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), packet);
+/*    } else {
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, packet);
+    }*/
     List<ItemStack> results = cachedRecipe.value()
         .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popAndAnimateItems);
     storedItems.addAll(results);
