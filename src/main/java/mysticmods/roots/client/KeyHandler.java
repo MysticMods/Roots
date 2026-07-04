@@ -12,6 +12,7 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.network.server.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.contents.KeybindContents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,15 +22,41 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import javax.swing.text.JTextComponent;
 
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class KeyHandler {
   private static int cancelEffect = -1;
+  private static boolean handledKeyThisTick = false;
 
   public static boolean isCancelingEffect() {
     return cancelEffect > 0;
+  }
+
+  @SubscribeEvent
+  public static void onScrenKeyPressed (ScreenEvent.KeyReleased.Post event) {
+    if (!event.isCanceled()) {
+      Minecraft mc = Minecraft.getInstance();
+      if (mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
+        return;
+      }
+
+      if (KeyBindings.OPEN_POUCH.matches(event.getKeyCode(), event.getScanCode()) && KeyBindings.OPEN_POUCH.isConflictContextAndModifierActive()) {
+        tryOpenPouch(mc);
+        event.setCanceled(true);
+        return;
+      }
+
+      if (KeyBindings.OPEN_SPELL_LIBRARY.matches(event.getKeyCode(), event.getScanCode()) && KeyBindings.OPEN_SPELL_LIBRARY.isConflictContextAndModifierActive()) {
+        tryOpenLibrary(mc);
+        event.setCanceled(true);
+        return;
+      }
+    }
   }
 
   @SubscribeEvent
@@ -41,6 +68,7 @@ public class KeyHandler {
 
     boolean foundEffect = false;
 
+    // Should happen at all times, probably check KeyInput events etc
     for (MobEffectInstance instance : mc.player.getActiveEffects()) {
       Holder<MobEffect> effect = instance.getEffect();
       if (effect.is(RootsTags.MobEffects.CANCELLABLE_EFFECTS)) {
@@ -71,11 +99,13 @@ public class KeyHandler {
       cancelEffect = -1;
     }
 
+    // Only in world
     if (KeyBindings.OPEN_FAKE_MENU.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
       PacketDistributor.sendToServer(new ServerboundFakeMenuPacket(HudOverlay.getStoredBlockPos()));
       return;
     }
 
+    // Only in world
     if (KeyBindings.CLEAR_CONTAINER.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
       PacketDistributor.sendToServer(new ServerboundClearContainerPacket(HudOverlay.getStoredBlockPos()));
       return;
@@ -94,40 +124,12 @@ public class KeyHandler {
     }
 
     if (KeyBindings.OPEN_POUCH.consumeClick()) {
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("Opening pouch via keybind");
-      }
-      PacketDistributor.sendToServer(ServerboundOpenPouchPacket.INSTANCE);
+      tryOpenPouch(mc);
       return;
     }
 
     if (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("Opening spell library via keybind");
-      }
-      int inventorySlot = -1;
-      InteractionHand hand = InteractionHand.MAIN_HAND;
-      ItemStack stack = mc.player.getItemInHand(hand);
-      if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
-        hand = InteractionHand.OFF_HAND;
-        stack = mc.player.getItemInHand(hand);
-      }
-      if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
-        Inventory inv = mc.player.getInventory();
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-          stack = inv.getItem(i);
-          if (stack.is(RootsTags.Items.CASTING_TOOLS) && stack.has(ModAttachments.SPELL_STORAGE)) {
-            hand = null;
-            inventorySlot = i;
-            break;
-          }
-        }
-      }
-      if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
-        return;
-      }
-
-      RootsClientHooks.openLibrary(hand, inventorySlot);
+      tryOpenLibrary(mc);
       return;
     }
 
@@ -238,5 +240,41 @@ public class KeyHandler {
       }
       PacketDistributor.sendToServer(new ServerboundSetSpellDataPacket(hand, index, newCurrent));
     }
+  }
+
+  private static void tryOpenLibrary(Minecraft mc) {
+    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+      RootsAPI.LOG.error("Opening spell library via keybind");
+    }
+    int inventorySlot = -1;
+    InteractionHand hand = InteractionHand.MAIN_HAND;
+    ItemStack stack = mc.player.getItemInHand(hand);
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
+      hand = InteractionHand.OFF_HAND;
+      stack = mc.player.getItemInHand(hand);
+    }
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
+      Inventory inv = mc.player.getInventory();
+      for (int i = 0; i < inv.getContainerSize(); i++) {
+        stack = inv.getItem(i);
+        if (stack.is(RootsTags.Items.CASTING_TOOLS) && stack.has(ModAttachments.SPELL_STORAGE)) {
+          hand = null;
+          inventorySlot = i;
+          break;
+        }
+      }
+    }
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
+      return;
+    }
+
+    RootsClientHooks.openLibrary(hand, inventorySlot);
+  }
+
+  private static void tryOpenPouch(Minecraft mc) {
+    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+      RootsAPI.LOG.error("Opening pouch via keybind");
+    }
+    PacketDistributor.sendToServer(ServerboundOpenPouchPacket.INSTANCE);
   }
 }

@@ -238,17 +238,24 @@ public class RootsClientHooks {
   }
 
   public static void stopUsingItem(Screen newScreen) {
-    if (Minecraft.getInstance().gameMode != null && Minecraft.getInstance().player != null) {
-      Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
-      Minecraft.getInstance().setScreen(newScreen);
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.gameMode != null && mc.player != null) {
+      // TODO: Release keybinds?
+      mc.gameMode.releaseUsingItem(mc.player);
+
+      if (mc.screen == null) {
+        mc.setScreen(newScreen);
+      } else {
+        mc.pushGuiLayer(newScreen);
+      }
     }
   }
 
   public static void popAndStopUsingItem(Screen newScreen) {
     var mc = Minecraft.getInstance();
     if (mc.gameMode != null && mc.player != null) {
+      mc.gameMode.releaseUsingItem(mc.player);
       if (mc.screen == null) {
-        mc.gameMode.releaseUsingItem(mc.player);
         mc.setScreen(newScreen);
       } else {
         mc.pushGuiLayer(newScreen);
