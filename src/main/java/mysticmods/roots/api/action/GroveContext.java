@@ -22,6 +22,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public interface GroveContext {
   Parameter LEVEL = new Parameter(RootsAPI.rl("level"), GroveContext::level);
@@ -46,6 +47,7 @@ public interface GroveContext {
   Parameter COSTING = new Parameter(RootsAPI.rl("costing"), GroveContext::costing);
   Parameter OFFER = new Parameter(RootsAPI.rl("offer"), GroveContext::offer);
   Parameter SPELL_MODIFIER = new Parameter(RootsAPI.rl("spell_modifier"), GroveContext::spellModifier);
+  Parameter RECIPE_OUTPUTS = new Parameter(RootsAPI.rl("recipe_outputs"), GroveContext::recipeOutputs);
 
   @Nonnull
   ServerLevel level();
@@ -167,6 +169,11 @@ public interface GroveContext {
 
   @Nullable
   default Modifier genericModifier() {
+    return null;
+  }
+
+  @Nullable
+  default List<ItemStack> recipeOutputs () {
     return null;
   }
 
