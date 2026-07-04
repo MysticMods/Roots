@@ -19,7 +19,7 @@ public class HerbMap {
     herbMap(player);
   }
 
-  public Iterable<HerbEntry> entries (Herb herb) {
+  public Iterable<HerbEntry> entries(Herb herb) {
     return herbMapCache.getOrDefault(herb, Collections.emptyList());
   }
 
@@ -30,7 +30,6 @@ public class HerbMap {
       ItemStack inSlot = playerInventory.getItem(i);
       if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
         foundCreativePouch = true;
-        return; // herbMap;
       }
       Herb herb = Herb.getHerb(inSlot);
       if (herb != null) {
