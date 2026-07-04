@@ -59,9 +59,8 @@ public class Costing {
     herbMapCache = null;
   }
 
-  public Costing(ICostedParent parent, Player player) {
-    this(parent);
-    herbMapCache = new HerbMap(player);
+  public void updateHerbCache (Player player) {
+    this.herbMapCache = new HerbMap(player);
   }
 
   public ParentChargeType getChargeType() {
@@ -94,6 +93,10 @@ public class Costing {
   }
 
   public boolean canAfford(Player player, boolean checkModifiers) {
+    if (herbMapCache == null) {
+      updateHerbCache(player);
+    }
+
     boolean creative = player.isCreative() || herbMapCache.foundCreativePouch();
     calculateCosts(checkModifiers, false, true, false);
 

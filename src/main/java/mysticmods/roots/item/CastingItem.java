@@ -104,7 +104,8 @@ public class CastingItem extends Item {
     int ticks = pStack.getUseDuration(pLivingEntity) - pRemainingUseDuration;
 
     if (spell.getType() == Spell.Type.CONTINUOUS) {
-      Costing costs = new Costing(spell, pPlayer);
+      Costing costs = new Costing(spell);
+      costs.updateHerbCache(pPlayer);
 
       if (ticks % 20 == 0) {
         if (!costs.canAfford(pPlayer, true)) {
@@ -217,7 +218,7 @@ public class CastingItem extends Item {
       return InteractionResultHolder.pass(stack);
     }
 
-    Costing costing = new Costing(spell, pPlayer);
+    Costing costing = new Costing(spell);
     if (!costing.canAfford(pPlayer, true)) {
       // TODO: display a warning
       pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
@@ -280,7 +281,7 @@ public class CastingItem extends Item {
     int ticksUsed = pStack.getUseDuration(pLivingEntity) - pTimeCharged;
 
     if (spell.getType() == Spell.Type.CHARGED) {
-      Costing costing = new Costing(spell, pPlayer);
+      Costing costing = new Costing(spell);
 
       // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
       if (!costing.canAfford(pPlayer, true)) {
