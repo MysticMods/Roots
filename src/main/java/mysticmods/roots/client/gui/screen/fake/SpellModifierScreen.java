@@ -51,10 +51,10 @@ public class SpellModifierScreen extends RootsScreen {
 
   @Override
   public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-    if (keyCode == KeyBindings.OPEN_POUCH.getKey().getValue()) {
+/*    if (keyCode == KeyBindings.OPEN_POUCH.getKey().getValue()) {
       PacketDistributor.sendToServer(new ServerboundDebugScreenTick(hand, inventorySlot));
       return true;
-    }
+    }*/
     return super.keyPressed(keyCode, scanCode, modifiers);
   }
 
