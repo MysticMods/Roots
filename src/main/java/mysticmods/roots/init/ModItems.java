@@ -523,6 +523,11 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.SKY_SOARER_AMPLIFIED_2);
     modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_1);
     modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_2);
+    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_I);
+    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_II);
+    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_III);
+    modifier(ITEMS, ModModifiers.SHATTER_MAGNETISM);
+    modifier(ITEMS, ModModifiers.SHATTER_SILK_TOUCH);
   }
 /*
 

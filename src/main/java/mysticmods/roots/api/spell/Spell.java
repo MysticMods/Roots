@@ -175,7 +175,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   // TODO: Make this abstract
   @Deprecated(forRemoval = true)
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
-    return null;
+    return new Component[]{};
   }
 
   public Component describeData(int index, int value) {
