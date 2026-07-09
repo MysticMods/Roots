@@ -34,30 +34,6 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
   }
 
   @Override
-  public SpellModifierSet with(SpellModifier element) {
-    if (this.contains(element)) {
-      return this;
-    }
-
-    ImmutableSet.Builder<SpellModifier> builder = ImmutableSet.builder();
-    builder.addAll(this);
-    builder.add(element);
-    return new SpellModifierSet(builder.build()).validated();
-  }
-
-  @Override
-  public SpellModifierSet with(Collection<SpellModifier> elements) {
-    if (this.containsAll(elements)) {
-      return this;
-    }
-
-    ImmutableSet.Builder<SpellModifier> builder = ImmutableSet.builder();
-    builder.addAll(this);
-    builder.addAll(elements);
-    return new SpellModifierSet(builder.build()).validated();
-  }
-
-  @Override
   public int count(TagKey<SpellModifier> tag) {
     int count = 0;
     for (SpellModifier modifier : this.internal) {

@@ -106,4 +106,19 @@ public class ModifierTrees {
 
     return new SpellModifierSet(instance.modifiersSet()).validated();
   }
+
+  public static SpellModifierSet with (Spell spell, SpellModifierSet modifiers, SpellModifier with) {
+    ModifierTree<Spell, SpellModifier> tree = getSpell(spell);
+    if (tree == null) {
+      throw new IllegalStateException("Spell " + spell.builtInRegistryHolder().getKey() + " has no modifier tree?!");
+    }
+
+    var instance = tree.instance(modifiers, null);
+
+    if (!instance.enable(with)) {
+      return modifiers;
+    }
+
+    return new SpellModifierSet(instance.modifiersSet()).validated();
+  }
 }

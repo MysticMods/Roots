@@ -271,6 +271,7 @@ public class ServerNetworkHooks {
     }
 
     GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
+    // TODO: Check this
     if (grants == null || !grants.hasSpell(spell)) {
       player.displayClientMessage(Component.translatable("roots.message.spell.not_granted", spell.getStyledName()), true);
       return;

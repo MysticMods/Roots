@@ -100,7 +100,8 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
     if (hasModifier(modifier)) {
       return copy();
     }
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.with(modifier), data);
+
+    return new SpellSlot(spellId, slot, spell, ModifierTrees.with(spell, enabledModifiers, modifier), data);
   }
 
   public SpellSlot withSlot(int slot) {
