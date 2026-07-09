@@ -123,7 +123,7 @@ public class KeyHandler {
       return;
     }
 
-    if (KeyBindings.OPEN_POUCH.consumeClick()) {
+/*    if (KeyBindings.OPEN_POUCH.consumeClick()) {
       tryOpenPouch(mc);
       return;
     }
@@ -131,7 +131,7 @@ public class KeyHandler {
     if (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
       tryOpenLibrary(mc);
       return;
-    }
+    }*/
 
     int op = -1;
 
