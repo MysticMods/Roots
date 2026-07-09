@@ -37,7 +37,7 @@ public class KeyHandler {
     return cancelEffect > 0;
   }
 
-  @SubscribeEvent
+/*  @SubscribeEvent
   public static void onScrenKeyPressed (ScreenEvent.KeyReleased.Post event) {
     if (!event.isCanceled()) {
       Minecraft mc = Minecraft.getInstance();
@@ -57,7 +57,7 @@ public class KeyHandler {
         return;
       }
     }
-  }
+  }*/
 
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post event) {
@@ -123,7 +123,7 @@ public class KeyHandler {
       return;
     }
 
-/*    if (KeyBindings.OPEN_POUCH.consumeClick()) {
+    if (KeyBindings.OPEN_POUCH.consumeClick()) {
       tryOpenPouch(mc);
       return;
     }
@@ -131,7 +131,7 @@ public class KeyHandler {
     if (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
       tryOpenLibrary(mc);
       return;
-    }*/
+    }
 
     int op = -1;
 
