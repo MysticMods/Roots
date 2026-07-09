@@ -22,6 +22,20 @@ public class ModModifiers {
 
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_SPEEDY_2 = REGISTER.register("sky_soarer/speedy_2", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0125), SKY_SOARER_SPEEDY_1.getKey(), ModSpells.SKY_SOARER.getKey()));
 
+  // Shatter:
+  //  Silk touch    ->
+  //  Fortune I-III  \- Conflict
+  //  Adjustable width --|
+  //  Adjustable height  |--> Increase maximum number of blocks
+  //  Adjustable depth --|    Vein mining
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_MAGNETISM = REGISTER.register("shatter/magnetism", () -> new SpellModifier(CostInstance.add(ModHerbs.WILDROOT, SpellCosts.BASE_0125), ModSpells.SHATTER.getKey()));
+
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_SILK_TOUCH = REGISTER.register("shatter/silk_touch", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0125), null, ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_FORTUNE_I.getKey(), ModModifiers.SHATTER_FORTUNE_II.getKey(), ModModifiers.SHATTER_FORTUNE_III.getKey()));
+
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_I = REGISTER.register("shatter/fortune_i", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), null, ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_II = REGISTER.register("shatter/fortune_ii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), SHATTER_FORTUNE_I.getKey(), ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_III = REGISTER.register("shatter/fortune_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), SHATTER_FORTUNE_II.getKey(), ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
+
   public static void register(IEventBus bus) {
     REGISTER.register(bus);
   }

@@ -104,9 +104,6 @@ public class DataMaps {
   public static final DataMapType<GroveAction, Item> GROVE_ACTION_ICONS = DataMapType.builder(RootsAPI.rl("grove_action_icons"), RootsRegistries.Keys.GROVE_ACTIONS, BuiltInRegistries.ITEM.byNameCodec())
       .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
       .build();
-  public static final DataMapType<SpellModifier, Item> SPELL_MODIFIER_ICONS = DataMapType.builder(RootsAPI.rl("spell_modifier_icons"), RootsRegistries.Keys.SPELL_MODIFIERS, BuiltInRegistries.ITEM.byNameCodec())
-      .synced(BuiltInRegistries.ITEM.byNameCodec(), true)
-      .build();
   public static final DataMapType<SpellModifier, Boolean> SPELL_MODIFIER_RESTRICTED = DataMapType.builder(RootsAPI.rl("spell_modifier_restricted"), RootsRegistries.Keys.SPELL_MODIFIERS, Codec.BOOL)
       .synced(Codec.BOOL, true)
       .build();

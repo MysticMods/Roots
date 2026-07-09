@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 
+import javax.management.modelmbean.ModelMBeanOperationInfo;
 import java.util.concurrent.CompletableFuture;
 
 public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsProvider<SpellModifier> {
@@ -29,6 +30,9 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
     );
     this.tag(RootsTags.SpellModifiers.SKY_SOARER_DURATION_INCREASES).add(
         ModModifiers.SKY_SOARER_SPEEDY_1.value(), ModModifiers.SKY_SOARER_SPEEDY_2.value()
+    );
+    this.tag(RootsTags.SpellModifiers.SHATTER_FORTUNE).add(
+        ModModifiers.SHATTER_FORTUNE_I.value(), ModModifiers.SHATTER_FORTUNE_II.value(), ModModifiers.SHATTER_FORTUNE_III.value()
     );
   }
 

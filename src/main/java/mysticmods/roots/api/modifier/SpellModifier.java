@@ -26,7 +26,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
 
-  public SpellModifier(CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
     this(defaultCosts, parent, applicable, ChildChargeType.ALWAYS);
   }
 
@@ -34,8 +34,20 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     this(defaultCosts, applicable, ChildChargeType.ALWAYS);
   }
 
-  public SpellModifier(CostInstance defaultCosts, @NotNull ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type) {
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type) {
     super(defaultCosts, parent, applicable);
+    this.chargeType = type;
+  }
+
+  @SafeVarargs
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ResourceKey<SpellModifier> ... conflicts) {
+    super(defaultCosts, parent, applicable, conflicts);
+    this.chargeType = ChildChargeType.ALWAYS;
+  }
+
+  @SafeVarargs
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type, ResourceKey<SpellModifier> ... conflicts) {
+    super(defaultCosts, parent, applicable, conflicts);
     this.chargeType = type;
   }
 
@@ -81,11 +93,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @Override
   protected DataMapType<SpellModifier, CostInstance> getDataMapType() {
     return DataMaps.SPELL_MODIFIER_COST_DATA;
-  }
-
-  @Override
-  protected DataMapType<SpellModifier, Item> getIconDataMapType() {
-    return DataMaps.SPELL_MODIFIER_ICONS;
   }
 
   @Nullable

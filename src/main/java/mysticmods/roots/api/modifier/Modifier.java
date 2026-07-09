@@ -41,8 +41,6 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
 
   protected abstract DataMapType<T, CostInstance> getDataMapType();
 
-  protected abstract DataMapType<T, Item> getIconDataMapType();
-
   @Override
   @Nullable
   public ResourceKey<T> getParent() {

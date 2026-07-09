@@ -601,6 +601,7 @@ public class RootsTags {
 
     public static final TagKey<SpellModifier> SKY_SOARER_AMPLIFIER_INCREASES = modTag("sky_soarer/amplifier_increases");
     public static final TagKey<SpellModifier> SKY_SOARER_DURATION_INCREASES = modTag("sky_soarer/duration_increases");
+    public static final TagKey<SpellModifier> SHATTER_FORTUNE = modTag("shatter/fortune");
 
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 

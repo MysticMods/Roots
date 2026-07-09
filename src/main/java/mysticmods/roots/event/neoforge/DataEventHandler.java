@@ -61,7 +61,6 @@ public class DataEventHandler {
     event.register(DataMaps.GROVE_GENERATION_ENTRIES);
     event.register(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
     event.register(DataMaps.GROVE_ACTION_ICONS);
-    event.register(DataMaps.SPELL_MODIFIER_ICONS);
     event.register(DataMaps.RITUAL_MODIFIER_ICONS);
     event.register(DataMaps.RITUAL_MODIFIER_RESTRICTED);
     event.register(DataMaps.SPELL_MODIFIER_RESTRICTED);

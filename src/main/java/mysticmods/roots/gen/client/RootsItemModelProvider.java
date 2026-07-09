@@ -395,6 +395,12 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.SKY_SOARER_SPEEDY_1, Items.ICE);
     modifier(ModModifiers.SKY_SOARER_SPEEDY_2, Items.PACKED_ICE);
 
+    modifier(ModModifiers.SHATTER_MAGNETISM, Items.COMPASS);
+    modifier(ModModifiers.SHATTER_SILK_TOUCH, Items.SLIME_BALL);
+    modifier(ModModifiers.SHATTER_FORTUNE_I, Items.IRON_PICKAXE);
+    modifier(ModModifiers.SHATTER_FORTUNE_II, Items.GOLDEN_PICKAXE);
+    modifier(ModModifiers.SHATTER_FORTUNE_III, Items.DIAMOND_PICKAXE);
+
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));
 

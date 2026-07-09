@@ -27,11 +27,6 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   }
 
   @Override
-  protected DataMapType<RitualModifier, Item> getIconDataMapType() {
-    return DataMaps.RITUAL_MODIFIER_ICONS;
-  }
-
-  @Override
   public Holder<Ritual> getApplicableHolder() {
     return RootsRegistries.RITUALS.getHolder(getApplicable()).orElse(null);
   }

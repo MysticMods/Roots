@@ -900,6 +900,12 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierExtendedDescription(ModModifiers.SKY_SOARER_SPEEDY_1, "Increases duration of boost effect by [%s%%] to %s seconds [%s ticks].");
     modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect.");
     modifierExtendedDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect by [%s%%] to %s seconds [%s ticks].");
+    modifierDescriptionBoth(ModModifiers.SHATTER_MAGNETISM, "Teleports dropped blocks to the player.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_SILK_TOUCH, "Applies silk touch when breaking blocks.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_I, "Applies Fortune I when breaking blocks.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_II, "Applies Fortune II when breaking blocks.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_III, "Applies Fortune III when breaking blocks.");
+
 
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
     modifierExtendedDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage for %s seconds [%s ticks] after the boost effect ends.");
@@ -943,6 +949,11 @@ public final class RootsLangProvider extends LanguageProvider {
 
   public void spellExtendedDescription(Holder<Spell> spell, String value) {
     add(spell.value().getTooltipExtendedDescriptionId(), value);
+  }
+
+  public void modifierDescriptionBoth (Holder<SpellModifier> spellModifier, String value) {
+    modifierDescription(spellModifier, value);
+    modifierExtendedDescription(spellModifier, value);
   }
 
   public void modifierDescription (Holder<SpellModifier> spellModifier, String value) {

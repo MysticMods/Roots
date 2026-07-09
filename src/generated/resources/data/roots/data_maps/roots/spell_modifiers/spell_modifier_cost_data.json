@@ -1,5 +1,50 @@
 {
   "values": {
+    "roots:shatter/fortune_i": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:spiritleaf"
+        }
+      ]
+    },
+    "roots:shatter/fortune_ii": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:spiritleaf"
+        }
+      ]
+    },
+    "roots:shatter/fortune_iii": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:spiritleaf"
+        }
+      ]
+    },
+    "roots:shatter/magnetism": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:wildroot"
+        }
+      ]
+    },
+    "roots:shatter/silk_touch": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:dewgonia"
+        }
+      ]
+    },
     "roots:sky_soarer/amplified_1": {
       "costs": [
         {
