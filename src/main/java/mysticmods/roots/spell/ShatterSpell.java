@@ -205,7 +205,7 @@ public class ShatterSpell extends Spell {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastShatterFX(pPlayer.getId(), broken));
     }*/
 
-    Vec3 start = pPlayer.getEyePosition().subtract(0, 0.3, 0);
+    //Vec3 start = pPlayer.getEyePosition().subtract(0, 0.3, 0);
 
     for (BlockPos pos : broken) {
       Vec3 stop = Vec3.atCenterOf(pos);

@@ -6,13 +6,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Unbreakable;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.providers.EnchantmentProvider;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
@@ -65,6 +71,36 @@ public class FakePlayerUtil {
     FakePlayerUtil.FORTUNE_III_ITEM.set(DataComponents.UNBREAKABLE, new Unbreakable(false));
     EnchantmentHelper.enchantItemFromProvider(FakePlayerUtil.FORTUNE_III_ITEM, pLevel.registryAccess(), FakePlayerUtil.FORTUNE_III, pLevel.getCurrentDifficultyAt(BlockPos.ZERO), randomSource);
     initialized = true;
+  }
+
+  public static Player wielding(ServerLevel level, ItemStack stack) {
+    FakePlayer player = FakePlayerFactory.get(level, ROOTS);
+    player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+    return player;
+  }
+
+  public static Player looting(ServerLevel level, int lootingLevel) {
+    lootingLevel = Mth.clamp(lootingLevel, 0, 3);
+    return wielding(level, switch (lootingLevel) {
+      case 1 -> LOOTING_I_ITEM;
+      case 2 -> LOOTING_II_ITEM;
+      case 3 -> LOOTING_III_ITEM;
+      default -> ItemStack.EMPTY;
+    });
+  }
+
+  public static Player fortune(ServerLevel level, int lootingLevel) {
+    lootingLevel = Mth.clamp(lootingLevel, 0, 3);
+    return wielding(level, switch (lootingLevel) {
+      case 1 -> FORTUNE_I_ITEM;
+      case 2 -> FORTUNE_II_ITEM;
+      case 3 -> FORTUNE_III_ITEM;
+      default -> ItemStack.EMPTY;
+    });
+  }
+
+  public static Player silkTouch(ServerLevel level) {
+    return wielding(level, SILK_TOUCH_ITEM);
   }
 
   public static void reset() {
