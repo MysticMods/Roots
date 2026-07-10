@@ -4,10 +4,11 @@ import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.CooldownStorage;
-import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
-import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.modifier.SpellModifierSet;
+import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RootsClientHooks;
@@ -21,9 +22,12 @@ import mysticmods.roots.network.client.fx.CastChannelJauntFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelTargetFXPacket;
 import mysticmods.roots.util.PlayerGetter;
 import mysticmods.roots.util.TooltipUtil;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,9 +36,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
@@ -78,6 +86,99 @@ public class CastingItem extends Item {
     return spell.getMaxUse();
   }
 
+  @Nullable
+  public SpellStorage getStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack item) {
+    return item.get(ModAttachments.SPELL_STORAGE);
+  }
+
+  @Nullable
+  public ISpellInstance getCurrentSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack) {
+    SpellStorage storage = getStorage(level, entity, itemStack);
+    if (storage == null) {
+      return null;
+    }
+
+    return storage.getCurrentSpell();
+  }
+
+  public SpellModifierSet getEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
+    var spell = getCurrentSpell(level, entity, stack);
+    if (spell == null) {
+      return SpellModifierSet.EMPTY;
+    }
+
+    return spell.getEnabledModifiers();
+  }
+
+  public int countEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack, TagKey<SpellModifier> tagType) {
+    return getEnabledModifiers(level, entity, stack).count(tagType);
+  }
+
+  public void setStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack, @Nullable SpellStorage previousStorage, SpellStorage newStorage) {
+    if (newStorage != previousStorage) {
+      itemStack.set(ModAttachments.SPELL_STORAGE, newStorage);
+    }
+  }
+
+  @Override
+  public int getEnchantmentLevel(ItemStack stack, Holder<Enchantment> enchantment) {
+    int baseValue = super.getEnchantmentLevel(stack, enchantment);
+
+    if (enchantment.is(RootsTags.Enchantments.INCREASES_FORTUNE)) {
+      baseValue += countEnabledModifiers(null, null, stack, RootsTags.SpellModifiers.INCREASES_FORTUNE);
+    }
+
+    if (enchantment.is(RootsTags.Enchantments.INCREASES_LOOTING)) {
+      baseValue += countEnabledModifiers(null, null, stack, RootsTags.SpellModifiers.INCREASES_LOOTING);
+    }
+
+    if (enchantment.is(RootsTags.Enchantments.SILK_TOUCH)) {
+      if (countEnabledModifiers(null, null, stack, RootsTags.SpellModifiers.SILK_TOUCH) > 0) {
+        baseValue = 1;
+      }
+    }
+
+    return baseValue;
+  }
+
+  @Override
+  public ItemEnchantments getAllEnchantments(ItemStack stack, HolderLookup.RegistryLookup<Enchantment> lookup) {
+    ItemEnchantments baseValue = super.getAllEnchantments(stack, lookup);
+
+    SpellModifierSet set = getEnabledModifiers(null, null, stack);
+    if (set.isEmpty()) {
+      return baseValue;
+    }
+
+    ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(baseValue);
+
+    var fortune = set.count(RootsTags.SpellModifiers.INCREASES_FORTUNE);
+    if (fortune > 0) {
+      lookup.get(Enchantments.FORTUNE).ifPresentOrElse(
+          o -> mutable.upgrade(o, fortune),
+          () -> RootsAPI.LOG.error("Fortune enchantment wasn't found in the registry!"));
+    }
+
+    var looting = set.count(RootsTags.SpellModifiers.INCREASES_LOOTING);
+    if (looting > 0) {
+      lookup.get(Enchantments.LOOTING).ifPresentOrElse(
+          o -> mutable.upgrade(o, looting),
+          () -> RootsAPI.LOG.error("Looting enchantment wasn't found in the registry!"));
+    }
+
+    var silk_touch = set.count(RootsTags.SpellModifiers.SILK_TOUCH);
+    if (silk_touch > 0) {
+      lookup.get(Enchantments.SILK_TOUCH).ifPresentOrElse(
+          o -> mutable.set(o, 1),
+          () -> RootsAPI.LOG.error("Silk touch enchantment wasn't found in the registry!"));
+    }
+
+    if (silk_touch > 0 || fortune > 0 || looting > 0) {
+      return mutable.toImmutable();
+    }
+
+    return baseValue;
+  }
 
   @Override
   public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
@@ -87,7 +188,7 @@ public class CastingItem extends Item {
 
     InteractionHand pHand = pLivingEntity.getUsedItemHand();
 
-    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
+    SpellStorage storage = getStorage(pLevel, pLivingEntity, pStack);
     if (storage == null) {
       CastingSuccessCache.clear(pStack);
       pPlayer.stopUsingItem();
@@ -171,7 +272,7 @@ public class CastingItem extends Item {
       return InteractionResultHolder.consume(stack);
     }
 
-    SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
+    SpellStorage storage = getStorage(pLevel, pPlayer, stack);
     if (storage == null) {
       return InteractionResultHolder.pass(stack);
     }
@@ -198,9 +299,7 @@ public class CastingItem extends Item {
 
       if (newSlot != current && storage.getSpell(newSlot) != null) {
         SpellStorage newStorage = storage.setCurrentSlot(newSlot);
-        if (newStorage != storage) {
-          stack.set(ModAttachments.SPELL_STORAGE, newStorage);
-        }
+        setStorage(pLevel, pPlayer, stack, storage, newStorage);
         CastingSuccessCache.clear(stack);
         if (pUsedHand == InteractionHand.MAIN_HAND) {
           PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundClearHighlightPacket.INSTANCE);
@@ -268,7 +367,7 @@ public class CastingItem extends Item {
       return;
     }
 
-    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
+    SpellStorage storage = getStorage(pLevel, pLivingEntity, pStack);
     if (storage == null) {
       return;
     }
@@ -316,12 +415,7 @@ public class CastingItem extends Item {
       return false;
     }
 
-    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
-    if (storage == null) {
-      return false;
-    }
-
-    SpellSlot spell = storage.getCurrentSpell();
+    ISpellInstance spell = getCurrentSpell(null, null, pStack);
     if (spell == null) {
       return false;
     }
@@ -345,12 +439,7 @@ public class CastingItem extends Item {
       return 0;
     }
 
-    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
-    if (storage == null) {
-      return 0;
-    }
-
-    SpellSlot spell = storage.getCurrentSpell();
+    ISpellInstance spell = getCurrentSpell(null, null, pStack);
     if (spell == null) {
       return 0;
     }
@@ -374,13 +463,11 @@ public class CastingItem extends Item {
 
   @Override
   public Component getName(ItemStack pStack) {
-    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
-    if (storage != null) {
-      ISpellInstance spell = storage.getCurrentSpell();
-      if (spell != null) {
-        var name = spell.getSpell().getStyledName();
-        return spell.getEnabledModifiers().isEmpty() ? Component.translatable("roots.item.staff.with_spell", name) : Component.translatable("roots.item.staff.with_modified_spell", name);
-      }
+    ISpellInstance spell = getCurrentSpell(null, null, pStack);
+    if (spell != null) {
+      var name = spell.getSpell().getStyledName();
+      return spell.getEnabledModifiers()
+          .isEmpty() ? Component.translatable("roots.item.staff.with_spell", name) : Component.translatable("roots.item.staff.with_modified_spell", name);
     }
 
     return super.getName(pStack);

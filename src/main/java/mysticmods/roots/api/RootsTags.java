@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
@@ -464,6 +465,20 @@ public class RootsTags {
     }
   }
 
+  public static class Enchantments extends RootsTags {
+    public static final TagKey<Enchantment> INCREASES_FORTUNE = modTag("increases_fortune");
+    public static final TagKey<Enchantment> INCREASES_LOOTING = modTag("increases_looting");
+    public static final TagKey<Enchantment> SILK_TOUCH = modTag("silk_touch");
+
+    static TagKey<Enchantment> modTag(String name) {
+      return TagKey.create(Registries.ENCHANTMENT, RootsAPI.rl(name));
+    }
+
+    static TagKey<Enchantment> compatTag(String name) {
+      return TagKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath("c", name));
+    }
+  }
+
   public static class Entities extends RootsTags {
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST = modTag("animal_harvest_entities");
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST_EXCLUDE = modTag("rituals/animal_harvest/exclude");
@@ -602,6 +617,9 @@ public class RootsTags {
     public static final TagKey<SpellModifier> SKY_SOARER_AMPLIFIER_INCREASES = modTag("sky_soarer/amplifier_increases");
     public static final TagKey<SpellModifier> SKY_SOARER_DURATION_INCREASES = modTag("sky_soarer/duration_increases");
     public static final TagKey<SpellModifier> SHATTER_FORTUNE = modTag("shatter/fortune");
+    public static final TagKey<SpellModifier> INCREASES_FORTUNE = modTag("increases_fortune");
+    public static final TagKey<SpellModifier> INCREASES_LOOTING = modTag("increases_looting");
+    public static final TagKey<SpellModifier> SILK_TOUCH = modTag("silk_touch");
 
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
