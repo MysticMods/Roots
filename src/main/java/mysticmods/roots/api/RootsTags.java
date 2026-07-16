@@ -221,6 +221,8 @@ public class RootsTags {
     public static final TagKey<Block> TIER_00_SHATTER = modTag("spell/shatter/tier_00");
     public static final TagKey<Block> TIER_05_SHATTER = modTag("spell/shatter/tier_05");
 
+    public static final TagKey<Block> MINEABLE_WITH_SHATTER = modTag("mineable_with_shatter");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
@@ -600,6 +602,8 @@ public class RootsTags {
     public static final TagKey<Spell> GEAS_ACTION = modTag("action/geas");
 
     public static final TagKey<Spell> BLOCKS_OFF_HAND_EATING = modTag("blocks_off_hand_eating");
+
+    public static final TagKey<Spell> CAN_BREAK_BLOCKS = modTag("can_break_blocks");
 
     static TagKey<Spell> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));

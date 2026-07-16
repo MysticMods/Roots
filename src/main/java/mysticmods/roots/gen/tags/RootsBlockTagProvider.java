@@ -1,5 +1,6 @@
 package mysticmods.roots.gen.tags;
 
+import com.mojang.math.Axis;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.HolderLookup;
@@ -105,7 +106,6 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.WATER_SOIL).add(AQUEOUS_SOIL.get());
     this.tag(RootsTags.Blocks.EARTH_SOIL).add(TERRAN_SOIL.get());
     this.tag(BlockTags.DIRT).add(ENCHANTED_TURF.get());
-    //noinspection unchecked
     this.tag(RootsTags.Blocks.ELEMENTAL_SOIL)
         .addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL);
     this.tag(RootsTags.Blocks.ALL_SOIL).addTags(RootsTags.Blocks.ELEMENTAL_SOIL, RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
@@ -229,6 +229,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
         .add(GROVE_CRAFTER.get());
 
     this.tag(RootsTags.Blocks.GRANITE_ORE_REPLACEABLES).add(Blocks.GRANITE);
+    Axis.YP.rotationDegrees(90);
     this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS).add(
         Blocks.DANDELION,
         Blocks.POPPY,
@@ -352,6 +353,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.TIER_00_SHATTER).add(Blocks.COBBLESTONE, Blocks.NETHERRACK).addTag(BlockTags.LEAVES);
     this.tag(RootsTags.Blocks.TIER_05_SHATTER).addTag(BlockTags.BASE_STONE_OVERWORLD)
         .addTag(BlockTags.BASE_STONE_NETHER).addTag(BlockTags.SAND).addTag(Tags.Blocks.GRAVELS);
+    this.tag(RootsTags.Blocks.MINEABLE_WITH_SHATTER).addTags(BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE);
   }
 
   @Override

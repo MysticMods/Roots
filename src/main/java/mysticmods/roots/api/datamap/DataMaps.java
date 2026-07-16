@@ -1,6 +1,7 @@
 package mysticmods.roots.api.datamap;
 
 import com.mojang.serialization.Codec;
+import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
@@ -21,6 +22,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
@@ -28,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.neoforge.common.crafting.BlockTagIngredient;
 import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapValueMerger;
@@ -134,6 +137,7 @@ public class DataMaps {
   public static final DataMapType<Block, Double> SHATTER_COST_MULTIPLIERS = DataMapType.builder(RootsAPI.rl("shatter_cost_multipliers"), Registries.BLOCK, Codec.DOUBLE)
       .synced(Codec.DOUBLE, true)
       .build();
+  public static final DataMapType<Spell, TagKey<Block>> CAN_BREAK_BLOCKS_TAG = DataMapType.builder(RootsAPI.rl("can_break_blocks_tag"), RootsRegistries.Keys.SPELLS, TagKey.codec(Registries.BLOCK)).synced(TagKey.codec(Registries.BLOCK), true).build();
 
   public static ItemStack getDimensionItem(ResourceKey<Level> dimension) {
     if (DIMENSION_LOOKUP.isEmpty()) {

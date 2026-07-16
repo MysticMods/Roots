@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
@@ -40,6 +41,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
@@ -86,6 +88,25 @@ public class CastingItem extends Item {
     return spell.getMaxUse();
   }
 
+  public ISpellInstance getCastingSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
+    if (Boolean.FALSE.equals(stack.get(ModAttachments.CASTING_CURRENT_SPELL))) {
+      return null;
+    }
+    return getCurrentSpell(level, entity, stack);
+  }
+
+  @Override
+  public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+    var currentSpell = getCastingSpell(null, null, stack);
+    if (currentSpell != null) {
+      var tag = currentSpell.getSpell().builtInRegistryHolder().getData(DataMaps.CAN_BREAK_BLOCKS_TAG);
+      if (tag != null) {
+        return state.is(tag);
+      }
+    }
+    return super.isCorrectToolForDrops(stack, state);
+  }
+
   @Nullable
   public SpellStorage getStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack item) {
     return item.get(ModAttachments.SPELL_STORAGE);
@@ -102,7 +123,7 @@ public class CastingItem extends Item {
   }
 
   public SpellModifierSet getEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
-    var spell = getCurrentSpell(level, entity, stack);
+    var spell = getCastingSpell(level, entity, stack);
     if (spell == null) {
       return SpellModifierSet.EMPTY;
     }
@@ -191,6 +212,7 @@ public class CastingItem extends Item {
     SpellStorage storage = getStorage(pLevel, pLivingEntity, pStack);
     if (storage == null) {
       CastingSuccessCache.clear(pStack);
+      pStack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
       pPlayer.stopUsingItem();
       return;
     }
@@ -199,10 +221,12 @@ public class CastingItem extends Item {
     if (spell == null) {
       CastingSuccessCache.clear(pStack);
       pPlayer.stopUsingItem();
+      pStack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
       return;
     }
 
     int ticks = pStack.getUseDuration(pLivingEntity) - pRemainingUseDuration;
+    pStack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
 
     if (spell.getType() == Spell.Type.CONTINUOUS) {
       Costing costs = new Costing(spell);
@@ -272,6 +296,8 @@ public class CastingItem extends Item {
       return InteractionResultHolder.consume(stack);
     }
 
+    stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
+
     SpellStorage storage = getStorage(pLevel, pPlayer, stack);
     if (storage == null) {
       return InteractionResultHolder.pass(stack);
@@ -308,8 +334,6 @@ public class CastingItem extends Item {
       } else {
         return InteractionResultHolder.pass(stack);
       }
-
-
     }
 
     ISpellInstance spell = storage.getSpell(current);
@@ -326,6 +350,7 @@ public class CastingItem extends Item {
     }
 
     if (spell.getType() == Spell.Type.INSTANT) {
+      stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
       int cooldown = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
@@ -334,11 +359,14 @@ public class CastingItem extends Item {
           CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
           cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
         }
+        stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
         return InteractionResultHolder.success(stack);
       }
+      stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
     } else {
       CastingSuccessCache.clear(stack);
       pPlayer.startUsingItem(pUsedHand);
+      stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
       return InteractionResultHolder.success(stack);
     }
 
@@ -350,6 +378,7 @@ public class CastingItem extends Item {
     this.releaseUsing(stack, level, livingEntity, stack.getUseDuration(livingEntity));
     if (!level.isClientSide()) {
       CastingSuccessCache.clear(stack);
+      stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
     }
     return stack;
   }
@@ -369,11 +398,13 @@ public class CastingItem extends Item {
 
     SpellStorage storage = getStorage(pLevel, pLivingEntity, pStack);
     if (storage == null) {
+      pStack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
       return;
     }
 
     ISpellInstance spell = storage.getCurrentSpell();
     if (spell == null) {
+      pStack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
       return;
     }
 
@@ -397,6 +428,7 @@ public class CastingItem extends Item {
           cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
         }
       }
+      pStack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
     }
   }
 

@@ -1,5 +1,6 @@
 package mysticmods.roots.init;
 
+import com.google.common.base.Suppliers;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -32,6 +33,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ModItems {
   private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
@@ -318,11 +320,11 @@ public class ModItems {
   public static final DeferredHolder<Item, SwordItem> RUNED_SWORD = ITEMS.register("runed_sword", () -> new SwordItem(RootsAPI.RUNED_TIER, new Item.Properties().attributes(SwordItem.createAttributes(RootsAPI.RUNED_TIER, 3.0f, -2.4f))));
   public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
-  public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
-      .stacksTo(1)));
-  public static final DeferredHolder<Item, CastingItem> CREATIVE_STAFF = ITEMS.register("creative_staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
-      .rarity(Rarity.EPIC)
-      .stacksTo(1)));
+
+  public static final Supplier<Item.Properties> STAFF_PROPERTIES = () -> new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get()).component(ModAttachments.CASTING_CURRENT_SPELL, false).stacksTo(1);
+
+  public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(STAFF_PROPERTIES.get()));
+  public static final DeferredHolder<Item, CastingItem> CREATIVE_STAFF = ITEMS.register("creative_staff", () -> new CastingItem(STAFF_PROPERTIES.get().rarity(Rarity.EPIC)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
       .stacksTo(1)));

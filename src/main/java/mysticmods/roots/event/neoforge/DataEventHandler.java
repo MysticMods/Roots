@@ -70,6 +70,7 @@ public class DataEventHandler {
     event.register(DataMaps.DIMENSION_ITEM);
     event.register(DataMaps.ENTITY_AUGMENTATION_DATA);
     event.register(DataMaps.SHATTER_COST_MULTIPLIERS);
+    event.register(DataMaps.CAN_BREAK_BLOCKS_TAG);
   }
 
   private static void callInit(Holder<?> holder) {

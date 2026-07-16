@@ -32,6 +32,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -151,6 +152,8 @@ public class ShatterSpell extends Spell {
     return pickBlock(pPlayer).getLocation();
   }
 
+
+
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     FakePlayerUtil.buildItems(pLevel, pLevel.getRandom());
@@ -177,6 +180,7 @@ public class ShatterSpell extends Spell {
       if (state.getDestroySpeed(pLevel, pos) < 0 && !state.is(RootsTags.Blocks.SHATTER_INCLUDE)) {
         continue;
       }
+/*
       // We check to see if the player is allowed to edit at this place
       if (!pPlayer.mayInteract(pLevel, pos)) {
         continue;
@@ -186,13 +190,28 @@ public class ShatterSpell extends Spell {
         continue;
       }
       // Now fire a NeoForge event
-      BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(pLevel, pos, state, player);
-      NeoForge.EVENT_BUS.post(event);
+      BlockEvent.BreakEvent event = CommonHooks.fireBlockBreak(pLevel, player.gameMode.getGameModeForPlayer(), player, pos, state);
+*/
+/*      BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(pLevel, pos, state, player);
+      NeoForge.EVENT_BUS.post(event);*//*
+
       if (event.isCanceled()) {
         continue;
       }
 
-      if (pLevel.destroyBlock(pos, true, pPlayer)) {
+      // Fake player -> pretend to be the player
+      // Copy of the staff currently casting
+      // -> Items in player's inventory
+      // -> Effects on player
+      // -> Attributes/attribute modifiers on player
+      // -> Enchantments on player
+
+
+*/
+
+
+
+      if (((ServerPlayer) pPlayer).gameMode.destroyBlock(pos)) {/*          pLevel.destroyBlock(pos, true, pPlayer)) {*/
         ShatterBlockAction.Context context = new ShatterBlockAction.Context((ServerLevel) pLevel, player, pos, state, instance);
         ModActions.SHATTER_BLOCK.get().accept(context);
         count += DataMaps.getShatterCostMultiplier(state.getBlock());

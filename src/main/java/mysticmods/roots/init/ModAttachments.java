@@ -113,6 +113,7 @@ public class ModAttachments {
       .networkSynchronized(StreamCodec.unit(Unit.INSTANCE)).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<QuiverRecord>> QUIVER_RECORD = COMPONENTS.register("quiver_record", () -> new DataComponentType.Builder<QuiverRecord>().persistent(QuiverRecord.CODEC)
       .networkSynchronized(QuiverRecord.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> CASTING_CURRENT_SPELL = COMPONENTS.register("casting_current_spell", () -> new DataComponentType.Builder<Boolean>().persistent(Codec.BOOL)/*.networkSynchronized(ByteBufCodecs.BOOL)*/.build());
 
   public static void register(IEventBus bus) {
     ATTACHMENTS.register(bus);
