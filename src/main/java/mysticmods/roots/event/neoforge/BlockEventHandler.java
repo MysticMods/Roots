@@ -2,14 +2,20 @@ package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.item.CastingItem;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.SpawnUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -21,7 +27,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+
+import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class BlockEventHandler {
@@ -66,6 +75,37 @@ public class BlockEventHandler {
         if (blockstate.is(RootsTags.Blocks.UNDERWATER_FARMLAND)) {
           event.setFinalState(Blocks.FARMLAND.defaultBlockState());
         }
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void magnetiseDrops(BlockDropsEvent event) {
+    if (!(event.getBreaker() instanceof ServerPlayer player)) {
+      return;
+    }
+
+    if (!event.getTool().is(RootsTags.Items.CASTING_TOOLS)) {
+      return;
+    }
+
+    var level = event.getLevel();
+    var tool = event.getTool();
+
+    var modifiers = CastingItem.getEnabledModifiers(level, player, tool);
+    if (modifiers.hasTag(RootsTags.SpellModifiers.MAGNETISM)) {
+      int xp = event.getDroppedExperience();
+      List<ItemStack> items = event.getDrops().stream().map(ItemEntity::getItem).toList();
+      event.setDroppedExperience(0);
+      event.setCanceled(true);
+
+      for (ItemStack item : items) {
+        ItemUtil.Spawn.spawnItem(level, player.getX(), player.getY(), player.getZ(), false, item, 0);
+      }
+
+      // TODO: Sound
+      if (xp > 0) {
+        player.giveExperiencePoints(xp);
       }
     }
   }

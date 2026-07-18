@@ -34,6 +34,17 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
   }
 
   @Override
+  public boolean hasTag(TagKey<SpellModifier> tag) {
+    for (SpellModifier modifier : this.internal) {
+      if (modifier.is(tag)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  @Override
   public int count(TagKey<SpellModifier> tag) {
     int count = 0;
     for (SpellModifier modifier : this.internal) {

@@ -88,7 +88,7 @@ public class CastingItem extends Item {
     return spell.getMaxUse();
   }
 
-  public ISpellInstance getCastingSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
+  public static ISpellInstance getCastingSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
     if (Boolean.FALSE.equals(stack.get(ModAttachments.CASTING_CURRENT_SPELL))) {
       return null;
     }
@@ -108,12 +108,12 @@ public class CastingItem extends Item {
   }
 
   @Nullable
-  public SpellStorage getStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack item) {
+  public static SpellStorage getStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack item) {
     return item.get(ModAttachments.SPELL_STORAGE);
   }
 
   @Nullable
-  public ISpellInstance getCurrentSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack) {
+  public static ISpellInstance getCurrentSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack) {
     SpellStorage storage = getStorage(level, entity, itemStack);
     if (storage == null) {
       return null;
@@ -122,7 +122,7 @@ public class CastingItem extends Item {
     return storage.getCurrentSpell();
   }
 
-  public SpellModifierSet getEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
+  public static SpellModifierSet getEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
     var spell = getCastingSpell(level, entity, stack);
     if (spell == null) {
       return SpellModifierSet.EMPTY;
@@ -131,11 +131,11 @@ public class CastingItem extends Item {
     return spell.getEnabledModifiers();
   }
 
-  public int countEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack, TagKey<SpellModifier> tagType) {
+  public static int countEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack, TagKey<SpellModifier> tagType) {
     return getEnabledModifiers(level, entity, stack).count(tagType);
   }
 
-  public void setStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack, @Nullable SpellStorage previousStorage, SpellStorage newStorage) {
+  public static void setStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack, @Nullable SpellStorage previousStorage, SpellStorage newStorage) {
     if (newStorage != previousStorage) {
       itemStack.set(ModAttachments.SPELL_STORAGE, newStorage);
     }

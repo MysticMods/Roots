@@ -81,6 +81,8 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     return true;
   }
 
+  public abstract boolean hasTag(TagKey<T> tag);
+
   public abstract int count (TagKey<T> tag);
 
   public boolean has(T element) {

@@ -624,6 +624,7 @@ public class RootsTags {
     public static final TagKey<SpellModifier> INCREASES_FORTUNE = modTag("increases_fortune");
     public static final TagKey<SpellModifier> INCREASES_LOOTING = modTag("increases_looting");
     public static final TagKey<SpellModifier> SILK_TOUCH = modTag("silk_touch");
+    public static final TagKey<SpellModifier> MAGNETISM = modTag("magnetism");
 
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
