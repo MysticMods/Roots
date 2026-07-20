@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.util.ItemUtil;
+import net.minecraft.advancements.critereon.PickedUpItemTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,6 +27,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.util.TriState;
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -99,10 +101,10 @@ public class BlockEventHandler {
       event.setDroppedExperience(0);
       event.setCanceled(true);
 
+      // TODO: There's probably a better way to handle this but that won't include the picked-up-drops-event
       for (ItemStack item : items) {
         ItemUtil.Spawn.spawnItem(level, player.getX(), player.getY(), player.getZ(), false, item, 0);
       }
-
       // TODO: Sound
       if (xp > 0) {
         player.giveExperiencePoints(xp);
