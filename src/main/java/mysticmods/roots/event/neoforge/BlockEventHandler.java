@@ -7,6 +7,7 @@ import mysticmods.roots.util.ItemUtil;
 import net.minecraft.advancements.critereon.PickedUpItemTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -15,9 +16,13 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,6 +38,7 @@ import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.util.List;
+import java.util.Map;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class BlockEventHandler {
@@ -96,13 +102,15 @@ public class BlockEventHandler {
     var tool = event.getTool();
 
     var modifiers = CastingItem.getEnabledModifiers(level, player, tool);
+    if (modifiers.hasTag(RootsTags.SpellModifiers.SMELTS)) {
+      event.getDrops().forEach(o -> o.setItem(smelt(event.getLevel(), o.getItem())));
+    }
     if (modifiers.hasTag(RootsTags.SpellModifiers.MAGNETISM)) {
       int xp = event.getDroppedExperience();
       List<ItemStack> items = event.getDrops().stream().map(ItemEntity::getItem).toList();
       event.setDroppedExperience(0);
       event.setCanceled(true);
 
-      // TODO: There's probably a better way to handle this but that won't include the picked-up-drops-event
       for (ItemStack item : items) {
         ItemUtil.Spawn.spawnItem(level, player.getX(), player.getY(), player.getZ(), false, item, 0);
       }
@@ -111,5 +119,25 @@ public class BlockEventHandler {
         player.giveExperiencePoints(xp);
       }
     }
+  }
+
+  private static ItemStack smelt (ServerLevel level, ItemStack item) {
+    // TODO: Caching?
+    var copy = item.copy();
+    copy.setCount(1);
+    SingleRecipeInput input = new SingleRecipeInput(copy);
+    var blastingRecipes = level.getRecipeManager().getRecipeFor(RecipeType.BLASTING, input, level);
+    if (blastingRecipes.isPresent()) {
+      ItemStack result = blastingRecipes.get().value().assemble(input, level.registryAccess());
+      result.setCount(item.getCount());
+      return result;
+    }
+    var smeltingRecipes = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, input, level);
+    if (smeltingRecipes.isPresent()) {
+      ItemStack result = smeltingRecipes.get().value().assemble(input, level.registryAccess());
+      result.setCount(item.getCount());
+      return result;
+    }
+    return item;
   }
 }
