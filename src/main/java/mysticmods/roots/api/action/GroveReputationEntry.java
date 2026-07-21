@@ -51,6 +51,7 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
     RECIPE, // ItemStack
     DAMAGE, // DamageType -> ItemStack map
     DIMENSION, // Dimension -> ItemStack map
+    TOOL, // ItemStack
     ALWAYS; // Symbol for always
 
     public static final Codec<SubEntryType> CODEC = StringRepresentable.fromEnum(SubEntryType::values);

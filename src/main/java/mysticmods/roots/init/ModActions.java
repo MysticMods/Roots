@@ -34,6 +34,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, MilkCowAction> MILK_COW = ACTIONS.register("milk_cow", MilkCowAction::new);
   public static final DeferredHolder<GroveAction, LearnSpellAction> LEARN_SPELL = ACTIONS.register("learn_spell", LearnSpellAction::new);
   public static final DeferredHolder<GroveAction, LearnSpellModifierAction> LEARN_SPELL_MODIFIER = ACTIONS.register("learn_spell_modifier", LearnSpellModifierAction::new);
+  public static final DeferredHolder<GroveAction, RunicShearingAction> RUNIC_SHEARING = ACTIONS.register("runic_shearing", RunicShearingAction::new);
 
   public static void register(IEventBus bus) {
     ACTIONS.register(bus);

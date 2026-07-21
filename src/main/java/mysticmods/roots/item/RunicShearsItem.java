@@ -1,11 +1,13 @@
 package mysticmods.roots.item;
 
+import mysticmods.roots.action.RunicShearingAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.EntityCooldowns;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.config.ConfigManager;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -23,6 +25,7 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -92,10 +95,12 @@ public class RunicShearsItem extends ShearsItem {
               .getCooldown());
           level.playSound(null, player.blockPosition(), SoundEvents.AXE_STRIP, SoundSource.PLAYERS, 0.5f, level.getRandom()
               .nextFloat() * 0.25f + 0.6f);
-          heldItem.hurtAndBreak(recipe.value()
-              .getDurabilityCost(), player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND); // TODO: Check hand
           List<ItemStack> results = recipe.value()
               .assembleOutputs(crafting, player.getRandom(), level.registryAccess(), null);
+          RunicShearingAction.Context context = new RunicShearingAction.Context((ServerLevel)level, (ServerPlayer)player, heldItem, results, recipe.value(), recipe.id(), null, null, entity.blockPosition(), entity);
+          ModActions.RUNIC_SHEARING.get().accept(context);
+          heldItem.hurtAndBreak(recipe.value()
+              .getDurabilityCost(), player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND); // TODO: Check hand
           for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, entity.getX(), entity.getY(), entity.getZ(), true, stack, -1);
           }
@@ -132,6 +137,8 @@ public class RunicShearsItem extends ShearsItem {
     return InteractionResult.PASS;
   }
 
+  private static final ResourceLocation SHEARING = ResourceLocation.withDefaultNamespace("shearing");
+
   protected boolean doShear(LivingEntity newTarget, Player player, ItemStack heldItem, LivingEntity original, BlockPos pos, InteractionHand hand) {
     if (!(newTarget instanceof IShearable target)) {
       return false;
@@ -139,6 +146,10 @@ public class RunicShearsItem extends ShearsItem {
     if (target.isShearable(player, heldItem, newTarget.level(), pos)) {
       // EnchantmentHelper.getItemEnchantmentLevel(entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), heldItem)
       List<ItemStack> drops = target.onSheared(player, heldItem, newTarget.level(), pos);
+      var sPlayer = (ServerPlayer) player;
+      RunicShearingAction.Context context = new RunicShearingAction.Context(sPlayer.serverLevel(), sPlayer, heldItem, drops, null, SHEARING, null, null, newTarget.blockPosition(), newTarget);
+      ModActions.RUNIC_SHEARING.get().accept(context);
+
       Random rand = new java.util.Random();
       drops.forEach(d -> {
         ItemEntity ent = original.spawnAtLocation(d, 1.0F);
@@ -197,19 +208,23 @@ public class RunicShearsItem extends ShearsItem {
         CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockpos, itemstack);
       }
 
-      if (player != null) {
-        itemstack.hurtAndBreak(recipe.value()
-            .getDurabilityCost(), player, pContext.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
-      }
-
       if (!level.isClientSide()) {
         List<ItemStack> results = recipe.value()
             .assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null);
+
+        var sPlayer = (ServerPlayer) player;
+        RunicShearingAction.Context context = new RunicShearingAction.Context(sPlayer.serverLevel(), sPlayer, itemstack, results, recipe.value(), recipe.id(), blockstate, level.getBlockState(blockpos), blockpos, null);
+        ModActions.RUNIC_SHEARING.get().accept(context);
         // TODO: Item could be empty with only chance outputs
         // TODO: Isn;'t there "assemble all" now?
         for (ItemStack stack : results) {
           ItemUtil.Spawn.spawnItem(level, player == null ? blockpos : player.blockPosition(), stack);
         }
+      }
+
+      if (player != null) {
+        itemstack.hurtAndBreak(recipe.value()
+            .getDurabilityCost(), player, pContext.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
       }
 
       return InteractionResult.sidedSuccess(level.isClientSide);
@@ -218,6 +233,7 @@ public class RunicShearsItem extends ShearsItem {
     }
   }
 
+  // TODO: Actions
   public static class RunicShearsDispenseBehaviour extends DefaultDispenseItemBehavior {
     @Override
     protected ItemStack execute(BlockSource blockSource, ItemStack item) {

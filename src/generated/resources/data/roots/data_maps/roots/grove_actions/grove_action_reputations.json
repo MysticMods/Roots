@@ -201,42 +201,6 @@
         "entries": [
           {
             "type": "exact_item",
-            "name": "roots:wildewheet"
-          }
-        ],
-        "grove": "roots:primal",
-        "name": "roots:create_wildewheet",
-        "reputation": {
-          "gain1": 50,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_item",
-            "name": "roots:spiritleaf"
-          }
-        ],
-        "grove": "roots:cultivation",
-        "name": "roots:create_spirit_leaf",
-        "reputation": {
-          "gain1": 50,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_item",
             "name": "roots:moonglow"
           }
         ],
@@ -1032,6 +996,44 @@
           "gain5": 0
         },
         "unique": false
+      }
+    ],
+    "roots:runic_shearing": [
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:wildewheet"
+          }
+        ],
+        "grove": "roots:primal",
+        "name": "roots:create_wildewheet",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
+      },
+      {
+        "entries": [
+          {
+            "type": "exact_item",
+            "name": "roots:spiritleaf"
+          }
+        ],
+        "grove": "roots:cultivation",
+        "name": "roots:create_spirit_leaf",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 0,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": true
       }
     ],
     "roots:shatter_block": [

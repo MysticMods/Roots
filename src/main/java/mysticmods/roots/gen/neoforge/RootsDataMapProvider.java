@@ -422,10 +422,14 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_dewgonia"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.DEWGONIA.getId()))),
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("create_baffle_cap"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.BAFFLECAP.getId()))),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("create_pereskia"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.PERESKIA.getId()))),
-        new GroveReputationEntry(ModGroves.PRIMAL.value(), RootsAPI.rl("create_wildewheet"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.WILDEWHEET.getId()))),
-        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("create_spirit_leaf"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.SPIRITLEAF.getId()))),
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("create_moonglow"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.MOONGLOW.getId())))
     ), false);
+
+    builder20.add(ModActions.RUNIC_SHEARING, List.of(
+        new GroveReputationEntry(ModGroves.PRIMAL.value(), RootsAPI.rl("create_wildewheet"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.WILDEWHEET.getId()))),
+        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("create_spirit_leaf"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.SPIRITLEAF.getId())))
+    ), false);
+
     builder20.add(ModActions.BRED_ANIMAL, List.of(
         new GroveReputationEntry(ModGroves.PRIMAL.value(), RootsAPI.rl("bred_animal"), new GroveReputation(50, 8, 4, 1, 1)),
         new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("bred_sprouts"), new GroveReputation(20, 10, 5, 1, 1), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.SPROUTS)
@@ -585,6 +589,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder27.add(ModActions.CRAFT_RECIPE, Items.CRAFTER, false);
     builder27.add(ModActions.CRAFT_ITEM, Items.CRAFTING_TABLE, false);
     builder27.add(ModActions.BRED_ANIMAL, Items.WHEAT, false);
+    builder27.add(ModActions.RUNIC_SHEARING, ModItems.RUNIC_SHEARS.get(), false);
     builder27.add(ModActions.SHATTER_BLOCK, Items.IRON_PICKAXE, false);
     builder27.add(ModActions.KILL_ENTITY, Items.IRON_SWORD, false);
     builder27.add(ModActions.TAME_ANIMAL, Items.LEAD, false);
