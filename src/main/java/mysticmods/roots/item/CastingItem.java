@@ -43,6 +43,8 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,6 +107,18 @@ public class CastingItem extends Item {
       }
     }
     return super.isCorrectToolForDrops(stack, state);
+  }
+
+  // TODO: Not sure if this is correct
+  @Override
+  public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+    if (itemAbility == ItemAbilities.SHEARS_DIG) {
+      var currentModifiers = getCurrentSpell(null, null, stack);
+      if (currentModifiers != null && currentModifiers.hasModifier(RootsTags.SpellModifiers.SILK_TOUCH)) {
+        return true;
+      }
+    }
+    return super.canPerformAction(stack, itemAbility);
   }
 
   @Nullable
