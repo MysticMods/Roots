@@ -115,7 +115,7 @@ public class ServerNetworkHooks {
 
     GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
     if (grants == null || !grants.hasSpell(spell)) {
-      player.displayClientMessage(Component.translatable("roots.message.spell.not_granted", spell.getDescriptionId()), true);
+      player.displayClientMessage(Component.translatable("roots.message.spell.not_granted", spell.getStyledName()), true);
       return;
     }
     // TODO: Validate that the player has the spell
@@ -272,10 +272,6 @@ public class ServerNetworkHooks {
 
     GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
     // TODO: Check this
-    if (grants == null || !grants.hasSpell(spell)) {
-      player.displayClientMessage(Component.translatable("roots.message.spell.not_granted", spell.getStyledName()), true);
-      return;
-    }
     if (grants == null || (modifier.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK) && !grants.hasSpellModifier(modifier))) {
       player.displayClientMessage(Component.translatable("roots.message.spell_modifier.not_granted", modifier.getName()), true);
       return;
