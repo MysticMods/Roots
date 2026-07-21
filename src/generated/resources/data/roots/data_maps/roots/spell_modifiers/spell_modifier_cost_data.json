@@ -45,6 +45,15 @@
         }
       ]
     },
+    "roots:shatter/smelting": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:inferno_bulb"
+        }
+      ]
+    },
     "roots:sky_soarer/amplified_1": {
       "costs": [
         {

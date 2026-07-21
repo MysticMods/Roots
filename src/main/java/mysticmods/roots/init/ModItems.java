@@ -530,6 +530,7 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_III);
     modifier(ITEMS, ModModifiers.SHATTER_MAGNETISM);
     modifier(ITEMS, ModModifiers.SHATTER_SILK_TOUCH);
+    modifier(ITEMS, ModModifiers.SHATTER_SMELTING);
   }
 /*
 

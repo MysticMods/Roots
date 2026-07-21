@@ -34,6 +34,7 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
     this.tag(RootsTags.SpellModifiers.SHATTER_FORTUNE).add(
         ModModifiers.SHATTER_FORTUNE_I.value(), ModModifiers.SHATTER_FORTUNE_II.value(), ModModifiers.SHATTER_FORTUNE_III.value()
     );
+    this.tag(RootsTags.SpellModifiers.SMELTS).add(ModModifiers.SHATTER_SMELTING.value());
     this.tag(RootsTags.SpellModifiers.INCREASES_FORTUNE).addTag(RootsTags.SpellModifiers.SHATTER_FORTUNE);
     this.tag(RootsTags.SpellModifiers.INCREASES_LOOTING);
     this.tag(RootsTags.SpellModifiers.SILK_TOUCH).add(ModModifiers.SHATTER_SILK_TOUCH.value());

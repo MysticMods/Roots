@@ -35,6 +35,7 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_I = REGISTER.register("shatter/fortune_i", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), null, ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_II = REGISTER.register("shatter/fortune_ii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), SHATTER_FORTUNE_I.getKey(), ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_III = REGISTER.register("shatter/fortune_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), SHATTER_FORTUNE_II.getKey(), ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_SMELTING = REGISTER.register("shatter/smelting", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), null, ModSpells.SHATTER.getKey()));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

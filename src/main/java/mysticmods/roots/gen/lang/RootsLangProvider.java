@@ -918,6 +918,7 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_I, "Applies Fortune I when breaking blocks.");
     modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_II, "Applies Fortune II when breaking blocks.");
     modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_III, "Applies Fortune III when breaking blocks.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_SMELTING, "Smelts items dropped by broken blocks.");
 
 
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");

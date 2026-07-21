@@ -400,6 +400,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.SHATTER_FORTUNE_I, Items.IRON_PICKAXE);
     modifier(ModModifiers.SHATTER_FORTUNE_II, Items.GOLDEN_PICKAXE);
     modifier(ModModifiers.SHATTER_FORTUNE_III, Items.DIAMOND_PICKAXE);
+    modifier(ModModifiers.SHATTER_SMELTING, Items.FURNACE);
 
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));
