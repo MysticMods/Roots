@@ -424,8 +424,8 @@ public final class RootsDataMapProvider extends DataMapProvider {
     ), false);
 
     builder20.add(ModActions.RUNIC_SHEARING, List.of(
-        new GroveReputationEntry(ModGroves.PRIMAL.value(), RootsAPI.rl("create_wildewheet"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.WILDEWHEET.getId()))),
-        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("create_spirit_leaf"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.SPIRITLEAF.getId())))
+        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("create_wildewheet"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.WILDEWHEET.getId()))),
+        new GroveReputationEntry(ModGroves.PRIMAL.value(), RootsAPI.rl("create_spirit_leaf"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.SPIRITLEAF.getId())))
     ), false);
 
     builder20.add(ModActions.BRED_ANIMAL, List.of(
