@@ -1,0 +1,46 @@
+{
+  "values": {
+    "#roots:decayable/phantoms": {
+      "baseIdentifier": "roots:decayable/phantoms",
+      "calculatedIdentifiers": [
+        "roots:decayable/phantoms/1",
+        "roots:decayable/phantoms/2",
+        "roots:decayable/phantoms/3"
+      ],
+      "healthReduction": -4.0,
+      "maxApplied": 3
+    },
+    "#roots:decayable/skeletons": {
+      "baseIdentifier": "roots:decayable/skeletons",
+      "calculatedIdentifiers": [
+        "roots:decayable/skeletons/1",
+        "roots:decayable/skeletons/2",
+        "roots:decayable/skeletons/3"
+      ],
+      "healthReduction": -4.0,
+      "maxApplied": 3
+    },
+    "#roots:decayable/withers": {
+      "baseIdentifier": "roots:decayable/withers",
+      "calculatedIdentifiers": [
+        "roots:decayable/withers/1",
+        "roots:decayable/withers/2",
+        "roots:decayable/withers/3",
+        "roots:decayable/withers/4",
+        "roots:decayable/withers/5"
+      ],
+      "healthReduction": -40.0,
+      "maxApplied": 5
+    },
+    "#roots:decayable/zombies": {
+      "baseIdentifier": "roots:decayable/zombies",
+      "calculatedIdentifiers": [
+        "roots:decayable/zombies/1",
+        "roots:decayable/zombies/2",
+        "roots:decayable/zombies/3"
+      ],
+      "healthReduction": -4.0,
+      "maxApplied": 3
+    }
+  }
+}
