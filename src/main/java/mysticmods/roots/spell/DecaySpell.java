@@ -68,7 +68,7 @@ public class DecaySpell extends TwoRadiusSpell {
       }
 
       LivingEntity entity = entities.remove(pLevel.getRandom().nextInt(entities.size()));
-      ItemStack result = tryDecayEntity(entity);
+      ItemStack result = tryDecayEntity(pPlayer, entity);
       if (result != null) {
         if (!result.isEmpty()) {
           entity.spawnAtLocation(result);
@@ -87,14 +87,14 @@ public class DecaySpell extends TwoRadiusSpell {
   }
 
   @Nullable
-  private static ItemStack tryDecayEntity (LivingEntity entity) {
+  private static ItemStack tryDecayEntity (LivingEntity attacker, LivingEntity entity) {
     var decayHealth = entity.getType().builtInRegistryHolder().getData(DataMaps.DECAYABLE_HEALTH_INFO);
     var decayDrop = entity.getType().builtInRegistryHolder().getData(DataMaps.DECAYABLE_DROP_INFO);
     if (decayHealth == null || decayDrop == null) {
       return null;
     }
 
-    if (decayHealth.apply(entity)) {
+    if (decayHealth.apply(attacker, entity)) {
       return decayDrop.run(entity.getRandom());
     }
 
