@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#roots:decayable/withers",
+    "#roots:decayable/phantoms",
+    "#roots:decayable/skeletons",
+    "#roots:decayable/zombies"
+  ]
+}

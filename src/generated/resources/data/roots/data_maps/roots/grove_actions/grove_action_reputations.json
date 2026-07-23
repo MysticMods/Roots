@@ -517,7 +517,7 @@
         "entries": [
           {
             "type": "target_entity",
-            "name": "roots:undead"
+            "name": "minecraft:undead"
           }
         ],
         "grove": "roots:fungal",
@@ -1006,7 +1006,7 @@
             "name": "roots:wildewheet"
           }
         ],
-        "grove": "roots:primal",
+        "grove": "roots:cultivation",
         "name": "roots:create_wildewheet",
         "reputation": {
           "gain1": 50,
@@ -1024,7 +1024,7 @@
             "name": "roots:spiritleaf"
           }
         ],
-        "grove": "roots:cultivation",
+        "grove": "roots:primal",
         "name": "roots:create_spirit_leaf",
         "reputation": {
           "gain1": 50,

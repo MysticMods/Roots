@@ -741,6 +741,8 @@
   "spell.roots.temporal_morass.description": "Creates a temporary field of disruptive energy. All entities within this field will have their movement dramatically slowed.",
   "spell.roots.wildfire": "Wildfire",
   "spell.roots.wildfire.description": "Flings a fiery meteor in the direction you are looking. If this meteor hits an enemy, it will damage it.",
+  "spell_modifier.roots.acid_cloud.fire": "Fire",
+  "spell_modifier.roots.acid_cloud.peaceful": "Peaceful",
   "spell_modifier.roots.shatter.fortune_i": "Fortune I",
   "spell_modifier.roots.shatter.fortune_i.description": "Applies Fortune I when breaking blocks.",
   "spell_modifier.roots.shatter.fortune_i.description.extended": "Applies Fortune I when breaking blocks.",

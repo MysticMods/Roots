@@ -1,5 +1,23 @@
 {
   "values": {
+    "roots:acid_cloud/fire": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:inferno_bulb"
+        }
+      ]
+    },
+    "roots:acid_cloud/peaceful": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:wildroot"
+        }
+      ]
+    },
     "roots:shatter/fortune_i": {
       "costs": [
         {
