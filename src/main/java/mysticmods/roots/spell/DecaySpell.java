@@ -28,7 +28,7 @@ public class DecaySpell extends TwoRadiusSpell {
   private int count;
 
   public DecaySpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x2d8115, 0xc92b5f);
+    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0x2d8115, 0xc92b5f);
   }
 
   @Override
@@ -83,6 +83,7 @@ public class DecaySpell extends TwoRadiusSpell {
       return -1;
     }
 
+    costs.operations(totalDecayed);
     return cooldown;
   }
 
