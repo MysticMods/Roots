@@ -1,0 +1,36 @@
+#version 150
+
+#moj_import <fog.glsl>
+
+uniform sampler2D Sampler0;
+uniform sampler2D Sampler2; // Lightmap
+
+uniform vec4 ColorModulator;
+uniform float FogStart;
+uniform float FogEnd;
+uniform vec4 FogColor;
+
+in float vertexDistance;
+in vec2 texCoord0;
+in vec2 texCoord1;
+in vec4 vertexColor;
+in float vAgeFrac;
+
+out vec4 fragColor;
+
+void main() {
+    float a = mix(0.9, 0.3, vAgeFrac);
+    vec2 p = (texCoord0 - 0.5) * 2.0;
+    p.y = -p.y;
+    float theta = atan(p.y, p.x);
+    float dropRadius = a * (1.0 - sin(theta));
+    if (length(p) > dropRadius) discard;
+
+    vec4 texColor = texture(Sampler0, texCoord0);
+    vec4 lightmap = texture(Sampler2, texCoord1);
+    vec4 color = texColor * lightmap * vertexColor * ColorModulator;
+    if (color.a <= 0.0039) {
+        discard;
+    }
+    fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
+}

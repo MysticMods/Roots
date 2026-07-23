@@ -169,7 +169,7 @@ public class TestParticle extends TextureSheetParticle {
       this.renderVertex(buffer, quaternion, x, y, z, -1.0F, -1.0F, f, f1, f4, i);
     }
 
-    private void renderVertex(
+    public void renderVertex(
         VertexConsumer buffer,
         Quaternionf quaternion,
         float x,

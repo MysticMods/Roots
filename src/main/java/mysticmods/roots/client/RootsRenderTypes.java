@@ -3,6 +3,7 @@ package mysticmods.roots.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormatElement;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
@@ -25,6 +26,14 @@ import java.util.function.Function;
 
 public class RootsRenderTypes {
   private static boolean offMainTarget = false;
+
+  public static final VertexFormat CARDIOID_PARTICLE = VertexFormat.builder()
+      .add("Position", VertexFormatElement.POSITION)
+      .add("UV0", VertexFormatElement.UV0)
+      .add("Color", VertexFormatElement.COLOR)
+      .add("UV2", VertexFormatElement.UV2)
+      .add("UV1", VertexFormatElement.UV1)
+      .build();
 
   public static void setOffMainTarget() {
     RootsRenderTypes.offMainTarget = true;
@@ -108,6 +117,8 @@ public class RootsRenderTypes {
       return RootsShaders.getLowDiscardParticleShader();
     }
   });
+
+  public static final RenderStateShard.ShaderStateShard CARDIOID_PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(RootsShaders::getCardioidParticleShader);
 
   public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =
       Util.memoize(p_286159_ -> {

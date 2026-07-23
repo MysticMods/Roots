@@ -235,6 +235,7 @@ public class ClientSetup {
   @SubscribeEvent
   public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.LOW_DISCARD_PARTICLE_SHADER_LOCATION, DefaultVertexFormat.PARTICLE), (s) -> RootsShaders.LOW_DISCARD_PARTICLE_SHADER = s);
+    event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.CARDIOID_PARTICLE_SHADER_LOCATION, RootsRenderTypes.CARDIOID_PARTICLE), (s) -> RootsShaders.CARDIOID_PARTICLE_SHADER = s);
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.DISSOLVE_SHADER_LOCATION, DefaultVertexFormat.BLOCK), (s) -> RootsShaders.DISSOLVE_SHADER = s);
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.RENDERTYPE_ENTITY_CUTOUT_DISSOLVE, DefaultVertexFormat.NEW_ENTITY), (s) -> RootsShaders.RENDERTYPE_ENTITY_CUTOUT_DISSOLVE_SHADER = s);
     event.registerShader(new ShaderInstance(event.getResourceProvider(), RootsShaders.RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE, DefaultVertexFormat.NEW_ENTITY), (s) -> RootsShaders.RENDERTYPE_ENTITY_TRANSLUCENT_CULL_DISSOLVE_SHADER = s);

@@ -1,6 +1,6 @@
 {
-    "vertex": "roots:low_particle_discard",
-    "fragment": "roots:low_particle_discard",
+    "vertex": "roots:cardioid_particle",
+    "fragment": "roots:cardioid_particle",
     "samplers": [
         { "name": "Sampler0" },
         { "name": "Sampler2" }

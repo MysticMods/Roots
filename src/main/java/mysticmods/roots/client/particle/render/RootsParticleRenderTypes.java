@@ -54,6 +54,26 @@ public class RootsParticleRenderTypes {
     }
   }
 
+  public static RootsParticleRenderType CARDIOID_GLOW = new RootsParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
+      RenderSystem.enableBlend();
+      RenderSystem.depthMask(false);
+      RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+      RenderSystem.setShader(RootsShaders::getCardioidParticleShader);
+      RenderSystem.enableCull();
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.enableDepthTest();
+      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
+      return tesselator.begin(VertexFormat.Mode.QUADS, RootsRenderTypes.CARDIOID_PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:glow";
+    }
+  };
+
   // Normal render types
   public static RootsParticleRenderType GLOW = new RootsParticleRenderType() {
     @Override
