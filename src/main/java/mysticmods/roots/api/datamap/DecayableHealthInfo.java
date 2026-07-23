@@ -68,7 +68,7 @@ public record DecayableHealthInfo(ResourceLocation baseIdentifier, List<Resource
 
     var reduct = healthReduction > 0 ? -healthReduction : healthReduction;
 
-    AttributeModifier modifier = new AttributeModifier(toApply, reduct, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    AttributeModifier modifier = new AttributeModifier(toApply, reduct, AttributeModifier.Operation.ADD_VALUE);
 
     var currentHealth = entity.getHealth();
     var maximumHealth = entity.getMaxHealth();
