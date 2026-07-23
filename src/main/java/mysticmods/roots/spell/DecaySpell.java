@@ -70,7 +70,9 @@ public class DecaySpell extends TwoRadiusSpell {
       LivingEntity entity = entities.remove(pLevel.getRandom().nextInt(entities.size()));
       ItemStack result = tryDecayEntity(entity);
       if (result != null) {
-        entity.spawnAtLocation(result);
+        if (!result.isEmpty()) {
+          entity.spawnAtLocation(result);
+        }
         // TODO: Visual
         totalDecayed++;
       }

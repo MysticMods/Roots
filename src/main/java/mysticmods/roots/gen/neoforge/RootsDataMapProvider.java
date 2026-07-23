@@ -647,10 +647,10 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder33.add(ModSpells.SHATTER, RootsTags.Blocks.MINEABLE_WITH_SHATTER, false);
 
     var builder35 = builder(DataMaps.DECAYABLE_DROP_INFO);
-    builder35.add(RootsTags.Entities.DECAYABLE_PHANTOMS, new DecayableDropInfo(Items.PHANTOM_MEMBRANE, 0.2f, 2), false);
-    builder35.add(RootsTags.Entities.DECAYABLE_SKELETONS, new DecayableDropInfo(Items.BONE, 0.8f, 3), false);
-    builder35.add(RootsTags.Entities.DECAYABLE_ZOMBIES, new DecayableDropInfo(Items.ROTTEN_FLESH, 0.8f, 3), false);
-    builder35.add(RootsTags.Entities.DECAYABLE_WITHERS, DecayableDropInfo.NONE, false);
+    builder35.add(RootsTags.Entities.DECAYABLE_PHANTOMS, new DecayableDropInfo(Items.PHANTOM_MEMBRANE, 0.2f, 0, 2), false);
+    builder35.add(RootsTags.Entities.DECAYABLE_SKELETONS, new DecayableDropInfo(Items.BONE, 0.3f, 1, 3), false);
+    builder35.add(RootsTags.Entities.DECAYABLE_ZOMBIES, new DecayableDropInfo(Items.ROTTEN_FLESH, 0.3f, 1, 3), false);
+    builder35.add(RootsTags.Entities.DECAYABLE_WITHERS, new DecayableDropInfo(Items.COAL, 0.6f, 1, 6), false);
 
     var builder36 = builder(DataMaps.DECAYABLE_HEALTH_INFO);
     builder36.add(RootsTags.Entities.DECAYABLE_PHANTOMS, new DecayableHealthInfo(RootsTags.Entities.DECAYABLE_PHANTOMS.location(), -4.0, 3), false);

@@ -6,17 +6,17 @@
       "tries": 2
     },
     "#roots:decayable/skeletons": {
-      "chance": 0.8,
+      "chance": 0.3,
       "item": "minecraft:bone",
       "tries": 3
     },
     "#roots:decayable/withers": {
-      "chance": 0.0,
-      "item": "minecraft:air",
-      "tries": 0
+      "chance": 0.6,
+      "item": "minecraft:coal",
+      "tries": 6
     },
     "#roots:decayable/zombies": {
-      "chance": 0.8,
+      "chance": 0.3,
       "item": "minecraft:rotten_flesh",
       "tries": 3
     }

@@ -12,10 +12,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
-public record DecayableDropInfo(Item item, float chance, int tries) {
-  public static final DecayableDropInfo NONE = new DecayableDropInfo(Items.AIR, 0, 0);
+public record DecayableDropInfo(Item item, float chance, int minimum, int tries) {
+  public static final DecayableDropInfo NONE = new DecayableDropInfo(Items.AIR, 0, 0, 0);
 
   public static final MapCodec<DecayableDropInfo> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.ITEM.byNameCodec().fieldOf("item")
           .forGetter(DecayableDropInfo::item), Codec.FLOAT.fieldOf("chance")
@@ -29,14 +30,17 @@ public record DecayableDropInfo(Item item, float chance, int tries) {
       DecayableDropInfo::new
   );
 
-  public DecayableDropInfo(ItemStack item, float chance, int tries) {
-    this(item.getItem(), chance, tries);
+  public DecayableDropInfo(ItemStack item, float chance, int minimum, int tries) {
+    this(item.getItem(), chance, minimum, tries);
   }
 
-  @Nullable
+  public DecayableDropInfo(Item item, float chance, int tries) {
+    this(item, chance, 1, tries);
+  }
+
   public ItemStack run(RandomSource random) {
     if (chance <= 0 || tries <= 0 || item == Items.AIR) {
-      return null;
+      return ItemStack.EMPTY;
     }
     ItemStack result = new ItemStack(item);
     int count = 0;
@@ -45,7 +49,10 @@ public record DecayableDropInfo(Item item, float chance, int tries) {
         count++;
       }
     }
-    result.setCount(Math.max(1, count));
+    if (minimum == 0 && count == 0) {
+      return ItemStack.EMPTY;
+    }
+    result.setCount(Math.max(minimum, count));
     return result;
   }
 }
