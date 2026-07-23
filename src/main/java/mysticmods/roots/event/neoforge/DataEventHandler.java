@@ -71,6 +71,7 @@ public class DataEventHandler {
     event.register(DataMaps.ENTITY_AUGMENTATION_DATA);
     event.register(DataMaps.SHATTER_COST_MULTIPLIERS);
     event.register(DataMaps.CAN_BREAK_BLOCKS_TAG);
+    event.register(DataMaps.DECAYABLE_INFO);
   }
 
   private static void callInit(Holder<?> holder) {

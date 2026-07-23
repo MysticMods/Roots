@@ -4,10 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.GroveReputationEntry;
-import mysticmods.roots.api.datamap.AugmentationData;
-import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.datamap.SproutGift;
+import mysticmods.roots.api.datamap.*;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
@@ -26,6 +23,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -443,7 +441,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("kill_withers"), new GroveReputation(50, 40, 30, 20, 20), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.WITHERS),
         new GroveReputationEntry(ModGroves.HOLLOW.value(), RootsAPI.rl("kill_dragons"), new GroveReputation(50, 40, 30, 20, 20), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.DRAGONS),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("kill_traders"), new GroveReputation(-5, -8, -10, -20, -20), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.TRADERS),
-        new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("kill_undead"), new GroveReputation(10, 8, 6, 2, 2), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.UNDEAD),
+        new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("kill_undead"), new GroveReputation(10, 8, 6, 2, 2), GroveReputationEntry.SubEntryType.TARGET_ENTITY, EntityTypeTags.UNDEAD),
         new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("kill_sprouts"), new GroveReputation(0, -2, -5, -10, -10), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.SPROUTS)
     ), false);
     builder20.add(ModActions.TAME_ANIMAL, List.of(
@@ -647,5 +645,13 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     var builder33 = builder(DataMaps.CAN_BREAK_BLOCKS_TAG);
     builder33.add(ModSpells.SHATTER, RootsTags.Blocks.MINEABLE_WITH_SHATTER, false);
+
+    var builder35 = builder(DataMaps.DECAYABLE_INFO);
+    builder35.add(RootsTags.Entities.DECAYABLE_PHANTOMS, new DecayableDropInfo(Items.PHANTOM_MEMBRANE, 0.2f, 2), false);
+    builder35.add(RootsTags.Entities.DECAYABLE_SKELETONS, new DecayableDropInfo(Items.BONE, 0.8f, 3), false);
+    builder35.add(RootsTags.Entities.DECAYABLE_ZOMBIES, new DecayableDropInfo(Items.ROTTEN_FLESH, 0.8f, 3), false);
+    builder35.add(RootsTags.Entities.DECAYABLE_WITHERS, DecayableDropInfo.NONE, false);
+
+
   }
 }

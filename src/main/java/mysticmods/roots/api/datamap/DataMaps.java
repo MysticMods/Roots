@@ -1,7 +1,6 @@
 package mysticmods.roots.api.datamap;
 
 import com.mojang.serialization.Codec;
-import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
@@ -30,7 +29,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.neoforged.neoforge.common.crafting.BlockTagIngredient;
 import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapValueMerger;
@@ -138,6 +136,7 @@ public class DataMaps {
       .synced(Codec.DOUBLE, true)
       .build();
   public static final DataMapType<Spell, TagKey<Block>> CAN_BREAK_BLOCKS_TAG = DataMapType.builder(RootsAPI.rl("can_break_blocks_tag"), RootsRegistries.Keys.SPELLS, TagKey.codec(Registries.BLOCK)).synced(TagKey.codec(Registries.BLOCK), true).build();
+  public static final DataMapType<EntityType<?>, DecayableDropInfo> DECAYABLE_INFO = DataMapType.builder(RootsAPI.rl("decayable_info"), Registries.ENTITY_TYPE, DecayableDropInfo.CODEC).synced(DecayableDropInfo.CODEC, true).build();
 
   public static ItemStack getDimensionItem(ResourceKey<Level> dimension) {
     if (DIMENSION_LOOKUP.isEmpty()) {

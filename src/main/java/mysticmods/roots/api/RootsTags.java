@@ -514,9 +514,9 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> ADD_TENTACLE_LOOT = modTag("add_tentacle_loot");
 
     public static final TagKey<EntityType<?>> WITHERS = modTag("withers");
+    public static final TagKey<EntityType<?>> PHANTOMS = modTag("phantoms");
     public static final TagKey<EntityType<?>> DRAGONS = modTag("dragons");
     public static final TagKey<EntityType<?>> TRADERS = modTag("traders");
-    public static final TagKey<EntityType<?>> UNDEAD = modTag("undead");
     public static final TagKey<EntityType<?>> SPROUTS = modTag("sprouts");
 
     public static final TagKey<EntityType<?>> END_ANIMALS = modTag("end_animals");
@@ -550,6 +550,12 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> AUGMENTABLE_ATTACK_DAMAGE = modTag("augmentable/attack_damage");
     // Currently unused
     public static final TagKey<EntityType<?>> AUGMENTABLE_ARMOR = modTag("augmentable/armor");
+
+    public static final TagKey<EntityType<?>> DECAYABLE = modTag("decayable");
+    public static final TagKey<EntityType<?>> DECAYABLE_ZOMBIES = modTag("decayable/zombies");
+    public static final TagKey<EntityType<?>> DECAYABLE_SKELETONS = modTag("decayable/skeletons");
+    public static final TagKey<EntityType<?>> DECAYABLE_PHANTOMS = modTag("decayable/phantoms");
+    public static final TagKey<EntityType<?>> DECAYABLE_WITHERS = modTag("decayable/withers");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

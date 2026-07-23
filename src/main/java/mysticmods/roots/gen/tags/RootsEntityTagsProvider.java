@@ -172,10 +172,10 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.ADD_TENTACLE_LOOT).add(EntityType.SQUID, EntityType.GLOW_SQUID);
 
     this.tag(RootsTags.Entities.WITHERS).add(EntityType.WITHER);
+    this.tag(RootsTags.Entities.PHANTOMS).add(EntityType.PHANTOM);
     this.tag(RootsTags.Entities.DRAGONS).add(EntityType.ENDER_DRAGON);
     this.tag(RootsTags.Entities.TRADERS)
         .add(EntityType.PIGLIN, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.ZOMBIE_VILLAGER);
-    this.tag(RootsTags.Entities.UNDEAD).addTag(EntityTypeTags.UNDEAD);
     this.tag(RootsTags.Entities.SPROUTS)
         .add(ModEntities.GREEN_SPROUT.get(), ModEntities.SNOW_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.TAN_SPROUT.get(), ModEntities.RED_SPROUT.get(), ModEntities.MELODY_SPROUT.get());
     this.tag(RootsTags.Entities.HELL_ANIMALS);
@@ -198,6 +198,11 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.SHOULD_RENDER_HUD)
         .add(EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.CAMEL, EntityType.LLAMA, EntityType.VILLAGER, EntityType.WOLF, ModEntities.FENNEC.get());
     this.tag(EntityTypeTags.ARROWS).add(ModEntities.LIVING_ARROW.get());
+    this.tag(RootsTags.Entities.DECAYABLE_SKELETONS).addTag(EntityTypeTags.SKELETONS);
+    this.tag(RootsTags.Entities.DECAYABLE_PHANTOMS).addTag(RootsTags.Entities.PHANTOMS);
+    this.tag(RootsTags.Entities.DECAYABLE_ZOMBIES).addTag(EntityTypeTags.ZOMBIES);
+    this.tag(RootsTags.Entities.DECAYABLE_WITHERS).addTag(RootsTags.Entities.WITHERS);
+    this.tag(RootsTags.Entities.DECAYABLE).addTags(RootsTags.Entities.DECAYABLE_WITHERS, RootsTags.Entities.DECAYABLE_PHANTOMS, RootsTags.Entities.DECAYABLE_SKELETONS, RootsTags.Entities.DECAYABLE_ZOMBIES);
   }
 
   @Override
