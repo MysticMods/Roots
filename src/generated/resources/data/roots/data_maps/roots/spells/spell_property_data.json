@@ -150,6 +150,33 @@
           "default_value": 20,
           "value": 20
         }
+      },
+      {
+        "id": "roots:decay/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "Radius",
+          "default_value": 3,
+          "value": 3
+        }
+      },
+      {
+        "id": "roots:decay/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "Radius",
+          "default_value": 2,
+          "value": 2
+        }
+      },
+      {
+        "id": "roots:decay/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How many entities or blocks the spell will affect per interval",
+          "default_value": 1,
+          "value": 1
+        }
       }
     ],
     "roots:desaturate": [

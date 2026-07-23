@@ -64,6 +64,9 @@ public class ModSpells {
   // Decay
   public static final DeferredHolder<Spell, DecaySpell> DECAY = spell(Spells.DECAY, DecaySpell::new, ChatFormatting.DARK_GREEN, () -> CostInstance.of(Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_COOLDOWN = P.recordProperty("decay/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_ZX = P.recordProperty("decay/radius_zx", Property.ofInt(3, "Radius"));
+  public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_Y = P.recordProperty("decay/radius_y", Property.ofInt(2, "Radius"));
+  public static final PropertyHolder<Property.IntegerProperty> DECAY_COUNT = P.recordProperty("decay/count", Property.ofInt(1, SpellProperties.COUNT));
 
   // Desaturate (500 cooldown)
   public static final DeferredHolder<Spell, DesaturateSpell> DESATURATE = spell(Spells.DESATURATE, DesaturateSpell::new, ChatFormatting.GREEN, () -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)));

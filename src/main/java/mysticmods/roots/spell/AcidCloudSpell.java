@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.spell.ParentChargeType;
@@ -16,6 +17,7 @@ import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 // Note: VISUALS DONE!
 public class AcidCloudSpell extends TwoRadiusSpell {
@@ -65,7 +68,9 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer));
+    Predicate<Entity> entityTest = instance.hasModifier(RootsTags.SpellModifiers.PEACEFUL) ? EntityUtils.isHostileTo(pPlayer) : (p) -> true;
+
+    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), entityTest);
     int totalDamaged = 0;
     for (int damaged = 0; damaged < count; damaged++) {
       if (entities.isEmpty()) {
