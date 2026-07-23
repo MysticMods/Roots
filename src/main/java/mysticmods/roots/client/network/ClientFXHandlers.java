@@ -18,6 +18,8 @@ import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ItemPickupParticle;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -1072,6 +1074,34 @@ public class ClientFXHandlers {
 
     if (mc.screen instanceof StaffScreen staffScreen) {
       staffScreen.validate();
+    }
+  }
+
+  // TODO: Temporary visual should be improved
+  public static void decayTarget(int entityId) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc == null || mc.player == null || mc.level == null) {
+      return;
+    }
+
+    Entity entity = mc.level.getEntity(entityId);
+    if (entity == null) {
+      return;
+    }
+
+    var offset = entity.position();
+
+    RandomSource random = entity.getRandom();
+
+    for (int i = 0; i < 4; i++) {
+      // Damage indicator?
+      mc.level.addParticle(
+          ParticleTypes.LARGE_SMOKE,
+          offset.x + (random.nextFloat() - 0.5) * 0.1, offset.y + (entity.getBbHeight() / 2), offset.z + (random.nextFloat() - 0.5) * 0.1,
+          (random.nextFloat() - 0.5) * 0.05,
+          random.nextFloat() * 0.05 + 0.02,
+          (random.nextFloat() - 0.5) * 0.05
+      );
     }
   }
 }

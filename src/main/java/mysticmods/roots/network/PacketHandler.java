@@ -100,6 +100,7 @@ public class PacketHandler {
     registrar.play(ClientboundPouchPickUpHerbPacket.TYPE, ClientboundPouchPickUpHerbPacket.CODEC);
     registrar.play(ClientboundRefreshModifierScreenPacket.TYPE, ClientboundRefreshModifierScreenPacket.CODEC);
     registrar.play(ClientboundRefreshStaffScreenPacket.TYPE, ClientboundRefreshStaffScreenPacket.CODEC);
+    registrar.play(DecayTargetFXPacket.TYPE, DecayTargetFXPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
