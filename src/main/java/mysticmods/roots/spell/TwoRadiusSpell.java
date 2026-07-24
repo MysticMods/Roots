@@ -2,14 +2,15 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellCastType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
@@ -20,7 +21,12 @@ public abstract class TwoRadiusSpell extends Spell {
   protected BoundingBox boundingBox;
   protected AABB aabb;
 
+  @Deprecated
   public TwoRadiusSpell(SpellCastType type, ChatFormatting color, CostInstance costs, ParentChargeType chargeType, int color1, int color2) {
+    this(type, TextColor.fromLegacyFormat(color), costs, chargeType, color1, color2);
+  }
+
+  public TwoRadiusSpell(SpellCastType type, TextColor color, CostInstance costs, ParentChargeType chargeType, int color1, int color2) {
     super(type, color, costs, chargeType, color1, color2);
   }
 
