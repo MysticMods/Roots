@@ -3,12 +3,13 @@ package mysticmods.roots.api.registry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 
 import javax.annotation.Nullable;
 
 public interface IStyled extends IDescribed {
   @Nullable
-  ChatFormatting getTextColor();
+  TextColor getTextColor();
 
   Style getOrCreateStyle();
 

@@ -23,6 +23,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -57,7 +58,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected int maxUse;
 
   protected Style style;
-  protected ChatFormatting textColor;
+  protected TextColor textColor;
   protected String descriptionId;
   protected String descriptionTooltipId;
   protected String descriptionTooltipExtendedId;
@@ -66,9 +67,14 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
   private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
 
-  public Spell(Type type, ChatFormatting color, CostInstance defaultCosts, ParentChargeType chargeType, int color1, int color2) {
+  @Deprecated
+  public Spell(SpellCastType type, ChatFormatting color, CostInstance defaultCosts, ParentChargeType chargeType, int color1, int color2) {
+    this(type, TextColor.fromLegacyFormat(color), defaultCosts, chargeType, color1, color2);
+  }
+
+  public Spell (SpellCastType type, TextColor textColor, CostInstance defaultCosts, ParentChargeType chargeType, int color1, int color2) {
     this.type = type;
-    this.textColor = color;
+    this.textColor = textColor;
     this.defaultCosts = defaultCosts;
     this.chargeType = chargeType;
     this.color1 = color1;
@@ -212,14 +218,14 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   @Override
   @Nullable
-  public ChatFormatting getTextColor() {
+  public TextColor getTextColor() {
     return textColor;
   }
 
   @Override
   public Style getOrCreateStyle() {
     if (style == null) {
-      ChatFormatting color = getTextColor();
+      TextColor color = getTextColor();
       if (color != null) {
         style = Style.EMPTY.withColor(color).withBold(isBold());
       } else {

@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -21,13 +22,20 @@ public class Herb implements IStyled {
   private final TagKey<Item> tag;
   private String descriptionId;
   private Style style;
-  private final ChatFormatting color;
+  private final TextColor color;
 
+  @Deprecated
   public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {
+    this(item, tag, TextColor.fromLegacyFormat(color));
+  }
+
+  public Herb(Holder<Item> item, TagKey<Item> tag, TextColor color) {
+
     this.item = item;
     this.tag = tag;
     this.color = color;
   }
+
 
   public Holder<Herb> builtInRegistryHolder() {
     return RootsRegistries.HERBS.wrapAsHolder(this);
@@ -44,14 +52,14 @@ public class Herb implements IStyled {
 
   @Override
   @Nullable
-  public ChatFormatting getTextColor() {
+  public TextColor getTextColor() {
     return color;
   }
 
   @Override
   public Style getOrCreateStyle() {
     if (style == null) {
-      ChatFormatting color = getTextColor();
+      TextColor color = getTextColor();
       if (color != null) {
         style = Style.EMPTY.withColor(color).withBold(isBold());
       } else {

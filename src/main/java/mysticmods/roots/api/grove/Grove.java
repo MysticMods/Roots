@@ -9,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -19,7 +20,7 @@ import java.util.function.Predicate;
 
 public class Grove implements IStyled, IDataMapInitialize<Grove> {
   private Style style;
-  private final ChatFormatting color;
+  private final TextColor color;
   private String descriptionId;
 
   private final ReputationRanks defaultReputationRanks = new ReputationRanks(1000, 5000, 15000, 30000);
@@ -27,7 +28,12 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
 
   private final int color1, color2;
 
+  @Deprecated
   public Grove(ChatFormatting color, int color1, int color2) {
+    this(TextColor.fromLegacyFormat(color), color1, color2);
+  }
+
+  public Grove(TextColor color, int color1, int color2) {
     this.color = color;
     this.color1 = color1;
     this.color2 = color2;
@@ -72,14 +78,14 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
 
   @Override
   @Nullable
-  public ChatFormatting getTextColor() {
+  public TextColor getTextColor() {
     return color;
   }
 
   @Override
   public Style getOrCreateStyle() {
     if (style == null) {
-      ChatFormatting color = getTextColor();
+      TextColor color = getTextColor();
       if (color != null) {
         style = Style.EMPTY.withColor(color).withBold(isBold());
       } else {
