@@ -21,6 +21,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -53,6 +55,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected final SpellCastType type;
   protected final CostInstance defaultCosts;
   protected final ParentChargeType chargeType;
+  protected DataComponentMap components = DataComponentMap.builder().build();
   protected CostInstance costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
@@ -66,9 +69,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
 
-  private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
-  private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
-
   @Deprecated
   public Spell(SpellCastType type, ChatFormatting color, CostInstance defaultCosts, ParentChargeType chargeType, int color1, int color2) {
     this(type, TextColor.fromLegacyFormat(color), defaultCosts, chargeType, color1, color2);
@@ -81,87 +81,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     this.chargeType = chargeType;
     this.color1 = color1;
     this.color2 = color2;
-    fillDataKeyMap(keyToDataIndex);
-    dataIndexMaximums.defaultReturnValue(-1);
   }
 
   public Holder<Spell> builtInRegistryHolder() {
     return RootsRegistries.SPELLS.wrapAsHolder(this);
-  }
-
-  public boolean hasDataSlot(int slot) {
-    return slot >= 0 && slot <= keyToDataIndex.size();
-  }
-
-  public int getDataSlots() {
-    // The 0 slot is always the index
-    return keyToDataIndex.size() + 1;
-  }
-
-  // Contract: slot 0 is *always* the "mode" key.
-  public int getDataSlotValue(ISpellInstance instance) {
-    if (instance.getSpellData() == null) {
-      return -1;
-    }
-    return instance.getSpellData().get(0);
-  }
-
-  public int getDataValue(ISpellInstance instance, String key) {
-    if (instance.getSpellData() == null) {
-      return -1;
-    }
-    return getDataValue(instance.getSpellData(), key);
-  }
-
-  public int getDataValue(SpellInstanceData data, String key) {
-    int index = getDataIndex(key);
-    if (index == -1 || !data.has(index)) {
-      return -1;
-    }
-    return data.get(index);
-  }
-
-  public int getDataValue(ISpellInstance instance, int index) {
-    if (instance.getSpellData() == null) {
-      return -1;
-    }
-    return getDataValue(instance.getSpellData(), index);
-  }
-
-  public int getDataValue(SpellInstanceData data, int index) {
-    if (!data.has(index)) {
-      return -1;
-    }
-    return data.get(index);
-  }
-
-  public int getDataIndex(String key) {
-    if (keyToDataIndex.containsKey(key)) {
-      return keyToDataIndex.getInt(key);
-    }
-    return -1;
-  }
-
-  public int getDataMaximumValue(int index) {
-    return dataIndexMaximums.get(index);
-  }
-
-  public Set<String> getDataKeys() {
-    return keyToDataIndex.keySet();
-  }
-
-  public Set<String> getTooltipDataKeys() {
-    return getDataKeys();
-  }
-
-  @Nullable
-  public String getDataKey(int index) {
-    for (Object2IntMap.Entry<String> entry : keyToDataIndex.object2IntEntrySet()) {
-      if (entry.getIntValue() == index) {
-        return entry.getKey();
-      }
-    }
-    return null;
   }
 
   @Override
@@ -184,38 +107,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   @Deprecated(forRemoval = true)
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[]{};
-  }
-
-  public Component describeData(int index, int value) {
-    if (index != 0) {
-      String keyName = getDataKey(index);
-      if (keyName == null) {
-        keyName = "unknown";
-      }
-
-      return Component.translatable(getOrCreateDescriptionId() + ".data." + keyName, value);
-    } else {
-      String mode = getDataKey(value);
-      if (mode == null) {
-        mode = "unknown";
-      }
-
-      return Component.translatable(getOrCreateDescriptionId() + ".data.mode." + mode);
-    }
-  }
-
-  public int getDataMaximumValue(String key) {
-    int index = getDataIndex(key);
-    if (index == -1) {
-      return -1;
-    }
-    return getDataMaximumValue(index);
-  }
-
-  protected void fillDataKeyMap(Object2IntMap<String> map) {
-  }
-
-  protected void fillDataMaximumValues(Int2IntMap map) {
   }
 
   @Override
@@ -360,11 +251,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     costs = holder.getData(DataMaps.SPELL_COST_DATA);
     initializeProperties(holder);
     initialize(holder);
-    fillDataMaximumValues(dataIndexMaximums);
-    if (dataIndexMaximums.size() != keyToDataIndex.size()) {
-      // TODO: Rampant growth breaks this contract?
-      RootsAPI.LOG.error("Key-to-data index and data index maximum mismatch: {}", holder.getKey());
-    }
   }
 
   public ItemStack getLibraryIcon() {
@@ -453,5 +339,13 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public MutableComponent getStyledName (ISpellInstance spellSlot) {
     return getStyledName();
+  }
+
+  public DataComponentMap getComponents() {
+    return components;
+  }
+
+  public DataComponentType<? extends Cycling<?>> getCycleComponent () {
+    return null;
   }
 }

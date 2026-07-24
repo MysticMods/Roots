@@ -14,22 +14,26 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstanceData;
 import net.minecraft.core.UUIDUtil;
+import net.minecraft.core.component.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers,
-                        SpellInstanceData data) implements ISpellInstance {
+                        PatchedDataComponentMap data) implements ISpellInstance, DataComponentHolder {
   public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.<SpellSlot>mapCodec(instance -> instance.group(
       UUIDUtil.CODEC.fieldOf("spellId").forGetter(SpellSlot::spellId),
       Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
       RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
       SpellModifierSet.CODEC.fieldOf("enabledModifiers").forGetter(SpellSlot::enabledModifiers),
-      SpellInstanceData.CODEC.fieldOf("data").forGetter(SpellSlot::data)
+      DataComponentPatch.CODEC.optionalFieldOf("data").forGetter(o -> o.data == null ? Optional.empty() : Optional.of(o.data.asPatch()))
   ).apply(instance, SpellSlot::new)).validate(result -> {
     // TODO: Validation: remove restricted modifiers
     return DataResult.success(result);
@@ -39,17 +43,22 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
       ByteBufCodecs.VAR_INT, SpellSlot::slot,
       ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), SpellSlot::spell,
       SpellModifierSet.STREAM_CODEC, SpellSlot::enabledModifiers,
-      SpellInstanceData.STREAM_CODEC, SpellSlot::data,
+      ByteBufCodecs.optional(DataComponentPatch.STREAM_CODEC), o -> o.data == null ? Optional.empty() : Optional.of(o.data.asPatch()),
       SpellSlot::new
   );
   public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
 
   public SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers) {
-    this(spellId, slot, spell, enabledModifiers, new SpellInstanceData(spell.getDataSlots() + 1));
+    this(spellId, slot, spell, enabledModifiers, PatchedDataComponentMap.fromPatch(spell.getComponents(), DataComponentPatch.EMPTY));
+  }
+
+  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+  public SpellSlot(UUID uuid, int integer, Spell spell, SpellModifierSet spellModifiers, Optional<DataComponentPatch> dataComponentPatch) {
+    this(uuid, integer, spell, spellModifiers, PatchedDataComponentMap.fromPatch(spell.getComponents(), dataComponentPatch.orElse(DataComponentPatch.EMPTY)));
   }
 
   @Override
-  public @Nullable SpellInstanceData getSpellData() {
+  public DataComponentMap getSpellData() {
     return data();
   }
 
@@ -73,19 +82,10 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
     return enabledModifiers.contains(modifier);
   }
 
-  public SpellSlot withData(int index, int value) {
-    IntArrayList newData = new IntArrayList(data.data());
-
-    newData.ensureCapacity(spell.getDataSlots() + 1);
-    newData.set(index, value);
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), new SpellInstanceData(newData));
-  }
-
-  public SpellSlot withData(SpellInstanceData data) {
-    if (data.equals(this.data)) {
-      return this;
-    }
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), data);
+  public <T> SpellSlot withData(DataComponentType<? super T> component, @Nullable T value) {
+    this.data.set(component, value);
+    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), PatchedDataComponentMap.fromPatch(spell.getComponents(), this.data()
+        .asPatch()));
   }
 
   public SpellSlot withoutModifier(SpellModifier modifier) {
@@ -110,5 +110,10 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
 
   public SpellSlot copy() {
     return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), data);
+  }
+
+  @Override
+  public DataComponentMap getComponents() {
+    return null;
   }
 }

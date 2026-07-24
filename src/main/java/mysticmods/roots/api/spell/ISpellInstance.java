@@ -11,6 +11,7 @@ import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -140,9 +141,8 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getSpell().getAABB();
   }
 
-  @Nullable
-  default SpellInstanceData getSpellData() {
-    return null;
+  default DataComponentMap getSpellData() {
+    return DataComponentMap.EMPTY;
   }
 
   @Override

@@ -32,7 +32,7 @@ public class PacketHandler {
   protected void registerClientToServer(PacketRegistrar registrar) {
     registrar.play(ServerboundSetSpellPacket.TYPE, ServerboundSetSpellPacket.CODEC);
     registrar.play(ServerboundSwapSpellsPacket.TYPE, ServerboundSwapSpellsPacket.CODEC);
-    registrar.play(ServerboundSetSpellDataPacket.TYPE, ServerboundSetSpellDataPacket.CODEC);
+    registrar.play(ServerboundCycleSpellModePacket.TYPE, ServerboundCycleSpellModePacket.CODEC);
     registrar.play(ServerboundOpenPouchPacket.TYPE, ServerboundOpenPouchPacket.CODEC);
     registrar.play(ServerboundCycleTomePacket.TYPE, ServerboundCycleTomePacket.CODEC);
     registrar.play(ServerboundClearStaffSlotPacket.TYPE, ServerboundClearStaffSlotPacket.CODEC);
