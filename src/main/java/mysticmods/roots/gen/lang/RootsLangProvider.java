@@ -207,12 +207,12 @@ public final class RootsLangProvider extends LanguageProvider {
 
     RootsRegistries.SPELLS.entrySet().forEach(o -> {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
-          for (String n : o.getValue().getDataKeys()) {
+/*          for (String n : o.getValue().getDataKeys()) {
             add(o.getValue().getDescriptionId() + ".data.mode." + n, "Modifying: " + toEnglishName(n));
             // TODO: Value -> name
             add(o.getValue().getDescriptionId() + ".data." + n, "Set " + toEnglishName(n) + " to %s");
             add(o.getValue().getDescriptionId() + ".data." + n + ".name", toEnglishName(n));
-          }
+          }*/
         }
     );
 
