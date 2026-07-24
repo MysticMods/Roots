@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.SpellLike;
+import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.CostInstance;
@@ -22,6 +23,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -445,4 +447,11 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return null;
   }
 
+  public String getDescriptionId(ISpellInstance spellSlot) {
+    return getDescriptionId();
+  }
+
+  public MutableComponent getStyledName (ISpellInstance spellSlot) {
+    return getStyledName();
+  }
 }

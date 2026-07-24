@@ -13,8 +13,7 @@ import java.util.function.IntFunction;
 public enum SpellCastType implements StringRepresentable {
   INSTANT,
   CONTINUOUS,
-  CHARGED,
-  TRANSFORMING;
+  CHARGED;
 
   public static final Codec<SpellCastType> CODEC = StringRepresentable.fromEnum(SpellCastType::values);
   public static final IntFunction<SpellCastType> BY_ID = ByIdMap.continuous(SpellCastType::ordinal, SpellCastType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);

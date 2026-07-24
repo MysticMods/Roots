@@ -61,40 +61,14 @@ public class CastingItem extends Item {
     return UseAnim.BOW;
   }
 
-  public static UUID getUUID(ItemStack stack) {
-    if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
-      throw new IllegalArgumentException("CastingItem.getUUID can only be called on a staff item");
-    }
-    UUID current = stack.get(ModAttachments.ITEM_UUID);
-    if (current == null) {
-      UUID newUUID = UUID.randomUUID();
-      stack.set(ModAttachments.ITEM_UUID, newUUID);
-      return newUUID;
-    } else {
-      return current;
-    }
-  }
-
   @Override
   public int getUseDuration(ItemStack pStack, LivingEntity entity) {
-    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
-    if (storage == null) {
-      return 0;
-    }
-
-    ISpellInstance spell = storage.getCurrentSpell();
+    ISpellInstance spell = getCurrentSpell(entity.level(), entity, pStack);
     if (spell == null) {
       return 0;
     }
 
     return spell.getMaxUse();
-  }
-
-  public static ISpellInstance getCastingSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
-    if (Boolean.FALSE.equals(stack.get(ModAttachments.CASTING_CURRENT_SPELL))) {
-      return null;
-    }
-    return getCurrentSpell(level, entity, stack);
   }
 
   @Override
@@ -113,46 +87,17 @@ public class CastingItem extends Item {
   @Override
   public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
     if (itemAbility == ItemAbilities.SHEARS_DIG) {
-      var currentModifiers = getCurrentSpell(null, null, stack);
-      if (currentModifiers != null && currentModifiers.hasModifier(RootsTags.SpellModifiers.SILK_TOUCH)) {
+      var currentSpell = getCastingSpell(null, null, stack);
+      if (currentSpell != null && currentSpell.hasModifier(RootsTags.SpellModifiers.SHEARING)) {
+        return true;
+      }
+    } else if (itemAbility == ItemAbilities.AXE_DIG || itemAbility == ItemAbilities.HOE_DIG || itemAbility == ItemAbilities.SHOVEL_DIG || itemAbility == ItemAbilities.SWORD_DIG || itemAbility == ItemAbilities.PICKAXE_DIG) {
+      var currentSpell = getCastingSpell(null, null, stack);
+      if (currentSpell != null && currentSpell.is(RootsTags.Spells.PRETEND_PICKAXE)) {
         return true;
       }
     }
     return super.canPerformAction(stack, itemAbility);
-  }
-
-  @Nullable
-  public static SpellStorage getStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack item) {
-    return item.get(ModAttachments.SPELL_STORAGE);
-  }
-
-  @Nullable
-  public static ISpellInstance getCurrentSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack) {
-    SpellStorage storage = getStorage(level, entity, itemStack);
-    if (storage == null) {
-      return null;
-    }
-
-    return storage.getCurrentSpell();
-  }
-
-  public static SpellModifierSet getEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
-    var spell = getCastingSpell(level, entity, stack);
-    if (spell == null) {
-      return SpellModifierSet.EMPTY;
-    }
-
-    return spell.getEnabledModifiers();
-  }
-
-  public static int countEnabledModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack, TagKey<SpellModifier> tagType) {
-    return getEnabledModifiers(level, entity, stack).count(tagType);
-  }
-
-  public static void setStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack, @Nullable SpellStorage previousStorage, SpellStorage newStorage) {
-    if (newStorage != previousStorage) {
-      itemStack.set(ModAttachments.SPELL_STORAGE, newStorage);
-    }
   }
 
   @Override
@@ -160,15 +105,15 @@ public class CastingItem extends Item {
     int baseValue = super.getEnchantmentLevel(stack, enchantment);
 
     if (enchantment.is(RootsTags.Enchantments.INCREASES_FORTUNE)) {
-      baseValue += countEnabledModifiers(null, null, stack, RootsTags.SpellModifiers.INCREASES_FORTUNE);
+      baseValue += countCastingModifiers(null, null, stack, RootsTags.SpellModifiers.INCREASES_FORTUNE);
     }
 
     if (enchantment.is(RootsTags.Enchantments.INCREASES_LOOTING)) {
-      baseValue += countEnabledModifiers(null, null, stack, RootsTags.SpellModifiers.INCREASES_LOOTING);
+      baseValue += countCastingModifiers(null, null, stack, RootsTags.SpellModifiers.INCREASES_LOOTING);
     }
 
     if (enchantment.is(RootsTags.Enchantments.SILK_TOUCH)) {
-      if (countEnabledModifiers(null, null, stack, RootsTags.SpellModifiers.SILK_TOUCH) > 0) {
+      if (countCastingModifiers(null, null, stack, RootsTags.SpellModifiers.SILK_TOUCH) > 0) {
         baseValue = 1;
       }
     }
@@ -180,7 +125,7 @@ public class CastingItem extends Item {
   public ItemEnchantments getAllEnchantments(ItemStack stack, HolderLookup.RegistryLookup<Enchantment> lookup) {
     ItemEnchantments baseValue = super.getAllEnchantments(stack, lookup);
 
-    SpellModifierSet set = getEnabledModifiers(null, null, stack);
+    SpellModifierSet set = getCastingModifiers(null, null, stack);
     if (set.isEmpty()) {
       return baseValue;
     }
@@ -511,7 +456,7 @@ public class CastingItem extends Item {
   public Component getName(ItemStack pStack) {
     ISpellInstance spell = getCurrentSpell(null, null, pStack);
     if (spell != null) {
-      var name = spell.getSpell().getStyledName();
+      var name = spell.getStyledName();
       return spell.getEnabledModifiers()
           .isEmpty() ? Component.translatable("roots.item.staff.with_spell", name) : Component.translatable("roots.item.staff.with_modified_spell", name);
     }
@@ -533,5 +478,60 @@ public class CastingItem extends Item {
   @Override
   public boolean isFoil(ItemStack stack) {
     return stack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS) || super.isFoil(stack);
+  }
+
+  public static UUID getUUID(ItemStack stack) {
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
+      throw new IllegalArgumentException("CastingItem.getUUID can only be called on a staff item");
+    }
+    UUID current = stack.get(ModAttachments.ITEM_UUID);
+    if (current == null) {
+      UUID newUUID = UUID.randomUUID();
+      stack.set(ModAttachments.ITEM_UUID, newUUID);
+      return newUUID;
+    } else {
+      return current;
+    }
+  }
+
+  public static ISpellInstance getCastingSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
+    if (Boolean.FALSE.equals(stack.get(ModAttachments.CASTING_CURRENT_SPELL))) {
+      return null;
+    }
+    return getCurrentSpell(level, entity, stack);
+  }
+
+  @Nullable
+  public static SpellStorage getStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack item) {
+    return item.get(ModAttachments.SPELL_STORAGE);
+  }
+
+  @Nullable
+  public static ISpellInstance getCurrentSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack) {
+    SpellStorage storage = getStorage(level, entity, itemStack);
+    if (storage == null) {
+      return null;
+    }
+
+    return storage.getCurrentSpell();
+  }
+
+  public static SpellModifierSet getCastingModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack) {
+    var spell = getCastingSpell(level, entity, stack);
+    if (spell == null) {
+      return SpellModifierSet.EMPTY;
+    }
+
+    return spell.getEnabledModifiers();
+  }
+
+  public static int countCastingModifiers(@Nullable Level level, @Nullable LivingEntity entity, ItemStack stack, TagKey<SpellModifier> tagType) {
+    return getCastingModifiers(level, entity, stack).count(tagType);
+  }
+
+  public static void setStorage(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack, @Nullable SpellStorage previousStorage, SpellStorage newStorage) {
+    if (newStorage != previousStorage) {
+      itemStack.set(ModAttachments.SPELL_STORAGE, newStorage);
+    }
   }
 }

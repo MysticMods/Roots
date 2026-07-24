@@ -4,25 +4,20 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.util.ItemUtil;
-import net.minecraft.advancements.critereon.PickedUpItemTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.SpawnUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,13 +27,11 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.util.TriState;
-import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.util.List;
-import java.util.Map;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class BlockEventHandler {
@@ -101,7 +94,7 @@ public class BlockEventHandler {
     var level = event.getLevel();
     var tool = event.getTool();
 
-    var modifiers = CastingItem.getEnabledModifiers(level, player, tool);
+    var modifiers = CastingItem.getCastingModifiers(level, player, tool);
     if (modifiers.hasTag(RootsTags.SpellModifiers.SMELTS)) {
       event.getDrops().forEach(o -> o.setItem(smelt(event.getLevel(), o.getItem())));
     }

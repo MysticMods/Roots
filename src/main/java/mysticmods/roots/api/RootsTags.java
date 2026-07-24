@@ -609,7 +609,7 @@ public class RootsTags {
 
     public static final TagKey<Spell> BLOCKS_OFF_HAND_EATING = modTag("blocks_off_hand_eating");
 
-    public static final TagKey<Spell> CAN_BREAK_BLOCKS = modTag("can_break_blocks");
+    public static final TagKey<Spell> PRETEND_PICKAXE = modTag("pretend_pickaxe");
 
     static TagKey<Spell> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));
@@ -630,6 +630,7 @@ public class RootsTags {
     public static final TagKey<SpellModifier> INCREASES_FORTUNE = modTag("increases_fortune");
     public static final TagKey<SpellModifier> INCREASES_LOOTING = modTag("increases_looting");
     public static final TagKey<SpellModifier> SILK_TOUCH = modTag("silk_touch");
+    public static final TagKey<SpellModifier> SHEARING = modTag("shearing");
     public static final TagKey<SpellModifier> MAGNETISM = modTag("magnetism");
     public static final TagKey<SpellModifier> SMELTS = modTag("smelts");
     public static final TagKey<SpellModifier> PEACEFUL = modTag("peaceful");

@@ -45,6 +45,7 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
 
     this.tag(RootsTags.Spells.BLOCKS_OFF_HAND_EATING)
         .add(ModSpells.RAMPANT_GROWTH.get(), ModSpells.GROWTH_INFUSION.get());
+    this.tag(RootsTags.Spells.PRETEND_PICKAXE).add(ModSpells.SHATTER.get());
   }
 
   @Override

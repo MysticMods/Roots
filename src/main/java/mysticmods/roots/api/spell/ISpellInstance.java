@@ -12,6 +12,8 @@ import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -23,12 +25,13 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public interface ISpellInstance extends SpellLike, ICostedParent {
   Spell getSpell();
 
   default MutableComponent getStyledName() {
-    return getSpell().getStyledName();
+    return getSpell().getStyledName(this);
   }
 
   SpellModifierSet getEnabledModifiers();
@@ -67,6 +70,22 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default boolean hasModifier (TagKey<SpellModifier> modifier) {
     return getEnabledModifiers().hasTag(modifier);
+  }
+
+  default boolean is (TagKey<Spell> spell) {
+    return asSpell().is(spell);
+  }
+
+  default boolean is (ResourceLocation spell) {
+    return asSpell().is(spell);
+  }
+
+  default boolean is (ResourceKey<Spell> spell) {
+    return asSpell().is(spell);
+  }
+
+  default boolean is (Predicate<ResourceKey<Spell>> spell) {
+    return asSpell().is(spell);
   }
 
   default boolean hasModifier(SpellModifier modifier) {

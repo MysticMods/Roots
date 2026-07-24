@@ -80,12 +80,20 @@ public abstract class TokenItem extends Item {
 
     @Override
     public String getDescriptionId(ItemStack stack) {
-      return getSpell().getDescriptionId();
+      if (!stack.has(ModAttachments.SPELL_SLOT)) {
+        return getSpell().getDescriptionId();
+      }
+
+      return getSpell().getDescriptionId(stack.get(ModAttachments.SPELL_SLOT));
     }
 
     @Override
     public Component getName(ItemStack stack) {
-      return getSpell().getStyledName();
+      if (!stack.has(ModAttachments.SPELL_SLOT)) {
+        return getSpell().getStyledName();
+      }
+
+      return getSpell().getStyledName(stack.get(ModAttachments.SPELL_SLOT));
     }
 
     @Override
