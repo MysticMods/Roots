@@ -9,10 +9,10 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.DecayTargetFXPacket;
 import mysticmods.roots.util.EntityUtils;
-import mysticmods.roots.util.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -30,7 +30,7 @@ public class DecaySpell extends TwoRadiusSpell {
   private int count;
 
   public DecaySpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0x2d8115, 0xc92b5f);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x2d8115, 0xc92b5f);
   }
 
   @Override

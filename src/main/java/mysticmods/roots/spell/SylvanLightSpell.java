@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
@@ -30,7 +31,7 @@ public class SylvanLightSpell extends Spell {
   protected double maxDistance = 0;
 
   public SylvanLightSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xf7f6d2, 0xe351f4);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xf7f6d2, 0xe351f4);
   }
 
   @Override

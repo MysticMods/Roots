@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
@@ -36,7 +37,7 @@ public class RoseThornsSpell extends Spell {
   private float damage;
 
   public RoseThornsSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xff2040, 0x20ff60);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xff2040, 0x20ff60);
   }
 
   @Override

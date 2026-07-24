@@ -7,6 +7,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastMagnetismFXPacket;
 import mysticmods.roots.util.MagnetismUtil;
@@ -20,7 +21,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class MagnetismSpell extends TwoRadiusSpell {
   public MagnetismSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0xdee129, 0xe62222);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0xdee129, 0xe62222);
   }
 
   @Override

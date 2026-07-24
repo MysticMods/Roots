@@ -10,6 +10,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.AcidCloudFXPacket;
@@ -34,7 +35,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   private int count;
 
   public AcidCloudSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x50a028, 0x405f20);
+    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x50a028, 0x405f20);
   }
 
   @Override

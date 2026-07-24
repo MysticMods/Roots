@@ -12,6 +12,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.SaturateScreenFXPacket;
 import net.minecraft.ChatFormatting;
@@ -34,7 +35,7 @@ public class SaturateSpell extends Spell {
   private float saturationMultiplier, foodMultiplier;
 
   public SaturateSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xe134f6, 0x05e82a);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xe134f6, 0x05e82a);
   }
 
   @Override

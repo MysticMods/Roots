@@ -47,7 +47,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
-  protected final Type type;
+  protected final SpellCastType type;
   protected final CostInstance defaultCosts;
   protected final ParentChargeType chargeType;
   protected CostInstance costs;
@@ -266,7 +266,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   }
 
   public int getMaxUse() {
-    if (maxUse == 0 && type == Type.CONTINUOUS) {
+    if (maxUse == 0 && type == SpellCastType.CONTINUOUS) {
       return 72000;
     }
 
@@ -312,7 +312,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return cooldown;
   }
 
-  public Type getType() {
+  public SpellCastType getType() {
     return type;
   }
 
@@ -437,12 +437,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   @Nullable
   public AABB getAABB() {
     return null;
-  }
-
-  public enum Type {
-    INSTANT,
-    CONTINUOUS,
-    CHARGED
   }
 
 }

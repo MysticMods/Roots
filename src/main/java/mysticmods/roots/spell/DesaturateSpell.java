@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.DesaturateScreenFXPacket;
 import mysticmods.roots.network.client.fx.HealFXPacket;
@@ -28,7 +29,7 @@ public class DesaturateSpell extends Spell {
   private float multiplier;
 
   public DesaturateSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xb8e82a, 0xbe20a8);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xb8e82a, 0xbe20a8);
   }
 
   @Override

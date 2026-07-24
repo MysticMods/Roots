@@ -7,6 +7,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.Level;
 
 public class RadianceSpell extends Spell {
   public RadianceSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffff40, 0xffffc0);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffff40, 0xffffc0);
   }
 
   @Override

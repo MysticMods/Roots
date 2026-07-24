@@ -10,6 +10,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.mixin.accessor.AccessorMixinMob;
@@ -43,7 +44,7 @@ public class DisarmSpell extends TwoRadiusSpell {
   private int glowDuration, count;
 
   public DisarmSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0x3a3a3a, 0x7a0000);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x3a3a3a, 0x7a0000);
   }
 
   @Override

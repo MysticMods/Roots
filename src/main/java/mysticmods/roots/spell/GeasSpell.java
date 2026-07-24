@@ -10,6 +10,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSpells;
@@ -39,7 +40,7 @@ public class GeasSpell extends Spell {
   private double maxHealth;
 
   public GeasSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x802020, 0x202020);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x802020, 0x202020);
   }
 
   @Override

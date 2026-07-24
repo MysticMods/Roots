@@ -11,7 +11,7 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
@@ -242,7 +242,7 @@ public class CastingItem extends Item {
     int ticks = pStack.getUseDuration(pLivingEntity) - pRemainingUseDuration;
     pStack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
 
-    if (spell.getType() == Spell.Type.CONTINUOUS) {
+    if (spell.getType() == SpellCastType.CONTINUOUS) {
       Costing costs = new Costing(spell);
       costs.updateHerbCache(pPlayer);
 
@@ -289,7 +289,7 @@ public class CastingItem extends Item {
       SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pHand, pStack, spell, costs);
       ModActions.SPELL_CAST.get().accept(context);
       costs.charge(pPlayer, true);
-    } else if (spell.getType() == Spell.Type.CHARGED) {
+    } else if (spell.getType() == SpellCastType.CHARGED) {
       pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);
 
       if (ticks % 2 == 0) {
@@ -363,7 +363,7 @@ public class CastingItem extends Item {
       return InteractionResultHolder.pass(stack);
     }
 
-    if (spell.getType() == Spell.Type.INSTANT) {
+    if (spell.getType() == SpellCastType.INSTANT) {
       stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
       int cooldown = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
       if (costing.charge(pPlayer)) {
@@ -424,7 +424,7 @@ public class CastingItem extends Item {
 
     int ticksUsed = pStack.getUseDuration(pLivingEntity) - pTimeCharged;
 
-    if (spell.getType() == Spell.Type.CHARGED) {
+    if (spell.getType() == SpellCastType.CHARGED) {
       Costing costing = new Costing(spell);
 
       // TODO: Charge every tick instead of assuming 20 ticks will elapse properly

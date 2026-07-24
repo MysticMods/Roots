@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
@@ -32,7 +33,7 @@ public class LightDrifterSpell extends Spell {
   private int duration, maxDistance;
 
   public LightDrifterSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xf2ee96, 0x96dbf2);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xf2ee96, 0x96dbf2);
   }
 
   @Override

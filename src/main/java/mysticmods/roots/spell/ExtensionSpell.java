@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
@@ -31,7 +32,7 @@ public class ExtensionSpell extends TwoRadiusSpell {
   private int nightVisionDuration, senseDangerDuration;
 
   public ExtensionSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xcde645, 0xb872b1);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xcde645, 0xb872b1);
   }
 
   @Override

@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.DandelionWindsFXPacket;
 import net.minecraft.ChatFormatting;
@@ -30,7 +31,7 @@ public class DandelionWindsSpell extends Spell {
   private double r1, r2;
 
   public DandelionWindsSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffff20, 0xffb020);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffff20, 0xffb020);
   }
 
   @Override

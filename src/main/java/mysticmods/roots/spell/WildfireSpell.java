@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.entity.projectile.WildfireEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
@@ -27,7 +28,7 @@ public class WildfireSpell extends Spell {
   private float damage, velocity;
 
   public WildfireSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xff8020, 0xff4020);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xff8020, 0xff4020);
   }
 
   @Override

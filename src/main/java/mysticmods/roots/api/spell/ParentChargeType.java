@@ -12,7 +12,8 @@ import java.util.function.IntFunction;
 
 public enum ParentChargeType implements StringRepresentable {
   INSTANCE, // Charges per instance
-  OPERATION; // Charges amount per operation per instance
+  OPERATION, // Charges amount per operation per instance
+  TRANSFORMING; //
 
   public static final Codec<ParentChargeType> CODEC = StringRepresentable.fromEnum(ParentChargeType::values);
   public static final IntFunction<ParentChargeType> BY_ID = ByIdMap.continuous(ParentChargeType::ordinal, ParentChargeType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);

@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
@@ -32,7 +33,7 @@ public class AquaBubbleSpell extends Spell {
   private int absorption;
 
   public AquaBubbleSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xede658, 0x5dd1de);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xede658, 0x5dd1de);
   }
 
   @Override

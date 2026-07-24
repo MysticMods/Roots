@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastLifeDrainFXPacket;
@@ -40,7 +41,7 @@ public class LifeDrainSpell extends Spell {
 
   // TODO: This should become an instant cast
   public LifeDrainSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x902040, 0xffc4f0);
+    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x902040, 0xffc4f0);
   }
 
   @Override

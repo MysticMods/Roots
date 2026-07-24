@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -31,7 +32,7 @@ public class JauntSpell extends Spell {
   private int jauntDistance;
 
   public JauntSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CHARGED, color, costs, ParentChargeType.INSTANCE, 0x538ad4, 0xede768);
+    super(SpellCastType.CHARGED, color, costs, ParentChargeType.INSTANCE, 0x538ad4, 0xede768);
   }
 
   @Override

@@ -13,11 +13,11 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.lightning.SemiDynamicLightningFXPacket;
-import mysticmods.roots.util.FakePlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,9 +32,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +41,7 @@ public class ShatterSpell extends Spell {
   private int maxWidth, maxDepth, maxHeight;
 
   public ShatterSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0x606060, 0xc0c0c0);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x606060, 0xc0c0c0);
   }
 
   @Override

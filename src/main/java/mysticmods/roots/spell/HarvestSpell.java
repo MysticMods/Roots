@@ -10,6 +10,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.growth.HarvestRecord;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.HarvestFXPacket;
@@ -34,7 +35,7 @@ import java.util.Set;
 
 public class HarvestSpell extends TwoRadiusSpell {
   public HarvestSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.OPERATION, 0x39fd1c, 0xc5e91c);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x39fd1c, 0xc5e91c);
   }
 
   @Override

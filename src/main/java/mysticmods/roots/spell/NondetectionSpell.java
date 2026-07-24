@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
@@ -24,7 +25,7 @@ public class NondetectionSpell extends Spell {
   private int potionDuration;
 
   public NondetectionSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x8f32b8, 0x4c94ed);
+    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x8f32b8, 0x4c94ed);
   }
 
 

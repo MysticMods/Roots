@@ -12,6 +12,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.RampantGrowthFXPacket;
@@ -39,7 +40,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   private int interval, count;
 
   public RampantGrowthSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.CONTINUOUS, color, costs, ParentChargeType.OPERATION, 0x157318, 0x13c3eb);
+    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.OPERATION, 0x157318, 0x13c3eb);
   }
 
   @Override

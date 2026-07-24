@@ -77,7 +77,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return hasModifier(modifier.value());
   }
 
-  default Spell.Type getType() {
+  default SpellCastType getType() {
     return getSpell().getType();
   }
 
