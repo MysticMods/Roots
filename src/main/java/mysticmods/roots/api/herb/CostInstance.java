@@ -7,14 +7,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public record CostInstance(List<Cost> costs) {
-  // TODO: I'm not sure this is safe
-  public static final CostInstance NONE = new CostInstance(new ArrayList<>());
-
   public static final MapCodec<CostInstance> MAP_CODEC =
       Cost.CODEC.listOf().fieldOf("costs").xmap(CostInstance::new, CostInstance::costs);
   public static final Codec<CostInstance> CODEC = MAP_CODEC.codec();
