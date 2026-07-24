@@ -33,10 +33,10 @@ public class SylvanLightBlockEntity extends BlockEntity implements ClientTickBlo
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     this.ticks++;
 
-    if (ticks % 20 == 0) {
-/*      if (random.nextInt(10) != 0) {
+    if (ticks % 2 == 0) {
+      if (random.nextInt(3) == 0) {
         return;
-      }*/
+      }
       int[] color = COLORS[random.nextInt(COLORS.length)];
       Vec3 spot = Vec3.atCenterOf(pPos)
           .add((random.nextDouble() - 0.5) * 0.058, (random.nextDouble() - 0.5) * 0.02, (random.nextDouble() - 0.5) * 0.058);
