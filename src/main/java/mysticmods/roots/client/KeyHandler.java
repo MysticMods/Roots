@@ -12,6 +12,7 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.network.server.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.contents.KeybindContents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,7 +22,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import javax.swing.text.JTextComponent;
 
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
@@ -129,18 +133,35 @@ public class KeyHandler {
       return;
     }
 
-    if (KeyBindings.CYCLE_SPELL_MODE.consumeClick()) {
+    int op = -1;
+
+    if (KeyBindings.INCREASE_SPELL.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Increasing spell data via keybind");
+      }
+      op = 2;
+    }
+    if (KeyBindings.DECREASE_SPELL.consumeClick()) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Decreasing spell data via keybind");
+      }
+      op = 1;
+    }
+    if (KeyBindings.CYCLE_ADJUSTABLE.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Cycling adjustable spell data via keybind");
       }
-    } else {
+      op = 0;
+    }
+
+    if (op == -1) {
       return;
     }
 
     InteractionHand hand = InteractionHand.MAIN_HAND;
     ItemStack stack = mc.player.getMainHandItem();
 
-    if (!stack.has(ModAttachments.SPELL_STORAGE)) {
+    if (op == 0 && !stack.has(ModAttachments.SPELL_STORAGE)) {
       ItemStack tome = RootsAPI.getInstance().getTome(mc.player);
       if (!tome.isEmpty()) {
         if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
@@ -181,10 +202,44 @@ public class KeyHandler {
 
     Spell source = spell.asSpell();
 
-    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-      RootsAPI.LOG.error("Sending spell data change to server");
+    int index = source.getDataSlotValue(spell);
+    if (op == 1 || op == 2) {
+      if (index == -1) {
+        if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+          RootsAPI.LOG.error("Spell does not have adjustable data");
+        }
+        return;
+      }
+    } else if (op == 0) {
+      index = 0;
     }
-    PacketDistributor.sendToServer(new ServerboundCycleSpellModePacket(hand, source.getCycleComponent()));
+
+    int max = source.getDataMaximumValue(index);
+    int current = source.getDataValue(spell, index);
+    int newCurrent = current;
+
+    if (op == 2 && current < max) {
+      newCurrent++;
+    } else if (op == 1 && newCurrent > 0) {
+      newCurrent--;
+    } else if (op == 0) {
+      if (current == max) {
+        newCurrent = 1;
+      } else {
+        newCurrent++;
+      }
+    }
+
+    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+      RootsAPI.LOG.error("Spell data change: hand={}, index={}, current={}, newCurrent={}", hand, index, current, newCurrent);
+    }
+
+    if (newCurrent != current) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Sending spell data change to server");
+      }
+      PacketDistributor.sendToServer(new ServerboundSetSpellDataPacket(hand, index, newCurrent));
+    }
   }
 
   private static void tryOpenLibrary(Minecraft mc) {

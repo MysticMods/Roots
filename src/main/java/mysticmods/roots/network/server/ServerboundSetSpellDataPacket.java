@@ -3,10 +3,7 @@ package mysticmods.roots.network.server;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
-import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.network.client.ClientboundRefreshStaffScreenPacket;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -16,17 +13,18 @@ import net.minecraft.world.InteractionHand;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ServerboundCycleSpellModePacket(InteractionHand hand, DataComponentType<?> component) implements IRootsPacket {
-  public static final Type<ServerboundCycleSpellModePacket> TYPE = new Type<>(RootsAPI.rl("server_bound_cycle_spell_mode"));
-  public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundCycleSpellModePacket> CODEC =
+public record ServerboundSetSpellDataPacket(InteractionHand hand, int index, int value) implements IRootsPacket {
+  public static final Type<ServerboundSetSpellDataPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_set_spell_data"));
+  public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundSetSpellDataPacket> CODEC =
       StreamCodec.composite(
-          ExtraStreamCodecs.INTERACTION_HAND_CODEC, ServerboundCycleSpellModePacket::hand,
-          ByteBufCodecs.registry(Registries.DATA_COMPONENT_TYPE), ServerboundCycleSpellModePacket::component,
-          ServerboundCycleSpellModePacket::new);
+          ExtraStreamCodecs.INTERACTION_HAND_CODEC, o -> o.hand,
+          ByteBufCodecs.VAR_INT, o -> o.index,
+          ByteBufCodecs.VAR_INT, o -> o.value,
+          ServerboundSetSpellDataPacket::new);
 
   @Override
   public void handle(IPayloadContext context) {
-    ServerNetworkHooks.cycleSpellMode(context.player(), this.hand, this.component);
+    ServerNetworkHooks.setSpellData(context.player(), this.hand, this.index, this.value);
     context.player().inventoryMenu.sendAllDataToRemote();
     PacketDistributor.sendToPlayer((ServerPlayer) context.player(), ClientboundRefreshStaffScreenPacket.getInstance());
   }

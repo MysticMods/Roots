@@ -7,11 +7,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
-import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstanceData;
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -178,7 +175,28 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(slot, maxSlot, slots);
   }
 
-  public <T> SpellStorage setData(int slot, DataComponentType<T> component, @Nullable T value) {
+/*  @Deprecated
+  public SpellStorage setData(int slot, IntArrayList data) {
+    if (slot < 0 || slot >= maxSlot) {
+      return this;
+    }
+
+    SpellSlot slotData = slots.get(slot);
+    if (slotData == null) {
+      return this;
+    }
+
+    SpellInstanceData currentData = slotData.getSpellData();
+    if (currentData != null && currentData.data().equals(data)) {
+      return this;
+    }
+
+    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    newSlots.set(slot, slotData.withData(new SpellInstanceData(data)));
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
+  }*/
+
+  public SpellStorage setData(int slot, int index, int value) {
     if (slot < 0 || slot >= maxSlot) {
       return this;
     }
@@ -189,8 +207,13 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return this;
     }
 
+    SpellInstanceData currentData = slotData.getSpellData();
+    if (currentData != null && slotData.data().has(index) && slotData.data().get(index) == value) {
+      return this;
+    }
+
     List<SpellSlot> newSlots = new ArrayList<>(slots);
-    newSlots.set(slot, slotData.withData(component, value));
+    newSlots.set(slot, slotData.withData(index, value));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 

@@ -8,7 +8,6 @@ import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
@@ -20,7 +19,6 @@ import mysticmods.roots.network.client.ClientboundChangeTomeMode;
 import mysticmods.roots.network.client.ClientboundRefreshModifierScreenPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
@@ -52,7 +50,46 @@ public class ServerNetworkHooks {
   }
 
   public static void setSpellData(Player player, InteractionHand hand, int index, int value) {
+    ItemStack stack = player.getItemInHand(hand);
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell storage found in item stack");
+      }
+      return;
+    }
+    SpellStorage existing = stack.get(ModAttachments.SPELL_STORAGE);
+    if (existing == null) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No spell storage found in item stack");
+      }
+      return;
+    }
+    ISpellInstance instance = existing.getCurrentSpell();
+    if (instance == null) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("No current spell found in spell storage");
+      }
+      return;
+    }
 
+    int spellSlot = existing.currentSlot();
+
+    Spell spell = instance.asSpell();
+    if (index != 0 && value > spell.getDataMaximumValue(index)) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Value {} exceeds maximum for index {} in spell {}", value, index, spell.getDescriptionId());
+      }
+      return;
+    }
+
+    SpellStorage newStorage = existing.setData(spellSlot, index, value);
+    if (!newStorage.equals(existing)) {
+      stack.set(ModAttachments.SPELL_STORAGE, newStorage);
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Setting spell data for spell {} at index {} to value {}", spell.getDescriptionId(), index, value);
+      }
+      player.displayClientMessage(spell.describeData(index, value), true);
+    }
   }
 
   public static void setSpellSlot(Player player, @Nullable InteractionHand hand, int inventorySlot, int staffSlot, Spell spell) {
@@ -271,53 +308,6 @@ public class ServerNetworkHooks {
     stack.set(ModAttachments.SPELL_STORAGE, existing.setSpell(staffSlot, newSlot));
     if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
       RootsAPI.LOG.error("Setting spell slot {} to {} {} modifier {}", staffSlot, spell.getDescriptionId(), type, modifier.getDescriptionId());
-    }
-  }
-
-  public static <T> void cycleSpellMode(Player player, InteractionHand hand, DataComponentType<T> component) {
-    ItemStack stack = player.getItemInHand(hand);
-    if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("No spell storage found in item stack");
-      }
-      return;
-    }
-    SpellStorage existing = stack.get(ModAttachments.SPELL_STORAGE);
-    if (existing == null) {
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("No spell storage found in item stack");
-      }
-      return;
-    }
-    ISpellInstance instance = existing.getCurrentSpell();
-    if (instance == null) {
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("No current spell found in spell storage");
-      }
-      return;
-    }
-
-    int spellSlot = existing.currentSlot();
-    var spell = instance.asSpell();
-
-    var c = instance.getSpellData().get(component);
-    if (!(c instanceof Cycling<?> cycling)) {
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("Component type {} is not cycling for spell {}", component, spell.asSpell()
-            .getDescriptionId());
-      }
-      return;
-    }
-
-    Cycling<?> next = cycling.next();
-
-    @SuppressWarnings("unchecked") SpellStorage newStorage = existing.setData(spellSlot, component, (T) next);
-    if (!newStorage.equals(existing)) {
-      stack.set(ModAttachments.SPELL_STORAGE, newStorage);
-      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("Cycled spell mode for spell {} from {} to {}", instance.asSpell().getDescriptionId(), c, next);
-      }
-      player.displayClientMessage(next.getStyledName(), true);
     }
   }
 }
