@@ -554,6 +554,7 @@
   "roots.reputation.increased": "Your reputation with the %s grove has increased by %s",
   "roots.spell.spell_light_drifter.on_ground": "You must be standing on solid ground to cast Light Drifter.",
   "roots.spell_mode.mode": "Mode",
+  "roots.spell_mode.mode_changed": "Mode changed to %s.",
   "roots.subtitles.alert": "Targeted by enemy",
   "roots.subtitles.aqua_bubble_alt_end": "Aqua bubble ends",
   "roots.subtitles.block.pyre.crackle": "Pyre crackles",

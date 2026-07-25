@@ -220,6 +220,7 @@ public final class RootsLangProvider extends LanguageProvider {
     );
 
     add("roots.spell_mode.mode", "Mode");
+    add("roots.spell_mode.mode_changed", "Mode changed to %s.");
 
     addCyclingMode(AOEGrowthMode.values());
     addCyclingMode(GramaryItem.GramaryMode.values());

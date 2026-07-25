@@ -317,7 +317,7 @@ public class ServerNetworkHooks {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Cycled spell mode for spell {} from {} to {}", instance.asSpell().getDescriptionId(), c, next);
       }
-      player.displayClientMessage(next.getStyledName(), true);
+      player.displayClientMessage(Component.translatable("roots.spell_mode.mode_changed", next.getStyledName()), true);
     }
   }
 }
