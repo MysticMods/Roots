@@ -5,21 +5,21 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModActions;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.RampantGrowthFXPacket;
+import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -73,9 +73,14 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   }
 
   @Override
+  public DataComponentType<? extends Cycling<?>> getCycleComponent() {
+    return ModAttachments.AOE_GROWTH_MODE.get();
+  }
+
+  @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (ticks % interval == 0) {
-      boolean checkTag = getDataValue(instance, "mode") == 2;
+      AOEGrowthMode mode = instance.getSpellData(ModAttachments.AOE_GROWTH_MODE);
       ItemStack offHandItem = pPlayer.getOffhandItem();
       Block tempBlock = offHandItem.getItemHolder().getData(DataMaps.GROWTH_SEED_TO_CROP);
       if (tempBlock == null) {
@@ -91,14 +96,14 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
 
       final Block block = tempBlock;
 
-      boolean offHand = getDataValue(instance, "mode") == 3 && !offHandItem.isEmpty() && tempBlock != null;
+      boolean offHand = mode == AOEGrowthMode.HELD_IN_OFFHAND && !offHandItem.isEmpty() && tempBlock != null;
 
       BoundingBox search = getBoundingBox().moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
       List<BlockPos> positions = new ArrayList<>();
       BlockPos.betweenClosedStream(search).forEach(pos -> {
         BlockState state = pLevel.getBlockState(pos);
         if (GrowthUtil.growthTicks(pLevel, pos, state, pPlayer) > 0) {
-          if (checkTag && state.is(RootsTags.Blocks.RAMPANT_GROWTH_EXCLUDE_MODE)) {
+          if (mode == AOEGrowthMode.IGNORE_TAGGED && state.is(RootsTags.Blocks.RAMPANT_GROWTH_EXCLUDE_MODE)) {
             return;
           }
           if (offHand && !state.is(block)) {

@@ -11,6 +11,8 @@ import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.util.DyeableWithDefault;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.recipe.pyre.PyrePedestalRecipe;
+import mysticmods.roots.spell.mode.AOEGrowthMode;
+import mysticmods.roots.spell.mode.HarvestMode;
 import mysticmods.roots.util.SpatialMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -77,7 +79,8 @@ public class ModAttachments {
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellSlot>> SPELL_SLOT = COMPONENTS.register("spell_slot", () -> new DataComponentType.Builder<SpellSlot>().persistent(SpellSlot.CODEC).networkSynchronized(SpellSlot.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellSlot>> SPELL_SLOT = COMPONENTS.register("spell_slot", () -> new DataComponentType.Builder<SpellSlot>().persistent(SpellSlot.CODEC)
+      .networkSynchronized(SpellSlot.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> QUIVER_CONTENTS = COMPONENTS.register("quiver_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
   // 9 only herb slots
@@ -103,8 +106,6 @@ public class ModAttachments {
       .networkSynchronized(DyeableWithDefault.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<UUID>> ITEM_UUID = COMPONENTS.register("uuid", () -> new DataComponentType.Builder<UUID>().persistent(UUIDUtil.CODEC)
       .networkSynchronized(UUIDUtil.STREAM_CODEC).build());
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<GramaryItem.GramaryMode>> GRAMARY_MODE = COMPONENTS.register("gramary_mode", () -> new DataComponentType.Builder<GramaryItem.GramaryMode>().persistent(GramaryItem.GramaryMode.CODEC)
-      .networkSynchronized(GramaryItem.GramaryMode.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> BOUND_POSITION = COMPONENTS.register("bound_position", () -> new DataComponentType.Builder<BlockPos>().persistent(BlockPos.CODEC)
       .networkSynchronized(BlockPos.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Unit>> DELETABLE = COMPONENTS.register("deletable", () -> new DataComponentType.Builder<Unit>().persistent(Unit.CODEC)
@@ -114,6 +115,14 @@ public class ModAttachments {
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<QuiverRecord>> QUIVER_RECORD = COMPONENTS.register("quiver_record", () -> new DataComponentType.Builder<QuiverRecord>().persistent(QuiverRecord.CODEC)
       .networkSynchronized(QuiverRecord.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> CASTING_CURRENT_SPELL = COMPONENTS.register("casting_current_spell", () -> new DataComponentType.Builder<Boolean>().persistent(Codec.BOOL)/*.networkSynchronized(ByteBufCodecs.BOOL)*/.build());
+
+  // Modes
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<GramaryItem.GramaryMode>> GRAMARY_MODE = COMPONENTS.register("gramary_mode", () -> new DataComponentType.Builder<GramaryItem.GramaryMode>().persistent(GramaryItem.GramaryMode.CODEC)
+      .networkSynchronized(GramaryItem.GramaryMode.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<AOEGrowthMode>> AOE_GROWTH_MODE = COMPONENTS.register("aoe_growth_mode", () -> new DataComponentType.Builder<AOEGrowthMode>().persistent(AOEGrowthMode.CODEC)
+      .networkSynchronized(AOEGrowthMode.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<HarvestMode>> HARVEST_MODE = COMPONENTS.register("harvest_mode", () -> new DataComponentType.Builder<HarvestMode>().persistent(HarvestMode.CODEC)
+      .networkSynchronized(HarvestMode.STREAM_CODEC).build());
 
   public static void register(IEventBus bus) {
     ATTACHMENTS.register(bus);

@@ -1,16 +1,17 @@
 package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.registry.IStyled;
+import net.minecraft.util.StringRepresentable;
 
-public interface Cycling<T extends Cycling<T>> extends IStyled {
+public interface Cycling<T extends Cycling<T>> extends IStyled, StringRepresentable {
   default T next() {
     int ord = this.ordinal();
-    T[] values = this.values();
+    T[] values = this.valuesInternal();
     int next = (ord + 1) % values.length;
     return values[next];
   }
 
-  T[] values();
+  T[] valuesInternal();
 
   int ordinal();
 }

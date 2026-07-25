@@ -78,7 +78,7 @@ public class ClientEvents {
 
   @SubscribeEvent
   public static void onEntityRender(RenderLivingEvent.Post<?, ?> event) {
-    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFO) && event.getEntity().getType()
+    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFORMATION) && event.getEntity().getType()
         .is(RootsTags.Entities.SHOULD_RENDER_HUD)) {
 
     }

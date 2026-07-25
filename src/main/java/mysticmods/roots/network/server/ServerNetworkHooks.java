@@ -153,7 +153,7 @@ public class ServerNetworkHooks {
     }
 
     GramaryItem.GramaryMode current = GramaryItem.getMode(tome);
-    GramaryItem.GramaryMode newMode = current.cycle();
+    GramaryItem.GramaryMode newMode = current.next();
     tome.set(ModAttachments.GRAMARY_MODE, newMode);
     if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
       RootsAPI.LOG.error("Cycling tome to from mode {} to mode {}", current, newMode);

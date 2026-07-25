@@ -1,24 +1,22 @@
 package mysticmods.roots.spell;
 
-import it.unimi.dsi.fastutil.ints.Int2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.growth.HarvestRecord;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.HarvestFXPacket;
+import mysticmods.roots.spell.mode.HarvestMode;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.HarvestUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -31,7 +29,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class HarvestSpell extends TwoRadiusSpell {
   public HarvestSpell(ChatFormatting color, CostInstance costs) {
@@ -58,28 +55,8 @@ public class HarvestSpell extends TwoRadiusSpell {
   }
 
   @Override
-  protected void fillDataKeyMap(Object2IntMap<String> map) {
-    super.fillDataKeyMap(map);
-    map.put("mode", 0);
-    map.put("all", 1);
-    map.put("held", 2);
-  }
-
-  @Override
-  protected void fillDataMaximumValues(Int2IntMap map) {
-    super.fillDataMaximumValues(map);
-    map.put(0, 2);
-  }
-
-  @Override
-  public Set<String> getTooltipDataKeys() {
-    return Set.of("mode");
-  }
-
-
-  @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    boolean held = getDataValue(instance, "mode") == 2;
+    HarvestMode mode = instance.getSpellData(ModAttachments.HARVEST_MODE);
 
     ItemStack offHandItem = pPlayer.getOffhandItem();
     Block tempBlock = offHandItem.getItemHolder().getData(DataMaps.HARVEST_SEED_TO_CROP);
@@ -96,7 +73,7 @@ public class HarvestSpell extends TwoRadiusSpell {
     List<BlockPos> positions = new ArrayList<>();
     BlockPos.betweenClosedStream(search).forEach(pos -> {
       BlockState state = pLevel.getBlockState(pos);
-      if (held && block != null && !state.is(block)) {
+      if (mode == HarvestMode.HELD_IN_OFFHAND && block != null && !state.is(block)) {
         return;
       }
       HarvestRecord record = HarvestUtil.getRecord(pLevel, pos, state, pPlayer);
@@ -118,5 +95,10 @@ public class HarvestSpell extends TwoRadiusSpell {
   @Override
   public ParentChargeType getChargeType() {
     return ParentChargeType.OPERATION;
+  }
+
+  @Override
+  public DataComponentType<? extends Cycling<?>> getCycleComponent() {
+    return ModAttachments.HARVEST_MODE.get();
   }
 }

@@ -21,7 +21,6 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 // Beware: this is triggered on both the server and the client so never reference client-only things
 public class TooltipUtil {
@@ -121,22 +120,9 @@ public class TooltipUtil {
 
   public static void spellDataTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
     Spell spell = instance.getSpell();
-    Set<String> keys = instance.getSpell().getTooltipDataKeys();
-    boolean added = false;
-    for (String key : keys) {
-      int index = spell.getDataIndex(key);
-      // TODO: Clean this up
-      Component keyC = Component.translatable(spell.getOrCreateDescriptionId() + ".data." + key + ".name");
-      Component valC;
-      if (index == 0) {
-        valC = Component.translatable(spell.getOrCreateDescriptionId() + ".data." + spell.getDataKey(spell.getDataValue(instance, key)) + ".name");
-      } else {
-        valC = Component.literal(String.valueOf(Math.max(1, spell.getDataValue(instance, key))));
-      }
-      result.add(Component.translatable("roots.tooltip.staff.data", keyC, valC));
-      added = true;
-    }
-    if (added) {
+    if (spell.getCycleComponent() != null) {
+      var mode = instance.getSpellData(spell.getCycleComponent());
+      result.add(Component.translatable("roots.tooltip.staff.data", Component.translatable("roots.spell_mode.mode"), mode.getStyledName()));
       result.add(CommonComponents.EMPTY);
     }
   }

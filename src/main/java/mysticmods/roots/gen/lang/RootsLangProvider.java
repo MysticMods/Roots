@@ -5,10 +5,13 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.init.*;
 import mysticmods.roots.item.GramaryItem;
+import mysticmods.roots.spell.mode.AOEGrowthMode;
+import mysticmods.roots.spell.mode.HarvestMode;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
@@ -215,6 +218,12 @@ public final class RootsLangProvider extends LanguageProvider {
           }*/
         }
     );
+
+    add("roots.spell_mode.mode", "Mode");
+
+    addCyclingMode(AOEGrowthMode.values());
+    addCyclingMode(GramaryItem.GramaryMode.values());
+    addCyclingMode(HarvestMode.values());
 
     RootsRegistries.RITUALS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
@@ -857,11 +866,6 @@ public final class RootsLangProvider extends LanguageProvider {
         }
     );
 
-    add(GramaryItem.GramaryMode.NONE.getKey(), "None");
-    add(GramaryItem.GramaryMode.ENTITY_INFO.getKey(), "Entity Information");
-    add(GramaryItem.GramaryMode.BLOCK_ENTITY_INFO.getKey(), "Block Information");
-    add(GramaryItem.GramaryMode.BIND_POSITION.getKey(), "Bind Position");
-
     add("roots.item.gramary.bound_block_entity", "Bound Block Entity to position %s/%s/%s");
     add("roots.item.gramary.bound_block_position", "Bound Gramary to position %s/%s/%s");
 
@@ -950,6 +954,12 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.STORM_CLOUD, "Creates a vicious cloud of storms around you. For the duration, lightning from the cloud may strike nearby enemies.");
     spellDescription(ModSpells.TEMPORAL_MORASS, "Creates a temporary field of disruptive energy. All entities within this field will have their movement dramatically slowed.");
     spellDescription(ModSpells.WILDFIRE, "Flings a fiery meteor in the direction you are looking. If this meteor hits an enemy, it will damage it.");
+  }
+
+  private void addCyclingMode(Cycling<?>[] values) {
+    for (Cycling<?> cycle : values) {
+      add(cycle.getDescriptionId(), toEnglishName(cycle.getSerializedName()));
+    }
   }
 
   // TODO: Translations for damage

@@ -163,7 +163,7 @@ public class HudOverlay {
   private static List<Holder<Attribute>> ATTRIBUTES_HOLDER = null;
 
   private static void renderEntity(GuiGraphics graphics, PoseStack pose, float partialTicks, DeltaTracker deltaTracker, Minecraft mc, EntityHitResult trace, LivingEntity entity) {
-    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFO)) {
+    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFORMATION)) {
 
       Level level = mc.level;
       if (mc.player == null || level == null) {

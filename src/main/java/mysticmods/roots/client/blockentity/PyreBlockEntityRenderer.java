@@ -37,7 +37,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
 
   @Override
   protected Component getTextToRender(PyreBlockEntity blockEntity) {
-    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.BLOCK_ENTITY_INFO)) {
+    if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.BLOCK_INFORMATION)) {
       if (blockEntity.getLifetime() != -1) {
         int lifetime = blockEntity.getLifetime();
         int seconds = lifetime / 20;

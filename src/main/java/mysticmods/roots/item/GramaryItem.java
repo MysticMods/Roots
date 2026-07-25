@@ -2,10 +2,16 @@ package mysticmods.roots.item;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.BindableBlockEntity;
+import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
@@ -30,7 +36,7 @@ public class GramaryItem extends Item {
   @Override
   public Component getName(ItemStack pStack) {
     GramaryMode mode = pStack.get(ModAttachments.GRAMARY_MODE);
-    return Component.translatable("roots.item.gramary.with_mode", mode.getComponent());
+    return Component.translatable("roots.item.gramary.with_mode", mode.getStyledName());
   }
 
   @Override
@@ -87,33 +93,54 @@ public class GramaryItem extends Item {
     return GramaryMode.NONE;
   }
 
-  public enum GramaryMode implements StringRepresentable {
-    NONE,
-    ENTITY_INFO,
-    BLOCK_ENTITY_INFO,
-    BIND_POSITION;
+  public enum GramaryMode implements Cycling<GramaryMode>, StringRepresentable {
+    // TODO: Encode properly
+    NONE(ChatFormatting.GRAY.getColor()),
+    ENTITY_INFORMATION(ChatFormatting.DARK_PURPLE.getColor()),
+    BLOCK_INFORMATION(ChatFormatting.AQUA.getColor()),
+    BIND_POSITION(ChatFormatting.DARK_GREEN.getColor());
 
     public static final Codec<GramaryMode> CODEC = StringRepresentable.fromEnum(GramaryMode::values);
     public static final IntFunction<GramaryMode> BY_ID = ByIdMap.continuous(GramaryMode::ordinal, values(), ByIdMap.OutOfBoundsStrategy.WRAP);
     public static final StreamCodec<ByteBuf, GramaryMode> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, GramaryMode::ordinal);
+
+    private final TextColor color;
+    private Style style;
+    private String descriptionId;
+
+    GramaryMode (int color) {
+      this.color = TextColor.fromRgb(color);
+    }
 
     @Override
     public String getSerializedName() {
       return this.name().toLowerCase(Locale.ROOT);
     }
 
-    public String getKey() {
-      return "roots.item.gramary.mode." + this.getSerializedName();
+    @Override
+    public TextColor getTextColor() {
+      return color;
     }
 
-    public Component getComponent() {
-      return Component.translatable(getKey());
+    @Override
+    public Style getOrCreateStyle() {
+      if (this.style == null) {
+        this.style = Style.EMPTY.withColor(getTextColor());
+      }
+      return style;
     }
 
-    public GramaryMode cycle() {
-      GramaryMode[] modes = values();
-      int nextOrdinal = (this.ordinal() + 1) % modes.length;
-      return modes[nextOrdinal];
+    @Override
+    public String getOrCreateDescriptionId() {
+      if (this.descriptionId == null) {
+        this.descriptionId = Util.makeDescriptionId("gramary_mode", RootsAPI.rl(this.getSerializedName()));
+      }
+      return descriptionId;
+    }
+
+    @Override
+    public GramaryMode[] valuesInternal() {
+      return values();
     }
   }
 }

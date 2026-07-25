@@ -1,17 +1,15 @@
 package mysticmods.roots.spell;
 
-import it.unimi.dsi.fastutil.ints.Int2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.action.ShatterBlockAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
@@ -35,7 +33,10 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShatterSpell extends Spell {
   private int maxWidth, maxDepth, maxHeight;
@@ -57,29 +58,6 @@ public class ShatterSpell extends Spell {
     this.maxHeight = properties.get(ModSpells.SHATTER_MAXIMUM_HEIGHT);
   }
 
-  @Override
-  protected void fillDataKeyMap(Object2IntMap<String> map) {
-    super.fillDataKeyMap(map);
-    map.put("mode", 0);
-    map.put("width", 1);
-    map.put("height", 2);
-    map.put("depth", 3);
-  }
-
-  @Override
-  public Set<String> getTooltipDataKeys() {
-    return Set.of("width", "height", "depth");
-  }
-
-  @Override
-  protected void fillDataMaximumValues(Int2IntMap map) {
-    super.fillDataMaximumValues(map);
-    map.put(0, 3);
-    map.put(1, maxWidth);
-    map.put(2, maxHeight);
-    map.put(3, maxDepth);
-  }
-
   private int[] getAsymmetricOffsets(int value) {
     int right = (value + 1) / 2;
     int left = value / 2;
@@ -97,9 +75,9 @@ public class ShatterSpell extends Spell {
     Direction heightDir = sideDir == Direction.DOWN ? playerFacing : sideDir.getAxis() == Direction.Axis.Y ? playerFacing.getOpposite() : Direction.DOWN;
     Direction depthDir = sideDir.getOpposite();
 
-    int width = getDataValue(spell, "width");
-    int height = getDataValue(spell, "height");
-    int depth = getDataValue(spell, "depth");
+    int width = 2;
+    int height = 2;
+    int depth = 2;
 
     BlockPos start = pos;
     BlockPos stop = pos;
@@ -207,7 +185,6 @@ public class ShatterSpell extends Spell {
 
 
 */
-
 
 
       if (((ServerPlayer) pPlayer).gameMode.destroyBlock(pos)) {/*          pLevel.destroyBlock(pos, true, pPlayer)) {*/

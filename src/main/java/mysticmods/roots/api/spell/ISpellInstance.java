@@ -12,6 +12,7 @@ import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public interface ISpellInstance extends SpellLike, ICostedParent {
   Spell getSpell();
@@ -143,6 +145,14 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default DataComponentMap getSpellData() {
     return DataComponentMap.EMPTY;
+  }
+
+  default <T> T getSpellData(DataComponentType<? extends T> component) {
+    return getSpellData().get(component);
+  }
+
+  default <T> T getSpellData(Supplier<? extends DataComponentType<? extends T>> component) {
+    return getSpellData().get(component.get());
   }
 
   @Override
