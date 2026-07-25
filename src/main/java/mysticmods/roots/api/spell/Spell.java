@@ -1,18 +1,17 @@
 package mysticmods.roots.api.spell;
 
+import com.google.common.collect.Interner;
+import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.ints.Int2IntMap;
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.SpellLike;
-import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -43,10 +42,12 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribed {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
@@ -55,7 +56,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected final SpellCastType type;
   protected final CostInstance defaultCosts;
   protected final ParentChargeType chargeType;
-  protected DataComponentMap components = DataComponentMap.builder().build();
+  protected DataComponentMap components;
   protected CostInstance costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
@@ -81,6 +82,17 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     this.chargeType = chargeType;
     this.color1 = color1;
     this.color2 = color2;
+    this.components = DataComponentMap.builder().build();
+  }
+
+  public Spell (Properties properties) {
+    this.type = properties.castType;
+    this.textColor = properties.textColor;
+    this.defaultCosts = properties.defaultCosts.get();
+    this.chargeType = properties.chargeType;
+    this.color1 = properties.color1;
+    this.color2 = properties.color2;
+    this.components = properties.buildAndValidateComponents();
   }
 
   public Holder<Spell> builtInRegistryHolder() {
@@ -347,5 +359,110 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public DataComponentType<? extends Cycling<?>> getCycleComponent () {
     return null;
+  }
+
+  public static class Properties {
+    private static final Interner<DataComponentMap> COMPONENT_INTERNER = Interners.newStrongInterner();
+    @Nullable
+    DataComponentMap.Builder components;
+    SpellCastType castType = SpellCastType.INSTANT;
+    TextColor textColor;
+    Supplier<CostInstance> defaultCosts;
+    ParentChargeType chargeType = ParentChargeType.INSTANCE;
+    int color1 = -1;
+    int color2 = -1;
+
+    public Properties castType(SpellCastType type) {
+      this.castType = type;
+      return this;
+    }
+
+    public Properties textColor(ChatFormatting format) {
+      this.textColor = TextColor.fromLegacyFormat(format);
+      return this;
+    }
+
+    public Properties textColor(int color) {
+      this.textColor = TextColor.fromRgb(color);
+      return this;
+    }
+
+    public Properties textColor(TextColor color) {
+      this.textColor = color;
+      return this;
+    }
+
+    public Properties color(int color1, int color2) {
+      this.color1 = color1;
+      this.color2 = color2;
+      return this;
+    }
+
+    public Properties costs(Supplier<CostInstance> costs) {
+      this.defaultCosts = costs;
+      return this;
+    }
+
+    public Properties cost (Supplier<Cost> costs) {
+      this.defaultCosts = () -> CostInstance.of(costs.get());
+      return this;
+    }
+
+    public Properties cost (Supplier<Holder<Herb>> herb, double amount) {
+      this.defaultCosts = () -> CostInstance.add(herb.get(), amount);
+      return this;
+    }
+
+    public Properties charge (ParentChargeType type) {
+      this.chargeType = type;
+      return this;
+    }
+
+    public Properties operations () {
+      return charge(ParentChargeType.OPERATION);
+    }
+
+    public Properties build () {
+      // TODO: Validate everything
+      if (this.castType == null) {
+        throw new NullPointerException("SpellProperties requires a `castType`");
+      }
+      if (this.textColor == null) {
+        throw new NullPointerException("SpellProperties requires a `textColor`");
+      }
+      if (this.defaultCosts == null) {
+        throw new NullPointerException("SpellProperties requires `defaultCosts`");
+      }
+      if (this.chargeType == null) {
+        throw new NullPointerException("SpellProperties requires a `chargeType`");
+      }
+      if (this.color1 == -1 && this.color2 == -1) {
+        throw new IllegalStateException("Invalid colors for SpellProperties");
+      }
+      return this;
+    }
+
+    public <T> Properties component(DataComponentType<T> component, T value) {
+      CommonHooks.validateComponent(value);
+      if (this.components == null) {
+        this.components = DataComponentMap.builder();
+      }
+
+      this.components.set(component, value);
+      return this;
+    }
+
+    DataComponentMap buildAndValidateComponents() {
+      DataComponentMap datacomponentmap = this.buildComponents();
+      return validateComponents(datacomponentmap);
+    }
+
+    public static DataComponentMap validateComponents(DataComponentMap datacomponentmap) {
+      return datacomponentmap;
+    }
+
+    private DataComponentMap buildComponents() {
+      return this.components == null ? DataComponentMap.EMPTY : COMPONENT_INTERNER.intern(this.components.build());
+    }
   }
 }
