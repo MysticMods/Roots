@@ -31,6 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HarvestSpell extends TwoRadiusSpell {
+
+  public HarvestSpell (Spell.Properties properties) {
+    super(properties);
+  }
+
+  @Deprecated
   public HarvestSpell(ChatFormatting color, CostInstance costs) {
     super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x39fd1c, 0xc5e91c);
   }

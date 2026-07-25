@@ -39,8 +39,9 @@ import java.util.Set;
 public class RampantGrowthSpell extends TwoRadiusSpell {
   private int interval, count;
 
-  public RampantGrowthSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.OPERATION, 0x157318, 0x13c3eb);
+  public RampantGrowthSpell(Spell.Properties properties) {
+    super(properties);
+
   }
 
   @Override

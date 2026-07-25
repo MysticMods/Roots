@@ -372,7 +372,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     int color1 = -1;
     int color2 = -1;
 
-    public Properties castType(SpellCastType type) {
+    public Properties type(SpellCastType type) {
       this.castType = type;
       return this;
     }
@@ -440,6 +440,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
         throw new IllegalStateException("Invalid colors for SpellProperties");
       }
       return this;
+    }
+
+    public <T> Properties component (Supplier<? extends DataComponentType<T>> component, T value) {
+      return this.component(component.get(), value);
     }
 
     public <T> Properties component(DataComponentType<T> component, T value) {

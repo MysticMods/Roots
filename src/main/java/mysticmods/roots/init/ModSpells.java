@@ -9,8 +9,12 @@ import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.reference.SpellProperties;
 import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.spell.*;
+import mysticmods.roots.spell.mode.AOEGrowthMode;
+import mysticmods.roots.spell.mode.HarvestMode;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
@@ -18,7 +22,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 
@@ -137,7 +140,16 @@ public class ModSpells {
   public static final PropertyHolder<Property.DoubleProperty> GROWTH_INFUSION_ADDED_REACH = P.recordProperty("growth_infusion/added_reach", Property.ofDouble(0.0, SpellProperties.ADDED_REACH));
 
   // Rampant Growth (20 cooldown)
-  public static final DeferredHolder<Spell, RampantGrowthSpell> RAMPANT_GROWTH = spell(Spells.RAMPANT_GROWTH, RampantGrowthSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0125), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0031))); // In theory it should cost 16 wildewheet to grow 20 blocks to full at this rate <-- not sure if this value is currently correct (May 21, 2026)
+  public static final DeferredHolder<Spell, RampantGrowthSpell> RAMPANT_GROWTH = REGISTER.register(Spells.RAMPANT_GROWTH.location()
+      .getPath(), () ->
+      new RampantGrowthSpell(new Spell.Properties()
+          .type(SpellCastType.CONTINUOUS)
+          .charge(ParentChargeType.OPERATION)
+          .color(0x157318, 0x13c3eb)
+          .cost(() -> ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)
+          .textColor(ChatFormatting.YELLOW)
+          .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
+          .build()));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN = P.recordProperty("rampant_growth/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_ZX = P.recordProperty("rampant_growth/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
@@ -146,7 +158,16 @@ public class ModSpells {
 
 
   // Harvest (25 cooldown)
-  public static final DeferredHolder<Spell, HarvestSpell> HARVEST = spell(Spells.HARVEST, HarvestSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0031), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0031)));
+  public static final DeferredHolder<Spell, HarvestSpell> HARVEST = REGISTER.register(Spells.HARVEST.location()
+      .getPath(), () -> new HarvestSpell(new Spell.Properties()
+      .operations()
+      .textColor(ChatFormatting.YELLOW)
+      .color(0x39fd1c, 0xc5e91c)
+      .cost(() -> ModHerbs.STALICRIPE, SpellCosts.BASE_0031)
+      .component(ModAttachments.HARVEST_MODE, HarvestMode.EVERYTHING)
+      .build()
+  ));
+
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_COOLDOWN = P.recordProperty("harvest/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_ZX = P.recordProperty("harvest/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_Y = P.recordProperty("harvest/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));

@@ -121,11 +121,6 @@
         {
           "type": "additive",
           "defaultValue": 0.031,
-          "herb": "roots:wildewheet"
-        },
-        {
-          "type": "additive",
-          "defaultValue": 0.031,
           "herb": "roots:stalicripe"
         }
       ]
@@ -217,13 +212,8 @@
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.125,
-          "herb": "roots:wildewheet"
-        },
-        {
-          "type": "additive",
           "defaultValue": 0.031,
-          "herb": "roots:grove_moss"
+          "herb": "roots:wildewheet"
         }
       ]
     },
