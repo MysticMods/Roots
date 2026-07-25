@@ -83,9 +83,9 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   public <T> SpellSlot withData(DataComponentType<? super T> component, @Nullable T value) {
-    this.data.set(component, value);
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), PatchedDataComponentMap.fromPatch(spell.getComponents(), this.data()
-        .asPatch()));
+    var newData = this.data.copy();
+    newData.set(component, value);
+    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), newData);
   }
 
   public SpellSlot withoutModifier(SpellModifier modifier) {
