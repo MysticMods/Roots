@@ -2,6 +2,8 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.effect.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -24,6 +26,7 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SimpleEffect> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x00008b, false));
   public static final DeferredHolder<MobEffect, SimpleEffect> LIGHT_DRIFTER = REGISTER.register("light_drifter", () -> new LightDrifterEffect(MobEffectCategory.BENEFICIAL, 0xded666, true));
   public static final DeferredHolder<MobEffect, SimpleEffect> HOMESICKNESS = REGISTER.register("homesickness", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x8b4513, false));
+  public static final DeferredHolder<MobEffect, SimpleEffect> DANDELION_WINDS = REGISTER.register("dandelion_winds", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, ChatFormatting.YELLOW.getColor(), false));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));

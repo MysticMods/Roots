@@ -9,6 +9,7 @@ import mysticmods.roots.client.gui.layer.*;
 import mysticmods.roots.client.gui.screen.*;
 import mysticmods.roots.client.item.WildwoodChestItemRenderer;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
+import mysticmods.roots.client.layer.DandelionWindsRenderLayer;
 import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
@@ -168,6 +169,7 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.JERBOA, JerboaModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.SYLVAN_SPIDER, SylvanSpiderModel::createSpiderBodyLayer);
+    event.registerLayerDefinition(ModelHolder.DANDELION_WINDS, DandelionWindsModel::createWindsLayer);
   }
 
   public static final ResourceLocation WARNING_OVERLAY = RootsAPI.rl("warning");
@@ -192,10 +194,12 @@ public class ClientSetup {
     PlayerRenderer render = event.getSkin(PlayerSkin.Model.WIDE);
     if (render != null) {
       render.addLayer(new AquaBubbleRenderLayer(render));
+      render.addLayer(new DandelionWindsRenderLayer<>(render, event.getEntityModels()));
     }
     render = event.getSkin(PlayerSkin.Model.SLIM);
     if (render != null) {
       render.addLayer(new AquaBubbleRenderLayer(render));
+      render.addLayer(new DandelionWindsRenderLayer<>(render, event.getEntityModels()));
     }
   }
 

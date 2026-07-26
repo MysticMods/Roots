@@ -19,6 +19,7 @@ public class ModelHolder {
   public static final ModelLayerLocation AMPLIFIER_CENTER = new ModelLayerLocation(RootsAPI.rl("amplifier_center"), "main");
   public static final ModelLayerLocation AMPLIFIER_OUTER = new ModelLayerLocation(RootsAPI.rl("amplifier_outer"), "main");
   public static final ModelLayerLocation SYLVAN_SPIDER = new ModelLayerLocation(RootsAPI.rl("sylvan_spider"), "main");
+  public static final ModelLayerLocation DANDELION_WINDS = new ModelLayerLocation(RootsAPI.rl("dandelion_winds"), "main");
 
   public static void init() {
   }
