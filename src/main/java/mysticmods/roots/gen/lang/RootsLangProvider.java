@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -236,13 +237,7 @@ public final class RootsLangProvider extends LanguageProvider {
     // TODO: These need to be adjusted to
     // a) split the '/' and ignore the spell name
     // b) convert any numbers to be in brackets i.e., (1)
-
-    Set<SpellModifier> skip = Set.of(ModModifiers.SHATTER_FORTUNE_I.value(), ModModifiers.SHATTER_FORTUNE_II.value(), ModModifiers.SHATTER_FORTUNE_III.value());
-
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o -> {
-          if (skip.contains(o.getValue())) {
-            return;
-          }
           var k = o.getKey().location().getPath();
           var s = k.split("/")[1];
           var e = toEnglishName(s);
@@ -251,11 +246,6 @@ public final class RootsLangProvider extends LanguageProvider {
           add(o.getValue().getDescriptionId(), e);
         }
     );
-
-    // Manually generate to handle proper capitalization
-    add(ModModifiers.SHATTER_FORTUNE_I.value().getDescriptionId(), "Fortune I");
-    add(ModModifiers.SHATTER_FORTUNE_II.value().getDescriptionId(), "Fortune II");
-    add(ModModifiers.SHATTER_FORTUNE_III.value().getDescriptionId(), "Fortune III");
 
     // TODO: Same as above?
     RootsRegistries.RITUAL_MODIFIERS.entrySet()
@@ -1010,9 +1000,20 @@ public final class RootsLangProvider extends LanguageProvider {
   }
 
   public static String toEnglishName(String internalName) {
-    return Arrays.stream(internalName.toLowerCase(Locale.ROOT).split("_"))
-        .map(StringUtils::capitalize)
-        .collect(Collectors.joining(" "));
+    String[] segments = internalName.toLowerCase(Locale.ROOT).split("_");
+    var joiner = new StringJoiner(" ");
+
+    for (String seg : segments) {
+      joiner.add(switch (seg) {
+        case "ii" -> "II";
+        case "iii" -> "III";
+        case "Iv" -> "IV";
+        case "Vi" -> "VI";
+        default -> StringUtils.capitalize(seg);
+      });
+    }
+
+    return joiner.toString();
   }
 
   public static String getComplexDescription(String defaultValue) {
