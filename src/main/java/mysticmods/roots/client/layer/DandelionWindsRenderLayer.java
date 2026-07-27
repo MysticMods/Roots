@@ -38,16 +38,20 @@ public class DandelionWindsRenderLayer<T extends LivingEntity, M extends EntityM
       float netHeadYaw,
       float headPitch
   ) {
-    if (livingEntity.hasEffect(ModEffects.DANDELION_WINDS)) {
+    if (livingEntity.hasEffect(ModEffects.DANDELION_WINDS)){
+      poseStack.pushPose();
+      poseStack.translate(0, -1.5, 0);
+      poseStack.scale(2, 2, 2);
       float f = (float) livingEntity.tickCount + partialTicks;
       VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.breezeWind(TEXTURE, this.xOffset(f) % 1.0F, 0.0F));
       this.model.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
       this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
+      poseStack.popPose();
     }
   }
 
   protected float xOffset(float tickCount) {
-    return tickCount * 0.03F;
+    return tickCount * 0.02F;
   }
 
   protected ResourceLocation getTextureLocation() {
