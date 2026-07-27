@@ -23,8 +23,8 @@ public class ModModifiers {
 
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_1 = REGISTER.register("dandelion_winds/chance_i", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_2 = REGISTER.register("dandelion_winds/chance_ii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_1.getKey(), ModSpells.DANDELION_WINDS.getKey()));
-  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_3 = REGISTER.register("dandelion_winds/chance_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_1.getKey(), ModSpells.DANDELION_WINDS.getKey()));
-  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_4 = REGISTER.register("dandelion_winds/chance_iv", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_1.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_3 = REGISTER.register("dandelion_winds/chance_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_2.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_4 = REGISTER.register("dandelion_winds/chance_iv", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_3.getKey(), ModSpells.DANDELION_WINDS.getKey()));
 
 
 
