@@ -98,15 +98,15 @@ public class DandelionWindsSpell extends Spell {
     if (spellModifier.is(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_DURATION)) {
       int count;
       if (spellModifier.is(ModModifiers.DANDELION_WINDS_DURATION_1)) {
-        count = 2;
+        count = 1;
       } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_DURATION_2)) {
-        count = 3;
+        count = 2;
       } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_DURATION_3)) {
-        count = 4;
+        count = 3;
       } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_DURATION_4)) {
-        count = 5;
+        count = 4;
       } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_DURATION_5)) {
-        count = 6;
+        count = 5;
       } else {
         RootsAPI.LOG.error("Spell modifier {} increases dandelion winds duration but isn't duration 1, 2, 3, 4 or 5!", spellModifier);
         count = 1;
@@ -121,13 +121,13 @@ public class DandelionWindsSpell extends Spell {
     } else if (spellModifier.is(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_CHANCE)) {
       int count;
       if (spellModifier.is(ModModifiers.DANDELION_WINDS_CHANCE_1)) {
-        count = 2;
+        count = 1;
       } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_CHANCE_2)) {
-        count = 3;
+        count = 2;
       } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_CHANCE_3)) {
-        count = 4;
+        count = 3;
       } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_CHANCE_4)) {
-        count = 5;
+        count = 4;
       } else {
         RootsAPI.LOG.error("Spell modifier {} increases dandelion winds chance but isn't chance 1, 2, 3 or 4!", spellModifier);
         count = 1;
@@ -136,8 +136,8 @@ public class DandelionWindsSpell extends Spell {
       float totalChance = deflectionChance + (deflectionChanceIncrease * count);
 
       return new Component[]{
-          Component.literal(String.format("%s", deflectionChance * 100)),
-          Component.literal(String.format("%s", totalChance * 100))
+          Component.literal(String.format("%s", (int) (deflectionChance * 100))),
+          Component.literal(String.format("%s", (int) (totalChance * 100)))
       };
     }
     RootsAPI.LOG.error("Tried to create description components for modifiers not associated with {}: {}", this, spellModifier);
