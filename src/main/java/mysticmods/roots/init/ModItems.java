@@ -531,6 +531,17 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.SHATTER_MAGNETISM);
     modifier(ITEMS, ModModifiers.SHATTER_SILK_TOUCH);
     modifier(ITEMS, ModModifiers.SHATTER_SMELTING);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_5);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_FIRE);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_PEACEFUL);
   }
 /*
 

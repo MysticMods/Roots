@@ -635,6 +635,9 @@ public class RootsTags {
     public static final TagKey<SpellModifier> SMELTS = modTag("smelts");
     public static final TagKey<SpellModifier> PEACEFUL = modTag("peaceful");
 
+    public static final TagKey<SpellModifier> DANDELION_WINDS_INCREASES_DURATION = modTag("dandelion_winds/increases_duration");
+    public static final TagKey<SpellModifier> DANDELION_WINDS_INCREASES_CHANCE = modTag("dandelion_winds/increases_chance");
+
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
     static TagKey<SpellModifier> modTag(String name) {

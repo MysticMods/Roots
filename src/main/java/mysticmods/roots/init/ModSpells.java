@@ -58,11 +58,11 @@ public class ModSpells {
 
   // Dandelion Winds (20 cooldown)
   public static final DeferredHolder<Spell, DandelionWindsSpell> DANDELION_WINDS = spell(Spells.DANDELION_WINDS, DandelionWindsSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0125)));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_DURATION = P.recordProperty("dandelion_winds/duration", Property.ofInt(20 * 60, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE = P.recordProperty("dandelion_winds/projectile_deflection_chance", Property.ofFloat(0.2f, "Chance to entirely deflect projectiles."));
+  public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE = P.recordProperty("dandelion_winds/projectile_deflection_increase", Property.ofFloat(0.2f, "For each deflection modifier, increases the chance of deflection additively up to 100%."));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_DURATION_INCREASE = P.recordProperty("dandelion_winds/duration_increase", Property.ofInt(30 * 20, "For each duration modifier, increases the effect duration by this value."));
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_COOLDOWN = P.recordProperty("dandelion_winds/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_DISTANCE = P.recordProperty("dandelion_winds/distance", Property.ofFloat(0.75f, "The vertical component of the vector used to move entities."));
-  public static final PropertyHolder<Property.DoubleProperty> DANDELION_WINDS_RANGE_1 = P.recordProperty("dandelion_winds/range_1", Property.ofDouble(4.0, "The first range increment for calculating the bounding box from the player."));
-  public static final PropertyHolder<Property.DoubleProperty> DANDELION_WINDS_RANGE_2 = P.recordProperty("dandelion_winds/range_2", Property.ofDouble(5.0, "The second range increment for calculating the bounding box from the player."));
-  public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_VERTICAL = P.recordProperty("dandelion_winds/vertical", Property.ofFloat(0.7f, "The percentage of the movement value applied to vertical momentum."));
 
   // Decay
   public static final DeferredHolder<Spell, DecaySpell> DECAY = spell(Spells.DECAY, DecaySpell::new, ChatFormatting.DARK_GREEN, () -> CostInstance.of(Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250)));

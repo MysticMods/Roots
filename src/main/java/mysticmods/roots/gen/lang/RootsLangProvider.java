@@ -651,6 +651,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addEffect(ModEffects.AQUA_BUBBLE);
     addEffect(ModEffects.HOMESICKNESS);
     addEffect(ModEffects.LIGHT_DRIFTER);
+    addEffect(ModEffects.DANDELION_WINDS);
 
     add(RootsTags.Items.SEEDS, "Seeds");
     add(RootsTags.Items.CLOUD_BERRY_SEEDS, "Cloud Berry Seeds");
@@ -925,7 +926,6 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_III, "Applies Fortune III when breaking blocks.");
     modifierDescriptionBoth(ModModifiers.SHATTER_SMELTING, "Smelts items dropped by broken blocks.");
 
-
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
     modifierExtendedDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage for %s seconds [%s ticks] after the boost effect ends.");
 
@@ -933,7 +933,27 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
     spellDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body, allowing you to float through entities and terrain for a short time and distance. Returns you to your body upon expiration.");
     spellDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs to your location.");
-    spellDescription(ModSpells.DANDELION_WINDS, "Blows entities away from you.");
+    spellDescription(ModSpells.DANDELION_WINDS, "Has a chance to deflect projectiles aimed at you.");
+    spellExtendedDescription(ModSpells.DANDELION_WINDS, "Applies a buff for %s seconds [%s ticks] that gives a %s%% chance to deflect projectiles aimed at you.");
+    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the Dandelion Winds effect.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
+    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_2, "Increases the duration of the Dandelion Winds effect.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_2, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
+    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_3, "Increases the duration of the Dandelion Winds effect.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_3, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
+    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_4, "Increases the duration of the Dandelion Winds effect.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_4, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
+    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_5, "Increases the duration of the Dandelion Winds effect.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_5, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
+    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance to deflect projectiles.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance of deflection projectiles by %s%% to a total of %s%%.");
+    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_2, "Increases the chance to deflect projectiles.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_2, "Increases the chance of deflection projectiles by %s%% to a total of %s%%.");
+    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_3, "Increases the chance to deflect projectiles.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_3, "Increases the chance of deflection projectiles by %s%% to a total of %s%%.");
+    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance of deflection projectiles by %s%% to a total of %s%%.");
+
     spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, losing maximum health.");
     spellDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health.");
     spellDescription(ModSpells.SATURATE, "Directly converts food and drink in your inventory to saturation and food levels. Some value is lost in this process.");

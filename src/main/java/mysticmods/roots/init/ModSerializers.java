@@ -1,6 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
@@ -57,6 +58,7 @@ public class ModSerializers {
   public static final DeferredHolder<SnapshotType<?>, RoseThornsEntitySnapshot.Type> ROSE_THORNS = SNAPSHOT_TYPES.register("rose_thorns", RoseThornsEntitySnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, WildfireEntitySnapshot.Type> WILDFIRE = SNAPSHOT_TYPES.register("wildfire", WildfireEntitySnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, LightDrifterSnapshot.Type> LIGHT_DRIFTER = SNAPSHOT_TYPES.register("light_drifter", LightDrifterSnapshot.Type::new);
+  public static final DeferredHolder<SnapshotType<?>, DandelionWindsSnapshot.Type> DANDELION_WINDS = SNAPSHOT_TYPES.register("dandelion_winds", DandelionWindsSnapshot.Type::new);
 
   // Integer
   public static final DeferredHolder<PropertySerializer<?>, PropertySerializer<Property.IntegerProperty>> INTEGER_PROPERTY_SERIALIZER = PROPERTY_SERIALIZERS.register("integer_property", Property.IntegerProperty.Serializer::new);

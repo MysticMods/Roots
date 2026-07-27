@@ -105,39 +105,39 @@
         }
       },
       {
-        "id": "roots:dandelion_winds/distance",
+        "id": "roots:dandelion_winds/duration_increase",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "For each duration modifier, increases the effect duration by this value.",
+          "default_value": 600,
+          "value": 600
+        }
+      },
+      {
+        "id": "roots:dandelion_winds/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 1200,
+          "value": 1200
+        }
+      },
+      {
+        "id": "roots:dandelion_winds/projectile_deflection_chance",
         "value": {
           "type": "roots:float_property",
-          "comment": "The vertical component of the vector used to move entities.",
-          "default_value": 0.75,
-          "value": 0.75
+          "comment": "Chance to entirely deflect projectiles.",
+          "default_value": 0.2,
+          "value": 0.2
         }
       },
       {
-        "id": "roots:dandelion_winds/range_1",
-        "value": {
-          "type": "roots:double_property",
-          "comment": "The first range increment for calculating the bounding box from the player.",
-          "default_value": 4.0,
-          "value": 4.0
-        }
-      },
-      {
-        "id": "roots:dandelion_winds/range_2",
-        "value": {
-          "type": "roots:double_property",
-          "comment": "The second range increment for calculating the bounding box from the player.",
-          "default_value": 5.0,
-          "value": 5.0
-        }
-      },
-      {
-        "id": "roots:dandelion_winds/vertical",
+        "id": "roots:dandelion_winds/projectile_deflection_increase",
         "value": {
           "type": "roots:float_property",
-          "comment": "The percentage of the movement value applied to vertical momentum.",
-          "default_value": 0.7,
-          "value": 0.7
+          "comment": "For each deflection modifier, increases the chance of deflection additively up to 100%.",
+          "default_value": 0.2,
+          "value": 0.2
         }
       }
     ],

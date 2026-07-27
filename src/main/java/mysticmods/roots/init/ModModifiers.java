@@ -15,6 +15,19 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_FIRE = REGISTER.register("acid_cloud/fire", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.ACID_CLOUD.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_PEACEFUL = REGISTER.register("acid_cloud/peaceful", () -> new SpellModifier(CostInstance.add(ModHerbs.WILDROOT, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
 
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_1 = REGISTER.register("dandelion_winds/duration_i", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_2 = REGISTER.register("dandelion_winds/duration_ii", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModModifiers.DANDELION_WINDS_DURATION_1.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_3 = REGISTER.register("dandelion_winds/duration_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModModifiers.DANDELION_WINDS_DURATION_2.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_4 = REGISTER.register("dandelion_winds/duration_iv", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModModifiers.DANDELION_WINDS_DURATION_3.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_5 = REGISTER.register("dandelion_winds/duration_v", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModModifiers.DANDELION_WINDS_DURATION_4.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_1 = REGISTER.register("dandelion_winds/chance_i", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_2 = REGISTER.register("dandelion_winds/chance_ii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_1.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_3 = REGISTER.register("dandelion_winds/chance_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_1.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_4 = REGISTER.register("dandelion_winds/chance_iv", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), DANDELION_WINDS_CHANCE_1.getKey(), ModSpells.DANDELION_WINDS.getKey()));
+
+
+
   // Sylvan Light
   // Auto-place to fill dark
   // Cast to remove nearby lights

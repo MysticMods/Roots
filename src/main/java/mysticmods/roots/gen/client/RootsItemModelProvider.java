@@ -402,6 +402,20 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.SHATTER_FORTUNE_III, Items.DIAMOND_PICKAXE);
     modifier(ModModifiers.SHATTER_SMELTING, Items.FURNACE);
 
+    modifier(ModModifiers.DANDELION_WINDS_DURATION_1, Items.IRON_INGOT);
+    modifier(ModModifiers.DANDELION_WINDS_DURATION_2, Items.COPPER_INGOT);
+    modifier(ModModifiers.DANDELION_WINDS_DURATION_3, Items.GOLD_INGOT);
+    modifier(ModModifiers.DANDELION_WINDS_DURATION_4, ModItems.SILVER_INGOT.value());
+    modifier(ModModifiers.DANDELION_WINDS_DURATION_5, Items.NETHERITE_INGOT);
+
+    modifier(ModModifiers.DANDELION_WINDS_CHANCE_1, Items.OAK_LOG);
+    modifier(ModModifiers.DANDELION_WINDS_CHANCE_2, Items.STONE);
+    modifier(ModModifiers.DANDELION_WINDS_CHANCE_3, Items.IRON_BLOCK);
+    modifier(ModModifiers.DANDELION_WINDS_CHANCE_4, Items.OBSIDIAN);
+
+    modifier(ModModifiers.ACID_CLOUD_FIRE, Items.FIRE_CHARGE);
+    modifier(ModModifiers.ACID_CLOUD_PEACEFUL, Items.BEACON);
+
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));
 
