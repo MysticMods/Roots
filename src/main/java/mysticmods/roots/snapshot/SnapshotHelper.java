@@ -5,6 +5,8 @@ import mysticmods.roots.api.snapshot.Snapshot;
 import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 

@@ -13,10 +13,13 @@ import mysticmods.roots.effect.SimpleEffect;
 import mysticmods.roots.init.*;
 import mysticmods.roots.integration.IntegrationUtil;
 import mysticmods.roots.item.PouchItem;
+import mysticmods.roots.mixin.accessor.AccessorMixinAbstractArrow;
 import mysticmods.roots.network.client.ClientboundPouchPickUpHerbPacket;
 import mysticmods.roots.network.client.ClientboundSyncGeasPacket;
 import mysticmods.roots.network.client.fx.AlertnessFXPacket;
+import mysticmods.roots.snapshot.DandelionWindsSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
+import mysticmods.roots.util.EntityUtils;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.QuiverUtil;
 import net.minecraft.ChatFormatting;
@@ -38,15 +41,20 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.common.util.TriState;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -72,7 +80,6 @@ public class EntityEventHandler {
     if (entity.hasPickUpDelay() && entity.getOwner() != null && entity.getOwner().equals(event.getPlayer())) {
       return;
     }
-
 
     ItemStack stack = entity.getItem();
     if (!stack.is(RootsTags.Items.HERBS)) {
@@ -522,6 +529,48 @@ public class EntityEventHandler {
         cancellableEvent.setCancellationResult(InteractionResult.FAIL);
         cancellableEvent.setCanceled(true);
       }
+    }
+  }
+
+  // TODO: Properly handle piercing?
+  @SubscribeEvent
+  public static void onPlayerProjectile(ProjectileImpactEvent event) {
+    if (!EntityUtils.isDeflectableByDandelionWinds(event.getProjectile())) {
+      return;
+    }
+
+    if (!(event.getRayTraceResult() instanceof EntityHitResult entityHit)) {
+      return;
+    }
+
+    if (!(entityHit.getEntity() instanceof LivingEntity deflectingEntity)) {
+      return;
+    }
+
+    DandelionWindsSnapshot snapshot = SnapshotHelper.getSnapshot(deflectingEntity, ModSerializers.DANDELION_WINDS.get());
+    if (snapshot == null) {
+      RootsAPI.LOG.error("Deflecting entity {} has the Dandelion Winds effect but no Dandelion Winds snapshot!", deflectingEntity);
+      return;
+    }
+
+    var random = deflectingEntity.getRandom();
+
+    if (random.nextFloat() < snapshot.getDeflectionChance()) {
+      Projectile projectile = event.getProjectile();
+
+      projectile.deflect(ProjectileDeflection.REVERSE, deflectingEntity, projectile.getOwner(), false);
+      projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.2));
+      // TODO: Not sure about discarding
+      if (!projectile.level().isClientSide && projectile.getDeltaMovement().lengthSqr() < 1.0E-7) {
+        if (projectile instanceof AbstractArrow arrow) {
+          if (arrow.pickup == AbstractArrow.Pickup.ALLOWED) {
+            projectile.spawnAtLocation(((AccessorMixinAbstractArrow)arrow).roots$getPickupItem(), 0.1F);
+          }
+        }
+
+        projectile.discard();
+      }
+      event.setCanceled(true);
     }
   }
 

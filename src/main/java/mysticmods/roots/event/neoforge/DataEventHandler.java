@@ -14,6 +14,7 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.network.client.ClientboundAnimalHarvestSyncPacket;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
+import mysticmods.roots.util.EntityUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
@@ -101,6 +102,8 @@ public class DataEventHandler {
   public static void onTagSync(TagsUpdatedEvent event) {
     if (event.getUpdateCause() != TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
       AnimalHarvestRecipe.cached = AnimalHarvestRecipe.getServerRecipes(event.getRegistryAccess().asGetterLookup());
+
+      EntityUtils.retestDeflectState(event.getRegistryAccess());
     }
   }
 

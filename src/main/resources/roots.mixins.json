@@ -15,6 +15,7 @@
     "MixinRecipeBuilder$DataGenerationModidFix",
     "MixinThrownPotion$ExtinguishPyre",
     "MixinWitherBoss$Geas",
+    "accessor.AccessorMixinAbstractArrow",
     "accessor.AccessorMixinBlockLootSubProvider",
     "accessor.AccessorMixinCompositeEntryBase",
     "accessor.AccessorMixinCropBlock",

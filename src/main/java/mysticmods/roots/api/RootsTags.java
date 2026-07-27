@@ -557,6 +557,11 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> DECAYABLE_PHANTOMS = modTag("decayable/phantoms");
     public static final TagKey<EntityType<?>> DECAYABLE_WITHERS = modTag("decayable/withers");
 
+    // If there's anything in this tag, only allow these
+    public static final TagKey<EntityType<?>> DANDELION_WINDS_DEFLECTABLES = modTag("dandelion_winds/deflectables");
+    // If there's nothing in deflectables, disallow these but allow everything else
+    public static final TagKey<EntityType<?>> DANDELION_WINDS_UNDEFLECTABLES = modTag("dandelion_winds/undeflectables");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }

@@ -1,6 +1,9 @@
 package mysticmods.roots.util;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -57,5 +60,46 @@ public class EntityUtils {
 
       return entity instanceof Enemy;
     };
+  }
+
+  private static Predicate<Entity> isDeflectableByDandelionWinds = (entity) -> {
+    if (!(entity instanceof Projectile projectile)) {
+      return false;
+    }
+
+    if (EntityUtils.state == DeflectState.WHITELIST) {
+      return entity.getType().is(RootsTags.Entities.DANDELION_WINDS_DEFLECTABLES);
+    } else if (EntityUtils.state == DeflectState.BLACKLIST) {
+      return !entity.getType().is(RootsTags.Entities.DANDELION_WINDS_UNDEFLECTABLES);
+    }
+
+    // TODO: What if the state is unknown or invalid?
+    return false;
+  };
+
+  public static boolean isDeflectableByDandelionWinds (Entity entity) {
+    return isDeflectableByDandelionWinds.test(entity);
+  }
+
+  // TODO: This actually feels quite gross
+  private static DeflectState state = DeflectState.UNKNOWN;
+
+  private enum DeflectState {
+    UNKNOWN,
+    WHITELIST,
+    BLACKLIST;
+  }
+
+  public static void retestDeflectState(RegistryAccess server) {
+    server.registry(Registries.ENTITY_TYPE)
+        .ifPresentOrElse(registry -> {
+              var whitelist = registry.getTag(RootsTags.Entities.DANDELION_WINDS_DEFLECTABLES);
+              if (whitelist.isEmpty()) {
+                EntityUtils.state = DeflectState.BLACKLIST;
+              } else {
+                EntityUtils.state = DeflectState.WHITELIST;
+              }
+            }, () -> RootsAPI.LOG.error("Somehow, Palpatine has returned: Server has no entity type registry!")
+        );
   }
 }
