@@ -44,4 +44,3 @@ datapacks/*.zip
 review/*
 run/*
 unused/groves/*
-/src/generated/resources/.cache/*

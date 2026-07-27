@@ -1007,8 +1007,8 @@ public final class RootsLangProvider extends LanguageProvider {
       joiner.add(switch (seg) {
         case "ii" -> "II";
         case "iii" -> "III";
-        case "Iv" -> "IV";
-        case "Vi" -> "VI";
+        case "iv" -> "IV";
+        case "vi" -> "VI";
         default -> StringUtils.capitalize(seg);
       });
     }
