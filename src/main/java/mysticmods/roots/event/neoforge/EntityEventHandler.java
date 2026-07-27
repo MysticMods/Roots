@@ -46,6 +46,7 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
+import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -59,9 +60,7 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class EntityEventHandler {
-  // TODO: How do item pick-up mods handle this
-  // TODO: Is this high enough?
-  @SubscribeEvent(priority = EventPriority.HIGH)
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onItemEntityCollect(ItemEntityPickupEvent.Pre event) {
     if (!ConfigManager.POUCH_HERB_PICKUP.get()) {
       return;
@@ -69,9 +68,11 @@ public class EntityEventHandler {
 
     var entity = event.getItemEntity();
 
-    if (entity.hasPickUpDelay()) {
+    // If you just threw it then you don't get to pick it up again
+    if (entity.hasPickUpDelay() && entity.getOwner() != null && entity.getOwner().equals(event.getPlayer())) {
       return;
     }
+
 
     ItemStack stack = entity.getItem();
     if (!stack.is(RootsTags.Items.HERBS)) {
@@ -90,15 +91,13 @@ public class EntityEventHandler {
     }
 
     if (changed) {
-      if (stack.isEmpty()) {
-        entity.discard();
-      } else {
-        entity.setItem(stack);
-        copy.shrink(stack.getCount());
-      }
+      entity.setItem(stack);
+      copy.shrink(stack.getCount());
 
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new ClientboundPouchPickUpHerbPacket(player.getId(), copy));
 
+      // TODO: Hopefully this properly tells the thingy to do the stuff with the thingy
+      event.setCanPickup(TriState.TRUE);
       // TODO: Notify the player that something was picked up
       // See ClientPacketListener::handleTakeItemEntity
     }
