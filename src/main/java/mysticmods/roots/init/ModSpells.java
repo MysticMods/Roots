@@ -63,6 +63,10 @@ public class ModSpells {
   public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE = P.recordProperty("dandelion_winds/projectile_deflection_increase", Property.ofFloat(0.2f, "For each deflection modifier, increases the chance of deflection additively up to 100%."));
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_DURATION_INCREASE = P.recordProperty("dandelion_winds/duration_increase", Property.ofInt(30 * 20, "For each duration modifier, increases the effect duration by this value."));
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_COOLDOWN = P.recordProperty("dandelion_winds/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_VORTEX_COOLDOWN = P.recordProperty("dandelion_winds/vortex_cooldown", Property.ofInt(10 * 20, "How often entities can be effected by Dandelion Winds's vortex effect."));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE = P.recordProperty("dandelion_winds/vortex_cooldown_decrease", Property.ofInt(1 * 20, "How much the vortex cooldown is decreased by for each cooldown reduction modifier applied."));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_MAGNETIC_COOLDOWN = P.recordProperty("dandelion_winds/magnetic_cooldown", Property.ofInt(10 * 20, "How often entities can be effected by Dandelion Winds's magnetic effect."));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE = P.recordProperty("dandelion_winds/magnetic_cooldown_decrease", Property.ofInt(1 * 20, "How much the magnetic cooldown is decreased by for each cooldown reduction modifier applied."));
 
   // Decay
   public static final DeferredHolder<Spell, DecaySpell> DECAY = spell(Spells.DECAY, DecaySpell::new, ChatFormatting.DARK_GREEN, () -> CostInstance.of(Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250)));

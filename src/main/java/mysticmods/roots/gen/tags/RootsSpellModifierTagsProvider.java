@@ -9,7 +9,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 
-import javax.management.modelmbean.ModelMBeanOperationInfo;
 import java.util.concurrent.CompletableFuture;
 
 public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsProvider<SpellModifier> {
@@ -42,6 +41,8 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
     this.tag(RootsTags.SpellModifiers.MAGNETISM).add(ModModifiers.SHATTER_MAGNETISM.value());
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_DURATION).add(ModModifiers.DANDELION_WINDS_DURATION_1.value(), ModModifiers.DANDELION_WINDS_DURATION_2.value(), ModModifiers.DANDELION_WINDS_DURATION_3.value(), ModModifiers.DANDELION_WINDS_DURATION_4.value(), ModModifiers.DANDELION_WINDS_DURATION_5.value());
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_CHANCE).add(ModModifiers.DANDELION_WINDS_CHANCE_1.value(), ModModifiers.DANDELION_WINDS_CHANCE_2.value(), ModModifiers.DANDELION_WINDS_CHANCE_3.value(), ModModifiers.DANDELION_WINDS_CHANCE_4.value());
+    this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE).add(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5.value());
+    this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE).add(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5.value());
   }
 
   @Override

@@ -99,6 +99,114 @@
         }
       ]
     },
+    "roots:dandelion_winds/gusts": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/gusts_cooldown_i": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/gusts_cooldown_ii": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/gusts_cooldown_iii": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/gusts_cooldown_iv": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/gusts_cooldown_v": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/vortex": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/vortex_cooldown_i": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/vortex_cooldown_ii": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/vortex_cooldown_iii": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/vortex_cooldown_iv": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds/vortex_cooldown_v": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
     "roots:shatter/fortune_i": {
       "costs": [
         {

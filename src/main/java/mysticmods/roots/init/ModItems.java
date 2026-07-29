@@ -1,6 +1,5 @@
 package mysticmods.roots.init;
 
-import com.google.common.base.Suppliers;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -542,6 +541,18 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_5);
     modifier(ITEMS, ModModifiers.ACID_CLOUD_FIRE);
     modifier(ITEMS, ModModifiers.ACID_CLOUD_PEACEFUL);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5);
   }
 /*
 

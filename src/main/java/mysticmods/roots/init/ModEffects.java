@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.checkerframework.checker.units.qual.C;
 
 
 public class ModEffects {
@@ -27,6 +28,8 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SimpleEffect> LIGHT_DRIFTER = REGISTER.register("light_drifter", () -> new LightDrifterEffect(MobEffectCategory.BENEFICIAL, 0xded666, true));
   public static final DeferredHolder<MobEffect, SimpleEffect> HOMESICKNESS = REGISTER.register("homesickness", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x8b4513, false));
   public static final DeferredHolder<MobEffect, SimpleEffect> DANDELION_WINDS = REGISTER.register("dandelion_winds", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, ChatFormatting.YELLOW.getColor(), false));
+  public static final DeferredHolder<MobEffect, SimpleEffect> VORTEX_COOLDOWN = REGISTER.register("vortex_cooldown", () -> new SimpleEffect(MobEffectCategory.HARMFUL, ChatFormatting.YELLOW.getColor(), false));
+  public static final DeferredHolder<MobEffect, SimpleEffect> MAGNETIC_COOLDOWN = REGISTER.register("magnetic_cooldown", () -> new SimpleEffect(MobEffectCategory.HARMFUL, ChatFormatting.RED.getColor(), false));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));

@@ -1,9 +1,7 @@
 package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.event.setup.ClientSetup;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
@@ -412,6 +410,20 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.DANDELION_WINDS_CHANCE_2, Items.STONE);
     modifier(ModModifiers.DANDELION_WINDS_CHANCE_3, Items.IRON_BLOCK);
     modifier(ModModifiers.DANDELION_WINDS_CHANCE_4, Items.OBSIDIAN);
+
+    modifier(ModModifiers.DANDELION_WINDS_VORTEX, Items.COMPASS);
+    modifier(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1, Items.QUARTZ);
+    modifier(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2, Items.LAPIS_LAZULI);
+    modifier(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3, Items.AMETHYST_SHARD);
+    modifier(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4, Items.EMERALD);
+    modifier(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5, Items.DIAMOND);
+
+    modifier(ModModifiers.DANDELION_WINDS_GUSTS, Items.LIGHTNING_ROD);
+    modifier(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1, Items.QUARTZ);
+    modifier(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2, Items.LAPIS_LAZULI);
+    modifier(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3, Items.AMETHYST_SHARD);
+    modifier(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4, Items.EMERALD);
+    modifier(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5, Items.DIAMOND);
 
     modifier(ModModifiers.ACID_CLOUD_FIRE, Items.FIRE_CHARGE);
     modifier(ModModifiers.ACID_CLOUD_PEACEFUL, Items.BEACON);

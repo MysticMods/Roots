@@ -17,8 +17,6 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.network.client.fx.CastAquaBubbleFXPacket;
-import mysticmods.roots.snapshot.AquaBubbleSnapshot;
 import mysticmods.roots.snapshot.DandelionWindsSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
@@ -26,18 +24,14 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
 public class DandelionWindsSpell extends Spell {
-  private int duration, durationIncrease;
+  private int duration, durationIncrease, vortexCooldown, vortexCooldownDecrease, gustsCooldown, gustsCooldownDecrease;
   private float deflectionChance, deflectionChanceIncrease;
 
   public DandelionWindsSpell(ChatFormatting color, CostInstance costs) {
@@ -56,6 +50,10 @@ public class DandelionWindsSpell extends Spell {
     result.add(ModSpells.DANDELION_WINDS_DURATION);
     result.add(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE);
     result.add(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE);
+    result.add(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE);
+    result.add(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN);
+    result.add(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE);
+    result.add(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN);
   }
 
   @Override
@@ -65,6 +63,10 @@ public class DandelionWindsSpell extends Spell {
     this.deflectionChanceIncrease = data.get(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE);
     this.duration = data.get(ModSpells.DANDELION_WINDS_DURATION);
     this.durationIncrease = data.get(ModSpells.DANDELION_WINDS_DURATION_INCREASE);
+    this.vortexCooldown = data.get(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN);
+    this.vortexCooldownDecrease = data.get(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE);
+    this.gustsCooldown = data.get(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN);
+    this.gustsCooldownDecrease = data.get(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE);
   }
 
   @Override
@@ -76,8 +78,10 @@ public class DandelionWindsSpell extends Spell {
 
     int curDuration = duration + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_DURATION) * durationIncrease);
     float curChance = deflectionChance + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_CHANCE) * deflectionChanceIncrease);
+    int curGusts = gustsCooldown + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE) * gustsCooldownDecrease);
+    int curVortex = vortexCooldown + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE) * vortexCooldownDecrease);
 
-    SnapshotHelper.addLiving(pPlayer, ModSerializers.DANDELION_WINDS.get(), new DandelionWindsSnapshot(pPlayer, curDuration, curChance));
+    SnapshotHelper.addLiving(pPlayer, ModSerializers.DANDELION_WINDS.get(), new DandelionWindsSnapshot(pPlayer, curDuration, curChance, instance.hasModifier(ModModifiers.DANDELION_WINDS_VORTEX), curVortex, instance.hasModifier(ModModifiers.DANDELION_WINDS_GUSTS), curGusts));
     pPlayer.addEffect(new MobEffectInstance(ModEffects.DANDELION_WINDS, curDuration, 0, false, false));
     return cooldown;
   }

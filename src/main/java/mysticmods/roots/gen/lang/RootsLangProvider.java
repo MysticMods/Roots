@@ -642,6 +642,8 @@ public final class RootsLangProvider extends LanguageProvider {
     addEffect(ModEffects.HOMESICKNESS);
     addEffect(ModEffects.LIGHT_DRIFTER);
     addEffect(ModEffects.DANDELION_WINDS);
+    addEffect(ModEffects.VORTEX_COOLDOWN);
+    addEffect(ModEffects.MAGNETIC_COOLDOWN);
 
     add(RootsTags.Items.SEEDS, "Seeds");
     add(RootsTags.Items.CLOUD_BERRY_SEEDS, "Cloud Berry Seeds");
