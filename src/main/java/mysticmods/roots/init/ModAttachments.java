@@ -72,6 +72,7 @@ public class ModAttachments {
       .serialize(PyrePedestalRecipe.CODEC).sync(PyrePedestalRecipe.STREAM_CODEC).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<ComplexEntityType>> CACHED_PYRE_ENTITY = ATTACHMENTS.register("cached_pyre_entity", () -> AttachmentType.builder(() -> ComplexEntityType.EMPTY)
       .serialize(ComplexEntityType.CODEC).sync(ComplexEntityType.STREAM_CODEC).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> TARGETED_ENTITY = ATTACHMENTS.register("targeted_entity", () -> AttachmentType.builder(() -> false)/*.serialize(Codec.BOOL).sync(ByteBufCodecs.BOOL)*/.build());
 
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();

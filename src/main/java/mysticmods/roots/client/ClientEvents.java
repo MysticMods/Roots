@@ -80,7 +80,6 @@ public class ClientEvents {
   public static void onEntityRender(RenderLivingEvent.Post<?, ?> event) {
     if (RootsClientAPI.isGramaryMode(GramaryItem.GramaryMode.ENTITY_INFORMATION) && event.getEntity().getType()
         .is(RootsTags.Entities.SHOULD_RENDER_HUD)) {
-
     }
 
     if (event.getEntity().getData(ModAttachments.HAS_GEAS)) {

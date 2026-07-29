@@ -180,6 +180,7 @@ public class RenderTickHandler {
     HerbOverlay.tick();
     BeamManager.tick();
     ScreenParticleEngine.tick();
+    TargetingSystem.tick();
   }
 
   // This is stolen from Mekanism

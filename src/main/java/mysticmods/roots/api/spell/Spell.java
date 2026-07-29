@@ -33,6 +33,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -279,8 +280,12 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return Collections.emptyMap();
   }
 
-  protected double getRange(Player pPlayer) {
+  public double getBlockRange(Player pPlayer) {
     return pPlayer.blockInteractionRange() + reach;
+  }
+
+  public double getEntityRange (Player pPlayer) {
+    return pPlayer.entityInteractionRange() + reach;
   }
 
   // TODO: Entity targets
@@ -297,7 +302,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   }
 
   protected BlockHitResult pickBlock(Player pPlayer, boolean fluids) {
-    return (BlockHitResult) pPlayer.pick(getRange(pPlayer), 1f, fluids);
+    return (BlockHitResult) pPlayer.pick(getBlockRange(pPlayer), 1f, fluids);
   }
 
   public boolean is(ResourceLocation key) {
@@ -359,6 +364,18 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public DataComponentType<? extends Cycling<?>> getCycleComponent () {
     return null;
+  }
+
+  public boolean canTargetThroughFluids() {
+    return true;
+  }
+
+  public boolean canMarkEntityTargets() {
+    return true;
+  }
+
+  public boolean canTargetEntity (Entity entity) {
+    return false; // TODO: This function should handle tag-checking
   }
 
   public static class Properties {

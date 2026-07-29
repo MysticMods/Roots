@@ -55,6 +55,7 @@
     "client.MixinMinecraft$LightDrifter",
     "client.MixinMouseHandler$LightDrifter",
     "client.MixinPlayerRenderer$LightDrifter",
+    "client.MixinEntity$Targeting",
     "client.accessor.AccessorMixinCompositeRenderType",
     "client.accessor.AccessorMixinCompositeState",
     "client.accessor.AccessorMixinEntityRenderer",

@@ -164,8 +164,29 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return false;
   }
 
+  default double getEntityRange (Player pPlayer) {
+    return asSpell().getEntityRange(pPlayer);
+  }
+
+  default double getBlockRange (Player pPlayer) {
+    return asSpell().getBlockRange(pPlayer);
+  }
+
+  default boolean canTargetThroughFluids() {
+    return asSpell().canTargetThroughFluids();
+  }
+
   static SimpleSpell of(Spell spell) {
     return new SimpleSpell(spell);
+  }
+
+  default boolean canMarkEntityTargets() {
+    return asSpell().canMarkEntityTargets();
+
+  }
+
+  default boolean canTargetEntity(Entity entity) {
+    return asSpell().canTargetEntity(entity);
   }
 
   record SimpleSpell(Spell spell) implements ISpellInstance {

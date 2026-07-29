@@ -42,7 +42,7 @@ public class BlockEventHandler {
     InteractionHand hand = event.getHand();
     ItemStack heldItem = player.getItemInHand(hand);
     if (heldItem.is(RootsTags.Items.CASTING_TOOLS)) {
-      // Check #1351
+      // TODO Check #1351
       BlockState block = player.level().getBlockState(event.getPos());
       if (!block.is(RootsTags.Blocks.ALLOW_CASTING_TOOL_RIGHT_CLICK)) {
         event.setUseItem(TriState.TRUE);
