@@ -123,8 +123,8 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
-  public @Nullable Vec3 getBlockTarget(Player pPlayer) {
-    return pickBlock(pPlayer).getLocation();
+  public @Nullable Vec3 getBlockTarget(Player pPlayer, ISpellInstance spell) {
+    return pickBlock(pPlayer, spell).getLocation();
   }
 
 
@@ -138,7 +138,7 @@ public class ShatterSpell extends Spell {
 
     List<BlockPos> broken = new ArrayList<>();
 
-    BlockHitResult rayTraceResult = pickBlock(pPlayer);
+    BlockHitResult rayTraceResult = pickBlock(pPlayer, instance);
     Map<BlockPos, BlockState> toBreak = getAffectedBlocks(pLevel, pPlayer, instance, pStack, rayTraceResult.getBlockPos(), pLevel.getBlockState(rayTraceResult.getBlockPos()), rayTraceResult);
     double count = 0;
     capturingDrops = instance.hasModifier(RootsTags.SpellModifiers.MAGNETISM);

@@ -23,9 +23,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -34,7 +36,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   Spell getSpell();
 
   default MutableComponent getStyledName() {
-    return getSpell().getStyledName(this);
+    return asSpell().getStyledName(this);
   }
 
   SpellModifierSet getEnabledModifiers();
@@ -44,31 +46,35 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default int getMaxUse() {
-    return getSpell().getMaxUse();
+    return asSpell().getMaxUse();
   }
 
   @Override
   default CostInstance getDefaultCosts() {
-    return getSpell().getDefaultCosts();
+    return asSpell().getDefaultCosts();
   }
 
   @Override
   default CostInstance getCosts() {
-    return getSpell().getCosts();
+    return asSpell().getCosts();
   }
 
   default ParentChargeType getChargeType() {
-    return getSpell().getChargeType();
+    return asSpell().getChargeType();
   }
 
   @Override
   default int getMaximumOperations() {
-    return getSpell().getMaximumOperations();
+    return asSpell().getMaximumOperations();
   }
 
   @Override
   default Set<? extends ICostedChild> getChildren() {
     return getEnabledModifiers();
+  }
+
+  default boolean has (TagKey<SpellModifier> modifier) {
+    return hasModifier(modifier);
   }
 
   default boolean hasModifier (TagKey<SpellModifier> modifier) {
@@ -100,11 +106,11 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default SpellCastType getType() {
-    return getSpell().getType();
+    return asSpell().getType();
   }
 
   default int getDefaultCooldown() {
-    return getSpell().getCooldown();
+    return asSpell().getCooldown();
   }
 
   default boolean offCooldown(ItemStack castingItem, Entity pCaster) {
@@ -122,7 +128,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   // Returns length of cooldown
   default int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
-    int cooldown = getSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
+    int cooldown = asSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
     double costReduction = RootsAPI.getInstance().getCostReduction(pPlayer);
     double cooldownReduction = RootsAPI.getInstance().getCooldownReduction(pPlayer);
     costs.discount(costReduction);
@@ -130,17 +136,22 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default boolean hasBlockTarget(Player pPlayer) {
-    return getSpell().hasBlockTarget(pPlayer);
+    return asSpell().hasBlockTarget(pPlayer);
+  }
+
+  default List<Entity> selectTargets (HitResult hit, Player pPlayer) {
+    return asSpell().selectTargets(this, hit, pPlayer);
+
   }
 
   @Nullable
   default Vec3 getBlockTarget(Player pPlayer) {
-    return getSpell().getBlockTarget(pPlayer);
+    return asSpell().getBlockTarget(pPlayer, this);
   }
 
   @Nullable
   default AABB getAABB() {
-    return getSpell().getAABB();
+    return asSpell().getAABB();
   }
 
   default DataComponentMap getSpellData() {
@@ -165,15 +176,15 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default double getEntityRange (Player pPlayer) {
-    return asSpell().getEntityRange(pPlayer);
+    return asSpell().getEntityRange(pPlayer, this);
   }
 
   default double getBlockRange (Player pPlayer) {
-    return asSpell().getBlockRange(pPlayer);
+    return asSpell().getBlockRange(pPlayer, this);
   }
 
   default boolean canTargetThroughFluids() {
-    return asSpell().canTargetThroughFluids();
+    return asSpell().canTargetThroughFluids(this);
   }
 
   static SimpleSpell of(Spell spell) {
@@ -181,7 +192,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default boolean canMarkEntityTargets() {
-    return asSpell().canMarkEntityTargets();
+    return asSpell().canMarkEntityTargets(this);
 
   }
 

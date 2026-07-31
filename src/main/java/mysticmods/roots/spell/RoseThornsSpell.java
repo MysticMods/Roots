@@ -65,7 +65,7 @@ public class RoseThornsSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    BlockHitResult result = pickBlock(pPlayer);
+    BlockHitResult result = pickBlock(pPlayer, instance);
 
     BlockPos starting = result.getBlockPos();
     BlockPos supporting = starting;

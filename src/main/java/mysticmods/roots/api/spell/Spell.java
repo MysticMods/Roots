@@ -42,6 +42,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.Nullable;
@@ -280,29 +281,20 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return Collections.emptyMap();
   }
 
-  public double getBlockRange(Player pPlayer) {
+  public double getBlockRange(Player pPlayer, ISpellInstance spell) {
     return pPlayer.blockInteractionRange() + reach;
   }
 
-  public double getEntityRange (Player pPlayer) {
+  public double getEntityRange (Player pPlayer, ISpellInstance spell) {
     return pPlayer.entityInteractionRange() + reach;
   }
 
-  // TODO: Entity targets
-  protected BlockHitResult pickBlock(Player pPlayer, double range) {
-    return pickBlock(pPlayer, range, false);
+  protected BlockHitResult pickBlock(Player pPlayer, ISpellInstance spell) {
+    return pickBlock(pPlayer, spell, false);
   }
 
-  protected BlockHitResult pickBlock(Player pPlayer, double range, boolean fluids) {
-    return (BlockHitResult) pPlayer.pick(range, 1f, fluids);
-  }
-
-  protected BlockHitResult pickBlock(Player pPlayer) {
-    return pickBlock(pPlayer, false);
-  }
-
-  protected BlockHitResult pickBlock(Player pPlayer, boolean fluids) {
-    return (BlockHitResult) pPlayer.pick(getBlockRange(pPlayer), 1f, fluids);
+  protected BlockHitResult pickBlock(Player pPlayer, ISpellInstance spell, boolean fluids) {
+    return (BlockHitResult) pPlayer.pick(getBlockRange(pPlayer, spell), 1f, fluids);
   }
 
   public boolean is(ResourceLocation key) {
@@ -336,7 +328,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   }
 
   @Nullable
-  public Vec3 getBlockTarget(Player pPlayer) {
+  public Vec3 getBlockTarget(Player pPlayer, @Nullable ISpellInstance spell) {
     return null;
   }
 
@@ -366,16 +358,20 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return null;
   }
 
-  public boolean canTargetThroughFluids() {
+  public boolean canTargetThroughFluids(ISpellInstance iSpellInstance) {
     return true;
   }
 
-  public boolean canMarkEntityTargets() {
+  public boolean canMarkEntityTargets(ISpellInstance iSpellInstance) {
     return true;
   }
 
   public boolean canTargetEntity (Entity entity) {
     return false; // TODO: This function should handle tag-checking
+  }
+
+  public List<Entity> selectTargets(ISpellInstance iSpellInstance, HitResult hit, Player pPlayer) {
+    return Collections.emptyList();
   }
 
   public static class Properties {

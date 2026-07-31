@@ -65,13 +65,13 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public @Nullable Vec3 getBlockTarget(Player pPlayer) {
-    return pickBlock(pPlayer).getLocation();
+  public @Nullable Vec3 getBlockTarget(Player pPlayer, @Nullable ISpellInstance spell) {
+    return pickBlock(pPlayer, spell).getLocation();
   }
 
   @Override
   public int cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    BlockHitResult result = pickBlock(pPlayer);
+    BlockHitResult result = pickBlock(pPlayer, instance);
     BlockPos pos = result.getBlockPos();
     BlockState at = level.getBlockState(pos);
 

@@ -16,15 +16,16 @@ import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TargetingSystem {
   private static final int hitDecay = 2 * 20;
   // TODO: Consider movement
 
-  private static int decayTimer = -1;
+  private static List<Entity> targetedEntities = new ArrayList<>();
 
-  private static EntityHitResult entityHit = null;
-/*  private static BlockHitResult blockHit = null;
-  private static BlockHitResult fluidHit = null;*/
+  private static int decayTimer = -1;
 
   public static ItemStack getStaff (Player player) {
     if (player.getMainHandItem().is(RootsTags.Items.CASTING_TOOLS)) {
@@ -36,6 +37,17 @@ public class TargetingSystem {
     }
   }
 
+  public static ISpellInstance getCurrentSpell (Player player) {
+    return CastingItem.getCurrentSpell(player.level(), player, getStaff(player));
+  }
+
+  private static void clearTargeted () {
+    for (Entity entity : targetedEntities) {
+      entity.removeData(ModAttachments.TARGETED_ENTITY);
+    }
+    targetedEntities.clear();
+  }
+
   public static void tick () {
     var mc = Minecraft.getInstance();
     if (mc == null || mc.player == null || mc.level == null) {
@@ -43,46 +55,31 @@ public class TargetingSystem {
     }
 
     Player player = mc.player;
-    var previousEntity = getEntityHit();
     decayTimer--;
-    var staff = getStaff(player);
-    ISpellInstance spell = CastingItem.getCurrentSpell(mc.level, player, staff);
-    if (spell == null) {
-      if (previousEntity != null) {
-        previousEntity.removeData(ModAttachments.TARGETED_ENTITY);
-      }
-
-      entityHit = null;
-/*      blockHit = null;
-      fluidHit = null;*/
-    } else {
-      if (spell.canMarkEntityTargets()) {
-        entityHit = pickEntity(player, spell, 0.0f); //spell.getBlockRange(player), spell.getEntityRange(player), spell.canTargetThroughFluids(), 0.0f); // TODO: Check partial tick
-
-        var entity = getEntityHit();
-        if (previousEntity != entity && previousEntity != null) {
-          previousEntity.removeData(ModAttachments.TARGETED_ENTITY);
-        }
-
-        if (entity != null) {
+    ISpellInstance spell = getCurrentSpell(player);
+    if (spell == null || !spell.canMarkEntityTargets() || decayTimer == 0) {
+      // If we've switched spells or its decayed
+      clearTargeted();
+    } else if (spell.canMarkEntityTargets()) {
+      var newTargets = pickEntities(player, spell, 0.0f);
+      if (!newTargets.isEmpty()) {
+        clearTargeted();
+        targetedEntities.addAll(newTargets);
+        for (Entity entity : targetedEntities) {
           entity.setData(ModAttachments.TARGETED_ENTITY, true);
         }
-      } else {
-        if (previousEntity != null) {
-          previousEntity.removeData(ModAttachments.TARGETED_ENTITY);
-        }
-        entityHit = null;
       }
     }
   }
 
   public static boolean isTargetedEntity (@NotNull Entity entity) {
-    return entity.equals(getEntityHit());
+    return targetedEntities.contains(entity);
   }
 
   @Nullable
   public static Entity getEntityHit () {
-    return entityHit != null ? entityHit.getEntity() : null;
+    return null;
+/*    return entityHit != null ? entityHit.getEntity() : null;*/
   }
 
 /*  @Nullable
@@ -95,7 +92,13 @@ public class TargetingSystem {
     return fluidHit != null ? fluidHit.getBlockPos() : null;
   }*/
 
-  private static EntityHitResult pickEntity(Player entity, ISpellInstance spell, float partialTick) {
+  enum TargetType {
+    BLOCK,
+    ENTITY,
+    SPLASH;
+  }
+
+  private static List<Entity> pickEntities(Player entity, ISpellInstance spell, float partialTick) {
     double blockInteractionRange = spell.getBlockRange(entity);
     double entityInteractionRange = spell.getEntityRange(entity);
     boolean hitFluids = spell.canTargetThroughFluids();
@@ -124,7 +127,7 @@ public class TargetingSystem {
         if (entityhitresult2.getType() == HitResult.Type.ENTITY && spell.canTargetEntity(((EntityHitResult) entityhitresult2).getEntity())) {
 /*          entityHit = (EntityHitResult) entityhitresult2;*/
           decayTimer = hitDecay;
-          return (EntityHitResult) entityhitresult2;
+          return null; //(EntityHitResult) entityhitresult2;
         } else {
           if (decayTimer == 0) {
             return null;
@@ -137,21 +140,7 @@ public class TargetingSystem {
       }
     }
 
-    return entityHit;
-
-/*    BlockHitResult blockhit = (BlockHitResult) filterHitResult(hitresult, vec3, blockInteractionRange);
-    if (blockhit.getType() == HitResult.Type.BLOCK) {
-      blockHit = blockhit;
-    } else {
-      blockHit = null;
-    }
-
-    blockhit = (BlockHitResult) filterHitResult(hitresult2, vec3, blockInteractionRange);
-    if (blockhit.getType() == HitResult.Type.BLOCK) {
-      fluidHit = blockhit;
-    } else {
-      fluidHit = null;
-    }*/
+    return null; //entityHit;
   }
 
   private static HitResult filterHitResult(HitResult hitResult, Vec3 pos, double blockInteractionRange) {
