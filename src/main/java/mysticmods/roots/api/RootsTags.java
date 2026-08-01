@@ -646,6 +646,10 @@ public class RootsTags {
     public static final TagKey<SpellModifier> DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE = modTag("dandelion_winds/gusts_cooldown_decrease");
     public static final TagKey<SpellModifier> DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE = modTag("dandelion_winds/vortex_cooldown_decrease");
 
+    public static final TagKey<SpellModifier> SHATTER_INCREASES_DEPTH = modTag("shatter/increases_depth");
+    public static final TagKey<SpellModifier> SHATTER_INCREASES_WIDTH = modTag("shatter/increases_width");
+    public static final TagKey<SpellModifier> SHATTER_INCREASES_HEIGHT = modTag("shatter/increases_height");
+
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
     static TagKey<SpellModifier> modTag(String name) {

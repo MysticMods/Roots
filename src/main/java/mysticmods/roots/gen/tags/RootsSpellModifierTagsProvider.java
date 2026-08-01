@@ -39,6 +39,9 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
     this.tag(RootsTags.SpellModifiers.SILK_TOUCH).add(ModModifiers.SHATTER_SILK_TOUCH.value());
     this.tag(RootsTags.SpellModifiers.SHEARING).add(ModModifiers.SHATTER_SILK_TOUCH.value());
     this.tag(RootsTags.SpellModifiers.MAGNETISM).add(ModModifiers.SHATTER_MAGNETISM.value());
+    this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_DEPTH);
+    this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_WIDTH);
+    this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_HEIGHT);
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_DURATION).add(ModModifiers.DANDELION_WINDS_DURATION_1.value(), ModModifiers.DANDELION_WINDS_DURATION_2.value(), ModModifiers.DANDELION_WINDS_DURATION_3.value(), ModModifiers.DANDELION_WINDS_DURATION_4.value(), ModModifiers.DANDELION_WINDS_DURATION_5.value());
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_CHANCE).add(ModModifiers.DANDELION_WINDS_CHANCE_1.value(), ModModifiers.DANDELION_WINDS_CHANCE_2.value(), ModModifiers.DANDELION_WINDS_CHANCE_3.value(), ModModifiers.DANDELION_WINDS_CHANCE_4.value());
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE).add(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5.value());
