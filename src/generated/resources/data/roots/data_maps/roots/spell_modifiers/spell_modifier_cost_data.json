@@ -153,6 +153,24 @@
         }
       ]
     },
+    "roots:dandelion_winds/inferno": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:inferno_bulb"
+        }
+      ]
+    },
+    "roots:dandelion_winds/statue": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
     "roots:dandelion_winds/vortex": {
       "costs": [
         {

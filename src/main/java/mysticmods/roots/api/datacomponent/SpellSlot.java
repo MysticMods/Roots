@@ -18,7 +18,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,7 +28,8 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
       Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
       RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
       SpellModifierSet.CODEC.fieldOf("enabledModifiers").forGetter(SpellSlot::enabledModifiers),
-      DataComponentPatch.CODEC.optionalFieldOf("data").forGetter(o -> o.data == null ? Optional.empty() : Optional.of(o.data.asPatch()))
+      DataComponentPatch.CODEC.fieldOf("data")
+          .forGetter(o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch())
   ).apply(instance, SpellSlot::new)).validate(result -> {
     // TODO: Validation: remove restricted modifiers
     return DataResult.success(result);
@@ -39,7 +39,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
       ByteBufCodecs.VAR_INT, SpellSlot::slot,
       ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), SpellSlot::spell,
       SpellModifierSet.STREAM_CODEC, SpellSlot::enabledModifiers,
-      ByteBufCodecs.optional(DataComponentPatch.STREAM_CODEC), o -> o.data == null ? Optional.empty() : Optional.of(o.data.asPatch()),
+      DataComponentPatch.STREAM_CODEC, o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch(),
       SpellSlot::new
   );
   public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
@@ -48,14 +48,28 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
     this(spellId, slot, spell, enabledModifiers, PatchedDataComponentMap.fromPatch(spell.getComponents(), DataComponentPatch.EMPTY));
   }
 
-  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public SpellSlot(UUID uuid, int integer, Spell spell, SpellModifierSet spellModifiers, Optional<DataComponentPatch> dataComponentPatch) {
-    this(uuid, integer, spell, spellModifiers, PatchedDataComponentMap.fromPatch(spell.getComponents(), dataComponentPatch.orElse(DataComponentPatch.EMPTY)));
+  public SpellSlot(UUID uuid, int integer, Spell spell, SpellModifierSet spellModifiers, DataComponentPatch dataComponentPatch) {
+    this(uuid, integer, spell, spellModifiers, PatchedDataComponentMap.fromPatch(spell.getComponents(), dataComponentPatch));
+  }
+
+  @Override
+  public PatchedDataComponentMap getSpellDataPatch() {
+    return data();
+  }
+
+  @Override
+  public int getSlot () {
+    return slot();
   }
 
   @Override
   public DataComponentMap getSpellData() {
     return data();
+  }
+
+  @Override
+  public UUID getId() {
+    return spellId();
   }
 
   @Override

@@ -84,7 +84,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
     }
 
     if (ticks % 3 == 0) {
-      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new AcidCloudFXPacket(pPlayer.getId()));
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new AcidCloudFXPacket(ISpellInstance.snapshot(instance), pPlayer.getId()));
     }
 
     if (totalDamaged == 0) {

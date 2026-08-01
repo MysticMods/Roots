@@ -1,6 +1,7 @@
 package mysticmods.roots.client.network;
 
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellInstanceSnapshot;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningOverlay;
 import mysticmods.roots.client.gui.screen.fake.SpellModifierScreen;
@@ -10,6 +11,7 @@ import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.client.particle.bolt.PositionProvider;
 import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
 import mysticmods.roots.config.ConfigManager;
+import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ModSpells;
@@ -18,7 +20,6 @@ import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ItemPickupParticle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -316,10 +317,11 @@ public class ClientFXHandlers {
     }
   }
 
-  public static void acidCloud(int entityId) {
+  public static void acidCloud(SpellInstanceSnapshot snapshot, int entityId) {
     if (ConfigManager.DISABLE_PATICLES.get()) {
       return;
     }
+    boolean fire = snapshot.has(ModModifiers.ACID_CLOUD_FIRE);
     Minecraft minecraft = Minecraft.getInstance();
     int color1 = ModSpells.ACID_CLOUD.get().getColor1();
     int color2 = ModSpells.ACID_CLOUD.get().getColor2();
@@ -327,9 +329,14 @@ public class ClientFXHandlers {
     RandomSource random = RootsParticleOptions.RANDOM;
     if (entity != null) {
       for (float i = 0; i < 360; i += (random.nextFloat() * 5)) {
-        RootsParticleOptions opts = random.nextBoolean() ? RootsParticleOptions.builder(ModParticles.SMOKE)
-            .color(color1, color2).build() : RootsParticleOptions.builder(ModParticles.SMOKE).color(color2, color1)
-            .build();
+        RootsParticleOptions.Builder builder = RootsParticleOptions.builder(ModParticles.SMOKE);
+        if (fire && random.nextInt(4) == 0) {
+          builder.color(0xdb3f0f, 0xdb270f);
+        } else {
+          builder.color(color1, color2);
+          builder.swapColors(random);
+        }
+        RootsParticleOptions opts = builder.build();
         double rad = Math.toRadians(i);
         double x = entity.getX() + (1.5 * random.nextDouble()) * Math.sin(rad);
         double y = entity.getY() + 0.5;

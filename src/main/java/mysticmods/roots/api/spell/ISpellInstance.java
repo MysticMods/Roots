@@ -12,7 +12,9 @@ import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.PatchedDataComponentMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
@@ -39,6 +41,10 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   UUID getId();
 
   Spell asSpell();
+
+  default int getSlot () {
+    return -1;
+  }
 
   SpellModifierSet getEnabledModifiers();
 
@@ -104,6 +110,10 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default DataComponentMap getSpellData() {
     return DataComponentMap.EMPTY;
+  }
+
+  default PatchedDataComponentMap getSpellDataPatch () {
+    return PatchedDataComponentMap.fromPatch(getSpellData(), DataComponentPatch.EMPTY);
   }
 
   default <T> T getSpellData(DataComponentType<? extends T> component) {
@@ -218,6 +228,13 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default Component getChargeText(int ticks) {
     return asSpell().getChargeText(ticks);
+  }
+
+  static SpellInstanceSnapshot snapshot (ISpellInstance spell) {
+    if (spell instanceof SpellInstanceSnapshot snapshot) {
+      return snapshot;
+    }
+    return new SpellInstanceSnapshot(spell.getId(), spell.getSlot(), spell.asSpell(), spell.getEnabledModifiers(), spell.getSpellDataPatch());
   }
 
   static SimpleSpell of(Spell spell) {
