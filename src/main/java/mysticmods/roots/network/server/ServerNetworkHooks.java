@@ -17,7 +17,6 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
-import mysticmods.roots.network.client.ClientboundRefreshModifierScreenPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;

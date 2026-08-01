@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client;
+package mysticmods.roots.network.client.attachment;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.CooldownStorage;

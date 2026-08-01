@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public class ClientboundClearHighlightPacket implements IRootsPacket {
+public record ClientboundClearHighlightPacket () implements IRootsPacket {
   public static final CustomPacketPayload.Type<ClientboundClearHighlightPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("clear_highlight"));
   public static final ClientboundClearHighlightPacket INSTANCE = new ClientboundClearHighlightPacket();
   public static final StreamCodec<ByteBuf, ClientboundClearHighlightPacket> CODEC = StreamCodec.unit(INSTANCE);

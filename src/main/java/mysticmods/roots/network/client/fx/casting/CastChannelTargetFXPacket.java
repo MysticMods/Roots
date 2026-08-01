@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client.fx;
+package mysticmods.roots.network.client.fx.casting;
 
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;

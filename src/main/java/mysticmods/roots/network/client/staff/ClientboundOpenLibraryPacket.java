@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client;
+package mysticmods.roots.network.client.staff;
 
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;

@@ -162,6 +162,7 @@ public class RootsClientHooks {
     }
   }
 
+  // TODO: Make this a syncing attachment
   public static void syncGeas(int entityId, boolean value) {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft == null || minecraft.level == null) {

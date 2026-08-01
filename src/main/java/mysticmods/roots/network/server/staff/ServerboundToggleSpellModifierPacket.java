@@ -1,11 +1,12 @@
-package mysticmods.roots.network.server;
+package mysticmods.roots.network.server.staff;
 
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.network.client.ClientboundRefreshModifierScreenPacket;
+import mysticmods.roots.network.client.staff.ClientboundRefreshModifierScreenPacket;
+import mysticmods.roots.network.server.ServerNetworkHooks;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

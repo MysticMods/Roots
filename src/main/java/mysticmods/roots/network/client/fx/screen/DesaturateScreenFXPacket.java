@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client.fx;
+package mysticmods.roots.network.client.fx.screen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;

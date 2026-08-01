@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client.fx;
+package mysticmods.roots.network.client.fx.casting;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
@@ -11,18 +11,18 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record CastChannelFailFXPacket(Spell spell, int casterId, int ticks) implements IRootsPacket {
-  public static final Type<CastChannelFailFXPacket> TYPE = new Type<>(RootsAPI.rl("client_fx/channel_fail"));
-  public static final StreamCodec<RegistryFriendlyByteBuf, CastChannelFailFXPacket> CODEC = StreamCodec.composite(
-      ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), CastChannelFailFXPacket::spell,
-      ByteBufCodecs.VAR_INT, CastChannelFailFXPacket::casterId,
-      ByteBufCodecs.VAR_INT, CastChannelFailFXPacket::ticks,
-      CastChannelFailFXPacket::new
+public record CastChannelFXPacket(Spell spell, int casterId, int ticks) implements IRootsPacket {
+  public static final Type<CastChannelFXPacket> TYPE = new Type<>(RootsAPI.rl("client_fx/channel"));
+  public static final StreamCodec<RegistryFriendlyByteBuf, CastChannelFXPacket> CODEC = StreamCodec.composite(
+      ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), CastChannelFXPacket::spell,
+      ByteBufCodecs.VAR_INT, CastChannelFXPacket::casterId,
+      ByteBufCodecs.VAR_INT, CastChannelFXPacket::ticks,
+      CastChannelFXPacket::new
   );
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientFXHandlers.castChannelFail(spell, casterId, ticks);
+    ClientFXHandlers.castChannel(spell, casterId, ticks);
   }
 
   @Override

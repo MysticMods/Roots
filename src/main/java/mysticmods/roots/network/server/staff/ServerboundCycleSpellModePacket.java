@@ -1,10 +1,10 @@
-package mysticmods.roots.network.server;
+package mysticmods.roots.network.server.staff;
 
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
-import mysticmods.roots.api.spell.Cycling;
-import mysticmods.roots.network.client.ClientboundRefreshStaffScreenPacket;
+import mysticmods.roots.network.client.staff.ClientboundRefreshStaffScreenPacket;
+import mysticmods.roots.network.server.ServerNetworkHooks;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;

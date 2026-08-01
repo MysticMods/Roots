@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client;
+package mysticmods.roots.network.client.attachment;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;

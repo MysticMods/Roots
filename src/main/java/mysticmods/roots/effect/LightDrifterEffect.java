@@ -1,7 +1,7 @@
 package mysticmods.roots.effect;
 
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
+import mysticmods.roots.network.client.light_drifter.ClientboundLightDrifterSyncPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;

@@ -25,7 +25,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
-import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
+import mysticmods.roots.network.client.attachment.ClientboundReputationSyncPacket;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

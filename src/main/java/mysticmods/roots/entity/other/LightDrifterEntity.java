@@ -4,7 +4,7 @@ import com.google.common.primitives.Floats;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.network.client.ClientboundLightDrifterSyncPacket;
+import mysticmods.roots.network.client.light_drifter.ClientboundLightDrifterSyncPacket;
 import mysticmods.roots.network.server.ServerboundMoveLightDrifterPacket;
 import mysticmods.roots.snapshot.LightDrifterSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;

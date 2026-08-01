@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client;
+package mysticmods.roots.network.client.light_drifter;
 
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.RootsAPI;

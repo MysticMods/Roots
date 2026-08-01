@@ -17,10 +17,10 @@ import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.util.CastingSuccessCache;
 import mysticmods.roots.network.client.ClientboundClearHighlightPacket;
-import mysticmods.roots.network.client.fx.CastChannelFXPacket;
-import mysticmods.roots.network.client.fx.CastChannelFailFXPacket;
-import mysticmods.roots.network.client.fx.CastChannelJauntFXPacket;
-import mysticmods.roots.network.client.fx.CastChannelTargetFXPacket;
+import mysticmods.roots.network.client.fx.casting.CastChannelFXPacket;
+import mysticmods.roots.network.client.fx.casting.CastChannelFailFXPacket;
+import mysticmods.roots.network.client.fx.casting.CastChannelChargingFXPacket;
+import mysticmods.roots.network.client.fx.casting.CastChannelTargetFXPacket;
 import mysticmods.roots.util.PlayerGetter;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.core.Holder;
@@ -239,7 +239,7 @@ public class CastingItem extends Item {
 
       if (ticks % 2 == 0) {
         // TODO: Jaunt effect should be triggered from something else?
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelJauntFXPacket(spell.getSpell(), pPlayer.getId(), ticks));
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelChargingFXPacket(spell.getSpell(), pPlayer.getId(), ticks));
       }
     }
   }

@@ -14,7 +14,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.network.client.fx.SaturateScreenFXPacket;
+import mysticmods.roots.network.client.fx.screen.SaturateScreenFXPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;

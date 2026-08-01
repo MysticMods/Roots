@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client;
+package mysticmods.roots.network.client.snapshot;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.SnapshotStorage;

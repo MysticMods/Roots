@@ -17,6 +17,7 @@ import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.integration.curios.CuriosIntegration;
 import mysticmods.roots.mixin.accessor.AccessorMixinEntity;
 import mysticmods.roots.network.client.*;
+import mysticmods.roots.network.client.attachment.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
