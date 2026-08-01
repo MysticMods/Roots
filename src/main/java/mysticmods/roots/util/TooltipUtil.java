@@ -119,7 +119,7 @@ public class TooltipUtil {
   }
 
   public static void spellDataTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
-    Spell spell = instance.getSpell();
+    Spell spell = instance.asSpell();
     if (spell.getCycleComponent() != null) {
       var mode = instance.getSpellData(spell.getCycleComponent());
       result.add(Component.translatable("roots.tooltip.staff.data", Component.translatable("roots.spell_mode.mode"), mode.getStyledName()));

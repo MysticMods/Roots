@@ -91,7 +91,7 @@ public class CropGrowthAction extends GroveAction {
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       return switch (type) {
         case BLOCK -> blockState().is(TagKey.create(Registries.BLOCK, tag));
-        case SPELL -> spell() != null && spell().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+        case SPELL -> spell() != null && spell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
         case RITUAL -> ritual() != null && ritual().getRitual().is(TagKey.create(RootsRegistries.Keys.RITUALS, tag));
         default -> false;
       };

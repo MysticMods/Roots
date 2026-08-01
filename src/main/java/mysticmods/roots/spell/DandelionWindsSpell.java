@@ -81,7 +81,7 @@ public class DandelionWindsSpell extends Spell {
     int curGusts = gustsCooldown + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE) * gustsCooldownDecrease);
     int curVortex = vortexCooldown + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE) * vortexCooldownDecrease);
 
-    SnapshotHelper.addLiving(pPlayer, ModSerializers.DANDELION_WINDS.get(), new DandelionWindsSnapshot(pPlayer, curDuration, curChance, instance.hasModifier(ModModifiers.DANDELION_WINDS_VORTEX), curVortex, instance.hasModifier(ModModifiers.DANDELION_WINDS_GUSTS), curGusts));
+    SnapshotHelper.addLiving(pPlayer, ModSerializers.DANDELION_WINDS.get(), new DandelionWindsSnapshot(pPlayer, curDuration, curChance, instance.has(ModModifiers.DANDELION_WINDS_VORTEX), curVortex, instance.has(ModModifiers.DANDELION_WINDS_GUSTS), curGusts));
     pPlayer.addEffect(new MobEffectInstance(ModEffects.DANDELION_WINDS, curDuration, 0, false, false));
     return cooldown;
   }

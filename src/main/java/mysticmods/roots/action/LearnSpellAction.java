@@ -17,7 +17,7 @@ public class LearnSpellAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("LearnSpellAction fired by '{}' with spell '{}'",
-        context.player().getName().getString(), context.spell().getSpell().builtInRegistryHolder().getKey().location());
+        context.player().getName().getString(), context.spell().getName().getString());
   }
 
   @Override
@@ -36,9 +36,11 @@ public class LearnSpellAction extends GroveAction {
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       if (type == GroveReputationEntry.SubEntryType.EXACT_SPELL) {
-        return this.spell().getSpell().builtInRegistryHolder().getKey().location().equals(tag);
+        // TODO: Test
+        return this.spell().is(tag);
+        //.getSpell().builtInRegistryHolder().getKey().location().equals(tag);
       } else if (type == GroveReputationEntry.SubEntryType.SPELL) {
-        return spell.getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+        return spell.is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
       }
       return false;
     }

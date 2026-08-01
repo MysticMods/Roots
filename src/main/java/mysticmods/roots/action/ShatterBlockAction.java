@@ -42,7 +42,7 @@ public class ShatterBlockAction extends GroveAction {
       if (type == GroveReputationEntry.SubEntryType.BLOCK) {
         return this.blockState().is(TagKey.create(Registries.BLOCK, tag));
       } else if (type == GroveReputationEntry.SubEntryType.SPELL) {
-        return this.spell().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+        return this.spell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
       }
       return false;
     }

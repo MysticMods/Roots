@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -43,6 +44,10 @@ public class CooldownStorage implements ICleanable, ITicking {
 
   public Object2IntOpenHashMap<Spell> getMaxCooldownMap() {
     return maxCooldownMap;
+  }
+
+  public int getCooldown (ISpellInstance spell) {
+    return getCooldown(spell.asSpell());
   }
 
   public int getCooldown(Spell spell) {

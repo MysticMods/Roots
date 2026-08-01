@@ -79,7 +79,7 @@ public class SpellModifierScreen extends RootsScreen {
     if (data == null) {
       return null;
     }
-    var spell = data.getSpell();
+    var spell = data.asSpell();
     var tree = ModifierTrees.getSpell(spell);
     if (Minecraft.getInstance().player == null) {
       return null;

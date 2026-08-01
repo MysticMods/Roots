@@ -213,7 +213,7 @@ public class RenderTickHandler {
             return;
           }
 
-          Map<BlockPos, BlockState> blocks = spell.getSpell()
+          Map<BlockPos, BlockState> blocks = spell.asSpell()
               .getAffectedBlocks(level, player, spell, stack, pos, blockState, rayTraceResult);
           if (!blocks.isEmpty()) {
             outliningArea = true;

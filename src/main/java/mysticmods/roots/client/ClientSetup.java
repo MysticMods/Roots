@@ -108,9 +108,9 @@ public class ClientSetup {
           return FastColor.ARGB32.opaque(0xbae38a);
         }
         if (index == 1) {
-          return FastColor.ARGB32.opaque(spell.getSpell().getColor1());
+          return FastColor.ARGB32.opaque(spell.getColor1());
         } else if (index == 2) {
-          return FastColor.ARGB32.opaque(spell.getSpell().getColor2());
+          return FastColor.ARGB32.opaque(spell.getColor2());
         }
       }
       return -1;

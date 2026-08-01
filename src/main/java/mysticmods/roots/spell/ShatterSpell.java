@@ -141,7 +141,7 @@ public class ShatterSpell extends Spell {
     BlockHitResult rayTraceResult = pickBlock(pPlayer, instance);
     Map<BlockPos, BlockState> toBreak = getAffectedBlocks(pLevel, pPlayer, instance, pStack, rayTraceResult.getBlockPos(), pLevel.getBlockState(rayTraceResult.getBlockPos()), rayTraceResult);
     double count = 0;
-    capturingDrops = instance.hasModifier(RootsTags.SpellModifiers.MAGNETISM);
+    capturingDrops = instance.has(RootsTags.SpellModifiers.MAGNETISM);
     for (Map.Entry<BlockPos, BlockState> entry : toBreak.entrySet()) {
       BlockPos pos = entry.getKey();
       BlockState state = entry.getValue();

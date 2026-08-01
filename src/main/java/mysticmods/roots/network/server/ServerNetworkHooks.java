@@ -247,11 +247,11 @@ public class ServerNetworkHooks {
     String type;
     SpellSlot newSlot;
 
-    if (inSlot.hasModifier(modifier)) {
+    if (inSlot.has(modifier)) {
       // Toggle off
       type = "without";
       newSlot = inSlot.withoutModifier(modifier);
-      if (newSlot.hasModifier(modifier)) {
+      if (newSlot.has(modifier)) {
         // We were unable to toggle the modifier
         player.displayClientMessage(Component.translatable("roots.message.spell_modifier.cannot_toggle", modifier.getName()), true);
         return;
@@ -260,7 +260,7 @@ public class ServerNetworkHooks {
       // Toggle on
       type = "with";
       newSlot = inSlot.withModifier(modifier);
-      if (!newSlot.hasModifier(modifier)) {
+      if (!newSlot.has(modifier)) {
         // We were unable to toggle the modifier
         player.displayClientMessage(Component.translatable("roots.message.spell_modifier.cannot_toggle", modifier.getName()), true);
         return;

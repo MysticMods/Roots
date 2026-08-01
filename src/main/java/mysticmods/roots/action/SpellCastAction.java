@@ -30,7 +30,7 @@ public class SpellCastAction extends GroveAction {
 
   @Override
   public GroveReputation modify(GroveContext context, GroveReputation reputation) {
-    if (context.spell().getSpell().getChargeType() == ParentChargeType.OPERATION) {
+    if (context.spell().getChargeType() == ParentChargeType.OPERATION) {
       return reputation.multiply(context.costing().operations());
     }
     return super.modify(context, reputation);
@@ -39,7 +39,7 @@ public class SpellCastAction extends GroveAction {
   @Override
   public void log(GroveContext context) {
     RootsAPI.LOG.error("SpellCastAction fired by '{}' with spell '{}'",
-        context.player().getName().getString(), context.spell().getSpell().getName().getString());
+        context.player().getName().getString(), context.spell().getName().getString());
   }
 
   @Override
@@ -54,9 +54,10 @@ public class SpellCastAction extends GroveAction {
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       if (type == GroveReputationEntry.SubEntryType.EXACT_SPELL) {
-        return this.spell().getSpell().builtInRegistryHolder().getKey().location().equals(tag);
+        // TODO: Test
+        return this.spell().is(tag);
       } else if (type == GroveReputationEntry.SubEntryType.SPELL) {
-        return this.spell().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+        return this.spell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
       }
       return false;
     }

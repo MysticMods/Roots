@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
@@ -12,14 +11,11 @@ import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstanceData;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -63,7 +59,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   @Override
-  public Spell getSpell() {
+  public Spell asSpell() {
     return spell();
   }
 
@@ -78,7 +74,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   @Override
-  public boolean hasModifier(SpellModifier modifier) {
+  public boolean has(SpellModifier modifier) {
     return enabledModifiers.contains(modifier);
   }
 
@@ -89,7 +85,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   public SpellSlot withoutModifier(SpellModifier modifier) {
-    if (!hasModifier(modifier)) {
+    if (!has(modifier)) {
       return copy();
     }
 
@@ -97,7 +93,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   public SpellSlot withModifier(SpellModifier modifier) {
-    if (hasModifier(modifier)) {
+    if (has(modifier)) {
       return copy();
     }
 

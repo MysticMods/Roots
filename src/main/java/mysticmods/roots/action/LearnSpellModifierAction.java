@@ -37,7 +37,7 @@ public class LearnSpellModifierAction extends GroveAction {
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       if (type == GroveReputationEntry.SubEntryType.SPELL) {
         return false;
-        //return spellModifier().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+        //return spellModifier().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
       } else if (type == GroveReputationEntry.SubEntryType.SPELL_MODIFIER) {
         return spellModifier().is(TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, tag));
       }

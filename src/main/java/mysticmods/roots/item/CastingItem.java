@@ -41,6 +41,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -75,7 +76,7 @@ public class CastingItem extends Item {
   public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
     var currentSpell = getCastingSpell(null, null, stack);
     if (currentSpell != null) {
-      var tag = currentSpell.getSpell().builtInRegistryHolder().getData(DataMaps.CAN_BREAK_BLOCKS_TAG);
+      TagKey<Block> tag = currentSpell.getData(DataMaps.CAN_BREAK_BLOCKS_TAG);
       if (tag != null) {
         return state.is(tag);
       }
@@ -88,7 +89,7 @@ public class CastingItem extends Item {
   public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
     if (itemAbility == ItemAbilities.SHEARS_DIG) {
       var currentSpell = getCastingSpell(null, null, stack);
-      if (currentSpell != null && currentSpell.hasModifier(RootsTags.SpellModifiers.SHEARING)) {
+      if (currentSpell != null && currentSpell.has(RootsTags.SpellModifiers.SHEARING)) {
         return true;
       }
     } else if (itemAbility == ItemAbilities.AXE_DIG || itemAbility == ItemAbilities.HOE_DIG || itemAbility == ItemAbilities.SHOVEL_DIG || itemAbility == ItemAbilities.SWORD_DIG || itemAbility == ItemAbilities.PICKAXE_DIG) {
@@ -193,7 +194,7 @@ public class CastingItem extends Item {
 
       if (ticks % 20 == 0) {
         if (!costs.canAfford(pPlayer, true)) {
-          RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
+          RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getName().getString());
           CastingSuccessCache.clear(pStack);
           pPlayer.stopUsingItem();
           return;
@@ -215,13 +216,13 @@ public class CastingItem extends Item {
             double sideOffset = 0.3;
             Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
             Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
-            packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+            packet = new CastChannelTargetFXPacket(spell.asSpell(), pPlayer.getId(), start, stop, ticks);
           }
         } else {
           if (CastingSuccessCache.isASuccess(pStack)) {
-            packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), ticks);
+            packet = new CastChannelFXPacket(spell.asSpell(), pPlayer.getId(), ticks);
           } else {
-            packet = new CastChannelFailFXPacket(spell.getSpell(), pPlayer.getId(), ticks);
+            packet = new CastChannelFailFXPacket(spell.asSpell(), pPlayer.getId(), ticks);
           }
         }
 
@@ -235,11 +236,11 @@ public class CastingItem extends Item {
       ModActions.SPELL_CAST.get().accept(context);
       costs.charge(pPlayer, true);
     } else if (spell.getType() == SpellCastType.CHARGED) {
-      pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);
+      pPlayer.displayClientMessage(spell.getChargeText(ticks), true);
 
       if (ticks % 2 == 0) {
         // TODO: Jaunt effect should be triggered from something else?
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelChargingFXPacket(spell.getSpell(), pPlayer.getId(), ticks));
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelChargingFXPacket(spell.asSpell(), pPlayer.getId(), ticks));
       }
     }
   }
@@ -304,7 +305,7 @@ public class CastingItem extends Item {
     if (!costing.canAfford(pPlayer, true)) {
       // TODO: display a warning
       pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
-      RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getSpell().getName());
+      RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getName());
       return InteractionResultHolder.pass(stack);
     }
 
@@ -374,7 +375,7 @@ public class CastingItem extends Item {
 
       // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
       if (!costing.canAfford(pPlayer, true)) {
-        RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getSpell().getName());
+        RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getName().getString());
         return;
       }
 
