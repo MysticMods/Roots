@@ -110,6 +110,6 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
 
   @Override
   public DataComponentMap getComponents() {
-    return null;
+    return data;
   }
 }

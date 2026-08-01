@@ -31,10 +31,13 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public interface ISpellInstance extends SpellLike, ICostedParent {
+  UUID getId();
+
   Spell asSpell();
 
   SpellModifierSet getEnabledModifiers();
@@ -193,10 +196,6 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().canTargetEntity(entity);
   }
 
-  static SimpleSpell of(Spell spell) {
-    return new SimpleSpell(spell);
-  }
-
   default int getColor1() {
     return asSpell().getColor1();
   }
@@ -221,7 +220,15 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().getChargeText(ticks);
   }
 
-  record SimpleSpell(Spell spell) implements ISpellInstance {
+  static SimpleSpell of(Spell spell) {
+    return new SimpleSpell(UUID.randomUUID(), spell);
+  }
+
+  record SimpleSpell(UUID id, Spell spell) implements ISpellInstance {
+    @Override
+    public UUID getId() {
+      return id();
+    }
 
     @Override
     public Spell asSpell() {
