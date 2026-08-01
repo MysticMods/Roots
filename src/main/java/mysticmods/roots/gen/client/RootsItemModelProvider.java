@@ -425,8 +425,8 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4, Items.EMERALD);
     modifier(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5, Items.DIAMOND);
 
-    modifier(ModModifiers.ACID_CLOUD_FIRE, Items.FIRE_CHARGE);
-    modifier(ModModifiers.ACID_CLOUD_PEACEFUL, Items.BEACON);
+    modifier(ModModifiers.ACID_CLOUD_FIRE, Items.FLINT_AND_STEEL);
+    modifier(ModModifiers.ACID_CLOUD_PEACEFUL, Items.TURTLE_EGG);
 
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));
