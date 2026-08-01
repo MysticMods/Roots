@@ -5,6 +5,7 @@
   "mixins": [
     "MixinAbstractArrow$WildwoodQuiver",
     "MixinBeehiveBlock$RunicShears",
+    "MixinBoneMealItem",
     "MixinBrewingStandBlockEntity",
     "MixinBrewingStandMenu$FuelSlot",
     "MixinMerchantMenu$FairyHutTemporary",
@@ -49,13 +50,13 @@
   "client": [
     "client.MixinCapeLayer$LightDrifter",
     "client.MixinEntity$ParticleHolder",
+    "client.MixinEntity$Targeting",
     "client.MixinGui$Tome",
     "client.MixinLocalPlayer$LightDrifter",
     "client.MixinLocalPlayer$StaffChannel",
     "client.MixinMinecraft$LightDrifter",
     "client.MixinMouseHandler$LightDrifter",
     "client.MixinPlayerRenderer$LightDrifter",
-    "client.MixinEntity$Targeting",
     "client.accessor.AccessorMixinCompositeRenderType",
     "client.accessor.AccessorMixinCompositeState",
     "client.accessor.AccessorMixinEntityRenderer",

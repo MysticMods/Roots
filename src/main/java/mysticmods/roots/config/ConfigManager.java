@@ -71,6 +71,8 @@ public class ConfigManager {
   public static final ModConfigSpec.BooleanValue ELEMENTAL_CROP_EXTRA_DROPS;
   public static final ModConfigSpec.DoubleValue ELEMENTAL_CROP_EXTRA_DROPS_CHANCE;
 
+  public static final ModConfigSpec.DoubleValue UNDERWATER_BONE_MEAL_WILD_ROOTS_CHANCE;
+
   public static final ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
 
   public static final ModConfigSpec.BooleanValue DEBUG_REPUTATION;
@@ -105,7 +107,7 @@ public class ConfigManager {
   }
 
   static {
-    COMMON_BUILDER.comment("magnetism-related configuration").push("magnetism");
+    COMMON_BUILDER.comment("Magnetism-related configuration").push("magnetism");
     EXPERIENCE_ORBS = COMMON_BUILDER.comment("whether or not experience orbs should be teleported when using magnetism")
         .define("move_experience_orbs", true);
     COMMON_BUILDER.pop();
@@ -219,6 +221,9 @@ public class ConfigManager {
     COMMON_BUILDER.comment("Configuration options relating to the mortar & pestle").push("mortar");
     PESTLE_COOLDOWN = COMMON_BUILDER.comment("the cooldown in ticks after using a pestle on a mortar, -1 for no cooldown")
         .defineInRange("pestle_cooldown", 12, -1, Integer.MAX_VALUE);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.comment("Configuration options for underwater bone meal effects.").push("underwater_bone_meal");
+    UNDERWATER_BONE_MEAL_WILD_ROOTS_CHANCE = COMMON_BUILDER.comment("the chance for wild roots to grow underwater when bone meal is used (replacing one of the potential sea grass or coral blocks").defineInRange("underwater_bone_meal_wild_roots_chance", 0.02, -1, 1);
     COMMON_BUILDER.pop();
     CLIENT_BUILDER.push("debug");
     SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
