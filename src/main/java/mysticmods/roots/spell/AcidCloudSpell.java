@@ -12,6 +12,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModDamage;
+import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.AcidCloudFXPacket;
 import mysticmods.roots.util.EntityUtils;
@@ -32,7 +33,7 @@ import java.util.function.Predicate;
 // Note: VISUALS DONE!
 public class AcidCloudSpell extends TwoRadiusSpell {
   private float damage;
-  private int count;
+  private int count, fireTicks;
 
   public AcidCloudSpell(ChatFormatting color, CostInstance costs) {
     super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x50a028, 0x405f20);
@@ -58,6 +59,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
     super.buildProperties(properties);
     properties.add(ModSpells.ACID_CLOUD_DAMAGE);
     properties.add(ModSpells.ACID_CLOUD_COUNT);
+    properties.add(ModSpells.ACID_CLOUD_FIRE_TICKS);
   }
 
   @Override
@@ -65,6 +67,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.damage = properties.get(ModSpells.ACID_CLOUD_DAMAGE);
     this.count = properties.get(ModSpells.ACID_CLOUD_COUNT);
+    this.fireTicks = properties.get(ModSpells.ACID_CLOUD_FIRE_TICKS);
   }
 
   @Override
@@ -81,6 +84,9 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       LivingEntity entity = entities.get(pLevel.getRandom().nextInt(entities.size()));
       totalDamaged++;
       entity.hurt(ModDamage.acidCloud(pPlayer), damage);
+      if (instance.has(RootsTags.SpellModifiers.SETS_ON_FIRE)) {
+        entity.igniteForTicks(fireTicks);
+      }
     }
 
     if (ticks % 3 == 0) {

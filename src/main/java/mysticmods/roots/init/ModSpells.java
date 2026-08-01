@@ -35,6 +35,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_Y = P.recordProperty("acid_cloud/radius_y", Property.ofInt(2, "Radius"));
   public static final PropertyHolder<Property.FloatProperty> ACID_CLOUD_DAMAGE = P.recordProperty("acid_cloud/damage", Property.ofFloat(2.0f, SpellProperties.DAMAGE));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COUNT = P.recordProperty("acid_cloud/count", Property.ofInt(1, SpellProperties.COUNT));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_FIRE_TICKS = P.recordProperty("acid_cloud/fire_ticks", Property.ofInt(3 * 20, "The number of ticks for which damaged mods are set on fire for when the fire modifier is enabled."));
 
   // Aqua Bubble (1200 cooldown)
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250));

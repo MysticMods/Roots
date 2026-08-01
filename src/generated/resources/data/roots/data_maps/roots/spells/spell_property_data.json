@@ -45,6 +45,15 @@
           "default_value": 1,
           "value": 1
         }
+      },
+      {
+        "id": "roots:acid_cloud/fire_ticks",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of ticks for which damaged mods are set on fire for when the fire modifier is enabled.",
+          "default_value": 60,
+          "value": 60
+        }
       }
     ],
     "roots:aqua_bubble": [
