@@ -27,6 +27,21 @@ public class EntityUtils {
     return isHostileTo(pPlayer, true);
   }
 
+  public static Predicate<Entity> allEntities(LivingEntity pPlayer, boolean skipSelf) {
+    return inc -> {
+      if (!(inc instanceof LivingEntity entity)) {
+        return false;
+      }
+
+      if ((entity == pPlayer && skipSelf) || entity.isDeadOrDying() || entity.hurtTime > 0) {
+        return false;
+      }
+
+      return true;
+    };
+  }
+
+
   public static Predicate<Entity> isHostileTo(LivingEntity pPlayer, boolean skipSelf) {
     return inc -> {
       if (!(inc instanceof LivingEntity entity)) {
@@ -77,7 +92,7 @@ public class EntityUtils {
     return false;
   };
 
-  public static boolean isDeflectableByDandelionWinds (Entity entity) {
+  public static boolean isDeflectableByDandelionWinds(Entity entity) {
     return isDeflectableByDandelionWinds.test(entity);
   }
 
