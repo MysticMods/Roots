@@ -245,6 +245,7 @@ public class CastingItem extends Item {
     }
   }
 
+  // TODO: #1351 pass allows interaction with items but
   @Override
   public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
@@ -311,6 +312,7 @@ public class CastingItem extends Item {
 
     if (spell.getType() == SpellCastType.INSTANT) {
       stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
+      // TODO: (#1353) Improve spell casting results
       int cooldown = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
@@ -330,6 +332,7 @@ public class CastingItem extends Item {
       return InteractionResultHolder.success(stack);
     }
 
+    // TODO: Pass result allows for interaction with other things
     return InteractionResultHolder.pass(stack);
   }
 
