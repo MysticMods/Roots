@@ -3,12 +3,15 @@ package mysticmods.roots.integration.jei.ingredient.grove;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.ingredients.IIngredientRenderer;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +33,12 @@ public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber
       Minecraft minecraft = Minecraft.getInstance();
       Font font = getFontRenderer(minecraft, ingredient);
       guiGraphics.renderFakeItem(ingredient.grove().getIcon(), posX, posY);
+      TextureAtlasSprite sprite = switch(ingredient.type()) {
+        case POWER -> minecraft.getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
+            .apply(RootsAPI.rl("gui/grove_power_symbol"));
+        case REPUTATION -> minecraft.getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
+            .apply(RootsAPI.rl("gui/grove_reputation_symbol"));
+      };
       // TODO: Render number here
       //guiGraphics.renderItemDecorations(font, ingredient.getIcon(), posX, posY);
       guiGraphics.pose().pushPose();
@@ -40,6 +49,8 @@ public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber
         color = 16733525;
       }
       guiGraphics.drawString(font, s, posX + 19 - 2 - font.width(s), posY + 6 + 3, color, true);
+      guiGraphics.pose().translate(0, 0, 200);
+      guiGraphics.blit(posX, posY, 0, 16, 16, sprite);
       guiGraphics.pose().popPose();
       RenderSystem.disableBlend();
     }

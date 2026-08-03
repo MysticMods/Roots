@@ -319,7 +319,14 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, RootsDimensionType.CODEC);
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
     registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
-    registration.register(GROVE_NUMBER_TYPE, Collections.emptyList(), new RootsGroveNumberHelper(), GROVE_NUMBER_RENDERER, GroveNumber.CODEC);
+    List<GroveNumber> groveStuff = new ArrayList<>();
+    for (Grove grove : RootsRegistries.GROVES) {
+      groveStuff.add(new GroveNumber(grove.builtInRegistryHolder(), 1, GroveNumber.GroveNumberType.POWER));
+    }
+    for (Grove grove : RootsRegistries.GROVES) {
+      groveStuff.add(new GroveNumber(grove.builtInRegistryHolder(), 1, GroveNumber.GroveNumberType.REPUTATION));
+    }
+    registration.register(GROVE_NUMBER_TYPE, groveStuff, new RootsGroveNumberHelper(), GROVE_NUMBER_RENDERER, GroveNumber.CODEC);
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()
         .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
   }

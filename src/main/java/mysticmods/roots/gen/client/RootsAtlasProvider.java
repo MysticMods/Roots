@@ -19,5 +19,9 @@ public final class RootsAtlasProvider extends SpriteSourceProvider {
   protected void gather() {
     this.atlas(SpriteSourceProvider.BLOCKS_ATLAS)
         .addSource(new SingleFile(RootsAPI.rl("gui/grove_action_symbol"), Optional.empty()));
+    this.atlas(SpriteSourceProvider.BLOCKS_ATLAS)
+        .addSource(new SingleFile(RootsAPI.rl("gui/grove_power_symbol"), Optional.empty()));
+    this.atlas(SpriteSourceProvider.BLOCKS_ATLAS)
+        .addSource(new SingleFile(RootsAPI.rl("gui/grove_reputation_symbol"), Optional.empty()));
   }
 }

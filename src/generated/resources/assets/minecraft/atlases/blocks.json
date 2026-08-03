@@ -3,6 +3,14 @@
     {
       "type": "minecraft:single",
       "resource": "roots:gui/grove_action_symbol"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "roots:gui/grove_power_symbol"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "roots:gui/grove_reputation_symbol"
     }
   ]
 }
