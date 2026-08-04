@@ -795,7 +795,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("message.dandelion_cordial", "You feel more alert!");
 
     // JEI
-    add("roots.jei.grove_power", "Grovve Power Generation");
+    add("roots.jei.ingredient.grove_power", " Grove Power");
+    add("roots.jei.ingredient.grove_reputation", " Grove Reputation");
+    add("roots.jei.grove_power", "Grove Power Generation");
     add("roots.jei.grove_reputation", "Grove Reputation");
     add("roots.jei.entity_interaction", "Entity Item Interaction");
     add("roots.jei.summon_creatures", "Summon Creatures");

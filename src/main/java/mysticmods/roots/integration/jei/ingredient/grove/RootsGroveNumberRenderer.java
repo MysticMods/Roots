@@ -61,8 +61,10 @@ public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber
   @Override
   public List<Component> getTooltip(GroveNumber ingredient, TooltipFlag tooltipFlag) {
     List<Component> result = new ArrayList<>();
-    result.add(ingredient.grove().getStyledName());
-    result.add(Component.literal(String.valueOf(ingredient.value())));
+    result.add(ingredient.grove().getStyledName().append(Component.translatable("roots.jei.ingredient.grove_" + ingredient.type().getSerializedName())));
+    if (ingredient.value() != Integer.MAX_VALUE) {
+      result.add(Component.literal(String.valueOf(ingredient.value())));
+    }
     if (tooltipFlag.isAdvanced()) {
       result.add(Component.literal(RootsRegistries.GROVES.getKey(ingredient.grove()).toString())
           .withStyle(ChatFormatting.DARK_GRAY));
