@@ -2,14 +2,11 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.DecayTargetFXPacket;
 import mysticmods.roots.util.EntityUtils;
@@ -61,7 +58,7 @@ public class DecaySpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer).and(o -> o.getType().is(RootsTags.Entities.DECAYABLE)));
     int totalDecayed = 0;
     while (totalDecayed < count) {
@@ -83,11 +80,11 @@ public class DecaySpell extends TwoRadiusSpell {
 
     if (totalDecayed == 0) {
       costs.noCharge();
-      return -1;
+      return SpellCastResult.nothing();
     }
 
     costs.operations(totalDecayed);
-    return cooldown;
+    return SpellCastResult.success(totalDecayed, cooldown);
   }
 
   @Nullable

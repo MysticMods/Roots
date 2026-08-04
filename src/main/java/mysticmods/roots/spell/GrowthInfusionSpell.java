@@ -3,14 +3,11 @@ package mysticmods.roots.spell;
 import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.GrowthFXPacket;
@@ -70,7 +67,7 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public int cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     BlockHitResult result = pickBlock(pPlayer, instance);
     BlockPos pos = result.getBlockPos();
     BlockState at = level.getBlockState(pos);
@@ -87,9 +84,9 @@ public class GrowthInfusionSpell extends Spell {
     } else {
       costs.noCharge();
       pPlayer.stopUsingItem();
-      return -1;
+      return SpellCastResult.nothing();
     }
 
-    return cooldown;
+    return SpellCastResult.success(cooldown);
   }
 }

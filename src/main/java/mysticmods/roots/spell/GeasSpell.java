@@ -3,14 +3,11 @@ package mysticmods.roots.spell;
 import mysticmods.roots.action.GeasAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSpells;
@@ -74,7 +71,7 @@ public class GeasSpell extends Spell {
   private static final AABB bounds = new AABB(-4, -4, -4, 5, 5, 5);
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int affected = 0;
     float hpAffected = 0;
 
@@ -116,11 +113,11 @@ public class GeasSpell extends Spell {
 
     if (affected == 0) {
       costs.noCharge();
-      return 0;
+      return SpellCastResult.nothing();
     }
 
     double scaleFactor = Math.sqrt(hpAffected) * 1.5;
-    return (int) Math.min(cooldown * scaleFactor, maxCooldown);
+    return SpellCastResult.success(affected, (int) Math.min(cooldown * scaleFactor, maxCooldown));
   }
 
   private int affect(Player player, LivingEntity entity) {

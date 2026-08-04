@@ -3,14 +3,11 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.mixin.accessor.AccessorMixinMob;
@@ -79,7 +76,7 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     List<EquipmentSlot> slots = List.of(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
     List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer)
         .and((o) -> !o.getType().is(RootsTags.Entities.DISABLE_DISARM)));
@@ -147,12 +144,11 @@ public class DisarmSpell extends TwoRadiusSpell {
 
     if (count == 0) {
       costs.noCharge();
-      return 0;
-    } else {
-      costs.operations(count);
+      return SpellCastResult.nothing();
     }
 
-    return cooldown * count;
+    costs.operations(count);
+    return SpellCastResult.success(count, cooldown * count);
   }
 
   @Override

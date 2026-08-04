@@ -201,7 +201,8 @@ public class CastingItem extends Item {
         }
       }
 
-      boolean lastSuccess = spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks) >= 0;
+      var result = spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks);
+      boolean lastSuccess = result.success();
 
       CastingSuccessCache.note(pStack, lastSuccess);
 
@@ -313,7 +314,9 @@ public class CastingItem extends Item {
     if (spell.getType() == SpellCastType.INSTANT) {
       stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
       // TODO: (#1353) Improve spell casting results
-      int cooldown = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
+      var result = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
+      stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
+      int cooldown = result.cooldown();
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
         ModActions.SPELL_CAST.get().accept(context);
@@ -321,19 +324,14 @@ public class CastingItem extends Item {
           CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
           cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
         }
-        stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
-        return InteractionResultHolder.success(stack);
       }
-      stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
+      return result.result(stack);
     } else {
       CastingSuccessCache.clear(stack);
       pPlayer.startUsingItem(pUsedHand);
       stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
       return InteractionResultHolder.success(stack);
     }
-
-    // TODO: Pass result allows for interaction with other things
-    return InteractionResultHolder.pass(stack);
   }
 
   @Override
@@ -382,7 +380,8 @@ public class CastingItem extends Item {
         return;
       }
 
-      int cooldown = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticksUsed);
+      var result = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticksUsed);
+      int cooldown = result.cooldown();
       if (costing.charge(pPlayer)) {
         SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pPlayer.getUsedItemHand(), pPlayer.getItemInHand(pPlayer.getUsedItemHand()), spell, costing);
         ModActions.SPELL_CAST.get().accept(context);

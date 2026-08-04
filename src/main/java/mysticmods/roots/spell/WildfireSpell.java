@@ -1,14 +1,11 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.entity.projectile.WildfireEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
@@ -51,11 +48,11 @@ public class WildfireSpell extends Spell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     WildfireEntity wildfire = new WildfireEntity(ModEntities.WILDFIRE.get(), pPlayer, pLevel);
     wildfire.shootFromRotation(pPlayer, pPlayer.getViewXRot(1), pPlayer.getViewYRot(1), 0, velocity, 0);
     pLevel.addFreshEntity(wildfire);
     SnapshotHelper.addLiving(wildfire, ModSerializers.WILDFIRE.get(), new WildfireEntitySnapshot(pPlayer, -1, damage));
-    return cooldown;
+    return SpellCastResult.success(cooldown);
   }
 }

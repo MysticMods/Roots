@@ -61,7 +61,7 @@ public class HarvestSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     HarvestMode mode = instance.getSpellData(ModAttachments.HARVEST_MODE);
 
     ItemStack offHandItem = pPlayer.getOffhandItem();
@@ -90,12 +90,12 @@ public class HarvestSpell extends TwoRadiusSpell {
     });
     if (positions.isEmpty()) {
       costs.noCharge();
-      return 0;
+      return SpellCastResult.nothing();
     }
 
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HarvestFXPacket(positions));
     costs.operations(positions.size());
-    return cooldown * positions.size();
+    return SpellCastResult.success(positions.size(), cooldown * positions.size());
   }
 
   @Override

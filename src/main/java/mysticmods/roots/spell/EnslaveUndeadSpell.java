@@ -1,13 +1,10 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -31,7 +28,8 @@ public class EnslaveUndeadSpell extends Spell {
   }
 
   @Override
-  public int cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    return cooldown;
+  public SpellCastResult cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+    costs.noCharge();
+    return SpellCastResult.nothing();
   }
 }

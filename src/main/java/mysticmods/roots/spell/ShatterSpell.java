@@ -8,10 +8,7 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.ParentChargeType;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModSpells;
@@ -131,7 +128,7 @@ public class ShatterSpell extends Spell {
   public static boolean capturingDrops = false;
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     //FakePlayerUtil.buildItems(pLevel, pLevel.getRandom());
 
     ServerPlayer player = (ServerPlayer) pPlayer;
@@ -209,10 +206,10 @@ public class ShatterSpell extends Spell {
 
     if (count == 0) {
       costs.noCharge();
-      return -1;
+      return SpellCastResult.nothing();
     } else {
       costs.operations(Mth.floor(count));
-      return Mth.floor(cooldown * count);
+      return SpellCastResult.success(Mth.floor(count), Mth.floor(cooldown * count));
     }
   }
 

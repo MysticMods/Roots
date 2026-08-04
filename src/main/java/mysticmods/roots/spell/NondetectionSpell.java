@@ -1,14 +1,11 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
@@ -47,10 +44,10 @@ public class NondetectionSpell extends Spell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.NONDETECTION, potionDuration, 0, false, false));
     // TODO: Do we need a snapshot?
     /*    SnapshotHelper.addLiving(pPlayer, ModSerializers.PETAL_SHELL.get(), new PetalShellSnapshot(pPlayer, duration + 40, count));*/
-    return cooldown;
+    return SpellCastResult.success(cooldown);
   }
 }

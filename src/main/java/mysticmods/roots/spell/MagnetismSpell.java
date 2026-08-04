@@ -1,13 +1,10 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastMagnetismFXPacket;
 import mysticmods.roots.util.MagnetismUtil;
@@ -45,17 +42,16 @@ public class MagnetismSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int pulled = MagnetismUtil.pull(pLevel, pPlayer.blockPosition(), radiusZX, radiusY, radiusZX);
     if (pulled == 0) {
       costs.noCharge();
-      return 0;
+      return SpellCastResult.nothing();
     } else {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastMagnetismFXPacket(pPlayer.getId()));
       costs.operations(pulled);
-      return cooldown * pulled;
+      return SpellCastResult.success(pulled, cooldown * pulled);
     }
-
   }
 
   @Override

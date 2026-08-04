@@ -1,14 +1,11 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.entity.other.TemporalMorassEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
@@ -61,7 +58,7 @@ public class TemporalMorassSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     TemporalMorassEntity timeStop = ModEntities.TEMPORAL_MORASS.get().create(pLevel);
     if (timeStop != null) {
       timeStop.setLifetime(duration);
@@ -69,10 +66,10 @@ public class TemporalMorassSpell extends TwoRadiusSpell {
       // Don't use the helper
       pLevel.addFreshEntity(timeStop);
       SnapshotHelper.addLiving(timeStop, ModSerializers.TEMPORAL_MORASS.get(), new TemporalMorassEntitySnapshot(timeStop.tickCount, -1, radiusZX, radiusY, duration, amplifier));
-      return cooldown;
+      return SpellCastResult.success(cooldown);
     } else {
       costs.noCharge();
-      return 0;
+      return SpellCastResult.nothing();
     }
   }
 }

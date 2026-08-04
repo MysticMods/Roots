@@ -9,10 +9,7 @@ import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.ParentChargeType;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSerializers;
@@ -70,7 +67,7 @@ public class DandelionWindsSpell extends Spell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
 /*    if (pPlayer.hasEffect(ModEffects.DANDELION_WINDS)) {
       costs.noCharge();
       return 0;
@@ -83,7 +80,7 @@ public class DandelionWindsSpell extends Spell {
 
     SnapshotHelper.addLiving(pPlayer, ModSerializers.DANDELION_WINDS.get(), new DandelionWindsSnapshot(pPlayer, curDuration, curChance, instance.has(ModModifiers.DANDELION_WINDS_VORTEX), curVortex, instance.has(ModModifiers.DANDELION_WINDS_GUSTS), curGusts));
     pPlayer.addEffect(new MobEffectInstance(ModEffects.DANDELION_WINDS, curDuration, 0, false, false));
-    return cooldown;
+    return SpellCastResult.success(cooldown);
   }
 
   @SuppressWarnings("removal")

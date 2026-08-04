@@ -1,22 +1,20 @@
 package mysticmods.roots.spell;
 
-import it.unimi.dsi.fastutil.ints.Int2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.action.CropGrowthAction;
+import mysticmods.roots.action.SpellCastAction;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.RampantGrowthFXPacket;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.util.GrowthUtil;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
@@ -34,7 +32,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class RampantGrowthSpell extends TwoRadiusSpell {
   private int interval, count;
@@ -79,7 +76,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (ticks % interval == 0) {
       AOEGrowthMode mode = instance.getSpellData(ModAttachments.AOE_GROWTH_MODE);
       ItemStack offHandItem = pPlayer.getOffhandItem();
@@ -91,8 +88,9 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
       }
 
       if (getBoundingBox() == null) {
+        RootsAPI.LOG.error("For some reason the Rampant Growth spell does not have a bounding box");
         costs.noCharge();
-        return -1;
+        return SpellCastResult.fail();
       }
 
       final Block block = tempBlock;
@@ -115,7 +113,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
       });
       if (positions.isEmpty()) {
         costs.noCharge();
-        return -1;
+        return SpellCastResult.nothing();
       }
       int growCount = 0;
       for (int i = 0; i < count; i++) {
@@ -138,15 +136,15 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
       }
       if (growCount == 0) {
         costs.noCharge();
-        return -1;
+        return SpellCastResult.nothing();
       } else {
         costs.operations(growCount);
       }
 
-      return cooldown;
+      return SpellCastResult.success(growCount, cooldown);
     } else {
       costs.noCharge();
-      return -1;
+      return SpellCastResult.tick();
     }
   }
 

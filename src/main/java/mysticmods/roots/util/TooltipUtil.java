@@ -135,6 +135,7 @@ public class TooltipUtil {
         case ADDITIVE -> "roots.tooltip.cost.cost_amount";
         case MULTIPLICATIVE_BASE -> "roots.tooltip.cost.cost_multiply_base";
         case MULTIPLICATIVE_TOTAL -> "roots.tooltip.cost.cost_multiply_total";
+        default -> "roots.tooltip.cost.cost_amount";
       };
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable(amountKey, herbCost)));
     }

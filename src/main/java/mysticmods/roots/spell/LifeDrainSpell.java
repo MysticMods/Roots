@@ -2,14 +2,11 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastLifeDrainFXPacket;
@@ -69,7 +66,7 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Vec3 eyePos = pPlayer.getEyePosition(1.0f);
     Vec3 look = pPlayer.getViewVector(1.0f);
     Vec3 endPos = eyePos.add(look.scale(distance));
@@ -105,10 +102,10 @@ public class LifeDrainSpell extends Spell {
 
     if (!foundTarget) {
       costs.noCharge();
-      return -1;
+      return SpellCastResult.nothing();
     } else {
       costs.operations(count);
-      return cooldown;
+      return SpellCastResult.success(count, cooldown);
     }
   }
 

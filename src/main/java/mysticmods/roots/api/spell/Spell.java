@@ -275,7 +275,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return RootsItemCallbacks.getItemStack(this);
   }
 
-  public abstract int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);
+  public abstract SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);
 
   public Map<BlockPos, BlockState> getAffectedBlocks(Level level, Player player, ISpellInstance spell, ItemStack stack, BlockPos pos, BlockState blockState, BlockHitResult rayTraceResult) {
     return Collections.emptyMap();

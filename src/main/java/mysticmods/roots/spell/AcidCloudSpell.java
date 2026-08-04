@@ -3,14 +3,11 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSpells;
@@ -71,7 +68,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Predicate<Entity> entityTest = instance.has(RootsTags.SpellModifiers.PEACEFUL) ? EntityUtils.isHostileTo(pPlayer) : EntityUtils.allEntities(pPlayer, true);
 
     List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), entityTest);
@@ -95,10 +92,9 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
     if (totalDamaged == 0) {
       costs.noCharge();
-      return -1;
+      return SpellCastResult.nothing();
     }
 
-    return cooldown;
+    return SpellCastResult.success(totalDamaged, cooldown);
   }
-
 }

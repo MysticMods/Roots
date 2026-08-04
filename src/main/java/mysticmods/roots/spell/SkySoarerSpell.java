@@ -5,14 +5,11 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSerializers;
@@ -72,7 +69,7 @@ public class SkySoarerSpell extends Spell {
   }
 
   @Override
-  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int durationCount = instance.count(RootsTags.SpellModifiers.SKY_SOARER_DURATION_INCREASES);
     int thisDuration = durationCount > 0 ? Mth.floor(((float) duration) * (1f + (duration_incrase * durationCount))) : duration;
     int amplifierCount = instance.count(RootsTags.SpellModifiers.SKY_SOARER_AMPLIFIER_INCREASES);
@@ -83,7 +80,7 @@ public class SkySoarerSpell extends Spell {
     SnapshotHelper.addLiving(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, thisDuration + 40, pPlayer.getDeltaMovement(), vehicleMovement, thisAmplifier, thisDuration, durationCount, amplifierCount, instance.has(ModModifiers.SKY_SOARER_FRIENDLY_EARTH)));
     //RootsAPI.LOG.info("Duration base: {}, this duration: {}, amplifier base: {}, this amplifier: {}", duration, thisDuration, amplifier, thisAmplifier);
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastSkySoarerFXPacket(pPlayer.getId(), thisDuration));
-    return cooldown;
+    return SpellCastResult.success(cooldown);
   }
 
   @SuppressWarnings("removal")

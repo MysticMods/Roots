@@ -2,14 +2,11 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.screen.DesaturateScreenFXPacket;
 import mysticmods.roots.network.client.fx.HealFXPacket;
@@ -50,10 +47,10 @@ public class DesaturateSpell extends Spell {
   }
 
   @Override
-  public int cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public SpellCastResult cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (!pPlayer.isHurt()) {
       costs.noCharge();
-      return 0;
+      return SpellCastResult.nothing();
     }
 
     FoodData stats = pPlayer.getFoodData();
@@ -61,7 +58,7 @@ public class DesaturateSpell extends Spell {
     int food = originalFood;
     if (food <= 1) {
       costs.noCharge();
-      return 0;
+      return SpellCastResult.nothing();
     }
 
     float originalHealth = pPlayer.getHealth();
@@ -81,7 +78,7 @@ public class DesaturateSpell extends Spell {
 
     if (healed == 0) {
       costs.noCharge();
-      return 0;
+      return SpellCastResult.nothing();
     }
 
     pPlayer.heal(healed);
@@ -89,6 +86,6 @@ public class DesaturateSpell extends Spell {
     stats.setSaturation(Math.min(stats.getExhaustionLevel(), food));
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new DesaturateScreenFXPacket(originalHealth, pPlayer.getHealth(), originalFood, food));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HealFXPacket(pPlayer.getId(), healed));
-    return cooldown;
+    return SpellCastResult.success(cooldown);
   }
 }

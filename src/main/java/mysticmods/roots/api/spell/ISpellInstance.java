@@ -49,13 +49,14 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   SpellModifierSet getEnabledModifiers();
 
   // Returns length of cooldown
-  default int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
-    int cooldown = asSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
+  default SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
+    SpellCastResult cooldown = asSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
     double costReduction = RootsAPI.getInstance().getCostReduction(pPlayer);
     double cooldownReduction = RootsAPI.getInstance().getCooldownReduction(pPlayer);
     costs.discount(costReduction);
     // TODO: What do the various cooldowns mean?
-    return Math.max(0, cooldown - (int) (cooldown * cooldownReduction));
+    var newCooldown = Math.max(0, cooldown.cooldown() - (int) (cooldown.cooldown() * cooldownReduction));
+    return cooldown.modify(newCooldown);
   }
 
   default boolean offCooldown(ItemStack castingItem, Entity pCaster) {
