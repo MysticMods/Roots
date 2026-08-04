@@ -10,7 +10,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
@@ -33,22 +32,23 @@ public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber
       Minecraft minecraft = Minecraft.getInstance();
       Font font = getFontRenderer(minecraft, ingredient);
       guiGraphics.renderFakeItem(ingredient.grove().getIcon(), posX, posY);
+      var atlas = minecraft.getTextureAtlas(RootsAPI.OVERLAYS_ATLAS_FILE);
       TextureAtlasSprite sprite = switch(ingredient.type()) {
-        case POWER -> minecraft.getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
+        case POWER -> atlas
             .apply(RootsAPI.rl("gui/grove_power_symbol"));
-        case REPUTATION -> minecraft.getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
+        case REPUTATION -> atlas
             .apply(RootsAPI.rl("gui/grove_reputation_symbol"));
       };
-      // TODO: Render number here
-      //guiGraphics.renderItemDecorations(font, ingredient.getIcon(), posX, posY);
       guiGraphics.pose().pushPose();
-      String s = String.valueOf(ingredient.value());
-      guiGraphics.pose().translate(0.0F, 0.0F, 200.0F);
-      int color = 16777215;
-      if (ingredient.value() < 0) {
-        color = 16733525;
+      if (ingredient.value() != Integer.MAX_VALUE) {
+        String s = String.valueOf(ingredient.value());
+        guiGraphics.pose().translate(0.0F, 0.0F, 200.0F);
+        int color = 16777215;
+        if (ingredient.value() < 0) {
+          color = 16733525;
+        }
+        guiGraphics.drawString(font, s, posX + 19 - 2 - font.width(s), posY + 6 + 3, color, true);
       }
-      guiGraphics.drawString(font, s, posX + 19 - 2 - font.width(s), posY + 6 + 3, color, true);
       guiGraphics.pose().translate(0, 0, 200);
       guiGraphics.blit(posX, posY, 0, 16, 16, sprite);
       guiGraphics.pose().popPose();

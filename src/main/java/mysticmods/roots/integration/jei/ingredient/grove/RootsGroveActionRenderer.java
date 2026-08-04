@@ -11,7 +11,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -37,11 +36,14 @@ public class RootsGroveActionRenderer implements IIngredientRenderer<GroveAction
       RenderSystem.enableDepthTest();
 
       Minecraft minecraft = Minecraft.getInstance();
-      TextureAtlasSprite sprite = minecraft.getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
+      TextureAtlasSprite sprite = minecraft.getTextureAtlas(RootsAPI.OVERLAYS_ATLAS_FILE)
           .apply(RootsAPI.rl("gui/grove_action_symbol"));
       Font font = getFontRenderer(minecraft, ingredient);
       // TODO: Cache this
       Item item = ingredient.builtInRegistryHolder().getData(DataMaps.GROVE_ACTION_ICONS);
+      if (item == null) {
+        RootsAPI.LOG.error("No item associated with grove action {}.", ingredient);
+      }
       ItemStack stack = new ItemStack(item);
       guiGraphics.renderFakeItem(stack, posX, posY);
       guiGraphics.pose().pushPose();

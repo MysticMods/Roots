@@ -17,11 +17,11 @@ public final class RootsAtlasProvider extends SpriteSourceProvider {
 
   @Override
   protected void gather() {
-    this.atlas(SpriteSourceProvider.BLOCKS_ATLAS)
+    this.atlas(RootsAPI.OVERLAYS_ATLAS)
         .addSource(new SingleFile(RootsAPI.rl("gui/grove_action_symbol"), Optional.empty()));
-    this.atlas(SpriteSourceProvider.BLOCKS_ATLAS)
+    this.atlas(RootsAPI.OVERLAYS_ATLAS)
         .addSource(new SingleFile(RootsAPI.rl("gui/grove_power_symbol"), Optional.empty()));
-    this.atlas(SpriteSourceProvider.BLOCKS_ATLAS)
+    this.atlas(RootsAPI.OVERLAYS_ATLAS)
         .addSource(new SingleFile(RootsAPI.rl("gui/grove_reputation_symbol"), Optional.empty()));
   }
 }

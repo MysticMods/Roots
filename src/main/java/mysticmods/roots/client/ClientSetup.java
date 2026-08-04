@@ -345,4 +345,9 @@ public class ClientSetup {
     GEAS_MODEL = event.getModels().get(GEAS);
     NO_GROVE_STONE_MODEL = event.getModels().get(NO_GROVE_STONE);
   }
+
+  @SubscribeEvent
+  public static void onAtlasCreation (RegisterMaterialAtlasesEvent event) {
+    event.register(RootsAPI.OVERLAYS_ATLAS_FILE, RootsAPI.OVERLAYS_ATLAS);
+  }
 }

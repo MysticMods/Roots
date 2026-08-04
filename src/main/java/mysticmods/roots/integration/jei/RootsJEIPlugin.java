@@ -90,7 +90,7 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   public static IDrawable INFO_DRAWABLE;
-  public static EnumMap<GrovePowerGenerator.Symmetry, IDrawable> GROVE_POWER_SYMMETRY_DRAWABLES = new EnumMap<>(GrovePowerGenerator.Symmetry.class);
+  public static Map<GrovePowerGenerator.Symmetry, IDrawable> GROVE_POWER_SYMMETRY_DRAWABLES = new EnumMap<>(GrovePowerGenerator.Symmetry.class);
 
   private static <T> IIngredientType<T> ingredient(Class<T> clazz) {
     return () -> clazz;
@@ -320,8 +320,8 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, RootsDimensionType.CODEC);
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
     registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
-    List<GroveNumber> groveStuff = new ArrayList<>(GroveNumber.all(1, IGroveNumber.Type.POWER));
-    groveStuff.addAll(GroveNumber.all(1, IGroveNumber.Type.REPUTATION));
+    List<GroveNumber> groveStuff = new ArrayList<>(GroveNumber.all(Integer.MAX_VALUE, IGroveNumber.Type.POWER));
+    groveStuff.addAll(GroveNumber.all(Integer.MAX_VALUE, IGroveNumber.Type.REPUTATION));
     registration.register(GROVE_NUMBER_TYPE, groveStuff, new RootsGroveNumberHelper(), GROVE_NUMBER_RENDERER, GroveNumber.CODEC);
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()
         .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
