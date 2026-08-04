@@ -1838,7 +1838,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
-                .result(ModItems.CULTIVAITON_GROVE_STONE, 1)
+                .result(ModItems.CULTIVATION_GROVE_STONE, 1)
                 .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.WILDEWHEET_HERB)
                 .requires(RootsTags.Items.WILDEWHEET_HERB)

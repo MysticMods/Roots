@@ -21,6 +21,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
+import mysticmods.roots.api.grove.IGroveNumber;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -271,7 +272,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.RITUAL_ANIMAL_HARVEST.get(), ANIMAL_HARVEST_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.FUNGAL_TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE);
     registration.addRecipeCatalyst(Items.GLASS_BOTTLE, ENTITY_INTERACTION_TYPE);
-    //registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.PRIMAL_GROVE_STONE.get(), ModItems.SPROUTING_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
+    registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.PRIMAL_GROVE_STONE.get(), ModItems.CULTIVATION_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
   }
 
   @Override
@@ -319,13 +320,8 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, RootsDimensionType.CODEC);
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
     registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
-    List<GroveNumber> groveStuff = new ArrayList<>();
-    for (Grove grove : RootsRegistries.GROVES) {
-      groveStuff.add(new GroveNumber(grove.builtInRegistryHolder(), 1, GroveNumber.GroveNumberType.POWER));
-    }
-    for (Grove grove : RootsRegistries.GROVES) {
-      groveStuff.add(new GroveNumber(grove.builtInRegistryHolder(), 1, GroveNumber.GroveNumberType.REPUTATION));
-    }
+    List<GroveNumber> groveStuff = new ArrayList<>(GroveNumber.all(1, IGroveNumber.Type.POWER));
+    groveStuff.addAll(GroveNumber.all(1, IGroveNumber.Type.REPUTATION));
     registration.register(GROVE_NUMBER_TYPE, groveStuff, new RootsGroveNumberHelper(), GROVE_NUMBER_RENDERER, GroveNumber.CODEC);
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()
         .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());

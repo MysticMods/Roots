@@ -162,7 +162,7 @@ public class BaseRecipeData {
     }
 
     public Builder requires(Grove grove, int value) {
-      this.powerRequirements.add(new GroveNumber(grove, value, GroveNumber.GroveNumberType.POWER));
+      this.powerRequirements.add(GroveNumber.power(grove, value));
       return this;
     }
 
