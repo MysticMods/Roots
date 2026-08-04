@@ -15,6 +15,7 @@ import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.RootsIngredientHelper;
+import mysticmods.roots.integration.jei.ingredient.grove.GroveReputation;
 import mysticmods.roots.recipe.fake.GroveWithReputation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -78,15 +79,16 @@ public class GroveWithReputationCategory implements IRecipeCategory<GroveWithRep
     }
 
     var slot = builder.addSlot(RecipeIngredientRole.OUTPUT, 192, 2)
-        .setCustomRenderer(RootsJEIPlugin.GROVE_NUMBER_TYPE, RootsJEIPlugin.GROVE_NUMBER_RENDERER);
+        .setCustomRenderer(RootsJEIPlugin.GROVE_REPUTATION_TYPE, RootsJEIPlugin.GROVE_REPUTATION_RENDERER);
 
     if (recipe.entry().unique()) {
-      slot.addIngredient(RootsJEIPlugin.GROVE_NUMBER_TYPE, GroveNumber.reputation(recipe.entry().grove(), recipe.entry()
-          .reputation().gain1()));
+      slot.addIngredient(RootsJEIPlugin.GROVE_REPUTATION_TYPE, new GroveReputation(GroveNumber.reputation(recipe.entry()
+          .grove(), recipe.entry()
+          .reputation().gain1())));
     } else {
-      List<GroveNumber> outputs = recipe.entry().reputation().stream()
-          .mapToObj(f -> GroveNumber.reputation(recipe.entry().grove(), f)).toList();
-      slot.addIngredients(RootsJEIPlugin.GROVE_NUMBER_TYPE, outputs);
+      List<GroveReputation> outputs = recipe.entry().reputation().stream()
+          .mapToObj(f -> new GroveReputation(GroveNumber.reputation(recipe.entry().grove(), f))).toList();
+      slot.addIngredients(RootsJEIPlugin.GROVE_REPUTATION_TYPE, outputs);
     }
 
   }

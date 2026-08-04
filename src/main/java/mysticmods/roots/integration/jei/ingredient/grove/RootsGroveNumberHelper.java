@@ -4,7 +4,7 @@ import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.grove.IGroveNumber;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.util.TagUtil;
@@ -18,51 +18,47 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class RootsGroveNumberHelper implements IIngredientHelper<GroveNumber> {
+public abstract class RootsGroveNumberHelper<T extends IGroveNumber> implements IIngredientHelper<T> {
   @Override
-  public Optional<TagKey<?>> getTagKeyEquivalent(Collection<GroveNumber> ingredients) {
+  public Optional<TagKey<?>> getTagKeyEquivalent(Collection<T> ingredients) {
     Registry<Grove> registry = RootsRegistries.GROVES;
-    return TagUtil.getTagEquivalent(ingredients, GroveNumber::grove, registry::getTags);
+    return TagUtil.getTagEquivalent(ingredients, IGroveNumber::grove, registry::getTags);
   }
 
   @Override
-  public IIngredientType<GroveNumber> getIngredientType() {
-    return RootsJEIPlugin.GROVE_NUMBER_TYPE;
-  }
+  public abstract IIngredientType<T> getIngredientType();
 
   @Override
-  public String getDisplayName(GroveNumber type) {
+  public String getDisplayName(T type) {
     return type.grove().getName().getString();
   }
 
   @Override
-  public Stream<ResourceLocation> getTagStream(GroveNumber ingredient) {
+  public Stream<ResourceLocation> getTagStream(T ingredient) {
     return ingredient.grove().builtInRegistryHolder().tags().map(TagKey::location);
   }
 
   @SuppressWarnings("removal")
   @Override
-  public String getUniqueId(GroveNumber ingredient, UidContext context) {
+  public String getUniqueId(T ingredient, UidContext context) {
     return getUid(ingredient, context);
   }
 
   @Override
-  public String getUid(GroveNumber type, UidContext context) {
+  public String getUid(T type, UidContext context) {
     return getResourceLocation(type).toString();
   }
 
   @Override
-  public ResourceLocation getResourceLocation(GroveNumber type) {
-    return Objects.requireNonNull(RootsRegistries.GROVES.getKey(type.grove()));
-  }
+  public abstract ResourceLocation getResourceLocation(T type);
 
   @Override
-  public GroveNumber copyIngredient(GroveNumber type) {
+  public T copyIngredient(T type) {
     return type;
   }
 
   @Override
-  public String getErrorInfo(@Nullable GroveNumber type) {
+  public String getErrorInfo(@Nullable T type) {
     if (type == null) {
       return "null";
     }
@@ -71,5 +67,31 @@ public class RootsGroveNumberHelper implements IIngredientHelper<GroveNumber> {
       return "unnamed";
     }
     return name.toString();
+  }
+
+  public static class Power extends RootsGroveNumberHelper<GrovePower> {
+
+    @Override
+    public IIngredientType<GrovePower> getIngredientType() {
+      return RootsJEIPlugin.GROVE_POWER_TYPE;
+    }
+
+    @Override
+    public ResourceLocation getResourceLocation(GrovePower type) {
+      return Objects.requireNonNull(RootsRegistries.GROVES.getKey(type.grove())).withSuffix("_power");
+    }
+  }
+
+  public static class Reputation extends RootsGroveNumberHelper<GroveReputation> {
+
+    @Override
+    public IIngredientType<GroveReputation> getIngredientType() {
+      return RootsJEIPlugin.GROVE_REPUTATION_TYPE;
+    }
+
+    @Override
+    public ResourceLocation getResourceLocation(GroveReputation type) {
+      return Objects.requireNonNull(RootsRegistries.GROVES.getKey(type.grove())).withSuffix("_reputation");
+    }
   }
 }

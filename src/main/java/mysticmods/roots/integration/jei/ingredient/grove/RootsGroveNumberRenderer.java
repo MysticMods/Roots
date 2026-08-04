@@ -5,6 +5,7 @@ import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.grove.IGroveNumber;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -18,14 +19,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber> {
+public class RootsGroveNumberRenderer<T extends IGroveNumber> implements IIngredientRenderer<T> {
   @Override
-  public void render(GuiGraphics guiGraphics, @Nullable GroveNumber ingredient) {
+  public void render(GuiGraphics guiGraphics, @Nullable T ingredient) {
     render(guiGraphics, ingredient, 0, 0);
   }
 
   @Override
-  public void render(GuiGraphics guiGraphics, @Nullable GroveNumber ingredient, int posX, int posY) {
+  public void render(GuiGraphics guiGraphics, @Nullable T ingredient, int posX, int posY) {
     if (ingredient != null) {
       RenderSystem.enableDepthTest();
 
@@ -59,7 +60,7 @@ public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber
   // TODO:
   @SuppressWarnings("removal")
   @Override
-  public List<Component> getTooltip(GroveNumber ingredient, TooltipFlag tooltipFlag) {
+  public List<Component> getTooltip(T ingredient, TooltipFlag tooltipFlag) {
     List<Component> result = new ArrayList<>();
     result.add(ingredient.grove().getStyledName().append(Component.translatable("roots.jei.ingredient.grove_" + ingredient.type().getSerializedName())));
     if (ingredient.value() != Integer.MAX_VALUE) {
@@ -73,7 +74,7 @@ public class RootsGroveNumberRenderer implements IIngredientRenderer<GroveNumber
   }
 
   @Override
-  public void getTooltip(ITooltipBuilder tooltip, GroveNumber ingredient, TooltipFlag tooltipFlag) {
+  public void getTooltip(ITooltipBuilder tooltip, T ingredient, TooltipFlag tooltipFlag) {
     tooltip.addAll(getTooltip(ingredient, tooltipFlag));
   }
 
