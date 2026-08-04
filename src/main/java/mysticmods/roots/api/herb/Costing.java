@@ -251,6 +251,10 @@ public class Costing {
         throw new IllegalStateException("Multiplicative costs cannot be found in the parent");
       }
 
+      if (cost.getType().isNegative()) {
+        throw new IllegalStateException("Negative costs cannot be found in the parent");
+      }
+
       var cur = baseCosts.getOrDefault(cost.getHerb(), 0.0);
       baseCosts.put(cost.getHerb(), cur + cost.getValue());
     }
@@ -295,31 +299,43 @@ public class Costing {
         }
       }
     }
-    // TODO: This assumes that the List<Cost> is sorted:
-    // - Additives first
-    // - Multiplicative base second
-    // - Multiply totals last
     for (Map.Entry<Herb, List<Cost>> entry : herbCosts.entrySet()) {
       double total = 0;
+
+      boolean negated = false;
+
       for (Cost cost : entry.getValue()) {
-        if (cost.getType().isMultiplicative()) {
+        if (cost.getType().isMultiplicative() || cost.getType().isNegative()) {
+          if (cost.getType() == CostType.NEGATE_COST) {
+            negated = true;
+            total = 0;
+            break;
+          }
           continue;
         }
 
         total += cost.getValue();
       }
-      for (Cost cost : entry.getValue()) {
-        if (cost.getType() == CostType.MULTIPLICATIVE_BASE) {
-          var val = cost.getValue();
-          total += (baseCosts.getOrDefault(entry.getKey(), 0) * val);
-        }
-      }
-      for (Cost cost : entry.getValue()) {
-        if (cost.getType() != CostType.MULTIPLICATIVE_TOTAL) {
-          continue;
-        }
 
-        total *= cost.getValue();
+      if (!negated) {
+        for (Cost cost : entry.getValue()) {
+          if (cost.getType() == CostType.MULTIPLICATIVE_BASE) {
+            var val = cost.getValue();
+            total += (baseCosts.getOrDefault(entry.getKey(), 0) * val);
+          }
+        }
+        for (Cost cost : entry.getValue()) {
+          if (cost.getType() == CostType.NEGATE_BASE_COST) {
+            total -= baseCosts.getOrDefault(entry.getKey(), 0);
+          }
+        }
+        for (Cost cost : entry.getValue()) {
+          if (cost.getType() != CostType.MULTIPLICATIVE_TOTAL) {
+            continue;
+          }
+
+          total *= cost.getValue();
+        }
       }
 
       if (total <= 0) {

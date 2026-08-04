@@ -3,6 +3,7 @@ package mysticmods.roots.api.herb;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.init.ModHerbs;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -51,6 +52,14 @@ public class Cost {
 
   public static Cost multTotal (Holder<Herb> herb, double value) {
     return new Cost(CostType.MULTIPLICATIVE_TOTAL, herb, value);
+  }
+
+  public static Cost negateBase () {
+    return new Cost(CostType.NEGATE_BASE_COST, ModHerbs.WILDROOT, 0);
+  }
+
+  public static Cost negate (Holder<Herb> herb) {
+    return new Cost(CostType.NEGATE_COST, herb, 0);
   }
 
   @Override

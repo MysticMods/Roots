@@ -11,22 +11,25 @@ import java.util.Locale;
 import java.util.function.IntFunction;
 
 public enum CostType implements StringRepresentable {
-  ADDITIVE(false),
-  MULTIPLICATIVE_BASE(true),
-  MULTIPLICATIVE_TOTAL(true);
+  ADDITIVE(),
+  MULTIPLICATIVE_BASE(),
+  MULTIPLICATIVE_TOTAL(),
+  NEGATE_BASE_COST(),
+  NEGATE_COST();
 
-  private final boolean multiplicative;
-
-  CostType(boolean multiplicative) {
-    this.multiplicative = multiplicative;
+  CostType() {
   }
 
   public boolean isMultiplicative() {
-    return multiplicative;
+    return this == MULTIPLICATIVE_BASE || this == MULTIPLICATIVE_TOTAL;
+  }
+
+  public boolean isNegative () {
+    return this == NEGATE_BASE_COST || this == NEGATE_COST;
   }
 
   public boolean isAdditive() {
-    return !multiplicative;
+    return !isMultiplicative();
   }
 
   public static final Codec<CostType> CODEC = StringRepresentable.fromEnum(CostType::values);
