@@ -71,10 +71,10 @@ public class DandelionWindsSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    if (pPlayer.hasEffect(ModEffects.DANDELION_WINDS)) {
+/*    if (pPlayer.hasEffect(ModEffects.DANDELION_WINDS)) {
       costs.noCharge();
       return 0;
-    }
+    }*/
 
     int curDuration = duration + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_DURATION) * durationIncrease);
     float curChance = deflectionChance + (instance.count(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_CHANCE) * deflectionChanceIncrease);

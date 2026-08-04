@@ -18,6 +18,7 @@ import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -61,14 +62,29 @@ public class AquaBubbleSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    if (pPlayer.hasEffect(ModEffects.AQUA_BUBBLE)) {
+/*    if (pPlayer.hasEffect(ModEffects.AQUA_BUBBLE)) {
+      AquaBubbleSnapshot snapshot = SnapshotHelper.getSnapshot(pPlayer, ModSerializers.AQUA_BUBBLE.get());
+      if (snapshot != null) {
+        var absorb = pPlayer.getEffect(MobEffects.ABSORPTION);
+        if (absorb == null || absorb.getAmplifier() < snapshot.getAbsorption()) {
+          // Can-reapply
+          pPlayer.removeEffect(ModEffects.AQUA_BUBBLE);
+          pPlayer.removeEffect(MobEffects.ABSORPTION);
+        }
+
+
+      }
+    }*/
+
+/*    if (pPlayer.hasEffect(ModEffects.AQUA_BUBBLE)) {
       costs.noCharge();
       return 0;
-    }
+    }*/
+
     pPlayer.extinguishFire();
     SnapshotHelper.addLiving(pPlayer, ModSerializers.AQUA_BUBBLE.get(), new AquaBubbleSnapshot(pPlayer, duration, absorption, fire_reduction, lava_reduction));
-    pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, 0, false, false));
-    pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, absorption, false, false));
+    pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, 0, false, false), pPlayer);
+    pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, absorption, false, false), pPlayer);
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastAquaBubbleFXPacket(pPlayer.getId()));
     return cooldown;
   }
