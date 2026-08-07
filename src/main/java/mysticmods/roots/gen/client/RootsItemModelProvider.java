@@ -429,14 +429,11 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.ACID_CLOUD_PEACEFUL, Items.TURTLE_EGG);
 
     String spellLocation = "item/spells/rampant_growth";
-    getBuilder(ModModifiers.RAMPANT_GROWTH.getKey().location().toString())
+    getBuilder(ModModifiers.RAMPANT_GROWTH.getKey().location().withPrefix("item/").toString())
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", RootsAPI.rl(spellLocation));
 
-    spellLocation = "item/spells/growth_infusion";
-    getBuilder(ModModifiers.TARGETED_GROWTH.getKey().location().toString())
-        .parent(new ModelFile.UncheckedModelFile("item/generated"))
-        .texture("layer0", RootsAPI.rl(spellLocation));
+    modifier(ModModifiers.TARGETED_GROWTH, Items.TARGET);
 
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));

@@ -17,9 +17,9 @@ import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.util.CastingSuccessCache;
 import mysticmods.roots.network.client.ClientboundClearHighlightPacket;
+import mysticmods.roots.network.client.fx.casting.CastChannelChargingFXPacket;
 import mysticmods.roots.network.client.fx.casting.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.casting.CastChannelFailFXPacket;
-import mysticmods.roots.network.client.fx.casting.CastChannelChargingFXPacket;
 import mysticmods.roots.network.client.fx.casting.CastChannelTargetFXPacket;
 import mysticmods.roots.util.PlayerGetter;
 import mysticmods.roots.util.TooltipUtil;
@@ -192,8 +192,8 @@ public class CastingItem extends Item {
       Costing costs = new Costing(spell);
       costs.updateHerbCache(pPlayer);
 
-      if (ticks % 20 == 0) {
-        if (!costs.canAfford(pPlayer, true)) {
+      if (!costs.canAfford(pPlayer, true)) {
+        if (ticks % 20 == 0) {
           RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getName().getString());
           CastingSuccessCache.clear(pStack);
           pPlayer.stopUsingItem();

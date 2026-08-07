@@ -18,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -128,16 +129,28 @@ public class TooltipUtil {
   }
 
   public static void baseModifierCostTooltip(Item.TooltipContext context, List<Component> result, SpellModifier modifier, TooltipFlag flag) {
-    for (Cost cost : modifier.getCosts().costs()) {
-      Herb herb = cost.getHerb();
-      String herbCost = cost.getType() == CostType.ADDITIVE ? String.format("%.4f", cost.getValue()) : String.format("%.1f", (cost.getValue()) * 100); // TODO: This doesn't work properly for reductions
-      String amountKey = switch (cost.getType()) {
-        case ADDITIVE -> "roots.tooltip.cost.cost_amount";
-        case MULTIPLICATIVE_BASE -> "roots.tooltip.cost.cost_multiply_base";
-        case MULTIPLICATIVE_TOTAL -> "roots.tooltip.cost.cost_multiply_total";
-        default -> "roots.tooltip.cost.cost_amount";
-      };
-      result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable(amountKey, herbCost)));
+    var modifierCosts = new ArrayList<>(modifier.getCosts().costs());
+
+    var negated = modifierCosts.removeIf(o -> o.getType().isNegative());
+
+    if (negated) {
+      var baseCosts = modifier.getApplicableHolder().value().getCosts();
+      for (Cost cost : baseCosts.costs()) {
+        modifierCosts.addFirst(Cost.negate(cost));
+      }
+    }
+
+    for (Cost cost : modifierCosts) {
+        Herb herb = cost.getHerb();
+        String herbCost = cost.getType()
+            .isMultiplicative() ? String.format("%.1f", (cost.getValue()) * 100) : String.format("%.4f", Math.abs(cost.getValue())); // TODO: This doesn't work properly for reductions
+        String amountKey = switch (cost.getType()) {
+          case ADDITIVE -> "roots.tooltip.cost.cost_amount";
+          case MULTIPLICATIVE_BASE -> "roots.tooltip.cost.cost_multiply_base";
+          case MULTIPLICATIVE_TOTAL -> "roots.tooltip.cost.cost_multiply_total";
+          default -> "roots.tooltip.cost.cost_cancel";
+        };
+        result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable(amountKey, herbCost)));
     }
   }
 
@@ -161,6 +174,9 @@ public class TooltipUtil {
     for (Map.Entry<Herb, Costing.HerbCost> entry : cos.getTooltipCost().entrySet()) {
       Herb herb = entry.getKey();
       Costing.HerbCost cost = entry.getValue();
+      if (cost.total() <= 0) {
+        continue;
+      }
       String herbCost = String.format("%.4f", cost.total());
       if (cost.modifiers() != 0) {
         String herbModifierCost = String.format("%.4f", Math.abs(cost.modifiers()));

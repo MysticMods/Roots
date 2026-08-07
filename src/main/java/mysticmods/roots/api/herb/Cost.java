@@ -58,6 +58,14 @@ public class Cost {
     return new Cost(CostType.NEGATE_BASE_COST, ModHerbs.WILDROOT, 0);
   }
 
+  public static Cost negate (Cost cost) {
+    var value = cost.getValue();
+    if (value > 0) {
+      value = -value;
+    }
+    return new Cost(CostType.NEGATE_BASE_COST, cost.getHolder(), value);
+  }
+
   @Override
   public String toString() {
     return "Cost{" +

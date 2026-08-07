@@ -151,6 +151,9 @@ public class Costing {
 
     if (!isCreative) {
       for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
+        if (entry.getDoubleValue() < 0) {
+          continue;
+        }
         double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
         if (remainder != 0) {
           int toConsume = Mth.ceil(remainder);
@@ -245,7 +248,6 @@ public class Costing {
   private void calculateCosts(boolean checkModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
     baseCosts.clear();
-    Map<Herb, List<Cost>> herbCosts = new HashMap<>();
     ParentChargeType thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
       if (!cost.getType().isAdditive()) {
@@ -276,6 +278,10 @@ public class Costing {
     }*/
 
 
+    boolean doNegate = false;
+
+    Map<Herb, List<Cost>> herbCosts = new HashMap<>();
+
     for (ICostedChild modifier : parent.getChildren()) {
       if (checkModifiers && ((modifier.getChargeType() == ChildChargeType.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeType() == ChildChargeType.ALWAYS) || maxOperations) {
         for (Cost cost : modifier.getCosts().costs()) {
@@ -284,7 +290,7 @@ public class Costing {
             if (cost.getType() == CostType.MULTIPLICATIVE_TOTAL) {
               costs.add(cost); // Totals are only ever applied once
             } else if (cost.getType() == CostType.NEGATE_BASE_COST) {
-              baseCosts.clear();
+              doNegate = true;
             } else {
               if (maxOperations) {
                 for (int i = 0; i < parent.getMaximumOperations(); i++) {
@@ -302,7 +308,14 @@ public class Costing {
         }
       }
     }
-    totalCosts.putAll(baseCosts);
+
+    if (doNegate) {
+/*      for (Object2DoubleMap.Entry<Herb> entry : baseCosts.object2DoubleEntrySet()) {
+        totalCosts.put(entry.getKey(), -entry.getDoubleValue());
+      }*/
+    } else {
+      totalCosts.putAll(baseCosts);
+    }
     for (Map.Entry<Herb, List<Cost>> entry : herbCosts.entrySet()) {
       double total = 0;
 
@@ -315,7 +328,7 @@ public class Costing {
       }
 
       for (Cost cost : entry.getValue()) {
-        if (cost.getType() == CostType.MULTIPLICATIVE_BASE) {
+        if (cost.getType() == CostType.MULTIPLICATIVE_BASE && !doNegate) {
           var val = cost.getValue();
           total += (baseCosts.getOrDefault(entry.getKey(), 0) * val);
         }

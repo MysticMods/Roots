@@ -91,6 +91,7 @@ public class GrowthInfusionSpell extends Spell {
       return SpellCastResult.nothing();
     }
 
+    costs.operations(1);
     return SpellCastResult.success(cooldown);
   }
 }
