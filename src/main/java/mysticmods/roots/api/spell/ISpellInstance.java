@@ -242,6 +242,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return new SimpleSpell(UUID.randomUUID(), spell);
   }
 
+  @Nullable
   default DataComponentType<? extends Cycling<?>> getCycleComponent() {
     return asSpell().getCycleComponent(this);
   }

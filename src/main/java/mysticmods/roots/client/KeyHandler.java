@@ -4,7 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.layer.HudOverlay;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
@@ -180,12 +179,12 @@ public class KeyHandler {
       return;
     }
 
-    Spell source = spell.asSpell();
-
-    if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-      RootsAPI.LOG.error("Sending spell data change to server");
+    if (spell.getCycleComponent() != null) {
+      if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
+        RootsAPI.LOG.error("Sending spell data change to server");
+      }
+      PacketDistributor.sendToServer(new ServerboundCycleSpellModePacket(hand, spell.getCycleComponent()));
     }
-    PacketDistributor.sendToServer(new ServerboundCycleSpellModePacket(hand, spell.getCycleComponent()));
   }
 
   private static void tryOpenLibrary(Minecraft mc) {
