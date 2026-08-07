@@ -25,7 +25,7 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
     this.tag(RootsTags.Spells.NYI)
         .add(ModSpells.SUMMON_UNDEAD.get(), ModSpells.RADIANCE.get(), ModSpells.STORM_CLOUD.get(), ModSpells.DECAY.get(), ModSpells.JAUNT.get());
     this.tag(RootsTags.Spells.ADJUSTABLE_SPELL)
-        .add(ModSpells.SHATTER.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get());
+        .add(ModSpells.SHATTER.get(), ModSpells.GROWTH_INFUSION.get(), ModSpells.HARVEST.get());
 
     this.tag(RootsTags.Spells.FAIRY)
         .add(ModSpells.SYLVAN_LIGHT.get(), ModSpells.PETAL_SHELL.get(), ModSpells.ROSE_THORNS.get()/*, ModSpells.SANCTUARY.get()*/);
@@ -34,7 +34,7 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
     this.tag(RootsTags.Spells.ELEMENTAL)
         .add(ModSpells.AQUA_BUBBLE.get(), ModSpells.DANDELION_WINDS.get(), ModSpells.RADIANCE.get(), ModSpells.SHATTER.get(), ModSpells.STORM_CLOUD.get(), ModSpells.SKY_SOARER.get(), ModSpells.WILDFIRE.get());
     this.tag(RootsTags.Spells.CULTIVATION)
-        .add(ModSpells.DESATURATE.get(), ModSpells.SATURATE.get(), ModSpells.GROWTH_INFUSION.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get());
+        .add(ModSpells.DESATURATE.get(), ModSpells.SATURATE.get(), ModSpells.GROWTH_INFUSION.get(), ModSpells.HARVEST.get());
     this.tag(RootsTags.Spells.WILD).add(ModSpells.MAGNETISM.get(), ModSpells.EXTENSION.get());
     this.tag(RootsTags.Spells.TWILIGHT)
         .add(ModSpells.LIGHT_DRIFTER.get(), ModSpells.LIFE_DRAIN.get(), ModSpells.JAUNT.get(), ModSpells.TEMPORAL_MORASS.get());
@@ -44,7 +44,7 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
     this.tag(RootsTags.Spells.GEAS_ACTION).add(ModSpells.GEAS.get());
 
     this.tag(RootsTags.Spells.BLOCKS_OFF_HAND_EATING)
-        .add(ModSpells.RAMPANT_GROWTH.get(), ModSpells.GROWTH_INFUSION.get());
+        .add(ModSpells.GROWTH_INFUSION.get());
     this.tag(RootsTags.Spells.PRETEND_PICKAXE).add(ModSpells.SHATTER.get());
   }
 
