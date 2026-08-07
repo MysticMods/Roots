@@ -131,7 +131,7 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public int getMaximumOperations() {
+  public int getBaseMaximumOperations() {
     return getMaxUse();
   }
 

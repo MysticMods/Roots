@@ -257,7 +257,7 @@ public class Costing {
 
       var cur = baseCosts.getOrDefault(cost.getHerb(), 0.0);
 
-      int totalOperations = thisType == ParentChargeType.OPERATION ? maxOperations ? parent.getMaximumOperations() : operations() : 1;
+      int totalOperations = thisType == ParentChargeType.OPERATION ? maxOperations ? parent.getMaximumOperations(modifierMap) : operations() : 1;
 
       baseCosts.put(cost.getHerb(), cur + cost.getValue() * totalOperations);
     }
@@ -293,7 +293,7 @@ public class Costing {
               doNegate = true;
             } else {
               if (maxOperations) {
-                for (int i = 0; i < parent.getMaximumOperations(); i++) {
+                for (int i = 0; i < parent.getMaximumOperations(modifierMap); i++) {
                   costs.add(cost);
                 }
               } else {

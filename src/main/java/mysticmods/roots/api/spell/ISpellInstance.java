@@ -155,8 +155,8 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   @Override
-  default int getMaximumOperations() {
-    return asSpell().getMaximumOperations();
+  default int getBaseMaximumOperations() {
+    return asSpell().getBaseMaximumOperations();
   }
 
   default SpellCastType getType() {
@@ -168,7 +168,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default boolean hasBlockTarget(Player pPlayer) {
-    return asSpell().hasBlockTarget(pPlayer);
+    return asSpell().hasBlockTarget(pPlayer, this);
   }
 
   default List<Entity> selectTargets(HitResult hit, Player pPlayer) {
@@ -240,6 +240,10 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   static SimpleSpell of(Spell spell) {
     return new SimpleSpell(UUID.randomUUID(), spell);
+  }
+
+  default DataComponentType<? extends Cycling<?>> getCycleComponent() {
+    return asSpell().getCycleComponent(this);
   }
 
   record SimpleSpell(UUID id, Spell spell) implements ISpellInstance {

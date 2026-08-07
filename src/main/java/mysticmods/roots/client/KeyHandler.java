@@ -185,7 +185,7 @@ public class KeyHandler {
     if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
       RootsAPI.LOG.error("Sending spell data change to server");
     }
-    PacketDistributor.sendToServer(new ServerboundCycleSpellModePacket(hand, source.getCycleComponent()));
+    PacketDistributor.sendToServer(new ServerboundCycleSpellModePacket(hand, spell.getCycleComponent()));
   }
 
   private static void tryOpenLibrary(Minecraft mc) {

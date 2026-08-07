@@ -152,7 +152,7 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int getMaximumOperations() {
+  public int getBaseMaximumOperations() {
     return 10;
   }
 

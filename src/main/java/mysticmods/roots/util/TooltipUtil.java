@@ -3,7 +3,6 @@ package mysticmods.roots.util;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.herb.CostType;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
@@ -120,9 +119,8 @@ public class TooltipUtil {
   }
 
   public static void spellDataTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
-    Spell spell = instance.asSpell();
-    if (spell.getCycleComponent() != null) {
-      var mode = instance.getSpellData(spell.getCycleComponent());
+    if (instance.getCycleComponent() != null) {
+      var mode = instance.getSpellData(instance.getCycleComponent());
       result.add(Component.translatable("roots.tooltip.staff.data", Component.translatable("roots.spell_mode.mode"), mode.getStyledName()));
       result.add(CommonComponents.EMPTY);
     }

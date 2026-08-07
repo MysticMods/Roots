@@ -104,7 +104,7 @@ public class HarvestSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public DataComponentType<? extends Cycling<?>> getCycleComponent() {
+  public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance iSpellInstance) {
     return ModAttachments.HARVEST_MODE.get();
   }
 }

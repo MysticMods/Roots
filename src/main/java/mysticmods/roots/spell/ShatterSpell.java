@@ -115,7 +115,7 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
-  public boolean hasBlockTarget(Player pPlayer) {
+  public boolean hasBlockTarget(Player pPlayer, ISpellInstance instance) {
     return true;
   }
 

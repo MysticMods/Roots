@@ -1,7 +1,6 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.action.CropGrowthAction;
-import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -38,7 +37,6 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
 
   public RampantGrowthSpell(Spell.Properties properties) {
     super(properties);
-
   }
 
   @Override
@@ -71,7 +69,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public DataComponentType<? extends Cycling<?>> getCycleComponent() {
+  public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance iSpellInstance) {
     return ModAttachments.AOE_GROWTH_MODE.get();
   }
 
@@ -154,12 +152,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int getMaximumOperations() {
+  public int getBaseMaximumOperations() {
     return count;
-  }
-
-  @Override
-  public int getCostChargeRate() {
-    return interval;
   }
 }

@@ -190,10 +190,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return Component.translatable("roots.message.staff.charging", currentCharge, getMaxUse());
   }
 
-  public int getCostChargeRate() {
-    return 20;
-  }
-
   @Override
   public CostInstance getDefaultCosts() {
     return defaultCosts;
@@ -323,12 +319,12 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return this;
   }
 
-  public boolean hasBlockTarget(Player pPlayer) {
+  public boolean hasBlockTarget(Player pPlayer, ISpellInstance instance) {
     return false;
   }
 
   @Nullable
-  public Vec3 getBlockTarget(Player pPlayer, @Nullable ISpellInstance spell) {
+  public Vec3 getBlockTarget(Player pPlayer, ISpellInstance spell) {
     return null;
   }
 
@@ -354,7 +350,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return components;
   }
 
-  public DataComponentType<? extends Cycling<?>> getCycleComponent () {
+  public DataComponentType<? extends Cycling<?>> getCycleComponent (ISpellInstance iSpellInstance) {
     return null;
   }
 
