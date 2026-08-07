@@ -346,28 +346,28 @@ public class RootsRenderTypes {
 
     var obj = (Object) state;
 
-    RenderStateShard.EmptyTextureStateShard textureStateShard = ((AccessorMixinCompositeState) obj).rootsGetTextureState();
-    RenderStateShard.ShaderStateShard shaderStateShard = ((AccessorMixinCompositeState) obj).rootsGetShaderState();
-    RenderStateShard.TransparencyStateShard transparencyStateShard = ((AccessorMixinCompositeState) obj).rootsGetTransparencyState();
-    RenderStateShard.CullStateShard cullStateShard = ((AccessorMixinCompositeState) obj).rootsGetCullState();
-    RenderStateShard.LightmapStateShard lightmapStateShard = ((AccessorMixinCompositeState) obj).rootsGetLightmapState();
-    RenderStateShard.OverlayStateShard overlayStateShard = ((AccessorMixinCompositeState) obj).rootsGetOverlayState();
-    RenderStateShard.LayeringStateShard layeringStateShard = ((AccessorMixinCompositeState) obj).rootsGetLayeringState();
-    RenderStateShard.OutputStateShard outputStateShard = ((AccessorMixinCompositeState) obj).rootsGetOutputState();
-    RenderStateShard.TexturingStateShard texturingStateShard = ((AccessorMixinCompositeState) obj).rootsGetTexturingState();
-    RenderStateShard.WriteMaskStateShard writeMaskStateShard = ((AccessorMixinCompositeState) obj).rootsGetWriteMaskState();
-    RenderStateShard.LineStateShard lineStateShard = ((AccessorMixinCompositeState) obj).rootsGetLineState();
-    RenderStateShard.ColorLogicStateShard colorLogicStateShard = ((AccessorMixinCompositeState) obj).rootsGetColorLogicState();
-    RenderType.OutlineProperty outlineProperty = ((AccessorMixinCompositeState) obj).rootsGetOutlineProperty();
+    RenderStateShard.EmptyTextureStateShard textureStateShard = ((AccessorMixinCompositeState) obj).roots$GetTextureState();
+    RenderStateShard.ShaderStateShard shaderStateShard = ((AccessorMixinCompositeState) obj).roots$GetShaderState();
+    RenderStateShard.TransparencyStateShard transparencyStateShard = ((AccessorMixinCompositeState) obj).roots$GetTransparencyState();
+    RenderStateShard.CullStateShard cullStateShard = ((AccessorMixinCompositeState) obj).roots$GetCullState();
+    RenderStateShard.LightmapStateShard lightmapStateShard = ((AccessorMixinCompositeState) obj).roots$GetLightmapState();
+    RenderStateShard.OverlayStateShard overlayStateShard = ((AccessorMixinCompositeState) obj).roots$GetOverlayState();
+    RenderStateShard.LayeringStateShard layeringStateShard = ((AccessorMixinCompositeState) obj).roots$GetLayeringState();
+    RenderStateShard.OutputStateShard outputStateShard = ((AccessorMixinCompositeState) obj).roots$GetOutputState();
+    RenderStateShard.TexturingStateShard texturingStateShard = ((AccessorMixinCompositeState) obj).roots$GetTexturingState();
+    RenderStateShard.WriteMaskStateShard writeMaskStateShard = ((AccessorMixinCompositeState) obj).roots$GetWriteMaskState();
+    RenderStateShard.LineStateShard lineStateShard = ((AccessorMixinCompositeState) obj).roots$GetLineState();
+    RenderStateShard.ColorLogicStateShard colorLogicStateShard = ((AccessorMixinCompositeState) obj).roots$GetColorLogicState();
+    RenderType.OutlineProperty outlineProperty = ((AccessorMixinCompositeState) obj).roots$GetOutlineProperty();
 
-    result = AccessorMixinCompositeRenderType.rootsCreateCompositeRenderType(
+    result = AccessorMixinCompositeRenderType.roots$CreateCompositeRenderType(
         renderType.name + "_dissolve_depth",
         renderType.format,
         renderType.mode,
         renderType.bufferSize,
         renderType.affectsCrumbling,
         renderType.sortOnUpload,
-        AccessorMixinCompositeState.rootsCreateCompositeState(
+        AccessorMixinCompositeState.roots$CreateCompositeState(
             textureStateShard,
             shaderStateShard,
             transparencyStateShard,

@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ComposterBlock.class)
 public class MixinComposterBlock$CompostAction {
   @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;consume(ILnet/minecraft/world/entity/LivingEntity;)V"))
-  private void RootsOnComposterFill(ItemStack instance, int amount, LivingEntity entity, Operation<Void> original, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) BlockState state, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) InteractionHand hand, @Local(ordinal = 1) BlockState blockstate) {
+  private void roots$OnComposterFill(ItemStack instance, int amount, LivingEntity entity, Operation<Void> original, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) BlockState state, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) InteractionHand hand, @Local(ordinal = 1) BlockState blockstate) {
     if (!(entity instanceof ServerPlayer serverPlayer)) {
       return;
     }

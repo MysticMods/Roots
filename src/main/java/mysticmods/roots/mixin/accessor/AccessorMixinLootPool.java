@@ -12,11 +12,11 @@ import java.util.List;
 @Mixin(LootPool.class)
 public interface AccessorMixinLootPool {
   @Accessor("entries")
-  List<LootPoolEntryContainer> rootsGetEntries();
+  List<LootPoolEntryContainer> roots$GetEntries();
 
   @Accessor("conditions")
-  List<LootItemCondition> rootsGetConditions();
+  List<LootItemCondition> roots$GetConditions();
 
   @Accessor("functions")
-  List<LootItemFunction> rootsGetFunctions();
+  List<LootItemFunction> roots$GetFunctions();
 }

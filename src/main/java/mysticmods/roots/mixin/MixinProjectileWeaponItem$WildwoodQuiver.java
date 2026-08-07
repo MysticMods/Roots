@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ProjectileWeaponItem.class)
 public class MixinProjectileWeaponItem$WildwoodQuiver {
   @WrapOperation(method = "useAmmo", at = @At(target = "Lnet/minecraft/world/entity/player/Inventory;removeItem(Lnet/minecraft/world/item/ItemStack;)V", value = "INVOKE"))
-  private static void rootsUseAmmo(Inventory instance, ItemStack ammo, Operation<Void> original, @Local Player player) {
+  private static void roots$UseAmmo(Inventory instance, ItemStack ammo, Operation<Void> original, @Local Player player) {
     // Important: even though the component exists when you examine the item stack, if it evaluates to empty (i.e., count is 0, which is the case for this injection point to even reach), the components/patch that is consulted by `has` will be empty.
     int oldCount = ammo.getCount();
     ammo.setCount(1);

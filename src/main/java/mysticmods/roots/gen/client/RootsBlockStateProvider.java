@@ -542,7 +542,7 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     String prefix = holder.getKey().location().getPath().replace("crop", "");
     getVariantBuilder(holder.value())
         .forAllStates(state -> {
-          String file = prefix + state.getValue(((AccessorMixinCropBlock) state.getBlock()).rootsCallGetAgeProperty());
+          String file = prefix + state.getValue(((AccessorMixinCropBlock) state.getBlock()).roots$CallGetAgeProperty());
           ModelFile stege = models().getBuilder(file)
               .parent(crop)
               .renderType("cutout")

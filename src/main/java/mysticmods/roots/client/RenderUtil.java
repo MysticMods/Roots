@@ -1,6 +1,5 @@
 package mysticmods.roots.client;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -24,7 +23,6 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
@@ -423,7 +421,7 @@ public class RenderUtil {
     if (OTHER_RENDER_TYPES.contains(type)) {
       return false;
     }
-    boolean equal = ((AccessorMixinCompositeState) (Object) ((AccessorMixinCompositeRenderType) type).rootsGetState()).rootsGetDepthTestState()
+    boolean equal = ((AccessorMixinCompositeState) (Object) ((AccessorMixinCompositeRenderType) type).rootsGetState()).roots$GetDepthTestState()
         .equals(RenderType.EQUAL_DEPTH_TEST);
     if (equal) {
       EQUAL_RENDER_TYPES.add(type);
@@ -460,7 +458,7 @@ public class RenderUtil {
       return false;
     }
     RenderType.CompositeState state = ((AccessorMixinCompositeRenderType) type).rootsGetState();
-    if (((AccessorMixinCompositeState) (Object) state).rootsGetTextureState() instanceof RenderStateShard.MultiTextureStateShard) {
+    if (((AccessorMixinCompositeState) (Object) state).roots$GetTextureState() instanceof RenderStateShard.MultiTextureStateShard) {
       return false;
     }
 

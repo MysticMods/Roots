@@ -35,7 +35,7 @@ import java.util.List;
 
 public class RootsClientHooks {
   public static void clearTooltipItem() {
-    ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetLastToolHighlight(ItemStack.EMPTY);
+    ((AccessorMixinGui) Minecraft.getInstance().gui).roots$SetLastToolHighlight(ItemStack.EMPTY);
   }
 
   public static void setAnimalHarvestRecipes(List<AnimalHarvestRecipe> recipes) {
@@ -308,8 +308,8 @@ public class RootsClientHooks {
           return;
         }
 
-        ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetLastToolHighlight(tome);
-        ((AccessorMixinGui) Minecraft.getInstance().gui).rootsSetToolHighlightTimer((int) (40.0 * mc.options.notificationDisplayTime()
+        ((AccessorMixinGui) Minecraft.getInstance().gui).roots$SetLastToolHighlight(tome);
+        ((AccessorMixinGui) Minecraft.getInstance().gui).roots$SetToolHighlightTimer((int) (40.0 * mc.options.notificationDisplayTime()
             .get()));
       }
       /*    }*/

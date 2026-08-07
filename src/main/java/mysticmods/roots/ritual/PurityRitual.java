@@ -49,8 +49,8 @@ public class PurityRitual extends Ritual {
         if (zombie.isConverting()) {
           entity.extinguishFire();
           if (convertZombies) {
-            int conversionTime = ((AccessorMixinZombieVillager) zombie).rootsGetVillagerConversionTime();
-            ((AccessorMixinZombieVillager) zombie).rootsSetVillagerConversionTime(conversionTime - conversionAddition);
+            int conversionTime = ((AccessorMixinZombieVillager) zombie).roots$GetVillagerConversionTime();
+            ((AccessorMixinZombieVillager) zombie).roots$SetVillagerConversionTime(conversionTime - conversionAddition);
           }
         }
       } else {

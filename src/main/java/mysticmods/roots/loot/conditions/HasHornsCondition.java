@@ -25,8 +25,8 @@ public record HasHornsCondition(boolean inverse) implements LootItemCondition {
     if (looted instanceof DeerEntity deer) {
       flag = deer.getEntityData().get(DeerEntity.hasHorns);
     } else if (looted instanceof Goat goat) {
-      flag = goat.getEntityData().get(AccessorMixinGoat.getDataHasLeftHorn()) || goat.getEntityData()
-          .get(AccessorMixinGoat.getDataHasRightHorn());
+      flag = goat.getEntityData().get(AccessorMixinGoat.roots$getDataHasLeftHorn()) || goat.getEntityData()
+          .get(AccessorMixinGoat.roots$getDataHasRightHorn());
     } else {
       flag = false;
     }

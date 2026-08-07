@@ -18,7 +18,7 @@ public class MixinBrushableBlockEntity$BrushBlockAction {
   private ItemStack item;
 
   @WrapOperation(method = "brush", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BrushableBlockEntity;brushingCompleted(Lnet/minecraft/world/entity/player/Player;)V"))
-  private void RootsOnBlockBrush(BrushableBlockEntity instance, Player player, Operation<Void> original) {
+  private void roots$OnBlockBrush(BrushableBlockEntity instance, Player player, Operation<Void> original) {
     if (player instanceof ServerPlayer serverPlayer) {
       BrushableBlockEntity blockEntity = (BrushableBlockEntity) (Object) this;
       BrushBlockAction.Context context = new BrushBlockAction.Context(serverPlayer.serverLevel(), serverPlayer, blockEntity.getBlockPos(), blockEntity.getBlockState(), item, blockEntity);

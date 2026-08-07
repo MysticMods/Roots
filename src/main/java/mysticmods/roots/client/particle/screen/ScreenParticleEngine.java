@@ -109,7 +109,7 @@ public class ScreenParticleEngine {
 
   public static SpriteSet getSpriteSet(ParticleType<?> type) {
     ResourceLocation key = BuiltInRegistries.PARTICLE_TYPE.getKey(type);
-    return ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).rootsGetSpriteSets().get(key);
+    return ((AccessorMixinParticleEngine) Minecraft.getInstance().particleEngine).roots$GetSpriteSets().get(key);
   }
 
   public static <T extends ParticleOptions> void register(ParticleType<T> type, ScreenParticleProvider<T> provider) {

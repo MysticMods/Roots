@@ -26,7 +26,7 @@ public class MixinPlayer$IncreaseItemBoundingBox {
   }
 
   @WrapOperation(method = "aiStep", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z"))
-  private boolean lootr$increaseItemBoundingBox(List<ItemEntity> instance, Operation<Boolean> original, @Local AABB aabb) {
+  private boolean roots$increaseItemBoundingBox(List<ItemEntity> instance, Operation<Boolean> original, @Local AABB aabb) {
     var result = original.call(instance);
     if ((Object) this instanceof ServerPlayer player) {
       var helm = player.getItemBySlot(EquipmentSlot.HEAD);

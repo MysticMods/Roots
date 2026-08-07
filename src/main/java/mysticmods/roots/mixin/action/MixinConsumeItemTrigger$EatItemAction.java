@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(ConsumeItemTrigger.class)
 public class MixinConsumeItemTrigger$EatItemAction {
   @WrapMethod(method = "trigger")
-  private void RootsTriggerConsumeItem(ServerPlayer player, ItemStack stack, Operation<Void> original) {
+  private void roots$TriggerConsumeItem(ServerPlayer player, ItemStack stack, Operation<Void> original) {
     original.call(player, stack);
     EatItemAction.Context context = new EatItemAction.Context(player.serverLevel(), player, stack);
     ModActions.EAT_ITEM.get().accept(context);

@@ -43,7 +43,7 @@ public record GrowthRecord(Block cropBlock, Optional<IntegerProperty> agePropert
   public static GrowthRecord of(Block cropBlock, String agePropertyName, int maximumAge, int ticks, CanGrowFunction canGrowFunction, LightFunction lightFunction) {
     IntegerProperty ageProperty = null;
     if (cropBlock instanceof CropBlock crop) {
-      ageProperty = ((AccessorMixinCropBlock) crop).rootsCallGetAgeProperty();
+      ageProperty = ((AccessorMixinCropBlock) crop).roots$CallGetAgeProperty();
     } else if (cropBlock != null) {
       BlockState blockState = cropBlock.defaultBlockState();
       for (Property<?> property : blockState.getProperties()) {
@@ -61,7 +61,7 @@ public record GrowthRecord(Block cropBlock, Optional<IntegerProperty> agePropert
     IntegerProperty ageProperty = null;
     int maxValue = -1;
     if (cropBlock instanceof CropBlock crop) {
-      ageProperty = ((AccessorMixinCropBlock) crop).rootsCallGetAgeProperty();
+      ageProperty = ((AccessorMixinCropBlock) crop).roots$CallGetAgeProperty();
       maxValue = crop.getMaxAge();
     } else {
       BlockState blockState = cropBlock.defaultBlockState();

@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(TextureAtlas.class)
 public interface AccessorMixinTextureAtlas {
   @Invoker("getWidth")
-  int rootsGetWidth();
+  int roots$GetWidth();
 
   @Invoker("getHeight")
-  int rootsGetHeight();
+  int roots$GetHeight();
 }

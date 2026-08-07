@@ -490,7 +490,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
     var builder23 = builder(DataMaps.HARVEST_SEED_TO_CROP);
     BuiltInRegistries.BLOCK.forEach(block -> {
       if (block instanceof CropBlock crop) {
-        Item seed = ((AccessorMixinCropBlock) crop).rootsCallGetBaseSeedId().asItem();
+        Item seed = ((AccessorMixinCropBlock) crop).roots$CallGetBaseSeedId().asItem();
         builder23.add(seed.builtInRegistryHolder(), block, false);
       }
     });
@@ -498,7 +498,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
     var builder23a = builder(DataMaps.GROWTH_SEED_TO_CROP);
     BuiltInRegistries.BLOCK.forEach(block -> {
       if (block instanceof CropBlock crop) {
-        Item seed = ((AccessorMixinCropBlock) crop).rootsCallGetBaseSeedId().asItem();
+        Item seed = ((AccessorMixinCropBlock) crop).roots$CallGetBaseSeedId().asItem();
         builder23a.add(seed.builtInRegistryHolder(), block, false);
       }
     });

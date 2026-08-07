@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(ThrownPotion.class)
 public class MixinThrownPotion$ExtinguishPyre {
   @WrapMethod(method = "dowseFire")
-  private void rootsDowseFire(BlockPos pos, Operation<Void> original) {
+  private void roots$DowseFire(BlockPos pos, Operation<Void> original) {
     Level level = ((ThrownPotion) (Object) this).level();
     BlockState state = level.getBlockState(pos);
     original.call(pos);

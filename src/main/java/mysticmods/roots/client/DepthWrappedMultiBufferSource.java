@@ -26,7 +26,7 @@ public class DepthWrappedMultiBufferSource implements MultiBufferSource {
     } else if (USE_DELEGATE.contains(renderType)) {
       return delegate.getBuffer(RootsRenderTypes.getDissolveDepth(renderType));
     } else {
-      if (((AccessorMixinCompositeState) (Object) ((AccessorMixinCompositeRenderType) renderType).rootsGetState()).rootsGetDepthTestState()
+      if (((AccessorMixinCompositeState) (Object) ((AccessorMixinCompositeRenderType) renderType).rootsGetState()).roots$GetDepthTestState()
           .equals(RenderType.EQUAL_DEPTH_TEST)) {
         EQUAL_DEPTH.add(renderType);
         return delegate.getBuffer(renderType);

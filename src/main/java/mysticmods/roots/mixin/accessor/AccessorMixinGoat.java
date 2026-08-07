@@ -9,17 +9,17 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(Goat.class)
 public interface AccessorMixinGoat {
   @Accessor("DATA_IS_SCREAMING_GOAT")
-  static EntityDataAccessor<Boolean> getDataIsScreamingGoat() {
+  static EntityDataAccessor<Boolean> roots$getDataIsScreamingGoat() {
     throw new NotImplementedException();
   }
 
   @Accessor("DATA_HAS_LEFT_HORN")
-  static EntityDataAccessor<Boolean> getDataHasLeftHorn() {
+  static EntityDataAccessor<Boolean> roots$getDataHasLeftHorn() {
     throw new NotImplementedException();
   }
 
   @Accessor("DATA_HAS_RIGHT_HORN")
-  static EntityDataAccessor<Boolean> getDataHasRightHorn() {
+  static EntityDataAccessor<Boolean> roots$getDataHasRightHorn() {
     throw new NotImplementedException();
   }
 }

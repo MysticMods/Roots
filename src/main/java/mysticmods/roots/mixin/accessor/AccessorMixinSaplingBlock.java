@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(SaplingBlock.class)
 public interface AccessorMixinSaplingBlock {
   @Accessor("treeGrower")
-  TreeGrower rootsGetTreeGrower();
+  TreeGrower roots$GetTreeGrower();
 }

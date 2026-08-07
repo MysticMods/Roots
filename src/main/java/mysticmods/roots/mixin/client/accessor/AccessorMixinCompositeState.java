@@ -9,49 +9,49 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(RenderType.CompositeState.class)
 public interface AccessorMixinCompositeState {
   @Accessor("textureState")
-  RenderStateShard.EmptyTextureStateShard rootsGetTextureState();
+  RenderStateShard.EmptyTextureStateShard roots$GetTextureState();
 
   @Accessor("shaderState")
-  RenderStateShard.ShaderStateShard rootsGetShaderState();
+  RenderStateShard.ShaderStateShard roots$GetShaderState();
 
   @Accessor("transparencyState")
-  RenderStateShard.TransparencyStateShard rootsGetTransparencyState();
+  RenderStateShard.TransparencyStateShard roots$GetTransparencyState();
 
   @Accessor("depthTestState")
-  RenderStateShard.DepthTestStateShard rootsGetDepthTestState();
+  RenderStateShard.DepthTestStateShard roots$GetDepthTestState();
 
   @Accessor("cullState")
-  RenderStateShard.CullStateShard rootsGetCullState();
+  RenderStateShard.CullStateShard roots$GetCullState();
 
   @Accessor("lightmapState")
-  RenderStateShard.LightmapStateShard rootsGetLightmapState();
+  RenderStateShard.LightmapStateShard roots$GetLightmapState();
 
   @Accessor("overlayState")
-  RenderStateShard.OverlayStateShard rootsGetOverlayState();
+  RenderStateShard.OverlayStateShard roots$GetOverlayState();
 
   @Accessor("layeringState")
-  RenderStateShard.LayeringStateShard rootsGetLayeringState();
+  RenderStateShard.LayeringStateShard roots$GetLayeringState();
 
   @Accessor("outputState")
-  RenderStateShard.OutputStateShard rootsGetOutputState();
+  RenderStateShard.OutputStateShard roots$GetOutputState();
 
   @Accessor("texturingState")
-  RenderStateShard.TexturingStateShard rootsGetTexturingState();
+  RenderStateShard.TexturingStateShard roots$GetTexturingState();
 
   @Accessor("writeMaskState")
-  RenderStateShard.WriteMaskStateShard rootsGetWriteMaskState();
+  RenderStateShard.WriteMaskStateShard roots$GetWriteMaskState();
 
   @Accessor("lineState")
-  RenderStateShard.LineStateShard rootsGetLineState();
+  RenderStateShard.LineStateShard roots$GetLineState();
 
   @Accessor("colorLogicState")
-  RenderStateShard.ColorLogicStateShard rootsGetColorLogicState();
+  RenderStateShard.ColorLogicStateShard roots$GetColorLogicState();
 
   @Accessor("outlineProperty")
-  RenderType.OutlineProperty rootsGetOutlineProperty();
+  RenderType.OutlineProperty roots$GetOutlineProperty();
 
   @Invoker("<init>")
-  static RenderType.CompositeState rootsCreateCompositeState(
+  static RenderType.CompositeState roots$CreateCompositeState(
       RenderStateShard.EmptyTextureStateShard textureState,
       RenderStateShard.ShaderStateShard shaderState,
       RenderStateShard.TransparencyStateShard transparencyState,

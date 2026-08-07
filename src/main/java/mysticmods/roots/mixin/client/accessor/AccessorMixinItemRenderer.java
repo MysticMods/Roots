@@ -9,17 +9,17 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(ItemRenderer.class)
 public interface AccessorMixinItemRenderer {
   @Accessor("itemModelShaper")
-  ItemModelShaper RootsGetItemModelShaper();
+  ItemModelShaper roots$GetItemModelShaper();
 
   @Accessor("TRIDENT_MODEL")
-  ModelResourceLocation RootsGetTridentModel();
+  ModelResourceLocation roots$GetTridentModel();
 
   @Accessor("TRIDENT_IN_HAND_MODEL")
-  ModelResourceLocation RootsGetTridentInHandModel();
+  ModelResourceLocation roots$GetTridentInHandModel();
 
   @Accessor("SPYGLASS_MODEL")
-  ModelResourceLocation RootsGetSpyglassModel();
+  ModelResourceLocation roots$GetSpyglassModel();
 
   @Accessor("SPYGLASS_IN_HAND_MODEL")
-  ModelResourceLocation RootsGetSpyglassInHandModel();
+  ModelResourceLocation roots$GetSpyglassInHandModel();
 }

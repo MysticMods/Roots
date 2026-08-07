@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(CuredZombieVillagerTrigger.class)
 public class MixinCuredZombieVillagerTrigger$CureVillagerAction {
   @WrapMethod(method = "trigger")
-  private void RootsTriggerCureZombieVillager(ServerPlayer player, Zombie zombie, Villager villager, Operation<Void> original) {
+  private void roots$TriggerCureZombieVillager(ServerPlayer player, Zombie zombie, Villager villager, Operation<Void> original) {
     original.call(player, zombie, villager);
     CureVillagerAction.Context context = new CureVillagerAction.Context(player.serverLevel(), player, villager, zombie);
     ModActions.CURE_VILLAGER.get().accept(context);

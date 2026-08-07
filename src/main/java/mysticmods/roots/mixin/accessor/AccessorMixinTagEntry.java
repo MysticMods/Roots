@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(TagEntry.class)
 public interface AccessorMixinTagEntry {
   @Accessor("tag")
-  TagKey<Item> rootsGetTag();
+  TagKey<Item> roots$GetTag();
 
   @Accessor("expand")
-  boolean rootsGetExpand();
+  boolean roots$GetExpand();
 }

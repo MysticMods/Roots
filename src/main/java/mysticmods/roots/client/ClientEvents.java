@@ -40,7 +40,7 @@ public class ClientEvents {
     if (BLOCKS_ATLAS_SIZE == null) {
       RootsAPI.LOG.error("Blocks atlas size not initialized, fetching from Minecraft instance.");
       TextureAtlas atlas = Minecraft.getInstance().getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS);
-      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas) atlas).rootsGetHeight());
+      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).roots$GetWidth(), ((AccessorMixinTextureAtlas) atlas).roots$GetHeight());
     }
     return BLOCKS_ATLAS_SIZE;
   }
@@ -67,7 +67,7 @@ public class ClientEvents {
   public static void onTextureStitched(TextureAtlasStitchedEvent event) {
     TextureAtlas atlas = event.getAtlas();
     if (atlas.location().equals(TextureAtlas.LOCATION_BLOCKS)) {
-      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).rootsGetWidth(), ((AccessorMixinTextureAtlas) atlas).rootsGetHeight());
+      BLOCKS_ATLAS_SIZE = new Vec2(((AccessorMixinTextureAtlas) atlas).roots$GetWidth(), ((AccessorMixinTextureAtlas) atlas).roots$GetHeight());
     }
   }
 
@@ -95,7 +95,7 @@ public class ClientEvents {
         float bobbingOffset = Mth.sin(ticks * 0.1f) * 0.05f;
         float pulse = 0.05f * Mth.sin(ticks * 0.1f) + 0.95f;
         poseStack.translate(0f, entity.getBbHeight() + entity.getBbHeight() * 0.2 + bobbingOffset, 0);
-        poseStack.mulPose(((AccessorMixinEntityRenderer) renderer).rootsGetEntityRenderDispatcher()
+        poseStack.mulPose(((AccessorMixinEntityRenderer) renderer).roots$GetEntityRenderDispatcher()
             .cameraOrientation());
         poseStack.scale(0.3f * pulse, 0.3f * pulse, 0.3f * pulse);
         poseStack.translate(-0.5f, 0, -0.5f);

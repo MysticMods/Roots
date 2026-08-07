@@ -22,10 +22,10 @@ public record HarvestGrowingPlantBlock() implements HarvestFunction {
       return;
     }
 
-    Block body = ((AccessorMixinGrowingPlantBlock) growing).rootsGetBodyBlock();
-    Direction dir = ((AccessorMixinGrowingPlantBlock) growing).rootsGetGrowthDirection();
+    Block body = ((AccessorMixinGrowingPlantBlock) growing).roots$GetBodyBlock();
+    Direction dir = ((AccessorMixinGrowingPlantBlock) growing).roots$GetGrowthDirection();
 
-    Block head = ((AccessorMixinGrowingPlantBlock) growing).rootsGetHeadBlock();
+    Block head = ((AccessorMixinGrowingPlantBlock) growing).roots$GetHeadBlock();
     BlockPos first = pos.relative(dir);
     BlockPos last = pos;
 

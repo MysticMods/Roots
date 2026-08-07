@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(BoneMealItem.class)
 public class MixinBoneMealItem$GrowAction {
   @WrapOperation(method = "applyBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BonemealableBlock;performBonemeal(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/util/RandomSource;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"))
-  private static void RootsActionApplyBonemeal(BonemealableBlock instance, ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState, Operation<Void> original, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) Player player, @Local BlockState originalState) {
+  private static void roots$ActionApplyBonemeal(BonemealableBlock instance, ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState, Operation<Void> original, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) Player player, @Local BlockState originalState) {
     original.call(instance, serverLevel, randomSource, blockPos, blockState);
     if (player != null && !level.isClientSide()) {
       InteractionHand hand = InteractionHand.MAIN_HAND;

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(BrewingStandBlockEntity.class)
 public class MixinBrewingStandBlockEntity {
   @WrapOperation(method = "canPlaceItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-  private boolean lootr$canPlaceAllowInfernoBulb(ItemStack instance, Item item, Operation<Boolean> original) {
+  private boolean roots$canPlaceAllowInfernoBulb(ItemStack instance, Item item, Operation<Boolean> original) {
     if (instance.is(RootsTags.Items.INFERNO_BULB_HERB)) {
       return true;
     }
@@ -21,7 +21,7 @@ public class MixinBrewingStandBlockEntity {
   }
 
   @WrapOperation(method = "serverTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-  private static boolean lootr$allowInfernoBulb(ItemStack instance, Item item, Operation<Boolean> original) {
+  private static boolean roots$allowInfernoBulb(ItemStack instance, Item item, Operation<Boolean> original) {
     if (instance.is(RootsTags.Items.INFERNO_BULB_HERB)) {
       return true;
     }

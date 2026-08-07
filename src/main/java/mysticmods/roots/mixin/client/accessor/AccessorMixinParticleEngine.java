@@ -11,11 +11,11 @@ import java.util.Queue;
 @Mixin(ParticleEngine.class)
 public interface AccessorMixinParticleEngine {
   @Accessor("trackingEmitters")
-  Queue<TrackingEmitter> rootsGetTrackingEmitters();
+  Queue<TrackingEmitter> roots$GetTrackingEmitters();
 
   @Accessor("particles")
-  Map<ParticleRenderType, Queue<Particle>> rootsGetParticles();
+  Map<ParticleRenderType, Queue<Particle>> roots$GetParticles();
 
   @Accessor("spriteSets")
-  Map<ResourceLocation, SpriteSet> rootsGetSpriteSets();
+  Map<ResourceLocation, SpriteSet> roots$GetSpriteSets();
 }

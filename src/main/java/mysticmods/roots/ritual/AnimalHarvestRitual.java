@@ -112,7 +112,7 @@ public class AnimalHarvestRitual extends Ritual {
       return false;
     }
 
-    List<LootPool> pools = ((AccessorMixinLootTable) table).rootsGetPools();
+    List<LootPool> pools = ((AccessorMixinLootTable) table).roots$GetPools();
     if (pools.isEmpty()) {
       emptyLoot.add(entity.getType());
       return false;

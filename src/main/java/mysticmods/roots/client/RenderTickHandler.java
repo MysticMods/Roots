@@ -114,7 +114,7 @@ public class RenderTickHandler {
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
 
       renderingDelayedParticles = true;
-      var allParticles = ((AccessorMixinParticleEngine) mc.particleEngine).rootsGetParticles();
+      var allParticles = ((AccessorMixinParticleEngine) mc.particleEngine).roots$GetParticles();
 
       Frustum frustum = event.getFrustum();
       float partialTick = getPartialTick();
@@ -223,7 +223,7 @@ public class RenderTickHandler {
             for (Map.Entry<BlockPos, BlockState> entry : blocks.entrySet()) {
               BlockPos target = entry.getKey();
               if (!pos.equals(target) && !ClientHooks.onDrawHighlight(renderer, info, rayTraceResult.withPosition(target), event.getDeltaTracker(), matrix, buffer)) {
-                ((AccessorMixinLevelRenderer) renderer).rootsCallRenderHitOutline(matrix, consumer, player, renderView.x, renderView.y, renderView.z, target, entry.getValue());
+                ((AccessorMixinLevelRenderer) renderer).roots$CallRenderHitOutline(matrix, consumer, player, renderView.x, renderView.y, renderView.z, target, entry.getValue());
               }
             }
             outliningArea = false;

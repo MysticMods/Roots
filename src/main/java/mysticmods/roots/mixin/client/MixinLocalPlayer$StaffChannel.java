@@ -17,7 +17,7 @@ public class MixinLocalPlayer$StaffChannel {
   protected int sprintTriggerTime;
 
   @WrapOperation(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/Input;forwardImpulse:F", opcode = Opcodes.PUTFIELD))
-  private void RootsModifyChannelMovementSpeedForward(Input input, float newValue, Operation<Void> original) {
+  private void roots$ModifyChannelMovementSpeedForward(Input input, float newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
       original.call(input, newValue);
@@ -25,7 +25,7 @@ public class MixinLocalPlayer$StaffChannel {
   }
 
   @WrapOperation(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/Input;leftImpulse:F", opcode = Opcodes.PUTFIELD))
-  private void RootsModifyChannelMovementSpeedLeft(Input input, float newValue, Operation<Void> original) {
+  private void roots$ModifyChannelMovementSpeedLeft(Input input, float newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
       original.call(input, newValue);
@@ -33,7 +33,7 @@ public class MixinLocalPlayer$StaffChannel {
   }
 
   @WrapOperation(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/LocalPlayer;sprintTriggerTime:I", opcode = Opcodes.PUTFIELD))
-  private void RootsModifyChannelMovementSpeedSprint(LocalPlayer player, int newValue, Operation<Void> original) {
+  private void roots$ModifyChannelMovementSpeedSprint(LocalPlayer player, int newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
       original.call(player, newValue);

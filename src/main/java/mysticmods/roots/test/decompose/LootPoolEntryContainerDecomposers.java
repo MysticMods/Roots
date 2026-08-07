@@ -27,7 +27,7 @@ public class LootPoolEntryContainerDecomposers {
       if (result == null) {
         result = new ArrayList<>();
       }
-      result.add(new ItemRecord(((AccessorMixinLootItem) lootItem).rootsGetItem().value()));
+      result.add(new ItemRecord(((AccessorMixinLootItem) lootItem).roots$GetItem().value()));
       return result;
     }
   }
@@ -83,7 +83,7 @@ public class LootPoolEntryContainerDecomposers {
     @Override
     public List<ItemRecord> perform(NestedLootTable nestedLootTable, @Nullable List<ItemRecord> result) {
       LootTable table =
-          ((AccessorMixinNestedLootTable) nestedLootTable).rootsGetContents()
+          ((AccessorMixinNestedLootTable) nestedLootTable).roots$GetContents()
               .map(resourceKey -> ServerLifecycleHooks.getCurrentServer().reloadableRegistries()
                   .getLootTable(resourceKey), Function.identity());
       return Decomposers.LOOT_TABLE.perform(List.of(table), result);
@@ -117,7 +117,7 @@ public class LootPoolEntryContainerDecomposers {
       if (result == null) {
         result = new ArrayList<>();
       }
-      result.add(new ItemRecord(((AccessorMixinTagEntry)tagEntry).rootsGetTag()));
+      result.add(new ItemRecord(((AccessorMixinTagEntry)tagEntry).roots$GetTag()));
       return result;
     }
 

@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(Gui.class)
 public interface AccessorMixinGui {
   @Accessor("lastToolHighlight")
-  void rootsSetLastToolHighlight(ItemStack stack);
+  void roots$SetLastToolHighlight(ItemStack stack);
 
   @Accessor("toolHighlightTimer")
-  void rootsSetToolHighlightTimer(int timer);
+  void roots$SetToolHighlightTimer(int timer);
 }

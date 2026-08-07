@@ -7,7 +7,6 @@ import mysticmods.roots.mixin.accessor.AccessorMixinLootTable;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntries;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import org.jetbrains.annotations.Nullable;
 
@@ -85,7 +84,7 @@ public class Decomposers {
       if (result == null) {
         result = new ArrayList<>();
       }
-      result.addAll(((AccessorMixinLootTable) lootTables).rootsGetPools());
+      result.addAll(((AccessorMixinLootTable) lootTables).roots$GetPools());
       return result;
     }
   }
@@ -96,7 +95,7 @@ public class Decomposers {
       if (result == null) {
         result = new ArrayList<>();
       }
-      result.addAll(((AccessorMixinLootPool) lootPool).rootsGetEntries());
+      result.addAll(((AccessorMixinLootPool) lootPool).roots$GetEntries());
       return result;
     }
   }

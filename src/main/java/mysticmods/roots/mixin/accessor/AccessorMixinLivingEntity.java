@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(LivingEntity.class)
 public interface AccessorMixinLivingEntity {
   @Invoker("tickEffects")
-  void rootsCallTickEffects();
+  void roots$CallTickEffects();
 }

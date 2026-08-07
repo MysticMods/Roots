@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Cow.class)
 public class MixinCow$MilkCowAction {
   @WrapOperation(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V"))
-  public void RootsOnCowInteract(Player player, InteractionHand hand, ItemStack itemStack, Operation<Void> original, @Local(ordinal = 0) ItemStack itemstack, @Local(ordinal = 1) ItemStack itemStack1) {
+  public void roots$OnCowInteract(Player player, InteractionHand hand, ItemStack itemStack, Operation<Void> original, @Local(ordinal = 0) ItemStack itemstack, @Local(ordinal = 1) ItemStack itemStack1) {
     if (player instanceof ServerPlayer serverPlayer) {
       MilkCowAction.Context context = new MilkCowAction.Context(serverPlayer.serverLevel(), serverPlayer, (Cow) (Object) this, hand, itemstack, itemStack1);
       ModActions.MILK_COW.get().accept(context);

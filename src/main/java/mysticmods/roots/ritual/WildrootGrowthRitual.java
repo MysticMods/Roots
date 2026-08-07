@@ -64,7 +64,7 @@ public class WildrootGrowthRitual extends Ritual {
       if (!belowState.isFaceSturdy(level, below, Direction.UP) || !belowState.isCollisionShapeFullBlock(level, below)) {
         level.setBlock(below, Blocks.DIRT.defaultBlockState(), 3);
       }
-      if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).rootsGetTreeGrower()
+      if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).roots$GetTreeGrower()
           .growTree(level, level.getChunkSource()
               .getGenerator(), treePos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
         level.setBlock(below, belowState, 3);

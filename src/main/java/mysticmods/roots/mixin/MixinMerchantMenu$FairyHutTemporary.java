@@ -16,7 +16,7 @@ public class MixinMerchantMenu$FairyHutTemporary {
   private Merchant trader;
 
   @WrapMethod(method = "playTradeSound")
-  private void RootsPlayTradeSound(Operation<Void> original) {
+  private void roots$PlayTradeSound(Operation<Void> original) {
     if (trader instanceof Entity) {
       // Prevent crash with non-Entity traders (e.g., fairy huts)
       original.call();

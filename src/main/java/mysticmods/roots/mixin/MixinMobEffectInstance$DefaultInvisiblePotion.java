@@ -21,7 +21,7 @@ public class MixinMobEffectInstance$DefaultInvisiblePotion {
   private boolean visible;
 
   @WrapMethod(method = "isVisible")
-  protected boolean RootsInjectIsVisible(Operation<Boolean> original) {
+  protected boolean roots$InjectIsVisible(Operation<Boolean> original) {
     if (!roots_1_21$checkedParticles) {
       Holder<MobEffect> effect = ((MobEffectInstance) (Object) this).getEffect();
       if (effect.value() instanceof SimpleEffect simpleEffect) {

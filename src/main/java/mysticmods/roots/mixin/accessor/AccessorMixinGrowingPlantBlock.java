@@ -11,11 +11,11 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(GrowingPlantBlock.class)
 public interface AccessorMixinGrowingPlantBlock {
   @Accessor("growthDirection")
-  Direction rootsGetGrowthDirection();
+  Direction roots$GetGrowthDirection();
 
   @Invoker("getBodyBlock")
-  Block rootsGetBodyBlock();
+  Block roots$GetBodyBlock();
 
   @Invoker("getHeadBlock")
-  GrowingPlantHeadBlock rootsGetHeadBlock();
+  GrowingPlantHeadBlock roots$GetHeadBlock();
 }

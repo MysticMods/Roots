@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(BeehiveBlock.class)
 public class MixinBeehiveBlock$HarvestBeeHiveAction {
   @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;awardStat(Lnet/minecraft/stats/Stat;)V"))
-  private void RootsBeehiveHarvested(Player player, Stat<?> stat, Operation<Void> original, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) BlockState state, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) InteractionHand hand) {
+  private void roots$BeehiveHarvested(Player player, Stat<?> stat, Operation<Void> original, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) BlockState state, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) InteractionHand hand) {
     original.call(player, stat);
     if (player instanceof ServerPlayer serverPlayer) {
       HarvestBeeHiveAction.Context context = new HarvestBeeHiveAction.Context(serverPlayer.serverLevel(), serverPlayer, pos, state, stack);

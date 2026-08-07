@@ -9,5 +9,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(LootItem.class)
 public interface AccessorMixinLootItem {
   @Accessor("item")
-  Holder<Item> rootsGetItem();
+  Holder<Item> roots$GetItem();
 }

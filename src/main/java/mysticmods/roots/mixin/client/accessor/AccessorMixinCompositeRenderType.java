@@ -14,7 +14,7 @@ public interface AccessorMixinCompositeRenderType {
   RenderType.CompositeState rootsGetState();
 
   @Invoker("<init>")
-  static RenderType.CompositeRenderType rootsCreateCompositeRenderType(
+  static RenderType.CompositeRenderType roots$CreateCompositeRenderType(
       String name,
       VertexFormat format,
       VertexFormat.Mode mode,

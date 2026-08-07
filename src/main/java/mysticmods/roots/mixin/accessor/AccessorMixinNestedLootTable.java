@@ -10,5 +10,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(NestedLootTable.class)
 public interface AccessorMixinNestedLootTable {
   @Accessor("contents")
-  Either<ResourceKey<LootTable>, LootTable> rootsGetContents();
+  Either<ResourceKey<LootTable>, LootTable> roots$GetContents();
 }

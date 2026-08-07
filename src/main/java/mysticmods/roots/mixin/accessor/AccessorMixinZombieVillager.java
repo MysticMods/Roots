@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(ZombieVillager.class)
 public interface AccessorMixinZombieVillager {
   @Accessor("villagerConversionTime")
-  int rootsGetVillagerConversionTime();
+  int roots$GetVillagerConversionTime();
 
   @Accessor("villagerConversionTime")
-  void rootsSetVillagerConversionTime(int time);
+  void roots$SetVillagerConversionTime(int time);
 }

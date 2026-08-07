@@ -113,7 +113,7 @@ public class DisarmSpell extends TwoRadiusSpell {
         }
 
         if (mob != null) {
-          float defaultChance = ((AccessorMixinMob) mob).rootsInvokeGetEquipmentDropChance(slot);
+          float defaultChance = ((AccessorMixinMob) mob).roots$getEquipmentDropChance(slot);
           if (defaultChance == 0.0f) {
             continue;
           }

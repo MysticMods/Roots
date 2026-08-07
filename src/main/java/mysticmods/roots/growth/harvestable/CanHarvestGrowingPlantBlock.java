@@ -20,9 +20,9 @@ public record CanHarvestGrowingPlantBlock() implements CanHarvestFunction {
       return false;
     }
 
-    Block head = ((AccessorMixinGrowingPlantBlock) growing).rootsGetHeadBlock();
-    Block body = ((AccessorMixinGrowingPlantBlock) growing).rootsGetBodyBlock();
-    Direction dir = ((AccessorMixinGrowingPlantBlock) growing).rootsGetGrowthDirection();
+    Block head = ((AccessorMixinGrowingPlantBlock) growing).roots$GetHeadBlock();
+    Block body = ((AccessorMixinGrowingPlantBlock) growing).roots$GetBodyBlock();
+    Direction dir = ((AccessorMixinGrowingPlantBlock) growing).roots$GetGrowthDirection();
 
     BlockPos behind = blockPos.relative(dir.getOpposite());
     BlockPos ahead = blockPos.relative(dir);

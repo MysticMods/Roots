@@ -17,7 +17,7 @@ import java.util.List;
 @Mixin(PiglinAi.class)
 public class MixinPiglinAi$TradeAction {
   @WrapOperation(method = "stopHoldingOffHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/piglin/PiglinAi;getBarterResponseItems(Lnet/minecraft/world/entity/monster/piglin/Piglin;)Ljava/util/List;"))
-  private static List<ItemStack> RootsStopHoldingOffHandItem(Piglin piglin, Operation<List<ItemStack>> original) {
+  private static List<ItemStack> roots$StopHoldingOffHandItem(Piglin piglin, Operation<List<ItemStack>> original) {
     List<ItemStack> result = original.call(piglin);
 
     if (!result.isEmpty()) {
