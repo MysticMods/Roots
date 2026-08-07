@@ -8,6 +8,7 @@
     "MixinBoneMealItem",
     "MixinBrewingStandBlockEntity",
     "MixinBrewingStandMenu$FuelSlot",
+    "MixinComponentSerialization$IngredientContents",
     "MixinMerchantMenu$FairyHutTemporary",
     "MixinMobEffectInstance$DefaultInvisiblePotion",
     "MixinPlayer$IncreaseItemBoundingBox",
