@@ -225,6 +225,23 @@
         }
       ]
     },
+    "roots:growth_infusion/rampant_growth": {
+      "costs": [
+        {
+          "type": "negate_base_cost",
+          "defaultValue": 0.0,
+          "herb": "roots:wildroot"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.031,
+          "herb": "roots:wildewheet"
+        }
+      ]
+    },
+    "roots:growth_infusion/targeted_growth": {
+      "costs": []
+    },
     "roots:shatter/fortune_i": {
       "costs": [
         {

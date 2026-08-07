@@ -762,6 +762,8 @@
   "spell_modifier.roots.dandelion_winds.vortex_cooldown_iii": "Vortex Cooldown III",
   "spell_modifier.roots.dandelion_winds.vortex_cooldown_iv": "Vortex Cooldown IV",
   "spell_modifier.roots.dandelion_winds.vortex_cooldown_v": "Vortex Cooldown V",
+  "spell_modifier.roots.growth_infusion.rampant_growth": "Rampant Growth",
+  "spell_modifier.roots.growth_infusion.targeted_growth": "Targeted Growth",
   "spell_modifier.roots.shatter.fortune_i": "Fortune I",
   "spell_modifier.roots.shatter.fortune_i.description": "Applies Fortune I when breaking blocks.",
   "spell_modifier.roots.shatter.fortune_i.description.extended": "Applies Fortune I when breaking blocks.",

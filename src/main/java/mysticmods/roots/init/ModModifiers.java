@@ -1,6 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
@@ -43,6 +44,9 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_STATUE = REGISTER.register("dandelion_winds/statue", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey()));
 
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_INFERNO = REGISTER.register("dandelion_winds/inferno", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey()));
+
+  public static final DeferredHolder<SpellModifier, SpellModifier> TARGETED_GROWTH = REGISTER.register("growth_infusion/targeted_growth", () -> new SpellModifier(CostInstance.empty(), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.RAMPANT_GROWTH.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> RAMPANT_GROWTH = REGISTER.register("growth_infusion/rampant_growth", () -> new SpellModifier(CostInstance.of(Cost.negateBase(), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.TARGETED_GROWTH.getKey()));
 
   // Sylvan Light
   // Auto-place to fill dark

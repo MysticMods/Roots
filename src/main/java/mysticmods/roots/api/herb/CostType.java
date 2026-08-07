@@ -14,9 +14,7 @@ public enum CostType implements StringRepresentable {
   ADDITIVE(),
   MULTIPLICATIVE_BASE(),
   MULTIPLICATIVE_TOTAL(),
-  NEGATE_BASE_COST(),
-  NEGATE_COST();
-
+  NEGATE_BASE_COST();
   CostType() {
   }
 
@@ -25,11 +23,11 @@ public enum CostType implements StringRepresentable {
   }
 
   public boolean isNegative () {
-    return this == NEGATE_BASE_COST || this == NEGATE_COST;
+    return this == NEGATE_BASE_COST;
   }
 
   public boolean isAdditive() {
-    return !isMultiplicative();
+    return !isMultiplicative() && !isNegative();
   }
 
   public static final Codec<CostType> CODEC = StringRepresentable.fromEnum(CostType::values);

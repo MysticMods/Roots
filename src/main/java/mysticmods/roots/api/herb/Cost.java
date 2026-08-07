@@ -58,10 +58,6 @@ public class Cost {
     return new Cost(CostType.NEGATE_BASE_COST, ModHerbs.WILDROOT, 0);
   }
 
-  public static Cost negate (Holder<Herb> herb) {
-    return new Cost(CostType.NEGATE_COST, herb, 0);
-  }
-
   @Override
   public String toString() {
     return "Cost{" +

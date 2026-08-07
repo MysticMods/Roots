@@ -32,9 +32,13 @@ import java.util.List;
 
 // Note: VISUALS DONE!
 public class GrowthInfusionSpell extends Spell {
-  public GrowthInfusionSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x30ff30, 0xc0ffc0);
+  public GrowthInfusionSpell(Properties properties) {
+    super(properties);
   }
+
+/*  public GrowthInfusionSpell(ChatFormatting color, CostInstance costs) {
+    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x30ff30, 0xc0ffc0);
+  }*/
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {

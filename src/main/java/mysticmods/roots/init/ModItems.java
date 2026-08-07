@@ -553,6 +553,8 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3);
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4);
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5);
+    modifier(ITEMS, ModModifiers.RAMPANT_GROWTH);
+    modifier(ITEMS, ModModifiers.TARGETED_GROWTH);
   }
 /*
 
