@@ -183,6 +183,7 @@ public class KeyHandler {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Sending spell data change to server");
       }
+      // TODO: This seems potentially dangerous, should just cycle the item not send this
       PacketDistributor.sendToServer(new ServerboundCycleSpellModePacket(hand, spell.getCycleComponent()));
     }
   }
