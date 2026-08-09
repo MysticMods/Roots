@@ -120,6 +120,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
     // This is a very specific hack.
     if (inHand.is(ModItems.FIRE_STARTER.get())) {
+      if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
+        RootsAPI.LOG.info("Deferring `use` iteraction on PyreBlockEntity at {} in {} by {} as item is a fire starter.", pos, level.dimension()
+            .location(), player);
+      }
       return InteractionResult.PASS;
     }
     if (level.isClientSide()) {
@@ -130,8 +134,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       Optional<IFluidHandlerItem> optFluid = FluidUtil.getFluidHandler(inHand);
       if (optFluid.isPresent()) {
         IFluidHandlerItem fluidHandler = optFluid.get();
+        // TODO: Make configurable (Hello, SeriousCreature!)
         FluidStack toDrain = new FluidStack(Fluids.WATER, FluidType.BUCKET_VOLUME);
         if (FluidStack.isSameFluidSameComponents(fluidHandler.drain(toDrain, IFluidHandler.FluidAction.SIMULATE), toDrain)) {
+          if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
+            RootsAPI.LOG.info("Stopping ritual on PyreBlockEntity at {} in {} as player {} used an item with a suitable water fluid ({})", pos, level.dimension()
+                .location(), player, inHand);
+          }
           stopRitual(true);
           if (!player.isCreative()) {
             fluidHandler.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);

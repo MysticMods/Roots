@@ -1,5 +1,6 @@
 package mysticmods.roots.block;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
@@ -42,6 +43,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.Nullable;
 
@@ -102,10 +104,33 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
   @Override
   public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
-    if (state.getValue(PyreBlock.ACTIVE) && !context.getLevel().isClientSide() && context.getLevel()
-        .getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
-      pyre.stopRitual(false);
-      return state.setValue(PyreBlock.ACTIVE, false).setValue(PyreBlock.LIT, false);
+    var level = context.getLevel();
+    if (level.getBlockEntity(context.getClickedPos()) instanceof PyreBlockEntity pyre) {
+      if (itemAbility == ItemAbilities.SHOVEL_DOUSE && ConfigManager.ENABLE_EXTINGUISH_PYRE.getAsBoolean()) {
+        if (state.getValue(PyreBlock.ACTIVE)) {
+          if (!simulate && !level.isClientSide()) {
+            if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
+              RootsAPI.LOG.info("Actually stopping ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+            }
+            pyre.stopRitual(false);
+          } else {
+            RootsAPI.LOG.info("Simulated stopping ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+          }
+          return state.setValue(PyreBlock.ACTIVE, false).setValue(PyreBlock.LIT, false);
+        }
+      } else if (itemAbility == ItemAbilities.FIRESTARTER_LIGHT) {
+        if (!state.getValue(PyreBlock.ACTIVE)) {
+          if (!simulate && !level.isClientSide()) {
+            if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
+              RootsAPI.LOG.info("Actually starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+            }
+            pyre.light(context.getPlayer());
+          } else {
+            RootsAPI.LOG.info("Simulated starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+          }
+          return state.setValue(PyreBlock.ACTIVE, true).setValue(PyreBlock.LIT, true);
+        }
+      }
     }
     return super.getToolModifiedState(state, context, itemAbility, simulate);
   }

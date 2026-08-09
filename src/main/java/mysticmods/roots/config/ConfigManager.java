@@ -46,6 +46,9 @@ public class ConfigManager {
   public static final ModConfigSpec.IntValue PYRE_BOUNDS_Y;
   public static final ModConfigSpec.IntValue PYRE_BOUNDS_Z;
 
+  public static final ModConfigSpec.BooleanValue DEBUG_PYRE;
+  public static final ModConfigSpec.BooleanValue ENABLE_EXTINGUISH_PYRE;
+
   public static final ModConfigSpec.IntValue ENCHANTED_TURF_TICKS;
 
   public static final ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_ZX;
@@ -130,6 +133,10 @@ public class ConfigManager {
         .defineInRange("pyre_bounds_y", 10, 1, Integer.MAX_VALUE);
     PYRE_BOUNDS_Z = COMMON_BUILDER.comment("the Z half value for the size of the Pyre aoe bounding box")
         .defineInRange("pyre_bounds_z", 10, 1, Integer.MAX_VALUE);
+    DEBUG_PYRE = COMMON_BUILDER.comment("if true, will print messages about every interaction with pyre")
+        .define("debug_pyre", false);
+    ENABLE_EXTINGUISH_PYRE = COMMON_BUILDER.comment("allows pyres to be extinguished through various means (right-click shovel, splash potion of water)")
+        .define("enable_extinguish_pyre", true);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for Grove Stones").push("grove_stones");
     RANK_1_GROVE_BOUNDS_ZX = COMMON_BUILDER.comment("the X and Z half value for the size of the Rank 1 Grove Stone aoe bounding box")
@@ -223,7 +230,8 @@ public class ConfigManager {
         .defineInRange("pestle_cooldown", 12, -1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Configuration options for underwater bone meal effects.").push("underwater_bone_meal");
-    UNDERWATER_BONE_MEAL_WILD_ROOTS_CHANCE = COMMON_BUILDER.comment("the chance for wild roots to grow underwater when bone meal is used (replacing one of the potential sea grass or coral blocks").defineInRange("underwater_bone_meal_wild_roots_chance", 0.02, -1, 1);
+    UNDERWATER_BONE_MEAL_WILD_ROOTS_CHANCE = COMMON_BUILDER.comment("the chance for wild roots to grow underwater when bone meal is used (replacing one of the potential sea grass or coral blocks")
+        .defineInRange("underwater_bone_meal_wild_roots_chance", 0.02, -1, 1);
     COMMON_BUILDER.pop();
     CLIENT_BUILDER.push("debug");
     SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
