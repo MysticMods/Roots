@@ -15,6 +15,8 @@ import mysticmods.roots.spell.mode.HarvestMode;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -22,12 +24,9 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
 import java.util.Locale;
-import java.util.Set;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 
 public final class RootsLangProvider extends LanguageProvider {
@@ -970,6 +969,12 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.STORM_CLOUD, "Creates a vicious cloud of storms around you. For the duration, lightning from the cloud may strike nearby enemies.");
     spellDescription(ModSpells.TEMPORAL_MORASS, "Creates a temporary field of disruptive energy. All entities within this field will have their movement dramatically slowed.");
     spellDescription(ModSpells.WILDFIRE, "Flings a fiery meteor in the direction you are looking. If this meteor hits an enemy, it will damage it.");
+
+    addDamage(ModDamage.ACID_CLOUD, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
+    addDamage(ModDamage.LIFE_DRAIN, "%1$s was drained away to nothing", "%1$s was drained away to nothing while fighting %2$s", "%1$s was drained away to nothing while fighting %2$s wielding %3$s");
+    addDamage(ModDamage.METEOR, "%1$s was killed by a falling meteor", "%1$s was killed by a falling meteor while fighting %2$s", "%1$s was killed by a falling meteor while fighting %2$s wielding %3$s");
+    addDamage(ModDamage.ROSE_THORNS, "%1$s was poked to death by rose thorns", "%1$s was poked to death by rose thorns while fighting %2$s", "%1$s was poked to death by rose thorns while fighting %2$s wielding %3$s");
+    addDamage(ModDamage.WILDFIRE, "%1$s was immolated by wild fire", "%1$s was immolated by wild fire while fighting %2$s", "%1$s was immolated by wild fire while fighting %2$s wielding %3$s");
   }
 
   private void addCyclingMode(Cycling<?>[] values) {
@@ -979,9 +984,12 @@ public final class RootsLangProvider extends LanguageProvider {
   }
 
   // TODO: Translations for damage
-/*  public void addDamage(ResourceKey<DamageType> damage, String death, String item, String player) {
-    add("death.attack.")
-  } */
+  public void addDamage(ResourceKey<DamageType> damage, String death, String player, String item) {
+    var prefix = "death.attack." + damage.location();
+    add(prefix, death);
+    add(prefix + ".player", player);
+    add(prefix + ".item", item);
+  }
 
   public void spellDescription(Holder<Spell> spell, String value) {
     add(spell.value().getTooltipDescriptionId(), value);

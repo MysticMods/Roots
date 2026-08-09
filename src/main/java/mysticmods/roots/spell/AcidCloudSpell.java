@@ -69,7 +69,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    Predicate<Entity> entityTest = instance.has(RootsTags.SpellModifiers.PEACEFUL) ? EntityUtils.isHostileTo(pPlayer) : EntityUtils.allEntities(pPlayer, true);
+    Predicate<Entity> entityTest = instance.has(RootsTags.SpellModifiers.PEACEFUL) ? EntityUtils.isHostileTo(pPlayer) : EntityUtils.allEntities(pPlayer, false);
 
     List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), entityTest);
     int totalDamaged = 0;
