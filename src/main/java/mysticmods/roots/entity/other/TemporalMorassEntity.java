@@ -75,6 +75,9 @@ public class TemporalMorassEntity extends Entity {
     this.setLifetime(newLifetime);
     if (aabb != null && !this.level().isClientSide()) {
       TemporalMorassEntitySnapshot snapshot = SnapshotHelper.getSnapshot(this, ModSerializers.TEMPORAL_MORASS.get());
+      if (snapshot == null) {
+        return;
+      }
       for (LivingEntity living : this.level().getEntitiesOfClass(LivingEntity.class, aabb, entity -> {
             if (entity.getType().is(RootsTags.Entities.TEMPORAL_MORASS_EXCLUDE)) {
               return false;
@@ -84,7 +87,8 @@ public class TemporalMorassEntity extends Entity {
           }
       )) {
         TemporalMorassEntitySnapshot livingSnapshot = new TemporalMorassEntitySnapshot(living, 10, snapshot.getRadiusZX(), snapshot.getRadiusY(), 10, snapshot.getAmplifier());
-        living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, livingSnapshot.getDuration(), snapshot.getAmplifier(), false, true));
+        // TODO: Once Temporal Morass snapshot includes casting player, adjust entity parameter
+        living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, livingSnapshot.getDuration(), snapshot.getAmplifier(), false, true), this);
         SnapshotHelper.addLiving(living, ModSerializers.TEMPORAL_MORASS.get(), livingSnapshot);
       }
     }

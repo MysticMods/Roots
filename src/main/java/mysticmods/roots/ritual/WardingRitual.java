@@ -40,7 +40,7 @@ public class WardingRitual extends Ritual {
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB());
       for (LivingEntity entity : entities) {
-        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, potionDuration, potionAmplifier, false, false));
+        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, potionDuration, potionAmplifier, false, false), blockEntity.getLastPlayer());
       }
     }
   }

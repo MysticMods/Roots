@@ -47,7 +47,7 @@ public class HomesicknessCharm extends Item {
       ServerPlayer player2 = (ServerPlayer) player;
       var dim = player2.findRespawnPositionAndUseSpawnBlock(true, DimensionTransition.DO_NOTHING);
       TeleportUtil.teleportWithVehicle(player2, dim.newLevel(), dim.pos().x, dim.pos().y, dim.pos().z, Set.of(), dim.yRot(), dim.xRot());
-      player2.addEffect(new MobEffectInstance(ModEffects.HOMESICKNESS, 20 * 60, 0, false, false));
+      player2.addEffect(new MobEffectInstance(ModEffects.HOMESICKNESS, 20 * 60, 0, false, false), player);
     }
 
     player.awardStat(Stats.ITEM_USED.get(this));

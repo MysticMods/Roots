@@ -269,7 +269,7 @@ public class EntityEventHandler {
         }
         if (doAlert) {
           PacketDistributor.sendToPlayer((ServerPlayer) player, new AlertnessFXPacket(event.getEntity().getId()));
-          mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60, 0, false, false));
+          mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60, 0, false, false), player);
         }
       }
     }
@@ -424,7 +424,7 @@ public class EntityEventHandler {
         } else {
           MobEffectInstance newInstance = new MobEffectInstance(ModEffects.PETAL_SHELL, instance.getDuration(), instance.getAmplifier() - 1, false, false);
           entity.removeEffect(ModEffects.PETAL_SHELL);
-          entity.addEffect(newInstance);
+          entity.addEffect(newInstance, entity);
         }
       }
       event.setCanceled(true);

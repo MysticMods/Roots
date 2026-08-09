@@ -38,7 +38,7 @@ public class EffectUseItem extends Item {
     ItemStack stack = player.getItemInHand(usedHand);
     if (!level.isClientSide()) {
       MobEffectInstance instance = new MobEffectInstance(effect, duration, amplifier);
-      player.addEffect(instance);
+      player.addEffect(instance, player);
       stack.consume(1, player);
     }
     level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS);

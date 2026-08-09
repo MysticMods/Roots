@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 
+// TODO: Extend to include casting player
 public class TemporalMorassEntitySnapshot extends Snapshot {
   public static final MapCodec<TemporalMorassEntitySnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(

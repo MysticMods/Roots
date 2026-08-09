@@ -79,7 +79,7 @@ public class AnimalHarvestRitual extends Ritual {
             ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), entity.blockPosition(), stack);
           }
           if (glowDuration > 0) {
-            entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
+            entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false), blockEntity.getLastPlayer());
           }
           AnimalHarvestFXPacket packet = new AnimalHarvestFXPacket(entity.getId());
           PacketDistributor.sendToPlayersTrackingEntity(entity, packet);

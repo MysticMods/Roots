@@ -75,7 +75,7 @@ public class SkySoarerSpell extends Spell {
     int amplifierCount = instance.count(RootsTags.SpellModifiers.SKY_SOARER_AMPLIFIER_INCREASES);
     float thisAmplifier = amplifierCount > 0 ? amplifier * (1f + (amplifier_increase * amplifierCount)) : amplifier;
 
-    pPlayer.addEffect(new MobEffectInstance(ModEffects.SKY_SOARER, thisDuration, 0, false, false));
+    pPlayer.addEffect(new MobEffectInstance(ModEffects.SKY_SOARER, thisDuration, 0, false, false), pPlayer);
     Vec3 vehicleMovement = pPlayer.getVehicle() != null ? pPlayer.getVehicle().getDeltaMovement() : Vec3.ZERO;
     SnapshotHelper.addLiving(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, thisDuration + 40, pPlayer.getDeltaMovement(), vehicleMovement, thisAmplifier, thisDuration, durationCount, amplifierCount, instance.has(ModModifiers.SKY_SOARER_FRIENDLY_EARTH)));
     //RootsAPI.LOG.info("Duration base: {}, this duration: {}, amplifier base: {}, this amplifier: {}", duration, thisDuration, amplifier, thisAmplifier);

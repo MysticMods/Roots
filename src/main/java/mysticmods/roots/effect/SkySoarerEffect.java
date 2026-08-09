@@ -72,7 +72,7 @@ public class SkySoarerEffect extends SimpleEffect {
         if (sky.hasFriendlyEarth()) {
           player.fallDistance = 1.0f;
           if (player instanceof LivingEntity living) {
-            living.addEffect(new MobEffectInstance(ModEffects.FRIENDLY_EARTH, ModSpells.SKY_SOARER.value().getFriendlyEarthDuration(), 0, false, false));
+            living.addEffect(new MobEffectInstance(ModEffects.FRIENDLY_EARTH, ModSpells.SKY_SOARER.value().getFriendlyEarthDuration(), 0, false, false), player);
           }
         }
       });

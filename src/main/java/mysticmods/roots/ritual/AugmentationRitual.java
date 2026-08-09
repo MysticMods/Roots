@@ -103,7 +103,7 @@ public class AugmentationRitual extends Ritual {
                 .getDescriptionId());
             adjusted++;
             if (glowDuration > 0) {
-              entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
+              entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false), blockEntity.getLastPlayer());
             }
             continue outer;
           }

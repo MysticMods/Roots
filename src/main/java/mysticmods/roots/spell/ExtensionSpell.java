@@ -67,8 +67,8 @@ public class ExtensionSpell extends TwoRadiusSpell {
 
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    pPlayer.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, nightVisionDuration, 0, false, false));
-    pPlayer.addEffect(new MobEffectInstance(ModEffects.SENSE_DANGER, senseDangerDuration, 0, false, false));
+    pPlayer.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, nightVisionDuration, 0, false, false), pPlayer);
+    pPlayer.addEffect(new MobEffectInstance(ModEffects.SENSE_DANGER, senseDangerDuration, 0, false, false), pPlayer);
     SnapshotHelper.addLiving(pPlayer, ModSerializers.EXTENSION.get(), new ExtensionSnapshot(pPlayer, getMaxDuration(), getRadiusZX(), getRadiusY()));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastExtensionFXPacket(pPlayer.getId()));
     return SpellCastResult.success(cooldown);
