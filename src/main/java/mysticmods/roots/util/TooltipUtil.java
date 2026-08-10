@@ -41,8 +41,7 @@ public class TooltipUtil {
         // TODO: Spell data
         int slotId = tempSlot + 1;
         boolean isModified = entry != null && !entry.getEnabledModifiers().isEmpty();
-        Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
-            .getStyledName();
+        Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.getStyledName();
         Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : CommonComponents.EMPTY;
 
         Component cd;

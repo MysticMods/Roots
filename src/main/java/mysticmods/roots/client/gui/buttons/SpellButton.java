@@ -7,11 +7,12 @@ import mysticmods.roots.client.gui.screen.RootsScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class SpellButton<S extends SpellLike, V extends RootsScreen> extends Button {
+public abstract class SpellButton<S extends SpellLike, V extends RootsScreen> extends Button {
   protected final int id;
   protected final V parentScreen;
   protected final Supplier<S> spellSupplier;
@@ -27,6 +28,8 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
     return id;
   }
 
+  public abstract ItemStack getItem ();
+
   @Override
   public void renderWidget(GuiGraphics arg, int pMouseX, int pMouseY, float pPartialTick) {
     if (spellSupplier.get() == null) {
@@ -35,8 +38,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
     if (visible) {
       // Draw the actual spell
 
-      RenderUtil.renderItemAsIcon(arg, spellSupplier.get().asSpell()
-          .getStaffIcon(), arg.pose(), this.getX(), this.getY(), 16, isTransparent());
+      RenderUtil.renderItemAsIcon(arg, getItem(), arg.pose(), this.getX(), this.getY(), 16, isTransparent());
       arg.flush();
 
       if (parentScreen.isMouseInRelativeRange(pMouseX, pMouseY, this.getX(), this.getY(), width, height)) {
@@ -50,7 +52,7 @@ public class SpellButton<S extends SpellLike, V extends RootsScreen> extends But
     if (spellSupplier.get() == null) {
       return;
     }
-    parentScreen.fillTooltip(spellSupplier.get().asSpell().getStaffIcon());
+    parentScreen.fillTooltip(getItem());
   }
 
   public boolean isTransparent() {

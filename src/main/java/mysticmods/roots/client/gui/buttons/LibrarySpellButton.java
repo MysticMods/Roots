@@ -6,6 +6,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.screen.fake.StaffScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
 
@@ -29,6 +30,11 @@ public class LibrarySpellButton extends SpellButton<Spell, StaffScreen> {
   private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/library_spell_slot_highlight.png");
 
   @Override
+  public ItemStack getItem() {
+    return getSpell().getSpellIcon();
+  }
+
+  @Override
   public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     super.renderWidget(graphics, pMouseX, pMouseY, pPartialTick);
     if (parentScreen.isSelected(this) && visible) {
@@ -43,6 +49,6 @@ public class LibrarySpellButton extends SpellButton<Spell, StaffScreen> {
     if (spellSupplier.get() == null) {
       return;
     }
-    parentScreen.fillTooltip(spellSupplier.get().asSpell().getLibraryIcon());
+    parentScreen.fillTooltip(spellSupplier.get().getSpellIcon());
   }
 }

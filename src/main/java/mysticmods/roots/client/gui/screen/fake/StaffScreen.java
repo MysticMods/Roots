@@ -67,7 +67,7 @@ public class StaffScreen extends RootsScreen {
         if (spell == null) {
           staffItemCache.add(ItemStack.EMPTY);
         } else {
-          var item = spell.getStaffIcon().copy();
+          var item = spell.getIcon().copy();
           item.set(ModAttachments.SPELL_SLOT, spell);
           staffItemCache.add(item);
         }

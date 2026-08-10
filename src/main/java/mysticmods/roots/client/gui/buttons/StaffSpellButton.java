@@ -32,6 +32,11 @@ public class StaffSpellButton extends SpellButton<ISpellInstance, StaffScreen> {
   }
 
   @Override
+  public ItemStack getItem() {
+    return itemGetter.get();
+  }
+
+  @Override
   public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     int x1 = getX() - 2;
     int y1 = getY() - 2;

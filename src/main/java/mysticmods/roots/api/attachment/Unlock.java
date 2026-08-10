@@ -69,7 +69,7 @@ public interface Unlock<T> {
 
     @Override
     public ItemStack getIcon() {
-      return value.value().getStaffIcon();
+      return value.value().getSpellIcon();
     }
 
     @Override

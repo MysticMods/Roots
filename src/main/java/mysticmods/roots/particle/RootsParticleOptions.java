@@ -194,7 +194,7 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     }
 
     public Builder color(Holder<Spell> spell) {
-      return color(spell.value().getColor1(), spell.value().getColor2());
+      return color(spell.value().getRawColor1(), spell.value().getRawColor2());
     }
 
     public Builder type(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type) {

@@ -2,6 +2,7 @@ package mysticmods.roots.api.modifier;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
+import com.google.common.collect.Ordering;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +18,7 @@ import java.util.stream.Stream;
 public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends ModifierSet<V, T, C>> implements Set<T> {
   // TODO: Does this need to be an ImmutableSet?
   protected final ImmutableSortedSet<T> internal;
+  protected final ImmutableSortedSet<ResourceKey<T>> internalKeys;
   @Nullable
   protected final T firstElement;
 
@@ -28,6 +30,8 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     } else {
       this.firstElement = null;
     }
+    this.internalKeys = Stream.of(elements).map(Modifier::getSelf)
+        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
   }
 
   public ModifierSet(Collection<T> elements) {
@@ -37,6 +41,8 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     } else {
       this.firstElement = null;
     }
+    this.internalKeys = elements.stream().map(Modifier::getSelf)
+        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
   }
 
   public ModifierSet(ImmutableSortedSet<T> elements) {
@@ -46,6 +52,8 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     } else {
       this.firstElement = null;
     }
+    this.internalKeys = elements.stream().map(Modifier::getSelf)
+        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
   }
 
   public ModifierSet(ImmutableSet<T> elements) {
@@ -55,11 +63,21 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     } else {
       this.firstElement = null;
     }
+    this.internalKeys = elements.stream().map(Modifier::getSelf)
+        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
   }
 
   @Nullable
   public T firstElement() {
     return this.firstElement;
+  }
+
+  @Nullable
+  public ResourceKey<T> firstKey() {
+    if (this.firstElement == null) {
+      return null;
+    }
+    return this.firstElement.getSelf();
   }
 
   // TODO: Why don't we use this?
@@ -83,7 +101,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
 
   public abstract boolean hasTag(TagKey<T> tag);
 
-  public abstract int count (TagKey<T> tag);
+  public abstract int count(TagKey<T> tag);
 
   public boolean has(T element) {
     return contains(element);
@@ -177,5 +195,9 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   @Override
   public void forEach(Consumer<? super T> action) {
     internal.forEach(action);
+  }
+
+  public Set<ResourceKey<T>> getKeys() {
+    return internalKeys;
   }
 }

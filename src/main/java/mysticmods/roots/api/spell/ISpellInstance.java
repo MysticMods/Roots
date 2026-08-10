@@ -48,6 +48,10 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   SpellModifierSet getEnabledModifiers();
 
+  default Set<ResourceKey<SpellModifier>> getEnabledModifierKeys () {
+    return getEnabledModifiers().getKeys();
+  }
+
   // Returns length of cooldown
   default SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
     SpellCastResult cooldown = asSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
@@ -99,6 +103,10 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default boolean has(TagKey<SpellModifier> modifier) {
     return getEnabledModifiers().hasTag(modifier);
+  }
+
+  default boolean has (ResourceKey<SpellModifier> modifier) {
+    return getEnabledModifierKeys().contains(modifier);
   }
 
   default boolean has(SpellModifier modifier) {
@@ -208,15 +216,15 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default int getColor1() {
-    return asSpell().getColor1();
+    return asSpell().getColor1(this);
   }
 
   default int getColor2() {
-    return asSpell().getColor2();
+    return asSpell().getColor2(this);
   }
 
-  default ItemStack getStaffIcon() {
-    return asSpell().getStaffIcon();
+  default ItemStack getIcon() {
+    return asSpell().getSpellIcon();
   }
 
   default <T> T getData(DataMapType<Spell, T> canBreakBlocksTag) {
@@ -229,6 +237,16 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default Component getChargeText(int ticks) {
     return asSpell().getChargeText(ticks);
+  }
+
+  default float getIconPredicate () {
+    return asSpell().getIconPredicate(this);
+  }
+
+  // TODO: Maybe remove this
+  @Nullable
+  default Spell.ModifierOverride getLowestOverride (Spell.OverrideContext<?> context) {
+    return asSpell().getLowestOverride(this, context);
   }
 
   static SpellInstanceSnapshot snapshot (ISpellInstance spell) {

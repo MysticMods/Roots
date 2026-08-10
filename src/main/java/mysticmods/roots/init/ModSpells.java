@@ -144,9 +144,13 @@ public class ModSpells {
       new GrowthInfusionSpell(new Spell.Properties()
           .type(SpellCastType.CONTINUOUS)
           .charge(ParentChargeType.OPERATION)
-          .color(0x157318, 0x13c3eb)
+          .color(0x30ff30, 0xc0ffc0)
+          .color(ModModifiers.RAMPANT_GROWTH.getKey(), 0x157318, 0x13c3eb)
           .cost(() -> ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)
           .textColor(ChatFormatting.YELLOW)
+          .textColor(ModModifiers.RAMPANT_GROWTH.getKey(), ChatFormatting.YELLOW)
+          .id(ModModifiers.RAMPANT_GROWTH.getKey(), Spells.RAMPANT_GROWTH.location())
+          .predicate(ModModifiers.RAMPANT_GROWTH.getKey(), 0.5f)
           .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
           .build()));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = P.recordProperty("growth_infusion/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));

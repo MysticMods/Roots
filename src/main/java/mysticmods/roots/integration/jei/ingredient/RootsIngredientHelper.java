@@ -70,7 +70,7 @@ public class RootsIngredientHelper {
       case EXACT_SPELL -> {
         Spell spell = RootsRegistries.SPELLS.get(location);
         if (spell != null) {
-          invis.addItemStack(spell.getStaffIcon());
+          invis.addItemStack(spell.getSpellIcon());
           builder.addIngredient(RootsJEIPlugin.SPELL_TYPE, spell)
               .setCustomRenderer(RootsJEIPlugin.SPELL_TYPE, RootsJEIPlugin.SPELL_RENDERER);
         }

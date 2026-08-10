@@ -44,8 +44,8 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     if (caster != null) {
-      int col1 = spell.getColor1();
-      int col2 = spell.getColor2();
+      int col1 = spell.getRawColor1();
+      int col2 = spell.getRawColor2();
 
       InteractionHand hand = InteractionHand.MAIN_HAND;
       if (caster instanceof Player player) {
@@ -78,8 +78,8 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 
-    int color1 = ModSpells.PETAL_SHELL.get().getColor1();
-    int color2 = ModSpells.PETAL_SHELL.get().getColor2();
+    int color1 = ModSpells.PETAL_SHELL.get().getRawColor1();
+    int color2 = ModSpells.PETAL_SHELL.get().getRawColor2();
 
     if (entity == null) {
       return;
@@ -126,8 +126,8 @@ public class ClientFXHandlers {
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
 
-    int color1 = ModSpells.MAGNETISM.get().getColor1();
-    int color2 = ModSpells.MAGNETISM.get().getColor2();
+    int color1 = ModSpells.MAGNETISM.get().getRawColor1();
+    int color2 = ModSpells.MAGNETISM.get().getRawColor2();
 
     RootsParticleOptions opt1 = RootsParticleOptions.builder(ModParticles.MAGNETISM).color(color2, color1)
         .entityId(entityId).build();
@@ -164,8 +164,8 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
-    int color1 = ModSpells.SHATTER.get().getColor1();
-    int color2 = ModSpells.SHATTER.get().getColor2();
+    int color1 = ModSpells.SHATTER.get().getRawColor1();
+    int color2 = ModSpells.SHATTER.get().getRawColor2();
 
     if (entity == null) {
       return;
@@ -209,8 +209,8 @@ public class ClientFXHandlers {
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
 
-    int color1 = ModSpells.EXTENSION.get().getColor1();
-    int color2 = ModSpells.EXTENSION.get().getColor2();
+    int color1 = ModSpells.EXTENSION.get().getRawColor1();
+    int color2 = ModSpells.EXTENSION.get().getRawColor2();
 
     if (entity != null) {
       double x = entity.getX();
@@ -246,8 +246,8 @@ public class ClientFXHandlers {
     Entity entity = minecraft.level.getEntity(entityId);
 
     if (entity != null) {
-      int color1 = 0xb0ecff; //ModSpells.SKY_SOARER.get().getColor1();
-      int color2 = 0xccd3ff; //ModSpells.SKY_SOARER.get().getColor2();
+      int color1 = 0xb0ecff; //ModSpells.SKY_SOARER.get().getRawColor1();
+      int color2 = 0xccd3ff; //ModSpells.SKY_SOARER.get().getRawColor2();
 
       minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.SKY_SOARER_EMITTER).color(color1, color2)
           .entityId(entityId).build(), entity.getX(), entity.getY(), entity.getZ(), duration + 25, 5, 0.9);
@@ -264,8 +264,8 @@ public class ClientFXHandlers {
 
 
     if (entity != null) {
-      int color1 = ModSpells.DANDELION_WINDS.get().getColor1();
-      int color2 = ModSpells.DANDELION_WINDS.get().getColor2();
+      int color1 = ModSpells.DANDELION_WINDS.get().getRawColor1();
+      int color2 = ModSpells.DANDELION_WINDS.get().getRawColor2();
 
       Vec3 look = entity.getViewVector(1.0F);
       double yaw = Math.atan2(look.z, look.x) - Math.PI / 2;
@@ -323,8 +323,8 @@ public class ClientFXHandlers {
     }
     boolean fire = snapshot.has(ModModifiers.ACID_CLOUD_FIRE);
     Minecraft minecraft = Minecraft.getInstance();
-    int color1 = ModSpells.ACID_CLOUD.get().getColor1();
-    int color2 = ModSpells.ACID_CLOUD.get().getColor2();
+    int color1 = ModSpells.ACID_CLOUD.get().getRawColor1();
+    int color2 = ModSpells.ACID_CLOUD.get().getRawColor2();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
     if (entity != null) {
@@ -357,8 +357,8 @@ public class ClientFXHandlers {
       return;
     }
     Minecraft minecraft = Minecraft.getInstance();
-    int color1 = ModSpells.DISARM.get().getColor1();
-    int color2 = ModSpells.DISARM.get().getColor2();
+    int color1 = ModSpells.DISARM.get().getRawColor1();
+    int color2 = ModSpells.DISARM.get().getRawColor2();
     Entity entity = minecraft.level.getEntity(entityId);
     if (entity != null) {
       minecraft.level.addParticle(RootsParticleOptions.builder(ModParticles.DISARM_EMITTER).color(color1, color2)
@@ -469,8 +469,8 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     if (caster != null) {
-      int col1 = spell.getColor1();
-      int col2 = spell.getColor2();
+      int col1 = spell.getRawColor1();
+      int col2 = spell.getRawColor2();
 
       InteractionHand hand = InteractionHand.MAIN_HAND;
       if (caster instanceof Player player) {
@@ -511,8 +511,8 @@ public class ClientFXHandlers {
     Player player = minecraft.player;
     if (player != null && caster != null) {
       Vec3 start = player.getPosition(0f);
-      int col1 = spell.getColor1();
-      int col2 = spell.getColor2();
+      int col1 = spell.getRawColor1();
+      int col2 = spell.getRawColor2();
 
       double radius = 0.1 + RootsParticleOptions.RANDOM.nextDouble() * 0.15;
 
@@ -555,8 +555,8 @@ public class ClientFXHandlers {
     Entity caster = minecraft.level.getEntity(casterId);
     Player player = minecraft.player;
     if (player != null && caster != null) {
-      int col1 = spell.getColor1();
-      int col2 = spell.getColor2();
+      int col1 = spell.getRawColor1();
+      int col2 = spell.getRawColor2();
 
       minecraft.level.addParticle(
           RootsParticleOptions.builder(
@@ -725,8 +725,8 @@ public class ClientFXHandlers {
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = RootsParticleOptions.RANDOM;
 
-    int color1 = 0x1e0e13;//ModSpells.LIFE_DRAIN.get().getColor1();
-    int color2 = 0x6b5766; //ModSpells.LIFE_DRAIN.get().getColor2();
+    int color1 = 0x1e0e13;//ModSpells.LIFE_DRAIN.get().getRawColor1();
+    int color2 = 0x6b5766; //ModSpells.LIFE_DRAIN.get().getRawColor2();
 
     RootsParticleOptions opt1 = RootsParticleOptions.builder(ModParticles.LIFE_DRAIN).color(color2, color1)
         .entityId(entityId).build();
@@ -879,8 +879,8 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 
-    int color1 = ModSpells.NONDETECTION.get().getColor1();
-    int color2 = ModSpells.NONDETECTION.get().getColor2();
+    int color1 = ModSpells.NONDETECTION.get().getRawColor1();
+    int color2 = ModSpells.NONDETECTION.get().getRawColor2();
 
     if (entity == null) {
       return;

@@ -76,6 +76,6 @@ public class RootsSpellHelper implements IIngredientHelper<Spell> {
 
   @Override
   public ItemStack getCheatItemStack(Spell ingredient) {
-    return ingredient.getStaffIcon().copy();
+    return ingredient.getSpellIcon().copy();
   }
 }
