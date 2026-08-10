@@ -10,6 +10,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.network.server.*;
 import mysticmods.roots.network.server.staff.ServerboundCycleSpellModePacket;
+import mysticmods.roots.network.server.staff.ServerboundCycleStaffSpellPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -129,6 +130,11 @@ public class KeyHandler {
       return;
     }
 
+    if (KeyBindings.CYCLE_STAFF_SPELL.consumeClick()) {
+      tryCycleStaff(mc);
+      return;
+    }
+
     if (KeyBindings.CYCLE_SPELL_MODE.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Cycling adjustable spell data via keybind");
@@ -222,5 +228,18 @@ public class KeyHandler {
       RootsAPI.LOG.error("Opening pouch via keybind");
     }
     PacketDistributor.sendToServer(ServerboundOpenPouchPacket.INSTANCE);
+  }
+
+  private static void tryCycleStaff (Minecraft mc) {
+    if (mc.player == null) {
+      return;
+    }
+    InteractionHand hand = mc.player.getMainHandItem().is(RootsTags.Items.CASTING_TOOLS) ? InteractionHand.MAIN_HAND : mc.player.getOffhandItem().is(RootsTags.Items.CASTING_TOOLS) ? InteractionHand.OFF_HAND : null;
+
+    if (hand == null) {
+      RootsAPI.LOG.error("Somehow managed to trigger the 'cycle staff' keybinding, but neither the held item nor the off-hand held item are tagged properly.");
+    }
+
+    PacketDistributor.sendToServer(new ServerboundCycleStaffSpellPacket(hand));
   }
 }

@@ -31,6 +31,7 @@ public class KeyBindings {
 
   public static final CastingTaggedSpell ADJUSTABLE = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_SPELL);
   public static final HasTomeSlotAdjustable HAS_ADJUSTABLE_TOME = new HasTomeSlotAdjustable();
+  public static final HoldingTaggedItem HOLDING_STAFF = HoldingTaggedItem.item(RootsTags.Items.CASTING_TOOLS);
 
   public static final LibraryKeyConflictContext IN_LIBRARY = new LibraryKeyConflictContext();
 
@@ -42,9 +43,8 @@ public class KeyBindings {
   public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.KEY_K, CATEGORY);
   public static final KeyMapping OPEN_POUCH = new KeyMapping("key.roots.open_pouch", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
   public static final KeyMapping OPEN_REPUTATION = new KeyMapping("key.roots.open_reputation", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
-/*  public static final KeyMapping INCREASE_SPELL = new KeyMapping("key.roots.increase_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_RBRACKET, CATEGORY);
-  public static final KeyMapping DECREASE_SPELL = new KeyMapping("key.roots.decrease_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_LBRACKET, CATEGORY);*/
   public static final KeyMapping CYCLE_SPELL_MODE = new KeyMapping("key.roots.cycle_spell_mode", HAS_ANY_ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
+  public static final KeyMapping CYCLE_STAFF_SPELL = new KeyMapping("key.roots.cycle_staff_spell", HOLDING_STAFF, InputConstants.Type.KEYSYM, InputConstants.KEY_PAGEDOWN, CATEGORY);
   public static final KeyMapping OPEN_FAKE_MENU = new KeyMapping("key.roots.open_fake_menu", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
   public static final KeyMapping CLEAR_CONTAINER = new KeyMapping("key.roots.clear_container", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
   public static final KeyMapping DELETE_SPELL = new KeyMapping("key.roots.delete_spell", IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
@@ -53,6 +53,7 @@ public class KeyBindings {
   public static final List<KeyMapping> MAPPINGS = Arrays.asList(
       OPEN_SPELL_LIBRARY,
       CYCLE_SPELL_MODE,
+      CYCLE_STAFF_SPELL,
       OPEN_POUCH,
       OPEN_REPUTATION,
       CLEAR_CONTAINER,
@@ -65,6 +66,7 @@ public class KeyBindings {
   public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
     event.register(OPEN_SPELL_LIBRARY);
     event.register(CYCLE_SPELL_MODE);
+    event.register(CYCLE_STAFF_SPELL);
     event.register(OPEN_POUCH);
     event.register(OPEN_REPUTATION);
     event.register(CANCEL_EFFECT);
@@ -179,11 +181,12 @@ public class KeyBindings {
       }
 
       ItemStack item = minecraft.player.getMainHandItem();
-      if (item.isEmpty()) {
+      ItemStack item2 = minecraft.player.getOffhandItem();
+      if (item.isEmpty() && item2.isEmpty()) {
         return false;
       }
 
-      return item.is(tag);
+      return item.is(tag) || item2.is(tag);
     }
 
     @Override

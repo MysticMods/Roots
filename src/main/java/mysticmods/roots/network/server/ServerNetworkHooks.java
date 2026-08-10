@@ -14,6 +14,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.PouchItem;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
@@ -317,6 +318,13 @@ public class ServerNetworkHooks {
         RootsAPI.LOG.error("Cycled spell mode for spell {} from {} to {}", instance.asSpell().getDescriptionId(), c, next);
       }
       player.displayClientMessage(Component.translatable("roots.spell_mode.mode_changed", next.getStyledName()), true);
+    }
+  }
+
+  public static void cycleStaffSpell(Player player, InteractionHand hand) {
+    ItemStack item = player.getItemInHand(hand);
+    if (item.getItem() instanceof CastingItem castingItem) {
+      castingItem.cycleStaffSpell(player.level(), player, hand, item, null);
     }
   }
 }

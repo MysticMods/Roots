@@ -246,63 +246,79 @@ public class CastingItem extends Item {
     }
   }
 
+  public InteractionResultHolder<ItemStack> cycleStaffSpell(Level pLevel, Player pPlayer, InteractionHand pUsedHand, ItemStack pUsedItem, @Nullable SpellStorage storage) {
+    boolean storageWasNull = storage == null;
+    if (storage == null) {
+      storage = getStorage(pLevel, pPlayer, pUsedItem);
+    }
+    if (storage == null || storage.isEmpty()) {
+      return InteractionResultHolder.pass(pUsedItem);
+    }
+
+    int current = storage.currentSlot();
+    int max = storage.maxSlot();
+
+    int newSlot = current + 1;
+    if (newSlot >= max) {
+      newSlot = 0;
+    }
+
+    while (storage.getSpell(newSlot) == null) {
+      newSlot++;
+      if (newSlot >= max) {
+        newSlot = 0;
+      }
+    }
+
+    if (newSlot != current && storage.getSpell(newSlot) != null) {
+      if (!pLevel.isClientSide()) {
+        SpellStorage newStorage = storage.setCurrentSlot(newSlot);
+        setStorage(pLevel, pPlayer, pUsedItem, storage, newStorage);
+        CastingSuccessCache.clear(pUsedItem);
+        if (storageWasNull) {
+          PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundClearHighlightPacket.INSTANCE);
+        }
+      }
+      return InteractionResultHolder.success(pUsedItem);
+    } else {
+      return InteractionResultHolder.pass(pUsedItem);
+    }
+  }
+
   // TODO: #1351 pass allows interaction with items but
   @Override
   public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
+/*
     if (pLevel.isClientSide()) {
       if (pUsedHand == InteractionHand.MAIN_HAND && !pPlayer.getOffhandItem().isEmpty()) {
         return InteractionResultHolder.pass(stack);
       }
-      return InteractionResultHolder.consume(stack);
+      return InteractionResultHolder.pass(stack);
     }
+*/
 
-    stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
+    if (!pLevel.isClientSide()) {
+      stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
+    }
 
     SpellStorage storage = getStorage(pLevel, pPlayer, stack);
     if (storage == null) {
       return InteractionResultHolder.pass(stack);
     }
 
-    int current = storage.currentSlot();
-    int max = storage.maxSlot();
-
     if (pPlayer.isShiftKeyDown()) {
-      if (storage.isEmpty()) {
-        return InteractionResultHolder.pass(stack);
-      }
-
-      int newSlot = current + 1;
-      if (newSlot >= max) {
-        newSlot = 0;
-      }
-
-      while (storage.getSpell(newSlot) == null) {
-        newSlot++;
-        if (newSlot >= max) {
-          newSlot = 0;
-        }
-      }
-
-      if (newSlot != current && storage.getSpell(newSlot) != null) {
-        SpellStorage newStorage = storage.setCurrentSlot(newSlot);
-        setStorage(pLevel, pPlayer, stack, storage, newStorage);
-        CastingSuccessCache.clear(stack);
-        if (pUsedHand == InteractionHand.MAIN_HAND) {
-          PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundClearHighlightPacket.INSTANCE);
-        }
-        return InteractionResultHolder.success(stack);
-      } else {
-        return InteractionResultHolder.pass(stack);
-      }
+      return this.cycleStaffSpell(pLevel, pPlayer, pUsedHand, stack, storage);
     }
 
+    int current = storage.currentSlot();
     ISpellInstance spell = storage.getSpell(current);
     if (spell == null || !spell.offCooldown(stack, pPlayer)) {
       return InteractionResultHolder.pass(stack);
     }
 
+    // TODO: Check this can be used client-side
     Costing costing = new Costing(spell);
     if (!costing.canAfford(pPlayer, true)) {
       // TODO: display a warning
@@ -312,25 +328,33 @@ public class CastingItem extends Item {
     }
 
     if (spell.getType() == SpellCastType.INSTANT) {
-      stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
-      // TODO: (#1353) Improve spell casting results
-      var result = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
-      stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
-      int cooldown = result.cooldown();
-      if (costing.charge(pPlayer)) {
-        SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
-        ModActions.SPELL_CAST.get().accept(context);
-        if (!stack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
-          CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
-          cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
+      if (!pLevel.isClientSide()) {
+        stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
+        // TODO: (#1353) Improve spell casting results
+        var result = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
+        stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
+        int cooldown = result.cooldown();
+        if (costing.charge(pPlayer)) {
+          SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
+          ModActions.SPELL_CAST.get().accept(context);
+          if (!stack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
+            CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
+            cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
+          }
         }
+        return result.result(stack);
+      } else {
+        return InteractionResultHolder.pass(stack);
       }
-      return result.result(stack);
     } else {
-      CastingSuccessCache.clear(stack);
+      if (!pLevel.isClientSide()) {
+        CastingSuccessCache.clear(stack);
+      }
       pPlayer.startUsingItem(pUsedHand);
-      stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
-      return InteractionResultHolder.success(stack);
+      if (!pLevel.isClientSide()) {
+        stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
+      }
+      return InteractionResultHolder.consume(stack);
     }
   }
 
@@ -472,7 +496,7 @@ public class CastingItem extends Item {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
     if (context.level() != null && context.level().isClientSide()) {
-      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getStaffKeyBind()));
+      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getStaffKeyBind(), RootsClientHooks.getUseKeyBind(), RootsClientHooks.getStaffCycleKeyBind()));
     }
 
     TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);

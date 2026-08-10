@@ -59,6 +59,7 @@ public class PacketHandler {
     registrar.play(ServerboundClearContainerPacket.TYPE, ServerboundClearContainerPacket.CODEC);
     registrar.play(ServerboundToggleSpellModifierPacket.TYPE, ServerboundToggleSpellModifierPacket.CODEC);
     registrar.play(ServerboundDebugScreenTick.TYPE, ServerboundDebugScreenTick.CODEC);
+    registrar.play(ServerboundCycleStaffSpellPacket.TYPE, ServerboundCycleStaffSpellPacket.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {
