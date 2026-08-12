@@ -936,11 +936,11 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance to deflect projectiles.");
     modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance to deflect projectiles by %s%% to a total of %s%%.");
     modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_2, "Increases the chance to deflect projectiles.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_2, "Increases the chance to deflect projectiles by %s%% to a total of %s%% including parent modifiers.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_2, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
     modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_3, "Increases the chance to deflect projectiles.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_3, "Increases the chance to deflect projectiles by %s%% to a total of %s%% including parent modifiers.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_3, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
     modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles by %s%% to a total of %s%% including parent modifiers.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
 
     spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, losing maximum health.");
     spellDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health.");
