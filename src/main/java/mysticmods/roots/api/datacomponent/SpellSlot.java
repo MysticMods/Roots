@@ -34,6 +34,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
       DataComponentPatch.CODEC.fieldOf("data")
           .forGetter(o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch())
   ).apply(instance, SpellSlot::new)).validate(result -> {
+    // TODO: Improve migration system
     if (result.is(Spells.RAMPANT_GROWTH)) {
       // Migrate to growth infusion with modifier
       var newSpell = RootsRegistries.SPELLS.get(Spells.GROWTH_INFUSION);
