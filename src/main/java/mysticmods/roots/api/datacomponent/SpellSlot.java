@@ -4,9 +4,12 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
+import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -31,6 +34,12 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
       DataComponentPatch.CODEC.fieldOf("data")
           .forGetter(o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch())
   ).apply(instance, SpellSlot::new)).validate(result -> {
+    if (result.is(Spells.RAMPANT_GROWTH)) {
+      // Migrate to growth infusion with modifier
+      var newSpell = RootsRegistries.SPELLS.get(Spells.GROWTH_INFUSION);
+      var rampantGrowth = RootsRegistries.SPELL_MODIFIERS.get(RootsAPI.rl("growth_infusion/rampant_growth"));
+      return DataResult.success(new SpellSlot(result.spellId, result.slot, newSpell, new SpellModifierSet(rampantGrowth), DataComponentPatch.EMPTY));
+    }
     // TODO: Validation: remove restricted modifiers
     return DataResult.success(result);
   });
