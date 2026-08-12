@@ -225,9 +225,6 @@ public class ModSpells {
   // Shatter (20 cooldown)
   public static final DeferredHolder<Spell, ShatterSpell> SHATTER = spell(Spells.SHATTER, ShatterSpell::new, ChatFormatting.YELLOW, () -> CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125)); // Charges per block broken
   public static final PropertyHolder<Property.IntegerProperty> SHATTER_COOLDOWN = P.recordProperty("shatter/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> SHATTER_MAXIMUM_WIDTH = P.recordProperty("shatter/maximum_width", Property.ofInt(2, "Half the maximum width of the shatter effect."));
-  public static final PropertyHolder<Property.IntegerProperty> SHATTER_MAXIMUM_HEIGHT = P.recordProperty("shatter/maximum_height", Property.ofInt(2, "Half the maximum height of the shatter effect."));
-  public static final PropertyHolder<Property.IntegerProperty> SHATTER_MAXIMUM_DEPTH = P.recordProperty("shatter/maximum_depth", Property.ofInt(2, "Half the maximum depth of the shatter effect."));
 
   // Jaunt (80 cooldown)
   public static final DeferredHolder<Spell, JauntSpell> JAUNT = spell(Spells.JAUNT, JauntSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0031), Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0031))); // Charges per number of blocks moved based on charge

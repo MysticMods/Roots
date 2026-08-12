@@ -36,8 +36,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ShatterSpell extends Spell {
-  private int maxWidth, maxDepth, maxHeight;
-
   public ShatterSpell(ChatFormatting color, CostInstance costs) {
     super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x606060, 0xc0c0c0);
   }
@@ -50,14 +48,11 @@ public class ShatterSpell extends Spell {
   @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.maxWidth = properties.get(ModSpells.SHATTER_MAXIMUM_WIDTH);
-    this.maxDepth = properties.get(ModSpells.SHATTER_MAXIMUM_DEPTH);
-    this.maxHeight = properties.get(ModSpells.SHATTER_MAXIMUM_HEIGHT);
   }
 
   private int[] getAsymmetricOffsets(int value) {
     int right = (value + 1) / 2;
-    int left = value / 2;
+    int left = (value + 1) / 2;
     return new int[]{left, right};
   }
 
@@ -72,9 +67,9 @@ public class ShatterSpell extends Spell {
     Direction heightDir = sideDir == Direction.DOWN ? playerFacing : sideDir.getAxis() == Direction.Axis.Y ? playerFacing.getOpposite() : Direction.DOWN;
     Direction depthDir = sideDir.getOpposite();
 
-    int width = 2;
-    int height = 2;
-    int depth = 2;
+    int width = spell.count(RootsTags.SpellModifiers.SHATTER_INCREASES_WIDTH);
+    int height = spell.count(RootsTags.SpellModifiers.SHATTER_INCREASES_HEIGHT);
+    int depth = spell.count(RootsTags.SpellModifiers.SHATTER_INCREASES_DEPTH);
 
     BlockPos start = pos;
     BlockPos stop = pos;
@@ -109,9 +104,6 @@ public class ShatterSpell extends Spell {
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
-    properties.add(ModSpells.SHATTER_MAXIMUM_DEPTH);
-    properties.add(ModSpells.SHATTER_MAXIMUM_HEIGHT);
-    properties.add(ModSpells.SHATTER_MAXIMUM_WIDTH);
   }
 
   @Override

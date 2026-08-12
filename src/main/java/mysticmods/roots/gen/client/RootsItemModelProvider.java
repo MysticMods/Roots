@@ -428,12 +428,20 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.ACID_CLOUD_FIRE, Items.FLINT_AND_STEEL);
     modifier(ModModifiers.ACID_CLOUD_PEACEFUL, Items.TURTLE_EGG);
 
-    String spellLocation = "item/spells/rampant_growth";
-    getBuilder(ModModifiers.RAMPANT_GROWTH.getKey().location().withPrefix("item/").toString())
-        .parent(new ModelFile.UncheckedModelFile("item/generated"))
-        .texture("layer0", RootsAPI.rl(spellLocation));
+    modifier(ModModifiers.DANDELION_WINDS_INFERNO, Items.CAMPFIRE);
+    modifier(ModModifiers.DANDELION_WINDS_STATUE, Items.IRON_CHESTPLATE);
 
+    modifier(ModModifiers.RAMPANT_GROWTH, "spells/rampant_growth");
     modifier(ModModifiers.TARGETED_GROWTH, Items.TARGET);
+
+    modifier(ModModifiers.SHATTER_ADJUSTABLE, Items.ANVIL);
+
+    modifier(ModModifiers.SHATTER_DEPTH_I, "spells/shatter_depth");
+    modifier(ModModifiers.SHATTER_DEPTH_II, "spells/shatter_depth");
+    modifier(ModModifiers.SHATTER_HEIGHT_I, "spells/shatter_height");
+    modifier(ModModifiers.SHATTER_HEIGHT_II, "spells/shatter_height");
+    modifier(ModModifiers.SHATTER_WIDTH_I, "spells/shatter_width");
+    modifier(ModModifiers.SHATTER_WIDTH_II, "spells/shatter_width");
 
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));
@@ -445,6 +453,23 @@ public final class RootsItemModelProvider extends ItemModelProvider {
         .texture("layer0", modLoc("item/no_grove_stone"));
 
 
+  }
+
+  public ItemModelBuilder modifier (Holder<SpellModifier> itemHolder, String location) {
+    if (!location.contains(":")) {
+      return modifier(itemHolder, RootsAPI.rl(location));
+    } else {
+      return modifier(itemHolder, ResourceLocation.parse(location));
+    }
+  }
+
+  public ItemModelBuilder modifier (Holder<SpellModifier> itemHolder, ResourceLocation location) {
+    if (!location.getPath().startsWith("item")) {
+      location = location.withPrefix("item/");
+    }
+    return getBuilder(itemHolder.getKey().location().withPrefix("item/").toString())
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", location);
   }
 
   @SuppressWarnings("UnusedReturnValue")

@@ -46,8 +46,11 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_CHANCE).add(ModModifiers.DANDELION_WINDS_CHANCE_1.value(), ModModifiers.DANDELION_WINDS_CHANCE_2.value(), ModModifiers.DANDELION_WINDS_CHANCE_3.value(), ModModifiers.DANDELION_WINDS_CHANCE_4.value());
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE).add(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4.value(), ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5.value());
     this.tag(RootsTags.SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE).add(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4.value(), ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5.value());
-    this.tag(RootsTags.SpellModifiers.SETS_ON_FIRE).add(ModModifiers.ACID_CLOUD_FIRE.value());
+    this.tag(RootsTags.SpellModifiers.SETS_ON_FIRE).add(ModModifiers.ACID_CLOUD_FIRE.value(), ModModifiers.DANDELION_WINDS_INFERNO.value());
     this.tag(RootsTags.SpellModifiers.PEACEFUL).add(ModModifiers.ACID_CLOUD_PEACEFUL.value());
+    this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_DEPTH).add(ModModifiers.SHATTER_DEPTH_I.value(), ModModifiers.SHATTER_DEPTH_II.value());
+    this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_HEIGHT).add(ModModifiers.SHATTER_HEIGHT_I.value(), ModModifiers.SHATTER_HEIGHT_II.value());
+    this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_WIDTH).add(ModModifiers.SHATTER_WIDTH_I.value(), ModModifiers.SHATTER_WIDTH_II.value());
   }
 
   @Override

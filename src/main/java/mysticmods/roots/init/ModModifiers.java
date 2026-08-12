@@ -76,7 +76,6 @@ public class ModModifiers {
   // Do damage while trapped
 
 
-
   // Increase duration
   // Decrease cooldown
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_FRIENDLY_EARTH = REGISTER.register("sky_soarer/friendly_earth", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125), ModSpells.SKY_SOARER.getKey()));
@@ -103,6 +102,15 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_II = REGISTER.register("shatter/fortune_ii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), SHATTER_FORTUNE_I.getKey(), ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_III = REGISTER.register("shatter/fortune_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), SHATTER_FORTUNE_II.getKey(), ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_SILK_TOUCH.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_SMELTING = REGISTER.register("shatter/smelting", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), null, ModSpells.SHATTER.getKey()));
+
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_ADJUSTABLE = REGISTER.register("shatter/adjustable", () -> new SpellModifier(CostInstance.EMPTY, ModSpells.SHATTER.getKey()));
+
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_HEIGHT_I = REGISTER.register("shatter/height_i", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_ADJUSTABLE.getKey(), ModSpells.SHATTER.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_HEIGHT_II = REGISTER.register("shatter/height_ii", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_HEIGHT_I.getKey(), ModSpells.SHATTER.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_WIDTH_I = REGISTER.register("shatter/width_i", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_ADJUSTABLE.getKey(), ModSpells.SHATTER.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_WIDTH_II = REGISTER.register("shatter/width_ii", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_WIDTH_I.getKey(), ModSpells.SHATTER.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_I = REGISTER.register("shatter/depth_i", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_ADJUSTABLE.getKey(), ModSpells.SHATTER.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_II = REGISTER.register("shatter/depth_ii", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_DEPTH_I.getKey(), ModSpells.SHATTER.getKey()));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

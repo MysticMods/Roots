@@ -805,33 +805,6 @@
           "default_value": 5,
           "value": 5
         }
-      },
-      {
-        "id": "roots:shatter/maximum_depth",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "Half the maximum depth of the shatter effect.",
-          "default_value": 2,
-          "value": 2
-        }
-      },
-      {
-        "id": "roots:shatter/maximum_height",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "Half the maximum height of the shatter effect.",
-          "default_value": 2,
-          "value": 2
-        }
-      },
-      {
-        "id": "roots:shatter/maximum_width",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "Half the maximum width of the shatter effect.",
-          "default_value": 2,
-          "value": 2
-        }
       }
     ],
     "roots:sky_soarer": [

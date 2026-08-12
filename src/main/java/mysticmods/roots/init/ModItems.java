@@ -320,10 +320,12 @@ public class ModItems {
   public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
 
-  public static final Supplier<Item.Properties> STAFF_PROPERTIES = () -> new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get()).component(ModAttachments.CASTING_CURRENT_SPELL, false).stacksTo(1);
+  public static final Supplier<Item.Properties> STAFF_PROPERTIES = () -> new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
+      .component(ModAttachments.CASTING_CURRENT_SPELL, false).stacksTo(1);
 
   public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(STAFF_PROPERTIES.get()));
-  public static final DeferredHolder<Item, CastingItem> CREATIVE_STAFF = ITEMS.register("creative_staff", () -> new CastingItem(STAFF_PROPERTIES.get().rarity(Rarity.EPIC)));
+  public static final DeferredHolder<Item, CastingItem> CREATIVE_STAFF = ITEMS.register("creative_staff", () -> new CastingItem(STAFF_PROPERTIES.get()
+      .rarity(Rarity.EPIC)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
       .stacksTo(1)));
@@ -555,6 +557,15 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5);
     modifier(ITEMS, ModModifiers.RAMPANT_GROWTH);
     modifier(ITEMS, ModModifiers.TARGETED_GROWTH);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_INFERNO);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_STATUE);
+    modifier(ITEMS, ModModifiers.SHATTER_ADJUSTABLE);
+    modifier(ITEMS, ModModifiers.SHATTER_DEPTH_I);
+    modifier(ITEMS, ModModifiers.SHATTER_DEPTH_II);
+    modifier(ITEMS, ModModifiers.SHATTER_HEIGHT_I);
+    modifier(ITEMS, ModModifiers.SHATTER_HEIGHT_II);
+    modifier(ITEMS, ModModifiers.SHATTER_WIDTH_I);
+    modifier(ITEMS, ModModifiers.SHATTER_WIDTH_II);
   }
 /*
 

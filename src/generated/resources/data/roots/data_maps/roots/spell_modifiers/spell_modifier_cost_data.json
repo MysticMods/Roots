@@ -242,6 +242,15 @@
     "roots:growth_infusion/targeted_growth": {
       "costs": []
     },
+    "roots:shatter/adjustable": {
+      "costs": []
+    },
+    "roots:shatter/depth_i": {
+      "costs": []
+    },
+    "roots:shatter/depth_ii": {
+      "costs": []
+    },
     "roots:shatter/fortune_i": {
       "costs": [
         {
@@ -269,6 +278,12 @@
         }
       ]
     },
+    "roots:shatter/height_i": {
+      "costs": []
+    },
+    "roots:shatter/height_ii": {
+      "costs": []
+    },
     "roots:shatter/magnetism": {
       "costs": [
         {
@@ -295,6 +310,12 @@
           "herb": "roots:inferno_bulb"
         }
       ]
+    },
+    "roots:shatter/width_i": {
+      "costs": []
+    },
+    "roots:shatter/width_ii": {
+      "costs": []
     },
     "roots:sky_soarer/amplified_1": {
       "costs": [
