@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "roots:item/growth_infusion/rampant_growth",
+      "predicate": {
+        "roots:spell_predicate": 0.5
+      }
+    }
+  ],
   "textures": {
     "layer0": "roots:item/spells/growth_infusion"
   }

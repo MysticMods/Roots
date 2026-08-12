@@ -6,6 +6,7 @@ import mysticmods.roots.event.setup.ClientSetup;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModModifiers;
+import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -281,6 +282,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
         .end();
 
 
+
     subfolder(ModItems.COOKED_PERESKIA, "food");
     subfolder(ModItems.FLOUR, "food");
     subfolder(ModItems.WILDEWHEET_BREAD, "food");
@@ -378,7 +380,9 @@ public final class RootsItemModelProvider extends ItemModelProvider {
       Item item = entry.getValue();
       if (entry.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
         if (item instanceof TokenItem.SpellTokenItem) {
-          spell(item.builtInRegistryHolder());
+          if (!item.builtInRegistryHolder().is(ModItems.SPELL_GROWTH_INFUSION)) {
+            spell(item.builtInRegistryHolder());
+          }
         } else if (item instanceof TokenItem.RitualTokenItem) {
           ritual(item.builtInRegistryHolder());
         } else if (item instanceof TokenItem.GroveTokenItem) {
@@ -386,6 +390,16 @@ public final class RootsItemModelProvider extends ItemModelProvider {
         }
       }
     });
+
+    var growth_infusion = ModSpells.GROWTH_INFUSION.getKey().location();
+    var growth_infusion_builder = getBuilder(growth_infusion.toString())
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", growth_infusion.withPrefix("item/spells/"));
+
+    // TODO: 0.5f is a magic number
+    growth_infusion_builder.override().predicate(ClientSetup.SPELL_PREDICATE, 0.5f)
+            .model(getBuilder(growth_infusion.withSuffix("/rampant_growth").withPrefix("item/").toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", RootsAPI.rl("item/spells/rampant_growth"))).end();
 
     modifier(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, Items.ARROW);
     modifier(ModModifiers.SKY_SOARER_AMPLIFIED_1, Items.REDSTONE);

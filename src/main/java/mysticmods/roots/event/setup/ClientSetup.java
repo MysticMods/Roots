@@ -15,6 +15,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class ClientSetup {
+  public static final ResourceLocation SPELL_PREDICATE = RootsAPI.rl("spell_predicate");
   public static final ResourceLocation STRING_COLOR = RootsAPI.rl("string_color");
   public static final ResourceLocation UNDYED = RootsAPI.rl("undyed");
 
@@ -41,16 +42,18 @@ public class ClientSetup {
         return dyeable.color().getId() / 16f;
       };
 
+      ItemProperties.register(ModItems.SYLVAN_POUCH.get(), STRING_COLOR, func2);
+
       ItemPropertyFunction func3 = (stack, level, entity, seed) -> {
         var spell = CastingItem.getCurrentSpell(level, entity, stack);
         if (spell != null) {
-
+          return spell.getIconPredicate();
         }
 
         return -1;
       };
 
-      ItemProperties.register(ModItems.SYLVAN_POUCH.get(), STRING_COLOR, func2);
+      ItemProperties.register(ModItems.SPELL_GROWTH_INFUSION.get(), SPELL_PREDICATE, func3);
     });
   }
 }
