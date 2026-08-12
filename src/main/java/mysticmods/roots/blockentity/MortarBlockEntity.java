@@ -395,4 +395,14 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
 
     return false;
   }
+
+  @Override
+  public double getInsertOffset() {
+    return 1.0;
+  }
+
+  @Override
+  public double getDeleteOffset() {
+    return 1.4;
+  }
 }

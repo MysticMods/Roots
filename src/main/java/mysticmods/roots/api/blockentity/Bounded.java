@@ -31,4 +31,12 @@ public interface Bounded {
   default AABB getAABB() {
     return null;
   }
+
+  default double getInsertOffset () {
+    return 0.6;
+  }
+
+  default double getDeleteOffset () {
+    return 1.0;
+  }
 }

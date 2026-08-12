@@ -74,12 +74,12 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
       if (ConfigManager.SHOW_INSERT_IN_GAME_MESSAGE.getAsBoolean() && HudOverlay.shouldShowInsert(pos)) {
         Component overlayMessageString = Component.translatable("roots.hud.fake_menu", Component.keybind(KeyBindings.OPEN_FAKE_MENU.getName()), pBlockEntity.getBlockState()
             .getBlock().getName());
-        renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, 0.6, overlayMessageString);
+        renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, pBlockEntity.getInsertOffset(), overlayMessageString);
       }
       if (ConfigManager.SHOW_DELETE_IN_GAME_MESSAGE.getAsBoolean() && HudOverlay.shouldShowDelete(pos)) {
         Component overlayMessageString = Component.translatable("roots.hud.clear", Component.keybind(KeyBindings.CLEAR_CONTAINER.getName()), pBlockEntity.getBlockState()
             .getBlock().getName());
-        renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, 1, overlayMessageString);
+        renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, pBlockEntity.getDeleteOffset(), overlayMessageString);
       }
     }
     if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
