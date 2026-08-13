@@ -9,6 +9,7 @@ import net.minecraft.util.Mth;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Generify?
 public class SpatialMap {
   private final Long2ObjectOpenHashMap<ObjectOpenHashSet<BlockPos>> index = new Long2ObjectOpenHashMap<>();
 
