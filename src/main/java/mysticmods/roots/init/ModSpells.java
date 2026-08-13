@@ -29,7 +29,14 @@ public class ModSpells {
   private static final DeferredRegister<Spell> REGISTER = DeferredRegister.create(RootsRegistries.Keys.SPELLS, RootsAPI.MODID);
 
   // Acid Cloud (20 cooldown)
-  public static final DeferredHolder<Spell, AcidCloudSpell> ACID_CLOUD = spell(Spells.ACID_CLOUD, AcidCloudSpell::new, ChatFormatting.GREEN, () -> CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)));
+  public static final DeferredHolder<Spell, AcidCloudSpell> ACID_CLOUD = REGISTER.register(Spells.ACID_CLOUD.location().getPath(), () -> new AcidCloudSpell(new Spell.Properties()
+      .type(SpellCastType.CONTINUOUS)
+      .textColor(ChatFormatting.GREEN)
+      .color(0x50a028, 0x405f20)
+      .charge(ParentChargeType.INSTANCE)
+      .costs(() -> CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)))
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COOLDOWN = P.recordProperty("acid_cloud/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_ZX = P.recordProperty("acid_cloud/radius_zx", Property.ofInt(2, "Radius"));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_Y = P.recordProperty("acid_cloud/radius_y", Property.ofInt(2, "Radius"));
@@ -38,7 +45,15 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_FIRE_TICKS = P.recordProperty("acid_cloud/fire_ticks", Property.ofInt(3 * 20, "The number of ticks for which damaged mods are set on fire for when the fire modifier is enabled."));
 
   // Aqua Bubble (1200 cooldown)
-  public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250));
+  public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = REGISTER.register(Spells.AQUA_BUBBLE.location().getPath(), () -> new AquaBubbleSpell(
+      new Spell.Properties()
+          .type(SpellCastType.INSTANT)
+          .color(0xede658, 0x5dd1de)
+          .textColor(ChatFormatting.AQUA)
+          .charge(ParentChargeType.INSTANCE)
+          .cost(() -> ModHerbs.DEWGONIA, SpellCosts.BASE_0250)
+          .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_COOLDOWN = P.recordProperty("aqua_bubble/cooldown", Property.ofInt(1200, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_DURATION = P.recordProperty("aqua_bubble/duration", Property.ofInt(20 * 90, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_ABSORPTION = P.recordProperty("aqua_bubble/absorption", Property.ofInt(4, "The amount of damage absorbed by the aqua bubble, 1 equals half a heart."));
@@ -46,7 +61,13 @@ public class ModSpells {
   public static final PropertyHolder<Property.FloatProperty> AQUA_BUBBLE_LAVA_REDUCTION = P.recordProperty("aqua_bubble/lava_reduction", Property.ofFloat(0.6f, "The percentage of lava damage reduced by the aqua bubble."));
 
   // Light Drifter (600 cooldown)
-  public static final DeferredHolder<Spell, LightDrifterSpell> LIGHT_DRIFTER = spell(Spells.LIGHT_DRIFTER, LightDrifterSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250));
+  public static final DeferredHolder<Spell, LightDrifterSpell> LIGHT_DRIFTER = REGISTER.register(Spells.LIGHT_DRIFTER.location().getPath(), () -> new LightDrifterSpell(new Spell.Properties()
+      .type(SpellCastType.INSTANT)
+      .charge(ParentChargeType.INSTANCE)
+      .color(0xf2ee96, 0x96dbf2)
+      .textColor(ChatFormatting.DARK_PURPLE)
+      .cost(() -> ModHerbs.MOONGLOW, SpellCosts.BASE_0250)
+      .build()));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_COOLDOWN = P.recordProperty("light_drifter/cooldown", Property.ofInt(600, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_DURATION = P.recordProperty("light_drifter/duration", Property.ofInt(20 * 30, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_DISTANCE = P.recordProperty("light_drifter/distance", Property.ofInt(Mth.square(50), "The maximum distance from the player that the light drifter can travel before being recalled."));

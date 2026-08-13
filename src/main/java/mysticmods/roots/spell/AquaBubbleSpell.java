@@ -1,6 +1,7 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -14,6 +15,7 @@ import mysticmods.roots.snapshot.AquaBubbleSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -30,8 +32,8 @@ public class AquaBubbleSpell extends Spell {
   private float fire_reduction, lava_reduction;
   private int absorption;
 
-  public AquaBubbleSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xede658, 0x5dd1de);
+  public AquaBubbleSpell(Properties properties) {
+    super(properties);
   }
 
   @Override
@@ -55,6 +57,27 @@ public class AquaBubbleSpell extends Spell {
     properties.add(ModSpells.AQUA_BUBBLE_ABSORPTION);
     properties.add(ModSpells.AQUA_BUBBLE_FIRE_REDUCTION);
     properties.add(ModSpells.AQUA_BUBBLE_LAVA_REDUCTION);
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    double absorb = ((absorption + 1) * 4.0) / 2.0;
+
+    return new Component[]{
+        Component.literal(String.format("%.1f", duration / 20.0)),
+        Component.literal(String.valueOf(duration)),
+        Component.literal(String.format("%.1f", absorb)),
+        Component.literal(String.format("%.1f", 1.0 - lava_reduction)),
+        Component.literal(String.format("%.1f", 1.0 - fire_reduction)),
+        Component.literal(String.format("%.1f", cooldown / 20.0)),
+        Component.literal(String.valueOf(cooldown))
+    };
+  }
+
+  // TODO: No current modifiers
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 
   @Override

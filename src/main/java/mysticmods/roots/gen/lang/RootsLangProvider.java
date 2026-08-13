@@ -917,9 +917,18 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
     modifierExtendedDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage for %s seconds [%s ticks] after the boost effect ends.");
 
-    spellDescription(ModSpells.ACID_CLOUD, "Creates a damaging poisonous cloud around you while channeled.");
+    spellDescription(ModSpells.ACID_CLOUD, "Creates a corrosive, damaging cloud around you while channeled.");
+    spellExtendedDescription(ModSpells.ACID_CLOUD, "Creates a corrosive cloud that deals %s hearts of damage to up to %s entities within the cloud's radius.");
+
+    modifierDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities are also set on fire.");
+    modifierExtendedDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities are also set on fire for %s seconds [%s ticks].");
+    modifierDescriptionBoth(ModModifiers.ACID_CLOUD_PEACEFUL, "Prevents damage to non-hostile entities.");
+
     spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
+    spellExtendedDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%. Triggers a base cooldown of %s seconds [%s ticks].");
+
     spellDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body, allowing you to float through entities and terrain for a short time and distance. Returns you to your body upon expiration.");
+    spellExtendedDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body for %s seconds [%s ticks], allowing you to float through entities and terrain up to %s blocks away from your location when casting the spell. Triggers a base cooldown of %s seconds [%s ticks].");
     spellDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs to your location.");
     spellDescription(ModSpells.DANDELION_WINDS, "Has a chance to deflect projectiles aimed at you.");
     spellExtendedDescription(ModSpells.DANDELION_WINDS, "Applies a buff for %s seconds [%s ticks] that gives a %s%% chance to deflect projectiles aimed at you.");

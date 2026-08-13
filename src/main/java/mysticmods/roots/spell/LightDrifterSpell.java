@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.attachment.LightDrifterStorage;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -29,8 +30,8 @@ import java.util.List;
 public class LightDrifterSpell extends Spell {
   private int duration, maxDistance;
 
-  public LightDrifterSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xf2ee96, 0x96dbf2);
+  public LightDrifterSpell(Properties properties) {
+    super(properties);
   }
 
   @Override
@@ -52,6 +53,19 @@ public class LightDrifterSpell extends Spell {
     properties.add(ModSpells.LIGHT_DRIFTER_DISTANCE);
   }
 
+  public static void stopPlayerMovement(Player pPlayer) {
+    pPlayer.setDeltaMovement(0, 0, 0);
+    pPlayer.hasImpulse = true;
+    PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundStopPlayerMovementPacket.INSTANCE);
+  }
+
+  public static void resetDrifterToPlayer(Player pPlayer, LightDrifterEntity drifter) {
+    drifter.setPos(pPlayer.getX(), pPlayer.getY() + 1.8, pPlayer.getZ());
+    drifter.setXRot(pPlayer.getXRot());
+    drifter.setYRot(pPlayer.getYRot());
+    drifter.hasImpulse = true;
+  }
+
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (pPlayer.isFallFlying() || !pPlayer.onGround()) {
@@ -59,13 +73,9 @@ public class LightDrifterSpell extends Spell {
       costs.noCharge();
       return SpellCastResult.fail();
     }
-    pPlayer.setDeltaMovement(0, 0, 0);
-    pPlayer.hasImpulse = true;
-    PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, ClientboundStopPlayerMovementPacket.INSTANCE);
+    stopPlayerMovement(pPlayer);
     LightDrifterEntity drifter = new LightDrifterEntity(ModEntities.LIGHT_DRIFTER.get(), pLevel, pPlayer);
-    drifter.setPos(pPlayer.getX(), pPlayer.getY() + 1.8, pPlayer.getZ());
-    drifter.setXRot(pPlayer.getXRot());
-    drifter.setYRot(pPlayer.getYRot());
+    resetDrifterToPlayer(pPlayer, drifter);
     pLevel.addFreshEntity(drifter);
     LightDrifterStorage storage = new LightDrifterStorage();
     storage.setId(drifter.getUUID());
@@ -78,5 +88,22 @@ public class LightDrifterSpell extends Spell {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.LIGHT_DRIFTER, duration), pPlayer);
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new ClientboundLightDrifterSyncPacket(drifter.getId()));
     return SpellCastResult.success(cooldown);
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.format("%.1f", duration / 20.0)),
+        Component.literal(String.valueOf(duration)),
+        Component.literal(String.valueOf(maxDistance)),
+        Component.literal(String.format("%.1f", cooldown / 20.0)),
+        Component.literal(String.valueOf(cooldown))
+    };
+  }
+
+  // TODO: When modifiers
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

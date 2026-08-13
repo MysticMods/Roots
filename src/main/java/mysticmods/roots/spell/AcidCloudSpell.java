@@ -1,20 +1,23 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.AcidCloudFXPacket;
 import mysticmods.roots.util.EntityUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,13 +30,12 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.List;
 import java.util.function.Predicate;
 
-// Note: VISUALS DONE!
 public class AcidCloudSpell extends TwoRadiusSpell {
   private float damage;
   private int count, fireTicks;
 
-  public AcidCloudSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x50a028, 0x405f20);
+  public AcidCloudSpell(Properties properties) {
+    super(properties);
   }
 
   @Override
@@ -65,6 +67,29 @@ public class AcidCloudSpell extends TwoRadiusSpell {
     this.damage = properties.get(ModSpells.ACID_CLOUD_DAMAGE);
     this.count = properties.get(ModSpells.ACID_CLOUD_COUNT);
     this.fireTicks = properties.get(ModSpells.ACID_CLOUD_FIRE_TICKS);
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    float hearts = damage / 2.0f;
+    return new Component[]{
+        Component.literal(String.format("%.1f", hearts)),
+        Component.literal(String.valueOf(count))
+    };
+  }
+
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    if (spellModifier.is(ModModifiers.ACID_CLOUD_FIRE)) {
+      return new Component[]{
+          Component.literal(String.format("%.1f", fireTicks / 20.0f)),
+          Component.literal(String.valueOf(fireTicks))
+      };
+    } else if (spellModifier.is(ModModifiers.ACID_CLOUD_PEACEFUL)) {
+      return new Component[]{};
+    }
+    RootsAPI.LOG.error("Tried to create description components for modifiers not associated with {}: {}", this, spellModifier);
+    return new Component[]{};
   }
 
   @Override
