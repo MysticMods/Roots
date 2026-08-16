@@ -29,9 +29,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.<SpellSlot>mapCodec(instance -> instance.group(
       UUIDUtil.CODEC.fieldOf("spellId").forGetter(SpellSlot::spellId),
       Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
-      RootsRegistries.SPELLS.byNameCodec().validate(result -> {
-        return DataResult.success(result);
-      }).fieldOf("spell").forGetter(SpellSlot::spell),
+      RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
       SpellModifierSet.CODEC.fieldOf("enabledModifiers").forGetter(SpellSlot::enabledModifiers),
       DataComponentPatch.CODEC.fieldOf("data")
           .forGetter(o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch())
