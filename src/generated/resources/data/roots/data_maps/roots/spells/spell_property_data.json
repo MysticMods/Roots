@@ -662,53 +662,6 @@
         }
       }
     ],
-    "roots:rampant_growth": [
-      {
-        "id": "roots:rampant_growth/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 0,
-          "value": 0
-        }
-      },
-      {
-        "id": "roots:rampant_growth/radius_zx",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
-          "default_value": 5,
-          "value": 5
-        }
-      },
-      {
-        "id": "roots:rampant_growth/radius_y",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Y axis",
-          "default_value": 5,
-          "value": 5
-        }
-      },
-      {
-        "id": "roots:rampant_growth/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The interval between growth ticks in ticks.",
-          "default_value": 2,
-          "value": 2
-        }
-      },
-      {
-        "id": "roots:rampant_growth/count",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How many entities or blocks the spell will affect per interval",
-          "default_value": 9,
-          "value": 9
-        }
-      }
-    ],
     "roots:rose_thorns": [
       {
         "id": "roots:rose_thorns/cooldown",

@@ -194,15 +194,6 @@
         }
       ]
     },
-    "roots:rampant_growth": {
-      "costs": [
-        {
-          "type": "additive",
-          "defaultValue": 0.031,
-          "herb": "roots:wildewheet"
-        }
-      ]
-    },
     "roots:rose_thorns": {
       "costs": [
         {

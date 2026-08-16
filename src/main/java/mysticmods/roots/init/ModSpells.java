@@ -251,7 +251,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(9, SpellProperties.COUNT));
 
   // Rampant Growth (20 cooldown)
-  @Deprecated
+/*  @Deprecated
   public static final DeferredHolder<Spell, RampantGrowthSpell> RAMPANT_GROWTH = REGISTER.register(Spells.RAMPANT_GROWTH.location()
       .getPath(), () ->
       new RampantGrowthSpell(new Spell.Properties()
@@ -261,7 +261,7 @@ public class ModSpells {
           .cost(() -> ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)
           .textColor(ChatFormatting.YELLOW)
           .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
-          .build()));
+          .build()));*/
 
   // Harvest (25 cooldown)
   public static final DeferredHolder<Spell, HarvestSpell> HARVEST = REGISTER.register(Spells.HARVEST.location()

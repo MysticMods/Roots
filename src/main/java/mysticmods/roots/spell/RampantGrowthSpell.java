@@ -32,7 +32,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RampantGrowthSpell extends TwoRadiusSpell {
+/*public class RampantGrowthSpell extends TwoRadiusSpell {
   private int interval, count;
 
   public RampantGrowthSpell(Spell.Properties properties) {
@@ -155,4 +155,4 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   public int getBaseMaximumOperations() {
     return count;
   }
-}
+}*/

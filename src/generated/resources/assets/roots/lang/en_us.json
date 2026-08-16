@@ -714,7 +714,6 @@
   "spell.roots.nondetection.description": "Reduces the range at which enemies can detect your presence.",
   "spell.roots.petal_shell": "Petal Shell",
   "spell.roots.petal_shell.description": "Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.",
-  "spell.roots.rampant_growth": "Rampant Growth",
   "spell.roots.rose_thorns": "Rose Thorns",
   "spell.roots.rose_thorns.description": "Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.",
   "spell.roots.saturate": "Saturate",
