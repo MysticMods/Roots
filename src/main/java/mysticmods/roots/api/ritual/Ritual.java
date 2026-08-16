@@ -27,6 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -89,14 +90,10 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
       box = getBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
     } else {
       box = cache.getBoundingBox();
-    }
-    animationTick(pLevel, pPos, pState, box, blockEntity, dur, random);*/
+    }*/
   }
 
   protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
-
-  @Deprecated
-  protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   protected void rebuildBounds() {
     boundingBox = new BoundingBox(-getRadiusXZ(), -getRadiusY(), -getRadiusXZ(), getRadiusXZ(), getRadiusY(), getRadiusXZ());
@@ -104,17 +101,16 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
   }
 
   protected void buildProperties(List<PropertyHolder<?>> properties) {
-    if (getDurationProperty() != null) {
-      properties.add(getDurationProperty());
-    }
+    properties.add(getDurationProperty());
+    properties.add(getIntervalProperty());
     if (getRadiusXZProperty() != null) {
       properties.add(getRadiusXZProperty());
     }
     if (getRadiusYProperty() != null) {
       properties.add(getRadiusYProperty());
     }
-    if (getIntervalProperty() != null) {
-      properties.add(getIntervalProperty());
+    if (getRadiusProperty() != null) {
+      properties.add(getRadiusProperty());
     }
   }
 
@@ -126,19 +122,21 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
 
   private void initProperties(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
-    if (getDurationProperty() != null) {
-      // if it's not null it should throw an error
-      duration = properties.get(getDurationProperty());
+    getDurationProperty();// if it's not null it should throw an error
+    duration = properties.get(getDurationProperty());
+    if (getRadiusProperty() != null) {
+      int radius = properties.get(getRadiusProperty());
+      radiusXZ = radius;
+      radiusY = radius;
+    } else {
+      if (getRadiusXZProperty() != null) {
+        radiusXZ = properties.get(getRadiusXZProperty());
+      }
+      if (getRadiusYProperty() != null) {
+        radiusY = properties.get(getRadiusYProperty());
+      }
     }
-    if (getRadiusXZProperty() != null) {
-      radiusXZ = properties.get(getRadiusXZProperty());
-    }
-    if (getRadiusYProperty() != null) {
-      radiusY = properties.get(getRadiusYProperty());
-    }
-    if (getIntervalProperty() != null) {
-      interval = properties.get(getIntervalProperty());
-    }
+    interval = properties.get(getIntervalProperty());
   }
 
   protected abstract void initialize(Holder<Ritual> holder);
@@ -198,12 +196,21 @@ public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapIn
     return builtInRegistryHolder().is(key);
   }
 
+  @NotNull
   protected abstract PropertyHolder<Property.IntegerProperty> getDurationProperty();
 
+  @Nullable
   protected abstract PropertyHolder<Property.IntegerProperty> getRadiusXZProperty();
 
+  @Nullable
   protected abstract PropertyHolder<Property.IntegerProperty> getRadiusYProperty();
 
+  @Nullable
+  protected PropertyHolder<Property.IntegerProperty> getRadiusProperty() {
+    return null;
+  }
+
+  @NotNull
   protected abstract PropertyHolder<Property.IntegerProperty> getIntervalProperty();
 
   public boolean requiresCache() {

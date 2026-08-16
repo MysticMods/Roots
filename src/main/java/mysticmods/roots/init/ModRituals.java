@@ -79,6 +79,7 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> GERMINATION_RADIUS_XZ = P.recordProperty("germination/radius_xz", Property.ofInt(20, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> GERMINATION_RADIUS_Y = P.recordProperty("germination/radius_y", Property.ofInt(20, RitualProperties.RADIUS_Y));
 
+  // TODO: Maybe merge with purity
   public static final DeferredHolder<Ritual, HealingAuraRitual> HEALING_AURA = RITUAL.register("healing_aura", HealingAuraRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_DURATION = P.recordProperty("healing_aura/duration", Property.ofInt(800, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_INTERVAL = P.recordProperty("healing_aura/interval", Property.ofInt(60, RitualProperties.INTERVAL));
@@ -150,6 +151,7 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> WILDROOT_GROWTH_RADIUS_XZ = P.recordProperty("wildroot_growth/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> WILDROOT_GROWTH_RADIUS_Y = P.recordProperty("wildroot_growth/radius_y", Property.ofInt(4, RitualProperties.RADIUS_Y));
 
+  // Long-term usage: keeping mobs out of your base
   public static final DeferredHolder<Ritual, WindwallRitual> WINDWALL = RITUAL.register("windwall", WindwallRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_DURATION = P.recordProperty("windwall/duration", Property.ofInt(3000, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_INTERVAL = P.recordProperty("windwall/interval", Property.ofInt(10, RitualProperties.INTERVAL));
@@ -158,6 +160,11 @@ public class ModRituals {
   public static final PropertyHolder<Property.FloatProperty> WINDWALL_KNOCKBACK_STRENGTH = P.recordProperty("windwall/knockback_strength", Property.ofFloat(1.0f, "The strength of the knockback applied to entities."));
   public static final PropertyHolder<Property.DoubleProperty> WINDWALL_MINIMUM_Y_VELOCITY = P.recordProperty("windwall/min_y_velocity", Property.ofDouble(0.4, "The minimum y velocity applied to entities."));
   public static final PropertyHolder<Property.DoubleProperty> WINDWALL_HEIGHT_PERCENTAGE = P.recordProperty("windwall/height_percentage", Property.ofDouble(0.1, "The percentage of the height of the relevant entity that will be added to their y velocity."));
+
+  public static final DeferredHolder<Ritual, ContainmentRitual> CONTAINMENT = RITUAL.register("containment", ContainmentRitual::new);
+  public static final PropertyHolder<Property.IntegerProperty> CONTAINMENT_DURATION = P.recordProperty("containment/duration", Property.ofInt(3 * 60 * 20, RitualProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> CONTAINMENT_RADIUS = P.recordProperty("containment/radius", Property.ofInt(15, RitualProperties.RADIUS));
+  public static final PropertyHolder<Property.IntegerProperty> CONTAINMENT_INTERVAL = P.recordProperty("containment/interval", Property.ofInt(1, RitualProperties.INTERVAL));
 
   public static final DeferredHolder<Ritual, GroveSupplicationRitual> GROVE_SUPPLICATION = RITUAL.register("grove_supplication", GroveSupplicationRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> GROVE_SUPPLICATION_DURATION = P.recordProperty("grove_supplication/duration", Property.ofInt(250, RitualProperties.DURATION));

@@ -19,7 +19,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -85,11 +84,6 @@ public class HeavyStormsRitual extends Ritual {
     super.removed(pLevel, pPos, pState, blockEntity, random);
     RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
     info.stopHeavyStorms();
-  }
-
-  @Override
-  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-
   }
 
   @Override

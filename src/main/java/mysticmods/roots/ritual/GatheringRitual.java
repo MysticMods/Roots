@@ -12,7 +12,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -25,11 +24,6 @@ public class GatheringRitual extends Ritual {
       List<Vec3> positions = MagnetismUtil.store(pLevel, pPos, blockEntity, getRadiusXZ(), getRadiusY(), getRadiusXZ());
       // TODO: Visuals for the yoink
     }
-  }
-
-  @Override
-  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-
   }
 
   @Override

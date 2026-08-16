@@ -3,30 +3,25 @@ package mysticmods.roots.ritual;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
-import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.block.GroveStoneBlock;
+import mysticmods.roots.api.ritual.SingleTickRitual;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.PositionCache;
-import mysticmods.roots.util.ReputationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.BiPredicate;
 
-public class GroveSupplicationRitual extends Ritual {
+public class GroveSupplicationRitual extends SingleTickRitual {
   private static final BiPredicate<Level, BlockPos> GROVE_STONE_PREDICATE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     return state.is(RootsTags.Blocks.GROVE_STONES) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE);
@@ -39,9 +34,8 @@ public class GroveSupplicationRitual extends Ritual {
     return PREDICATES;
   }
 
-  // TODO: singleFunctionalTick
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     // TODO: Move this to super.functionalTick
     // TODO: call super.functionalTick
     if (pCache == null/* && requiresCache()*/) {
@@ -50,7 +44,6 @@ public class GroveSupplicationRitual extends Ritual {
     }
 
     // TODO: Look into
-    if (duration % getInterval() == 0) {
       if (blockEntity.getBoundingBox() != null) {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
           if (blockEntity.getLevel().getBlockEntity(pos) instanceof GroveStoneBlockEntity groveStoneBlockEntity) {
@@ -89,14 +82,7 @@ public class GroveSupplicationRitual extends Ritual {
             }
           }*/
         }
-      }
     }
-  }
-
-  @Override
-  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity
-      blockEntity, int duration, RandomSource randomSource) {
-
   }
 
   @Override

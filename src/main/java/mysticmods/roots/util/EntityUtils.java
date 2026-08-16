@@ -77,7 +77,7 @@ public class EntityUtils {
     };
   }
 
-  private static Predicate<Entity> isDeflectableByDandelionWinds = (entity) -> {
+  private static final Predicate<Entity> isDeflectableByDandelionWinds = (entity) -> {
     if (!(entity instanceof Projectile projectile)) {
       return false;
     }
@@ -116,5 +116,42 @@ public class EntityUtils {
               }
             }, () -> RootsAPI.LOG.error("Somehow, Palpatine has returned: Server has no entity type registry!")
         );
+  }
+
+  private static final Predicate<Entity> isHostile =
+    inc -> {
+    if (!(inc instanceof LivingEntity entity)) {
+      return false;
+    }
+
+    Level pLevel = inc.level();
+
+    if (entity.isDeadOrDying() || entity.hurtTime > 0) {
+      return false;
+    }
+
+    EntityType<?> type = entity.getType();
+
+    if (type.is(RootsTags.Entities.FORCE_HOSTILE)) {
+      return true;
+    } else if (type.is(RootsTags.Entities.FORCE_FRIENDLY)) {
+      return false;
+    }
+
+    if (entity instanceof NeutralMob neutral) {
+      if (neutral.isAngryAtAllPlayers(pLevel)) {
+        return true;
+      }
+    }
+
+    return entity instanceof Enemy;
+  };
+
+  public static boolean isHostile(Entity entity) {
+    return isHostile.test(entity);
+  }
+
+  public static Predicate<Entity> isHostile () {
+    return isHostile;
   }
 }

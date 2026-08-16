@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.SingleTickRitual;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
@@ -19,13 +20,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.BiPredicate;
 
-public class WildrootGrowthRitual extends Ritual {
+public class WildrootGrowthRitual extends SingleTickRitual {
   private static final BiPredicate<Level, BlockPos> MATURE_WILDROOT_CROP = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     if (state.is(RootsTags.Blocks.WILDROOT_CROP)) {
@@ -43,39 +43,32 @@ public class WildrootGrowthRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (pCache == null && requiresCache()) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
 
-    if (duration % interval == 0) {
-      ServerLevel level = (ServerLevel) pLevel;
+    ServerLevel level = (ServerLevel) pLevel;
 
-      BlockPos treePos = pCache.random(MATURE_WILDROOT_CROP, randomSource);
-      if (treePos == null) {
-        return; // TODO: Something here?
-      }
-      BlockState currentState = level.getBlockState(treePos);
-      level.setBlock(treePos, Blocks.AIR.defaultBlockState(), 4);
-      BlockPos below = treePos.below();
-      // If it wasn't on a full height block, replace it with dirt
-      BlockState belowState = level.getBlockState(below);
-      if (!belowState.isFaceSturdy(level, below, Direction.UP) || !belowState.isCollisionShapeFullBlock(level, below)) {
-        level.setBlock(below, Blocks.DIRT.defaultBlockState(), 3);
-      }
-      if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).roots$GetTreeGrower()
-          .growTree(level, level.getChunkSource()
-              .getGenerator(), treePos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
-        level.setBlock(below, belowState, 3);
-        level.setBlock(treePos, currentState, 3);
-      }
+    BlockPos treePos = pCache.random(MATURE_WILDROOT_CROP, randomSource);
+    if (treePos == null) {
+      return; // TODO: Something here?
     }
-  }
-
-  @Override
-  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-
+    BlockState currentState = level.getBlockState(treePos);
+    level.setBlock(treePos, Blocks.AIR.defaultBlockState(), 4);
+    BlockPos below = treePos.below();
+    // If it wasn't on a full height block, replace it with dirt
+    BlockState belowState = level.getBlockState(below);
+    if (!belowState.isFaceSturdy(level, below, Direction.UP) || !belowState.isCollisionShapeFullBlock(level, below)) {
+      level.setBlock(below, Blocks.DIRT.defaultBlockState(), 3);
+    }
+    if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).roots$GetTreeGrower()
+        .growTree(level, level.getChunkSource()
+            .getGenerator(), treePos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
+      level.setBlock(below, belowState, 3);
+      level.setBlock(treePos, currentState, 3);
+    }
   }
 
   @Override

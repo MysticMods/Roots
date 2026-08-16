@@ -11,6 +11,15 @@
         }
       },
       {
+        "id": "roots:animal_harvest/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 110,
+          "value": 110
+        }
+      },
+      {
         "id": "roots:animal_harvest/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -26,15 +35,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 6,
           "value": 6
-        }
-      },
-      {
-        "id": "roots:animal_harvest/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 110,
-          "value": 110
         }
       },
       {
@@ -103,6 +103,15 @@
         }
       },
       {
+        "id": "roots:augmentation/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 19,
+          "value": 19
+        }
+      },
+      {
         "id": "roots:augmentation/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -118,15 +127,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 6,
           "value": 6
-        }
-      },
-      {
-        "id": "roots:augmentation/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 19,
-          "value": 19
         }
       },
       {
@@ -159,6 +159,15 @@
         }
       },
       {
+        "id": "roots:blooming/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 100,
+          "value": 100
+        }
+      },
+      {
         "id": "roots:blooming/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -177,21 +186,41 @@
         }
       },
       {
-        "id": "roots:blooming/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 100,
-          "value": 100
-        }
-      },
-      {
         "id": "roots:blooming/count",
         "value": {
           "type": "roots:integer_property",
           "comment": "The number of flowers to place per interval.",
           "default_value": 1,
           "value": 1
+        }
+      }
+    ],
+    "roots:containment": [
+      {
+        "id": "roots:containment/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The length of the ritual",
+          "default_value": 3600,
+          "value": 3600
+        }
+      },
+      {
+        "id": "roots:containment/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:containment/radius",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The radius of the ritual in blocks, both horizontally and vertically.",
+          "default_value": 15,
+          "value": 15
         }
       }
     ],
@@ -226,6 +255,15 @@
         }
       },
       {
+        "id": "roots:fire_storm/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 60,
+          "value": 60
+        }
+      },
+      {
         "id": "roots:fire_storm/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -241,15 +279,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 30,
           "value": 30
-        }
-      },
-      {
-        "id": "roots:fire_storm/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 60,
-          "value": 60
         }
       },
       {
@@ -273,6 +302,15 @@
         }
       },
       {
+        "id": "roots:frost_lands/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 30,
+          "value": 30
+        }
+      },
+      {
         "id": "roots:frost_lands/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -288,15 +326,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 10,
           "value": 10
-        }
-      },
-      {
-        "id": "roots:frost_lands/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 30,
-          "value": 30
         }
       },
       {
@@ -374,6 +403,15 @@
         }
       },
       {
+        "id": "roots:gathering/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 80,
+          "value": 80
+        }
+      },
+      {
         "id": "roots:gathering/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -390,15 +428,6 @@
           "default_value": 15,
           "value": 15
         }
-      },
-      {
-        "id": "roots:gathering/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 80,
-          "value": 80
-        }
       }
     ],
     "roots:germination": [
@@ -409,6 +438,15 @@
           "comment": "The length of the ritual",
           "default_value": 6400,
           "value": 6400
+        }
+      },
+      {
+        "id": "roots:germination/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 64,
+          "value": 64
         }
       },
       {
@@ -428,15 +466,6 @@
           "default_value": 20,
           "value": 20
         }
-      },
-      {
-        "id": "roots:germination/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 64,
-          "value": 64
-        }
       }
     ],
     "roots:grove_supplication": [
@@ -447,6 +476,15 @@
           "comment": "The length of the ritual",
           "default_value": 250,
           "value": 250
+        }
+      },
+      {
+        "id": "roots:grove_supplication/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 210,
+          "value": 210
         }
       },
       {
@@ -466,15 +504,6 @@
           "default_value": 10,
           "value": 10
         }
-      },
-      {
-        "id": "roots:grove_supplication/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 210,
-          "value": 210
-        }
       }
     ],
     "roots:healing_aura": [
@@ -485,6 +514,15 @@
           "comment": "The length of the ritual",
           "default_value": 800,
           "value": 800
+        }
+      },
+      {
+        "id": "roots:healing_aura/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 60,
+          "value": 60
         }
       },
       {
@@ -503,15 +541,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 15,
           "value": 15
-        }
-      },
-      {
-        "id": "roots:healing_aura/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 60,
-          "value": 60
         }
       },
       {
@@ -544,6 +573,15 @@
         }
       },
       {
+        "id": "roots:heavy_storms/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
         "id": "roots:heavy_storms/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -559,15 +597,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 15,
           "value": 15
-        }
-      },
-      {
-        "id": "roots:heavy_storms/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 20,
-          "value": 20
         }
       },
       {
@@ -618,6 +647,15 @@
         }
       },
       {
+        "id": "roots:overgrowth/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 150,
+          "value": 150
+        }
+      },
+      {
         "id": "roots:overgrowth/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -634,15 +672,6 @@
           "default_value": 5,
           "value": 5
         }
-      },
-      {
-        "id": "roots:overgrowth/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 150,
-          "value": 150
-        }
       }
     ],
     "roots:protection": [
@@ -653,6 +682,15 @@
           "comment": "The length of the ritual",
           "default_value": 1200,
           "value": 1200
+        }
+      },
+      {
+        "id": "roots:protection/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 20,
+          "value": 20
         }
       },
       {
@@ -671,15 +709,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 6,
           "value": 6
-        }
-      },
-      {
-        "id": "roots:protection/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 20,
-          "value": 20
         }
       },
       {
@@ -766,6 +795,15 @@
         }
       },
       {
+        "id": "roots:purity/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
         "id": "roots:purity/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -781,15 +819,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 4,
           "value": 4
-        }
-      },
-      {
-        "id": "roots:purity/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 20,
-          "value": 20
         }
       },
       {
@@ -831,6 +860,15 @@
         }
       },
       {
+        "id": "roots:spreading_forest/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
         "id": "roots:spreading_forest/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -846,15 +884,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 30,
           "value": 30
-        }
-      },
-      {
-        "id": "roots:spreading_forest/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 20,
-          "value": 20
         }
       }
     ],
@@ -889,6 +918,15 @@
         }
       },
       {
+        "id": "roots:warding/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
         "id": "roots:warding/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -904,15 +942,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 6,
           "value": 6
-        }
-      },
-      {
-        "id": "roots:warding/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 20,
-          "value": 20
         }
       },
       {
@@ -945,6 +974,15 @@
         }
       },
       {
+        "id": "roots:wildroot_growth/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 250,
+          "value": 250
+        }
+      },
+      {
         "id": "roots:wildroot_growth/radius_xz",
         "value": {
           "type": "roots:integer_property",
@@ -961,15 +999,6 @@
           "default_value": 4,
           "value": 4
         }
-      },
-      {
-        "id": "roots:wildroot_growth/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 250,
-          "value": 250
-        }
       }
     ],
     "roots:windwall": [
@@ -980,6 +1009,15 @@
           "comment": "The length of the ritual",
           "default_value": 3000,
           "value": 3000
+        }
+      },
+      {
+        "id": "roots:windwall/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration)",
+          "default_value": 10,
+          "value": 10
         }
       },
       {
@@ -998,15 +1036,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 31,
           "value": 31
-        }
-      },
-      {
-        "id": "roots:windwall/interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How often the ritual is executed (must be shorter than duration)",
-          "default_value": 10,
-          "value": 10
         }
       },
       {

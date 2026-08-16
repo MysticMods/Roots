@@ -5,6 +5,7 @@ import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.SingleTickRitual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModRituals;
@@ -18,49 +19,41 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CraftingRitual extends Ritual {
+public class CraftingRitual extends SingleTickRitual {
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
-    if (dur == getInterval()) {
-      List<ItemStack> output = blockEntity.popStoredItems();
-      if (output.isEmpty()) {
-        return;
-      }
-      if (blockEntity.getLastPlayer() != null) {
-        for (ItemStack item : output) {
-          CraftItemAction.Context context = new CraftItemAction.Context(
-              (ServerLevel) blockEntity.getLevel(),
-              (ServerPlayer) blockEntity.getLastPlayer(),
-              item
-          );
-          ModActions.CRAFT_ITEM.get().accept(context);
-        }
-      }
-      output = blockEntity.outputAdjacent(output); // Try to output to adjacent inventories
-      for (ItemStack stack : output) { // Drop whatever's left over
-        ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), blockEntity.getBlockPos().above(), stack);
-      }
-      if (blockEntity.getLastPlayer() != null && blockEntity.getLastRecipe() != null) {
-        CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+  public void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
+    List<ItemStack> output = blockEntity.popStoredItems();
+    if (output.isEmpty()) {
+      return;
+    }
+    if (blockEntity.getLastPlayer() != null) {
+      for (ItemStack item : output) {
+        CraftItemAction.Context context = new CraftItemAction.Context(
             (ServerLevel) blockEntity.getLevel(),
             (ServerPlayer) blockEntity.getLastPlayer(),
-            blockEntity.getLastRecipe().id(),
-            blockEntity.getLastRecipe().value(),
-            blockEntity
+            item
         );
-        ModActions.CRAFT_RECIPE.get().accept(context);
+        ModActions.CRAFT_ITEM.get().accept(context);
       }
     }
-  }
-
-  @Override
-  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
-
+    output = blockEntity.outputAdjacent(output); // Try to output to adjacent inventories
+    for (ItemStack stack : output) { // Drop whatever's left over
+      ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), blockEntity.getBlockPos().above(), stack);
+    }
+    if (blockEntity.getLastPlayer() != null && blockEntity.getLastRecipe() != null) {
+      CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+          (ServerLevel) blockEntity.getLevel(),
+          (ServerPlayer) blockEntity.getLastPlayer(),
+          blockEntity.getLastRecipe().id(),
+          blockEntity.getLastRecipe().value(),
+          blockEntity
+      );
+      ModActions.CRAFT_RECIPE.get().accept(context);
+    }
   }
 
   @Override
