@@ -21,10 +21,9 @@ import java.util.List;
 public class NondetectionSpell extends Spell {
   private int potionDuration;
 
-  public NondetectionSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x8f32b8, 0x4c94ed);
+  public NondetectionSpell(Properties properties) {
+    super(properties);
   }
-
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {

@@ -279,7 +279,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
           // Spawn particles at the pedestal
           pLevel.addParticle(
-              RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).color(ModSpells.WILDFIRE).build(),
+              RootsParticleOptions.builder(ModParticles.GROVE_CRAFTER).build(),
               x, y, z,
               pLevel.getRandom().nextDouble() * 0.01, (pLevel.random.nextDouble() * 0.05), pLevel.getRandom()
                   .nextDouble() * 0.01

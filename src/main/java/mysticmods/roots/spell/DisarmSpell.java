@@ -40,8 +40,8 @@ public class DisarmSpell extends TwoRadiusSpell {
   private float dropChance;
   private int glowDuration, count;
 
-  public DisarmSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x3a3a3a, 0x7a0000);
+  public DisarmSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

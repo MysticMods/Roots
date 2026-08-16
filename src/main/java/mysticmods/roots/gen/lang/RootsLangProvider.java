@@ -930,6 +930,7 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body, allowing you to float through entities and terrain for a short time and distance. Returns you to your body upon expiration.");
     spellExtendedDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body for %s seconds [%s ticks], allowing you to float through entities and terrain up to %s blocks away from your location when casting the spell. Triggers a base cooldown of %s seconds [%s ticks].");
     spellDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs to your location.");
+    spellExtendedDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs within %s blocks horizontally and %s blocks vertically to your location.");
     spellDescription(ModSpells.DANDELION_WINDS, "Has a chance to deflect projectiles aimed at you.");
     spellExtendedDescription(ModSpells.DANDELION_WINDS, "Applies a buff for %s seconds [%s ticks] that gives a %s%% chance to deflect projectiles aimed at you.");
     modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the Dandelion Winds effect.");
@@ -959,19 +960,18 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.NONDETECTION, "Reduces the range at which enemies can detect your presence.");
     spellDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light.");
     spellDescription(ModSpells.GEAS, "Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.");
-    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");
+/*    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");*/
     spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
-    spellDescription(ModSpells.RAMPANT_GROWTH, "Causes accelerated growth to all eligible blocks in a radius around you.");
     spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
     spellDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.");
     spellDescription(ModSpells.PETAL_SHELL, "Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.");
-    spellDescription(ModSpells.RADIANCE, "Shoots a beam of destructive light in the direction you are facing. This beam will damage all entities that it touches.");
+/*    spellDescription(ModSpells.RADIANCE, "Shoots a beam of destructive light in the direction you are facing. This beam will damage all entities that it touches.");*/
     spellDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.");
     spellDescription(ModSpells.SHATTER, "Breaks the targeted blocks. The size and dimensions of the spell can be adjusted."); // TODO: Spell description keybinds
     spellDescription(ModSpells.JAUNT, "Teleports you a short way in the distance you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.");
-    spellDescription(ModSpells.STORM_CLOUD, "Creates a vicious cloud of storms around you. For the duration, lightning from the cloud may strike nearby enemies.");
+/*    spellDescription(ModSpells.STORM_CLOUD, "Creates a vicious cloud of storms around you. For the duration, lightning from the cloud may strike nearby enemies.");
     spellDescription(ModSpells.TEMPORAL_MORASS, "Creates a temporary field of disruptive energy. All entities within this field will have their movement dramatically slowed.");
-    spellDescription(ModSpells.WILDFIRE, "Flings a fiery meteor in the direction you are looking. If this meteor hits an enemy, it will damage it.");
+    spellDescription(ModSpells.WILDFIRE, "Flings a fiery meteor in the direction you are looking. If this meteor hits an enemy, it will damage it.");*/
 
     addDamage(ModDamage.ACID_CLOUD, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
     addDamage(ModDamage.LIFE_DRAIN, "%1$s was drained away to nothing", "%1$s was drained away to nothing while fighting %2$s", "%1$s was drained away to nothing while fighting %2$s wielding %3$s");

@@ -27,8 +27,8 @@ import java.util.List;
 public class SylvanLightSpell extends Spell {
   protected double maxDistance = 0;
 
-  public SylvanLightSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xf7f6d2, 0xe351f4);
+  public SylvanLightSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

@@ -663,24 +663,6 @@
         "entries": [
           {
             "type": "exact_spell",
-            "name": "roots:summon_undead"
-          }
-        ],
-        "grove": "roots:fungal",
-        "name": "roots:learn_spell/summon_undead",
-        "reputation": {
-          "gain1": 125,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_spell",
             "name": "roots:aqua_bubble"
           }
         ],
@@ -717,24 +699,6 @@
         "entries": [
           {
             "type": "exact_spell",
-            "name": "roots:radiance"
-          }
-        ],
-        "grove": "roots:elemental",
-        "name": "roots:learn_spell/radiance",
-        "reputation": {
-          "gain1": 71,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_spell",
             "name": "roots:shatter"
           }
         ],
@@ -753,47 +717,11 @@
         "entries": [
           {
             "type": "exact_spell",
-            "name": "roots:storm_cloud"
-          }
-        ],
-        "grove": "roots:elemental",
-        "name": "roots:learn_spell/storm_cloud",
-        "reputation": {
-          "gain1": 71,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_spell",
             "name": "roots:sky_soarer"
           }
         ],
         "grove": "roots:elemental",
         "name": "roots:learn_spell/sky_soarer",
-        "reputation": {
-          "gain1": 71,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_spell",
-            "name": "roots:wildfire"
-          }
-        ],
-        "grove": "roots:elemental",
-        "name": "roots:learn_spell/wildfire",
         "reputation": {
           "gain1": 71,
           "gain2": 0,
@@ -938,24 +866,6 @@
         ],
         "grove": "roots:twilight",
         "name": "roots:learn_spell/jaunt",
-        "reputation": {
-          "gain1": 125,
-          "gain2": 0,
-          "gain3": 0,
-          "gain4": 0,
-          "gain5": 0
-        },
-        "unique": true
-      },
-      {
-        "entries": [
-          {
-            "type": "exact_spell",
-            "name": "roots:temporal_morass"
-          }
-        ],
-        "grove": "roots:twilight",
-        "name": "roots:learn_spell/temporal_morass",
         "reputation": {
           "gain1": 125,
           "gain2": 0,

@@ -28,8 +28,8 @@ import java.util.List;
 public class ExtensionSpell extends TwoRadiusSpell {
   private int nightVisionDuration, senseDangerDuration;
 
-  public ExtensionSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xcde645, 0xb872b1);
+  public ExtensionSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

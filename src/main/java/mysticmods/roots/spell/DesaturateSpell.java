@@ -25,8 +25,8 @@ import java.util.List;
 public class DesaturateSpell extends Spell {
   private float multiplier;
 
-  public DesaturateSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xb8e82a, 0xbe20a8);
+  public DesaturateSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

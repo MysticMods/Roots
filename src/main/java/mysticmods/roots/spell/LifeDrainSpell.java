@@ -36,9 +36,8 @@ public class LifeDrainSpell extends Spell {
   private float damage, heal;
   private int angle;
 
-  // TODO: This should become an instant cast
-  public LifeDrainSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.CONTINUOUS, color, costs, ParentChargeType.INSTANCE, 0x902040, 0xffc4f0);
+  public LifeDrainSpell(Properties properties) {
+    super(properties);
   }
 
   @Override
@@ -132,10 +131,5 @@ public class LifeDrainSpell extends Spell {
     results.sort(Comparator.comparingDouble(e -> e.distanceToSqr(startVec)));
 
     return results;
-  }
-
-  @Override
-  public ParentChargeType getChargeType() {
-    return ParentChargeType.OPERATION;
   }
 }

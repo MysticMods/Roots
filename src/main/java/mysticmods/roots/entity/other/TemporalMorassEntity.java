@@ -59,7 +59,7 @@ public class TemporalMorassEntity extends Entity {
             double y = Mth.lerp(this.random.nextDouble(), aabb.minY, aabb.maxY);
             double z = Mth.lerp(this.random.nextDouble(), aabb.minZ, aabb.maxZ);
             this.level().addParticle(
-                RootsParticleOptions.builder(ModParticles.TEMPORAL_MORASS).color(ModSpells.TEMPORAL_MORASS)
+                RootsParticleOptions.builder(ModParticles.TEMPORAL_MORASS).color(ModSpells.GROWTH_INFUSION)
                     .swapColors(random)
                     .build(),
                 x, y, z,

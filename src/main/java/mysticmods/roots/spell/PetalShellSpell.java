@@ -25,8 +25,8 @@ import java.util.List;
 public class PetalShellSpell extends Spell {
   private int duration, count;
 
-  public PetalShellSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffc0f0, 0xffffff);
+  public PetalShellSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

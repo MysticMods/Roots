@@ -36,8 +36,8 @@ public class GeasSpell extends Spell {
   private int count, duration, maxCooldown;
   private double maxHealth;
 
-  public GeasSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x802020, 0x202020);
+  public GeasSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

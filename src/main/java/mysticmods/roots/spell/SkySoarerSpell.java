@@ -35,8 +35,8 @@ public class SkySoarerSpell extends Spell {
   private float amplifier, amplifier_increase, duration_incrase;
   private int duration, friendly_earth_duration;
 
-  public SkySoarerSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x20c8ff, 0x2040ff);
+  public SkySoarerSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

@@ -33,8 +33,8 @@ public class RoseThornsSpell extends Spell {
   private int duration;
   private float damage;
 
-  public RoseThornsSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xff2040, 0x20ff60);
+  public RoseThornsSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

@@ -21,7 +21,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class TemporalMorassSpell extends TwoRadiusSpell {
+/*public class TemporalMorassSpell extends TwoRadiusSpell {
   private int duration, amplifier;
 
   public TemporalMorassSpell(ChatFormatting color, CostInstance costs) {
@@ -72,4 +72,4 @@ public class TemporalMorassSpell extends TwoRadiusSpell {
       return SpellCastResult.nothing();
     }
   }
-}
+}*/

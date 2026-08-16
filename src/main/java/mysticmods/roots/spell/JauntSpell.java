@@ -28,8 +28,8 @@ import java.util.List;
 public class JauntSpell extends Spell {
   private int jauntDistance;
 
-  public JauntSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.CHARGED, color, costs, ParentChargeType.INSTANCE, 0x538ad4, 0xede768);
+  public JauntSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

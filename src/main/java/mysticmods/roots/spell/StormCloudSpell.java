@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class StormCloudSpell extends Spell {
+/*public class StormCloudSpell extends Spell {
   public StormCloudSpell(ChatFormatting color, CostInstance costs) {
     super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0x168eff, 0xffffff);
   }
@@ -32,4 +32,4 @@ public class StormCloudSpell extends Spell {
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     return SpellCastResult.success(cooldown);
   }
-}
+}*/

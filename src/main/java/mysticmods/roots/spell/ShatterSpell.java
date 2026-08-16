@@ -36,8 +36,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ShatterSpell extends Spell {
-  public ShatterSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x606060, 0xc0c0c0);
+  public ShatterSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

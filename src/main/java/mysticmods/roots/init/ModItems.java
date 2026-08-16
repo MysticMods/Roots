@@ -400,7 +400,7 @@ public class ModItems {
 
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_ACID_CLOUD = ITEMS.register("acid_cloud", () -> spell(ModSpells.ACID_CLOUD));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_AQUA_BUBBLE = ITEMS.register("aqua_bubble", () -> spell(ModSpells.AQUA_BUBBLE));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SUMMON_UNDEAD = ITEMS.register("summon_undead", () -> spell(ModSpells.SUMMON_UNDEAD));
+/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SUMMON_UNDEAD = ITEMS.register("summon_undead", () -> spell(ModSpells.SUMMON_UNDEAD));*/
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DANDELION_WINDS = ITEMS.register("dandelion_winds", () -> spell(ModSpells.DANDELION_WINDS));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DECAY = ITEMS.register("decay", () -> spell(ModSpells.DECAY));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DESATURATE = ITEMS.register("desaturate", () -> spell(ModSpells.DESATURATE));
@@ -417,16 +417,16 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_MAGNETISM = ITEMS.register("magnetism", () -> spell(ModSpells.MAGNETISM));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_NONDETECTION = ITEMS.register("nondetection", () -> spell(ModSpells.NONDETECTION));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_PETAL_SHELL = ITEMS.register("petal_shell", () -> spell(ModSpells.PETAL_SHELL));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RADIANCE = ITEMS.register("radiance", () -> spell(ModSpells.RADIANCE));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RAMPANT_GROWTH = ITEMS.register("rampant_growth", () -> spell(ModSpells.RAMPANT_GROWTH));
+/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RADIANCE = ITEMS.register("radiance", () -> spell(ModSpells.RADIANCE));*/
+/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RAMPANT_GROWTH = ITEMS.register("rampant_growth", () -> spell(ModSpells.RAMPANT_GROWTH));*/
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_ROSE_THORNS = ITEMS.register("rose_thorns", () -> spell(ModSpells.ROSE_THORNS));
   /*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SANCTUARY = ITEMS.register("sanctuary", () -> spell(ModSpells.SANCTUARY));*/
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SATURATE = ITEMS.register("saturate", () -> spell(ModSpells.SATURATE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SHATTER = ITEMS.register("shatter", () -> spell(ModSpells.SHATTER));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SKY_SOARER = ITEMS.register("sky_soarer", () -> spell(ModSpells.SKY_SOARER));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_STORM_CLOUD = ITEMS.register("storm_cloud", () -> spell(ModSpells.STORM_CLOUD));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_TEMPORAL_MORASS = ITEMS.register("temporal_morass", () -> spell(ModSpells.TEMPORAL_MORASS));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_WILDFIRE = ITEMS.register("wildfire", () -> spell(ModSpells.WILDFIRE));
+/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_STORM_CLOUD = ITEMS.register("storm_cloud", () -> spell(ModSpells.STORM_CLOUD));*/
+/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_TEMPORAL_MORASS = ITEMS.register("temporal_morass", () -> spell(ModSpells.TEMPORAL_MORASS));*/
+/*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_WILDFIRE = ITEMS.register("wildfire", () -> spell(ModSpells.WILDFIRE));*/
 
   static {
     ITEMS.addAlias(RootsAPI.rl("spell_acid_cloud"), RootsAPI.rl("acid_cloud"));

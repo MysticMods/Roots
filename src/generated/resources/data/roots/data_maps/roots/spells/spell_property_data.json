@@ -662,17 +662,6 @@
         }
       }
     ],
-    "roots:radiance": [
-      {
-        "id": "roots:radiance/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 20,
-          "value": 20
-        }
-      }
-    ],
     "roots:rampant_growth": [
       {
         "id": "roots:rampant_growth/cooldown",
@@ -863,28 +852,6 @@
         }
       }
     ],
-    "roots:storm_cloud": [
-      {
-        "id": "roots:storm_cloud/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 100,
-          "value": 100
-        }
-      }
-    ],
-    "roots:summon_undead": [
-      {
-        "id": "roots:summon_undead/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 320,
-          "value": 320
-        }
-      }
-    ],
     "roots:sylvan_light": [
       {
         "id": "roots:sylvan_light/cooldown",
@@ -902,82 +869,6 @@
           "comment": "The maximum distance a sylvan light can be placed from the caster",
           "default_value": 10.0,
           "value": 10.0
-        }
-      }
-    ],
-    "roots:temporal_morass": [
-      {
-        "id": "roots:temporal_morass/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 320,
-          "value": 320
-        }
-      },
-      {
-        "id": "roots:temporal_morass/radius_zx",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
-          "default_value": 5,
-          "value": 5
-        }
-      },
-      {
-        "id": "roots:temporal_morass/radius_y",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Y axis",
-          "default_value": 5,
-          "value": 5
-        }
-      },
-      {
-        "id": "roots:temporal_morass/duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long the spell will last",
-          "default_value": 300,
-          "value": 300
-        }
-      },
-      {
-        "id": "roots:temporal_morass/amplifier",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The amplifier for the slowness effect applied by Temporal Morass.",
-          "default_value": 3,
-          "value": 3
-        }
-      }
-    ],
-    "roots:wildfire": [
-      {
-        "id": "roots:wildfire/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 45,
-          "value": 45
-        }
-      },
-      {
-        "id": "roots:wildfire/damage",
-        "value": {
-          "type": "roots:float_property",
-          "comment": "How much damage the spell will cause",
-          "default_value": 4.5,
-          "value": 4.5
-        }
-      },
-      {
-        "id": "roots:wildfire/velocity",
-        "value": {
-          "type": "roots:float_property",
-          "comment": "The velocity of the wildfire projectile.",
-          "default_value": 3.2,
-          "value": 3.2
         }
       }
     ]

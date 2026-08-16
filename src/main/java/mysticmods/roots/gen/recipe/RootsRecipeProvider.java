@@ -1351,13 +1351,13 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.SEEDS).requires(Items.COMPOSTER)
             .requires(ItemTags.HOES).requires(Items.BONE_MEAL).requires(ItemTags.SMALL_FLOWERS)
             .unlocks(Unlock.spell(ModSpells.GROWTH_INFUSION))), c, RootsAPI.rl("spell/growth_infusion"));
-    RecipeSaver.saver().unlockedBy("has_milk_bucket", has(Items.MILK_BUCKET))
+/*    RecipeSaver.saver().unlockedBy("has_milk_bucket", has(Items.MILK_BUCKET))
         .save(MortarRecipe.Builder.create().times(5)
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDEWHEET_CROP)
                 .requires(RootsTags.Items.WILDEWHEET_SEEDS).requires(Tags.Items.CROPS_SUGAR_CANE)
                 .requires(Tags.Items.CROPS_CARROT)
                 .requires(Items.MILK_BUCKET)
-                .unlocks(Unlock.spell(ModSpells.RAMPANT_GROWTH))), c, RootsAPI.rl("spell/rampant_growth"));
+                .unlocks(Unlock.spell(ModSpells.RAMPANT_GROWTH))), c, RootsAPI.rl("spell/rampant_growth"));*/
     RecipeSaver.saver().unlockedBy("has_bow", has(Tags.Items.TOOLS_BOW)).save(MortarRecipe.Builder.create().times(5)
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.TOOLS_BOW).requires(Items.PAPER)
             .requires(Items.LADDER).requires(RootsTags.Items.CLOUD_BERRY_CROP).requires(Items.SHORT_GRASS)
@@ -1407,14 +1407,14 @@ public final class RootsRecipeProvider extends RecipeProvider {
                     .requires(ModItems.GLASS_EYE.get())
                     .unlocks(Unlock.spell(ModSpells.NONDETECTION))), c, RootsAPI.rl("spell/nondetection"));
 
-    // Time stop
+/*    // Time stop
     RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
         .save(MortarRecipe.Builder.create().times(5)
             .build(
                 BaseRecipeData.Builder.create().requires(RootsTags.Items.STALICRIPE_HERB).requires(Items.CLOCK)
                     .requires(Tags.Items.SANDS).requires(Tags.Items.GLASS_BLOCKS)
                     .requires(Items.TRIPWIRE_HOOK)
-                    .unlocks(Unlock.spell(ModSpells.TEMPORAL_MORASS))), c, RootsAPI.rl("spell/temporal_morass"));
+                    .unlocks(Unlock.spell(ModSpells.TEMPORAL_MORASS))), c, RootsAPI.rl("spell/temporal_morass"));*/
 
     // Shatter
     RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
@@ -1455,13 +1455,13 @@ public final class RootsRecipeProvider extends RecipeProvider {
                     .unlocks(Unlock.spell(ModSpells.ROSE_THORNS))), c, RootsAPI.rl("spell/rose_thorns"));
 
     // Wildfire
-    RecipeSaver.saver().unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB))
+/*    RecipeSaver.saver().unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB))
         .save(MortarRecipe.Builder.create().times(5)
             .build(
                 BaseRecipeData.Builder.create().requires(RootsTags.Items.INFERNO_BULB_HERB)
                     .requires(Items.GUNPOWDER).requires(Items.CAMPFIRE)
                     .requires(Items.MAGMA_CREAM).requires(Items.LAVA_BUCKET)
-                    .unlocks(Unlock.spell(ModSpells.WILDFIRE))), c, RootsAPI.rl("spell/wildfire"));
+                    .unlocks(Unlock.spell(ModSpells.WILDFIRE))), c, RootsAPI.rl("spell/wildfire"));*/
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.MOSS_BLOCK)
         .pattern("XX")

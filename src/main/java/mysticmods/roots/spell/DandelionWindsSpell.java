@@ -31,8 +31,8 @@ public class DandelionWindsSpell extends Spell {
   private int duration, durationIncrease, vortexCooldown, vortexCooldownDecrease, gustsCooldown, gustsCooldownDecrease;
   private float deflectionChance, deflectionChanceIncrease;
 
-  public DandelionWindsSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffff20, 0xffb020);
+  public DandelionWindsSpell(Properties properties) {
+    super(properties);
   }
 
   @Override

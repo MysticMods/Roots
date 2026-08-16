@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+/*
 public class RadianceSpell extends Spell {
   public RadianceSpell(ChatFormatting color, CostInstance costs) {
     super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xffff40, 0xffffc0);
@@ -33,3 +34,4 @@ public class RadianceSpell extends Spell {
     return SpellCastResult.success(cooldown);
   }
 }
+*/

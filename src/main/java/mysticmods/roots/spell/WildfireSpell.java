@@ -21,7 +21,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class WildfireSpell extends Spell {
+/*public class WildfireSpell extends Spell {
   private float damage, velocity;
 
   public WildfireSpell(ChatFormatting color, CostInstance costs) {
@@ -55,4 +55,4 @@ public class WildfireSpell extends Spell {
     SnapshotHelper.addLiving(wildfire, ModSerializers.WILDFIRE.get(), new WildfireEntitySnapshot(pPlayer, -1, damage));
     return SpellCastResult.success(cooldown);
   }
-}
+}*/

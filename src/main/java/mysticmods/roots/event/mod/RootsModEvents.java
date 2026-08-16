@@ -343,7 +343,7 @@ public class RootsModEvents {
     if (event.getTab().equals(ModTabs.SPELLS_TAB.get())) {
       event.accept(ModItems.SPELL_ACID_CLOUD.get());
       event.accept(ModItems.SPELL_AQUA_BUBBLE.get());
-      event.accept(ModItems.SPELL_SUMMON_UNDEAD.get());
+/*      event.accept(ModItems.SPELL_SUMMON_UNDEAD.get());*/
       event.accept(ModItems.SPELL_DANDELION_WINDS.get());
       event.accept(ModItems.SPELL_DECAY.get());
       event.accept(ModItems.SPELL_DESATURATE.get());
@@ -359,16 +359,16 @@ public class RootsModEvents {
       event.accept(ModItems.SPELL_MAGNETISM.get());
       event.accept(ModItems.SPELL_NONDETECTION.get());
       event.accept(ModItems.SPELL_PETAL_SHELL.get());
-      event.accept(ModItems.SPELL_RADIANCE.get());
-      event.accept(ModItems.SPELL_RAMPANT_GROWTH.get());
+/*      event.accept(ModItems.SPELL_RADIANCE.get());
+      event.accept(ModItems.SPELL_RAMPANT_GROWTH.get());*/
       event.accept(ModItems.SPELL_ROSE_THORNS.get());
       /*      event.accept(ModItems.SPELL_SANCTUARY.get());*/
       event.accept(ModItems.SPELL_SATURATE.get());
       event.accept(ModItems.SPELL_SHATTER.get());
       event.accept(ModItems.SPELL_SKY_SOARER.get());
-      event.accept(ModItems.SPELL_STORM_CLOUD.get());
+/*      event.accept(ModItems.SPELL_STORM_CLOUD.get());
       event.accept(ModItems.SPELL_TEMPORAL_MORASS.get());
-      event.accept(ModItems.SPELL_WILDFIRE.get());
+      event.accept(ModItems.SPELL_WILDFIRE.get());*/
     }
     if (event.getTab().equals(ModTabs.RITUALS_TAB.get())) {
       event.accept(ModItems.RITUAL_ANIMAL_HARVEST.get());

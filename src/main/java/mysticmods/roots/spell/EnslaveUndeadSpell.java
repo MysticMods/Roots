@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class EnslaveUndeadSpell extends Spell {
+/*public class EnslaveUndeadSpell extends Spell {
   public EnslaveUndeadSpell(ChatFormatting color, CostInstance costs) {
     super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xcc6d0e, 0x9e1827);
   }
@@ -32,4 +32,4 @@ public class EnslaveUndeadSpell extends Spell {
     costs.noCharge();
     return SpellCastResult.nothing();
   }
-}
+}*/

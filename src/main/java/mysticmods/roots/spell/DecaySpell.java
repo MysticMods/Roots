@@ -26,8 +26,8 @@ import java.util.List;
 public class DecaySpell extends TwoRadiusSpell {
   private int count;
 
-  public DecaySpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x2d8115, 0xc92b5f);
+  public DecaySpell(Properties properties) {
+    super(properties);
   }
 
   @Override

@@ -32,8 +32,8 @@ import java.util.List;
 public class SaturateSpell extends Spell {
   private float saturationMultiplier, foodMultiplier;
 
-  public SaturateSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.INSTANCE, 0xe134f6, 0x05e82a);
+  public SaturateSpell(Properties properties) {
+    super(properties);
   }
 
   @Override
