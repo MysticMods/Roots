@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -12,6 +13,7 @@ import mysticmods.roots.network.client.fx.DecayTargetFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -100,5 +102,20 @@ public class DecaySpell extends TwoRadiusSpell {
     }
 
     return null;
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.valueOf(count)),
+        Component.literal(String.valueOf(radiusZX)),
+        Component.literal(String.valueOf(radiusY))
+    };
+  }
+
+  // TODO: When modifiers
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

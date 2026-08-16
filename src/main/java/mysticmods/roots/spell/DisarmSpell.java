@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -16,6 +17,7 @@ import mysticmods.roots.network.client.fx.lightning.DynamicLightningFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -157,7 +159,19 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public ParentChargeType getChargeType() {
-    return ParentChargeType.OPERATION;
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.valueOf(count)),
+        Component.literal(String.valueOf(radiusZX)),
+        Component.literal(String.valueOf(radiusY)),
+        Component.literal(String.format("%.1f", 1 - dropChance)),
+        Component.literal(String.format("%.1f", glowDuration / 20.0)),
+        Component.literal(String.valueOf(glowDuration))
+    };
+  }
+
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

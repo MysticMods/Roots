@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -12,6 +13,7 @@ import mysticmods.roots.network.client.fx.screen.DesaturateScreenFXPacket;
 import mysticmods.roots.network.client.fx.HealFXPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -87,5 +89,18 @@ public class DesaturateSpell extends Spell {
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new DesaturateScreenFXPacket(originalHealth, pPlayer.getHealth(), originalFood, food));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HealFXPacket(pPlayer.getId(), healed));
     return SpellCastResult.success(cooldown);
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.format("%.1f", multiplier))
+    };
+  }
+
+  // TODO: Modifiers
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

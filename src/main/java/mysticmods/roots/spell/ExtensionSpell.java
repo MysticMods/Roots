@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -15,6 +16,7 @@ import mysticmods.roots.snapshot.ExtensionSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -72,5 +74,22 @@ public class ExtensionSpell extends TwoRadiusSpell {
     SnapshotHelper.addLiving(pPlayer, ModSerializers.EXTENSION.get(), new ExtensionSnapshot(pPlayer, getMaxDuration(), getRadiusZX(), getRadiusY()));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastExtensionFXPacket(pPlayer.getId()));
     return SpellCastResult.success(cooldown);
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.format("%.1f", nightVisionDuration / 20.0)),
+        Component.literal(String.valueOf(nightVisionDuration)),
+        Component.literal(String.format("%.1f", senseDangerDuration / 20.0)),
+        Component.literal(String.valueOf(senseDangerDuration)),
+        Component.literal(String.valueOf(radiusZX)),
+        Component.literal(String.valueOf(radiusY))
+    };
+  }
+
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

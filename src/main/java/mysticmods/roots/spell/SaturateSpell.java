@@ -5,18 +5,19 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.screen.SaturateScreenFXPacket;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.monster.SpellcasterIllager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
@@ -174,5 +175,19 @@ public class SaturateSpell extends Spell {
     }
 
     return props.nutrition() * foodMultiplier;
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.format("%.1f", 1 - saturationMultiplier)),
+        Component.literal(String.format("%.1f", 1 - foodMultiplier))
+    };
+  }
+
+  // TODO: Modifiers
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

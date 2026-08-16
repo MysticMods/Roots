@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.action.GeasAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -15,6 +16,7 @@ import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -132,4 +134,20 @@ public class GeasSpell extends Spell {
     return 1;
   }
 
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.valueOf(count)),
+        Component.literal(String.format("%.1f", maxHealth / 2.0)),
+        Component.literal(String.valueOf(5)),
+        Component.literal(String.format("%.1f", duration / 20.0)),
+        Component.literal(String.valueOf(duration))
+    };
+  }
+
+  // TODO: when modifiers
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
+  }
 }

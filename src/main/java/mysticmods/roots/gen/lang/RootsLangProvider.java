@@ -955,13 +955,22 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
 
     spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, losing maximum health.");
+    spellExtendedDescription(ModSpells.DECAY, "Causes up to %s undead entities within ±%s/±%s blocks to decay, shedding resources and losing maximum health [result varies depending on the entity]. The maximum number of decay applications varies depending on the entity.");
+
     spellDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health.");
-    spellDescription(ModSpells.SATURATE, "Directly converts food and drink in your inventory to saturation and food levels. Some value is lost in this process.");
+    spellExtendedDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health. Each point of food provides %s hearts of healing.");
+    spellDescription(ModSpells.SATURATE, "Directly converts food and drink items in your inventory to saturation and food levels. Some value is lost in this process.");
+    spellExtendedDescription(ModSpells.SATURATE, "Directly consumes food items, applying %s%% of the item's saturation and %s%% of the item's food to you.");
     spellDescription(ModSpells.DISARM, "Disarms entities around you, with a chance to drop the held items.");
+    spellExtendedDescription(ModSpells.DISARM, "Disarms up to %s entities within ±%s/±%s blocks. The chance to drop each equipped item is %s%% or the default drop chance, whichever is lower. Disarmed entities will then glow for %s seconds [%s ticks].");
     spellDescription(ModSpells.EXTENSION, "Extends your senses, allowing you to see in the dark and sense nearby enemies.");
+    spellExtendedDescription(ModSpells.EXTENSION, "Extends your senses, applying night vision for %s seconds [%s ticks] and sense danger for %s [%s ticks]. Sense danger causes hostile entities that remain within ±%s/±%s blocks to glow.");
     spellDescription(ModSpells.NONDETECTION, "Reduces the range at which enemies can detect your presence.");
+    spellExtendedDescription(ModSpells.NONDETECTION, "Reduces the range at which enemies can detect your presence for %s seconds [%s ticks].");
     spellDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light.");
+    spellExtendedDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light up to %s blocks away in the direction you are looking.");
     spellDescription(ModSpells.GEAS, "Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.");
+    spellExtendedDescription(ModSpells.GEAS, "Places a geas on up to %s entities that are visible to you whose maximum health does not exceed %s hearts, up to %s blocks away. For the duration of %s seconds [%s ticks], affected entities will be unable to target you.");
     /*    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");*/
     spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
     spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
