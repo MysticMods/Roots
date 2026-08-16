@@ -662,6 +662,17 @@
         }
       }
     ],
+    "roots:rampant_growth": [
+      {
+        "id": "roots:rampant_growth/cooldown_unused",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 0,
+          "value": 0
+        }
+      }
+    ],
     "roots:rose_thorns": [
       {
         "id": "roots:rose_thorns/cooldown",

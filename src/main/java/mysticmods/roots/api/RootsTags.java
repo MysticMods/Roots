@@ -616,6 +616,9 @@ public class RootsTags {
 
     public static final TagKey<Spell> PRETEND_PICKAXE = modTag("pretend_pickaxe");
 
+    // Invalid spells will not show up in command completion, library, etc
+    public static final TagKey<Spell> INVALID = modTag("invalid");
+
     static TagKey<Spell> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));
     }

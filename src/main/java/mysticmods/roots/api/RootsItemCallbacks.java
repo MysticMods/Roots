@@ -53,8 +53,7 @@ public class RootsItemCallbacks {
     }
   }
 
-  @SuppressWarnings("unchecked")
-  public static Item getItemGeneric(ResourceKey<?> key) {
+/*  public static Item getItemGeneric(ResourceKey<?> key) {
     if (key == RootsRegistries.Keys.SPELLS) {
       return getItem(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key));
     } else if (key == RootsRegistries.Keys.RITUALS) {
@@ -66,7 +65,7 @@ public class RootsItemCallbacks {
     } else {
       return Items.AIR;
     }
-  }
+  }*/
 
   public static ItemStack getItemStackGeneric(ResourceKey<?> key) {
     if (key.isFor(RootsRegistries.Keys.SPELLS)) {
@@ -106,6 +105,9 @@ public class RootsItemCallbacks {
   public static ItemStack getItemStack(Spell spell) {
     if (SPELL_TO_ITEMSTACK_MAP.isEmpty()) {
       fill();
+    }
+    if (spell.is(RootsTags.Spells.INVALID)) {
+      return ItemStack.EMPTY;
     }
     return SPELL_TO_ITEMSTACK_MAP.getOrDefault(spell, ItemStack.EMPTY);
   }

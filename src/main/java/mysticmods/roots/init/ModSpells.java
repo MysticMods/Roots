@@ -199,6 +199,7 @@ public class ModSpells {
 
   static {
     REGISTER.addAlias(RootsAPI.rl("fey_light"), RootsAPI.rl("sylvan_light"));
+    REGISTER.addAlias(RootsAPI.rl("rampant_growth"), RootsAPI.rl("growth_infusion"));
   }
 
   public static final PropertyHolder<Property.IntegerProperty> SYLVAN_LIGHT_COOLDOWN = P.recordProperty("sylvan_light/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
@@ -245,13 +246,14 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = P.recordProperty("growth_infusion/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> GROWTH_INFUSION_ADDED_REACH = P.recordProperty("growth_infusion/added_reach", Property.ofDouble(0.0, SpellProperties.ADDED_REACH));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN = P.recordProperty("rampant_growth/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN_UNUSED = P.recordProperty("rampant_growth/cooldown_unused", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_ZX = P.recordProperty("rampant_growth/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_INTERVAL = P.recordProperty("rampant_growth/interval", Property.ofInt(2, "The interval between growth ticks in ticks."));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(9, SpellProperties.COUNT));
 
   // Rampant Growth (20 cooldown)
-/*  @Deprecated
+  @Deprecated
   public static final DeferredHolder<Spell, RampantGrowthSpell> RAMPANT_GROWTH = REGISTER.register(Spells.RAMPANT_GROWTH.location()
       .getPath(), () ->
       new RampantGrowthSpell(new Spell.Properties()
@@ -261,7 +263,7 @@ public class ModSpells {
           .cost(() -> ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)
           .textColor(ChatFormatting.YELLOW)
           .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
-          .build()));*/
+          .build()));
 
   // Harvest (25 cooldown)
   public static final DeferredHolder<Spell, HarvestSpell> HARVEST = REGISTER.register(Spells.HARVEST.location()

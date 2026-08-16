@@ -210,7 +210,9 @@ public final class RootsLangProvider extends LanguageProvider {
     });
 
     RootsRegistries.SPELLS.entrySet().forEach(o -> {
-          add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
+          if (!o.getValue().is(RootsTags.Spells.INVALID)) {
+            add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
+          }
         }
     );
 
@@ -960,12 +962,12 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.NONDETECTION, "Reduces the range at which enemies can detect your presence.");
     spellDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light.");
     spellDescription(ModSpells.GEAS, "Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.");
-/*    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");*/
+    /*    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");*/
     spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
     spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
     spellDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.");
     spellDescription(ModSpells.PETAL_SHELL, "Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.");
-/*    spellDescription(ModSpells.RADIANCE, "Shoots a beam of destructive light in the direction you are facing. This beam will damage all entities that it touches.");*/
+    /*    spellDescription(ModSpells.RADIANCE, "Shoots a beam of destructive light in the direction you are facing. This beam will damage all entities that it touches.");*/
     spellDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.");
     spellDescription(ModSpells.SHATTER, "Breaks the targeted blocks. The size and dimensions of the spell can be adjusted."); // TODO: Spell description keybinds
     spellDescription(ModSpells.JAUNT, "Teleports you a short way in the distance you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.");

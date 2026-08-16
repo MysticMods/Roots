@@ -53,7 +53,9 @@ public final class RootsDataMapProvider extends DataMapProvider {
         .replace(false);
 
     RootsRegistries.SPELLS.stream().forEach(spell -> {
-      builder.add(spell.builtInRegistryHolder(), spell.getDefaultCosts(), false);
+      if (!spell.is(RootsTags.Spells.INVALID)) {
+        builder.add(spell.builtInRegistryHolder(), spell.getDefaultCosts(), false);
+      }
     });
 
     Builder<Herb, Item> builder2 = builder(DataMaps.HERB_ITEM_DATA)
@@ -80,7 +82,9 @@ public final class RootsDataMapProvider extends DataMapProvider {
     Builder<PropertyDataMap, Spell> builder4 = builder(DataMaps.SPELL_PROPERTY_DATA)
         .replace(false);
     RootsRegistries.SPELLS.stream().forEach(spell -> {
-      builder4.add(spell.builtInRegistryHolder(), new PropertyDataMap(spell.getProperties()), false);
+      if (!spell.is(RootsTags.Spells.INVALID)) {
+        builder4.add(spell.builtInRegistryHolder(), new PropertyDataMap(spell.getProperties()), false);
+      }
     });
 
     Builder<PropertyDataMap, Ritual> builder5 = builder(DataMaps.RITUAL_PROPERTY_DATA)

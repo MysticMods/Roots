@@ -97,6 +97,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   @Nullable
   public Holder<Spell> getApplicableHolder() {
+    //noinspection deprecation
     return RootsRegistries.SPELLS.getHolder(getApplicable()).orElse(null);
   }
 

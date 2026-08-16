@@ -1,6 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -51,7 +52,7 @@ public class P {
 
   public static List<PropertyHolder<?>> unclaimed() {
     Set<PropertyHolder<?>> CLAIMED = new HashSet<>();
-    RootsRegistries.SPELLS.stream().forEach(o -> CLAIMED.addAll(o.getProperties()));
+    RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID)).forEach(o -> CLAIMED.addAll(o.getProperties()));
     RootsRegistries.RITUALS.stream().forEach(o -> CLAIMED.addAll(o.getProperties()));
     List<PropertyHolder<?>> unclaimed = new ArrayList<>();
     for (PropertyHolder<?> property : INT_PROPERTIES) {

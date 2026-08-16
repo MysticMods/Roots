@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import com.google.common.collect.ImmutableMap;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -74,6 +75,9 @@ public class ModifierTrees {
 
     ImmutableMap.Builder<ResourceKey<Spell>, ModifierTree<Spell, SpellModifier>> spellBuilder = ImmutableMap.builder();
     RootsRegistries.SPELLS.holders().forEach(holder -> {
+      if (holder.is(RootsTags.Spells.INVALID)) {
+        return;
+      }
       ModifierTree<Spell, SpellModifier> tree = new ModifierTree<>(holder, RootsRegistries.Keys.SPELL_MODIFIERS);
       for (SpellModifier modifier : RootsRegistries.SPELL_MODIFIERS) {
         if (modifier.getApplicable().equals(holder.getKey())) {

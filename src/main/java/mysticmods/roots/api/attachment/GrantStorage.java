@@ -71,6 +71,9 @@ public class GrantStorage implements ICleanable {
 
   public boolean canUnlock(Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
+      if (value.is(RootsTags.Spells.INVALID)) {
+        return false;
+      }
       return !hasSpell(value.value());
     } else if (unlock instanceof Unlock.SpellModifierUnlock(Holder<SpellModifier> value)) {
       return !hasSpellModifier(value.value());
@@ -102,6 +105,9 @@ public class GrantStorage implements ICleanable {
 
   public void unlock(ServerPlayer player, Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
+      if (value.is(RootsTags.Spells.INVALID)) {
+        return;
+      }
       Spell spell = value.value();
       unlockSpell(player, spell);
     } else if (unlock instanceof Unlock.SpellModifierUnlock(Holder<SpellModifier> value)) {
@@ -111,6 +117,9 @@ public class GrantStorage implements ICleanable {
   }
 
   private void unlockSpell(ServerPlayer player, Spell spell) {
+    if (spell.is(RootsTags.Spells.INVALID)) {
+      return;
+    }
     if (grantedSpells.add(spell)) {
       librarySpells = null;
       setDirty(true);
@@ -156,7 +165,7 @@ public class GrantStorage implements ICleanable {
 
   public List<LibrarySpell> getLibrarySpells() {
     if (librarySpells == null || librarySpells.isEmpty()) {
-      librarySpells = RootsRegistries.SPELLS.stream().sorted(Comparator.comparing(IDescribed::getDescriptionId))
+      librarySpells = RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID)).sorted(Comparator.comparing(IDescribed::getDescriptionId))
           .map(o -> new LibrarySpell(o.builtInRegistryHolder(), grantedSpells.contains(o)))
           .sorted(Comparator.comparing(LibrarySpell::granted).reversed()).toList();
     }

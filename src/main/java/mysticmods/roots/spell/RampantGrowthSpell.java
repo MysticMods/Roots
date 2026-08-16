@@ -1,38 +1,22 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.action.CropGrowthAction;
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.init.ModActions;
-import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.network.client.fx.RampantGrowthFXPacket;
-import mysticmods.roots.spell.mode.AOEGrowthMode;
-import mysticmods.roots.util.GrowthUtil;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/*public class RampantGrowthSpell extends TwoRadiusSpell {
+public class RampantGrowthSpell extends Spell {
   private int interval, count;
 
   public RampantGrowthSpell(Spell.Properties properties) {
@@ -41,10 +25,10 @@ import java.util.List;
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.RAMPANT_GROWTH_COOLDOWN;
+    return ModSpells.RAMPANT_GROWTH_COOLDOWN_UNUSED;
   }
 
-  @Override
+/*  @Override
   public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
     return ModSpells.RAMPANT_GROWTH_RADIUS_Y;
   }
@@ -52,30 +36,31 @@ import java.util.List;
   @Override
   public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
     return ModSpells.RAMPANT_GROWTH_RADIUS_ZX;
-  }
+  }*/
 
   @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.interval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
-    this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);
+/*    this.interval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
+    this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);*/
   }
 
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
-    properties.add(ModSpells.RAMPANT_GROWTH_INTERVAL);
-    properties.add(ModSpells.RAMPANT_GROWTH_COUNT);
+/*    properties.add(ModSpells.RAMPANT_GROWTH_INTERVAL);
+    properties.add(ModSpells.RAMPANT_GROWTH_COUNT);*/
   }
 
-  @Override
+/*  @Override
   public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance iSpellInstance) {
     return ModAttachments.AOE_GROWTH_MODE.get();
-  }
+  }*/
 
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    if (ticks % interval == 0) {
+    return SpellCastResult.nothing();
+/*    if (ticks % interval == 0) {
       AOEGrowthMode mode = instance.getSpellData(ModAttachments.AOE_GROWTH_MODE);
       ItemStack offHandItem = pPlayer.getOffhandItem();
       Block tempBlock = offHandItem.getItemHolder().getData(DataMaps.GROWTH_SEED_TO_CROP);
@@ -143,16 +128,11 @@ import java.util.List;
     } else {
       costs.noCharge();
       return SpellCastResult.tick();
-    }
-  }
-
-  @Override
-  public ParentChargeType getChargeType() {
-    return ParentChargeType.OPERATION;
+    }*/
   }
 
   @Override
   public int getBaseMaximumOperations() {
     return count;
   }
-}*/
+}

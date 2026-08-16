@@ -5,6 +5,7 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -69,7 +70,7 @@ public class RootsIngredientHelper {
       }
       case EXACT_SPELL -> {
         Spell spell = RootsRegistries.SPELLS.get(location);
-        if (spell != null) {
+        if (spell != null && !spell.is(RootsTags.Spells.INVALID)) {
           invis.addItemStack(spell.getSpellIcon());
           builder.addIngredient(RootsJEIPlugin.SPELL_TYPE, spell)
               .setCustomRenderer(RootsJEIPlugin.SPELL_TYPE, RootsJEIPlugin.SPELL_RENDERER);

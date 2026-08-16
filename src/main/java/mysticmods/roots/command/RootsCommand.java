@@ -85,7 +85,8 @@ public class RootsCommand {
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
     if (spellIds == null) {
-      spellIds = RootsRegistries.SPELLS.keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList());
+      spellIds = RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID)).map(o -> o.builtInRegistryHolder()
+          .getKey().location()).map(ResourceLocation::toString).collect(Collectors.toList());
     }
     return Commands.argument("spell", ResourceLocationArgument.id())
         .suggests((c, build) -> SharedSuggestionProvider.suggest(spellIds, build));
@@ -144,7 +145,7 @@ public class RootsCommand {
       GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
       ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
       Spell spell = RootsRegistries.SPELLS.get(spellID);
-      if (spell == null) {
+      if (spell == null || spell.is(RootsTags.Spells.INVALID)) {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
         return 0;
       }
@@ -169,7 +170,7 @@ public class RootsCommand {
       GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
       ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
       Spell spell = RootsRegistries.SPELLS.get(spellID);
-      if (spell == null) {
+      if (spell == null || spell.is(RootsTags.Spells.INVALID)) {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
         return 0;
       }
@@ -219,7 +220,7 @@ public class RootsCommand {
     }).then(suggestSpells().executes(c -> {
       ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
       Spell spell = RootsRegistries.SPELLS.get(spellID);
-      if (spell == null) {
+      if (spell == null || spell.is(RootsTags.Spells.INVALID)) {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
         return 1;
       }
