@@ -5,12 +5,15 @@ import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.registry.ICosted;
-import mysticmods.roots.api.registry.ICostedChild;
-import mysticmods.roots.api.spell.*;
+import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.spell.Cycling;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModModifiers;
@@ -22,6 +25,7 @@ import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -208,11 +212,76 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public int getMaximumOperations (Object2BooleanMap<ICosted> modifierMap) {
+  public int getMaximumOperations(Object2BooleanMap<ICosted> modifierMap) {
     if (modifierMap.getBoolean(ModModifiers.RAMPANT_GROWTH)) {
       return count;
     }
 
     return super.getMaximumOperations(modifierMap);
+  }
+
+  private String rampantGrowthDescription = null;
+  private String rampantGrowthExtendedDescription = null;
+
+  @Override
+  public String getOrCreateTooltipExtendedDescriptionId(ISpellInstance instance) {
+    if (this.descriptionTooltipExtendedId == null) {
+      this.descriptionTooltipExtendedId = getOrCreateDescriptionId() + ".description.extended";
+    }
+    if (this.rampantGrowthExtendedDescription == null) {
+      this.rampantGrowthExtendedDescription = getOrCreateDescriptionId(instance) + ".description.extended";
+    }
+
+    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+      return this.rampantGrowthExtendedDescription;
+    }
+
+    return this.descriptionTooltipExtendedId;
+  }
+
+  @Override
+  public String getOrCreateTooltipDescriptionId(ISpellInstance instance) {
+    if (this.descriptionTooltipId == null) {
+      this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
+    }
+    if (this.rampantGrowthDescription == null) {
+      this.rampantGrowthDescription = getOrCreateDescriptionId(instance) + ".description";
+    }
+
+    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+      return this.rampantGrowthDescription;
+    }
+
+    return this.descriptionTooltipId;
+  }
+
+  private Component[] defaultComponents = null;
+  private Component[] rampantGrowthComponents = null;
+
+  @Override
+  public Component[] getOrCreateDescriptionComponents(ISpellInstance instance) {
+    if (defaultComponents == null) {
+      defaultComponents = new Component[]{};
+    }
+    if (rampantGrowthComponents == null) {
+      rampantGrowthComponents = new Component[]{
+          Component.literal(String.valueOf(count)),
+          Component.literal(String.valueOf(radiusZX)),
+          Component.literal(String.valueOf(radiusY)),
+          Component.literal(String.format("%.1f", interval / 20.0)),
+          Component.literal(String.valueOf(interval))
+      };
+    }
+
+    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+      return rampantGrowthComponents;
+    }
+
+    return defaultComponents;
+  }
+
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

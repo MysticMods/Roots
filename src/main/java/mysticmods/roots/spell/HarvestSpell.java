@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.*;
@@ -17,6 +18,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -99,12 +101,20 @@ public class HarvestSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public ParentChargeType getChargeType() {
-    return ParentChargeType.OPERATION;
+  public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance iSpellInstance) {
+    return ModAttachments.HARVEST_MODE.get();
   }
 
   @Override
-  public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance iSpellInstance) {
-    return ModAttachments.HARVEST_MODE.get();
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.valueOf(radiusZX)),
+        Component.literal(String.valueOf(radiusY))
+    };
+  }
+
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

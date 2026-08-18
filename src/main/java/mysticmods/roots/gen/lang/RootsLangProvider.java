@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.api.spell.Spell;
@@ -12,6 +13,7 @@ import mysticmods.roots.init.*;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
+import net.minecraft.Util;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
@@ -954,6 +956,7 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles.");
     modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
 
+    // TODO: Cooldowns
     spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, losing maximum health.");
     spellExtendedDescription(ModSpells.DECAY, "Causes up to %s undead entities within ±%s/±%s blocks to decay, shedding resources and losing maximum health [result varies depending on the entity]. The maximum number of decay applications varies depending on the entity.");
 
@@ -973,12 +976,18 @@ public final class RootsLangProvider extends LanguageProvider {
     spellExtendedDescription(ModSpells.GEAS, "Places a geas on up to %s entities that are visible to you whose maximum health does not exceed %s hearts, up to %s blocks away. For the duration of %s seconds [%s ticks], affected entities will be unable to target you.");
     /*    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");*/
     spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
+    spellExtendedDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
+    var rampant = Util.makeDescriptionId("spell", Spells.RAMPANT_GROWTH.location()) + ".description";
+    add(rampant, "Causes accelerated growth to all eligible blocks in the area around you.");
+    // TODO: Multiple growth modes
+    add(rampant + ".extended", "Causes accelerated growth for up to %s eligible blocks within ±%s/±%s blocks every %s seconds [%s ticks] while channeled. The number of ticks applied to each block varies.");
     spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
+    spellExtendedDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks within ±%s/±%s blocks around you.");
     spellDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.");
     spellDescription(ModSpells.PETAL_SHELL, "Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.");
     /*    spellDescription(ModSpells.RADIANCE, "Shoots a beam of destructive light in the direction you are facing. This beam will damage all entities that it touches.");*/
     spellDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.");
-    spellDescription(ModSpells.SHATTER, "Breaks the targeted blocks. The size and dimensions of the spell can be adjusted."); // TODO: Spell description keybinds
+    spellDescription(ModSpells.SHATTER, "Breaks the targeted blocks. The size and dimensions of the spell can be adjusted.");
     spellDescription(ModSpells.JAUNT, "Teleports you a short way in the distance you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.");
 /*    spellDescription(ModSpells.STORM_CLOUD, "Creates a vicious cloud of storms around you. For the duration, lightning from the cloud may strike nearby enemies.");
     spellDescription(ModSpells.TEMPORAL_MORASS, "Creates a temporary field of disruptive energy. All entities within this field will have their movement dramatically slowed.");

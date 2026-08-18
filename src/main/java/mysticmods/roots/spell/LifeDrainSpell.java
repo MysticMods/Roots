@@ -31,6 +31,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+// TODO: Overhaul targeting
 public class LifeDrainSpell extends Spell {
   private double distance;
   private float damage, heal;

@@ -185,6 +185,14 @@ public class TooltipUtil {
     //addChargeType(context, result, spell.getChargeType(), flag);
   }
 
+  public static void describeSpell (Item.TooltipContext context, List<Component> tooltipComponents, ISpellInstance spell, TooltipFlag tooltipFlag) {
+    if (tooltipFlag.hasShiftDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
+      tooltipComponents.add(spell.asSpell().getTooltipExtendedDescription(spell));
+    } else {
+      tooltipComponents.add(spell.asSpell().getTooltipDescription(spell));
+    }
+  }
+
   public static void describeSpell(Item.TooltipContext context, List<Component> tooltipComponents, Spell spell, TooltipFlag tooltipFlag) {
     if (tooltipFlag.hasShiftDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
       tooltipComponents.add(spell.getTooltipExtendedDescription());
