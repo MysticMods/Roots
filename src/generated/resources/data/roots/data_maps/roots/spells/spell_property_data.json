@@ -448,6 +448,15 @@
           "default_value": 9,
           "value": 9
         }
+      },
+      {
+        "id": "roots:growth_infusion/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the spell is executed while channeling",
+          "default_value": 1,
+          "value": 1
+        }
       }
     ],
     "roots:harvest": [
@@ -514,8 +523,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How long before the player can cast the spell again",
-          "default_value": 0,
-          "value": 0
+          "default_value": 20,
+          "value": 20
         }
       },
       {
@@ -552,6 +561,15 @@
           "comment": "The amount a player should be healed for each entity damaged.",
           "default_value": 0.5,
           "value": 0.5
+        }
+      },
+      {
+        "id": "roots:life_drain/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of entities affected by the spell per cast.",
+          "default_value": 3,
+          "value": 3
         }
       }
     ],

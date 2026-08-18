@@ -245,7 +245,7 @@ public class ModSpells {
           .build()));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = P.recordProperty("growth_infusion/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> GROWTH_INFUSION_ADDED_REACH = P.recordProperty("growth_infusion/added_reach", Property.ofDouble(0.0, SpellProperties.ADDED_REACH));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN = P.recordProperty("rampant_growth/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_INTERVAL = P.recordProperty("growth_infusion/interval", Property.ofInt(1, SpellProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN_UNUSED = P.recordProperty("rampant_growth/cooldown_unused", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_ZX = P.recordProperty("rampant_growth/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
@@ -288,11 +288,12 @@ public class ModSpells {
       .color(0x902040, 0xffc4f0)
       .textColor(ChatFormatting.DARK_PURPLE)
       .build()));
-  public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_DISTANCE = P.recordProperty("life_drain/distance", Property.ofDouble(8.0, "The range in blocks for the life drain search."));
   public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_ANGLE = P.recordProperty("life_drain/angle", Property.ofInt(80, "The angle in degrees for the life drain search, centered on the player's view vector."));
   public static final PropertyHolder<Property.FloatProperty> LIFE_DRAIN_DAMAGE = P.recordProperty("life_drain/damage", Property.ofFloat(3.0f, SpellProperties.DAMAGE));
   public static final PropertyHolder<Property.FloatProperty> LIFE_DRAIN_HEAL = P.recordProperty("life_drain/heal", Property.ofFloat(0.5f, "The amount a player should be healed for each entity damaged."));
+  public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COUNT = P.recordProperty("life_drain/count", Property.ofInt(3, "The number of entities affected by the spell per cast."));
 
   // Petal Shell (120 cooldown)
   public static final DeferredHolder<Spell, PetalShellSpell> PETAL_SHELL = REGISTER.register(Spells.PETAL_SHELL.location().getPath(), () -> new PetalShellSpell(new Spell.Properties()

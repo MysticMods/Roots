@@ -51,7 +51,7 @@ import java.util.List;
 // - Handle texture colour change
 // - Handle icon change(?)
 public class GrowthInfusionSpell extends TwoRadiusSpell {
-  private int interval, count;
+  private int rampantInterval, count, growthInterval;
 
   public GrowthInfusionSpell(Properties properties) {
     super(properties);
@@ -80,8 +80,9 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.interval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
+    this.rampantInterval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
     this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);
+    this.growthInterval = properties.get(ModSpells.GROWTH_INFUSION_INTERVAL);
   }
 
   @Override
@@ -89,6 +90,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
     super.buildProperties(properties);
     properties.add(ModSpells.RAMPANT_GROWTH_INTERVAL);
     properties.add(ModSpells.RAMPANT_GROWTH_COUNT);
+    properties.add(ModSpells.GROWTH_INFUSION_INTERVAL);
   }
 
   @Override
@@ -117,7 +119,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
-      if (ticks % interval == 0) {
+      if (ticks % rampantInterval == 0) {
         AOEGrowthMode mode = instance.getSpellData(ModAttachments.AOE_GROWTH_MODE);
         ItemStack offHandItem = pPlayer.getOffhandItem();
         Block tempBlock = offHandItem.getItemHolder().getData(DataMaps.GROWTH_SEED_TO_CROP);
@@ -187,27 +189,32 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
         return SpellCastResult.tick();
       }
     } else {
-      BlockHitResult result = pickBlock(pPlayer, instance);
-      BlockPos pos = result.getBlockPos();
-      BlockState at = pLevel.getBlockState(pos);
+      if (ticks % growthInterval == 0) {
+        BlockHitResult result = pickBlock(pPlayer, instance);
+        BlockPos pos = result.getBlockPos();
+        BlockState at = pLevel.getBlockState(pos);
 
-      int doTicks = GrowthUtil.growthTicks(pLevel, pos, at, pPlayer);
-      if (doTicks > 0) {
-        if (pLevel.random.nextInt(doTicks) == 0) {
-          at.randomTick((ServerLevel) pLevel, pos, pLevel.random);
-          BlockState newState = pLevel.getBlockState(pos);
-          CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, at, pHand, pStack, instance);
-          ModActions.CROP_GROWTH.get().accept(context);
-          PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pLevel, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
+        int doTicks = GrowthUtil.growthTicks(pLevel, pos, at, pPlayer);
+        if (doTicks > 0) {
+          if (pLevel.random.nextInt(doTicks) == 0) {
+            at.randomTick((ServerLevel) pLevel, pos, pLevel.random);
+            BlockState newState = pLevel.getBlockState(pos);
+            CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, at, pHand, pStack, instance);
+            ModActions.CROP_GROWTH.get().accept(context);
+            PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pLevel, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
+          }
+        } else {
+          costs.noCharge();
+          pPlayer.stopUsingItem();
+          return SpellCastResult.nothing();
         }
+
+        costs.operations(1);
+        return SpellCastResult.success(cooldown);
       } else {
         costs.noCharge();
-        pPlayer.stopUsingItem();
-        return SpellCastResult.nothing();
+        return SpellCastResult.tick();
       }
-
-      costs.operations(1);
-      return SpellCastResult.success(cooldown);
     }
   }
 
@@ -261,15 +268,19 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   @Override
   public Component[] getOrCreateDescriptionComponents(ISpellInstance instance) {
     if (defaultComponents == null) {
-      defaultComponents = new Component[]{};
+      defaultComponents = new Component[]{
+          Component.literal(String.format("%.1f", growthInterval / 20.0)),
+          Component.literal(String.valueOf(growthInterval)),
+          Component.literal(String.format("%.1f", reach))
+      };
     }
     if (rampantGrowthComponents == null) {
       rampantGrowthComponents = new Component[]{
           Component.literal(String.valueOf(count)),
           Component.literal(String.valueOf(radiusZX)),
           Component.literal(String.valueOf(radiusY)),
-          Component.literal(String.format("%.1f", interval / 20.0)),
-          Component.literal(String.valueOf(interval))
+          Component.literal(String.format("%.1f", rampantInterval / 20.0)),
+          Component.literal(String.valueOf(rampantInterval))
       };
     }
 
@@ -282,6 +293,11 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
 
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
     return new Component[]{};
   }
 }

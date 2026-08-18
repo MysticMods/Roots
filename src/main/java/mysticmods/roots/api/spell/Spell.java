@@ -152,17 +152,9 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   }
 
-  // TODO: Make this abstract
-  @Deprecated(forRemoval = true)
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{};
-  }
+  public abstract Component[] createExtendedDescriptionComponents();
 
-  // TODO: Make this abstract
-  @Deprecated(forRemoval = true)
-  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
-    return new Component[]{};
-  }
+  public abstract Component[] createModifierDescriptionComponents(SpellModifier spellModifier);
 
   @Override
   @Nullable

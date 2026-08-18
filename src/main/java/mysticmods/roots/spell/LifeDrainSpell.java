@@ -1,20 +1,24 @@
 package mysticmods.roots.spell;
 
+import com.google.common.collect.Iterators;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastLifeDrainFXPacket;
 import mysticmods.roots.network.client.fx.DrainLifeFXPacket;
 import mysticmods.roots.network.client.fx.HealFXPacket;
 import mysticmods.roots.util.EntityUtils;
-import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,6 +31,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -35,7 +40,7 @@ import java.util.function.Predicate;
 public class LifeDrainSpell extends Spell {
   private double distance;
   private float damage, heal;
-  private int angle;
+  private int angle, maxCount;
 
   public LifeDrainSpell(Properties properties) {
     super(properties);
@@ -53,6 +58,7 @@ public class LifeDrainSpell extends Spell {
     properties.add(ModSpells.LIFE_DRAIN_ANGLE);
     properties.add(ModSpells.LIFE_DRAIN_DAMAGE);
     properties.add(ModSpells.LIFE_DRAIN_HEAL);
+    properties.add(ModSpells.LIFE_DRAIN_COUNT);
   }
 
   @Override
@@ -63,6 +69,7 @@ public class LifeDrainSpell extends Spell {
     this.angle = Math.clamp(properties.get(ModSpells.LIFE_DRAIN_ANGLE), 1, 180);
     this.damage = properties.get(ModSpells.LIFE_DRAIN_DAMAGE);
     this.heal = properties.get(ModSpells.LIFE_DRAIN_HEAL);
+    this.maxCount = properties.get(ModSpells.LIFE_DRAIN_COUNT);
   }
 
   @Override
@@ -75,14 +82,15 @@ public class LifeDrainSpell extends Spell {
 
     AABB bounds = new AABB(eyePos, endPos).inflate(reach);
 
-    boolean foundTarget = false;
     int count = 0;
 
-
     List<LivingEntity> entities = getLifeDrainTargets(pLevel, pPlayer, eyePos, endPos, bounds, EntityUtils.isHostileTo(pPlayer));
+    Util.shuffle(entities, pPlayer.getRandom());
 
     for (LivingEntity entity : entities) {
-      foundTarget = true;
+      if (count > maxCount) {
+        break;
+      }
       if (entity.hurt(ModDamage.lifeDrain(pPlayer), this.damage)) {
         count++;
 
@@ -96,14 +104,11 @@ public class LifeDrainSpell extends Spell {
       }
     }
 
-    if (ticks % 10 == 0) {
-      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastLifeDrainFXPacket(pPlayer.getId(), distance, angle + (int) (angle * 0.3)));
-    }
-
-    if (!foundTarget) {
+    if (count == 0) {
       costs.noCharge();
       return SpellCastResult.nothing();
     } else {
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastLifeDrainFXPacket(pPlayer.getId(), distance, angle + (int) (angle * 0.3)));
       costs.operations(count);
       return SpellCastResult.success(count, cooldown);
     }
@@ -132,5 +137,22 @@ public class LifeDrainSpell extends Spell {
     results.sort(Comparator.comparingDouble(e -> e.distanceToSqr(startVec)));
 
     return results;
+  }
+
+  @Override
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{
+        Component.literal(String.valueOf(maxCount)),
+        Component.literal(String.format("%.1f", distance)),
+        Component.literal(String.valueOf(angle)),
+        Component.literal(String.format("%.2f", damage / 2.0)),
+        Component.literal(String.format("%.2f", heal / 2.0))
+    };
+  }
+
+  // TODO: When modifiers
+  @Override
+  public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    return new Component[]{};
   }
 }

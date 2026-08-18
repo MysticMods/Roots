@@ -72,6 +72,6 @@ public class MagnetismSpell extends TwoRadiusSpell {
   // TODO: When modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
-    return super.createModifierDescriptionComponents(spellModifier);
+    return new Component[]{};
   }
 }

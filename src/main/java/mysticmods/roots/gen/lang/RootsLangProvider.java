@@ -974,9 +974,8 @@ public final class RootsLangProvider extends LanguageProvider {
     spellExtendedDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light up to %s blocks away in the direction you are looking.");
     spellDescription(ModSpells.GEAS, "Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.");
     spellExtendedDescription(ModSpells.GEAS, "Places a geas on up to %s entities that are visible to you whose maximum health does not exceed %s hearts, up to %s blocks away. For the duration of %s seconds [%s ticks], affected entities will be unable to target you.");
-    /*    spellDescription(ModSpells.SUMMON_UNDEAD, "Summons an undead servant to fight for you.");*/
     spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
-    spellExtendedDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
+    spellExtendedDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block every %s seconds [%s ticks] while channeled. While casting this spell, your block interaction range for it is increased by %s blocks.");
     var rampant = Util.makeDescriptionId("spell", Spells.RAMPANT_GROWTH.location()) + ".description";
     add(rampant, "Causes accelerated growth to all eligible blocks in the area around you.");
     // TODO: Multiple growth modes
@@ -984,14 +983,15 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
     spellExtendedDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks within ±%s/±%s blocks around you.");
     spellDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.");
+    spellExtendedDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from up to %s random entities who are up to %s blocks away in a %s° range, centred on the direction you are facing, dealing %s hearts of damage and healing you for %s hearts.");
     spellDescription(ModSpells.PETAL_SHELL, "Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.");
-    /*    spellDescription(ModSpells.RADIANCE, "Shoots a beam of destructive light in the direction you are facing. This beam will damage all entities that it touches.");*/
+    spellExtendedDescription(ModSpells.PETAL_SHELL, "Creates a shield of %s impenetrable petals around you for %s seconds [%s ticks]. Each attack you take while the effect is active will be blocked, breaking the petal until none remain.");
     spellDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.");
-    spellDescription(ModSpells.SHATTER, "Breaks the targeted blocks. The size and dimensions of the spell can be adjusted.");
-    spellDescription(ModSpells.JAUNT, "Teleports you a short way in the distance you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.");
-/*    spellDescription(ModSpells.STORM_CLOUD, "Creates a vicious cloud of storms around you. For the duration, lightning from the cloud may strike nearby enemies.");
-    spellDescription(ModSpells.TEMPORAL_MORASS, "Creates a temporary field of disruptive energy. All entities within this field will have their movement dramatically slowed.");
-    spellDescription(ModSpells.WILDFIRE, "Flings a fiery meteor in the direction you are looking. If this meteor hits an enemy, it will damage it.");*/
+    spellExtendedDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines on the block you are looking at that lasts for %s seconds [%s ticks]. The first entity that touches it will take %s hearts of damage and become trapped until the spell ends.");
+    spellDescription(ModSpells.SHATTER, "Breaks the targeted block. The number of broken blocks can be increased with modifiers.");
+    spellExtendedDescription(ModSpells.SHATTER, "Breaks the targeted block. The number of broken blocks can be increased with modifiers.");
+    spellDescription(ModSpells.JAUNT, "Teleports you a short way in the direction you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.");
+    spellExtendedDescription(ModSpells.JAUNT, "Teleports you %s blocks in the direction you are looking, the distance increasing the longer the spell is charged for, placing you on a safe surface on the next highest or lowest surface.");
 
     addDamage(ModDamage.ACID_CLOUD, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
     addDamage(ModDamage.LIFE_DRAIN, "%1$s was drained away to nothing", "%1$s was drained away to nothing while fighting %2$s", "%1$s was drained away to nothing while fighting %2$s wielding %3$s");
