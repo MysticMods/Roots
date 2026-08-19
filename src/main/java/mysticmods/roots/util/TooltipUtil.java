@@ -1,10 +1,13 @@
 package mysticmods.roots.util;
 
+import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostType;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
@@ -14,6 +17,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -180,6 +184,26 @@ public class TooltipUtil {
     }
   }
 
+  private record CostKey (Holder<Herb> herb, CostType type) {
+    private CostKey fromCost (Cost cost) {
+      return new CostKey(cost.getHolder(), type);
+    }
+  }
+
+  public static List<Cost> collateCosts (List<Cost> incoming) {
+    Object2DoubleMap<CostKey> map = new Object2DoubleOpenHashMap<>();
+    for (Cost cost : incoming) {
+      var key = new CostKey(cost.getHolder(), cost.getType());
+      var current = map.getOrDefault(key, 0);
+      map.put(key, current + cost.getValue());
+    }
+    List<Cost> result = new ArrayList<>();
+    for (Object2DoubleMap.Entry<CostKey> entry : map.object2DoubleEntrySet()) {
+      result.add(new Cost(entry.getKey().type(), entry.getKey().herb(), entry.getDoubleValue()));
+    }
+    return result;
+  }
+
   public static void baseModifierCostTooltip(Item.TooltipContext context, List<Component> result, List<SpellModifier> modifierList, TooltipFlag flag) {
     List<Cost> modifierCosts = new ArrayList<>();
     for (SpellModifier modifier : modifierList) {
@@ -195,7 +219,7 @@ public class TooltipUtil {
       }
     }
 
-    for (Cost cost : modifierCosts) {
+    for (Cost cost : collateCosts(modifierCosts)) {
       Herb herb = cost.getHerb();
       String herbCost = cost.getType()
           .isMultiplicative() ? String.format("%.1f", (cost.getValue()) * 100) : String.format("%.4f", Math.abs(cost.getValue())); // TODO: This doesn't work properly for reductions

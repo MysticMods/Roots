@@ -20,7 +20,7 @@ public class Cost {
       .apply(instance, Cost::new));
   public static final StreamCodec<RegistryFriendlyByteBuf, Cost> STREAM_CODEC = StreamCodec.composite(CostType.STREAM_CODEC, Cost::getType, ByteBufCodecs.holderRegistry(RootsRegistries.Keys.HERBS), Cost::getHolder, ByteBufCodecs.DOUBLE, Cost::getValue, Cost::new);
 
-  protected Cost(CostType type, Holder<Herb> herb, double value) {
+  public Cost(CostType type, Holder<Herb> herb, double value) {
     this.type = type;
     this.herb = herb;
     this.value = value;
@@ -30,7 +30,7 @@ public class Cost {
     return type;
   }
 
-  protected Holder<Herb> getHolder() {
+  public Holder<Herb> getHolder() {
     return herb;
   }
 
