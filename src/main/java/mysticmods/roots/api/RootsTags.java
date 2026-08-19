@@ -655,6 +655,8 @@ public class RootsTags {
 
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
+    public static final TagKey<SpellModifier> SKIPPED_IN_TOOLTIPS = modTag("skipped_in_tooltips");
+
     static TagKey<SpellModifier> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, RootsAPI.rl(name));
     }

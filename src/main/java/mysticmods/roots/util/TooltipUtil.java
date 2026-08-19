@@ -1,6 +1,7 @@
 package mysticmods.roots.util;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
@@ -89,6 +90,10 @@ public class TooltipUtil {
     if (modifiers.isEmpty()) {
       return List.of();
     } else if (modifiers.size() == 1) {
+      if (modifiers.firstElement() != null && modifiers.firstElement()
+          .is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+        return List.of();
+      }
       return List.of(modifiers.stream().toList());
     }
 
@@ -97,10 +102,12 @@ public class TooltipUtil {
     Map<GroupId, List<SpellModifier>> grouped = new HashMap<>();
 
     for (SpellModifier modifier : modifiers) {
-      if (modifier.canGroup()) {
-        grouped.computeIfAbsent(modifier.getGroupKey(), k -> new ArrayList<>()).add(modifier);
-      } else {
-        result.add(List.of(modifier));
+      if (!modifier.is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+        if (modifier.canGroup()) {
+          grouped.computeIfAbsent(modifier.getGroupKey(), k -> new ArrayList<>()).add(modifier);
+        } else {
+          result.add(List.of(modifier));
+        }
       }
     }
 
@@ -133,6 +140,9 @@ public class TooltipUtil {
       if (flag.hasShiftDown()) {
         for (List<SpellModifier> modifierGroup : modifiers) {
           SpellModifier first = modifierGroup.getFirst();
+          if (first.is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+            continue;
+          }
           Component name = modifierGroup.size() == 1 ? first.getName() : first.getGroupName(modifierGroup.size());
           result.add(Component.translatable("roots.tooltip.spell.modifier_description", name, TooltipUtil.describeModifier(context, result, first, flag)));
           result.add(CommonComponents.EMPTY);
@@ -143,6 +153,9 @@ public class TooltipUtil {
         MutableComponent modifierNames = Component.empty();
         boolean first = true;
         for (List<SpellModifier> modifierGroup : modifiers) {
+          if (modifierGroup.getFirst().is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+            continue;
+          }
           if (!first) {
             modifierNames.append(", ");
           }
