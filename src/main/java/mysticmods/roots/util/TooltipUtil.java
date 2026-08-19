@@ -8,7 +8,7 @@ import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
-import mysticmods.roots.api.registry.IGroupDescribed;
+import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
@@ -94,7 +94,7 @@ public class TooltipUtil {
 
     List<List<SpellModifier>> result = new ArrayList<>();
 
-    Map<IGroupDescribed.GroupId, List<SpellModifier>> grouped = new HashMap<>();
+    Map<GroupId, List<SpellModifier>> grouped = new HashMap<>();
 
     for (SpellModifier modifier : modifiers) {
       if (modifier.canGroup()) {
@@ -104,7 +104,7 @@ public class TooltipUtil {
       }
     }
 
-    for (Map.Entry<IGroupDescribed.GroupId, List<SpellModifier>> entry : grouped.entrySet()) {
+    for (Map.Entry<GroupId, List<SpellModifier>> entry : grouped.entrySet()) {
       List<SpellModifier> entryValues = entry.getValue();
       if (entryValues.isEmpty()) {
         RootsAPI.LOG.error("Empty group SOMEHOW??? {}", entry);

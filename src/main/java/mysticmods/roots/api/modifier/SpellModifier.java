@@ -3,20 +3,16 @@ package mysticmods.roots.api.modifier;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.IExtendedDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +30,10 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable) {
     this(defaultCosts, applicable, ChildChargeType.ALWAYS);
+  }
+
+  public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable, GroupId groupId) {
+    this(defaultCosts, null, applicable, ChildChargeType.ALWAYS, groupId);
   }
 
   public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable, ChildChargeType type) {
@@ -154,7 +154,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @Override
   public String getOrCreateGroupDescriptionId() {
     if (groupDescriptionId == null) {
-      this.groupDescriptionId = groupId.createDescriptionId("modifier_group", builtInRegistryHolder().getKey());
+      this.groupDescriptionId = groupId.createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey());
     }
 
     return this.groupDescriptionId;

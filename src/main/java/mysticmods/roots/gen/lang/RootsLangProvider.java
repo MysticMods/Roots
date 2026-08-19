@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.Spells;
+import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.api.spell.Spell;
@@ -238,13 +239,22 @@ public final class RootsLangProvider extends LanguageProvider {
     // b) convert any numbers to be in brackets i.e., (1)
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o -> {
           var k = o.getKey().location().getPath();
-          var s = k.split("/")[1];
+          var sp = k.split("/");
+          var s = sp[sp.length - 1];
           var e = toEnglishName(s);
           //var m = numbers.matcher(e);
 
           add(o.getValue().getDescriptionId(), e);
         }
     );
+
+    for (GroupId id : ModModifiers.GROUP_IDS) {
+      var k = id.groupKey();
+      var sp = k.split("/");
+      var s = sp[sp.length - 1];
+      var e = toEnglishName(s);
+      add(id.createDescriptionId("spell_modifier_group", "roots"), e + " (%s)");
+    }
 
     // TODO: Same as above?
     RootsRegistries.RITUAL_MODIFIERS.entrySet()
@@ -1048,6 +1058,17 @@ public final class RootsLangProvider extends LanguageProvider {
         case "vi" -> "VI";
         default -> StringUtils.capitalize(seg);
       });
+    }
+
+    return joiner.toString();
+  }
+
+  public static String toEnglishTruncated(String internalName) {
+    String[] segments = internalName.toLowerCase(Locale.ROOT).split("_");
+    var joiner = new StringJoiner(" ");
+
+    for (int i = 0; i < segments.length - 1; i++) {
+      joiner.add(StringUtils.capitalize(segments[i]));
     }
 
     return joiner.toString();
