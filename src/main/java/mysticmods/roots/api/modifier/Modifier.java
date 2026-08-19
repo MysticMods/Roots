@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T>, ICostedChild {
+public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, IGroupDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T>, ICostedChild {
   @Nullable
   protected final ResourceKey<T> parent;
   protected final ResourceKey<V> applicable;

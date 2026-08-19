@@ -105,6 +105,11 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
       LivingEntity entity = entities.get(pLevel.getRandom().nextInt(entities.size()));
       totalDamaged++;
+      // TODO: Look into modifying damage based on enchantments and attributes
+      // TODO: Mace-like modifying damage based off of item
+      // TODO: Critical hit modification?
+      // DONE: Handle entity incoming damage is already done via `hurt`
+      // DONE: Knockback prevention is done via damage type tag
       entity.hurt(ModDamage.acidCloud(pPlayer), damage);
       if (instance.has(RootsTags.SpellModifiers.SETS_ON_FIRE)) {
         entity.igniteForTicks(fireTicks);

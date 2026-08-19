@@ -159,6 +159,8 @@ public class CastingItem extends Item {
       return mutable.toImmutable();
     }
 
+    // TODO: Smite, etc, can actually be applied from here *technically* but only apply to weapon attacks not to spells
+
     return baseValue;
   }
 
@@ -291,15 +293,6 @@ public class CastingItem extends Item {
   public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
-/*
-    if (pLevel.isClientSide()) {
-      if (pUsedHand == InteractionHand.MAIN_HAND && !pPlayer.getOffhandItem().isEmpty()) {
-        return InteractionResultHolder.pass(stack);
-      }
-      return InteractionResultHolder.pass(stack);
-    }
-*/
-
     if (!pLevel.isClientSide()) {
       stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
     }
@@ -322,16 +315,17 @@ public class CastingItem extends Item {
     // TODO: Check this can be used client-side
     Costing costing = new Costing(spell);
     if (!costing.canAfford(pPlayer, true)) {
-      // TODO: display a warning
-      pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
-      RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getName());
+      if (!pLevel.isClientSide()) {
+        // TODO: display a warning
+        pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
+        RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getName());
+      }
       return InteractionResultHolder.pass(stack);
     }
 
     if (spell.getType() == SpellCastType.INSTANT) {
       if (!pLevel.isClientSide()) {
         stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
-        // TODO: (#1353) Improve spell casting results
         var result = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
         stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
         int cooldown = result.cooldown();
@@ -372,11 +366,11 @@ public class CastingItem extends Item {
   @Override
   public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
     super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
-    if (!pLevel.isClientSide()) {
+/*    if (!pLevel.isClientSide()) {
       int dur = getUseDuration(pStack, pLivingEntity) - pTimeCharged;
       CastingSuccessCache.clear(pStack);
       //RootsAPI.LOG.info("Finished using after {} ticks {} seconds", dur, dur / 20);
-    }
+    }*/
 
     if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {
       return;
@@ -399,7 +393,6 @@ public class CastingItem extends Item {
     if (spell.getType() == SpellCastType.CHARGED) {
       Costing costing = new Costing(spell);
 
-      // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
       if (!costing.canAfford(pPlayer, true)) {
         RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getName().getString());
         return;

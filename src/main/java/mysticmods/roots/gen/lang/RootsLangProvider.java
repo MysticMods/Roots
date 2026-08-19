@@ -83,7 +83,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.token.enabled_modifiers", "Enabled modifiers:");
     add("roots.tooltip.token.ritual", "Ritual: %s");
 
-    add("roots.tooltip.spell.modifiers", "Modifiers: ");
+    add("roots.tooltip.spell.modifiers", "Modifiers: %s");
+    add("roots.tooltip.spell.modifier_description", "%s: %s");
     add("roots.tooltip.cost.herb_cost", "%s %s");
     add("roots.tooltip.cost.herb_cost_full", "%s %s%s");
     add("roots.tooltip.cost.herb_cost_modified", " [±%s]");

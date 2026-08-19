@@ -50,4 +50,9 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   public ItemStack getIcon() {
     return ItemStack.EMPTY;
   }
+
+  @Override
+  public boolean canGroup() {
+    return false;
+  }
 }
