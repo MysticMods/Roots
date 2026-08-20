@@ -17,8 +17,8 @@ import java.util.Set;
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ConfigManager {
 
-  private static final ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
-  private static final ModConfigSpec.Builder CLIENT_BUILDER = new ModConfigSpec.Builder();
+  public static final ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
+  public static final ModConfigSpec.Builder CLIENT_BUILDER = new ModConfigSpec.Builder();
 
   public static List<AbstractConfig> CONFIGS = new ArrayList<>();
 

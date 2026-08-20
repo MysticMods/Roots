@@ -30,6 +30,7 @@
     "accessor.AccessorMixinLootPoolSingletonContainer",
     "accessor.AccessorMixinLootTable",
     "accessor.AccessorMixinMob",
+    "accessor.AccessorMixinModConfigSpec",
     "accessor.AccessorMixinNestedLootTable",
     "accessor.AccessorMixinOverworldBiomes",
     "accessor.AccessorMixinSaplingBlock",

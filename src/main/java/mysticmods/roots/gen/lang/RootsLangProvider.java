@@ -10,8 +10,10 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Cycling;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
 import mysticmods.roots.item.GramaryItem;
+import mysticmods.roots.mixin.accessor.AccessorMixinModConfigSpec;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
 import net.minecraft.Util;
@@ -24,10 +26,13 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
@@ -1009,6 +1014,22 @@ public final class RootsLangProvider extends LanguageProvider {
     addDamage(ModDamage.METEOR, "%1$s was killed by a falling meteor", "%1$s was killed by a falling meteor while fighting %2$s", "%1$s was killed by a falling meteor while fighting %2$s wielding %3$s");
     addDamage(ModDamage.ROSE_THORNS, "%1$s was poked to death by rose thorns", "%1$s was poked to death by rose thorns while fighting %2$s", "%1$s was poked to death by rose thorns while fighting %2$s wielding %3$s");
     addDamage(ModDamage.WILDFIRE, "%1$s was immolated by wild fire", "%1$s was immolated by wild fire while fighting %2$s", "%1$s was immolated by wild fire while fighting %2$s wielding %3$s");
+
+    Set<String> doneStrings = new HashSet<>();
+
+    for (ModConfigSpec.ConfigValue<?> value : ((AccessorMixinModConfigSpec)ConfigManager.COMMON_BUILDER).roots$getValues()) {
+      StringJoiner keyBuilder = new StringJoiner(".");
+      for (String s : value.getPath()) {
+        keyBuilder.add(s);
+      }
+      String key = keyBuilder.toString();
+      if (doneStrings.contains(key)) {
+        continue;
+      }
+
+      add("roots.configuration." + key, toEnglishName(value.getPath().getLast()));
+      doneStrings.add(key);
+    }
   }
 
   private void addCyclingMode(Cycling<?>[] values) {
