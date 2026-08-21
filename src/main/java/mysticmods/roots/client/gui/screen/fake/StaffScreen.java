@@ -122,11 +122,11 @@ public class StaffScreen extends RootsScreen {
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), itemStackSupplier(3), index++, leftPos + 55, topPos + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), itemStackSupplier(4), index, leftPos + 60, topPos + 33)));
 
-    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos - 12, topPos + 31)));
-    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos - 7, topPos + 7)));
+/*    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos, topPos + 51)));
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 5, topPos - 1)));
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 30, topPos - 8)));
     modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 2, topPos - 20)));
-    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 2, topPos - 20)));
-    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 2, topPos - 20)));
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 2, topPos - 20)));*/
 
     if (getMinecraft().player != null) {
       createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));

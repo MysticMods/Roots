@@ -18,7 +18,7 @@ public class ModifierButton extends Button {
   );
 
   public ModifierButton(StaffScreen parentScreen, int x, int y) {
-    super(x, y, 10, 10, CommonComponents.EMPTY, parentScreen::buttonClicked, DEFAULT_NARRATION);
+    super(x, y, 8, 8, CommonComponents.EMPTY, parentScreen::buttonClicked, DEFAULT_NARRATION);
   }
 
   @Override
