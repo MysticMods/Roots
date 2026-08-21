@@ -64,6 +64,7 @@ public class GroveRecipe extends RootsTileRecipe<PedestalInventoryWrapper, Grove
     }
 
     public GroveRecipe build(BaseRecipeData.Builder data) {
+      var built = data.build();
       return build(data.build());
     }
 
