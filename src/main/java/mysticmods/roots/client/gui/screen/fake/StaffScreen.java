@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
+import mysticmods.roots.client.gui.buttons.ModifierButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
 import mysticmods.roots.client.gui.screen.RootsScreen;
 import mysticmods.roots.init.ModAttachments;
@@ -38,6 +39,9 @@ public class StaffScreen extends RootsScreen {
   private final List<ItemStack> staffItemCache = new ArrayList<>();
   protected int selectedStaff = -1;
   protected int selectedLibrary = -1;
+
+  private final List<Button> modifierButtons = new ArrayList<>();
+  private final List<Button> removeButtons = new ArrayList<>();
 
   protected StaffScreen(InteractionHand hand, int inventorySlot) {
     super(Component.translatable("roots.gui.spell_library"));
@@ -117,6 +121,12 @@ public class StaffScreen extends RootsScreen {
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(2), itemStackSupplier(2), index++, leftPos + 31, topPos + 4)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), itemStackSupplier(3), index++, leftPos + 55, topPos + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), itemStackSupplier(4), index, leftPos + 60, topPos + 33)));
+
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos - 12, topPos + 31)));
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos - 7, topPos + 7)));
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 2, topPos - 20)));
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 2, topPos - 20)));
+    modifierButtons.add(addRenderableWidget(new ModifierButton(this, leftPos + 2, topPos - 20)));
 
     if (getMinecraft().player != null) {
       createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
