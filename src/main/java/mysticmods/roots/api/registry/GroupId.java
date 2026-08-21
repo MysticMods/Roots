@@ -4,8 +4,13 @@ import net.minecraft.Util;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-public record GroupId(String groupKey) {
-  public static final GroupId NONE = new GroupId(null);
+// TODO: Group descriptions
+public record GroupId(String groupKey, boolean useGroupDescription) {
+  public static final GroupId NONE = new GroupId(null, false);
+
+  public GroupId (String groupKey) {
+    this(groupKey, false);
+  }
 
   public String createDescriptionId(String signifier, String namespace) {
     return Util.makeDescriptionId(signifier, ResourceLocation.fromNamespaceAndPath(namespace, groupKey()));

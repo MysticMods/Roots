@@ -39,9 +39,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForgeConfig;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
+import javax.management.modelmbean.ModelMBeanOperationInfo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -233,10 +235,10 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   @Override
   public String getOrCreateTooltipExtendedDescriptionId(ISpellInstance instance) {
     if (this.descriptionTooltipExtendedId == null) {
-      this.descriptionTooltipExtendedId = getOrCreateDescriptionId() + ".description.extended";
+      this.descriptionTooltipExtendedId = getOrCreateTooltipDescriptionId(instance) + ".extended";
     }
     if (this.rampantGrowthExtendedDescription == null) {
-      this.rampantGrowthExtendedDescription = getOrCreateDescriptionId(instance) + ".description.extended";
+      this.rampantGrowthExtendedDescription = getOrCreateTooltipDescriptionId(instance) + ".extended";
     }
 
     if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
@@ -293,11 +295,24 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
 
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
+    if (spellModifier.is(ModModifiers.RAMPANT_GROWTH)) {
+      return new Component[]{
+          Component.literal(String.valueOf(count)),
+          Component.literal(String.valueOf(radiusZX)),
+          Component.literal(String.valueOf(radiusY)),
+          Component.literal(String.format("%.1f", rampantInterval / 20.0)),
+          Component.literal(String.valueOf(rampantInterval))
+      };
+    }
     return new Component[]{};
   }
 
   @Override
   public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{};
+    return new Component[]{
+        Component.literal(String.format("%.1f", growthInterval / 20.0)),
+        Component.literal(String.valueOf(growthInterval)),
+        Component.literal(String.format("%.1f", reach))
+    };
   }
 }

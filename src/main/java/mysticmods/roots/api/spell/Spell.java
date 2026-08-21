@@ -244,7 +244,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   @Override
   public String getOrCreateTooltipExtendedDescriptionId() {
     if (this.descriptionTooltipExtendedId == null) {
-      this.descriptionTooltipExtendedId = getOrCreateDescriptionId() + ".description.extended";
+      this.descriptionTooltipExtendedId = getOrCreateTooltipDescriptionId() + ".extended";
     }
 
     return this.descriptionTooltipExtendedId;

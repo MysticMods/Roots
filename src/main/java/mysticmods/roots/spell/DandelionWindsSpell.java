@@ -4,19 +4,19 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.spell.*;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.snapshot.DandelionWindsSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -139,6 +139,52 @@ public class DandelionWindsSpell extends Spell {
       return new Component[]{
           Component.literal(String.format("%s", (int) (deflectionChance * 100))),
           Component.literal(String.format("%s", (int) (totalChance * 100)))
+      };
+    } else if (spellModifier.is(RootsTags.SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE)) {
+      int count;
+      if (spellModifier.is(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1)) {
+        count = 1;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2)) {
+        count = 2;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3)) {
+        count = 3;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4)) {
+        count = 4;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5)) {
+        count = 5;
+      } else {
+        RootsAPI.LOG.error("Spell modifier {} decreases dandelion winds gusts cooldown duration but isn't duration 1, 2, 3, 4 or 5!", spellModifier);
+        count = 1;
+      }
+      int totalDur = gustsCooldown+ (gustsCooldownDecrease* count);
+      return new Component[]{
+          Component.literal(String.format("%s", gustsCooldownDecrease/ 20)),
+          Component.literal(String.format("%s", gustsCooldownDecrease)),
+          Component.literal(String.format("%s", totalDur / 20)),
+          Component.literal(String.format("%s", totalDur))
+      };
+    } else if (spellModifier.is(RootsTags.SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE)) {
+      int count;
+      if (spellModifier.is(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1)) {
+        count = 1;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2)) {
+        count = 2;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3)) {
+        count = 3;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4)) {
+        count = 4;
+      } else if (spellModifier.is(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5)) {
+        count = 5;
+      } else {
+        RootsAPI.LOG.error("Spell modifier {} decreases dandelion winds vortex cooldown duration but isn't duration 1, 2, 3, 4 or 5!", spellModifier);
+        count = 1;
+      }
+      int totalDur = vortexCooldown + (vortexCooldownDecrease * count);
+      return new Component[]{
+          Component.literal(String.format("%s", vortexCooldownDecrease / 20)),
+          Component.literal(String.format("%s", vortexCooldownDecrease)),
+          Component.literal(String.format("%s", totalDur / 20)),
+          Component.literal(String.format("%s", totalDur))
       };
     }
     RootsAPI.LOG.error("Tried to create description components for modifiers not associated with {}: {}", this, spellModifier);

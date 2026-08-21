@@ -953,24 +953,19 @@ public final class RootsLangProvider extends LanguageProvider {
     spellExtendedDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs within %s blocks horizontally and %s blocks vertically to your location.");
     spellDescription(ModSpells.DANDELION_WINDS, "Has a chance to deflect projectiles aimed at you.");
     spellExtendedDescription(ModSpells.DANDELION_WINDS, "Applies a buff for %s seconds [%s ticks] that gives a %s%% chance to deflect projectiles aimed at you.");
+    // These use group id
     modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the Dandelion Winds effect.");
     modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
-    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_2, "Increases the duration of the Dandelion Winds effect.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_2, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
-    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_3, "Increases the duration of the Dandelion Winds effect.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_3, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
-    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_4, "Increases the duration of the Dandelion Winds effect.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_4, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
-    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_5, "Increases the duration of the Dandelion Winds effect.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_5, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
     modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance to deflect projectiles.");
     modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance to deflect projectiles by %s%% to a total of %s%%.");
-    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_2, "Increases the chance to deflect projectiles.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_2, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
-    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_3, "Increases the chance to deflect projectiles.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_3, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
-    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_4, "Increases the chance to deflect projectiles by %s%% to a total of %s%% (including parent modifiers).");
+    modifierDescription(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1, "Reduces the cooldown of the Vortex effect.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1, "Reduces the cooldown of the Vortex effect by %s seconds [%s ticks].");
+    modifierDescription(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1, "Reduces the cooldown of the Gusts effect.");
+    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1, "Reduces the cooldown of the Gusts effect by %s seconds [%s ticks].");
+
+    // TODO: This isn't implemented
+    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_STATUE, "Increases your knockback resistance. [NYI]");
+    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_INFERNO, "Enflames nearby enemies. [NYI]");
 
     // TODO: Cooldowns
     spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, losing maximum health.");
@@ -991,11 +986,22 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.GEAS, "Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.");
     spellExtendedDescription(ModSpells.GEAS, "Places a geas on up to %s entities that are visible to you whose maximum health does not exceed %s hearts, up to %s blocks away. For the duration of %s seconds [%s ticks], affected entities will be unable to target you.");
     spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
+    spellDescription(ModSpells.RAMPANT_GROWTH, "Use Growth Infusion instead!");
+    spellExtendedDescription(ModSpells.RAMPANT_GROWTH, "Use growth infusion instead!");
     spellExtendedDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block every %s seconds [%s ticks] while channeled. While casting this spell, your block interaction range for it is increased by %s blocks.");
-    var rampant = Util.makeDescriptionId("spell", Spells.RAMPANT_GROWTH.location()) + ".description";
-    add(rampant, "Causes accelerated growth to all eligible blocks in the area around you.");
-    // TODO: Multiple growth modes
-    add(rampant + ".extended", "Causes accelerated growth for up to %s eligible blocks within ±%s/±%s blocks every %s seconds [%s ticks] while channeled. The number of ticks applied to each block varies.");
+    modifierDescription(ModModifiers.RAMPANT_GROWTH, "Causes accelerated growth to all eligible blocks in the area around you.");
+    modifierExtendedDescription(ModModifiers.RAMPANT_GROWTH, "Causes accelerated growth for up to %s eligible blocks within ±%s/±%s blocks every %s seconds [%s ticks] while channeled. The number of ticks applied to each block varies.");
+    // TODO: Handle this?
+    modifierDescriptionBoth(ModModifiers.TARGETED_GROWTH, "Causes accelerated growth to only the targeted block. [NYI]");
+    modifierDescriptionBoth(ModModifiers.SHATTER_ADJUSTABLE, "Group of modifiers that allow for the adjustment of the width, depth and height of the Shatter spell.");
+
+    modifierDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell.");
+    modifierExtendedDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell to %s blocks.");
+    modifierDescription(ModModifiers.SHATTER_WIDTH_I, "Increases the width of the Shatter spell.");
+    modifierExtendedDescription(ModModifiers.SHATTER_WIDTH_I, "Increases the width of the Shatter spell to %s blocks.");
+    modifierDescription(ModModifiers.SHATTER_HEIGHT_I, "Increases the height of the Shatter spell.");
+    modifierExtendedDescription(ModModifiers.SHATTER_HEIGHT_I, "Increases the height of the Shatter spell to %s blocks.");
+
     spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
     spellExtendedDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks within ±%s/±%s blocks around you.");
     spellDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.");

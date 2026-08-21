@@ -57,19 +57,19 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   }
 
   @SafeVarargs
-  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ResourceKey<SpellModifier> ... conflicts) {
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ResourceKey<SpellModifier>... conflicts) {
     this(defaultCosts, parent, applicable, GroupId.NONE, conflicts);
   }
 
   @SafeVarargs
-  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, GroupId groupId, ResourceKey<SpellModifier> ... conflicts) {
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, GroupId groupId, ResourceKey<SpellModifier>... conflicts) {
     super(defaultCosts, parent, applicable, conflicts);
     this.chargeType = ChildChargeType.ALWAYS;
     this.groupId = groupId;
   }
 
   @SafeVarargs
-  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type, GroupId groupId, ResourceKey<SpellModifier> ... conflicts) {
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type, GroupId groupId, ResourceKey<SpellModifier>... conflicts) {
     super(defaultCosts, parent, applicable, conflicts);
     this.chargeType = type;
     this.groupId = groupId;
@@ -92,7 +92,11 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @Override
   public String getOrCreateTooltipDescriptionId() {
     if (this.descriptionTooltipId == null) {
-      this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
+      if (this.groupId.useGroupDescription()) {
+        this.descriptionTooltipId = this.groupId.createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey()) + ".description";
+      } else {
+        this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
+      }
     }
 
     return this.descriptionTooltipId;
@@ -102,7 +106,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @Override
   public String getOrCreateTooltipExtendedDescriptionId() {
     if (this.descriptionTooltipExtendedId == null) {
-      this.descriptionTooltipExtendedId = getOrCreateDescriptionId() + ".description.extended";
+      this.descriptionTooltipExtendedId = getOrCreateTooltipDescriptionId() + ".extended";
     }
 
     return this.descriptionTooltipExtendedId;
@@ -135,7 +139,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     return chargeType;
   }
 
-  public ItemStack getIcon () {
+  public ItemStack getIcon() {
     return RootsItemCallbacks.getItemStack(this);
   }
 

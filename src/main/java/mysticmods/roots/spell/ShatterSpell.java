@@ -12,6 +12,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.*;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModActions;
+import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.lightning.SemiDynamicLightningFXPacket;
 import net.minecraft.ChatFormatting;
@@ -55,7 +56,7 @@ public class ShatterSpell extends Spell {
   private int[] getAsymmetricOffsets(int value) {
     int right = (value + 1) / 2;
     int left = (value + 1) / 2;
-    return new int[]{left, right};
+    return new int[]{value, value};
   }
 
   @Override
@@ -214,6 +215,19 @@ public class ShatterSpell extends Spell {
 
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
-    return new Component[0];
+    if (spellModifier.is(RootsTags.SpellModifiers.SHATTER_INCREASES_PARAMETERS)) {
+      int count;
+      if (spellModifier.is(ModModifiers.SHATTER_DEPTH_I) || spellModifier.is(ModModifiers.SHATTER_HEIGHT_I) || spellModifier.is(ModModifiers.SHATTER_WIDTH_I)) {
+        count = 3;
+      } else if (spellModifier.is(ModModifiers.SHATTER_DEPTH_II) || spellModifier.is(ModModifiers.SHATTER_HEIGHT_II) || spellModifier.is(ModModifiers.SHATTER_WIDTH_II)) {
+        count = 5;
+      } else {
+        count = 1;
+      }
+      return new Component[]{
+          Component.literal(String.valueOf(count))
+      };
+    }
+    return new Component[]{};
   }
 }
