@@ -7,6 +7,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -58,5 +59,9 @@ public interface ILevelCondition {
 
   default Component getDescriptionComponent() {
     return Component.translatable("level_condition.roots." + getName() + ".description");
+  }
+
+  static boolean hasTag (ILevelCondition condition, TagKey<ILevelConditionType<?>> type) {
+    return RootsRegistries.LEVEL_CONDITIONS.wrapAsHolder(condition.type()).is(type);
   }
 }

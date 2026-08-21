@@ -2,10 +2,14 @@ package mysticmods.roots.recipe.grove;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
+import mysticmods.roots.condition.GroveStoneCondition;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.PedestalInventoryWrapper;
@@ -65,7 +69,17 @@ public class GroveRecipe extends RootsTileRecipe<PedestalInventoryWrapper, Grove
 
     public GroveRecipe build(BaseRecipeData.Builder data) {
       var built = data.build();
-      return build(data.build());
+      boolean found = false;
+      for (ILevelCondition condition : built.levelConditions) {
+        if (condition instanceof GroveStoneCondition) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        RootsAPI.LOG.error("Grove recipe data `{}` does not contain a grove stone condition!", built);
+      }
+      return build(built);
     }
 
     public static Builder create() {

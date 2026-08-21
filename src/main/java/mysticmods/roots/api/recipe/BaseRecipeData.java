@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.ILevelConditionType;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GroveNumber;
@@ -108,6 +109,20 @@ public class BaseRecipeData {
 
   public boolean isEmpty() {
     return ingredients.isEmpty() && levelConditions.isEmpty() && playerConditions.isEmpty() && result.isEmpty() && chanceOutputs.isEmpty() && unlocks.isEmpty() && powerRequirements.isEmpty();
+  }
+
+  public boolean hasTaggedCondition (TagKey<ILevelConditionType<?>> tag) {
+    if (levelConditions.isEmpty()) {
+      return false;
+    }
+
+    for (ILevelCondition condition : levelConditions) {
+      if (ILevelCondition.hasTag(condition, tag)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   private static <V, T extends List<V>> Optional<T> c(T value) {

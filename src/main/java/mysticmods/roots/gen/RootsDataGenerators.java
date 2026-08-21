@@ -381,6 +381,7 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsEnchantmentTagProvider(output, dataPackProvider, helper));
     generator.addProvider(event.includeServer(), new RootsRitualModifierTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsSpellModifierTagsProvider(output, provider, helper));
+    generator.addProvider(event.includeServer(), new RootsLevelConditionTypeTagsProvider(output, provider, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
 
     generator.addProvider(event.includeServer(), new RootsItemTagsProvider(output, provider, blocks.contentsGetter(), spellTagsProvider.contentsGetter(), ritualTagsProvider.contentsGetter(), groveTagsProvider.contentsGetter(), helper));

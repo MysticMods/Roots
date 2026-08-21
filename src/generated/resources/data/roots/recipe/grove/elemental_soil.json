@@ -21,6 +21,16 @@
         "tag": "c:fertilizers"
       }
     ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "any",
+          "tag": "roots:grove_stones"
+        },
+        "require_active": true
+      }
+    ],
     "player_conditions": [
       {
         "type": "roots:grove_rank_condition",
