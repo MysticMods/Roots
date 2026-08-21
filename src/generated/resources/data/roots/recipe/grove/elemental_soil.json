@@ -3,19 +3,22 @@
   "data": {
     "ingredients": [
       {
-        "tag": "roots:dusts/runic"
-      },
-      {
         "tag": "c:gravels"
       },
       {
         "tag": "minecraft:dirt"
       },
       {
-        "tag": "minecraft:dirt"
+        "tag": "minecraft:sand"
       },
       {
-        "tag": "minecraft:dirt"
+        "tag": "c:storage_blocks/clay"
+      },
+      {
+        "tag": "c:storage_blocks/moss"
+      },
+      {
+        "tag": "c:fertilizers"
       }
     ],
     "player_conditions": [
@@ -27,7 +30,7 @@
     ],
     "priority": 0,
     "result": {
-      "count": 4,
+      "count": 5,
       "id": "roots:elemental_soil"
     }
   }

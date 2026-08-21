@@ -861,9 +861,9 @@ public final class RootsRecipeProvider extends RecipeProvider {
     saver.save(mortarbuilder.times(5)
         .build(sugarbuilder.multiplty(5)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_5"));
 
-    RecipeSaver.saver().unlockedBy("has_runic_dust", has(RootsTags.Items.RUNIC_DUST)).save(GroveRecipe.Builder.create()
-        .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNIC_DUST).requires(Tags.Items.GRAVELS)
-            .requires(ItemTags.DIRT).requires(ItemTags.DIRT).requires(ItemTags.DIRT).result(ModItems.ELEMENTAL_SOIL, 4)
+    RecipeSaver.saver().unlockedBy("has_runic_dust", has(ItemTags.DIRT)).save(GroveRecipe.Builder.create()
+        .build(BaseRecipeData.Builder.create().requires(Tags.Items.GRAVELS)
+            .requires(ItemTags.DIRT).requires(ItemTags.SAND).requires(RootsTags.Items.CLAY_STORAGE).requires(RootsTags.Items.MOSS_STORAGE).requires(Tags.Items.FERTILIZERS).result(ModItems.ELEMENTAL_SOIL, 5)
             .condition(ModConditions.ELEMENTAL_RANK_1.get())), c, RootsAPI.rl("grove/elemental_soil"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.AQUEOUS_SOIL.get(), 1)

@@ -101,7 +101,10 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.RUNIC_DUST).add(ModItems.RUNIC_DUST.get());
 
     this.tag(RootsTags.Items.RAW_SILVER).add(ModItems.RAW_SILVER.get());
+    this.tag(RootsTags.Items.CLAY).add(Items.CLAY_BALL);
+    this.copy(RootsTags.Blocks.MOSS_STORAGE, RootsTags.Items.MOSS_STORAGE);
     this.copy(RootsTags.Blocks.RAW_SILVER_STORAGE, RootsTags.Items.RAW_SILVER_STORAGE);
+    this.copy(RootsTags.Blocks.CLAY_STORAGE, RootsTags.Items.CLAY_STORAGE);
     this.tag(RootsTags.Items.SILVER_INGOT).add(ModItems.SILVER_INGOT.get());
 
     this.tag(RootsTags.Items.COPPER_ITEMS)

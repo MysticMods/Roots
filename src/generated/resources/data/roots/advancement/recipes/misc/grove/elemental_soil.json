@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#roots:dusts/runic"
+            "items": "#minecraft:dirt"
           }
         ]
       },

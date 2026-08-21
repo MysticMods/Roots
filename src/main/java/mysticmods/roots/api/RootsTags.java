@@ -154,6 +154,8 @@ public class RootsTags {
     public static final TagKey<Block> QUARTZ_ORE = compatTag("ores/quartz"); // SKIP
     public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver"); // SKIP
     public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver"); // SKIP
+    public static final TagKey<Block> CLAY_STORAGE = compatTag("storage_blocks/clay");
+    public static final TagKey<Block> MOSS_STORAGE = compatTag("storage_blocks/moss");
 
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
 
@@ -369,6 +371,9 @@ public class RootsTags {
     public static final TagKey<Item> QUARTZ_ORE = compatTag("ores/quartz");
     public static final TagKey<Item> SILVER_STORAGE = compatTag("storage_blocks/silver");
     public static final TagKey<Item> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
+    public static final TagKey<Item> CLAY_STORAGE = compatTag("storage_blocks/clay");
+    public static final TagKey<Item> MOSS_STORAGE = compatTag("storage_blocks/moss");
+    public static final TagKey<Item> CLAY = compatTag("clays");
     public static final TagKey<Item> SILVER_NUGGET = compatTag("nuggets/silver");
     public static final TagKey<Item> SILVER_ITEMS = modTag("silver_items");
     public static final TagKey<Item> SKIPPED_FOODS = modTag("skipped_foods");

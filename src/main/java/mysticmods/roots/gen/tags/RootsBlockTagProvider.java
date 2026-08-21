@@ -81,6 +81,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(RootsTags.Blocks.STONEPETAL).add(STONEPETAL.get());
     this.tag(RootsTags.Blocks.RAW_SILVER_STORAGE).add(RAW_SILVER_BLOCK.get());
+    this.tag(RootsTags.Blocks.MOSS_STORAGE).add(Blocks.MOSS_BLOCK);
+    this.tag(RootsTags.Blocks.CLAY_STORAGE).add(Blocks.CLAY);
     this.tag(RootsTags.Blocks.SILVER_STORAGE).add(SILVER_BLOCK.get());
     this.tag(RootsTags.Blocks.SILVER_ORE).add(SILVER_ORE.get(), DEEPSLATE_SILVER_ORE.get());
     this.tag(RootsTags.Blocks.WILDWOOD_LOGS)
