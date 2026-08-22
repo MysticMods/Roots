@@ -18,6 +18,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -44,7 +46,7 @@ public class ModBlocks {
   private static final BlockBehaviour.Properties RUNED_OBSIDIAN_PROPERTIES = BlockBehaviour.Properties.of()
       .mapColor(DyeColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(18.0f, 1200.0f).pushReaction(PushReaction.BLOCK);
-  private static final BlockBehaviour.Properties RUNED_OBSIDIAN_DERIVATIVE_PROPERTIES =  BlockBehaviour.Properties.of()
+  private static final BlockBehaviour.Properties RUNED_OBSIDIAN_DERIVATIVE_PROPERTIES = BlockBehaviour.Properties.of()
       .mapColor(DyeColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(7.0f, 1200.0f).pushReaction(PushReaction.BLOCK);
   public static final DeferredHolder<Block, Block> RUNED_OBSIDIAN = BLOCKS.register("runed_obsidian", () -> new Block(RUNED_OBSIDIAN_PROPERTIES));
@@ -268,9 +270,11 @@ public class ModBlocks {
   public static final DeferredHolder<Block, GroveStoneBlock> CULTIVATION_GROVE_STONE = BLOCKS.register("cultivation_grove_stone", () -> new GroveStoneBlock(ModGroves.CULTIVATION, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
+
   static {
     BLOCKS.addAlias(RootsAPI.rl("sprouting_grove_stone"), RootsAPI.rl("cultivation_grove_stone"));
   }
+
   public static final DeferredHolder<Block, GroveStoneBlock> TWILIGHT_GROVE_STONE = BLOCKS.register("twilight_grove_stone", () -> new GroveStoneBlock(ModGroves.TWILIGHT, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
@@ -300,7 +304,15 @@ public class ModBlocks {
       .lightLevel(o -> 2)));
   public static final DeferredHolder<Block, UnendingBowlBlock> UNENDING_BOWL = BLOCKS.register("unending_bowl", () -> new UnendingBowlBlock(BlockBehaviour.Properties.of()
       .strength(1.0f, 6.0f).forceSolidOn().dynamicShape().noOcclusion()));
-  public static final DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
+
+  public static final DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)) {
+    private static final VoxelShape SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 9.5, 11.0);
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+      return SHAPE;
+    }
+  });
 
   private static final BlockBehaviour.Properties CROP_PROPERTIES = BlockBehaviour.Properties.of()
       .mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)
