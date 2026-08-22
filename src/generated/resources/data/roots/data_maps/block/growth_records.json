@@ -177,7 +177,7 @@
       "canGrowFunction": "roots:age_can_grow",
       "cropBlock": "minecraft:torchflower_crop",
       "lightFunction": "roots:light_above_eight",
-      "maximumAge": 2,
+      "maximumAge": 1,
       "ticks": 4
     },
     "minecraft:twisting_vines": {

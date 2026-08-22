@@ -10,9 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.ArrayList;
 import java.util.List;
 
-public record SimpleBlockType(BlockState state, ItemStack stack) implements IBlockType {
+public record SimpleBlockType(BlockState state, BlockState grownState, ItemStack stack) implements IBlockType {
   public SimpleBlockType(Block block) {
-    this(block.defaultBlockState(), new ItemStack(block));
+    this(block.defaultBlockState(), IBlockType.getGrownState(block.defaultBlockState()), new ItemStack(block));
   }
 
   public SimpleBlockType(Holder<Block> block) {
@@ -23,5 +23,13 @@ public record SimpleBlockType(BlockState state, ItemStack stack) implements IBlo
     List<SimpleBlockType> result = new ArrayList<>();
     BuiltInRegistries.BLOCK.getTagOrEmpty(tag).forEach(o -> result.add(new SimpleBlockType(o)));
     return result;
+  }
+
+  @Override
+  public BlockState renderState() {
+    if (grownState != null) {
+      return grownState;
+    }
+    return state;
   }
 }

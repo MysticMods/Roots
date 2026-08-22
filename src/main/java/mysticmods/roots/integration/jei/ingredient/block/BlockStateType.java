@@ -1,24 +1,26 @@
 package mysticmods.roots.integration.jei.ingredient.block;
 
 import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public record BlockStateType(PartialBlockState partial, BlockState state, ItemStack stack) implements IBlockType {
+public record BlockStateType(PartialBlockState partial, BlockState state, @Nullable BlockState grownState, ItemStack stack) implements IBlockType {
   public BlockStateType(PartialBlockState state) {
-    this(state, state.build(), new ItemStack(state.block()));
+    this(state, state.build(), IBlockType.getGrownState(state.build()), new ItemStack(state.block()));
   }
 
   public BlockStateType(BlockState state) {
-    this(new PartialBlockState(state), state, new ItemStack(state.getBlock()));
+    this(new PartialBlockState(state), state, IBlockType.getGrownState(state), new ItemStack(state.getBlock()));
   }
 
   private Component getPropertyValueString(Map.Entry<Property<?>, Comparable<?>> entry) {
@@ -32,6 +34,14 @@ public record BlockStateType(PartialBlockState partial, BlockState state, ItemSt
     }
 
     return Component.literal(property.getName() + ": " + s);
+  }
+
+  @Override
+  public BlockState renderState() {
+    if (grownState != null) {
+      return grownState;
+    }
+    return state;
   }
 
   @Override
