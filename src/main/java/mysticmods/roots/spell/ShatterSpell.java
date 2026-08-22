@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ShatterSpell extends Spell {
+  public static boolean IS_CASTING_SHATTER = false;
+
   public ShatterSpell(Properties properties) {
     super(properties);
   }
@@ -178,7 +180,7 @@ public class ShatterSpell extends Spell {
 
 */
 
-
+      IS_CASTING_SHATTER = true;
       if (((ServerPlayer) pPlayer).gameMode.destroyBlock(pos)) {/*          pLevel.destroyBlock(pos, true, pPlayer)) {*/
         if (ModActions.SHATTER_BLOCK.get().shouldTest()) {
           ShatterBlockAction.Context context = new ShatterBlockAction.Context((ServerLevel) pLevel, player, pos, state, instance);
@@ -187,6 +189,7 @@ public class ShatterSpell extends Spell {
         count += DataMaps.getShatterCostMultiplier(state.getBlock());
         broken.add(pos);
       }
+      IS_CASTING_SHATTER = false;
     }
 
     // TODO:
