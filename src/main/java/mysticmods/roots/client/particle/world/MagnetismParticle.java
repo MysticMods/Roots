@@ -53,11 +53,11 @@ public class MagnetismParticle extends RootsEntityParticle {
   @Override
   public void tick() {
     this.oRadius = this.radius;
-    this.radius *= 0.93f;
+    this.radius *= 0.81f;
     this.xo = this.x;
     this.yo = this.y;
     this.zo = this.z;
-    if (this.radius <= 0.08f) {
+    if (this.radius <= 0.1f) {
       this.remove();
     }
     if (!this.removed) {
