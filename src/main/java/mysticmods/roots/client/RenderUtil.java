@@ -51,7 +51,6 @@ import net.neoforged.neoforge.client.NeoForgeRenderTypes;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
-import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -260,28 +259,28 @@ public class RenderUtil {
   public static void renderBlock(GuiGraphics guiGraphics, BlockState block, float x, float y, float z, float rotate,
                                  float scale) {
     Minecraft mc = Minecraft.getInstance();
-    PoseStack pose = guiGraphics.pose();
-    pose.pushPose();
+    guiGraphics.pose().pushPose();
+    guiGraphics.pose().translate(x, y, z);
+    guiGraphics.pose().scale(-scale, -scale, -scale);
+    guiGraphics.pose().translate(-0.5F, -0.5F, 0);
+    guiGraphics.pose().mulPose(Axis.XP.rotationDegrees(-30F));
+    guiGraphics.pose().translate(0.5F, 0, -0.5F);
+    guiGraphics.pose().mulPose(Axis.YP.rotationDegrees(rotate));
+    guiGraphics.pose().translate(-0.5F, 0, 0.5F);
 
-    pose.translate(x, y, z);
-    pose.scale(scale, -scale, scale);
+    guiGraphics.pose().pushPose();
+    RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+    guiGraphics.pose().translate(0, 0, -1);
 
-    pose.mulPose(new Quaternionf().rotationXYZ(
-        (float) Math.toRadians(30),
-        (float) Math.toRadians(rotate),
-        0f
-    ));
-
-    pose.translate(-0.5f, -0.5f, -0.5f);
-    RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-
     MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
     mc.getBlockRenderer()
         .renderSingleBlock(block, guiGraphics.pose(), bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
-    bufferSource.endBatch();
-    pose.popPose();
+    //bufferSource.endBatch();
+    guiGraphics.pose().popPose();
+
+    guiGraphics.pose().popPose();
   }
 
   private static final Set<EntityType<?>> IGNORED_ENTITIES = new HashSet<>();
