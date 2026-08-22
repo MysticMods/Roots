@@ -35,7 +35,7 @@ public class RootsBlockRenderer<T extends IBlockType> implements IIngredientRend
   @Override
   public void render(GuiGraphics guiGraphics, T ingredient, int posX, int posY) {
     if (ingredient != null) {
-      RenderUtil.renderBlock(guiGraphics, ingredient.state(), posX + 8, posY + 5, 0, 45f, 10f);
+      RenderUtil.renderBlock(guiGraphics, ingredient.state(), posX + 8, posY + 8, 150, 225f, 10f);
     }
   }
 
