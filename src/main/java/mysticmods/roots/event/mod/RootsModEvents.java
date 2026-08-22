@@ -1,10 +1,7 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModAttributes;
-import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModTabs;
+import mysticmods.roots.init.*;
 import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -334,6 +331,9 @@ public class RootsModEvents {
               return;
             }
             if (!includedItems.contains(holder.value())) {
+              if (holder.is(ModBlocks.WILD_ROOTS.getId()) || holder.is(ModBlocks.HANGING_GROVE_MOSS.getId()) || holder.is(ModBlocks.CREEPING_GROVE_MOSS.getId())) {
+                return;
+              }
               RootsAPI.LOG.error("Item {} is missing from creative tab.", holder.getKey().location());
             }
           }
