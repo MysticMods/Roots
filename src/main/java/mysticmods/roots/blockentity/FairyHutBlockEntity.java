@@ -27,7 +27,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -386,7 +385,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     offer.increaseUses();
     /*    this.ambientSoundTime = -this.getAmbientSoundInterval();*/
     this.rewardTradeXp(offer);
-    if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
+    if (this.tradingPlayer instanceof ServerPlayer serverPlayer && ModActions.TRADE_FAIRY_HUT.get().shouldTest()) {
       TradeFairyHutAction.Context context = new TradeFairyHutAction.Context(
           (ServerLevel) this.getLevel(), serverPlayer, this, getBlockPos(), getBlockState(), offer);
       ModActions.TRADE_FAIRY_HUT.get().accept(context);

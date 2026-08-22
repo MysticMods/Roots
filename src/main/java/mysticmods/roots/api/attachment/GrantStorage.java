@@ -124,8 +124,10 @@ public class GrantStorage implements ICleanable {
       librarySpells = null;
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
-      LearnSpellAction.Context context = new LearnSpellAction.Context(player.serverLevel(), player, ISpellInstance.of(spell));
-      ModActions.LEARN_SPELL.get().accept(context);
+      if (ModActions.LEARN_SPELL.get().shouldTest()) {
+        LearnSpellAction.Context context = new LearnSpellAction.Context(player.serverLevel(), player, ISpellInstance.of(spell));
+        ModActions.LEARN_SPELL.get().accept(context);
+      }
     }
   }
 
@@ -137,8 +139,10 @@ public class GrantStorage implements ICleanable {
     if (grantedSpellModifiers.add(modifier)) {
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
-      LearnSpellModifierAction.Context context = new LearnSpellModifierAction.Context(player.serverLevel(), player, modifier);
-      ModActions.LEARN_SPELL_MODIFIER.get().accept(context);
+      if (ModActions.LEARN_SPELL_MODIFIER.get().shouldTest()) {
+        LearnSpellModifierAction.Context context = new LearnSpellModifierAction.Context(player.serverLevel(), player, modifier);
+        ModActions.LEARN_SPELL_MODIFIER.get().accept(context);
+      }
     }
   }
 

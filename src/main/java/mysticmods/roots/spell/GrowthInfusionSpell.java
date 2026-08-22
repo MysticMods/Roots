@@ -172,8 +172,10 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
               oldState.randomTick((ServerLevel) pLevel, pos, pLevel.random);
               PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new RampantGrowthFXPacket(pos));
               BlockState newState = pLevel.getBlockState(pos);
-              CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, oldState, pHand, pStack, instance);
-              ModActions.CROP_GROWTH.get().accept(context);
+              if (ModActions.CROP_GROWTH.get().shouldTest()) {
+                CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, oldState, pHand, pStack, instance);
+                ModActions.CROP_GROWTH.get().accept(context);
+              }
               growCount++;
             }
           }
@@ -201,8 +203,10 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
           if (pLevel.random.nextInt(doTicks) == 0) {
             at.randomTick((ServerLevel) pLevel, pos, pLevel.random);
             BlockState newState = pLevel.getBlockState(pos);
-            CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, at, pHand, pStack, instance);
-            ModActions.CROP_GROWTH.get().accept(context);
+            if (ModActions.CROP_GROWTH.get().shouldTest()) {
+              CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, at, pHand, pStack, instance);
+              ModActions.CROP_GROWTH.get().accept(context);
+            }
             PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pLevel, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
           }
         } else {

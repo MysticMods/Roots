@@ -19,16 +19,17 @@ public class MixinPiglinAi$TradeAction {
   @WrapOperation(method = "stopHoldingOffHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/piglin/PiglinAi;getBarterResponseItems(Lnet/minecraft/world/entity/monster/piglin/Piglin;)Ljava/util/List;"))
   private static List<ItemStack> roots$StopHoldingOffHandItem(Piglin piglin, Operation<List<ItemStack>> original) {
     List<ItemStack> result = original.call(piglin);
-
-    if (!result.isEmpty()) {
-      piglin.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_PLAYER).ifPresent(player -> {
-        if (player instanceof ServerPlayer serverPlayer) {
-          for (ItemStack item : result) {
-            TradePiglinAction.Context context = new TradePiglinAction.Context(serverPlayer.serverLevel(), serverPlayer, piglin, item);
-            ModActions.TRADE_PIGLIN.get().accept(context);
+    if (ModActions.TRADE_PIGLIN.get().shouldTest()) {
+      if (!result.isEmpty()) {
+        piglin.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_PLAYER).ifPresent(player -> {
+          if (player instanceof ServerPlayer serverPlayer) {
+            for (ItemStack item : result) {
+              TradePiglinAction.Context context = new TradePiglinAction.Context(serverPlayer.serverLevel(), serverPlayer, piglin, item);
+              ModActions.TRADE_PIGLIN.get().accept(context);
+            }
           }
-        }
-      });
+        });
+      }
     }
     return result;
   }

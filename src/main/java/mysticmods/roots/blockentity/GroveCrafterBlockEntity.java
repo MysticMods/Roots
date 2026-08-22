@@ -84,7 +84,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       return;
     }
     if (!storedItems.isEmpty()) {
-      if (player != null) {
+      if (player != null && ModActions.CRAFT_ITEM.get().shouldTest()) {
         for (ItemStack item : storedItems) {
           CraftItemAction.Context context = new CraftItemAction.Context(
               (ServerLevel) level,
@@ -100,7 +100,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       }
     }
     storedItems.clear();
-    if (lastRecipe != null && player != null) {
+    if (lastRecipe != null && player != null && ModActions.CRAFT_RECIPE.get().shouldTest()) {
       CraftRecipeAction.Context context = new CraftRecipeAction.Context(
           (ServerLevel) level,
           (ServerPlayer) player,

@@ -418,7 +418,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       return;
     }
     if (!storedItems.isEmpty()) {
-      if (player != null) {
+      if (player != null && ModActions.CRAFT_ITEM.get().shouldTest()) {
         for (ItemStack item : storedItems) {
           CraftItemAction.Context context = new CraftItemAction.Context(
               (ServerLevel) level,
@@ -434,7 +434,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       }
     }
     storedItems.clear();
-    if (lastRecipe != null && player != null) {
+    if (lastRecipe != null && player != null && ModActions.CRAFT_RECIPE.get().shouldTest()) {
       CraftRecipeAction.Context context = new CraftRecipeAction.Context(
           (ServerLevel) level,
           (ServerPlayer) player,

@@ -22,8 +22,10 @@ public class MixinComposterBlock$CompostAction {
     if (!(entity instanceof ServerPlayer serverPlayer)) {
       return;
     }
-    FillCompostAction.Context context = new FillCompostAction.Context(serverPlayer.serverLevel(), serverPlayer, pos, blockstate, state, stack, hand);
-    ModActions.FILL_COMPOST.get().accept(context);
+    if (ModActions.FILL_COMPOST.get().shouldTest()) {
+      FillCompostAction.Context context = new FillCompostAction.Context(serverPlayer.serverLevel(), serverPlayer, pos, blockstate, state, stack, hand);
+      ModActions.FILL_COMPOST.get().accept(context);
+    }
     original.call(instance, amount, entity);
   }
 }

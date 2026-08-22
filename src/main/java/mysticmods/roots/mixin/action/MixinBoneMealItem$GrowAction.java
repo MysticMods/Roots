@@ -31,10 +31,12 @@ public class MixinBoneMealItem$GrowAction {
         hand = InteractionHand.OFF_HAND;
       }
       BlockState state = level.getBlockState(pos);
-      CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) level, (ServerPlayer) player, pos, state, originalState, hand, stack);
-      ModActions.CROP_GROWTH.get().accept(context);
-      if (originalState.getBlock() instanceof MushroomBlock && !state.is(originalState.getBlock())) {
-        ModActions.GROW_HUGE_MUSHROOM.get().accept(context);
+      if (ModActions.CROP_GROWTH.get().shouldTest()) {
+        CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) level, (ServerPlayer) player, pos, state, originalState, hand, stack);
+        ModActions.CROP_GROWTH.get().accept(context);
+        if (originalState.getBlock() instanceof MushroomBlock && !state.is(originalState.getBlock())) {
+          ModActions.GROW_HUGE_MUSHROOM.get().accept(context);
+        }
       }
     }
   }

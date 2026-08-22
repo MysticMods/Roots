@@ -18,9 +18,17 @@ import java.util.function.Predicate;
 
 public abstract class GroveAction implements Consumer<GroveContext>, GroveContextUser, IDescribed {
   private String descriptionId;
+  private boolean skipped = false;
+
+  public boolean shouldTest() {
+    return !skipped;
+  }
 
   @Override
   public void accept(GroveContext context) {
+    if (skipped) {
+      return;
+    }
     validate(context);
     if (testAndLog(context)) {
       reward(context);
@@ -49,6 +57,9 @@ public abstract class GroveAction implements Consumer<GroveContext>, GroveContex
   }
 
   public boolean testAndLog(GroveContext context) {
+    if (skipped) {
+      return false;
+    }
     if (shouldLog()) {
       log(context);
     }
@@ -56,6 +67,9 @@ public abstract class GroveAction implements Consumer<GroveContext>, GroveContex
   }
 
   public void reward(GroveContext context) {
+    if (skipped) {
+      return;
+    }
     for (GroveReputationEntry entry : getReputationEntries()) {
       boolean doReward = true;
       for (GroveReputationEntry.SubEntry subEntry : entry.entries()) {
@@ -75,6 +89,9 @@ public abstract class GroveAction implements Consumer<GroveContext>, GroveContex
   }
 
   public void validate(GroveContext context) {
+    if (skipped) {
+      return;
+    }
     for (GroveContext.Parameter type : getUsedParameters()) {
       if (!GroveContext.hasParameter(context, type)) {
         throw new NoSuchElementException("Missing required parameter '" + type.name() + "' in context '" + context + "' for action '" + this + "'");
@@ -86,6 +103,7 @@ public abstract class GroveAction implements Consumer<GroveContext>, GroveContex
     List<GroveReputationEntry> result = builtInRegistryHolder().getData(DataMaps.GROVE_ACTION_REPUTATIONS);
     if (result == null) {
       RootsAPI.LOG.error("Grove action " + this + " has no reputation entries");
+      this.skipped = true;
       return Collections.emptyList();
     }
 

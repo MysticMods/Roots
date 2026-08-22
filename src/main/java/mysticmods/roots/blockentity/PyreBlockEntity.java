@@ -255,8 +255,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       this.lifetime = currentRitual.getDuration();
       this.refreshRitualCache();
       this.currentRitual.starts(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
-      StartRitualAction.Context context = new StartRitualAction.Context((ServerLevel) getLevel(), (ServerPlayer) player, IRitualInstance.of(currentRitual), this);
-      ModActions.START_RITUAL.get().accept(context);
+      if (ModActions.START_RITUAL.get().shouldTest()) {
+        StartRitualAction.Context context = new StartRitualAction.Context((ServerLevel) getLevel(), (ServerPlayer) player, IRitualInstance.of(currentRitual), this);
+        ModActions.START_RITUAL.get().accept(context);
+      }
     } else {
       RootsAPI.LOG.error("tried to start a ritual but the ritual is null");
     }

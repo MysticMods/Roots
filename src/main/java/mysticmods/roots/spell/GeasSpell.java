@@ -129,8 +129,10 @@ public class GeasSpell extends Spell {
 
     entity.addEffect(new MobEffectInstance(ModEffects.GEAS, this.duration, 0, false, false), player);
     ServerPlayer serverPlayer = (ServerPlayer) player;
-    GeasAction.Context context = new GeasAction.Context(serverPlayer.serverLevel(), serverPlayer, entity);
-    ModActions.GEAS.get().accept(context);
+    if (ModActions.GEAS.get().shouldTest()) {
+      GeasAction.Context context = new GeasAction.Context(serverPlayer.serverLevel(), serverPlayer, entity);
+      ModActions.GEAS.get().accept(context);
+    }
     return 1;
   }
 

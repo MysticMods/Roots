@@ -15,7 +15,9 @@ public class MixinBredAnimalsTrigger$BredAnimalAction {
   @WrapMethod(method = "trigger")
   public void roots$TriggerAnimalBreeding(ServerPlayer player, Animal parent, Animal partner, AgeableMob child, Operation<Void> original) {
     original.call(player, parent, partner, child);
-    BredAnimalAction.Context context = new BredAnimalAction.Context(player.serverLevel(), player, child, parent, partner);
-    ModActions.BRED_ANIMAL.get().accept(context);
+    if (ModActions.BRED_ANIMAL.get().shouldTest()) {
+      BredAnimalAction.Context context = new BredAnimalAction.Context(player.serverLevel(), player, child, parent, partner);
+      ModActions.BRED_ANIMAL.get().accept(context);
+    }
   }
 }

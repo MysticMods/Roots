@@ -16,6 +16,9 @@ public class MixinAbstractVillager$TradeAction {
   // TODO: Convert this to a tag
   @WrapMethod(method = "notifyTrade")
   public void roots$NotifyTradeStart(MerchantOffer offer, Operation<Void> original) {
+    if (!ModActions.TRADE_VILLAGER.get().shouldTest()) {
+      return;
+    }
     if (!(((AbstractVillager) (Object) this).getTradingPlayer() instanceof ServerPlayer player)) {
       return;
     }

@@ -236,8 +236,10 @@ public class CastingItem extends Item {
       }
 
       // TODO: Properly handle operations
-      SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pHand, pStack, spell, costs);
-      ModActions.SPELL_CAST.get().accept(context);
+      if (ModActions.SPELL_CAST.get().shouldTest()) {
+        SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pHand, pStack, spell, costs);
+        ModActions.SPELL_CAST.get().accept(context);
+      }
       costs.charge(pPlayer, true);
     } else if (spell.getType() == SpellCastType.CHARGED) {
       pPlayer.displayClientMessage(spell.getChargeText(ticks), true);
@@ -330,8 +332,10 @@ public class CastingItem extends Item {
         stack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
         int cooldown = result.cooldown();
         if (costing.charge(pPlayer)) {
-          SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
-          ModActions.SPELL_CAST.get().accept(context);
+          if (ModActions.SPELL_CAST.get().shouldTest()) {
+            SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
+            ModActions.SPELL_CAST.get().accept(context);
+          }
           if (!stack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
             CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
             cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);
@@ -401,8 +405,10 @@ public class CastingItem extends Item {
       var result = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticksUsed);
       int cooldown = result.cooldown();
       if (costing.charge(pPlayer)) {
-        SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pPlayer.getUsedItemHand(), pPlayer.getItemInHand(pPlayer.getUsedItemHand()), spell, costing);
-        ModActions.SPELL_CAST.get().accept(context);
+        if (ModActions.SPELL_CAST.get().shouldTest()) {
+          SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pPlayer.getUsedItemHand(), pPlayer.getItemInHand(pPlayer.getUsedItemHand()), spell, costing);
+          ModActions.SPELL_CAST.get().accept(context);
+        }
         if (!pStack.is(RootsTags.Items.CREATIVE_CASTING_TOOLS)) {
           CooldownStorage cdStorage = pPlayer.getData(ModAttachments.COOLDOWN_STORAGE);
           cdStorage.setCooldown(spell.asSpell(), cooldown, cooldown);

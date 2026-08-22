@@ -327,15 +327,19 @@ public class EntityEventHandler {
     if (!(event.getTamer() instanceof ServerPlayer player)) {
       return;
     }
-    TameAnimalAction.Context context = new TameAnimalAction.Context(player.serverLevel(), player, event.getAnimal());
-    ModActions.TAME_ANIMAL.get().accept(context);
+    if (ModActions.TAME_ANIMAL.get().shouldTest()) {
+      TameAnimalAction.Context context = new TameAnimalAction.Context(player.serverLevel(), player, event.getAnimal());
+      ModActions.TAME_ANIMAL.get().accept(context);
+    }
   }
 
   @SubscribeEvent
   public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
     if (event.getEntity() instanceof ServerPlayer player) {
-      ArriveDimensionAction.Context context = new ArriveDimensionAction.Context(player.serverLevel(), player);
-      ModActions.ARRIVE_DIMENSION.get().accept(context);
+      if (ModActions.ARRIVE_DIMENSION.get().shouldTest()) {
+        ArriveDimensionAction.Context context = new ArriveDimensionAction.Context(player.serverLevel(), player);
+        ModActions.ARRIVE_DIMENSION.get().accept(context);
+      }
       var data = player.getData(ModAttachments.HERB_STORAGE);
       data.setDirty(true);
       player.setData(ModAttachments.HERB_STORAGE, data);
@@ -469,8 +473,10 @@ public class EntityEventHandler {
 
     ModAdvancements.PACIFIST.get().trigger(player, target);
 
-    KillEntityAction.Context context = new KillEntityAction.Context(player.serverLevel(), player, target, directEntity, source);
-    ModActions.KILL_ENTITY.get().accept(context);
+    if (ModActions.KILL_ENTITY.get().shouldTest()) {
+      KillEntityAction.Context context = new KillEntityAction.Context(player.serverLevel(), player, target, directEntity, source);
+      ModActions.KILL_ENTITY.get().accept(context);
+    }
   }
 
   // Decrementing is handled via MixinProjectileWeaponItem

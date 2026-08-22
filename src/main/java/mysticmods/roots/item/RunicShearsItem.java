@@ -97,8 +97,10 @@ public class RunicShearsItem extends ShearsItem {
               .nextFloat() * 0.25f + 0.6f);
           List<ItemStack> results = recipe.value()
               .assembleOutputs(crafting, player.getRandom(), level.registryAccess(), null);
-          RunicShearingAction.Context context = new RunicShearingAction.Context((ServerLevel)level, (ServerPlayer)player, heldItem, results, recipe.value(), recipe.id(), null, null, entity.blockPosition(), entity);
-          ModActions.RUNIC_SHEARING.get().accept(context);
+          if (ModActions.RUNIC_SHEARING.get().shouldTest()) {
+            RunicShearingAction.Context context = new RunicShearingAction.Context((ServerLevel) level, (ServerPlayer) player, heldItem, results, recipe.value(), recipe.id(), null, null, entity.blockPosition(), entity);
+            ModActions.RUNIC_SHEARING.get().accept(context);
+          }
           heldItem.hurtAndBreak(recipe.value()
               .getDurabilityCost(), player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND); // TODO: Check hand
           for (ItemStack stack : results) {
@@ -147,8 +149,10 @@ public class RunicShearsItem extends ShearsItem {
       // EnchantmentHelper.getItemEnchantmentLevel(entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), heldItem)
       List<ItemStack> drops = target.onSheared(player, heldItem, newTarget.level(), pos);
       var sPlayer = (ServerPlayer) player;
-      RunicShearingAction.Context context = new RunicShearingAction.Context(sPlayer.serverLevel(), sPlayer, heldItem, drops, null, SHEARING, null, null, newTarget.blockPosition(), newTarget);
-      ModActions.RUNIC_SHEARING.get().accept(context);
+      if (ModActions.RUNIC_SHEARING.get().shouldTest()) {
+        RunicShearingAction.Context context = new RunicShearingAction.Context(sPlayer.serverLevel(), sPlayer, heldItem, drops, null, SHEARING, null, null, newTarget.blockPosition(), newTarget);
+        ModActions.RUNIC_SHEARING.get().accept(context);
+      }
 
       Random rand = new java.util.Random();
       drops.forEach(d -> {
@@ -213,8 +217,10 @@ public class RunicShearsItem extends ShearsItem {
             .assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null);
 
         var sPlayer = (ServerPlayer) player;
-        RunicShearingAction.Context context = new RunicShearingAction.Context(sPlayer.serverLevel(), sPlayer, itemstack, results, recipe.value(), recipe.id(), blockstate, level.getBlockState(blockpos), blockpos, null);
-        ModActions.RUNIC_SHEARING.get().accept(context);
+        if (ModActions.RUNIC_SHEARING.get().shouldTest()) {
+          RunicShearingAction.Context context = new RunicShearingAction.Context(sPlayer.serverLevel(), sPlayer, itemstack, results, recipe.value(), recipe.id(), blockstate, level.getBlockState(blockpos), blockpos, null);
+          ModActions.RUNIC_SHEARING.get().accept(context);
+        }
         // TODO: Item could be empty with only chance outputs
         // TODO: Isn;'t there "assemble all" now?
         for (ItemStack stack : results) {

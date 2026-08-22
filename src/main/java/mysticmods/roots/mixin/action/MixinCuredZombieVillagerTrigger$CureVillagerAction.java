@@ -15,8 +15,9 @@ public class MixinCuredZombieVillagerTrigger$CureVillagerAction {
   @WrapMethod(method = "trigger")
   private void roots$TriggerCureZombieVillager(ServerPlayer player, Zombie zombie, Villager villager, Operation<Void> original) {
     original.call(player, zombie, villager);
-    CureVillagerAction.Context context = new CureVillagerAction.Context(player.serverLevel(), player, villager, zombie);
-    ModActions.CURE_VILLAGER.get().accept(context);
-
+    if (ModActions.CURE_VILLAGER.get().shouldTest()) {
+      CureVillagerAction.Context context = new CureVillagerAction.Context(player.serverLevel(), player, villager, zombie);
+      ModActions.CURE_VILLAGER.get().accept(context);
+    }
   }
 }

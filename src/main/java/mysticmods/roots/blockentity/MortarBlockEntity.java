@@ -281,25 +281,29 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
             previousRecipeItems.addAll(inventory.getItemsCopy());
             List<ItemStack> results = cachedRecipe.value()
                 .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear);
-            for (ItemStack stack : results) {
-              CraftItemAction.Context context = new CraftItemAction.Context(
-                  (ServerLevel) this.getLevel(),
-                  (ServerPlayer) player,
-                  stack
-              );
-              ModActions.CRAFT_ITEM.get().accept(context);
+            if (ModActions.CRAFT_ITEM.get().shouldTest()) {
+              for (ItemStack stack : results) {
+                CraftItemAction.Context context = new CraftItemAction.Context(
+                    (ServerLevel) this.getLevel(),
+                    (ServerPlayer) player,
+                    stack
+                );
+                ModActions.CRAFT_ITEM.get().accept(context);
+              }
             }
             for (ItemStack stack : results) {
               ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
             }
-            CraftRecipeAction.Context context = new CraftRecipeAction.Context(
-                (ServerLevel) level,
-                (ServerPlayer) player,
-                lastRecipe.id(),
-                lastRecipe.value(),
-                this
-            );
-            ModActions.CRAFT_RECIPE.get().accept(context);
+            if (ModActions.CRAFT_RECIPE.get().shouldTest()) {
+              CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+                  (ServerLevel) level,
+                  (ServerPlayer) player,
+                  lastRecipe.id(),
+                  lastRecipe.value(),
+                  this
+              );
+              ModActions.CRAFT_RECIPE.get().accept(context);
+            }
             uses = -1;
             cachedRecipe = null;
           }

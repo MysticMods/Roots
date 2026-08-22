@@ -30,7 +30,7 @@ public class CraftingRitual extends SingleTickRitual {
     if (output.isEmpty()) {
       return;
     }
-    if (blockEntity.getLastPlayer() != null) {
+    if (blockEntity.getLastPlayer() != null && ModActions.CRAFT_ITEM.get().shouldTest()) {
       for (ItemStack item : output) {
         CraftItemAction.Context context = new CraftItemAction.Context(
             (ServerLevel) blockEntity.getLevel(),
@@ -44,7 +44,7 @@ public class CraftingRitual extends SingleTickRitual {
     for (ItemStack stack : output) { // Drop whatever's left over
       ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), blockEntity.getBlockPos().above(), stack);
     }
-    if (blockEntity.getLastPlayer() != null && blockEntity.getLastRecipe() != null) {
+    if (blockEntity.getLastPlayer() != null && blockEntity.getLastRecipe() != null && ModActions.CRAFT_RECIPE.get().shouldTest()) {
       CraftRecipeAction.Context context = new CraftRecipeAction.Context(
           (ServerLevel) blockEntity.getLevel(),
           (ServerPlayer) blockEntity.getLastPlayer(),

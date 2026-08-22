@@ -14,7 +14,9 @@ public class MixinConsumeItemTrigger$EatItemAction {
   @WrapMethod(method = "trigger")
   private void roots$TriggerConsumeItem(ServerPlayer player, ItemStack stack, Operation<Void> original) {
     original.call(player, stack);
-    EatItemAction.Context context = new EatItemAction.Context(player.serverLevel(), player, stack);
-    ModActions.EAT_ITEM.get().accept(context);
+    if (ModActions.EAT_ITEM.get().shouldTest()) {
+      EatItemAction.Context context = new EatItemAction.Context(player.serverLevel(), player, stack);
+      ModActions.EAT_ITEM.get().accept(context);
+    }
   }
 }
