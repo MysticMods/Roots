@@ -96,8 +96,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The maximum number of attempts per ritual operation to generate loot up to the `count` maximum number of entities, if the chosen entity produces no loot.",
-          "default_value": 20,
-          "value": 20
+          "default_value": 8,
+          "value": 8
         }
       }
     ],
