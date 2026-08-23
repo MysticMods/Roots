@@ -1021,7 +1021,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     Set<String> doneStrings = new HashSet<>();
 
-/*    for (ModConfigSpec.ConfigValue<?> value : ((AccessorMixinModConfigSpec) ConfigManager.COMMON_BUILDER).roots$getValues()) {
+    for (ModConfigSpec.ConfigValue<?> value : ((AccessorMixinModConfigSpec) ConfigManager.COMMON_BUILDER).roots$getValues()) {
       StringJoiner keyBuilder = new StringJoiner(".");
       for (String s : value.getPath()) {
         keyBuilder.add(s);
@@ -1033,7 +1033,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
       add("roots.configuration." + key, toEnglishName(value.getPath().getLast()));
       doneStrings.add(key);
-    }*/
+    }
   }
 
   private void addCyclingMode(Cycling<?>[] values) {

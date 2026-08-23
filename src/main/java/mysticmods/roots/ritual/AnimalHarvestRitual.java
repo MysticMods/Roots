@@ -79,10 +79,13 @@ public class AnimalHarvestRitual extends Ritual {
       if (entities.isEmpty()) {
         return;
       }
-      for (int i = 0; i < count; i++) {
+      int tries = 20;
+      int i = 0;
+      while (i < count && tries > 0) {
         LivingEntity entity = entities.get(blockEntity.getRandom().nextInt(entities.size()));
         List<ItemStack> result = getDrops(entity, randomSource);
         if (!result.isEmpty()) {
+          i++;
           for (ItemStack stack : result) {
             ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), entity.blockPosition(), stack);
           }
@@ -91,6 +94,8 @@ public class AnimalHarvestRitual extends Ritual {
           }
           AnimalHarvestFXPacket packet = new AnimalHarvestFXPacket(entity.getId());
           PacketDistributor.sendToPlayersTrackingEntity(entity, packet);
+        } else {
+          tries--;
         }
       }
     }

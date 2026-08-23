@@ -89,7 +89,7 @@ public final class RootsLootTableProvider {
                       .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                       .apply(FillHorns.fillHorns())
                       .when(LootItemRandomChanceCondition.randomChance(0.1f)).setWeight(1))
-                  .add(EmptyLootItem.emptyItem().setWeight(15))
+                  .add(EmptyLootItem.emptyItem().setWeight(14))
               )
               .setParamSet(LootContextParamSets.ENTITY)
       );
