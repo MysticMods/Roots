@@ -12,6 +12,7 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.network.client.ClientboundAnimalHarvestSyncPacket;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.util.EntityUtils;
@@ -104,6 +105,7 @@ public class DataEventHandler {
       AnimalHarvestRecipe.cached = AnimalHarvestRecipe.getServerRecipes(event.getRegistryAccess().asGetterLookup());
 
       EntityUtils.retestDeflectState(event.getRegistryAccess());
+      ModRituals.ANIMAL_HARVEST.get().reset();
     }
   }
 

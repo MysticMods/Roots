@@ -17,7 +17,9 @@ import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -52,6 +54,8 @@ public class AnimalHarvestRitual extends Ritual {
   private final Set<EntityType<?>> normalLoot = new ObjectOpenHashSet<>();
 
   private final Map<EntityType<?>, List<LootTable>> additionalLootTables = new HashMap<>();
+  // TODO: Handle reload
+  private boolean checkedAdditionalLootTables = false;
 
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
@@ -60,7 +64,12 @@ public class AnimalHarvestRitual extends Ritual {
       return;
     }
 
+    // TODO: "First tick"
     FakePlayerUtil.buildItems(pLevel, randomSource);
+    if (!checkedAdditionalLootTables) {
+      buildAdditionalLootTables(pLevel.getServer().reloadableRegistries());
+      checkedAdditionalLootTables = true;
+    }
 
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
@@ -87,12 +96,20 @@ public class AnimalHarvestRitual extends Ritual {
     }
   }
 
+  public void reset () {
+    this.emptyLoot.clear();
+    this.normalLoot.clear();
+    this.additionalLootTables.clear();
+  }
+
   private boolean checkEntity(LootTable table, List<LootTable> additionalTables, LivingEntity entity) {
     boolean result = checkEntity(table, entity);
 
-    for (LootTable additional : additionalTables) {
-      if (checkEntity(additional, entity) && !result) {
-        result = true;
+    if (additionalTables != null && !additionalTables.isEmpty()) {
+      for (LootTable additional : additionalTables) {
+        if (checkEntity(additional, entity) && !result) {
+          result = true;
+        }
       }
     }
 
@@ -100,7 +117,7 @@ public class AnimalHarvestRitual extends Ritual {
   }
 
   private boolean checkEntity(LootTable table, LivingEntity entity) {
-    if (normalLoot.contains(entity.getType())) {
+    if (normalLoot.contains(entity.getType()) || additionalLootTables.containsKey(entity.getType())) {
       return true;
     } else if (emptyLoot.contains(entity.getType())) {
       return false;
@@ -121,27 +138,29 @@ public class AnimalHarvestRitual extends Ritual {
     }
   }
 
+  protected void buildAdditionalLootTables(ReloadableServerRegistries.Holder registryLookup) {
+    for (EntityType<?> type : BuiltInRegistries.ENTITY_TYPE) {
+      var additional = type.builtInRegistryHolder().getData(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
+      if (additional != null && !additional.isEmpty()) {
+        List<LootTable> additionals = new ArrayList<>();
+        for (ResourceKey<LootTable> key : additional) {
+          var table = registryLookup.getLootTable(key);
+          if (table != null && table != LootTable.EMPTY) {
+            additionals.add(table);
+          }
+        }
+        if (!additionals.isEmpty()) {
+          additionalLootTables.put(type, additionals);
+        }
+      }
+    }
+  }
+
   protected List<ItemStack> getDrops(LivingEntity entity, RandomSource pRandom) {
     ResourceKey<LootTable> resourcelocation = entity.getLootTable();
     LootTable loottable = entity.level().getServer().reloadableRegistries().getLootTable(resourcelocation);
 
-    List<LootTable> additionalTables = additionalLootTables.get(entity.getType());
-    if (additionalTables == null) {
-      var additional = entity.getType().builtInRegistryHolder().getData(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
-      if (additional == null || additional.isEmpty()) {
-        additionalTables = Collections.emptyList();
-      } else {
-
-        additionalTables = new ArrayList<>();
-        for (ResourceKey<LootTable> key : additional) {
-          LootTable additionalTable = entity.level().getServer().reloadableRegistries().getLootTable(key);
-          if (additionalTable != LootTable.EMPTY) {
-            additionalTables.add(additionalTable);
-          }
-        }
-      }
-      additionalLootTables.put(entity.getType(), additionalTables);
-    }
+    List<LootTable> additionalTables = additionalLootTables.getOrDefault(entity.getType(), Collections.emptyList());
 
     if (!checkEntity(loottable, additionalTables, entity)) {
       return Collections.emptyList();
