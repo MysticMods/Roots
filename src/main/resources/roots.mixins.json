@@ -1,5 +1,6 @@
 {
   "required": true,
+  "plugin": "mysticmods.roots.RootsMixinConfigPlugin",
   "package": "mysticmods.roots.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [

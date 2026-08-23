@@ -4,7 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Cycling;
@@ -16,7 +15,6 @@ import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.mixin.accessor.AccessorMixinModConfigSpec;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
-import net.minecraft.Util;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
@@ -1023,7 +1021,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     Set<String> doneStrings = new HashSet<>();
 
-    for (ModConfigSpec.ConfigValue<?> value : ((AccessorMixinModConfigSpec)ConfigManager.COMMON_BUILDER).roots$getValues()) {
+/*    for (ModConfigSpec.ConfigValue<?> value : ((AccessorMixinModConfigSpec) ConfigManager.COMMON_BUILDER).roots$getValues()) {
       StringJoiner keyBuilder = new StringJoiner(".");
       for (String s : value.getPath()) {
         keyBuilder.add(s);
@@ -1035,7 +1033,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
       add("roots.configuration." + key, toEnglishName(value.getPath().getLast()));
       doneStrings.add(key);
-    }
+    }*/
   }
 
   private void addCyclingMode(Cycling<?>[] values) {

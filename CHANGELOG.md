@@ -52,3 +52,7 @@
 - Using shatter in creative mode no longer destroys the blocks
 - Particles spawned by Magnetism move towards the caster much faster
 - The bounding box of Bafflecap (mushrooms) have been increased
+
+## 4.0.0.26-alpha
+
+- Removed unused development-only mixin that can cause crashes with Sodium
