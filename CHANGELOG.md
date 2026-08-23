@@ -62,3 +62,7 @@
 - Animal Harvest ritual now has retries when failing to generate any loot; that value is configurable
 - Chances for turtle scute and goat horns to drop has been adjusted to a flat 0.07% chance rather than the stacked 10% chance after a 6.6% chance.
 - Modifiers no longer display in an extremely 'stacked' manner when saving and re-entering a world in single player.
+
+## 4.0.0.28-alpha
+
+- Again remove references to mixins that can cause issues with other mods
