@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class AnimalHarvestRitual extends Ritual {
-  private int count, glowDuration, lootingValue, itemStackCountLimit, itemStackLimit;
+  private int count, glowDuration, lootingValue, itemStackCountLimit, itemStackLimit, maxTries;
   private float lootingChance;
 
   private final Set<EntityType<?>> emptyLoot = new ObjectOpenHashSet<>();
@@ -79,9 +79,13 @@ public class AnimalHarvestRitual extends Ritual {
       if (entities.isEmpty()) {
         return;
       }
-      int tries = 20;
+      int tries = maxTries;
       int i = 0;
-      while (i < count && tries > 0) {
+      while (i < count) {
+        if (tries < 0) {
+          break;
+        }
+        tries--;
         LivingEntity entity = entities.get(blockEntity.getRandom().nextInt(entities.size()));
         List<ItemStack> result = getDrops(entity, randomSource);
         if (!result.isEmpty()) {
@@ -94,8 +98,6 @@ public class AnimalHarvestRitual extends Ritual {
           }
           AnimalHarvestFXPacket packet = new AnimalHarvestFXPacket(entity.getId());
           PacketDistributor.sendToPlayersTrackingEntity(entity, packet);
-        } else {
-          tries--;
         }
       }
     }
@@ -233,12 +235,14 @@ public class AnimalHarvestRitual extends Ritual {
     properties.add(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE);
     properties.add(ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT);
     properties.add(ModRituals.ANIMAL_HARVEST_STACK_LIMIT);
+    properties.add(ModRituals.ANIMAL_HARVEST_MAX_TRIES);
   }
 
   @Override
   public void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     count = properties.get(ModRituals.ANIMAL_HARVEST_COUNT);
+    maxTries = properties.get(ModRituals.ANIMAL_HARVEST_MAX_TRIES);
     glowDuration = properties.get(ModRituals.ANIMAL_HARVEST_GLOW_DURATION);
     lootingValue = properties.get(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE);
     lootingChance = properties.get(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE);
