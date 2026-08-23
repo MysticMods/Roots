@@ -56,3 +56,9 @@
 ## 4.0.0.26-alpha
 
 - Removed unused development-only mixin that can cause crashes with Sodium
+
+## 4.0.0.27-alpha
+
+- Animal Harvest ritual now has retries when failing to generate any loot; that value is configurable
+- Chances for turtle scute and goat horns to drop has been adjusted to a flat 0.07% chance rather than the stacked 10% chance after a 6.6% chance.
+- Modifiers no longer display in an extremely 'stacked' manner when saving and re-entering a world in single player.
