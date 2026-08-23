@@ -76,8 +76,7 @@ public final class RootsLootTableProvider {
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(Items.TURTLE_SCUTE)
                       .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                      .when(LootItemRandomChanceCondition.randomChance(0.1f)).setWeight(1))
-                  .add(EmptyLootItem.emptyItem().setWeight(15))
+                      .when(LootItemRandomChanceCondition.randomChance(0.005f)))
               )
               .setParamSet(LootContextParamSets.ENTITY)
       );
@@ -88,7 +87,7 @@ public final class RootsLootTableProvider {
                   .add(LootItem.lootTableItem(Items.GOAT_HORN)
                       .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                       .apply(FillHorns.fillHorns())
-                      .when(LootItemRandomChanceCondition.randomChance(0.025f)))
+                      .when(LootItemRandomChanceCondition.randomChance(0.005f)))
               )
               .setParamSet(LootContextParamSets.ENTITY)
       );

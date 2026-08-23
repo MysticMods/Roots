@@ -8,7 +8,7 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "chance": 0.1,
+              "chance": 0.005,
               "condition": "minecraft:random_chance"
             }
           ],
@@ -20,10 +20,6 @@
             }
           ],
           "name": "minecraft:turtle_scute"
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 15
         }
       ],
       "rolls": 1.0
