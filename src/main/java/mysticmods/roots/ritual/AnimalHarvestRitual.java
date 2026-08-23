@@ -39,6 +39,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -198,7 +199,7 @@ public class AnimalHarvestRitual extends Ritual {
       }
       randomItems.addAll(additionalTable.getRandomItems(lootParamsBuilder.create(LootContextParamSets.ENTITY)));
     }
-    if (randomItems.isEmpty()) {
+    if (randomItems.isEmpty() && !entity.getType().equals(EntityType.GOAT)) {
       RootsAPI.LOG.error("Generated empty loot for entity {}.", entity);
     }
     if (itemStackCountLimit != -1) {

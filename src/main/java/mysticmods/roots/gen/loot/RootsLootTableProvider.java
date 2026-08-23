@@ -88,8 +88,7 @@ public final class RootsLootTableProvider {
                   .add(LootItem.lootTableItem(Items.GOAT_HORN)
                       .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                       .apply(FillHorns.fillHorns())
-                      .when(LootItemRandomChanceCondition.randomChance(0.1f)).setWeight(1))
-                  .add(EmptyLootItem.emptyItem().setWeight(14))
+                      .when(LootItemRandomChanceCondition.randomChance(0.025f)))
               )
               .setParamSet(LootContextParamSets.ENTITY)
       );

@@ -8,7 +8,7 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "chance": 0.1,
+              "chance": 0.025,
               "condition": "minecraft:random_chance"
             }
           ],
@@ -23,10 +23,6 @@
             }
           ],
           "name": "minecraft:goat_horn"
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 14
         }
       ],
       "rolls": 1.0
