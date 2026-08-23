@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RootsMixinConfigPlugin implements IMixinConfigPlugin {
-  @SuppressWarnings("ReferenceToMixin")
-  private static final Set<String> DEV_ONLY_CLASSES = Set.of(AccessorMixinModConfigSpec.class.getName(), MixinRecipeBuilder$DataGenerationModidFix.class.getName(), MixinComponentSerialization$IngredientContents.class.getName());
+  private static final Set<String> DEV_ONLY_CLASSES = Set.of("mysticmods.roots.mixin.accessor.AccessorMixinModConfigSpec", "mysticmods.roots.mixin.MixinRecipeBuilder$DataGenerationModidFix", "mysticmods.roots.mixin.MixinComponentSerialization$IngredientContents");
 
   @Override
   public void onLoad(String mixinPackage) {
