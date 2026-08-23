@@ -31,4 +31,8 @@ public interface IModifierNode<V, T extends IModifier<V, T>> {
   default float y() {
     return 0;
   }
+
+  default IModifierNode<V, T> reset () {
+    return this;
+  }
 }

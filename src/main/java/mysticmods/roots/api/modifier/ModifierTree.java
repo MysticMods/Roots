@@ -37,9 +37,19 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   private final RootModifierNode<V, C> root;
 
+  private final Set<ResourceKey<C>> resetThisBuild = new ObjectOpenHashSet<>();
+
   public ModifierTree(Holder<V> object, ResourceKey<? extends Registry<C>> registry) {
     this.object = object;
     this.root = RootModifierNode.create(this, object, registry);
+  }
+
+  private IModifierNode<V, C> getOrResetNode (ResourceKey<C> key) {
+    IModifierNode<V, C> node = ModifierNode.create(key);
+    if (resetThisBuild.add(key)) {
+      node.reset();
+    }
+    return node;
   }
 
   public Holder<V> getObject() {
@@ -89,7 +99,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
     missing.remove(modifier.getKey());
 
-    IModifierNode<V, C> node = ModifierNode.create(modifier.getKey());
+    IModifierNode<V, C> node = getOrResetNode(modifier.getKey());
     allNodes.add(node);
     modifiers.put(modifier.getKey(), modifier);
     nodes.put(modifier.getKey(), node);
@@ -108,7 +118,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       //node.setParent(root);
       rootNodes.add(node);
     } else {
-      IModifierNode<V, C> parentNode = ModifierNode.create(mod.getParent());
+      IModifierNode<V, C> parentNode = getOrResetNode(mod.getParent());
       parentNode.addChild(node);
       parents.add(mod.getParent());
       node.setParent(parentNode);

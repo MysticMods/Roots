@@ -32,10 +32,6 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
     return (IModifierNode<V, T>) VALUES.computeIfAbsent(modifier, (k) -> new ModifierNode<>((ResourceKey<T>) k));
   }
 
-  public static <V, T extends Modifier<V, T>> IModifierNode<V, T> create(ResourceKey<T> modifier, IModifierNode<V, T> parent) {
-    return create(modifier).setParent(parent);
-  }
-
   @NotNull
   public ResourceKey<T> key() {
     return key;
@@ -94,5 +90,14 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
 
   public float y() {
     return y;
+  }
+
+  @Override
+  public ModifierNode<V, T> reset() {
+    this.x = 0;
+    this.y = 0;
+    this.parent = null;
+    this.children.clear();
+    return this;
   }
 }
