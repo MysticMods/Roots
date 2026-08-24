@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "mysticmods.roots.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinComponentSerialization$IngredientContents",
+    "accessor.AccessorMixinModConfigSpec",
+    "MixinRecipeBuilder$DataGenerationModidFix"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8",
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  }
+}
