@@ -1,6 +1,5 @@
 {
   "required": true,
-  "plugin": "mysticmods.roots.RootsMixinConfigPlugin",
   "package": "mysticmods.roots.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
@@ -9,7 +8,6 @@
     "MixinBoneMealItem",
     "MixinBrewingStandBlockEntity",
     "MixinBrewingStandMenu$FuelSlot",
-    "MixinComponentSerialization$IngredientContents",
     "MixinMerchantMenu$FairyHutTemporary",
     "MixinMobEffectInstance$DefaultInvisiblePotion",
     "MixinPlayer$IncreaseItemBoundingBox",
@@ -32,7 +30,6 @@
     "accessor.AccessorMixinLootPoolSingletonContainer",
     "accessor.AccessorMixinLootTable",
     "accessor.AccessorMixinMob",
-    "accessor.AccessorMixinModConfigSpec",
     "accessor.AccessorMixinNestedLootTable",
     "accessor.AccessorMixinOverworldBiomes",
     "accessor.AccessorMixinSaplingBlock",
