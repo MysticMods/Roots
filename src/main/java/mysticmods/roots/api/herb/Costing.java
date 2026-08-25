@@ -281,16 +281,22 @@ public class Costing {
     boolean doNegate = false;
 
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
+    for (Herb herb : baseCosts.keySet()) {
+      herbCosts.computeIfAbsent(herb, k -> new ArrayList<>());
+    }
 
     for (ICostedChild modifier : parent.getChildren()) {
       if (checkModifiers && ((modifier.getChargeType() == ChildChargeType.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeType() == ChildChargeType.ALWAYS) || maxOperations) {
         for (Cost cost : modifier.getCosts().costs()) {
+          if (cost.getType() == CostType.NEGATE_BASE_COST) {
+            doNegate = true;
+            continue;
+          }
+
           List<Cost> costs = herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>());
           if (thisType == ParentChargeType.OPERATION) {
             if (cost.getType() == CostType.MULTIPLICATIVE_TOTAL) {
               costs.add(cost); // Totals are only ever applied once
-            } else if (cost.getType() == CostType.NEGATE_BASE_COST) {
-              doNegate = true;
             } else {
               if (maxOperations) {
                 for (int i = 0; i < parent.getMaximumOperations(modifierMap); i++) {
@@ -309,15 +315,8 @@ public class Costing {
       }
     }
 
-    if (doNegate) {
-/*      for (Object2DoubleMap.Entry<Herb> entry : baseCosts.object2DoubleEntrySet()) {
-        totalCosts.put(entry.getKey(), -entry.getDoubleValue());
-      }*/
-    } else {
-      totalCosts.putAll(baseCosts);
-    }
     for (Map.Entry<Herb, List<Cost>> entry : herbCosts.entrySet()) {
-      double total = 0;
+      double total = doNegate ? 0 : baseCosts.getOrDefault(entry.getKey(), 0);
 
       for (Cost cost : entry.getValue()) {
         if (!cost.getType().isAdditive()) {

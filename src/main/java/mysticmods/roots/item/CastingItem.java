@@ -195,13 +195,11 @@ public class CastingItem extends Item {
       Costing costs = new Costing(spell);
       costs.updateHerbCache(pPlayer);
 
-      if (!costs.canAfford(pPlayer, true)) {
-        if (ticks % 20 == 0) {
-          RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getName().getString());
-          CastingSuccessCache.clear(pStack);
-          pPlayer.stopUsingItem();
-          return;
-        }
+      if (ticks % 20 == 0 && !costs.canAfford(pPlayer, true)) {
+        RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getName().getString());
+        CastingSuccessCache.clear(pStack);
+        pPlayer.stopUsingItem();
+        return;
       }
 
       var result = spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks);
