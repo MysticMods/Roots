@@ -41,7 +41,7 @@ enumExtensions="META-INF/enumextensions.json"
 config="${mod_id}.mixins.json"
 
 [[mixins]]
-config="${mod_id}-dev.mixins.json"
+config="dev.mixins.json"
 requiredMods=["noobanidusdev"]
 
 [[accessTransformers]]
