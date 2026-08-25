@@ -66,3 +66,8 @@
 ## 4.0.0.28-alpha
 
 - Again remove references to mixins that can cause issues with other mods
+
+## 4.0.0.29-alpha
+
+- Again, change how 'dev' mixins are handled to prevent future issues
+- Fix how continuous spells, such as Growth Infusion, have their costs calculated and charged to prevent them from over-charging
