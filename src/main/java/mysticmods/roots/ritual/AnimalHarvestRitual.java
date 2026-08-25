@@ -39,7 +39,6 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -104,7 +103,7 @@ public class AnimalHarvestRitual extends Ritual {
     }
   }
 
-  public void reset () {
+  public void reset() {
     this.emptyLoot.clear();
     this.normalLoot.clear();
     this.additionalLootTables.clear();

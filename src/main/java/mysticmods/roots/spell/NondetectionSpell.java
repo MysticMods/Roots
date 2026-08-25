@@ -1,15 +1,15 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSpells;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

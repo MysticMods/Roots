@@ -230,11 +230,13 @@ public class KeyHandler {
     PacketDistributor.sendToServer(ServerboundOpenPouchPacket.INSTANCE);
   }
 
-  private static void tryCycleStaff (Minecraft mc) {
+  private static void tryCycleStaff(Minecraft mc) {
     if (mc.player == null) {
       return;
     }
-    InteractionHand hand = mc.player.getMainHandItem().is(RootsTags.Items.CASTING_TOOLS) ? InteractionHand.MAIN_HAND : mc.player.getOffhandItem().is(RootsTags.Items.CASTING_TOOLS) ? InteractionHand.OFF_HAND : null;
+    InteractionHand hand = mc.player.getMainHandItem()
+        .is(RootsTags.Items.CASTING_TOOLS) ? InteractionHand.MAIN_HAND : mc.player.getOffhandItem()
+        .is(RootsTags.Items.CASTING_TOOLS) ? InteractionHand.OFF_HAND : null;
 
     if (hand == null) {
       RootsAPI.LOG.error("Somehow managed to trigger the 'cycle staff' keybinding, but neither the held item nor the off-hand held item are tagged properly.");

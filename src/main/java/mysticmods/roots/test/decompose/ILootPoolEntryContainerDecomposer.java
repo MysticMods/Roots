@@ -21,16 +21,16 @@ public interface ILootPoolEntryContainerDecomposer<T extends LootPoolEntryContai
     }
   };
 
-  record ItemRecord (Item item, ItemStack stack, TagKey<Item> tag) {
-    public ItemRecord (Item item) {
+  record ItemRecord(Item item, ItemStack stack, TagKey<Item> tag) {
+    public ItemRecord(Item item) {
       this(item, null, null);
     }
 
-    public ItemRecord (ItemStack stack) {
+    public ItemRecord(ItemStack stack) {
       this(null, stack, null);
     }
 
-    public ItemRecord (TagKey<Item> tag) {
+    public ItemRecord(TagKey<Item> tag) {
       this(null, null, tag);
     }
   }

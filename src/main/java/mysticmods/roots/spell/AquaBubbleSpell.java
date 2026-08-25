@@ -1,23 +1,22 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastAquaBubbleFXPacket;
 import mysticmods.roots.snapshot.AquaBubbleSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;

@@ -61,7 +61,7 @@ public interface ILevelCondition {
     return Component.translatable("level_condition.roots." + getName() + ".description");
   }
 
-  static boolean hasTag (ILevelCondition condition, TagKey<ILevelConditionType<?>> type) {
+  static boolean hasTag(ILevelCondition condition, TagKey<ILevelConditionType<?>> type) {
     return RootsRegistries.LEVEL_CONDITIONS.wrapAsHolder(condition.type()).is(type);
   }
 }

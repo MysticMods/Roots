@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ClientboundRefreshModifierScreenPacket () implements IRootsPacket {
+public record ClientboundRefreshModifierScreenPacket() implements IRootsPacket {
   private static final ClientboundRefreshModifierScreenPacket INSTANCE = new ClientboundRefreshModifierScreenPacket();
 
   public static final Type<ClientboundRefreshModifierScreenPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_refresh_modifier_screen"));

@@ -68,6 +68,6 @@ public class ModifierTab<V, T extends Modifier<V, T>> {
 
   @FunctionalInterface
   public interface WidgetBuilder<V, T extends Modifier<V, T>> {
-    ModifierWidget<V, T> create (ModifierTab<V, T> tab, IModifierNode<V, T> node);
+    ModifierWidget<V, T> create(ModifierTab<V, T> tab, IModifierNode<V, T> node);
   }
 }

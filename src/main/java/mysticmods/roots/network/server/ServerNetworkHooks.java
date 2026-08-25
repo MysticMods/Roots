@@ -241,7 +241,8 @@ public class ServerNetworkHooks {
     }
     var inSlot = existing.getSpell(staffSlot);
     if (inSlot == null || inSlot.spell() != spell || !modifier.isFor(spell.builtInRegistryHolder().getKey())) {
-      player.displayClientMessage(Component.translatable("roots.message.spell_modifier.invalid_spell", modifier.getName(), inSlot == null ? Component.literal("no spell in slot") /* TODO: Make this into a translation string */ : inSlot.spell().getStyledName()), true);
+      player.displayClientMessage(Component.translatable("roots.message.spell_modifier.invalid_spell", modifier.getName(), inSlot == null ? Component.literal("no spell in slot") /* TODO: Make this into a translation string */ : inSlot.spell()
+          .getStyledName()), true);
       return;
     }
 
@@ -315,7 +316,8 @@ public class ServerNetworkHooks {
     if (!newStorage.equals(existing)) {
       stack.set(ModAttachments.SPELL_STORAGE, newStorage);
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
-        RootsAPI.LOG.error("Cycled spell mode for spell {} from {} to {}", instance.asSpell().getDescriptionId(), c, next);
+        RootsAPI.LOG.error("Cycled spell mode for spell {} from {} to {}", instance.asSpell()
+            .getDescriptionId(), c, next);
       }
       player.displayClientMessage(Component.translatable("roots.spell_mode.mode_changed", next.getStyledName()), true);
     }

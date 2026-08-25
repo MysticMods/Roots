@@ -156,9 +156,9 @@ public class DandelionWindsSpell extends Spell {
         RootsAPI.LOG.error("Spell modifier {} decreases dandelion winds gusts cooldown duration but isn't duration 1, 2, 3, 4 or 5!", spellModifier);
         count = 1;
       }
-      int totalDur = gustsCooldown+ (gustsCooldownDecrease* count);
+      int totalDur = gustsCooldown + (gustsCooldownDecrease * count);
       return new Component[]{
-          Component.literal(String.format("%s", gustsCooldownDecrease/ 20)),
+          Component.literal(String.format("%s", gustsCooldownDecrease / 20)),
           Component.literal(String.format("%s", gustsCooldownDecrease)),
           Component.literal(String.format("%s", totalDur / 20)),
           Component.literal(String.format("%s", totalDur))

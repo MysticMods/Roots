@@ -4,12 +4,13 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSerializers;
@@ -17,7 +18,6 @@ import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastSkySoarerFXPacket;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -64,7 +64,7 @@ public class SkySoarerSpell extends Spell {
     this.friendly_earth_duration = properties.get(ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION);
   }
 
-  public int getFriendlyEarthDuration () {
+  public int getFriendlyEarthDuration() {
     return friendly_earth_duration;
   }
 
@@ -100,12 +100,12 @@ public class SkySoarerSpell extends Spell {
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     if (spellModifier.is(ModModifiers.SKY_SOARER_FRIENDLY_EARTH)) {
       return new Component[]{
-          Component.literal(String.format("%.1f", friendly_earth_duration/20.0)),
+          Component.literal(String.format("%.1f", friendly_earth_duration / 20.0)),
           Component.literal(String.valueOf(friendly_earth_duration))
       };
     } else if (spellModifier.is(ModModifiers.SKY_SOARER_SPEEDY_1)) {
       double total = (1 * duration_incrase);
-      double duration = this.duration + (((double)this.duration) * total);
+      double duration = this.duration + (((double) this.duration) * total);
       double seconds = duration / 20.0;
 
       return new Component[]{
@@ -115,7 +115,7 @@ public class SkySoarerSpell extends Spell {
       };
     } else if (spellModifier.is(ModModifiers.SKY_SOARER_SPEEDY_2)) {
       double total = (2 * duration_incrase);
-      double duration = this.duration + (((double)this.duration) * total);
+      double duration = this.duration + (((double) this.duration) * total);
       double seconds = duration / 20.0;
 
       return new Component[]{

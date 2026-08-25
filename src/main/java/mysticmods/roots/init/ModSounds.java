@@ -28,11 +28,11 @@ public class ModSounds {
   public static final DeferredHolder<SoundEvent, SoundEvent> SQUID_MILK = SOUNDS.register("mob.squid.milk", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.squid.milk")));
 
   // Duck
-/*  public static final DeferredHolder<SoundEvent, SoundEvent> DUCK_AMBIENT = SOUNDS.register("mob.duck.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.duck.ambient")));*/
+  /*  public static final DeferredHolder<SoundEvent, SoundEvent> DUCK_AMBIENT = SOUNDS.register("mob.duck.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.duck.ambient")));*/
   public static final DeferredHolder<SoundEvent, SoundEvent> DUCK_SWIM = SOUNDS.register("mob.duck.swim", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.duck.swim")));
 
   // Deer
-/*  public static final DeferredHolder<SoundEvent, SoundEvent> DEER_AMBIENT = SOUNDS.register("mob.deer.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.deer.ambient")));*/
+  /*  public static final DeferredHolder<SoundEvent, SoundEvent> DEER_AMBIENT = SOUNDS.register("mob.deer.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.deer.ambient")));*/
 
   // Pyre
   public static final DeferredHolder<SoundEvent, SoundEvent> PYRE_CRACKLES = SOUNDS.register("block.pyre.crackle", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("block.pyre.crackle")));

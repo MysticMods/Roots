@@ -46,7 +46,7 @@ public class CooldownStorage implements ICleanable, ITicking {
     return maxCooldownMap;
   }
 
-  public int getCooldown (ISpellInstance spell) {
+  public int getCooldown(ISpellInstance spell) {
     return getCooldown(spell.asSpell());
   }
 

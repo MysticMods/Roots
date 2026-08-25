@@ -56,7 +56,7 @@ public class RootsShaders {
     return RENDERTYPE_ENTITY_TRANSLUCENT_DISSOLVE_SHADER;
   }
 
-  public static ShaderInstance getCardioidParticleShader () {
+  public static ShaderInstance getCardioidParticleShader() {
     return CARDIOID_PARTICLE_SHADER;
   }
 }

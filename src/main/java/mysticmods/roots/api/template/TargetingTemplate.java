@@ -10,17 +10,17 @@ public interface TargetingTemplate {
     @Nullable
     protected Entity targeter = null;
 
-    public Builder withDistance (double distance) {
+    public Builder withDistance(double distance) {
       this.distance = distance;
       return this;
     }
 
-    public Builder withTargeter (Entity entity) {
+    public Builder withTargeter(Entity entity) {
       this.targeter = entity;
       return this;
     }
 
-    public Builder entity () {
+    public Builder entity() {
       if (this.type != null && this.type != TargetType.ENTITY) {
         throw new IllegalStateException("TargetingTemplate builder is already set to " + this.type);
       }
@@ -28,7 +28,7 @@ public interface TargetingTemplate {
       return this;
     }
 
-    public Builder block () {
+    public Builder block() {
       if (this.type != null && this.type != TargetType.BLOCK) {
         throw new IllegalStateException("TargetingTemplate builder is already set to " + this.type);
       }
@@ -36,7 +36,7 @@ public interface TargetingTemplate {
       return this;
     }
 
-    public Builder fluid () {
+    public Builder fluid() {
       if (this.type != null && this.type != TargetType.FLUID) {
         throw new IllegalStateException("TargetingTemplate builder is already set to " + this.type);
       }
@@ -44,7 +44,7 @@ public interface TargetingTemplate {
       return this;
     }
 
-    public Builder air () {
+    public Builder air() {
       if (this.type != null && this.type != TargetType.AIR) {
         throw new IllegalStateException("TargetingTemplate builder is already set to " + this.type);
       }
@@ -53,7 +53,7 @@ public interface TargetingTemplate {
     }
 
     // TODO:
-    public void build () {
+    public void build() {
 
     }
   }

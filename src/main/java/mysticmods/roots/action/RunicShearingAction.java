@@ -4,7 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
-import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +37,8 @@ public class RunicShearingAction extends GroveAction {
   }
 
   public record Context(ServerLevel level, ServerPlayer player, ItemStack item, List<ItemStack> recipeOutputs,
-                        @Nullable Recipe<?> recipe, ResourceLocation recipeId, @Nullable BlockState oldBlockState, @Nullable BlockState blockState, @Nullable BlockPos position,
+                        @Nullable Recipe<?> recipe, ResourceLocation recipeId, @Nullable BlockState oldBlockState,
+                        @Nullable BlockState blockState, @Nullable BlockPos position,
                         @Nullable Entity targetEntity) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.ITEM, GroveContext.POSITION);
 

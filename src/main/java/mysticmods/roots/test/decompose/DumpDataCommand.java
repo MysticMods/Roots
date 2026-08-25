@@ -3,7 +3,6 @@ package mysticmods.roots.test.decompose;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -12,12 +11,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
@@ -46,7 +42,8 @@ public class DumpDataCommand {
       ResourceLocation entityID = ResourceLocationArgument.getId(c, "entity");
       EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(entityID);
       var key = type.getDefaultLootTable();
-      List<ILootPoolEntryContainerDecomposer.ItemRecord> result = Decomposers.LOOT_TABLE.perform(c.getSource().getServer().reloadableRegistries().getLootTable(key));
+      List<ILootPoolEntryContainerDecomposer.ItemRecord> result = Decomposers.LOOT_TABLE.perform(c.getSource()
+          .getServer().reloadableRegistries().getLootTable(key));
 
       for (ILootPoolEntryContainerDecomposer.ItemRecord record : result) {
         if (record.item() != null) {

@@ -108,7 +108,7 @@ public class GramaryItem extends Item {
     private Style style;
     private String descriptionId;
 
-    GramaryMode (int color) {
+    GramaryMode(int color) {
       this.color = TextColor.fromRgb(color);
     }
 

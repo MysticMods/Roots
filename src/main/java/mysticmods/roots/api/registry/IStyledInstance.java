@@ -4,7 +4,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import org.apache.commons.lang3.NotImplementedException;
 
 import javax.annotation.Nullable;
 

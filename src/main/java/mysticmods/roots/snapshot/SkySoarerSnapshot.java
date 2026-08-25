@@ -83,19 +83,19 @@ public class SkySoarerSnapshot extends Snapshot {
     return vehicleOriginalMovement;
   }
 
-  public int getDuration () {
+  public int getDuration() {
     return duration;
   }
 
-  public int getDurationCount () {
+  public int getDurationCount() {
     return durationCount;
   }
 
-  public int getAmplifierCount () {
+  public int getAmplifierCount() {
     return amplifierCount;
   }
 
-  public boolean hasFriendlyEarth () {
+  public boolean hasFriendlyEarth() {
     return friendlyEarth;
   }
 

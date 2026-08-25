@@ -16,5 +16,5 @@ public abstract class SingleTickRitual extends Ritual {
     }
   }
 
-  protected abstract void singleTick (Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
+  protected abstract void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 }

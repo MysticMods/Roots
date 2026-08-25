@@ -12,7 +12,6 @@ import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.Holder;
-import net.minecraft.gametest.framework.GlobalTestReporter;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -44,7 +43,7 @@ public class ContainmentRitual extends Ritual {
   }
 
   @Nullable
-  public static GlobalPos canMoveFromTetherBounds (Entity entity, Vec3 newPosition) {
+  public static GlobalPos canMoveFromTetherBounds(Entity entity, Vec3 newPosition) {
     if (!entity.hasData(ModAttachments.CONTAINMENT_TETHER)) {
       return null;
     }
@@ -75,7 +74,6 @@ public class ContainmentRitual extends Ritual {
 
     return tether;
   }
-
 
 
   @Override

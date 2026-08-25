@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.grove.GroveNumber;
 import mysticmods.roots.api.grove.IGroveNumber;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
@@ -34,7 +33,7 @@ public class RootsGroveNumberRenderer<T extends IGroveNumber> implements IIngred
       Font font = getFontRenderer(minecraft, ingredient);
       guiGraphics.renderFakeItem(ingredient.grove().getIcon(), posX, posY);
       var atlas = minecraft.getTextureAtlas(RootsAPI.OVERLAYS_ATLAS_FILE);
-      TextureAtlasSprite sprite = switch(ingredient.type()) {
+      TextureAtlasSprite sprite = switch (ingredient.type()) {
         case POWER -> atlas
             .apply(RootsAPI.rl("gui/grove_power_symbol"));
         case REPUTATION -> atlas
@@ -62,7 +61,8 @@ public class RootsGroveNumberRenderer<T extends IGroveNumber> implements IIngred
   @Override
   public List<Component> getTooltip(T ingredient, TooltipFlag tooltipFlag) {
     List<Component> result = new ArrayList<>();
-    result.add(ingredient.grove().getStyledName().append(Component.translatable("roots.jei.ingredient.grove_" + ingredient.type().getSerializedName())));
+    result.add(ingredient.grove().getStyledName()
+        .append(Component.translatable("roots.jei.ingredient.grove_" + ingredient.type().getSerializedName())));
     if (ingredient.value() != Integer.MAX_VALUE) {
       result.add(Component.literal(String.valueOf(ingredient.value())));
     }

@@ -27,7 +27,6 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.LevelStem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -75,8 +74,10 @@ public class ModAttachments {
       .serialize(PyrePedestalRecipe.CODEC).sync(PyrePedestalRecipe.STREAM_CODEC).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<ComplexEntityType>> CACHED_PYRE_ENTITY = ATTACHMENTS.register("cached_pyre_entity", () -> AttachmentType.builder(() -> ComplexEntityType.EMPTY)
       .serialize(ComplexEntityType.CODEC).sync(ComplexEntityType.STREAM_CODEC).build());
-  public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> TARGETED_ENTITY = ATTACHMENTS.register("targeted_entity", () -> AttachmentType.builder(() -> false).build());
-  public static final DeferredHolder<AttachmentType<?>, AttachmentType<GlobalPos>> CONTAINMENT_TETHER = ATTACHMENTS.register("containment_tether", () -> AttachmentType.builder(() -> GlobalPos.of(Level.OVERWORLD, BlockPos.ZERO) /* TODO: ??? Is this a valid default??? */).serialize(GlobalPos.CODEC).sync(GlobalPos.STREAM_CODEC).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> TARGETED_ENTITY = ATTACHMENTS.register("targeted_entity", () -> AttachmentType.builder(() -> false)
+      .build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<GlobalPos>> CONTAINMENT_TETHER = ATTACHMENTS.register("containment_tether", () -> AttachmentType.builder(() -> GlobalPos.of(Level.OVERWORLD, BlockPos.ZERO) /* TODO: ??? Is this a valid default??? */)
+      .serialize(GlobalPos.CODEC).sync(GlobalPos.STREAM_CODEC).build());
 
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();

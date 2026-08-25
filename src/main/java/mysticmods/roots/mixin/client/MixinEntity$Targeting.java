@@ -24,8 +24,8 @@ public class MixinEntity$Targeting {
     return original.call();
   }
 
-  @WrapMethod(method="isCurrentlyGlowing")
-  private boolean roots$isCurrentlyGlowing (Operation<Boolean> original) {
+  @WrapMethod(method = "isCurrentlyGlowing")
+  private boolean roots$isCurrentlyGlowing(Operation<Boolean> original) {
     Entity thisEntity = (Entity) (Object) this;
 
     if (thisEntity.hasData(ModAttachments.TARGETED_ENTITY)) {

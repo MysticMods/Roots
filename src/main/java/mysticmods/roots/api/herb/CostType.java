@@ -15,6 +15,7 @@ public enum CostType implements StringRepresentable {
   MULTIPLICATIVE_BASE(),
   MULTIPLICATIVE_TOTAL(),
   NEGATE_BASE_COST();
+
   CostType() {
   }
 
@@ -22,7 +23,7 @@ public enum CostType implements StringRepresentable {
     return this == MULTIPLICATIVE_BASE || this == MULTIPLICATIVE_TOTAL;
   }
 
-  public boolean isNegative () {
+  public boolean isNegative() {
     return this == NEGATE_BASE_COST;
   }
 

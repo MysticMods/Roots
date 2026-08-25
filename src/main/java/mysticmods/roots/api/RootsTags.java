@@ -1,6 +1,5 @@
 package mysticmods.roots.api;
 
-import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.ILevelConditionType;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
@@ -822,7 +821,7 @@ public class RootsTags {
     public static final TagKey<ILevelConditionType<?>> GROVE_STONE = modTag("grove_stone");
     public static final TagKey<ILevelConditionType<?>> PILLAR = modTag("pillar");
 
-    static TagKey<ILevelConditionType<?>> modTag (String name) {
+    static TagKey<ILevelConditionType<?>> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.LEVEL_CONDITIONS, RootsAPI.rl(name));
     }
   }

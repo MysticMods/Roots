@@ -2,16 +2,16 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellCastResult;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.DecayTargetFXPacket;
 import mysticmods.roots.util.EntityUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -61,7 +61,8 @@ public class DecaySpell extends TwoRadiusSpell {
 
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer).and(o -> o.getType().is(RootsTags.Entities.DECAYABLE)));
+    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer)
+        .and(o -> o.getType().is(RootsTags.Entities.DECAYABLE)));
     int totalDecayed = 0;
     while (totalDecayed < count) {
       if (entities.isEmpty()) {
@@ -90,7 +91,7 @@ public class DecaySpell extends TwoRadiusSpell {
   }
 
   @Nullable
-  private static ItemStack tryDecayEntity (LivingEntity attacker, LivingEntity entity) {
+  private static ItemStack tryDecayEntity(LivingEntity attacker, LivingEntity entity) {
     var decayHealth = entity.getType().builtInRegistryHolder().getData(DataMaps.DECAYABLE_HEALTH_INFO);
     var decayDrop = entity.getType().builtInRegistryHolder().getData(DataMaps.DECAYABLE_DROP_INFO);
     if (decayHealth == null || decayDrop == null) {

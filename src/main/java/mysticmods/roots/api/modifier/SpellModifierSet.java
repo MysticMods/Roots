@@ -82,7 +82,7 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     }
   }
 
-  public SpellModifierSet copy () {
+  public SpellModifierSet copy() {
     if (this == EMPTY) {
       return this;
     }

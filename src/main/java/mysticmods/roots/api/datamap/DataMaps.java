@@ -135,9 +135,12 @@ public class DataMaps {
   public static final DataMapType<Block, Double> SHATTER_COST_MULTIPLIERS = DataMapType.builder(RootsAPI.rl("shatter_cost_multipliers"), Registries.BLOCK, Codec.DOUBLE)
       .synced(Codec.DOUBLE, true)
       .build();
-  public static final DataMapType<Spell, TagKey<Block>> CAN_BREAK_BLOCKS_TAG = DataMapType.builder(RootsAPI.rl("can_break_blocks_tag"), RootsRegistries.Keys.SPELLS, TagKey.codec(Registries.BLOCK)).synced(TagKey.codec(Registries.BLOCK), true).build();
-  public static final DataMapType<EntityType<?>, DecayableDropInfo> DECAYABLE_DROP_INFO = DataMapType.builder(RootsAPI.rl("decayable_drop_info"), Registries.ENTITY_TYPE, DecayableDropInfo.CODEC).synced(DecayableDropInfo.CODEC, true).build();
-  public static final DataMapType<EntityType<?>, DecayableHealthInfo> DECAYABLE_HEALTH_INFO = DataMapType.builder(RootsAPI.rl("decay_health_info"), Registries.ENTITY_TYPE, DecayableHealthInfo.CODEC).synced(DecayableHealthInfo.CODEC, true).build();
+  public static final DataMapType<Spell, TagKey<Block>> CAN_BREAK_BLOCKS_TAG = DataMapType.builder(RootsAPI.rl("can_break_blocks_tag"), RootsRegistries.Keys.SPELLS, TagKey.codec(Registries.BLOCK))
+      .synced(TagKey.codec(Registries.BLOCK), true).build();
+  public static final DataMapType<EntityType<?>, DecayableDropInfo> DECAYABLE_DROP_INFO = DataMapType.builder(RootsAPI.rl("decayable_drop_info"), Registries.ENTITY_TYPE, DecayableDropInfo.CODEC)
+      .synced(DecayableDropInfo.CODEC, true).build();
+  public static final DataMapType<EntityType<?>, DecayableHealthInfo> DECAYABLE_HEALTH_INFO = DataMapType.builder(RootsAPI.rl("decay_health_info"), Registries.ENTITY_TYPE, DecayableHealthInfo.CODEC)
+      .synced(DecayableHealthInfo.CODEC, true).build();
 
   public static ItemStack getDimensionItem(ResourceKey<Level> dimension) {
     if (DIMENSION_LOOKUP.isEmpty()) {

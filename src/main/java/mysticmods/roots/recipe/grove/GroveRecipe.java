@@ -3,7 +3,6 @@ package mysticmods.roots.recipe.grove;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;

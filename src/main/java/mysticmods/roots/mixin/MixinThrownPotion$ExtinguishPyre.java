@@ -25,8 +25,8 @@ public class MixinThrownPotion$ExtinguishPyre {
     if (state.is(RootsTags.Blocks.PYRES) && state.hasProperty(PyreBlock.ACTIVE) && state.getValue(PyreBlock.ACTIVE) && ConfigManager.ENABLE_EXTINGUISH_PYRE.getAsBoolean()) {
       if (level.getBlockEntity(pos) instanceof PyreBlockEntity pyre) {
         if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
-            RootsAPI.LOG.info("Stopping ritual on PyreBlockEntity at {} in {} as entity {} used a throwable potion and triggered the 'dowseFire' feature", pos, level.dimension()
-                .location(), potion.getOwner());
+          RootsAPI.LOG.info("Stopping ritual on PyreBlockEntity at {} in {} as entity {} used a throwable potion and triggered the 'dowseFire' feature", pos, level.dimension()
+              .location(), potion.getOwner());
         }
         pyre.stopRitual(false);
       }

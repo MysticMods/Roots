@@ -11,8 +11,6 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 public abstract class RootsParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;

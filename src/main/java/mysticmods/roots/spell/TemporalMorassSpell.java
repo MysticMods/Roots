@@ -1,26 +1,5 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.spell.*;
-import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.herb.Costing;
-import mysticmods.roots.entity.other.TemporalMorassEntity;
-import mysticmods.roots.init.ModEntities;
-import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.snapshot.SnapshotHelper;
-import mysticmods.roots.snapshot.TemporalMorassEntitySnapshot;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-
-import java.util.List;
-
 /*public class TemporalMorassSpell extends TwoRadiusSpell {
   private int duration, amplifier;
 

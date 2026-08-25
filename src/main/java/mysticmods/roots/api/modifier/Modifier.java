@@ -1,15 +1,16 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.registry.*;
+import mysticmods.roots.api.registry.ICostedChild;
+import mysticmods.roots.api.registry.IDataMapInitialize;
+import mysticmods.roots.api.registry.IDescribed;
+import mysticmods.roots.api.registry.IGroupDescribed;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 
 import javax.annotation.Nullable;
@@ -54,7 +55,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     return applicable;
   }
 
-  public abstract Holder<V> getApplicableHolder ();
+  public abstract Holder<V> getApplicableHolder();
 
   @Override
   public Set<ResourceKey<T>> getConflicts() {
@@ -63,7 +64,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
 
   public abstract Holder<T> builtInRegistryHolder();
 
-  public ResourceKey<T> getSelf () {
+  public ResourceKey<T> getSelf() {
     return builtInRegistryHolder().getKey();
   }
 
@@ -95,15 +96,15 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   // ????? TODO:
-  public boolean is (T value) {
+  public boolean is(T value) {
     return this.equals(value);
   }
 
-  public boolean is (Holder<T> value) {
+  public boolean is(Holder<T> value) {
     return builtInRegistryHolder().is(value);
   }
 
-  public boolean isFor (@Nullable ResourceKey<?> type) {
+  public boolean isFor(@Nullable ResourceKey<?> type) {
     return applicable == type;
   }
 

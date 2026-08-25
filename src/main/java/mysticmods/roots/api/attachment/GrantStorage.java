@@ -133,7 +133,8 @@ public class GrantStorage implements ICleanable {
 
   private void unlockSpellModifier(ServerPlayer player, SpellModifier modifier) {
     if (!modifier.is(RootsTags.SpellModifiers.REQUIRES_UNLOCK)) {
-      RootsAPI.LOG.error("Attempted to unlock modifier {} for {}, despite modifier not being tagged `requires_unlock`", modifier.builtInRegistryHolder().getKey(), player);
+      RootsAPI.LOG.error("Attempted to unlock modifier {} for {}, despite modifier not being tagged `requires_unlock`", modifier.builtInRegistryHolder()
+          .getKey(), player);
       return;
     }
     if (grantedSpellModifiers.add(modifier)) {
@@ -169,7 +170,8 @@ public class GrantStorage implements ICleanable {
 
   public List<LibrarySpell> getLibrarySpells() {
     if (librarySpells == null || librarySpells.isEmpty()) {
-      librarySpells = RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID)).sorted(Comparator.comparing(IDescribed::getDescriptionId))
+      librarySpells = RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID))
+          .sorted(Comparator.comparing(IDescribed::getDescriptionId))
           .map(o -> new LibrarySpell(o.builtInRegistryHolder(), grantedSpells.contains(o)))
           .sorted(Comparator.comparing(LibrarySpell::granted).reversed()).toList();
     }

@@ -16,7 +16,8 @@ import net.minecraft.world.InteractionHand;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ServerboundCycleSpellModePacket(InteractionHand hand, DataComponentType<?> component) implements IRootsPacket {
+public record ServerboundCycleSpellModePacket(InteractionHand hand,
+                                              DataComponentType<?> component) implements IRootsPacket {
   public static final Type<ServerboundCycleSpellModePacket> TYPE = new Type<>(RootsAPI.rl("server_bound_cycle_spell_mode"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundCycleSpellModePacket> CODEC =
       StreamCodec.composite(

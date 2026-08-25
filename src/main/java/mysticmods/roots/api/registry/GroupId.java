@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 public record GroupId(String groupKey, boolean useGroupDescription) {
   public static final GroupId NONE = new GroupId(null, false);
 
-  public GroupId (String groupKey) {
+  public GroupId(String groupKey) {
     this(groupKey, false);
   }
 

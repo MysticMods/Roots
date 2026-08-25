@@ -10,7 +10,6 @@ import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;

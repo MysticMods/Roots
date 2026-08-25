@@ -27,7 +27,7 @@ public class TargetingSystem {
 
   private static int decayTimer = -1;
 
-  public static ItemStack getStaff (Player player) {
+  public static ItemStack getStaff(Player player) {
     if (player.getMainHandItem().is(RootsTags.Items.CASTING_TOOLS)) {
       return player.getMainHandItem();
     } else if (player.getOffhandItem().is(RootsTags.Items.CASTING_TOOLS)) {
@@ -37,18 +37,18 @@ public class TargetingSystem {
     }
   }
 
-  public static ISpellInstance getCurrentSpell (Player player) {
+  public static ISpellInstance getCurrentSpell(Player player) {
     return CastingItem.getCurrentSpell(player.level(), player, getStaff(player));
   }
 
-  private static void clearTargeted () {
+  private static void clearTargeted() {
     for (Entity entity : targetedEntities) {
       entity.removeData(ModAttachments.TARGETED_ENTITY);
     }
     targetedEntities.clear();
   }
 
-  public static void tick () {
+  public static void tick() {
     var mc = Minecraft.getInstance();
     if (mc == null || mc.player == null || mc.level == null) {
       return;
@@ -72,14 +72,14 @@ public class TargetingSystem {
     }
   }
 
-  public static boolean isTargetedEntity (@NotNull Entity entity) {
+  public static boolean isTargetedEntity(@NotNull Entity entity) {
     return targetedEntities.contains(entity);
   }
 
   @Nullable
-  public static Entity getEntityHit () {
+  public static Entity getEntityHit() {
     return null;
-/*    return entityHit != null ? entityHit.getEntity() : null;*/
+    /*    return entityHit != null ? entityHit.getEntity() : null;*/
   }
 
 /*  @Nullable
@@ -107,7 +107,7 @@ public class TargetingSystem {
     double d1 = Mth.square(d0);
     Vec3 vec3 = entity.getEyePosition(partialTick);
     HitResult hitresult = entity.pick(d0, partialTick, hitFluids);
-/*    HitResult hitresult2 = entity.pick(d0, partialTick, true);*/
+    /*    HitResult hitresult2 = entity.pick(d0, partialTick, true);*/
     double d2 = hitresult.getLocation().distanceToSqr(vec3);
     if (hitresult.getType() != HitResult.Type.MISS) {
       d1 = d2;
@@ -125,7 +125,7 @@ public class TargetingSystem {
       if (entityhitresult.getLocation().distanceTo(vec3) < d2) {
         var entityhitresult2 = filterHitResult(entityhitresult, vec3, entityInteractionRange);
         if (entityhitresult2.getType() == HitResult.Type.ENTITY && spell.canTargetEntity(((EntityHitResult) entityhitresult2).getEntity())) {
-/*          entityHit = (EntityHitResult) entityhitresult2;*/
+          /*          entityHit = (EntityHitResult) entityhitresult2;*/
           decayTimer = hitDecay;
           return null; //(EntityHitResult) entityhitresult2;
         } else {

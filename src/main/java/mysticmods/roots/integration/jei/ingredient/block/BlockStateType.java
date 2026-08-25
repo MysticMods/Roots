@@ -1,7 +1,6 @@
 package mysticmods.roots.integration.jei.ingredient.block;
 
 import mysticmods.roots.api.test.world.PartialBlockState;
-import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
@@ -14,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public record BlockStateType(PartialBlockState partial, BlockState state, @Nullable BlockState grownState, ItemStack stack) implements IBlockType {
+public record BlockStateType(PartialBlockState partial, BlockState state, @Nullable BlockState grownState,
+                             ItemStack stack) implements IBlockType {
   public BlockStateType(PartialBlockState state) {
     this(state, state.build(), IBlockType.getGrownState(state.build()), new ItemStack(state.block()));
   }

@@ -17,9 +17,7 @@ import mysticmods.roots.mixin.client.accessor.AccessorMixinGui;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.util.LightDrifterUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.options.controls.KeyBindsList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -187,7 +185,7 @@ public class RootsClientHooks {
     return KeyBindings.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
   }
 
-  public static Component getStaffCycleKeyBind () {
+  public static Component getStaffCycleKeyBind() {
     return KeyBindings.CYCLE_STAFF_SPELL.getKey().getDisplayName();
   }
 

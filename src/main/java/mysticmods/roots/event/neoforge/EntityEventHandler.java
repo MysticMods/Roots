@@ -570,7 +570,7 @@ public class EntityEventHandler {
       if (!projectile.level().isClientSide && projectile.getDeltaMovement().lengthSqr() < 1.0E-7) {
         if (projectile instanceof AbstractArrow arrow) {
           if (arrow.pickup == AbstractArrow.Pickup.ALLOWED) {
-            projectile.spawnAtLocation(((AccessorMixinAbstractArrow)arrow).roots$getPickupItem(), 0.1F);
+            projectile.spawnAtLocation(((AccessorMixinAbstractArrow) arrow).roots$getPickupItem(), 0.1F);
           }
         }
 

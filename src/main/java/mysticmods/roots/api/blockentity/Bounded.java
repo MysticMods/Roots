@@ -32,11 +32,11 @@ public interface Bounded {
     return null;
   }
 
-  default double getInsertOffset () {
+  default double getInsertOffset() {
     return 0.6;
   }
 
-  default double getDeleteOffset () {
+  default double getDeleteOffset() {
     return 1.0;
   }
 }

@@ -282,7 +282,6 @@ public final class RootsItemModelProvider extends ItemModelProvider {
         .end();
 
 
-
     subfolder(ModItems.COOKED_PERESKIA, "food");
     subfolder(ModItems.FLOUR, "food");
     subfolder(ModItems.WILDEWHEET_BREAD, "food");
@@ -398,8 +397,9 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
     // TODO: 0.5f is a magic number
     growth_infusion_builder.override().predicate(ClientSetup.SPELL_PREDICATE, 0.5f)
-            .model(getBuilder(growth_infusion.withSuffix("/rampant_growth").withPrefix("item/").toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", RootsAPI.rl("item/spells/rampant_growth"))).end();
+        .model(getBuilder(growth_infusion.withSuffix("/rampant_growth").withPrefix("item/")
+            .toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", RootsAPI.rl("item/spells/rampant_growth"))).end();
 
     modifier(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, Items.ARROW);
     modifier(ModModifiers.SKY_SOARER_AMPLIFIED_1, Items.REDSTONE);
@@ -469,7 +469,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
   }
 
-  public ItemModelBuilder modifier (Holder<SpellModifier> itemHolder, String location) {
+  public ItemModelBuilder modifier(Holder<SpellModifier> itemHolder, String location) {
     if (!location.contains(":")) {
       return modifier(itemHolder, RootsAPI.rl(location));
     } else {
@@ -477,7 +477,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     }
   }
 
-  public ItemModelBuilder modifier (Holder<SpellModifier> itemHolder, ResourceLocation location) {
+  public ItemModelBuilder modifier(Holder<SpellModifier> itemHolder, ResourceLocation location) {
     if (!location.getPath().startsWith("item")) {
       location = location.withPrefix("item/");
     }

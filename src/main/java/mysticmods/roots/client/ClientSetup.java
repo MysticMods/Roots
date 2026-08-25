@@ -347,7 +347,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onAtlasCreation (RegisterMaterialAtlasesEvent event) {
+  public static void onAtlasCreation(RegisterMaterialAtlasesEvent event) {
     event.register(RootsAPI.OVERLAYS_ATLAS_FILE, RootsAPI.OVERLAYS_ATLAS);
   }
 }

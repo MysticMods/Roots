@@ -21,31 +21,31 @@ public record SpellCastResult(ResultType type, int operations, int cooldown) {
     }
   }
 
-  public static SpellCastResult nothing () {
+  public static SpellCastResult nothing() {
     return new SpellCastResult(ResultType.NOOP, 0, 0);
   }
 
-  public static SpellCastResult success (int cooldown) {
+  public static SpellCastResult success(int cooldown) {
     return new SpellCastResult(ResultType.SUCCESS, 0, cooldown);
   }
 
-  public static SpellCastResult success (int operations, int cooldown) {
+  public static SpellCastResult success(int operations, int cooldown) {
     return new SpellCastResult(ResultType.SUCCESS, operations, cooldown);
   }
 
-  public static SpellCastResult fail () {
+  public static SpellCastResult fail() {
     return new SpellCastResult(ResultType.FAIL, 0, 0);
   }
 
-  public static SpellCastResult tick () {
+  public static SpellCastResult tick() {
     return new SpellCastResult(ResultType.TICK, 0, 0);
   }
 
-  public SpellCastResult modify (int newCooldown) {
+  public SpellCastResult modify(int newCooldown) {
     return new SpellCastResult(type, operations, newCooldown);
   }
 
-  public boolean success () {
+  public boolean success() {
     return this.type() == ResultType.SUCCESS/* || this.type() == ResultType.TICK*/;
   }
 }

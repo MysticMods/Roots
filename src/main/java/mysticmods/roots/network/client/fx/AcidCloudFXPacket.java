@@ -4,7 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.SpellInstanceSnapshot;
 import mysticmods.roots.client.network.ClientFXHandlers;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

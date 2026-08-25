@@ -34,7 +34,7 @@ import java.util.List;
 
 public class HarvestSpell extends TwoRadiusSpell {
 
-  public HarvestSpell (Spell.Properties properties) {
+  public HarvestSpell(Spell.Properties properties) {
     super(properties);
   }
 

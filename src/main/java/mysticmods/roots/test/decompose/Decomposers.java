@@ -23,7 +23,7 @@ public class Decomposers {
 
     List<INTO> perform(FROM from, @Nullable List<INTO> result);
 
-    default List<INTO> perform (List<FROM> from, @Nullable List<INTO> result) {
+    default List<INTO> perform(List<FROM> from, @Nullable List<INTO> result) {
       if (result == null) {
         result = new ArrayList<>();
       }
@@ -113,9 +113,11 @@ public class Decomposers {
   static LootPoolEntries LOOT_POOL_ENTRIES = new LootPoolEntries();
   static LootPoolEntryContainers LOOT_POOL_ENTRY_CONTAINERS = new LootPoolEntryContainers();
 
-  static Function<List<LootTable>, List<ILootPoolEntryContainerDecomposer.ItemRecord>> LOOT_TABLE_INTERNAL = LOOT_POOLS.andThen(LOOT_POOL_ENTRIES).andThen(LOOT_POOL_ENTRY_CONTAINERS);
+  static Function<List<LootTable>, List<ILootPoolEntryContainerDecomposer.ItemRecord>> LOOT_TABLE_INTERNAL = LOOT_POOLS.andThen(LOOT_POOL_ENTRIES)
+      .andThen(LOOT_POOL_ENTRY_CONTAINERS);
 
-  static Function<List<Registry<LootTable>>, List<ILootPoolEntryContainerDecomposer.ItemRecord>> ALL_LOOT_INTERIOR = LOOT_TABLES.andThen(LOOT_POOLS).andThen(LOOT_POOL_ENTRIES).andThen(LOOT_POOL_ENTRY_CONTAINERS);
+  static Function<List<Registry<LootTable>>, List<ILootPoolEntryContainerDecomposer.ItemRecord>> ALL_LOOT_INTERIOR = LOOT_TABLES.andThen(LOOT_POOLS)
+      .andThen(LOOT_POOL_ENTRIES).andThen(LOOT_POOL_ENTRY_CONTAINERS);
 
   static Decomposer<Registry<LootTable>, ILootPoolEntryContainerDecomposer.ItemRecord> ALL_LOOT = (lootTables, result) -> ALL_LOOT_INTERIOR.apply(List.of(lootTables));
 

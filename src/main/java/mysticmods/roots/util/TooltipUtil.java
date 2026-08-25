@@ -184,13 +184,13 @@ public class TooltipUtil {
     }
   }
 
-  private record CostKey (Holder<Herb> herb, CostType type) {
-    private CostKey fromCost (Cost cost) {
+  private record CostKey(Holder<Herb> herb, CostType type) {
+    private CostKey fromCost(Cost cost) {
       return new CostKey(cost.getHolder(), type);
     }
   }
 
-  public static List<Cost> collateCosts (List<Cost> incoming) {
+  public static List<Cost> collateCosts(List<Cost> incoming) {
     Object2DoubleMap<CostKey> map = new Object2DoubleOpenHashMap<>();
     for (Cost cost : incoming) {
       var key = new CostKey(cost.getHolder(), cost.getType());

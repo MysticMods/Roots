@@ -32,7 +32,6 @@ import java.util.Objects;
 // Wildroot: 0, Wildewheet: 0, Spirit Leaf: 1.5
 
 
-
 public final class CostChain {
   private final List<CostSegment> segments;
 

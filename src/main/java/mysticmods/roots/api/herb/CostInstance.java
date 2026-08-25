@@ -17,7 +17,7 @@ public record CostInstance(List<Cost> costs) {
   public static final StreamCodec<RegistryFriendlyByteBuf, CostInstance> STREAM_CODEC = Cost.STREAM_CODEC.apply(ByteBufCodecs.list())
       .map(CostInstance::new, CostInstance::costs);
 
-  public boolean isEmpty () {
+  public boolean isEmpty() {
     return costs.isEmpty();
   }
 
@@ -29,7 +29,7 @@ public record CostInstance(List<Cost> costs) {
     return of(Cost.mult(herb, value));
   }
 
-  public static CostInstance multTotal (Holder<Herb> herb, double value) {
+  public static CostInstance multTotal(Holder<Herb> herb, double value) {
     return of(Cost.multTotal(herb, value));
   }
 
@@ -41,7 +41,7 @@ public record CostInstance(List<Cost> costs) {
     return new CostInstance(costs);
   }
 
-  public static CostInstance empty () {
+  public static CostInstance empty() {
     return EMPTY;
   }
 }

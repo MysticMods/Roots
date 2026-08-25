@@ -44,11 +44,11 @@ public class GroveSupplicationRitual extends SingleTickRitual {
     }
 
     // TODO: Look into
-      if (blockEntity.getBoundingBox() != null) {
-        for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
-          if (blockEntity.getLevel().getBlockEntity(pos) instanceof GroveStoneBlockEntity groveStoneBlockEntity) {
-            groveStoneBlockEntity.tryActivating(this, blockEntity, blockEntity.getLastPlayer());
-          }
+    if (blockEntity.getBoundingBox() != null) {
+      for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
+        if (blockEntity.getLevel().getBlockEntity(pos) instanceof GroveStoneBlockEntity groveStoneBlockEntity) {
+          groveStoneBlockEntity.tryActivating(this, blockEntity, blockEntity.getLastPlayer());
+        }
 
 /*          BlockState state = blockEntity.getLevel().getBlockState(pos);
 
@@ -81,7 +81,7 @@ public class GroveSupplicationRitual extends SingleTickRitual {
               }
             }
           }*/
-        }
+      }
     }
   }
 

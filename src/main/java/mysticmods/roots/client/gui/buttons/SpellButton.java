@@ -28,7 +28,7 @@ public abstract class SpellButton<S extends SpellLike, V extends RootsScreen> ex
     return id;
   }
 
-  public abstract ItemStack getItem ();
+  public abstract ItemStack getItem();
 
   @Override
   public void renderWidget(GuiGraphics arg, int pMouseX, int pMouseY, float pPartialTick) {

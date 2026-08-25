@@ -154,7 +154,7 @@ public class SpellModifierScreen extends RootsScreen {
     return tab.roots();
   }
 
-  public void validate () {
+  public void validate() {
     if (getStorage() == null) {
       this.onClose();
     } else if (this.parent != null) {

@@ -8,14 +8,11 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public record DecayableHealthInfo(ResourceLocation baseIdentifier, List<ResourceLocation> calculatedIdentifiers,
                                   double healthReduction, int maxApplied) {
@@ -48,7 +45,7 @@ public record DecayableHealthInfo(ResourceLocation baseIdentifier, List<Resource
     return temp;
   }
 
-  public boolean apply (LivingEntity attacker, LivingEntity entity) {
+  public boolean apply(LivingEntity attacker, LivingEntity entity) {
     var attribute = entity.getAttribute(Attributes.MAX_HEALTH);
 
     if (attribute == null) {

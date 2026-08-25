@@ -53,7 +53,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
@@ -171,8 +170,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     // Guard against #1348
     positions.removeIf(o -> o.item().isEmpty());
     var packet = new StartGroveCraftingFX(getBlockPos(), positions);
-/*    if (player instanceof FakePlayer) {*/
-      PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), packet);
+    /*    if (player instanceof FakePlayer) {*/
+    PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), packet);
 /*    } else {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, packet);
     }*/

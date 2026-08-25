@@ -1,35 +1,34 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.spell.ISpellInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public interface IExtendedDescribedInstance<T> extends IExtendedDescribed {
-  default String getOrCreateTooltipExtendedDescriptionId (T instance) {
+  default String getOrCreateTooltipExtendedDescriptionId(T instance) {
     return getOrCreateTooltipExtendedDescriptionId();
   }
 
-  default String getTooltipExtendedDescriptionId (T instance) {
+  default String getTooltipExtendedDescriptionId(T instance) {
     return getOrCreateTooltipExtendedDescriptionId(instance);
   }
 
-  default MutableComponent getTooltipExtendedDescription (T instance) {
-    return Component.translatable(getOrCreateTooltipExtendedDescriptionId( instance), (Object[]) getOrCreateDescriptionComponents(instance));
+  default MutableComponent getTooltipExtendedDescription(T instance) {
+    return Component.translatable(getOrCreateTooltipExtendedDescriptionId(instance), (Object[]) getOrCreateDescriptionComponents(instance));
   }
 
   default Component[] getOrCreateDescriptionComponents(T instance) {
     return getOrCreateDescriptionComponents();
   }
 
-  default String getOrCreateTooltipDescriptionId (T instance) {
+  default String getOrCreateTooltipDescriptionId(T instance) {
     return getOrCreateTooltipDescriptionId();
   }
 
-  default String getTooltipDescriptionId (T instance) {
+  default String getTooltipDescriptionId(T instance) {
     return getOrCreateTooltipDescriptionId(instance);
   }
 
-  default MutableComponent getTooltipDescription (T instance) {
+  default MutableComponent getTooltipDescription(T instance) {
     return Component.translatable(this.getTooltipDescriptionId(instance));
   }
 }

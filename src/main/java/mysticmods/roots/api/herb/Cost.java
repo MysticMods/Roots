@@ -50,15 +50,15 @@ public class Cost {
     return new Cost(CostType.MULTIPLICATIVE_BASE, herb, value);
   }
 
-  public static Cost multTotal (Holder<Herb> herb, double value) {
+  public static Cost multTotal(Holder<Herb> herb, double value) {
     return new Cost(CostType.MULTIPLICATIVE_TOTAL, herb, value);
   }
 
-  public static Cost negateBase () {
+  public static Cost negateBase() {
     return new Cost(CostType.NEGATE_BASE_COST, ModHerbs.WILDROOT, 0);
   }
 
-  public static Cost negate (Cost cost) {
+  public static Cost negate(Cost cost) {
     var value = cost.getValue();
     if (value > 0) {
       value = -value;

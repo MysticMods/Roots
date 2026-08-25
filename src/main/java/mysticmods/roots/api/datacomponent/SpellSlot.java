@@ -5,7 +5,6 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
@@ -68,7 +67,7 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
   }
 
   @Override
-  public int getSlot () {
+  public int getSlot() {
     return slot();
   }
 

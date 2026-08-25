@@ -14,7 +14,7 @@ public interface IBlockType {
 
   BlockState state();
 
-  BlockState renderState ();
+  BlockState renderState();
 
   default Block block() {
     return state().getBlock();
@@ -25,7 +25,7 @@ public interface IBlockType {
   }
 
   @Nullable
-  static BlockState getGrownState (BlockState state) {
+  static BlockState getGrownState(BlockState state) {
     var record = GrowthUtil.getGrowthRecord(state);
     if (record == null) {
       return null;

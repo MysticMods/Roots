@@ -85,8 +85,9 @@ public class RootsCommand {
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
     if (spellIds == null) {
-      spellIds = RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID)).map(o -> o.builtInRegistryHolder()
-          .getKey().location()).map(ResourceLocation::toString).collect(Collectors.toList());
+      spellIds = RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID))
+          .map(o -> o.builtInRegistryHolder()
+              .getKey().location()).map(ResourceLocation::toString).collect(Collectors.toList());
     }
     return Commands.argument("spell", ResourceLocationArgument.id())
         .suggests((c, build) -> SharedSuggestionProvider.suggest(spellIds, build));

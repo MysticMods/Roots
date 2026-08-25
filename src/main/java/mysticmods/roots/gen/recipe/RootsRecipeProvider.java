@@ -863,8 +863,10 @@ public final class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_runic_dust", has(ItemTags.DIRT)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.GRAVELS)
-            .requires(ItemTags.DIRT).requires(ItemTags.SAND).requires(RootsTags.Items.CLAY_STORAGE).requires(RootsTags.Items.MOSS_STORAGE).requires(Tags.Items.FERTILIZERS).result(ModItems.ELEMENTAL_SOIL, 5)
-            .condition(ModConditions.ELEMENTAL_RANK_1.get()).condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/elemental_soil"));
+            .requires(ItemTags.DIRT).requires(ItemTags.SAND).requires(RootsTags.Items.CLAY_STORAGE)
+            .requires(RootsTags.Items.MOSS_STORAGE).requires(Tags.Items.FERTILIZERS).result(ModItems.ELEMENTAL_SOIL, 5)
+            .condition(ModConditions.ELEMENTAL_RANK_1.get())
+            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/elemental_soil"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.AQUEOUS_SOIL.get(), 1)
         .requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.DEWGONIA_HERB)

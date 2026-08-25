@@ -14,7 +14,8 @@ import java.util.concurrent.CompletableFuture;
 public final class RootsLevelConditionTypeTagsProvider extends IntrinsicHolderTagsProvider<ILevelConditionType<?>> {
 
   public RootsLevelConditionTypeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
-    super(output, RootsRegistries.Keys.LEVEL_CONDITIONS, provider, p_256665_ -> RootsRegistries.LEVEL_CONDITIONS.getResourceKey(p_256665_).orElseThrow(), RootsAPI.MODID, existingFileHelper);
+    super(output, RootsRegistries.Keys.LEVEL_CONDITIONS, provider, p_256665_ -> RootsRegistries.LEVEL_CONDITIONS.getResourceKey(p_256665_)
+        .orElseThrow(), RootsAPI.MODID, existingFileHelper);
   }
 
   @Override

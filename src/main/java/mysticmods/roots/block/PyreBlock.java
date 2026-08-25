@@ -110,11 +110,13 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
         if (state.getValue(PyreBlock.ACTIVE)) {
           if (!simulate && !level.isClientSide()) {
             if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
-              RootsAPI.LOG.info("Actually stopping ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+              RootsAPI.LOG.info("Actually stopping ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
+                  .location(), itemAbility, context.getPlayer());
             }
             pyre.stopRitual(false);
           } else {
-            RootsAPI.LOG.info("Simulated stopping ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+            RootsAPI.LOG.info("Simulated stopping ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
+                .location(), itemAbility, context.getPlayer());
           }
           return state.setValue(PyreBlock.ACTIVE, false).setValue(PyreBlock.LIT, false);
         }
@@ -122,11 +124,13 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
         if (!state.getValue(PyreBlock.ACTIVE)) {
           if (!simulate && !level.isClientSide()) {
             if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
-              RootsAPI.LOG.info("Actually starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+              RootsAPI.LOG.info("Actually starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
+                  .location(), itemAbility, context.getPlayer());
             }
             pyre.light(context.getPlayer());
           } else {
-            RootsAPI.LOG.info("Simulated starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension().location(), itemAbility, context.getPlayer());
+            RootsAPI.LOG.info("Simulated starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
+                .location(), itemAbility, context.getPlayer());
           }
           return state.setValue(PyreBlock.ACTIVE, true).setValue(PyreBlock.LIT, true);
         }

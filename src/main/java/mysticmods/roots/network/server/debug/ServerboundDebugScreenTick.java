@@ -21,7 +21,7 @@ public record ServerboundDebugScreenTick(@Nullable InteractionHand hand, int inv
       ServerboundDebugScreenTick::new
   );
 
-  public ServerboundDebugScreenTick (Optional<InteractionHand> hand, int inventorySlot) {
+  public ServerboundDebugScreenTick(Optional<InteractionHand> hand, int inventorySlot) {
     this(hand.orElse(null), inventorySlot);
   }
 

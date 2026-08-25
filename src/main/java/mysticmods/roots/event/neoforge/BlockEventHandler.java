@@ -114,7 +114,7 @@ public class BlockEventHandler {
     }
   }
 
-  private static ItemStack smelt (ServerLevel level, ItemStack item) {
+  private static ItemStack smelt(ServerLevel level, ItemStack item) {
     // TODO: Caching?
     var copy = item.copy();
     copy.setCount(1);

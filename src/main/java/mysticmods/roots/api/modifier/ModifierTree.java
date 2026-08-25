@@ -14,11 +14,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Holder<V> object;
@@ -44,7 +42,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     this.root = RootModifierNode.create(this, object, registry);
   }
 
-  private IModifierNode<V, C> getOrResetNode (ResourceKey<C> key) {
+  private IModifierNode<V, C> getOrResetNode(ResourceKey<C> key) {
     IModifierNode<V, C> node = ModifierNode.create(key);
     if (resetThisBuild.add(key)) {
       node.reset();
@@ -136,7 +134,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   private Set<C> allModifiers = null;
 
-  public Set<C> allModifiers () {
+  public Set<C> allModifiers() {
     if (allModifiers == null) {
       allModifiers = modifiers.values().stream().map(Holder::value).collect(ImmutableSet.toImmutableSet());
     }
@@ -184,7 +182,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return node;
   }
 
-  public static <V, C extends Modifier<V, C>> Holder<C> getHolder (ModifierTree<V, C> tree, ResourceKey<C> key) {
+  public static <V, C extends Modifier<V, C>> Holder<C> getHolder(ModifierTree<V, C> tree, ResourceKey<C> key) {
     var result = tree.modifiers.get(key);
     if (result == null) {
       throw new NullPointerException("No holder for key " + key);
@@ -192,7 +190,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return result;
   }
 
-  public static <V, C extends Modifier<V, C>> ResourceKey<C> getKey (ModifierTree<V, C> tree, C value) {
+  public static <V, C extends Modifier<V, C>> ResourceKey<C> getKey(ModifierTree<V, C> tree, C value) {
     for (Holder<C> holder : tree.modifiers.values()) {
       if (holder.value().equals(value)) {
         return holder.getKey();
@@ -252,7 +250,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return true;
     }
 
-    public boolean enable (C value) {
+    public boolean enable(C value) {
       var key = getKey(ModifierTree.this, value);
       return enable(key);
     }
@@ -262,7 +260,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return enable(node);
     }
 
-    public boolean disable (C value) {
+    public boolean disable(C value) {
       var key = getKey(ModifierTree.this, value);
       return disable(key);
     }

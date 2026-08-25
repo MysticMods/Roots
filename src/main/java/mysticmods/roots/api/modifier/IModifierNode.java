@@ -32,7 +32,7 @@ public interface IModifierNode<V, T extends IModifier<V, T>> {
     return 0;
   }
 
-  default IModifierNode<V, T> reset () {
+  default IModifierNode<V, T> reset() {
     return this;
   }
 }

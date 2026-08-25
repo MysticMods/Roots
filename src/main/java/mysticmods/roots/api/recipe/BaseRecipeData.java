@@ -111,7 +111,7 @@ public class BaseRecipeData {
     return ingredients.isEmpty() && levelConditions.isEmpty() && playerConditions.isEmpty() && result.isEmpty() && chanceOutputs.isEmpty() && unlocks.isEmpty() && powerRequirements.isEmpty();
   }
 
-  public boolean hasTaggedCondition (TagKey<ILevelConditionType<?>> tag) {
+  public boolean hasTaggedCondition(TagKey<ILevelConditionType<?>> tag) {
     if (levelConditions.isEmpty()) {
       return false;
     }

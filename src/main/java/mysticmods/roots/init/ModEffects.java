@@ -3,14 +3,12 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.effect.*;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.checkerframework.checker.units.qual.C;
 
 
 public class ModEffects {

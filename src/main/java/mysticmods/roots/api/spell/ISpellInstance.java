@@ -42,13 +42,13 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   Spell asSpell();
 
-  default int getSlot () {
+  default int getSlot() {
     return -1;
   }
 
   SpellModifierSet getEnabledModifiers();
 
-  default Set<ResourceKey<SpellModifier>> getEnabledModifierKeys () {
+  default Set<ResourceKey<SpellModifier>> getEnabledModifierKeys() {
     return getEnabledModifiers().getKeys();
   }
 
@@ -105,7 +105,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getEnabledModifiers().hasTag(modifier);
   }
 
-  default boolean has (ResourceKey<SpellModifier> modifier) {
+  default boolean has(ResourceKey<SpellModifier> modifier) {
     return getEnabledModifierKeys().contains(modifier);
   }
 
@@ -121,7 +121,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return DataComponentMap.EMPTY;
   }
 
-  default PatchedDataComponentMap getSpellDataPatch () {
+  default PatchedDataComponentMap getSpellDataPatch() {
     return PatchedDataComponentMap.fromPatch(getSpellData(), DataComponentPatch.EMPTY);
   }
 
@@ -239,17 +239,17 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().getChargeText(ticks);
   }
 
-  default float getIconPredicate () {
+  default float getIconPredicate() {
     return asSpell().getIconPredicate(this);
   }
 
   // TODO: Maybe remove this
   @Nullable
-  default Spell.ModifierOverride getLowestOverride (Spell.OverrideContext<?> context) {
+  default Spell.ModifierOverride getLowestOverride(Spell.OverrideContext<?> context) {
     return asSpell().getLowestOverride(this, context);
   }
 
-  static SpellInstanceSnapshot snapshot (ISpellInstance spell) {
+  static SpellInstanceSnapshot snapshot(ISpellInstance spell) {
     if (spell instanceof SpellInstanceSnapshot snapshot) {
       return snapshot;
     }

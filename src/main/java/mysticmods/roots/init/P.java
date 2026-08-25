@@ -52,7 +52,8 @@ public class P {
 
   public static List<PropertyHolder<?>> unclaimed() {
     Set<PropertyHolder<?>> CLAIMED = new HashSet<>();
-    RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID)).forEach(o -> CLAIMED.addAll(o.getProperties()));
+    RootsRegistries.SPELLS.stream().filter(o -> !o.is(RootsTags.Spells.INVALID))
+        .forEach(o -> CLAIMED.addAll(o.getProperties()));
     RootsRegistries.RITUALS.stream().forEach(o -> CLAIMED.addAll(o.getProperties()));
     List<PropertyHolder<?>> unclaimed = new ArrayList<>();
     for (PropertyHolder<?> property : INT_PROPERTIES) {

@@ -100,7 +100,7 @@ public class LootPoolEntryContainerDecomposers {
 
     @Override
     public List<ItemRecord> perform(SequentialEntry sequentialEntry, @Nullable List<ItemRecord> result) {
-      return Decomposers.LOOT_POOL_ENTRY_CONTAINERS.perform(((AccessorMixinCompositeEntryBase)sequentialEntry).roots$getChildren(), result);
+      return Decomposers.LOOT_POOL_ENTRY_CONTAINERS.perform(((AccessorMixinCompositeEntryBase) sequentialEntry).roots$getChildren(), result);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class LootPoolEntryContainerDecomposers {
       if (result == null) {
         result = new ArrayList<>();
       }
-      result.add(new ItemRecord(((AccessorMixinTagEntry)tagEntry).roots$GetTag()));
+      result.add(new ItemRecord(((AccessorMixinTagEntry) tagEntry).roots$GetTag()));
       return result;
     }
 

@@ -16,14 +16,10 @@ import mysticmods.roots.spell.*;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
 import net.minecraft.ChatFormatting;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.lwjgl.system.NonnullDefault;
-
-import java.util.function.Supplier;
 
 
 public class ModSpells {
@@ -149,7 +145,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.FloatProperty> SATURATE_FOOD_MULTIPLIER = P.recordProperty("saturate/food_multiplier", Property.ofFloat(0.5f, "Amount of food restored per point of food."));
 
   // Disarm spell (350 cooldown)
-  public static final DeferredHolder<Spell, DisarmSpell> DISARM = REGISTER.register(Spells.DISARM.location().getPath(), () -> new DisarmSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, DisarmSpell> DISARM = REGISTER.register(Spells.DISARM.location()
+      .getPath(), () -> new DisarmSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.OPERATION)
       .textColor(ChatFormatting.AQUA)
@@ -165,7 +162,8 @@ public class ModSpells {
 
   // Long night vision & sense danger
   // Extension spell (350 cooldown)
-  public static final DeferredHolder<Spell, ExtensionSpell> EXTENSION = REGISTER.register(Spells.EXTENSION.location().getPath(), () -> new ExtensionSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, ExtensionSpell> EXTENSION = REGISTER.register(Spells.EXTENSION.location()
+      .getPath(), () -> new ExtensionSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.COMPLEX_1750), Cost.add(ModHerbs.WILDROOT, SpellCosts.COMPLEX_1750)))
@@ -178,7 +176,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_Y = P.recordProperty("extension/radius_y", Property.ofInt(20, SpellProperties.RADIUS_Y));
 
   // Nondetection (350 cooldown)
-  public static final DeferredHolder<Spell, NondetectionSpell> NONDETECTION = REGISTER.register(Spells.NONDETECTION.location().getPath(), () -> new NondetectionSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, NondetectionSpell> NONDETECTION = REGISTER.register(Spells.NONDETECTION.location()
+      .getPath(), () -> new NondetectionSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)))
@@ -189,7 +188,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_DURATION = P.recordProperty("nondetection/duration", Property.ofInt(45 * 60, "The duration of the nondetection effect in ticks."));
 
   // Sylvan Light (20 cooldown)
-  public static final DeferredHolder<Spell, SylvanLightSpell> SYLVAN_LIGHT = REGISTER.register(Spells.SYLVAN_LIGHT.location().getPath(), () -> new SylvanLightSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, SylvanLightSpell> SYLVAN_LIGHT = REGISTER.register(Spells.SYLVAN_LIGHT.location()
+      .getPath(), () -> new SylvanLightSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, 0.0625), Cost.add(ModHerbs.PERESKIA, 0.0625)))
@@ -206,7 +206,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.DoubleProperty> SYLVAN_LIGHT_MAX_DISTANCE = P.recordProperty("sylvan_light/max_distance", Property.ofDouble(10.0, "The maximum distance a sylvan light can be placed from the caster"));
 
   // Geas (80 cooldown)
-  public static final DeferredHolder<Spell, GeasSpell> GEAS = REGISTER.register(Spells.GEAS.location().getPath(), () -> new GeasSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, GeasSpell> GEAS = REGISTER.register(Spells.GEAS.location()
+      .getPath(), () -> new GeasSpell(new Spell.Properties()
       .textColor(ChatFormatting.RED)
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.OPERATION)
@@ -281,7 +282,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_Y = P.recordProperty("harvest/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
 
   // Life Drain (20 cooldown)
-  public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = REGISTER.register(Spells.LIFE_DRAIN.location().getPath(), () -> new LifeDrainSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = REGISTER.register(Spells.LIFE_DRAIN.location()
+      .getPath(), () -> new LifeDrainSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125)))
@@ -296,7 +298,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COUNT = P.recordProperty("life_drain/count", Property.ofInt(3, "The number of entities affected by the spell per cast."));
 
   // Petal Shell (120 cooldown)
-  public static final DeferredHolder<Spell, PetalShellSpell> PETAL_SHELL = REGISTER.register(Spells.PETAL_SHELL.location().getPath(), () -> new PetalShellSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, PetalShellSpell> PETAL_SHELL = REGISTER.register(Spells.PETAL_SHELL.location()
+      .getPath(), () -> new PetalShellSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
       .textColor(ChatFormatting.LIGHT_PURPLE)
@@ -312,7 +315,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> RADIANCE_COOLDOWN = P.recordProperty("radiance/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));*/
 
   // Rose Thorns (24 cooldown)
-  public static final DeferredHolder<Spell, RoseThornsSpell> ROSE_THORNS = REGISTER.register(Spells.ROSE_THORNS.location().getPath(), () -> new RoseThornsSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, RoseThornsSpell> ROSE_THORNS = REGISTER.register(Spells.ROSE_THORNS.location()
+      .getPath(), () -> new RoseThornsSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)))
@@ -333,7 +337,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.FloatProperty> SANCTUARY_VELOCITY = P.recordProperty("sanctuary/velocity", Property.ofFloat(0.125f, "The velocity modifier applied to entities inside the sanctuary."));*/
 
   // Shatter (20 cooldown)
-  public static final DeferredHolder<Spell, ShatterSpell> SHATTER = REGISTER.register(Spells.SHATTER.location().getPath(), () -> new ShatterSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, ShatterSpell> SHATTER = REGISTER.register(Spells.SHATTER.location()
+      .getPath(), () -> new ShatterSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.OPERATION)
       .costs(() -> CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125))
@@ -343,7 +348,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> SHATTER_COOLDOWN = P.recordProperty("shatter/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
 
   // Jaunt (80 cooldown)
-  public static final DeferredHolder<Spell, JauntSpell> JAUNT = REGISTER.register(Spells.JAUNT.location().getPath(), () -> new JauntSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, JauntSpell> JAUNT = REGISTER.register(Spells.JAUNT.location()
+      .getPath(), () -> new JauntSpell(new Spell.Properties()
       .type(SpellCastType.CHARGED)
       .charge(ParentChargeType.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0031), Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0031)))
@@ -358,7 +364,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> STORM_CLOUD_COOLDOWN = P.recordProperty("storm_cloud/cooldown", Property.ofInt(100, SpellProperties.COOLDOWN));*/
 
   // Sky Soarer (39 cooldown)
-  public static final DeferredHolder<Spell, SkySoarerSpell> SKY_SOARER = REGISTER.register(Spells.SKY_SOARER.location().getPath(), () -> new SkySoarerSpell(new Spell.Properties()
+  public static final DeferredHolder<Spell, SkySoarerSpell> SKY_SOARER = REGISTER.register(Spells.SKY_SOARER.location()
+      .getPath(), () -> new SkySoarerSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
       .textColor(ChatFormatting.BLUE)

@@ -44,7 +44,8 @@ public abstract class RootsAPI {
   public static final ResourceKey<LootTable> GOAT_HORN = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath("minecraft", "entities/goat/horn"));
 
   public static final ResourceLocation OVERLAYS_ATLAS = RootsAPI.rl("overlays");
-  public static final ResourceLocation OVERLAYS_ATLAS_FILE = OVERLAYS_ATLAS.withPrefix("textures/atlas").withSuffix(".png");
+  public static final ResourceLocation OVERLAYS_ATLAS_FILE = OVERLAYS_ATLAS.withPrefix("textures/atlas")
+      .withSuffix(".png");
 
   public static ResourceLocation rl(String path) {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);

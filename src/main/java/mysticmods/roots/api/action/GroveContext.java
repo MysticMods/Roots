@@ -1,9 +1,9 @@
 package mysticmods.roots.api.action;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.ritual.IRitualInstance;
-import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -173,7 +173,7 @@ public interface GroveContext {
   }
 
   @Nullable
-  default List<ItemStack> recipeOutputs () {
+  default List<ItemStack> recipeOutputs() {
     return null;
   }
 

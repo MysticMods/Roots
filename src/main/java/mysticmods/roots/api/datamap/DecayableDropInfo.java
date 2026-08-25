@@ -12,13 +12,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
 
 public record DecayableDropInfo(Item item, float chance, int minimum, int tries) {
   public static final DecayableDropInfo NONE = new DecayableDropInfo(Items.AIR, 0, 0, 0);
 
-  public static final MapCodec<DecayableDropInfo> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.ITEM.byNameCodec().fieldOf("item")
+  public static final MapCodec<DecayableDropInfo> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.ITEM.byNameCodec()
+          .fieldOf("item")
           .forGetter(DecayableDropInfo::item), Codec.FLOAT.fieldOf("chance")
           .forGetter(DecayableDropInfo::chance), Codec.INT.fieldOf("tries").forGetter(DecayableDropInfo::tries))
       .apply(instance, DecayableDropInfo::new));

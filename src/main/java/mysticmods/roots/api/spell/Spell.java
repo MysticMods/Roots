@@ -175,7 +175,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   @Override
-  public Style getOrCreateStyle () {
+  public Style getOrCreateStyle() {
     if (style == null) {
       TextColor color = getTextColor();
       if (color != null) {
@@ -216,7 +216,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   @Override
-  public String getOrCreateDescriptionId (ISpellInstance instance) {
+  public String getOrCreateDescriptionId(ISpellInstance instance) {
     if (hasDescriptionOverride) {
       if (instance != null) {
         var overrides = getLowestOverride(instance, ModifierOverride.ID);

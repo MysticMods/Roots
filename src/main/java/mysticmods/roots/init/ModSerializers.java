@@ -1,7 +1,6 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;

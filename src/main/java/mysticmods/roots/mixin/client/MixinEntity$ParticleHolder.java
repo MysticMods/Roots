@@ -1,7 +1,6 @@
 package mysticmods.roots.mixin.client;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.client.particle.IMixinParticleHolder;
 import mysticmods.roots.client.particle.IParticleTester;

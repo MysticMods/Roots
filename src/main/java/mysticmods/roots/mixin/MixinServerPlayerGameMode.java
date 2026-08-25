@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ServerPlayerGameMode.class)
 public class MixinServerPlayerGameMode {
-  @WrapOperation(method="destroyBlock", at=@At(value="INVOKE", target="Lnet/minecraft/server/level/ServerPlayerGameMode;isCreative()Z"))
-  private boolean roots$checkShatterCreative (ServerPlayerGameMode instance, Operation<Boolean> original) {
+  @WrapOperation(method = "destroyBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayerGameMode;isCreative()Z"))
+  private boolean roots$checkShatterCreative(ServerPlayerGameMode instance, Operation<Boolean> original) {
     boolean result = original.call(instance);
     if (result && ShatterSpell.IS_CASTING_SHATTER) {
       return false;

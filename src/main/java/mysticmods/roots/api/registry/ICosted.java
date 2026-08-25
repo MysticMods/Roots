@@ -13,7 +13,7 @@ public interface ICosted {
     return 1;
   }
 
-  default int getMaximumOperations (Object2BooleanMap<ICosted> childMap) {
+  default int getMaximumOperations(Object2BooleanMap<ICosted> childMap) {
     return getBaseMaximumOperations();
   }
 }

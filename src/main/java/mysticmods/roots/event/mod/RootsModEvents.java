@@ -343,7 +343,7 @@ public class RootsModEvents {
     if (event.getTab().equals(ModTabs.SPELLS_TAB.get())) {
       event.accept(ModItems.SPELL_ACID_CLOUD.get());
       event.accept(ModItems.SPELL_AQUA_BUBBLE.get());
-/*      event.accept(ModItems.SPELL_SUMMON_UNDEAD.get());*/
+      /*      event.accept(ModItems.SPELL_SUMMON_UNDEAD.get());*/
       event.accept(ModItems.SPELL_DANDELION_WINDS.get());
       event.accept(ModItems.SPELL_DECAY.get());
       event.accept(ModItems.SPELL_DESATURATE.get());

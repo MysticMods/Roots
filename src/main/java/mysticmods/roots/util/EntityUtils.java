@@ -119,39 +119,39 @@ public class EntityUtils {
   }
 
   private static final Predicate<Entity> isHostile =
-    inc -> {
-    if (!(inc instanceof LivingEntity entity)) {
-      return false;
-    }
+      inc -> {
+        if (!(inc instanceof LivingEntity entity)) {
+          return false;
+        }
 
-    Level pLevel = inc.level();
+        Level pLevel = inc.level();
 
-    if (entity.isDeadOrDying() || entity.hurtTime > 0) {
-      return false;
-    }
+        if (entity.isDeadOrDying() || entity.hurtTime > 0) {
+          return false;
+        }
 
-    EntityType<?> type = entity.getType();
+        EntityType<?> type = entity.getType();
 
-    if (type.is(RootsTags.Entities.FORCE_HOSTILE)) {
-      return true;
-    } else if (type.is(RootsTags.Entities.FORCE_FRIENDLY)) {
-      return false;
-    }
+        if (type.is(RootsTags.Entities.FORCE_HOSTILE)) {
+          return true;
+        } else if (type.is(RootsTags.Entities.FORCE_FRIENDLY)) {
+          return false;
+        }
 
-    if (entity instanceof NeutralMob neutral) {
-      if (neutral.isAngryAtAllPlayers(pLevel)) {
-        return true;
-      }
-    }
+        if (entity instanceof NeutralMob neutral) {
+          if (neutral.isAngryAtAllPlayers(pLevel)) {
+            return true;
+          }
+        }
 
-    return entity instanceof Enemy;
-  };
+        return entity instanceof Enemy;
+      };
 
   public static boolean isHostile(Entity entity) {
     return isHostile.test(entity);
   }
 
-  public static Predicate<Entity> isHostile () {
+  public static Predicate<Entity> isHostile() {
     return isHostile;
   }
 }

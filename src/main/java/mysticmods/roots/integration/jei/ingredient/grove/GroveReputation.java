@@ -27,6 +27,7 @@ public record GroveReputation(GroveNumber number) implements IGroveNumber {
   }
 
   public static List<GroveReputation> all(int value) {
-    return RootsRegistries.GROVES.stream().map(o -> new GroveReputation(new GroveNumber(o, value, Type.REPUTATION))).toList();
+    return RootsRegistries.GROVES.stream().map(o -> new GroveReputation(new GroveNumber(o, value, Type.REPUTATION)))
+        .toList();
   }
 }

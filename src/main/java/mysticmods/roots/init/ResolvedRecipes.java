@@ -1,6 +1,5 @@
 package mysticmods.roots.init;
 
-import com.google.gson.JsonElement;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.type.ResolvingRecipeType;
@@ -21,18 +20,9 @@ import mysticmods.roots.recipe.runic.RunicEntityCrafting;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.transmutation.TransmutationCrafting;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.PreparableReloadListener;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
-
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {

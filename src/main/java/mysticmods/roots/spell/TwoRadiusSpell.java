@@ -30,7 +30,7 @@ public abstract class TwoRadiusSpell extends Spell {
     super(type, color, costs, chargeType, color1, color2);
   }
 
-  public TwoRadiusSpell (Spell.Properties properties) {
+  public TwoRadiusSpell(Spell.Properties properties) {
     super(properties);
   }
 

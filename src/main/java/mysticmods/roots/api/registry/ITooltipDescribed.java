@@ -4,13 +4,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public interface ITooltipDescribed extends IDescribed {
-  String getOrCreateTooltipDescriptionId ();
+  String getOrCreateTooltipDescriptionId();
 
-  default String getTooltipDescriptionId () {
+  default String getTooltipDescriptionId() {
     return getOrCreateTooltipDescriptionId();
   }
 
-  default MutableComponent getTooltipDescription () {
+  default MutableComponent getTooltipDescription() {
     return Component.translatable(this.getTooltipDescriptionId());
   }
 }

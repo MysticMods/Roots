@@ -3,7 +3,6 @@ package mysticmods.roots.client.gui.buttons;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.gui.screen.fake.StaffScreen;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;

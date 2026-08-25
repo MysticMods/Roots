@@ -38,7 +38,7 @@ public class DandelionWindsRenderLayer<T extends LivingEntity, M extends EntityM
       float netHeadYaw,
       float headPitch
   ) {
-    if (livingEntity.hasEffect(ModEffects.DANDELION_WINDS)){
+    if (livingEntity.hasEffect(ModEffects.DANDELION_WINDS)) {
       poseStack.pushPose();
       poseStack.translate(0, -1.5, 0);
       poseStack.scale(2, 2, 2);
