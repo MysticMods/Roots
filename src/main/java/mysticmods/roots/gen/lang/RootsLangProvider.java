@@ -917,6 +917,9 @@ public final class RootsLangProvider extends LanguageProvider {
 
     spellDescription(ModSpells.SKY_SOARER, "Propels you through the air in the direction you are looking.");
     spellExtendedDescription(ModSpells.SKY_SOARER, "Propels you through the air at ×%s sprint speed [%s] for %s seconds [%s ticks] in the direction you are looking.");
+    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_VORTEX, "Causes ranged attackers to be pulled towards you.");
+    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_GUSTS, "Causes melee attackers to be pushed away from you.");
+
     modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_1, "Increases speed of boost effect.");
     modifierExtendedDescription(ModModifiers.SKY_SOARER_AMPLIFIED_1, "Increases boost effect to ×%s sprint speed [%s].");
     modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_2, "Increases speed of boost effect.");
