@@ -965,9 +965,8 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_STATUE, "Increases your knockback resistance. [NYI]");
     modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_INFERNO, "Enflames nearby enemies. [NYI]");
 
-    // TODO: Cooldowns
-    spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, losing maximum health.");
-    spellExtendedDescription(ModSpells.DECAY, "Causes up to %s undead entities within ±%s/±%s blocks to decay, shedding resources and losing maximum health [result varies depending on the entity]. The maximum number of decay applications varies depending on the entity.");
+    spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, permanently losing maximum health.");
+    spellExtendedDescription(ModSpells.DECAY, "Causes up to %s undead entities within ±%s/±%s blocks to decay, shedding resources and permanently losing maximum health [result varies depending on the entity]. The maximum number of decay applications varies depending on the entity.");
 
     spellDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health.");
     spellExtendedDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health. Each point of food provides %s hearts of healing.");
