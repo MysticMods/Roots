@@ -26,11 +26,10 @@
         "roots:decayable/withers/1",
         "roots:decayable/withers/2",
         "roots:decayable/withers/3",
-        "roots:decayable/withers/4",
-        "roots:decayable/withers/5"
+        "roots:decayable/withers/4"
       ],
-      "healthReduction": -40.0,
-      "maxApplied": 5
+      "healthReduction": -20.0,
+      "maxApplied": 4
     },
     "#roots:decayable/zombies": {
       "baseIdentifier": "roots:decayable/zombies",

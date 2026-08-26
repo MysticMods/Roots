@@ -662,6 +662,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder36.add(RootsTags.Entities.DECAYABLE_ZOMBIES, new DecayableHealthInfo(RootsTags.Entities.DECAYABLE_ZOMBIES.location(), -4.0, 3), false);
     builder36.add(RootsTags.Entities.DECAYABLE_SKELETONS, new DecayableHealthInfo(RootsTags.Entities.DECAYABLE_SKELETONS.location(), -4.0, 3), false);
     builder36.add(RootsTags.Entities.DECAYABLE_SKELETONS, new DecayableHealthInfo(RootsTags.Entities.DECAYABLE_SKELETONS.location(), -4.0, 3), false);
-    builder36.add(RootsTags.Entities.DECAYABLE_WITHERS, new DecayableHealthInfo(RootsTags.Entities.DECAYABLE_WITHERS.location(), -40.0, 5), false);
+    builder36.add(RootsTags.Entities.DECAYABLE_WITHERS, new DecayableHealthInfo(RootsTags.Entities.DECAYABLE_WITHERS.location(), -20.0, 4), false);
   }
 }
