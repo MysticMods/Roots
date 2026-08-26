@@ -118,6 +118,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_ZX = P.recordProperty("decay/radius_zx", Property.ofInt(3, "Radius"));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_Y = P.recordProperty("decay/radius_y", Property.ofInt(2, "Radius"));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_COUNT = P.recordProperty("decay/count", Property.ofInt(1, SpellProperties.COUNT));
+  public static final PropertyHolder<Property.DoubleProperty> DECAY_COOLDOWN_BOSS_MODIFIER = P.recordProperty("decay/cooldown_boss_modifier", Property.ofDouble(2.5, "How much the cooldown should be multiplied by when decaying a boss entity."));
+  public static final PropertyHolder<Property.DoubleProperty> DECAY_COOLDOWN_HEART_MODIFIER = P.recordProperty("decay/cooldown_heart_modifier", Property.ofDouble(10, "How many ticks the cooldown should be increased by per decayed heart."));
 
   // Desaturate (500 cooldown)
   public static final DeferredHolder<Spell, DesaturateSpell> DESATURATE = REGISTER.register(Spells.DESATURATE.location()

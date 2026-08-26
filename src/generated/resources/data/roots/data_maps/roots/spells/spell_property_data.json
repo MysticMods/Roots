@@ -222,6 +222,24 @@
           "default_value": 1,
           "value": 1
         }
+      },
+      {
+        "id": "roots:decay/cooldown_boss_modifier",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "How much the cooldown should be multiplied by when decaying a boss entity.",
+          "default_value": 2.5,
+          "value": 2.5
+        }
+      },
+      {
+        "id": "roots:decay/cooldown_heart_modifier",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "How many ticks the cooldown should be increased by per decayed heart.",
+          "default_value": 10.0,
+          "value": 10.0
+        }
       }
     ],
     "roots:desaturate": [

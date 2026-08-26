@@ -45,7 +45,7 @@ public record DecayableHealthInfo(ResourceLocation baseIdentifier, List<Resource
     return temp;
   }
 
-  public boolean apply(LivingEntity attacker, LivingEntity entity) {
+  public double apply(LivingEntity attacker, LivingEntity entity) {
     var attribute = entity.getAttribute(Attributes.MAX_HEALTH);
 
     if (attribute == null) {
@@ -62,7 +62,7 @@ public record DecayableHealthInfo(ResourceLocation baseIdentifier, List<Resource
     }
 
     if (toApply == null) {
-      return false;
+      return 0;
     }
 
     var reduct = healthReduction > 0 ? -healthReduction : healthReduction;
@@ -85,6 +85,6 @@ public record DecayableHealthInfo(ResourceLocation baseIdentifier, List<Resource
 
     entity.setLastHurtByMob(attacker);
 
-    return true;
+    return reduct;
   }
 }

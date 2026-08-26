@@ -206,6 +206,7 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
         .addTags(RootsTags.Entities.DECAYABLE_WITHERS, RootsTags.Entities.DECAYABLE_PHANTOMS, RootsTags.Entities.DECAYABLE_SKELETONS, RootsTags.Entities.DECAYABLE_ZOMBIES);
     this.tag(RootsTags.Entities.DANDELION_WINDS_DEFLECTABLES);
     this.tag(RootsTags.Entities.DANDELION_WINDS_UNDEFLECTABLES).add(EntityType.EXPERIENCE_BOTTLE);
+    this.tag(RootsTags.Entities.BOSS).add(EntityType.WITHER, EntityType.WARDEN, EntityType.ENDER_DRAGON);
   }
 
   @Override
