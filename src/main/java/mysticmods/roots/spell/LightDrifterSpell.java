@@ -95,9 +95,7 @@ public class LightDrifterSpell extends Spell {
     return new Component[]{
         Component.literal(String.format("%.1f", duration / 20.0)),
         Component.literal(String.valueOf(duration)),
-        Component.literal(String.valueOf(maxDistance)),
-        Component.literal(String.format("%.1f", cooldown / 20.0)),
-        Component.literal(String.valueOf(cooldown))
+        Component.literal(String.valueOf(maxDistance))
     };
   }
 

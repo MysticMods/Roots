@@ -67,9 +67,7 @@ public class AquaBubbleSpell extends Spell {
         Component.literal(String.valueOf(duration)),
         Component.literal(String.format("%.1f", absorb)),
         Component.literal(String.format("%.1f", 1.0 - lava_reduction)),
-        Component.literal(String.format("%.1f", 1.0 - fire_reduction)),
-        Component.literal(String.format("%.1f", cooldown / 20.0)),
-        Component.literal(String.valueOf(cooldown))
+        Component.literal(String.format("%.1f", 1.0 - fire_reduction))
     };
   }
 

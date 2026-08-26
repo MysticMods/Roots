@@ -943,7 +943,7 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescriptionBoth(ModModifiers.ACID_CLOUD_PEACEFUL, "Prevents damage to non-hostile entities.");
 
     spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
-    spellExtendedDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%. Triggers a base cooldown of %s seconds [%s ticks].");
+    spellExtendedDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%.");
 
     spellDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body, allowing you to float through entities and terrain for a short time and distance. Returns you to your body upon expiration.");
     spellExtendedDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body for %s seconds [%s ticks], allowing you to float through entities and terrain up to %s blocks away from your location when casting the spell. Triggers a base cooldown of %s seconds [%s ticks].");
