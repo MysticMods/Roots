@@ -27,6 +27,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -186,6 +187,7 @@ public class ShatterSpell extends Spell {
           ShatterBlockAction.Context context = new ShatterBlockAction.Context((ServerLevel) pLevel, player, pos, state, instance);
           ModActions.SHATTER_BLOCK.get().accept(context);
         }
+        pLevel.levelEvent(2001, pos, Block.getId(state));
         count += DataMaps.getShatterCostMultiplier(state.getBlock());
         broken.add(pos);
       }
