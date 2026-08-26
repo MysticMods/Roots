@@ -138,6 +138,16 @@ repositories {
             includeGroup 'top.theillusivec4.curios'
         }
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = "https://api.modrinth.com/maven/"
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("maven.modrinth")
+        }
+    }
 }
 
 dependencies {
@@ -150,6 +160,9 @@ dependencies {
 
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    compileOnly("maven.modrinth:jade:${rootProject.jade_version}+neoforge")
+    implementation "maven.modrinth:jade:${rootProject.jade_version}+neoforge"
 
     compileOnly("com.google.auto.service:auto-service-annotations:${rootProject.auto_service_version}")
     annotationProcessor("com.google.auto.service:auto-service:${rootProject.auto_service_version}")
