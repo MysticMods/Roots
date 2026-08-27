@@ -569,6 +569,8 @@ public class RootsTags {
     // If there's nothing in deflectables, disallow these but allow everything else
     public static final TagKey<EntityType<?>> DANDELION_WINDS_UNDEFLECTABLES = modTag("dandelion_winds/undeflectables");
 
+    public static final TagKey<EntityType<?>> GEAS_INELIGIBLE = modTag("geas_ineligible");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }
