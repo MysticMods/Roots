@@ -39,7 +39,7 @@ public class TooltipUtil {
       ISpellInstance spell = storage.getCurrentSpell();
       pTooltipComponents.add(CommonComponents.EMPTY);
       if (spell != null) {
-        TooltipUtil.spellInstanceTooltip(context, pTooltipComponents, spell, flag);
+        TooltipUtil.spellInstanceCostModeModifiersTooltip(context, pTooltipComponents, spell, flag);
       } else {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
@@ -80,9 +80,12 @@ public class TooltipUtil {
 
   public static final Component MODIFIED_SPELL = Component.translatable("roots.tooltip.staff.is_modified");
 
-  public static void spellInstanceTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag, boolean addName) {
+  public static void spellInstanceCostModeModifiersTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag, boolean addName, boolean addDescription) {
     if (addName) {
       result.add(spell.getStyledName());
+    }
+    if (addDescription) {
+      TooltipUtil.describeSpell(context, result, spell, flag);
     }
     spellModeTooltip(context, result, spell, flag);
     fullSpellCostTooltip(context, result, spell, flag);
@@ -172,8 +175,8 @@ public class TooltipUtil {
     }
   }
 
-  public static void spellInstanceTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
-    spellInstanceTooltip(context, result, spell, flag, true);
+  public static void spellInstanceCostModeModifiersTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
+    spellInstanceCostModeModifiersTooltip(context, result, spell, flag, true, true);
   }
 
   public static void spellModeTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
@@ -275,13 +278,13 @@ public class TooltipUtil {
     }
   }
 
-  public static void describeSpell(Item.TooltipContext context, List<Component> tooltipComponents, Spell spell, TooltipFlag tooltipFlag) {
+/*  public static void describeSpell(Item.TooltipContext context, List<Component> tooltipComponents, Spell spell, TooltipFlag tooltipFlag) {
     if (tooltipFlag.hasShiftDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
       tooltipComponents.add(spell.getTooltipExtendedDescription());
     } else {
       tooltipComponents.add(spell.getTooltipDescription());
     }
-  }
+  }*/
 
   public static Component describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, SpellModifier spellModifier, TooltipFlag tooltipFlag) {
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
