@@ -83,4 +83,5 @@
 - Aqua Bubble and Light Drifter tooltips no longer display cooldowns; these will be automatically added in a future release to all spells
 - Ender dragons and withers are bosses with an override to `addEffect` that prevents any potion effect from being applied to them; thus they are ineligible for Geas
 - Aliases added for previously removed spells and rituals (#1382) hopefully resolving crash with FTB Quests
-- 
+- Decay now has a custom cost and a recipe
+- Staffs now properly display the tooltip of the currently selected spell
