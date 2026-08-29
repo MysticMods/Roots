@@ -120,7 +120,7 @@ public class ModSpells {
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.OPERATION)
       .color(0x2d8115, 0xc92b5f)
-      .costs(() -> CostInstance.of(Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250)))
+      .costs(() -> CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250)))
       .textColor(ChatFormatting.DARK_GREEN)
       .build()));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_COOLDOWN = P.recordProperty("decay/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));

@@ -42,12 +42,12 @@
         {
           "type": "additive",
           "defaultValue": 0.25,
-          "herb": "roots:stalicripe"
+          "herb": "roots:moonglow"
         },
         {
           "type": "additive",
           "defaultValue": 0.25,
-          "herb": "roots:wildewheet"
+          "herb": "roots:bafflecap"
         }
       ]
     },
