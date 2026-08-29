@@ -71,3 +71,16 @@
 
 - Again, change how 'dev' mixins are handled to prevent future issues
 - Fix how continuous spells, such as Growth Infusion, have their costs calculated and charged to prevent them from over-charging
+
+## 4.0.0.30-alpha
+
+- Improved decay configuration for withers, default maximum health can be reduced 4 times by 20 instead of by a total of 200
+- Decay cooldown now scales configurably based on the number of hearts removed from the maximum health
+- Decay tooltips now clarify that decay is a permanent effect
+- Decay cooldowns are further increased by a configurable modifier (default 2.5) if tagged entity is a "boss"
+- Shatter now displays block break particles and plays block break sounds
+- Fixed some missing modifier descriptions
+- Aqua Bubble and Light Drifter tooltips no longer display cooldowns; these will be automatically added in a future release to all spells
+- Ender dragons and withers are bosses with an override to `addEffect` that prevents any potion effect from being applied to them; thus they are ineligible for Geas
+- Aliases added for previously removed spells and rituals (#1382) hopefully resolving crash with FTB Quests
+- 
