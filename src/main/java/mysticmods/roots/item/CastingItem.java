@@ -181,7 +181,7 @@ public class CastingItem extends Item {
     }
 
     ISpellInstance spell = storage.getCurrentSpell();
-    if (spell == null) {
+    if (spell == null || spell.is(RootsTags.Spells.INVALID)) {
       CastingSuccessCache.clear(pStack);
       pPlayer.stopUsingItem();
       pStack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
@@ -308,7 +308,7 @@ public class CastingItem extends Item {
 
     int current = storage.currentSlot();
     ISpellInstance spell = storage.getSpell(current);
-    if (spell == null || !spell.offCooldown(stack, pPlayer)) {
+    if (spell == null || !spell.offCooldown(stack, pPlayer) || spell.is(RootsTags.Spells.INVALID)) {
       return InteractionResultHolder.pass(stack);
     }
 
@@ -385,7 +385,7 @@ public class CastingItem extends Item {
     }
 
     ISpellInstance spell = storage.getCurrentSpell();
-    if (spell == null) {
+    if (spell == null || spell.is(RootsTags.Spells.INVALID)) {
       pStack.set(ModAttachments.CASTING_CURRENT_SPELL, false);
       return;
     }
