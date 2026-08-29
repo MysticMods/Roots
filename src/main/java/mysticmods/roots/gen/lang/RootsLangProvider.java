@@ -975,6 +975,8 @@ public final class RootsLangProvider extends LanguageProvider {
     spellExtendedDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health. Each point of food provides %s hearts of healing.");
     spellDescription(ModSpells.SATURATE, "Directly converts food and drink items in your inventory to saturation and food levels. Some value is lost in this process.");
     spellExtendedDescription(ModSpells.SATURATE, "Directly consumes food items, applying %s%% of the item's saturation and %s%% of the item's food to you.");
+    spellDescription(ModSpells.EMPTY, "Placeholder value. This spell cannot be cast!");
+    spellExtendedDescription(ModSpells.EMPTY, "Placeholder value. This spell cannot be cast!");
     spellDescription(ModSpells.DISARM, "Disarms entities around you, with a chance to drop the held items.");
     spellExtendedDescription(ModSpells.DISARM, "Disarms up to %s entities within ±%s/±%s blocks. The chance to drop each equipped item is %s%% or the default drop chance, whichever is lower. Disarmed entities will then glow for %s seconds [%s ticks].");
     spellDescription(ModSpells.EXTENSION, "Extends your senses, allowing you to see in the dark and sense nearby enemies.");

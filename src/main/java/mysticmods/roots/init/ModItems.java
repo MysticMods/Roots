@@ -424,11 +424,20 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SATURATE = ITEMS.register("saturate", () -> spell(ModSpells.SATURATE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SHATTER = ITEMS.register("shatter", () -> spell(ModSpells.SHATTER));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SKY_SOARER = ITEMS.register("sky_soarer", () -> spell(ModSpells.SKY_SOARER));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_EMPTY = ITEMS.register("empty_spell", () -> spell(ModSpells.EMPTY));
   /*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_STORM_CLOUD = ITEMS.register("storm_cloud", () -> spell(ModSpells.STORM_CLOUD));*/
   /*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_TEMPORAL_MORASS = ITEMS.register("temporal_morass", () -> spell(ModSpells.TEMPORAL_MORASS));*/
   /*  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_WILDFIRE = ITEMS.register("wildfire", () -> spell(ModSpells.WILDFIRE));*/
 
   static {
+    ITEMS.addAlias(RootsAPI.rl("storm_cloud"), RootsAPI.rl("empty_spell"));
+    ITEMS.addAlias(RootsAPI.rl("temporal_morass"), RootsAPI.rl("empty_spell"));
+    ITEMS.addAlias(RootsAPI.rl("wildfire"), RootsAPI.rl("empty_spell"));
+    ITEMS.addAlias(RootsAPI.rl("sanctuary"), RootsAPI.rl("empty_spell"));
+    ITEMS.addAlias(RootsAPI.rl("radiance"), RootsAPI.rl("empty_spell"));
+    ITEMS.addAlias(RootsAPI.rl("summon_undead"), RootsAPI.rl("empty_spell"));
+    ITEMS.addAlias(RootsAPI.rl("rampant_growth"), RootsAPI.rl("empty_spell"));
+
     ITEMS.addAlias(RootsAPI.rl("spell_acid_cloud"), RootsAPI.rl("acid_cloud"));
     ITEMS.addAlias(RootsAPI.rl("spell_aqua_bubble"), RootsAPI.rl("aqua_bubble"));
     ITEMS.addAlias(RootsAPI.rl("spell_control_undead"), RootsAPI.rl("control_undead"));
@@ -484,7 +493,7 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WARDING = ITEMS.register("warding", () -> ritual(ModRituals.WARDING));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WILDROOT_GROWTH = ITEMS.register("wildroot_growth", () -> ritual(ModRituals.WILDROOT_GROWTH));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WINDWALL = ITEMS.register("windwall", () -> ritual(ModRituals.WINDWALL));
-  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_EMPTY = ITEMS.register("empty", () -> ritual(ModRituals.EMPTY));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_EMPTY = ITEMS.register("empty_ritual", () -> ritual(ModRituals.EMPTY));
 
   static {
     ITEMS.addAlias(RootsAPI.rl("ritual_animal_harvest"), RootsAPI.rl("animal_harvest"));

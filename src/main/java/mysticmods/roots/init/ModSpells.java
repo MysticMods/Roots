@@ -42,6 +42,15 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COUNT = P.recordProperty("acid_cloud/count", Property.ofInt(1, SpellProperties.COUNT));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_FIRE_TICKS = P.recordProperty("acid_cloud/fire_ticks", Property.ofInt(3 * 20, "The number of ticks for which damaged mods are set on fire for when the fire modifier is enabled."));
 
+  public static final DeferredHolder<Spell, EmptySpell> EMPTY = REGISTER.register("empty", () -> new EmptySpell(new Spell.Properties()
+      .type(SpellCastType.INSTANT)
+      .charge(ParentChargeType.INSTANCE)
+      .color(0xffffff, 0xc0c0c0)
+      .textColor(ChatFormatting.DARK_PURPLE)
+      .costs(() -> CostInstance.EMPTY)
+      .build()));
+  public static final PropertyHolder<Property.IntegerProperty> EMPTY_COOLDOWN = P.recordProperty("empty/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN + " (this spell is unused)"));
+
   // Aqua Bubble (1200 cooldown)
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = REGISTER.register(Spells.AQUA_BUBBLE.location()
       .getPath(), () -> new AquaBubbleSpell(
@@ -380,6 +389,15 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_DURATION = P.recordProperty("sky_soarer/duration", Property.ofInt(50, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_FRIENDLY_EARTH_DURATION = P.recordProperty("sky_soarer/friendly_earth_duration", Property.ofInt(5 * 20, "Duration of the friendly earth effect, applied when the sky soarer effect ends or is canceled, in ticks."));
   public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_DURATION_INCREASE = P.recordProperty("sky_soarer/boosted_duration", Property.ofFloat(0.1f, "The base duration value is multiplied by 1+(this value, multiplied by the number of duration modifiers enabled)."));
+
+  static {
+    REGISTER.addAlias(RootsAPI.rl("storm_cloud"), RootsAPI.rl("empty"));
+    REGISTER.addAlias(RootsAPI.rl("temporal_morass"), RootsAPI.rl("empty"));
+    REGISTER.addAlias(RootsAPI.rl("wildfire"), RootsAPI.rl("empty"));
+    REGISTER.addAlias(RootsAPI.rl("sanctuary"), RootsAPI.rl("empty"));
+    REGISTER.addAlias(RootsAPI.rl("radiance"), RootsAPI.rl("empty"));
+    REGISTER.addAlias(RootsAPI.rl("summon_undead"), RootsAPI.rl("empty"));
+  }
 
   // Temporal Morass (320 cooldown)
 /*  public static final DeferredHolder<Spell, TemporalMorassSpell> TEMPORAL_MORASS = spell(Spells.TEMPORAL_MORASS, TemporalMorassSpell::new, ChatFormatting.DARK_BLUE, () -> CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250)));

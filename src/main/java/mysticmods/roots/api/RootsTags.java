@@ -630,6 +630,9 @@ public class RootsTags {
     // Invalid spells will not show up in command completion, library, etc
     public static final TagKey<Spell> INVALID = modTag("invalid");
 
+    // Empty spells are also invalid
+    public static final TagKey<Spell> EMPTY = modTag("empty");
+
     static TagKey<Spell> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));
     }

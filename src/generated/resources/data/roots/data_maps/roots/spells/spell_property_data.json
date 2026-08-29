@@ -318,6 +318,17 @@
         }
       }
     ],
+    "roots:empty": [
+      {
+        "id": "roots:empty/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again (this spell is unused)",
+          "default_value": 0,
+          "value": 0
+        }
+      }
+    ],
     "roots:extension": [
       {
         "id": "roots:extension/cooldown",

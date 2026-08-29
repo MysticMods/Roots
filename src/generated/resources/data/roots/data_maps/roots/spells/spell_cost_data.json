@@ -79,6 +79,9 @@
         }
       ]
     },
+    "roots:empty": {
+      "costs": []
+    },
     "roots:extension": {
       "costs": [
         {

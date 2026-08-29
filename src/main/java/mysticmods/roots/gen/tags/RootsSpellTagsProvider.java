@@ -48,7 +48,8 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
     this.tag(RootsTags.Spells.PRETEND_PICKAXE).add(ModSpells.SHATTER.get());
 
     //noinspection deprecation
-    this.tag(RootsTags.Spells.INVALID).add(ModSpells.RAMPANT_GROWTH.get());
+    this.tag(RootsTags.Spells.INVALID).add(ModSpells.RAMPANT_GROWTH.get(), ModSpells.EMPTY.get());
+    this.tag(RootsTags.Spells.EMPTY).add(ModSpells.EMPTY.get());
   }
 
   @Override
