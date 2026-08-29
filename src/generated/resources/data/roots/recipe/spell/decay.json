@@ -1,0 +1,30 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:rotten_flesh"
+      },
+      {
+        "tag": "c:bones"
+      },
+      {
+        "tag": "minecraft:coals"
+      },
+      {
+        "item": "minecraft:armadillo_scute"
+      },
+      {
+        "tag": "roots:crops/bafflecap"
+      }
+    ],
+    "priority": 0,
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:decay"
+      }
+    ]
+  },
+  "times": 6
+}

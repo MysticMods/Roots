@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:spell/decay"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_armadillo_scute": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:armadillo_scute"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_armadillo_scute"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:spell/decay"
+    ]
+  }
+}

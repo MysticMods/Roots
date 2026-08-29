@@ -1465,6 +1465,13 @@ public final class RootsRecipeProvider extends RecipeProvider {
                     .requires(Items.MAGMA_CREAM).requires(Items.LAVA_BUCKET)
                     .unlocks(Unlock.spell(ModSpells.WILDFIRE))), c, RootsAPI.rl("spell/wildfire"));*/
 
+    RecipeSaver.saver().unlockedBy("has_armadillo_scute", has(Items.ARMADILLO_SCUTE))
+        .save(MortarRecipe.Builder.create().times(6)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.ROTTEN_FLESH).requires(Tags.Items.BONES)
+                    .requires(ItemTags.COALS).requires(Items.ARMADILLO_SCUTE).requires(RootsTags.Items.BAFFLECAP_CROP)
+                    .unlocks(Unlock.spell(ModSpells.DECAY))), c, RootsAPI.rl("spell/decay"));
+
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.MOSS_BLOCK)
         .pattern("XX")
         .pattern("XX")
