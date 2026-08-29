@@ -12,7 +12,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 public class CommandsHandler {
   @SubscribeEvent
   public static void onCommands(RegisterCommandsEvent event) {
-    RootsCommand.register(event.getDispatcher());
+    RootsCommand.register(event.getDispatcher(), event.getBuildContext());
     DumpDataCommand.register(event.getDispatcher());
   }
 }
