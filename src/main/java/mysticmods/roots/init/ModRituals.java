@@ -15,6 +15,10 @@ public class ModRituals {
 
   private static final DeferredRegister<Ritual> RITUAL = DeferredRegister.create(RootsRegistries.Keys.RITUALS, RootsAPI.MODID);
 
+  public static final DeferredHolder<Ritual, EmptyRitual> EMPTY = RITUAL.register("empty", EmptyRitual::new);
+  public static final PropertyHolder<Property.IntegerProperty> EMPTY_DURATION = P.recordProperty("empty/duration", Property.ofInt(0, RitualProperties.DURATION + " (this ritual is unused"));
+  public static final PropertyHolder<Property.IntegerProperty> EMPTY_INTERVAL = P.recordProperty("empty/interval", Property.ofInt(1, RitualProperties.INTERVAL + " (this ritual is unused"));
+
   // This is just a pseudoritual.
   public static final DeferredHolder<Ritual, CraftingRitual> CRAFTING = RITUAL.register("crafting", CraftingRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> CRAFTING_DURATION = P.recordProperty("crafting/duration", Property.ofInt(160, RitualProperties.DURATION));

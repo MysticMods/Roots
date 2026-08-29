@@ -39,6 +39,7 @@ public final class RootsRitualTagsProvider extends IntrinsicHolderTagsProvider<R
     this.tag(RootsTags.Rituals.FAIRY)
         .add(ModRituals.BLOOMING.get(), ModRituals.PROTECTION.get(), ModRituals.WARDING.get());
     this.tag(RootsTags.Rituals.SUMMON_CREATURES).add(ModRituals.SUMMON_CREATURES.get());
+    this.tag(RootsTags.Rituals.EMPTY).add(ModRituals.EMPTY.get());
   }
 
   @Override

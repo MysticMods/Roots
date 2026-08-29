@@ -253,6 +253,26 @@
         }
       }
     ],
+    "roots:empty": [
+      {
+        "id": "roots:empty/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The length of the ritual (this ritual is unused",
+          "default_value": 0,
+          "value": 0
+        }
+      },
+      {
+        "id": "roots:empty/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How often the ritual is executed (must be shorter than duration) (this ritual is unused",
+          "default_value": 1,
+          "value": 1
+        }
+      }
+    ],
     "roots:fire_storm": [
       {
         "id": "roots:fire_storm/duration",

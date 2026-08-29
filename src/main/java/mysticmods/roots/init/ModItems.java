@@ -484,6 +484,7 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WARDING = ITEMS.register("warding", () -> ritual(ModRituals.WARDING));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WILDROOT_GROWTH = ITEMS.register("wildroot_growth", () -> ritual(ModRituals.WILDROOT_GROWTH));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WINDWALL = ITEMS.register("windwall", () -> ritual(ModRituals.WINDWALL));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_EMPTY = ITEMS.register("empty", () -> ritual(ModRituals.EMPTY));
 
   static {
     ITEMS.addAlias(RootsAPI.rl("ritual_animal_harvest"), RootsAPI.rl("animal_harvest"));
@@ -567,15 +568,6 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.SHATTER_WIDTH_I);
     modifier(ITEMS, ModModifiers.SHATTER_WIDTH_II);
   }
-/*
-
-  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_FRIENDLY_EARTH = modifier(ITEMS, ModModifiers.SKY_SOARER_FRIENDLY_EARTH);
-  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_AMPLIFIED_1 = ITEMS.register("sky_soarer/amplified_1", () -> modifier(ModModifiers.SKY_SOARER_AMPLIFIED_1));
-  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_AMPLIFIED_2 = ITEMS.register("sky_soarer/amplified_2", () -> modifier(ModModifiers.SKY_SOARER_AMPLIFIED_2));
-  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_SPEEDY_1 = ITEMS.register("sky_soarer/speedy_1", () -> modifier(ModModifiers.SKY_SOARER_SPEEDY_1));
-  public static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> SKY_SOARER_SPEEDY_2 = ITEMS.register("sky_soarer/speedy_2", () -> modifier(ModModifiers.SKY_SOARER_SPEEDY_2));
-
-*/
 
   private static TokenItem.SpellTokenItem spell(Holder<Spell> spell) {
     return new TokenItem.SpellTokenItem(spell.getKey(), new Item.Properties().stacksTo(1));

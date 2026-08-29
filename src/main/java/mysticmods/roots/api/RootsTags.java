@@ -595,6 +595,8 @@ public class RootsTags {
 
     public static final TagKey<Ritual> SUMMON_CREATURES = modTag("summon_creatures");
 
+    public static final TagKey<Ritual> EMPTY = modTag("empty");
+
     static TagKey<Ritual> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.RITUALS, RootsAPI.rl(name));
     }
