@@ -29,7 +29,6 @@ import org.joml.Vector3f;
 public class NondetectionParticle extends RootsParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
-  protected float[][] rolls;
 
   private static final float[][] colors = {
       convertColor(0xffe383),
@@ -51,6 +50,8 @@ public class NondetectionParticle extends RootsParticle {
   private final TextureAtlasSprite[] sprites;
   private final int[] assignedColors;
 
+  private int curIndex = 0;
+
   private static float[] convertColor(int color) {
     return new float[]{
         ((color >> 16) & 0xFF) / 255.0f,
@@ -63,13 +64,9 @@ public class NondetectionParticle extends RootsParticle {
     super(level, x, y, z);
     this.sprites = new TextureAtlasSprite[count];
     this.assignedColors = new int[count];
-    this.rolls = new float[count][3];
     for (int i = 0; i < count; i++) {
       this.sprites[i] = sprites.get(random);
       this.assignedColors[i] = random.nextInt(colors.length);
-      this.rolls[i][0] = 0.01f + (random.nextFloat() - 0.5f) * 0.01f;
-      this.rolls[i][1] = 0;
-      this.rolls[i][2] = 0;
     }
     this.entity = entity;
     this.lifetime = 100;
@@ -90,6 +87,7 @@ public class NondetectionParticle extends RootsParticle {
     this.defaultLight = false;
     this.defaultMovement = false;
     this.defaultRoll = false;
+    this.curIndex = 0;
     tick();
   }
 
@@ -123,11 +121,6 @@ public class NondetectionParticle extends RootsParticle {
     this.y = entity.getY();
     this.z = entity.getZ();
 
-    for (int i = 0; i < count; i++) {
-      rolls[i][2] = rolls[i][1];
-      rolls[i][1] += rolls[i][0];
-    }
-
     if (!this.removed) {
       float f = (float) this.age / (float) this.lifetime;
       if (this.oB1 != this.bcol2) {
@@ -142,6 +135,17 @@ public class NondetectionParticle extends RootsParticle {
   public AABB getRenderBoundingBox(float partialTicks) {
     // Otherwise it won't render in first person
     return AABB.INFINITE;
+  }
+
+  @Override
+  public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
+    Quaternionf quaternionf = new Quaternionf();
+    this.getFacingCameraMode().setRotation(quaternionf, renderInfo, partialTicks);
+    if (this.roll != 0.0F) {
+      quaternionf.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
+    }
+
+    this.renderRotatedQuad(buffer, renderInfo, quaternionf, partialTicks);
   }
 
   @Override
@@ -164,6 +168,7 @@ public class NondetectionParticle extends RootsParticle {
     int newCount = count;
 
     for (int i = 0; i <= count; i++) {
+      this.curIndex = i;
       double sin = Math.sin(angleOffset + i * anglePerShell);
       double cos = Math.cos(angleOffset + i * anglePerShell);
 
@@ -182,13 +187,39 @@ public class NondetectionParticle extends RootsParticle {
       Quaternionf q = new Quaternionf(quaternion);
       /*      q.rotateZ(Mth.lerp(partialTicks, rolls[i][1], rolls[i][2]));*/
 
-      this.renderRotatedQuad(i, buffer, q, f, f1, f2, partialTicks, getLightColor(x, y, z, partialTicks));
+      float[] color = colors[assignedColors[i]];
+      this.rCol = color[0];
+      this.gCol = color[1];
+      this.bCol = color[2];
+
+      this.renderRotatedQuad(buffer, q, f, f1, f2, partialTicks);
 
       newCount--;
       if (newCount <= 0) {
+        this.curIndex = 0;
         break;
       }
     }
+  }
+
+  @Override
+  protected float getU0() {
+    return getU0(curIndex);
+  }
+
+  @Override
+  protected float getU1() {
+    return getU1(curIndex);
+  }
+
+  @Override
+  protected float getV0() {
+    return getV0(curIndex);
+  }
+
+  @Override
+  protected float getV1() {
+    return getV1(curIndex);
   }
 
   protected float getU0(int i) {
@@ -206,41 +237,6 @@ public class NondetectionParticle extends RootsParticle {
   protected float getV1(int i) {
     return this.sprites[i].getV1();
   }
-
-  protected void renderRotatedQuad(int index, VertexConsumer buffer, Quaternionf quaternion, float x, float y, float z, float partialTicks, int packedLight) {
-    float f = this.getQuadSize(partialTicks);
-    float f1 = this.getU0(index);
-    float f2 = this.getU1(index);
-    float f3 = this.getV0(index);
-    float f4 = this.getV1(index);
-    this.renderVertex(index, buffer, quaternion, x, y, z, 1.0F, -1.0F, f, f2, f4, packedLight);
-    this.renderVertex(index, buffer, quaternion, x, y, z, 1.0F, 1.0F, f, f2, f3, packedLight);
-    this.renderVertex(index, buffer, quaternion, x, y, z, -1.0F, 1.0F, f, f1, f3, packedLight);
-    this.renderVertex(index, buffer, quaternion, x, y, z, -1.0F, -1.0F, f, f1, f4, packedLight);
-  }
-
-  private void renderVertex(
-      int index,
-      VertexConsumer buffer,
-      Quaternionf quaternion,
-      float x,
-      float y,
-      float z,
-      float xOffset,
-      float yOffset,
-      float quadSize,
-      float u,
-      float v,
-      int packedLight
-  ) {
-    Vector3f vector3f = new Vector3f(xOffset, yOffset, 0.0F).rotate(quaternion).mul(quadSize).add(x, y, z);
-    float[] color = colors[assignedColors[index]];
-    buffer.addVertex(vector3f.x(), vector3f.y(), vector3f.z())
-        .setUv(u, v)
-        .setColor(color[0], color[1], color[2], this.alpha)
-        .setLight(packedLight);
-  }
-
 
   public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {
     @Override
