@@ -333,7 +333,6 @@ public class RootsCommand {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.ritual.usage"), false);
         return 1;
       }).then(suggestRituals(context).executes(c -> {
-        Holder<Grove> grove = ResourceArgument.getResource(c, "grove", RootsRegistries.Keys.GROVES);
         Holder<Ritual> ritual = ResourceArgument.getResource(c, "ritual", RootsRegistries.Keys.RITUALS);
 
         if (c.getSource().getPlayer() == null) {
