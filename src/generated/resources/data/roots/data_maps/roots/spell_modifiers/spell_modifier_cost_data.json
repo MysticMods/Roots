@@ -27,6 +27,24 @@
         }
       ]
     },
+    "roots:acid_cloud/slowness": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:dewgonia"
+        }
+      ]
+    },
+    "roots:acid_cloud/temporal_morass": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
     "roots:dandelion_winds/chance_i": {
       "costs": [
         {

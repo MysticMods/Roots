@@ -947,6 +947,9 @@ public final class RootsLangProvider extends LanguageProvider {
 
     modifierDescriptionBoth(ModModifiers.ACID_CLOUD_KNOCKBACK, "Prevents damaged entities from being knocked back when damaged by acid cloud.");
 
+    modifierDescription(ModModifiers.ACID_CLOUD_SLOWNESS, "Damaged entities are also slowed.");
+    modifierExtendedDescription(ModModifiers.ACID_CLOUD_SLOWNESS, "Damaged entities are slowed for %s seconds [%s ticks] with Slowness %s.");
+
     spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
     spellExtendedDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%.");
 

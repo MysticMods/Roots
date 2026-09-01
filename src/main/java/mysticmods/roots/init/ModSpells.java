@@ -40,7 +40,9 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_Y = P.recordProperty("acid_cloud/radius_y", Property.ofInt(2, "Radius"));
   public static final PropertyHolder<Property.FloatProperty> ACID_CLOUD_DAMAGE = P.recordProperty("acid_cloud/damage", Property.ofFloat(2.0f, SpellProperties.DAMAGE));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COUNT = P.recordProperty("acid_cloud/count", Property.ofInt(1, SpellProperties.COUNT));
-  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_FIRE_TICKS = P.recordProperty("acid_cloud/fire_ticks", Property.ofInt(3 * 20, "The number of ticks for which damaged mods are set on fire for when the fire modifier is enabled."));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_FIRE_TICKS = P.recordProperty("acid_cloud/fire_ticks", Property.ofInt(3 * 20, "The number of ticks for which damaged mobs are set on fire for when the fire modifier is enabled."));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_SLOW_DURATION = P.recordProperty("acid_cloud/slow_duration", Property.ofInt(20 * 3, "The number of ticks for which damaged mobs are slowed for when the slowness modifier is enabled."));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_SLOW_AMPLIFIER = P.recordProperty("acid_cloud/slow_amplifier", Property.ofInt(0, "The amplifier applied to the slowness effect when the slowness modifier is enabled."));
 
   public static final DeferredHolder<Spell, EmptySpell> EMPTY = REGISTER.register("empty", () -> new EmptySpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)

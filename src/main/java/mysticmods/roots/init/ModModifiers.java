@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.modifier.ChildChargeType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.registry.GroupId;
@@ -32,7 +33,8 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_FIRE = REGISTER.register("acid_cloud/fire", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.ACID_CLOUD.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_PEACEFUL = REGISTER.register("acid_cloud/peaceful", () -> new SpellModifier(CostInstance.add(ModHerbs.WILDROOT, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_KNOCKBACK = REGISTER.register("acid_cloud/knockback", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
-
+  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_SLOWNESS = REGISTER.register("acid_cloud/slowness", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED));
+  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_TEMPORAL_MORASS = REGISTER.register("acid_cloud/temporal_morass", () -> new SpellModifier(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125), ModModifiers.ACID_CLOUD_SLOWNESS.getKey(), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED, GroupId.NONE));
   public static final GroupId DANDELION_WINDS_DURATION = group("dandelion_winds/duration", true);
 
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_1 = REGISTER.register("dandelion_winds/duration_i", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey(), DANDELION_WINDS_DURATION));

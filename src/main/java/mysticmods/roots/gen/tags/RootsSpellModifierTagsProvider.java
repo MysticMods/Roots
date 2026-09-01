@@ -63,6 +63,7 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
     //noinspection unchecked
     this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_PARAMETERS)
         .addTags(RootsTags.SpellModifiers.SHATTER_INCREASES_DEPTH, RootsTags.SpellModifiers.SHATTER_INCREASES_HEIGHT, RootsTags.SpellModifiers.SHATTER_INCREASES_WIDTH);
+    this.tag(RootsTags.SpellModifiers.SLOWS).add(ModModifiers.ACID_CLOUD_SLOWNESS.value());
   }
 
   @Override

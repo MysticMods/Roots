@@ -19,6 +19,8 @@ import mysticmods.roots.util.EntityUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +34,7 @@ import java.util.function.Predicate;
 
 public class AcidCloudSpell extends TwoRadiusSpell {
   private float damage;
-  private int count, fireTicks;
+  private int count, fireTicks, slowDuration, slowAmplifier;
 
   public AcidCloudSpell(Properties properties) {
     super(properties);
@@ -59,6 +61,8 @@ public class AcidCloudSpell extends TwoRadiusSpell {
     properties.add(ModSpells.ACID_CLOUD_DAMAGE);
     properties.add(ModSpells.ACID_CLOUD_COUNT);
     properties.add(ModSpells.ACID_CLOUD_FIRE_TICKS);
+    properties.add(ModSpells.ACID_CLOUD_SLOW_DURATION);
+    properties.add(ModSpells.ACID_CLOUD_SLOW_AMPLIFIER);
   }
 
   @Override
@@ -67,6 +71,8 @@ public class AcidCloudSpell extends TwoRadiusSpell {
     this.damage = properties.get(ModSpells.ACID_CLOUD_DAMAGE);
     this.count = properties.get(ModSpells.ACID_CLOUD_COUNT);
     this.fireTicks = properties.get(ModSpells.ACID_CLOUD_FIRE_TICKS);
+    this.slowDuration = properties.get(ModSpells.ACID_CLOUD_SLOW_DURATION);
+    this.slowAmplifier = properties.get(ModSpells.ACID_CLOUD_SLOW_AMPLIFIER);
   }
 
   @Override
@@ -87,6 +93,12 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       };
     } else if (spellModifier.is(ModModifiers.ACID_CLOUD_PEACEFUL)) {
       return new Component[]{};
+    } else if (spellModifier.is(ModModifiers.ACID_CLOUD_SLOWNESS)) {
+      return new Component[]{
+          Component.literal(String.format("%.1f", slowDuration / 20.0f)),
+          Component.literal(String.valueOf(slowDuration)),
+          Component.literal(String.valueOf(slowAmplifier))
+      };
     }
     RootsAPI.LOG.error("Tried to create description components for modifiers not associated with {}: {}", this, spellModifier);
     return new Component[]{};
@@ -113,6 +125,12 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       entity.hurt(ModDamage.acidCloud(pPlayer, instance.has(ModModifiers.ACID_CLOUD_KNOCKBACK)), damage);
       if (instance.has(RootsTags.SpellModifiers.SETS_ON_FIRE)) {
         entity.igniteForTicks(fireTicks);
+      }
+      if (instance.has(RootsTags.SpellModifiers.SLOWS)) {
+        if (!entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
+          entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, slowDuration, slowAmplifier));
+          costs.charge(ModModifiers.ACID_CLOUD_SLOWNESS.value());
+        }
       }
     }
 
