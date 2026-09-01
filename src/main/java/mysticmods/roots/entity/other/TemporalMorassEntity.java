@@ -87,7 +87,6 @@ public class TemporalMorassEntity extends Entity {
           }
       )) {
         TemporalMorassEntitySnapshot livingSnapshot = new TemporalMorassEntitySnapshot(living, 10, snapshot.getRadiusZX(), snapshot.getRadiusY(), 10, snapshot.getAmplifier());
-        // TODO: Once Temporal Morass snapshot includes casting player, adjust entity parameter
         living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, livingSnapshot.getDuration(), snapshot.getAmplifier(), false, true), this);
         SnapshotHelper.addLiving(living, ModSerializers.TEMPORAL_MORASS.get(), livingSnapshot);
       }

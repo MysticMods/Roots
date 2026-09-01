@@ -43,6 +43,11 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_FIRE_TICKS = P.recordProperty("acid_cloud/fire_ticks", Property.ofInt(3 * 20, "The number of ticks for which damaged mobs are set on fire for when the fire modifier is enabled."));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_SLOW_DURATION = P.recordProperty("acid_cloud/slow_duration", Property.ofInt(20 * 3, "The number of ticks for which damaged mobs are slowed for when the slowness modifier is enabled."));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_SLOW_AMPLIFIER = P.recordProperty("acid_cloud/slow_amplifier", Property.ofInt(0, "The amplifier applied to the slowness effect when the slowness modifier is enabled."));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_COOLDOWN = P.recordProperty("temporal_morass/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_DURATION = P.recordProperty("temporal_morass/duration", Property.ofInt(300, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_Y = P.recordProperty("temporal_morass/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_ZX = P.recordProperty("temporal_morass/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_AMPLIFIER = P.recordProperty("temporal_morass/amplifier", Property.ofInt(3, "The amplifier for the slowness effect applied by Temporal Morass."));
 
   public static final DeferredHolder<Spell, EmptySpell> EMPTY = REGISTER.register("empty", () -> new EmptySpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
@@ -407,12 +412,6 @@ public class ModSpells {
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
   }
-
-  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_COOLDOWN = P.recordProperty("temporal_morass/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_DURATION = P.recordProperty("temporal_morass/duration", Property.ofInt(300, SpellProperties.DURATION));
-  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_Y = P.recordProperty("temporal_morass/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
-  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_ZX = P.recordProperty("temporal_morass/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
-  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_AMPLIFIER = P.recordProperty("temporal_morass/amplifier", Property.ofInt(3, "The amplifier for the slowness effect applied by Temporal Morass."));*/
 
   // Wildfire (24 cooldown)
 /*  public static final DeferredHolder<Spell, WildfireSpell> WILDFIRE = spell(Spells.WILDFIRE, WildfireSpell::new, ChatFormatting.DARK_RED, () -> CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250));

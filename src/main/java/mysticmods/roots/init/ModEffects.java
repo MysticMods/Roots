@@ -28,6 +28,7 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SimpleEffect> DANDELION_WINDS = REGISTER.register("dandelion_winds", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, ChatFormatting.YELLOW.getColor(), false));
   public static final DeferredHolder<MobEffect, SimpleEffect> VORTEX_COOLDOWN = REGISTER.register("vortex_cooldown", () -> new SimpleEffect(MobEffectCategory.HARMFUL, ChatFormatting.YELLOW.getColor(), false));
   public static final DeferredHolder<MobEffect, SimpleEffect> MAGNETIC_COOLDOWN = REGISTER.register("magnetic_cooldown", () -> new SimpleEffect(MobEffectCategory.HARMFUL, ChatFormatting.RED.getColor(), false));
+  public static final DeferredHolder<MobEffect, SimpleEffect> TEMPORAL_MORASS_COOLDOWN = REGISTER.register("temporal_morass_cooldown", () -> new SimpleEffect(MobEffectCategory.HARMFUL, 0x404040, false));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));

@@ -656,6 +656,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addEffect(ModEffects.DANDELION_WINDS);
     addEffect(ModEffects.VORTEX_COOLDOWN);
     addEffect(ModEffects.MAGNETIC_COOLDOWN);
+    addEffect(ModEffects.TEMPORAL_MORASS_COOLDOWN);
 
     add(RootsTags.Items.SEEDS, "Seeds");
     add(RootsTags.Items.CLOUD_BERRY_SEEDS, "Cloud Berry Seeds");
@@ -948,7 +949,11 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescriptionBoth(ModModifiers.ACID_CLOUD_KNOCKBACK, "Prevents damaged entities from being knocked back when damaged by acid cloud.");
 
     modifierDescription(ModModifiers.ACID_CLOUD_SLOWNESS, "Damaged entities are also slowed.");
-    modifierExtendedDescription(ModModifiers.ACID_CLOUD_SLOWNESS, "Damaged entities are slowed for %s seconds [%s ticks] with Slowness %s.");
+    modifierExtendedDescription(ModModifiers.ACID_CLOUD_SLOWNESS, "Damaged entities are slowed for %s seconds [%s ticks] with Slowness %s. Entities that are already slowed are unaffected.");
+
+    modifierDescription(ModModifiers.ACID_CLOUD_TEMPORAL_MORASS, "Summons a Temporal Morass to the location where the Acid Cloud was cast. The morass drastically slows any entities that pass through it.");
+
+    modifierExtendedDescription(ModModifiers.ACID_CLOUD_TEMPORAL_MORASS, "Summons a Temporal Morass to the location where Acid Cloud was cast. The morass covers an area of ±%s/±%s blocks and lasts for %s seconds [%s ticks]. Entities that pass through the morass have Slowness %s applied. Effect triggers a secondary cooldown for %s seconds [%s ticks] before another morass can be summoned.");
 
     spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
     spellExtendedDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%.");

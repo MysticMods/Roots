@@ -553,6 +553,9 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_5);
     modifier(ITEMS, ModModifiers.ACID_CLOUD_FIRE);
     modifier(ITEMS, ModModifiers.ACID_CLOUD_PEACEFUL);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_SLOWNESS);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_KNOCKBACK);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_TEMPORAL_MORASS);
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS);
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX);
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1);
