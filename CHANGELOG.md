@@ -88,4 +88,11 @@
 
 ## 4.0.0.31-alpha
 
-- 
+- Improved particle compatibility with Sodium (#1384)
+- Fix broken ritual command (#1385)
+- Fix curios integration breaking when curios isn't installed (#1382)
+- Knockback modifier for Acid Cloud
+- Slowness modifier for Acid Cloud
+- Temporal Morass modifier for Acid Cloud
+- Hydration modifier for Growth Infusion
+- Fertilization modifier for Growth Infusion
