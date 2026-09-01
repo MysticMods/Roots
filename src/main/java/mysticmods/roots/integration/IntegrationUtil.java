@@ -5,6 +5,7 @@ import mysticmods.roots.integration.curios.CuriosIntegration;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
@@ -30,5 +31,9 @@ public class IntegrationUtil {
     }
 
     return charms;
+  }
+
+  public static void init (IEventBus bus) {
+    CuriosIntegration.init(bus);
   }
 }

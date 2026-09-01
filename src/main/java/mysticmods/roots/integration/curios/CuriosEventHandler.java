@@ -1,20 +1,17 @@
 package mysticmods.roots.integration.curios;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.ClientboundChangeTomeMode;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.PacketDistributor;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
 
-@EventBusSubscriber(modid = RootsAPI.MODID)
 public class CuriosEventHandler {
   @SubscribeEvent
-  public static void onCuriosChange(CurioChangeEvent event) {
+  public void onCuriosChange(CurioChangeEvent event) {
     LivingEntity entity = event.getEntity();
     if (entity instanceof ServerPlayer player && event.getTo().is(RootsTags.Items.GRAMARIES)) {
       boolean changedMode = false;

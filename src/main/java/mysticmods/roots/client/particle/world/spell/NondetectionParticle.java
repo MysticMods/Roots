@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 
 // TODO: This sucks
-public class NondetectionParticle extends RootsParticle {
+public class NondetectionParticle extends RootsParticle{
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
 

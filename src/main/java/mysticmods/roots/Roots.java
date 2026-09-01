@@ -3,6 +3,7 @@ package mysticmods.roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
+import mysticmods.roots.integration.IntegrationUtil;
 import mysticmods.roots.network.PacketHandler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -56,5 +57,7 @@ public class Roots {
     ModAttributes.register(bus);
     ModModifiers.register(bus);
     packetHandler = new PacketHandler(bus);
+
+    IntegrationUtil.init(bus);
   }
 }

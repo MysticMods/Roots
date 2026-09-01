@@ -6,10 +6,7 @@ import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.*;
 import net.minecraft.util.Mth;
 import org.joml.Quaternionf;
 
@@ -44,7 +41,7 @@ public class DandelionParticle extends RootsParticle {
   }
 
   @Override
-  public FacingCameraMode getFacingCameraMode() {
+  public SingleQuadParticle.FacingCameraMode getFacingCameraMode() {
     return RootsParticle.FACING_UP;
   }
 

@@ -5,6 +5,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
@@ -24,6 +25,12 @@ public class CuriosIntegration {
       return CuriosIntegrationInternal.getTagged(player, allPouches);
     } else {
       return new ArrayList<>();
+    }
+  }
+
+  public static void init (IEventBus bus) {
+    if (ModList.get().isLoaded("curios")) {
+      CuriosIntegrationInternal.init(bus);
     }
   }
 }

@@ -4,13 +4,10 @@ import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.client.particle.world.RootsParticle;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.*;
 
 public class HarvestParticle extends RootsParticle {
-  private SpriteSet sprites;
+  private final SpriteSet sprites;
 
   protected HarvestParticle(SpriteSet sprites, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z);
@@ -48,7 +45,7 @@ public class HarvestParticle extends RootsParticle {
   }
 
   @Override
-  public FacingCameraMode getFacingCameraMode() {
+  public SingleQuadParticle.FacingCameraMode getFacingCameraMode() {
     return RootsParticle.BILLBOARD_TILTED;
   }
 

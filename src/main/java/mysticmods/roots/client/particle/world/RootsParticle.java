@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class RootsParticle extends TextureSheetParticle {
+public abstract class RootsParticle extends BaseRootsParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bCol2;
   protected float rollAmount;
@@ -186,11 +186,11 @@ public abstract class RootsParticle extends TextureSheetParticle {
     return RootsParticleRenderTypes.OPAQUE;
   }
 
-  public static final FacingCameraMode FACING_UP = (quaternion, camera, partialTick) -> {
+  public static final SingleQuadParticle.FacingCameraMode FACING_UP = (quaternion, camera, partialTick) -> {
     quaternion.rotationX((float) Math.PI / 2);
   };
 
-  public static final FacingCameraMode BILLBOARD_TILTED = (quaternion, camera, partialTick) -> {
+  public static final SingleQuadParticle.FacingCameraMode BILLBOARD_TILTED = (quaternion, camera, partialTick) -> {
     quaternion.set(camera.rotation());
     quaternion.rotateX((float) Math.toRadians(45));
   };
