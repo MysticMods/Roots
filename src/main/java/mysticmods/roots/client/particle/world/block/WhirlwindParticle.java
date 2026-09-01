@@ -93,7 +93,7 @@ public class WhirlwindParticle extends BaseRootsParticle {
 
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      TextureSheetParticle portalParticle = new WhirlwindParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
+      BaseRootsParticle portalParticle = new WhirlwindParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       portalParticle.pickSprite(this.sprite);
       return portalParticle;
     }

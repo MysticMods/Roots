@@ -76,7 +76,7 @@ public class GroveStoneParticle extends BaseRootsParticle {
 
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      Particle portalParticle = new GroveStoneParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
+      BaseRootsParticle portalParticle = new GroveStoneParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       portalParticle.pickSprite(this.sprite);
       return portalParticle;
     }
