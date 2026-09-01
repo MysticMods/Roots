@@ -1,10 +1,11 @@
 package mysticmods.roots.client.particle.world.ritual;
 
+import mysticmods.roots.client.particle.world.BaseRootsParticle;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
-public class MeteorParticle extends TextureSheetParticle {
+public class MeteorParticle extends BaseRootsParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected float rotSpeed, spinAcceleration;

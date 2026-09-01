@@ -2,13 +2,17 @@ package mysticmods.roots.client.particle.world.unused;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
+import mysticmods.roots.client.particle.world.BaseRootsParticle;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class CardioidSylvanLightParticle extends TextureSheetParticle {
+public class CardioidSylvanLightParticle extends BaseRootsParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
 

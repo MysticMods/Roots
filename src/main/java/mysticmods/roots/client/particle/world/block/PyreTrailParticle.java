@@ -1,6 +1,7 @@
 package mysticmods.roots.client.particle.world.block;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.particle.world.BaseRootsParticle;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -13,7 +14,7 @@ import org.joml.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PyreTrailParticle extends TextureSheetParticle {
+public class PyreTrailParticle extends BaseRootsParticle {
   protected final List<Snapshot> snapshots = new ArrayList<>();
 
   protected float oR1, oG1, oB1;

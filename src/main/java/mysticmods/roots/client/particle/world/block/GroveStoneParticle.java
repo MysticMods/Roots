@@ -1,11 +1,12 @@
 package mysticmods.roots.client.particle.world.block;
 
 
+import mysticmods.roots.client.particle.world.BaseRootsParticle;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
-public class GroveStoneParticle extends TextureSheetParticle {
+public class GroveStoneParticle extends BaseRootsParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected float rollAmount;
@@ -75,7 +76,7 @@ public class GroveStoneParticle extends TextureSheetParticle {
 
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      TextureSheetParticle portalParticle = new GroveStoneParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
+      Particle portalParticle = new GroveStoneParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       portalParticle.pickSprite(this.sprite);
       return portalParticle;
     }

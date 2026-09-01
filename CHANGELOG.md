@@ -85,3 +85,7 @@
 - Aliases added for previously removed spells and rituals (#1382) hopefully resolving crash with FTB Quests
 - Decay now has a custom cost and a recipe
 - Staffs now properly display the tooltip of the currently selected spell
+
+## 4.0.0.31-alpha
+
+- 

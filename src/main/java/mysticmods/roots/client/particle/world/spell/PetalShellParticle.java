@@ -3,6 +3,7 @@ package mysticmods.roots.client.particle.world.spell;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.client.particle.IParticleHolder;
+import mysticmods.roots.client.particle.world.BaseRootsParticle;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModParticles;
@@ -20,7 +21,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 
-public class PetalShellParticle extends TextureSheetParticle {
+public class PetalShellParticle extends BaseRootsParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected int count, maxCount;

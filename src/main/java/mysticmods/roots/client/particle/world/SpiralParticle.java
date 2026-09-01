@@ -5,7 +5,7 @@ import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
-public class SpiralParticle extends TextureSheetParticle {
+public class SpiralParticle extends BaseRootsParticle {
   protected final double centerX, centerZ;
   protected final double radius;
   protected double angle;

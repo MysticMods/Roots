@@ -9,7 +9,7 @@ import net.minecraft.client.particle.*;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class TestParticle extends TextureSheetParticle {
+public class TestParticle extends BaseRootsParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected float rotSpeed, spinAcceleration;
