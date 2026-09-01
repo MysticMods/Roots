@@ -252,6 +252,15 @@
         }
       ]
     },
+    "roots:growth_infusion/fertilizer": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.5,
+          "herb": "roots:bafflecap"
+        }
+      ]
+    },
     "roots:growth_infusion/hydration": {
       "costs": [
         {

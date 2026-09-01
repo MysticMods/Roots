@@ -270,6 +270,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_INTERVAL = P.recordProperty("rampant_growth/interval", Property.ofInt(2, "The interval between growth ticks in ticks."));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(9, SpellProperties.COUNT));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_BONE_MEAL_COUNT = P.recordProperty("growth_infusion/bone_meal_count", Property.ofInt(1, "The number of stacks of bone meal to be applied per interval when the fertilizer modifier is active."));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_BONE_MEAL_INTERVAL = P.recordProperty("growth_infusion/bone_meal_interval", Property.ofInt(10, "The interval between bone meal applications in ticks."));
 
   // Rampant Growth (20 cooldown)
   @Deprecated

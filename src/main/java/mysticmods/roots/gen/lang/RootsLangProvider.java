@@ -1009,6 +1009,9 @@ public final class RootsLangProvider extends LanguageProvider {
 
     modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_HYDRATION, "The soil crops are growing upon has its moisture level increased if it has a moisture level.");
 
+    modifierDescription(ModModifiers.GROWTH_INFUSION_FERTILIZER, "Duplicates the effects of using bone meal instead of applying random growth ticks.");
+    modifierExtendedDescription(ModModifiers.GROWTH_INFUSION_FERTILIZER, "Applies up to %s stacks of bone meal per %s seconds [%s ticks] of the channeled duration.");
+
     modifierDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell.");
     modifierExtendedDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell to %s blocks.");
     modifierDescription(ModModifiers.SHATTER_WIDTH_I, "Increases the width of the Shatter spell.");

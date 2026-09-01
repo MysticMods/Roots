@@ -14,6 +14,7 @@ import mysticmods.roots.api.registry.ICostedParent;
 import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -73,6 +74,10 @@ public class Costing {
     this.noCharge = true;
   }
 
+  public boolean hasNoCharge () {
+    return this.noCharge;
+  }
+
   public int operations() {
     return this.operationsCount;
   }
@@ -92,6 +97,10 @@ public class Costing {
 
     this.noCharge = false;
     modifierMap.put(modifier, true);
+  }
+
+  public void charge (Holder<? extends ICostedChild> modifier) {
+    charge(modifier.value());
   }
 
   public boolean canAfford(Player player, boolean checkModifiers) {

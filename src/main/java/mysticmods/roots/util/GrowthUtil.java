@@ -6,6 +6,9 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.growth.GrowthRecord;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BoneMealItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,5 +46,17 @@ public class GrowthUtil {
     }
 
     return -1;
+  }
+
+  public static boolean applyBoneMeal (int maxCount, Level level, BlockPos pos, Player player) {
+    ItemStack stack = new ItemStack(Items.BONE_MEAL, Math.min(64, maxCount + 1));
+    boolean result = false;
+    for (int i = 0; i < maxCount; i++) {
+      if (BoneMealItem.applyBonemeal(stack, level, pos, player)) {
+        result = true;
+      }
+    }
+
+    return result;
   }
 }

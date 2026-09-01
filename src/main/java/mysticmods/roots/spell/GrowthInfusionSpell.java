@@ -52,7 +52,7 @@ import java.util.List;
 // - Handle texture colour change
 // - Handle icon change(?)
 public class GrowthInfusionSpell extends TwoRadiusSpell {
-  private int rampantInterval, count, growthInterval;
+  private int rampantInterval, count, growthInterval, boneMealCount, boneMealInterval;
 
   public GrowthInfusionSpell(Properties properties) {
     super(properties);
@@ -84,6 +84,8 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
     this.rampantInterval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
     this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);
     this.growthInterval = properties.get(ModSpells.GROWTH_INFUSION_INTERVAL);
+    this.boneMealCount = properties.get(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT);
+    this.boneMealInterval = properties.get(ModSpells.GROWTH_INFUSION_BONE_MEAL_INTERVAL);
   }
 
   @Override
@@ -92,6 +94,8 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
     properties.add(ModSpells.RAMPANT_GROWTH_INTERVAL);
     properties.add(ModSpells.RAMPANT_GROWTH_COUNT);
     properties.add(ModSpells.GROWTH_INFUSION_INTERVAL);
+    properties.add(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT);
+    properties.add(ModSpells.GROWTH_INFUSION_BONE_MEAL_INTERVAL);
   }
 
   @Override
@@ -186,42 +190,50 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
         } else {
           costs.operations(growCount);
         }
-
-        return SpellCastResult.success(growCount, cooldown);
       } else {
         costs.noCharge();
-        return SpellCastResult.tick();
       }
+      return SpellCastResult.tickFromCosting(cooldown, costs);
     } else {
-      if (ticks % growthInterval == 0) {
-        BlockHitResult result = pickBlock(pPlayer, instance);
-        BlockPos pos = result.getBlockPos();
-        BlockState at = pLevel.getBlockState(pos);
+      BlockHitResult result = pickBlock(pPlayer, instance);
+      BlockPos pos = result.getBlockPos();
+      BlockState at = pLevel.getBlockState(pos);
+      if (instance.has(ModModifiers.GROWTH_INFUSION_FERTILIZER)) {
+        if (ticks % boneMealInterval == 0 && GrowthUtil.applyBoneMeal(boneMealCount, pLevel, pos, pPlayer)) {
+          tryMoisturizeGround(pLevel, costs, instance, pos);
+          // TODO: Visual
 
-        int doTicks = GrowthUtil.growthTicks(pLevel, pos, at, pPlayer);
-        if (doTicks > 0) {
-          if (pLevel.random.nextInt(doTicks) == 0) {
-            at.randomTick((ServerLevel) pLevel, pos, pLevel.random);
-            BlockState newState = pLevel.getBlockState(pos);
-            if (ModActions.CROP_GROWTH.get().shouldTest()) {
-              CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, at, pHand, pStack, instance);
-              ModActions.CROP_GROWTH.get().accept(context);
-            }
-            PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pLevel, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
-            tryMoisturizeGround(pLevel, costs, instance, pos);
-          }
+          costs.charge(ModModifiers.GROWTH_INFUSION_FERTILIZER);
+          costs.operations(1);
         } else {
           costs.noCharge();
-          pPlayer.stopUsingItem();
-          return SpellCastResult.nothing();
         }
-
-        costs.operations(1);
-        return SpellCastResult.success(cooldown);
       } else {
-        costs.noCharge();
-        return SpellCastResult.tick();
+        if (ticks % growthInterval == 0) {
+          int doTicks = GrowthUtil.growthTicks(pLevel, pos, at, pPlayer);
+          if (doTicks > 0) {
+            if (pLevel.random.nextInt(doTicks) == 0) {
+              at.randomTick((ServerLevel) pLevel, pos, pLevel.random);
+              BlockState newState = pLevel.getBlockState(pos);
+              if (ModActions.CROP_GROWTH.get().shouldTest()) {
+                CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pos, newState, at, pHand, pStack, instance);
+                ModActions.CROP_GROWTH.get().accept(context);
+              }
+              PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pLevel, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
+              tryMoisturizeGround(pLevel, costs, instance, pos);
+            }
+          } else {
+            costs.noCharge();
+            pPlayer.stopUsingItem();
+            return SpellCastResult.nothing();
+          }
+
+          costs.operations(1);
+        } else {
+          costs.noCharge();
+        }
       }
+      return SpellCastResult.tickFromCosting(cooldown, costs);
     }
   }
 
@@ -325,6 +337,12 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
           Component.literal(String.valueOf(radiusY)),
           Component.literal(String.format("%.1f", rampantInterval / 20.0)),
           Component.literal(String.valueOf(rampantInterval))
+      };
+    } else if (spellModifier.is(ModModifiers.GROWTH_INFUSION_FERTILIZER)) {
+      return new Component[]{
+          Component.literal(String.valueOf(boneMealCount)),
+          Component.literal(String.format("%.1f", boneMealInterval / 20.0)),
+          Component.literal(String.valueOf(boneMealInterval))
       };
     }
     return new Component[]{};

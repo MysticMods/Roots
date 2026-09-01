@@ -1,7 +1,11 @@
 package mysticmods.roots.api.spell;
 
+import mysticmods.roots.api.herb.Costing;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.monster.SpellcasterIllager;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.function.Supplier;
 
 public record SpellCastResult(ResultType type, int operations, int cooldown) {
   public enum ResultType {
@@ -27,6 +31,22 @@ public record SpellCastResult(ResultType type, int operations, int cooldown) {
 
   public static SpellCastResult success(int cooldown) {
     return new SpellCastResult(ResultType.SUCCESS, 0, cooldown);
+  }
+
+  public static SpellCastResult tickFromCosting (int cooldown, Costing costing) {
+    return fromCosting(cooldown, costing, SpellCastResult::tick);
+  }
+
+  public static SpellCastResult fromCosting (int cooldown, Costing costing) {
+    return fromCosting(cooldown, costing, SpellCastResult::nothing);
+  }
+
+  public static SpellCastResult fromCosting (int cooldown, Costing costing, Supplier<SpellCastResult> defaultResult) {
+    if (costing.hasNoCharge()) {
+      return defaultResult.get();
+    } else {
+      return SpellCastResult.success(costing.operations(), cooldown);
+    }
   }
 
   public static SpellCastResult success(int operations, int cooldown) {

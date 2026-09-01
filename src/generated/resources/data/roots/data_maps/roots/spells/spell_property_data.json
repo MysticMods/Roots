@@ -549,6 +549,24 @@
           "default_value": 1,
           "value": 1
         }
+      },
+      {
+        "id": "roots:growth_infusion/bone_meal_count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of stacks of bone meal to be applied per interval when the fertilizer modifier is active.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:growth_infusion/bone_meal_interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The interval between bone meal applications in ticks.",
+          "default_value": 10,
+          "value": 10
+        }
       }
     ],
     "roots:harvest": [

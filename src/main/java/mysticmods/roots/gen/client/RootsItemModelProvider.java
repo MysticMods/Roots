@@ -458,6 +458,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     modifier(ModModifiers.RAMPANT_GROWTH, "spells/rampant_growth");
     modifier(ModModifiers.TARGETED_GROWTH, Items.TARGET);
     modifier(ModModifiers.GROWTH_INFUSION_HYDRATION, Items.WATER_BUCKET);
+    modifier(ModModifiers.GROWTH_INFUSION_FERTILIZER, Items.BONE_MEAL);
 
     modifier(ModModifiers.SHATTER_ADJUSTABLE, Items.ANVIL);
 

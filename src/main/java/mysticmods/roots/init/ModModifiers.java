@@ -74,8 +74,8 @@ public class ModModifiers {
 
   public static final DeferredHolder<SpellModifier, SpellModifier> TARGETED_GROWTH = REGISTER.register("growth_infusion/targeted_growth", () -> new SpellModifier(CostInstance.empty(), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.RAMPANT_GROWTH.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> RAMPANT_GROWTH = REGISTER.register("growth_infusion/rampant_growth", () -> new SpellModifier(CostInstance.of(Cost.negateBase(), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.TARGETED_GROWTH.getKey()));
-  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_HYDRATION = REGISTER.register("growth_infusion/hydration", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0063), ModSpells.GROWTH_INFUSION.getKey()));
-  //public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_FERTILIZER = REGISTER.register("growth_infusion/fertilizer", () -> new SpellModifier(CostInstance.add()))
+  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_HYDRATION = REGISTER.register("growth_infusion/hydration", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0063), ModSpells.GROWTH_INFUSION.getKey(), ChildChargeType.SPECIFIED));
+  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_FERTILIZER = REGISTER.register("growth_infusion/fertilizer", () -> new SpellModifier(CostInstance.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0500), TARGETED_GROWTH.getKey(), ModSpells.GROWTH_INFUSION.getKey(), ChildChargeType.SPECIFIED, GroupId.NONE));
 
   // Sylvan Light
   // Auto-place to fill dark

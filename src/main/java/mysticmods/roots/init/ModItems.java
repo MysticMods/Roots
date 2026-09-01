@@ -571,6 +571,7 @@ public class ModItems {
     modifier(ITEMS, ModModifiers.RAMPANT_GROWTH);
     modifier(ITEMS, ModModifiers.TARGETED_GROWTH);
     modifier(ITEMS, ModModifiers.GROWTH_INFUSION_HYDRATION);
+    modifier(ITEMS, ModModifiers.GROWTH_INFUSION_FERTILIZER);
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_INFERNO);
     modifier(ITEMS, ModModifiers.DANDELION_WINDS_STATUE);
     modifier(ITEMS, ModModifiers.SHATTER_ADJUSTABLE);
