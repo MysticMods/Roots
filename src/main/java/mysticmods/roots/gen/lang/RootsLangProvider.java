@@ -1003,9 +1003,11 @@ public final class RootsLangProvider extends LanguageProvider {
     spellExtendedDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block every %s seconds [%s ticks] while channeled. While casting this spell, your block interaction range for it is increased by %s blocks.");
     modifierDescription(ModModifiers.RAMPANT_GROWTH, "Causes accelerated growth to all eligible blocks in the area around you.");
     modifierExtendedDescription(ModModifiers.RAMPANT_GROWTH, "Causes accelerated growth for up to %s eligible blocks within ±%s/±%s blocks every %s seconds [%s ticks] while channeled. The number of ticks applied to each block varies.");
-    // TODO: Handle this?
+    // TODO: Handle this: both of these need to be 'placeholder' modifiers.
     modifierDescriptionBoth(ModModifiers.TARGETED_GROWTH, "Causes accelerated growth to only the targeted block. [NYI]");
     modifierDescriptionBoth(ModModifiers.SHATTER_ADJUSTABLE, "Group of modifiers that allow for the adjustment of the width, depth and height of the Shatter spell.");
+
+    modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_HYDRATION, "The soil crops are growing upon has its moisture level increased if it has a moisture level.");
 
     modifierDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell.");
     modifierExtendedDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell to %s blocks.");

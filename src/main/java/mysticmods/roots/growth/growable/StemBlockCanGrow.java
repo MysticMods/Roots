@@ -13,14 +13,14 @@ import org.jetbrains.annotations.Nullable;
 public record StemBlockCanGrow() implements CanGrowFunction {
   @Override
   public boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maximumAge) {
+    // Compare with StemBlock implementation
     for (Direction dir : Direction.values()) {
       if (dir.getAxis().isVertical()) {
         continue;
       }
 
       BlockPos offset = blockPos.relative(dir);
-      BlockState offsetState = level.getBlockState(offset);
-      if (offsetState.canBeReplaced() || offsetState.isAir()) {
+      if (level.isEmptyBlock(offset)) {
         BlockPos downPos = offset.below();
         BlockState downState = level.getBlockState(downPos);
         if (downState.is(BlockTags.DIRT) || downState.getBlock() instanceof FarmBlock) {

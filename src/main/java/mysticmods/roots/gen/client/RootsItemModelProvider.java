@@ -2,6 +2,7 @@ package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.event.setup.ClientSetup;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
@@ -401,6 +402,12 @@ public final class RootsItemModelProvider extends ItemModelProvider {
             .toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
             .texture("layer0", RootsAPI.rl("item/spells/rampant_growth"))).end();
 
+    for (SpellModifier modifier : RootsRegistries.SPELL_MODIFIERS) {
+      if (BuiltInRegistries.ITEM.get(modifier.builtInRegistryHolder().getKey().location()) == Items.AIR) {
+        throw new NullPointerException("Modifier " + modifier.builtInRegistryHolder().getKey().location() + " does not have an equivalent item!");
+      }
+    }
+
     modifier(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, Items.ARROW);
     modifier(ModModifiers.SKY_SOARER_AMPLIFIED_1, Items.REDSTONE);
     modifier(ModModifiers.SKY_SOARER_AMPLIFIED_2, Items.GLOWSTONE_DUST);
@@ -450,6 +457,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
     modifier(ModModifiers.RAMPANT_GROWTH, "spells/rampant_growth");
     modifier(ModModifiers.TARGETED_GROWTH, Items.TARGET);
+    modifier(ModModifiers.GROWTH_INFUSION_HYDRATION, Items.WATER_BUCKET);
 
     modifier(ModModifiers.SHATTER_ADJUSTABLE, Items.ANVIL);
 

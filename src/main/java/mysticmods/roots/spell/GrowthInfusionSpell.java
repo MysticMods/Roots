@@ -35,6 +35,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
@@ -175,6 +176,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
                 ModActions.CROP_GROWTH.get().accept(context);
               }
               growCount++;
+              tryMoisturizeGround(pLevel, costs, instance, pos);
             }
           }
         }
@@ -206,6 +208,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
               ModActions.CROP_GROWTH.get().accept(context);
             }
             PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pLevel, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
+            tryMoisturizeGround(pLevel, costs, instance, pos);
           }
         } else {
           costs.noCharge();
@@ -218,6 +221,24 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       } else {
         costs.noCharge();
         return SpellCastResult.tick();
+      }
+    }
+  }
+
+  private static void tryMoisturizeGround(Level pLevel, Costing costs, ISpellInstance instance, BlockPos pos) {
+    if (instance.has(ModModifiers.GROWTH_INFUSION_HYDRATION)) {
+      BlockPos below = pos.below();
+      BlockState belowState = pLevel.getBlockState(below);
+      int tries = 3;
+      while (!belowState.hasProperty(FarmBlock.MOISTURE) && tries-- > 0) {
+        below = below.below();
+        belowState = pLevel.getBlockState(below);
+      }
+      if (belowState.hasProperty(FarmBlock.MOISTURE) && belowState.getValue(FarmBlock.MOISTURE) < FarmBlock.MAX_MOISTURE) {
+        BlockState newBelowState = belowState.setValue(FarmBlock.MOISTURE, belowState.getValue(FarmBlock.MOISTURE) + 1);
+        pLevel.setBlock(below, newBelowState, 2);
+        costs.charge(ModModifiers.GROWTH_INFUSION_HYDRATION.get());
+        // TODO: Hydration particles
       }
     }
   }

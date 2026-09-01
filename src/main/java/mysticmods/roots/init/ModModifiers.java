@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.ChildChargeType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
@@ -73,6 +74,8 @@ public class ModModifiers {
 
   public static final DeferredHolder<SpellModifier, SpellModifier> TARGETED_GROWTH = REGISTER.register("growth_infusion/targeted_growth", () -> new SpellModifier(CostInstance.empty(), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.RAMPANT_GROWTH.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> RAMPANT_GROWTH = REGISTER.register("growth_infusion/rampant_growth", () -> new SpellModifier(CostInstance.of(Cost.negateBase(), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.TARGETED_GROWTH.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_HYDRATION = REGISTER.register("growth_infusion/hydration", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0063), ModSpells.GROWTH_INFUSION.getKey()));
+  //public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_FERTILIZER = REGISTER.register("growth_infusion/fertilizer", () -> new SpellModifier(CostInstance.add()))
 
   // Sylvan Light
   // Auto-place to fill dark

@@ -252,6 +252,15 @@
         }
       ]
     },
+    "roots:growth_infusion/hydration": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.063,
+          "herb": "roots:dewgonia"
+        }
+      ]
+    },
     "roots:growth_infusion/rampant_growth": {
       "costs": [
         {
