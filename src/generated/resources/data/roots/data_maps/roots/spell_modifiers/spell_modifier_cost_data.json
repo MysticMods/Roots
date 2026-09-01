@@ -9,6 +9,15 @@
         }
       ]
     },
+    "roots:acid_cloud/knockback": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
     "roots:acid_cloud/peaceful": {
       "costs": [
         {

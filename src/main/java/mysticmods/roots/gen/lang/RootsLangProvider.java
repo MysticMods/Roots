@@ -945,6 +945,8 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierExtendedDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities are also set on fire for %s seconds [%s ticks].");
     modifierDescriptionBoth(ModModifiers.ACID_CLOUD_PEACEFUL, "Prevents damage to non-hostile entities.");
 
+    modifierDescriptionBoth(ModModifiers.ACID_CLOUD_KNOCKBACK, "Prevents damaged entities from being knocked back when damaged by acid cloud.");
+
     spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
     spellExtendedDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%.");
 
@@ -1018,6 +1020,7 @@ public final class RootsLangProvider extends LanguageProvider {
     spellExtendedDescription(ModSpells.JAUNT, "Teleports you %s blocks in the direction you are looking, the distance increasing the longer the spell is charged for, placing you on a safe surface on the next highest or lowest surface.");
 
     addDamage(ModDamage.ACID_CLOUD, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
+    addDamage(ModDamage.ACID_CLOUD_NO_KNOCKBACK, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
     addDamage(ModDamage.LIFE_DRAIN, "%1$s was drained away to nothing", "%1$s was drained away to nothing while fighting %2$s", "%1$s was drained away to nothing while fighting %2$s wielding %3$s");
     addDamage(ModDamage.METEOR, "%1$s was killed by a falling meteor", "%1$s was killed by a falling meteor while fighting %2$s", "%1$s was killed by a falling meteor while fighting %2$s wielding %3$s");
     addDamage(ModDamage.ROSE_THORNS, "%1$s was poked to death by rose thorns", "%1$s was poked to death by rose thorns while fighting %2$s", "%1$s was poked to death by rose thorns while fighting %2$s wielding %3$s");

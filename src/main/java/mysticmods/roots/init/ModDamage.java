@@ -14,6 +14,7 @@ public class ModDamage {
   public static final ResourceKey<DamageType> METEOR = create(RootsAPI.rl("meteor"));
   public static final ResourceKey<DamageType> WILDFIRE = create(RootsAPI.rl("wildfire"));
   public static final ResourceKey<DamageType> ACID_CLOUD = create(RootsAPI.rl("acid_cloud"));
+  public static final ResourceKey<DamageType> ACID_CLOUD_NO_KNOCKBACK = create(RootsAPI.rl("acid_cloud_no_knockback"));
   public static final ResourceKey<DamageType> LIFE_DRAIN = create(RootsAPI.rl("life_drain"));
 
   private static DamageSource fromEntity(ResourceKey<DamageType> type, Entity direct, Entity indirect) {
@@ -33,7 +34,11 @@ public class ModDamage {
     return fromEntity(WILDFIRE, direct, indirect);
   }
 
-  public static DamageSource acidCloud(Entity direct) {
+  public static DamageSource acidCloud(Entity direct, boolean noKnockback) {
+    if (noKnockback) {
+      return fromEntity(ACID_CLOUD_NO_KNOCKBACK, null, direct);
+    }
+
     return fromEntity(ACID_CLOUD, null, direct);
   }
 

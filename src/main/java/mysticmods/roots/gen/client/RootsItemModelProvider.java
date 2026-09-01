@@ -441,6 +441,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
     modifier(ModModifiers.ACID_CLOUD_FIRE, Items.FLINT_AND_STEEL);
     modifier(ModModifiers.ACID_CLOUD_PEACEFUL, Items.TURTLE_EGG);
+    modifier(ModModifiers.ACID_CLOUD_KNOCKBACK, Items.IRON_BOOTS);
 
     modifier(ModModifiers.DANDELION_WINDS_INFERNO, Items.CAMPFIRE);
     modifier(ModModifiers.DANDELION_WINDS_STATUE, Items.IRON_CHESTPLATE);

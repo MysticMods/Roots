@@ -331,6 +331,7 @@ public final class RootsDataGenerators {
 
                   bootstrap.register(ModDamage.ACID_CLOUD, new DamageType(ModDamage.ACID_CLOUD.location()
                       .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.ACID_CLOUD_NO_KNOCKBACK, new DamageType(ModDamage.ACID_CLOUD_NO_KNOCKBACK.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
                   bootstrap.register(ModDamage.METEOR, new DamageType(ModDamage.METEOR.location()
                       .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
                   bootstrap.register(ModDamage.WILDFIRE, new DamageType(ModDamage.WILDFIRE.location()
@@ -376,7 +377,7 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsRecipeProvider(output, provider));
     generator.addProvider(event.includeClient(), new RootsParticleProvider(output, helper));
     generator.addProvider(event.includeServer(), new RootsMobEffectsTagsProvider(output, provider, helper));
-    generator.addProvider(event.includeServer(), new RootsDamageTagsProvider(output, provider, helper));
+    generator.addProvider(event.includeServer(), new RootsDamageTagsProvider(output, dataPackProvider, helper));
     generator.addProvider(event.includeServer(), new RootsAttributeTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsEnchantmentTagProvider(output, dataPackProvider, helper));
     generator.addProvider(event.includeServer(), new RootsRitualModifierTagsProvider(output, provider, helper));
