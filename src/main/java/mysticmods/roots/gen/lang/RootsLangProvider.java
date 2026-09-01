@@ -943,7 +943,7 @@ public final class RootsLangProvider extends LanguageProvider {
     spellExtendedDescription(ModSpells.ACID_CLOUD, "Creates a corrosive cloud that deals %s hearts of damage to up to %s entities within the cloud's radius.");
 
     modifierDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities are also set on fire.");
-    modifierExtendedDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities are also set on fire for %s seconds [%s ticks].");
+    modifierExtendedDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities that are not currently on fire are also set on fire for %s seconds [%s ticks].");
     modifierDescriptionBoth(ModModifiers.ACID_CLOUD_PEACEFUL, "Prevents damage to non-hostile entities.");
 
     modifierDescriptionBoth(ModModifiers.ACID_CLOUD_KNOCKBACK, "Prevents damaged entities from being knocked back when damaged by acid cloud.");

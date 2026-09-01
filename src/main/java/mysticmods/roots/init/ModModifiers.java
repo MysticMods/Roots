@@ -30,7 +30,7 @@ public class ModModifiers {
     return id;
   }
 
-  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_FIRE = REGISTER.register("acid_cloud/fire", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.ACID_CLOUD.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_FIRE = REGISTER.register("acid_cloud/fire", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_PEACEFUL = REGISTER.register("acid_cloud/peaceful", () -> new SpellModifier(CostInstance.add(ModHerbs.WILDROOT, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_KNOCKBACK = REGISTER.register("acid_cloud/knockback", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_SLOWNESS = REGISTER.register("acid_cloud/slowness", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED));

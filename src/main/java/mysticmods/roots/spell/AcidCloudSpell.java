@@ -138,8 +138,9 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       // DONE: Handle entity incoming damage is already done via `hurt`
       // DONE: Knockback prevention is done via damage type tag
       entity.hurt(ModDamage.acidCloud(pPlayer, instance.has(ModModifiers.ACID_CLOUD_KNOCKBACK)), damage);
-      if (instance.has(RootsTags.SpellModifiers.SETS_ON_FIRE)) {
+      if (instance.has(RootsTags.SpellModifiers.SETS_ON_FIRE) && !entity.isOnFire()) {
         entity.igniteForTicks(fireTicks);
+        costs.charge(ModModifiers.ACID_CLOUD_FIRE.get());
       }
       if (instance.has(RootsTags.SpellModifiers.SLOWS)) {
         if (!entity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
