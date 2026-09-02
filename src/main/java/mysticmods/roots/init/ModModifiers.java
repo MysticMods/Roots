@@ -9,6 +9,9 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.item.TokenItem;
+import net.minecraft.core.Holder;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,18 +21,9 @@ import java.util.List;
 
 public class ModModifiers {
   private static final DeferredRegister<SpellModifier> REGISTER = DeferredRegister.create(RootsRegistries.Keys.SPELL_MODIFIERS, RootsAPI.MODID);
+  private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
 
   public static final List<GroupId> GROUP_IDS = new ArrayList<>();
-
-  public static GroupId group(String name) {
-    return group(name, false);
-  }
-
-  public static GroupId group(String name, boolean useGroupDescription) {
-    var id = new GroupId(name, useGroupDescription);
-    GROUP_IDS.add(id);
-    return id;
-  }
 
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_FIRE = REGISTER.register("acid_cloud/fire", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_PEACEFUL = REGISTER.register("acid_cloud/peaceful", () -> new SpellModifier(CostInstance.add(ModHerbs.WILDROOT, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
@@ -77,41 +71,10 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_HYDRATION = REGISTER.register("growth_infusion/hydration", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0063), ModSpells.GROWTH_INFUSION.getKey(), ChildChargeType.SPECIFIED));
   public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_FERTILIZER = REGISTER.register("growth_infusion/fertilizer", () -> new SpellModifier(CostInstance.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0500), TARGETED_GROWTH.getKey(), ModSpells.GROWTH_INFUSION.getKey(), ChildChargeType.SPECIFIED, GroupId.NONE));
 
-  // Sylvan Light
-  // Auto-place to fill dark
-  // Cast to remove nearby lights
-  // Adjust brightness
-  // Adjust colour
-
-  // Geas
-  // Increase quantity
-
-  // Harvest
-  // Increase radius
-  // Magnetism
-
-  // Life Drain
-  // Increase damage, decrease healing
-  // Increase healing, decrease damage
-  // Dot
-  // Peaceful
-
-  // Petal Shell
-  // Increase shells
-  // Do damage/knockback when shield ends
-
-  // Rose Thorns
-  // Peaceful
-  // Do damage while trapped
-
-
-  // Increase duration
-  // Decrease cooldown
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_FRIENDLY_EARTH = REGISTER.register("sky_soarer/friendly_earth", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125), ModSpells.SKY_SOARER.getKey()));
 
   public static final GroupId SKY_SOARER_AMPLIFIED = group("sky_soarer/amplified");
 
-  // TODO: Rename I, etc
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_AMPLIFIED_1 = REGISTER.register("sky_soarer/amplified_1", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0125), ModSpells.SKY_SOARER.getKey(), SKY_SOARER_AMPLIFIED));
 
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_AMPLIFIED_2 = REGISTER.register("sky_soarer/amplified_2", () -> new SpellModifier(CostInstance.mult(ModHerbs.CLOUD_BERRY, SpellCosts.MULT_005), SKY_SOARER_AMPLIFIED_1.getKey(), ModSpells.SKY_SOARER.getKey(), SKY_SOARER_AMPLIFIED));
@@ -122,12 +85,6 @@ public class ModModifiers {
 
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_SPEEDY_2 = REGISTER.register("sky_soarer/speedy_2", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0125), SKY_SOARER_SPEEDY_1.getKey(), ModSpells.SKY_SOARER.getKey(), SKY_SOARER_SPEEDY));
 
-  // Shatter:
-  //  Silk touch    ->
-  //  Fortune I-III  \- Conflict
-  //  Adjustable width --|
-  //  Adjustable height  |--> Increase maximum number of blocks
-  //  Adjustable depth --|    Vein mining
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_MAGNETISM = REGISTER.register("shatter/magnetism", () -> new SpellModifier(CostInstance.add(ModHerbs.WILDROOT, SpellCosts.BASE_0125), ModSpells.SHATTER.getKey()));
 
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_SILK_TOUCH = REGISTER.register("shatter/silk_touch", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0125), null, ModSpells.SHATTER.getKey(), ModModifiers.SHATTER_FORTUNE_I.getKey(), ModModifiers.SHATTER_FORTUNE_II.getKey(), ModModifiers.SHATTER_FORTUNE_III.getKey()));
@@ -151,7 +108,79 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_I = REGISTER.register("shatter/depth_i", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_ADJUSTABLE.getKey(), ModSpells.SHATTER.getKey(), SHATTER_DEPTH));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_II = REGISTER.register("shatter/depth_ii", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_DEPTH_I.getKey(), ModSpells.SHATTER.getKey(), SHATTER_DEPTH));
 
+  static {
+    modifier(ITEMS, ModModifiers.SKY_SOARER_FRIENDLY_EARTH);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_AMPLIFIED_1);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_AMPLIFIED_2);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_1);
+    modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_2);
+    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_I);
+    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_II);
+    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_III);
+    modifier(ITEMS, ModModifiers.SHATTER_MAGNETISM);
+    modifier(ITEMS, ModModifiers.SHATTER_SILK_TOUCH);
+    modifier(ITEMS, ModModifiers.SHATTER_SMELTING);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_5);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_FIRE);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_PEACEFUL);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_SLOWNESS);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_KNOCKBACK);
+    modifier(ITEMS, ModModifiers.ACID_CLOUD_TEMPORAL_MORASS);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5);
+    modifier(ITEMS, ModModifiers.RAMPANT_GROWTH);
+    modifier(ITEMS, ModModifiers.TARGETED_GROWTH);
+    modifier(ITEMS, ModModifiers.GROWTH_INFUSION_HYDRATION);
+    modifier(ITEMS, ModModifiers.GROWTH_INFUSION_FERTILIZER);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_INFERNO);
+    modifier(ITEMS, ModModifiers.DANDELION_WINDS_STATUE);
+    modifier(ITEMS, ModModifiers.SHATTER_ADJUSTABLE);
+    modifier(ITEMS, ModModifiers.SHATTER_DEPTH_I);
+    modifier(ITEMS, ModModifiers.SHATTER_DEPTH_II);
+    modifier(ITEMS, ModModifiers.SHATTER_HEIGHT_I);
+    modifier(ITEMS, ModModifiers.SHATTER_HEIGHT_II);
+    modifier(ITEMS, ModModifiers.SHATTER_WIDTH_I);
+    modifier(ITEMS, ModModifiers.SHATTER_WIDTH_II);
+  }
+
+  private static TokenItem.SpellModifierTokenItem modifier(Holder<SpellModifier> modifier) {
+    return new TokenItem.SpellModifierTokenItem(modifier.getKey(), new Item.Properties().stacksTo(1));
+  }
+
+  private static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> modifier(DeferredRegister.Items reg, Holder<SpellModifier> modifier) {
+    return reg.register(modifier.getKey().location().getPath(), () -> modifier(modifier));
+  }
+
+  public static GroupId group(String name) {
+    return group(name, false);
+  }
+
+  public static GroupId group(String name, boolean useGroupDescription) {
+    var id = new GroupId(name, useGroupDescription);
+    GROUP_IDS.add(id);
+    return id;
+  }
+
   public static void register(IEventBus bus) {
     REGISTER.register(bus);
+    ITEMS.register(bus);
   }
 }

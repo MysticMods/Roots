@@ -530,59 +530,6 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_TWILIGHT = ITEMS.register("twilight", () -> grove(ModGroves.TWILIGHT));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_PRIMAL = ITEMS.register("primal", () -> grove(ModGroves.PRIMAL));
 
-  static {
-    modifier(ITEMS, ModModifiers.SKY_SOARER_FRIENDLY_EARTH);
-    modifier(ITEMS, ModModifiers.SKY_SOARER_AMPLIFIED_1);
-    modifier(ITEMS, ModModifiers.SKY_SOARER_AMPLIFIED_2);
-    modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_1);
-    modifier(ITEMS, ModModifiers.SKY_SOARER_SPEEDY_2);
-    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_I);
-    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_II);
-    modifier(ITEMS, ModModifiers.SHATTER_FORTUNE_III);
-    modifier(ITEMS, ModModifiers.SHATTER_MAGNETISM);
-    modifier(ITEMS, ModModifiers.SHATTER_SILK_TOUCH);
-    modifier(ITEMS, ModModifiers.SHATTER_SMELTING);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_1);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_2);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_3);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_CHANCE_4);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_1);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_2);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_3);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_4);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_DURATION_5);
-    modifier(ITEMS, ModModifiers.ACID_CLOUD_FIRE);
-    modifier(ITEMS, ModModifiers.ACID_CLOUD_PEACEFUL);
-    modifier(ITEMS, ModModifiers.ACID_CLOUD_SLOWNESS);
-    modifier(ITEMS, ModModifiers.ACID_CLOUD_KNOCKBACK);
-    modifier(ITEMS, ModModifiers.ACID_CLOUD_TEMPORAL_MORASS);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5);
-    modifier(ITEMS, ModModifiers.RAMPANT_GROWTH);
-    modifier(ITEMS, ModModifiers.TARGETED_GROWTH);
-    modifier(ITEMS, ModModifiers.GROWTH_INFUSION_HYDRATION);
-    modifier(ITEMS, ModModifiers.GROWTH_INFUSION_FERTILIZER);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_INFERNO);
-    modifier(ITEMS, ModModifiers.DANDELION_WINDS_STATUE);
-    modifier(ITEMS, ModModifiers.SHATTER_ADJUSTABLE);
-    modifier(ITEMS, ModModifiers.SHATTER_DEPTH_I);
-    modifier(ITEMS, ModModifiers.SHATTER_DEPTH_II);
-    modifier(ITEMS, ModModifiers.SHATTER_HEIGHT_I);
-    modifier(ITEMS, ModModifiers.SHATTER_HEIGHT_II);
-    modifier(ITEMS, ModModifiers.SHATTER_WIDTH_I);
-    modifier(ITEMS, ModModifiers.SHATTER_WIDTH_II);
-  }
-
   private static TokenItem.SpellTokenItem spell(Holder<Spell> spell) {
     return new TokenItem.SpellTokenItem(spell.getKey(), new Item.Properties().stacksTo(1));
   }
@@ -593,14 +540,6 @@ public class ModItems {
 
   private static TokenItem.GroveTokenItem grove(Holder<Grove> grove) {
     return new TokenItem.GroveTokenItem(grove.getKey(), new Item.Properties().stacksTo(1));
-  }
-
-  private static TokenItem.SpellModifierTokenItem modifier(Holder<SpellModifier> modifier) {
-    return new TokenItem.SpellModifierTokenItem(modifier.getKey(), new Item.Properties().stacksTo(1));
-  }
-
-  private static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> modifier(DeferredRegister.Items reg, Holder<SpellModifier> modifier) {
-    return reg.register(modifier.getKey().location().getPath(), () -> modifier(modifier));
   }
 
   public static void register(IEventBus bus) {
