@@ -5,10 +5,7 @@ import mysticmods.roots.api.EnumProxies;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.gen.advancement.RootsAdvancementProvider;
-import mysticmods.roots.gen.client.RootsAtlasProvider;
-import mysticmods.roots.gen.client.RootsBlockStateProvider;
-import mysticmods.roots.gen.client.RootsItemModelProvider;
-import mysticmods.roots.gen.client.RootsParticleProvider;
+import mysticmods.roots.gen.client.*;
 import mysticmods.roots.gen.lang.RootsLangProvider;
 import mysticmods.roots.gen.loot.RootsLootTableProvider;
 import mysticmods.roots.gen.nbt.StructureNbtUpdater;
@@ -383,6 +380,7 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsRitualModifierTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsSpellModifierTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsLevelConditionTypeTagsProvider(output, provider, helper));
+    generator.addProvider(event.includeClient(), new RootsModifierModelProvider(output, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
 
     generator.addProvider(event.includeServer(), new RootsItemTagsProvider(output, provider, blocks.contentsGetter(), spellTagsProvider.contentsGetter(), ritualTagsProvider.contentsGetter(), groveTagsProvider.contentsGetter(), helper));
