@@ -1,5 +1,8 @@
 import groovy.json.JsonSlurper
 
+// BLAME CLAUDE, I JUST KEPT YELLING AT IT WHILE IT MADE THINGS MORE COMPLICATED AND I SAID, PLEASE, NO
+// SO IN SUMMARY, IS IT WORTH IT TO SPEND ALMOST 3 HOURS CAJOLING AN AI TO CONVERT A FILE TO A DATA FORMAT, OR DO IT YOURSELF? ANSWER: UNCERTAIN, LOST 3 HOURS & ALL HOPE.
+
 // ---------------------------------------------------------------------------
 // Usage: groovy GenerateModifiers.groovy <modifiers.json> <output-src-root>
 // Also runs in-process from build.gradle via GroovyShell; invalid data throws
