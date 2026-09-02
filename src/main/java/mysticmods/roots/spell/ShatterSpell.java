@@ -224,9 +224,9 @@ public class ShatterSpell extends Spell {
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     if (spellModifier.is(RootsTags.SpellModifiers.SHATTER_INCREASES_PARAMETERS)) {
       int count;
-      if (spellModifier.is(ModModifiers.SHATTER_DEPTH_I) || spellModifier.is(ModModifiers.SHATTER_HEIGHT_I) || spellModifier.is(ModModifiers.SHATTER_WIDTH_I)) {
+      if (spellModifier.is(ModModifiers.SHATTER_DEPTH_1) || spellModifier.is(ModModifiers.SHATTER_HEIGHT_1) || spellModifier.is(ModModifiers.SHATTER_WIDTH_1)) {
         count = 3;
-      } else if (spellModifier.is(ModModifiers.SHATTER_DEPTH_II) || spellModifier.is(ModModifiers.SHATTER_HEIGHT_II) || spellModifier.is(ModModifiers.SHATTER_WIDTH_II)) {
+      } else if (spellModifier.is(ModModifiers.SHATTER_DEPTH_2) || spellModifier.is(ModModifiers.SHATTER_HEIGHT_2) || spellModifier.is(ModModifiers.SHATTER_WIDTH_2)) {
         count = 5;
       } else {
         count = 1;

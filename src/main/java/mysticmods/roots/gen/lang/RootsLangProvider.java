@@ -931,9 +931,9 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierExtendedDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect by [%s%%] to %s seconds [%s ticks].");
     modifierDescriptionBoth(ModModifiers.SHATTER_MAGNETISM, "Teleports dropped blocks to the player.");
     modifierDescriptionBoth(ModModifiers.SHATTER_SILK_TOUCH, "Applies silk touch when breaking blocks.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_I, "Applies Fortune I when breaking blocks.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_II, "Applies Fortune II when breaking blocks.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_III, "Applies Fortune III when breaking blocks.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_1, "Applies Fortune I when breaking blocks.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_2, "Applies Fortune II when breaking blocks.");
+    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_3, "Applies Fortune III when breaking blocks.");
     modifierDescriptionBoth(ModModifiers.SHATTER_SMELTING, "Smelts items dropped by broken blocks.");
 
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
@@ -1012,12 +1012,12 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescription(ModModifiers.GROWTH_INFUSION_FERTILIZER, "Duplicates the effects of using bone meal instead of applying random growth ticks.");
     modifierExtendedDescription(ModModifiers.GROWTH_INFUSION_FERTILIZER, "Applies up to %s stacks of bone meal per %s seconds [%s ticks] of the channeled duration.");
 
-    modifierDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell.");
-    modifierExtendedDescription(ModModifiers.SHATTER_DEPTH_I, "Increases the depth of the Shatter spell to %s blocks.");
-    modifierDescription(ModModifiers.SHATTER_WIDTH_I, "Increases the width of the Shatter spell.");
-    modifierExtendedDescription(ModModifiers.SHATTER_WIDTH_I, "Increases the width of the Shatter spell to %s blocks.");
-    modifierDescription(ModModifiers.SHATTER_HEIGHT_I, "Increases the height of the Shatter spell.");
-    modifierExtendedDescription(ModModifiers.SHATTER_HEIGHT_I, "Increases the height of the Shatter spell to %s blocks.");
+    modifierDescription(ModModifiers.SHATTER_DEPTH_1, "Increases the depth of the Shatter spell.");
+    modifierExtendedDescription(ModModifiers.SHATTER_DEPTH_1, "Increases the depth of the Shatter spell to %s blocks.");
+    modifierDescription(ModModifiers.SHATTER_WIDTH_1, "Increases the width of the Shatter spell.");
+    modifierExtendedDescription(ModModifiers.SHATTER_WIDTH_1, "Increases the width of the Shatter spell to %s blocks.");
+    modifierDescription(ModModifiers.SHATTER_HEIGHT_1, "Increases the height of the Shatter spell.");
+    modifierExtendedDescription(ModModifiers.SHATTER_HEIGHT_1, "Increases the height of the Shatter spell to %s blocks.");
 
     spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
     spellExtendedDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks within ±%s/±%s blocks around you.");

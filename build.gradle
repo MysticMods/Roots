@@ -211,6 +211,49 @@ sourceSets.main.resources.srcDir generateModMetadata
 // To avoid having to run "generateModMetadata" manually, make it run on every project reload
 neoForge.ideSyncTask generateModMetadata
 
+// Generates ModModifiers.java and RootsModifierModelProvider.java from
+// data/modifiers.json, in place under src/main/java so the results are
+// committed. Both are generated files -- edit the JSON, not the Java.
+// The script runs in-process using Gradle's bundled Groovy, so it needs no
+// extra dependency or repository.
+var modifierData = layout.projectDirectory.file("data/modifiers.json")
+var modifierScript = layout.projectDirectory.file("buildscripts/GenerateModifiers.groovy")
+var modifierSourceRoot = layout.projectDirectory.dir("src/main/java")
+// Declared individually on purpose: src/main/java is NOT this task's output,
+// so it must never be registered with outputs.dir or Gradle would treat every
+// hand-written source file as generated.
+var modifierGeneratedFiles = [
+        modifierSourceRoot.file("mysticmods/roots/init/ModModifiers.java"),
+        modifierSourceRoot.file("mysticmods/roots/gen/client/RootsModifierModelProvider.java")
+]
+
+var generateModifiers = tasks.register("generateModifiers") {
+    group = "build"
+    description = "Generates spell modifier registration and model provider sources"
+
+    inputs.file(modifierData).withPathSensitivity(PathSensitivity.RELATIVE)
+    inputs.file(modifierScript).withPathSensitivity(PathSensitivity.RELATIVE)
+    outputs.files(modifierGeneratedFiles)
+
+    var dataFile = modifierData.asFile
+    var scriptFile = modifierScript.asFile
+    var outDir = modifierSourceRoot.asFile
+
+    doLast {
+        // No delete here: the output directory is a live source root. The
+        // generator always writes the same two paths, so nothing goes stale,
+        // and it leaves files untouched when the content is identical.
+        var binding = new Binding(args: [dataFile.absolutePath, outDir.absolutePath] as String[])
+        new GroovyShell(binding).evaluate(scriptFile)
+    }
+}
+
+// src/main/java is already a source root, so the sources just need to exist
+// before anything compiles them.
+tasks.named("compileJava") { dependsOn generateModifiers }
+// Regenerate on every project reload so the IDE sees changes to the JSON.
+neoForge.ideSyncTask generateModifiers
+
 // Example configuration to allow publishing using the maven-publish plugin
 publishing {
     publications {

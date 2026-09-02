@@ -1,0 +1,285 @@
+{
+  "acid_cloud": {
+    "fire": {
+      "cost": {
+        "herb": "inferno_bulb",
+        "amount": "BASE_0250"
+      },
+      "charge": "specified",
+      "icon": "minecraft:flint_and_steel"
+    },
+    "peaceful": {
+      "cost": {
+        "herb": "wildroot",
+        "amount": "BASE_0125"
+      },
+      "icon": "minecraft:turtle_egg"
+    },
+    "knockback": {
+      "cost": {
+        "herb": "stalicripe",
+        "amount": "BASE_0125"
+      },
+      "icon": "minecraft:iron_boots"
+    },
+    "slowness": {
+      "cost": {
+        "herb": "dewgonia",
+        "amount": "BASE_0125"
+      },
+      "charge": "specified",
+      "icon": "minecraft:soul_sand"
+    },
+    "temporal_morass": {
+      "cost": {
+        "herb": "moonglow",
+        "amount": "BASE_0125"
+      },
+      "charge": "specified",
+      "parent": "slowness",
+      "icon": "minecraft:purple_glazed_terracotta"
+    }
+  },
+  "dandelion_winds": {
+    "duration": {
+      "cost": {
+        "herb": "cloud_berry",
+        "amount": "BASE_0250"
+      },
+      "tiers": [
+        "minecraft:iron_ingot",
+        "minecraft:copper_ingot",
+        "minecraft:gold_ingot",
+        "roots:silver_ingot",
+        "minecraft:netherite_ingot"
+      ]
+    },
+    "chance": {
+      "cost": {
+        "herb": "spiritleaf",
+        "amount": "BASE_0250"
+      },
+      "tiers": [
+        "minecraft:oak_log",
+        "minecraft:stone",
+        "minecraft:iron_block",
+        "minecraft:obsidian"
+      ]
+    },
+    "vortex": {
+      "cost": {
+        "herb": "moonglow",
+        "amount": "BASE_0125"
+      },
+      "icon": "minecraft:compass"
+    },
+    "vortex_cooldown": {
+      "parent": "vortex",
+      "cost": {
+        "herb": "moonglow",
+        "amount": "BASE_0125"
+      },
+      "tiers": [
+        "minecraft:quartz",
+        "minecraft:lapis_lazuli",
+        "minecraft:amethyst_shard",
+        "minecraft:emerald",
+        "minecraft:diamond"
+      ]
+    },
+    "gusts": {
+      "cost": {
+        "herb": "moonglow",
+        "amount": "BASE_0125"
+      },
+      "icon": "minecraft:lightning_rod"
+    },
+    "gusts_cooldown": {
+      "parent": "gusts",
+      "cost": {
+        "herb": "moonglow",
+        "amount": "BASE_0125"
+      },
+      "tiers": [
+        "minecraft:quartz",
+        "minecraft:lapis_lazuli",
+        "minecraft:amethyst_shard",
+        "minecraft:emerald",
+        "minecraft:diamond"
+      ]
+    },
+    "statue": {
+      "cost": {
+        "herb": "stalicripe",
+        "amount": "BASE_0250"
+      },
+      "icon": "minecraft:iron_chestplate"
+    },
+    "inferno": {
+      "cost": {
+        "herb": "inferno_bulb",
+        "amount": "BASE_0250"
+      },
+      "icon": "minecraft:campfire"
+    }
+  },
+  "growth_infusion": {
+    "targeted_growth": {
+      "icon": "minecraft:target"
+    },
+    "rampant_growth": {
+      "cost": [
+        {
+          "type": "negate_base"
+        },
+        {
+          "herb": "wildewheet",
+          "amount": "BASE_0031"
+        }
+      ],
+      "icon": "spells/rampant_growth"
+    },
+    "hydration": {
+      "cost": {
+        "herb": "dewgonia",
+        "amount": "BASE_0063"
+      },
+      "charge": "specified",
+      "icon": "minecraft:water_bucket"
+    },
+    "fertilizer": {
+      "cost": {
+        "herb": "bafflecap",
+        "amount": "BASE_0500"
+      },
+      "charge": "specified",
+      "parent": "targeted_growth",
+      "icon": "minecraft:bone_meal"
+    }
+  },
+  "sky_soarer": {
+    "friendly_earth": {
+      "cost": {
+        "herb": "stalicripe",
+        "amount": "BASE_0125"
+      },
+      "icon": "minecraft:arrow"
+    },
+    "amplified": {
+      "group_description": false,
+      "tiers": [
+        {
+          "cost": {
+            "herb": "cloud_berry",
+            "amount": "BASE_0125"
+          },
+          "icon": "minecraft:redstone",
+          "aliases": [
+            "sky_soarer/amplified_1"
+          ]
+        },
+        {
+          "cost": {
+            "herb": "cloud_berry",
+            "amount": "MULT_005",
+            "type": "mult"
+          },
+          "icon": "minecraft:glowstone_dust",
+          "aliases": [
+            "sky_soarer/amplified_2"
+          ]
+        }
+      ]
+    },
+    "speedy": {
+      "group_description": false,
+      "cost": {
+        "herb": "cloud_berry",
+        "amount": "BASE_0125"
+      },
+      "tiers": [
+        {
+          "icon": "minecraft:ice",
+          "aliases": [
+            "sky_soarer/speedy_1"
+          ]
+        },
+        {
+          "icon": "minecraft:packed_ice",
+          "aliases": [
+            "sky_soarer/speedy_2"
+          ]
+        }
+      ]
+    }
+  },
+  "shatter": {
+    "magnetism": {
+      "cost": {
+        "herb": "wildroot",
+        "amount": "BASE_0125"
+      },
+      "icon": "minecraft:compass"
+    },
+    "silk_touch": {
+      "cost": {
+        "herb": "dewgonia",
+        "amount": "BASE_0125"
+      },
+      "icon": "minecraft:slime_ball"
+    },
+    "fortune": {
+      "group_description": false,
+      "cost": {
+        "herb": "spiritleaf",
+        "amount": "BASE_0250"
+      },
+      "tiers": [
+        "minecraft:iron_pickaxe",
+        "minecraft:golden_pickaxe",
+        "minecraft:diamond_pickaxe"
+      ]
+    },
+    "smelting": {
+      "cost": {
+        "herb": "inferno_bulb",
+        "amount": "BASE_0250"
+      },
+      "icon": "minecraft:furnace"
+    },
+    "adjustable": {
+      "icon": "minecraft:anvil"
+    },
+    "height": {
+      "parent": "adjustable",
+      "tiers": [
+        "spells/shatter_height",
+        "spells/shatter_height"
+      ]
+    },
+    "width": {
+      "parent": "adjustable",
+      "tiers": [
+        "spells/shatter_width",
+        "spells/shatter_width"
+      ]
+    },
+    "depth": {
+      "parent": "adjustable",
+      "tiers": [
+        "spells/shatter_depth",
+        "spells/shatter_depth"
+      ]
+    }
+  },
+  "conflicts": [
+    [
+      "growth_infusion/rampant_growth",
+      "growth_infusion/targeted_growth"
+    ],
+    [
+      "shatter/fortune",
+      "shatter/silk_touch"
+    ]
+  ]
+}

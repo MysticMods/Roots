@@ -31,7 +31,7 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
         ModModifiers.SKY_SOARER_SPEEDY_1.value(), ModModifiers.SKY_SOARER_SPEEDY_2.value()
     );
     this.tag(RootsTags.SpellModifiers.SHATTER_FORTUNE).add(
-        ModModifiers.SHATTER_FORTUNE_I.value(), ModModifiers.SHATTER_FORTUNE_II.value(), ModModifiers.SHATTER_FORTUNE_III.value()
+        ModModifiers.SHATTER_FORTUNE_1.value(), ModModifiers.SHATTER_FORTUNE_2.value(), ModModifiers.SHATTER_FORTUNE_3.value()
     );
     this.tag(RootsTags.SpellModifiers.SMELTS).add(ModModifiers.SHATTER_SMELTING.value());
     this.tag(RootsTags.SpellModifiers.INCREASES_FORTUNE).addTag(RootsTags.SpellModifiers.SHATTER_FORTUNE);
@@ -54,11 +54,11 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
         .add(ModModifiers.ACID_CLOUD_FIRE.value(), ModModifiers.DANDELION_WINDS_INFERNO.value());
     this.tag(RootsTags.SpellModifiers.PEACEFUL).add(ModModifiers.ACID_CLOUD_PEACEFUL.value());
     this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_DEPTH)
-        .add(ModModifiers.SHATTER_DEPTH_I.value(), ModModifiers.SHATTER_DEPTH_II.value());
+        .add(ModModifiers.SHATTER_DEPTH_1.value(), ModModifiers.SHATTER_DEPTH_2.value());
     this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_HEIGHT)
-        .add(ModModifiers.SHATTER_HEIGHT_I.value(), ModModifiers.SHATTER_HEIGHT_II.value());
+        .add(ModModifiers.SHATTER_HEIGHT_1.value(), ModModifiers.SHATTER_HEIGHT_2.value());
     this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_WIDTH)
-        .add(ModModifiers.SHATTER_WIDTH_I.value(), ModModifiers.SHATTER_WIDTH_II.value());
+        .add(ModModifiers.SHATTER_WIDTH_1.value(), ModModifiers.SHATTER_WIDTH_2.value());
     this.tag(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS).add(ModModifiers.SHATTER_ADJUSTABLE.value());
     //noinspection unchecked
     this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_PARAMETERS)
