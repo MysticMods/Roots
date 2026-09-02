@@ -282,7 +282,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return color2;
   }
 
-  public int getMaxUse() {
+  public int getMaxUse(ISpellInstance iSpellInstance) {
     if (maxUse == 0 && type == SpellCastType.CONTINUOUS) {
       return 72000;
     }
@@ -290,8 +290,8 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return maxUse;
   }
 
-  public Component getChargeText(int currentCharge) {
-    return Component.translatable("roots.message.staff.charging", currentCharge, getMaxUse());
+  public Component getChargeText(ISpellInstance iSpellInstance, int currentCharge) {
+    return Component.translatable("roots.message.staff.charging", currentCharge, getMaxUse(iSpellInstance));
   }
 
   @Override
@@ -325,7 +325,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return cooldown;
   }
 
-  public SpellCastType getType() {
+  public SpellCastType getType(ISpellInstance iSpellInstance) {
     return type;
   }
 
@@ -439,7 +439,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   @Nullable
-  public AABB getAABB() {
+  public AABB getAABB(ISpellInstance iSpellInstance) {
     return null;
   }
 

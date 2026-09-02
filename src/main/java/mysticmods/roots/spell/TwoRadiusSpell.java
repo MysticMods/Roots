@@ -5,6 +5,7 @@ import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellCastType;
@@ -81,7 +82,7 @@ public abstract class TwoRadiusSpell extends Spell {
   }
 
   @Override
-  public AABB getAABB() {
+  public AABB getAABB(ISpellInstance iSpellInstance) {
     if (aabb == null) {
       BoundingBox box = getBoundingBox();
       if (box == null) {

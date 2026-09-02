@@ -80,7 +80,7 @@ public class DisarmSpell extends TwoRadiusSpell {
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     List<EquipmentSlot> slots = List.of(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
-    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer)
+    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), instance.getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer)
         .and((o) -> !o.getType().is(RootsTags.Entities.DISABLE_DISARM)));
 
     DamageSources damage = pPlayer.damageSources();

@@ -126,14 +126,14 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public Component getChargeText(int currentCharge) {
-    int chargePercent = (int) (((float) currentCharge / (float) getMaxUse()) * 100);
+  public Component getChargeText(ISpellInstance iSpellInstance, int currentCharge) {
+    int chargePercent = (int) (((float) currentCharge / (float) getMaxUse(iSpellInstance)) * 100);
     return Component.translatable("roots.message.staff.charging_percent", chargePercent);
   }
 
   @Override
   public int getBaseMaximumOperations() {
-    return getMaxUse();
+    return maxUse;
   }
 
   @Override

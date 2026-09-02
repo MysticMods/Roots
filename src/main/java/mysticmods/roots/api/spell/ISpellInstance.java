@@ -145,7 +145,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default int getMaxUse() {
-    return asSpell().getMaxUse();
+    return asSpell().getMaxUse(this);
   }
 
   @Override
@@ -168,7 +168,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default SpellCastType getType() {
-    return asSpell().getType();
+    return asSpell().getType(this);
   }
 
   default int getDefaultCooldown() {
@@ -191,7 +191,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   @Nullable
   default AABB getAABB() {
-    return asSpell().getAABB();
+    return asSpell().getAABB(this);
   }
 
   default double getEntityRange(Player pPlayer) {
@@ -236,7 +236,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default Component getChargeText(int ticks) {
-    return asSpell().getChargeText(ticks);
+    return asSpell().getChargeText(this, ticks);
   }
 
   default float getIconPredicate() {

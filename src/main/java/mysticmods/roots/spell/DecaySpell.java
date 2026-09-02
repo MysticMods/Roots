@@ -14,7 +14,6 @@ import mysticmods.roots.network.client.fx.DecayTargetFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -67,7 +66,7 @@ public class DecaySpell extends TwoRadiusSpell {
 
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer)
+    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), instance.getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer)
         .and(o -> o.getType().is(RootsTags.Entities.DECAYABLE)));
     int totalDecayed = 0;
     double heartsDecayed = 0;

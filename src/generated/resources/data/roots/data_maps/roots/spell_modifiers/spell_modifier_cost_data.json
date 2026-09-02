@@ -362,7 +362,7 @@
     "roots:shatter/width_ii": {
       "costs": []
     },
-    "roots:sky_soarer/amplified_1": {
+    "roots:sky_soarer/amplified_i": {
       "costs": [
         {
           "type": "additive",
@@ -371,7 +371,7 @@
         }
       ]
     },
-    "roots:sky_soarer/amplified_2": {
+    "roots:sky_soarer/amplified_ii": {
       "costs": [
         {
           "type": "multiplicative_base",
@@ -389,7 +389,7 @@
         }
       ]
     },
-    "roots:sky_soarer/speedy_1": {
+    "roots:sky_soarer/speedy_i": {
       "costs": [
         {
           "type": "additive",
@@ -398,7 +398,7 @@
         }
       ]
     },
-    "roots:sky_soarer/speedy_2": {
+    "roots:sky_soarer/speedy_ii": {
       "costs": [
         {
           "type": "additive",

@@ -101,7 +101,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   @Override
   @Nullable
   public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance instance) {
-    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+    if (instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return ModAttachments.AOE_GROWTH_MODE.get();
     }
 
@@ -110,12 +110,12 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
 
   @Override
   public boolean hasBlockTarget(Player pPlayer, ISpellInstance instance) {
-    return !instance.has(ModModifiers.RAMPANT_GROWTH);
+    return !instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH);
   }
 
   @Override
   public @Nullable Vec3 getBlockTarget(Player pPlayer, ISpellInstance spell) {
-    if (spell.has(ModModifiers.RAMPANT_GROWTH)) {
+    if (spell.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return null;
     }
     return pickBlock(pPlayer, spell).getLocation();
@@ -123,7 +123,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
 
   @Override
   public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+    if (instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       if (ticks % rampantInterval == 0) {
         AOEGrowthMode mode = instance.getSpellData(ModAttachments.AOE_GROWTH_MODE);
         ItemStack offHandItem = pPlayer.getOffhandItem();
@@ -257,7 +257,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
 
   @Override
   public int getMaximumOperations(Object2BooleanMap<ICosted> modifierMap) {
-    if (modifierMap.getBoolean(ModModifiers.RAMPANT_GROWTH)) {
+    if (modifierMap.getBoolean(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return count;
     }
 
@@ -276,7 +276,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       this.rampantGrowthExtendedDescription = getOrCreateTooltipDescriptionId(instance) + ".extended";
     }
 
-    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+    if (instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return this.rampantGrowthExtendedDescription;
     }
 
@@ -292,7 +292,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       this.rampantGrowthDescription = getOrCreateDescriptionId(instance) + ".description";
     }
 
-    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+    if (instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return this.rampantGrowthDescription;
     }
 
@@ -321,7 +321,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       };
     }
 
-    if (instance.has(ModModifiers.RAMPANT_GROWTH)) {
+    if (instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return rampantGrowthComponents;
     }
 
@@ -330,7 +330,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
 
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
-    if (spellModifier.is(ModModifiers.RAMPANT_GROWTH)) {
+    if (spellModifier.is(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return new Component[]{
           Component.literal(String.valueOf(count)),
           Component.literal(String.valueOf(radiusZX)),

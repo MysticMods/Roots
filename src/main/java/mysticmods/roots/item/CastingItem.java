@@ -191,6 +191,7 @@ public class CastingItem extends Item {
     int ticks = pStack.getUseDuration(pLivingEntity) - pRemainingUseDuration;
     pStack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
 
+    // TODO: This can technically change now
     if (spell.getType() == SpellCastType.CONTINUOUS) {
       Costing costs = new Costing(spell);
       costs.updateHerbCache(pPlayer);

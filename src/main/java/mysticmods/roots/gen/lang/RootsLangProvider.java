@@ -1001,10 +1001,10 @@ public final class RootsLangProvider extends LanguageProvider {
     spellDescription(ModSpells.RAMPANT_GROWTH, "Use Growth Infusion instead!");
     spellExtendedDescription(ModSpells.RAMPANT_GROWTH, "Use growth infusion instead!");
     spellExtendedDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block every %s seconds [%s ticks] while channeled. While casting this spell, your block interaction range for it is increased by %s blocks.");
-    modifierDescription(ModModifiers.RAMPANT_GROWTH, "Causes accelerated growth to all eligible blocks in the area around you.");
-    modifierExtendedDescription(ModModifiers.RAMPANT_GROWTH, "Causes accelerated growth for up to %s eligible blocks within ±%s/±%s blocks every %s seconds [%s ticks] while channeled. The number of ticks applied to each block varies.");
+    modifierDescription(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH, "Causes accelerated growth to all eligible blocks in the area around you.");
+    modifierExtendedDescription(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH, "Causes accelerated growth for up to %s eligible blocks within ±%s/±%s blocks every %s seconds [%s ticks] while channeled. The number of ticks applied to each block varies.");
     // TODO: Handle this: both of these need to be 'placeholder' modifiers.
-    modifierDescriptionBoth(ModModifiers.TARGETED_GROWTH, "Causes accelerated growth to only the targeted block. [NYI]");
+    modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_TARGETED_GROWTH, "Causes accelerated growth to only the targeted block. [NYI]");
     modifierDescriptionBoth(ModModifiers.SHATTER_ADJUSTABLE, "Group of modifiers that allow for the adjustment of the width, depth and height of the Shatter spell.");
 
     modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_HYDRATION, "The soil crops are growing upon has its moisture level increased if it has a moisture level.");
