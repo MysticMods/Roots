@@ -30,7 +30,7 @@ public class WaterElementalCropBlock extends ElementalCropBlock implements Simpl
   @Override
   public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
     BlockState newState = pLevel.getBlockState(pPos);
-    if (pLevel.getBlockState(pPos.below()).is(RootsTags.Blocks.ELEMENTAL_SOIL)) {
+    if (pLevel.getBlockState(pPos.below()).is(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL)) {
       return true;
     }
     if (newState.hasProperty(WATERLOGGED) && !newState.getValue(WATERLOGGED)) {

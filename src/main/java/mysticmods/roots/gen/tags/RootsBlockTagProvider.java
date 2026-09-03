@@ -24,7 +24,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-    this.tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(RootsTags.Blocks.ALL_SOIL).add(ENCHANTED_TURF.get());
+    this.tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(RootsTags.Blocks.ELEMENTAL_SOIL).add(ENCHANTED_TURF.get());
     this.tag(BlockTags.MINEABLE_WITH_HOE)
         .add(THATCH.get(), STONEPETAL.get(), WILDWOOD_LEAVES.get(), WILD_ROOTS.get(), CREEPING_GROVE_MOSS.get(), HANGING_GROVE_MOSS.get(), BAFFLECAP.get());
     this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -108,9 +108,9 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.WATER_SOIL).add(AQUEOUS_SOIL.get());
     this.tag(RootsTags.Blocks.EARTH_SOIL).add(TERRAN_SOIL.get());
     this.tag(BlockTags.DIRT).add(ENCHANTED_TURF.get());
-    this.tag(RootsTags.Blocks.ELEMENTAL_SOIL)
+    this.tag(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL)
         .addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL);
-    this.tag(RootsTags.Blocks.ALL_SOIL).addTags(RootsTags.Blocks.ELEMENTAL_SOIL, RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
+    this.tag(RootsTags.Blocks.ELEMENTAL_SOIL).addTags(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL, RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.NYI).add(INCENSE_BURNER.get(), UNENDING_BOWL.get());
     this.tag(RootsTags.Blocks.WIP).addTag(RootsTags.Blocks.SOILS);
@@ -265,7 +265,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
         Blocks.WITHER_ROSE,
         Blocks.SUNFLOWER, Blocks.LILAC, Blocks.PEONY, Blocks.ROSE_BUSH, Blocks.PITCHER_PLANT // Tall flowers
     );
-    this.tag(RootsTags.Blocks.BLOOMING_INELIGIBLE_BLOCKS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
+    this.tag(RootsTags.Blocks.BLOOMING_INELIGIBLE_BLOCKS).addTag(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL);
 
     this.tag(BlockTags.MAINTAINS_FARMLAND).addTag(RootsTags.Blocks.CROPS);
 
@@ -320,13 +320,13 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.PRIMAL_REPUTATION_CROPS).addTags(RootsTags.Blocks.SPIRITLEAF_CROP);
     tag(RootsTags.Blocks.TWILIGHT_REPUTATION_CROPS).addTags(RootsTags.Blocks.MOONGLOW_CROP);
     tag(RootsTags.Blocks.UNDERWATER_FARMLAND).add(Blocks.DIRT, Blocks.DIRT_PATH, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.GRASS_BLOCK);
-    tag(RootsTags.Blocks.FARMLANDS).add(Blocks.FARMLAND).addTag(RootsTags.Blocks.ALL_SOIL);
-    tag(BlockTags.MUSHROOM_GROW_BLOCK).addTag(RootsTags.Blocks.ALL_SOIL);
+    tag(RootsTags.Blocks.FARMLANDS).add(Blocks.FARMLAND).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
+    tag(BlockTags.MUSHROOM_GROW_BLOCK).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
 
     tag(BlockTags.SMALL_FLOWERS).addTag(RootsTags.Blocks.STONEPETAL);
 
     tag(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS).add(Blocks.SNOW_BLOCK, Blocks.MAGMA_BLOCK, Blocks.MUD, Blocks.OBSIDIAN, Blocks.ICE, Blocks.PACKED_ICE, Blocks.PACKED_MUD, Blocks.BLUE_ICE, Blocks.END_STONE)
-        .addTags(RootsTags.Blocks.ALL_SOIL);
+        .addTags(RootsTags.Blocks.ELEMENTAL_SOIL);
     tag(RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS).add(Blocks.LAVA, Blocks.WATER);
     tag(RootsTags.Blocks.FAIRY_GROVE_GENERATORS).addTags(BlockTags.SMALL_FLOWERS, BlockTags.TALL_FLOWERS);
     tag(RootsTags.Blocks.FAIRY_GROVE_PATHS).add(Blocks.DIRT_PATH);

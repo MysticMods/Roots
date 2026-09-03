@@ -3,7 +3,7 @@
   "conditions": [
     {
       "condition": "roots:block_tag",
-      "tag": "roots:soils/elemental"
+      "tag": "roots:soils/typed_elemental"
     },
     {
       "condition": "roots:block_tag",

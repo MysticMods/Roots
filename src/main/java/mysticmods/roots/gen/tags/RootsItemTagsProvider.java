@@ -61,6 +61,10 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.WILDROOT_CROP).add(ModItems.WILDROOT.get());
     this.tag(RootsTags.Items.INFERNO_BULB_CROP).add(ModItems.INFERNO_BULB.get());
 
+    this.tag(RootsTags.Items.DEWGONIA_SEEDS).add(DEWGONIA.get());
+    this.tag(RootsTags.Items.INFERNO_BULB_SEEDS).add(INFERNO_BULB.get());
+    this.tag(RootsTags.Items.CLOUD_BERRY_SEEDS).add(CLOUD_BERRY.get());
+    this.tag(RootsTags.Items.STALICRIPE_SEEDS).add(STALICRIPE.get());
     this.tag(RootsTags.Items.MOONGLOW_SEEDS).add(ModItems.MOONGLOW_SEEDS.get());
     this.tag(RootsTags.Items.PERESKIA_SEEDS).add(ModItems.PERESKIA_BULB.get());
     this.tag(RootsTags.Items.WILDEWHEET_SEEDS).add(ModItems.WILDEWHEET_SEEDS.get());
@@ -131,8 +135,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.EARTH_SOIL, RootsTags.Items.EARTH_SOIL);
     this.copy(RootsTags.Blocks.FIRE_SOIL, RootsTags.Items.FIRE_SOIL);
     this.copy(RootsTags.Blocks.BASE_ELEMENTAL_SOIL, RootsTags.Items.BASE_ELEMENTAL_SOIL);
-    this.copy(RootsTags.Blocks.ALL_SOIL, RootsTags.Items.ALL_SOIL);
-    this.copy(RootsTags.Blocks.ELEMENTAL_SOIL, RootsTags.Items.ELEMENTAL_SOIL);
+    this.copy(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL, RootsTags.Items.ELEMENTAL_SOIL);
     this.copy(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Items.RUNED_OBSIDIAN);
     this.copy(RootsTags.Blocks.RUNESTONE, RootsTags.Items.RUNESTONE);
     this.copy(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Items.WILDWOOD_LOGS);

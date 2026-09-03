@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#roots:soils/air",
+    "#roots:soils/fire",
+    "#roots:soils/water",
+    "#roots:soils/earth"
+  ]
+}

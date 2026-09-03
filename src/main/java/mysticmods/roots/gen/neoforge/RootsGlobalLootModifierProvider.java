@@ -35,7 +35,7 @@ public final class RootsGlobalLootModifierProvider extends GlobalLootModifierPro
 
   private LootItemCondition[] getCropExtraConditions() {
     List<LootItemCondition> conditions = new ArrayList<>();
-    conditions.add(LootItemBlockBelowTagCondition.tag(RootsTags.Blocks.ELEMENTAL_SOIL));
+    conditions.add(LootItemBlockBelowTagCondition.tag(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL));
     conditions.add(LootItemBlockTagCondition.tag(BlockTags.CROPS));
     conditions.add(FullyGrownCropCondition.fullyGrownCrop());
     conditions.add(new ConfigSpecificLootCondition("elemental_crop_extra_drops"));

@@ -9,6 +9,6 @@
     "minecraft:packed_mud",
     "minecraft:blue_ice",
     "minecraft:end_stone",
-    "#roots:soils/all"
+    "#roots:soils/elemental"
   ]
 }

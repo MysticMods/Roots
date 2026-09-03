@@ -1,6 +1,6 @@
 {
   "values": [
     "minecraft:farmland",
-    "#roots:soils/all"
+    "#roots:soils/elemental"
   ]
 }

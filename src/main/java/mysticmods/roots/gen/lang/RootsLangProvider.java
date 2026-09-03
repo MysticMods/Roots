@@ -805,6 +805,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.container.herb_pouch", "Herb Pouch");
     add("roots.commands.alerts.no_player", "Sender is not a player.");
     add("roots.message.spell_modifier.already_learned", "Spell modifier '%s' already learned!");
+    add("roots.message.dewgonia_not_waterlogged", "Unless using elemental soil, this crop must be planted on a waterlogged block.");
     add("message.dandelion_cordial", "You feel more alert!");
 
     // JEI

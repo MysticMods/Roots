@@ -13,6 +13,7 @@ import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
 import mysticmods.roots.inventory.pouch.sylvan.SylvanPouchMenu;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.block.EnchantedTurfBlockItem;
+import mysticmods.roots.item.block.WaterElementalCropBlockItem;
 import mysticmods.roots.item.living.*;
 import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.Util;
@@ -215,7 +216,7 @@ public class ModItems {
   public static final DeferredHolder<Item, ItemNameBlockItem> WILDROOT = ITEMS.register("wildroot", () -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), new Item.Properties()));
   public static final DeferredHolder<Item, Item> GROVE_MOSS = ITEMS.register("grove_moss", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, ItemNameBlockItem> CLOUD_BERRY = ITEMS.register("cloud_berry", () -> new ItemNameBlockItem(ModBlocks.CLOUD_BERRY_CROP.get(), new Item.Properties().fireResistant()));
-  public static final DeferredHolder<Item, ItemNameBlockItem> DEWGONIA = ITEMS.register("dewgonia", () -> new ItemNameBlockItem(ModBlocks.DEWGONIA_CROP.get(), new Item.Properties().fireResistant()));
+  public static final DeferredHolder<Item, WaterElementalCropBlockItem> DEWGONIA = ITEMS.register("dewgonia", () -> new WaterElementalCropBlockItem(ModBlocks.DEWGONIA_CROP.get(), new Item.Properties().fireResistant()));
   public static final DeferredHolder<Item, ItemNameBlockItem> INFERNO_BULB = ITEMS.register("inferno_bulb", () -> new ItemNameBlockItem(ModBlocks.INFERNO_BULB_CROP.get(), new Item.Properties().fireResistant()));
   public static final DeferredHolder<Item, ItemNameBlockItem> STALICRIPE = ITEMS.register("stalicripe", () -> new ItemNameBlockItem(ModBlocks.STALICRIPE_CROP.get(), new Item.Properties().fireResistant()));
   public static final DeferredHolder<Item, ItemNameBlockItem> BAFFLECAP = ITEMS.register("bafflecap", () -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), new Item.Properties()));
