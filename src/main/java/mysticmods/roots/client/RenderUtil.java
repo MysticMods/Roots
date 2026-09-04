@@ -207,6 +207,7 @@ public class RenderUtil {
     pPoseStack.popPose();
   }
 
+  // TODO: Improve batching: just like JEI, render all of these in two passes, one for flat gui lighting and the other for gui3d lighting.
   // TODO: Overhaul all of this; where is the guiGraphics gooey goodness?
   public static void renderItemAsIcon(GuiGraphics graphics, ItemStack stack, PoseStack poseStack, int pX, int pY, int size,
                                       boolean transparent) {
@@ -232,7 +233,7 @@ public class RenderUtil {
       itemRenderer.render(stack, ItemDisplayContext.GUI, false, poseStack, bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, itemBakedModel);
     }
     graphics.flush();
-    //bufferSource.endBatch();
+    bufferSource.endBatch();
     if (flag) {
       Lighting.setupFor3DItems();
     } else {
