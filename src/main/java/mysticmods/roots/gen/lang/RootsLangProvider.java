@@ -2,6 +2,7 @@ package mysticmods.roots.gen.lang;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.GroupId;
@@ -28,10 +29,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -212,9 +210,16 @@ public final class RootsLangProvider extends LanguageProvider {
       }
     }
 
+    Set<GroveAction> manuallyNamedActions = Set.of(ModActions.HARVEST_BEE_HIVE.value());
+
     RootsRegistries.GROVE_ACTIONS.entrySet().forEach(o -> {
+      if (manuallyNamedActions.contains(o.getValue())) {
+        return;
+      }
       add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
     });
+
+    add(ModActions.HARVEST_BEE_HIVE.value().getDescriptionId(), "Harvest Honey or Honeycomb");
 
     RootsRegistries.SPELLS.entrySet().forEach(o -> {
           if (!o.getValue().is(RootsTags.Spells.INVALID)) {
