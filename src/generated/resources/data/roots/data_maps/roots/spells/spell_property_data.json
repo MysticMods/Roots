@@ -968,8 +968,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The amount of time before a sylvan light decays (in ticks) when the decay modifier is enabled.",
-          "default_value": 2400,
-          "value": 2400
+          "default_value": 1200,
+          "value": 1200
         }
       }
     ]

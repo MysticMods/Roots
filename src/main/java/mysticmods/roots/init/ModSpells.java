@@ -222,7 +222,7 @@ public class ModSpells {
 
   public static final PropertyHolder<Property.IntegerProperty> SYLVAN_LIGHT_COOLDOWN = P.recordProperty("sylvan_light/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> SYLVAN_LIGHT_MAX_DISTANCE = P.recordProperty("sylvan_light/max_distance", Property.ofDouble(10.0, "The maximum distance a sylvan light can be placed from the caster"));
-  public static final PropertyHolder<Property.IntegerProperty> SYLVAN_LIGHT_DECAY = P.recordProperty("sylvan_light/decay", Property.ofInt(2 * 20 * 60, "The amount of time before a sylvan light decays (in ticks) when the decay modifier is enabled."));
+  public static final PropertyHolder<Property.IntegerProperty> SYLVAN_LIGHT_DECAY = P.recordProperty("sylvan_light/decay", Property.ofInt(60 * 20, "The amount of time before a sylvan light decays (in ticks) when the decay modifier is enabled."));
 
   // Geas (80 cooldown)
   public static final DeferredHolder<Spell, GeasSpell> GEAS = REGISTER.register(Spells.GEAS.location()
