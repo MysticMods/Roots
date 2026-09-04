@@ -9,6 +9,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -88,5 +89,16 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     }
 
     return new SpellModifierSet(ImmutableSet.copyOf(internal));
+  }
+
+  @Nullable
+  public SpellModifier getFirstModifier(TagKey<SpellModifier> modifier) {
+    for (SpellModifier mod : this) {
+      if (mod.is(modifier)) {
+        return mod;
+      }
+    }
+
+    return null;
   }
 }

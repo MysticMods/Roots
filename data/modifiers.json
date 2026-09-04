@@ -272,6 +272,38 @@
       ]
     }
   },
+  "sylvan_light": {
+    "color": {
+      "icon": "minecraft:black_dye"
+    },
+    "white": {
+      "parent": "color",
+      "icon": "minecraft:white_dye"
+    },
+    "orange": {
+      "parent": "color",
+      "icon": "minecraft:orange_dye"
+    },
+    "lime": {
+      "parent": "color",
+      "icon": "minecraft:lime_dye"
+    },
+    "pink": {
+      "parent": "color",
+      "icon": "minecraft:pink_dye"
+    },
+    "cyan": {
+      "parent": "color",
+      "icon": "minecraft:cyan_dye"
+    },
+    "decaying": {
+      "icon": "minecraft:cracked_stone_bricks",
+      "cost": {
+        "herb": "stalicripe",
+        "amount": "COMPLEX_0625"
+      }
+    }
+  },
   "conflicts": [
     [
       "growth_infusion/rampant_growth",
@@ -280,6 +312,13 @@
     [
       "shatter/fortune",
       "shatter/silk_touch"
+    ],
+    [
+      "sylvan_light/white",
+      "sylvan_light/orange",
+      "sylvan_light/lime",
+      "sylvan_light/pink",
+      "sylvan_light/cyan"
     ]
   ]
 }

@@ -251,12 +251,12 @@
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.0625,
+          "defaultValue": 0.625,
           "herb": "roots:grove_moss"
         },
         {
           "type": "additive",
-          "defaultValue": 0.0625,
+          "defaultValue": 0.625,
           "herb": "roots:pereskia"
         }
       ]

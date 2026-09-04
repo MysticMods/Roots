@@ -7,7 +7,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.*;
 import mysticmods.roots.block.GroveStoneBlock;
-import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 // TODO: Handle rank changes
-public class GroveStoneBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, GrovePowerGenerator, IGroveInstance {
+public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, GrovePowerGenerator, IGroveInstance {
   private int generatedLastTick = 0;
   private int consumedLastTick = 0;
   private int generatedThisTick = 0;

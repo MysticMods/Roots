@@ -82,6 +82,13 @@ public final class RootsModifierModelProvider extends ItemModelProvider {
     modifier(ModModifiers.SHATTER_WIDTH_2, "spells/shatter_width");
     modifier(ModModifiers.SHATTER_DEPTH_1, "spells/shatter_depth");
     modifier(ModModifiers.SHATTER_DEPTH_2, "spells/shatter_depth");
+    modifier(ModModifiers.SYLVAN_LIGHT_COLOR, Items.BLACK_DYE);
+    modifier(ModModifiers.SYLVAN_LIGHT_WHITE, Items.WHITE_DYE);
+    modifier(ModModifiers.SYLVAN_LIGHT_ORANGE, Items.ORANGE_DYE);
+    modifier(ModModifiers.SYLVAN_LIGHT_LIME, Items.LIME_DYE);
+    modifier(ModModifiers.SYLVAN_LIGHT_PINK, Items.PINK_DYE);
+    modifier(ModModifiers.SYLVAN_LIGHT_CYAN, Items.CYAN_DYE);
+    modifier(ModModifiers.SYLVAN_LIGHT_DECAYING, Items.CRACKED_STONE_BRICKS);
   }
 
   public ItemModelBuilder modifier(Holder<SpellModifier> itemHolder, String location) {

@@ -658,6 +658,8 @@ public class RootsTags {
     public static final TagKey<SpellModifier> SETS_ON_FIRE = modTag("sets_on_fire");
     public static final TagKey<SpellModifier> SLOWS = modTag("slows");
 
+    public static final TagKey<SpellModifier> SYLVAN_LIGHT_COLOR = modTag("sylvan_light/color");
+
     public static final TagKey<SpellModifier> DANDELION_WINDS_INCREASES_DURATION = modTag("dandelion_winds/increases_duration");
     public static final TagKey<SpellModifier> DANDELION_WINDS_INCREASES_CHANCE = modTag("dandelion_winds/increases_chance");
     public static final TagKey<SpellModifier> DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE = modTag("dandelion_winds/gusts_cooldown_decrease");

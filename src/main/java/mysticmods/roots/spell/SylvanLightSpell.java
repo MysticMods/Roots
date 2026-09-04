@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Costing;
@@ -9,7 +10,9 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.blockentity.SylvanLightBlockEntity;
 import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,6 +31,7 @@ import java.util.List;
 
 public class SylvanLightSpell extends Spell {
   protected double maxDistance = 0;
+  private int decay;
 
   public SylvanLightSpell(Properties properties) {
     super(properties);
@@ -42,12 +46,14 @@ public class SylvanLightSpell extends Spell {
   public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
     result.add(ModSpells.SYLVAN_LIGHT_MAX_DISTANCE);
+    result.add(ModSpells.SYLVAN_LIGHT_DECAY);
   }
 
   @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.maxDistance = properties.get(ModSpells.SYLVAN_LIGHT_MAX_DISTANCE);
+    this.decay = properties.get(ModSpells.SYLVAN_LIGHT_DECAY);
   }
 
   @Override
@@ -70,6 +76,19 @@ public class SylvanLightSpell extends Spell {
 
     if (doPlace) {
       pLevel.setBlock(potentialPos, ModBlocks.SYLVAN_LIGHT.get().defaultBlockState(), 3);
+
+      if ((pLevel.getBlockEntity(potentialPos) instanceof SylvanLightBlockEntity sbe)) {
+
+
+        SpellModifier mod = instance.getFirstModifier(RootsTags.SpellModifiers.SYLVAN_LIGHT_COLOR);
+        if (mod != null) {
+          sbe.setColor(mod);
+        }
+        if (instance.has(ModModifiers.SYLVAN_LIGHT_DECAYING)) {
+          sbe.setDecaying(decay);
+        }
+        // TODO: Light value
+      }
     } else {
       costs.noCharge();
       return SpellCastResult.nothing();

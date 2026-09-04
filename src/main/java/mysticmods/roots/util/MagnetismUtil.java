@@ -1,6 +1,6 @@
 package mysticmods.roots.util;
 
-import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -47,7 +47,7 @@ public class MagnetismUtil {
     return positions;
   }
 
-  public static List<Vec3> store(Level pLevel, BlockPos startPosition, BaseBlockEntity pyre, int radiusX, int radiusY, int radiusZ) {
+  public static List<Vec3> store(Level pLevel, BlockPos startPosition, BaseBoundedBlockEntity pyre, int radiusX, int radiusY, int radiusZ) {
     if (pLevel.isClientSide()) {
       return Collections.emptyList();
     }

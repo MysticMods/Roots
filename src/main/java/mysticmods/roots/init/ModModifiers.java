@@ -87,6 +87,13 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_WIDTH_2 = REGISTER.register("shatter/width_ii", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_WIDTH_1.getKey(), ModSpells.SHATTER.getKey(), SHATTER_WIDTH));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_1 = REGISTER.register("shatter/depth_i", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_ADJUSTABLE.getKey(), ModSpells.SHATTER.getKey(), SHATTER_DEPTH));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_2 = REGISTER.register("shatter/depth_ii", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SHATTER_DEPTH_1.getKey(), ModSpells.SHATTER.getKey(), SHATTER_DEPTH));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_COLOR = REGISTER.register("sylvan_light/color", () -> new SpellModifier(CostInstance.empty(), ModSpells.SYLVAN_LIGHT.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_WHITE = REGISTER.register("sylvan_light/white", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SYLVAN_LIGHT_COLOR.getKey(), ModSpells.SYLVAN_LIGHT.getKey(), ModModifiers.SYLVAN_LIGHT_ORANGE.getKey(), ModModifiers.SYLVAN_LIGHT_LIME.getKey(), ModModifiers.SYLVAN_LIGHT_PINK.getKey(), ModModifiers.SYLVAN_LIGHT_CYAN.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_ORANGE = REGISTER.register("sylvan_light/orange", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SYLVAN_LIGHT_COLOR.getKey(), ModSpells.SYLVAN_LIGHT.getKey(), ModModifiers.SYLVAN_LIGHT_WHITE.getKey(), ModModifiers.SYLVAN_LIGHT_LIME.getKey(), ModModifiers.SYLVAN_LIGHT_PINK.getKey(), ModModifiers.SYLVAN_LIGHT_CYAN.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_LIME = REGISTER.register("sylvan_light/lime", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SYLVAN_LIGHT_COLOR.getKey(), ModSpells.SYLVAN_LIGHT.getKey(), ModModifiers.SYLVAN_LIGHT_WHITE.getKey(), ModModifiers.SYLVAN_LIGHT_ORANGE.getKey(), ModModifiers.SYLVAN_LIGHT_PINK.getKey(), ModModifiers.SYLVAN_LIGHT_CYAN.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_PINK = REGISTER.register("sylvan_light/pink", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SYLVAN_LIGHT_COLOR.getKey(), ModSpells.SYLVAN_LIGHT.getKey(), ModModifiers.SYLVAN_LIGHT_WHITE.getKey(), ModModifiers.SYLVAN_LIGHT_ORANGE.getKey(), ModModifiers.SYLVAN_LIGHT_LIME.getKey(), ModModifiers.SYLVAN_LIGHT_CYAN.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_CYAN = REGISTER.register("sylvan_light/cyan", () -> new SpellModifier(CostInstance.empty(), ModModifiers.SYLVAN_LIGHT_COLOR.getKey(), ModSpells.SYLVAN_LIGHT.getKey(), ModModifiers.SYLVAN_LIGHT_WHITE.getKey(), ModModifiers.SYLVAN_LIGHT_ORANGE.getKey(), ModModifiers.SYLVAN_LIGHT_LIME.getKey(), ModModifiers.SYLVAN_LIGHT_PINK.getKey()));
+  public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_DECAYING = REGISTER.register("sylvan_light/decaying", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.COMPLEX_0625), ModSpells.SYLVAN_LIGHT.getKey()));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("sky_soarer/amplified_1"), RootsAPI.rl("sky_soarer/amplified_i"));
@@ -148,6 +155,13 @@ public class ModModifiers {
     modifier(ITEMS, ModModifiers.SHATTER_WIDTH_2);
     modifier(ITEMS, ModModifiers.SHATTER_DEPTH_1);
     modifier(ITEMS, ModModifiers.SHATTER_DEPTH_2);
+    modifier(ITEMS, ModModifiers.SYLVAN_LIGHT_COLOR);
+    modifier(ITEMS, ModModifiers.SYLVAN_LIGHT_WHITE);
+    modifier(ITEMS, ModModifiers.SYLVAN_LIGHT_ORANGE);
+    modifier(ITEMS, ModModifiers.SYLVAN_LIGHT_LIME);
+    modifier(ITEMS, ModModifiers.SYLVAN_LIGHT_PINK);
+    modifier(ITEMS, ModModifiers.SYLVAN_LIGHT_CYAN);
+    modifier(ITEMS, ModModifiers.SYLVAN_LIGHT_DECAYING);
   }
 
   private static TokenItem.SpellModifierTokenItem modifier(Holder<SpellModifier> modifier) {

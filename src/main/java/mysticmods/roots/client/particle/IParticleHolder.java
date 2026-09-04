@@ -1,6 +1,6 @@
 package mysticmods.roots.client.particle;
 
-import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,7 @@ public interface IParticleHolder {
     }
 
     BlockEntity blockEntity = level.getBlockEntity(pos);
-    if (blockEntity instanceof BaseBlockEntity base) {
+    if (blockEntity instanceof BaseBoundedBlockEntity base) {
       Object holder = base.getParticleHolder();
       if (holder == null) {
         base.setParticleHolder(holder = new SimpleParticleHolder());

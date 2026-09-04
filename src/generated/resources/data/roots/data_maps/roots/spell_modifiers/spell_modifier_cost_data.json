@@ -406,6 +406,33 @@
           "herb": "roots:cloud_berry"
         }
       ]
+    },
+    "roots:sylvan_light/color": {
+      "costs": []
+    },
+    "roots:sylvan_light/cyan": {
+      "costs": []
+    },
+    "roots:sylvan_light/decaying": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.625,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
+    "roots:sylvan_light/lime": {
+      "costs": []
+    },
+    "roots:sylvan_light/orange": {
+      "costs": []
+    },
+    "roots:sylvan_light/pink": {
+      "costs": []
+    },
+    "roots:sylvan_light/white": {
+      "costs": []
     }
   }
 }

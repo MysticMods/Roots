@@ -8,7 +8,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.PowerTicket;
-import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
@@ -33,7 +33,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class EnchantedTurfBlockEntity extends BaseBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
+public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
   private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePowerGenerator.Consumer(RootsTags.Groves.ANY, 35)));
 
   private PowerTicket ticket;

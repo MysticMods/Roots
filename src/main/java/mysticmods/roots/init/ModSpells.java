@@ -210,7 +210,7 @@ public class ModSpells {
       .getPath(), () -> new SylvanLightSpell(new Spell.Properties()
       .type(SpellCastType.INSTANT)
       .charge(ParentChargeType.INSTANCE)
-      .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, 0.0625), Cost.add(ModHerbs.PERESKIA, 0.0625)))
+      .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.COMPLEX_0625), Cost.add(ModHerbs.PERESKIA, SpellCosts.COMPLEX_0625)))
       .color(0xf7f6d2, 0xe351f4)
       .textColor(ChatFormatting.LIGHT_PURPLE)
       .build()));
@@ -222,6 +222,7 @@ public class ModSpells {
 
   public static final PropertyHolder<Property.IntegerProperty> SYLVAN_LIGHT_COOLDOWN = P.recordProperty("sylvan_light/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> SYLVAN_LIGHT_MAX_DISTANCE = P.recordProperty("sylvan_light/max_distance", Property.ofDouble(10.0, "The maximum distance a sylvan light can be placed from the caster"));
+  public static final PropertyHolder<Property.IntegerProperty> SYLVAN_LIGHT_DECAY = P.recordProperty("sylvan_light/decay", Property.ofInt(2 * 20 * 60, "The amount of time before a sylvan light decays (in ticks) when the decay modifier is enabled."));
 
   // Geas (80 cooldown)
   public static final DeferredHolder<Spell, GeasSpell> GEAS = REGISTER.register(Spells.GEAS.location()

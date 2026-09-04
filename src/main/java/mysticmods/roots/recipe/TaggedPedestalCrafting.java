@@ -3,7 +3,7 @@ package mysticmods.roots.recipe;
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
-import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends RootsTileCrafting<PedestalInventoryWrapper, T> {
+public abstract class TaggedPedestalCrafting<T extends BaseBoundedBlockEntity> extends RootsTileCrafting<PedestalInventoryWrapper, T> {
   private final TagKey<Block> includeTag;
   private final TagKey<Block> excludeTag;
   private final boolean allowEmpty;
