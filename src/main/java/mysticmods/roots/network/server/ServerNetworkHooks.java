@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.blockentity.ClearableBlockEntity;
 import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
-import mysticmods.roots.api.datacomponent.SpellSlot;
+import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.Cycling;
@@ -247,7 +247,7 @@ public class ServerNetworkHooks {
     }
 
     String type;
-    SpellSlot newSlot;
+    SpellInstance newSlot;
 
     if (inSlot.has(modifier)) {
       // Toggle off

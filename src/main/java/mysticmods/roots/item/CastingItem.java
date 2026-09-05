@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.attachment.CooldownStorage;
-import mysticmods.roots.api.datacomponent.SpellSlot;
+import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Costing;
@@ -534,7 +534,7 @@ public class CastingItem extends Item {
 
   @Nullable
   public static ISpellInstance getCurrentSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack) {
-    SpellSlot slot = itemStack.get(ModAttachments.SPELL_SLOT);
+    SpellInstance slot = itemStack.get(ModAttachments.SPELL_SLOT);
     if (slot != null) {
       return slot;
     }

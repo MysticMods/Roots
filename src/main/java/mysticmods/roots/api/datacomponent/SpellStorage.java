@@ -17,37 +17,37 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) {
-  private static final List<SpellSlot> EMPTY_SLOTS = new ArrayList<>(Arrays.asList(new SpellSlot[]{null, null, null, null, null}));
+public record SpellStorage(int currentSlot, int maxSlot, List<SpellInstance> slots) {
+  private static final List<SpellInstance> EMPTY_SLOTS = new ArrayList<>(Arrays.asList(new SpellInstance[]{null, null, null, null, null}));
   public static final Supplier<SpellStorage> EMPTY = () -> new SpellStorage(0, 5, new ArrayList<>(EMPTY_SLOTS));
 
   public static MapCodec<SpellStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
           Codec.INT.fieldOf("currentSlot").forGetter(SpellStorage::currentSlot),
           Codec.INT.fieldOf("maxSlots").forGetter(SpellStorage::maxSlot),
-          SpellSlot.CODEC.listOf().fieldOf("slots").forGetter(o -> o.slots.stream().filter(Objects::nonNull).toList())
+          SpellInstance.CODEC.listOf().fieldOf("slots").forGetter(o -> o.slots.stream().filter(Objects::nonNull).toList())
       ).apply(instance, SpellStorage::new)
   );
   public static Codec<SpellStorage> CODEC = MAP_CODEC.codec();
   public static StreamCodec<RegistryFriendlyByteBuf, SpellStorage> STREAM_CODEC = StreamCodec.composite(
       ByteBufCodecs.VAR_INT, SpellStorage::currentSlot,
       ByteBufCodecs.VAR_INT, SpellStorage::maxSlot,
-      SpellSlot.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.slots.stream().filter(Objects::nonNull).toList(),
+      SpellInstance.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.slots.stream().filter(Objects::nonNull).toList(),
       SpellStorage::new
   );
 
-  public SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) {
+  public SpellStorage(int currentSlot, int maxSlot, List<SpellInstance> slots) {
     this.currentSlot = currentSlot;
     this.maxSlot = maxSlot;
-    List<SpellSlot> result;
+    List<SpellInstance> result;
     if (slots.size() == maxSlot) {
       result = slots;
     } else {
       if (slots.size() > maxSlot) {
         throw new IllegalStateException("Too many slots!");
       }
-      List<SpellSlot> newSlots = new ArrayList<>(EMPTY_SLOTS);
-      for (SpellSlot slot : slots) {
+      List<SpellInstance> newSlots = new ArrayList<>(EMPTY_SLOTS);
+      for (SpellInstance slot : slots) {
         if (slot != null) {
           newSlots.set(slot.slot(), slot);
         }
@@ -66,12 +66,12 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
   }
 
   @Nullable
-  public SpellSlot getCurrentSpell() {
+  public SpellInstance getCurrentSpell() {
     return slots.get(currentSlot);
   }
 
   @Nullable
-  public SpellSlot getSpell(int slot) {
+  public SpellInstance getSpell(int slot) {
     if (!validateSlot(slot)) {
       return null;
     }
@@ -80,7 +80,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
   }
 
   public boolean isEmpty() {
-    for (SpellSlot slot : slots) {
+    for (SpellInstance slot : slots) {
       if (slot != null) {
         return false;
       }
@@ -98,23 +98,23 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return this;
     }
 
-    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    List<SpellInstance> newSlots = new ArrayList<>(slots);
     if (newSlots.get(slot) != null) {
       var existing = newSlots.get(slot);
       if (existing.spell() == spell && Sets.symmetricDifference(existing.enabledModifiers(), modifiers).isEmpty()) {
         return this;
       }
     }
-    newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, new SpellModifierSet(modifiers)));
+    newSlots.set(slot, new SpellInstance(UUID.randomUUID(), slot, spell, new SpellModifierSet(modifiers)));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
-  public SpellStorage setSpell(int slot, SpellSlot spell) {
+  public SpellStorage setSpell(int slot, SpellInstance spell) {
     if (!validateSlot(slot)) {
       return this;
     }
 
-    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    List<SpellInstance> newSlots = new ArrayList<>(slots);
     if (spell.equals(newSlots.get(slot))) {
       return this;
     }
@@ -128,14 +128,14 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return this;
     }
 
-    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    List<SpellInstance> newSlots = new ArrayList<>(slots);
     if (newSlots.get(slot) != null) {
       if (newSlots.get(slot).spell() == spell) {
         return this;
       }
     }
 
-    newSlots.set(slot, new SpellSlot(UUID.randomUUID(), slot, spell, SpellModifierSet.EMPTY));
+    newSlots.set(slot, new SpellInstance(UUID.randomUUID(), slot, spell, SpellModifierSet.EMPTY));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
@@ -144,7 +144,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return this;
     }
 
-    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    List<SpellInstance> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, null);
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
@@ -154,12 +154,12 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return this;
     }
 
-    List<SpellSlot> newSlots = new ArrayList<>(slots);
-    SpellSlot temp1 = newSlots.get(slot1);
+    List<SpellInstance> newSlots = new ArrayList<>(slots);
+    SpellInstance temp1 = newSlots.get(slot1);
     if (temp1 != null) {
       temp1 = temp1.withSlot(slot2);
     }
-    SpellSlot temp2 = newSlots.get(slot2);
+    SpellInstance temp2 = newSlots.get(slot2);
     if (temp2 != null) {
       temp2 = temp2.withSlot(slot1);
     }
@@ -181,12 +181,12 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     }
 
 
-    SpellSlot slotData = slots.get(slot);
+    SpellInstance slotData = slots.get(slot);
     if (slotData == null) {
       return this;
     }
 
-    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    List<SpellInstance> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, slotData.withData(component, value));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
@@ -207,7 +207,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return result;
   }
 
-  public List<SpellSlot> getSpells() {
+  public List<SpellInstance> getSpells() {
     return slots;
   }
 

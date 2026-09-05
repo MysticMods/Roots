@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.datacomponent.SpellSlot;
+import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostType;
@@ -45,7 +45,7 @@ public class TooltipUtil {
       }
       pTooltipComponents.add(CommonComponents.EMPTY);
       int tempSlot = 0;
-      for (SpellSlot entry : storage.getSpells()) {
+      for (SpellInstance entry : storage.getSpells()) {
         int slotId = tempSlot + 1;
         boolean isModified = entry != null && !entry.getEnabledModifiers().isEmpty();
         Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.getStyledName();

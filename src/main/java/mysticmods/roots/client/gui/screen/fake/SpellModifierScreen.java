@@ -4,7 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.client.ModifierTab;
 import mysticmods.roots.api.client.ModifierWidget;
-import mysticmods.roots.api.datacomponent.SpellSlot;
+import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.modifier.IModifierNode;
 import mysticmods.roots.api.modifier.ModifierTree;
@@ -75,7 +75,7 @@ public class SpellModifierScreen extends RootsScreen {
     if (storage == null) {
       return null;
     }
-    SpellSlot data = storage.getSpell(spellSlot);
+    SpellInstance data = storage.getSpell(spellSlot);
     if (data == null) {
       return null;
     }

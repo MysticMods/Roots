@@ -23,41 +23,41 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.UUID;
 
-public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers,
-                        PatchedDataComponentMap data) implements ISpellInstance.Identified, DataComponentHolder {
-  public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.<SpellSlot>mapCodec(instance -> instance.group(
-      UUIDUtil.CODEC.fieldOf("spellId").forGetter(SpellSlot::spellId),
-      Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
-      RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
-      SpellModifierSet.CODEC.fieldOf("enabledModifiers").forGetter(SpellSlot::enabledModifiers),
+public record SpellInstance(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers,
+                            PatchedDataComponentMap data) implements ISpellInstance.Identified, DataComponentHolder {
+  public static MapCodec<SpellInstance> MAP_CODEC = RecordCodecBuilder.<SpellInstance>mapCodec(instance -> instance.group(
+      UUIDUtil.CODEC.fieldOf("spellId").forGetter(SpellInstance::spellId),
+      Codec.INT.fieldOf("slot").forGetter(SpellInstance::slot),
+      RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellInstance::spell),
+      SpellModifierSet.CODEC.fieldOf("enabledModifiers").forGetter(SpellInstance::enabledModifiers),
       DataComponentPatch.CODEC.fieldOf("data")
           .forGetter(o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch())
-  ).apply(instance, SpellSlot::new)).validate(result -> {
+  ).apply(instance, SpellInstance::new)).validate(result -> {
     // TODO: Improve migration system
     if (result.is(Spells.RAMPANT_GROWTH)) {
       // Migrate to growth infusion with modifier
       var newSpell = RootsRegistries.SPELLS.get(Spells.GROWTH_INFUSION);
       var rampantGrowth = RootsRegistries.SPELL_MODIFIERS.get(RootsAPI.rl("growth_infusion/rampant_growth"));
-      return DataResult.success(new SpellSlot(result.spellId, result.slot, newSpell, new SpellModifierSet(rampantGrowth), DataComponentPatch.EMPTY));
+      return DataResult.success(new SpellInstance(result.spellId, result.slot, newSpell, new SpellModifierSet(rampantGrowth), DataComponentPatch.EMPTY));
     }
     // TODO: Validation: remove restricted modifiers
     return DataResult.success(result);
   });
-  public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
-      UUIDUtil.STREAM_CODEC, SpellSlot::spellId,
-      ByteBufCodecs.VAR_INT, SpellSlot::slot,
-      ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), SpellSlot::spell,
-      SpellModifierSet.STREAM_CODEC, SpellSlot::enabledModifiers,
+  public static StreamCodec<RegistryFriendlyByteBuf, SpellInstance> STREAM_CODEC = StreamCodec.composite(
+      UUIDUtil.STREAM_CODEC, SpellInstance::spellId,
+      ByteBufCodecs.VAR_INT, SpellInstance::slot,
+      ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), SpellInstance::spell,
+      SpellModifierSet.STREAM_CODEC, SpellInstance::enabledModifiers,
       DataComponentPatch.STREAM_CODEC, o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch(),
-      SpellSlot::new
+      SpellInstance::new
   );
-  public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
+  public static Codec<SpellInstance> CODEC = MAP_CODEC.codec();
 
-  public SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers) {
+  public SpellInstance(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers) {
     this(spellId, slot, spell, enabledModifiers, PatchedDataComponentMap.fromPatch(spell.getComponents(), DataComponentPatch.EMPTY));
   }
 
-  public SpellSlot(UUID uuid, int integer, Spell spell, SpellModifierSet spellModifiers, DataComponentPatch dataComponentPatch) {
+  public SpellInstance(UUID uuid, int integer, Spell spell, SpellModifierSet spellModifiers, DataComponentPatch dataComponentPatch) {
     this(uuid, integer, spell, spellModifiers, PatchedDataComponentMap.fromPatch(spell.getComponents(), dataComponentPatch));
   }
 
@@ -101,34 +101,34 @@ public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet en
     return enabledModifiers.contains(modifier);
   }
 
-  public <T> SpellSlot withData(DataComponentType<? super T> component, @Nullable T value) {
+  public <T> SpellInstance withData(DataComponentType<? super T> component, @Nullable T value) {
     var newData = this.data.copy();
     newData.set(component, value);
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), newData);
+    return new SpellInstance(spellId, slot, spell, enabledModifiers.copy(), newData);
   }
 
-  public SpellSlot withoutModifier(SpellModifier modifier) {
+  public SpellInstance withoutModifier(SpellModifier modifier) {
     if (!has(modifier)) {
       return copy();
     }
 
-    return new SpellSlot(spellId, slot, spell, ModifierTrees.without(spell, enabledModifiers, modifier), data);
+    return new SpellInstance(spellId, slot, spell, ModifierTrees.without(spell, enabledModifiers, modifier), data);
   }
 
-  public SpellSlot withModifier(SpellModifier modifier) {
+  public SpellInstance withModifier(SpellModifier modifier) {
     if (has(modifier)) {
       return copy();
     }
 
-    return new SpellSlot(spellId, slot, spell, ModifierTrees.with(spell, enabledModifiers, modifier), data);
+    return new SpellInstance(spellId, slot, spell, ModifierTrees.with(spell, enabledModifiers, modifier), data);
   }
 
-  public SpellSlot withSlot(int slot) {
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), data);
+  public SpellInstance withSlot(int slot) {
+    return new SpellInstance(spellId, slot, spell, enabledModifiers.copy(), data);
   }
 
-  public SpellSlot copy() {
-    return new SpellSlot(spellId, slot, spell, enabledModifiers.copy(), data);
+  public SpellInstance copy() {
+    return new SpellInstance(spellId, slot, spell, enabledModifiers.copy(), data);
   }
 
   @Override

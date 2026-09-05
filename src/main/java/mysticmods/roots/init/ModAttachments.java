@@ -3,7 +3,7 @@ package mysticmods.roots.init;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
-import mysticmods.roots.api.datacomponent.SpellSlot;
+import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.datamap.AugmentationInfo;
 import mysticmods.roots.api.recipe.ComplexEntityType;
@@ -85,8 +85,8 @@ public class ModAttachments {
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellSlot>> SPELL_SLOT = COMPONENTS.register("spell_slot", () -> new DataComponentType.Builder<SpellSlot>().persistent(SpellSlot.CODEC)
-      .networkSynchronized(SpellSlot.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellInstance>> SPELL_SLOT = COMPONENTS.register("spell_slot", () -> new DataComponentType.Builder<SpellInstance>().persistent(SpellInstance.CODEC)
+      .networkSynchronized(SpellInstance.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> QUIVER_CONTENTS = COMPONENTS.register("quiver_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
   // 9 only herb slots
