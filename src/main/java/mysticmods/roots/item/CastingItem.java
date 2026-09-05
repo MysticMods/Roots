@@ -438,7 +438,7 @@ public class CastingItem extends Item {
     }
 
     CooldownStorage cooldownStorage = player.getData(ModAttachments.COOLDOWN_STORAGE);
-    return cooldownStorage.getCooldown(spell.asSpell()) > 0;
+    return cooldownStorage.getCooldown(spell) > 0;
   }
 
   @Override
@@ -462,7 +462,7 @@ public class CastingItem extends Item {
     }
 
     CooldownStorage cooldownStorage = player.getData(ModAttachments.COOLDOWN_STORAGE);
-    int cooldown = cooldownStorage.getCooldown(spell.asSpell());
+    int cooldown = cooldownStorage.getCooldown(spell);
     if (cooldown <= 0) {
       return 0;
     }

@@ -15,6 +15,8 @@ import net.minecraft.world.entity.Entity;
 import java.util.Iterator;
 import java.util.Map;
 
+// TODO: Change this to SpellTemplate
+// SpellTemplate: ResourceKey<Spell> spell, ResourceKey<SpellModifier> ... enabledModifiers, ? extends Cycling cycleMode
 public class CooldownStorage implements ICleanable, ITicking {
   public static final Codec<CooldownStorage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
       Codec.unboundedMap(RootsRegistries.SPELLS.byNameCodec(), Codec.INT).fieldOf("cooldown_map")
@@ -47,11 +49,7 @@ public class CooldownStorage implements ICleanable, ITicking {
   }
 
   public int getCooldown(ISpellInstance spell) {
-    return getCooldown(spell.asSpell());
-  }
-
-  public int getCooldown(Spell spell) {
-    return cooldownMap.getOrDefault(spell, -1);
+    return cooldownMap.getOrDefault(spell.asSpell(), -1);
   }
 
   public int getMaxCooldown(Spell spell) {

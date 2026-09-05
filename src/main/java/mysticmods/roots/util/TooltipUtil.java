@@ -61,7 +61,7 @@ public class TooltipUtil {
             if (!player.hasData(ModAttachments.COOLDOWN_STORAGE)) {
               cd = CommonComponents.EMPTY;
             } else {
-              int cooldown = player.getData(ModAttachments.COOLDOWN_STORAGE).getCooldown(entry.spell());
+              int cooldown = player.getData(ModAttachments.COOLDOWN_STORAGE).getCooldown(entry);
               if (cooldown > 0) {
                 cd = Component.translatable("roots.tooltip.staff.cooldown", cooldown / 20);
               } else {

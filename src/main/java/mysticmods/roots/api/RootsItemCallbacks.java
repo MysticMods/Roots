@@ -4,6 +4,7 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RootsItemCallbacks {
-  private static final Map<Spell, Item> SPELL_TO_ITEM_MAP = new HashMap<>();
   private static final Map<Spell, ItemStack> SPELL_TO_ITEMSTACK_MAP = new HashMap<>();
   private static final Map<Spell, ItemStack> SPELL_TO_LIBRARY_ITEMSTACK_MAP = new HashMap<>();
   private static final Map<SpellModifier, Item> SPELL_MODIFIER_TO_ITEM_MAP = new HashMap<>();
@@ -31,7 +31,6 @@ public class RootsItemCallbacks {
     for (Item value : BuiltInRegistries.ITEM) {
       if (value instanceof TokenItem.SpellTokenItem spellToken) {
         var key = spellToken.getSpell();
-        SPELL_TO_ITEM_MAP.put(key, spellToken);
         SPELL_TO_LIBRARY_ITEMSTACK_MAP.put(key, new ItemStack(spellToken));
         ItemStack library = new ItemStack(spellToken);
         library.set(RootsAPI.getInstance().getDeletableType(), Unit.INSTANCE);
@@ -53,23 +52,9 @@ public class RootsItemCallbacks {
     }
   }
 
-/*  public static Item getItemGeneric(ResourceKey<?> key) {
-    if (key == RootsRegistries.Keys.SPELLS) {
-      return getItem(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key));
-    } else if (key == RootsRegistries.Keys.RITUALS) {
-      return getItem(RootsRegistries.RITUALS.get((ResourceKey<Ritual>) key));
-    } else if (key == RootsRegistries.Keys.GROVES) {
-      return getItem(RootsRegistries.GROVES.get((ResourceKey<Grove>) key));
-    } else if (key == RootsRegistries.Keys.SPELL_MODIFIERS) {
-      return getItem(RootsRegistries.SPELL_MODIFIERS.get((ResourceKey<SpellModifier>) key));
-    } else {
-      return Items.AIR;
-    }
-  }*/
-
   public static ItemStack getItemStackGeneric(ResourceKey<?> key) {
     if (key.isFor(RootsRegistries.Keys.SPELLS)) {
-      return getItemStack(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key));
+      return getItemStack(RootsRegistries.SPELLS.get((ResourceKey<Spell>) key).simple());
     } else if (key.isFor(RootsRegistries.Keys.RITUALS)) {
       return getItemStack(RootsRegistries.RITUALS.get((ResourceKey<Ritual>) key));
     } else if (key.isFor(RootsRegistries.Keys.GROVES)) {
@@ -95,21 +80,14 @@ public class RootsItemCallbacks {
     return SPELL_MODIFIER_TO_ITEM_MAP.getOrDefault(spellModifier, Items.AIR);
   }
 
-  public static Item getItem(Spell spell) {
-    if (SPELL_TO_ITEM_MAP.isEmpty()) {
-      fill();
-    }
-    return SPELL_TO_ITEM_MAP.getOrDefault(spell, Items.AIR);
-  }
-
-  public static ItemStack getItemStack(Spell spell) {
+  public static ItemStack getItemStack(ISpellInstance spell) {
     if (SPELL_TO_ITEMSTACK_MAP.isEmpty()) {
       fill();
     }
     if (spell.is(RootsTags.Spells.INVALID)) {
       return ItemStack.EMPTY;
     }
-    return SPELL_TO_ITEMSTACK_MAP.getOrDefault(spell, ItemStack.EMPTY);
+    return SPELL_TO_ITEMSTACK_MAP.getOrDefault(spell.asSpell(), ItemStack.EMPTY);
   }
 
   public static ItemStack getItemStack(Ritual ritual) {
@@ -119,11 +97,11 @@ public class RootsItemCallbacks {
     return RITUAL_TO_ITEMSTACK_MAP.getOrDefault(ritual, ItemStack.EMPTY);
   }
 
-  public static ItemStack getLibraryItemStack(Spell spell) {
+  public static ItemStack getLibraryItemStack(ISpellInstance spell) {
     if (SPELL_TO_LIBRARY_ITEMSTACK_MAP.isEmpty()) {
       fill();
     }
-    return SPELL_TO_LIBRARY_ITEMSTACK_MAP.getOrDefault(spell, ItemStack.EMPTY);
+    return SPELL_TO_LIBRARY_ITEMSTACK_MAP.getOrDefault(spell.asSpell(), ItemStack.EMPTY);
   }
 
   public static Item getItem(Ritual ritual) {

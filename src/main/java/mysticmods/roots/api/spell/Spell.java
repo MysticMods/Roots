@@ -367,13 +367,17 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     initialize(holder);
   }
 
-  public ItemStack getSpellIcon() {
-    return RootsItemCallbacks.getLibraryItemStack(this);
+  public ItemStack getSpellIcon (@Nullable ISpellInstance instance) {
+    if (instance == null) {
+      return getSpellIcon(this.simple());
+    }
+
+    return RootsItemCallbacks.getLibraryItemStack(instance);
   }
 
   @Deprecated
-  public ItemStack getInstanceIcon(ISpellInstance instance) {
-    return RootsItemCallbacks.getItemStack(this);
+  public ItemStack getSpellIcon() {
+    return RootsItemCallbacks.getLibraryItemStack(this.simple());
   }
 
   public abstract SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);
