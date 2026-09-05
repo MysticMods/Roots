@@ -1,7 +1,7 @@
 package mysticmods.roots.client.network;
 
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstanceSnapshot;
+import mysticmods.roots.api.spell.SpellTemplate;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningOverlay;
 import mysticmods.roots.client.gui.screen.fake.SpellModifierScreen;
@@ -317,7 +317,7 @@ public class ClientFXHandlers {
     }
   }
 
-  public static void acidCloud(SpellInstanceSnapshot snapshot, int entityId) {
+  public static void acidCloud(SpellTemplate snapshot, int entityId) {
     if (ConfigManager.DISABLE_PATICLES.get()) {
       return;
     }

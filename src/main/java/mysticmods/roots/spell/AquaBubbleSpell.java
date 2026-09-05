@@ -7,7 +7,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
@@ -78,7 +78,7 @@ public class AquaBubbleSpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
 /*    if (pPlayer.hasEffect(ModEffects.AQUA_BUBBLE)) {
       AquaBubbleSnapshot snapshot = SnapshotHelper.getSnapshot(pPlayer, ModSerializers.AQUA_BUBBLE.get());
       if (snapshot != null) {
@@ -103,6 +103,6 @@ public class AquaBubbleSpell extends Spell {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, 0, false, false), pPlayer);
     pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, absorption, false, false), pPlayer);
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastAquaBubbleFXPacket(pPlayer.getId()));
-    return SpellCastResult.success(cooldown);
+    return CastResult.success(cooldown);
   }
 }

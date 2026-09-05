@@ -7,7 +7,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
@@ -63,7 +63,7 @@ public class RoseThornsSpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     BlockHitResult result = pickBlock(pPlayer, instance);
 
     BlockPos starting = result.getBlockPos();
@@ -81,7 +81,7 @@ public class RoseThornsSpell extends Spell {
 
     if (!pLevel.getEntitiesOfClass(RoseThornsEntity.class, entityBoundsCheck.move(supporting)).isEmpty()) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     RoseThornsEntity rose = ModEntities.ROSE_THORNS.get().create(pLevel);
@@ -91,10 +91,10 @@ public class RoseThornsSpell extends Spell {
       rose.setPos(result.getLocation());
       pLevel.addFreshEntity(rose);
       SnapshotHelper.addLiving(rose, ModSerializers.ROSE_THORNS.get(), new RoseThornsEntitySnapshot(rose.tickCount, -1, radiusZX, radiusY, duration, damage));
-      return SpellCastResult.success(cooldown);
+      return CastResult.success(cooldown);
     } else {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
   }
 

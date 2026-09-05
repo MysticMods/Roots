@@ -1,4 +1,4 @@
-package mysticmods.roots.api.spell;
+package mysticmods.roots.api;
 
 import mysticmods.roots.api.registry.IStyled;
 import net.minecraft.util.StringRepresentable;

@@ -4,14 +4,13 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
-import mysticmods.roots.api.modifier.ChildChargeType;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
-import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.Holder;
@@ -41,7 +40,7 @@ public class Costing {
 
   private HerbMap herbMapCache;
 
-  private final ParentChargeType chargeType;
+  private final SpellType.Primary chargeType;
 
   private int operationsCount = 0;
   private double discount = 0;
@@ -55,7 +54,7 @@ public class Costing {
     modifierMap.defaultReturnValue(false);
     chargeType = parent.getChargeType();
     for (ICostedChild modifier : parent.getChildren()) {
-      if (modifier.getChargeType() == ChildChargeType.ALWAYS) {
+      if (modifier.getChargeType() == SpellType.Secondary.ALWAYS) {
         charge(modifier);
       }
     }
@@ -66,7 +65,7 @@ public class Costing {
     this.herbMapCache = new HerbMap(player);
   }
 
-  public ParentChargeType getChargeType() {
+  public SpellType.Primary getChargeType() {
     return chargeType;
   }
 
@@ -148,7 +147,7 @@ public class Costing {
       return false;
     }
 
-    if (chargeType == ParentChargeType.OPERATION && operationsCount == 0) {
+    if (chargeType == SpellType.Primary.OPERATION && operationsCount == 0) {
       RootsAPI.LOG.error("Charging with operation costs but no operations! {}", parent);
     }
 
@@ -257,7 +256,7 @@ public class Costing {
   private void calculateCosts(boolean checkModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
     baseCosts.clear();
-    ParentChargeType thisType = getChargeType();
+    SpellType.Primary thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
       if (!cost.getType().isAdditive()) {
         throw new IllegalStateException("Only additive costs can be created for parents, cost type '" + cost.getType()
@@ -266,7 +265,7 @@ public class Costing {
 
       var cur = baseCosts.getOrDefault(cost.getHerb(), 0.0);
 
-      int totalOperations = thisType == ParentChargeType.OPERATION ? maxOperations ? parent.getMaximumOperations(modifierMap) : operations() : 1;
+      int totalOperations = thisType == SpellType.Primary.OPERATION ? maxOperations ? parent.getMaximumOperations(modifierMap) : operations() : 1;
 
       baseCosts.put(cost.getHerb(), cur + cost.getValue() * totalOperations);
     }
@@ -295,7 +294,7 @@ public class Costing {
     }
 
     for (ICostedChild modifier : parent.getChildren()) {
-      if (checkModifiers && ((modifier.getChargeType() == ChildChargeType.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeType() == ChildChargeType.ALWAYS) || maxOperations) {
+      if (checkModifiers && ((modifier.getChargeType() == SpellType.Secondary.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeType() == SpellType.Secondary.ALWAYS) || maxOperations) {
         for (Cost cost : modifier.getCosts().costs()) {
           if (cost.getType() == CostType.NEGATE_BASE_COST) {
             doNegate = true;
@@ -303,7 +302,7 @@ public class Costing {
           }
 
           List<Cost> costs = herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>());
-          if (thisType == ParentChargeType.OPERATION) {
+          if (thisType == SpellType.Primary.OPERATION) {
             if (cost.getType() == CostType.MULTIPLICATIVE_TOTAL) {
               costs.add(cost); // Totals are only ever applied once
             } else {

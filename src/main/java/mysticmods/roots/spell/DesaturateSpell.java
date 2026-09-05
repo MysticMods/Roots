@@ -8,7 +8,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.HealFXPacket;
 import mysticmods.roots.network.client.fx.screen.DesaturateScreenFXPacket;
@@ -49,10 +49,10 @@ public class DesaturateSpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (!pPlayer.isHurt()) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     FoodData stats = pPlayer.getFoodData();
@@ -60,7 +60,7 @@ public class DesaturateSpell extends Spell {
     int food = originalFood;
     if (food <= 1) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     float originalHealth = pPlayer.getHealth();
@@ -80,7 +80,7 @@ public class DesaturateSpell extends Spell {
 
     if (healed == 0) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     pPlayer.heal(healed);
@@ -88,7 +88,7 @@ public class DesaturateSpell extends Spell {
     stats.setSaturation(Math.min(stats.getExhaustionLevel(), food));
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new DesaturateScreenFXPacket(originalHealth, pPlayer.getHealth(), originalFood, food));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HealFXPacket(pPlayer.getId(), healed));
-    return SpellCastResult.success(cooldown);
+    return CastResult.success(cooldown);
   }
 
   @Override

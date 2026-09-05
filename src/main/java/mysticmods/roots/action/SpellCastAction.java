@@ -1,5 +1,6 @@
 package mysticmods.roots.action;
 
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
@@ -8,7 +9,6 @@ import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.ParentChargeType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,7 +30,7 @@ public class SpellCastAction extends GroveAction {
 
   @Override
   public GroveReputation modify(GroveContext context, GroveReputation reputation) {
-    if (context.spell().getChargeType() == ParentChargeType.OPERATION) {
+    if (context.spell().getChargeType() == SpellType.Primary.OPERATION) {
       return reputation.multiply(context.costing().operations());
     }
     return super.modify(context, reputation);

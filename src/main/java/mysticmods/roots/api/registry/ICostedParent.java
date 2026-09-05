@@ -1,11 +1,11 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.spell.ParentChargeType;
+import mysticmods.roots.api.SpellType;
 
 import java.util.Set;
 
 public interface ICostedParent extends ICosted {
-  ParentChargeType getChargeType();
+  SpellType.Primary getChargeType();
 
   Set<? extends ICostedChild> getChildren();
 

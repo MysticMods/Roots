@@ -7,7 +7,7 @@ import mysticmods.roots.api.grove.GrovePowerGenerator;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.Cycling;
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.config.ConfigManager;

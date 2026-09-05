@@ -6,7 +6,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -42,7 +42,7 @@ public class EmptySpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     throw new NotImplementedException("The empty spell cannot be cast!");
   }
 }

@@ -10,7 +10,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.entity.other.TemporalMorassEntity;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.client.fx.AcidCloudFXPacket;
@@ -120,7 +120,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Predicate<Entity> entityTest = instance.has(RootsTags.SpellModifiers.PEACEFUL) ? EntityUtils.isHostileTo(pPlayer) : EntityUtils.allEntities(pPlayer, true);
 
     List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB(instance).move(pPlayer.position()), entityTest);
@@ -174,9 +174,9 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
     if (totalDamaged == 0 && !morass) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
-    return SpellCastResult.success(totalDamaged, cooldown);
+    return CastResult.success(totalDamaged, cooldown);
   }
 }

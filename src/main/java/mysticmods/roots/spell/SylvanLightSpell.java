@@ -9,7 +9,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.blockentity.SylvanLightBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModModifiers;
@@ -57,7 +57,7 @@ public class SylvanLightSpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Vec3 look = pPlayer.getLookAngle().scale(1.5);
     BlockPos potentialPos = BlockPos.containing(pPlayer.getEyePosition().add(look.x, look.y, look.z));
     boolean doPlace = pLevel.isEmptyBlock(potentialPos);
@@ -91,10 +91,10 @@ public class SylvanLightSpell extends Spell {
       }
     } else {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
-    return SpellCastResult.success(cooldown);
+    return CastResult.success(cooldown);
   }
 
   @Override

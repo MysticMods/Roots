@@ -1,8 +1,6 @@
 package mysticmods.roots.api.spell;
 
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.SpellLike;
+import mysticmods.roots.api.*;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
@@ -38,10 +36,9 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public interface ISpellInstance extends SpellLike, ICostedParent {
-  UUID getId();
-
   Spell asSpell();
 
+  // TODO: Decide how to handle slots
   default int getSlot() {
     return -1;
   }
@@ -53,8 +50,8 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   // Returns length of cooldown
-  default SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
-    SpellCastResult cooldown = asSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
+  default CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
+    CastResult cooldown = asSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
     double costReduction = RootsAPI.getInstance().getCostReduction(pPlayer);
     double cooldownReduction = RootsAPI.getInstance().getCooldownReduction(pPlayer);
     costs.discount(costReduction);
@@ -101,13 +98,13 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().is(spell);
   }
 
-  default boolean has(TagKey<SpellModifier> modifier) {
-    return getEnabledModifiers().hasTag(modifier);
-  }
-
   @Nullable
   default SpellModifier getFirstModifier (TagKey<SpellModifier> modifier) {
     return getEnabledModifiers().getFirstModifier(modifier);
+  }
+
+  default boolean has(TagKey<SpellModifier> modifier) {
+    return getEnabledModifiers().hasTag(modifier);
   }
 
   default boolean has(ResourceKey<SpellModifier> modifier) {
@@ -142,9 +139,6 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return false;
   }
 
-
-  // These all defer to asSpell
-
   default MutableComponent getStyledName() {
     return asSpell().getStyledName(this);
   }
@@ -163,7 +157,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().getCosts();
   }
 
-  default ParentChargeType getChargeType() {
+  default SpellType.Primary getChargeType() {
     return asSpell().getChargeType();
   }
 
@@ -172,7 +166,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().getBaseMaximumOperations();
   }
 
-  default SpellCastType getType() {
+  default SpellType.Cast getType() {
     return asSpell().getType(this);
   }
 
@@ -181,7 +175,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default boolean hasBlockTarget(Player pPlayer) {
-    return asSpell().hasBlockTarget(pPlayer, this);
+    return asSpell().hasBlockTarget(this, pPlayer);
   }
 
   default List<Entity> selectTargets(HitResult hit, Player pPlayer) {
@@ -191,7 +185,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   @Nullable
   default Vec3 getBlockTarget(Player pPlayer) {
-    return asSpell().getBlockTarget(pPlayer, this);
+    return asSpell().getBlockTarget(this, pPlayer);
   }
 
   @Nullable
@@ -213,11 +207,10 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default boolean canMarkEntityTargets() {
     return asSpell().canMarkEntityTargets(this);
-
   }
 
   default boolean canTargetEntity(Entity entity) {
-    return asSpell().canTargetEntity(entity);
+    return asSpell().canTargetEntity(this, entity);
   }
 
   default int getColor1() {
@@ -229,7 +222,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default ItemStack getIcon() {
-    return asSpell().getSpellIcon();
+    return asSpell().getSpellIcon(this);
   }
 
   default <T> T getData(DataMapType<Spell, T> canBreakBlocksTag) {
@@ -237,7 +230,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default MutableComponent getName() {
-    return asSpell().getName();
+    return asSpell().getName(this);
   }
 
   default Component getChargeText(int ticks) {
@@ -248,34 +241,23 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().getIconPredicate(this);
   }
 
-  // TODO: Maybe remove this
-  @Nullable
-  default Spell.ModifierOverride getLowestOverride(Spell.OverrideContext<?> context) {
-    return asSpell().getLowestOverride(this, context);
-  }
-
-  static SpellInstanceSnapshot snapshot(ISpellInstance spell) {
-    if (spell instanceof SpellInstanceSnapshot snapshot) {
-      return snapshot;
-    }
-    return new SpellInstanceSnapshot(spell.getId(), spell.getSlot(), spell.asSpell(), spell.getEnabledModifiers(), spell.getSpellDataPatch());
-  }
-
-  static SimpleSpell of(Spell spell) {
-    return new SimpleSpell(UUID.randomUUID(), spell);
-  }
-
   @Nullable
   default DataComponentType<? extends Cycling<?>> getCycleComponent() {
     return asSpell().getCycleComponent(this);
   }
 
-  record SimpleSpell(UUID id, Spell spell) implements ISpellInstance {
-    @Override
-    public UUID getId() {
-      return id();
+  static SpellTemplate snapshot(ISpellInstance spell) {
+    if (spell instanceof SpellTemplate snapshot) {
+      return snapshot;
     }
+    return new SpellTemplate(spell.asSpell(), spell.getEnabledModifiers(), spell.getSpellDataPatch());
+  }
 
+  static SimpleSpell of(Spell spell) {
+    return new SimpleSpell(spell);
+  }
+
+  record SimpleSpell(Spell spell) implements ISpellInstance {
     @Override
     public Spell asSpell() {
       return spell();
@@ -295,5 +277,9 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     public boolean has(Holder<SpellModifier> modifier) {
       return false;
     }
+  }
+
+  interface Identified extends ISpellInstance {
+    UUID getId();
   }
 }

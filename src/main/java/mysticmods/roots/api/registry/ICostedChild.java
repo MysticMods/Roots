@@ -1,7 +1,7 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.modifier.ChildChargeType;
+import mysticmods.roots.api.SpellType;
 
 public interface ICostedChild extends ICosted {
-  ChildChargeType getChargeType();
+  SpellType.Secondary getChargeType();
 }

@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SpellModifier extends Modifier<Spell, SpellModifier> implements IExtendedDescribed {
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
-  protected final ChildChargeType chargeType;
+  protected final SpellType.Secondary chargeType;
   @NotNull
   protected final GroupId groupId;
 
@@ -29,28 +30,28 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   protected Component[] extendedDescription = null;
 
   public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable) {
-    this(defaultCosts, applicable, ChildChargeType.ALWAYS);
+    this(defaultCosts, applicable, SpellType.Secondary.ALWAYS);
   }
 
   public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable, GroupId groupId) {
-    this(defaultCosts, null, applicable, ChildChargeType.ALWAYS, groupId);
+    this(defaultCosts, null, applicable, SpellType.Secondary.ALWAYS, groupId);
   }
 
-  public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable, ChildChargeType type) {
+  public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable, SpellType.Secondary type) {
     super(defaultCosts, applicable);
     this.chargeType = type;
     this.groupId = GroupId.NONE;
   }
 
   public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable) {
-    this(defaultCosts, parent, applicable, ChildChargeType.ALWAYS, GroupId.NONE);
+    this(defaultCosts, parent, applicable, SpellType.Secondary.ALWAYS, GroupId.NONE);
   }
 
   public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, GroupId groupId) {
-    this(defaultCosts, parent, applicable, ChildChargeType.ALWAYS, groupId);
+    this(defaultCosts, parent, applicable, SpellType.Secondary.ALWAYS, groupId);
   }
 
-  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type, GroupId groupId) {
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, SpellType.Secondary type, GroupId groupId) {
     super(defaultCosts, parent, applicable);
     this.chargeType = type;
     this.groupId = groupId;
@@ -64,12 +65,12 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @SafeVarargs
   public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, GroupId groupId, ResourceKey<SpellModifier>... conflicts) {
     super(defaultCosts, parent, applicable, conflicts);
-    this.chargeType = ChildChargeType.ALWAYS;
+    this.chargeType = SpellType.Secondary.ALWAYS;
     this.groupId = groupId;
   }
 
   @SafeVarargs
-  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ChildChargeType type, GroupId groupId, ResourceKey<SpellModifier>... conflicts) {
+  public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, SpellType.Secondary type, GroupId groupId, ResourceKey<SpellModifier>... conflicts) {
     super(defaultCosts, parent, applicable, conflicts);
     this.chargeType = type;
     this.groupId = groupId;
@@ -135,7 +136,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   }
 
   @Override
-  public ChildChargeType getChargeType() {
+  public SpellType.Secondary getChargeType() {
     return chargeType;
   }
 

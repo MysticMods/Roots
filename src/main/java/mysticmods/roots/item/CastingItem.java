@@ -3,6 +3,7 @@ package mysticmods.roots.item;
 import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -12,7 +13,6 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
@@ -192,7 +192,7 @@ public class CastingItem extends Item {
     pStack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
 
     // TODO: This can technically change now
-    if (spell.getType() == SpellCastType.CONTINUOUS) {
+    if (spell.getType() == SpellType.Cast.CONTINUOUS) {
       Costing costs = new Costing(spell);
       costs.updateHerbCache(pPlayer);
 
@@ -240,7 +240,7 @@ public class CastingItem extends Item {
         ModActions.SPELL_CAST.get().accept(context);
       }
       costs.charge(pPlayer, true);
-    } else if (spell.getType() == SpellCastType.CHARGED) {
+    } else if (spell.getType() == SpellType.Cast.CHARGED) {
       pPlayer.displayClientMessage(spell.getChargeText(ticks), true);
 
       if (ticks % 2 == 0) {
@@ -324,7 +324,7 @@ public class CastingItem extends Item {
       return InteractionResultHolder.pass(stack);
     }
 
-    if (spell.getType() == SpellCastType.INSTANT) {
+    if (spell.getType() == SpellType.Cast.INSTANT) {
       if (!pLevel.isClientSide()) {
         stack.set(ModAttachments.CASTING_CURRENT_SPELL, true);
         var result = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
@@ -393,7 +393,7 @@ public class CastingItem extends Item {
 
     int ticksUsed = pStack.getUseDuration(pLivingEntity) - pTimeCharged;
 
-    if (spell.getType() == SpellCastType.CHARGED) {
+    if (spell.getType() == SpellType.Cast.CHARGED) {
       Costing costing = new Costing(spell);
 
       if (!costing.canAfford(pPlayer, true)) {

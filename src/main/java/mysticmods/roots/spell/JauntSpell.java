@@ -8,7 +8,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -111,18 +111,18 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Vec3 dest = findSafePosition(pLevel, pPlayer, ticks);
     if (dest == null) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     } else {
       costs.operations(ticks);
       pPlayer.teleportTo(dest.x, dest.y, dest.z);
       pPlayer.fallDistance = 0f;
     }
 
-    return SpellCastResult.success(ticks, cooldown);
+    return CastResult.success(ticks, cooldown);
   }
 
   @Override

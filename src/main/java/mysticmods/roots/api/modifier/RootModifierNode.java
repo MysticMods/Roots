@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class RootModifierNode<V, T extends Modifier<V, T>> extends ModifierNode<V, T> {
-  private ModifierTree<V, T> tree;
+  private final ModifierTree<V, T> tree;
 
   protected RootModifierNode(ResourceKey<T> key, ModifierTree<V, T> tree) {
     super(key);

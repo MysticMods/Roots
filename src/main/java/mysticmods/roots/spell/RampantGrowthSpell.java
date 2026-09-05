@@ -7,7 +7,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -70,8 +70,8 @@ public class RampantGrowthSpell extends Spell {
   }*/
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    return SpellCastResult.nothing();
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+    return CastResult.nothing();
 /*    if (ticks % interval == 0) {
       AOEGrowthMode mode = instance.getSpellData(ModAttachments.AOE_GROWTH_MODE);
       ItemStack offHandItem = pPlayer.getOffhandItem();

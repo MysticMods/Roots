@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.SpellType;
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
@@ -40,7 +42,7 @@ public class HarvestSpell extends TwoRadiusSpell {
 
   @Deprecated
   public HarvestSpell(ChatFormatting color, CostInstance costs) {
-    super(SpellCastType.INSTANT, color, costs, ParentChargeType.OPERATION, 0x39fd1c, 0xc5e91c);
+    super(SpellType.Cast.INSTANT, color, costs, SpellType.Primary.OPERATION, 0x39fd1c, 0xc5e91c);
   }
 
   @Override
@@ -63,7 +65,7 @@ public class HarvestSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     HarvestMode mode = instance.getSpellData(ModAttachments.HARVEST_MODE);
 
     ItemStack offHandItem = pPlayer.getOffhandItem();
@@ -92,12 +94,12 @@ public class HarvestSpell extends TwoRadiusSpell {
     });
     if (positions.isEmpty()) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HarvestFXPacket(positions));
     costs.operations(positions.size());
-    return SpellCastResult.success(positions.size(), cooldown * positions.size());
+    return CastResult.success(positions.size(), cooldown * positions.size());
   }
 
   @Override

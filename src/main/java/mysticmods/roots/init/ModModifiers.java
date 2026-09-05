@@ -2,10 +2,10 @@
 // Source: data/modifiers.json  ->  :generateModifiers
 package mysticmods.roots.init;
 
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.modifier.ChildChargeType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.registry.GroupId;
@@ -37,11 +37,11 @@ public class ModModifiers {
   public static final GroupId SHATTER_WIDTH = group("shatter/width", true);
   public static final GroupId SHATTER_DEPTH = group("shatter/depth", true);
 
-  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_FIRE = REGISTER.register("acid_cloud/fire", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED));
+  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_FIRE = REGISTER.register("acid_cloud/fire", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.ACID_CLOUD.getKey(), SpellType.Secondary.SPECIFIED));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_PEACEFUL = REGISTER.register("acid_cloud/peaceful", () -> new SpellModifier(CostInstance.add(ModHerbs.WILDROOT, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_KNOCKBACK = REGISTER.register("acid_cloud/knockback", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey()));
-  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_SLOWNESS = REGISTER.register("acid_cloud/slowness", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED));
-  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_TEMPORAL_MORASS = REGISTER.register("acid_cloud/temporal_morass", () -> new SpellModifier(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125), ModModifiers.ACID_CLOUD_SLOWNESS.getKey(), ModSpells.ACID_CLOUD.getKey(), ChildChargeType.SPECIFIED, GroupId.NONE));
+  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_SLOWNESS = REGISTER.register("acid_cloud/slowness", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0125), ModSpells.ACID_CLOUD.getKey(), SpellType.Secondary.SPECIFIED));
+  public static final DeferredHolder<SpellModifier, SpellModifier> ACID_CLOUD_TEMPORAL_MORASS = REGISTER.register("acid_cloud/temporal_morass", () -> new SpellModifier(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125), ModModifiers.ACID_CLOUD_SLOWNESS.getKey(), ModSpells.ACID_CLOUD.getKey(), SpellType.Secondary.SPECIFIED, GroupId.NONE));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_1 = REGISTER.register("dandelion_winds/duration_i", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey(), DANDELION_WINDS_DURATION));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_2 = REGISTER.register("dandelion_winds/duration_ii", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModModifiers.DANDELION_WINDS_DURATION_1.getKey(), ModSpells.DANDELION_WINDS.getKey(), DANDELION_WINDS_DURATION));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_3 = REGISTER.register("dandelion_winds/duration_iii", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), ModModifiers.DANDELION_WINDS_DURATION_2.getKey(), ModSpells.DANDELION_WINDS.getKey(), DANDELION_WINDS_DURATION));
@@ -67,8 +67,8 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_INFERNO = REGISTER.register("dandelion_winds/inferno", () -> new SpellModifier(CostInstance.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), ModSpells.DANDELION_WINDS.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_TARGETED_GROWTH = REGISTER.register("growth_infusion/targeted_growth", () -> new SpellModifier(CostInstance.empty(), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_RAMPANT_GROWTH = REGISTER.register("growth_infusion/rampant_growth", () -> new SpellModifier(CostInstance.of(Cost.negateBase(), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)), null, ModSpells.GROWTH_INFUSION.getKey(), ModModifiers.GROWTH_INFUSION_TARGETED_GROWTH.getKey()));
-  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_HYDRATION = REGISTER.register("growth_infusion/hydration", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0063), ModSpells.GROWTH_INFUSION.getKey(), ChildChargeType.SPECIFIED));
-  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_FERTILIZER = REGISTER.register("growth_infusion/fertilizer", () -> new SpellModifier(CostInstance.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0500), ModModifiers.GROWTH_INFUSION_TARGETED_GROWTH.getKey(), ModSpells.GROWTH_INFUSION.getKey(), ChildChargeType.SPECIFIED, GroupId.NONE));
+  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_HYDRATION = REGISTER.register("growth_infusion/hydration", () -> new SpellModifier(CostInstance.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0063), ModSpells.GROWTH_INFUSION.getKey(), SpellType.Secondary.SPECIFIED));
+  public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_FERTILIZER = REGISTER.register("growth_infusion/fertilizer", () -> new SpellModifier(CostInstance.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0500), ModModifiers.GROWTH_INFUSION_TARGETED_GROWTH.getKey(), ModSpells.GROWTH_INFUSION.getKey(), SpellType.Secondary.SPECIFIED, GroupId.NONE));
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_FRIENDLY_EARTH = REGISTER.register("sky_soarer/friendly_earth", () -> new SpellModifier(CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125), ModSpells.SKY_SOARER.getKey()));
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_AMPLIFIED_1 = REGISTER.register("sky_soarer/amplified_i", () -> new SpellModifier(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0125), ModSpells.SKY_SOARER.getKey(), SKY_SOARER_AMPLIFIED));
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_AMPLIFIED_2 = REGISTER.register("sky_soarer/amplified_ii", () -> new SpellModifier(CostInstance.mult(ModHerbs.CLOUD_BERRY, SpellCosts.MULT_005), ModModifiers.SKY_SOARER_AMPLIFIED_1.getKey(), ModSpells.SKY_SOARER.getKey(), SKY_SOARER_AMPLIFIED));

@@ -11,7 +11,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.screen.SaturateScreenFXPacket;
 import net.minecraft.core.Holder;
@@ -57,13 +57,13 @@ public class SaturateSpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     FoodData data = pPlayer.getFoodData();
     int currentFood = data.getFoodLevel();
     float currentSaturation = data.getSaturationLevel();
     if (currentFood >= 20 && currentSaturation >= 20) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     float newSat = currentSaturation;
@@ -88,7 +88,7 @@ public class SaturateSpell extends Spell {
 
     if (foodsToSlots.isEmpty()) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     List<ItemStack> sortedFoods = foodsToSlots.keySet().stream()
@@ -117,7 +117,7 @@ public class SaturateSpell extends Spell {
 
     if ((newSat <= currentSaturation && newFood <= currentFood) || usedAmounts.isEmpty()) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     List<ItemStack> consumedItems = new ArrayList<>();
@@ -132,7 +132,7 @@ public class SaturateSpell extends Spell {
 
     if (consumedItems.isEmpty()) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     if (data.getSaturationLevel() < newSat) {
@@ -156,7 +156,7 @@ public class SaturateSpell extends Spell {
         pPlayer.getInventory().placeItemBackInInventory(result);
       }
     }
-    return SpellCastResult.success(cooldown);
+    return CastResult.success(cooldown);
   }
 
   private float saturation(ItemStack stack, Player pPlayer, ISpellInstance spell) {

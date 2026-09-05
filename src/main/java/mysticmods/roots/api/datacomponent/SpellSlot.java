@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public record SpellSlot(UUID spellId, int slot, Spell spell, SpellModifierSet enabledModifiers,
-                        PatchedDataComponentMap data) implements ISpellInstance, DataComponentHolder {
+                        PatchedDataComponentMap data) implements ISpellInstance.Identified, DataComponentHolder {
   public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.<SpellSlot>mapCodec(instance -> instance.group(
       UUIDUtil.CODEC.fieldOf("spellId").forGetter(SpellSlot::spellId),
       Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),

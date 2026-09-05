@@ -1,5 +1,6 @@
 package mysticmods.roots.init;
 
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
@@ -9,9 +10,7 @@ import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.reference.SpellProperties;
 import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.ParentChargeType;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastType;
 import mysticmods.roots.spell.*;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
@@ -28,10 +27,10 @@ public class ModSpells {
   // Acid Cloud (20 cooldown)
   public static final DeferredHolder<Spell, AcidCloudSpell> ACID_CLOUD = REGISTER.register(Spells.ACID_CLOUD.location()
       .getPath(), () -> new AcidCloudSpell(new Spell.Properties()
-      .type(SpellCastType.CONTINUOUS)
+      .type(SpellType.Cast.CONTINUOUS)
       .textColor(ChatFormatting.GREEN)
       .color(0x50a028, 0x405f20)
-      .charge(ParentChargeType.INSTANCE)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)))
       .build()
   ));
@@ -50,8 +49,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_AMPLIFIER = P.recordProperty("temporal_morass/amplifier", Property.ofInt(3, "The amplifier for the slowness effect applied by Temporal Morass."));
 
   public static final DeferredHolder<Spell, EmptySpell> EMPTY = REGISTER.register("empty", () -> new EmptySpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .color(0xffffff, 0xc0c0c0)
       .textColor(ChatFormatting.DARK_PURPLE)
       .costs(() -> CostInstance.EMPTY)
@@ -62,10 +61,10 @@ public class ModSpells {
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = REGISTER.register(Spells.AQUA_BUBBLE.location()
       .getPath(), () -> new AquaBubbleSpell(
       new Spell.Properties()
-          .type(SpellCastType.INSTANT)
+          .type(SpellType.Cast.INSTANT)
           .color(0xede658, 0x5dd1de)
           .textColor(ChatFormatting.AQUA)
-          .charge(ParentChargeType.INSTANCE)
+          .charge(SpellType.Primary.INSTANCE)
           .cost(() -> ModHerbs.DEWGONIA, SpellCosts.BASE_0250)
           .build()
   ));
@@ -78,8 +77,8 @@ public class ModSpells {
   // Light Drifter (600 cooldown)
   public static final DeferredHolder<Spell, LightDrifterSpell> LIGHT_DRIFTER = REGISTER.register(Spells.LIGHT_DRIFTER.location()
       .getPath(), () -> new LightDrifterSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .color(0xf2ee96, 0x96dbf2)
       .textColor(ChatFormatting.DARK_PURPLE)
       .cost(() -> ModHerbs.MOONGLOW, SpellCosts.BASE_0250)
@@ -91,8 +90,8 @@ public class ModSpells {
   // Magnetism (350 cooldown)
   public static final DeferredHolder<Spell, MagnetismSpell> MAGNETISM = REGISTER.register(Spells.MAGNETISM.location()
       .getPath(), () -> new MagnetismSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.OPERATION)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.OPERATION)
       .color(0xdee129, 0xe62222)
       .textColor(ChatFormatting.YELLOW)
       .cost(() -> ModHerbs.SPIRITLEAF, SpellCosts.BASE_0016)
@@ -104,8 +103,8 @@ public class ModSpells {
   // Dandelion Winds (20 cooldown)
   public static final DeferredHolder<Spell, DandelionWindsSpell> DANDELION_WINDS = REGISTER.register(Spells.DANDELION_WINDS.location()
       .getPath(), () -> new DandelionWindsSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .color(0xffff20, 0xffb020)
       .textColor(ChatFormatting.YELLOW)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0125)))
@@ -124,8 +123,8 @@ public class ModSpells {
   // Decay
   public static final DeferredHolder<Spell, DecaySpell> DECAY = REGISTER.register(Spells.DECAY.location()
       .getPath(), () -> new DecaySpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.OPERATION)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.OPERATION)
       .color(0x2d8115, 0xc92b5f)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250)))
       .textColor(ChatFormatting.DARK_GREEN)
@@ -140,8 +139,8 @@ public class ModSpells {
   // Desaturate (500 cooldown)
   public static final DeferredHolder<Spell, DesaturateSpell> DESATURATE = REGISTER.register(Spells.DESATURATE.location()
       .getPath(), () -> new DesaturateSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .color(0xb8e82a, 0xbe20a8)
       .textColor(ChatFormatting.GREEN)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)))
@@ -155,8 +154,8 @@ public class ModSpells {
       .getPath(), () -> new SaturateSpell(new Spell.Properties()
       .textColor(ChatFormatting.DARK_GREEN)
       .color(0xe134f6, 0x05e82a)
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)))));
   public static final PropertyHolder<Property.IntegerProperty> SATURATE_COOLDOWN = P.recordProperty("saturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.FloatProperty> SATURATE_SATURATION_MULTIPLIER = P.recordProperty("saturate/saturation_multiplier", Property.ofFloat(0.5f, "Amount of saturation give per point of saturation."));
@@ -165,8 +164,8 @@ public class ModSpells {
   // Disarm spell (350 cooldown)
   public static final DeferredHolder<Spell, DisarmSpell> DISARM = REGISTER.register(Spells.DISARM.location()
       .getPath(), () -> new DisarmSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.OPERATION)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.OPERATION)
       .textColor(ChatFormatting.AQUA)
       .color(0x3a3a3a, 0x7a0000)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0125), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0125
@@ -182,8 +181,8 @@ public class ModSpells {
   // Extension spell (350 cooldown)
   public static final DeferredHolder<Spell, ExtensionSpell> EXTENSION = REGISTER.register(Spells.EXTENSION.location()
       .getPath(), () -> new ExtensionSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.COMPLEX_1750), Cost.add(ModHerbs.WILDROOT, SpellCosts.COMPLEX_1750)))
       .textColor(ChatFormatting.BLUE)
       .color(0xcde645, 0xb872b1).build()));
@@ -196,8 +195,8 @@ public class ModSpells {
   // Nondetection (350 cooldown)
   public static final DeferredHolder<Spell, NondetectionSpell> NONDETECTION = REGISTER.register(Spells.NONDETECTION.location()
       .getPath(), () -> new NondetectionSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)))
       .color(0x8f32b8, 0x4c94ed)
       .textColor(ChatFormatting.DARK_AQUA)
@@ -208,8 +207,8 @@ public class ModSpells {
   // Sylvan Light (20 cooldown)
   public static final DeferredHolder<Spell, SylvanLightSpell> SYLVAN_LIGHT = REGISTER.register(Spells.SYLVAN_LIGHT.location()
       .getPath(), () -> new SylvanLightSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.COMPLEX_0625), Cost.add(ModHerbs.PERESKIA, SpellCosts.COMPLEX_0625)))
       .color(0xf7f6d2, 0xe351f4)
       .textColor(ChatFormatting.LIGHT_PURPLE)
@@ -228,8 +227,8 @@ public class ModSpells {
   public static final DeferredHolder<Spell, GeasSpell> GEAS = REGISTER.register(Spells.GEAS.location()
       .getPath(), () -> new GeasSpell(new Spell.Properties()
       .textColor(ChatFormatting.RED)
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.OPERATION)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.OPERATION)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)))
       .color(0x802020, 0x202020)
       .build()));
@@ -252,8 +251,8 @@ public class ModSpells {
   public static final DeferredHolder<Spell, GrowthInfusionSpell> GROWTH_INFUSION = REGISTER.register(Spells.GROWTH_INFUSION.location()
       .getPath(), () ->
       new GrowthInfusionSpell(new Spell.Properties()
-          .type(SpellCastType.CONTINUOUS)
-          .charge(ParentChargeType.OPERATION)
+          .type(SpellType.Cast.CONTINUOUS)
+          .charge(SpellType.Primary.OPERATION)
           .color(0x30ff30, 0xc0ffc0)
           .color(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), 0x157318, 0x13c3eb)
           .cost(() -> ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)
@@ -279,8 +278,8 @@ public class ModSpells {
   public static final DeferredHolder<Spell, RampantGrowthSpell> RAMPANT_GROWTH = REGISTER.register(Spells.RAMPANT_GROWTH.location()
       .getPath(), () ->
       new RampantGrowthSpell(new Spell.Properties()
-          .type(SpellCastType.CONTINUOUS)
-          .charge(ParentChargeType.OPERATION)
+          .type(SpellType.Cast.CONTINUOUS)
+          .charge(SpellType.Primary.OPERATION)
           .color(0x157318, 0x13c3eb)
           .cost(() -> ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)
           .textColor(ChatFormatting.YELLOW)
@@ -305,8 +304,8 @@ public class ModSpells {
   // Life Drain (20 cooldown)
   public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = REGISTER.register(Spells.LIFE_DRAIN.location()
       .getPath(), () -> new LifeDrainSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125)))
       .color(0x902040, 0xffc4f0)
       .textColor(ChatFormatting.DARK_PURPLE)
@@ -321,8 +320,8 @@ public class ModSpells {
   // Petal Shell (120 cooldown)
   public static final DeferredHolder<Spell, PetalShellSpell> PETAL_SHELL = REGISTER.register(Spells.PETAL_SHELL.location()
       .getPath(), () -> new PetalShellSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .textColor(ChatFormatting.LIGHT_PURPLE)
       .color(0xffc0f0, 0xffffff)
       .costs(() -> CostInstance.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250))
@@ -338,8 +337,8 @@ public class ModSpells {
   // Rose Thorns (24 cooldown)
   public static final DeferredHolder<Spell, RoseThornsSpell> ROSE_THORNS = REGISTER.register(Spells.ROSE_THORNS.location()
       .getPath(), () -> new RoseThornsSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)))
       .color(0xff2040, 0x20ff60)
       .textColor(ChatFormatting.RED)
@@ -360,8 +359,8 @@ public class ModSpells {
   // Shatter (20 cooldown)
   public static final DeferredHolder<Spell, ShatterSpell> SHATTER = REGISTER.register(Spells.SHATTER.location()
       .getPath(), () -> new ShatterSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.OPERATION)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.OPERATION)
       .costs(() -> CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125))
       .color(0x606060, 0xc0c0c0)
       .textColor(ChatFormatting.YELLOW)
@@ -371,8 +370,8 @@ public class ModSpells {
   // Jaunt (80 cooldown)
   public static final DeferredHolder<Spell, JauntSpell> JAUNT = REGISTER.register(Spells.JAUNT.location()
       .getPath(), () -> new JauntSpell(new Spell.Properties()
-      .type(SpellCastType.CHARGED)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.CHARGED)
+      .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0031), Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0031)))
       .color(0x538ad4, 0xede768)
       .textColor(ChatFormatting.DARK_PURPLE)));
@@ -387,8 +386,8 @@ public class ModSpells {
   // Sky Soarer (39 cooldown)
   public static final DeferredHolder<Spell, SkySoarerSpell> SKY_SOARER = REGISTER.register(Spells.SKY_SOARER.location()
       .getPath(), () -> new SkySoarerSpell(new Spell.Properties()
-      .type(SpellCastType.INSTANT)
-      .charge(ParentChargeType.INSTANCE)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Primary.INSTANCE)
       .textColor(ChatFormatting.BLUE)
       .costs(() -> CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.COMPLEX_1250))
       .color(0x20c8ff, 0x2040ff)

@@ -8,7 +8,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.client.light_drifter.ClientboundLightDrifterSyncPacket;
@@ -67,11 +67,11 @@ public class LightDrifterSpell extends Spell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (pPlayer.isFallFlying() || !pPlayer.onGround()) {
       pPlayer.displayClientMessage(Component.translatable("roots.spell.spell_light_drifter.on_ground"), true);
       costs.noCharge();
-      return SpellCastResult.fail();
+      return CastResult.fail();
     }
     stopPlayerMovement(pPlayer);
     LightDrifterEntity drifter = new LightDrifterEntity(ModEntities.LIGHT_DRIFTER.get(), pLevel, pPlayer);
@@ -87,7 +87,7 @@ public class LightDrifterSpell extends Spell {
     SnapshotHelper.addLiving(drifter, ModSerializers.LIGHT_DRIFTER.get(), snapshot2);
     pPlayer.addEffect(new MobEffectInstance(ModEffects.LIGHT_DRIFTER, duration), pPlayer);
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new ClientboundLightDrifterSyncPacket(drifter.getId()));
-    return SpellCastResult.success(cooldown);
+    return CastResult.success(cooldown);
   }
 
   @Override

@@ -10,7 +10,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModModifiers;
@@ -113,12 +113,12 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
-  public boolean hasBlockTarget(Player pPlayer, ISpellInstance instance) {
+  public boolean hasBlockTarget(ISpellInstance instance, Player pPlayer) {
     return true;
   }
 
   @Override
-  public @Nullable Vec3 getBlockTarget(Player pPlayer, ISpellInstance spell) {
+  public @Nullable Vec3 getBlockTarget(ISpellInstance spell, Player pPlayer) {
     return pickBlock(pPlayer, spell).getLocation();
   }
 
@@ -126,7 +126,7 @@ public class ShatterSpell extends Spell {
   public static boolean capturingDrops = false;
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     //FakePlayerUtil.buildItems(pLevel, pLevel.getRandom());
 
     ServerPlayer player = (ServerPlayer) pPlayer;
@@ -208,10 +208,10 @@ public class ShatterSpell extends Spell {
 
     if (count == 0) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     } else {
       costs.operations(Mth.floor(count));
-      return SpellCastResult.success(Mth.floor(count), Mth.floor(cooldown * count));
+      return CastResult.success(Mth.floor(count), Mth.floor(cooldown * count));
     }
   }
 

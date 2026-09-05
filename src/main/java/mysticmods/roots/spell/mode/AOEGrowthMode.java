@@ -3,7 +3,7 @@ package mysticmods.roots.spell.mode;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.spell.Cycling;
+import mysticmods.roots.api.Cycling;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Style;

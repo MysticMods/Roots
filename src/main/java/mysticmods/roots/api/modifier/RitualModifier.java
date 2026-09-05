@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -41,8 +42,8 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   }
 
   @Override
-  public ChildChargeType getChargeType() {
-    return ChildChargeType.ALWAYS;
+  public SpellType.Secondary getChargeType() {
+    return SpellType.Secondary.ALWAYS;
   }
 
   @Override

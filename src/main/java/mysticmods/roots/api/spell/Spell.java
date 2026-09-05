@@ -7,9 +7,7 @@ import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsItemCallbacks;
-import mysticmods.roots.api.SpellLike;
+import mysticmods.roots.api.*;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
@@ -67,9 +65,9 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   protected final boolean hasDescriptionOverride;
   protected final boolean hasPredicates;
 
-  protected final SpellCastType type;
+  protected final SpellType.Cast type;
   protected final CostInstance defaultCosts;
-  protected final ParentChargeType chargeType;
+  protected final SpellType.Primary chargeType;
   protected DataComponentMap components;
   protected CostInstance costs;
   protected int cooldown = 0;
@@ -85,11 +83,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   protected Component[] extendedDescription = null;
 
   @Deprecated
-  public Spell(SpellCastType type, ChatFormatting color, CostInstance defaultCosts, ParentChargeType chargeType, int color1, int color2) {
+  public Spell(SpellType.Cast type, ChatFormatting color, CostInstance defaultCosts, SpellType.Primary chargeType, int color1, int color2) {
     this(type, TextColor.fromLegacyFormat(color), defaultCosts, chargeType, color1, color2);
   }
 
-  public Spell(SpellCastType type, TextColor textColor, CostInstance defaultCosts, ParentChargeType chargeType, int color1, int color2) {
+  public Spell(SpellType.Cast type, TextColor textColor, CostInstance defaultCosts, SpellType.Primary chargeType, int color1, int color2) {
     this.type = type;
     this.textColor = textColor;
     this.defaultCosts = defaultCosts;
@@ -283,7 +281,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public int getMaxUse(ISpellInstance iSpellInstance) {
-    if (maxUse == 0 && type == SpellCastType.CONTINUOUS) {
+    if (maxUse == 0 && type == SpellType.Cast.CONTINUOUS) {
       return 72000;
     }
 
@@ -307,7 +305,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return costs;
   }
 
-  public ParentChargeType getChargeType() {
+  public SpellType.Primary getChargeType() {
     return chargeType;
   }
 
@@ -325,7 +323,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return cooldown;
   }
 
-  public SpellCastType getType(ISpellInstance iSpellInstance) {
+  public SpellType.Cast getType(ISpellInstance iSpellInstance) {
     return type;
   }
 
@@ -380,7 +378,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return RootsItemCallbacks.getLibraryItemStack(this.simple());
   }
 
-  public abstract SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);
+  public abstract CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);
 
   public Map<BlockPos, BlockState> getAffectedBlocks(Level level, Player player, ISpellInstance spell, ItemStack stack, BlockPos pos, BlockState blockState, BlockHitResult rayTraceResult) {
     return Collections.emptyMap();
@@ -428,12 +426,12 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return this;
   }
 
-  public boolean hasBlockTarget(Player pPlayer, ISpellInstance instance) {
+  public boolean hasBlockTarget(ISpellInstance instance, Player pPlayer) {
     return false;
   }
 
   @Nullable
-  public Vec3 getBlockTarget(Player pPlayer, ISpellInstance spell) {
+  public Vec3 getBlockTarget(ISpellInstance spell, Player pPlayer) {
     return null;
   }
 
@@ -468,7 +466,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return true;
   }
 
-  public boolean canTargetEntity(Entity entity) {
+  public boolean canTargetEntity(ISpellInstance instance, Entity entity) {
     return false; // TODO: This function should handle tag-checking
   }
 
@@ -534,10 +532,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     private static final Interner<DataComponentMap> COMPONENT_INTERNER = Interners.newStrongInterner();
     @Nullable
     DataComponentMap.Builder components;
-    SpellCastType castType = SpellCastType.INSTANT;
+    SpellType.Cast castType = SpellType.Cast.INSTANT;
     TextColor textColor;
     Supplier<CostInstance> defaultCosts;
-    ParentChargeType chargeType = ParentChargeType.INSTANCE;
+    SpellType.Primary chargeType = SpellType.Primary.INSTANCE;
     int color1 = -1;
     int color2 = -1;
     List<ResourceKey<SpellModifier>> resolutionOrder = null;
@@ -548,7 +546,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     Object2FloatMap<ResourceKey<SpellModifier>> predicateMap = new Object2FloatOpenHashMap<>();
     Map<ResourceKey<SpellModifier>, String> descriptionIdMap = new HashMap<>();
 
-    public Properties type(SpellCastType type) {
+    public Properties type(SpellType.Cast type) {
       this.castType = type;
       return this;
     }
@@ -632,13 +630,13 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties charge(ParentChargeType type) {
+    public Properties charge(SpellType.Primary type) {
       this.chargeType = type;
       return this;
     }
 
     public Properties operations() {
-      return charge(ParentChargeType.OPERATION);
+      return charge(SpellType.Primary.OPERATION);
     }
 
     public Properties build() {

@@ -9,7 +9,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSpells;
@@ -73,7 +73,7 @@ public class GeasSpell extends Spell {
   private static final AABB bounds = new AABB(-4, -4, -4, 5, 5, 5);
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int affected = 0;
     float hpAffected = 0;
 
@@ -115,11 +115,11 @@ public class GeasSpell extends Spell {
 
     if (affected == 0) {
       costs.noCharge();
-      return SpellCastResult.nothing();
+      return CastResult.nothing();
     }
 
     double scaleFactor = Math.sqrt(hpAffected) * 1.5;
-    return SpellCastResult.success(affected, (int) Math.min(cooldown * scaleFactor, maxCooldown));
+    return CastResult.success(affected, (int) Math.min(cooldown * scaleFactor, maxCooldown));
   }
 
   private int affect(Player player, LivingEntity entity) {

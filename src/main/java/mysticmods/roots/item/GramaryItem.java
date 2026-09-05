@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.BindableBlockEntity;
-import mysticmods.roots.api.spell.Cycling;
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;

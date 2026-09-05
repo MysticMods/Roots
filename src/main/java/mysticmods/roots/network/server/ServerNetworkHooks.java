@@ -8,7 +8,7 @@ import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.datacomponent.SpellSlot;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.spell.Cycling;
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;

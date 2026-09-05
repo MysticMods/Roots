@@ -10,10 +10,10 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICosted;
-import mysticmods.roots.api.spell.Cycling;
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellCastResult;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModModifiers;
@@ -109,12 +109,12 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public boolean hasBlockTarget(Player pPlayer, ISpellInstance instance) {
+  public boolean hasBlockTarget(ISpellInstance instance, Player pPlayer) {
     return !instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH);
   }
 
   @Override
-  public @Nullable Vec3 getBlockTarget(Player pPlayer, ISpellInstance spell) {
+  public @Nullable Vec3 getBlockTarget(ISpellInstance spell, Player pPlayer) {
     if (spell.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       return null;
     }
@@ -122,7 +122,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public SpellCastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+  public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (instance.has(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)) {
       if (ticks % rampantInterval == 0) {
         AOEGrowthMode mode = instance.getSpellData(ModAttachments.AOE_GROWTH_MODE);
@@ -137,7 +137,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
         if (getBoundingBox() == null) {
           RootsAPI.LOG.error("For some reason the Rampant Growth spell does not have a bounding box");
           costs.noCharge();
-          return SpellCastResult.fail();
+          return CastResult.fail();
         }
 
         final Block block = tempBlock;
@@ -160,7 +160,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
         });
         if (positions.isEmpty()) {
           costs.noCharge();
-          return SpellCastResult.nothing();
+          return CastResult.nothing();
         }
         int growCount = 0;
         for (int i = 0; i < count; i++) {
@@ -186,14 +186,14 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
         }
         if (growCount == 0) {
           costs.noCharge();
-          return SpellCastResult.nothing();
+          return CastResult.nothing();
         } else {
           costs.operations(growCount);
         }
       } else {
         costs.noCharge();
       }
-      return SpellCastResult.tickFromCosting(cooldown, costs);
+      return CastResult.tickFromCosting(cooldown, costs);
     } else {
       BlockHitResult result = pickBlock(pPlayer, instance);
       BlockPos pos = result.getBlockPos();
@@ -225,7 +225,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
           } else {
             costs.noCharge();
             pPlayer.stopUsingItem();
-            return SpellCastResult.nothing();
+            return CastResult.nothing();
           }
 
           costs.operations(1);
@@ -233,7 +233,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
           costs.noCharge();
         }
       }
-      return SpellCastResult.tickFromCosting(cooldown, costs);
+      return CastResult.tickFromCosting(cooldown, costs);
     }
   }
 
