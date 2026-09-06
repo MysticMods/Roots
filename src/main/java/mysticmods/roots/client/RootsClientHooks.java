@@ -323,4 +323,8 @@ public class RootsClientHooks {
     Minecraft mc = Minecraft.getInstance();
     return mc.options.keyUse.getKey().getDisplayName();
   }
+
+  public static Component getModifySpellKeyBind() {
+    return KeyBindings.MODIFY_SPELL.getKey().getDisplayName();
+  }
 }

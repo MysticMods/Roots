@@ -495,7 +495,7 @@ public class CastingItem extends Item {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
     if (context.level() != null && context.level().isClientSide()) {
-      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getStaffKeyBind(), RootsClientHooks.getUseKeyBind(), RootsClientHooks.getStaffCycleKeyBind()));
+      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getStaffKeyBind(), RootsClientHooks.getUseKeyBind(), RootsClientHooks.getStaffCycleKeyBind(), RootsClientHooks.getModifySpellKeyBind()));
     }
 
     TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);
