@@ -281,7 +281,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public int getMaxUse(ISpellInstance iSpellInstance) {
-    if (maxUse == 0 && type == SpellType.Cast.CONTINUOUS) {
+    if (maxUse == 0 && getType(iSpellInstance) == SpellType.Cast.CONTINUOUS) {
       return 72000;
     }
 

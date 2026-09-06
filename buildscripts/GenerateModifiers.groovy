@@ -22,7 +22,7 @@ import groovy.json.JsonSlurper
 //                     {"type": "negate_base"} takes no herb or amount
 //   icon              "minecraft:arrow" (item)  |  "spells/foo" (texture)
 //   parent            sibling modifier name within the same spell
-//   charge            ChildChargeType value, e.g. "specified"
+//   charge            SpellType.Secondary value, e.g. "specified"
 //   no_token_item     true -> skip TokenItem registration
 //   excludes          one-directional conflicts (this modifier only)
 //   aliases           legacy registry names this modifier was renamed from;
@@ -280,7 +280,7 @@ def iconExpr = { String icon ->
   ns == 'minecraft' ? "Items.${path.toUpperCase()}" : "ModItems.${path.toUpperCase()}.value()"
 }
 
-// The SpellModifier overloads that actually exist. A ChildChargeType can only
+// The SpellModifier overloads that actually exist. A SpellType.Secondary can only
 // be passed alongside a parent slot AND an explicit GroupId, so those are
 // forced on rather than authored.
 def LEGAL_SHAPES = [
@@ -313,7 +313,7 @@ def ctorArgs = { rec ->
       case 'cost':      return [costExpr(rec.cost)]
       case 'parent':    return [rec.parent ? "ModModifiers.${rec.parent}.getKey()" : 'null']
       case 'spell':     return ["ModSpells.${rec.spell}.getKey()"]
-      case 'charge':    return ["ChildChargeType.${rec.charge.toUpperCase()}"]
+      case 'charge':    return ["SpellType.Secondary.${rec.charge.toUpperCase()}"]
       case 'group':     return [rec.group ?: 'GroupId.NONE']
       case 'conflicts': return rec.conflicts.collect { "ModModifiers.${it}.getKey()" }
     }
@@ -341,7 +341,7 @@ mods << HEADER << """package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.modifier.ChildChargeType;
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.registry.GroupId;

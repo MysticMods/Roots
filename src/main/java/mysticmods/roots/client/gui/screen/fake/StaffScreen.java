@@ -1,6 +1,7 @@
 package mysticmods.roots.client.gui.screen.fake;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import mysticmods.roots.RootsClient;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -228,7 +229,7 @@ public class StaffScreen extends RootsScreen {
         return true;
       }
     }
-    if (keyCode == InputConstants.KEY_INSERT) {
+    if (keyCode == KeyBindings.MODIFY_SPELL.getKey().getValue()) {
       StaffSpellButton toInsertButton = null;
       for (StaffSpellButton button : staffSpellButtons) {
         if (isMouseInRelativeRange(lastMouseX, lastMouseY, button.getX(), button.getY(), button.getWidth(), button.getHeight())) {
@@ -255,6 +256,12 @@ public class StaffScreen extends RootsScreen {
 
   public static void open(@Nullable InteractionHand hand, int inventorySlot) {
     RootsClientHooks.stopUsingItem(new StaffScreen(hand, inventorySlot));
+  }
+
+  public static void openAndModify (@Nullable InteractionHand hand, int inventorySlot, int spellSlot) {
+    var screen = new StaffScreen(hand, inventorySlot);
+    RootsClientHooks.stopUsingItem(screen);
+    SpellModifierScreen.open(screen, spellSlot);
   }
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");

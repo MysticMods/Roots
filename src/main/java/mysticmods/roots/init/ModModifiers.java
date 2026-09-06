@@ -2,10 +2,10 @@
 // Source: data/modifiers.json  ->  :generateModifiers
 package mysticmods.roots.init;
 
-import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.registry.GroupId;

@@ -104,6 +104,10 @@ public class RootsClientHooks {
     StaffScreen.open(hand, inventorySlot);
   }
 
+  public static void openLibraryAndModify(@Nullable InteractionHand hand, int inventorySlot, int spellSlot) {
+    StaffScreen.openAndModify(hand, inventorySlot, spellSlot);
+  }
+
   public static void openReputation() {
     ReputationScreen.open();
   }
@@ -245,21 +249,8 @@ public class RootsClientHooks {
   public static void stopUsingItem(Screen newScreen) {
     Minecraft mc = Minecraft.getInstance();
     if (mc.gameMode != null && mc.player != null) {
-      // TODO: Release keybinds?
       mc.gameMode.releaseUsingItem(mc.player);
 
-      if (mc.screen == null) {
-        mc.setScreen(newScreen);
-      } else {
-        mc.pushGuiLayer(newScreen);
-      }
-    }
-  }
-
-  public static void popAndStopUsingItem(Screen newScreen) {
-    var mc = Minecraft.getInstance();
-    if (mc.gameMode != null && mc.player != null) {
-      mc.gameMode.releaseUsingItem(mc.player);
       if (mc.screen == null) {
         mc.setScreen(newScreen);
       } else {

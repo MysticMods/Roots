@@ -130,6 +130,11 @@ public class KeyHandler {
       return;
     }
 
+    if (KeyBindings.MODIFY_SPELL.consumeClick()) {
+      tryOpenLibrary(mc, true);
+      return;
+    }
+
     if (KeyBindings.CYCLE_STAFF_SPELL.consumeClick()) {
       tryCycleStaff(mc);
       return;
@@ -193,8 +198,10 @@ public class KeyHandler {
       PacketDistributor.sendToServer(new ServerboundCycleSpellModePacket(hand, spell.getCycleComponent()));
     }
   }
-
   private static void tryOpenLibrary(Minecraft mc) {
+    tryOpenLibrary(mc, false);
+  }
+  private static void tryOpenLibrary (Minecraft mc, boolean modifySpell) {
     if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
       RootsAPI.LOG.error("Opening spell library via keybind");
     }
@@ -220,7 +227,13 @@ public class KeyHandler {
       return;
     }
 
-    RootsClientHooks.openLibrary(hand, inventorySlot);
+    SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
+
+    if (modifySpell && storage != null && storage.getCurrentSpell() != null) {
+      RootsClientHooks.openLibraryAndModify(hand, inventorySlot, storage.currentSlot());
+    } else {
+      RootsClientHooks.openLibrary(hand, inventorySlot);
+    }
   }
 
   private static void tryOpenPouch(Minecraft mc) {

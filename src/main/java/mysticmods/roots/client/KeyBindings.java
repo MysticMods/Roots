@@ -35,6 +35,8 @@ public class KeyBindings {
 
   public static final LibraryKeyConflictContext IN_LIBRARY = new LibraryKeyConflictContext();
 
+  public static final MultiConflictContext HOLDING_STAFF_OR_IN_LIBRARY = MultiConflictContext.multi(HOLDING_STAFF, IN_LIBRARY);
+
   public static final NearRelevantBlockEntity NEAR_RELEVANT_BLOCK_ENTITY = new NearRelevantBlockEntity();
 
   public static final IKeyConflictContext HAS_ANY_ADJUSTABLE = new MultiKeyConflictContext(ADJUSTABLE, HAS_ADJUSTABLE_TOME);
@@ -48,7 +50,7 @@ public class KeyBindings {
   public static final KeyMapping OPEN_FAKE_MENU = new KeyMapping("key.roots.open_fake_menu", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
   public static final KeyMapping CLEAR_CONTAINER = new KeyMapping("key.roots.clear_container", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
   public static final KeyMapping DELETE_SPELL = new KeyMapping("key.roots.delete_spell", IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
-  public static final KeyMapping MODIFY_SPELL = new KeyMapping("key.roots.modify_spell", IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
+  public static final KeyMapping MODIFY_SPELL = new KeyMapping("key.roots.modify_spell", HOLDING_STAFF_OR_IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
 
   public static final List<KeyMapping> MAPPINGS = Arrays.asList(
       OPEN_SPELL_LIBRARY,
@@ -74,6 +76,39 @@ public class KeyBindings {
     event.register(OPEN_FAKE_MENU);
     event.register(DELETE_SPELL);
     event.register(MODIFY_SPELL);
+  }
+
+  public static class MultiConflictContext implements IKeyConflictContext {
+
+    private final List<IKeyConflictContext> contexts;
+
+    private MultiConflictContext(IKeyConflictContext ... contexts) {
+      this.contexts = Arrays.asList(contexts);
+    }
+
+    @Override
+    public boolean isActive() {
+      for (IKeyConflictContext context : contexts) {
+        if (context.isActive()) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    @Override
+    public boolean conflicts(IKeyConflictContext iKeyConflictContext) {
+      for (IKeyConflictContext context : contexts) {
+        if (context.conflicts(iKeyConflictContext)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    public static MultiConflictContext multi (IKeyConflictContext ... contexts) {
+      return new MultiConflictContext(contexts);
+    }
   }
 
   public static class LibraryKeyConflictContext implements IKeyConflictContext {
@@ -156,7 +191,6 @@ public class KeyBindings {
       return this == other;
     }
   }
-
 
   public static class HoldingTaggedItem implements IKeyConflictContext {
     private final TagKey<Item> tag;

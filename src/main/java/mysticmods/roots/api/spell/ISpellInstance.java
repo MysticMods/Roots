@@ -35,6 +35,8 @@ import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+// TODO: Use tags to indicate enabled modifiers that are transformative
+// TODO: Spell.Properties.transformers(ModifierTransforms...)
 public interface ISpellInstance extends SpellLike, ICostedParent {
   Spell asSpell();
 

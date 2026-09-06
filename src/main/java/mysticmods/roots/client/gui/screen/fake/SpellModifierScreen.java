@@ -163,7 +163,7 @@ public class SpellModifierScreen extends RootsScreen {
   }
 
   public static void open(StaffScreen staffScreen, int slot) {
-    RootsClientHooks.popAndStopUsingItem(new SpellModifierScreen(staffScreen, staffScreen.hand, staffScreen.inventorySlot, slot));
+    RootsClientHooks.stopUsingItem(new SpellModifierScreen(staffScreen, staffScreen.hand, staffScreen.inventorySlot, slot));
   }
 
   public class SpellModifierWidget extends ModifierWidget<Spell, SpellModifier> {
