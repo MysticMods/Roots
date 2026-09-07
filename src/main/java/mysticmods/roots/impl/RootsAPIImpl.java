@@ -89,8 +89,7 @@ public class RootsAPIImpl implements IRootsAPI {
 
   @Override
   public List<ItemStack> getPouches(Player player) {
-    List<ItemStack> pouches = new ArrayList<>();
-    pouches.addAll(getCurios(player, RootsTags.Items.ALL_POUCHES));
+    List<ItemStack> pouches = new ArrayList<>(getCurios(player, RootsTags.Items.ALL_POUCHES));
 
     ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
     if (stack.is(RootsTags.Items.POUCHES)) {

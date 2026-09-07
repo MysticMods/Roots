@@ -54,15 +54,24 @@ public class ReputationStorage implements ICleanable {
   }
 
   public int getReputation(Grove grove) {
-    return reputations.computeIfAbsent(grove, t -> 0);
+    if (grove == null) {
+      throw new NullPointerException("Cannot fetch reputation for null grove!");
+    }
+    return reputations.getInt(grove);
   }
 
   public void setReputation(Grove grove, int reputation) {
+    if (grove == null) {
+      throw new NullPointerException("Cannot set reputation of null grove to '" + reputation + "'!");
+    }
     reputations.put(grove, reputation);
     setDirty(true);
   }
 
   public int apply(Grove grove, ResourceLocation name, GroveReputation reputation) {
+    if (grove == null) {
+      throw new NullPointerException("Cannot apply unique reputation '" + name +"' (" + reputation + ") for null grove!");
+    }
     UniqueReputation rep = new UniqueReputation(grove.builtInRegistryHolder().getKey().location(), name);
     if (uniqueReputations.contains(rep)) {
       return 0;
@@ -77,6 +86,9 @@ public class ReputationStorage implements ICleanable {
   }
 
   public int increaseReputation(Grove grove, int reputation) {
+    if (grove == null) {
+      throw new NullPointerException("Cannot increase reputation of null grove by '" + reputation + "'!");
+    }
     int current = reputations.getOrDefault(grove, 0);
     reputations.put(grove, current + reputation);
     setDirty(true);
@@ -84,6 +96,9 @@ public class ReputationStorage implements ICleanable {
   }
 
   public int decreaseReputation(Grove grove, int reputation) {
+    if (grove == null) {
+      throw new NullPointerException("Cannot decrease reputation of null grove by '" + reputation + "'!");
+    }
     int current = reputations.computeIfAbsent(grove, t -> 0);
     if (reputation > 0) {
       reputation = -reputation;
