@@ -17,7 +17,7 @@ import java.util.Map;
 
 // TODO: Change this to SpellTemplate
 // SpellTemplate: ResourceKey<Spell> spell, ResourceKey<SpellModifier> ... enabledModifiers, ? extends Cycling cycleMode
-public class CooldownStorage implements ICleanable, ITicking {
+public class CooldownStorage implements ICleanable<CooldownStorage>, ITicking {
   public static final Codec<CooldownStorage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
       Codec.unboundedMap(RootsRegistries.SPELLS.byNameCodec(), Codec.INT).fieldOf("cooldown_map")
           .forGetter(o -> o.cooldownMap),
@@ -80,6 +80,11 @@ public class CooldownStorage implements ICleanable, ITicking {
   @Override
   public boolean isDirty() {
     return dirty;
+  }
+
+  @Override
+  public CooldownStorage copy() {
+    return new CooldownStorage(cooldownMap, maxCooldownMap);
   }
 
   public void reset() {

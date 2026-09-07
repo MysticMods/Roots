@@ -28,7 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-public class GrantStorage implements ICleanable {
+public class GrantStorage implements ICleanable<GrantStorage> {
   public static final MapCodec<GrantStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
           RootsRegistries.SPELLS.byNameCodec().listOf().fieldOf("grantedSpells")
@@ -191,6 +191,11 @@ public class GrantStorage implements ICleanable {
   @Override
   public boolean isDirty() {
     return this.dirty;
+  }
+
+  @Override
+  public GrantStorage copy() {
+    return new GrantStorage(grantedSpells, grantedSpellModifiers);
   }
 
   @Override

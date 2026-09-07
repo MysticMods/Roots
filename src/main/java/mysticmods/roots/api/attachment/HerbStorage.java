@@ -10,7 +10,7 @@ import net.minecraft.network.codec.StreamCodec;
 
 import java.util.Map;
 
-public class HerbStorage implements ICleanable {
+public class HerbStorage implements ICleanable<HerbStorage> {
   public static final Codec<HerbStorage> CODEC = Codec.unboundedMap(RootsRegistries.HERBS.byNameCodec(), Codec.DOUBLE)
       .xmap(HerbStorage::new, HerbStorage::getHerbMap);
   public static final StreamCodec<RegistryFriendlyByteBuf, HerbStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.map(Object2DoubleOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.HERBS), ByteBufCodecs.DOUBLE), HerbStorage::getHerbMap, HerbStorage::new);
@@ -76,5 +76,10 @@ public class HerbStorage implements ICleanable {
   @Override
   public boolean isDirty() {
     return dirty;
+  }
+
+  @Override
+  public HerbStorage copy() {
+    return new HerbStorage(herbMap);
   }
 }

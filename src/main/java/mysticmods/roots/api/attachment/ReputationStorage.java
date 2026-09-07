@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.UniqueReputation;
 import mysticmods.roots.api.grove.Grove;
@@ -18,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Map;
 import java.util.Set;
 
-public class ReputationStorage implements ICleanable {
+public class ReputationStorage implements ICleanable<ReputationStorage> {
   public static final MapCodec<ReputationStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       Codec.BOOL.fieldOf("untrue_pacifist").forGetter(o -> o.untruePacifist),
       Codec.unboundedMap(RootsRegistries.GROVES.byNameCodec(), Codec.INT).fieldOf("reputations")
@@ -126,10 +127,26 @@ public class ReputationStorage implements ICleanable {
   @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
+    if (dirty) {
+
+    }
   }
 
   @Override
   public boolean isDirty() {
     return dirty;
+  }
+
+  @Override
+  public ReputationStorage copy() {
+    return new ReputationStorage(untruePacifist, reputations, uniqueReputations);
+  }
+
+  public void validate () {
+    for (Grove grove : reputations.keySet()) {
+      if (grove == null) {
+        RootsAPI.LOG.error("Null grove contained within reputations!");
+      }
+    }
   }
 }

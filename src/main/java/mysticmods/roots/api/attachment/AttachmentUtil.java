@@ -18,23 +18,23 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class AttachmentUtil {
-  public static <T extends ICleanable & ITicking, V extends ISyncPacket<T>> void monitorTickAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, Function<T, V> packetSupplier) {
+  public static <T extends ICleanable<T> & ITicking, V extends ISyncPacket<T>> void monitorTickAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, Function<T, V> packetSupplier) {
     monitorForChange(player, attachment, (a, b) -> b.tick(a), (p, t) -> PacketDistributor.sendToPlayer(p, packetSupplier.apply(t)));
   }
 
-  public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<ServerPlayer, T> consumer, Function<T, V> packetSupplier) {
+  public static <T extends ICleanable<T>, V extends ISyncPacket<T>> void monitorAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<ServerPlayer, T> consumer, Function<T, V> packetSupplier) {
     monitorForChange(player, attachment, consumer, (p, t) -> PacketDistributor.sendToPlayer(p, packetSupplier.apply(t)));
   }
 
-  public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, Function<T, V> packetSupplier) {
+  public static <T extends ICleanable<T>, V extends ISyncPacket<T>> void monitorAndSync(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, Function<T, V> packetSupplier) {
     monitorAndSync(player, attachment, null, packetSupplier);
   }
 
-  public static <T extends ICleanable> void monitorForChange(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<ServerPlayer, T> consumer) {
+  public static <T extends ICleanable<T>> void monitorForChange(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<ServerPlayer, T> consumer) {
     monitorForChange(player, attachment, consumer, null);
   }
 
-  public static <T extends ICleanable> void monitorForChange(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<ServerPlayer, T> consumer, @Nullable BiConsumer<ServerPlayer, T> whenDirty) {
+  public static <T extends ICleanable<T>> void monitorForChange(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<ServerPlayer, T> consumer, @Nullable BiConsumer<ServerPlayer, T> whenDirty) {
     T attachmentInstance = player.getData(attachment.value());
     if (attachmentInstance == null) {
       return;
@@ -44,20 +44,20 @@ public class AttachmentUtil {
     }
     if (attachmentInstance.isDirty()) {
       if (whenDirty != null) {
-        whenDirty.accept(player, attachmentInstance);
+        whenDirty.accept(player, attachmentInstance.copy());
       }
       attachmentInstance.setDirty(false);
       player.setData(attachment.value(), attachmentInstance);
     }
   }
 
-  public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSyncBlockEntity(BlockEntity blockEntity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<BlockEntity, T> consumer, BiFunction<T, Long, V> packetSupplier) {
+  public static <T extends ICleanable<T>, V extends ISyncPacket<T>> void monitorAndSyncBlockEntity(BlockEntity blockEntity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<BlockEntity, T> consumer, BiFunction<T, Long, V> packetSupplier) {
     BlockPos pos = blockEntity.getBlockPos();
     monitorBlockEntityForChange(blockEntity, attachment, consumer, (be, t) -> PacketDistributor.sendToPlayersNear((ServerLevel) blockEntity.getLevel(), null, pos.getX(), pos.getY(), pos.getZ(), 64, packetSupplier.apply(t, blockEntity.getBlockPos()
         .asLong())));
   }
 
-  public static <T extends ICleanable> void monitorBlockEntityForChange(BlockEntity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<BlockEntity, T> consumer, @Nullable BiConsumer<BlockEntity, T> whenDirty) {
+  public static <T extends ICleanable<T>> void monitorBlockEntityForChange(BlockEntity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<BlockEntity, T> consumer, @Nullable BiConsumer<BlockEntity, T> whenDirty) {
     BlockPos pos = entity.getBlockPos();
     if (!entity.hasData(attachment.value())) {
       return;
@@ -78,24 +78,24 @@ public class AttachmentUtil {
     }
     if (attachmentInstance.isDirty()) {
       if (whenDirty != null) {
-        whenDirty.accept(entity, attachmentInstance);
+        whenDirty.accept(entity, attachmentInstance.copy());
       }
       attachmentInstance.setDirty(false);
       entity.setData(attachment.value(), attachmentInstance);
     }
   }
 
-  public static <T extends ICleanable, V extends ISyncPacket<T>> void manuallySync(Entity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiFunction<T, Integer, V> packetSupplier) {
+  public static <T extends ICleanable<T>, V extends ISyncPacket<T>> void manuallySync(Entity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiFunction<T, Integer, V> packetSupplier) {
     if (entity.hasData(attachment.value())) {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, packetSupplier.apply(entity.getData(attachment.value()), entity.getId()));
     }
   }
 
-  public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSyncEntity(Entity player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<Entity, T> consumer, BiFunction<T, Integer, V> packetSupplier) {
+  public static <T extends ICleanable<T>, V extends ISyncPacket<T>> void monitorAndSyncEntity(Entity player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<Entity, T> consumer, BiFunction<T, Integer, V> packetSupplier) {
     monitorEntityForChange(player, attachment, consumer, (p, t) -> PacketDistributor.sendToPlayersTrackingEntityAndSelf(p, packetSupplier.apply(t, p.getId())));
   }
 
-  public static <T extends ICleanable> void monitorEntityForChange(Entity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<Entity, T> consumer, @Nullable BiConsumer<Entity, T> whenDirty) {
+  public static <T extends ICleanable<T>> void monitorEntityForChange(Entity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<Entity, T> consumer, @Nullable BiConsumer<Entity, T> whenDirty) {
     if (!entity.hasData(attachment.value())) {
       return;
     }
@@ -111,7 +111,7 @@ public class AttachmentUtil {
     }
     if (attachmentInstance.isDirty()) {
       if (whenDirty != null) {
-        whenDirty.accept(entity, attachmentInstance);
+        whenDirty.accept(entity, attachmentInstance.copy());
       }
       attachmentInstance.setDirty(false);
       entity.setData(attachment.value(), attachmentInstance);
