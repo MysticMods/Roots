@@ -12,8 +12,9 @@ import java.util.function.IntFunction;
 
 public class SpellType {
   public enum Primary implements StringRepresentable {
-    INSTANCE, // Charges per instance
-    OPERATION; // Charges amount per operation per instance
+    INSTANCE,  // Charges per instance
+    OPERATION, // Charges amount per operation per instance
+    DEFAULT;  // For modifiers: charges the default spell
 
     public static final Codec<Primary> CODEC = StringRepresentable.fromEnum(Primary::values);
     public static final IntFunction<Primary> BY_ID = ByIdMap.continuous(Primary::ordinal, Primary.values(), ByIdMap.OutOfBoundsStrategy.ZERO);

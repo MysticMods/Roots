@@ -5,8 +5,13 @@ import groovy.json.JsonSlurper
 
 // ---------------------------------------------------------------------------
 // Usage: groovy GenerateModifiers.groovy <modifiers.json> <output-src-root>
+//                                        [<template-root>]
 // Also runs in-process from build.gradle via GroovyShell; invalid data throws
 // rather than exiting, so it must never call System.exit.
+//
+// The Java skeletons live in src/template/java, laid out by package exactly as
+// the generated sources are; this script only fills their @SLOT@ holes. Slots
+// are listed with each emit() call below.
 //
 // SCHEMA
 //   <spell>.<name>   a modifier; add `tiers` to make it a ladder, i.e. a
@@ -43,6 +48,7 @@ import groovy.json.JsonSlurper
 
 def data = new JsonSlurper().parse(new File(args[0]))
 def outRoot = new File(args[1])
+def tplRoot = args.size() > 2 ? new File(args[2]) : new File('src/template/java')
 
 def ROMAN = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x']
 
@@ -95,18 +101,18 @@ data.each { spellName, spell ->
     if (unknown) fail("$id: unknown key(s) $unknown")
     checkCost(id, m.cost)
     def rec = [
-      id              : id,
-      constant        : m.constant ?: "${SPELL}_${name}".toUpperCase(),
-      spell           : SPELL,
-      cost            : m.cost,
-      icon            : m.icon,
-      charge          : m.charge,
-      tokenItem       : !(m.no_token_item as boolean),
-      parent          : null,
-      group           : null,
-      conflicts       : [],
-      excludes        : (m.excludes ?: []) as List,
-      aliases         : (m.aliases ?: []) as List,
+            id              : id,
+            constant        : m.constant ?: "${SPELL}_${name}".toUpperCase(),
+            spell           : SPELL,
+            cost            : m.cost,
+            icon            : m.icon,
+            charge          : m.charge,
+            tokenItem       : !(m.no_token_item as boolean),
+            parent          : null,
+            group           : null,
+            conflicts       : [],
+            excludes        : (m.excludes ?: []) as List,
+            aliases         : (m.aliases ?: []) as List,
     ] + extra
     if (!rec.icon) fail("$id: no icon")
     if (byId.containsKey(id)) fail("$id: duplicate")
@@ -136,7 +142,7 @@ data.each { spellName, spell ->
       if (raw.cost != null) fail("$where: use either cost or costs, not both")
       if (!(raw.costs instanceof List) || raw.costs.size() != raw.tiers.size())
         fail("$where: costs must be parallel to tiers " +
-             "(${raw.costs instanceof List ? raw.costs.size() : '?'} vs ${raw.tiers.size()})")
+                "(${raw.costs instanceof List ? raw.costs.size() : '?'} vs ${raw.tiers.size()})")
     }
 
     def gconst = "${SPELL}_${name}".toUpperCase()
@@ -284,15 +290,15 @@ def iconExpr = { String icon ->
 // be passed alongside a parent slot AND an explicit GroupId, so those are
 // forced on rather than authored.
 def LEGAL_SHAPES = [
-  ['cost', 'spell'],
-  ['cost', 'spell', 'group'],
-  ['cost', 'spell', 'charge'],
-  ['cost', 'parent', 'spell'],
-  ['cost', 'parent', 'spell', 'group'],
-  ['cost', 'parent', 'spell', 'charge', 'group'],
-  ['cost', 'parent', 'spell', 'conflicts'],
-  ['cost', 'parent', 'spell', 'group', 'conflicts'],
-  ['cost', 'parent', 'spell', 'charge', 'group', 'conflicts'],
+        ['cost', 'spell'],
+        ['cost', 'spell', 'group'],
+        ['cost', 'spell', 'charge'],
+        ['cost', 'parent', 'spell'],
+        ['cost', 'parent', 'spell', 'group'],
+        ['cost', 'parent', 'spell', 'charge', 'group'],
+        ['cost', 'parent', 'spell', 'conflicts'],
+        ['cost', 'parent', 'spell', 'group', 'conflicts'],
+        ['cost', 'parent', 'spell', 'charge', 'group', 'conflicts'],
 ] as Set
 
 def ctorShape = { rec ->
@@ -332,160 +338,85 @@ if (errors) {
 }
 
 def HEADER = '// GENERATED FILE - DO NOT EDIT.\n' +
-             '// Source: data/modifiers.json  ->  :generateModifiers\n'
+        '// Source: data/modifiers.json  ->  :generateModifiers\n'
 
-// ---------------------------------------------------------------- ModModifiers
-def mods = new StringBuilder()
-mods << HEADER << """package mysticmods.roots.init;
+// ---------------------------------------------------------------- templates
+// A slot is @UPPER_SNAKE@ on its own; the value replaces it verbatim, so every
+// block below carries its own indentation and trailing newline. Filling is
+// strict in both directions: an unknown slot in the template and an unused
+// value passed here are both errors.
+def block = { List ls -> ls ? ls.join('\n') + '\n' : '' }
 
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.SpellType;
-import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.reference.SpellCosts;
-import mysticmods.roots.api.registry.GroupId;
-import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.item.TokenItem;
-import net.minecraft.core.Holder;
-import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+// A template sits at the same relative path as the file it generates, so one
+// path names both. A slot is a whole-line comment -- // @UPPER_SNAKE@ -- which
+// keeps the templates parseable as Java; the whole line goes, indentation and
+// newline included, since the value brings its own.
+def SLOT = ~/(?m)^[^\S\r\n]*\/\/[^\S\r\n]*@([A-Z_]+)@[^\S\r\n]*\r?\n/
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ModModifiers {
-  private static final DeferredRegister<SpellModifier> REGISTER = DeferredRegister.create(RootsRegistries.Keys.SPELL_MODIFIERS, RootsAPI.MODID);
-  private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
-
-  public static final List<GroupId> GROUP_IDS = new ArrayList<>();
-
-"""
-
-groups.each { g ->
-  mods << "  public static final GroupId ${g.constant} = " +
-          (g.description ? "group(\"${g.name}\", true);\n" : "group(\"${g.name}\");\n")
-}
-mods << "\n"
-
-flat.each { rec ->
-  mods << "  public static final DeferredHolder<SpellModifier, SpellModifier> ${rec.constant} = " +
-          "REGISTER.register(\"${rec.id}\", () -> new SpellModifier(${ctorArgs(rec)}));\n"
+// Filling is strict in every direction: a slot the script does not supply, a
+// value with no slot to go in, and a token that is not on a line of its own
+// are all errors.
+def fill = { String rel, Map slots ->
+  def f = new File(tplRoot, rel)
+  if (!f.isFile()) throw new IllegalStateException("missing template: ${f.path}")
+  def seen = [] as Set
+  // replaceAll with a closure appends the result literally, so no escaping
+  def out = f.text.replaceAll(SLOT) { full, slot ->
+    if (!slots.containsKey(slot)) throw new IllegalStateException("${rel}: no value for @${slot}@")
+    seen << slot
+    slots[slot]
+  }
+  // a leftover token means it was written inline rather than as its own line
+  def stray = (out =~ /@[A-Z_]+@/)
+  if (stray) throw new IllegalStateException("${rel}: ${stray[0]} is not on a line of its own")
+  def missing = slots.keySet() - seen
+  if (missing) throw new IllegalStateException("${rel}: no ${missing.collect { "@$it@" }.join(', ')} slot")
+  out
 }
 
-mods << "\n  static {\n"
-if (aliasPairs) {
-  aliasPairs.each { a ->
-    mods << "    REGISTER.addAlias(RootsAPI.rl(\"$a.from\"), RootsAPI.rl(\"$a.to\"));\n"
-    if (a.item) mods << "    ITEMS.addAlias(RootsAPI.rl(\"$a.from\"), RootsAPI.rl(\"$a.to\"));\n"
-  }
-  mods << "\n"
-}
-flat.findAll { it.tokenItem }.each { mods << "    modifier(ITEMS, ModModifiers.${it.constant});\n" }
-mods << """  }
-
-  private static TokenItem.SpellModifierTokenItem modifier(Holder<SpellModifier> modifier) {
-    return new TokenItem.SpellModifierTokenItem(modifier.getKey(), new Item.Properties().stacksTo(1));
-  }
-
-  private static DeferredHolder<Item, TokenItem.SpellModifierTokenItem> modifier(DeferredRegister.Items reg, Holder<SpellModifier> modifier) {
-    return reg.register(modifier.getKey().location().getPath(), () -> modifier(modifier));
-  }
-
-  public static GroupId group(String name) {
-    return group(name, false);
-  }
-
-  public static GroupId group(String name, boolean useGroupDescription) {
-    var id = new GroupId(name, useGroupDescription);
-    GROUP_IDS.add(id);
-    return id;
-  }
-
-  public static void register(IEventBus bus) {
-    REGISTER.register(bus);
-    ITEMS.register(bus);
-  }
-}
-"""
-
-// ---------------------------------------------------------------- provider
-def prov = new StringBuilder()
-prov << HEADER << """package mysticmods.roots.gen.client;
-
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModModifiers;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-
-public final class RootsModifierModelProvider extends ItemModelProvider {
-  public RootsModifierModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-    super(output, RootsAPI.MODID, existingFileHelper);
-  }
-
-  @Override
-  protected void registerModels() {
-    for (SpellModifier modifier : RootsRegistries.SPELL_MODIFIERS) {
-      if (BuiltInRegistries.ITEM.get(modifier.builtInRegistryHolder().getKey().location()) == Items.AIR) {
-        throw new NullPointerException("Modifier " + modifier.builtInRegistryHolder().getKey()
-            .location() + " does not have an equivalent item!");
-      }
-    }
-
-"""
-
-flat.each { prov << "    modifier(ModModifiers.${it.constant}, ${iconExpr(it.icon)});\n" }
-
-prov << """  }
-
-  public ItemModelBuilder modifier(Holder<SpellModifier> itemHolder, String location) {
-    if (!location.contains(":")) {
-      return modifier(itemHolder, RootsAPI.rl(location));
-    } else {
-      return modifier(itemHolder, ResourceLocation.parse(location));
-    }
-  }
-
-  public ItemModelBuilder modifier(Holder<SpellModifier> itemHolder, ResourceLocation location) {
-    if (!location.getPath().startsWith("item")) {
-      location = location.withPrefix("item/");
-    }
-    return getBuilder(itemHolder.getKey().location().withPrefix("item/").toString())
-        .parent(new ModelFile.UncheckedModelFile("item/generated"))
-        .texture("layer0", location);
-  }
-
-  public ItemModelBuilder modifier(Holder<SpellModifier> itemHolder, Item icon) {
-    ResourceLocation item = itemHolder.getKey().location();
-
-    return getBuilder(item.withPrefix("item/").toString())
-        .parent(getExistingFile(icon.builtInRegistryHolder().getKey().location()));
-  }
-
-  @Override
-  public String getName() {
-    return "Roots Modifier Model Provider";
-  }
-}
-"""
-
-def write = { String rel, StringBuilder content ->
-  def f = new File(outRoot, rel); f.parentFile.mkdirs(); f.text = content.toString()
+def emit = { String rel, Map slots ->
+  def f = new File(outRoot, rel); f.parentFile.mkdirs(); f.text = fill(rel, slots)
   println "wrote ${f.path}"
 }
-write('mysticmods/roots/init/ModModifiers.java', mods)
-write('mysticmods/roots/gen/client/RootsModifierModelProvider.java', prov)
+
+// ---------------------------------------------------------------- ModModifiers
+def groupsBlock = block(groups.collect { g ->
+  "  public static final GroupId ${g.constant} = " +
+          (g.description ? "group(\"${g.name}\", true);" : "group(\"${g.name}\");")
+})
+
+def modifiersBlock = block(flat.collect { rec ->
+  "  public static final DeferredHolder<SpellModifier, SpellModifier> ${rec.constant} = " +
+          "REGISTER.register(\"${rec.id}\", () -> new SpellModifier(${ctorArgs(rec)}));"
+})
+
+def aliasBlock = block(aliasPairs.collectMany { a ->
+  def ls = ["    REGISTER.addAlias(RootsAPI.rl(\"$a.from\"), RootsAPI.rl(\"$a.to\"));"]
+  if (a.item) ls << "    ITEMS.addAlias(RootsAPI.rl(\"$a.from\"), RootsAPI.rl(\"$a.to\"));"
+  ls
+})
+if (aliasBlock) aliasBlock += '\n'
+
+def tokenBlock = block(flat.findAll { it.tokenItem }.collect {
+  "    modifier(ITEMS, ModModifiers.${it.constant});"
+})
+
+emit('mysticmods/roots/init/ModModifiers.java', [
+        HEADER     : HEADER,
+        GROUPS     : groupsBlock,
+        MODIFIERS  : modifiersBlock,
+        ALIASES    : aliasBlock,
+        TOKEN_ITEMS: tokenBlock,
+])
+
+// ---------------------------------------------------------------- provider
+def iconsBlock = block(flat.collect {
+  "    modifier(ModModifiers.${it.constant}, ${iconExpr(it.icon)});"
+})
+
+emit('mysticmods/roots/gen/client/RootsModifierModelProvider.java', [
+        HEADER: HEADER,
+        ICONS : iconsBlock,
+])
+
 println "${flat.size()} modifiers, ${groups.size()} groups"
