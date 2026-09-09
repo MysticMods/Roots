@@ -21,24 +21,13 @@ public abstract class TwoRadiusSpell extends Spell {
   protected BoundingBox boundingBox;
   protected AABB aabb;
 
-  @Deprecated
-  public TwoRadiusSpell(SpellType.Cast type, ChatFormatting color, CostInstance costs, SpellType.Primary chargeType, int color1, int color2) {
-    this(type, TextColor.fromLegacyFormat(color), costs, chargeType, color1, color2);
-  }
-
-  public TwoRadiusSpell(SpellType.Cast type, TextColor color, CostInstance costs, SpellType.Primary chargeType, int color1, int color2) {
-    super(type, color, costs, chargeType, color1, color2);
-  }
+  protected final PropertyHolder<Property.IntegerProperty> radiusZXProperty;
+  protected final PropertyHolder<Property.IntegerProperty> radiusYProperty;
 
   public TwoRadiusSpell(Spell.Properties properties) {
     super(properties);
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(getRadiusZXProperty());
-    properties.add(getRadiusYProperty());
+    this.radiusYProperty = properties.radiusYProperty;
+    this.radiusZXProperty = properties.radiusXProperty;
   }
 
   @Override
@@ -49,12 +38,13 @@ public abstract class TwoRadiusSpell extends Spell {
     this.radiusZX = properties.get(getRadiusZXProperty());
   }
 
-  @Override
-  public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
+  public final PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return radiusYProperty;
+  }
 
-  public abstract PropertyHolder<Property.IntegerProperty> getRadiusYProperty();
-
-  public abstract PropertyHolder<Property.IntegerProperty> getRadiusZXProperty();
+  public final PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
+    return radiusZXProperty;
+  }
 
   public int getRadiusX() {
     return radiusZX;

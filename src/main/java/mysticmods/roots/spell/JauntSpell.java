@@ -34,22 +34,6 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.JAUNT_COOLDOWN;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getMaxUseProperty() {
-    return ModSpells.JAUNT_MAX_USE;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.JAUNT_DISTANCE);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.jauntDistance = properties.get(ModSpells.JAUNT_DISTANCE);

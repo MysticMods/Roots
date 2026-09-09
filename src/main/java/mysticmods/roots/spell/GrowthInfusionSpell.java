@@ -7,8 +7,6 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -59,45 +57,16 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.GROWTH_INFUSION_COOLDOWN;
-  }
-
-  @Override
-  public PropertyHolder<Property.DoubleProperty> getReachProperty() {
-    return ModSpells.GROWTH_INFUSION_ADDED_REACH;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.RAMPANT_GROWTH_RADIUS_Y;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.RAMPANT_GROWTH_RADIUS_ZX;
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.rampantInterval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
-    this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);
+    this.rampantInterval = properties.get(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL);
+    this.count = properties.get(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT);
     this.growthInterval = properties.get(ModSpells.GROWTH_INFUSION_INTERVAL);
     this.boneMealCount = properties.get(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT);
     this.boneMealInterval = properties.get(ModSpells.GROWTH_INFUSION_BONE_MEAL_INTERVAL);
   }
 
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.RAMPANT_GROWTH_INTERVAL);
-    properties.add(ModSpells.RAMPANT_GROWTH_COUNT);
-    properties.add(ModSpells.GROWTH_INFUSION_INTERVAL);
-    properties.add(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT);
-    properties.add(ModSpells.GROWTH_INFUSION_BONE_MEAL_INTERVAL);
-  }
-
+  // TODO: Automate via properties
   @Override
   @Nullable
   public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance instance) {
@@ -193,7 +162,6 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       } else {
         costs.noCharge();
       }
-      return CastResult.tickFromCosting(cooldown, costs);
     } else {
       BlockHitResult result = pickBlock(pPlayer, instance);
       BlockPos pos = result.getBlockPos();
@@ -233,8 +201,8 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
           costs.noCharge();
         }
       }
-      return CastResult.tickFromCosting(cooldown, costs);
     }
+    return CastResult.tickFromCosting(cooldown, costs);
   }
 
   private static void tryMoisturizeGround(Level pLevel, Costing costs, ISpellInstance instance, BlockPos pos) {

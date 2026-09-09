@@ -47,29 +47,6 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.DISARM_COOLDOWN;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.DISARM_RADIUS_Y;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.DISARM_RADIUS_ZX;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> result) {
-    super.buildProperties(result);
-    result.add(ModSpells.DISARM_DROP_CHANCE);
-    result.add(ModSpells.DISARM_GLOW_DURATION);
-    result.add(ModSpells.DISARM_COUNT);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.dropChance = properties.get(ModSpells.DISARM_DROP_CHANCE);

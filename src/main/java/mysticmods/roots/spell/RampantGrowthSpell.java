@@ -36,40 +36,6 @@ public class RampantGrowthSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.RAMPANT_GROWTH_COOLDOWN_UNUSED;
-  }
-
-/*  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.RAMPANT_GROWTH_RADIUS_Y;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.RAMPANT_GROWTH_RADIUS_ZX;
-  }*/
-
-  @Override
-  public void initialize(Holder<Spell> holder) {
-    var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-/*    this.interval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
-    this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);*/
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-/*    properties.add(ModSpells.RAMPANT_GROWTH_INTERVAL);
-    properties.add(ModSpells.RAMPANT_GROWTH_COUNT);*/
-  }
-
-/*  @Override
-  public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance iSpellInstance) {
-    return ModAttachments.AOE_GROWTH_MODE.get();
-  }*/
-
-  @Override
   public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     return CastResult.nothing();
 /*    if (ticks % interval == 0) {

@@ -40,26 +40,12 @@ public class RoseThornsSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.ROSE_THORNS_COOLDOWN;
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     radiusZX = properties.get(ModSpells.ROSE_THORNS_RADIUS_ZX);
     radiusY = properties.get(ModSpells.ROSE_THORNS_RADIUS_Y);
     duration = properties.get(ModSpells.ROSE_THORNS_DURATION);
     damage = properties.get(ModSpells.ROSE_THORNS_DAMAGE);
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.ROSE_THORNS_RADIUS_ZX);
-    properties.add(ModSpells.ROSE_THORNS_RADIUS_Y);
-    properties.add(ModSpells.ROSE_THORNS_DURATION);
-    properties.add(ModSpells.ROSE_THORNS_DAMAGE);
   }
 
   @Override

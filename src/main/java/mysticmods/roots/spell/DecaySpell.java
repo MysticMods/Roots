@@ -34,29 +34,6 @@ public class DecaySpell extends TwoRadiusSpell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.DECAY_COOLDOWN;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.DECAY_RADIUS_Y;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.DECAY_RADIUS_ZX;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.DECAY_COUNT);
-    properties.add(ModSpells.DECAY_COOLDOWN_BOSS_MODIFIER);
-    properties.add(ModSpells.DECAY_COOLDOWN_HEART_MODIFIER);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     var data = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.count = data.get(ModSpells.DECAY_COUNT);

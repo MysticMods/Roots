@@ -38,18 +38,6 @@ public class SylvanLightSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.SYLVAN_LIGHT_COOLDOWN;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> result) {
-    super.buildProperties(result);
-    result.add(ModSpells.SYLVAN_LIGHT_MAX_DISTANCE);
-    result.add(ModSpells.SYLVAN_LIGHT_DECAY);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.maxDistance = properties.get(ModSpells.SYLVAN_LIGHT_MAX_DISTANCE);

@@ -35,28 +35,6 @@ public class ExtensionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.EXTENSION_COOLDOWN;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.EXTENSION_RADIUS_Y;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.EXTENSION_RADIUS_ZX;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> result) {
-    super.buildProperties(result);
-    result.add(ModSpells.EXTENSION_NIGHT_VISION_DURATION);
-    result.add(ModSpells.EXTENSION_SENSE_DANGER_DURATION);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.nightVisionDuration = properties.get(ModSpells.EXTENSION_NIGHT_VISION_DURATION);

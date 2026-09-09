@@ -29,21 +29,21 @@
         }
       },
       {
-        "id": "roots:acid_cloud/damage",
-        "value": {
-          "type": "roots:float_property",
-          "comment": "How much damage the spell will cause",
-          "default_value": 2.0,
-          "value": 2.0
-        }
-      },
-      {
         "id": "roots:acid_cloud/count",
         "value": {
           "type": "roots:integer_property",
           "comment": "How many entities or blocks the spell will affect per interval",
           "default_value": 1,
           "value": 1
+        }
+      },
+      {
+        "id": "roots:acid_cloud/damage",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "How much damage the spell will cause",
+          "default_value": 2.0,
+          "value": 2.0
         }
       },
       {
@@ -56,21 +56,21 @@
         }
       },
       {
-        "id": "roots:acid_cloud/slow_duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The number of ticks for which damaged mobs are slowed for when the slowness modifier is enabled.",
-          "default_value": 60,
-          "value": 60
-        }
-      },
-      {
         "id": "roots:acid_cloud/slow_amplifier",
         "value": {
           "type": "roots:integer_property",
           "comment": "The amplifier applied to the slowness effect when the slowness modifier is enabled.",
           "default_value": 0,
           "value": 0
+        }
+      },
+      {
+        "id": "roots:acid_cloud/slow_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of ticks for which damaged mobs are slowed for when the slowness modifier is enabled.",
+          "default_value": 60,
+          "value": 60
         }
       },
       {
@@ -130,21 +130,21 @@
         }
       },
       {
-        "id": "roots:aqua_bubble/duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long the spell will last",
-          "default_value": 1800,
-          "value": 1800
-        }
-      },
-      {
         "id": "roots:aqua_bubble/absorption",
         "value": {
           "type": "roots:integer_property",
           "comment": "The amount of damage absorbed by the aqua bubble, 1 equals half a heart.",
           "default_value": 4,
           "value": 4
+        }
+      },
+      {
+        "id": "roots:aqua_bubble/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 1800,
+          "value": 1800
         }
       },
       {
@@ -354,6 +354,15 @@
         }
       },
       {
+        "id": "roots:disarm/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of entities that can be disarmed per cast.",
+          "default_value": 2,
+          "value": 2
+        }
+      },
+      {
         "id": "roots:disarm/drop_chance",
         "value": {
           "type": "roots:float_property",
@@ -369,15 +378,6 @@
           "comment": "The duration of the glow effect in ticks on entities that are disarmed.",
           "default_value": 100,
           "value": 100
-        }
-      },
-      {
-        "id": "roots:disarm/count",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The number of entities that can be disarmed per cast.",
-          "default_value": 2,
-          "value": 2
         }
       }
     ],
@@ -694,21 +694,21 @@
         }
       },
       {
-        "id": "roots:light_drifter/duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long the spell will last",
-          "default_value": 600,
-          "value": 600
-        }
-      },
-      {
         "id": "roots:light_drifter/distance",
         "value": {
           "type": "roots:integer_property",
           "comment": "The maximum distance from the player that the light drifter can travel before being recalled.",
           "default_value": 2500,
           "value": 2500
+        }
+      },
+      {
+        "id": "roots:light_drifter/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 600,
+          "value": 600
         }
       }
     ],
@@ -812,6 +812,24 @@
         }
       },
       {
+        "id": "roots:rose_thorns/damage",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "How much damage the spell will cause",
+          "default_value": 3.5,
+          "value": 3.5
+        }
+      },
+      {
+        "id": "roots:rose_thorns/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 360,
+          "value": 360
+        }
+      },
+      {
         "id": "roots:rose_thorns/radius_zx",
         "value": {
           "type": "roots:double_property",
@@ -827,24 +845,6 @@
           "comment": "The radius of the rose thorns effect in the Y axis.",
           "default_value": 1.0,
           "value": 1.0
-        }
-      },
-      {
-        "id": "roots:rose_thorns/duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long the spell will last",
-          "default_value": 360,
-          "value": 360
-        }
-      },
-      {
-        "id": "roots:rose_thorns/damage",
-        "value": {
-          "type": "roots:float_property",
-          "comment": "How much damage the spell will cause",
-          "default_value": 3.5,
-          "value": 3.5
         }
       }
     ],
@@ -955,21 +955,21 @@
         }
       },
       {
-        "id": "roots:sylvan_light/max_distance",
-        "value": {
-          "type": "roots:double_property",
-          "comment": "The maximum distance a sylvan light can be placed from the caster",
-          "default_value": 10.0,
-          "value": 10.0
-        }
-      },
-      {
         "id": "roots:sylvan_light/decay",
         "value": {
           "type": "roots:integer_property",
           "comment": "The amount of time before a sylvan light decays (in ticks) when the decay modifier is enabled.",
           "default_value": 1200,
           "value": 1200
+        }
+      },
+      {
+        "id": "roots:sylvan_light/max_distance",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The maximum distance a sylvan light can be placed from the caster",
+          "default_value": 10.0,
+          "value": 10.0
         }
       }
     ]

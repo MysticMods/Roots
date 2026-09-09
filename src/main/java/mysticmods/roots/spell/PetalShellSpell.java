@@ -32,18 +32,6 @@ public class PetalShellSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.PETAL_SHELL_COOLDOWN;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.PETAL_SHELL_COUNT);
-    properties.add(ModSpells.PETAL_SHELL_DURATION);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.count = properties.get(ModSpells.PETAL_SHELL_COUNT);

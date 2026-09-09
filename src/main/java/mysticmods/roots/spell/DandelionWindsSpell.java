@@ -36,24 +36,6 @@ public class DandelionWindsSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.DANDELION_WINDS_COOLDOWN;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> result) {
-    super.buildProperties(result);
-    result.add(ModSpells.DANDELION_WINDS_DURATION_INCREASE);
-    result.add(ModSpells.DANDELION_WINDS_DURATION);
-    result.add(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE);
-    result.add(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE);
-    result.add(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE);
-    result.add(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN);
-    result.add(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE);
-    result.add(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap data = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.deflectionChance = data.get(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE);
@@ -83,7 +65,6 @@ public class DandelionWindsSpell extends Spell {
     return CastResult.success(cooldown);
   }
 
-  @SuppressWarnings("removal")
   @Override
   public Component[] createExtendedDescriptionComponents() {
     return new Component[]{
@@ -93,7 +74,6 @@ public class DandelionWindsSpell extends Spell {
     };
   }
 
-  @SuppressWarnings("removal")
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     if (spellModifier.is(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_DURATION)) {

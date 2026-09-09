@@ -38,18 +38,6 @@ public class SaturateSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.SATURATE_COOLDOWN;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> result) {
-    super.buildProperties(result);
-    result.add(ModSpells.SATURATE_FOOD_MULTIPLIER);
-    result.add(ModSpells.SATURATE_SATURATION_MULTIPLIER);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.saturationMultiplier = properties.get(ModSpells.SATURATE_SATURATION_MULTIPLIER);

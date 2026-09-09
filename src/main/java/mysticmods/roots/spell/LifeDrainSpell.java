@@ -45,21 +45,6 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.LIFE_DRAIN_COOLDOWN;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.LIFE_DRAIN_DISTANCE);
-    properties.add(ModSpells.LIFE_DRAIN_ANGLE);
-    properties.add(ModSpells.LIFE_DRAIN_DAMAGE);
-    properties.add(ModSpells.LIFE_DRAIN_HEAL);
-    properties.add(ModSpells.LIFE_DRAIN_COUNT);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.distance = properties.get(ModSpells.LIFE_DRAIN_DISTANCE);

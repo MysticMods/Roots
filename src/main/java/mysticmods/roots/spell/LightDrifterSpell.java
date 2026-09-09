@@ -35,22 +35,10 @@ public class LightDrifterSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.LIGHT_DRIFTER_COOLDOWN;
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     var map = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.duration = map.get(ModSpells.LIGHT_DRIFTER_DURATION);
     this.maxDistance = map.get(ModSpells.LIGHT_DRIFTER_DISTANCE);
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.LIGHT_DRIFTER_DURATION);
-    properties.add(ModSpells.LIGHT_DRIFTER_DISTANCE);
   }
 
   public static void stopPlayerMovement(Player pPlayer) {

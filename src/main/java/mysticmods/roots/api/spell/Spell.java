@@ -57,6 +57,12 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
+  protected final PropertyHolder<Property.IntegerProperty> cooldownProperty;
+  protected final PropertyHolder<Property.DoubleProperty> reachProperty;
+  protected final PropertyHolder<Property.IntegerProperty> maxUseProperty;
+
+  protected final List<PropertyHolder<?>> allProperties;
+
   protected final List<ResourceKey<SpellModifier>> resolutionOrder;
   protected final ResourceKey<SpellModifier> onlyModifier;
   protected final Map<ResourceKey<SpellModifier>, ModifierOverride> overrides = new HashMap<>();
@@ -81,28 +87,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   protected String descriptionTooltipId;
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
-
-  @Deprecated
-  public Spell(SpellType.Cast type, ChatFormatting color, CostInstance defaultCosts, SpellType.Primary chargeType, int color1, int color2) {
-    this(type, TextColor.fromLegacyFormat(color), defaultCosts, chargeType, color1, color2);
-  }
-
-  public Spell(SpellType.Cast type, TextColor textColor, CostInstance defaultCosts, SpellType.Primary chargeType, int color1, int color2) {
-    this.type = type;
-    this.textColor = textColor;
-    this.defaultCosts = defaultCosts;
-    this.chargeType = chargeType;
-    this.color1 = color1;
-    this.color2 = color2;
-    this.components = DataComponentMap.builder().build();
-
-    this.hasPredicates = false;
-    this.hasDescriptionOverride = false;
-    this.hasColorOverride = false;
-    this.hasTextColorOverride = false;
-    this.onlyModifier = null;
-    this.resolutionOrder = List.of();
-  }
 
   public Spell(Properties properties) {
     this.type = properties.castType;
@@ -134,6 +118,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       ModifierOverride overrides = new ModifierOverride(properties.textColorMap.getOrDefault(modifier, null), properties.color1Map.getOrDefault(modifier, -1), properties.color2Map.getOrDefault(modifier, -1), properties.predicateMap.getOrDefault(modifier, -1), properties.descriptionIdMap.getOrDefault(modifier, null));
       this.overrides.put(modifier, overrides);
     }
+
+    this.reachProperty = properties.reachProperty;
+    this.cooldownProperty = properties.cooldownProperty;
+    this.maxUseProperty = properties.maxUseProperty;
+    this.allProperties = new ArrayList<>(properties.allProperties);
   }
 
   public Holder<Spell> builtInRegistryHolder() {
@@ -309,14 +298,16 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return chargeType;
   }
 
-  public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
-
-  public PropertyHolder<Property.DoubleProperty> getReachProperty() {
-    return null;
+  public final PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return cooldownProperty;
   }
 
-  public PropertyHolder<Property.IntegerProperty> getMaxUseProperty() {
-    return null;
+  public final PropertyHolder<Property.DoubleProperty> getReachProperty() {
+    return reachProperty;
+  }
+
+  public final PropertyHolder<Property.IntegerProperty> getMaxUseProperty() {
+    return maxUseProperty;
   }
 
   public int getCooldown() {
@@ -328,15 +319,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public void buildProperties(List<PropertyHolder<?>> properties) {
-    if (getCooldownProperty() != null) {
-      properties.add(getCooldownProperty());
-    }
-    if (getReachProperty() != null) {
-      properties.add(getReachProperty());
-    }
-    if (getMaxUseProperty() != null) {
-      properties.add(getMaxUseProperty());
-    }
+    properties.addAll(allProperties);
   }
 
   public List<PropertyHolder<?>> getProperties() {
@@ -356,7 +339,9 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
   }
 
-  public abstract void initialize(Holder<Spell> holder);
+  public void initialize(Holder<Spell> holder) {
+
+  }
 
   @Override
   public void init(Holder<Spell> holder) {
@@ -365,7 +350,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     initialize(holder);
   }
 
-  public ItemStack getSpellIcon (@Nullable ISpellInstance instance) {
+  public ItemStack getSpellIcon(@Nullable ISpellInstance instance) {
     if (instance == null) {
       return getSpellIcon(this.simple());
     }
@@ -546,8 +531,87 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     Object2FloatMap<ResourceKey<SpellModifier>> predicateMap = new Object2FloatOpenHashMap<>();
     Map<ResourceKey<SpellModifier>, String> descriptionIdMap = new HashMap<>();
 
+    PropertyHolder<Property.IntegerProperty> cooldownProperty;
+    PropertyHolder<Property.DoubleProperty> reachProperty = null;
+    PropertyHolder<Property.IntegerProperty> maxUseProperty = null;
+
+    final List<PropertyHolder<?>> allProperties = new ArrayList<>();
+
+    public PropertyHolder<Property.IntegerProperty> radiusXProperty = null;
+    public PropertyHolder<Property.IntegerProperty> radiusYProperty = null;
+    public PropertyHolder<Property.IntegerProperty> radiusZProperty = null;
+
+    public Properties radiusY (PropertyHolder<Property.IntegerProperty> property) {
+      this.radiusYProperty = property;
+      if (property != null && !this.allProperties.contains(property)) {
+        this.allProperties.add(property);
+      }
+      return this;
+    }
+
+    public Properties radiusX (PropertyHolder<Property.IntegerProperty> property) {
+      this.radiusXProperty = property;
+      if (property != null && !this.allProperties.contains(property)) {
+        this.allProperties.add(property);
+      }
+      return this;
+    }
+
+    public Properties radiusZ (PropertyHolder<Property.IntegerProperty> property) {
+      this.radiusZProperty = property;
+      if (property != null && !this.allProperties.contains(property)) {
+        this.allProperties.add(property);
+      }
+      return this;
+    }
+
+    public Properties radius (PropertyHolder<Property.IntegerProperty> radiusX, PropertyHolder<Property.IntegerProperty> radiusY, PropertyHolder<Property.IntegerProperty> radiusZ) {
+      return radiusX(radiusX).radiusY(radiusY).radiusZ(radiusZ);
+    }
+
+    public Properties radius (PropertyHolder<Property.IntegerProperty> radiusZX, PropertyHolder<Property.IntegerProperty> radiusY) {
+      return radiusX(radiusZX).radiusY(radiusY).radiusZ(radiusZX);
+    }
+
+    public Properties radius (PropertyHolder<Property.IntegerProperty> radius) {
+      return radius(radius, radius, radius);
+    }
+
+
     public Properties type(SpellType.Cast type) {
       this.castType = type;
+      return this;
+    }
+
+    public Properties property (PropertyHolder<?> property) {
+      this.allProperties.add(property);
+      return this;
+    }
+
+    public Properties properties (PropertyHolder<?> ... properties) {
+      this.allProperties.addAll(Arrays.asList(properties));
+      return this;
+    }
+
+    public Properties cooldown (PropertyHolder<Property.IntegerProperty> property) {
+      this.cooldownProperty = property;
+      allProperties.add(property);
+      return this;
+    }
+
+    public Properties reach (PropertyHolder<Property.DoubleProperty> property) {
+      this.reachProperty = property;
+      if (property != null) {
+        allProperties.add(property);
+      }
+      return this;
+    }
+
+    public Properties maxUse (PropertyHolder<Property.IntegerProperty> property) {
+      this.maxUseProperty = property;
+      if (property != null) {
+        allProperties.add(property);
+      }
       return this;
     }
 
@@ -655,6 +719,9 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       }
       if (this.color1 == -1 && this.color2 == -1) {
         throw new IllegalStateException("Invalid colors for SpellProperties");
+      }
+      if (this.cooldownProperty == null) {
+        throw new IllegalStateException("Invalid cooldown property: `cooldown` property must be supplied.");
       }
       return this;
     }

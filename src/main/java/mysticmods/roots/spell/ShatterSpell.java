@@ -3,10 +3,8 @@ package mysticmods.roots.spell;
 import mysticmods.roots.action.ShatterBlockAction;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -14,11 +12,9 @@ import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModModifiers;
-import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.lightning.SemiDynamicLightningFXPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,22 +43,6 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.SHATTER_COOLDOWN;
-  }
-
-  @Override
-  public void initialize(Holder<Spell> holder) {
-    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-  }
-
-  private int[] getAsymmetricOffsets(int value) {
-    int right = (value + 1) / 2;
-    int left = (value + 1) / 2;
-    return new int[]{value, value};
-  }
-
-  @Override
   public Map<BlockPos, BlockState> getAffectedBlocks(Level level, Player player, ISpellInstance spell, ItemStack stack, BlockPos pos, BlockState blockState, BlockHitResult rayTraceResult) {
     Map<BlockPos, BlockState> result = new HashMap<>();
 
@@ -81,19 +61,16 @@ public class ShatterSpell extends Spell {
     BlockPos stop = pos;
 
     if (width > 0) {
-      int[] widthOffsets = getAsymmetricOffsets(width);
-      start = start.relative(widthDir, -widthOffsets[0]);
-      stop = stop.relative(widthDir, widthOffsets[1]);
+      start = start.relative(widthDir, -width);
+      stop = stop.relative(widthDir, width);
     }
     if (height > 0) {
-      int[] heightOffsets = getAsymmetricOffsets(height);
-      start = start.relative(heightDir, -heightOffsets[0]);
-      stop = stop.relative(heightDir, heightOffsets[1]);
+      start = start.relative(heightDir, -height);
+      stop = stop.relative(heightDir, height);
     }
     if (depth > 0) {
-      int[] depthOffsets = getAsymmetricOffsets(depth);
-      start = start.relative(depthDir, -depthOffsets[0]);
-      stop = stop.relative(depthDir, depthOffsets[1]);
+      start = start.relative(depthDir, -depth);
+      stop = stop.relative(depthDir, depth);
     }
 
     for (BlockPos blockPos : BlockPos.betweenClosed(start, stop)) {

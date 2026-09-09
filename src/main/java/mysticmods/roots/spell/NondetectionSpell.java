@@ -28,20 +28,9 @@ public class NondetectionSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.NONDETECTION_COOLDOWN;
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.potionDuration = properties.get(ModSpells.NONDETECTION_DURATION);
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.NONDETECTION_DURATION);
   }
 
   @Override

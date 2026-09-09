@@ -40,21 +40,6 @@ public class SkySoarerSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.SKY_SOARER_COOLDOWN;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.SKY_SOARER_AMPLIFIER);
-    properties.add(ModSpells.SKY_SOARER_AMPLIFIER_INCREASE);
-    properties.add(ModSpells.SKY_SOARER_DURATION);
-    properties.add(ModSpells.SKY_SOARER_DURATION_INCREASE);
-    properties.add(ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.amplifier = properties.get(ModSpells.SKY_SOARER_AMPLIFIER);

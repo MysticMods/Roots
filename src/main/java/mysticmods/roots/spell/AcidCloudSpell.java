@@ -44,28 +44,6 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.ACID_CLOUD_COOLDOWN;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.ACID_CLOUD_RADIUS_Y;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.ACID_CLOUD_RADIUS_ZX;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.addAll(List.of(ModSpells.ACID_CLOUD_DAMAGE, ModSpells.ACID_CLOUD_COUNT, ModSpells.ACID_CLOUD_FIRE_TICKS, ModSpells.ACID_CLOUD_SLOW_DURATION, ModSpells.ACID_CLOUD_SLOW_AMPLIFIER));
-    properties.addAll(List.of(ModSpells.TEMPORAL_MORASS_AMPLIFIER, ModSpells.TEMPORAL_MORASS_COOLDOWN, ModSpells.TEMPORAL_MORASS_DURATION, ModSpells.TEMPORAL_MORASS_RADIUS_Y, ModSpells.TEMPORAL_MORASS_RADIUS_ZX));
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.damage = properties.get(ModSpells.ACID_CLOUD_DAMAGE);

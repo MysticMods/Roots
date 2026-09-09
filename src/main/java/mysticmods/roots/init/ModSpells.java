@@ -1,7 +1,7 @@
 package mysticmods.roots.init;
 
-import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
@@ -32,6 +32,9 @@ public class ModSpells {
       .color(0x50a028, 0x405f20)
       .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)))
+      .cooldown(ModSpells.ACID_CLOUD_COOLDOWN)
+      .radius(ModSpells.ACID_CLOUD_RADIUS_ZX, ModSpells.ACID_CLOUD_RADIUS_Y)
+      .properties(ModSpells.ACID_CLOUD_COUNT, ModSpells.ACID_CLOUD_DAMAGE, ModSpells.ACID_CLOUD_FIRE_TICKS, ModSpells.ACID_CLOUD_SLOW_AMPLIFIER, ModSpells.ACID_CLOUD_SLOW_DURATION, ModSpells.TEMPORAL_MORASS_AMPLIFIER, ModSpells.TEMPORAL_MORASS_COOLDOWN, ModSpells.TEMPORAL_MORASS_DURATION, ModSpells.TEMPORAL_MORASS_RADIUS_Y, ModSpells.TEMPORAL_MORASS_RADIUS_ZX)
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COOLDOWN = P.recordProperty("acid_cloud/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
@@ -54,7 +57,9 @@ public class ModSpells {
       .color(0xffffff, 0xc0c0c0)
       .textColor(ChatFormatting.DARK_PURPLE)
       .costs(() -> CostInstance.EMPTY)
-      .build()));
+      .cooldown(ModSpells.EMPTY_COOLDOWN)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> EMPTY_COOLDOWN = P.recordProperty("empty/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN + " (this spell is unused)"));
 
   // Aqua Bubble (1200 cooldown)
@@ -66,6 +71,8 @@ public class ModSpells {
           .textColor(ChatFormatting.AQUA)
           .charge(SpellType.Primary.INSTANCE)
           .cost(() -> ModHerbs.DEWGONIA, SpellCosts.BASE_0250)
+          .cooldown(ModSpells.AQUA_BUBBLE_COOLDOWN)
+          .properties(ModSpells.AQUA_BUBBLE_ABSORPTION, ModSpells.AQUA_BUBBLE_DURATION, ModSpells.AQUA_BUBBLE_FIRE_REDUCTION, ModSpells.AQUA_BUBBLE_LAVA_REDUCTION)
           .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_COOLDOWN = P.recordProperty("aqua_bubble/cooldown", Property.ofInt(1200, SpellProperties.COOLDOWN));
@@ -82,7 +89,10 @@ public class ModSpells {
       .color(0xf2ee96, 0x96dbf2)
       .textColor(ChatFormatting.DARK_PURPLE)
       .cost(() -> ModHerbs.MOONGLOW, SpellCosts.BASE_0250)
-      .build()));
+      .cooldown(ModSpells.LIGHT_DRIFTER_COOLDOWN)
+      .properties(ModSpells.LIGHT_DRIFTER_DISTANCE, ModSpells.LIGHT_DRIFTER_DURATION)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_COOLDOWN = P.recordProperty("light_drifter/cooldown", Property.ofInt(600, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_DURATION = P.recordProperty("light_drifter/duration", Property.ofInt(20 * 30, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_DISTANCE = P.recordProperty("light_drifter/distance", Property.ofInt(Mth.square(50), "The maximum distance from the player that the light drifter can travel before being recalled."));
@@ -95,7 +105,10 @@ public class ModSpells {
       .color(0xdee129, 0xe62222)
       .textColor(ChatFormatting.YELLOW)
       .cost(() -> ModHerbs.SPIRITLEAF, SpellCosts.BASE_0016)
-      .build()));
+      .cooldown(ModSpells.MAGNETISM_COOLDOWN)
+      .radius(ModSpells.MAGNETISM_RADIUS_ZX, ModSpells.MAGNETISM_RADIUS_Y)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = P.recordProperty("magnetism/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_ZX = P.recordProperty("magnetism/radius_zx", Property.ofInt(20, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_Y = P.recordProperty("magnetism/radius_y", Property.ofInt(10, SpellProperties.RADIUS_Y));
@@ -108,6 +121,8 @@ public class ModSpells {
       .color(0xffff20, 0xffb020)
       .textColor(ChatFormatting.YELLOW)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0125)))
+      .cooldown(ModSpells.DANDELION_WINDS_COOLDOWN)
+      .properties(ModSpells.DANDELION_WINDS_DURATION_INCREASE, ModSpells.DANDELION_WINDS_DURATION, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE, ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN)
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_DURATION = P.recordProperty("dandelion_winds/duration", Property.ofInt(20 * 60, SpellProperties.DURATION));
@@ -128,7 +143,11 @@ public class ModSpells {
       .color(0x2d8115, 0xc92b5f)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250)))
       .textColor(ChatFormatting.DARK_GREEN)
-      .build()));
+      .cooldown(ModSpells.DECAY_COOLDOWN)
+      .radius(ModSpells.DECAY_RADIUS_ZX, ModSpells.DECAY_RADIUS_Y)
+      .properties(ModSpells.DECAY_COUNT, ModSpells.DECAY_COOLDOWN_BOSS_MODIFIER, ModSpells.DECAY_COOLDOWN_HEART_MODIFIER)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_COOLDOWN = P.recordProperty("decay/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_ZX = P.recordProperty("decay/radius_zx", Property.ofInt(3, "Radius"));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_Y = P.recordProperty("decay/radius_y", Property.ofInt(2, "Radius"));
@@ -144,7 +163,10 @@ public class ModSpells {
       .color(0xb8e82a, 0xbe20a8)
       .textColor(ChatFormatting.GREEN)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)))
-      .build()));
+      .cooldown(ModSpells.DESATURATE_COOLDOWN)
+      .properties(ModSpells.DESATURATE_MULTIPLIER)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> DESATURATE_COOLDOWN = P.recordProperty("desaturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.FloatProperty> DESATURATE_MULTIPLIER = P.recordProperty("desaturate/multiplier", Property.ofFloat(0.7f, "Amount of health restored per point of food"));
 
@@ -156,7 +178,11 @@ public class ModSpells {
       .color(0xe134f6, 0x05e82a)
       .type(SpellType.Cast.INSTANT)
       .charge(SpellType.Primary.INSTANCE)
-      .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)))));
+      .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)))
+      .cooldown(ModSpells.SATURATE_COOLDOWN)
+      .properties(ModSpells.SATURATE_FOOD_MULTIPLIER, ModSpells.SATURATE_SATURATION_MULTIPLIER)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> SATURATE_COOLDOWN = P.recordProperty("saturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.FloatProperty> SATURATE_SATURATION_MULTIPLIER = P.recordProperty("saturate/saturation_multiplier", Property.ofFloat(0.5f, "Amount of saturation give per point of saturation."));
   public static final PropertyHolder<Property.FloatProperty> SATURATE_FOOD_MULTIPLIER = P.recordProperty("saturate/food_multiplier", Property.ofFloat(0.5f, "Amount of food restored per point of food."));
@@ -169,7 +195,12 @@ public class ModSpells {
       .textColor(ChatFormatting.AQUA)
       .color(0x3a3a3a, 0x7a0000)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0125), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0125
-      ))).build()));
+      )))
+      .cooldown(ModSpells.DISARM_COOLDOWN)
+      .radius(ModSpells.DISARM_RADIUS_ZX, ModSpells.DISARM_RADIUS_Y)
+      .properties(ModSpells.DISARM_COUNT, ModSpells.DISARM_DROP_CHANCE, ModSpells.DISARM_GLOW_DURATION)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_COOLDOWN = P.recordProperty("disarm/cooldown", Property.ofInt(60, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = P.recordProperty("disarm/radius_zx", Property.ofInt(9, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_Y = P.recordProperty("disarm/radius_y", Property.ofInt(9, SpellProperties.RADIUS_Y));
@@ -185,7 +216,12 @@ public class ModSpells {
       .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.COMPLEX_1750), Cost.add(ModHerbs.WILDROOT, SpellCosts.COMPLEX_1750)))
       .textColor(ChatFormatting.BLUE)
-      .color(0xcde645, 0xb872b1).build()));
+      .color(0xcde645, 0xb872b1)
+      .cooldown(ModSpells.EXTENSION_COOLDOWN)
+      .radius(ModSpells.EXTENSION_RADIUS_ZX, ModSpells.EXTENSION_RADIUS_Y)
+      .properties(ModSpells.EXTENSION_NIGHT_VISION_DURATION, ModSpells.EXTENSION_SENSE_DANGER_DURATION)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_COOLDOWN = P.recordProperty("extension/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_NIGHT_VISION_DURATION = P.recordProperty("extension/night_vision_duration", Property.ofInt(4 * 60 * 20, "The duration of the night vision effect in ticks."));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_SENSE_DANGER_DURATION = P.recordProperty("extension/sense_danger_duration", Property.ofInt(4 * 60 * 20, "The duration of the sense danger effect in ticks."));
@@ -200,7 +236,10 @@ public class ModSpells {
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)))
       .color(0x8f32b8, 0x4c94ed)
       .textColor(ChatFormatting.DARK_AQUA)
-      .build()));
+      .cooldown(ModSpells.NONDETECTION_COOLDOWN)
+      .properties(ModSpells.NONDETECTION_DURATION)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_COOLDOWN = P.recordProperty("nondetection/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_DURATION = P.recordProperty("nondetection/duration", Property.ofInt(45 * 60, "The duration of the nondetection effect in ticks."));
 
@@ -212,7 +251,10 @@ public class ModSpells {
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.COMPLEX_0625), Cost.add(ModHerbs.PERESKIA, SpellCosts.COMPLEX_0625)))
       .color(0xf7f6d2, 0xe351f4)
       .textColor(ChatFormatting.LIGHT_PURPLE)
-      .build()));
+      .cooldown(ModSpells.SYLVAN_LIGHT_COOLDOWN)
+      .properties(ModSpells.SYLVAN_LIGHT_DECAY, ModSpells.SYLVAN_LIGHT_MAX_DISTANCE)
+      .build()
+  ));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("fey_light"), RootsAPI.rl("sylvan_light"));
@@ -231,7 +273,10 @@ public class ModSpells {
       .charge(SpellType.Primary.OPERATION)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)))
       .color(0x802020, 0x202020)
-      .build()));
+      .cooldown(ModSpells.GEAS_COOLDOWN)
+      .properties(ModSpells.GEAS_COUNT, ModSpells.GEAS_DURATION, ModSpells.GEAS_MAX_COOLDOWN, ModSpells.GEAS_MAX_HEALTH)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_COOLDOWN = P.recordProperty("geas/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_MAX_COOLDOWN = P.recordProperty("geas/max_cooldown", Property.ofInt(80 * 10, "The maximum cooldown for the geas spell when scaling based off maximum health."));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_DURATION = P.recordProperty("geas/duration", Property.ofInt(400, SpellProperties.DURATION));
@@ -261,15 +306,19 @@ public class ModSpells {
           .id(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), Spells.RAMPANT_GROWTH.location())
           .predicate(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), 0.5f)
           .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
-          .build()));
+          .cooldown(ModSpells.GROWTH_INFUSION_COOLDOWN)
+          .reach(ModSpells.GROWTH_INFUSION_ADDED_REACH)
+          .radius(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_ZX, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
+          .properties(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT, ModSpells.GROWTH_INFUSION_INTERVAL, ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT, ModSpells.GROWTH_INFUSION_BONE_MEAL_INTERVAL)
+          .build()
+      ));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = P.recordProperty("growth_infusion/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> GROWTH_INFUSION_ADDED_REACH = P.recordProperty("growth_infusion/added_reach", Property.ofDouble(0.0, SpellProperties.ADDED_REACH));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_INTERVAL = P.recordProperty("growth_infusion/interval", Property.ofInt(1, SpellProperties.INTERVAL));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN_UNUSED = P.recordProperty("rampant_growth/cooldown_unused", Property.ofInt(0, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_ZX = P.recordProperty("rampant_growth/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_INTERVAL = P.recordProperty("rampant_growth/interval", Property.ofInt(2, "The interval between growth ticks in ticks."));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(9, SpellProperties.COUNT));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_ZX = P.recordProperty("rampant_growth/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL = P.recordProperty("rampant_growth/interval", Property.ofInt(2, "The interval between growth ticks in ticks."));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(9, SpellProperties.COUNT));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_BONE_MEAL_COUNT = P.recordProperty("growth_infusion/bone_meal_count", Property.ofInt(1, "The number of stacks of bone meal to be applied per interval when the fertilizer modifier is active."));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_BONE_MEAL_INTERVAL = P.recordProperty("growth_infusion/bone_meal_interval", Property.ofInt(10, "The interval between bone meal applications in ticks."));
 
@@ -284,7 +333,10 @@ public class ModSpells {
           .cost(() -> ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)
           .textColor(ChatFormatting.YELLOW)
           .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
-          .build()));
+          .cooldown(ModSpells.RAMPANT_GROWTH_COOLDOWN_UNUSED)
+          .build()
+      ));
+  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN_UNUSED = P.recordProperty("rampant_growth/cooldown_unused", Property.ofInt(0, SpellProperties.COOLDOWN));
 
   // Harvest (25 cooldown)
   public static final DeferredHolder<Spell, HarvestSpell> HARVEST = REGISTER.register(Spells.HARVEST.location()
@@ -294,6 +346,8 @@ public class ModSpells {
       .color(0x39fd1c, 0xc5e91c)
       .cost(() -> ModHerbs.STALICRIPE, SpellCosts.BASE_0031)
       .component(ModAttachments.HARVEST_MODE, HarvestMode.EVERYTHING)
+      .cooldown(ModSpells.HARVEST_COOLDOWN)
+      .radius(ModSpells.HARVEST_RADIUS_ZX, ModSpells.HARVEST_RADIUS_Y)
       .build()
   ));
 
@@ -309,7 +363,10 @@ public class ModSpells {
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125)))
       .color(0x902040, 0xffc4f0)
       .textColor(ChatFormatting.DARK_PURPLE)
-      .build()));
+      .cooldown(ModSpells.LIFE_DRAIN_COOLDOWN)
+      .properties(ModSpells.LIFE_DRAIN_DISTANCE, ModSpells.LIFE_DRAIN_ANGLE, ModSpells.LIFE_DRAIN_DAMAGE, ModSpells.LIFE_DRAIN_HEAL, ModSpells.LIFE_DRAIN_COUNT)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_DISTANCE = P.recordProperty("life_drain/distance", Property.ofDouble(8.0, "The range in blocks for the life drain search."));
   public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_ANGLE = P.recordProperty("life_drain/angle", Property.ofInt(80, "The angle in degrees for the life drain search, centered on the player's view vector."));
@@ -325,7 +382,10 @@ public class ModSpells {
       .textColor(ChatFormatting.LIGHT_PURPLE)
       .color(0xffc0f0, 0xffffff)
       .costs(() -> CostInstance.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250))
-      .build()));
+      .cooldown(ModSpells.PETAL_SHELL_COOLDOWN)
+      .properties(ModSpells.PETAL_SHELL_COUNT, ModSpells.PETAL_SHELL_DURATION)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_COOLDOWN = P.recordProperty("petal_shell/cooldown", Property.ofInt(120, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_DURATION = P.recordProperty("petal_shell/duration", Property.ofInt(20 * 90, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_COUNT = P.recordProperty("petal_shell/count", Property.ofInt(3, "The number of petal shells."));
@@ -342,7 +402,11 @@ public class ModSpells {
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)))
       .color(0xff2040, 0x20ff60)
       .textColor(ChatFormatting.RED)
-      .build()));
+      .cooldown(ModSpells.ROSE_THORNS_COOLDOWN)
+      // Non-traditional radius properties
+      .properties(ModSpells.ROSE_THORNS_DAMAGE, ModSpells.ROSE_THORNS_DURATION, ModSpells.ROSE_THORNS_RADIUS_ZX, ModSpells.ROSE_THORNS_RADIUS_Y)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> ROSE_THORNS_COOLDOWN = P.recordProperty("rose_thorns/cooldown", Property.ofInt(24, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> ROSE_THORNS_DURATION = P.recordProperty("rose_thorns/duration", Property.ofInt(20 * 18, SpellProperties.DURATION));
   public static final PropertyHolder<Property.DoubleProperty> ROSE_THORNS_RADIUS_ZX = P.recordProperty("rose_thorns/radius_zx", Property.ofDouble(1.2, "The radius of the rose thorns effect in the X and Z axis."));
@@ -364,7 +428,9 @@ public class ModSpells {
       .costs(() -> CostInstance.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0125))
       .color(0x606060, 0xc0c0c0)
       .textColor(ChatFormatting.YELLOW)
-      .build()));
+      .cooldown(ModSpells.SHATTER_COOLDOWN)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> SHATTER_COOLDOWN = P.recordProperty("shatter/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
 
   // Jaunt (80 cooldown)
@@ -374,7 +440,12 @@ public class ModSpells {
       .charge(SpellType.Primary.INSTANCE)
       .costs(() -> CostInstance.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0031), Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0031)))
       .color(0x538ad4, 0xede768)
-      .textColor(ChatFormatting.DARK_PURPLE)));
+      .textColor(ChatFormatting.DARK_PURPLE)
+      .cooldown(ModSpells.JAUNT_COOLDOWN)
+      .maxUse(ModSpells.JAUNT_MAX_USE)
+      .properties(ModSpells.JAUNT_DISTANCE)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> JAUNT_COOLDOWN = P.recordProperty("jaunt/cooldown", Property.ofInt(80, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> JAUNT_DISTANCE = P.recordProperty("jaunt/distance", Property.ofInt(8, "The number of blocks that Jaunt travels forwards."));
   public static final PropertyHolder<Property.IntegerProperty> JAUNT_MAX_USE = P.recordProperty("jaunt/max_use", Property.ofInt(100, SpellProperties.MAX_USE));
@@ -391,7 +462,10 @@ public class ModSpells {
       .textColor(ChatFormatting.BLUE)
       .costs(() -> CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.COMPLEX_1250))
       .color(0x20c8ff, 0x2040ff)
-      .build()));
+      .cooldown(ModSpells.SKY_SOARER_COOLDOWN)
+      .properties(ModSpells.SKY_SOARER_AMPLIFIER, ModSpells.SKY_SOARER_AMPLIFIER_INCREASE, ModSpells.SKY_SOARER_DURATION, ModSpells.SKY_SOARER_DURATION_INCREASE, ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION)
+      .build()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_COOLDOWN = P.recordProperty("sky_soarer/cooldown", Property.ofInt(39, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_AMPLIFIER = P.recordProperty("sky_soarer/amplifier", Property.ofFloat(0.9f, "The default movement speed amplifier for Sky Soarer."));
   public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_AMPLIFIER_INCREASE = P.recordProperty("sky_soarer/amplifier_increase", Property.ofFloat(0.1f, "The base amplifier value is multiplied by 1+(this value, multiplied by the number of amplifier modifiers enabled)."));

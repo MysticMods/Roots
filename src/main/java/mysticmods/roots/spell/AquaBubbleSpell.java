@@ -36,26 +36,12 @@ public class AquaBubbleSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.AQUA_BUBBLE_COOLDOWN;
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.duration = properties.get(ModSpells.AQUA_BUBBLE_DURATION);
     this.absorption = properties.get(ModSpells.AQUA_BUBBLE_ABSORPTION);
     this.fire_reduction = properties.get(ModSpells.AQUA_BUBBLE_FIRE_REDUCTION);
     this.lava_reduction = properties.get(ModSpells.AQUA_BUBBLE_LAVA_REDUCTION);
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModSpells.AQUA_BUBBLE_DURATION);
-    properties.add(ModSpells.AQUA_BUBBLE_ABSORPTION);
-    properties.add(ModSpells.AQUA_BUBBLE_FIRE_REDUCTION);
-    properties.add(ModSpells.AQUA_BUBBLE_LAVA_REDUCTION);
   }
 
   @Override

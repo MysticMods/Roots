@@ -32,16 +32,6 @@ public class EmptySpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.EMPTY_COOLDOWN;
-  }
-
-  @Override
-  public void initialize(Holder<Spell> holder) {
-
-  }
-
-  @Override
   public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     throw new NotImplementedException("The empty spell cannot be cast!");
   }

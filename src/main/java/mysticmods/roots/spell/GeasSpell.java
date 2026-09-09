@@ -43,20 +43,6 @@ public class GeasSpell extends Spell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.GEAS_COOLDOWN;
-  }
-
-  @Override
-  public void buildProperties(List<PropertyHolder<?>> result) {
-    super.buildProperties(result);
-    result.add(ModSpells.GEAS_COUNT);
-    result.add(ModSpells.GEAS_DURATION);
-    result.add(ModSpells.GEAS_MAX_COOLDOWN);
-    result.add(ModSpells.GEAS_MAX_HEALTH);
-  }
-
-  @Override
   public void initialize(Holder<Spell> holder) {
     var dataMap = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
 

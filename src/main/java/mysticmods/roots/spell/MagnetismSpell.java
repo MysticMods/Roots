@@ -24,26 +24,6 @@ public class MagnetismSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.MAGNETISM_COOLDOWN;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.MAGNETISM_RADIUS_Y;
-  }
-
-  @Override
-  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.MAGNETISM_RADIUS_ZX;
-  }
-
-  @Override
-  public void initialize(Holder<Spell> holder) {
-
-  }
-
-  @Override
   public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int pulled = MagnetismUtil.pull(pLevel, pPlayer.blockPosition(), radiusZX, radiusY, radiusZX);
     if (pulled == 0) {
@@ -73,5 +53,10 @@ public class MagnetismSpell extends TwoRadiusSpell {
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[]{};
+  }
+
+  @Override
+  public void initialize(Holder<Spell> holder) {
+
   }
 }
