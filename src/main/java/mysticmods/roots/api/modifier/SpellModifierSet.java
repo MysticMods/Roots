@@ -101,4 +101,14 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
 
     return null;
   }
+
+  @Nullable
+  public ModifierTree<Spell, SpellModifier> getTree () {
+    SpellModifier first = firstElement();
+    if (first == null) {
+      return null;
+    }
+
+    return ModifierTrees.getSpell(first.getApplicableHolder());
+  }
 }

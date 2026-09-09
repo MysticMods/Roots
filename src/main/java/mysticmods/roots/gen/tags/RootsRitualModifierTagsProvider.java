@@ -21,6 +21,7 @@ public final class RootsRitualModifierTagsProvider extends IntrinsicHolderTagsPr
   protected void addTags(HolderLookup.Provider provider) {
     this.tag(RootsTags.RitualModifiers.NYI);
     this.tag(RootsTags.RitualModifiers.RESTRICTED);
+    this.tag(RootsTags.RitualModifiers.TRANSFORMING_MODIFIER);
   }
 
   @Override

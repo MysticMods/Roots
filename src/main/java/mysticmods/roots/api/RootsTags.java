@@ -674,6 +674,8 @@ public class RootsTags {
 
     public static final TagKey<SpellModifier> SKIPPED_IN_TOOLTIPS = modTag("skipped_in_tooltips");
 
+    public static final TagKey<SpellModifier> TRANSFORMING_MODIFIER = modTag("transforming");
+
     static TagKey<SpellModifier> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, RootsAPI.rl(name));
     }
@@ -687,6 +689,8 @@ public class RootsTags {
     public static final TagKey<RitualModifier> RESTRICTED = modTag("restricted");
 
     public static final TagKey<RitualModifier> NYI = modTag("nyi");
+
+    public static final TagKey<RitualModifier> TRANSFORMING_MODIFIER = modTag("transforming");
 
     static TagKey<RitualModifier> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.RITUAL_MODIFIERS, RootsAPI.rl(name));
