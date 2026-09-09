@@ -115,6 +115,11 @@ public final class RootsModifierModelProvider extends ItemModelProvider {
         .parent(getExistingFile(icon.builtInRegistryHolder().getKey().location()));
   }
 
+  static {
+    ModItems.noop();
+    ModModifiers.noop();
+  }
+
   @Override
   public String getName() {
     return "Roots Modifier Model Provider";

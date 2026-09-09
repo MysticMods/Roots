@@ -547,4 +547,8 @@ public class ModItems {
     ARMOR.register(bus);
     ITEMS.register(bus);
   }
+
+  public static void noop () {
+
+  }
 }

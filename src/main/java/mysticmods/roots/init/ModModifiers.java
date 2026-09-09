@@ -26,6 +26,13 @@ public class ModModifiers {
 
   public static final List<GroupId> GROUP_IDS = new ArrayList<>();
 
+  static {
+    var x = Cost.class;
+    var y = CostInstance.class;
+    var z = SpellType.class;
+    var a = SpellCosts.class;
+  }
+
   public static final GroupId DANDELION_WINDS_DURATION = group("dandelion_winds/duration", true);
   public static final GroupId DANDELION_WINDS_CHANCE = group("dandelion_winds/chance", true);
   public static final GroupId DANDELION_WINDS_VORTEX_COOLDOWN = group("dandelion_winds/vortex_cooldown", true);
@@ -185,5 +192,8 @@ public class ModModifiers {
   public static void register(IEventBus bus) {
     REGISTER.register(bus);
     ITEMS.register(bus);
+  }
+
+  public static void noop() {
   }
 }
