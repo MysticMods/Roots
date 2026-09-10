@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Ordering;
@@ -22,6 +23,16 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   @Nullable
   protected final T firstElement;
 
+  private final int hash;
+
+  @Nullable
+  private volatile TransformingCache<V, T> transformingCache;
+
+  private record TransformingCache<V, T extends Modifier<V, T>>(
+      ModifierTree<V, T> tree,
+      ImmutableList<ImmutableList<ResourceKey<T>>> combinations) {
+  }
+
   @SafeVarargs
   public ModifierSet(T... elements) {
     this.internal = ImmutableSortedSet.copyOf(elements);
@@ -32,6 +43,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
     this.internalKeys = Stream.of(elements).map(Modifier::getSelf)
         .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
+    this.hash = this.internal.hashCode();
   }
 
   public ModifierSet(Collection<T> elements) {
@@ -43,6 +55,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
     this.internalKeys = elements.stream().map(Modifier::getSelf)
         .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
+    this.hash = this.internal.hashCode();
   }
 
   public ModifierSet(ImmutableSortedSet<T> elements) {
@@ -54,6 +67,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
     this.internalKeys = elements.stream().map(Modifier::getSelf)
         .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
+    this.hash = this.internal.hashCode();
   }
 
   public ModifierSet(ImmutableSet<T> elements) {
@@ -65,6 +79,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
     this.internalKeys = elements.stream().map(Modifier::getSelf)
         .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
+    this.hash = this.internal.hashCode();
   }
 
   @Nullable
@@ -97,6 +112,24 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
 
     return true;
+  }
+
+  /**
+   * Every set of transforming modifiers in this set that could be active
+   * together, each ordered shallowest-first. Cached; the cache is keyed on tree
+   * identity, so a datapack reload (which rebuilds every ModifierTree) recomputes
+   * rather than serving results from the old tree's layout.
+   */
+  public ImmutableList<ImmutableList<ResourceKey<T>>> transformingCombinations(ModifierTree<V, T> tree) {
+    TransformingCache<V, T> cache = this.transformingCache;
+    if (cache != null && cache.tree() == tree) {
+      return cache.combinations();
+    }
+
+    ImmutableList<ImmutableList<ResourceKey<T>>> computed = tree.matchingTransformingCombinations(this);
+    // Benign race: concurrent callers compute the same immutable value.
+    this.transformingCache = new TransformingCache<>(tree, computed);
+    return computed;
   }
 
   public abstract boolean hasTag(TagKey<T> tag);
@@ -174,6 +207,33 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   @Override
   public void clear() {
     internal.clear();
+  }
+
+  /**
+   * Value equality, per the Set contract -- compares contents against any Set,
+   * not just another ModifierSet. Deliberately ignores firstElement, which is
+   * assigned inconsistently across the constructors (elements[0] for varargs,
+   * stream().findFirst() on an unsorted collection otherwise) and so can differ
+   * between two sets holding identical contents.
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Set<?> other)) {
+      return false;
+    }
+    // Cheap reject before the element-wise comparison
+    if (this.hash != other.hashCode()) {
+      return false;
+    }
+    return this.internal.equals(other);
+  }
+
+  @Override
+  public int hashCode() {
+    return this.hash;
   }
 
   @Override

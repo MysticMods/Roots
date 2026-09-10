@@ -389,6 +389,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     private static final Interner<DataComponentMap> COMPONENT_INTERNER = Interners.newStrongInterner();
     @Nullable
     DataComponentMap.Builder components;
+    DataComponentType<? extends Cycling<?>> cycleComponent;
     SpellType.Cast castType = SpellType.Cast.INSTANT;
     TextColor textColor;
     Supplier<CostInstance> defaultCosts;
@@ -552,6 +553,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
         throw new IllegalStateException("Invalid cooldown property: `cooldown` property must be supplied.");
       }
       return this;
+    }
+
+    public <T extends Cycling<T>> Properties cycle (DataComponentType<T> component, T value) {
+      this.cycleComponent = component;
+      return this.component(component, value);
     }
 
     public <T> Properties component(Supplier<? extends DataComponentType<T>> component, T value) {

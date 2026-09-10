@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -20,6 +21,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class ModifierTree<V, C extends Modifier<V, C>> {
+  /**
+   * Safety valve for {@link #transformingCombinations()}. The enumeration is
+   * exponential in the number of mutually compatible transforming modifiers;
+   * in practice conflicts keep this in the single digits, so blowing this cap
+   * means the conflict declarations are wrong.
+   */
+  private static final int MAX_TRANSFORMING_COMBINATIONS = 4096;
+
   private final Holder<V> object;
   private final Map<ResourceKey<C>, Holder<C>> modifiers = new Object2ObjectOpenHashMap<>();
   private final Map<ResourceKey<C>, IModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
@@ -29,7 +38,11 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   private final Set<ResourceKey<C>> transformingNodes = new ObjectOpenHashSet<>();
 
   // Transforming modifier keys ordered deepest-first; populated by position()
-  private List<ResourceKey<C>> transformingByDepth = List.of();
+  private ImmutableList<ResourceKey<C>> transformingByDepth = ImmutableList.of();
+
+  // Every viable set of simultaneously-enabled transforming modifiers, each
+  // ordered shallowest-first; populated by position()
+  private ImmutableList<ImmutableList<ResourceKey<C>>> transformingCombinations = ImmutableList.of();
 
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> conflicts = new Object2ObjectOpenHashMap<>();
 
@@ -187,19 +200,32 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   public void position() {
     ModifierNodePosition.run(this);
-    cacheTransformingOrder();
+    cacheTransforming();
   }
 
-  private void cacheTransformingOrder() {
-    List<ResourceKey<C>> sorted = new ArrayList<>(transformingNodes);
-    sorted.sort(Comparator.comparingDouble((ResourceKey<C> key) -> getNode(this, key).x()).reversed());
-    this.transformingByDepth = List.copyOf(sorted);
+  /**
+   * Must run after {@link ModifierNodePosition#run}, which is what assigns each
+   * node its column (depth) via setLocation.
+   */
+  private void cacheTransforming() {
+    List<ResourceKey<C>> shallowestFirst = new ArrayList<>(transformingNodes);
+    shallowestFirst.sort(shallowestFirstComparator());
 
-    if (!transformingNodes.isEmpty() && RootsAPI.LOG.isDebugEnabled()) {
-      RootsAPI.LOG.debug("Cached {} transforming modifier(s) for {}.", transformingByDepth.size(), object.getKey());
-    }
+    this.transformingByDepth = ImmutableList.copyOf(shallowestFirst).reverse();
+    this.transformingCombinations = new CombinationBuilder(shallowestFirst).build();
   }
 
+  private Comparator<ResourceKey<C>> shallowestFirstComparator() {
+    return Comparator.comparingDouble((ResourceKey<C> key) -> getNode(this, key).x())
+        .thenComparing(key -> key.location().toString());
+  }
+
+  /**
+   * Depth of the node in the tree, where top-level modifiers are 0. The root
+   * node itself occupies column 0, hence the offset. Floored because the column
+   * is stored as a float, though ModifierNodePosition only ever assigns whole
+   * numbers to it.
+   */
   public int depth(IModifierNode<V, C> node) {
     return (int) Math.floor(node.x() - 1);
   }
@@ -216,16 +242,54 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return isTransforming(modifier.getSelf());
   }
 
-  public List<ResourceKey<C>> transformingByDepth() {
+  /**
+   * Every set of transforming modifiers that could be enabled together on this
+   * object, each ordered shallowest-first (so index 0 is the "highest" in the
+   * tree). Single-element lists are the common case; longer ones occur where a
+   * transforming modifier descends from another, or where two transforming
+   * branches were never declared as conflicting.
+   * <p>
+   * Ancestor-closed: enabling a modifier enables its parents, so a combination
+   * containing a transforming node always contains its transforming ancestors.
+   * Non-maximal combinations are included -- a chain A -&gt; B yields both [A]
+   * and [A, B], since A alone is a reachable state.
+   * <p>
+   * Ordered shortest-first, then shallowest-first within a length.
+   */
+  public ImmutableList<ImmutableList<ResourceKey<C>>> transformingCombinations() {
+    return transformingCombinations;
+  }
+
+  /**
+   * The combinations from {@link #transformingCombinations()} that the given set
+   * actually satisfies, longest (most specific) first. Callers should generally
+   * go through ModifierSet#transformingCombinations, which caches this.
+   */
+  public ImmutableList<ImmutableList<ResourceKey<C>>> matchingTransformingCombinations(ModifierSet<V, C, ?> set) {
+    Set<ResourceKey<C>> keys = set.getKeys();
+    List<ImmutableList<ResourceKey<C>>> matches = new ArrayList<>();
+    for (ImmutableList<ResourceKey<C>> combination : transformingCombinations) {
+      if (keys.containsAll(combination)) {
+        matches.add(combination);
+      }
+    }
+    matches.sort(Comparator.comparingInt(List<ResourceKey<C>>::size).reversed());
+    return ImmutableList.copyOf(matches);
+  }
+
+  /**
+   * The transforming modifiers of this tree, ordered deepest-first.
+   */
+  public ImmutableList<ResourceKey<C>> transformingByDepth() {
     return transformingByDepth;
   }
 
+  /**
+   * Returns the deepest transforming modifier present in the given set, or null
+   * if it contains none.
+   */
   @Nullable
   public C lowestTransforming(ModifierSet<V, C, ?> set) {
-    if (transformingNodes.isEmpty()) {
-      return null;
-    }
-
     Set<ResourceKey<C>> keys = set.getKeys();
     for (ResourceKey<C> key : transformingByDepth) {
       if (keys.contains(key)) {
@@ -233,6 +297,109 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       }
     }
     return null;
+  }
+
+  /**
+   * Enumerates ancestor-closed, conflict-free sets of transforming modifiers.
+   * <p>
+   * Each transforming node implies its whole ancestor chain, so a "pick" drags
+   * in a closure rather than a single key. Conflicts are checked against the
+   * full closure (transforming or not), because a conflict between two
+   * non-transforming ancestors rules out their descendants just as hard.
+   */
+  private final class CombinationBuilder {
+    private final List<ResourceKey<C>> ordered;
+    private final Map<ResourceKey<C>, Set<ResourceKey<C>>> transformingClosures = new Object2ObjectOpenHashMap<>();
+    private final Map<ResourceKey<C>, Set<ResourceKey<C>>> fullClosures = new Object2ObjectOpenHashMap<>();
+    private final Set<Set<ResourceKey<C>>> seen = new HashSet<>();
+    private final List<ImmutableList<ResourceKey<C>>> results = new ArrayList<>();
+    private final Comparator<ResourceKey<C>> order = shallowestFirstComparator();
+    private boolean truncated = false;
+
+    private CombinationBuilder(List<ResourceKey<C>> ordered) {
+      this.ordered = ordered;
+
+      for (ResourceKey<C> key : ordered) {
+        Set<ResourceKey<C>> transforming = new ObjectOpenHashSet<>();
+        Set<ResourceKey<C>> full = new ObjectOpenHashSet<>();
+
+        IModifierNode<V, C> node = nodes.get(key);
+        while (node != null && node != root) {
+          full.add(node.key());
+          if (transformingNodes.contains(node.key())) {
+            transforming.add(node.key());
+          }
+          node = node.parent();
+        }
+
+        transformingClosures.put(key, transforming);
+        fullClosures.put(key, full);
+      }
+    }
+
+    private ImmutableList<ImmutableList<ResourceKey<C>>> build() {
+      if (ordered.isEmpty()) {
+        return ImmutableList.of();
+      }
+
+      expand(0, new ObjectOpenHashSet<>(), new ObjectOpenHashSet<>());
+
+      if (truncated) {
+        RootsAPI.LOG.error("Transforming modifier combinations for {} exceeded {}; check that conflicting transforming modifiers are declared as conflicts.", object.getKey(), MAX_TRANSFORMING_COMBINATIONS);
+      }
+
+      results.sort(Comparator.<ImmutableList<ResourceKey<C>>>comparingInt(List::size)
+          .thenComparing(list -> list.get(0), order));
+
+      return ImmutableList.copyOf(results);
+    }
+
+    private void expand(int index, Set<ResourceKey<C>> current, Set<ResourceKey<C>> currentFull) {
+      if (!current.isEmpty()) {
+        Set<ResourceKey<C>> snapshot = new ObjectOpenHashSet<>(current);
+        if (seen.add(snapshot)) {
+          List<ResourceKey<C>> combination = new ArrayList<>(snapshot);
+          combination.sort(order);
+          results.add(ImmutableList.copyOf(combination));
+        }
+      }
+
+      if (results.size() >= MAX_TRANSFORMING_COMBINATIONS) {
+        truncated = true;
+        return;
+      }
+
+      for (int i = index; i < ordered.size(); i++) {
+        ResourceKey<C> key = ordered.get(i);
+        if (current.contains(key)) {
+          continue; // already pulled in as somebody's ancestor
+        }
+
+        Set<ResourceKey<C>> nextFull = new ObjectOpenHashSet<>(currentFull);
+        nextFull.addAll(fullClosures.get(key));
+        if (conflicted(nextFull)) {
+          continue;
+        }
+
+        Set<ResourceKey<C>> next = new ObjectOpenHashSet<>(current);
+        next.addAll(transformingClosures.get(key));
+
+        expand(i + 1, next, nextFull);
+
+        if (truncated) {
+          return;
+        }
+      }
+    }
+
+    private boolean conflicted(Set<ResourceKey<C>> keys) {
+      for (ResourceKey<C> key : keys) {
+        if (SetUtils.containsAny(keys, conflicts.get(key))) {
+          return true;
+        }
+      }
+      return false;
+    }
   }
 
   // TODO: Handle this better because it's only in the instance
@@ -276,6 +443,15 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     return result;
   }
 
+  /**
+   * Equality-based reverse lookup over every holder in the tree. Nothing in this
+   * class uses it any more -- prefer {@link Modifier#getSelf()}, which is a
+   * direct registry lookup. Retained only for callers that genuinely need to
+   * resolve an equal-but-not-identical value.
+   *
+   * @deprecated use {@link Modifier#getSelf()}
+   */
+  @Deprecated
   public static <V, C extends Modifier<V, C>> ResourceKey<C> getKey(ModifierTree<V, C> tree, C value) {
     for (Holder<C> holder : tree.modifiers.values()) {
       if (holder.value().equals(value)) {
@@ -295,7 +471,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
     public Instance(Set<C> modifierSet, Set<C> grantedModifiers) {
       for (C modifier : modifierSet) {
-        if (!enable(modifier.builtInRegistryHolder().getKey())) {
+        if (!enable(modifier.getSelf())) {
           // TODO: Conflicting modifiers in the initial set
           // TODO: This should probably throw a catchable error
         }
@@ -337,8 +513,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     }
 
     public boolean enable(C value) {
-      var key = getKey(ModifierTree.this, value);
-      return enable(key);
+      return enable(value.getSelf());
     }
 
     public boolean enable(ResourceKey<C> key) {
@@ -347,8 +522,7 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     }
 
     public boolean disable(C value) {
-      var key = getKey(ModifierTree.this, value);
-      return disable(key);
+      return disable(value.getSelf());
     }
 
     public boolean disable(IModifierNode<V, C> node) {
@@ -390,6 +564,21 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     }
 
     /**
+     * The enabled transforming modifiers, shallowest-first. Empty if none are
+     * enabled. Should always match one of {@link #transformingCombinations()}.
+     */
+    public ImmutableList<ResourceKey<C>> enabledTransforming() {
+      List<ResourceKey<C>> enabled = new ArrayList<>();
+      for (ResourceKey<C> key : transformingByDepth) {
+        if (enabledModifiers.contains(key)) {
+          enabled.add(key);
+        }
+      }
+      // transformingByDepth is deepest-first
+      return ImmutableList.copyOf(enabled).reverse();
+    }
+
+    /**
      * The deepest enabled transforming modifier, or null if none are enabled.
      */
     @Nullable
@@ -397,16 +586,6 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       for (ResourceKey<C> key : transformingByDepth) {
         if (enabledModifiers.contains(key)) {
           return modifiers.get(key).value();
-        }
-      }
-      return null;
-    }
-
-    @Nullable
-    public IModifierNode<V, C> lowestTransformingNode() {
-      for (ResourceKey<C> key : transformingByDepth) {
-        if (enabledModifiers.contains(key)) {
-          return getNode(ModifierTree.this, key);
         }
       }
       return null;

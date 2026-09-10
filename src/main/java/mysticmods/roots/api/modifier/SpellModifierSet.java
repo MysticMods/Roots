@@ -1,12 +1,16 @@
 package mysticmods.roots.api.modifier;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Interner;
+import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 
 import javax.annotation.Nullable;
@@ -17,6 +21,8 @@ import java.util.Set;
 
 public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellModifierSet> {
   public static final SpellModifierSet EMPTY = new SpellModifierSet();
+
+  private static final Interner<SpellModifierSet> INTERNER = Interners.newWeakInterner();
 
   public static final Codec<SpellModifierSet> CODEC = RootsRegistries.SPELL_MODIFIERS.byNameCodec()
       .listOf().xmap(o -> new SpellModifierSet(o).validated(), set -> set.internal.asList());
@@ -56,6 +62,14 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     return count;
   }
 
+  public SpellModifierSet intern() {
+    if (this == EMPTY || this.isEmpty()) {
+      return EMPTY;
+    }
+
+    return INTERNER.intern(this);
+  }
+
   public SpellModifierSet validated() {
     if (this.isEmpty()) {
       return EMPTY;
@@ -77,9 +91,9 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     ModifierTree<Spell, SpellModifier>.Instance instance = tree.instance(this, Collections.emptySet());
     Set<SpellModifier> validModifiers = instance.modifiersSet();
     if (validModifiers.size() == this.size() && this.containsAll(validModifiers)) {
-      return this;
+      return this.intern();
     } else {
-      return new SpellModifierSet(validModifiers);
+      return new SpellModifierSet(validModifiers).intern();
     }
   }
 
@@ -124,5 +138,23 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     }
 
     return tree.lowestTransforming(this);
+  }
+
+  public ImmutableList<ImmutableList<ResourceKey<SpellModifier>>> getTransformingCombinations() {
+    if (this == EMPTY || this.isEmpty()) {
+      return ImmutableList.of();
+    }
+
+    ModifierTree<Spell, SpellModifier> tree = getTree();
+    if (tree == null) {
+      return ImmutableList.of();
+    }
+
+    return transformingCombinations(tree);
+  }
+
+  public ImmutableList<ResourceKey<SpellModifier>> getTransformingCombination() {
+    var combinations = getTransformingCombinations();
+    return combinations.isEmpty() ? ImmutableList.of() : combinations.getFirst();
   }
 }

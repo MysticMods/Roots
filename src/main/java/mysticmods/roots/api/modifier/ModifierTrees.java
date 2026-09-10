@@ -56,6 +56,8 @@ public class ModifierTrees {
   }
 
   public static void initialize() {
+    initialized = false;
+
     ImmutableMap.Builder<ResourceKey<Ritual>, ModifierTree<Ritual, RitualModifier>> builder = ImmutableMap.builder();
     RootsRegistries.RITUALS.holders().forEach(holder -> {
       ModifierTree<Ritual, RitualModifier> tree = new ModifierTree<>(holder, RootsRegistries.Keys.RITUAL_MODIFIERS);
@@ -67,6 +69,12 @@ public class ModifierTrees {
       var validated = tree.validateParents();
       if (!validated.isEmpty()) {
         throw new IllegalStateException("Ritual " + holder.getKey() + " has modifiers with missing parents: " + validated);
+      }
+      // Must precede position(): ModifierNodePosition recurses through children
+      // in its constructor and will overflow the stack on a parent cycle.
+      var unreachable = tree.validateReachable();
+      if (!unreachable.isEmpty()) {
+        throw new IllegalStateException("Ritual " + holder.getKey() + " has unreachable modifiers (parent cycle?): " + unreachable);
       }
       tree.position();
       builder.put(holder.key(), tree);
@@ -87,6 +95,12 @@ public class ModifierTrees {
       var validated = tree.validateParents();
       if (!validated.isEmpty()) {
         throw new IllegalStateException("Spell " + holder.getKey() + " has modifiers with missing parents: " + validated);
+      }
+      // Must precede position(): ModifierNodePosition recurses through children
+      // in its constructor and will overflow the stack on a parent cycle.
+      var unreachable = tree.validateReachable();
+      if (!unreachable.isEmpty()) {
+        throw new IllegalStateException("Spell " + holder.getKey() + " has unreachable modifiers (parent cycle?): " + unreachable);
       }
       tree.position();
       spellBuilder.put(holder.key(), tree);

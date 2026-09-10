@@ -305,7 +305,7 @@ public class ModSpells {
 /*          .textColor(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), ChatFormatting.YELLOW)*/
 /*          .id(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), Spells.RAMPANT_GROWTH.location())*/
 /*          .predicate(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), 0.5f)*/
-          .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
+          .cycle(ModAttachments.AOE_GROWTH_MODE.get(), AOEGrowthMode.EVERYTHING)
           .cooldown(ModSpells.GROWTH_INFUSION_COOLDOWN)
           .reach(ModSpells.GROWTH_INFUSION_ADDED_REACH)
           .radius(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_ZX, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
