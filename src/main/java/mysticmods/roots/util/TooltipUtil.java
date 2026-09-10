@@ -246,7 +246,7 @@ public class TooltipUtil {
     //addChargeType(context, result, spell.getChargeType(), flag);
   }
 
-  public static void addChargeType(Item.TooltipContext context, List<Component> result, SpellType.Primary type, TooltipFlag flag) {
+  public static void addChargeType(Item.TooltipContext context, List<Component> result, SpellType.Charge type, TooltipFlag flag) {
     result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + type
         .name().toLowerCase(Locale.ROOT))));
   }

@@ -5,7 +5,7 @@ import mysticmods.roots.api.SpellType;
 import java.util.Set;
 
 public interface ICostedParent extends ICosted {
-  SpellType.Primary getChargeType();
+  SpellType.Charge getChargeType();
 
   Set<? extends ICostedChild> getChildren();
 

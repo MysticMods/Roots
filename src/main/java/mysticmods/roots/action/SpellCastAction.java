@@ -30,7 +30,7 @@ public class SpellCastAction extends GroveAction {
 
   @Override
   public GroveReputation modify(GroveContext context, GroveReputation reputation) {
-    if (context.spell().getChargeType() == SpellType.Primary.OPERATION) {
+    if (context.spell().getChargeType() == SpellType.Charge.OPERATION) {
       return reputation.multiply(context.costing().operations());
     }
     return super.modify(context, reputation);

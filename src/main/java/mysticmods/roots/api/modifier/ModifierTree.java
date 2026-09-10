@@ -12,9 +12,10 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -25,11 +26,15 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   private final List<IModifierNode<V, C>> rootNodes = new ArrayList<>();
   private final Set<IModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
 
+  private final Set<ResourceKey<C>> transformingNodes = new ObjectOpenHashSet<>();
+
+  // Transforming modifier keys ordered deepest-first; populated by position()
+  private List<ResourceKey<C>> transformingByDepth = List.of();
+
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> conflicts = new Object2ObjectOpenHashMap<>();
 
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> ancestors = new Object2ObjectOpenHashMap<>();
 
-  private final Map<ResourceKey<C>, Item> icons = new Object2ObjectOpenHashMap<>();
 
   private final Set<ResourceKey<C>> missing = new ObjectOpenHashSet<>();
 
@@ -37,9 +42,12 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   private final Set<ResourceKey<C>> resetThisBuild = new ObjectOpenHashSet<>();
 
+  private final TagKey<C> transformingTag;
+
   public ModifierTree(Holder<V> object, ResourceKey<? extends Registry<C>> registry) {
     this.object = object;
     this.root = RootModifierNode.create(this, object, registry);
+    this.transformingTag = TagKey.create(registry, RootsAPI.rl("transforming"));
   }
 
   private IModifierNode<V, C> getOrResetNode(ResourceKey<C> key) {
@@ -62,6 +70,34 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
   public Set<ResourceKey<C>> validateParents() {
     missing.removeIf(modifiers::containsKey);
     return missing;
+  }
+
+  /**
+   * This not being empty is a sign of a cycle in the parent graph, or of nodes
+   * orphaned from the root. Must be called before {@link #position()}, which
+   * recurses through the node graph and will overflow the stack on a cycle.
+   */
+  public Set<ResourceKey<C>> validateReachable() {
+    Set<ResourceKey<C>> seen = new ObjectOpenHashSet<>();
+    Deque<IModifierNode<V, C>> queue = new ArrayDeque<>();
+
+    for (IModifierNode<V, C> node : rootNodes) {
+      if (seen.add(node.key())) {
+        queue.addLast(node);
+      }
+    }
+
+    while (!queue.isEmpty()) {
+      for (IModifierNode<V, C> child : queue.removeFirst().children()) {
+        if (seen.add(child.key())) {
+          queue.addLast(child);
+        }
+      }
+    }
+
+    Set<ResourceKey<C>> unreachable = new ObjectOpenHashSet<>(modifiers.keySet());
+    unreachable.removeAll(seen);
+    return unreachable;
   }
 
   public C getModifier(ResourceKey<C> key) {
@@ -89,6 +125,10 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
     C mod = modifier.value();
     if (!mod.getApplicable().equals(this.object.getKey())) {
       return false;
+    }
+
+    if (modifier.is(transformingTag)) {
+      transformingNodes.add(modifier.getKey());
     }
 
     if (modifiers.containsKey(modifier.getKey())) {
@@ -147,6 +187,52 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   public void position() {
     ModifierNodePosition.run(this);
+    cacheTransformingOrder();
+  }
+
+  private void cacheTransformingOrder() {
+    List<ResourceKey<C>> sorted = new ArrayList<>(transformingNodes);
+    sorted.sort(Comparator.comparingDouble((ResourceKey<C> key) -> getNode(this, key).x()).reversed());
+    this.transformingByDepth = List.copyOf(sorted);
+
+    if (!transformingNodes.isEmpty() && RootsAPI.LOG.isDebugEnabled()) {
+      RootsAPI.LOG.debug("Cached {} transforming modifier(s) for {}.", transformingByDepth.size(), object.getKey());
+    }
+  }
+
+  public int depth(IModifierNode<V, C> node) {
+    return (int) Math.floor(node.x() - 1);
+  }
+
+  public int depth(ResourceKey<C> key) {
+    return depth(getNode(this, key));
+  }
+
+  public boolean isTransforming(ResourceKey<C> key) {
+    return transformingNodes.contains(key);
+  }
+
+  public boolean isTransforming(C modifier) {
+    return isTransforming(modifier.getSelf());
+  }
+
+  public List<ResourceKey<C>> transformingByDepth() {
+    return transformingByDepth;
+  }
+
+  @Nullable
+  public C lowestTransforming(ModifierSet<V, C, ?> set) {
+    if (transformingNodes.isEmpty()) {
+      return null;
+    }
+
+    Set<ResourceKey<C>> keys = set.getKeys();
+    for (ResourceKey<C> key : transformingByDepth) {
+      if (keys.contains(key)) {
+        return modifiers.get(key).value();
+      }
+    }
+    return null;
   }
 
   // TODO: Handle this better because it's only in the instance
@@ -301,6 +387,29 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
     public boolean enabled(IModifierNode<V, C> node) {
       return enabled(node.key());
+    }
+
+    /**
+     * The deepest enabled transforming modifier, or null if none are enabled.
+     */
+    @Nullable
+    public C lowestTransforming() {
+      for (ResourceKey<C> key : transformingByDepth) {
+        if (enabledModifiers.contains(key)) {
+          return modifiers.get(key).value();
+        }
+      }
+      return null;
+    }
+
+    @Nullable
+    public IModifierNode<V, C> lowestTransformingNode() {
+      for (ResourceKey<C> key : transformingByDepth) {
+        if (enabledModifiers.contains(key)) {
+          return getNode(ModifierTree.this, key);
+        }
+      }
+      return null;
     }
 
     public Map<ResourceKey<C>, ModifierInfo> getModifierInfoCache() {

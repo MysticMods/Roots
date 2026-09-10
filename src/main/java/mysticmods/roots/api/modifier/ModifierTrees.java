@@ -52,7 +52,7 @@ public class ModifierTrees {
     if (!initialized) {
       throw new IllegalStateException("ModifierTrees not initialized");
     }
-    return SPELL_MODIFIER_TREES.get(spell.builtInRegistryHolder().getKey());
+    return SPELL_MODIFIER_TREES.get(spell.getKey());
   }
 
   public static void initialize() {
@@ -99,7 +99,7 @@ public class ModifierTrees {
   public static SpellModifierSet without(Spell spell, SpellModifierSet modifiers, SpellModifier without) {
     ModifierTree<Spell, SpellModifier> tree = getSpell(spell);
     if (tree == null) {
-      throw new IllegalStateException("Spell " + spell.builtInRegistryHolder().getKey() + " has no modifier tree?!");
+      throw new IllegalStateException("Spell " + spell.getKey() + " has no modifier tree?!");
     }
 
     var instance = tree.instance(modifiers, null);
@@ -114,7 +114,7 @@ public class ModifierTrees {
   public static SpellModifierSet with(Spell spell, SpellModifierSet modifiers, SpellModifier with) {
     ModifierTree<Spell, SpellModifier> tree = getSpell(spell);
     if (tree == null) {
-      throw new IllegalStateException("Spell " + spell.builtInRegistryHolder().getKey() + " has no modifier tree?!");
+      throw new IllegalStateException("Spell " + spell.getKey() + " has no modifier tree?!");
     }
 
     var instance = tree.instance(modifiers, null);

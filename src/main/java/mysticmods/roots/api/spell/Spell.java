@@ -3,10 +3,6 @@ package mysticmods.roots.api.spell;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.objects.Object2FloatMap;
-import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.*;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -49,7 +45,6 @@ import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -57,72 +52,52 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
+  private final ResourceKey<Spell> resourceKey;
+
   protected final PropertyHolder<Property.IntegerProperty> cooldownProperty;
   protected final PropertyHolder<Property.DoubleProperty> reachProperty;
   protected final PropertyHolder<Property.IntegerProperty> maxUseProperty;
-
   protected final List<PropertyHolder<?>> allProperties;
-
-  protected final List<ResourceKey<SpellModifier>> resolutionOrder;
-  protected final ResourceKey<SpellModifier> onlyModifier;
-  protected final Map<ResourceKey<SpellModifier>, ModifierOverride> overrides = new HashMap<>();
-  protected final boolean hasTextColorOverride;
-  protected final boolean hasColorOverride;
-  protected final boolean hasDescriptionOverride;
-  protected final boolean hasPredicates;
-
-  protected final SpellType.Cast type;
   protected final CostInstance defaultCosts;
-  protected final SpellType.Primary chargeType;
   protected DataComponentMap components;
   protected CostInstance costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
-  protected final int color1, color2;
   protected int maxUse;
+
+  // These values can fluctuate based on modifiers
+  protected final SpellType.Cast castType;
+  protected final SpellType.Charge chargeType;
+  protected final int color1, color2;
 
   protected Style style;
   protected TextColor textColor;
+
   protected String descriptionId;
   protected String descriptionTooltipId;
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
 
   public Spell(Properties properties) {
-    this.type = properties.castType;
+    properties.build(); // TODO: Handle this some other way
+    this.castType = properties.castType;
     this.textColor = properties.textColor;
-    this.defaultCosts = properties.defaultCosts.get();
     this.chargeType = properties.chargeType;
     this.color1 = properties.color1;
     this.color2 = properties.color2;
+
+    this.resourceKey = properties.resourceKey;
+
+    this.defaultCosts = properties.defaultCosts.get();
     this.components = properties.buildAndValidateComponents();
-
-    this.hasTextColorOverride = !properties.textColorMap.isEmpty();
-    this.hasColorOverride = !properties.color1Map.isEmpty() || !properties.color2Map.isEmpty();
-    this.hasDescriptionOverride = !properties.descriptionIdMap.isEmpty();
-    this.hasPredicates = !properties.predicateMap.isEmpty();
-
-    if (properties.resolutionOrder == null) {
-      this.resolutionOrder = new ArrayList<>(properties.modifiers);
-    } else {
-      this.resolutionOrder = properties.resolutionOrder;
-    }
-
-    if (this.resolutionOrder.size() == 1) {
-      this.onlyModifier = this.resolutionOrder.getFirst();
-    } else {
-      this.onlyModifier = null;
-    }
-
-    for (ResourceKey<SpellModifier> modifier : properties.modifiers) {
-      ModifierOverride overrides = new ModifierOverride(properties.textColorMap.getOrDefault(modifier, null), properties.color1Map.getOrDefault(modifier, -1), properties.color2Map.getOrDefault(modifier, -1), properties.predicateMap.getOrDefault(modifier, -1), properties.descriptionIdMap.getOrDefault(modifier, null));
-      this.overrides.put(modifier, overrides);
-    }
-
     this.reachProperty = properties.reachProperty;
     this.cooldownProperty = properties.cooldownProperty;
     this.maxUseProperty = properties.maxUseProperty;
     this.allProperties = new ArrayList<>(properties.allProperties);
+  }
+
+  public ResourceKey<Spell> getKey () {
+    return resourceKey;
   }
 
   public Holder<Spell> builtInRegistryHolder() {
@@ -136,7 +111,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     return this.extendedDescription;
-
   }
 
   public abstract Component[] createExtendedDescriptionComponents();
@@ -151,14 +125,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Nullable
   public TextColor getTextColor(ISpellInstance instance) {
-    if (hasTextColorOverride) {
-      var override = getLowestOverride(instance, ModifierOverride.TEXT_COLOR);
-      if (override != null && override.textColor() != null) {
-        return override.textColor();
-      }
-    }
-
-    return getTextColor();
   }
 
   @Override
@@ -174,29 +140,14 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return style;
   }
 
-  protected Style style2;
-
   @Override
   public Style getOrCreateStyle(ISpellInstance instance) {
-    if (hasTextColorOverride) {
-      if (style2 == null) {
-        TextColor color = getTextColor(instance);
-        if (color != null) {
-          style2 = Style.EMPTY.withColor(color).withBold(isBold(instance));
-        } else {
-          style2 = Style.EMPTY.withBold(isBold(instance));
-        }
-      }
-      return style2;
-    }
-
-    return getOrCreateStyle();
   }
 
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("spell", builtInRegistryHolder().getKey().location());
+      this.descriptionId = Util.makeDescriptionId("spell", getKey().location());
     }
 
     return this.descriptionId;
@@ -204,18 +155,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Override
   public String getOrCreateDescriptionId(ISpellInstance instance) {
-    if (hasDescriptionOverride) {
-      if (instance != null) {
-        var overrides = getLowestOverride(instance, ModifierOverride.ID);
-        if (overrides != null && overrides.id() != null) {
-          return overrides.id();
-        }
-      } else {
-        RootsAPI.LOG.error("Don't forget to create a translation key for '{}''s modifier description IDs!", this);
-      }
-    }
-
-    return getOrCreateDescriptionId();
   }
 
   @Override
@@ -248,25 +187,9 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public int getColor1(ISpellInstance instance) {
-    if (hasColorOverride) {
-      var override = getLowestOverride(instance, ModifierOverride.COLOR_1);
-      if (override != null && override.color1() != -1) {
-        return override.color1();
-      }
-    }
-
-    return color1;
   }
 
   public int getColor2(ISpellInstance instance) {
-    if (hasColorOverride) {
-      var override = getLowestOverride(instance, ModifierOverride.COLOR_2);
-      if (override != null && override.color2() != -1) {
-        return override.color2();
-      }
-    }
-
-    return color2;
   }
 
   public int getMaxUse(ISpellInstance iSpellInstance) {
@@ -289,12 +212,12 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   @Override
   public CostInstance getCosts() {
     if (costs == null) {
-      RootsAPI.LOG.error("Data maps haven't been initialized for spell: {}", builtInRegistryHolder().getKey());
+      RootsAPI.LOG.error("Data maps haven't been initialized for spell: {}", getKey());
     }
     return costs;
   }
 
-  public SpellType.Primary getChargeType() {
+  public SpellType.Charge getChargeType() {
     return chargeType;
   }
 
@@ -315,7 +238,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public SpellType.Cast getType(ISpellInstance iSpellInstance) {
-    return type;
+    return castType;
   }
 
   public void buildProperties(List<PropertyHolder<?>> properties) {
@@ -460,57 +383,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public float getIconPredicate(ISpellInstance iSpellInstance) {
-    var modifier = getLowestOverride(iSpellInstance, ModifierOverride.PREDICATE);
-    if (modifier == null) {
-      return -1f;
-    }
-    return modifier.predicate();
-  }
-
-  @Nullable
-  public ModifierOverride getLowestOverride(ISpellInstance iSpellInstance, OverrideContext<?> context) {
-    if (overrides.isEmpty()) {
-      return null;
-    }
-
-    if (onlyModifier != null && iSpellInstance.has(onlyModifier)) {
-      return overrides.get(onlyModifier);
-    }
-
-    for (ResourceKey<SpellModifier> modifier : this.resolutionOrder) {
-      if (iSpellInstance.has(modifier)) {
-        var potential = overrides.get(modifier);
-        if (!context.test(potential)) {
-          return potential;
-        }
-      }
-    }
-
-    return null;
-  }
-
-  public record ModifierOverride(@Nullable TextColor textColor, int color1, int color2, float predicate,
-                                 @Nullable String id) {
-    public static final OverrideContext<TextColor> TEXT_COLOR = new OverrideContext<>(null, ModifierOverride::textColor);
-    public static final OverrideContext<Integer> COLOR_1 = new OverrideContext<>(-1, ModifierOverride::color1);
-    public static final OverrideContext<Integer> COLOR_2 = new OverrideContext<>(-1, ModifierOverride::color2);
-    public static final OverrideContext<Float> PREDICATE = new OverrideContext<>(-1f, ModifierOverride::predicate);
-    public static final OverrideContext<String> ID = new OverrideContext<>(null, ModifierOverride::id);
-  }
-
-  public static class OverrideContext<T> implements Predicate<ModifierOverride> {
-    private final T defaultOrNull;
-    private final Function<ModifierOverride, T> accessor;
-
-    private OverrideContext(T defaultOrNull, Function<ModifierOverride, T> accessor) {
-      this.defaultOrNull = defaultOrNull;
-      this.accessor = accessor;
-    }
-
-    @Override
-    public boolean test(ModifierOverride modifierOverride) {
-      return defaultOrNull.equals(accessor.apply(modifierOverride));
-    }
   }
 
   public static class Properties {
@@ -520,16 +392,9 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     SpellType.Cast castType = SpellType.Cast.INSTANT;
     TextColor textColor;
     Supplier<CostInstance> defaultCosts;
-    SpellType.Primary chargeType = SpellType.Primary.INSTANCE;
+    SpellType.Charge chargeType = SpellType.Charge.INSTANCE;
     int color1 = -1;
     int color2 = -1;
-    List<ResourceKey<SpellModifier>> resolutionOrder = null;
-    Set<ResourceKey<SpellModifier>> modifiers = new HashSet<>();
-    Map<ResourceKey<SpellModifier>, TextColor> textColorMap = new HashMap<>();
-    Object2IntMap<ResourceKey<SpellModifier>> color1Map = new Object2IntOpenHashMap<>();
-    Object2IntMap<ResourceKey<SpellModifier>> color2Map = new Object2IntOpenHashMap<>();
-    Object2FloatMap<ResourceKey<SpellModifier>> predicateMap = new Object2FloatOpenHashMap<>();
-    Map<ResourceKey<SpellModifier>, String> descriptionIdMap = new HashMap<>();
 
     PropertyHolder<Property.IntegerProperty> cooldownProperty;
     PropertyHolder<Property.DoubleProperty> reachProperty = null;
@@ -537,11 +402,17 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
     final List<PropertyHolder<?>> allProperties = new ArrayList<>();
 
+    final ResourceKey<Spell> resourceKey;
+
     public PropertyHolder<Property.IntegerProperty> radiusXProperty = null;
     public PropertyHolder<Property.IntegerProperty> radiusYProperty = null;
     public PropertyHolder<Property.IntegerProperty> radiusZProperty = null;
 
-    public Properties radiusY (PropertyHolder<Property.IntegerProperty> property) {
+    public Properties(ResourceKey<Spell> resourceKey) {
+      this.resourceKey = resourceKey;
+    }
+
+    public Properties radiusY(PropertyHolder<Property.IntegerProperty> property) {
       this.radiusYProperty = property;
       if (property != null && !this.allProperties.contains(property)) {
         this.allProperties.add(property);
@@ -549,7 +420,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties radiusX (PropertyHolder<Property.IntegerProperty> property) {
+    public Properties radiusX(PropertyHolder<Property.IntegerProperty> property) {
       this.radiusXProperty = property;
       if (property != null && !this.allProperties.contains(property)) {
         this.allProperties.add(property);
@@ -557,7 +428,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties radiusZ (PropertyHolder<Property.IntegerProperty> property) {
+    public Properties radiusZ(PropertyHolder<Property.IntegerProperty> property) {
       this.radiusZProperty = property;
       if (property != null && !this.allProperties.contains(property)) {
         this.allProperties.add(property);
@@ -565,15 +436,15 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties radius (PropertyHolder<Property.IntegerProperty> radiusX, PropertyHolder<Property.IntegerProperty> radiusY, PropertyHolder<Property.IntegerProperty> radiusZ) {
+    public Properties radius(PropertyHolder<Property.IntegerProperty> radiusX, PropertyHolder<Property.IntegerProperty> radiusY, PropertyHolder<Property.IntegerProperty> radiusZ) {
       return radiusX(radiusX).radiusY(radiusY).radiusZ(radiusZ);
     }
 
-    public Properties radius (PropertyHolder<Property.IntegerProperty> radiusZX, PropertyHolder<Property.IntegerProperty> radiusY) {
+    public Properties radius(PropertyHolder<Property.IntegerProperty> radiusZX, PropertyHolder<Property.IntegerProperty> radiusY) {
       return radiusX(radiusZX).radiusY(radiusY).radiusZ(radiusZX);
     }
 
-    public Properties radius (PropertyHolder<Property.IntegerProperty> radius) {
+    public Properties radius(PropertyHolder<Property.IntegerProperty> radius) {
       return radius(radius, radius, radius);
     }
 
@@ -583,23 +454,23 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties property (PropertyHolder<?> property) {
+    public Properties property(PropertyHolder<?> property) {
       this.allProperties.add(property);
       return this;
     }
 
-    public Properties properties (PropertyHolder<?> ... properties) {
+    public Properties properties(PropertyHolder<?>... properties) {
       this.allProperties.addAll(Arrays.asList(properties));
       return this;
     }
 
-    public Properties cooldown (PropertyHolder<Property.IntegerProperty> property) {
+    public Properties cooldown(PropertyHolder<Property.IntegerProperty> property) {
       this.cooldownProperty = property;
       allProperties.add(property);
       return this;
     }
 
-    public Properties reach (PropertyHolder<Property.DoubleProperty> property) {
+    public Properties reach(PropertyHolder<Property.DoubleProperty> property) {
       this.reachProperty = property;
       if (property != null) {
         allProperties.add(property);
@@ -607,35 +478,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties maxUse (PropertyHolder<Property.IntegerProperty> property) {
+    public Properties maxUse(PropertyHolder<Property.IntegerProperty> property) {
       this.maxUseProperty = property;
       if (property != null) {
         allProperties.add(property);
       }
-      return this;
-    }
-
-    @SafeVarargs
-    public final Properties resolve(ResourceKey<SpellModifier>... modifierOrder) {
-      this.resolutionOrder = Arrays.asList(modifierOrder);
-      return this;
-    }
-
-    public Properties textColor(ResourceKey<SpellModifier> modifier, ChatFormatting legacyColor) {
-      this.textColorMap.put(modifier, TextColor.fromLegacyFormat(legacyColor));
-      this.modifiers.add(modifier);
-      return this;
-    }
-
-    public Properties textColor(ResourceKey<SpellModifier> modifier, int color) {
-      this.textColorMap.put(modifier, TextColor.fromRgb(color));
-      this.modifiers.add(modifier);
-      return this;
-    }
-
-    public Properties textColor(ResourceKey<SpellModifier> modifier, TextColor color) {
-      this.textColorMap.put(modifier, color);
-      this.modifiers.add(modifier);
       return this;
     }
 
@@ -651,25 +498,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
     public Properties textColor(TextColor color) {
       this.textColor = color;
-      return this;
-    }
-
-    public Properties color(ResourceKey<SpellModifier> modifier, int color1, int color2) {
-      this.color1Map.put(modifier, color1);
-      this.color2Map.put(modifier, color2);
-      this.modifiers.add(modifier);
-      return this;
-    }
-
-    public Properties predicate(ResourceKey<SpellModifier> modifier, float value) {
-      this.predicateMap.put(modifier, value);
-      this.modifiers.add(modifier);
-      return this;
-    }
-
-    public Properties id(ResourceKey<SpellModifier> modifier, ResourceLocation id) {
-      this.descriptionIdMap.put(modifier, Util.makeDescriptionId("spell", id));
-      this.modifiers.add(modifier);
       return this;
     }
 
@@ -694,13 +522,13 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties charge(SpellType.Primary type) {
+    public Properties charge(SpellType.Charge type) {
       this.chargeType = type;
       return this;
     }
 
     public Properties operations() {
-      return charge(SpellType.Primary.OPERATION);
+      return charge(SpellType.Charge.OPERATION);
     }
 
     public Properties build() {
@@ -731,6 +559,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     public <T> Properties component(DataComponentType<T> component, T value) {
+      //noinspection UnstableApiUsage
       CommonHooks.validateComponent(value);
       if (this.components == null) {
         this.components = DataComponentMap.builder();
@@ -752,5 +581,85 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     private DataComponentMap buildComponents() {
       return this.components == null ? DataComponentMap.EMPTY : COMPONENT_INTERNER.intern(this.components.build());
     }
+  }
+
+  public static class Transformer {
+    SpellType.Cast castType = SpellType.Cast.INSTANT;
+    SpellType.Charge unitType = SpellType.Charge.INSTANCE;
+    SpellType.Condition conditionType = SpellType.Condition.ALWAYS;
+    int color1;
+    int color2;
+    String descriptionId;
+    String descriptionTooltipId;
+    String descriptionExtendedTooltipId;
+    TextColor textColor;
+    DataComponentType<? extends Cycling<?>> cyclingComponent;
+    float predicateValue;
+    Component[] extendedComponents;
+
+
+    public Transformer cast(SpellType.Cast castType) {
+      this.castType = castType;
+      return this;
+    }
+
+    public Transformer unit(SpellType.Charge unitType) {
+      this.unitType = unitType;
+      return this;
+    }
+
+    public Transformer condition(SpellType.Condition conditionType) {
+      this.conditionType = conditionType;
+      return this;
+    }
+
+    public Transformer color(int color1, int color2) {
+      this.color1 = color1;
+      this.color2 = color2;
+      return this;
+    }
+
+    public Transformer description(String descriptionId) {
+      this.descriptionId = descriptionId;
+      return this;
+    }
+
+    public Transformer tooltip(String descriptionTooltipId) {
+      this.descriptionTooltipId = descriptionTooltipId;
+      return this;
+    }
+
+    public Transformer extended(String descriptionExtendedTooltipId) {
+      this.descriptionExtendedTooltipId = descriptionExtendedTooltipId;
+      return this;
+    }
+
+    public Transformer text(TextColor textColor) {
+      this.textColor = textColor;
+      return this;
+    }
+
+    public Transformer cycle(DataComponentType<? extends Cycling<?>> cyclingComponent) {
+      this.cyclingComponent = cyclingComponent;
+      return this;
+    }
+
+    public Transformer predicate(float predicateValue) {
+      this.predicateValue = predicateValue;
+      return this;
+    }
+
+    public Transformer component (Component[] extendedComponents) {
+      this.extendedComponents = extendedComponents;
+      return this;
+    }
+  }
+
+  private record BuiltTransformer(SpellType.Cast castType, SpellType.Charge unitType, SpellType.Condition conditionType,
+                                  boolean hasColorOverride, int color1, int color2, String descriptionId,
+                                  String descriptionTooltipId, String descriptionTooltipExtendedId,
+                                  Component[] extendedDescriptionComponents, TextColor textColor,
+                                  DataComponentType<? extends Cycling<?>> component, boolean hasPredicateValue,
+                                  float predicateValue) {
   }
 }

@@ -42,8 +42,8 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   }
 
   @Override
-  public SpellType.Secondary getChargeType() {
-    return SpellType.Secondary.ALWAYS;
+  public SpellType.Condition getChargeType() {
+    return SpellType.Condition.ALWAYS;
   }
 
   @Override

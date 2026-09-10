@@ -159,7 +159,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().getCosts();
   }
 
-  default SpellType.Primary getChargeType() {
+  default SpellType.Charge getChargeType() {
     return asSpell().getChargeType();
   }
 

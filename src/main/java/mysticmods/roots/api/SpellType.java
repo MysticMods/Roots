@@ -11,14 +11,14 @@ import java.util.Locale;
 import java.util.function.IntFunction;
 
 public class SpellType {
-  public enum Primary implements StringRepresentable {
+  public enum Charge implements StringRepresentable {
     INSTANCE,  // Charges per instance
     OPERATION, // Charges amount per operation per instance
     DEFAULT;  // For modifiers: charges the default spell
 
-    public static final Codec<Primary> CODEC = StringRepresentable.fromEnum(Primary::values);
-    public static final IntFunction<Primary> BY_ID = ByIdMap.continuous(Primary::ordinal, Primary.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-    public static final StreamCodec<ByteBuf, Primary> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Primary::ordinal);
+    public static final Codec<Charge> CODEC = StringRepresentable.fromEnum(Charge::values);
+    public static final IntFunction<Charge> BY_ID = ByIdMap.continuous(Charge::ordinal, Charge.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+    public static final StreamCodec<ByteBuf, Charge> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Charge::ordinal);
 
     @Override
     public String getSerializedName() {
@@ -26,13 +26,13 @@ public class SpellType {
     }
   }
 
-  public enum Secondary implements StringRepresentable {
+  public enum Condition implements StringRepresentable {
     ALWAYS, // Always applies the child cost to the parent
     SPECIFIED; // Only applies the child cost when specified
 
-    public static final Codec<Secondary> CODEC = StringRepresentable.fromEnum(Secondary::values);
-    public static final IntFunction<Secondary> BY_ID = ByIdMap.continuous(Secondary::ordinal, Secondary.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-    public static final StreamCodec<ByteBuf, Secondary> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Secondary::ordinal);
+    public static final Codec<Condition> CODEC = StringRepresentable.fromEnum(Condition::values);
+    public static final IntFunction<Condition> BY_ID = ByIdMap.continuous(Condition::ordinal, Condition.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+    public static final StreamCodec<ByteBuf, Condition> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Condition::ordinal);
 
     @Override
     public String getSerializedName() {

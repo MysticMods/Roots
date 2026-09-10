@@ -107,6 +107,10 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     return contains(element);
   }
 
+  public boolean has(ResourceKey<T> element) {
+    return this.internalKeys.contains(element);
+  }
+
   @Override
   public int size() {
     return internal.size();

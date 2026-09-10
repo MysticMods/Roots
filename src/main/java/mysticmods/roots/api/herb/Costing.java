@@ -40,7 +40,7 @@ public class Costing {
 
   private HerbMap herbMapCache;
 
-  private final SpellType.Primary chargeType;
+  private final SpellType.Charge chargeType;
 
   private int operationsCount = 0;
   private double discount = 0;
@@ -54,7 +54,7 @@ public class Costing {
     modifierMap.defaultReturnValue(false);
     chargeType = parent.getChargeType();
     for (ICostedChild modifier : parent.getChildren()) {
-      if (modifier.getChargeType() == SpellType.Secondary.ALWAYS) {
+      if (modifier.getChargeType() == SpellType.Condition.ALWAYS) {
         charge(modifier);
       }
     }
@@ -65,7 +65,7 @@ public class Costing {
     this.herbMapCache = new HerbMap(player);
   }
 
-  public SpellType.Primary getChargeType() {
+  public SpellType.Charge getChargeType() {
     return chargeType;
   }
 
@@ -147,7 +147,7 @@ public class Costing {
       return false;
     }
 
-    if (chargeType == SpellType.Primary.OPERATION && operationsCount == 0) {
+    if (chargeType == SpellType.Charge.OPERATION && operationsCount == 0) {
       RootsAPI.LOG.error("Charging with operation costs but no operations! {}", parent);
     }
 
@@ -256,7 +256,7 @@ public class Costing {
   private void calculateCosts(boolean checkModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
     baseCosts.clear();
-    SpellType.Primary thisType = getChargeType();
+    SpellType.Charge thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
       if (!cost.getType().isAdditive()) {
         throw new IllegalStateException("Only additive costs can be created for parents, cost type '" + cost.getType()
@@ -265,7 +265,7 @@ public class Costing {
 
       var cur = baseCosts.getOrDefault(cost.getHerb(), 0.0);
 
-      int totalOperations = thisType == SpellType.Primary.OPERATION ? maxOperations ? parent.getMaximumOperations(modifierMap) : operations() : 1;
+      int totalOperations = thisType == SpellType.Charge.OPERATION ? maxOperations ? parent.getMaximumOperations(modifierMap) : operations() : 1;
 
       baseCosts.put(cost.getHerb(), cur + cost.getValue() * totalOperations);
     }
@@ -294,7 +294,7 @@ public class Costing {
     }
 
     for (ICostedChild modifier : parent.getChildren()) {
-      if (checkModifiers && ((modifier.getChargeType() == SpellType.Secondary.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeType() == SpellType.Secondary.ALWAYS) || maxOperations) {
+      if (checkModifiers && ((modifier.getChargeType() == SpellType.Condition.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeType() == SpellType.Condition.ALWAYS) || maxOperations) {
         for (Cost cost : modifier.getCosts().costs()) {
           if (cost.getType() == CostType.NEGATE_BASE_COST) {
             doNegate = true;
@@ -302,7 +302,7 @@ public class Costing {
           }
 
           List<Cost> costs = herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>());
-          if (thisType == SpellType.Primary.OPERATION) {
+          if (thisType == SpellType.Charge.OPERATION) {
             if (cost.getType() == CostType.MULTIPLICATIVE_TOTAL) {
               costs.add(cost); // Totals are only ever applied once
             } else {

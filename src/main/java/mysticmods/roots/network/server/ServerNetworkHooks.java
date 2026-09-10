@@ -240,7 +240,7 @@ public class ServerNetworkHooks {
       return;
     }
     var inSlot = existing.getSpell(staffSlot);
-    if (inSlot == null || inSlot.spell() != spell || !modifier.isFor(spell.builtInRegistryHolder().getKey())) {
+    if (inSlot == null || inSlot.spell() != spell || !modifier.isFor(spell.getKey())) {
       player.displayClientMessage(Component.translatable("roots.message.spell_modifier.invalid_spell", modifier.getName(), inSlot == null ? Component.literal("no spell in slot") /* TODO: Make this into a translation string */ : inSlot.spell()
           .getStyledName()), true);
       return;

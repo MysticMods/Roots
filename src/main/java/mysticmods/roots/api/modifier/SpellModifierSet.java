@@ -103,12 +103,26 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
   }
 
   @Nullable
-  public ModifierTree<Spell, SpellModifier> getTree () {
+  public ModifierTree<Spell, SpellModifier> getTree() {
     SpellModifier first = firstElement();
     if (first == null) {
       return null;
     }
 
     return ModifierTrees.getSpell(first.getApplicableHolder());
+  }
+
+  @Nullable
+  public SpellModifier getLowestTransformer() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    var tree = getTree();
+    if (tree == null) {
+      return null;
+    }
+
+    return tree.lowestTransforming(this);
   }
 }

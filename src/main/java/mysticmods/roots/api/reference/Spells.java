@@ -33,8 +33,9 @@ public interface Spells {
   /*  ResourceKey<Spell> STORM_CLOUD = spell("storm_cloud");
     ResourceKey<Spell> SUMMON_UNDEAD = spell("summon_undead");*/
   ResourceKey<Spell> SYLVAN_LIGHT = spell("sylvan_light");
-  ResourceKey<Spell> TEMPORAL_MORASS = spell("temporal_morass");
-  ResourceKey<Spell> WILDFIRE = spell("wildfire");
+/*  ResourceKey<Spell> TEMPORAL_MORASS = spell("temporal_morass");*/
+/*  ResourceKey<Spell> WILDFIRE = spell("wildfire");*/
+  ResourceKey<Spell> EMPTY = spell("empty");
 
   static ResourceKey<Spell> spell(String name) {
     return ResourceKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));
