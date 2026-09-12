@@ -51,6 +51,14 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return getEnabledModifiers().getKeys();
   }
 
+  default Set<ResourceKey<SpellModifier>> getTransformingKeys () {
+    return getEnabledModifiers().getTransformingKeys();
+  }
+
+  default int getTransformingHash () {
+    return getEnabledModifiers().transformingHash();
+  }
+
   // Returns length of cooldown
   default CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
     CastResult cooldown = asSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);

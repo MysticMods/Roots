@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
@@ -7,6 +8,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +21,11 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
 
   public RitualModifier(CostInstance defaultCosts, ResourceKey<Ritual> applicable) {
     super(defaultCosts, applicable);
+  }
+
+  @Override
+  protected TagKey<RitualModifier> getTransformingTag() {
+    return RootsTags.RitualModifiers.TRANSFORMING_MODIFIER;
   }
 
   @Override

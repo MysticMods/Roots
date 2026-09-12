@@ -20,8 +20,6 @@ import java.util.Set;
 public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellModifierSet> {
   public static final SpellModifierSet EMPTY = new SpellModifierSet();
 
-  private static final Interner<SpellModifierSet> INTERNER = Interners.newWeakInterner();
-
   public static final Codec<SpellModifierSet> CODEC = RootsRegistries.SPELL_MODIFIERS.byNameCodec()
       .listOf().xmap(o -> new SpellModifierSet(o).validated(), set -> set.internal.asList());
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifierSet> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.collection(HashSet::new, ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)), o -> o.internal, o -> new SpellModifierSet(o).validated());
@@ -60,14 +58,6 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     return count;
   }
 
-  public SpellModifierSet intern() {
-    if (this == EMPTY || this.isEmpty()) {
-      return EMPTY;
-    }
-
-    return INTERNER.intern(this);
-  }
-
   public SpellModifierSet validated() {
     if (this.isEmpty()) {
       return EMPTY;
@@ -89,9 +79,11 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     ModifierTree<Spell, SpellModifier>.Instance instance = tree.instance(this, Collections.emptySet());
     Set<SpellModifier> validModifiers = instance.modifiersSet();
     if (validModifiers.size() == this.size() && this.containsAll(validModifiers)) {
-      return this.intern();
+      return this;
+    } else if (validModifiers.isEmpty()) {
+      return EMPTY;
     } else {
-      return new SpellModifierSet(validModifiers).intern();
+      return new SpellModifierSet(validModifiers);
     }
   }
 

@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -14,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
@@ -60,6 +62,11 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @SafeVarargs
   public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, ResourceKey<SpellModifier>... conflicts) {
     this(defaultCosts, parent, applicable, GroupId.NONE, conflicts);
+  }
+
+  @Override
+  protected TagKey<SpellModifier> getTransformingTag() {
+    return RootsTags.SpellModifiers.TRANSFORMING_MODIFIER;
   }
 
   @SafeVarargs

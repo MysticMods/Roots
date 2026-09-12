@@ -19,10 +19,12 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   // TODO: Does this need to be an ImmutableSet?
   protected final ImmutableSortedSet<T> internal;
   protected final ImmutableSortedSet<ResourceKey<T>> internalKeys;
+  protected final ImmutableSortedSet<ResourceKey<T>> transformingKeys;
   @Nullable
   protected final T firstElement;
 
   private final int hash;
+  private final int transformingHash;
 
   @SafeVarargs
   public ModifierSet(T... elements) {
@@ -38,7 +40,9 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
     this.internalKeys = elements.stream().map(Modifier::getSelf)
         .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
+    this.transformingKeys = elements.stream().filter(Modifier::isTransforming).map(Modifier::getSelf).collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
     this.hash = this.internal.hashCode();
+    this.transformingHash = this.transformingKeys.hashCode();
   }
 
   @Nullable
@@ -150,13 +154,6 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     internal.clear();
   }
 
-  /**
-   * Value equality, per the Set contract -- compares contents against any Set,
-   * not just another ModifierSet. Deliberately ignores firstElement, which is
-   * assigned inconsistently across the constructors (elements[0] for varargs,
-   * stream().findFirst() on an unsorted collection otherwise) and so can differ
-   * between two sets holding identical contents.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -175,6 +172,10 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   @Override
   public int hashCode() {
     return this.hash;
+  }
+
+  public int transformingHash () {
+    return this.transformingHash;
   }
 
   @Override
@@ -204,5 +205,9 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
 
   public Set<ResourceKey<T>> getKeys() {
     return internalKeys;
+  }
+
+  public Set<ResourceKey<T>> getTransformingKeys () {
+    return transformingKeys;
   }
 }

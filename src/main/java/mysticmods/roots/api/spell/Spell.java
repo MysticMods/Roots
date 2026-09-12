@@ -415,6 +415,8 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     public PropertyHolder<Property.IntegerProperty> radiusYProperty = null;
     public PropertyHolder<Property.IntegerProperty> radiusZProperty = null;
 
+    public Map<ResourceKey<SpellModifier>, Transformer> transformers = new HashMap<>();
+
     public Properties(ResourceKey<Spell> resourceKey) {
       this.resourceKey = resourceKey;
     }
@@ -581,6 +583,15 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
+    public Properties transformer (ResourceKey<SpellModifier> modifier, Transformer transformer) {
+      this.transformers.put(modifier, transformer);
+      return this;
+    }
+
+    public Properties transformer (Holder<SpellModifier> modifier, Transformer transformer) {
+      return this.transformer(modifier.getKey(), transformer);
+    }
+
     DataComponentMap buildAndValidateComponents() {
       DataComponentMap datacomponentmap = this.buildComponents();
       return validateComponents(datacomponentmap);
@@ -596,19 +607,20 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public static class Transformer {
-    SpellType.Cast castType = SpellType.Cast.INSTANT;
-    SpellType.Charge unitType = SpellType.Charge.INSTANCE;
-    SpellType.Condition conditionType = SpellType.Condition.ALWAYS;
-    int color1;
-    int color2;
-    String descriptionId;
-    String descriptionTooltipId;
-    String descriptionExtendedTooltipId;
-    TextColor textColor;
-    DataComponentType<? extends Cycling<?>> cyclingComponent;
-    float predicateValue;
-    Component[] extendedComponents;
-
+    SpellType.Cast castType = null;
+    SpellType.Charge unitType = null;
+    boolean hasColors = false;
+    int color1 = -1;
+    int color2 = -1;
+    String descriptionId = null;
+    String descriptionTooltipId = null;
+    String descriptionExtendedTooltipId = null;
+    Supplier<Component[]> extendedComponents = null;
+    TextColor textColor = null;
+    boolean hasComponent = false;
+    DataComponentType<? extends Cycling<?>> cyclingComponent = null;
+    boolean hasPredicateValue = false;
+    float predicateValue = -1;
 
     public Transformer cast(SpellType.Cast castType) {
       this.castType = castType;
@@ -617,11 +629,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
     public Transformer unit(SpellType.Charge unitType) {
       this.unitType = unitType;
-      return this;
-    }
-
-    public Transformer condition(SpellType.Condition conditionType) {
-      this.conditionType = conditionType;
       return this;
     }
 
@@ -652,26 +659,20 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     public Transformer cycle(DataComponentType<? extends Cycling<?>> cyclingComponent) {
+      this.hasComponent = true;
       this.cyclingComponent = cyclingComponent;
       return this;
     }
 
     public Transformer predicate(float predicateValue) {
+      this.hasPredicateValue = true;
       this.predicateValue = predicateValue;
       return this;
     }
 
-    public Transformer component (Component[] extendedComponents) {
+    public Transformer component (Supplier<Component[]> extendedComponents) {
       this.extendedComponents = extendedComponents;
       return this;
     }
-  }
-
-  private record BuiltTransformer(SpellType.Cast castType, SpellType.Charge unitType, SpellType.Condition conditionType,
-                                  boolean hasColorOverride, int color1, int color2, String descriptionId,
-                                  String descriptionTooltipId, String descriptionTooltipExtendedId,
-                                  Component[] extendedDescriptionComponents, TextColor textColor,
-                                  DataComponentType<? extends Cycling<?>> component, boolean hasPredicateValue,
-                                  float predicateValue) {
   }
 }

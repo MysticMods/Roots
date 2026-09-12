@@ -40,6 +40,13 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     this(defaultCosts, null, applicable, conflicts);
   }
 
+  // TODO: Migrate this
+  protected abstract TagKey<T> getTransformingTag ();
+
+  public boolean isTransforming () {
+    return is(getTransformingTag());
+  }
+
   protected abstract DataMapType<T, CostInstance> getDataMapType();
 
   @Override
@@ -125,5 +132,10 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     if (costs != null) {
       this.costs = costs;
     }
+  }
+
+  @Override
+  public int hashCode() {
+    return getSelf().hashCode();
   }
 }
