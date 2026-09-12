@@ -5,7 +5,7 @@
         "herb": "inferno_bulb",
         "amount": "BASE_0250"
       },
-      "charge": "specified",
+      "condition": "specified",
       "icon": "minecraft:flint_and_steel"
     },
     "peaceful": {
@@ -27,7 +27,7 @@
         "herb": "dewgonia",
         "amount": "BASE_0125"
       },
-      "charge": "specified",
+      "condition": "specified",
       "icon": "minecraft:soul_sand"
     },
     "temporal_morass": {
@@ -35,7 +35,7 @@
         "herb": "moonglow",
         "amount": "BASE_0125"
       },
-      "charge": "specified",
+      "condition": "specified",
       "parent": "slowness",
       "icon": "minecraft:purple_glazed_terracotta"
     }
@@ -144,7 +144,7 @@
         "herb": "dewgonia",
         "amount": "BASE_0063"
       },
-      "charge": "specified",
+      "condition": "specified",
       "icon": "minecraft:water_bucket"
     },
     "fertilizer": {
@@ -152,7 +152,7 @@
         "herb": "bafflecap",
         "amount": "BASE_0500"
       },
-      "charge": "specified",
+      "condition": "specified",
       "parent": "targeted_growth",
       "icon": "minecraft:bone_meal"
     }

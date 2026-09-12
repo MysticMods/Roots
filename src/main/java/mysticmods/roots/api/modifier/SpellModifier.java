@@ -119,7 +119,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     return DataMaps.SPELL_MODIFIER_COST_DATA;
   }
 
-  @Nullable
   public Holder<Spell> getApplicableHolder() {
     //noinspection deprecation
     return RootsRegistries.SPELLS.getHolder(getApplicable()).orElse(null);

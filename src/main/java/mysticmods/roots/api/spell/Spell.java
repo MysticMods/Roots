@@ -125,6 +125,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Nullable
   public TextColor getTextColor(ISpellInstance instance) {
+    return getTextColor();
   }
 
   @Override
@@ -142,6 +143,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Override
   public Style getOrCreateStyle(ISpellInstance instance) {
+    return getOrCreateStyle();
   }
 
   @Override
@@ -155,6 +157,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Override
   public String getOrCreateDescriptionId(ISpellInstance instance) {
+    return getOrCreateDescriptionId();
   }
 
   @Override
@@ -187,9 +190,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public int getColor1(ISpellInstance instance) {
+    return getRawColor1();
   }
 
   public int getColor2(ISpellInstance instance) {
+    return getRawColor2();
   }
 
   public int getMaxUse(ISpellInstance iSpellInstance) {
@@ -383,6 +388,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public float getIconPredicate(ISpellInstance iSpellInstance) {
+    return -1;
   }
 
   public static class Properties {

@@ -25,9 +25,9 @@ public class LayeredProperties {
     this.defaultLayer = new LayerSet(properties.castType, properties.chargeType, true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), Suppliers.memoize(spell::getOrCreateDescriptionComponents), properties.textColor, properties.cycleComponent != null, properties.cycleComponent, false, -1);
   }
 
-  public LayerSet get (ISpellInstance instance) {
+/*  public LayerSet get (ISpellInstance instance) {
 
-  }
+  }*/
 
   public record LayerSet (@Nullable SpellType.Cast cast, @Nullable SpellType.Charge charge, boolean hasColors, int color1, int color2, @Nullable String descriptionId, @Nullable String descriptionTooltipId, @Nullable String descriptionTooltipExtendedId, @Nullable Supplier<Component[]> componentGetter, @Nullable TextColor color, boolean hasComponent, @Nullable DataComponentType<? extends Cycling<?>> component, boolean hasPredicateValue, float predicateValue) {
   }

@@ -1,6 +1,5 @@
 package mysticmods.roots.api.modifier;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
@@ -10,7 +9,6 @@ import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 
 import javax.annotation.Nullable;
@@ -124,37 +122,5 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
     }
 
     return ModifierTrees.getSpell(first.getApplicableHolder());
-  }
-
-  @Nullable
-  public SpellModifier getLowestTransformer() {
-    if (this.isEmpty()) {
-      return null;
-    }
-
-    var tree = getTree();
-    if (tree == null) {
-      return null;
-    }
-
-    return tree.lowestTransforming(this);
-  }
-
-  public ImmutableList<ImmutableList<ResourceKey<SpellModifier>>> getTransformingCombinations() {
-    if (this == EMPTY || this.isEmpty()) {
-      return ImmutableList.of();
-    }
-
-    ModifierTree<Spell, SpellModifier> tree = getTree();
-    if (tree == null) {
-      return ImmutableList.of();
-    }
-
-    return transformingCombinations(tree);
-  }
-
-  public ImmutableList<ResourceKey<SpellModifier>> getTransformingCombination() {
-    var combinations = getTransformingCombinations();
-    return combinations.isEmpty() ? ImmutableList.of() : combinations.getFirst();
   }
 }

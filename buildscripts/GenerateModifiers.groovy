@@ -27,7 +27,7 @@ import groovy.json.JsonSlurper
 //                     {"type": "negate_base"} takes no herb or amount
 //   icon              "minecraft:arrow" (item)  |  "spells/foo" (texture)
 //   parent            sibling modifier name within the same spell
-//   charge            SpellType.Secondary value, e.g. "specified"
+//   condition            SpellType.Condition value, e.g. "specified"
 //   no_token_item     true -> skip TokenItem registration
 //   excludes          one-directional conflicts (this modifier only)
 //   aliases           legacy registry names this modifier was renamed from;
@@ -82,7 +82,7 @@ def groups = []          // ordered list of group declarations
 def byId = [:]
 def ladderMembers = [:]  // "shatter/fortune" -> [tier ids...]
 
-def MODIFIER_KEYS = ['cost', 'icon', 'parent', 'charge',
+def MODIFIER_KEYS = ['cost', 'icon', 'parent', 'condition',
                      'no_token_item', 'constant', 'excludes', 'aliases'] as Set
 def LADDER_KEYS   = ['tiers', 'costs', 'group_description'] as Set
 // consumed by the ladder itself; every other key becomes a tier default
@@ -106,7 +106,7 @@ data.each { spellName, spell ->
             spell           : SPELL,
             cost            : m.cost,
             icon            : m.icon,
-            charge          : m.charge,
+            condition          : m.condition,
             tokenItem       : !(m.no_token_item as boolean),
             parent          : null,
             group           : null,
@@ -286,29 +286,29 @@ def iconExpr = { String icon ->
   ns == 'minecraft' ? "Items.${path.toUpperCase()}" : "ModItems.${path.toUpperCase()}.value()"
 }
 
-// The SpellModifier overloads that actually exist. A SpellType.Secondary can only
+// The SpellModifier overloads that actually exist. A SpellType.Condition can only
 // be passed alongside a parent slot AND an explicit GroupId, so those are
 // forced on rather than authored.
 def LEGAL_SHAPES = [
         ['cost', 'spell'],
         ['cost', 'spell', 'group'],
-        ['cost', 'spell', 'charge'],
+        ['cost', 'spell', 'condition'],
         ['cost', 'parent', 'spell'],
         ['cost', 'parent', 'spell', 'group'],
-        ['cost', 'parent', 'spell', 'charge', 'group'],
+        ['cost', 'parent', 'spell', 'condition', 'group'],
         ['cost', 'parent', 'spell', 'conflicts'],
         ['cost', 'parent', 'spell', 'group', 'conflicts'],
-        ['cost', 'parent', 'spell', 'charge', 'group', 'conflicts'],
+        ['cost', 'parent', 'spell', 'condition', 'group', 'conflicts'],
 ] as Set
 
 def ctorShape = { rec ->
-  // a charge type with a group has no parentless overload, so force the slot
-  def parentSlot = rec.parent || rec.conflicts || (rec.charge && rec.group)
+  // a condition type with a group has no parentless overload, so force the slot
+  def parentSlot = rec.parent || rec.conflicts || (rec.condition && rec.group)
   def shape = ['cost']
   if (parentSlot) shape << 'parent'
   shape << 'spell'
-  if (rec.charge) shape << 'charge'
-  if (rec.group || (rec.charge && parentSlot)) shape << 'group'
+  if (rec.condition) shape << 'condition'
+  if (rec.group || (rec.condition && parentSlot)) shape << 'group'
   if (rec.conflicts) shape << 'conflicts'
   shape
 }
@@ -319,7 +319,7 @@ def ctorArgs = { rec ->
       case 'cost':      return [costExpr(rec.cost)]
       case 'parent':    return [rec.parent ? "ModModifiers.${rec.parent}.getKey()" : 'null']
       case 'spell':     return ["ModSpells.${rec.spell}.getKey()"]
-      case 'charge':    return ["SpellType.Secondary.${rec.charge.toUpperCase()}"]
+      case 'condition':    return ["SpellType.Condition.${rec.condition.toUpperCase()}"]
       case 'group':     return [rec.group ?: 'GroupId.NONE']
       case 'conflicts': return rec.conflicts.collect { "ModModifiers.${it}.getKey()" }
     }

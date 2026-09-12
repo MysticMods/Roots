@@ -1,7 +1,5 @@
 package mysticmods.roots.api.modifier;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Ordering;
 import net.minecraft.resources.ResourceKey;
@@ -9,6 +7,7 @@ import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -25,52 +24,12 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
 
   private final int hash;
 
-  @Nullable
-  private volatile TransformingCache<V, T> transformingCache;
-
-  private record TransformingCache<V, T extends Modifier<V, T>>(
-      ModifierTree<V, T> tree,
-      ImmutableList<ImmutableList<ResourceKey<T>>> combinations) {
-  }
-
   @SafeVarargs
   public ModifierSet(T... elements) {
-    this.internal = ImmutableSortedSet.copyOf(elements);
-    if (elements.length > 0) {
-      this.firstElement = elements[0];
-    } else {
-      this.firstElement = null;
-    }
-    this.internalKeys = Stream.of(elements).map(Modifier::getSelf)
-        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
-    this.hash = this.internal.hashCode();
+    this(Arrays.asList(elements));
   }
 
   public ModifierSet(Collection<T> elements) {
-    this.internal = ImmutableSortedSet.copyOf(elements);
-    if (!elements.isEmpty()) {
-      this.firstElement = elements.stream().findFirst().orElse(null);
-    } else {
-      this.firstElement = null;
-    }
-    this.internalKeys = elements.stream().map(Modifier::getSelf)
-        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
-    this.hash = this.internal.hashCode();
-  }
-
-  public ModifierSet(ImmutableSortedSet<T> elements) {
-    this.internal = elements;
-    if (!elements.isEmpty()) {
-      this.firstElement = elements.stream().findFirst().orElse(null);
-    } else {
-      this.firstElement = null;
-    }
-    this.internalKeys = elements.stream().map(Modifier::getSelf)
-        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
-    this.hash = this.internal.hashCode();
-  }
-
-  public ModifierSet(ImmutableSet<T> elements) {
     this.internal = ImmutableSortedSet.copyOf(elements);
     if (!elements.isEmpty()) {
       this.firstElement = elements.stream().findFirst().orElse(null);
@@ -112,24 +71,6 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
 
     return true;
-  }
-
-  /**
-   * Every set of transforming modifiers in this set that could be active
-   * together, each ordered shallowest-first. Cached; the cache is keyed on tree
-   * identity, so a datapack reload (which rebuilds every ModifierTree) recomputes
-   * rather than serving results from the old tree's layout.
-   */
-  public ImmutableList<ImmutableList<ResourceKey<T>>> transformingCombinations(ModifierTree<V, T> tree) {
-    TransformingCache<V, T> cache = this.transformingCache;
-    if (cache != null && cache.tree() == tree) {
-      return cache.combinations();
-    }
-
-    ImmutableList<ImmutableList<ResourceKey<T>>> computed = tree.matchingTransformingCombinations(this);
-    // Benign race: concurrent callers compute the same immutable value.
-    this.transformingCache = new TransformingCache<>(tree, computed);
-    return computed;
   }
 
   public abstract boolean hasTag(TagKey<T> tag);
