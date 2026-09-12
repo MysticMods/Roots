@@ -70,7 +70,7 @@ public class HarvestSpell extends TwoRadiusSpell {
 
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HarvestFXPacket(positions));
     costs.operations(positions.size());
-    return CastResult.success(positions.size(), cooldown * positions.size());
+    return CastResult.success(positions.size(), instance.getCooldown()* positions.size());
   }
 
   @Override

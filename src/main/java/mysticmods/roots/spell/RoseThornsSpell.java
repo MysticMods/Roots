@@ -77,7 +77,7 @@ public class RoseThornsSpell extends Spell {
       rose.setPos(result.getLocation());
       pLevel.addFreshEntity(rose);
       SnapshotHelper.addLiving(rose, ModSerializers.ROSE_THORNS.get(), new RoseThornsEntitySnapshot(rose.tickCount, -1, radiusZX, radiusY, duration, damage));
-      return CastResult.success(cooldown);
+      return CastResult.success(instance.getCooldown());
     } else {
       costs.noCharge();
       return CastResult.nothing();

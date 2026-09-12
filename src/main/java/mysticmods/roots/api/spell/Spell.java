@@ -78,6 +78,8 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
 
+  private final LayeredProperties layeredProperties;
+
   public Spell(Properties properties) {
     properties.build(); // TODO: Handle this some other way
     this.castType = properties.castType;
@@ -94,6 +96,8 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     this.cooldownProperty = properties.cooldownProperty;
     this.maxUseProperty = properties.maxUseProperty;
     this.allProperties = new ArrayList<>(properties.allProperties);
+
+    this.layeredProperties = new LayeredProperties(properties, this);
   }
 
   public ResourceKey<Spell> getKey () {
@@ -125,9 +129,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Nullable
   public TextColor getTextColor(ISpellInstance instance) {
-    return getTextColor();
+    return layeredProperties.get(instance).color();
   }
 
+  // TODO: Override this
   @Override
   public Style getOrCreateStyle() {
     if (style == null) {
@@ -141,9 +146,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return style;
   }
 
+  // TODO: Cache this
   @Override
   public Style getOrCreateStyle(ISpellInstance instance) {
-    return getOrCreateStyle();
+    var props = layeredProperties.get(instance);
+    return Style.EMPTY.withColor(props.color()).withBold(true);
   }
 
   @Override
@@ -157,9 +164,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Override
   public String getOrCreateDescriptionId(ISpellInstance instance) {
-    return getOrCreateDescriptionId();
+    return layeredProperties.get(instance).descriptionId();
   }
 
+  // TODO: Tooltip doesn't have SpelInstance?
   @Override
   public String getOrCreateTooltipDescriptionId() {
     if (this.descriptionTooltipId == null) {
@@ -167,6 +175,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     return this.descriptionTooltipId;
+  }
+
+  @Override
+  public String getOrCreateTooltipDescriptionId(ISpellInstance iSpellInstance) {
+    return layeredProperties.get(iSpellInstance).descriptionTooltipId();
   }
 
 
@@ -177,6 +190,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     return this.descriptionTooltipExtendedId;
+  }
+
+  @Override
+  public String getOrCreateTooltipExtendedDescriptionId(ISpellInstance instance) {
+    return layeredProperties.get(instance).descriptionTooltipExtendedId();
   }
 
   @Deprecated
@@ -190,11 +208,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public int getColor1(ISpellInstance instance) {
-    return getRawColor1();
+    return layeredProperties.get(instance).color1();
   }
 
   public int getColor2(ISpellInstance instance) {
-    return getRawColor2();
+    return layeredProperties.get(instance).color2();
   }
 
   public int getMaxUse(ISpellInstance iSpellInstance) {
@@ -222,8 +240,8 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return costs;
   }
 
-  public SpellType.Charge getChargeType() {
-    return chargeType;
+  public SpellType.Charge getChargeType (ISpellInstance instance) {
+    return layeredProperties.get(instance).charge();
   }
 
   public final PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
@@ -238,12 +256,12 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return maxUseProperty;
   }
 
-  public int getCooldown() {
+  public int getCooldown(ISpellInstance instance) {
     return cooldown;
   }
 
   public SpellType.Cast getType(ISpellInstance iSpellInstance) {
-    return castType;
+    return layeredProperties.get(iSpellInstance).cast();
   }
 
   public void buildProperties(List<PropertyHolder<?>> properties) {
@@ -278,6 +296,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     initialize(holder);
   }
 
+  // TODO: This does not function how it should function
   public ItemStack getSpellIcon(@Nullable ISpellInstance instance) {
     if (instance == null) {
       return getSpellIcon(this.simple());
@@ -329,6 +348,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return builtInRegistryHolder().is(key);
   }
 
+  // TODO: Collapse this into the style by default
   @Override
   public boolean isBold() {
     return true;
@@ -360,7 +380,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Override
   public String getDescriptionId(ISpellInstance spellSlot) {
-    return getOrCreateDescriptionId(spellSlot);
+    return layeredProperties.get(spellSlot).descriptionId();
   }
 
   public DataComponentMap getComponents() {
@@ -368,7 +388,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public DataComponentType<? extends Cycling<?>> getCycleComponent(ISpellInstance iSpellInstance) {
-    return null;
+    return layeredProperties.get(iSpellInstance).cycleComponent();
   }
 
   public boolean canTargetThroughFluids(ISpellInstance iSpellInstance) {
@@ -388,7 +408,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   public float getIconPredicate(ISpellInstance iSpellInstance) {
-    return -1;
+    return layeredProperties.get(iSpellInstance).predicateValue();
   }
 
   public static class Properties {

@@ -106,7 +106,7 @@ public class JauntSpell extends Spell {
       pPlayer.fallDistance = 0f;
     }
 
-    return CastResult.success(ticks, cooldown);
+    return CastResult.success(ticks, instance.getCooldown());
   }
 
   @Override

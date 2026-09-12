@@ -127,7 +127,7 @@ public class DisarmSpell extends TwoRadiusSpell {
     }
 
     costs.operations(count);
-    return CastResult.success(count, cooldown * count);
+    return CastResult.success(count, instance.getCooldown()* count);
   }
 
   @Override

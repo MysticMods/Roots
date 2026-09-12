@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;
 import net.minecraft.core.BlockPos;
@@ -193,8 +194,13 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
       return this;
     }
 
+    @Deprecated
     public Builder color(Holder<Spell> spell) {
       return color(spell.value().getRawColor1(), spell.value().getRawColor2());
+    }
+
+    public Builder color (ISpellInstance instance) {
+      return color(instance.getColor1(), instance.getColor2());
     }
 
     public Builder type(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type) {

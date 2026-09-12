@@ -42,7 +42,7 @@ public class PetalShellSpell extends Spell {
   public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.PETAL_SHELL, duration, count - 1, false, false), pPlayer);
     SnapshotHelper.addLiving(pPlayer, ModSerializers.PETAL_SHELL.get(), new PetalShellSnapshot(pPlayer, duration + 40, count));
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 
   @Override

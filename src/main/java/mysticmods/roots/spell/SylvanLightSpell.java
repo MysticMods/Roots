@@ -82,7 +82,7 @@ public class SylvanLightSpell extends Spell {
       return CastResult.nothing();
     }
 
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 
   @Override

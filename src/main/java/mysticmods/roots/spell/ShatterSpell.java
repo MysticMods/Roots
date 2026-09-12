@@ -188,7 +188,7 @@ public class ShatterSpell extends Spell {
       return CastResult.nothing();
     } else {
       costs.operations(Mth.floor(count));
-      return CastResult.success(Mth.floor(count), Mth.floor(cooldown * count));
+      return CastResult.success(Mth.floor(count), Mth.floor(instance.getCooldown()* count));
     }
   }
 

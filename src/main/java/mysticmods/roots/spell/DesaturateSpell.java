@@ -77,7 +77,7 @@ public class DesaturateSpell extends Spell {
     stats.setSaturation(Math.min(stats.getExhaustionLevel(), food));
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new DesaturateScreenFXPacket(originalHealth, pPlayer.getHealth(), originalFood, food));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new HealFXPacket(pPlayer.getId(), healed));
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 
   @Override

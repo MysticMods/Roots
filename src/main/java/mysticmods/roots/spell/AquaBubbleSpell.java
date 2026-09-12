@@ -89,6 +89,6 @@ public class AquaBubbleSpell extends Spell {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, 0, false, false), pPlayer);
     pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, absorption, false, false), pPlayer);
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastAquaBubbleFXPacket(pPlayer.getId()));
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 }

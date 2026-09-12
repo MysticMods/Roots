@@ -105,7 +105,7 @@ public class GeasSpell extends Spell {
     }
 
     double scaleFactor = Math.sqrt(hpAffected) * 1.5;
-    return CastResult.success(affected, (int) Math.min(cooldown * scaleFactor, maxCooldown));
+    return CastResult.success(affected, (int) Math.min(instance.getCooldown()* scaleFactor, maxCooldown));
   }
 
   private int affect(Player player, LivingEntity entity) {

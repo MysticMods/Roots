@@ -62,7 +62,7 @@ public class DandelionWindsSpell extends Spell {
 
     SnapshotHelper.addLiving(pPlayer, ModSerializers.DANDELION_WINDS.get(), new DandelionWindsSnapshot(pPlayer, curDuration, curChance, instance.has(ModModifiers.DANDELION_WINDS_VORTEX), curVortex, instance.has(ModModifiers.DANDELION_WINDS_GUSTS), curGusts));
     pPlayer.addEffect(new MobEffectInstance(ModEffects.DANDELION_WINDS, curDuration, 0, false, false), pPlayer);
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 
   @Override

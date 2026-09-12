@@ -202,7 +202,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
         }
       }
     }
-    return CastResult.tickFromCosting(cooldown, costs);
+    return CastResult.tickFromCosting(instance.getCooldown(), costs);
   }
 
   private static void tryMoisturizeGround(Level pLevel, Costing costs, ISpellInstance instance, BlockPos pos) {

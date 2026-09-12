@@ -168,7 +168,7 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   }
 
   default SpellType.Charge getChargeType() {
-    return asSpell().getChargeType();
+    return asSpell().getChargeType(this);
   }
 
   @Override
@@ -180,8 +180,8 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
     return asSpell().getType(this);
   }
 
-  default int getDefaultCooldown() {
-    return asSpell().getCooldown();
+  default int getCooldown () {
+    return asSpell().getCooldown(this);
   }
 
   default boolean hasBlockTarget(Player pPlayer) {

@@ -78,7 +78,7 @@ public class DecaySpell extends TwoRadiusSpell {
 
     costs.operations(totalDecayed);
 
-    int newCooldown = cooldown + (int) Math.floor(heartModifier * Math.abs(heartsDecayed));
+    int newCooldown = instance.getCooldown() + (int) Math.floor(heartModifier * Math.abs(heartsDecayed));
 
     if (bossFound) {
       newCooldown = (int) Math.floor(newCooldown * bossModifier);

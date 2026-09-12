@@ -15,7 +15,7 @@ public record LayeredProperty(
     String descriptionTooltipExtendedId,
     Supplier<Component[]> componentGetter,
     TextColor color,
-    @Nullable DataComponentType<? extends Cycling<?>> component,
+    @Nullable DataComponentType<? extends Cycling<?>> cycleComponent,
     float predicateValue) {
   public LayeredProperty(LayeredProperties.LayerSet base) {
     this(base.cast(), base.charge(), base.color1(), base.color2(), base.descriptionId(), base.descriptionTooltipId(), base.descriptionTooltipExtendedId(), base.componentGetter(), base.color(), base.component(), base.predicateValue());

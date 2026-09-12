@@ -32,7 +32,7 @@ public class MagnetismSpell extends TwoRadiusSpell {
     } else {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastMagnetismFXPacket(pPlayer.getId()));
       costs.operations(pulled);
-      return CastResult.success(pulled, cooldown * pulled);
+      return CastResult.success(pulled, instance.getCooldown()* pulled);
     }
   }
 

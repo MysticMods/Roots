@@ -93,7 +93,7 @@ public class LifeDrainSpell extends Spell {
     } else {
       PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastLifeDrainFXPacket(pPlayer.getId(), distance, angle + (int) (angle * 0.3)));
       costs.operations(count);
-      return CastResult.success(count, cooldown);
+      return CastResult.success(count, instance.getCooldown());
     }
   }
 

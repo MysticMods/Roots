@@ -155,6 +155,6 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       return CastResult.nothing();
     }
 
-    return CastResult.success(totalDamaged, cooldown);
+    return CastResult.success(totalDamaged, instance.getCooldown());
   }
 }

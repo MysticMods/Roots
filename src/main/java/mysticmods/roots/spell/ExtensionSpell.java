@@ -51,7 +51,7 @@ public class ExtensionSpell extends TwoRadiusSpell {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.SENSE_DANGER, senseDangerDuration, 0, false, false), pPlayer);
     SnapshotHelper.addLiving(pPlayer, ModSerializers.EXTENSION.get(), new ExtensionSnapshot(pPlayer, getMaxDuration(), getRadiusZX(), getRadiusY()));
     PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastExtensionFXPacket(pPlayer.getId()));
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 
   @Override

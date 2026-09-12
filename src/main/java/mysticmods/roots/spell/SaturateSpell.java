@@ -144,7 +144,7 @@ public class SaturateSpell extends Spell {
         pPlayer.getInventory().placeItemBackInInventory(result);
       }
     }
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 
   private float saturation(ItemStack stack, Player pPlayer, ISpellInstance spell) {

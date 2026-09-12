@@ -75,7 +75,7 @@ public class LightDrifterSpell extends Spell {
     SnapshotHelper.addLiving(drifter, ModSerializers.LIGHT_DRIFTER.get(), snapshot2);
     pPlayer.addEffect(new MobEffectInstance(ModEffects.LIGHT_DRIFTER, duration), pPlayer);
     PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new ClientboundLightDrifterSyncPacket(drifter.getId()));
-    return CastResult.success(cooldown);
+    return CastResult.success(instance.getCooldown());
   }
 
   @Override
