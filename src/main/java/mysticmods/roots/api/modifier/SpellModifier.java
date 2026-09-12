@@ -30,6 +30,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   protected String descriptionTooltipId;
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
+  protected Component[] transformerExtendedDescription = null;
 
   public SpellModifier(CostInstance defaultCosts, ResourceKey<Spell> applicable) {
     this(defaultCosts, applicable, SpellType.Condition.ALWAYS);
@@ -64,11 +65,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     this(defaultCosts, parent, applicable, GroupId.NONE, conflicts);
   }
 
-  @Override
-  protected TagKey<SpellModifier> getTransformingTag() {
-    return RootsTags.SpellModifiers.TRANSFORMING_MODIFIER;
-  }
-
   @SafeVarargs
   public SpellModifier(CostInstance defaultCosts, @Nullable ResourceKey<SpellModifier> parent, ResourceKey<Spell> applicable, GroupId groupId, ResourceKey<SpellModifier>... conflicts) {
     super(defaultCosts, parent, applicable, conflicts);
@@ -93,8 +89,21 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   }
 
-  public Component[] createExtendedDescriptionComponents() {
+  protected Component[] createExtendedDescriptionComponents() {
     return getApplicableHolder().value().createModifierDescriptionComponents(this);
+  }
+
+  public Component[] getOrCreateTransformerExtendedDescriptionComponents () {
+    if (transformerExtendedDescription == null) {
+      this.transformerExtendedDescription = createTransformerExtendedDescriptionComponents();
+    }
+
+    return this.transformerExtendedDescription;
+  }
+
+  // TODO:
+  protected Component[] createTransformerExtendedDescriptionComponents () {
+    return new Component[]{};
   }
 
   @Override

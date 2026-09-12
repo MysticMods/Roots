@@ -15,6 +15,7 @@ import mysticmods.roots.spell.*;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.Mth;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -299,13 +300,23 @@ public class ModSpells {
           .type(SpellType.Cast.CONTINUOUS)
           .charge(SpellType.Charge.OPERATION)
           .color(0x30ff30, 0xc0ffc0)
-/*          .color(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), 0x157318, 0x13c3eb)*/
           .cost(() -> ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)
           .textColor(ChatFormatting.YELLOW)
-/*          .textColor(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), ChatFormatting.YELLOW)*/
-/*          .id(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), Spells.RAMPANT_GROWTH.location())*/
-/*          .predicate(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH.getKey(), 0.5f)*/
-          .cycle(ModAttachments.AOE_GROWTH_MODE.get(), AOEGrowthMode.EVERYTHING)
+          .transformer(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH, (mod, transformer) -> transformer
+              .cycle(ModAttachments.AOE_GROWTH_MODE.get())
+              .predicate(0.5f)
+              .textColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))
+              .color(0x157318, 0x13c3eb)
+              .description(mod.getOrCreateTransformerDescriptionId())
+              .extended(mod.getOrCreateTransformerDescriptionExtendedTooltipId())
+              .tooltip(mod.getOrCreateTransformerDescriptionTooltipId())
+              .component(mod::getOrCreateTransformerExtendedDescriptionComponents)
+          )
+          .transformer(ModModifiers.GROWTH_INFUSION_FERTILIZER, (mod, transformer) -> transformer
+              .cast(SpellType.Cast.INSTANT)
+              .charge(SpellType.Charge.INSTANCE)
+              .predicate(0.6f))
+          .component(ModAttachments.AOE_GROWTH_MODE.get(), AOEGrowthMode.EVERYTHING)
           .cooldown(ModSpells.GROWTH_INFUSION_COOLDOWN)
           .reach(ModSpells.GROWTH_INFUSION_ADDED_REACH)
           .radius(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_ZX, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)

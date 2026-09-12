@@ -45,8 +45,7 @@ import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance> {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
@@ -612,6 +611,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this.transformer(modifier.getKey(), transformer);
     }
 
+    public Properties transformer (Holder<SpellModifier> modifier, BiFunction <SpellModifier, Transformer, Transformer> operator) {
+      return this.transformer(modifier.getKey(), operator.apply(modifier.value(), new Spell.Transformer()));
+    }
+
     DataComponentMap buildAndValidateComponents() {
       DataComponentMap datacomponentmap = this.buildComponents();
       return validateComponents(datacomponentmap);
@@ -647,7 +650,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Transformer unit(SpellType.Charge unitType) {
+    public Transformer charge(SpellType.Charge unitType) {
       this.unitType = unitType;
       return this;
     }
@@ -658,6 +661,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
+    // TODO: Supplier<String>
     public Transformer description(String descriptionId) {
       this.descriptionId = descriptionId;
       return this;
@@ -673,7 +677,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Transformer text(TextColor textColor) {
+    public Transformer textColor(TextColor textColor) {
       this.textColor = textColor;
       return this;
     }

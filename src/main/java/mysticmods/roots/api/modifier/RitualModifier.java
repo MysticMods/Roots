@@ -25,11 +25,6 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   }
 
   @Override
-  protected TagKey<RitualModifier> getTransformingTag() {
-    return RootsTags.RitualModifiers.TRANSFORMING_MODIFIER;
-  }
-
-  @Override
   protected DataMapType<RitualModifier, CostInstance> getDataMapType() {
     return DataMaps.RITUAL_MODIFIER_COST_DATA;
   }
