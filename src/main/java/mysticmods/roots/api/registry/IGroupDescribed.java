@@ -23,7 +23,7 @@ public interface IGroupDescribed {
 
   default MutableComponent getGroupName(int count) {
     if (!canGroup() || count == 0 || getGroupKey().isEmpty()) {
-      throw new IllegalStateException("Tried to get cycleComponent for IGroupDescribed '" + this + "' where the object is not configured to be groupable.");
+      throw new IllegalStateException("Tried to get component for IGroupDescribed '" + this + "' where the object is not configured to be groupable.");
     }
     return Component.translatable(this.getGroupDescriptionId(), count);
   }
