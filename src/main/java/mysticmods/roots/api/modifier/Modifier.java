@@ -26,6 +26,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   @Nullable
   protected CostInstance costs;
   private String descriptionId;
+  private int depth = 0;
 
   @SafeVarargs
   public Modifier(CostInstance defaultCosts, @Nullable ResourceKey<T> parent, ResourceKey<V> applicable, ResourceKey<T>... conflicts) {
@@ -56,10 +57,15 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   @Override
+  @Nullable
+  public abstract Holder<T> getParentHolder();
+
+  @Override
   public ResourceKey<V> getApplicable() {
     return applicable;
   }
 
+  @Override
   public abstract Holder<V> getApplicableHolder();
 
   @Override
@@ -78,7 +84,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId(getSignifier(), builtInRegistryHolder().getKey().location());
+      this.descriptionId = Util.makeDescriptionId(getSignifier(), getSelf().location());
     }
 
     return this.descriptionId;
@@ -137,5 +143,15 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   @Override
   public int hashCode() {
     return getSelf().hashCode();
+  }
+
+  @Override
+  public void setDepth(int depth) {
+    this.depth = depth;
+  }
+
+  @Override
+  public int depth() {
+    return this.depth;
   }
 }

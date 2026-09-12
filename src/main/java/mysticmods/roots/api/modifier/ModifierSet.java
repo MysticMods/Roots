@@ -7,10 +7,7 @@ import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.stream.Stream;
@@ -26,21 +23,28 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
   private final int hash;
   private final int transformingHash;
 
+  private static final Comparator<ResourceKey<?>> KEY_ORDER =
+      Comparator.<ResourceKey<?>>comparingInt(ModifierTree::getDepth).thenComparing(Comparator.naturalOrder());
+
+  private static final Comparator<Modifier<?, ?>> MODIFIER_ORDER =
+      Comparator.<Modifier<?, ?>>comparingInt(Modifier::depth)
+          .thenComparing(Modifier::getSelf);
+
   @SafeVarargs
   public ModifierSet(T... elements) {
     this(Arrays.asList(elements));
   }
 
   public ModifierSet(Collection<T> elements) {
-    this.internal = ImmutableSortedSet.copyOf(elements);
+    this.internal = ImmutableSortedSet.copyOf(MODIFIER_ORDER, elements);
     if (!elements.isEmpty()) {
       this.firstElement = elements.stream().findFirst().orElse(null);
     } else {
       this.firstElement = null;
     }
     this.internalKeys = elements.stream().map(Modifier::getSelf)
-        .collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
-    this.transformingKeys = elements.stream().filter(Modifier::isTransforming).map(Modifier::getSelf).collect(ImmutableSortedSet.toImmutableSortedSet(Ordering.natural()));
+        .collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
+    this.transformingKeys = elements.stream().filter(Modifier::isTransforming).map(Modifier::getSelf).collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
     this.hash = this.internal.hashCode();
     this.transformingHash = this.transformingKeys.hashCode();
   }

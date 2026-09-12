@@ -1,10 +1,8 @@
 package mysticmods.roots.api.modifier;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import com.sun.jna.platform.unix.Resource;
+import it.unimi.dsi.fastutil.objects.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.util.SetUtils;
 import net.minecraft.core.Holder;
@@ -13,21 +11,23 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class ModifierTree<V, C extends Modifier<V, C>> {
+  private static final Object2IntMap<ResourceKey<?>> KEY_TO_DEPTH_CACHE = new Object2IntOpenHashMap<>();
+
+  public static int getDepth (ResourceKey<?> key) {
+    return KEY_TO_DEPTH_CACHE.getOrDefault(key, 0);
+  }
+
   private final Holder<V> object;
   private final Map<ResourceKey<C>, Holder<C>> modifiers = new Object2ObjectOpenHashMap<>();
   private final Map<ResourceKey<C>, IModifierNode<V, C>> nodes = new Object2ObjectOpenHashMap<>();
   private final List<IModifierNode<V, C>> rootNodes = new ArrayList<>();
   private final Set<IModifierNode<V, C>> allNodes = new ReferenceOpenHashSet<>();
-
-  private final Set<ResourceKey<C>> transformingNodes = new ObjectOpenHashSet<>();
 
   private final Map<ResourceKey<C>, Set<ResourceKey<C>>> conflicts = new Object2ObjectOpenHashMap<>();
 
@@ -39,12 +39,9 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   private final Set<ResourceKey<C>> resetThisBuild = new ObjectOpenHashSet<>();
 
-  private final TagKey<C> transformingTag;
-
-  public ModifierTree(Holder<V> object, ResourceKey<? extends Registry<C>> registry, TagKey<C> transformingTag) {
+  public ModifierTree(Holder<V> object, ResourceKey<? extends Registry<C>> registry) {
     this.object = object;
     this.root = RootModifierNode.create(this, object, registry);
-    this.transformingTag = transformingTag;
   }
 
   private IModifierNode<V, C> getOrResetNode(ResourceKey<C> key) {
@@ -96,10 +93,6 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       return false;
     }
 
-    if (modifier.is(transformingTag)) {
-      transformingNodes.add(modifier.getKey());
-    }
-
     if (modifiers.containsKey(modifier.getKey())) {
       return true; // this was previously false but it's already added so it doesn't matter
     }
@@ -122,13 +115,19 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
     var parents = ancestors.computeIfAbsent(modifier.getKey(), k -> new HashSet<>());
     if (mod.getParent() == null) {
-      //node.setParent(root);
+      mod.setDepth(0);
+      node.setDepth(0);
+      KEY_TO_DEPTH_CACHE.put(modifier.getKey(), 0);
       rootNodes.add(node);
     } else {
       IModifierNode<V, C> parentNode = getOrResetNode(mod.getParent());
       parentNode.addChild(node);
       parents.add(mod.getParent());
       node.setParent(parentNode);
+      int myDepth = parentNode.depth() + 1;
+      mod.setDepth(myDepth);
+      node.setDepth(myDepth);
+      KEY_TO_DEPTH_CACHE.put(modifier.getKey(), myDepth);
       if (modifiers.get(mod.getParent()) == null) {
         missing.add(mod.getParent());
       }
@@ -156,14 +155,6 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
 
   public void position() {
     ModifierNodePosition.run(this);
-  }
-
-  public boolean isTransforming(ResourceKey<C> key) {
-    return transformingNodes.contains(key);
-  }
-
-  public boolean isTransforming(C modifier) {
-    return isTransforming(modifier.getSelf());
   }
 
   // TODO: Handle this better because it's only in the instance
@@ -205,25 +196,6 @@ public class ModifierTree<V, C extends Modifier<V, C>> {
       throw new NullPointerException("No holder for key " + key);
     }
     return result;
-  }
-
-  /**
-   * Equality-based reverse lookup over every holder in the tree. Nothing in this
-   * class uses it any more -- prefer {@link Modifier#getSelf()}, which is a
-   * direct registry lookup. Retained only for callers that genuinely need to
-   * resolve an equal-but-not-identical value.
-   *
-   * @deprecated use {@link Modifier#getSelf()}
-   */
-  @Deprecated
-  public static <V, C extends Modifier<V, C>> ResourceKey<C> getKey(ModifierTree<V, C> tree, C value) {
-    for (Holder<C> holder : tree.modifiers.values()) {
-      if (holder.value().equals(value)) {
-        return holder.getKey();
-      }
-    }
-
-    throw new NullPointerException("No holder found for value " + value);
   }
 
   public static final StreamCodec<RegistryFriendlyByteBuf, Map<String, ModifierInfo>> MODIFIER_INFO_STREAM_CODEC = ByteBufCodecs.map(Object2ObjectOpenHashMap::new, ByteBufCodecs.STRING_UTF8, ModifierInfo.STREAM_CODEC);

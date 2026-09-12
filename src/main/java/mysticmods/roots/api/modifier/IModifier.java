@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -14,12 +15,23 @@ public interface IModifier<V, T extends IModifier<V, T>> extends Comparable<IMod
   @Nullable
   ResourceKey<T> getParent();
 
+  @Nullable
+  Holder<T> getParentHolder ();
+
   ResourceKey<V> getApplicable();
+
+  Holder<V> getApplicableHolder ();
 
   Set<ResourceKey<T>> getConflicts();
 
   @NonNull
   ItemStack getIcon();
+
+  void setDepth (int depth);
+
+  default int depth () {
+    return 0;
+  }
 
   @Override
   default int compareTo(@NotNull IModifier<V, T> o) {

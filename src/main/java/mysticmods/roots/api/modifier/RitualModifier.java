@@ -12,6 +12,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 // TODO: Costs??? Do these really need costs?
 public class RitualModifier extends Modifier<Ritual, RitualModifier> {
@@ -31,6 +32,14 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   @Override
   protected DataMapType<RitualModifier, CostInstance> getDataMapType() {
     return DataMaps.RITUAL_MODIFIER_COST_DATA;
+  }
+
+  @Override
+  public @Nullable Holder<RitualModifier> getParentHolder() {
+    if (getParent() == null) {
+      return null;
+    }
+    return RootsRegistries.RITUAL_MODIFIERS.getHolder(getParent()).orElse(null);
   }
 
   @Override

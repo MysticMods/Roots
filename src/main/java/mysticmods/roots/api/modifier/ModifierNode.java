@@ -17,6 +17,7 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
   protected IModifierNode<V, T> parent;
   protected final List<IModifierNode<V, T>> children = new ArrayList<>();
   protected float x, y;
+  protected int depth = -1;
 
   protected ModifierNode(ResourceKey<T> key, @Nullable IModifierNode<V, T> parent) {
     this.key = key;
@@ -93,11 +94,21 @@ public class ModifierNode<V, T extends Modifier<V, T>> implements IModifierNode<
   }
 
   @Override
+  public int depth () {
+    return depth;
+  }
+
+  public void setDepth (int depth) {
+    this.depth = depth;
+  }
+
+  @Override
   public ModifierNode<V, T> reset() {
     this.x = 0;
     this.y = 0;
     this.parent = null;
     this.children.clear();
+    // TODO: Reset depth?
     return this;
   }
 }

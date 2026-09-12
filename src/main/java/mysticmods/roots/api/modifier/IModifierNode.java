@@ -24,6 +24,12 @@ public interface IModifierNode<V, T extends IModifier<V, T>> {
     // NO-OP
   }
 
+  void setDepth (int depth);
+
+  default int depth () {
+    return 0;
+  }
+
   default float x() {
     return 0;
   }

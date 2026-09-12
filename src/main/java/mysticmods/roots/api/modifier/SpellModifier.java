@@ -126,9 +126,18 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     return DataMaps.SPELL_MODIFIER_COST_DATA;
   }
 
+  @Override
   public Holder<Spell> getApplicableHolder() {
     //noinspection deprecation
     return RootsRegistries.SPELLS.getHolder(getApplicable()).orElse(null);
+  }
+
+  @Nullable
+  public Holder<SpellModifier> getParentHolder () {
+    if (getParent() == null) {
+      return null;
+    }
+    return RootsRegistries.SPELL_MODIFIERS.getHolder(getParent()).orElse(null);
   }
 
   @Override
