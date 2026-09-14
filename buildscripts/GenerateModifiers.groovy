@@ -28,6 +28,7 @@ import groovy.json.JsonSlurper
 //   icon              "minecraft:arrow" (item)  |  "spells/foo" (texture)
 //   parent            sibling modifier name within the same spell
 //   condition            SpellType.Condition value, e.g. "specified"
+//   transforms        true -> the modifier transforms the spell (Properties.transforms)
 //   no_token_item     true -> skip TokenItem registration
 //   excludes          one-directional conflicts (this modifier only)
 //   aliases           legacy registry names this modifier was renamed from;
@@ -82,7 +83,7 @@ def groups = []          // ordered list of group declarations
 def byId = [:]
 def ladderMembers = [:]  // "shatter/fortune" -> [tier ids...]
 
-def MODIFIER_KEYS = ['cost', 'icon', 'parent', 'condition',
+def MODIFIER_KEYS = ['cost', 'icon', 'parent', 'condition', 'transforms',
                      'no_token_item', 'constant', 'excludes', 'aliases'] as Set
 def LADDER_KEYS   = ['tiers', 'costs', 'group_description'] as Set
 // consumed by the ladder itself; every other key becomes a tier default
@@ -100,6 +101,9 @@ data.each { spellName, spell ->
     def unknown = m.keySet() - MODIFIER_KEYS
     if (unknown) fail("$id: unknown key(s) $unknown")
     checkCost(id, m.cost)
+    if (m.containsKey('transforms') && !(m.transforms instanceof Boolean)) {
+      fail("$id: transforms must be true or false")
+    }
     def rec = [
             id              : id,
             constant        : m.constant ?: "${SPELL}_${name}".toUpperCase(),
@@ -107,6 +111,7 @@ data.each { spellName, spell ->
             cost            : m.cost,
             icon            : m.icon,
             condition          : m.condition,
+            transforms      : m.transforms as boolean,
             tokenItem       : !(m.no_token_item as boolean),
             parent          : null,
             group           : null,
@@ -297,6 +302,7 @@ def propsChain = { rec ->
   def parts = [".source(ModSpells.${rec.spell})"]
   if (rec.parent) parts << ".parent(SpellModifiers.${rec.parent})"
   if (rec.condition) parts << ".condition(SpellType.Condition.${rec.condition.toUpperCase()})"
+  if (rec.transforms) parts << ".transforms()"
   if (rec.group) parts << ".group(${rec.group})"
   if (rec.conflicts) {
     parts << ".conflicts(${rec.conflicts.collect { "SpellModifiers.${it}" }.join(', ')})"

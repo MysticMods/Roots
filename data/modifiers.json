@@ -137,6 +137,7 @@
           "amount": "BASE_0031"
         }
       ],
+      "transforms": true,
       "icon": "spells/rampant_growth"
     },
     "hydration": {
@@ -153,6 +154,7 @@
         "amount": "BASE_0500"
       },
       "condition": "specified",
+      "transforms": true,
       "parent": "targeted_growth",
       "icon": "minecraft:bone_meal"
     }

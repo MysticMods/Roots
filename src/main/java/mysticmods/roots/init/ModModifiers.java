@@ -205,6 +205,7 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_RAMPANT_GROWTH =
       REGISTER.register("growth_infusion/rampant_growth", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.GROWTH_INFUSION_RAMPANT_GROWTH)
           .source(ModSpells.GROWTH_INFUSION)
+          .transforms()
           .conflicts(SpellModifiers.GROWTH_INFUSION_TARGETED_GROWTH)
           .costs(() -> CostInstance.of(Cost.negateBase(), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0031)))));
   public static final DeferredHolder<SpellModifier, SpellModifier> GROWTH_INFUSION_HYDRATION =
@@ -217,6 +218,7 @@ public class ModModifiers {
           .source(ModSpells.GROWTH_INFUSION)
           .parent(SpellModifiers.GROWTH_INFUSION_TARGETED_GROWTH)
           .condition(SpellType.Condition.SPECIFIED)
+          .transforms()
           .costs(() -> CostInstance.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0500))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_FRIENDLY_EARTH =
       REGISTER.register("sky_soarer/friendly_earth", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SKY_SOARER_FRIENDLY_EARTH)

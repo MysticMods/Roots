@@ -4,8 +4,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public interface IExtendedDescribedInstance<T> extends IExtendedDescribed {
-  default String getOrCreateTooltipExtendedDescriptionId(T instance) {
-    return getOrCreateTooltipExtendedDescriptionId();
+  String getOrCreateTooltipExtendedDescriptionId(T instance);
+
+  String getOrCreateTooltipDescriptionId(T instance);
+
+  Component[] getOrCreateDescriptionComponents(T instance);
+
+  default String getTooltipDescriptionId(T instance) {
+    return getOrCreateTooltipDescriptionId(instance);
   }
 
   default String getTooltipExtendedDescriptionId(T instance) {
@@ -13,19 +19,7 @@ public interface IExtendedDescribedInstance<T> extends IExtendedDescribed {
   }
 
   default MutableComponent getTooltipExtendedDescription(T instance) {
-    return Component.translatable(getOrCreateTooltipExtendedDescriptionId(instance), (Object[]) getOrCreateDescriptionComponents(instance));
-  }
-
-  default Component[] getOrCreateDescriptionComponents(T instance) {
-    return getOrCreateDescriptionComponents();
-  }
-
-  default String getOrCreateTooltipDescriptionId(T instance) {
-    return getOrCreateTooltipDescriptionId();
-  }
-
-  default String getTooltipDescriptionId(T instance) {
-    return getOrCreateTooltipDescriptionId(instance);
+    return Component.translatable(getTooltipExtendedDescriptionId(instance), (Object[]) getOrCreateDescriptionComponents(instance));
   }
 
   default MutableComponent getTooltipDescription(T instance) {

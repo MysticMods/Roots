@@ -121,6 +121,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   public abstract Component[] createModifierDescriptionComponents(SpellModifier spellModifier);
 
   @Override
+  public Component[] getOrCreateDescriptionComponents(ISpellInstance instance) {
+    return layeredProperties.get(instance).componentGetter().get();
+  }
+
+  @Override
   @Nullable
   public TextColor getTextColor() {
     return textColor;
