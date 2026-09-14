@@ -7,6 +7,7 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
+import mysticmods.roots.api.reference.SpellModifiers;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.item.TokenItem;

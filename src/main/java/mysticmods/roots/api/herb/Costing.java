@@ -54,7 +54,7 @@ public class Costing {
     modifierMap.defaultReturnValue(false);
     chargeType = parent.getChargeType();
     for (ICostedChild modifier : parent.getChildren()) {
-      if (modifier.getChargeType() == SpellType.Condition.ALWAYS) {
+      if (modifier.getChargeCondition() == SpellType.Condition.ALWAYS) {
         charge(modifier);
       }
     }
@@ -294,7 +294,7 @@ public class Costing {
     }
 
     for (ICostedChild modifier : parent.getChildren()) {
-      if (checkModifiers && ((modifier.getChargeType() == SpellType.Condition.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeType() == SpellType.Condition.ALWAYS) || maxOperations) {
+      if (checkModifiers && ((modifier.getChargeCondition() == SpellType.Condition.SPECIFIED && modifierMap.getBoolean(modifier)) || modifier.getChargeCondition() == SpellType.Condition.ALWAYS) || maxOperations) {
         for (Cost cost : modifier.getCosts().costs()) {
           if (cost.getType() == CostType.NEGATE_BASE_COST) {
             doNegate = true;

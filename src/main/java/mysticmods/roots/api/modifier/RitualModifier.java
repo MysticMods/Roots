@@ -16,12 +16,13 @@ import org.jetbrains.annotations.Nullable;
 
 // TODO: Costs??? Do these really need costs?
 public class RitualModifier extends Modifier<Ritual, RitualModifier> {
-  public RitualModifier(CostInstance defaultCosts, @NotNull ResourceKey<RitualModifier> parent, ResourceKey<Ritual> applicable) {
-    super(defaultCosts, parent, applicable);
+  public RitualModifier(Modifier.Properties<Ritual, RitualModifier, ?> properties) {
+    super(properties);
   }
 
-  public RitualModifier(CostInstance defaultCosts, ResourceKey<Ritual> applicable) {
-    super(defaultCosts, applicable);
+  @Override
+  public boolean isTransforming() {
+    return false;
   }
 
   @Override
@@ -50,11 +51,6 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   @Override
   protected String getSignifier() {
     return "ritual_modifier";
-  }
-
-  @Override
-  public SpellType.Condition getChargeType() {
-    return SpellType.Condition.ALWAYS;
   }
 
   @Override

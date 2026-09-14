@@ -10,11 +10,10 @@ import net.minecraft.util.StringRepresentable;
 import java.util.Locale;
 import java.util.function.IntFunction;
 
-public class SpellType {
-  public enum Charge implements StringRepresentable {
+public interface SpellType {
+  enum Charge implements StringRepresentable {
     INSTANCE,  // Charges per instance
-    OPERATION, // Charges amount per operation per instance
-    DEFAULT;  // For modifiers: charges the default spell
+    OPERATION; // Charges amount per operation per instance
 
     public static final Codec<Charge> CODEC = StringRepresentable.fromEnum(Charge::values);
     public static final IntFunction<Charge> BY_ID = ByIdMap.continuous(Charge::ordinal, Charge.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
@@ -26,7 +25,7 @@ public class SpellType {
     }
   }
 
-  public enum Condition implements StringRepresentable {
+  enum Condition implements StringRepresentable {
     ALWAYS, // Always applies the child cost to the parent
     SPECIFIED; // Only applies the child cost when specified
 
@@ -40,7 +39,7 @@ public class SpellType {
     }
   }
 
-  public enum Cast implements StringRepresentable {
+  enum Cast implements StringRepresentable {
     INSTANT,
     CONTINUOUS,
     CHARGED;

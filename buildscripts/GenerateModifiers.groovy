@@ -286,55 +286,23 @@ def iconExpr = { String icon ->
   ns == 'minecraft' ? "Items.${path.toUpperCase()}" : "ModItems.${path.toUpperCase()}.value()"
 }
 
-// The SpellModifier overloads that actually exist. A SpellType.Condition can only
-// be passed alongside a parent slot AND an explicit GroupId, so those are
-// forced on rather than authored.
-def LEGAL_SHAPES = [
-        ['cost', 'spell'],
-        ['cost', 'spell', 'group'],
-        ['cost', 'spell', 'condition'],
-        ['cost', 'parent', 'spell'],
-        ['cost', 'parent', 'spell', 'group'],
-        ['cost', 'parent', 'spell', 'condition', 'group'],
-        ['cost', 'parent', 'spell', 'conflicts'],
-        ['cost', 'parent', 'spell', 'group', 'conflicts'],
-        ['cost', 'parent', 'spell', 'condition', 'group', 'conflicts'],
-] as Set
-
-def ctorShape = { rec ->
-  // a condition type with a group has no parentless overload, so force the slot
-  def parentSlot = rec.parent || rec.conflicts || (rec.condition && rec.group)
-  def shape = ['cost']
-  if (parentSlot) shape << 'parent'
-  shape << 'spell'
-  if (rec.condition) shape << 'condition'
-  if (rec.group || (rec.condition && parentSlot)) shape << 'group'
-  if (rec.conflicts) shape << 'conflicts'
-  shape
-}
-
-def ctorArgs = { rec ->
-  ctorShape(rec).collectMany { part ->
-    switch (part) {
-      case 'cost':      return [costExpr(rec.cost)]
-      case 'parent':    return [rec.parent ? "ModModifiers.${rec.parent}.getKey()" : 'null']
-      case 'spell':     return ["ModSpells.${rec.spell}.getKey()"]
-      case 'condition':    return ["SpellType.Condition.${rec.condition.toUpperCase()}"]
-      case 'group':     return [rec.group ?: 'GroupId.NONE']
-      case 'conflicts': return rec.conflicts.collect { "ModModifiers.${it}.getKey()" }
-    }
-  }.join(', ')
-}
-
-flat.each { rec ->
-  def shape = ctorShape(rec)
-  if (!LEGAL_SHAPES.contains(shape)) fail("$rec.id: no SpellModifier overload for $shape")
-}
-
-if (errors) {
-  def report = (["Modifier data is invalid:"] + errors.unique().collect { "  - $it" }).join("\n")
-  // never System.exit here: this script also runs in-process inside Gradle
-  throw new IllegalStateException(report)
+// SpellModifier takes a SpellModifier.Properties builder, so every combination
+// of parts is expressible and there are no overload shapes left to police: a
+// part is emitted when the data has it and omitted when it does not. Absent
+// parent, group and condition all have defaults on Properties (null, NONE,
+// ALWAYS), so nothing has to be forced on to reach a legal signature.
+// `costs` is the one exception: it is always emitted, empty included, because
+// SpellModifier's constructor dereferences properties.costs eagerly.
+def propsChain = { rec ->
+  def parts = [".source(ModSpells.${rec.spell})"]
+  if (rec.parent) parts << ".parent(SpellModifiers.${rec.parent})"
+  if (rec.condition) parts << ".condition(SpellType.Condition.${rec.condition.toUpperCase()})"
+  if (rec.group) parts << ".group(${rec.group})"
+  if (rec.conflicts) {
+    parts << ".conflicts(${rec.conflicts.collect { "SpellModifiers.${it}" }.join(', ')})"
+  }
+  parts << ".costs(() -> ${costExpr(rec.cost)})"
+  parts
 }
 
 def HEADER = '// GENERATED FILE - DO NOT EDIT.\n' +
@@ -385,9 +353,13 @@ def groupsBlock = block(groups.collect { g ->
           (g.description ? "group(\"${g.name}\", true);" : "group(\"${g.name}\");")
 })
 
+// Properties wants the modifier's own ResourceKey; SpellModifiers holds one for
+// every id, so the registration just names it, and parents and conflicts name
+// theirs the same way rather than reaching back through a DeferredHolder.
 def modifiersBlock = block(flat.collect { rec ->
-  "  public static final DeferredHolder<SpellModifier, SpellModifier> ${rec.constant} = " +
-          "REGISTER.register(\"${rec.id}\", () -> new SpellModifier(${ctorArgs(rec)}));"
+  "  public static final DeferredHolder<SpellModifier, SpellModifier> ${rec.constant} =\n" +
+          "      REGISTER.register(\"${rec.id}\", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.${rec.constant})\n" +
+          propsChain(rec).collect { "          $it" }.join('\n') + "));"
 })
 
 def aliasBlock = block(aliasPairs.collectMany { a ->
@@ -407,6 +379,16 @@ emit('mysticmods/roots/init/ModModifiers.java', [
         MODIFIERS  : modifiersBlock,
         ALIASES    : aliasBlock,
         TOKEN_ITEMS: tokenBlock,
+])
+
+// ---------------------------------------------------------------- keys
+def keysBlock = block(flat.collect { rec ->
+  "  public static final ResourceKey<SpellModifier> ${rec.constant} = key(\"${rec.id}\");"
+})
+
+emit('mysticmods/roots/api/reference/SpellModifiers.java', [
+        HEADER: HEADER,
+        KEYS  : keysBlock,
 ])
 
 // ---------------------------------------------------------------- provider

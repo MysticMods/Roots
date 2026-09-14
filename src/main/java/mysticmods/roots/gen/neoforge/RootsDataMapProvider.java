@@ -72,13 +72,6 @@ public final class RootsDataMapProvider extends DataMapProvider {
       builder3.add(modifier.builtInRegistryHolder(), modifier.getDefaultCosts(), false);
     });
 
-    Builder<CostInstance, RitualModifier> builder18 = builder(DataMaps.RITUAL_MODIFIER_COST_DATA)
-        .replace(false);
-
-    RootsRegistries.RITUAL_MODIFIERS.stream().forEach(modifier -> {
-      builder18.add(modifier.builtInRegistryHolder(), modifier.getDefaultCosts(), false);
-    });
-
     Builder<PropertyDataMap, Spell> builder4 = builder(DataMaps.SPELL_PROPERTY_DATA)
         .replace(false);
     RootsRegistries.SPELLS.stream().forEach(spell -> {
