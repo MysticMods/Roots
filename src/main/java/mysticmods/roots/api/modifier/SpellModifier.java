@@ -34,7 +34,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @NotNull
   protected final GroupId groupId;
 
-
   protected final CostInstance defaultCosts;
   @javax.annotation.Nullable
   protected CostInstance costs;
@@ -70,19 +69,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   protected Component[] createExtendedDescriptionComponents() {
     return getApplicableHolder().value().createModifierDescriptionComponents(this);
-  }
-
-  public Component[] getOrCreateTransformerExtendedDescriptionComponents() {
-    if (transformerExtendedDescription == null) {
-      this.transformerExtendedDescription = createTransformerExtendedDescriptionComponents();
-    }
-
-    return this.transformerExtendedDescription;
-  }
-
-  // TODO:
-  protected Component[] createTransformerExtendedDescriptionComponents() {
-    return new Component[]{};
   }
 
   @Override
@@ -186,30 +172,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     if (costs != null) {
       this.costs = costs;
     }
-  }
-
-  public String getOrCreateTransformerDescriptionId() {
-    if (transformerDescriptionId == null) {
-      this.transformerDescriptionId = Util.makeDescriptionId(getSignifier() + "_transformer", getApplicable().location()
-          .withSuffix("/" + getSelf().location().getPath()).withSuffix("/description"));
-    }
-    return transformerDescriptionId;
-  }
-
-  public String getOrCreateTransformerDescriptionTooltipId() {
-    if (transformerDescriptionTooltipId == null) {
-      this.transformerDescriptionTooltipId = Util.makeDescriptionId(getSignifier() + "_transformer", getApplicable().location()
-          .withSuffix("/" + getSelf().location().getPath()).withSuffix("/description/tooltip"));
-    }
-    return transformerDescriptionTooltipId;
-  }
-
-  public String getOrCreateTransformerDescriptionExtendedTooltipId() {
-    if (transformerDescriptionExtendedTooltipId == null) {
-      this.transformerDescriptionExtendedTooltipId = Util.makeDescriptionId(getSignifier(), getApplicable().location()
-          .withSuffix("/" + getSelf().location().getPath()).withSuffix("/description/tooltip/extended"));
-    }
-    return transformerDescriptionExtendedTooltipId;
   }
 
   @Override
