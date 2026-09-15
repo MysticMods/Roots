@@ -203,7 +203,7 @@ public class RootsClientHooks {
 
     MutableComponent base = Component.empty().append(prefix).append(boundKey.getTranslatedKeyMessage()).append(suffix);
 
-    if (tooltipFlag.hasControlDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasShiftDown()) {
+    if (tooltipFlag.hasControlDown() || tooltipFlag.hasAltDown()) {
       return Component.translatable("roots.tooltip.extended_key_binding", base, Component.translatable(boundKey.getCategory()), Component.translatable(boundKey.getName()));
     } else {
       return base;
