@@ -50,7 +50,7 @@ import java.util.List;
 // - Handle texture colour change
 // - Handle icon change(?)
 public class GrowthInfusionSpell extends TwoRadiusSpell {
-  private int rampantInterval, count, growthInterval, boneMealCount, boneMealInterval;
+  private int rampantInterval, count, growthInterval, boneMealCount, boneMealCooldown;
 
   public GrowthInfusionSpell(Properties properties) {
     super(properties);
@@ -63,7 +63,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
     this.count = properties.get(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT);
     this.growthInterval = properties.get(ModSpells.GROWTH_INFUSION_INTERVAL);
     this.boneMealCount = properties.get(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT);
-    this.boneMealInterval = properties.get(ModSpells.GROWTH_INFUSION_BONE_MEAL_INTERVAL);
+    this.boneMealCooldown = properties.get(ModSpells.GROWTH_INFUSION_BONE_MEAL_COOLDOWN);
   }
 
   // TODO: Automate via properties
@@ -167,7 +167,7 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       BlockPos pos = result.getBlockPos();
       BlockState at = pLevel.getBlockState(pos);
       if (instance.has(ModModifiers.GROWTH_INFUSION_FERTILIZER)) {
-        if (ticks % boneMealInterval == 0 && GrowthUtil.applyBoneMeal(boneMealCount, pLevel, pos, pPlayer)) {
+        if (GrowthUtil.applyBoneMeal(boneMealCount, pLevel, pos, pPlayer)) {
           tryMoisturizeGround(pLevel, costs, instance, pos);
           // TODO: Visual
 
@@ -203,6 +203,15 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       }
     }
     return CastResult.tickFromCosting(instance.getCooldown(), costs);
+  }
+
+  @Override
+  public int getCooldown(ISpellInstance instance) {
+    if (instance.has(ModModifiers.GROWTH_INFUSION_FERTILIZER)) {
+      return boneMealCooldown;
+    }
+
+    return cooldown;
   }
 
   private static void tryMoisturizeGround(Level pLevel, Costing costs, ISpellInstance instance, BlockPos pos) {
@@ -244,9 +253,9 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
       };
     } else if (spellModifier.is(ModModifiers.GROWTH_INFUSION_FERTILIZER)) {
       return new Component[]{
-          Component.literal(String.valueOf(boneMealCount)),
+          Component.literal(String.valueOf(boneMealCount))/*,
           Component.literal(String.format("%.1f", boneMealInterval / 20.0)),
-          Component.literal(String.valueOf(boneMealInterval))
+          Component.literal(String.valueOf(boneMealInterval))*/
       };
     }
     return new Component[]{};

@@ -554,18 +554,18 @@
         "id": "roots:growth_infusion/bone_meal_count",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The number of stacks of bone meal to be applied per interval when the fertilizer modifier is active.",
-          "default_value": 1,
-          "value": 1
+          "comment": "The number of stacks of bone meal to be applied per cast when then Fertilization modifier is active.",
+          "default_value": 5,
+          "value": 5
         }
       },
       {
-        "id": "roots:growth_infusion/bone_meal_interval",
+        "id": "roots:growth_infusion/bone_meal_cooldown",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The interval between bone meal applications in ticks.",
-          "default_value": 10,
-          "value": 10
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 100,
+          "value": 100
         }
       }
     ],
