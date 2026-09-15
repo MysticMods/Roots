@@ -28,9 +28,9 @@ import java.util.function.Supplier;
 public class SpellModifier extends Modifier<Spell, SpellModifier> implements IExtendedDescribed, ICostedChild {
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
 
-  protected final SpellType.Cast castType;
-  protected final SpellType.Charge chargeType;
-  protected final SpellType.Condition conditionType;
+  protected final SpellType.Charge chargeType; // If null, use the spell default; otherwise, unless a transformer(?), a chargeType of `OPERATION` will store the number of operations of this instance of the modifier; a charge type of `INSTANCE` will only charge once per spell -- depending on the condition type.
+  // If null, it will use the spell's code, in which case if it's `OPERATION` it will be charged for every operation if specified, etc.
+  protected final SpellType.Condition conditionType; // If `ALWAYS`, it's always charged. If `SPECIFIED`, it must be specified via `costs.charge(SpellModifier)`.
   @NotNull
   protected final GroupId groupId;
 
@@ -41,12 +41,8 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   protected String descriptionTooltipId;
   protected String descriptionTooltipExtendedId;
-  private String transformerDescriptionId = null;
-  private String transformerDescriptionTooltipId = null;
-  private String transformerDescriptionExtendedTooltipId = null;
   private String groupDescriptionId = null;
   protected Component[] extendedDescription = null;
-  protected Component[] transformerExtendedDescription = null;
 
   public SpellModifier(SpellModifier.Properties properties) {
     super(properties);
@@ -54,7 +50,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     this.groupId = properties.groupId;
     this.chargeType = properties.chargeType;
     this.conditionType = properties.conditionType;
-    this.castType = properties.castType;
     this.transforming = properties.transformer;
   }
 
@@ -185,7 +180,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   public static class Properties extends Modifier.Properties<Spell, SpellModifier, SpellModifier.Properties> {
     SpellType.Charge chargeType = null;
-    SpellType.Cast castType = null;
     SpellType.Condition conditionType = SpellType.Condition.ALWAYS;
     GroupId groupId = GroupId.NONE;
     Supplier<CostInstance> costs = null;
@@ -197,11 +191,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
     public final Properties charge (SpellType.Charge chargeType) {
       this.chargeType = chargeType;
-      return this;
-    }
-
-    public final Properties cast (SpellType.Cast castType) {
-      this.castType = castType;
       return this;
     }
 
