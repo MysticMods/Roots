@@ -8,6 +8,7 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.CostType;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -17,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record CostRemover<T>(Herb herbCost, CostType type,
+public record CostRemover<T>(Holder<Herb> herbCost, CostType type,
                              float value) implements DataMapValueRemover<T, CostInstance> {
   public static Codec<CostInstance> CODEC = CostInstance.CODEC;
 
   public static <T> Codec<CostRemover<T>> codec() {
-    return RecordCodecBuilder.create(instance -> instance.group(RootsRegistries.HERBS.byNameCodec().fieldOf("herb")
+    return RecordCodecBuilder.create(instance -> instance.group(RootsRegistries.HERBS.holderByNameCodec().fieldOf("herb")
             .forGetter(CostRemover::herbCost), CostType.CODEC.optionalFieldOf("type", null)
             .forGetter(CostRemover::type), Codec.FLOAT.optionalFieldOf("defaultValue", -1.0f).forGetter(CostRemover::value))
         .apply(instance, CostRemover::new));
@@ -31,8 +32,8 @@ public record CostRemover<T>(Herb herbCost, CostType type,
   @Override
   public Optional<CostInstance> remove(CostInstance object, Registry<T> arg, Either<TagKey<T>, ResourceKey<T>> either, T object2) {
     List<Cost> newCosts = new ArrayList<>(object.costs());
-    newCosts.removeIf(cost -> cost.getHerb()
-        .is(herbCost()) && (type() == null || cost.getType() == type()) && (value() == -1.0f || cost.getValue() == value()));
+    newCosts.removeIf(cost -> cost.getHerb().is(herbCost.getKey())
+        && (type() == null || cost.getType() == type()) && (value() == -1.0f || cost.getValue() == value()));
     return Optional.of(CostInstance.of(newCosts));
   }
 }

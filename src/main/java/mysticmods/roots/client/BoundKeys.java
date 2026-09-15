@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
-public class KeyBindings {
+public class BoundKeys {
   public static final String CATEGORY = "key.category.roots.general";
 
   public static final CastingTaggedSpell ADJUSTABLE = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_SPELL);

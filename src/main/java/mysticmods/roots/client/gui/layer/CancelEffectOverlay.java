@@ -1,7 +1,7 @@
 package mysticmods.roots.client.gui.layer;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.client.BoundKeys;
 import mysticmods.roots.client.KeyHandler;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
@@ -50,7 +50,7 @@ public class CancelEffectOverlay {
     guiGraphics.pose().pushPose();
     guiGraphics.pose()
         .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-    Component overlayMessageString = Component.translatable(instant ? "roots.gui.effect_cancel" : KeyHandler.isCancelingEffect() ? "roots.gui.effect_continue_canceling" : "roots.gui.effect_start_canceling", Component.keybind(KeyBindings.CANCEL_EFFECT.getName()), Component.translatable(cancelEffect.value()
+    Component overlayMessageString = Component.translatable(instant ? "roots.gui.effect_cancel" : KeyHandler.isCancelingEffect() ? "roots.gui.effect_continue_canceling" : "roots.gui.effect_start_canceling", Component.keybind(BoundKeys.CANCEL_EFFECT.getName()), Component.translatable(cancelEffect.value()
             .getDescriptionId()))
         .withStyle(ChatFormatting.BOLD);
     int k = font.width(overlayMessageString);

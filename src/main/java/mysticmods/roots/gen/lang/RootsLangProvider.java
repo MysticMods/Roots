@@ -9,7 +9,7 @@ import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.client.BoundKeys;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
 import mysticmods.roots.item.GramaryItem;
@@ -199,8 +199,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.advancements.pacifist.title", "An Untrue Pacifist");
     add("roots.advancements.pacifist.description", "Needlessly slaughtered one of nature's peaceful creatures.");
 
-    add(KeyBindings.CATEGORY, "Roots");
-    for (KeyMapping bind : KeyBindings.MAPPINGS) {
+    add(BoundKeys.CATEGORY, "Roots");
+    for (KeyMapping bind : BoundKeys.MAPPINGS) {
       String key = bind.getName();
       String[] segments = key.split("\\.");
       if (segments.length > 0) {

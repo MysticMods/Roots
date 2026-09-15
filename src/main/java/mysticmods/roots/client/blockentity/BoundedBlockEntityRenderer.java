@@ -3,7 +3,7 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.blockentity.Bounded;
-import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.client.BoundKeys;
 import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.client.gui.layer.HudOverlay;
 import mysticmods.roots.config.ConfigManager;
@@ -72,12 +72,12 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & Bounded> impleme
         pPoseStack.popPose();
       }
       if (ConfigManager.SHOW_INSERT_IN_GAME_MESSAGE.getAsBoolean() && HudOverlay.shouldShowInsert(pos)) {
-        Component overlayMessageString = Component.translatable("roots.hud.fake_menu", Component.keybind(KeyBindings.OPEN_FAKE_MENU.getName()), pBlockEntity.getBlockState()
+        Component overlayMessageString = Component.translatable("roots.hud.fake_menu", Component.keybind(BoundKeys.OPEN_FAKE_MENU.getName()), pBlockEntity.getBlockState()
             .getBlock().getName());
         renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, pBlockEntity.getInsertOffset(), overlayMessageString);
       }
       if (ConfigManager.SHOW_DELETE_IN_GAME_MESSAGE.getAsBoolean() && HudOverlay.shouldShowDelete(pos)) {
-        Component overlayMessageString = Component.translatable("roots.hud.clear", Component.keybind(KeyBindings.CLEAR_CONTAINER.getName()), pBlockEntity.getBlockState()
+        Component overlayMessageString = Component.translatable("roots.hud.clear", Component.keybind(BoundKeys.CLEAR_CONTAINER.getName()), pBlockEntity.getBlockState()
             .getBlock().getName());
         renderText(pBlockEntity, pPoseStack, pBufferSource, pPackedLight, pPartialTick, pBlockEntity.getDeleteOffset(), overlayMessageString);
       }

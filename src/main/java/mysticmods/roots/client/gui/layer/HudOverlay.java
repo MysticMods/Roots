@@ -21,7 +21,7 @@ import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
-import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.client.BoundKeys;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -683,7 +683,7 @@ public class HudOverlay {
       guiGraphics.pose().pushPose();
       guiGraphics.pose()
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-      Component overlayMessageString = Component.translatable("roots.hud.fake_menu", Component.keybind(KeyBindings.OPEN_FAKE_MENU.getName()), level.getBlockState(getStoredBlockPos())
+      Component overlayMessageString = Component.translatable("roots.hud.fake_menu", Component.keybind(BoundKeys.OPEN_FAKE_MENU.getName()), level.getBlockState(getStoredBlockPos())
           .getBlock().getName());
 
       int k = font.width(overlayMessageString);
@@ -705,7 +705,7 @@ public class HudOverlay {
       guiGraphics.pose().pushPose();
       guiGraphics.pose()
           .translate((float) (guiGraphics.guiWidth() / 2), (float) (guiGraphics.guiHeight() - Math.max(yShift, 68)), 0.0F);
-      Component overlayMessageString = Component.translatable("roots.hud.clear", Component.keybind(KeyBindings.CLEAR_CONTAINER.getName()), level.getBlockState(getStoredBlockPos())
+      Component overlayMessageString = Component.translatable("roots.hud.clear", Component.keybind(BoundKeys.CLEAR_CONTAINER.getName()), level.getBlockState(getStoredBlockPos())
           .getBlock().getName());
 
       int k = font.width(overlayMessageString);

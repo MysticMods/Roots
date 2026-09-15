@@ -186,15 +186,15 @@ public class RootsClientHooks {
   }
 
   public static Component getStaffKeyBind() {
-    return KeyBindings.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
+    return BoundKeys.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
   }
 
   public static Component getStaffCycleKeyBind() {
-    return KeyBindings.CYCLE_STAFF_SPELL.getKey().getDisplayName();
+    return BoundKeys.CYCLE_STAFF_SPELL.getKey().getDisplayName();
   }
 
   public static Component getPouchKeyBind() {
-    return KeyBindings.OPEN_POUCH.getKey().getDisplayName();
+    return BoundKeys.OPEN_POUCH.getKey().getDisplayName();
   }
 
   public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
@@ -208,10 +208,10 @@ public class RootsClientHooks {
         tooltipComponents.add(CommonComponents.EMPTY);
       }
       if (stack.has(ModAttachments.DELETABLE)) {
-        tooltipComponents.add(Component.translatable("roots.tooltip.token.delete", Component.keybind(KeyBindings.DELETE_SPELL.getName())));
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.delete", Component.keybind(BoundKeys.DELETE_SPELL.getName())));
       }
       if (stack.has(ModAttachments.MODIFIABLE)) {
-        tooltipComponents.add(Component.translatable("roots.tooltip.token.modify", Component.keybind(KeyBindings.MODIFY_SPELL.getName())));
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.modify", Component.keybind(BoundKeys.MODIFY_SPELL.getName())));
       }
       return;
     } else if (minecraft.screen instanceof SpellModifierScreen) {
@@ -325,6 +325,6 @@ public class RootsClientHooks {
   }
 
   public static Component getModifySpellKeyBind() {
-    return KeyBindings.MODIFY_SPELL.getKey().getDisplayName();
+    return BoundKeys.MODIFY_SPELL.getKey().getDisplayName();
   }
 }

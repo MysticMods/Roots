@@ -70,7 +70,7 @@ public class KeyHandler {
       Holder<MobEffect> effect = instance.getEffect();
       if (effect.is(RootsTags.MobEffects.CANCELLABLE_EFFECTS)) {
         foundEffect = true;
-        if (KeyBindings.CANCEL_EFFECT.isDown()) {
+        if (BoundKeys.CANCEL_EFFECT.isDown()) {
           if (effect.is(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT)) {
             PacketDistributor.sendToServer(new ServerboundCancelEffectPacket(effect));
             cancelEffect = -1;
@@ -97,18 +97,18 @@ public class KeyHandler {
     }
 
     // Only in world
-    if (KeyBindings.OPEN_FAKE_MENU.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
+    if (BoundKeys.OPEN_FAKE_MENU.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
       PacketDistributor.sendToServer(new ServerboundFakeMenuPacket(HudOverlay.getStoredBlockPos()));
       return;
     }
 
     // Only in world
-    if (KeyBindings.CLEAR_CONTAINER.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
+    if (BoundKeys.CLEAR_CONTAINER.consumeClick() && HudOverlay.getStoredBlockPos() != null) {
       PacketDistributor.sendToServer(new ServerboundClearContainerPacket(HudOverlay.getStoredBlockPos()));
       return;
     }
 
-    if (KeyBindings.OPEN_REPUTATION.consumeClick()) {
+    if (BoundKeys.OPEN_REPUTATION.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Opening reputation screen via keybind");
       }
@@ -120,27 +120,27 @@ public class KeyHandler {
       return;
     }
 
-    if (KeyBindings.OPEN_POUCH.consumeClick()) {
+    if (BoundKeys.OPEN_POUCH.consumeClick()) {
       tryOpenPouch(mc);
       return;
     }
 
-    if (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
+    if (BoundKeys.OPEN_SPELL_LIBRARY.consumeClick()) {
       tryOpenLibrary(mc);
       return;
     }
 
-    if (KeyBindings.MODIFY_SPELL.consumeClick()) {
+    if (BoundKeys.MODIFY_SPELL.consumeClick()) {
       tryOpenLibrary(mc, true);
       return;
     }
 
-    if (KeyBindings.CYCLE_STAFF_SPELL.consumeClick()) {
+    if (BoundKeys.CYCLE_STAFF_SPELL.consumeClick()) {
       tryCycleStaff(mc);
       return;
     }
 
-    if (KeyBindings.CYCLE_SPELL_MODE.consumeClick()) {
+    if (BoundKeys.CYCLE_SPELL_MODE.consumeClick()) {
       if (ConfigManager.DEBUG_KEYBINDS.getAsBoolean()) {
         RootsAPI.LOG.error("Cycling adjustable spell data via keybind");
       }

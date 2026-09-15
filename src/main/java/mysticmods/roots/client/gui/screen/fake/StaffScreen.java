@@ -1,14 +1,12 @@
 package mysticmods.roots.client.gui.screen.fake;
 
-import com.mojang.blaze3d.platform.InputConstants;
-import mysticmods.roots.RootsClient;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.client.BoundKeys;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
@@ -209,11 +207,11 @@ public class StaffScreen extends RootsScreen {
 
   @Override
   public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-    if (keyCode == KeyBindings.OPEN_POUCH.getKey().getValue()) {
+    if (keyCode == BoundKeys.OPEN_POUCH.getKey().getValue()) {
       PacketDistributor.sendToServer(new ServerboundDebugScreenTick(hand, inventorySlot));
       return true;
     }
-    if (keyCode == KeyBindings.DELETE_SPELL.getKey().getValue()) {
+    if (keyCode == BoundKeys.DELETE_SPELL.getKey().getValue()) {
       StaffSpellButton toDeleteButton = null;
       for (StaffSpellButton button : staffSpellButtons) {
         if (isMouseInRelativeRange(lastMouseX, lastMouseY, button.getX(), button.getY(), button.getWidth(), button.getHeight())) {
@@ -229,7 +227,7 @@ public class StaffScreen extends RootsScreen {
         return true;
       }
     }
-    if (keyCode == KeyBindings.MODIFY_SPELL.getKey().getValue()) {
+    if (keyCode == BoundKeys.MODIFY_SPELL.getKey().getValue()) {
       StaffSpellButton toInsertButton = null;
       for (StaffSpellButton button : staffSpellButtons) {
         if (isMouseInRelativeRange(lastMouseX, lastMouseY, button.getX(), button.getY(), button.getWidth(), button.getHeight())) {
