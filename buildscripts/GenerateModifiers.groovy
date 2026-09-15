@@ -307,7 +307,7 @@ def propsChain = { rec ->
   if (rec.conflicts) {
     parts << ".conflicts(${rec.conflicts.collect { "SpellModifiers.${it}" }.join(', ')})"
   }
-  parts << ".costs(() -> ${costExpr(rec.cost)})"
+  parts << ".costs(${costExpr(rec.cost)})"
   parts
 }
 

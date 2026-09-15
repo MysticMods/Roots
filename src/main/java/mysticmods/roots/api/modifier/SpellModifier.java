@@ -46,7 +46,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   public SpellModifier(SpellModifier.Properties properties) {
     super(properties);
-    this.defaultCosts = properties.costs.get();
+    this.defaultCosts = properties.costs;
     this.groupId = properties.groupId;
     this.chargeType = properties.chargeType;
     this.conditionType = properties.conditionType;
@@ -182,8 +182,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     SpellType.Charge chargeType = null;
     SpellType.Condition conditionType = SpellType.Condition.ALWAYS;
     GroupId groupId = GroupId.NONE;
-    Supplier<CostInstance> costs = null;
-    // Spells-only?
+    CostInstance costs = null;
 
     public Properties(ResourceKey<SpellModifier> key) {
       super(key);
@@ -204,18 +203,18 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
       return this;
     }
 
-    public final Properties costs(Supplier<CostInstance> costs) {
+    public final Properties costs(CostInstance costs) {
       this.costs = costs;
       return this;
     }
 
-    public final Properties cost(Supplier<Cost> costs) {
-      this.costs = () -> CostInstance.of(costs.get());
+    public final Properties cost(Cost costs) {
+      this.costs = CostInstance.of(costs);
       return this;
     }
 
-    public final Properties cost(Supplier<Holder<Herb>> herb, double amount) {
-      this.costs = () -> CostInstance.add(herb.get(), amount);
+    public final Properties cost(Holder<Herb> herb, double amount) {
+      this.costs = CostInstance.add(herb, amount);
       return this;
     }
 

@@ -89,7 +89,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
     this.resourceKey = properties.resourceKey;
 
-    this.defaultCosts = properties.defaultCosts.get();
+    this.defaultCosts = properties.defaultCosts;
     this.components = properties.buildAndValidateComponents();
     this.reachProperty = properties.reachProperty;
     this.cooldownProperty = properties.cooldownProperty;
@@ -434,7 +434,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     DataComponentType<? extends Cycling<?>> cycleComponent;
     SpellType.Cast castType = SpellType.Cast.INSTANT;
     TextColor textColor;
-    Supplier<CostInstance> defaultCosts;
+    CostInstance defaultCosts;
     SpellType.Charge chargeType = SpellType.Charge.INSTANCE;
     int color1 = -1;
     int color2 = -1;
@@ -552,18 +552,18 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties costs(Supplier<CostInstance> costs) {
+    public Properties costs(CostInstance costs) {
       this.defaultCosts = costs;
       return this;
     }
 
-    public Properties cost(Supplier<Cost> costs) {
-      this.defaultCosts = () -> CostInstance.of(costs.get());
+    public Properties cost(Cost costs) {
+      this.defaultCosts = CostInstance.of(costs);
       return this;
     }
 
-    public Properties cost(Supplier<Holder<Herb>> herb, double amount) {
-      this.defaultCosts = () -> CostInstance.add(herb.get(), amount);
+    public Properties cost(Holder<Herb> herb, double amount) {
+      this.defaultCosts = CostInstance.add(herb, amount);
       return this;
     }
 
