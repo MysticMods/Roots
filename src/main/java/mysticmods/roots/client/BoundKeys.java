@@ -44,7 +44,7 @@ public class BoundKeys {
   public static final KeyMapping CANCEL_EFFECT = new KeyMapping("key.roots.cancel_effect", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_TAB, CATEGORY);
   public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.KEY_K, CATEGORY);
   public static final KeyMapping OPEN_POUCH = new KeyMapping("key.roots.open_pouch", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
-  public static final KeyMapping OPEN_REPUTATION = new KeyMapping("key.roots.open_reputation", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
+  public static final KeyMapping OPEN_REPUTATION = new KeyMapping("key.roots.open_reputation", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_SEMICOLON, CATEGORY);
   public static final KeyMapping CYCLE_SPELL_MODE = new KeyMapping("key.roots.cycle_spell_mode", HAS_ANY_ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
   public static final KeyMapping CYCLE_STAFF_SPELL = new KeyMapping("key.roots.cycle_staff_spell", HOLDING_STAFF, InputConstants.Type.KEYSYM, InputConstants.KEY_PAGEDOWN, CATEGORY);
   public static final KeyMapping OPEN_FAKE_MENU = new KeyMapping("key.roots.open_fake_menu", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);

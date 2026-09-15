@@ -28,33 +28,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class KeyHandler {
   private static int cancelEffect = -1;
-  private static boolean handledKeyThisTick = false;
 
   public static boolean isCancelingEffect() {
     return cancelEffect > 0;
   }
-
-/*  @SubscribeEvent
-  public static void onScrenKeyPressed (ScreenEvent.KeyReleased.Post event) {
-    if (!event.isCanceled()) {
-      Minecraft mc = Minecraft.getInstance();
-      if (mc.player.hasEffect(ModEffects.LIGHT_DRIFTER)) {
-        return;
-      }
-
-      if (KeyBindings.OPEN_POUCH.matches(event.getKeyCode(), event.getScanCode()) && KeyBindings.OPEN_POUCH.isConflictContextAndModifierActive()) {
-        tryOpenPouch(mc);
-        event.setCanceled(true);
-        return;
-      }
-
-      if (KeyBindings.OPEN_SPELL_LIBRARY.matches(event.getKeyCode(), event.getScanCode()) && KeyBindings.OPEN_SPELL_LIBRARY.isConflictContextAndModifierActive()) {
-        tryOpenLibrary(mc);
-        event.setCanceled(true);
-        return;
-      }
-    }
-  }*/
 
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post event) {
