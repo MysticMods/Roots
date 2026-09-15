@@ -231,6 +231,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.spell_mode.mode", "Mode");
     add("roots.spell_mode.mode_changed", "Mode changed to %s.");
 
+    add("roots.spell_modifier.transformed", "Transformed by %s.");
+
     addCyclingMode(AOEGrowthMode.values());
     addCyclingMode(GramaryItem.GramaryMode.values());
     addCyclingMode(HarvestMode.values());

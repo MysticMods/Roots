@@ -415,6 +415,18 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return layeredProperties.get(iSpellInstance).predicateValue();
   }
 
+  public boolean isTransformed(ISpellInstance iSpellInstance) {
+    return iSpellInstance.getTransformingHash() != 0;
+  }
+
+  public List<SpellModifier> transformedBy(ISpellInstance iSpellInstance) {
+    if (!iSpellInstance.isTransformed()) {
+      return List.of();
+    }
+
+    return iSpellInstance.getEnabledModifiers().getTransformingModifiers();
+  }
+
   public static class Properties {
     private static final Interner<DataComponentMap> COMPONENT_INTERNER = Interners.newStrongInterner();
     @Nullable
@@ -587,11 +599,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public <T extends Cycling<T>> Properties cycle (DataComponentType<T> component, T value) {
-      this.cycleComponent = component;
-      return this.component(component, value);
-    }
-
     public <T> Properties component(Supplier<? extends DataComponentType<T>> component, T value) {
       return this.component(component.get(), value);
     }
@@ -616,6 +623,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this.transformer(modifier.getKey(), transformer);
     }
 
+    // TODO: I'm concerned that this may cause issues
     public Properties transformer (Holder<SpellModifier> modifier, BiFunction <SpellModifier, Transformer, Transformer> operator) {
       return this.transformer(modifier.getKey(), operator.apply(modifier.value(), new Spell.Transformer()));
     }
@@ -703,5 +711,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       this.extendedComponents = extendedComponents;
       return this;
     }
+
+    // TODO: Build and validate function?
   }
 }

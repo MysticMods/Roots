@@ -40,6 +40,14 @@ import java.util.function.Supplier;
 public interface ISpellInstance extends SpellLike, ICostedParent {
   Spell asSpell();
 
+  default boolean isTransformed () {
+    return asSpell().isTransformed(this);
+  }
+
+  default List<SpellModifier> transformedBy () {
+    return asSpell().transformedBy(this);
+  }
+
   // TODO: Decide how to handle slots
   default int getSlot() {
     return -1;

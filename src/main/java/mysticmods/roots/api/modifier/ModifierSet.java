@@ -1,5 +1,6 @@
 package mysticmods.roots.api.modifier;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Ordering;
 import net.minecraft.resources.ResourceKey;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends ModifierSet<V, T, C>> implements Set<T> {
   // TODO: Does this need to be an ImmutableSet?
   protected final ImmutableSortedSet<T> internal;
+  protected final ImmutableList<T> transformingModifiers;
   protected final ImmutableSortedSet<ResourceKey<T>> internalKeys;
   protected final ImmutableSortedSet<ResourceKey<T>> transformingKeys;
   @Nullable
@@ -42,9 +44,10 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     } else {
       this.firstElement = null;
     }
-    this.internalKeys = elements.stream().map(Modifier::getSelf)
+    this.internalKeys = this.internal.stream().map(Modifier::getSelf)
         .collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
-    this.transformingKeys = elements.stream().filter(Modifier::isTransforming).map(Modifier::getSelf).collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
+    this.transformingModifiers = elements.stream().filter(Modifier::isTransforming).sorted(MODIFIER_ORDER).collect(ImmutableList.toImmutableList());
+    this.transformingKeys = this.transformingModifiers.stream().map(Modifier::getSelf).collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
     this.hash = this.internal.hashCode();
     this.transformingHash = this.transformingKeys.hashCode();
   }
@@ -213,5 +216,9 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
 
   public Set<ResourceKey<T>> getTransformingKeys () {
     return transformingKeys;
+  }
+
+  public List<T> getTransformingModifiers () {
+    return transformingModifiers;
   }
 }

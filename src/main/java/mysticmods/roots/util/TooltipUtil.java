@@ -271,20 +271,25 @@ public class TooltipUtil {
   }
 
   public static void describeSpell(Item.TooltipContext context, List<Component> tooltipComponents, ISpellInstance spell, TooltipFlag tooltipFlag) {
+    if (spell.isTransformed()) {
+      MutableComponent spellNames = Component.empty();
+      boolean first = true;
+      for (SpellModifier modifier : spell.getEnabledModifiers().getTransformingModifiers()) {
+        if (!first) {
+          spellNames.append(Component.literal(", "));
+        }
+        first = false;
+        spellNames.append(modifier.getName());
+      }
+      tooltipComponents.add(Component.translatable("roots.spell_modifier.transformed", spellNames));
+      return;
+    }
     if (tooltipFlag.hasShiftDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
       tooltipComponents.add(spell.asSpell().getTooltipExtendedDescription(spell));
     } else {
       tooltipComponents.add(spell.asSpell().getTooltipDescription(spell));
     }
   }
-
-/*  public static void describeSpell(Item.TooltipContext context, List<Component> tooltipComponents, Spell spell, TooltipFlag tooltipFlag) {
-    if (tooltipFlag.hasShiftDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
-      tooltipComponents.add(spell.getTooltipExtendedDescription());
-    } else {
-      tooltipComponents.add(spell.getTooltipDescription());
-    }
-  }*/
 
   public static Component describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, SpellModifier spellModifier, TooltipFlag tooltipFlag) {
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
