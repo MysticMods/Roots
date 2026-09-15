@@ -3,6 +3,7 @@ package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.reference.SpellModifiers;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModModifiers;
@@ -61,6 +62,7 @@ public final class RootsModifierModelProvider extends ItemModelProvider {
   static {
     ModItems.noop();
     ModModifiers.noop();
+    SpellModifiers.noop();
   }
 
   @Override

@@ -389,7 +389,7 @@ emit('mysticmods/roots/init/ModModifiers.java', [
 
 // ---------------------------------------------------------------- keys
 def keysBlock = block(flat.collect { rec ->
-  "  public static final ResourceKey<SpellModifier> ${rec.constant} = key(\"${rec.id}\");"
+  "  ResourceKey<SpellModifier> ${rec.constant} = key(\"${rec.id}\");"
 })
 
 emit('mysticmods/roots/api/reference/SpellModifiers.java', [
