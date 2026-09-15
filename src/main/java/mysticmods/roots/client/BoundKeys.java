@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.reference.Keys;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.layer.HudOverlay;
@@ -23,7 +24,9 @@ import net.neoforged.neoforge.client.settings.IKeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class BoundKeys {
@@ -41,28 +44,42 @@ public class BoundKeys {
 
   public static final IKeyConflictContext HAS_ANY_ADJUSTABLE = new MultiKeyConflictContext(ADJUSTABLE, HAS_ADJUSTABLE_TOME);
 
-  public static final KeyMapping CANCEL_EFFECT = new KeyMapping("key.roots.cancel_effect", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_TAB, CATEGORY);
-  public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.KEY_K, CATEGORY);
-  public static final KeyMapping OPEN_POUCH = new KeyMapping("key.roots.open_pouch", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
-  public static final KeyMapping OPEN_REPUTATION = new KeyMapping("key.roots.open_reputation", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_SEMICOLON, CATEGORY);
-  public static final KeyMapping CYCLE_SPELL_MODE = new KeyMapping("key.roots.cycle_spell_mode", HAS_ANY_ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
-  public static final KeyMapping CYCLE_STAFF_SPELL = new KeyMapping("key.roots.cycle_staff_spell", HOLDING_STAFF, InputConstants.Type.KEYSYM, InputConstants.KEY_PAGEDOWN, CATEGORY);
-  public static final KeyMapping OPEN_FAKE_MENU = new KeyMapping("key.roots.open_fake_menu", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
-  public static final KeyMapping CLEAR_CONTAINER = new KeyMapping("key.roots.clear_container", NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
-  public static final KeyMapping DELETE_SPELL = new KeyMapping("key.roots.delete_spell", IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
-  public static final KeyMapping MODIFY_SPELL = new KeyMapping("key.roots.modify_spell", HOLDING_STAFF_OR_IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
+  public static final KeyMapping CANCEL_EFFECT = new KeyMapping(Keys.CANCEL_EFFECT, KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_TAB, CATEGORY);
+  public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping(Keys.OPEN_SPELL_LIBRARY, KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.KEY_K, CATEGORY);
+  public static final KeyMapping OPEN_POUCH = new KeyMapping(Keys.OPEN_POUCH, KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
+  public static final KeyMapping OPEN_REPUTATION = new KeyMapping(Keys.OPEN_REPUTATION, KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_SEMICOLON, CATEGORY);
+  public static final KeyMapping CYCLE_SPELL_MODE = new KeyMapping(Keys.CYCLE_SPELL_MODE, HAS_ANY_ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
+  public static final KeyMapping CYCLE_STAFF_SPELL = new KeyMapping(Keys.CYCLE_STAFF_SPELL, HOLDING_STAFF, InputConstants.Type.KEYSYM, InputConstants.KEY_PAGEDOWN, CATEGORY);
+  public static final KeyMapping OPEN_FAKE_MENU = new KeyMapping(Keys.OPEN_FAKE_MENU, NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
+  public static final KeyMapping CLEAR_CONTAINER = new KeyMapping(Keys.CLEAR_CONTAINER, NEAR_RELEVANT_BLOCK_ENTITY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
+  public static final KeyMapping DELETE_SPELL = new KeyMapping(Keys.DELETE_SPELL, IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_DELETE, CATEGORY);
+  public static final KeyMapping MODIFY_SPELL = new KeyMapping(Keys.MODIFY_SPELL, HOLDING_STAFF_OR_IN_LIBRARY, InputConstants.Type.KEYSYM, InputConstants.KEY_INSERT, CATEGORY);
 
-  public static final List<KeyMapping> MAPPINGS = Arrays.asList(
-      OPEN_SPELL_LIBRARY,
-      CYCLE_SPELL_MODE,
-      CYCLE_STAFF_SPELL,
-      OPEN_POUCH,
-      OPEN_REPUTATION,
-      CLEAR_CONTAINER,
-      OPEN_FAKE_MENU,
-      DELETE_SPELL,
-      MODIFY_SPELL);
+  public static final Map<String, KeyMapping> MAPPINGS = new HashMap<>();
 
+  static {
+    MAPPINGS.put(Keys.OPEN_SPELL_LIBRARY, OPEN_SPELL_LIBRARY);
+    MAPPINGS.put(Keys.CYCLE_SPELL_MODE, CYCLE_SPELL_MODE);
+    MAPPINGS.put(Keys.CYCLE_STAFF_SPELL, CYCLE_STAFF_SPELL);
+    MAPPINGS.put(Keys.OPEN_POUCH, OPEN_POUCH);
+    MAPPINGS.put(Keys.OPEN_REPUTATION, OPEN_REPUTATION);
+    MAPPINGS.put(Keys.CLEAR_CONTAINER, CLEAR_CONTAINER);
+    MAPPINGS.put(Keys.OPEN_FAKE_MENU, OPEN_FAKE_MENU);
+    MAPPINGS.put(Keys.DELETE_SPELL, DELETE_SPELL);
+    MAPPINGS.put(Keys.MODIFY_SPELL, MODIFY_SPELL);
+  }
+
+  public static KeyMapping getKey (String key) {
+    if (Keys.USE.equals(key)) {
+      return Minecraft.getInstance().options.keyUse;
+    }
+
+    var result = MAPPINGS.get(key);
+    if (result == null) {
+      throw new NullPointerException("Tried to access an invalid/unregistered key mapping: '" + key + "'!");
+    }
+    return result;
+  }
 
   @SubscribeEvent
   public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
@@ -82,7 +99,7 @@ public class BoundKeys {
 
     private final List<IKeyConflictContext> contexts;
 
-    private MultiConflictContext(IKeyConflictContext ... contexts) {
+    private MultiConflictContext(IKeyConflictContext... contexts) {
       this.contexts = Arrays.asList(contexts);
     }
 
@@ -106,7 +123,7 @@ public class BoundKeys {
       return false;
     }
 
-    public static MultiConflictContext multi (IKeyConflictContext ... contexts) {
+    public static MultiConflictContext multi(IKeyConflictContext... contexts) {
       return new MultiConflictContext(contexts);
     }
   }

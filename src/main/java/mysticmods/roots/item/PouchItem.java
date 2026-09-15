@@ -1,6 +1,7 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.reference.Keys;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
@@ -84,7 +85,7 @@ public class PouchItem extends Item {
     }
     if (context.level() != null && context.level().isClientSide() && stack.is(RootsTags.Items.POUCHES)) {
       tooltipComponents.add(CommonComponents.EMPTY);
-      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.key_binding", RootsClientHooks.getPouchKeyBind()));
+      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.key_binding", RootsClientHooks.getKey(tooltipFlag, Keys.OPEN_POUCH)));
     }
   }
 

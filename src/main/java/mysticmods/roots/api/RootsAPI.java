@@ -84,11 +84,6 @@ public abstract class RootsAPI {
 
   public static Logger LOG = LogManager.getLogger();
 
-  public static MutableComponent holdShift() {
-    return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift")
-        .setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
-  }
-
   public static void debug(String message, Object... objs) {
     if (ConfigManager.DEBUG_EXTENSIVE.get() || !FMLEnvironment.production) {
       LOG.error(message, objs);

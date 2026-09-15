@@ -12,6 +12,7 @@ import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.network.IRootsPacket;
+import mysticmods.roots.api.reference.Keys;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
@@ -495,7 +496,7 @@ public class CastingItem extends Item {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
     if (context.level() != null && context.level().isClientSide()) {
-      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getStaffKeyBind(), RootsClientHooks.getUseKeyBind(), RootsClientHooks.getStaffCycleKeyBind(), RootsClientHooks.getModifySpellKeyBind()));
+      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getKey(tooltipFlag, Keys.OPEN_SPELL_LIBRARY), RootsClientHooks.getKey(tooltipFlag, Keys.CYCLE_STAFF_SPELL), RootsClientHooks.getKey(tooltipFlag, Keys.USE), RootsClientHooks.getKey(tooltipFlag, Keys.MODIFY_SPELL)));
     }
 
     TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);

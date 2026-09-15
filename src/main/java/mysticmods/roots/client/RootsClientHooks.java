@@ -16,11 +16,13 @@ import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinGui;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.util.LightDrifterUtil;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +31,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.client.ClientTooltipFlag;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -185,16 +188,36 @@ public class RootsClientHooks {
     }
   }
 
-  public static Component getStaffKeyBind() {
-    return BoundKeys.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
+  public static Component getKey(@Nullable TooltipFlag tooltipFlag, String key) {
+    if (tooltipFlag == null) {
+      tooltipFlag = tooltipFlag();
+    }
+    return getKey(tooltipFlag, key, "'", "'");
   }
 
-  public static Component getStaffCycleKeyBind() {
-    return BoundKeys.CYCLE_STAFF_SPELL.getKey().getDisplayName();
+  public static Component getKey(@Nullable TooltipFlag tooltipFlag, String key, String prefix, String suffix) {
+    if (tooltipFlag == null) {
+      tooltipFlag = tooltipFlag();
+    }
+    KeyMapping boundKey = BoundKeys.getKey(key);
+
+    MutableComponent base = Component.empty().append(prefix).append(boundKey.getTranslatedKeyMessage()).append(suffix);
+
+    if (tooltipFlag.hasControlDown() || tooltipFlag.hasAltDown() || tooltipFlag.hasShiftDown()) {
+      return Component.translatable("roots.tooltip.extended_key_binding", base, Component.translatable(boundKey.getCategory()), Component.translatable(boundKey.getName()));
+    } else {
+      return base;
+    }
   }
 
-  public static Component getPouchKeyBind() {
-    return BoundKeys.OPEN_POUCH.getKey().getDisplayName();
+  public static TooltipFlag tooltipFlag() {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc == null || mc.player == null) {
+      return TooltipFlag.NORMAL;
+    }
+    TooltipFlag.Default tooltipflag$default = mc.options.advancedItemTooltips ? TooltipFlag.Default.ADVANCED : TooltipFlag.Default.NORMAL;
+    TooltipFlag tooltipflag = mc.player.isCreative() ? tooltipflag$default.asCreative() : tooltipflag$default;
+    return ClientTooltipFlag.of(tooltipflag);
   }
 
   public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
@@ -322,9 +345,5 @@ public class RootsClientHooks {
   public static Component getUseKeyBind() {
     Minecraft mc = Minecraft.getInstance();
     return mc.options.keyUse.getKey().getDisplayName();
-  }
-
-  public static Component getModifySpellKeyBind() {
-    return BoundKeys.MODIFY_SPELL.getKey().getDisplayName();
   }
 }

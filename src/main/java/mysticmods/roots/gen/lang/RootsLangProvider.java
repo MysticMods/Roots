@@ -102,7 +102,9 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("roots.tooltip.pouch.color", "Dyed: %s");
     add("roots.tooltip.pouch.color_name", "%s");
-    add("roots.tooltip.pouch.key_binding", "Press '%s' to open your pouch.");
+    add("roots.tooltip.pouch.key_binding", "Press %s to open your pouch.");
+
+    add("roots.tooltip.extended_key_binding", "%s [%s: %s]");
 
     add("roots.hud.attributes", "%s: %s");
 
@@ -114,7 +116,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.staff.data", "  %s: %s");
     add("roots.tooltip.staff.is_modified", "*");
 
-    add("roots.tooltip.staff.key_binding", "Press '%s' to open your spell library. Use ('%s') while sneaking or press '%s' to cycle spells.");
+    add("roots.tooltip.staff.key_binding", "Press %s to open your spell library. Cycle spells with %s or use (%s) while sneaking.");
     add("roots.tooltip.hold_shift", "[Hold %s for more information.]");
     add("roots.tooltip.shift", "Shift");
 
@@ -200,7 +202,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.advancements.pacifist.description", "Needlessly slaughtered one of nature's peaceful creatures.");
 
     add(BoundKeys.CATEGORY, "Roots");
-    for (KeyMapping bind : BoundKeys.MAPPINGS) {
+    for (KeyMapping bind : BoundKeys.MAPPINGS.values()) {
       String key = bind.getName();
       String[] segments = key.split("\\.");
       if (segments.length > 0) {
