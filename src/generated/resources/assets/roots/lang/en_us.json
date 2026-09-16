@@ -719,7 +719,7 @@
   "roots.tooltip.staff.key_binding": "Press %s to open your spell library. Cycle spells with %s or use (%s) while sneaking.",
   "roots.tooltip.staff.no_spell": "No spell.",
   "roots.tooltip.staff.selected": "Selected Slot: %s",
-  "roots.tooltip.staff.spell_in_slot": "%s: %s%s%s",
+  "roots.tooltip.staff.spell_in_slot": "%s: %s%s%s%s",
   "roots.tooltip.token.available_modifiers": "Available modifiers:",
   "roots.tooltip.token.delete": "[Press [%s] to remove from this slot.]",
   "roots.tooltip.token.enabled_modifiers": "Enabled modifiers:",
