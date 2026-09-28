@@ -2,7 +2,7 @@ package mysticmods.roots.integration.jei.widget;
 
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.widgets.IRecipeWidget;
-import mysticmods.roots.api.grove.GrovePowerGenerator;
+import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenPosition;
@@ -12,9 +12,9 @@ import net.minecraft.network.chat.Component;
 public class SymmetryWidget implements IRecipeWidget {
   private final Component tooltip;
   private final int x, y;
-  private final GrovePowerGenerator.Symmetry symmetry;
+  private final Symmetry symmetry;
 
-  public SymmetryWidget(int x, int y, GrovePowerGenerator.Symmetry symmetry) {
+  public SymmetryWidget(int x, int y, Symmetry symmetry) {
     this.y = y;
     this.x = x;
     this.tooltip = symmetry.getTooltip();

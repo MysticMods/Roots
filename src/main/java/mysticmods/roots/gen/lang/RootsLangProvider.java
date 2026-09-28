@@ -3,7 +3,7 @@ package mysticmods.roots.gen.lang;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
-import mysticmods.roots.api.grove.GrovePowerGenerator;
+import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -916,15 +916,15 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("container.wildwoodchest", "Wildwood Chest");
 
-    for (GrovePowerGenerator.Symmetry sym : GrovePowerGenerator.Symmetry.values()) {
+    for (Symmetry sym : Symmetry.values()) {
       add(sym.getTranslationKey(), toEnglishName(sym.getSerializedName()));
     }
 
-    add(GrovePowerGenerator.Symmetry.RADIAL_NOT_MATCHING.getTranslationKey() + ".description", "Requires a non-matching block positioned radially around the grove stone.");
-    add(GrovePowerGenerator.Symmetry.RADIAL_SAME_BLOCK_OR_TAG.getTranslationKey() + ".description", "Requires a matching block or a block from the same tag positioned radially around the grove stone.");
-    add(GrovePowerGenerator.Symmetry.RADIAL_SAME_BLOCK.getTranslationKey() + ".description", "Requires an identical block positioned radially around the grove stone.");
-    add(GrovePowerGenerator.Symmetry.RADIAL_DIFFERENT_SAME_TAG.getTranslationKey() + ".description", "Requires a different block from the same tag positioned radially around the grove stone.");
-    add(GrovePowerGenerator.Symmetry.NONE.getTranslationKey() + ".description", "No symmetry required.");
+    add(Symmetry.RADIAL_NOT_MATCHING.getTranslationKey() + ".description", "Requires a non-matching block positioned radially around the grove stone.");
+    add(Symmetry.RADIAL_SAME_BLOCK_OR_TAG.getTranslationKey() + ".description", "Requires a matching block or a block from the same tag positioned radially around the grove stone.");
+    add(Symmetry.RADIAL_SAME_BLOCK.getTranslationKey() + ".description", "Requires an identical block positioned radially around the grove stone.");
+    add(Symmetry.RADIAL_DIFFERENT_SAME_TAG.getTranslationKey() + ".description", "Requires a different block from the same tag positioned radially around the grove stone.");
+    add(Symmetry.NONE.getTranslationKey() + ".description", "No symmetry required.");
 
     spellDescription(ModSpells.SKY_SOARER, "Propels you through the air in the direction you are looking.");
     spellExtendedDescription(ModSpells.SKY_SOARER, "Propels you through the air at ×%s sprint speed [%s] for %s seconds [%s ticks] in the direction you are looking.");

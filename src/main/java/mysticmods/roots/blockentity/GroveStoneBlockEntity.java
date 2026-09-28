@@ -6,6 +6,9 @@ import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.*;
+import mysticmods.roots.api.grove.generator.BlockGenerationEntry;
+import mysticmods.roots.api.grove.generator.BlockGenerator;
+import mysticmods.roots.api.util.BlockTracker;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
@@ -179,20 +182,20 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
     return positions;
   }
 
-  public List<GrovePowerGenerator.GenerationEntry> getGenerationEntries() {
-    List<GrovePowerGenerator.GenerationEntry> entries = getGrove().getData(DataMaps.GROVE_GENERATION_ENTRIES);
+  public List<BlockGenerationEntry> getGenerationEntries() {
+    List<BlockGenerationEntry> entries = getGrove().getData(DataMaps.GROVE_GENERATION_ENTRIES);
     if (entries == null) {
       return Collections.emptyList();
     }
     return entries;
   }
 
-  public Map<GenerationEntry, BlockTracker> buildTrackers() {
-    List<GrovePowerGenerator.GenerationEntry> entries = getGenerationEntries();
+  public Map<BlockGenerationEntry, BlockTracker> buildTrackers() {
+    List<BlockGenerationEntry> entries = getGenerationEntries();
     if (entries.isEmpty()) {
       return Collections.emptyMap();
     }
-    Map<GenerationEntry, BlockTracker> trackers = new Object2ObjectOpenHashMap<>();
+    Map<BlockGenerationEntry, BlockTracker> trackers = new Object2ObjectOpenHashMap<>();
     entries.forEach(o -> trackers.put(o, BlockTracker.create(o.maxCount())));
     return trackers;
   }
@@ -202,7 +205,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
     generatedLastTick = generatedThisTick;
     generatedThisTick = 0;
 
-    List<GrovePowerGenerator.GenerationEntry> entries = getGenerationEntries();
+    List<BlockGenerationEntry> entries = getGenerationEntries();
     if (entries.isEmpty()) {
       return;
     }
@@ -212,7 +215,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
       return;
     }
 
-    Map<GenerationEntry, BlockTracker> trackers = buildTrackers();
+    Map<BlockGenerationEntry, BlockTracker> trackers = buildTrackers();
     if (trackers.isEmpty()) {
       return;
     }
@@ -225,14 +228,14 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
       if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
         continue;
       }
-      List<Generator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_POWER_GENERATORS);
+      List<BlockGenerator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_POWER_GENERATORS);
       if (generators == null) {
         continue;
       }
-      for (GenerationEntry entry : entries) {
+      for (BlockGenerationEntry entry : entries) {
         Symmetry sym = entry.symmetry();
         if (sym.matches(pLevel, entry.tag(), pos, pPos)) {
-          for (Generator generator : generators) {
+          for (BlockGenerator generator : generators) {
             int willGenerate = generator.generate(this, pos);
             if (willGenerate != 0) {
               BlockTracker tracker = trackers.get(entry);

@@ -3,6 +3,7 @@ package mysticmods.roots.api.grove;
 import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import mysticmods.roots.api.grove.consumer.BlockConsumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class PowerTicket {
   private final TicketDefinition definition;
   private final long tick;
-  private final Object2IntMap<GrovePowerGenerator.Consumer> suppliedMap = new Object2IntOpenHashMap<>();
+  private final Object2IntMap<BlockConsumer> suppliedMap = new Object2IntOpenHashMap<>();
   private final List<BlockPos> lastPoweredFrom = new ArrayList<>();
 
   private PowerTicket(TicketDefinition definition, long tick) {
@@ -24,7 +25,7 @@ public class PowerTicket {
     if (amount <= 0) {
       return amount;
     }
-    for (GrovePowerGenerator.Consumer req : definition.requests()) {
+    for (BlockConsumer req : definition.requests()) {
       if (grove.is(req.tag())) {
         int fullRequired = req.value();
         int amountSupplied = suppliedMap.getInt(req);
@@ -44,7 +45,7 @@ public class PowerTicket {
   }
 
   public boolean wasFullfilled() {
-    for (GrovePowerGenerator.Consumer req : definition.requests()) {
+    for (BlockConsumer req : definition.requests()) {
       if (!suppliedMap.containsKey(req)) {
         return false;
       }
@@ -56,7 +57,7 @@ public class PowerTicket {
   }
 
   public int getSupplied(TagKey<Grove> tag) {
-    for (GrovePowerGenerator.Consumer consumer : definition.requests()) {
+    for (BlockConsumer consumer : definition.requests()) {
       if (consumer.tag().equals(tag)) {
         return suppliedMap.getInt(consumer);
       }
@@ -64,7 +65,7 @@ public class PowerTicket {
     return 0;
   }
 
-  public int getSupplied(GrovePowerGenerator.Consumer consumer) {
+  public int getSupplied(BlockConsumer consumer) {
     return suppliedMap.getInt(consumer);
   }
 
@@ -76,7 +77,7 @@ public class PowerTicket {
     return this.tick == tick;
   }
 
-  public record TicketDefinition(ImmutableList<GrovePowerGenerator.Consumer> requests) {
+  public record TicketDefinition(ImmutableList<BlockConsumer> requests) {
     public PowerTicket create(long tick) {
       return new PowerTicket(this, tick);
     }

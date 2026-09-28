@@ -6,7 +6,7 @@ import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.*;
-import mysticmods.roots.api.grove.GrovePowerGenerator;
+import mysticmods.roots.api.grove.consumer.BlockConsumer;
 import mysticmods.roots.api.grove.IGroveConsumer;
 import mysticmods.roots.api.grove.PowerTicket;
 import mysticmods.roots.api.recipe.ConditionResult;
@@ -65,7 +65,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   private static PowerTicket.TicketDefinition getTicketDefinition() {
     if (TICKET_DEFINITION == null) {
-      TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new GrovePowerGenerator.Consumer(RootsTags.Groves.FUNGAL, ConfigManager.FUNGAL_TRANSMUTER_POWER_PER_TICK.getAsInt())));
+      TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new BlockConsumer(RootsTags.Groves.FUNGAL, ConfigManager.FUNGAL_TRANSMUTER_POWER_PER_TICK.getAsInt())));
     }
     return TICKET_DEFINITION;
   }

@@ -19,7 +19,7 @@ import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.GrovePowerGenerator;
+import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -88,7 +88,7 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   public static IDrawable INFO_DRAWABLE;
-  public static Map<GrovePowerGenerator.Symmetry, IDrawable> GROVE_POWER_SYMMETRY_DRAWABLES = new EnumMap<>(GrovePowerGenerator.Symmetry.class);
+  public static Map<Symmetry, IDrawable> GROVE_POWER_SYMMETRY_DRAWABLES = new EnumMap<>(Symmetry.class);
 
   private static <T> IIngredientType<T> ingredient(Class<T> clazz) {
     return () -> clazz;
@@ -164,7 +164,7 @@ public class RootsJEIPlugin implements IModPlugin {
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
-    for (GrovePowerGenerator.Symmetry sym : GrovePowerGenerator.Symmetry.values()) {
+    for (Symmetry sym : Symmetry.values()) {
       GROVE_POWER_SYMMETRY_DRAWABLES.put(sym, guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/symmetry/" + sym.name()
               .toLowerCase(Locale.ROOT) + ".png"), 0, 0, 16, 16)
           .setTextureSize(16, 16).build());
