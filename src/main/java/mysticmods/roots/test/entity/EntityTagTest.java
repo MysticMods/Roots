@@ -36,8 +36,10 @@ public class EntityTagTest extends EntityTest {
 
   @Override
   public List<EntityType<?>> getEntityTypes() {
-    List<EntityType<?>> tagContents = new ArrayList<>();
-    BuiltInRegistries.ENTITY_TYPE.getTag(tag).get().stream().forEach(o -> tagContents.add(o.value()));
+    if (tagContents == null) {
+      tagContents = new ArrayList<>();
+      BuiltInRegistries.ENTITY_TYPE.getTag(tag).get().stream().forEach(o -> tagContents.add(o.value()));
+    }
     return tagContents;
   }
 

@@ -5,9 +5,11 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.datamap.*;
+import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.grove.generator.BlockGenerationEntry;
 import mysticmods.roots.api.grove.generator.BlockGenerator;
-import mysticmods.roots.api.grove.Symmetry;
+import mysticmods.roots.api.grove.generator.EntityGenerationEntry;
+import mysticmods.roots.api.grove.generator.EntityGenerator;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
@@ -20,6 +22,8 @@ import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
+import mysticmods.roots.test.entity.EntityTagTest;
+import mysticmods.roots.test.entity.TamedEntityTest;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -547,6 +551,27 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new BlockGenerator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
     builder24.add(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, List.of(
         new BlockGenerator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY_POWERABLE, 1000)), false);
+
+    var builder37 = builder(DataMaps.GROVE_ENTITY_POWER_GENERATORS);
+    builder37.add(RootsTags.Entities.TAMEABLE, List.of(
+        new EntityGenerator(RootsTags.Entities.TAMEABLE, RootsTags.Groves.PASTORAL, TamedEntityTest.getInstance(), 5)), false);
+    builder37.add(RootsTags.Entities.UNTAMEABLE_ANIMALS, List.of(
+        new EntityGenerator(RootsTags.Entities.UNTAMEABLE_ANIMALS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.UNTAMEABLE_ANIMALS), 1)), false);
+    builder37.add(RootsTags.Entities.SPROUTS, List.of(new EntityGenerator(RootsTags.Entities.SPROUTS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.SPROUTS), 1)), false);
+
+    var builder38 = builder(DataMaps.GROVE_ENTITY_GENERATION_ENTRIES);
+    builder38.add(
+        ModGroves.PASTORAL,
+        List.of(
+            new EntityGenerationEntry(
+                RootsTags.Entities.TAMEABLE, 2),
+            new EntityGenerationEntry(
+                RootsTags.Entities.UNTAMEABLE_ANIMALS, 1
+            ),
+            new EntityGenerationEntry(
+                RootsTags.Entities.SPROUTS, 1
+            )
+        ), false);
 
     var builder25 = builder(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
     builder25.add(ModGroves.FAIRY, List.of(

@@ -13,6 +13,7 @@ import mysticmods.roots.growth.harvest.*;
 import mysticmods.roots.growth.harvestable.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
+import mysticmods.roots.test.entity.TamedEntityTest;
 import net.minecraft.core.Direction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -28,6 +29,7 @@ public class ModTests {
 
   public static final DeferredHolder<EntityTestType<?>, EntityTestType<EntityTagTest>> ENTITY_TAG_TEST = ENTITY_TESTS.register("entity_tag_test", EntityTagTest.Type::new);
   public static final DeferredHolder<EntityTestType<?>, EntityTestType<EntityTypeTest>> ENTITY_TYPE_TEST = ENTITY_TESTS.register("entity_type_test", EntityTypeTest.Type::new);
+  public static final DeferredHolder<EntityTestType<?>, EntityTestType<TamedEntityTest>> TAMED_ENTITY_TEST = ENTITY_TESTS.register("tamed_entity_test", TamedEntityTest.Type::new);
 
   public static final DeferredHolder<WorldTestType<?>, WorldTestType<AlwaysTrueWorldTest>> ALWAYS_TRUE_TEST = WORLD_TESTS.register(AlwaysTrueWorldTest.ALWAYS_TRUE_TEST_KEY.location()
       .getPath(), AlwaysTrueWorldTest.Type::new);

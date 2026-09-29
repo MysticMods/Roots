@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.OwnableEntity;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -208,6 +209,52 @@ public final class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.DANDELION_WINDS_UNDEFLECTABLES).add(EntityType.EXPERIENCE_BOTTLE);
     this.tag(RootsTags.Entities.BOSS).add(EntityType.WITHER, EntityType.WARDEN, EntityType.ENDER_DRAGON);
     this.tag(RootsTags.Entities.GEAS_INELIGIBLE).add(EntityType.WITHER, EntityType.ENDER_DRAGON);
+    this.tag(RootsTags.Entities.TAMEABLE).add(
+        ModEntities.BEETLE.value(),
+        ModEntities.OWL.value(),
+        ModEntities.FENNEC.value()
+    ).add(
+        EntityType.ZOMBIE_HORSE,
+        EntityType.TRADER_LLAMA,
+        EntityType.SKELETON_HORSE,
+        EntityType.MULE,
+        EntityType.LLAMA,
+        EntityType.HORSE,
+        EntityType.DONKEY,
+        EntityType.CAMEL,
+        EntityType.WOLF,
+        EntityType.CAT,
+        EntityType.PARROT
+    );
+    this.tag(RootsTags.Entities.UNTAMEABLE_ANIMALS).add(
+            EntityType.AXOLOTL,
+            EntityType.BEE,
+            EntityType.CHICKEN,
+            EntityType.COD,
+            EntityType.COW,
+            EntityType.DOLPHIN,
+            EntityType.FOX,
+            EntityType.FROG,
+            EntityType.GLOW_SQUID,
+            EntityType.GOAT,
+            EntityType.MOOSHROOM,
+            EntityType.OCELOT,
+            EntityType.PANDA,
+            EntityType.PIG,
+            EntityType.POLAR_BEAR,
+            EntityType.PUFFERFISH,
+            EntityType.RABBIT,
+            EntityType.SALMON,
+            EntityType.SHEEP,
+            EntityType.SQUID,
+            EntityType.STRIDER,
+            EntityType.TADPOLE,
+            EntityType.TROPICAL_FISH,
+            EntityType.TURTLE,
+            ModEntities.DUCK.get(),
+            ModEntities.DEER.get(),
+            ModEntities.JERBOA.get(),
+            EntityType.BAT);
   }
 
   @Override

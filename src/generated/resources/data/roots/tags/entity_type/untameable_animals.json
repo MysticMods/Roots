@@ -1,0 +1,32 @@
+{
+  "values": [
+    "minecraft:axolotl",
+    "minecraft:bee",
+    "minecraft:chicken",
+    "minecraft:cod",
+    "minecraft:cow",
+    "minecraft:dolphin",
+    "minecraft:fox",
+    "minecraft:frog",
+    "minecraft:glow_squid",
+    "minecraft:goat",
+    "minecraft:mooshroom",
+    "minecraft:ocelot",
+    "minecraft:panda",
+    "minecraft:pig",
+    "minecraft:polar_bear",
+    "minecraft:pufferfish",
+    "minecraft:rabbit",
+    "minecraft:salmon",
+    "minecraft:sheep",
+    "minecraft:squid",
+    "minecraft:strider",
+    "minecraft:tadpole",
+    "minecraft:tropical_fish",
+    "minecraft:turtle",
+    "roots:duck",
+    "roots:deer",
+    "roots:jerboa",
+    "minecraft:bat"
+  ]
+}

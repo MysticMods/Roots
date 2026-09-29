@@ -1,0 +1,36 @@
+{
+  "values": {
+    "#roots:sprouts": [
+      {
+        "entityTag": "roots:sprouts",
+        "tag": "roots:pastoral",
+        "test": {
+          "type": "roots:entity_tag_test",
+          "tag": "roots:sprouts"
+        },
+        "value": 1
+      }
+    ],
+    "#roots:tameable": [
+      {
+        "entityTag": "roots:tameable",
+        "tag": "roots:pastoral",
+        "test": {
+          "type": "roots:tamed_entity_test"
+        },
+        "value": 5
+      }
+    ],
+    "#roots:untameable_animals": [
+      {
+        "entityTag": "roots:untameable_animals",
+        "tag": "roots:pastoral",
+        "test": {
+          "type": "roots:entity_tag_test",
+          "tag": "roots:untameable_animals"
+        },
+        "value": 1
+      }
+    ]
+  }
+}

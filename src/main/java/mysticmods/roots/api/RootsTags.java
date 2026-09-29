@@ -571,6 +571,9 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> GEAS_INELIGIBLE = modTag("geas_ineligible");
 
+    public static final TagKey<EntityType<?>> TAMEABLE = modTag("tameable");
+    public static final TagKey<EntityType<?>> UNTAMEABLE_ANIMALS = modTag("untameable_animals");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }
