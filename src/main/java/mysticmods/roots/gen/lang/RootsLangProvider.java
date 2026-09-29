@@ -311,9 +311,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_1.get().getName(), "Fairy Grove Rank 1+");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_1.get().getName(), "Primal Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 1.");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_1.get().getName(), "Pastoral Grove Rank 1+");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_1.get()
+        .getName() + ".description", "Obtain a reputation rank with the Pastoral Grove of at least 1.");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_1.get().getName(), "Cultivation Grove Rank 1+");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 1.");
@@ -330,9 +330,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_2.get().getName(), "Fairy Grove Rank 2+");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_2.get().getName(), "Primal Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 2.");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_2.get().getName(), "Pastoral Grove Rank 2+");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_2.get()
+        .getName() + ".description", "Obtain a reputation rank with the Pastoral Grove of at least 2.");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_2.get().getName(), "Cultivation Grove Rank 2+");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 2.");
@@ -349,9 +349,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_3.get().getName(), "Fairy Grove Rank 3+");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_3.get().getName(), "Primal Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Primal Grove of at least 3.");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_3.get().getName(), "Pastoral Grove Rank 3+");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_3.get()
+        .getName() + ".description", "Obtain a reputation rank with the Pastoral Grove of at least 3.");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_3.get().getName(), "Cultivation Grove Rank 3+");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 3.");
@@ -368,9 +368,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.FAIRY_RANK_4.get().getName(), "Fairy Grove Rank 4");
     add("player_condition.roots." + ModConditions.FAIRY_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Fairy Grove.");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_4.get().getName(), "Primal Grove Rank 4");
-    add("player_condition.roots." + ModConditions.PRIMAL_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Primal Grove.");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_4.get().getName(), "Pastoral Grove Rank 4");
+    add("player_condition.roots." + ModConditions.PASTORAL_RANK_4.get()
+        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Pastoral Grove.");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_4.get().getName(), "Cultivation Grove Rank 4");
     add("player_condition.roots." + ModConditions.CULTIVATION_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Cultivation Grove.");
@@ -471,7 +471,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.CREEPING_GROVE_MOSS);
     addBlock(ModBlocks.HANGING_GROVE_MOSS);
     addBlock(ModBlocks.BAFFLECAP_BLOCK);
-    addBlock(ModBlocks.PRIMAL_GROVE_STONE);
+    addBlock(ModBlocks.PASTORAL_GROVE_STONE);
     addBlock(ModBlocks.WILD_GROVE_STONE);
     addBlock(ModBlocks.TWILIGHT_GROVE_STONE);
     addBlock(ModBlocks.ELEMENTAL_GROVE_STONE);
@@ -716,7 +716,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.RUNESTONE, "Runestone");
     add(RootsTags.Items.WILDWOOD_LOGS, "Wildwood Logs");
     add(RootsTags.Items.GROVE_STONES, "Grove Stones");
-    add(RootsTags.Items.GROVE_STONE_PRIMAL, "Primal Grove Stones");
+    add(RootsTags.Items.GROVE_STONE_PASTORAL, "Pastoral Grove Stones");
     add(RootsTags.Items.PEDESTALS, "Pedestals");
     add(RootsTags.Items.RITUAL_PEDESTALS, "Ritual Pedestals");
     add(RootsTags.Items.GROVE_PEDESTALS, "Grove Crafting Pedestals");

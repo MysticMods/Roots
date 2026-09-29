@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:primal_grove_stone"
+        "recipe": "roots:pastoral_grove_stone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:primal_grove_stone"
+      "roots:pastoral_grove_stone"
     ]
   }
 }

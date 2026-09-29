@@ -53,7 +53,7 @@ public class ReputationScreen extends RootsScreen {
     ReputationStorage rep = getStorage();
 
     ReputationRanks.Progress fairy = rep.getProgress(ModGroves.FAIRY.get());
-    ReputationRanks.Progress primal = rep.getProgress(ModGroves.PRIMAL.get());
+    ReputationRanks.Progress pastoral = rep.getProgress(ModGroves.PASTORAL.get());
     ReputationRanks.Progress cultivation = rep.getProgress(ModGroves.CULTIVATION.get());
     ReputationRanks.Progress elemental = rep.getProgress(ModGroves.ELEMENTAL.get());
     ReputationRanks.Progress twilight = rep.getProgress(ModGroves.TWILIGHT.get());
@@ -64,9 +64,9 @@ public class ReputationScreen extends RootsScreen {
     int j = (this.height - 142) / 2;
     graphics.blit(background, i, j, 0, 0, getBackgroundWidth(), getBackgroundHeight());
 
-    ReputationRanks.Progress[] progresses = new ReputationRanks.Progress[]{fairy, twilight, fungal, elemental, primal, cultivation};
+    ReputationRanks.Progress[] progresses = new ReputationRanks.Progress[]{fairy, twilight, fungal, elemental, pastoral, cultivation};
     Grove[] groves = new Grove[]{
-        ModGroves.FAIRY.get(), ModGroves.TWILIGHT.get(), ModGroves.FUNGAL.get(), ModGroves.ELEMENTAL.get(), ModGroves.PRIMAL.get(), ModGroves.CULTIVATION.get()
+        ModGroves.FAIRY.get(), ModGroves.TWILIGHT.get(), ModGroves.FUNGAL.get(), ModGroves.ELEMENTAL.get(), ModGroves.PASTORAL.get(), ModGroves.CULTIVATION.get()
     };
 
     for (int l = 0; l < 6; l++) {

@@ -10,7 +10,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "roots:primal_grove_stone",
+          "block": "roots:pastoral_grove_stone",
           "condition": "minecraft:block_state_property",
           "properties": {
             "part": "bottom"
@@ -27,11 +27,11 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "roots:primal_grove_stone"
+          "name": "roots:pastoral_grove_stone"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "roots:blocks/primal_grove_stone"
+  "random_sequence": "roots:blocks/pastoral_grove_stone"
 }

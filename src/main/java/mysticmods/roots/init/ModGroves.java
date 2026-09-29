@@ -11,7 +11,13 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModGroves {
   private static final DeferredRegister<Grove> REGISTER = DeferredRegister.create(RootsRegistries.Keys.GROVES, RootsAPI.MODID);
 
+  // W, F, T, F, C, E, P, H
+
+  // A, B, D, G, I, J, K, L, M, N, O, P, Q, R, S, V, X, Y, Z
+
   public static final DeferredHolder<Grove, Grove> WILD = REGISTER.register("wild", () -> new Grove(ChatFormatting.GOLD, 0x82d5ac, 0x17b86d));
+
+  // TODO: Rename
   public static final DeferredHolder<Grove, Grove> FAIRY = REGISTER.register("fairy", () -> new Grove(ChatFormatting.LIGHT_PURPLE, 0xe38192, 0xdab7ca));
   public static final DeferredHolder<Grove, Grove> TWILIGHT = REGISTER.register("twilight", () -> new Grove(ChatFormatting.DARK_PURPLE, 0x99e5ff, 0x6d62ff));
   public static final DeferredHolder<Grove, Grove> FUNGAL = REGISTER.register("fungal", () -> new Grove(ChatFormatting.DARK_AQUA, 0xcca3a7, 0x8b7173));
@@ -23,7 +29,14 @@ public class ModGroves {
   }
 
   public static final DeferredHolder<Grove, Grove> ELEMENTAL = REGISTER.register("elemental", () -> new Grove(ChatFormatting.DARK_RED, 0xffe98e, 0x80f7ff));
-  public static final DeferredHolder<Grove, Grove> PRIMAL = REGISTER.register("primal", () -> new Grove(ChatFormatting.YELLOW, 0x71d443, 0xb6cf89));
+
+  // TODO: Rename
+  public static final DeferredHolder<Grove, Grove> PASTORAL = REGISTER.register("pastoral", () -> new Grove(ChatFormatting.YELLOW, 0x71d443, 0xb6cf89));
+
+  static {
+    REGISTER.addAlias(RootsAPI.rl("primal"), RootsAPI.rl("pastoral"));
+  }
+
   public static final DeferredHolder<Grove, Grove> HOLLOW = REGISTER.register("hollow", () -> new Grove(ChatFormatting.DARK_GRAY, 0x000000, 0x000000));
 
   public static void register(IEventBus bus) {

@@ -455,7 +455,7 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     simpleBlock(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), models().withExistingParent("potted_wildwood_sapling", mcLoc("block/flower_pot_cross"))
         .texture("plant", modLoc("block/wildwood_sapling")).renderType("cutout"));
 
-    groveStone(ModBlocks.PRIMAL_GROVE_STONE);
+    groveStone(ModBlocks.PASTORAL_GROVE_STONE);
     groveStone(ModBlocks.WILD_GROVE_STONE);
     groveStone(ModBlocks.FAIRY_GROVE_STONE);
     groveStone(ModBlocks.TWILIGHT_GROVE_STONE);

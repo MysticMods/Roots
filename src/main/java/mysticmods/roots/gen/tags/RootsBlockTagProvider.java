@@ -132,14 +132,14 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.GROVE_MOSS).add(CREEPING_GROVE_MOSS.get(), HANGING_GROVE_MOSS.get());
 
     this.tag(RootsTags.Blocks.GROVE_STONE_WILD).add(WILD_GROVE_STONE.get());
-    this.tag(RootsTags.Blocks.GROVE_STONE_PRIMAL).add(PRIMAL_GROVE_STONE.get());
+    this.tag(RootsTags.Blocks.GROVE_STONE_PASTORAL).add(PASTORAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_FAIRY).add(FAIRY_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_CULTIVATION).add(CULTIVATION_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_TWILIGHT).add(TWILIGHT_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_FUNGAL).add(FUNGAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_ELEMENTAL).add(ELEMENTAL_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONES)
-        .addTags(RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Blocks.GROVE_STONE_CULTIVATION, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
+        .addTags(RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Blocks.GROVE_STONE_PASTORAL, RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Blocks.GROVE_STONE_CULTIVATION, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
     this.tag(RootsTags.Blocks.RED_HUTS).add(RED_FAIRY_HUT.get());
     this.tag(RootsTags.Blocks.BROWN_HUTS).add(BROWN_FAIRY_HUT.get());
     this.tag(RootsTags.Blocks.BAFFLECAP_HUTS).add(BAFFLECAP_FAIRY_HUT.get());
@@ -317,7 +317,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     // All crops for cultivation
     tag(RootsTags.Blocks.CULTIVATION_REPUTATION_CROPS).addTags(BlockTags.CROPS);
     tag(RootsTags.Blocks.FAIRY_REPUTATION_CROPS).addTags(RootsTags.Blocks.PERESKIA_CROP);
-    tag(RootsTags.Blocks.PRIMAL_REPUTATION_CROPS).addTags(RootsTags.Blocks.SPIRITLEAF_CROP);
+    tag(RootsTags.Blocks.PASTORAL_REPUTATION_CROPS).addTags(RootsTags.Blocks.SPIRITLEAF_CROP);
     tag(RootsTags.Blocks.TWILIGHT_REPUTATION_CROPS).addTags(RootsTags.Blocks.MOONGLOW_CROP);
     tag(RootsTags.Blocks.UNDERWATER_FARMLAND).add(Blocks.DIRT, Blocks.DIRT_PATH, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.GRASS_BLOCK);
     tag(RootsTags.Blocks.FARMLANDS).add(Blocks.FARMLAND).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);

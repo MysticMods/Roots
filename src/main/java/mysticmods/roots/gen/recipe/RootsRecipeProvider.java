@@ -494,7 +494,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .pattern("RR")
         .define('R', RootsTags.Items.RUNESTONE)
         .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
-        .save(c, RootsAPI.rl("primal_grove_stone"));
+        .save(c, RootsAPI.rl("pastoral_grove_stone"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MORTAR.get())
         .pattern("R R")
@@ -1129,7 +1129,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.SILVER_INGOT)
                 .requires(ItemTags.BIRCH_LOGS)
                 .requires(RootsTags.Items.WILDWOOD_LOGS)
-                .condition(ModConditions.PRIMAL_RANK_1.get())
+                .condition(ModConditions.PASTORAL_RANK_1.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
                 .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/augmentation"));
@@ -1938,7 +1938,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
-                .result(ModItems.PRIMAL_GROVE_STONE, 1)
+                .result(ModItems.PASTORAL_GROVE_STONE, 1)
                 .requires(RootsTags.Items.GROVE_STONE_WILD)
                 .requires(RootsTags.Items.SPIRITLEAF_HERB)
                 .requires(RootsTags.Items.SPIRITLEAF_HERB)
@@ -1950,7 +1950,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.CROPS)
                 .requires(Items.GOLDEN_AXE)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.PRIMAL_RANK_1.get())
+                .condition(ModConditions.PASTORAL_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_wild"));
 
     RecipeSaver.saver().unlockedBy("has_red_mushroom", has(Items.RED_MUSHROOM))

@@ -1,12 +1,9 @@
 package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.event.setup.ClientSetup;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.Holder;
@@ -15,7 +12,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -144,8 +140,8 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
 
     withExistingParent("bafflecap_block", modLoc("block/bafflecap_block_inventory"));
-    withExistingParent(ModBlocks.PRIMAL_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/primal_grove_stone_inventory"));
+    withExistingParent(ModBlocks.PASTORAL_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/pastoral_grove_stone_inventory"));
     withExistingParent(ModBlocks.WILD_GROVE_STONE.getKey().location()
         .getPath(), modLoc("block/wild_grove_stone_inventory"));
     withExistingParent(ModBlocks.CULTIVATION_GROVE_STONE.getKey().location()

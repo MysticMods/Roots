@@ -38,7 +38,7 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
     this.tag(RootsTags.Spells.WILD).add(ModSpells.MAGNETISM.get(), ModSpells.EXTENSION.get());
     this.tag(RootsTags.Spells.TWILIGHT)
         .add(ModSpells.LIGHT_DRIFTER.get(), ModSpells.LIFE_DRAIN.get(), ModSpells.JAUNT.get()/*, ModSpells.TEMPORAL_MORASS.get()*/);
-    this.tag(RootsTags.Spells.PRIMAL).add(ModSpells.NONDETECTION.get());
+    this.tag(RootsTags.Spells.PASTORAL).add(ModSpells.NONDETECTION.get());
     this.tag(RootsTags.Spells.HOLLOW);
 
     this.tag(RootsTags.Spells.GEAS_ACTION).add(ModSpells.GEAS.get());

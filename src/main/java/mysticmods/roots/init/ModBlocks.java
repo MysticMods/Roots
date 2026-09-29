@@ -252,13 +252,13 @@ public class ModBlocks {
   public static final DeferredHolder<Block, HugeMushroomBlock> BAFFLECAP_BLOCK = BLOCKS.register("bafflecap_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD)
       .ignitedByLava()));
-  public static final DeferredHolder<Block, GroveStoneBlock> PRIMAL_GROVE_STONE = BLOCKS.register("primal_grove_stone", () -> new GroveStoneBlock(ModGroves.PRIMAL, BlockBehaviour.Properties.of()
+  public static final DeferredHolder<Block, GroveStoneBlock> WILD_GROVE_STONE = BLOCKS.register("wild_grove_stone", () -> new GroveStoneBlock(ModGroves.WILD, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(2.0f, 6.0f).forceSolidOn()));
+  public static final DeferredHolder<Block, GroveStoneBlock> PASTORAL_GROVE_STONE = BLOCKS.register("pastoral_grove_stone", () -> new GroveStoneBlock(ModGroves.PASTORAL, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
   public static final DeferredHolder<Block, GroveStoneBlock> FAIRY_GROVE_STONE = BLOCKS.register("fairy_grove_stone", () -> new GroveStoneBlock(ModGroves.FAIRY, BlockBehaviour.Properties.of()
-      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
-      .strength(2.0f, 6.0f).forceSolidOn()));
-  public static final DeferredHolder<Block, GroveStoneBlock> WILD_GROVE_STONE = BLOCKS.register("wild_grove_stone", () -> new GroveStoneBlock(ModGroves.WILD, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
   public static final DeferredHolder<Block, GroveStoneBlock> FUNGAL_GROVE_STONE = BLOCKS.register("fungal_grove_stone", () -> new GroveStoneBlock(ModGroves.FUNGAL, BlockBehaviour.Properties.of()
@@ -273,6 +273,7 @@ public class ModBlocks {
 
   static {
     BLOCKS.addAlias(RootsAPI.rl("sprouting_grove_stone"), RootsAPI.rl("cultivation_grove_stone"));
+    BLOCKS.addAlias(RootsAPI.rl("primal_grove_stone"), RootsAPI.rl("pastoral_grove_stone"));
   }
 
   public static final DeferredHolder<Block, GroveStoneBlock> TWILIGHT_GROVE_STONE = BLOCKS.register("twilight_grove_stone", () -> new GroveStoneBlock(ModGroves.TWILIGHT, BlockBehaviour.Properties.of()

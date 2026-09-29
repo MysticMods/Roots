@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Block;
 
 public record GroveType(String name, TagKey<Block> tag) {
   public static final GroveType ANY = new GroveType("any", RootsTags.Blocks.GROVE_STONES);
-  public static final GroveType PRIMAL = new GroveType("primal", RootsTags.Blocks.GROVE_STONE_PRIMAL);
+  public static final GroveType PASTORAL = new GroveType("pastoral", RootsTags.Blocks.GROVE_STONE_PASTORAL);
   public static final GroveType ELEMENTAL = new GroveType("elemental", RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
   public static final GroveType FAIRY = new GroveType("fairy", RootsTags.Blocks.GROVE_STONE_FAIRY);
   public static final GroveType FUNGAL = new GroveType("fungal", RootsTags.Blocks.GROVE_STONE_FUNGAL);

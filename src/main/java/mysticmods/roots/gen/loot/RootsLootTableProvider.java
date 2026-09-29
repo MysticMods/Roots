@@ -470,7 +470,7 @@ public final class RootsLootTableProvider {
       addFairyHouseDrops(ModBlocks.CRIMSON_FAIRY_HUT, ModItems.CRIMSON_FAIRY_HUT);
       addFairyHouseDrops(ModBlocks.WARPED_FAIRY_HUT, ModItems.WARPED_FAIRY_HUT);
 
-      addGroveStoneDrops(ModBlocks.PRIMAL_GROVE_STONE, ModItems.PRIMAL_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.PASTORAL_GROVE_STONE, ModItems.PASTORAL_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.WILD_GROVE_STONE, ModItems.WILD_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.FUNGAL_GROVE_STONE, ModItems.FUNGAL_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.FAIRY_GROVE_STONE, ModItems.FAIRY_GROVE_STONE);
