@@ -59,8 +59,10 @@ public class DataEventHandler {
     event.register(DataMaps.GROVE_RANKS);
     event.register(DataMaps.HARVEST_SEED_TO_CROP);
     event.register(DataMaps.GROWTH_SEED_TO_CROP);
-    event.register(DataMaps.GROVE_POWER_GENERATORS);
-    event.register(DataMaps.GROVE_GENERATION_ENTRIES);
+    event.register(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
+    event.register(DataMaps.GROVE_ENTITY_POWER_GENERATORS);
+    event.register(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
+    event.register(DataMaps.GROVE_ENTITY_GENERATION_ENTRIES);
     event.register(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
     event.register(DataMaps.GROVE_ACTION_ICONS);
     event.register(DataMaps.RITUAL_MODIFIER_ICONS);

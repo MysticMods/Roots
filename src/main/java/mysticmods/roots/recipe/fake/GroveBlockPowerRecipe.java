@@ -25,19 +25,19 @@ import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
 import java.util.List;
 
-public record GrovePowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
-                               Symmetry symmetry, int amount) {
-  public static final Codec<GrovePowerRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-      ValidatedTagKey.CODEC.fieldOf("block_tag").forGetter(GrovePowerRecipe::tag),
-      RootsRegistries.GROVES.byNameCodec().fieldOf("grove_tag").forGetter(GrovePowerRecipe::groveTag),
-      Codec.INT.fieldOf("power").forGetter(GrovePowerRecipe::power),
-      Symmetry.CODEC.fieldOf("symmetry").forGetter(GrovePowerRecipe::symmetry),
-      Codec.INT.fieldOf("amount").forGetter(GrovePowerRecipe::amount)
-  ).apply(instance, GrovePowerRecipe::new));
-  public static final StreamCodec<RegistryFriendlyByteBuf, GrovePowerRecipe> STREAM_CODEC = StreamCodec.composite(ValidatedTagKey.STREAM_CODEC, GrovePowerRecipe::tag, ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), GrovePowerRecipe::groveTag, ByteBufCodecs.VAR_INT, GrovePowerRecipe::power, Symmetry.STREAM_CODEC, GrovePowerRecipe::symmetry, ByteBufCodecs.VAR_INT, GrovePowerRecipe::amount, GrovePowerRecipe::new);
+public record GroveBlockPowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
+                                    Symmetry symmetry, int amount) {
+  public static final Codec<GroveBlockPowerRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+      ValidatedTagKey.CODEC.fieldOf("block_tag").forGetter(GroveBlockPowerRecipe::tag),
+      RootsRegistries.GROVES.byNameCodec().fieldOf("grove_tag").forGetter(GroveBlockPowerRecipe::groveTag),
+      Codec.INT.fieldOf("power").forGetter(GroveBlockPowerRecipe::power),
+      Symmetry.CODEC.fieldOf("symmetry").forGetter(GroveBlockPowerRecipe::symmetry),
+      Codec.INT.fieldOf("amount").forGetter(GroveBlockPowerRecipe::amount)
+  ).apply(instance, GroveBlockPowerRecipe::new));
+  public static final StreamCodec<RegistryFriendlyByteBuf, GroveBlockPowerRecipe> STREAM_CODEC = StreamCodec.composite(ValidatedTagKey.STREAM_CODEC, GroveBlockPowerRecipe::tag, ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), GroveBlockPowerRecipe::groveTag, ByteBufCodecs.VAR_INT, GroveBlockPowerRecipe::power, Symmetry.STREAM_CODEC, GroveBlockPowerRecipe::symmetry, ByteBufCodecs.VAR_INT, GroveBlockPowerRecipe::amount, GroveBlockPowerRecipe::new);
 
-  public GrovePowerRecipe(TagKey<Block> blockTag, Grove groveTag, int power, Symmetry symmetry, int amount) {
-    this(new ValidatedTagKey(blockTag), groveTag, power, symmetry, amount);
+  public GroveBlockPowerRecipe(TagKey<Block> blockTag, Grove groveTag, int power, Symmetry symmetry, int amount) {
+    this(ValidatedTagKey.create(blockTag), groveTag, power, symmetry, amount);
   }
 
   public TagKey<Item> itemTag() {
@@ -103,8 +103,8 @@ public record GrovePowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
     }
   }
 
-  public static List<GrovePowerRecipe> generate() {
-    List<GrovePowerRecipe> result = new ArrayList<>();
+  public static List<GroveBlockPowerRecipe> generate() {
+    List<GroveBlockPowerRecipe> result = new ArrayList<>();
 
     RootsRegistries.GROVES.holders().forEach(o -> {
       var generators = o.getData(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
@@ -126,7 +126,7 @@ public record GrovePowerRecipe(ValidatedTagKey tag, Grove groveTag, int power,
         var symmetry = gen.symmetry();
 
         for (BlockGenerator g : generator) {
-          result.add(new GrovePowerRecipe(gen.tag(), o.value(), g.value(), symmetry, max));
+          result.add(new GroveBlockPowerRecipe(gen.tag(), o.value(), g.value(), symmetry, max));
         }
       }
     });

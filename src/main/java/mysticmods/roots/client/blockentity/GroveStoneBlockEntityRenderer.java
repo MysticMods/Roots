@@ -47,7 +47,7 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
             continue;
           }
 
-          if (stateAt.getBlockHolder().getData(DataMaps.GROVE_POWER_GENERATORS) == null) {
+          if (stateAt.getBlockHolder().getData(DataMaps.GROVE_BLOCK_POWER_GENERATORS) == null) {
             continue;
           }
 

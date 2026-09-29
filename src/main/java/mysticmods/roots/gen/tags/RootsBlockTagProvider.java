@@ -331,7 +331,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.FAIRY_GROVE_GENERATORS).addTags(BlockTags.SMALL_FLOWERS, BlockTags.TALL_FLOWERS);
     tag(RootsTags.Blocks.FAIRY_GROVE_PATHS).add(Blocks.DIRT_PATH);
     tag(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS).addTags(BlockTags.CROPS);
-    tag(RootsTags.Blocks.WILD_GROVE_GENERATORS).add(Blocks.DRAGON_EGG);
+    tag(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS).add(Blocks.DRAGON_EGG);
     // TODO: Separate into two seaparte tags
     tag(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS).add(Blocks.MYCELIUM, Blocks.PODZOL);
     tag(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS).add(Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, BAFFLECAP_BLOCK.get());

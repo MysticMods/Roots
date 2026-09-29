@@ -183,7 +183,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
   }
 
   public List<BlockGenerationEntry> getGenerationEntries() {
-    List<BlockGenerationEntry> entries = getGrove().getData(DataMaps.GROVE_GENERATION_ENTRIES);
+    List<BlockGenerationEntry> entries = getGrove().getData(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
     if (entries == null) {
       return Collections.emptyList();
     }
@@ -228,7 +228,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
       if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
         continue;
       }
-      List<BlockGenerator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_POWER_GENERATORS);
+      List<BlockGenerator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
       if (generators == null) {
         continue;
       }

@@ -524,7 +524,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder23a.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
     builder23a.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
 
-    var builder24 = builder(DataMaps.GROVE_POWER_GENERATORS);
+    var builder24 = builder(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, List.of(
         new BlockGenerator(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, RootsTags.Groves.FAIRY, 5)), false);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_PATHS, List.of(
@@ -541,14 +541,14 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new BlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, List.of(
         new BlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
-    builder24.add(RootsTags.Blocks.WILD_GROVE_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.WILD_GROVE_GENERATORS, RootsTags.Groves.PASTORAL, 5)), false);
+    builder24.add(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, List.of(
+        new BlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, RootsTags.Groves.PASTORAL, 5)), false);
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
         new BlockGenerator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
     builder24.add(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, List.of(
         new BlockGenerator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY_POWERABLE, 1000)), false);
 
-    var builder25 = builder(DataMaps.GROVE_GENERATION_ENTRIES);
+    var builder25 = builder(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
     builder25.add(ModGroves.FAIRY, List.of(
         new BlockGenerationEntry(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, 2, Symmetry.RADIAL_SAME_BLOCK),
         new BlockGenerationEntry(RootsTags.Blocks.FAIRY_GROVE_PATHS, 30, Symmetry.RADIAL_SAME_BLOCK)
@@ -565,7 +565,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new BlockGenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, 8, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.PASTORAL, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_GENERATORS, 2, Symmetry.NONE)
+        new BlockGenerationEntry(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, 2, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.TWILIGHT, List.of(
         new BlockGenerationEntry(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, Symmetry.RADIAL_NOT_MATCHING)

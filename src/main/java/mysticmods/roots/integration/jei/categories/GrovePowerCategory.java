@@ -17,7 +17,7 @@ import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.block.SimpleBlockType;
 import mysticmods.roots.integration.jei.ingredient.grove.GrovePower;
 import mysticmods.roots.integration.jei.widget.SymmetryWidget;
-import mysticmods.roots.recipe.fake.GrovePowerRecipe;
+import mysticmods.roots.recipe.fake.GroveBlockPowerRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +25,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public class GrovePowerCategory implements IRecipeCategory<GrovePowerRecipe> {
+public class GrovePowerCategory implements IRecipeCategory<GroveBlockPowerRecipe> {
   private final IDrawable background;
   private final IDrawable icon;
   private final Component title;
@@ -42,7 +42,7 @@ public class GrovePowerCategory implements IRecipeCategory<GrovePowerRecipe> {
 
 
   @Override
-  public RecipeType<GrovePowerRecipe> getRecipeType() {
+  public RecipeType<GroveBlockPowerRecipe> getRecipeType() {
     return RootsJEIPlugin.GROVE_POWER_RECIPE_TYPE;
   }
 
@@ -63,7 +63,7 @@ public class GrovePowerCategory implements IRecipeCategory<GrovePowerRecipe> {
   }
 
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, GrovePowerRecipe recipe, IFocusGroup iFocusGroup) {
+  public void setRecipe(IRecipeLayoutBuilder builder, GroveBlockPowerRecipe recipe, IFocusGroup iFocusGroup) {
     builder.addSlot(RecipeIngredientRole.INPUT, 2, 2)
         .addIngredients(RootsJEIPlugin.BLOCK_TYPE, SimpleBlockType.fromTag(recipe.blockTag()))
         .setCustomRenderer(RootsJEIPlugin.BLOCK_TYPE, RootsJEIPlugin.BLOCK_RENDERER);
@@ -77,7 +77,7 @@ public class GrovePowerCategory implements IRecipeCategory<GrovePowerRecipe> {
   }
 
   @Override
-  public void createRecipeExtras(IRecipeExtrasBuilder builder, GrovePowerRecipe recipe, IFocusGroup focuses) {
+  public void createRecipeExtras(IRecipeExtrasBuilder builder, GroveBlockPowerRecipe recipe, IFocusGroup focuses) {
     IRecipeCategory.super.createRecipeExtras(builder, recipe, focuses);
 
     builder.addWidget(new SymmetryWidget(23, 2, recipe.symmetry()));

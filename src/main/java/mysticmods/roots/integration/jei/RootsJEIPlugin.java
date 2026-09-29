@@ -127,7 +127,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<TransmutationRecipe> TRANSMUTATION_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("transmutation_recipe"), TransmutationRecipe.class);
   public static final RecipeType<GroveWithReputation> GROVE_REPUTATION_ENTRY_TYPE = new RecipeType<>(RootsAPI.rl("grove_reputation_entry"), GroveWithReputation.class);
   public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = new RecipeType<>(RootsAPI.rl("entity_interaction_recipe"), EntityInteractionRecipe.class);
-  public static final RecipeType<GrovePowerRecipe> GROVE_POWER_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("grove_power_recipe"), GrovePowerRecipe.class);
+  public static final RecipeType<GroveBlockPowerRecipe> GROVE_POWER_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("grove_power_recipe"), GroveBlockPowerRecipe.class);
 
   private static final Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
       MortarContainer.class, MORTAR_RECIPE_TYPE,
@@ -253,7 +253,7 @@ public class RootsJEIPlugin implements IModPlugin {
     List<EntityInteractionRecipe> entityInteractionRecipes = new ArrayList<>();
     entityInteractionRecipes.add(new EntityInteractionRecipe(new EntityTagTest(RootsTags.Entities.SQUID), Ingredient.of(RootsTags.Items.BOTTLES), List.of(new ChanceOutput(new ItemStack(ModItems.INK_BOTTLE), 1.0f)), 20 * 15));
     registration.addRecipes(ENTITY_INTERACTION_TYPE, entityInteractionRecipes);
-    registration.addRecipes(GROVE_POWER_RECIPE_TYPE, GrovePowerRecipe.generate());
+    registration.addRecipes(GROVE_POWER_RECIPE_TYPE, GroveBlockPowerRecipe.generate());
   }
 
   @Override
