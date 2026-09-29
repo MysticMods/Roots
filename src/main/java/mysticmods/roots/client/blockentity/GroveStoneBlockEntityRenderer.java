@@ -34,7 +34,7 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
         BlockPos pPos = pBlockEntity.getBlockPos();
         List<BlockPos> generatorPositions = pBlockEntity.getValidPositions(pPos);
-        List<BlockGenerationEntry> entries = pBlockEntity.getGenerationEntries();
+        List<BlockGenerationEntry> entries = pBlockEntity.getBlockGenerationEntries();
         if (generatorPositions.isEmpty() || entries.isEmpty()) {
           return;
         }
