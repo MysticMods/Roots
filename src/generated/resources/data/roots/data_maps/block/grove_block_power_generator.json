@@ -63,17 +63,17 @@
         "value": 3
       }
     ],
+    "#roots:grove_generators/pastoral": [
+      {
+        "blockTag": "roots:grove_generators/pastoral",
+        "tag": "roots:pastoral",
+        "value": 5
+      }
+    ],
     "#roots:grove_generators/twilight": [
       {
         "blockTag": "roots:grove_generators/twilight",
         "tag": "roots:twilight",
-        "value": 5
-      }
-    ],
-    "#roots:grove_generators/wild": [
-      {
-        "blockTag": "roots:grove_generators/wild",
-        "tag": "roots:pastoral",
         "value": 5
       }
     ]

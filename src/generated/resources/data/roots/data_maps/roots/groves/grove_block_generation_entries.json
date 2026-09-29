@@ -48,7 +48,7 @@
     "roots:pastoral": [
       {
         "max_count": 2,
-        "tag": "roots:grove_generators/wild"
+        "tag": "roots:grove_generators/pastoral"
       }
     ],
     "roots:twilight": [
