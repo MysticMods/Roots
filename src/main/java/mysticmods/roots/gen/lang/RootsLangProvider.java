@@ -876,6 +876,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("roots.hud.pyre.auto1", "will start automatically");
 
+    add("roots.hud.grove_power.wild", "%s");
     add("roots.hud.grove_power.grove", "%s, rank %s/%s");
     add("roots.hud.grove_power.power", "Power usage: %s/%s");
     add("roots.hud.grove_power.invalid_rank", "[Requires rank 1 or higher.]");

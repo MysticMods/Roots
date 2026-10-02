@@ -515,7 +515,7 @@ public class HudOverlay {
         if (!groveInstance.is(RootsTags.Groves.WILD)) {
           comp2 = Component.translatable("roots.hud.grove_power.invalid_rank");
         } else {
-          comp2 = CommonComponents.EMPTY;
+          comp1 = Component.translatable("roots.hud.grove_power.wild", grove.getStyledName());
         }
       }
 

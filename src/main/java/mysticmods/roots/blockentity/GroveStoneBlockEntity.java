@@ -130,6 +130,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
   @Override
   public int getRadiusX() {
     return switch (getBlockState().getValue(GroveStoneBlock.RANK)) {
+      case 0 -> getGrove().is(RootsTags.Groves.WILD) ? ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt() : 0;
       case 1 -> ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt();
       case 2 -> ConfigManager.RANK_2_GROVE_BOUNDS_ZX.getAsInt();
       case 3 -> ConfigManager.RANK_3_GROVE_BOUNDS_ZX.getAsInt();
@@ -141,6 +142,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
   @Override
   public int getRadiusY() {
     return switch (getBlockState().getValue(GroveStoneBlock.RANK)) {
+      case 0 -> getGrove().is(RootsTags.Groves.WILD) ? ConfigManager.RANK_1_GROVE_BOUNDS_Y.getAsInt() : 0;
       case 1 -> ConfigManager.RANK_1_GROVE_BOUNDS_Y.getAsInt();
       case 2 -> ConfigManager.RANK_2_GROVE_BOUNDS_Y.getAsInt();
       case 3 -> ConfigManager.RANK_3_GROVE_BOUNDS_Y.getAsInt();
@@ -152,6 +154,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
   @Override
   public int getRadiusZ() {
     return switch (getBlockState().getValue(GroveStoneBlock.RANK)) {
+      case 0 -> getGrove().is(RootsTags.Groves.WILD) ? ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt() : 0;
       case 1 -> ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt();
       case 2 -> ConfigManager.RANK_2_GROVE_BOUNDS_ZX.getAsInt();
       case 3 -> ConfigManager.RANK_3_GROVE_BOUNDS_ZX.getAsInt();
