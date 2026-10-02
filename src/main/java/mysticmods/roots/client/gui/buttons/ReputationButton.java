@@ -47,6 +47,14 @@ public class ReputationButton extends Button {
     this.progress = progress;
   }
 
+  public int getRank () {
+    if (this.progress == null) {
+      return 0;
+    }
+
+    return this.progress.rank();
+  }
+
   public float getProgress () {
     if (this.progress == null) {
       return 0f;
@@ -104,7 +112,7 @@ public class ReputationButton extends Button {
     
     if (this.progress != null) {
       if (this.progress.rank() > 0) {
-        guiGraphics.blitSprite(this.ranks.get(this.progress.rank()), this.getX() + 8, this.getY() - 16, 16, 16);
+        //guiGraphics.blitSprite(this.ranks.get(this.progress.rank()), this.getX() + 8, this.getY() - 16, 16, 16);
       }
     }
 

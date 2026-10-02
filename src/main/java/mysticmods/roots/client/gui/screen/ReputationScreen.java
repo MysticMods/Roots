@@ -5,12 +5,22 @@ import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.ReputationButton;
+import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
+import mysticmods.roots.client.particle.screen.ScreenParticleSupplier;
+import mysticmods.roots.client.particle.screen.base.ScreenParticle;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModGroves;
+import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.particle.RootsParticleOptions;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public class ReputationScreen extends RootsScreen {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ReputationScreen extends RootsScreen implements ScreenParticleSupplier {
   private ReputationButton fairy;
   private ReputationButton elemental;
   private ReputationButton cultivation;
@@ -18,6 +28,8 @@ public class ReputationScreen extends RootsScreen {
   private ReputationButton wild;
   private ReputationButton fungal;
   private ReputationButton twilight;
+
+  private final Map<ParticleRenderType, List<ScreenParticle>> myParticles = new HashMap<>();
 
   protected ReputationScreen() {
     super(Component.translatable("roots.gui.reputation"));
@@ -42,6 +54,23 @@ public class ReputationScreen extends RootsScreen {
     this.addRenderableWidget(this.elemental);
 
     updateButtons();
+
+    this.addRankParticle(this.fungal);
+    this.addRankParticle(this.fairy);
+    this.addRankParticle(this.pastoral);
+    this.addRankParticle(this.cultivation);
+    this.addRankParticle(this.twilight);
+    this.addRankParticle(this.elemental);
+  }
+
+  private void addRankParticle (ReputationButton button) {
+    int rank = button.getRank();
+
+    if (rank == 0) {
+      return;
+    }
+
+    this.addContainerParticle(RootsParticleOptions.builder(ModParticles.RANK).build(), button.getX(), button.getY(), button.getX(), button.getY());
   }
 
   protected void updateButtons() {
@@ -79,5 +108,10 @@ public class ReputationScreen extends RootsScreen {
   @Override
   public int getBackgroundHeight() {
     return 256;
+  }
+
+  @Override
+  public Map<ParticleRenderType, List<ScreenParticle>> getParticles() {
+    return myParticles;
   }
 }

@@ -15,6 +15,8 @@ public abstract class RootsScreenParticle extends TextureSheetScreenParticle {
 
   protected boolean fastForwarding = false;
 
+  protected boolean perpetual = false;
+
   protected RootsScreenParticle(ClientLevel level, RootsParticleOptions options, double x, double y, int col1, int col2) {
     super(level, x, y);
     unwrapColor(options.color1(), options.color2());
@@ -83,9 +85,15 @@ public abstract class RootsScreenParticle extends TextureSheetScreenParticle {
   public void tick() {
     this.xo = this.x;
     this.yo = this.y;
-    if (this.age++ >= this.lifetime) {
-      this.remove();
-    } else {
+    this.age++;
+
+    if (!perpetual) {
+      if (this.age >= this.lifetime) {
+        this.remove();
+      }
+    }
+
+    if (isAlive()) {
       if (defaultMovement) {
         this.yd = this.yd + 0.04 * (double) this.gravity;
         this.x += this.xd;

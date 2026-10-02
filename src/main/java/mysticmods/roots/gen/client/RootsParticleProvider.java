@@ -68,6 +68,8 @@ public final class RootsParticleProvider extends ParticleDescriptionProvider {
 
     this.sprite(ModParticles.SPROUT_PORTAL.get(), RootsAPI.rl("simple"));
 
+    this.sprite(ModParticles.RANK.get(), RootsAPI.rl("fey_light_0"));
+
     this.sprite(ModParticles.DESATURATE.get(), RootsAPI.rl("food_0"));
     this.sprite(ModParticles.SATURATE.get(), RootsAPI.rl("food_0"));
 

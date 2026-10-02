@@ -16,10 +16,7 @@ import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
 import mysticmods.roots.client.particle.bolt.RenderPreset;
-import mysticmods.roots.client.particle.screen.DesaturateScreenParticle;
-import mysticmods.roots.client.particle.screen.EmptyProvider;
-import mysticmods.roots.client.particle.screen.RiseBounceScreenParticle;
-import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
+import mysticmods.roots.client.particle.screen.*;
 import mysticmods.roots.client.particle.world.*;
 import mysticmods.roots.client.particle.world.block.*;
 import mysticmods.roots.client.particle.world.channel.ChannelCastParticle;
@@ -295,6 +292,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.DESATURATE.get(), EmptyProvider::new);
     event.registerSpriteSet(ModParticles.SATURATE.get(), HealParticle.Provider::new);
     event.registerSpriteSet(ModParticles.HEAL.get(), HealParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.RANK.get(), EmptyProvider::new);
     event.registerSpriteSet(ModParticles.NONDETECTION.get(), NondetectionParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FOG.get(), FogParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SANCTUARY.get(), SanctuaryParticle.Provider::new);
@@ -315,6 +313,7 @@ public class ClientSetup {
     ScreenParticleEngine.register(ModParticles.DESATURATE.get(), new DesaturateScreenParticle.Provider());
     ScreenParticleEngine.register(ModParticles.SATURATE.get(), new RiseBounceScreenParticle.Provider());
     ScreenParticleEngine.register(ModParticles.HEAL.get(), new RiseBounceScreenParticle.Provider());
+    ScreenParticleEngine.register(ModParticles.RANK.get(), new RankScreenParticle.Provider());
   }
 
   @SubscribeEvent
