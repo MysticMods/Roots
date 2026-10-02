@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.Congen;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
@@ -36,6 +37,10 @@ public record BlockGenerator(TagKey<Block> blockTag, TagKey<Grove> tag,
     }
 
     if (value == Integer.MAX_VALUE) {
+      return value;
+    }
+
+    if (grove.asGrove().is(RootsTags.Groves.WILD)) {
       return value;
     }
 

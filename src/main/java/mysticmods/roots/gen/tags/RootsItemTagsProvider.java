@@ -383,7 +383,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copyGrove(RootsTags.Groves.PASTORAL);
 
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY_POWERABLE)).addTags(
-        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PASTORAL, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT
+        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PASTORAL, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
     );
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY)).addTags(
         RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PASTORAL, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD

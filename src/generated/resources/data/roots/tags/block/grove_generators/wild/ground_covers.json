@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#minecraft:flowers",
+    "#minecraft:saplings",
+    "minecraft:lily_pad",
+    "minecraft:moss_carpet",
+    "minecraft:vine",
+    "#roots:short_grass",
+    "#roots:tall_grass"
+  ]
+}

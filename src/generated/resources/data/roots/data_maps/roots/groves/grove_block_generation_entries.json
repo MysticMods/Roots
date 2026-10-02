@@ -6,6 +6,32 @@
         "tag": "roots:grove_generators/creative"
       }
     ],
+    "#roots:wild": [
+      {
+        "max_count": 10,
+        "tag": "roots:grove_generators/wild/ground_covers"
+      },
+      {
+        "max_count": 1,
+        "tag": "roots:grove_generators/wild/pyres"
+      },
+      {
+        "max_count": 1,
+        "tag": "roots:grove_generators/wild/crafters"
+      },
+      {
+        "max_count": 10,
+        "tag": "roots:grove_generators/wild/leaves"
+      },
+      {
+        "max_count": 10,
+        "tag": "roots:grove_generators/wild/logs"
+      },
+      {
+        "max_count": 1,
+        "tag": "roots:grove_generators/wild/cakes"
+      }
+    ],
     "roots:cultivation": [
       {
         "max_count": 3,

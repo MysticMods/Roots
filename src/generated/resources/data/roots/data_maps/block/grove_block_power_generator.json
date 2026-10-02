@@ -76,6 +76,48 @@
         "tag": "roots:twilight",
         "value": 5
       }
+    ],
+    "#roots:grove_generators/wild/cakes": [
+      {
+        "blockTag": "roots:grove_generators/wild/cakes",
+        "tag": "roots:wild",
+        "value": 20
+      }
+    ],
+    "#roots:grove_generators/wild/crafters": [
+      {
+        "blockTag": "roots:grove_generators/wild/crafters",
+        "tag": "roots:wild",
+        "value": 10
+      }
+    ],
+    "#roots:grove_generators/wild/ground_covers": [
+      {
+        "blockTag": "roots:grove_generators/wild/ground_covers",
+        "tag": "roots:wild",
+        "value": 2
+      }
+    ],
+    "#roots:grove_generators/wild/leaves": [
+      {
+        "blockTag": "roots:grove_generators/wild/leaves",
+        "tag": "roots:wild",
+        "value": 2
+      }
+    ],
+    "#roots:grove_generators/wild/logs": [
+      {
+        "blockTag": "roots:grove_generators/wild/logs",
+        "tag": "roots:wild",
+        "value": 2
+      }
+    ],
+    "#roots:grove_generators/wild/pyres": [
+      {
+        "blockTag": "roots:grove_generators/wild/pyres",
+        "tag": "roots:wild",
+        "value": 10
+      }
     ]
   }
 }

@@ -551,6 +551,12 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new BlockGenerator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
     builder24.add(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, List.of(
         new BlockGenerator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY_POWERABLE, 1000)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, RootsTags.Groves.WILD, 20)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, RootsTags.Groves.WILD, 10)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, RootsTags.Groves.WILD, 10)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, RootsTags.Groves.WILD, 2)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, RootsTags.Groves.WILD, 2)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, RootsTags.Groves.WILD, 2)), false);
 
     var builder37 = builder(DataMaps.GROVE_ENTITY_POWER_GENERATORS);
     builder37.add(RootsTags.Entities.TAMEABLE, List.of(
@@ -599,6 +605,15 @@ public final class RootsDataMapProvider extends DataMapProvider {
     builder25.add(RootsTags.Groves.ANY_POWERABLE, List.of(
         new BlockGenerationEntry(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, 1, Symmetry.NONE)
     ), false);
+
+    builder25.add(RootsTags.Groves.WILD, List.of(
+        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, 10, Symmetry.NONE),
+        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, 1, Symmetry.NONE),
+        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, 1, Symmetry.NONE),
+        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, 10, Symmetry.NONE),
+        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, 10, Symmetry.NONE),
+        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, 1, Symmetry.NONE)), false
+    );
 
     var builder26 = builder(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
     builder26.add(EntityType.TURTLE.builtInRegistryHolder(), List.of(RootsAPI.TURTLE_SCUTE), false);

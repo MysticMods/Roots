@@ -110,7 +110,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(BlockTags.DIRT).add(ENCHANTED_TURF.get());
     this.tag(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL)
         .addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL);
-    this.tag(RootsTags.Blocks.ELEMENTAL_SOIL).addTags(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL, RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
+    this.tag(RootsTags.Blocks.ELEMENTAL_SOIL)
+        .addTags(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL, RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.NYI).add(INCENSE_BURNER.get(), UNENDING_BOWL.get());
     this.tag(RootsTags.Blocks.WIP).addTag(RootsTags.Blocks.SOILS);
@@ -357,6 +358,15 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
         .addTag(BlockTags.BASE_STONE_NETHER).addTag(BlockTags.SAND).addTag(Tags.Blocks.GRAVELS);
     this.tag(RootsTags.Blocks.MINEABLE_WITH_SHATTER)
         .addTags(BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE);
+
+    this.tag(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS).add(Blocks.CAKE);
+    this.tag(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS).addTag(BlockTags.LOGS_THAT_BURN);
+    this.tag(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS).addTag(BlockTags.LEAVES);
+    this.tag(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS).addTag(RootsTags.Blocks.GROVE_CRAFTERS);
+    this.tag(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS).addTag(RootsTags.Blocks.PYRES);
+    this.tag(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS).addTag(
+        BlockTags.FLOWERS
+    ).addTag(BlockTags.SAPLINGS).add(Blocks.LILY_PAD).add(Blocks.MOSS_CARPET).add(Blocks.VINE).addTags(RootsTags.Blocks.SHORT_GRASS, RootsTags.Blocks.TALL_GRASS);
   }
 
   @Override

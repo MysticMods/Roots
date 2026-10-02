@@ -91,10 +91,6 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    if (pState.is(RootsTags.Blocks.GROVE_STONE_WILD)) {
-      return;
-    }
-
     if (!pState.getValue(GroveStoneBlock.ACTIVE) || getBoundingBox() == null) {
       return;
     }

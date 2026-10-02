@@ -203,6 +203,13 @@ public class RootsTags {
     public static final TagKey<Block> ELEMENTAL_GROVE_GENERATORS = modTag("grove_generators/elemental");
     public static final TagKey<Block> ELEMENTAL_GROVE_LIQUID_GENERATORS = modTag("grove_generators/elemental_liquid");
 
+    public static final TagKey<Block> WILD_GROVE_LOG_GENERATORS = modTag("grove_generators/wild/logs");
+    public static final TagKey<Block> WILD_GROVE_LEAF_GENERATORS = modTag("grove_generators/wild/leaves");
+    public static final TagKey<Block> WILD_GROVE_GROUND_COVER_GENERATORS = modTag("grove_generators/wild/ground_covers");
+    public static final TagKey<Block> WILD_GROVE_PYRE_GENERATORS = modTag("grove_generators/wild/pyres");
+    public static final TagKey<Block> WILD_GROVE_CRAFTER_GENERATORS = modTag("grove_generators/wild/crafters");
+    public static final TagKey<Block> WILD_GROVE_CAKE_GENERATORS = modTag("grove_generators/wild/cakes");
+
     public static final TagKey<Block> CREATIVE_GROVE_GENERATORS = modTag("grove_generators/creative");
 
     public static final TagKey<Block> PYRE_HUD_RENDERER = modTag("pyre_hud_layer");
