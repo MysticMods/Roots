@@ -1,18 +1,24 @@
 package mysticmods.roots.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.ReputationStorage;
-import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.ReputationRanks;
+import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.client.RootsClientHooks;
+import mysticmods.roots.client.gui.buttons.ReputationButton;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModGroves;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class ReputationScreen extends RootsScreen {
+  private ReputationButton fairy;
+  private ReputationButton elemental;
+  private ReputationButton cultivation;
+  private ReputationButton pastoral;
+  private ReputationButton wild;
+  private ReputationButton fungal;
+  private ReputationButton twilight;
+
   protected ReputationScreen() {
     super(Component.translatable("roots.gui.reputation"));
   }
@@ -20,6 +26,33 @@ public class ReputationScreen extends RootsScreen {
   @Override
   protected void init() {
     super.init();
+
+    this.fairy = new ReputationButton(this.leftPos + 120, this.topPos + 20, GroveType.FAIRY);
+    this.pastoral = new ReputationButton(this.leftPos + 26, this.topPos + 81, GroveType.PASTORAL);
+    this.cultivation = new ReputationButton(this.leftPos + 42, this.topPos + 171, GroveType.CULTIVATION);
+    this.twilight = new ReputationButton(this.leftPos + 206, this.topPos + 81, GroveType.TWILIGHT);
+    this.fungal = new ReputationButton(this.leftPos + 191, this.topPos + 171, GroveType.FUNGAL);
+    this.elemental = new ReputationButton(this.leftPos + 117, this.topPos + 208, GroveType.ELEMENTAL);
+
+    this.addRenderableWidget(this.fungal);
+    this.addRenderableWidget(this.fairy);
+    this.addRenderableWidget(this.pastoral);
+    this.addRenderableWidget(this.cultivation);
+    this.addRenderableWidget(this.twilight);
+    this.addRenderableWidget(this.elemental);
+
+    updateButtons();
+  }
+
+  protected void updateButtons() {
+    ReputationStorage rep = getStorage();
+
+    this.fairy.setProgress(rep.getProgress(ModGroves.FAIRY));
+    this.elemental.setProgress(rep.getProgress(ModGroves.ELEMENTAL));
+    this.twilight.setProgress(rep.getProgress(ModGroves.TWILIGHT));
+    this.pastoral.setProgress(rep.getProgress(ModGroves.PASTORAL));
+    this.cultivation.setProgress(rep.getProgress(ModGroves.CULTIVATION));
+    this.fungal.setProgress(rep.getProgress(ModGroves.FUNGAL));
   }
 
   private ReputationStorage getStorage() {
@@ -30,76 +63,8 @@ public class ReputationScreen extends RootsScreen {
     RootsClientHooks.stopUsingItem(new ReputationScreen());
   }
 
-  @Override
-  public void drawForeground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-    super.drawForeground(graphics, mouseX, mouseY, partialTicks);
-  }
-
-  @Override
-  public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, int uvW, int uvH, int maxW, int maxH) {
-  }
-
-  private static final ResourceLocation ENCHANTMENT_SLOT_HIGHLIGHTED_SPRITE = ResourceLocation.withDefaultNamespace(
-      "container/enchanting_table/enchantment_slot_highlighted"
-  );
-  private static final ResourceLocation ENCHANTMENT_SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/enchanting_table/enchantment_slot");
-
-  @Override
-  public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-  }
-
-  @Override
-  public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-    ReputationStorage rep = getStorage();
-
-    ReputationRanks.Progress fairy = rep.getProgress(ModGroves.FAIRY.get());
-    ReputationRanks.Progress pastoral = rep.getProgress(ModGroves.PASTORAL.get());
-    ReputationRanks.Progress cultivation = rep.getProgress(ModGroves.CULTIVATION.get());
-    ReputationRanks.Progress elemental = rep.getProgress(ModGroves.ELEMENTAL.get());
-    ReputationRanks.Progress twilight = rep.getProgress(ModGroves.TWILIGHT.get());
-    ReputationRanks.Progress fungal = rep.getProgress(ModGroves.FUNGAL.get());
-
-
-    int i = (this.width - 176) / 2;
-    int j = (this.height - 142) / 2;
-    graphics.blit(background, i, j, 0, 0, getBackgroundWidth(), getBackgroundHeight());
-
-    ReputationRanks.Progress[] progresses = new ReputationRanks.Progress[]{fairy, twilight, fungal, elemental, pastoral, cultivation};
-    Grove[] groves = new Grove[]{
-        ModGroves.FAIRY.get(), ModGroves.TWILIGHT.get(), ModGroves.FUNGAL.get(), ModGroves.ELEMENTAL.get(), ModGroves.PASTORAL.get(), ModGroves.CULTIVATION.get()
-    };
-
-    for (int l = 0; l < 6; l++) {
-      int i1 = i + 60;
-      int j1 = i1 + 5;
-      ReputationRanks.Progress prog = progresses[l];
-      Grove grove = groves[l];
-      String s;
-      if (prog.nextRank() == 0) {
-        s = prog.progress() + " " + prog.rank();
-      } else {
-        s = prog.progress() + "/" + prog.nextRank() + " " + prog.rank();
-      }
-      int i2 = 6839882;
-      int j2 = mouseX - (i + 60);
-      int k2 = mouseY - (j + 14 + 19 * l);
-      RenderSystem.enableBlend();
-      if (j2 >= 0 && k2 >= 0 && j2 < 108 && k2 < 19) {
-        graphics.blitSprite(ENCHANTMENT_SLOT_HIGHLIGHTED_SPRITE, i1, j + 14 + 19 * l, 108, 19);
-        i2 = 16777088;
-      } else {
-        graphics.blitSprite(ENCHANTMENT_SLOT_SPRITE, i1, j + 14 + 19 * l, 108, 19);
-      }
-
-      RenderSystem.disableBlend();
-      graphics.drawString(this.font, grove.getName(), j1, j + 16 + 19 * l, i2);
-      i2 = 8453920;
-
-      graphics.drawString(this.font, s, j1 + 86 + 15 - this.font.width(s), j + 16 + 19 * l + 7, i2);
-    }
-  }
-
-  private static final ResourceLocation background = RootsAPI.rl("textures/gui/reputation.png");
+  private static final ResourceLocation background = RootsAPI.rl("textures/gui/reputation_background.png");
+  private static final ResourceLocation foreground = RootsAPI.rl("textures/gui/reputation_foreground.png");
 
   @Override
   public ResourceLocation getBackground() {

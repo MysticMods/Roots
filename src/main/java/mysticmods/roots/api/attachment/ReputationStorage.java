@@ -11,6 +11,7 @@ import mysticmods.roots.api.action.UniqueReputation;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -48,6 +49,10 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
 
   public int getRank(Grove grove) {
     return grove.getRanks().getRank(reputations.computeIfAbsent(grove, t -> 0));
+  }
+
+  public ReputationRanks.Progress getProgress (Holder<Grove> grove) {
+    return getProgress(grove.value());
   }
 
   public ReputationRanks.Progress getProgress(Grove grove) {
