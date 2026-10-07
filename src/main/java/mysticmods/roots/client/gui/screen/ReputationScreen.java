@@ -39,12 +39,12 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   protected void init() {
     super.init();
 
-    this.fairy = new ReputationButton(this.leftPos + 120, this.topPos + 20, GroveType.FAIRY);
-    this.pastoral = new ReputationButton(this.leftPos + 26, this.topPos + 81, GroveType.PASTORAL);
-    this.cultivation = new ReputationButton(this.leftPos + 42, this.topPos + 171, GroveType.CULTIVATION);
-    this.twilight = new ReputationButton(this.leftPos + 206, this.topPos + 81, GroveType.TWILIGHT);
-    this.fungal = new ReputationButton(this.leftPos + 191, this.topPos + 171, GroveType.FUNGAL);
-    this.elemental = new ReputationButton(this.leftPos + 117, this.topPos + 208, GroveType.ELEMENTAL);
+    this.fairy = new ReputationButton(this.leftPos + 118, this.topPos + 20, GroveType.FAIRY);
+    this.pastoral = new ReputationButton(this.leftPos + 48, this.topPos + 81, GroveType.PASTORAL);
+    this.cultivation = new ReputationButton(this.leftPos + 48, this.topPos + 171, GroveType.CULTIVATION);
+    this.twilight = new ReputationButton(this.leftPos + /*206*/ 188, this.topPos + 81, GroveType.TWILIGHT);
+    this.fungal = new ReputationButton(this.leftPos + /*191*/ 188, this.topPos + 171, GroveType.FUNGAL);
+    this.elemental = new ReputationButton(this.leftPos + 118, this.topPos + 208, GroveType.ELEMENTAL);
 
     this.addRenderableWidget(this.fungal);
     this.addRenderableWidget(this.fairy);
@@ -54,13 +54,6 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     this.addRenderableWidget(this.elemental);
 
     updateButtons();
-
-    this.addRankParticle(this.fungal);
-    this.addRankParticle(this.fairy);
-    this.addRankParticle(this.pastoral);
-    this.addRankParticle(this.cultivation);
-    this.addRankParticle(this.twilight);
-    this.addRankParticle(this.elemental);
   }
 
   private void addRankParticle (ReputationButton button) {

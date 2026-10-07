@@ -15,17 +15,31 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-
 public class ReputationButton extends Button {
-  private static final Function<GroveType, ResourceLocation> SPRITE_MAPPER = (grove) -> RootsAPI.rl(grove.name())
-      .withPrefix("buttons/").withSuffix("_grove");
+  private static final ResourceLocation BUTTON_BASE = RootsAPI.rl("reputation/base_rank");
 
-  private final ResourceLocation baseSprite;
-  private final ResourceLocation progressSprite;
-  private final List<ResourceLocation> ranks = new ArrayList<>();
+  private static ResourceLocation baseFromRank(int rank) {
+    return switch (rank) {
+      case 2 -> BUTTON_BASE.withSuffix("_2");
+      case 3 -> BUTTON_BASE.withSuffix("_3");
+      case 4 -> BUTTON_BASE.withSuffix("_4");
+      default -> BUTTON_BASE;
+    };
+  }
+
+  private static ResourceLocation iconFromRank(GroveType grove, int rank) {
+    ResourceLocation base = RootsAPI.rl("reputation/" + grove.name());
+    return switch (rank) {
+      case 1, 2, 3, 4 -> base.withSuffix("_glow");
+      default -> base.withSuffix("_base");
+    };
+  }
+
+  private static ResourceLocation progress(GroveType grove) {
+    return RootsAPI.rl("reputation/" + grove.name() + "_progress");
+  }
+
+  private final GroveType grove;
   private ReputationRanks.Progress progress;
   protected boolean wasHovered = false;
   private AnimationState state = AnimationState.NORMAL;
@@ -35,19 +49,14 @@ public class ReputationButton extends Button {
   public ReputationButton(int x, int y, GroveType grove) {
     super(x, y, 32, 32, CommonComponents.EMPTY, (v) -> {
     }, DEFAULT_NARRATION);
-    var base = SPRITE_MAPPER.apply(grove);
-    this.baseSprite = base.withSuffix("_base");
-    this.progressSprite = base.withSuffix("_progress");
-    for (int i = 0; i < 5; i++) {
-      this.ranks.add(base.withSuffix("_rank_" + i));
-    }
+    this.grove = grove;
   }
 
   public void setProgress(ReputationRanks.Progress progress) {
     this.progress = progress;
   }
 
-  public int getRank () {
+  public int getRank() {
     if (this.progress == null) {
       return 0;
     }
@@ -55,7 +64,7 @@ public class ReputationButton extends Button {
     return this.progress.rank();
   }
 
-  public float getProgress () {
+  public float getProgress() {
     if (this.progress == null) {
       return 0f;
     }
@@ -66,7 +75,7 @@ public class ReputationButton extends Button {
     return max <= 0 ? 0F : Mth.clamp((float) current / (float) max, 0F, 1F);
   }
 
- @Override
+  @Override
   protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
     float currentTick = Minecraft.getInstance().levelRenderer.getTicks() + partialTick;
 
@@ -99,7 +108,10 @@ public class ReputationButton extends Button {
       pose.translate(-cx, -cy, 0f);
     }
 
-    guiGraphics.blitSprite(baseSprite, this.getX(), this.getY(), this.getWidth(), this.getHeight());
+
+
+    guiGraphics.blitSprite(baseFromRank(getRank()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+    guiGraphics.blitSprite(iconFromRank(grove, getRank()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
     if (this.progress != null) {
       float sweep = this.progress.rank() == 4 ? Mth.TWO_PI : Mth.clamp(getProgress(), 0F, 1F) * Mth.TWO_PI;
@@ -109,12 +121,6 @@ public class ReputationButton extends Button {
     }
 
     pose.popPose();
-    
-    if (this.progress != null) {
-      if (this.progress.rank() > 0) {
-        //guiGraphics.blitSprite(this.ranks.get(this.progress.rank()), this.getX() + 8, this.getY() - 16, 16, 16);
-      }
-    }
 
     guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
   }
@@ -131,7 +137,7 @@ public class ReputationButton extends Button {
   }
 
   private void renderProgress(GuiGraphics guiGraphics, float sweep) {
-    TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(progressSprite);
+    TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(progress(grove));
     RenderSystem.setShaderTexture(0, sprite.atlasLocation());
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
