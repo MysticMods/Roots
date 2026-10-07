@@ -91,9 +91,6 @@ public class ConfigManager {
   public static final ModConfigSpec.BooleanValue AQUA_BUBBLE_OVERLAY;
   public static final ModConfigSpec.BooleanValue WARNING_OVERLAY;
 
-  public static final ModConfigSpec.IntValue FUNGAL_TRANSMUTER_POWER_PER_TICK;
-  public static final ModConfigSpec.IntValue FUNGAL_TRANSMUTER_MAX_STORED_POWER;
-
   public static final ModConfigSpec.IntValue PESTLE_COOLDOWN;
 
   public static final ModConfigSpec.BooleanValue DISABLE_CUSTOM_PARTICLE_SHADER;
@@ -218,12 +215,6 @@ public class ConfigManager {
         .define("elemental_crop_extra_drops", true);
     ELEMENTAL_CROP_EXTRA_DROPS_CHANCE = COMMON_BUILDER.comment("the chance for elemental crops to drop extra items when harvested, if enabled and a specific drop chance isn't already specified in the data map")
         .defineInRange("elemental_crop_extra_drops_chance", 0.1, 0.0, 1.0);
-    COMMON_BUILDER.pop();
-    COMMON_BUILDER.push("fungal_transmuter");
-    FUNGAL_TRANSMUTER_POWER_PER_TICK = COMMON_BUILDER.comment("the amount of power the Fungal Transmuter will consume per tick")
-        .defineInRange("fungal_transmuter_power_per_tick", 1, 1, Integer.MAX_VALUE);
-    FUNGAL_TRANSMUTER_MAX_STORED_POWER = COMMON_BUILDER.comment("the maximum amount of power the Fungal Transmuter can store")
-        .defineInRange("fungal_transmuter_max_stored_power", 50 * 100, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Configuration options relating to the mortar & pestle").push("mortar");
     PESTLE_COOLDOWN = COMMON_BUILDER.comment("the cooldown in ticks after using a pestle on a mortar, -1 for no cooldown")

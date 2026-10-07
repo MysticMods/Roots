@@ -104,7 +104,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<RootsDimensionType> DIMENSION_TYPE = ingredient(RootsDimensionType.class);
   public static final IIngredientType<RootsDamageType> DAMAGE_TYPE = ingredient(RootsDamageType.class);
   public static final IIngredientType<Grove> GROVE_TYPE = ingredient(Grove.class);
-  public static final IIngredientType<GrovePower> GROVE_POWER_TYPE = ingredient(GrovePower.class);
+  public static final IIngredientType<GroveGeneratedPower> GROVE_POWER_TYPE = ingredient(GroveGeneratedPower.class);
   public static final IIngredientType<GroveReputation> GROVE_REPUTATION_TYPE = ingredient(GroveReputation.class);
   public static final IIngredientType<GroveAction> GROVE_ACTION_TYPE = ingredient(GroveAction.class);
 
@@ -302,7 +302,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RootsRitualRenderer RITUAL_RENDERER = new RootsRitualRenderer();
   public static final RootsDimensionRenderer DIMENSION_RENDERER = new RootsDimensionRenderer();
   public static final RootsDamageRenderer DAMAGE_RENDERER = new RootsDamageRenderer();
-  public static final RootsGroveNumberRenderer<GrovePower> GROVE_POWER_RENDERER = new RootsGroveNumberRenderer<>();
+  public static final RootsGroveNumberRenderer<GroveGeneratedPower> GROVE_POWER_RENDERER = new RootsGroveNumberRenderer<>();
   public static final RootsGroveNumberRenderer<GroveReputation> GROVE_REPUTATION_RENDERER = new RootsGroveNumberRenderer<>();
   public static final RootsGroveRenderer GROVE_RENDERER = new RootsGroveRenderer();
   public static final RootsGroveActionRenderer GROVE_ACTION_RENDERER = new RootsGroveActionRenderer();
@@ -320,8 +320,8 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, RootsDimensionType.CODEC);
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
     registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
-    registration.register(GROVE_POWER_TYPE, GrovePower.all(Integer.MAX_VALUE), new RootsGroveNumberHelper.Power(), GROVE_POWER_RENDERER, GrovePower.CODEC);
-    registration.register(GROVE_REPUTATION_TYPE, GroveReputation.all(Integer.MAX_VALUE), new RootsGroveNumberHelper.Reputation(), GROVE_REPUTATION_RENDERER, GroveReputation.CODEC);
+    registration.register(GROVE_POWER_TYPE, Collections.emptyList(), new RootsGroveNumberHelper.Power(), GROVE_POWER_RENDERER, GroveGeneratedPower.CODEC);
+    registration.register(GROVE_REPUTATION_TYPE, Collections.emptyList(), new RootsGroveNumberHelper.Reputation(), GROVE_REPUTATION_RENDERER, GroveReputation.CODEC);
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()
         .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
   }

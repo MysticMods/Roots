@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.reference.Identifiers;
@@ -28,7 +28,7 @@ public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory,
   public TransmutationRecipe(BaseRecipeData data) {
     super(data);
     cachedPowerRequirement = 0;
-    for (GroveNumber number : data.powerRequirements) {
+    for (SimpleGroveValue number : data.powerRequirements) {
       if (number.grove().is(RootsTags.Groves.FUNGAL)) {
         cachedPowerRequirement += number.value();
       }

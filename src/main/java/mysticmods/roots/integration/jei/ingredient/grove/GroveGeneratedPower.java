@@ -4,12 +4,9 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.api.grove.IGroveValue;
-import mysticmods.roots.api.registry.RootsRegistries;
 
-import java.util.List;
-
-public record GroveReputation(SimpleGroveValue number) implements IGroveValue {
-  public static Codec<GroveReputation> CODEC = IGroveValue.mapCodec(SimpleGroveValue::new).codec().xmap(GroveReputation::new, GroveReputation::number);
+public record GroveGeneratedPower(SimpleGroveValue number) implements IGroveValue {
+  public static Codec<GroveGeneratedPower> CODEC = IGroveValue.mapCodec(SimpleGroveValue::new).xmap(GroveGeneratedPower::new, GroveGeneratedPower::number).codec();
 
   @Override
   public Grove grove() {

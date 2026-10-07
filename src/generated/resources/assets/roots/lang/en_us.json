@@ -507,8 +507,6 @@
   "roots.configuration.elemental_soil.elemental_crop_extra_drops": "Elemental Crop Extra Drops",
   "roots.configuration.elemental_soil.elemental_crop_extra_drops_chance": "Elemental Crop Extra Drops Chance",
   "roots.configuration.enchanted_turf.enchanted_turf_ticks": "Enchanted Turf Ticks",
-  "roots.configuration.fungal_transmuter.fungal_transmuter_max_stored_power": "Fungal Transmuter Max Stored Power",
-  "roots.configuration.fungal_transmuter.fungal_transmuter_power_per_tick": "Fungal Transmuter Power Per Tick",
   "roots.configuration.grass_drops.drop_aubergine_seeds": "Drop Aubergine Seeds",
   "roots.configuration.grass_drops.drop_grove_spores": "Drop Grove Spores",
   "roots.configuration.grass_drops.drop_wildroot": "Drop Wildroot",

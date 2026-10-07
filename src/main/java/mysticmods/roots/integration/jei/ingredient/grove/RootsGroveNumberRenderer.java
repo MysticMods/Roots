@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.grove.IGroveNumber;
+import mysticmods.roots.api.grove.IGroveValue;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RootsGroveNumberRenderer<T extends IGroveNumber> implements IIngredientRenderer<T> {
+public class RootsGroveNumberRenderer<T extends IGroveValue> implements IIngredientRenderer<T> {
   @Override
   public void render(GuiGraphics guiGraphics, @Nullable T ingredient) {
     render(guiGraphics, ingredient, 0, 0);
@@ -34,10 +34,12 @@ public class RootsGroveNumberRenderer<T extends IGroveNumber> implements IIngred
       guiGraphics.renderFakeItem(ingredient.grove().getIcon(), posX, posY);
       var atlas = minecraft.getTextureAtlas(RootsAPI.OVERLAYS_ATLAS_FILE);
       TextureAtlasSprite sprite = switch (ingredient.type()) {
-        case POWER -> atlas
+        case POWER_GENERATION, POWER_CONSUMPTION -> atlas
             .apply(RootsAPI.rl("gui/grove_power_symbol"));
-        case REPUTATION -> atlas
-            .apply(RootsAPI.rl("gui/grove_reputation_symbol"));
+        case REPUTATION_GAIN -> atlas
+            .apply(RootsAPI.rl("gui/grove_reputation_gain_symbol"));
+        case REPUTATION_LOSS -> atlas
+            .apply(RootsAPI.rl("gui/grove_reputation_loss_symbol"));
       };
       guiGraphics.pose().pushPose();
       if (ingredient.value() != Integer.MAX_VALUE) {

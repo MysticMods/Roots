@@ -4,7 +4,7 @@ import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.IGroveNumber;
+import mysticmods.roots.api.grove.IGroveValue;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.util.TagUtil;
@@ -18,11 +18,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public abstract class RootsGroveNumberHelper<T extends IGroveNumber> implements IIngredientHelper<T> {
+public abstract class RootsGroveNumberHelper<T extends IGroveValue> implements IIngredientHelper<T> {
   @Override
   public Optional<TagKey<?>> getTagKeyEquivalent(Collection<T> ingredients) {
     Registry<Grove> registry = RootsRegistries.GROVES;
-    return TagUtil.getTagEquivalent(ingredients, IGroveNumber::grove, registry::getTags);
+    return TagUtil.getTagEquivalent(ingredients, IGroveValue::grove, registry::getTags);
   }
 
   @Override
@@ -69,15 +69,15 @@ public abstract class RootsGroveNumberHelper<T extends IGroveNumber> implements 
     return name.toString();
   }
 
-  public static class Power extends RootsGroveNumberHelper<GrovePower> {
+  public static class Power extends RootsGroveNumberHelper<GroveGeneratedPower> {
 
     @Override
-    public IIngredientType<GrovePower> getIngredientType() {
+    public IIngredientType<GroveGeneratedPower> getIngredientType() {
       return RootsJEIPlugin.GROVE_POWER_TYPE;
     }
 
     @Override
-    public ResourceLocation getResourceLocation(GrovePower type) {
+    public ResourceLocation getResourceLocation(GroveGeneratedPower type) {
       return Objects.requireNonNull(RootsRegistries.GROVES.getKey(type.grove())).withSuffix("_power");
     }
   }

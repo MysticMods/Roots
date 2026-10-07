@@ -6,10 +6,13 @@ import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.*;
-import mysticmods.roots.api.grove.generator.BlockGenerationEntry;
-import mysticmods.roots.api.grove.generator.BlockGenerator;
-import mysticmods.roots.api.grove.generator.EntityGenerationEntry;
-import mysticmods.roots.api.grove.generator.EntityGenerator;
+import mysticmods.roots.api.grove.power.PowerTicket;
+import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
+import mysticmods.roots.api.grove.power.distributor.IGrovePowerDistributor;
+import mysticmods.roots.api.grove.power.generator.BlockGenerationInfo;
+import mysticmods.roots.api.grove.power.generator.SimpleBlockGenerator;
+import mysticmods.roots.api.grove.power.generator.EntityGenerationInfo;
+import mysticmods.roots.api.grove.power.generator.SimpleEntityGenerator;
 import mysticmods.roots.api.util.Tracker;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
@@ -40,7 +43,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 // TODO: Handle rank changes
-public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, GrovePowerGenerator, IGroveInstance {
+public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, IGrovePowerDistributor, IGroveInstance {
   private int generatedLastTick = 0;
   private int consumedLastTick = 0;
   private int generatedThisTick = 0;
@@ -199,42 +202,42 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
     return positions;
   }
 
-  public List<BlockGenerationEntry> getBlockGenerationEntries() {
-    List<BlockGenerationEntry> entries = getGrove().getData(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
+  public List<BlockGenerationInfo> getBlockGenerationEntries() {
+    List<BlockGenerationInfo> entries = getGrove().getData(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
     if (entries == null) {
       return Collections.emptyList();
     }
     return entries;
   }
 
-  public List<EntityGenerationEntry> getEntityGenerationEntries() {
-    List<EntityGenerationEntry> entries = getGrove().getData(DataMaps.GROVE_ENTITY_GENERATION_ENTRIES);
+  public List<EntityGenerationInfo> getEntityGenerationEntries() {
+    List<EntityGenerationInfo> entries = getGrove().getData(DataMaps.GROVE_ENTITY_GENERATION_ENTRIES);
     if (entries == null) {
       return Collections.emptyList();
     }
     return entries;
   }
 
-  public Map<BlockGenerationEntry, Tracker.BlockTracker> buildBlockTrackers() {
-    List<BlockGenerationEntry> entries = getBlockGenerationEntries();
+  public Map<BlockGenerationInfo, Tracker.BlockTracker> buildBlockTrackers() {
+    List<BlockGenerationInfo> entries = getBlockGenerationEntries();
     if (entries.isEmpty()) {
       return Collections.emptyMap();
     }
-    Map<BlockGenerationEntry, Tracker.BlockTracker> trackers = new Object2ObjectOpenHashMap<>();
-    for (BlockGenerationEntry entry : entries) {
+    Map<BlockGenerationInfo, Tracker.BlockTracker> trackers = new Object2ObjectOpenHashMap<>();
+    for (BlockGenerationInfo entry : entries) {
       trackers.put(entry, Tracker.createBlockTracker(entry.maxCount()));
     }
     return trackers;
   }
 
-  public Map<EntityGenerationEntry, Tracker.EntityTracker> buildEntityTrackers() {
-    List<EntityGenerationEntry> entries = getEntityGenerationEntries();
+  public Map<EntityGenerationInfo, Tracker.EntityTracker> buildEntityTrackers() {
+    List<EntityGenerationInfo> entries = getEntityGenerationEntries();
     if (entries.isEmpty()) {
       return Collections.emptyMap();
     }
 
-    Map<EntityGenerationEntry, Tracker.EntityTracker> trackers = new Object2ObjectOpenHashMap<>();
-    for (EntityGenerationEntry entry : entries) {
+    Map<EntityGenerationInfo, Tracker.EntityTracker> trackers = new Object2ObjectOpenHashMap<>();
+    for (EntityGenerationInfo entry : entries) {
       trackers.put(entry, Tracker.createEntityTracker(entry.maxCount()));
     }
     return trackers;
@@ -245,15 +248,15 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
     generatedLastTick = generatedThisTick;
     generatedThisTick = 0;
 
-    List<BlockGenerationEntry> blockEntries = getBlockGenerationEntries();
-    List<EntityGenerationEntry> entityEntries = getEntityGenerationEntries();
+    List<BlockGenerationInfo> blockEntries = getBlockGenerationEntries();
+    List<EntityGenerationInfo> entityEntries = getEntityGenerationEntries();
     if (blockEntries.isEmpty() && entityEntries.isEmpty()) {
       return;
     }
 
     List<BlockPos> generatorPositions = getValidPositions(pPos);
     if (!generatorPositions.isEmpty()) {
-      Map<BlockGenerationEntry, Tracker.BlockTracker> trackers = buildBlockTrackers();
+      Map<BlockGenerationInfo, Tracker.BlockTracker> trackers = buildBlockTrackers();
       if (!trackers.isEmpty()) {
         for (BlockPos pos : generatorPositions) {
           BlockState stateAt = pLevel.getBlockState(pos);
@@ -263,14 +266,14 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
           if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
             continue;
           }
-          List<BlockGenerator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
+          List<SimpleBlockGenerator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
           if (generators == null || generators.isEmpty()) {
             continue;
           }
-          for (BlockGenerationEntry entry : blockEntries) {
+          for (BlockGenerationInfo entry : blockEntries) {
             Symmetry sym = entry.symmetry();
             if (sym.matches(pLevel, entry.tag(), pos, pPos)) {
-              for (BlockGenerator generator : generators) {
+              for (SimpleBlockGenerator generator : generators) {
                 int willGenerate = generator.generate(this, pos);
                 if (willGenerate != 0) {
                   Tracker.BlockTracker tracker = trackers.get(entry);
@@ -288,7 +291,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
     if (!entityEntries.isEmpty()) {
       AABB moved = getMovedAABB(pPos);
       if (moved != null) {
-        Set<TagKey<EntityType<?>>> tags = entityEntries.stream().map(EntityGenerationEntry::tag)
+        Set<TagKey<EntityType<?>>> tags = entityEntries.stream().map(EntityGenerationInfo::tag)
             .collect(Collectors.toSet());
         Predicate<Entity> test = entity -> {
           for (TagKey<EntityType<?>> tag : tags) {
@@ -304,18 +307,18 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
           return;
         }
 
-        Map<EntityGenerationEntry, Tracker.EntityTracker> trackers = buildEntityTrackers();
+        Map<EntityGenerationInfo, Tracker.EntityTracker> trackers = buildEntityTrackers();
 
         for (Entity entity : potentialEntities) {
-          List<EntityGenerator> generators = entity.getType().builtInRegistryHolder()
+          List<SimpleEntityGenerator> generators = entity.getType().builtInRegistryHolder()
               .getData(DataMaps.GROVE_ENTITY_POWER_GENERATORS);
           if (generators == null || generators.isEmpty()) {
             continue;
           }
 
-          for (EntityGenerationEntry entry : entityEntries) {
+          for (EntityGenerationInfo entry : entityEntries) {
             if (entity.getType().is(entry.tag())) {
-              for (EntityGenerator generator : generators) {
+              for (SimpleEntityGenerator generator : generators) {
                 int willGenerate = generator.generate(this, entity);
                 if (willGenerate != 0) {
                   Tracker.EntityTracker tracker = trackers.get(entry);
@@ -358,9 +361,12 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
       }
       if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof IGroveConsumer consumer) {
+        if (be instanceof IGrovePowerConsumer consumer) {
           PowerTicket ticket = consumer.getTicketForTick(tick);
-          available = ticket.supply(this, available);
+          if (ticket != null) {
+            available = ticket.supplyTick(this, available);
+            ticket.finalizeTick(consumer, generatedThisTick, available);
+          }
         }
       }
     }
@@ -389,7 +395,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
   }
 
   @Override
-  public GrovePowerGenerator getPower() {
+  public IGrovePowerDistributor getCollector() {
     return this;
   }
 

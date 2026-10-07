@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveReputationEntry;
-import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.RootsIngredientHelper;
@@ -82,12 +82,12 @@ public class GroveWithReputationCategory implements IRecipeCategory<GroveWithRep
         .setCustomRenderer(RootsJEIPlugin.GROVE_REPUTATION_TYPE, RootsJEIPlugin.GROVE_REPUTATION_RENDERER);
 
     if (recipe.entry().unique()) {
-      slot.addIngredient(RootsJEIPlugin.GROVE_REPUTATION_TYPE, new GroveReputation(GroveNumber.reputation(recipe.entry()
+      slot.addIngredient(RootsJEIPlugin.GROVE_REPUTATION_TYPE, new GroveReputation(SimpleGroveValue.reputation(recipe.entry()
           .grove(), recipe.entry()
           .reputation().gain1())));
     } else {
       List<GroveReputation> outputs = recipe.entry().reputation().stream()
-          .mapToObj(f -> new GroveReputation(GroveNumber.reputation(recipe.entry().grove(), f))).toList();
+          .mapToObj(f -> new GroveReputation(SimpleGroveValue.reputation(recipe.entry().grove(), f))).toList();
       slot.addIngredients(RootsJEIPlugin.GROVE_REPUTATION_TYPE, outputs);
     }
 

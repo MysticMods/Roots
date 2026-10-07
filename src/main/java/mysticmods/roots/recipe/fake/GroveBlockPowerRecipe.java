@@ -8,7 +8,7 @@ import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.grove.generator.BlockGenerator;
+import mysticmods.roots.api.grove.power.generator.SimpleBlockGenerator;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -125,7 +125,7 @@ public record GroveBlockPowerRecipe(ValidatedTagKey tag, Grove groveTag, int pow
         int max = gen.maxCount();
         var symmetry = gen.symmetry();
 
-        for (BlockGenerator g : generator) {
+        for (SimpleBlockGenerator g : generator) {
           result.add(new GroveBlockPowerRecipe(gen.tag(), o.value(), g.value(), symmetry, max));
         }
       }

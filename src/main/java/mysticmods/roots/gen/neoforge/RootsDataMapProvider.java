@@ -6,10 +6,10 @@ import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.datamap.*;
 import mysticmods.roots.api.grove.Symmetry;
-import mysticmods.roots.api.grove.generator.BlockGenerationEntry;
-import mysticmods.roots.api.grove.generator.BlockGenerator;
-import mysticmods.roots.api.grove.generator.EntityGenerationEntry;
-import mysticmods.roots.api.grove.generator.EntityGenerator;
+import mysticmods.roots.api.grove.power.generator.BlockGenerationInfo;
+import mysticmods.roots.api.grove.power.generator.SimpleBlockGenerator;
+import mysticmods.roots.api.grove.power.generator.EntityGenerationInfo;
+import mysticmods.roots.api.grove.power.generator.SimpleEntityGenerator;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
@@ -530,89 +530,89 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     var builder24 = builder(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, RootsTags.Groves.FAIRY, 5)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, RootsTags.Groves.FAIRY, 5)), false);
     builder24.add(RootsTags.Blocks.FAIRY_GROVE_PATHS, List.of(
-        new BlockGenerator(RootsTags.Blocks.FAIRY_GROVE_PATHS, RootsTags.Groves.FAIRY, 1)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.FAIRY_GROVE_PATHS, RootsTags.Groves.FAIRY, 1)), false);
     builder24.add(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
     builder24.add(RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS, RootsTags.Groves.ELEMENTAL, 5)), false);
     builder24.add(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS, RootsTags.Groves.CULTIVATION, 5)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS, RootsTags.Groves.CULTIVATION, 5)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, RootsTags.Groves.FUNGAL, 5)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, RootsTags.Groves.FUNGAL, 5)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
     builder24.add(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, RootsTags.Groves.PASTORAL, 5)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, RootsTags.Groves.PASTORAL, 5)), false);
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
     builder24.add(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, List.of(
-        new BlockGenerator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY_POWERABLE, 1000)), false);
-    builder24.add(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, RootsTags.Groves.WILD, 20)), false);
-    builder24.add(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, RootsTags.Groves.WILD, 10)), false);
-    builder24.add(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, RootsTags.Groves.WILD, 10)), false);
-    builder24.add(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, RootsTags.Groves.WILD, 2)), false);
-    builder24.add(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, RootsTags.Groves.WILD, 2)), false);
-    builder24.add(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, List.of(new BlockGenerator(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, RootsTags.Groves.WILD, 2)), false);
+        new SimpleBlockGenerator(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, RootsTags.Groves.ANY_POWERABLE, 1000)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, List.of(new SimpleBlockGenerator(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, RootsTags.Groves.WILD, 20)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, List.of(new SimpleBlockGenerator(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, RootsTags.Groves.WILD, 10)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, List.of(new SimpleBlockGenerator(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, RootsTags.Groves.WILD, 10)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, List.of(new SimpleBlockGenerator(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, RootsTags.Groves.WILD, 2)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, List.of(new SimpleBlockGenerator(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, RootsTags.Groves.WILD, 2)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, List.of(new SimpleBlockGenerator(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, RootsTags.Groves.WILD, 2)), false);
 
     var builder37 = builder(DataMaps.GROVE_ENTITY_POWER_GENERATORS);
     builder37.add(RootsTags.Entities.TAMEABLE, List.of(
-        new EntityGenerator(RootsTags.Entities.TAMEABLE, RootsTags.Groves.PASTORAL, TamedEntityTest.getInstance(), 5)), false);
+        new SimpleEntityGenerator(RootsTags.Entities.TAMEABLE, RootsTags.Groves.PASTORAL, TamedEntityTest.getInstance(), 5)), false);
     builder37.add(RootsTags.Entities.UNTAMEABLE_ANIMALS, List.of(
-        new EntityGenerator(RootsTags.Entities.UNTAMEABLE_ANIMALS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.UNTAMEABLE_ANIMALS), 1)), false);
-    builder37.add(RootsTags.Entities.SPROUTS, List.of(new EntityGenerator(RootsTags.Entities.SPROUTS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.SPROUTS), 1)), false);
+        new SimpleEntityGenerator(RootsTags.Entities.UNTAMEABLE_ANIMALS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.UNTAMEABLE_ANIMALS), 1)), false);
+    builder37.add(RootsTags.Entities.SPROUTS, List.of(new SimpleEntityGenerator(RootsTags.Entities.SPROUTS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.SPROUTS), 1)), false);
 
     var builder38 = builder(DataMaps.GROVE_ENTITY_GENERATION_ENTRIES);
     builder38.add(
         ModGroves.PASTORAL,
         List.of(
-            new EntityGenerationEntry(
+            new EntityGenerationInfo(
                 RootsTags.Entities.TAMEABLE, 2),
-            new EntityGenerationEntry(
+            new EntityGenerationInfo(
                 RootsTags.Entities.UNTAMEABLE_ANIMALS, 1
             ),
-            new EntityGenerationEntry(
+            new EntityGenerationInfo(
                 RootsTags.Entities.SPROUTS, 1
             )
         ), false);
 
     var builder25 = builder(DataMaps.GROVE_BLOCK_GENERATION_ENTRIES);
     builder25.add(ModGroves.FAIRY, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, 2, Symmetry.RADIAL_SAME_BLOCK),
-        new BlockGenerationEntry(RootsTags.Blocks.FAIRY_GROVE_PATHS, 30, Symmetry.RADIAL_SAME_BLOCK)
+        new BlockGenerationInfo(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, 2, Symmetry.RADIAL_SAME_BLOCK),
+        new BlockGenerationInfo(RootsTags.Blocks.FAIRY_GROVE_PATHS, 30, Symmetry.RADIAL_SAME_BLOCK)
     ), false);
     builder25.add(ModGroves.ELEMENTAL, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, 2, Symmetry.RADIAL_DIFFERENT_SAME_TAG)
+        new BlockGenerationInfo(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, 2, Symmetry.RADIAL_DIFFERENT_SAME_TAG)
     ), false);
     builder25.add(ModGroves.CULTIVATION, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS, 3, Symmetry.NONE)
+        new BlockGenerationInfo(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS, 3, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.FUNGAL, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, 5, Symmetry.NONE),
-        new BlockGenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, 5, Symmetry.NONE),
-        new BlockGenerationEntry(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, 8, Symmetry.NONE)
+        new BlockGenerationInfo(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS, 5, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, 5, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, 8, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.PASTORAL, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, 2, Symmetry.NONE)
+        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, 2, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.TWILIGHT, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, Symmetry.RADIAL_NOT_MATCHING)
+        new BlockGenerationInfo(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, Symmetry.RADIAL_NOT_MATCHING)
     ), false);
 
     builder25.add(RootsTags.Groves.ANY_POWERABLE, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, 1, Symmetry.NONE)
+        new BlockGenerationInfo(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, 1, Symmetry.NONE)
     ), false);
 
     builder25.add(RootsTags.Groves.WILD, List.of(
-        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, 10, Symmetry.NONE),
-        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, 1, Symmetry.NONE),
-        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, 1, Symmetry.NONE),
-        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, 10, Symmetry.NONE),
-        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, 10, Symmetry.NONE),
-        new BlockGenerationEntry(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, 1, Symmetry.NONE)), false
+        new BlockGenerationInfo(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS, 10, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS, 1, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS, 1, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS, 10, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS, 10, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS, 1, Symmetry.NONE)), false
     );
 
     var builder26 = builder(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);

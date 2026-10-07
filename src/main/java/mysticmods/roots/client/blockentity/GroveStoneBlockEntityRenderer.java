@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.grove.generator.BlockGenerationEntry;
+import mysticmods.roots.api.grove.power.generator.BlockGenerationInfo;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
@@ -34,7 +34,7 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
       if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
         BlockPos pPos = pBlockEntity.getBlockPos();
         List<BlockPos> generatorPositions = pBlockEntity.getValidPositions(pPos);
-        List<BlockGenerationEntry> entries = pBlockEntity.getBlockGenerationEntries();
+        List<BlockGenerationInfo> entries = pBlockEntity.getBlockGenerationEntries();
         if (generatorPositions.isEmpty() || entries.isEmpty()) {
           return;
         }
@@ -55,7 +55,7 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
             continue;
           }
 
-          for (BlockGenerationEntry entry : entries) {
+          for (BlockGenerationInfo entry : entries) {
             BlockState current = pBlockEntity.getLevel().getBlockState(pos);
             if (!current.is(entry.tag())) {
               continue;

@@ -11,11 +11,11 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.grove.GroveNumber;
+import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.block.SimpleBlockType;
-import mysticmods.roots.integration.jei.ingredient.grove.GrovePower;
+import mysticmods.roots.integration.jei.ingredient.grove.GroveGeneratedPower;
 import mysticmods.roots.integration.jei.widget.SymmetryWidget;
 import mysticmods.roots.recipe.fake.GroveBlockPowerRecipe;
 import net.minecraft.network.chat.Component;
@@ -70,7 +70,7 @@ public class GrovePowerCategory implements IRecipeCategory<GroveBlockPowerRecipe
     builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addIngredients(recipe.itemIngredient());
     builder.addSlot(RecipeIngredientRole.CATALYST, 61, 2)
         .addIngredients(Ingredient.of(RootsTags.Groves.getGroveStoneTag(recipe.groveTag())));
-    var power = new GrovePower(GroveNumber.power(recipe.groveTag(), recipe.power()));
+    var power = new GroveGeneratedPower(SimpleGroveValue.generate(recipe.groveTag(), recipe.power()));
     builder.addSlot(RecipeIngredientRole.OUTPUT, 99, 2)
         .addIngredient(RootsJEIPlugin.GROVE_POWER_TYPE, power)
         .setCustomRenderer(RootsJEIPlugin.GROVE_POWER_TYPE, RootsJEIPlugin.GROVE_POWER_RENDERER);

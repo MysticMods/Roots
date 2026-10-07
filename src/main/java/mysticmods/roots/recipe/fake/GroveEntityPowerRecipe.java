@@ -6,12 +6,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.Symmetry;
-import mysticmods.roots.api.grove.generator.BlockGenerator;
-import mysticmods.roots.api.grove.generator.EntityGenerator;
+import mysticmods.roots.api.grove.power.generator.SimpleEntityGenerator;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -22,7 +20,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +103,7 @@ public record GroveEntityPowerRecipe(ValidatedTagKey tag, Grove groveTag, int po
     }
   }
 
+  // TODO:
   public static List<GroveEntityPowerRecipe> generate() {
     List<GroveEntityPowerRecipe> result = new ArrayList<>();
 
@@ -128,7 +126,7 @@ public record GroveEntityPowerRecipe(ValidatedTagKey tag, Grove groveTag, int po
         int max = gen.maxCount();
         var symmetry = gen.symmetry();
 
-        for (EntityGenerator g : generator) {
+        for (SimpleEntityGenerator g : generator) {
           result.add(new GroveEntityPowerRecipe(gen.tag(), o.value(), g.value(), symmetry, max));
         }
       }

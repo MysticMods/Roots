@@ -8,9 +8,9 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.grove.consumer.BlockConsumer;
-import mysticmods.roots.api.grove.IGroveConsumer;
-import mysticmods.roots.api.grove.PowerTicket;
+import mysticmods.roots.api.grove.power.consumer.PowerRequest;
+import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
+import mysticmods.roots.api.grove.power.PowerTicket;
 import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.FairyHutBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
@@ -51,9 +51,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer, Merchant {
+public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, Merchant {
   private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(
-      ImmutableList.of(new BlockConsumer(RootsTags.Groves.FAIRY, 15))
+      ImmutableList.of(new PowerRequest(RootsTags.Groves.FAIRY, 15))
   );
 
   private boolean wasPoweredLastTick = false;

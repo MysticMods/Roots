@@ -1,4 +1,4 @@
-package mysticmods.roots.api.grove;
+package mysticmods.roots.api.grove.power.distributor;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.core.BlockPos;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 
-public interface GrovePowerGenerator {
+public interface IGrovePowerDistributor {
   int getMaxPower();
 
   int getUsedPower();
@@ -19,12 +19,4 @@ public interface GrovePowerGenerator {
   void generateTick(ServerLevel level, BlockPos pos, BlockState state);
 
   void consumeTick(ServerLevel level, BlockPos pos, BlockState state);
-
-  static Set<Block> getAllBlocks(TagKey<Block> tag) {
-    Set<Block> blocks = new ObjectOpenHashSet<>();
-    for (Holder<Block> holder : BuiltInRegistries.BLOCK.getTagOrEmpty(tag)) {
-      blocks.add(holder.value());
-    }
-    return blocks;
-  }
 }

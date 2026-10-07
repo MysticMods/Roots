@@ -8,7 +8,7 @@
     ],
     "power_requirements": [
       {
-        "type": "power",
+        "type": "power_generation",
         "grove": "roots:fungal",
         "value": 600
       }

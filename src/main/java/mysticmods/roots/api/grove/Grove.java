@@ -114,4 +114,12 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
   public boolean is(TagKey<Grove> tag) {
     return builtInRegistryHolder().is(tag);
   }
+
+  public enum Rank {
+    NONE,
+    FIRST,
+    SECOND,
+    THIRD,
+    FINAL;
+  }
 }

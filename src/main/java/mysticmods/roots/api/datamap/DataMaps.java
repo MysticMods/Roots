@@ -4,12 +4,12 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
-import mysticmods.roots.api.grove.generator.BlockGenerationEntry;
-import mysticmods.roots.api.grove.generator.BlockGenerator;
+import mysticmods.roots.api.grove.power.generator.BlockGenerationInfo;
+import mysticmods.roots.api.grove.power.generator.SimpleBlockGenerator;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.ReputationRanks;
-import mysticmods.roots.api.grove.generator.EntityGenerationEntry;
-import mysticmods.roots.api.grove.generator.EntityGenerator;
+import mysticmods.roots.api.grove.power.generator.EntityGenerationInfo;
+import mysticmods.roots.api.grove.power.generator.SimpleEntityGenerator;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
@@ -94,18 +94,18 @@ public class DataMaps {
   public static final DataMapType<Item, Block> GROWTH_SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("growth_seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), true)
       .build();
-  public static final DataMapType<Block, List<BlockGenerator>> GROVE_BLOCK_POWER_GENERATORS = AdvancedDataMapType.builder(RootsAPI.rl("grove_block_power_generator"), Registries.BLOCK, BlockGenerator.LIST_CODEC)
+  public static final DataMapType<Block, List<SimpleBlockGenerator>> GROVE_BLOCK_POWER_GENERATORS = AdvancedDataMapType.builder(RootsAPI.rl("grove_block_power_generator"), Registries.BLOCK, SimpleBlockGenerator.LIST_CODEC)
       .merger(DataMapValueMerger.listMerger())
-      .synced(BlockGenerator.LIST_CODEC, true).build();
-  public static final DataMapType<EntityType<?>, List<EntityGenerator>> GROVE_ENTITY_POWER_GENERATORS = AdvancedDataMapType.builder(RootsAPI.rl("grove_entity_power_generator"), Registries.ENTITY_TYPE, EntityGenerator.LIST_CODEC)
+      .synced(SimpleBlockGenerator.LIST_CODEC, true).build();
+  public static final DataMapType<EntityType<?>, List<SimpleEntityGenerator>> GROVE_ENTITY_POWER_GENERATORS = AdvancedDataMapType.builder(RootsAPI.rl("grove_entity_power_generator"), Registries.ENTITY_TYPE, SimpleEntityGenerator.LIST_CODEC)
       .merger(DataMapValueMerger.listMerger())
-      .synced(EntityGenerator.LIST_CODEC, true).build();
-  public static final DataMapType<Grove, List<BlockGenerationEntry>> GROVE_BLOCK_GENERATION_ENTRIES = AdvancedDataMapType.builder(RootsAPI.rl("grove_block_generation_entries"), RootsRegistries.Keys.GROVES, BlockGenerationEntry.LIST_CODEC)
+      .synced(SimpleEntityGenerator.LIST_CODEC, true).build();
+  public static final DataMapType<Grove, List<BlockGenerationInfo>> GROVE_BLOCK_GENERATION_ENTRIES = AdvancedDataMapType.builder(RootsAPI.rl("grove_block_generation_entries"), RootsRegistries.Keys.GROVES, BlockGenerationInfo.LIST_CODEC)
       .merger(DataMapValueMerger.listMerger())
-      .synced(BlockGenerationEntry.LIST_CODEC, true).build();
-  public static final DataMapType<Grove, List<EntityGenerationEntry>> GROVE_ENTITY_GENERATION_ENTRIES = AdvancedDataMapType.builder(RootsAPI.rl("grove_entity_generation_entries"), RootsRegistries.Keys.GROVES, EntityGenerationEntry.LIST_CODEC)
+      .synced(BlockGenerationInfo.LIST_CODEC, true).build();
+  public static final DataMapType<Grove, List<EntityGenerationInfo>> GROVE_ENTITY_GENERATION_ENTRIES = AdvancedDataMapType.builder(RootsAPI.rl("grove_entity_generation_entries"), RootsRegistries.Keys.GROVES, EntityGenerationInfo.LIST_CODEC)
       .merger(DataMapValueMerger.listMerger())
-      .synced(EntityGenerationEntry.LIST_CODEC, true).build();
+      .synced(EntityGenerationInfo.LIST_CODEC, true).build();
   public static final DataMapType<EntityType<?>, List<ResourceKey<LootTable>>> ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES = AdvancedDataMapType.builder(RootsAPI.rl("additional_animal_harvest_loot_tables"), Registries.ENTITY_TYPE, ResourceKey.codec(Registries.LOOT_TABLE)
           .listOf())
       .synced(ResourceKey.codec(Registries.LOOT_TABLE).listOf(), true)

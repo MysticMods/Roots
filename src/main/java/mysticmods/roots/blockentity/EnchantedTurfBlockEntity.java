@@ -5,9 +5,10 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.grove.consumer.BlockConsumer;
-import mysticmods.roots.api.grove.IGroveConsumer;
-import mysticmods.roots.api.grove.PowerTicket;
+import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.power.PowerTicket;
+import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
+import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
@@ -21,6 +22,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -33,8 +35,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGroveConsumer {
-  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new BlockConsumer(RootsTags.Groves.ANY, 35)));
+public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, ISimpleGrovePowerConsumer {
+  private static final int POWER_REQUIRED = 35;
+  private static final TagKey<Grove> GROVE_REQUIRED = RootsTags.Groves.ANY;
+
+  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new PowerRequest(RootsTags.Groves.ANY, 35)));
 
   private PowerTicket ticket;
   private boolean poweredLastTick = false;
@@ -156,5 +161,15 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
   @Override
   public boolean wasPoweredLastTick() {
     return poweredLastTick;
+  }
+
+  @Override
+  public TagKey<Grove> grovePowerTag() {
+    return GROVE_REQUIRED;
+  }
+
+  @Override
+  public int grovePowerRequired() {
+    return POWER_REQUIRED;
   }
 }

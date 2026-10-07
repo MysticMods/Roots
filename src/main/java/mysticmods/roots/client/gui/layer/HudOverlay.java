@@ -10,7 +10,8 @@ import mysticmods.roots.api.blockentity.ClearableBlockEntity;
 import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.GrovePowerGenerator;
+import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
+import mysticmods.roots.api.grove.power.distributor.IGrovePowerDistributor;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.ritual.Ritual;
@@ -28,6 +29,7 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
+import mysticmods.roots.util.CycleTimer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -40,6 +42,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -64,6 +67,8 @@ import java.util.List;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID)
 public class HudOverlay {
+  private static final CycleTimer cycleTimer = CycleTimer.create(0);
+
   private static final int MENU_POS_TIME_OUT = 20 * 5;
   public static final int TEXT_COLOR = 16777215;
 
@@ -137,6 +142,9 @@ public class HudOverlay {
       } else if (state.is(RootsTags.Blocks.TRANSMUTER_HUD_RENDERER)) {
         renderTransmuter(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
         changed = storeBlockPos(trace.getBlockPos());
+      } else if (state.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
+        renderConsumer(guiGraphics, stack, partialTicks, deltaTracker, mc, trace, state);
+        changed = storeBlockPos(trace.getBlockPos());
       } else {
         changed = false;
       }
@@ -157,6 +165,39 @@ public class HudOverlay {
     if (getStoredBlockPos() != null) {
       renderFakeMenu(guiGraphics, stack, partialTicks, deltaTracker, mc);
       renderClear(guiGraphics, stack, partialTicks, deltaTracker, mc);
+    }
+  }
+
+  private static void renderConsumer(GuiGraphics graphics, PoseStack stack, float partialTicks, DeltaTracker deltaTracker, Minecraft mc, BlockHitResult trace, BlockState state) {
+    Level level = mc.level;
+    if (level.getBlockEntity(trace.getBlockPos()) instanceof ISimpleGrovePowerConsumer consumer) {
+      int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
+      int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
+
+      boolean powered = consumer.wasPoweredLastTick();
+
+      y += 10;
+      x += 30;
+
+      int requiredPower = consumer.grovePowerRequired();
+
+      List<Grove> grovesToCycle = ISimpleGrovePowerConsumer.Cache.getAllGroves(consumer);
+
+      Grove result = cycleTimer.getCycled(grovesToCycle);
+
+      if (result == null) {
+        return;
+      }
+
+      Component comp1 = result.getStyledName();
+      Component comp2 = Component.literal("Requires: " + requiredPower);
+
+      RenderSystem.disableDepthTest();
+      RenderSystem.disableBlend();
+      graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
+      RenderSystem.enableDepthTest();
+      RenderSystem.enableBlend();
     }
   }
 
@@ -378,7 +419,8 @@ public class HudOverlay {
       int rowSpacing = 18;
       int itemsPerRow = 2;
 
-      Component comp4 = Component.translatable("roots.hud.transmuter.power", requiredPower, transmuter.getPower()/*, transmuter.getMaxPower()*/);
+      Component comp4 = Component.empty();
+      //Component.translatable("roots.hud.transmuter.power", requiredPower, transmuter.getPower()/*, transmuter.getMaxPower()*/);
 
       for (int i = 0; i < outputs.size(); i++) {
         ChanceOutput chanceOutput = outputs.get(i);
@@ -506,7 +548,7 @@ public class HudOverlay {
       y += 10;
       x += 30;
 
-      GrovePowerGenerator powerPower = groveInstance.getPower();
+      IGrovePowerDistributor powerPower = groveInstance.getCollector();
       Grove grove = groveInstance.asGrove();
 
       Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank(), groveInstance.getMaxRank());
