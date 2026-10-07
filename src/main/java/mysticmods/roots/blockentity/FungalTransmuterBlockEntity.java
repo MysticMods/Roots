@@ -143,17 +143,21 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   }
 
   public InteractionResult startCrafting(Player player) {
+    if (currentRecipe != null) {
+      // Currently crafting something
+      return InteractionResult.FAIL;
+    }
     if (cachedRecipe == null || !cachedRecipe.value().matches(playerlessCrafting, level)) {
       revalidateRecipe();
     }
     if (cachedRecipe != null) {
-      if (cachedRecipe.value().getPower() > storedPower) {
+/*      if (cachedRecipe.value().getPower() > storedPower) {
         RootsAPI.LOG.info("Not enough power to craft: {} < {}", storedPower, cachedRecipe.value().getPower());
         player.displayClientMessage(Component.translatable("roots.transmutation.not_enough_power", storedPower, cachedRecipe.value()
             .getPower()), true);
         return InteractionResult.FAIL;
       }
-      storedPower -= cachedRecipe.value().getPower();
+      storedPower -= cachedRecipe.value().getPower();*/
       ConditionResult result = cachedRecipe.value()
           .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), getBlockPos());
       if (result.anyFailed()) {
@@ -189,7 +193,6 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
       }
       cachedRecipe = null;
-      lifetime = currentRecipe.value().getPower();
       setChanged();
       updateViaState();
     }

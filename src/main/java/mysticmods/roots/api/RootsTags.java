@@ -746,6 +746,7 @@ public class RootsTags {
     public static final TagKey<Grove> CULTIVATION = modTag("cultivation");
     public static final TagKey<Grove> ELEMENTAL = modTag("elemental");
     public static final TagKey<Grove> PASTORAL = modTag("pastoral");
+    public static final TagKey<Grove> HOLLOW = modTag("hollow");
 
     public static final TagKey<Item> ANY_GROVE_STONE = modItemTag("grove_stone/any");
     public static final TagKey<Item> ANY_POWERABLE_GROVE_STONE = modItemTag("grove_stone/any_powerable");
@@ -769,6 +770,7 @@ public class RootsTags {
       GROVE_MAP.put(CULTIVATION, CULTIVATION_GROVE_STONE);
       GROVE_MAP.put(ELEMENTAL, ELEMENTAL_GROVE_STONE);
       GROVE_MAP.put(PASTORAL, PASTORAL_GROVE_STONE);
+      GROVE_MAP.put(HOLLOW, ELEMENTAL_GROVE_STONE);
     }
 
     public static TagKey<Item> getGroveStoneTag(Grove grove) {

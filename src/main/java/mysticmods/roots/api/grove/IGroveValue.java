@@ -36,7 +36,8 @@ public interface IGroveValue {
     REPUTATION_GAIN,
     REPUTATION_LOSS,
     POWER_GENERATION,
-    POWER_CONSUMPTION;
+    POWER_CONSUMPTION,
+    REPUTATION_RANK;
 
     public static final IntFunction<Type> BY_ID = ByIdMap.continuous(Type::ordinal, Type.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
     public static final Codec<Type> CODEC = StringRepresentable.fromEnum(Type::values);

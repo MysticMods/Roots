@@ -27,13 +27,15 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
   private ReputationRanks reputationRanks;
 
   private final int color1, color2;
+  private final TagKey<Grove> tag;
 
   @Deprecated
-  public Grove(ChatFormatting color, int color1, int color2) {
-    this(TextColor.fromLegacyFormat(color), color1, color2);
+  public Grove(TagKey<Grove> tag, ChatFormatting color, int color1, int color2) {
+    this(tag, TextColor.fromLegacyFormat(color), color1, color2);
   }
 
-  public Grove(TextColor color, int color1, int color2) {
+  public Grove(TagKey<Grove> tag, TextColor color, int color1, int color2) {
+    this.tag = tag;
     this.color = color;
     this.color1 = color1;
     this.color2 = color2;
@@ -69,6 +71,10 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
 
   public int getColor2() {
     return color2;
+  }
+
+  public TagKey<Grove> getTag () {
+    return tag;
   }
 
   @Override

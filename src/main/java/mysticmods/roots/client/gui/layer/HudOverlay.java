@@ -394,7 +394,6 @@ public class HudOverlay {
         comp1 = Component.translatable("roots.hud.transmuter.begin1");
         comp2 = Component.translatable("roots.hud.transmuter.begin2");
         comp3 = Component.translatable("roots.hud.transmuter.begin3", output.getHoverName());
-        requiredPower = cachedRecipe.getPower();
         outputs = cachedRecipe.getChanceOutputs();
       } else if (lastRecipe != null && empty) {
         output = lastRecipe.getResultItem(mc.level.registryAccess());
@@ -404,7 +403,6 @@ public class HudOverlay {
         } else {
 
         }
-        requiredPower = lastRecipe.getPower();
         comp1 = Component.translatable("roots.hud.transmuter.restart1");
         comp2 = Component.translatable("roots.hud.transmuter.restart2");
         comp3 = output.getHoverName();

@@ -88,6 +88,6 @@ public class FungalTransmuterCategory extends RootsRecipeBaseCategory<Transmutat
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
     }
-    builder.addWidget(new GrovePowerWidget(recipe.getPower(), 66, 50, Component.translatable("roots.jei.text.grove_power", recipe.getPower())));
+/*    builder.addWidget(new GrovePowerWidget(recipe.getPower(), 66, 50, Component.translatable("roots.jei.text.grove_power", recipe.getPower())));*/
   }
 }

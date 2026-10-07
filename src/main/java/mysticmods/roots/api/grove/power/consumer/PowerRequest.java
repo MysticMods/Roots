@@ -15,7 +15,6 @@ import net.minecraft.tags.TagKey;
 
 import java.util.List;
 
-// TODO: Unsure if this needs to be GrovePowerBase
 public record PowerRequest(TagKey<Grove> tag, int value) implements GrovePowerBase {
   public static final MapCodec<PowerRequest> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(RootsRegistries.Keys.GROVES)
           .fieldOf("tag").forGetter(PowerRequest::tag),

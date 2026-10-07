@@ -35,4 +35,12 @@ public record SimpleGroveValue(Grove grove, int value, IGroveValue.Type type) im
   public static SimpleGroveValue generate(Grove grove, int value) {
     return new SimpleGroveValue(grove, value, Type.POWER_GENERATION);
   }
+
+  public static SimpleGroveValue rank (Grove grove, int value) {
+    return new SimpleGroveValue(grove, value, Type.REPUTATION_RANK);
+  }
+
+  public static SimpleGroveValue rank (Holder<Grove> grove, int value) {
+    return rank(grove.value(), value);
+  }
 }

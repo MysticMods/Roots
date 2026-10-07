@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.SimpleGroveValue;
+import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.reference.Identifiers;
@@ -16,6 +17,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
+import java.util.List;
+
 public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory, FungalTransmuterBlockEntity, TransmutationCrafting> {
   public static final MapCodec<TransmutationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data)
@@ -23,23 +26,12 @@ public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory,
   public static final StreamCodec<RegistryFriendlyByteBuf, TransmutationRecipe> STREAM_CODEC = StreamCodec.composite(BaseRecipeData.STREAM_CODEC, o -> o.data,
       TransmutationRecipe::new);
 
-  private int cachedPowerRequirement = -1;
-
   public TransmutationRecipe(BaseRecipeData data) {
     super(data);
-    cachedPowerRequirement = 0;
-    for (SimpleGroveValue number : data.powerRequirements) {
-      if (number.grove().is(RootsTags.Groves.FUNGAL)) {
-        cachedPowerRequirement += number.value();
-      }
-    }
-    if (cachedPowerRequirement == 0) {
-      cachedPowerRequirement = -1;
-    }
   }
 
-  public int getPower() {
-    return cachedPowerRequirement;
+  public List<PowerRequest> getPowerRequirements() {
+    return data.powerRequirements;
   }
 
   @Override

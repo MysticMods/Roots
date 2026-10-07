@@ -36,7 +36,7 @@ public class RootsGroveNumberRenderer<T extends IGroveValue> implements IIngredi
       TextureAtlasSprite sprite = switch (ingredient.type()) {
         case POWER_GENERATION, POWER_CONSUMPTION -> atlas
             .apply(RootsAPI.rl("gui/grove_power_symbol"));
-        case REPUTATION_GAIN -> atlas
+        case REPUTATION_GAIN, REPUTATION_RANK -> atlas
             .apply(RootsAPI.rl("gui/grove_reputation_gain_symbol"));
         case REPUTATION_LOSS -> atlas
             .apply(RootsAPI.rl("gui/grove_reputation_loss_symbol"));

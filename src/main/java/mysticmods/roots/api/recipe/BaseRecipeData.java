@@ -11,6 +11,7 @@ import mysticmods.roots.api.condition.ILevelConditionType;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.SimpleGroveValue;
+import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
@@ -49,7 +50,7 @@ public class BaseRecipeData {
       ChanceOutput.LIST_CODEC.optionalFieldOf("chance_outputs", Collections.emptyList())
           .forGetter(o -> o.chanceOutputs),
       Unlock.LIST_CODEC.optionalFieldOf("unlocks", Collections.emptyList()).forGetter(o -> o.unlocks),
-      SimpleGroveValue.CODEC.listOf().optionalFieldOf("power_requirements", Collections.emptyList())
+      PowerRequest.CODEC.listOf().optionalFieldOf("power_requirements", Collections.emptyList())
           .forGetter(o -> o.powerRequirements),
       Codec.INT.fieldOf("priority").forGetter(o -> o.priority)
   ).apply(instance, BaseRecipeData::new));
@@ -63,7 +64,7 @@ public class BaseRecipeData {
       ByteBufCodecs.optional(ItemStack.STREAM_CODEC), o -> o.result == null || o.result.isEmpty() ? Optional.empty() : Optional.of(o.result),
       ByteBufCodecs.optional(ChanceOutput.LIST_STREAM_CODEC), o -> c(o.chanceOutputs),
       ByteBufCodecs.optional(Unlock.LIST_STREAM_CODEC), o -> c(o.unlocks),
-      ByteBufCodecs.optional(SimpleGroveValue.STREAM_CODEC.apply(ByteBufCodecs.list())), o -> c(o.powerRequirements),
+      ByteBufCodecs.optional(PowerRequest.STREAM_CODEC.apply(ByteBufCodecs.list())), o -> c(o.powerRequirements),
       ByteBufCodecs.VAR_INT, o -> o.priority,
       BaseRecipeData::new
   );
@@ -75,12 +76,12 @@ public class BaseRecipeData {
   public List<ChanceOutput> chanceOutputs;
   public List<Unlock<?>> unlocks;
   public int priority;
-  public List<SimpleGroveValue> powerRequirements;
+  public List<PowerRequest> powerRequirements;
 
   public BaseRecipeData() {
   }
 
-  public BaseRecipeData(NonNullList<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, List<SimpleGroveValue> powerRequirements, int priority) {
+  public BaseRecipeData(NonNullList<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, List<PowerRequest> powerRequirements, int priority) {
     this.ingredients = ingredients;
     this.levelConditions = Collections.unmodifiableList(levelConditions);
     this.playerConditions = Collections.unmodifiableList(playerConditions);
@@ -92,7 +93,7 @@ public class BaseRecipeData {
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  private BaseRecipeData(Optional<NonNullList<Ingredient>> ingredients, Optional<List<ILevelCondition>> levelConditions, Optional<List<IPlayerCondition>> playerConditions, Optional<ItemStack> itemStack, Optional<List<ChanceOutput>> chanceOutputs, Optional<List<Unlock<?>>> unlocks, Optional<List<SimpleGroveValue>> powerRequirements, int priority) {
+  private BaseRecipeData(Optional<NonNullList<Ingredient>> ingredients, Optional<List<ILevelCondition>> levelConditions, Optional<List<IPlayerCondition>> playerConditions, Optional<ItemStack> itemStack, Optional<List<ChanceOutput>> chanceOutputs, Optional<List<Unlock<?>>> unlocks, Optional<List<PowerRequest>> powerRequirements, int priority) {
     this(ingredients.orElse(NonNullList.create()), levelConditions.orElse(new ArrayList<>()), playerConditions.orElse(new ArrayList<>()), itemStack.orElse(ItemStack.EMPTY), chanceOutputs.orElse(new ArrayList<>()), unlocks.orElse(new ArrayList<>()), powerRequirements.orElse(new ArrayList<>()), priority);
   }
 
@@ -137,9 +138,9 @@ public class BaseRecipeData {
     private final List<ChanceOutput> chanceOutputs;
     private final List<Unlock<?>> unlocks;
     private int priority;
-    private final List<SimpleGroveValue> powerRequirements;
+    private final List<PowerRequest> powerRequirements;
 
-    protected Builder(List<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, List<SimpleGroveValue> powerRequirements, int priority) {
+    protected Builder(List<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, List<PowerRequest> powerRequirements, int priority) {
       this.ingredients = ingredients;
       this.levelConditions = levelConditions;
       this.playerConditions = playerConditions;
@@ -172,12 +173,22 @@ public class BaseRecipeData {
     }
 
     public Builder requires(SimpleGroveValue number) {
-      this.powerRequirements.add(number);
+      this.powerRequirements.add(new PowerRequest(number.grove().getTag(), number.value()));
       return this;
     }
 
     public Builder requires(Grove grove, int value) {
-      this.powerRequirements.add(SimpleGroveValue.generate(grove, value));
+      this.powerRequirements.add(new PowerRequest(grove.getTag(), value));
+      return this;
+    }
+
+    public Builder requires (TagKey<Grove> groveTag, int value) {
+      this.powerRequirements.add(new PowerRequest(groveTag, value));
+      return this;
+    }
+
+    public Builder requires (PowerRequest request) {
+      this.powerRequirements.add(request);
       return this;
     }
 

@@ -25,6 +25,7 @@ public final class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Gr
     tag(RootsTags.Groves.FAIRY).add(ModGroves.FAIRY.get());
     tag(RootsTags.Groves.ELEMENTAL).add(ModGroves.ELEMENTAL.get());
     tag(RootsTags.Groves.PASTORAL).add(ModGroves.PASTORAL.get());
+    tag(RootsTags.Groves.HOLLOW).add(ModGroves.HOLLOW.get());
     tag(RootsTags.Groves.TWILIGHT).add(ModGroves.TWILIGHT.get());
     tag(RootsTags.Groves.CULTIVATION).add(ModGroves.CULTIVATION.get());
     tag(RootsTags.Groves.FUNGAL).add(ModGroves.FUNGAL.get());
