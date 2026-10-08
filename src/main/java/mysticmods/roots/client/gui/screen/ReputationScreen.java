@@ -5,18 +5,21 @@ import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.ReputationButton;
-import mysticmods.roots.client.particle.screen.ScreenParticleEngine;
+import mysticmods.roots.client.gui.renderable.CloudRenderer;
+import mysticmods.roots.client.gui.renderable.StarRenderer;
 import mysticmods.roots.client.particle.screen.ScreenParticleSupplier;
 import mysticmods.roots.client.particle.screen.base.ScreenParticle;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModGroves;
-import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import org.joml.Vector2i;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +32,55 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   private ReputationButton wild;
   private ReputationButton fungal;
   private ReputationButton twilight;
+  private final List<Vector2i> stars = new ArrayList<>();
+
+  private final CloudRenderer clouds;
 
   private final Map<ParticleRenderType, List<ScreenParticle>> myParticles = new HashMap<>();
 
   protected ReputationScreen() {
     super(Component.translatable("roots.gui.reputation"));
+    this.clouds = new CloudRenderer(256, 256, true);
+
+    int starStartX = 106;
+    int starStopX = 220;
+    int starStartY = 60;
+    int starStopY = 140;
+
+    int minPadding = 20;
+    int maxPadding = 65;
+
+    RandomSource random = RandomSource.create();
+
+    int starCount = 20 + random.nextInt(10) + random.nextInt(3) * 4;
+
+    int minSq = minPadding * minPadding;
+    int maxSq = maxPadding * maxPadding;
+
+    for (int attempts = 0; stars.size() < starCount && attempts < 1000; attempts++) {
+      int x = Mth.nextInt(random, starStartX, starStopX);
+      int y = Mth.nextInt(random, starStartY, starStopY);
+
+      boolean tooClose = false;
+      boolean nearEnough = stars.isEmpty(); // first star can go anywhere
+
+      for (Vector2i other : stars) {
+        int dx = other.x - x;
+        int dy = other.y - y;
+        int distSq = dx * dx + dy * dy;
+        if (distSq < minSq) {
+          tooClose = true;
+          break;
+        }
+        if (distSq <= maxSq) {
+          nearEnough = true;
+        }
+      }
+
+      if (!tooClose && nearEnough) {
+        stars.add(new Vector2i(x, y));
+      }
+    }
   }
 
   @Override
@@ -47,6 +94,12 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     this.fungal = new ReputationButton(this.leftPos + /*191*/ 188, this.topPos + 171, GroveType.FUNGAL);
     this.elemental = new ReputationButton(this.leftPos + 118, this.topPos + 208, GroveType.ELEMENTAL);
 
+    for (Vector2i star : stars) {
+      this.addRenderableOnly(new StarRenderer(this.leftPos + star.x, this.topPos + star.y));
+    }
+
+    this.clouds.setPosition(this.leftPos, this.topPos);
+    this.addRenderableOnly(this.clouds);
     this.addRenderableOnly(this::drawTree);
     this.addRenderableWidget(this.fungal);
     this.addRenderableWidget(this.fairy);
@@ -57,16 +110,6 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
 
     updateButtons();
   }
-
-/*  private void addRankParticle (ReputationButton button) {
-    int rank = button.getRank();
-
-    if (rank == 0) {
-      return;
-    }
-
-    this.addContainerParticle(RootsParticleOptions.builder(ModParticles.RANK).build(), button.getX(), button.getY(), button.getX(), button.getY());
-  }*/
 
   protected void updateButtons() {
     ReputationStorage rep = getStorage();

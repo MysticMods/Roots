@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 
-// TODO: Tooltips
 public class ReputationButton extends Button {
   private static final ResourceLocation BUTTON_BASE = RootsAPI.rl("reputation/base_rank");
   private static final ResourceLocation DROP_SHADOW = RootsAPI.rl("reputation/drop_shadow");
