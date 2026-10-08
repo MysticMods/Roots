@@ -12,6 +12,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModGroves;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -46,6 +47,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     this.fungal = new ReputationButton(this.leftPos + /*191*/ 188, this.topPos + 171, GroveType.FUNGAL);
     this.elemental = new ReputationButton(this.leftPos + 118, this.topPos + 208, GroveType.ELEMENTAL);
 
+    this.addRenderableOnly(this::drawTree);
     this.addRenderableWidget(this.fungal);
     this.addRenderableWidget(this.fairy);
     this.addRenderableWidget(this.pastoral);
@@ -56,7 +58,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     updateButtons();
   }
 
-  private void addRankParticle (ReputationButton button) {
+/*  private void addRankParticle (ReputationButton button) {
     int rank = button.getRank();
 
     if (rank == 0) {
@@ -64,7 +66,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     }
 
     this.addContainerParticle(RootsParticleOptions.builder(ModParticles.RANK).build(), button.getX(), button.getY(), button.getX(), button.getY());
-  }
+  }*/
 
   protected void updateButtons() {
     ReputationStorage rep = getStorage();
@@ -91,6 +93,10 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   @Override
   public ResourceLocation getBackground() {
     return background;
+  }
+
+  protected void drawTree(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    graphics.blit(foreground, leftPos, topPos, 0, 0, getBackgroundWidth(), getBackgroundHeight(), getBackgroundWidth(), getBackgroundHeight());
   }
 
   @Override

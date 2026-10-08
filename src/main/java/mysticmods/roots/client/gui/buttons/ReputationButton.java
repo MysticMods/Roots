@@ -18,6 +18,7 @@ import org.joml.Matrix4f;
 // TODO: Tooltips
 public class ReputationButton extends Button {
   private static final ResourceLocation BUTTON_BASE = RootsAPI.rl("reputation/base_rank");
+  private static final ResourceLocation DROP_SHADOW = RootsAPI.rl("reputation/drop_shadow");
 
   private static ResourceLocation baseFromRank(int rank) {
     return switch (rank) {
@@ -97,9 +98,14 @@ public class ReputationButton extends Button {
 
     PoseStack pose = guiGraphics.pose();
     pose.pushPose();
-    guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);
     RenderSystem.enableBlend();
     RenderSystem.enableDepthTest();
+
+/*    guiGraphics.setColor(1.0F, 1.0F, 1.0F, 0.1f);
+
+    guiGraphics.blitSprite(DROP_SHADOW, this.getX() - 16, this.getY() - 16, 64, 64);*/
+
+    guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);
 
     if (scale != 1f) {
       float cx = this.getX() + this.getWidth() / 2f;
