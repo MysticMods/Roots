@@ -13,6 +13,10 @@ public interface ISimpleGrovePowerConsumer extends IGrovePowerConsumer {
 
   TagKey<Grove> grovePowerTag();
 
+  default List<Grove> allGroves () {
+    return Cache.getAllGroves(this);
+  }
+
   // TODO: ???
   class Cache {
     private static TagKey<Grove> lastGrove = null;
@@ -36,6 +40,4 @@ public interface ISimpleGrovePowerConsumer extends IGrovePowerConsumer {
       return lastResult;
     }
   }
-
-
 }

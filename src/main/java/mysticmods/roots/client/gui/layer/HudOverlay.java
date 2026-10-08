@@ -181,7 +181,7 @@ public class HudOverlay {
 
       int requiredPower = consumer.grovePowerRequired();
 
-      List<Grove> grovesToCycle = ISimpleGrovePowerConsumer.Cache.getAllGroves(consumer);
+      List<Grove> grovesToCycle = consumer.allGroves();
 
       Grove result = cycleTimer.getCycled(grovesToCycle);
 
