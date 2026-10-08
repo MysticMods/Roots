@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"gui_light": "front",
 	"textures": {
 		"4": "block/campfire_fire",
 		"particle": "roots:block/full_runestone",
