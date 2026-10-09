@@ -17,7 +17,6 @@ import org.joml.Matrix4f;
 
 public class ReputationButton extends Button {
   private static final ResourceLocation BUTTON_BASE = RootsAPI.rl("reputation/base_rank");
-  private static final ResourceLocation DROP_SHADOW = RootsAPI.rl("reputation/drop_shadow");
 
   private static ResourceLocation baseFromRank(int rank) {
     return switch (rank) {
@@ -107,13 +106,21 @@ public class ReputationButton extends Button {
     guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);
 
     if (scale != 1f) {
+      // Snap the scaled button to whole screen pixels so its edges never fall between pixels;
+      // otherwise the edge column can sample the neighbouring sprite in the GUI atlas
+      float guiScale = (float) Minecraft.getInstance().getWindow().getGuiScale();
+      float sizePx = Math.round(this.getWidth() * scale * guiScale);
+      float snapped = sizePx / (this.getWidth() * guiScale);
+
       float cx = this.getX() + this.getWidth() / 2f;
       float cy = this.getY() + this.getHeight() / 2f;
-      pose.translate(cx, cy, 0f);
-      pose.scale(scale, scale, 1f);
-      pose.translate(-cx, -cy, 0f);
-    }
+      float leftPx = Math.round((cx - this.getWidth() * snapped / 2f) * guiScale);
+      float topPx = Math.round((cy - this.getHeight() * snapped / 2f) * guiScale);
 
+      pose.translate(leftPx / guiScale, topPx / guiScale, 0f);
+      pose.scale(snapped, snapped, 1f);
+      pose.translate(-this.getX(), -this.getY(), 0f);
+    }
 
 
     guiGraphics.blitSprite(baseFromRank(getRank()), this.getX(), this.getY(), this.getWidth(), this.getHeight());

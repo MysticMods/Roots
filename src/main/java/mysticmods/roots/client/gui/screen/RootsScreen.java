@@ -9,10 +9,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class RootsScreen extends Screen {
-  protected List<Component> tooltip;
+  protected final List<Component> tooltip = new ArrayList<>();
   protected ItemStack tooltipItem = ItemStack.EMPTY;
   protected int leftPos, topPos;
   protected int lastMouseX, lastMouseY;
@@ -37,15 +39,25 @@ public abstract class RootsScreen extends Screen {
     if (tooltipItem != null && !tooltipItem.isEmpty()) {
       ItemStack itemstack = this.tooltipItem;
       guiGraphics.renderTooltip(this.font, getTooltipFromItem(minecraft, itemstack), itemstack.getTooltipImage(), itemstack, x, y);
+    } else if (!tooltip.isEmpty()) {
+      guiGraphics.renderTooltip(this.font, this.tooltip, Optional.empty(), x, y);
     }
   }
 
   public void resetTooltip() {
     tooltipItem = ItemStack.EMPTY;
+    tooltip.clear();
   }
 
   public void fillTooltip(ItemStack stack) {
     tooltipItem = stack;
+    tooltip.clear();
+  }
+
+  public void setTooltip(List<Component> tooltip) {
+    this.tooltipItem = ItemStack.EMPTY;
+    this.tooltip.clear();
+    this.tooltip.addAll(tooltip);
   }
 
   @Override
@@ -75,9 +87,7 @@ public abstract class RootsScreen extends Screen {
     resetTooltip();
     stack.pushPose();
     RenderSystem.disableDepthTest();
-    //stack.translate(leftPos, topPos, 0);
     RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-    //drawBackground(graphics, pMouseX, pMouseY, pPartialTick);
     for (Renderable renderable : this.renderables) {
       renderable.render(graphics, pMouseX, pMouseY, pPartialTick);
     }

@@ -15,11 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import org.joml.Vector2i;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,75 +28,34 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   private ReputationButton wild;
   private ReputationButton fungal;
   private ReputationButton twilight;
-  private final List<Vector2i> stars = new ArrayList<>();
 
+  private final StarRenderer stars;
   private final CloudRenderer clouds;
 
   private final Map<ParticleRenderType, List<ScreenParticle>> myParticles = new HashMap<>();
 
   protected ReputationScreen() {
     super(Component.translatable("roots.gui.reputation"));
-    this.clouds = new CloudRenderer(256, 256, true);
-
-    int starStartX = 106;
-    int starStopX = 220;
-    int starStartY = 60;
-    int starStopY = 140;
-
-    int minPadding = 20;
-    int maxPadding = 65;
-
-    RandomSource random = RandomSource.create();
-
-    int starCount = 20 + random.nextInt(10) + random.nextInt(3) * 4;
-
-    int minSq = minPadding * minPadding;
-    int maxSq = maxPadding * maxPadding;
-
-    for (int attempts = 0; stars.size() < starCount && attempts < 1000; attempts++) {
-      int x = Mth.nextInt(random, starStartX, starStopX);
-      int y = Mth.nextInt(random, starStartY, starStopY);
-
-      boolean tooClose = false;
-      boolean nearEnough = stars.isEmpty(); // first star can go anywhere
-
-      for (Vector2i other : stars) {
-        int dx = other.x - x;
-        int dy = other.y - y;
-        int distSq = dx * dx + dy * dy;
-        if (distSq < minSq) {
-          tooClose = true;
-          break;
-        }
-        if (distSq <= maxSq) {
-          nearEnough = true;
-        }
-      }
-
-      if (!tooClose && nearEnough) {
-        stars.add(new Vector2i(x, y));
-      }
-    }
+    this.clouds = new CloudRenderer(getBackgroundWidth(), getBackgroundHeight(), true);
+    this.stars = new StarRenderer();
   }
 
   @Override
   protected void init() {
     super.init();
 
-    this.fairy = new ReputationButton(this.leftPos + 118, this.topPos + 20, GroveType.FAIRY);
-    this.pastoral = new ReputationButton(this.leftPos + 48, this.topPos + 81, GroveType.PASTORAL);
-    this.cultivation = new ReputationButton(this.leftPos + 48, this.topPos + 171, GroveType.CULTIVATION);
-    this.twilight = new ReputationButton(this.leftPos + /*206*/ 188, this.topPos + 81, GroveType.TWILIGHT);
-    this.fungal = new ReputationButton(this.leftPos + /*191*/ 188, this.topPos + 171, GroveType.FUNGAL);
-    this.elemental = new ReputationButton(this.leftPos + 118, this.topPos + 208, GroveType.ELEMENTAL);
+    this.fairy = new ReputationButton(this.leftPos + 119, this.topPos + 7, GroveType.FAIRY);
+    this.pastoral = new ReputationButton(this.leftPos + 40, this.topPos + 76, GroveType.PASTORAL);
+    this.cultivation = new ReputationButton(this.leftPos + 40, this.topPos + 178, GroveType.CULTIVATION);
+    this.twilight = new ReputationButton(this.leftPos + 198, this.topPos + 76, GroveType.TWILIGHT);
+    this.fungal = new ReputationButton(this.leftPos + 198, this.topPos + 178, GroveType.FUNGAL);
+    this.elemental = new ReputationButton(this.leftPos + 119, this.topPos + 220, GroveType.ELEMENTAL);
 
-    for (Vector2i star : stars) {
-      this.addRenderableOnly(new StarRenderer(this.leftPos + star.x, this.topPos + star.y));
-    }
-
+    this.stars.setPosition(this.leftPos, this.topPos);
+    this.addRenderableOnly(this.stars);
     this.clouds.setPosition(this.leftPos, this.topPos);
     this.addRenderableOnly(this.clouds);
-    this.addRenderableOnly(this::drawTree);
+    this.addRenderableOnly(this::drawTreeAndBorder);
     this.addRenderableWidget(this.fungal);
     this.addRenderableWidget(this.fairy);
     this.addRenderableWidget(this.pastoral);
@@ -108,7 +63,22 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     this.addRenderableWidget(this.twilight);
     this.addRenderableWidget(this.elemental);
 
+    //this.addRenderableOnly(this::drawLines);
+
     updateButtons();
+  }
+
+  protected void drawLines(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    graphics.hLine(leftPos + 120, leftPos + 256, 160, -1);
+    graphics.hLine(leftPos + 100, leftPos + 120, 140, -1);
+    graphics.hLine(leftPos + 80, leftPos + 100, 100, -1);
+    graphics.hLine(leftPos + 40, leftPos + 80, 50, -1);
+    graphics.vLine(leftPos + 40, topPos, topPos + 60, -1);
+    graphics.vLine(leftPos + 80, topPos + 55, topPos + 110, -1);
+    graphics.vLine(leftPos + 100, topPos + 100, topPos + 160, -1);
+    graphics.vLine(leftPos + 120, topPos + 140, topPos + 180, -1);
+
+
   }
 
   protected void updateButtons() {
@@ -132,14 +102,16 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/reputation_background.png");
   private static final ResourceLocation foreground = RootsAPI.rl("textures/gui/reputation_foreground.png");
+  private static final ResourceLocation border = RootsAPI.rl("textures/gui/reputation_border.png");
 
   @Override
   public ResourceLocation getBackground() {
     return background;
   }
 
-  protected void drawTree(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+  protected void drawTreeAndBorder(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     graphics.blit(foreground, leftPos, topPos, 0, 0, getBackgroundWidth(), getBackgroundHeight(), getBackgroundWidth(), getBackgroundHeight());
+    graphics.blit(border, leftPos - 16, topPos - 18, 0, 0, 289, 290, 289, 290);
   }
 
   @Override
