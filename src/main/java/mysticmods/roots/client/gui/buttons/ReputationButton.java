@@ -70,6 +70,7 @@ public class ReputationButton extends Button {
   private void updateTooltip () {
     this.tooltip.add(grove.value().getStyledName());
     this.tooltip.add(getRank().getName());
+    this.tooltip.add(Component.literal(progress.progress() +"/" + progress.nextRank()));
   }
 
   public ReputationRanks.Rank getRank() {

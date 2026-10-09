@@ -8,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
@@ -28,7 +27,7 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
   public Progress getProgress(int reputation) {
     Rank rank = Rank.fromRanks(this, reputation);
     int progress = rank.progress(this, reputation);
-    int nextRank = rank.nextThreshold(this);
+    int nextRank = rank.nextThreshold(this) - rank.threshold(this);
     return new Progress(rank, progress, nextRank, reputation);
   }
 
@@ -52,7 +51,7 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       this.name = Component.translatable("roots.grove.ranks." + name().toLowerCase(Locale.ROOT));
     }
 
-    public MutableComponent getName () {
+    public MutableComponent getName() {
       return this.name;
     }
 
@@ -66,11 +65,21 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       };
     }
 
-    public int progress (ReputationRanks ranks, int reputation) {
-      return reputation - nextThreshold(ranks);
+    public int threshold(ReputationRanks ranks) {
+      return switch (this) {
+        case UNRANKED -> 0;
+        case FIRST -> ranks.threshold1;
+        case SECOND -> ranks.threshold2;
+        case THIRD -> ranks.threshold3;
+        case FOURTH -> ranks.threshold4;
+      };
     }
 
-    public int nextThreshold (ReputationRanks ranks) {
+    public int progress(ReputationRanks ranks, int reputation) {
+      return reputation - threshold(ranks);
+    }
+
+    public int nextThreshold(ReputationRanks ranks) {
       return switch (this.next()) {
         case FIRST -> ranks.threshold1;
         case SECOND -> ranks.threshold2;
@@ -80,7 +89,7 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       };
     }
 
-    public Rank next () {
+    public Rank next() {
       return switch (this) {
         case UNRANKED -> FIRST;
         case FIRST -> SECOND;
@@ -89,7 +98,7 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       };
     }
 
-    public static Rank fromRanks (ReputationRanks ranks, int reputation) {
+    public static Rank fromRanks(ReputationRanks ranks, int reputation) {
       if (reputation >= ranks.threshold4) {
         return Rank.FOURTH;
       } else if (reputation >= ranks.threshold3) {
