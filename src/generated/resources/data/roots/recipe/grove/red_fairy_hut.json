@@ -37,6 +37,7 @@
       {
         "type": "roots:grove_stone_condition",
         "grove_type": {
+          "grove": "roots:fairy",
           "name": "fairy",
           "tag": "roots:grove_stones/fairy"
         },

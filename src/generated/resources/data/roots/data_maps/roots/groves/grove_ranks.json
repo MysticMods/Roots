@@ -2,51 +2,51 @@
   "values": {
     "roots:cultivation": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     },
     "roots:elemental": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     },
     "roots:fairy": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     },
     "roots:fungal": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     },
     "roots:hollow": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     },
     "roots:pastoral": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     },
     "roots:twilight": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     },
     "roots:wild": {
       "threshold1": 1000,
-      "threshold2": 5000,
-      "threshold3": 15000,
-      "threshold4": 30000
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
     }
   }
 }

@@ -440,8 +440,9 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
       return false;
     }
     var rank = ReputationHelper.getRank(player, grove);
-    if (rank > getRank()) {
-      activate(level, pos, state, rank);
+    if (rank.ordinal() > getRank()) {
+      // TODO: Don't pass ordinal
+      activate(level, pos, state, rank.ordinal());
       return true;
 
       // TODO: Animation

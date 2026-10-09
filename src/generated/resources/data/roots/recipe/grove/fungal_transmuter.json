@@ -25,6 +25,7 @@
       {
         "type": "roots:grove_stone_condition",
         "grove_type": {
+          "grove": "roots:fungal",
           "name": "fungal",
           "tag": "roots:grove_stones/fungal"
         },

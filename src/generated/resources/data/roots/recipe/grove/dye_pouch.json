@@ -43,6 +43,7 @@
       {
         "type": "roots:grove_stone_condition",
         "grove_type": {
+          "grove": "roots:any",
           "name": "any",
           "tag": "roots:grove_stones"
         },

@@ -47,8 +47,8 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
     this.uniqueReputations = new ObjectOpenHashSet<>(uniqueReputations);
   }
 
-  public int getRank(Grove grove) {
-    return grove.getRanks().getRank(reputations.computeIfAbsent(grove, t -> 0));
+  public ReputationRanks.Rank getRank(Grove grove) {
+    return ReputationRanks.Rank.fromRanks(grove.getRanks(), reputations.computeIfAbsent(grove, t -> 0));
   }
 
   public ReputationRanks.Progress getProgress (Holder<Grove> grove) {
@@ -87,7 +87,7 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
   }
 
   public int adjust(Grove grove, GroveReputation reputation) {
-    int rank = getRank(grove);
+    ReputationRanks.Rank rank = getRank(grove);
     return increaseReputation(grove, reputation.byIndex(rank));
   }
 

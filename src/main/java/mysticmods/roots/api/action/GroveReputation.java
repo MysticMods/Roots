@@ -3,6 +3,7 @@ package mysticmods.roots.api.action;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.grove.ReputationRanks;
 
 import java.util.stream.IntStream;
 
@@ -41,14 +42,13 @@ public record GroveReputation(int gain1, int gain2, int gain3, int gain4, int ga
     return new GroveReputation(g1, g2, g3, g4, g5);
   }
 
-  public int byIndex(int index) {
+  public int byIndex(ReputationRanks.Rank index) {
     return switch (index) {
-      case 0 -> gain1;
-      case 1 -> gain2;
-      case 2 -> gain3;
-      case 3 -> gain4;
-      case 4 -> gain5;
-      default -> throw new IndexOutOfBoundsException("Index must be between 0 and 4, inclusive.");
+      case UNRANKED -> gain1;
+      case FIRST -> gain2;
+      case SECOND -> gain3;
+      case THIRD -> gain4;
+      case FOURTH -> gain5;
     };
   }
 

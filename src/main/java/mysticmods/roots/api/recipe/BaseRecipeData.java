@@ -173,12 +173,12 @@ public class BaseRecipeData {
     }
 
     public Builder requires(SimpleGroveValue number) {
-      this.powerRequirements.add(new PowerRequest(number.grove().getTag(), number.value()));
+      this.powerRequirements.add(new PowerRequest(number.grove().getGroveTag(), number.value()));
       return this;
     }
 
     public Builder requires(Grove grove, int value) {
-      this.powerRequirements.add(new PowerRequest(grove.getTag(), value));
+      this.powerRequirements.add(new PowerRequest(grove.getGroveTag(), value));
       return this;
     }
 

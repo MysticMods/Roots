@@ -1,6 +1,7 @@
 package mysticmods.roots.api.grove;
 
 import mysticmods.roots.api.RootsItemCallbacks;
+import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IStyled;
@@ -14,6 +15,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
@@ -23,19 +25,19 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
   private final TextColor color;
   private String descriptionId;
 
-  private final ReputationRanks defaultReputationRanks = new ReputationRanks(1000, 5000, 15000, 30000);
+  private final ReputationRanks defaultReputationRanks = new ReputationRanks(1000, 2000, 3000, 4000);
   private ReputationRanks reputationRanks;
 
   private final int color1, color2;
-  private final TagKey<Grove> tag;
+  private final GroveType type;
 
   @Deprecated
-  public Grove(TagKey<Grove> tag, ChatFormatting color, int color1, int color2) {
-    this(tag, TextColor.fromLegacyFormat(color), color1, color2);
+  public Grove(GroveType type, ChatFormatting color, int color1, int color2) {
+    this(type, TextColor.fromLegacyFormat(color), color1, color2);
   }
 
-  public Grove(TagKey<Grove> tag, TextColor color, int color1, int color2) {
-    this.tag = tag;
+  public Grove(GroveType type, TextColor color, int color1, int color2) {
+    this.type = type;
     this.color = color;
     this.color1 = color1;
     this.color2 = color2;
@@ -73,8 +75,16 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
     return color2;
   }
 
-  public TagKey<Grove> getTag () {
-    return tag;
+  public TagKey<Grove> getGroveTag() {
+    return type.grove();
+  }
+
+  public TagKey<Block> getBlockTag() {
+    return type.tag();
+  }
+
+  public GroveType getType () {
+    return this.type;
   }
 
   @Override
@@ -119,13 +129,5 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
 
   public boolean is(TagKey<Grove> tag) {
     return builtInRegistryHolder().is(tag);
-  }
-
-  public enum Rank {
-    NONE,
-    FIRST,
-    SECOND,
-    THIRD,
-    FINAL;
   }
 }

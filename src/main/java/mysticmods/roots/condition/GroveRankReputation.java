@@ -24,10 +24,11 @@ public record GroveRankReputation(Grove grove, int minimumRank) implements IPlay
   public static final Codec<GroveRankReputation> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, GroveRankReputation> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), GroveRankReputation::grove, ByteBufCodecs.INT, GroveRankReputation::minimumRank, GroveRankReputation::new);
 
+  // TODO: minimumRank should be ReputationRanks.Rank
   @Override
   public boolean test(Level level, @NotNull Player player) {
     ReputationStorage rep = player.getData(ModAttachments.REPUTATION_STORAGE);
-    return rep.getRank(grove) >= minimumRank;
+    return rep.getRank(grove).ordinal() >= minimumRank;
   }
 
   @Override

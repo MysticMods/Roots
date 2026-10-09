@@ -14,6 +14,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -486,10 +487,10 @@ public class RootsCommand {
         }
 
         int reputation = storage.getReputation(grove.value());
-        int rank = storage.getRank(grove.value());
+        ReputationRanks.Rank rank = storage.getRank(grove.value());
         c.getSource()
             .sendSuccess(() -> Component.translatable("roots.commands.reputation.current_reputation", grove.value()
-                .getName(), rank, reputation), false);
+                .getName(), rank.getName(), reputation), false);
         return 1;
       }).then(Commands.literal("add").executes(c -> {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.add.usage"), false);

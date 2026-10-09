@@ -4,61 +4,77 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.GroveType;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.ReputationRanks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReputationButton extends Button {
   private static final ResourceLocation BUTTON_BASE = RootsAPI.rl("reputation/base_rank");
 
-  private static ResourceLocation baseFromRank(int rank) {
+  private static ResourceLocation baseFromRank(ReputationRanks.Rank rank) {
     return switch (rank) {
-      case 2 -> BUTTON_BASE.withSuffix("_2");
-      case 3 -> BUTTON_BASE.withSuffix("_3");
-      case 4 -> BUTTON_BASE.withSuffix("_4");
+      case SECOND -> BUTTON_BASE.withSuffix("_2");
+      case THIRD -> BUTTON_BASE.withSuffix("_3");
+      case FOURTH -> BUTTON_BASE.withSuffix("_4");
       default -> BUTTON_BASE;
     };
   }
 
-  private static ResourceLocation iconFromRank(GroveType grove, int rank) {
-    ResourceLocation base = RootsAPI.rl("reputation/" + grove.name());
-    return switch (rank) {
-      case 1, 2, 3, 4 -> base.withSuffix("_glow");
-      default -> base.withSuffix("_base");
-    };
+  private static ResourceLocation iconFromRank(GroveType grove, ReputationRanks.Rank rank) {
+    if (rank == ReputationRanks.Rank.UNRANKED) {
+      return RootsAPI.rl("reputation/" + grove.name() + "_base");
+    }
+    return RootsAPI.rl("reputation/" + grove.name() + "_glow");
   }
 
   private static ResourceLocation progress(GroveType grove) {
     return RootsAPI.rl("reputation/" + grove.name() + "_progress");
   }
 
-  private final GroveType grove;
+  private final GroveType groveType;
   private ReputationRanks.Progress progress;
   protected boolean wasHovered = false;
   private AnimationState state = AnimationState.NORMAL;
   private float animationStart = -1f;
   private float animationStartScale = 1f;
+  private final Holder<Grove> grove;
+  private final List<Component> tooltip = new ArrayList<>();
 
-  public ReputationButton(int x, int y, GroveType grove) {
+  public ReputationButton(Holder<Grove> grove, int x, int y) {
     super(x, y, 32, 32, CommonComponents.EMPTY, (v) -> {
     }, DEFAULT_NARRATION);
     this.grove = grove;
+    this.groveType = grove.value().getType();
   }
 
   public void setProgress(ReputationRanks.Progress progress) {
     this.progress = progress;
+    this.tooltip.clear();
+    updateTooltip();
   }
 
-  public int getRank() {
+  private void updateTooltip () {
+    this.tooltip.add(grove.value().getStyledName());
+    this.tooltip.add(getRank().getName());
+  }
+
+  public ReputationRanks.Rank getRank() {
     if (this.progress == null) {
-      return 0;
+      return ReputationRanks.Rank.UNRANKED;
     }
 
     return this.progress.rank();
@@ -77,7 +93,8 @@ public class ReputationButton extends Button {
 
   @Override
   protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-    float currentTick = Minecraft.getInstance().levelRenderer.getTicks() + partialTick;
+    var mc = Minecraft.getInstance();
+    float currentTick = mc.levelRenderer.getTicks() + partialTick;
 
     if (this.isHovered != this.wasHovered) {
       // Start from wherever we currently are, so reversing mid-animation is smooth
@@ -124,10 +141,10 @@ public class ReputationButton extends Button {
 
 
     guiGraphics.blitSprite(baseFromRank(getRank()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
-    guiGraphics.blitSprite(iconFromRank(grove, getRank()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+    guiGraphics.blitSprite(iconFromRank(groveType, getRank()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
     if (this.progress != null) {
-      float sweep = this.progress.rank() == 4 ? Mth.TWO_PI : Mth.clamp(getProgress(), 0F, 1F) * Mth.TWO_PI;
+      float sweep = this.progress.rank() == ReputationRanks.Rank.FOURTH ? Mth.TWO_PI : Mth.clamp(getProgress(), 0F, 1F) * Mth.TWO_PI;
       if (sweep > 0F) {
         renderProgress(guiGraphics, sweep);
       }
@@ -136,6 +153,10 @@ public class ReputationButton extends Button {
     pose.popPose();
 
     guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+    if (isHovered()) {
+      guiGraphics.renderComponentTooltip(mc.font, this.tooltip, mouseX, mouseY);
+    }
   }
 
   private float getScale(float currentTick) {
@@ -150,7 +171,7 @@ public class ReputationButton extends Button {
   }
 
   private void renderProgress(GuiGraphics guiGraphics, float sweep) {
-    TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(progress(grove));
+    TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(progress(groveType));
     RenderSystem.setShaderTexture(0, sprite.atlasLocation());
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
 

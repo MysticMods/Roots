@@ -201,6 +201,12 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.advancements.pacifist.title", "An Untrue Pacifist");
     add("roots.advancements.pacifist.description", "Needlessly slaughtered one of nature's peaceful creatures.");
 
+    add("roots.grove.ranks.unranked", "Unranked");
+    add("roots.grove.ranks.first", "Rank I");
+    add("roots.grove.ranks.second", "Rank II");
+    add("roots.grove.ranks.third", "Rank III");
+    add("roots.grove.ranks.fourth", "Rank IV");
+
     add(BoundKeys.CATEGORY, "Roots");
     for (KeyMapping bind : BoundKeys.MAPPINGS.values()) {
       String key = bind.getName();

@@ -2,7 +2,6 @@ package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.ReputationStorage;
-import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.gui.buttons.ReputationButton;
 import mysticmods.roots.client.gui.renderable.CloudRenderer;
@@ -44,12 +43,12 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   protected void init() {
     super.init();
 
-    this.fairy = new ReputationButton(this.leftPos + 119, this.topPos + 7, GroveType.FAIRY);
-    this.pastoral = new ReputationButton(this.leftPos + 40, this.topPos + 76, GroveType.PASTORAL);
-    this.cultivation = new ReputationButton(this.leftPos + 40, this.topPos + 178, GroveType.CULTIVATION);
-    this.twilight = new ReputationButton(this.leftPos + 198, this.topPos + 76, GroveType.TWILIGHT);
-    this.fungal = new ReputationButton(this.leftPos + 198, this.topPos + 178, GroveType.FUNGAL);
-    this.elemental = new ReputationButton(this.leftPos + 119, this.topPos + 220, GroveType.ELEMENTAL);
+    this.fairy = new ReputationButton(ModGroves.FAIRY, this.leftPos + 119, this.topPos + 7);
+    this.pastoral = new ReputationButton(ModGroves.PASTORAL, this.leftPos + 40, this.topPos + 76);
+    this.cultivation = new ReputationButton(ModGroves.CULTIVATION, this.leftPos + 40, this.topPos + 178);
+    this.twilight = new ReputationButton(ModGroves.TWILIGHT, this.leftPos + 198, this.topPos + 76);
+    this.fungal = new ReputationButton(ModGroves.FUNGAL, this.leftPos + 198, this.topPos + 178);
+    this.elemental = new ReputationButton(ModGroves.ELEMENTAL, this.leftPos + 119, this.topPos + 220);
 
     this.stars.setPosition(this.leftPos, this.topPos);
     this.addRenderableOnly(this.stars);
