@@ -748,6 +748,8 @@ public class RootsTags {
     public static final TagKey<Grove> PASTORAL = modTag("pastoral");
     public static final TagKey<Grove> HOLLOW = modTag("hollow");
 
+    public static final TagKey<Grove> CARES_ABOUT_PACIFIST = modTag("cares_about_pacifist");
+
     public static final TagKey<Item> ANY_GROVE_STONE = modItemTag("grove_stone/any");
     public static final TagKey<Item> ANY_POWERABLE_GROVE_STONE = modItemTag("grove_stone/any_powerable");
     public static final TagKey<Item> WILD_GROVE_STONE = modItemTag("grove_stone/wild");

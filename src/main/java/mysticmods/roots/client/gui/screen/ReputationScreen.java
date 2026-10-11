@@ -11,6 +11,7 @@ import mysticmods.roots.client.particle.screen.base.ScreenParticle;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModGroves;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -83,12 +84,11 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   protected void updateButtons() {
     ReputationStorage rep = getStorage();
 
-    this.fairy.setProgress(rep.getProgress(ModGroves.FAIRY));
-    this.elemental.setProgress(rep.getProgress(ModGroves.ELEMENTAL));
-    this.twilight.setProgress(rep.getProgress(ModGroves.TWILIGHT));
-    this.pastoral.setProgress(rep.getProgress(ModGroves.PASTORAL));
-    this.cultivation.setProgress(rep.getProgress(ModGroves.CULTIVATION));
-    this.fungal.setProgress(rep.getProgress(ModGroves.FUNGAL));
+    for (Renderable renderable : this.renderables) {
+      if (renderable instanceof ReputationButton repButton) {
+        repButton.updateProgress(rep);
+      }
+    }
   }
 
   private ReputationStorage getStorage() {

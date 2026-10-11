@@ -2,6 +2,7 @@ package mysticmods.roots.advancements;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAdvancements;
 import mysticmods.roots.util.PacifistUtil;
 import net.minecraft.advancements.Criterion;
@@ -19,6 +20,10 @@ public class PacifistTrigger extends SimpleCriterionTrigger<PacifistTrigger.Trig
   }
 
   public void trigger(ServerPlayer player, Entity entity) {
+    if (ConfigManager.PACIFIST_DISABLED.get()) {
+      return;
+    }
+
     this.trigger(player, (instance) -> instance.test(player, entity));
   }
 
@@ -29,7 +34,7 @@ public class PacifistTrigger extends SimpleCriterionTrigger<PacifistTrigger.Trig
             .apply(codec, TriggerInstance::new));
 
     public boolean test(ServerPlayer serverPlayer, Entity entity) {
-      return PacifistUtil.test(serverPlayer, entity);
+      return true;
     }
   }
 

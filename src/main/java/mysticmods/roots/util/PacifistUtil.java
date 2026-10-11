@@ -11,10 +11,6 @@ public class PacifistUtil {
   public static AABB AABB = new AABB(-0.75, -0.75, -0.75, 0.75, 0.75, 0.75);
 
   public static boolean test(ServerPlayer serverPlayer, Entity entity) {
-    if (ConfigManager.PACIFIST_DISABLED.get()) {
-      return false;
-    }
-
     EntityType<?> type = entity.getType();
     if (!type.is(RootsTags.Entities.PACIFIST)) {
       return false;

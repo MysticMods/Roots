@@ -26,4 +26,16 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
     int nextRank = rank.nextThreshold(this) - rank.threshold(this);
     return new ReputationProgress(rank, progress, nextRank, reputation);
   }
+
+  public int clamp (int value) {
+    if (value > threshold4) {
+      return threshold4();
+    }
+
+    if (value < 0) {
+      return 0;
+    }
+
+    return value;
+  }
 }

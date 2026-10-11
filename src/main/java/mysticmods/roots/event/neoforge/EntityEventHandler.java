@@ -5,6 +5,7 @@ import mysticmods.roots.action.KillEntityAction;
 import mysticmods.roots.action.TameAnimalAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.api.attachment.EntityCooldowns;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -21,6 +22,7 @@ import mysticmods.roots.snapshot.DandelionWindsSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.util.EntityUtils;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.PacifistUtil;
 import mysticmods.roots.util.QuiverUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
@@ -471,7 +473,10 @@ public class EntityEventHandler {
       directEntity = sourceEntity;
     }
 
-    ModAdvancements.PACIFIST.get().trigger(player, target);
+    if (PacifistUtil.test(player, target)) {
+      ModAdvancements.PACIFIST.get().trigger(player, target);
+      AttachmentUtil.monitorForChange(player, ModAttachments.REPUTATION_STORAGE, (player2, rep) -> rep.markUntruePacifist(true));
+    }
 
     if (ModActions.KILL_ENTITY.get().shouldTest()) {
       KillEntityAction.Context context = new KillEntityAction.Context(player.serverLevel(), player, target, directEntity, source);

@@ -3,6 +3,8 @@ package mysticmods.roots.client.gui.buttons;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.Rank;
@@ -53,6 +55,7 @@ public class ReputationButton extends Button {
   private float animationStartScale = 1f;
   private final Holder<Grove> grove;
   private final List<Component> tooltip = new ArrayList<>();
+  private boolean pacifist = false;
 
   public ReputationButton(Holder<Grove> grove, int x, int y) {
     super(x, y, 32, 32, CommonComponents.EMPTY, (v) -> {
@@ -69,8 +72,20 @@ public class ReputationButton extends Button {
 
   private void updateTooltip () {
     this.tooltip.add(grove.value().getStyledName());
-    this.tooltip.add(getRank().getName());
-    this.tooltip.add(Component.literal(progress.progressCurrentRank() +"/" + progress.nextRankRequirement()));
+    var rank = getRank();
+    this.tooltip.add(rank.getName());
+    if (rank != Rank.FOURTH) {
+      this.tooltip.add(Component.literal(progress.progressCurrentRank() + "/" + progress.nextRankRequirement()));
+      this.tooltip.add(Component.empty());
+      this.tooltip.add(Component.translatable("roots.reputation.percent", this.progress.percentage()).append(Component.literal(" progress to ")).append(rank.next().getName()));
+    } else {
+      this.tooltip.add(Component.empty());
+      this.tooltip.add(Component.literal("You have reached the maximum reputation with the ").append(grove.value().getStyledName()).append(Component.literal(" grove!")));
+    }
+
+    if (grove.is(RootsTags.Groves.CARES_ABOUT_PACIFIST)) {
+
+    }
   }
 
   public Rank getRank() {
@@ -231,6 +246,11 @@ public class ReputationButton extends Button {
     float u = Mth.lerp((ox + hw) / (2F * hw), sprite.getU0(), sprite.getU1());
     float v = Mth.lerp((oy + hh) / (2F * hh), sprite.getV0(), sprite.getV1());
     buffer.addVertex(matrix, cx + ox, cy + oy, 0F).setUv(u, v);
+  }
+
+  public void updateProgress(ReputationStorage rep) {
+    this.setProgress(rep.getProgress(this.grove));
+    this.pacifist = rep.isUntruePacifist();
   }
 
   private enum AnimationState {

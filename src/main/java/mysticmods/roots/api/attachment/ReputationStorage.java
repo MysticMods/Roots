@@ -11,6 +11,7 @@ import mysticmods.roots.api.action.UniqueReputation;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.ReputationProgress;
+import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -38,6 +39,7 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
   private boolean dirty = true;
 
   public ReputationStorage() {
+    untruePacifist = false;
     reputations = new Object2IntOpenHashMap<>();
     uniqueReputations = new ObjectOpenHashSet<>();
   }
@@ -46,6 +48,14 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
     this.untruePacifist = untruePacifist;
     this.reputations = new Object2IntOpenHashMap<>(reputations);
     this.uniqueReputations = new ObjectOpenHashSet<>(uniqueReputations);
+    clamp();
+  }
+
+  // TODO: Deprecate this for future version
+  private void clamp () {
+    for (Grove grove : RootsRegistries.GROVES) {
+      this.reputations.put(grove, grove.getRanks().clamp(this.reputations.getInt(grove)));
+    }
   }
 
   public Rank getRank(Grove grove) {
@@ -71,7 +81,7 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
     if (grove == null) {
       throw new NullPointerException("Cannot set reputation of null grove to '" + reputation + "'!");
     }
-    reputations.put(grove, reputation);
+    reputations.put(grove, grove.getRanks().clamp(reputation));
     setDirty(true);
   }
 
@@ -97,7 +107,7 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
       throw new NullPointerException("Cannot increase reputation of null grove by '" + reputation + "'!");
     }
     int current = reputations.getOrDefault(grove, 0);
-    reputations.put(grove, Math.max(0, current + reputation));
+    reputations.put(grove, grove.getRanks().clamp(current + reputation));
     setDirty(true);
     return reputation;
   }
@@ -110,7 +120,7 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
     if (reputation > 0) {
       reputation = -reputation;
     }
-    reputations.put(grove, Math.max(0, current + reputation));
+    reputations.put(grove, grove.getRanks().clamp(current + reputation));
     setDirty(true);
     return reputation;
   }
