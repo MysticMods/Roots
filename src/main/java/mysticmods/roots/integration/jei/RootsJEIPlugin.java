@@ -19,6 +19,8 @@ import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.IGroveValue;
+import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
@@ -62,6 +64,7 @@ import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import mysticmods.roots.test.entity.EntityTagTest;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -128,6 +131,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<GroveWithReputation> GROVE_REPUTATION_ENTRY_TYPE = new RecipeType<>(RootsAPI.rl("grove_reputation_entry"), GroveWithReputation.class);
   public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = new RecipeType<>(RootsAPI.rl("entity_interaction_recipe"), EntityInteractionRecipe.class);
   public static final RecipeType<GroveBlockPowerRecipe> GROVE_POWER_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("grove_power_recipe"), GroveBlockPowerRecipe.class);
+  public static final RecipeType<GroveEntityPowerRecipe> GROVE_ENTITY_POWER_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("grove_entity_power_recipe"), GroveEntityPowerRecipe.class);
 
   private static final Map<Class<?>, RecipeType<?>> recipeTypeMap = Map.of(
       MortarContainer.class, MORTAR_RECIPE_TYPE,
@@ -161,6 +165,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new GroveWithReputationCategory(guiHelper));
     registration.addRecipeCategories(new EntityInteractionCategory(guiHelper));
     registration.addRecipeCategories(new GrovePowerCategory(guiHelper));
+    registration.addRecipeCategories(new EntityGrovePowerCategory(guiHelper));
 
     INFO_DRAWABLE = guiHelper.drawableBuilder(RootsAPI.rl("textures/gui/jei/info.png"), 0, 0, 9, 11)
         .setTextureSize(9, 11).build();
@@ -254,6 +259,7 @@ public class RootsJEIPlugin implements IModPlugin {
     entityInteractionRecipes.add(new EntityInteractionRecipe(new EntityTagTest(RootsTags.Entities.SQUID), Ingredient.of(RootsTags.Items.BOTTLES), List.of(new ChanceOutput(new ItemStack(ModItems.INK_BOTTLE), 1.0f)), 20 * 15));
     registration.addRecipes(ENTITY_INTERACTION_TYPE, entityInteractionRecipes);
     registration.addRecipes(GROVE_POWER_RECIPE_TYPE, GroveBlockPowerRecipe.generate());
+    registration.addRecipes(GROVE_ENTITY_POWER_RECIPE_TYPE, GroveEntityPowerRecipe.generate());
   }
 
   @Override
@@ -272,6 +278,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.FUNGAL_TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE);
     registration.addRecipeCatalyst(Items.GLASS_BOTTLE, ENTITY_INTERACTION_TYPE);
     registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.PASTORAL_GROVE_STONE.get(), ModItems.CULTIVATION_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
+    registration.addRecipeCatalysts(GROVE_ENTITY_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.PASTORAL_GROVE_STONE.get(), ModItems.CULTIVATION_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
   }
 
   @Override
@@ -320,8 +327,17 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(DIMENSION_TYPE, Collections.emptyList(), new RootsDimensionHelper(), DIMENSION_RENDERER, RootsDimensionType.CODEC);
     registration.register(DAMAGE_TYPE, Collections.emptyList(), new RootsDamageHelper(), DAMAGE_RENDERER, RootsDamageType.CODEC);
     registration.register(GROVE_TYPE, Collections.emptyList(), new RootsGroveHelper(), GROVE_RENDERER, RootsRegistries.GROVES.byNameCodec());
-    registration.register(GROVE_POWER_TYPE, Collections.emptyList(), new RootsGroveNumberHelper.Power(), GROVE_POWER_RENDERER, GroveGeneratedPower.CODEC);
-    registration.register(GROVE_REPUTATION_TYPE, Collections.emptyList(), new RootsGroveNumberHelper.Reputation(), GROVE_REPUTATION_RENDERER, GroveReputation.CODEC);
+    List<GroveGeneratedPower> grovePowerIngredients = new ArrayList<>();
+    List<GroveReputation> groveReputationIngredients = new ArrayList<>();
+    List<GroveReputation> groveReputationLossIngredients = new ArrayList<>();
+    for (Holder<Grove> grove : RootsRegistries.GROVES.getTagOrEmpty(RootsTags.Groves.ANY_POWERABLE)) {
+      grovePowerIngredients.add(new GroveGeneratedPower(new SimpleGroveValue(grove.value(), Integer.MAX_VALUE, IGroveValue.Type.POWER_GENERATION)));
+      groveReputationIngredients.add(new GroveReputation(new SimpleGroveValue(grove.value(), Integer.MAX_VALUE, IGroveValue.Type.REPUTATION_GAIN)));
+      groveReputationLossIngredients.add(new GroveReputation(new SimpleGroveValue(grove.value(), Integer.MAX_VALUE, IGroveValue.Type.REPUTATION_LOSS)));
+    }
+
+    registration.register(GROVE_POWER_TYPE, grovePowerIngredients, new RootsGroveNumberHelper.Power(), GROVE_POWER_RENDERER, GroveGeneratedPower.CODEC);
+    registration.register(GROVE_REPUTATION_TYPE, groveReputationIngredients, new RootsGroveNumberHelper.Reputation(), GROVE_REPUTATION_RENDERER, GroveReputation.CODEC);
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()
         .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
   }
