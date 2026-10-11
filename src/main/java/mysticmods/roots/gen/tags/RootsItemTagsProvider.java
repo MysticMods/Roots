@@ -353,6 +353,12 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS);
     tag(TagKey.create(Registries.ITEM, RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS.location())).add(Items.CREEPER_HEAD, Items.DRAGON_HEAD, Items.PIGLIN_HEAD, Items.PLAYER_HEAD, Items.ZOMBIE_HEAD);
     tag(TagKey.create(Registries.ITEM, RootsTags.Blocks.ELEMENTAL_GROVE_LIQUID_GENERATORS.location())).add(Items.LAVA_BUCKET, Items.WATER_BUCKET);
+    manualCopy(RootsTags.Blocks.WILD_GROVE_LOG_GENERATORS);
+    manualCopy(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS);
+    manualCopy(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS);
+    manualCopy(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS);
+    manualCopy(RootsTags.Blocks.WILD_GROVE_CAKE_GENERATORS);
+    manualCopy(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS);
 
     copySpell(RootsTags.Spells.ADJUSTABLE_SPELL);
     copySpell(RootsTags.Spells.FAIRY);
