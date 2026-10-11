@@ -97,7 +97,7 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
       throw new NullPointerException("Cannot increase reputation of null grove by '" + reputation + "'!");
     }
     int current = reputations.getOrDefault(grove, 0);
-    reputations.put(grove, current + reputation);
+    reputations.put(grove, Math.max(0, current + reputation));
     setDirty(true);
     return reputation;
   }
