@@ -26,6 +26,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.network.client.ClientboundReputationAlertPacket;
 import mysticmods.roots.network.client.ClientboundReputationMessagePacket;
 import mysticmods.roots.network.client.attachment.ClientboundReputationSyncPacket;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
@@ -432,7 +433,7 @@ public class RootsCommand {
     }
     alerts:
     {
-      builder.then(Commands.literal("alerts").executes(c -> {
+      builder.then(Commands.literal("herb_alerts").executes(c -> {
         if (c.getSource().isPlayer()) {
           Object2DoubleOpenHashMap<Herb> totals = new Object2DoubleOpenHashMap<>();
           for (Map.Entry<ResourceKey<Herb>, Herb> herb : RootsRegistries.HERBS.entrySet()) {
@@ -440,6 +441,17 @@ public class RootsCommand {
           }
           RootsAPI.getInstance().syncHerbs(c.getSource().getPlayer(), totals);
           c.getSource().sendSuccess(() -> Component.translatable("roots.commands.alerts.synced", c.getSource()
+              .getDisplayName()), false);
+          return 1;
+        } else {
+          c.getSource().sendFailure(Component.translatable("roots.commands.alerts.no_player"));
+          return 0;
+        }
+      }));
+      builder.then(Commands.literal("reputation_alerts").executes(c -> {
+        if (c.getSource().isPlayer()) {
+          PacketDistributor.sendToPlayer(c.getSource().getPlayer(), ClientboundReputationAlertPacket.getInstance());
+          c.getSource().sendSuccess(() -> Component.translatable("roots.commands.alerts.synced_reputation", c.getSource()
               .getDisplayName()), false);
           return 1;
         } else {

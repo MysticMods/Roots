@@ -116,6 +116,7 @@ public class PacketHandler {
     registrar.play(ClientboundRefreshModifierScreenPacket.TYPE, ClientboundRefreshModifierScreenPacket.CODEC);
     registrar.play(ClientboundRefreshStaffScreenPacket.TYPE, ClientboundRefreshStaffScreenPacket.CODEC);
     registrar.play(DecayTargetFXPacket.TYPE, DecayTargetFXPacket.CODEC);
+    registrar.play(ClientboundReputationAlertPacket.TYPE, ClientboundReputationAlertPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

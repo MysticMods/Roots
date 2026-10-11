@@ -3,8 +3,11 @@ package mysticmods.roots.client;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.client.gui.layer.HerbOverlay;
+import mysticmods.roots.client.gui.layer.ReputationOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.fake.SpellModifierScreen;
 import mysticmods.roots.client.gui.screen.fake.StaffScreen;
@@ -23,6 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -35,6 +39,7 @@ import net.neoforged.neoforge.client.ClientTooltipFlag;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 
 public class RootsClientHooks {
   public static void clearTooltipItem() {
@@ -345,5 +350,28 @@ public class RootsClientHooks {
   public static Component getUseKeyBind() {
     Minecraft mc = Minecraft.getInstance();
     return mc.options.keyUse.getKey().getDisplayName();
+  }
+
+  public static void displayReputations() {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc == null || mc.player == null) {
+      return;
+    }
+
+    if (mc.level == null) {
+      return;
+    }
+
+    ReputationStorage reputation = mc.player.getData(ModAttachments.REPUTATION_STORAGE);
+    if (reputation == null) {
+      return;
+    }
+
+    for (Map.Entry<ResourceKey<Grove>, Grove> entry : RootsRegistries.GROVES.entrySet()) {
+      var grove = entry.getValue();
+      var progress = reputation.getProgress(grove);
+      ReputationOverlay.updateReputationAlert(grove, -1, progress);
+      ReputationOverlay.updateReputationAlert(grove, 1, progress);
+    }
   }
 }

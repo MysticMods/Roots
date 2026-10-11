@@ -79,7 +79,7 @@ public class ReputationOverlay {
     private static final int TIME_VISIBLE = 10 * 20;
     private static final int MAX_TIME = TIME_VISIBLE;
     private static final int ANIMATION_TIME = 5;
-    private static final int COL_WIDTH = 50;
+    private static final int COL_WIDTH = 35;
 
     private int ticks = 0;
     private final ItemStack stack;
@@ -185,7 +185,7 @@ public class ReputationOverlay {
       FormattedCharSequence rankText = getProgress().rank().getShortName().getVisualOrderText();
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, number, 18.0f, 0 /*3.5f*/, 16777215, true);
+      graphics.drawString(mc.font, number, 18.0f, 3.5f, 16777215, true);
       //graphics.drawString(mc.font, progressText, 18.0f, 5.5f /*3.5f*/, 16777215, true);
       //graphics.drawString(mc.font, rankText, 25.0f, 5.5f /*3.5f*/, 16777215, true);
       pose.popPose();
