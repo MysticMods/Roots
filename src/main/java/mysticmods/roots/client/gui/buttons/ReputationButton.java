@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
@@ -66,14 +67,14 @@ public class ReputationButton extends Button {
 
   public void setProgress(ReputationProgress progress) {
     this.progress = progress;
-    this.tooltip.clear();
-    updateTooltip();
   }
 
   private void updateTooltip () {
+    this.tooltip.clear();
     this.tooltip.add(grove.value().getStyledName());
     var rank = getRank();
     this.tooltip.add(rank.getName());
+    // TODO: Actually make these translatable
     if (rank != Rank.FOURTH) {
       this.tooltip.add(Component.literal(progress.progressCurrentRank() + "/" + progress.nextRankRequirement()));
       this.tooltip.add(Component.empty());
@@ -83,8 +84,9 @@ public class ReputationButton extends Button {
       this.tooltip.add(Component.literal("You have reached the maximum reputation with the ").append(grove.value().getStyledName()).append(Component.literal(" grove!")));
     }
 
-    if (grove.is(RootsTags.Groves.CARES_ABOUT_PACIFIST)) {
-
+    if (grove.is(RootsTags.Groves.CARES_ABOUT_PACIFIST) && pacifist) {
+      this.tooltip.add(Component.empty());
+      this.tooltip.add(Component.literal("For the purposes of the ").append(this.grove.value().getStyledName()).append(Component.literal(" grove, you are considered an ").append(Component.literal("Untrue Pacifist").setStyle(Style.EMPTY.withBold(true))).append(Component.literal("."))));
     }
   }
 
@@ -251,6 +253,7 @@ public class ReputationButton extends Button {
   public void updateProgress(ReputationStorage rep) {
     this.setProgress(rep.getProgress(this.grove));
     this.pacifist = rep.isUntruePacifist();
+    updateTooltip();
   }
 
   private enum AnimationState {
