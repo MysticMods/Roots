@@ -8,6 +8,7 @@ import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.layer.HerbOverlay;
+import mysticmods.roots.client.gui.layer.ReputationOverlay;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.BeamManager;
 import mysticmods.roots.client.particle.bolt.BoltRenderer;
@@ -180,6 +181,7 @@ public class RenderTickHandler {
     HerbOverlay.tick();
     BeamManager.tick();
     ScreenParticleEngine.tick();
+    ReputationOverlay.tick();
     //TargetingSystem.tick();
   }
 

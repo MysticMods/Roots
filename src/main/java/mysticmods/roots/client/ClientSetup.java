@@ -181,6 +181,7 @@ public class ClientSetup {
 
   public static final ResourceLocation WARNING_OVERLAY = RootsAPI.rl("warning");
   public static final ResourceLocation HERB_ALERT_OVERLAY = RootsAPI.rl("herb_alert");
+  public static final ResourceLocation REPUTATION_ALERT_OVERLAY = RootsAPI.rl("reputation_alert");
   public static final ResourceLocation HUD_OVERLAY = RootsAPI.rl("hud");
   public static final ResourceLocation AQUA_BUBBLE_OVERLAY = RootsAPI.rl("aqua_bubble");
   public static final ResourceLocation LIGHT_DRIFTER_OVERLAY = RootsAPI.rl("light_drifter");
@@ -192,6 +193,7 @@ public class ClientSetup {
     event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, WARNING_OVERLAY, WarningOverlay::render);
     event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, AQUA_BUBBLE_OVERLAY, AquaBubbleOverlay::render);
     event.registerBelow(VanillaGuiLayers.HOTBAR, HERB_ALERT_OVERLAY, HerbOverlay::render);
+    event.registerBelow(VanillaGuiLayers.HOTBAR, REPUTATION_ALERT_OVERLAY, ReputationOverlay::render);
     event.registerBelow(VanillaGuiLayers.OVERLAY_MESSAGE, LIGHT_DRIFTER_OVERLAY, LightDrifterPositionOverlay::render);
     event.registerBelow(VanillaGuiLayers.OVERLAY_MESSAGE, CANCEL_EFFECT_OVERLAY, CancelEffectOverlay::render);
   }

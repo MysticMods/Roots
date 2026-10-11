@@ -9,7 +9,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.UniqueReputation;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.ReputationRanks;
+import mysticmods.roots.api.grove.Rank;
+import mysticmods.roots.api.grove.ReputationProgress;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -47,15 +48,15 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
     this.uniqueReputations = new ObjectOpenHashSet<>(uniqueReputations);
   }
 
-  public ReputationRanks.Rank getRank(Grove grove) {
-    return ReputationRanks.Rank.fromRanks(grove.getRanks(), reputations.computeIfAbsent(grove, t -> 0));
+  public Rank getRank(Grove grove) {
+    return Rank.fromRanks(grove.getRanks(), reputations.computeIfAbsent(grove, t -> 0));
   }
 
-  public ReputationRanks.Progress getProgress (Holder<Grove> grove) {
+  public ReputationProgress getProgress (Holder<Grove> grove) {
     return getProgress(grove.value());
   }
 
-  public ReputationRanks.Progress getProgress(Grove grove) {
+  public ReputationProgress getProgress(Grove grove) {
     return grove.getRanks().getProgress(reputations.computeIfAbsent(grove, t -> 0));
   }
 
@@ -87,7 +88,7 @@ public class ReputationStorage implements ICleanable<ReputationStorage> {
   }
 
   public int adjust(Grove grove, GroveReputation reputation) {
-    ReputationRanks.Rank rank = getRank(grove);
+    Rank rank = getRank(grove);
     return increaseReputation(grove, reputation.byIndex(rank));
   }
 

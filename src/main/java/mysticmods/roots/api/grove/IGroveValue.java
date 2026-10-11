@@ -5,7 +5,9 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
@@ -46,6 +48,14 @@ public interface IGroveValue {
     @Override
     public String getSerializedName() {
       return this.name().toLowerCase(Locale.ROOT);
+    }
+
+    public TextColor color () {
+      return switch (this) {
+        case REPUTATION_GAIN -> TextColor.fromLegacyFormat(ChatFormatting.GREEN);
+        case REPUTATION_LOSS -> TextColor.fromLegacyFormat(ChatFormatting.RED);
+        default -> TextColor.fromRgb(0xffffff);
+      };
     }
   }
 }

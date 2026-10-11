@@ -17,11 +17,6 @@ public class HerbOverlay {
   public static final Deque<HerbAlert> slots = new ArrayDeque<>();
   private static final Map<Herb, HerbAlert> alerts = new HashMap<>();
 
-  public static double herbAmount(Herb herb) {
-    HerbAlert alert = getAlert(herb);
-    return alert.getAmount();
-  }
-
   public static void updateHerb(Herb herb, double amount) {
     HerbAlert alert = getAlert(herb);
     alert.setAmount(amount);

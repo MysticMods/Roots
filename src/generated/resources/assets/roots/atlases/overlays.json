@@ -10,7 +10,11 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "roots:gui/grove_reputation_symbol"
+      "resource": "roots:gui/grove_reputation_gain_symbol"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "roots:gui/grove_reputation_loss_symbol"
     }
   ]
 }

@@ -22,6 +22,8 @@ public final class RootsAtlasProvider extends SpriteSourceProvider {
     this.atlas(RootsAPI.OVERLAYS_ATLAS)
         .addSource(new SingleFile(RootsAPI.rl("gui/grove_power_symbol"), Optional.empty()));
     this.atlas(RootsAPI.OVERLAYS_ATLAS)
-        .addSource(new SingleFile(RootsAPI.rl("gui/grove_reputation_symbol"), Optional.empty()));
+        .addSource(new SingleFile(RootsAPI.rl("gui/grove_reputation_gain_symbol"), Optional.empty()));
+    this.atlas(RootsAPI.OVERLAYS_ATLAS)
+        .addSource(new SingleFile(RootsAPI.rl("gui/grove_reputation_loss_symbol"), Optional.empty()));
   }
 }

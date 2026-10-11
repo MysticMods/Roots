@@ -5,11 +5,11 @@ import com.mojang.blaze3d.vertex.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.ReputationRanks;
+import mysticmods.roots.api.grove.Rank;
+import mysticmods.roots.api.grove.ReputationProgress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Holder;
@@ -25,7 +25,7 @@ import java.util.List;
 public class ReputationButton extends Button {
   private static final ResourceLocation BUTTON_BASE = RootsAPI.rl("reputation/base_rank");
 
-  private static ResourceLocation baseFromRank(ReputationRanks.Rank rank) {
+  private static ResourceLocation baseFromRank(Rank rank) {
     return switch (rank) {
       case SECOND -> BUTTON_BASE.withSuffix("_2");
       case THIRD -> BUTTON_BASE.withSuffix("_3");
@@ -34,8 +34,8 @@ public class ReputationButton extends Button {
     };
   }
 
-  private static ResourceLocation iconFromRank(GroveType grove, ReputationRanks.Rank rank) {
-    if (rank == ReputationRanks.Rank.UNRANKED) {
+  private static ResourceLocation iconFromRank(GroveType grove, Rank rank) {
+    if (rank == Rank.UNRANKED) {
       return RootsAPI.rl("reputation/" + grove.name() + "_base");
     }
     return RootsAPI.rl("reputation/" + grove.name() + "_glow");
@@ -46,7 +46,7 @@ public class ReputationButton extends Button {
   }
 
   private final GroveType groveType;
-  private ReputationRanks.Progress progress;
+  private ReputationProgress progress;
   protected boolean wasHovered = false;
   private AnimationState state = AnimationState.NORMAL;
   private float animationStart = -1f;
@@ -61,7 +61,7 @@ public class ReputationButton extends Button {
     this.groveType = grove.value().getType();
   }
 
-  public void setProgress(ReputationRanks.Progress progress) {
+  public void setProgress(ReputationProgress progress) {
     this.progress = progress;
     this.tooltip.clear();
     updateTooltip();
@@ -70,12 +70,12 @@ public class ReputationButton extends Button {
   private void updateTooltip () {
     this.tooltip.add(grove.value().getStyledName());
     this.tooltip.add(getRank().getName());
-    this.tooltip.add(Component.literal(progress.progress() +"/" + progress.nextRank()));
+    this.tooltip.add(Component.literal(progress.progressCurrentRank() +"/" + progress.nextRankRequirement()));
   }
 
-  public ReputationRanks.Rank getRank() {
+  public Rank getRank() {
     if (this.progress == null) {
-      return ReputationRanks.Rank.UNRANKED;
+      return Rank.UNRANKED;
     }
 
     return this.progress.rank();
@@ -86,8 +86,8 @@ public class ReputationButton extends Button {
       return 0f;
     }
 
-    int current = progress.progress();
-    int max = progress.nextRank();
+    int current = progress.progressCurrentRank();
+    int max = progress.nextRankRequirement();
 
     return max <= 0 ? 0F : Mth.clamp((float) current / (float) max, 0F, 1F);
   }
@@ -145,7 +145,7 @@ public class ReputationButton extends Button {
     guiGraphics.blitSprite(iconFromRank(groveType, getRank()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
     if (this.progress != null) {
-      float sweep = this.progress.rank() == ReputationRanks.Rank.FOURTH ? Mth.TWO_PI : Mth.clamp(getProgress(), 0F, 1F) * Mth.TWO_PI;
+      float sweep = this.progress.rank() == Rank.FOURTH ? Mth.TWO_PI : Mth.clamp(getProgress(), 0F, 1F) * Mth.TWO_PI;
       if (sweep > 0F) {
         renderProgress(guiGraphics, sweep);
       }

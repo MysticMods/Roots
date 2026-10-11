@@ -14,7 +14,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.ReputationRanks;
+import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -26,6 +26,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.network.client.ClientboundReputationMessagePacket;
 import mysticmods.roots.network.client.attachment.ClientboundReputationSyncPacket;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.commands.CommandBuildContext;
@@ -487,10 +488,10 @@ public class RootsCommand {
         }
 
         int reputation = storage.getReputation(grove.value());
-        ReputationRanks.Rank rank = storage.getRank(grove.value());
+        Rank rank = storage.getRank(grove.value());
         c.getSource()
             .sendSuccess(() -> Component.translatable("roots.commands.reputation.current_reputation", grove.value()
-                .getName(), rank.getName(), reputation), false);
+                .getStyledName(), rank.getName(), reputation), false);
         return 1;
       }).then(Commands.literal("add").executes(c -> {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.add.usage"), false);
@@ -507,9 +508,10 @@ public class RootsCommand {
         int amount = IntegerArgumentType.getInteger(c, "amount");
         storage.increaseReputation(grove.value(), amount);
         PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
+        PacketDistributor.sendToPlayer(player, new ClientboundReputationMessagePacket(grove.value(), amount, storage.getProgress(grove.value())));
         c.getSource()
             .sendSuccess(() -> Component.translatable("roots.commands.reputation.add", player.getDisplayName(), grove.value()
-                .getStyledName(), amount, storage.getRank(grove.value()), storage.getReputation(grove.value())), false);
+                .getStyledName(), amount, storage.getRank(grove.value()).getName(), storage.getReputation(grove.value())), false);
         return 1;
       }))).then(Commands.literal("remove").executes(c -> {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove.usage"), false);
@@ -526,9 +528,10 @@ public class RootsCommand {
         int amount = IntegerArgumentType.getInteger(c, "amount");
         storage.decreaseReputation(grove.value(), amount);
         PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
+        PacketDistributor.sendToPlayer(player, new ClientboundReputationMessagePacket(grove.value(), amount, storage.getProgress(grove.value())));
         c.getSource()
             .sendSuccess(() -> Component.translatable("roots.commands.reputation.remove", player.getDisplayName(), grove.value()
-                .getStyledName(), amount, storage.getRank(grove.value()), storage.getReputation(grove.value())), false);
+                .getStyledName(), amount, storage.getRank(grove.value()).getName(), storage.getReputation(grove.value())), false);
         return 1;
       }))).then(Commands.literal("set").executes(c -> {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set.usage"), false);
@@ -542,9 +545,17 @@ public class RootsCommand {
           c.getSource().sendFailure(Component.translatable("roots.commands.reputation.no_reputation_storage"));
           return 1;
         }
+        int oldValue = storage.getReputation(grove.value());
         int amount = IntegerArgumentType.getInteger(c, "amount");
+        int diff;
+        if (oldValue < amount) {
+          diff = amount - oldValue;
+        } else {
+          diff = oldValue - amount;
+        }
         storage.setReputation(grove.value(), amount);
         PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
+        PacketDistributor.sendToPlayer(player, new ClientboundReputationMessagePacket(grove.value(), diff, storage.getProgress(grove)));
         c.getSource()
             .sendSuccess(() -> Component.translatable("roots.commands.reputation.set", player.getDisplayName(), grove.value()
                 .getStyledName(), storage.getRank(grove.value()), amount), false);

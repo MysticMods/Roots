@@ -3,7 +3,7 @@ package mysticmods.roots.api.action;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mysticmods.roots.api.grove.ReputationRanks;
+import mysticmods.roots.api.grove.Rank;
 
 import java.util.stream.IntStream;
 
@@ -42,7 +42,7 @@ public record GroveReputation(int gain1, int gain2, int gain3, int gain4, int ga
     return new GroveReputation(g1, g2, g3, g4, g5);
   }
 
-  public int byIndex(ReputationRanks.Rank index) {
+  public int byIndex(Rank index) {
     return switch (index) {
       case UNRANKED -> gain1;
       case FIRST -> gain2;

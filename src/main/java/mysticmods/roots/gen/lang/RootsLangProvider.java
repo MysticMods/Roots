@@ -71,6 +71,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("roots.reputation.decreased", "Your reputation with the %s grove has decreased by %s");
     add("roots.reputation.increased", "Your reputation with the %s grove has increased by %s");
+    add("roots.reputation.percent", "%s%%");
 
     add("roots.tooltip.effect", "Use to gain %s for %s seconds.");
     add("roots.tooltip.chance", "Chance: %s%%");
@@ -206,6 +207,11 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.grove.ranks.second", "Rank II");
     add("roots.grove.ranks.third", "Rank III");
     add("roots.grove.ranks.fourth", "Rank IV");
+
+    add("roots.grove.ranks.unranked.short", "");
+    add("roots.grove.ranks.first.short", "I");
+    add("roots.grove.ranks.second.short", "II");
+    add("roots.grove.ranks.third.short", "III");
 
     add(BoundKeys.CATEGORY, "Roots");
     for (KeyMapping bind : BoundKeys.MAPPINGS.values()) {
@@ -842,7 +848,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.jei.text.cooldown", "Cooldown: %ss");
     add("roots.jei.sprout_gifts", "Rewards for Breeding Sprouts");
     add("roots.jei.animal_harvest", "Animal Harvest");
-    add("roots.jei.grove_reputaiton", "Grove Reputation");
+    // TODO: this was 'reputaiton'
+    add("roots.jei.grove_reputation", "Grove Reputation");
     add("roots.jei.animal_harvest.info", "Note: Outputs shown are default and may vary based on mod interactions.");
     add("roots.jei.fungal_transmuter", "Fungal Transmutation");
     add("roots.jei.text.grove_power", "Fungal Grove Power required: %s");
