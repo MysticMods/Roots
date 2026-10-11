@@ -71,10 +71,10 @@ public class EntityGrovePowerCategory implements IRecipeCategory<GroveEntityPowe
         .addIngredients(RootsJEIPlugin.ENTITY_TYPE, RootsEntityType.fromTag(recipe.entityTag()))
         .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.SMALL_ENTITY_RENDERER);
     builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addIngredients(recipe.itemIngredient());
-    builder.addSlot(RecipeIngredientRole.CATALYST, 61, 2)
+    builder.addSlot(RecipeIngredientRole.CATALYST, 40, 2)
         .addIngredients(Ingredient.of(RootsTags.Groves.getGroveStoneTag(recipe.groveTag())));
     var power = new GroveGeneratedPower(SimpleGroveValue.generate(recipe.groveTag(), recipe.power()));
-    builder.addSlot(RecipeIngredientRole.OUTPUT, 99, 2)
+    builder.addSlot(RecipeIngredientRole.OUTPUT, 78, 2)
         .addIngredient(RootsJEIPlugin.GROVE_POWER_TYPE, power)
         .setCustomRenderer(RootsJEIPlugin.GROVE_POWER_TYPE, RootsJEIPlugin.GROVE_POWER_RENDERER);
   }
