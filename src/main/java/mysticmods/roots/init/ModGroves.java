@@ -21,9 +21,9 @@ public class ModGroves {
 
   // TODO: Rename
   public static final DeferredHolder<Grove, Grove> FAIRY = REGISTER.register("fairy", () -> new Grove(GroveType.FAIRY, ChatFormatting.LIGHT_PURPLE, 0xe38192, 0xdab7ca));
-  public static final DeferredHolder<Grove, Grove> TWILIGHT = REGISTER.register("twilight", () -> new Grove(GroveType.TWILIGHT, ChatFormatting.DARK_PURPLE, 0x99e5ff, 0x6d62ff));
-  public static final DeferredHolder<Grove, Grove> FUNGAL = REGISTER.register("fungal", () -> new Grove(GroveType.FUNGAL, ChatFormatting.DARK_AQUA, 0xcca3a7, 0x8b7173));
-  public static final DeferredHolder<Grove, Grove> CULTIVATION = REGISTER.register("cultivation", () -> new Grove(GroveType.CULTIVATION, ChatFormatting.GREEN, 0xdbac39, 0xd4d887));
+  public static final DeferredHolder<Grove, Grove> TWILIGHT = REGISTER.register("twilight", () -> new Grove(GroveType.TWILIGHT, ChatFormatting.DARK_AQUA, 0x99e5ff, 0x6d62ff));
+  public static final DeferredHolder<Grove, Grove> FUNGAL = REGISTER.register("fungal", () -> new Grove(GroveType.FUNGAL, ChatFormatting.DARK_PURPLE, 0xcca3a7, 0x8b7173));
+  public static final DeferredHolder<Grove, Grove> CULTIVATION = REGISTER.register("cultivation", () -> new Grove(GroveType.CULTIVATION, ChatFormatting.YELLOW, 0xdbac39, 0xd4d887));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("sprout"), RootsAPI.rl("cultivation"));
@@ -33,7 +33,7 @@ public class ModGroves {
   public static final DeferredHolder<Grove, Grove> ELEMENTAL = REGISTER.register("elemental", () -> new Grove(GroveType.ELEMENTAL, ChatFormatting.DARK_RED, 0xffe98e, 0x80f7ff));
 
   // TODO: Rename
-  public static final DeferredHolder<Grove, Grove> PASTORAL = REGISTER.register("pastoral", () -> new Grove(GroveType.PASTORAL, ChatFormatting.YELLOW, 0x71d443, 0xb6cf89));
+  public static final DeferredHolder<Grove, Grove> PASTORAL = REGISTER.register("pastoral", () -> new Grove(GroveType.PASTORAL, ChatFormatting.GREEN, 0x71d443, 0xb6cf89));
 
   static {
     REGISTER.addAlias(RootsAPI.rl("primal"), RootsAPI.rl("pastoral"));
