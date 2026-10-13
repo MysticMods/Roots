@@ -30,13 +30,17 @@ public class GroveSupplicationRitual extends SingleTickRitual {
 
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(GROVE_STONE_PREDICATE);
 
+  public GroveSupplicationRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
   }
 
   @Override
-  public void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void singleTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     // TODO: Move this to super.functionalTick
     // TODO: call super.functionalTick
     if (pCache == null/* && requiresCache()*/) {
@@ -88,25 +92,5 @@ public class GroveSupplicationRitual extends SingleTickRitual {
 
   @Override
   public void initialize(Holder<Ritual> holder) {
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.GROVE_SUPPLICATION_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.GROVE_SUPPLICATION_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.GROVE_SUPPLICATION_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.GROVE_SUPPLICATION_INTERVAL;
   }
 }

@@ -15,10 +15,10 @@ public abstract class SingleTickRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (duration % getInterval(instance) == 0) {
-      singleTick(pLevel, pPos, pState, pCache, blockEntity, duration, randomSource);
+    if (duration % instance.getInterval() == 0) {
+      singleTick(instance ,pLevel, pPos, pState, pCache, blockEntity, duration, randomSource);
     }
   }
 
-  protected abstract void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
+  protected abstract void singleTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 }

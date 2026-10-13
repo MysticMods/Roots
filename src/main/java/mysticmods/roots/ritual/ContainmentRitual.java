@@ -26,6 +26,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class ContainmentRitual extends Ritual {
+  public ContainmentRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     // TODO: Look at mob::isWithinRestriction
@@ -33,7 +37,7 @@ public class ContainmentRitual extends Ritual {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
-    AABB radius = AABB.of(pCache.getBoundingBox().inflatedBy(getRadiusXZ(this)));
+    AABB radius = AABB.of(pCache.getBoundingBox().inflatedBy(instance.getRadiusXZ()));
     // TODO: Handle teams?
     var lastPlayer = blockEntity.getLastPlayer();
     Predicate<Entity> test = lastPlayer != null ? EntityUtils.isHostileTo(lastPlayer) : EntityUtils.isHostile();
@@ -80,30 +84,5 @@ public class ContainmentRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
 
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.CONTAINMENT_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return null;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return null;
-  }
-
-  @Override
-  protected @Nullable PropertyHolder<Property.IntegerProperty> getRadiusProperty() {
-    return ModRituals.CONTAINMENT_RADIUS;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.CONTAINMENT_INTERVAL;
   }
 }

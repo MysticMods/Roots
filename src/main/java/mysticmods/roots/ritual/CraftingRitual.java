@@ -4,6 +4,7 @@ import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.SingleTickRitual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -29,7 +30,7 @@ public class CraftingRitual extends SingleTickRitual {
   }
 
   @Override
-  public void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
+  public void singleTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
     List<ItemStack> output = blockEntity.popStoredItems();
     if (output.isEmpty()) {
       return;
@@ -63,25 +64,5 @@ public class CraftingRitual extends SingleTickRitual {
 
   @Override
   public void initialize(Holder<Ritual> holder) {
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.CRAFTING_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return null;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return null;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.CRAFTING_INTERVAL;
   }
 }

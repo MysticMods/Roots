@@ -16,6 +16,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 
 public class SpreadingForestRitual extends Ritual {
+  public SpreadingForestRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
   }
@@ -23,25 +27,5 @@ public class SpreadingForestRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
 
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.SPREADING_FOREST_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.SPREADING_FOREST_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.SPREADING_FOREST_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.SPREADING_FOREST_INTERVAL;
   }
 }

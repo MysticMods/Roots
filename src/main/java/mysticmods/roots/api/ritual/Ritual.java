@@ -42,6 +42,7 @@ import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import javax.swing.*;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
@@ -68,6 +69,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   protected int radiusXZ = 0;
   protected int radiusY = 0;
   protected int interval = 0;
+  protected int count = 0;
 
   private final PropertyHolder<Property.IntegerProperty> radiusXProperty, radiusYProperty, intervalProperty, durationProperty;
   @Nullable
@@ -111,7 +113,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());
+      this.descriptionId = Util.makeDescriptionId("ritual", getKey().location());
     }
 
     return this.descriptionId;
@@ -126,9 +128,18 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return RootsRegistries.RITUALS.wrapAsHolder(this);
   }
 
-  public abstract Component[] createExtendedDescriptionComponents();
+  public Component[] createExtendedDescriptionComponents() {
+    return new Component[]{};
+  }
 
-  public abstract Component[] createModifierDescriptionComponents(RitualModifier modifier);
+  public Component[] createModifierDescriptionComponents(RitualModifier modifier) {
+    return new Component[]{};
+  }
+
+  @Override
+  public Component[] getOrCreateDescriptionComponents() {
+    return new Component[]{};
+  }
 
   @Override
   public Component[] getOrCreateDescriptionComponents(IRitualInstance instance) {
@@ -229,7 +240,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   }
 
   public void tick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, @Nullable PositionCache cache, RandomSource random) {
-    int dur = getDuration(instance) - blockEntity.getLifetime();
+    int dur = instance.getDuration() - blockEntity.getLifetime();
     functionalTick(instance, pLevel, pPos, pState, cache, blockEntity, dur, random);
 /*    BoundingBox box;
     if (cache == null) {
@@ -267,6 +278,9 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
       radiusY = properties.get(getRadiusYProperty());
     }
     interval = properties.get(getIntervalProperty());
+    if (getCountProperty() != null) {
+      count = properties.get(getCountProperty());
+    }
   }
 
   protected abstract void initialize(Holder<Ritual> holder);
@@ -366,6 +380,10 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   public IRitualInstance simple () {
     return IRitualInstance.of(this);
+  }
+
+  public int getCount(IRitualInstance iRitualInstance) {
+    return count;
   }
 
   // Predicates
@@ -477,12 +495,12 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
     public Properties build() {
       // TODO: Validate everything
-      if (this.textColor == null) {
-        throw new NullPointerException("SpellProperties requires a `textColor`");
+/*      if (this.textColor == null) {
+        throw new NullPointerException("RitualProperties requires a `textColor`");
       }
       if (this.color1 == -1 && this.color2 == -1) {
-        throw new IllegalStateException("Invalid colors for SpellProperties");
-      }
+        throw new IllegalStateException("Invalid colors for RitualProperties");
+      }*/
       return this;
     }
 

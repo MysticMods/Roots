@@ -24,6 +24,10 @@ import java.util.List;
 public class FireStormRitual extends Ritual {
   private int count;
 
+  public FireStormRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public boolean requiresCache(IRitualInstance iRitualInstance) {
     return true;
@@ -36,7 +40,7 @@ public class FireStormRitual extends Ritual {
       return;
     }
 
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       List<MeteorEntity> entities = pLevel.getEntitiesOfClass(MeteorEntity.class, pCache.getAABB());
       if (entities.size() < count) {
         MeteorEntity meteor = ModEntities.METEOR.get().create(pLevel);
@@ -54,34 +58,8 @@ public class FireStormRitual extends Ritual {
   }
 
   @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.FIRE_STORM_COUNT);
-  }
-
-  @Override
   protected void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     count = properties.get(ModRituals.FIRE_STORM_COUNT);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.FIRE_STORM_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.FIRE_STORM_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.FIRE_STORM_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.FIRE_STORM_INTERVAL;
   }
 }

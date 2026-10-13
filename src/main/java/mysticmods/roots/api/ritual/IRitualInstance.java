@@ -43,6 +43,10 @@ public interface IRitualInstance extends RitualLike {
     return getRitual().getDuration(this);
   }
 
+  default int getCount () {
+    return getRitual().getCount(this);
+  }
+
   RitualModifierSet getEnabledModifiers();
 
   default Set<ResourceKey<RitualModifier>> getEnabledModifierKeys() {

@@ -50,6 +50,10 @@ public class BloomingRitual extends Ritual {
   };
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(TWO_AIR_ABOVE);
 
+  public BloomingRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
@@ -64,7 +68,7 @@ public class BloomingRitual extends Ritual {
       return;
     }
 
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       List<Pair<BlockPos, PedestalBlockEntity>> pedestals = blockEntity.pedestals(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS, false);
 
       BlockItem flowerToPlace = null;
@@ -118,34 +122,8 @@ public class BloomingRitual extends Ritual {
   }
 
   @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.BLOOMING_COUNT);
-  }
-
-  @Override
   protected void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     this.count = properties.get(ModRituals.BLOOMING_COUNT);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.BLOOMING_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.BLOOMING_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.BLOOMING_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.BLOOMING_INTERVAL;
   }
 }

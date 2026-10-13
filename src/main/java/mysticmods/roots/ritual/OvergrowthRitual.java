@@ -32,6 +32,10 @@ public class OvergrowthRitual extends Ritual {
   // TODO: This *must* be on the block entity
   private BlockPos lastChanged;
 
+  public OvergrowthRitual(Properties properties) {
+    super(properties);
+  }
+
   private static List<Direction> horizontals() {
     if (HORIZONTALS == null) {
       HORIZONTALS = new ArrayList<>(Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal())
@@ -56,7 +60,7 @@ public class OvergrowthRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(instance)) {
+    if (pCache == null && instance.requiresCache()) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
@@ -115,25 +119,5 @@ public class OvergrowthRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
 
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.OVERGROWTH_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.OVERGROWTH_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.OVERGROWTH_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.OVERGROWTH_INTERVAL;
   }
 }

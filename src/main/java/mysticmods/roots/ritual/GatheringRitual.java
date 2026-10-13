@@ -19,9 +19,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class GatheringRitual extends Ritual {
+  public GatheringRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       List<Vec3> positions = MagnetismUtil.store(pLevel, pPos, blockEntity, getRadiusXZ(instance), getRadiusY(instance), getRadiusXZ(instance));
       // TODO: Visuals for the yoink
     }
@@ -30,25 +34,5 @@ public class GatheringRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
 
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.GATHERING_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.GATHERING_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.GATHERING_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.GATHERING_INTERVAL;
   }
 }

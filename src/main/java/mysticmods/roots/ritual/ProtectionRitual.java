@@ -26,6 +26,10 @@ public class ProtectionRitual extends Ritual {
   private int dayLength, nightThreshold, clearDuration;
   private float daySpeed, nightSpeed;
 
+  public ProtectionRitual(Properties properties) {
+    super(properties);
+  }
+
   public static int getDayLength() {
     return ModRituals.PROTECTION.get().dayLength;
   }
@@ -47,7 +51,7 @@ public class ProtectionRitual extends Ritual {
     }
 
     // TODO: Modded dimensions
-    if (duration % getInterval(instance) == 0 && clearsWeather) {
+    if (duration % instance.getInterval() == 0 && clearsWeather) {
       // Clear the rains!
       RitualInformation info = server.getData(ModAttachments.RITUAL_INFORMATION);
       if (info.shouldStopWeather()) {
@@ -83,19 +87,6 @@ public class ProtectionRitual extends Ritual {
   }
 
   @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.PROTECTION_DAY_LENGTH);
-    properties.add(ModRituals.PROTECTION_NIGHT_THRESHOLD);
-    properties.add(ModRituals.PROTECTION_CLEAR_DURATION);
-    properties.add(ModRituals.PROTECTION_CLEARS_WEATHER);
-    properties.add(ModRituals.PROTECTION_SHORTENS_NIGHT);
-    properties.add(ModRituals.PROTECTION_LENGTHENS_DAY);
-    properties.add(ModRituals.PROTECTION_DAY_SPEED);
-    properties.add(ModRituals.PROTECTION_NIGHT_SPEED);
-  }
-
-  @Override
   protected void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     dayLength = properties.get(ModRituals.PROTECTION_DAY_LENGTH);
@@ -106,25 +97,5 @@ public class ProtectionRitual extends Ritual {
     lengthensDay = properties.get(ModRituals.PROTECTION_LENGTHENS_DAY);
     daySpeed = properties.get(ModRituals.PROTECTION_DAY_SPEED);
     nightSpeed = properties.get(ModRituals.PROTECTION_NIGHT_SPEED);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.PROTECTION_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.PROTECTION_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.PROTECTION_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.PROTECTION_INTERVAL;
   }
 }

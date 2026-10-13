@@ -11,6 +11,15 @@
         }
       },
       {
+        "id": "roots:animal_harvest/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of entities to harvest per operation.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
         "id": "roots:animal_harvest/interval",
         "value": {
           "type": "roots:integer_property",
@@ -38,21 +47,21 @@
         }
       },
       {
-        "id": "roots:animal_harvest/count",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The number of entities to harvest per operation.",
-          "default_value": 1,
-          "value": 1
-        }
-      },
-      {
         "id": "roots:animal_harvest/glow_duration",
         "value": {
           "type": "roots:integer_property",
           "comment": "The duration of the glow effect applied to entities that have been harvest.",
           "default_value": 20,
           "value": 20
+        }
+      },
+      {
+        "id": "roots:animal_harvest/looting_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "Chance per operation that the loot level will be set to looting_value",
+          "default_value": 0.2,
+          "value": 0.2
         }
       },
       {
@@ -65,12 +74,12 @@
         }
       },
       {
-        "id": "roots:animal_harvest/looting_chance",
+        "id": "roots:animal_harvest/max_tries",
         "value": {
-          "type": "roots:float_property",
-          "comment": "Chance per operation that the loot level will be set to looting_value",
-          "default_value": 0.2,
-          "value": 0.2
+          "type": "roots:integer_property",
+          "comment": "The maximum number of attempts per ritual operation to generate loot up to the `count` maximum number of entities, if the chosen entity produces no loot.",
+          "default_value": 8,
+          "value": 8
         }
       },
       {
@@ -90,15 +99,6 @@
           "default_value": 1,
           "value": 1
         }
-      },
-      {
-        "id": "roots:animal_harvest/max_tries",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The maximum number of attempts per ritual operation to generate loot up to the `count` maximum number of entities, if the chosen entity produces no loot.",
-          "default_value": 8,
-          "value": 8
-        }
       }
     ],
     "roots:augmentation": [
@@ -109,6 +109,15 @@
           "comment": "The length of the ritual",
           "default_value": 20,
           "value": 20
+        }
+      },
+      {
+        "id": "roots:augmentation/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of entities to augment per interval.",
+          "default_value": 1,
+          "value": 1
         }
       },
       {
@@ -139,15 +148,6 @@
         }
       },
       {
-        "id": "roots:augmentation/count",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The number of entities to augment per interval.",
-          "default_value": 1,
-          "value": 1
-        }
-      },
-      {
         "id": "roots:augmentation/glow_duration",
         "value": {
           "type": "roots:integer_property",
@@ -165,6 +165,15 @@
           "comment": "The length of the ritual",
           "default_value": 3200,
           "value": 3200
+        }
+      },
+      {
+        "id": "roots:blooming/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of flowers to place per interval.",
+          "default_value": 1,
+          "value": 1
         }
       },
       {
@@ -192,15 +201,6 @@
           "comment": "The vertical radius of the ritual in blocks.",
           "default_value": 10,
           "value": 10
-        }
-      },
-      {
-        "id": "roots:blooming/count",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The number of flowers to place per interval.",
-          "default_value": 1,
-          "value": 1
         }
       }
     ],
@@ -284,6 +284,15 @@
         }
       },
       {
+        "id": "roots:fire_storm/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The maximum number of meteors that can exist in the ritual area at once.",
+          "default_value": 8,
+          "value": 8
+        }
+      },
+      {
         "id": "roots:fire_storm/interval",
         "value": {
           "type": "roots:integer_property",
@@ -309,15 +318,6 @@
           "default_value": 30,
           "value": 30
         }
-      },
-      {
-        "id": "roots:fire_storm/count",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The maximum number of meteors that can exist in the ritual area at once.",
-          "default_value": 8,
-          "value": 8
-        }
       }
     ],
     "roots:frost_lands": [
@@ -328,6 +328,15 @@
           "comment": "The length of the ritual",
           "default_value": 6400,
           "value": 6400
+        }
+      },
+      {
+        "id": "roots:frost_lands/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of blocks to tweak per interval.",
+          "default_value": 5,
+          "value": 5
         }
       },
       {
@@ -358,39 +367,12 @@
         }
       },
       {
-        "id": "roots:frost_lands/heal_interval",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The interval at which tagged entities are healed.",
-          "default_value": 30,
-          "value": 30
-        }
-      },
-      {
-        "id": "roots:frost_lands/spawn_chance",
-        "value": {
-          "type": "roots:float_property",
-          "comment": "The chance per tick that a snowman will spawn.",
-          "default_value": 0.06,
-          "value": 0.06
-        }
-      },
-      {
         "id": "roots:frost_lands/fluid_count",
         "value": {
           "type": "roots:integer_property",
           "comment": "The number of fluid blocks to tweak per interval.",
           "default_value": 2,
           "value": 2
-        }
-      },
-      {
-        "id": "roots:frost_lands/count",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The number of blocks to tweak per interval.",
-          "default_value": 5,
-          "value": 5
         }
       },
       {
@@ -418,6 +400,24 @@
           "comment": "The chance per interval that an ice block will be converted into packed or blue ice.",
           "default_value": 0.05,
           "value": 0.05
+        }
+      },
+      {
+        "id": "roots:frost_lands/heal_interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The interval at which tagged entities are healed.",
+          "default_value": 30,
+          "value": 30
+        }
+      },
+      {
+        "id": "roots:frost_lands/spawn_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The chance per tick that a snowman will spawn.",
+          "default_value": 0.06,
+          "value": 0.06
         }
       }
     ],
@@ -573,7 +573,7 @@
         }
       },
       {
-        "id": "roots:healing_aura/entity_heal_amount",
+        "id": "roots:healing_aura/player_heal_amount",
         "value": {
           "type": "roots:float_property",
           "comment": "The amount of health to heal per interval.",
@@ -582,7 +582,7 @@
         }
       },
       {
-        "id": "roots:healing_aura/player_heal_amount",
+        "id": "roots:healing_aura/entity_heal_amount",
         "value": {
           "type": "roots:float_property",
           "comment": "The amount of health to heal per interval.",
@@ -629,6 +629,15 @@
         }
       },
       {
+        "id": "roots:heavy_storms/weather_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long storms and rain should continue for.",
+          "default_value": 200,
+          "value": 200
+        }
+      },
+      {
         "id": "roots:heavy_storms/lightning_chance",
         "value": {
           "type": "roots:float_property",
@@ -653,15 +662,6 @@
           "comment": "Whether the ritual causes thunder.",
           "default_value": true,
           "value": true
-        }
-      },
-      {
-        "id": "roots:heavy_storms/weather_duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long storms and rain should continue for.",
-          "default_value": 200,
-          "value": 200
         }
       }
     ],
@@ -759,15 +759,6 @@
         }
       },
       {
-        "id": "roots:protection/clear_duration",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long the weather is cleared for, if the weather is cleared.",
-          "default_value": 24000,
-          "value": 24000
-        }
-      },
-      {
         "id": "roots:protection/clears_weather",
         "value": {
           "type": "roots:boolean_property",
@@ -811,6 +802,15 @@
           "default_value": 2.0,
           "value": 2.0
         }
+      },
+      {
+        "id": "roots:protection/clear_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the weather is cleared for, if the weather is cleared.",
+          "default_value": 24000,
+          "value": 24000
+        }
       }
     ],
     "roots:purity": [
@@ -851,6 +851,15 @@
         }
       },
       {
+        "id": "roots:purity/convert_zombies",
+        "value": {
+          "type": "roots:boolean_property",
+          "comment": "Whether the ritual should reduce the conversion time of zombie villagers.",
+          "default_value": true,
+          "value": true
+        }
+      },
+      {
         "id": "roots:purity/conversion_addition",
         "value": {
           "type": "roots:integer_property",
@@ -866,15 +875,6 @@
           "comment": "The number of potion effects to clear per entity per interval.",
           "default_value": 1,
           "value": 1
-        }
-      },
-      {
-        "id": "roots:purity/convert_zombies",
-        "value": {
-          "type": "roots:boolean_property",
-          "comment": "Whether the ritual should reduce the conversion time of zombie villagers.",
-          "default_value": true,
-          "value": true
         }
       }
     ],
@@ -974,21 +974,21 @@
         }
       },
       {
-        "id": "roots:warding/resistance_amplifier",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The amplifier of the resistance effect applied to entities.",
-          "default_value": 10,
-          "value": 10
-        }
-      },
-      {
         "id": "roots:warding/resistance_duration",
         "value": {
           "type": "roots:integer_property",
           "comment": "The duration of the resistance effect applied to entities.",
           "default_value": 60,
           "value": 60
+        }
+      },
+      {
+        "id": "roots:warding/resistance_amplifier",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The amplifier of the resistance effect applied to entities.",
+          "default_value": 10,
+          "value": 10
         }
       }
     ],

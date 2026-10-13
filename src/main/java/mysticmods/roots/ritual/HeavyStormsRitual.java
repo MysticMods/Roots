@@ -35,6 +35,10 @@ public class HeavyStormsRitual extends Ritual {
   private static final BiPredicate<Level, BlockPos> AIR_ABOVE = (level, pos) -> level.isEmptyBlock(pos.above()) && !level.isEmptyBlock(pos);
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(AIR_ABOVE);
 
+  public HeavyStormsRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
@@ -47,7 +51,7 @@ public class HeavyStormsRitual extends Ritual {
       return;
     }
 
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       // TODO: Weather in modded dimensions
       ServerLevel serverLevel = (ServerLevel) pLevel;
       if (causesThunder || causesRain) {
@@ -55,7 +59,7 @@ public class HeavyStormsRitual extends Ritual {
         if (info.shouldStartWeather()) {
           info.startHeavyStorms();
           info.stopProtection();
-          serverLevel.setWeatherParameters(0, getDuration(instance), causesRain, causesThunder);
+          serverLevel.setWeatherParameters(0, instance.getDuration(), causesRain, causesThunder);
         }
       }
 
@@ -94,34 +98,5 @@ public class HeavyStormsRitual extends Ritual {
     causesRain = properties.get(ModRituals.HEAVY_STORMS_CAUSES_RAIN);
     causesThunder = properties.get(ModRituals.HEAVY_STORMS_CAUSES_THUNDER);
     weatherDuration = properties.get(ModRituals.HEAVY_STORMS_WEATHER_DURATION);
-  }
-
-  @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
-    properties.add(ModRituals.HEAVY_STORMS_CAUSES_RAIN);
-    properties.add(ModRituals.HEAVY_STORMS_CAUSES_THUNDER);
-    properties.add(ModRituals.HEAVY_STORMS_WEATHER_DURATION);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.HEAVY_STORMS_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.HEAVY_STORMS_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.HEAVY_STORMS_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.HEAVY_STORMS_INTERVAL;
   }
 }

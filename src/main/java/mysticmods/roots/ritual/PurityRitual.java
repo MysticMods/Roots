@@ -29,6 +29,10 @@ public class PurityRitual extends Ritual {
   private boolean convertZombies;
   private int conversionAddition, potionCount;
 
+  public PurityRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public boolean requiresCache(IRitualInstance iRitualInstance) {
     return true;
@@ -54,7 +58,7 @@ public class PurityRitual extends Ritual {
           }
         }
       } else {
-        if (duration % getInterval(instance) == 0) {
+        if (duration % instance.getInterval() == 0) {
           for (MobEffectInstance effect : entity.getActiveEffects()) {
             if (effect.isInfiniteDuration()) {
               continue;
@@ -90,33 +94,5 @@ public class PurityRitual extends Ritual {
     this.conversionAddition = properties.get(ModRituals.PURITY_CONVERSION_ADDITION);
     this.potionCount = properties.get(ModRituals.PURITY_POTION_COUNT);
     this.convertZombies = properties.get(ModRituals.PURITY_CONVERT_ZOMBIES);
-  }
-
-  @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.PURITY_CONVERSION_ADDITION);
-    properties.add(ModRituals.PURITY_POTION_COUNT);
-    properties.add(ModRituals.PURITY_CONVERT_ZOMBIES);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.PURITY_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.PURITY_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.PURITY_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.PURITY_INTERVAL;
   }
 }

@@ -24,9 +24,13 @@ import java.util.List;
 public class HealingAuraRitual extends Ritual {
   private float playerHeal, entityHeal;
 
+  public HealingAuraRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       List<Player> players = pLevel.getEntitiesOfClass(Player.class, pCache.getAABB());
       for (Player player : players) {
         float amount = Math.min(player.getMaxHealth() - player.getHealth(), playerHeal);
@@ -53,33 +57,6 @@ public class HealingAuraRitual extends Ritual {
     var proprties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     this.entityHeal = proprties.get(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT);
     this.playerHeal = proprties.get(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT);
-  }
-
-  @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT);
-    properties.add(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.HEALING_AURA_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.HEALING_AURA_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.HEALING_AURA_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.HEALING_AURA_INTERVAL;
   }
 
   @Override

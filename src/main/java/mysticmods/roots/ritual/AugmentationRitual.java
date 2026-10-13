@@ -35,6 +35,10 @@ public class AugmentationRitual extends Ritual {
   private static final Map<EntityType<?>, Set<Holder<Attribute>>> ELIGIBLE_ATTRIBUTES = new HashMap<>();
   private int count, glowDuration;
 
+  public AugmentationRitual(Properties properties) {
+    super(properties);
+  }
+
   private static Set<Holder<Attribute>> getAttributes(EntityType<?> entity) {
     //noinspection deprecation
     var e = entity.builtInRegistryHolder();
@@ -49,7 +53,7 @@ public class AugmentationRitual extends Ritual {
 
   @Override
   public void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(instance)) {
+    if (pCache == null && instance.requiresCache()) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
@@ -62,7 +66,7 @@ public class AugmentationRitual extends Ritual {
       return;
     }
 
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       assert blockEntity.getLevel() != null;
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB(instance).move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
@@ -113,36 +117,9 @@ public class AugmentationRitual extends Ritual {
   }
 
   @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.AUGMENTATION_COUNT);
-    properties.add(ModRituals.AUGMENTATION_GLOW_DURATION);
-  }
-
-  @Override
   public void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     glowDuration = properties.get(ModRituals.AUGMENTATION_GLOW_DURATION);
     count = properties.get(ModRituals.AUGMENTATION_COUNT);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.AUGMENTATION_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.AUGMENTATION_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.AUGMENTATION_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.AUGMENTATION_INTERVAL;
   }
 }

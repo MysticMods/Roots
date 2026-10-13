@@ -5,8 +5,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -58,6 +56,10 @@ public class AnimalHarvestRitual extends Ritual {
   // TODO: Handle reload
   private boolean checkedAdditionalLootTables = false;
 
+  public AnimalHarvestRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (pCache == null && requiresCache(instance)) {
@@ -72,7 +74,7 @@ public class AnimalHarvestRitual extends Ritual {
       checkedAdditionalLootTables = true;
     }
 
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB(instance).move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
               .and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !o.getType()
@@ -228,18 +230,6 @@ public class AnimalHarvestRitual extends Ritual {
   }
 
   @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.ANIMAL_HARVEST_COUNT);
-    properties.add(ModRituals.ANIMAL_HARVEST_GLOW_DURATION);
-    properties.add(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE);
-    properties.add(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE);
-    properties.add(ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT);
-    properties.add(ModRituals.ANIMAL_HARVEST_STACK_LIMIT);
-    properties.add(ModRituals.ANIMAL_HARVEST_MAX_TRIES);
-  }
-
-  @Override
   public void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     count = properties.get(ModRituals.ANIMAL_HARVEST_COUNT);
@@ -249,25 +239,5 @@ public class AnimalHarvestRitual extends Ritual {
     lootingChance = properties.get(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE);
     itemStackCountLimit = properties.get(ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT);
     itemStackLimit = properties.get(ModRituals.ANIMAL_HARVEST_STACK_LIMIT);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.ANIMAL_HARVEST_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.ANIMAL_HARVEST_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.ANIMAL_HARVEST_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.ANIMAL_HARVEST_INTERVAL;
   }
 }

@@ -27,6 +27,10 @@ public class WindwallRitual extends Ritual {
   private float strength;
   private double minimumY, heightPercentage;
 
+  public WindwallRitual(Properties properties) {
+    super(properties);
+  }
+
   private void knockBack(Entity entity, float strength, double x, double z) {
     // TODO: Tag entities as not being knockable
     entity.hasImpulse = true;
@@ -49,12 +53,12 @@ public class WindwallRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(this)) {
+    if (pCache == null && instance.requiresCache()) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
 
-    if (duration % getInterval(this) == 0) {
+    if (duration % instance.getInterval() == 0) {
       List<Entity> entities = pLevel.getEntities(null, pCache.getAABB());
       for (Entity entity : entities) {
         if (!entity.isRemoved()) {
@@ -92,33 +96,5 @@ public class WindwallRitual extends Ritual {
     this.strength = properties.get(ModRituals.WINDWALL_KNOCKBACK_STRENGTH);
     this.minimumY = properties.get(ModRituals.WINDWALL_MINIMUM_Y_VELOCITY);
     this.heightPercentage = properties.get(ModRituals.WINDWALL_HEIGHT_PERCENTAGE);
-  }
-
-  @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.WINDWALL_KNOCKBACK_STRENGTH);
-    properties.add(ModRituals.WINDWALL_MINIMUM_Y_VELOCITY);
-    properties.add(ModRituals.WINDWALL_HEIGHT_PERCENTAGE);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.WINDWALL_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.WINDWALL_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.WINDWALL_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.WINDWALL_INTERVAL;
   }
 }

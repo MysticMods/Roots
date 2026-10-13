@@ -368,7 +368,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     todo:
     {
       if (currentRitual != null) {
-        pTag.putString("current_ritual", RootsRegistries.RITUALS.getKey(currentRitual).toString());
+        //pTag.putString("current_ritual", RootsRegistries.RITUALS.getKey(currentRitual).toString());
       }
       pTag.putInt("lifetime", lifetime);
     }

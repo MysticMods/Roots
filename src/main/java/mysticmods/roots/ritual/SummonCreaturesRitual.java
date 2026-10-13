@@ -32,6 +32,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class SummonCreaturesRitual extends Ritual {
+  public SummonCreaturesRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public void starts(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
     super.starts(instance, pLevel, pPos, pState, blockEntity, random);
@@ -69,7 +73,7 @@ public class SummonCreaturesRitual extends Ritual {
       }
     }
 
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       if (recipe != null && !recipe.value().getEntity().isEmpty()) {
         if (blockEntity.getLastPlayer() != null) {
           UnlockResult failedGrants = recipe.value().checkUnlocks(pLevel, (ServerPlayer) blockEntity.getLastPlayer());
@@ -108,26 +112,5 @@ public class SummonCreaturesRitual extends Ritual {
 
   @Override
   protected void initialize(Holder<Ritual> holder) {
-
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.SUMMON_CREATURES_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return null;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return null;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.SUMMON_CREATURES_INTERVAL;
   }
 }

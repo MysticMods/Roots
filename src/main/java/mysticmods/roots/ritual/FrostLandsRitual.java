@@ -3,8 +3,6 @@ package mysticmods.roots.ritual;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -122,6 +120,10 @@ public class FrostLandsRitual extends Ritual {
 
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE, TWO_AIR_ABOVE_SOLID);
 
+  public FrostLandsRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
@@ -154,7 +156,7 @@ public class FrostLandsRitual extends Ritual {
     }
 
     // TODO: Positions should come from the cached positions
-    if (duration % getInterval(instance) == 0) {
+    if (duration % instance.getInterval() == 0) {
       int i = 0;
       for (BlockPos chosen : pCache.iterate(WATER_OR_LAVA, randomSource)) {
         if (i >= fluidCount) {
@@ -279,37 +281,5 @@ public class FrostLandsRitual extends Ritual {
   @Override
   public boolean providesLight(IRitualInstance iRitualInstance) {
     return false;
-  }
-
-  @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
-    super.buildProperties(properties);
-    properties.add(ModRituals.FROST_LANDS_INTERVAL_HEAL);
-    properties.add(ModRituals.FROST_LANDS_SPAWN_CHANCE);
-    properties.add(ModRituals.FROST_LANDS_FLUID_COUNT);
-    properties.add(ModRituals.FROST_LANDS_COUNT);
-    properties.add(ModRituals.FROST_LANDS_LAYER_CHANCE);
-    properties.add(ModRituals.FROST_LANDS_POWDER_CHANCE);
-    properties.add(ModRituals.FROST_LANDS_ICE_CHANCE);
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.FROST_LANDS_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.FROST_LANDS_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.FROST_LANDS_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.FROST_LANDS_INTERVAL;
   }
 }

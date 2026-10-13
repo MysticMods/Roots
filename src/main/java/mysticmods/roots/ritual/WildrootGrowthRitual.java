@@ -38,14 +38,18 @@ public class WildrootGrowthRitual extends SingleTickRitual {
 
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(MATURE_WILDROOT_CROP);
 
+  public WildrootGrowthRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
   }
 
   @Override
-  protected void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(this)) {
+  protected void singleTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && instance.requiresCache()) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
@@ -75,25 +79,5 @@ public class WildrootGrowthRitual extends SingleTickRitual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
 
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.WILDROOT_GROWTH_DURATION;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return ModRituals.WILDROOT_GROWTH_RADIUS_XZ;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModRituals.WILDROOT_GROWTH_RADIUS_Y;
-  }
-
-  @Override
-  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.WILDROOT_GROWTH_INTERVAL;
   }
 }

@@ -17,6 +17,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EmptyRitual extends Ritual {
+  public EmptyRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     throw new NotImplementedException("The empty ritual cannot be started!");
@@ -25,25 +29,5 @@ public class EmptyRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
 
-  }
-
-  @Override
-  protected @NotNull PropertyHolder<Property.IntegerProperty> getDurationProperty() {
-    return ModRituals.EMPTY_DURATION;
-  }
-
-  @Override
-  protected @NotNull PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
-    return ModRituals.EMPTY_INTERVAL;
-  }
-
-  @Override
-  protected @Nullable PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
-    return null;
-  }
-
-  @Override
-  protected @Nullable PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return null;
   }
 }
