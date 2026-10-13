@@ -9,9 +9,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class SingleTickRitual extends Ritual {
+  public SingleTickRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (duration % getInterval() == 0) {
+  protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (duration % getInterval(instance) == 0) {
       singleTick(pLevel, pPos, pState, pCache, blockEntity, duration, randomSource);
     }
   }

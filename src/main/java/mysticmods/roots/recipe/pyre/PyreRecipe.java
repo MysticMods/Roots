@@ -65,7 +65,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
   @Override
   public void buildCachedOutputs(List<ChanceOutput> list, HolderLookup.Provider provider) {
     if (getResultItem(provider).isEmpty() && ritual != null) {
-      list.add(new ChanceOutput(ritual.getIcon(), 1));
+      list.add(new ChanceOutput(ritual.getRitualIcon(), 1));
     }
     super.buildCachedOutputs(list, provider);
   }

@@ -28,8 +28,8 @@ public class RootsRitualRenderer implements IIngredientRenderer<Ritual> {
 
       Minecraft minecraft = Minecraft.getInstance();
       Font font = getFontRenderer(minecraft, ingredient);
-      guiGraphics.renderFakeItem(ingredient.getIcon(), posX, posY);
-      guiGraphics.renderItemDecorations(font, ingredient.getIcon(), posX, posY);
+      guiGraphics.renderFakeItem(ingredient.getRitualIcon(), posX, posY);
+      guiGraphics.renderItemDecorations(font, ingredient.getRitualIcon(), posX, posY);
       RenderSystem.disableBlend();
     }
   }
@@ -40,7 +40,7 @@ public class RootsRitualRenderer implements IIngredientRenderer<Ritual> {
     Minecraft minecraft = Minecraft.getInstance();
     Player player = minecraft.player;
     Item.TooltipContext tooltipContext = Item.TooltipContext.of(minecraft.level);
-    return ingredient.getIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
+    return ingredient.getRitualIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
   }
 
   @Override
@@ -48,7 +48,7 @@ public class RootsRitualRenderer implements IIngredientRenderer<Ritual> {
     Minecraft minecraft = Minecraft.getInstance();
     Player player = minecraft.player;
     Item.TooltipContext tooltipContext = Item.TooltipContext.of(minecraft.level);
-    List<Component> tooltipLines = ingredient.getIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
+    List<Component> tooltipLines = ingredient.getRitualIcon().getTooltipLines(tooltipContext, player, tooltipFlag);
     tooltip.addAll(tooltipLines);
   }
 

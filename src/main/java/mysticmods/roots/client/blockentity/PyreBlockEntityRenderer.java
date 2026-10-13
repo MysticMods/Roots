@@ -94,10 +94,10 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       } else if (recipe.value().getRitual() == null) {
         inSlot = recipe.value().getResultItem(Minecraft.getInstance().getConnection().registryAccess());
       } else {
-        inSlot = recipe.value().getRitual().getIcon();
+        inSlot = recipe.value().getRitual().getRitualIcon();
       }
     } else {
-      inSlot = pBlockEntity.getCurrentRitual().getIcon();
+      inSlot = pBlockEntity.getCurrentRitual().getRitualIcon();
 
       // TODO: Debug cache update
       if (pBlockEntity.getCurrentRitual().is(RootsTags.Rituals.SUMMON_CREATURES)) {

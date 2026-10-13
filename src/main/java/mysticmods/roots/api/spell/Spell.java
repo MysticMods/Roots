@@ -77,7 +77,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
 
-  private final LayeredProperties layeredProperties;
+  private final LayeredSpellProperties layeredProperties;
 
   public Spell(Properties properties) {
     properties.build(); // TODO: Handle this some other way
@@ -96,7 +96,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     this.maxUseProperty = properties.maxUseProperty;
     this.allProperties = new ArrayList<>(properties.allProperties);
 
-    this.layeredProperties = new LayeredProperties(properties, this);
+    this.layeredProperties = new LayeredSpellProperties(properties, this);
   }
 
   public ResourceKey<Spell> getKey () {
@@ -427,6 +427,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return iSpellInstance.getEnabledModifiers().getTransformingModifiers();
   }
 
+  // TODO: Transformers affecting base cooldown
   public static class Properties {
     private static final Interner<DataComponentMap> COMPONENT_INTERNER = Interners.newStrongInterner();
     @Nullable

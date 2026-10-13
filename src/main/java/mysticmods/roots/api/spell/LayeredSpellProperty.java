@@ -9,7 +9,7 @@ import net.minecraft.network.chat.TextColor;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-public record LayeredProperty(
+public record LayeredSpellProperty(
     SpellType.Cast cast, SpellType.Charge charge,
     int color1, int color2, String descriptionId, String descriptionTooltipId,
     String descriptionTooltipExtendedId,
@@ -17,7 +17,7 @@ public record LayeredProperty(
     TextColor color,
     @Nullable DataComponentType<? extends Cycling<?>> cycleComponent,
     float predicateValue) {
-  public LayeredProperty(LayeredProperties.LayerSet base) {
+  public LayeredSpellProperty(LayeredSpellProperties.LayerSet base) {
     this(base.cast(), base.charge(), base.color1(), base.color2(), base.descriptionId(), base.descriptionTooltipId(), base.descriptionTooltipExtendedId(), base.componentGetter(), base.color(), base.component(), base.predicateValue());
   }
 }

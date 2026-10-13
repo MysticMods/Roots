@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.SingleTickRitual;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
@@ -38,13 +39,13 @@ public class WildrootGrowthRitual extends SingleTickRitual {
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(MATURE_WILDROOT_CROP);
 
   @Override
-  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+  public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
   }
 
   @Override
   protected void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache()) {
+    if (pCache == null && requiresCache(this)) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }

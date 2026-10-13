@@ -14,6 +14,7 @@ import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
 import mysticmods.roots.api.grove.power.distributor.IGrovePowerDistributor;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.block.GroveStoneBlock;
@@ -42,7 +43,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -276,7 +276,7 @@ public class HudOverlay {
       y += 10;
       x += 30;
 
-      Ritual activeRitual = pyre.getCurrentRitual();
+      IRitualInstance activeRitual = pyre.getCurrentRitual();
       PyreRecipe cachedRecipe = pyre.getCachedRecipe() == null ? null : pyre.getCachedRecipe().value();
       PyreRecipe lastRecipe = pyre.getLastRecipe() == null ? null : pyre.getLastRecipe().value();
       Ritual lastRitual = lastRecipe != null ? lastRecipe.getRitual() : null;
@@ -289,12 +289,12 @@ public class HudOverlay {
       List<ChanceOutput> outputs = Collections.emptyList();
 
       if (cachedRecipe != null && activeRitual == null) {
-        output = nextRitual != null ? nextRitual.getIcon() : cachedRecipe.getResultItem(mc.level.registryAccess());
+        output = nextRitual != null ? nextRitual.getRitualIcon() : cachedRecipe.getResultItem(mc.level.registryAccess());
         comp1 = Component.translatable("roots.hud.pyre.begin1");
         comp2 = Component.translatable(nextRitual != null ? "roots.hud.pyre.begin2" : "roots.hud.pyre.begin3", nextRitual != null ? nextRitual.getName() : output.getHoverName());
         outputs = cachedRecipe.getChanceOutputs();
       } else if (cachedRecipe != null && cachedRecipe == lastRecipe) {
-        output = nextRitual != null ? nextRitual.getIcon() : cachedRecipe.getResultItem(mc.level.registryAccess());
+        output = nextRitual != null ? nextRitual.getRitualIcon() : cachedRecipe.getResultItem(mc.level.registryAccess());
         outputs = cachedRecipe.getChanceOutputs();
         if (active) {
           comp1 = nextRitual != null ? nextRitual.getName() : output.getHoverName();
@@ -304,7 +304,7 @@ public class HudOverlay {
           comp2 = Component.translatable(nextRitual != null ? "roots.hud.pyre.begin2" : "roots.hud.pyre.begin3", nextRitual != null ? nextRitual.getName() : output.getHoverName());
         }
       } else if (lastRecipe != null && empty) {
-        output = lastRitual != null ? lastRitual.getIcon() : lastRecipe.getResultItem(mc.level.registryAccess());
+        output = lastRitual != null ? lastRitual.getRitualIcon() : lastRecipe.getResultItem(mc.level.registryAccess());
         outputs = lastRecipe.getChanceOutputs();
         comp1 = Component.translatable("roots.hud.pyre.restart1");
         comp2 = Component.translatable("roots.hud.pyre.restart2");

@@ -2,6 +2,7 @@ package mysticmods.roots.ritual;
 
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -19,9 +20,9 @@ import java.util.List;
 
 public class GatheringRitual extends Ritual {
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (duration % getInterval() == 0) {
-      List<Vec3> positions = MagnetismUtil.store(pLevel, pPos, blockEntity, getRadiusXZ(), getRadiusY(), getRadiusXZ());
+  protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (duration % getInterval(instance) == 0) {
+      List<Vec3> positions = MagnetismUtil.store(pLevel, pPos, blockEntity, getRadiusXZ(instance), getRadiusY(instance), getRadiusXZ(instance));
       // TODO: Visuals for the yoink
     }
   }

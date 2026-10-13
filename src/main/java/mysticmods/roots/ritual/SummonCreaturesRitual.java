@@ -5,6 +5,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.recipe.ComplexEntityType;
 import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModAttachments;
@@ -32,19 +33,19 @@ import java.util.List;
 
 public class SummonCreaturesRitual extends Ritual {
   @Override
-  public void starts(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
-    super.starts(pLevel, pPos, pState, blockEntity, random);
+  public void starts(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.starts(instance, pLevel, pPos, pState, blockEntity, random);
     blockEntity.clearPedestalCrafting();
   }
 
   @Override
-  public void ends(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
-    super.ends(pLevel, pPos, pState, blockEntity, random);
+  public void ends(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.ends(instance, pLevel, pPos, pState, blockEntity, random);
     blockEntity.clearPedestalCrafting();
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(IRitualInstance instance ,Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     PyrePedestalCrafting crafting = blockEntity.getPedestalCrafting();
     PyrePedestalRecipe.PyrePedestalRecipeHolder cachedRecipe = blockEntity.getData(ModAttachments.CACHED_PEDESTAL_RECIPE);
     RecipeHolder<SummonCreaturesRecipe> recipe = null;
@@ -68,7 +69,7 @@ public class SummonCreaturesRitual extends Ritual {
       }
     }
 
-    if (duration % getInterval() == 0) {
+    if (duration % getInterval(instance) == 0) {
       if (recipe != null && !recipe.value().getEntity().isEmpty()) {
         if (blockEntity.getLastPlayer() != null) {
           UnlockResult failedGrants = recipe.value().checkUnlocks(pLevel, (ServerPlayer) blockEntity.getLastPlayer());

@@ -6,6 +6,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModAttachments;
@@ -35,18 +36,18 @@ public class HeavyStormsRitual extends Ritual {
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(AIR_ABOVE);
 
   @Override
-  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+  public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache()) {
+  protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache(instance)) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
 
-    if (duration % getInterval() == 0) {
+    if (duration % getInterval(instance) == 0) {
       // TODO: Weather in modded dimensions
       ServerLevel serverLevel = (ServerLevel) pLevel;
       if (causesThunder || causesRain) {
@@ -54,7 +55,7 @@ public class HeavyStormsRitual extends Ritual {
         if (info.shouldStartWeather()) {
           info.startHeavyStorms();
           info.stopProtection();
-          serverLevel.setWeatherParameters(0, getDuration(), causesRain, causesThunder);
+          serverLevel.setWeatherParameters(0, getDuration(instance), causesRain, causesThunder);
         }
       }
 
@@ -73,15 +74,15 @@ public class HeavyStormsRitual extends Ritual {
   }
 
   @Override
-  public void stops(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
-    super.stops(pLevel, pPos, pState, blockEntity, random);
+  public void stops(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.stops(instance, pLevel, pPos, pState, blockEntity, random);
     RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
     info.stopHeavyStorms();
   }
 
   @Override
-  public void removed(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
-    super.removed(pLevel, pPos, pState, blockEntity, random);
+  public void removed(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.removed(instance ,pLevel, pPos, pState, blockEntity, random);
     RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
     info.stopHeavyStorms();
   }

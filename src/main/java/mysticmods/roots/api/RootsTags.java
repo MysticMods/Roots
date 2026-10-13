@@ -591,6 +591,7 @@ public class RootsTags {
   }
 
   public static class Rituals extends RootsTags {
+    public static final TagKey<Ritual> INVALID = modTag("invalid");
     public static final TagKey<Ritual> NYI = modTag("nyi");
     public static final TagKey<Ritual> WIP = modTag("wip");
 

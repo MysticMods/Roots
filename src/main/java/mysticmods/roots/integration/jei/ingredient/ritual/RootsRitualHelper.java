@@ -76,6 +76,6 @@ public class RootsRitualHelper implements IIngredientHelper<Ritual> {
 
   @Override
   public ItemStack getCheatItemStack(Ritual ingredient) {
-    return ingredient.getIcon().copy();
+    return ingredient.getRitualIcon().copy();
   }
 }

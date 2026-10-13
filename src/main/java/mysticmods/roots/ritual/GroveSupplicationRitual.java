@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.SingleTickRitual;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
@@ -30,7 +31,7 @@ public class GroveSupplicationRitual extends SingleTickRitual {
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(GROVE_STONE_PREDICATE);
 
   @Override
-  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+  public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
   }
 

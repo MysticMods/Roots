@@ -6,6 +6,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -47,8 +48,8 @@ public class AugmentationRitual extends Ritual {
   }
 
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache()) {
+  public void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache(instance)) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
@@ -61,10 +62,10 @@ public class AugmentationRitual extends Ritual {
       return;
     }
 
-    if (duration % getInterval() == 0) {
+    if (duration % getInterval(instance) == 0) {
       assert blockEntity.getLevel() != null;
       List<LivingEntity> entities = blockEntity.getLevel()
-          .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
+          .getEntitiesOfClass(LivingEntity.class, getAABB(instance).move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
               .and((o) -> o.getType().is(RootsTags.Entities.AUGMENTABLE_ALL) && !o.getType()
                   .is(RootsTags.Entities.AUGMENTABLE_EXCLUDE)));
       if (entities.isEmpty()) {

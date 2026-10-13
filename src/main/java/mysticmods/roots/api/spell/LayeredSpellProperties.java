@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class LayeredProperties {
+public class LayeredSpellProperties {
   private static final Hash.Strategy<SpellModifierSet> SPELL_MODIFIER_STRATEGY = new Hash.Strategy<>() {
     @Override
     public int hashCode(SpellModifierSet o) {
@@ -36,9 +36,9 @@ public class LayeredProperties {
 
   private final LayerSet defaultLayer;
   private final Map<ResourceKey<SpellModifier>, LayerSet> layers = new HashMap<>();
-  private final Map<SpellModifierSet, LayeredProperty> layerCache = new Object2ObjectOpenCustomHashMap<>(SPELL_MODIFIER_STRATEGY);
+  private final Map<SpellModifierSet, LayeredSpellProperty> layerCache = new Object2ObjectOpenCustomHashMap<>(SPELL_MODIFIER_STRATEGY);
 
-  public LayeredProperties(Spell.Properties properties, Spell spell) {
+  public LayeredSpellProperties(Spell.Properties properties, Spell spell) {
     this.defaultLayer = new LayerSet(properties.castType, properties.chargeType, true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), Suppliers.memoize(spell::getOrCreateDescriptionComponents), properties.textColor, properties.cycleComponent != null, properties.cycleComponent, false, -1);
     for (Map.Entry<ResourceKey<SpellModifier>, Spell.Transformer> entry : properties.transformers.entrySet()) {
       if (this.layers.containsKey(entry.getKey())) {
@@ -64,11 +64,11 @@ public class LayeredProperties {
     }
   }
 
-  public LayeredProperty get(ISpellInstance instance) {
+  public LayeredSpellProperty get(ISpellInstance instance) {
     return get(instance.getEnabledModifiers());
   }
 
-  public LayeredProperty get(SpellModifierSet modifiers) {
+  public LayeredSpellProperty get(SpellModifierSet modifiers) {
     return layerCache.computeIfAbsent(modifiers, mods -> {
       LayerSet base = defaultLayer;
       for (ResourceKey<SpellModifier> transformer : mods.getTransformingKeys()) {
@@ -78,7 +78,7 @@ public class LayeredProperties {
         }
         base = base.compose(nextLayer);
       }
-      return new LayeredProperty(base);
+      return new LayeredSpellProperty(base);
     });
   }
 

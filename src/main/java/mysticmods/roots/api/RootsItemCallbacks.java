@@ -3,6 +3,7 @@ package mysticmods.roots.api;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -78,6 +79,18 @@ public class RootsItemCallbacks {
       fill();
     }
     return SPELL_MODIFIER_TO_ITEM_MAP.getOrDefault(spellModifier, Items.AIR);
+  }
+
+  public static ItemStack getItemStack (IRitualInstance ritual) {
+    if (RITUAL_TO_ITEMSTACK_MAP.isEmpty()) {
+      fill();
+    }
+
+    if (ritual.is(RootsTags.Rituals.INVALID)) {
+      return ItemStack.EMPTY;
+    }
+
+    return RITUAL_TO_ITEMSTACK_MAP.getOrDefault(ritual.asRitual(), ItemStack.EMPTY);
   }
 
   public static ItemStack getItemStack(ISpellInstance spell) {

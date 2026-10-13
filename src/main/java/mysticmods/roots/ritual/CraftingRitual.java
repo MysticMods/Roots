@@ -24,6 +24,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class CraftingRitual extends SingleTickRitual {
+  public CraftingRitual(Properties properties) {
+    super(properties);
+  }
+
   @Override
   public void singleTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
     List<ItemStack> output = blockEntity.popStoredItems();

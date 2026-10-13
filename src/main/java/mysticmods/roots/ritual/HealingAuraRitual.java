@@ -3,6 +3,7 @@ package mysticmods.roots.ritual;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -24,8 +25,8 @@ public class HealingAuraRitual extends Ritual {
   private float playerHeal, entityHeal;
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (duration % getInterval() == 0) {
+  protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (duration % getInterval(instance) == 0) {
       List<Player> players = pLevel.getEntitiesOfClass(Player.class, pCache.getAABB());
       for (Player player : players) {
         float amount = Math.min(player.getMaxHealth() - player.getHealth(), playerHeal);
@@ -82,7 +83,7 @@ public class HealingAuraRitual extends Ritual {
   }
 
   @Override
-  public boolean requiresCache() {
+  public boolean requiresCache(IRitualInstance iRitualInstance) {
     return true;
   }
 }

@@ -1,9 +1,6 @@
 package mysticmods.roots.api.modifier;
 
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.IGroupDescribed;
@@ -20,7 +17,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribed, IGroupDescribed, TooltipComponent, IModifier<V, T>, IDataMapInitialize<T> {
   @Nullable
@@ -140,7 +136,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     }
 
     @SuppressWarnings("unchecked")
-    protected final S self () {
+    protected final S self() {
       return (S) this;
     }
 

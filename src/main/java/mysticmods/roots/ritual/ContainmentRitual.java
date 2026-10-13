@@ -3,6 +3,7 @@ package mysticmods.roots.ritual;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModAttachments;
@@ -26,13 +27,13 @@ import java.util.function.Predicate;
 
 public class ContainmentRitual extends Ritual {
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     // TODO: Look at mob::isWithinRestriction
     if (pCache == null) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
-    AABB radius = AABB.of(pCache.getBoundingBox().inflatedBy(getRadiusXZ()));
+    AABB radius = AABB.of(pCache.getBoundingBox().inflatedBy(getRadiusXZ(this)));
     // TODO: Handle teams?
     var lastPlayer = blockEntity.getLastPlayer();
     Predicate<Entity> test = lastPlayer != null ? EntityUtils.isHostileTo(lastPlayer) : EntityUtils.isHostile();

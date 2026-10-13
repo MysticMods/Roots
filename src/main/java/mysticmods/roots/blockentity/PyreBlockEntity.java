@@ -20,6 +20,7 @@ import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.ritual.RitualInstance;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
@@ -94,7 +95,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private final List<ItemStack> storedItems = new ArrayList<>();
   private RecipeHolder<PyreRecipe> lastRecipe = null;
   private RecipeHolder<PyreRecipe> cachedRecipe = null;
-  private Ritual currentRitual = null;
+  private IRitualInstance currentRitual = null;
   private int lifetime = -1;
   private Player lastPlayer;
   private UUID lastUuid;
@@ -112,7 +113,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   private void setCurrentRitual(Ritual ritual) {
-    this.currentRitual = ritual;
+    this.currentRitual = new RitualInstance(ritual);
     this.refreshRitualCache();
   }
 
@@ -256,7 +257,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       this.refreshRitualCache();
       this.currentRitual.starts(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
       if (ModActions.START_RITUAL.get().shouldTest()) {
-        StartRitualAction.Context context = new StartRitualAction.Context((ServerLevel) getLevel(), (ServerPlayer) player, IRitualInstance.of(currentRitual), this);
+        StartRitualAction.Context context = new StartRitualAction.Context((ServerLevel) getLevel(), (ServerPlayer) player, currentRitual, this);
         ModActions.START_RITUAL.get().accept(context);
       }
     } else {
@@ -363,8 +364,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (lastRecipe != null) {
       pTag.putString("last_recipe", lastRecipe.id().toString());
     }
-    if (currentRitual != null) {
-      pTag.putString("current_ritual", RootsRegistries.RITUALS.getKey(currentRitual).toString());
+    // TODO:
+    todo:
+    {
+      if (currentRitual != null) {
+        pTag.putString("current_ritual", RootsRegistries.RITUALS.getKey(currentRitual).toString());
+      }
+      pTag.putInt("lifetime", lifetime);
     }
 
     ListTag storedItems = new ListTag();
@@ -376,7 +382,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (!storedItems.isEmpty()) {
       pTag.put("stored_items", storedItems);
     }
-    pTag.putInt("lifetime", lifetime);
+
     pTag.put("inventory", inventory.serializeNBT(provider));
     if (lastPlayer != null) {
       pTag.putUUID("last_player", lastPlayer.getUUID());
@@ -403,14 +409,17 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
     }
-    if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
-      ResourceLocation ritualId = ResourceLocation.parse(pTag.getString("current_ritual"));
-      setCurrentRitual(RootsRegistries.RITUALS.get(ritualId));
-    } else {
-      setCurrentRitual(null);
-    }
-    if (pTag.contains("lifetime", Tag.TAG_INT)) {
-      lifetime = pTag.getInt("lifetime");
+    todo:
+    {
+      if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
+        ResourceLocation ritualId = ResourceLocation.parse(pTag.getString("current_ritual"));
+        setCurrentRitual(RootsRegistries.RITUALS.get(ritualId));
+      } else {
+        setCurrentRitual(null);
+      }
+      if (pTag.contains("lifetime", Tag.TAG_INT)) {
+        lifetime = pTag.getInt("lifetime");
+      }
     }
     storedItems.clear();
     if (pTag.contains("stored_items", Tag.TAG_LIST)) {
@@ -455,13 +464,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Nullable
-  public Ritual getCurrentRitual() {
+  public IRitualInstance getCurrentRitual() {
     return currentRitual;
   }
 
   @Override
   public int getRadiusX() {
-    Ritual ritual = getCurrentRitual();
+    IRitualInstance ritual = getCurrentRitual();
     if (ritual == null) {
       return super.getRadiusX();
     }
@@ -471,7 +480,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public int getRadiusY() {
-    Ritual ritual = getCurrentRitual();
+    IRitualInstance ritual = getCurrentRitual();
     if (ritual == null) {
       return super.getRadiusY();
     }
@@ -481,7 +490,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public int getRadiusZ() {
-    Ritual ritual = getCurrentRitual();
+    IRitualInstance ritual = getCurrentRitual();
     if (ritual == null) {
       return super.getRadiusZ();
     }

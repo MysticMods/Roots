@@ -5,6 +5,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModAttachments;
@@ -30,7 +31,7 @@ public class ProtectionRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     ServerLevel server = (ServerLevel) pLevel;
 
     long dayTime = server.getDayTime() % dayLength;
@@ -46,7 +47,7 @@ public class ProtectionRitual extends Ritual {
     }
 
     // TODO: Modded dimensions
-    if (duration % getInterval() == 0 && clearsWeather) {
+    if (duration % getInterval(instance) == 0 && clearsWeather) {
       // Clear the rains!
       RitualInformation info = server.getData(ModAttachments.RITUAL_INFORMATION);
       if (info.shouldStopWeather()) {
@@ -58,23 +59,23 @@ public class ProtectionRitual extends Ritual {
   }
 
   @Override
-  public void stops(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
-    super.stops(pLevel, pPos, pState, blockEntity, random);
+  public void stops(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.stops(instance, pLevel, pPos, pState, blockEntity, random);
     RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
     info.stopProtection();
   }
 
   @Override
-  public void ends(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
-    super.ends(pLevel, pPos, pState, blockEntity, random);
+  public void ends(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.ends(instance, pLevel, pPos, pState, blockEntity, random);
 
     ServerLevel server = (ServerLevel) pLevel;
     server.setDayTimePerTick(-1f);
   }
 
   @Override
-  public void removed(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
-    super.removed(pLevel, pPos, pState, blockEntity, random);
+  public void removed(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.removed(instance, pLevel, pPos, pState, blockEntity, random);
     ServerLevel server = (ServerLevel) pLevel;
     server.setDayTimePerTick(-1f);
     RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);

@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -122,13 +123,13 @@ public class FrostLandsRitual extends Ritual {
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE, TWO_AIR_ABOVE_SOLID);
 
   @Override
-  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+  public List<BiPredicate<Level, BlockPos>> getPredicates(IRitualInstance iRitualInstance) {
     return PREDICATES;
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache()) {
+  protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (pCache == null && requiresCache(instance)) {
       RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
       return;
     }
@@ -137,7 +138,7 @@ public class FrostLandsRitual extends Ritual {
 
     if (duration % healInterval == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
-          .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
+          .getEntitiesOfClass(LivingEntity.class, getAABB(instance).move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
               .and(o -> o.getType().is(RootsTags.Entities.HEALABLE_ICE_CREATURES)));
       if (!entities.isEmpty()) {
         for (LivingEntity entity : entities) {
@@ -153,7 +154,7 @@ public class FrostLandsRitual extends Ritual {
     }
 
     // TODO: Positions should come from the cached positions
-    if (duration % getInterval() == 0) {
+    if (duration % getInterval(instance) == 0) {
       int i = 0;
       for (BlockPos chosen : pCache.iterate(WATER_OR_LAVA, randomSource)) {
         if (i >= fluidCount) {
@@ -276,7 +277,7 @@ public class FrostLandsRitual extends Ritual {
   }
 
   @Override
-  public boolean providesLight() {
+  public boolean providesLight(IRitualInstance iRitualInstance) {
     return false;
   }
 

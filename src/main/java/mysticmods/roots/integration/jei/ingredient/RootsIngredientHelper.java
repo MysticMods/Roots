@@ -63,7 +63,7 @@ public class RootsIngredientHelper {
       case EXACT_RITUAL -> {
         Ritual ritual = RootsRegistries.RITUALS.get(location);
         if (ritual != null) {
-          invis.addItemStack(ritual.getIcon());
+          invis.addItemStack(ritual.getRitualIcon());
           builder.addIngredient(RootsJEIPlugin.RITUAL_TYPE, ritual)
               .setCustomRenderer(RootsJEIPlugin.RITUAL_TYPE, RootsJEIPlugin.RITUAL_RENDERER);
         }

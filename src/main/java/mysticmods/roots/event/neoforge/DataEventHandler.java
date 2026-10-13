@@ -92,6 +92,7 @@ public class DataEventHandler {
       return;
     }
 
+    // TODO:
     if (event.getRegistry().key().equals(Registries.ITEM)) {
       DataMaps.DIMENSION_LOOKUP.clear();
     }
