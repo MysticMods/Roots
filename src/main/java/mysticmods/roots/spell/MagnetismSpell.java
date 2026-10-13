@@ -2,12 +2,9 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.CastResult;
-import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastMagnetismFXPacket;
 import mysticmods.roots.util.MagnetismUtil;
 import net.minecraft.core.Holder;

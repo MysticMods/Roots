@@ -1,8 +1,6 @@
 package mysticmods.roots.ritual;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;

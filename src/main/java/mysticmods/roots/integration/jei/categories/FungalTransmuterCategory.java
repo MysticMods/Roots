@@ -13,7 +13,6 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.widget.GrovePowerWidget;
 import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;

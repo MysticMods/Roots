@@ -2,16 +2,16 @@ package mysticmods.roots.spell;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import mysticmods.roots.action.CropGrowthAction;
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.ICosted;
-import mysticmods.roots.api.Cycling;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModModifiers;

@@ -1,5 +1,6 @@
 package mysticmods.roots.gen.lang;
 
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
@@ -7,7 +8,6 @@ import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.BoundKeys;
 import mysticmods.roots.config.ConfigManager;
@@ -29,7 +29,10 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
 

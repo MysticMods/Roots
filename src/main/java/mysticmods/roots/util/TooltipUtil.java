@@ -2,9 +2,9 @@ package mysticmods.roots.util;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Cost;

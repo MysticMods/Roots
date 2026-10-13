@@ -42,7 +42,6 @@ import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import javax.swing.*;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;

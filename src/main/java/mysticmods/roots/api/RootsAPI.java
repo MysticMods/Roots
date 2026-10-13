@@ -2,11 +2,7 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.Roots;
 import mysticmods.roots.config.ConfigManager;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;

@@ -3,7 +3,10 @@ package mysticmods.roots.client.particle.world.spell;
 import mysticmods.roots.client.particle.world.BaseRootsParticle;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
 
 public class GrowthParticle extends BaseRootsParticle {
   protected float oR1, oG1, oB1;

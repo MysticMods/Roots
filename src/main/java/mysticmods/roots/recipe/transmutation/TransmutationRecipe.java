@@ -3,8 +3,6 @@ package mysticmods.roots.recipe.transmutation;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;

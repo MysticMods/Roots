@@ -6,11 +6,9 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModModifiers;
 import mysticmods.roots.init.ModSerializers;
@@ -28,8 +26,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
-
-import java.util.List;
 
 public class SkySoarerSpell extends Spell {
   private float amplifier, amplifier_increase, duration_incrase;

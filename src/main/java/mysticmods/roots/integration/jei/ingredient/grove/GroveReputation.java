@@ -2,11 +2,8 @@ package mysticmods.roots.integration.jei.ingredient.grove;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.api.grove.IGroveValue;
-import mysticmods.roots.api.registry.RootsRegistries;
-
-import java.util.List;
+import mysticmods.roots.api.grove.SimpleGroveValue;
 
 public record GroveReputation(SimpleGroveValue number) implements IGroveValue {
   public static Codec<GroveReputation> CODEC = IGroveValue.mapCodec(SimpleGroveValue::new).codec().xmap(GroveReputation::new, GroveReputation::number);

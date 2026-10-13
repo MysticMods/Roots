@@ -6,8 +6,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 
-import java.util.function.Function;
-
 public abstract class Tracker<T, V> {
   private final Object2IntMap<T> countMap = new Object2IntOpenHashMap<>();
   private final int maxCount;

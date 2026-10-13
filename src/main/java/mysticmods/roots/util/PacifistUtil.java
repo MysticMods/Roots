@@ -1,7 +1,6 @@
 package mysticmods.roots.util;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.config.ConfigManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

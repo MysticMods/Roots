@@ -2,14 +2,11 @@ package mysticmods.roots.ritual;
 
 import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.SingleTickRitual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModActions;
-import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;

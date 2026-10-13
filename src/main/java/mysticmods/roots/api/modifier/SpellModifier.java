@@ -11,7 +11,6 @@ import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.IExtendedDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -22,8 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Supplier;
 
 public class SpellModifier extends Modifier<Spell, SpellModifier> implements IExtendedDescribed, ICostedChild {
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);

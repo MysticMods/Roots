@@ -4,11 +4,9 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.HealFXPacket;
 import mysticmods.roots.network.client.fx.screen.DesaturateScreenFXPacket;
@@ -21,8 +19,6 @@ import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
-
-import java.util.List;
 
 public class DesaturateSpell extends Spell {
   private float multiplier;

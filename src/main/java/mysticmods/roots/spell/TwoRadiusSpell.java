@@ -1,20 +1,14 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
-
-import java.util.List;
 
 public abstract class TwoRadiusSpell extends Spell {
   protected int radiusZX, radiusY;

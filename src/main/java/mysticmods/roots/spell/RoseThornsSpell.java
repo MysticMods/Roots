@@ -3,11 +3,9 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.CastResult;
 import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
@@ -26,8 +24,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
-
-import java.util.List;
 
 public class RoseThornsSpell extends Spell {
   private static final AABB entityBoundsCheck = new AABB(-1.8, -1.8, -1.8, 1.8, 1.8, 1.8);

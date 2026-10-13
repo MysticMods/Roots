@@ -1,7 +1,6 @@
 package mysticmods.roots.api.modifier;
 
 import com.google.common.collect.ImmutableSet;
-import com.sun.jna.platform.unix.Resource;
 import it.unimi.dsi.fastutil.objects.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.util.SetUtils;

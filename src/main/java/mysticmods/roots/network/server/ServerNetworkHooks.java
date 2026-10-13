@@ -1,5 +1,6 @@
 package mysticmods.roots.network.server;
 
+import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.GrantStorage;
@@ -8,7 +9,6 @@ import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.config.ConfigManager;

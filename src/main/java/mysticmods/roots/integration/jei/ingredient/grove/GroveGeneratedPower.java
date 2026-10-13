@@ -2,8 +2,8 @@ package mysticmods.roots.integration.jei.ingredient.grove;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.SimpleGroveValue;
 import mysticmods.roots.api.grove.IGroveValue;
+import mysticmods.roots.api.grove.SimpleGroveValue;
 
 public record GroveGeneratedPower(SimpleGroveValue number) implements IGroveValue {
   public static Codec<GroveGeneratedPower> CODEC = IGroveValue.mapCodec(SimpleGroveValue::new).xmap(GroveGeneratedPower::new, GroveGeneratedPower::number).codec();

@@ -11,7 +11,6 @@ import mysticmods.roots.api.action.UniqueReputation;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.ReputationProgress;
-import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;

@@ -1,8 +1,8 @@
 package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.RitualLike;
-import mysticmods.roots.api.modifier.*;
 import mysticmods.roots.api.modifier.RitualModifier;
+import mysticmods.roots.api.modifier.RitualModifierSet;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;

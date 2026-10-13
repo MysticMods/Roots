@@ -45,7 +45,9 @@ import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance> {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();

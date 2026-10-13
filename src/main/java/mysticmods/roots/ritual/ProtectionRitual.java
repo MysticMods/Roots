@@ -3,8 +3,6 @@ package mysticmods.roots.ritual;
 import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -19,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class ProtectionRitual extends Ritual {
   private boolean clearsWeather, shortensNight, lengthensDay;

@@ -1,11 +1,8 @@
 package mysticmods.roots.ritual;
 
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
-import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

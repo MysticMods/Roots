@@ -1,12 +1,10 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.reference.RitualProperties;
 import mysticmods.roots.api.reference.Rituals;
-import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.ritual.*;

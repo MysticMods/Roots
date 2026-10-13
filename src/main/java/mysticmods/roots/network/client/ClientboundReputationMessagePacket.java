@@ -8,7 +8,6 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.client.gui.layer.ReputationOverlay;
 import mysticmods.roots.config.ConfigManager;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

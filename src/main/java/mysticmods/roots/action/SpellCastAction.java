@@ -1,7 +1,7 @@
 package mysticmods.roots.action;
 
-import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputation;

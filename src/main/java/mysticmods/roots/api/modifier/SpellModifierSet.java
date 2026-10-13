@@ -1,8 +1,6 @@
 package mysticmods.roots.api.modifier;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Interner;
-import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
