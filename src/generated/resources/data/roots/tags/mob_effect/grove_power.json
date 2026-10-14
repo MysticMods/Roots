@@ -1,0 +1,7 @@
+{
+  "values": [
+    "roots:grove_power_eligible",
+    "roots:grove_power_eligible_powered",
+    "roots:grove_power_ineligible"
+  ]
+}
