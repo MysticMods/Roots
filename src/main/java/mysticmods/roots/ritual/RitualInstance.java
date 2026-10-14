@@ -40,6 +40,12 @@ public class RitualInstance implements IRitualInstance.Identified {
     this.lifetime = this.getDuration();
   }
 
+  public RitualInstance (Ritual ritual, int lifetime) {
+    this.ritual = ritual;
+    this.lifetime = lifetime;
+    this.ritualId = UUID.randomUUID();
+  }
+
   protected RitualInstance (Ritual ritual, UUID ritualId, int lifetime, RitualModifierSet modifiers, DataComponentPatch dataPatch) {
     this.ritual = ritual;
     this.ritualId = ritualId;

@@ -23,13 +23,11 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.ritual.RitualInstance;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.PositionCache;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
 import net.minecraft.network.Connection;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -102,7 +100,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   private RecipeHolder<PyreRecipe> lastRecipe = null;
   private RecipeHolder<PyreRecipe> cachedRecipe = null;
-  private IRitualInstance currentRitual = null;
+  private RitualInstance ritualInstance = null;
 
   private Player lastPlayer;
   private UUID lastPlayerUuid;
@@ -122,8 +120,18 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     super(ModBlockEntities.PYRE.get(), pWorldPosition, pBlockState);
   }
 
+  private void clearCurrentRitual () {
+    this.ritualInstance = null;
+    this.refreshRitualCache();
+  }
+
   private void setCurrentRitual(Ritual ritual) {
-    this.currentRitual = new RitualInstance(ritual);
+    this.ritualInstance = new RitualInstance(ritual);
+    this.refreshRitualCache();
+  }
+
+  private void setCurrentRitual(RitualInstance instance) {
+    this.ritualInstance = instance;
     this.refreshRitualCache();
   }
 
@@ -141,7 +149,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return InteractionResult.CONSUME;
     }
 
-    if (!currentRitual.is(ModRituals.CRAFTING) && (currentRitual.getLifetime() > 0 || getBlockState().getValue(PyreBlock.ACTIVE))) {
+    if (!ritualInstance.is(ModRituals.CRAFTING) && (ritualInstance.getLifetime() > 0 || getBlockState().getValue(PyreBlock.ACTIVE))) {
       Optional<IFluidHandlerItem> optFluid = FluidUtil.getFluidHandler(inHand);
       if (optFluid.isPresent()) {
         IFluidHandlerItem fluidHandler = optFluid.get();
@@ -237,7 +245,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       lastPlayer = player; // This is where the grove crafter does it.
       lastPlayerUuid = null; // TODO: Is it handled elsewhere?
       storedItems.clear(); // TODO: Is this correct?
-      if (currentRitual.is(ModRituals.CRAFTING)) {
+      if (ritualInstance.is(ModRituals.CRAFTING)) {
         storedItems.addAll(cachedRecipe.value()
             .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
       }
@@ -262,12 +270,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public void startRitual(Player player) {
     this.lastPlayer = player;
     this.lastPlayerUuid = null;
-    if (currentRitual != null) {
-      currentRitual.resetLifetime();
+    if (ritualInstance != null) {
+      ritualInstance.resetLifetime();
       this.refreshRitualCache();
-      this.currentRitual.starts(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+      this.ritualInstance.starts(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
       if (ModActions.START_RITUAL.get().shouldTest()) {
-        StartRitualAction.Context context = new StartRitualAction.Context((ServerLevel) getLevel(), (ServerPlayer) player, currentRitual, this);
+        StartRitualAction.Context context = new StartRitualAction.Context((ServerLevel) getLevel(), (ServerPlayer) player, ritualInstance, this);
         ModActions.START_RITUAL.get().accept(context);
       }
     } else {
@@ -276,12 +284,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   private void refreshRitualCache() {
-    if (this.currentRitual == null) {
+    if (this.ritualInstance == null) {
       this.cache = null;
       return;
     }
 
-    if (!this.currentRitual.requiresCache()) {
+    if (!this.ritualInstance.requiresCache()) {
       this.cache = null;
       return;
     }
@@ -291,7 +299,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (cache == null || !this.cache.getPosition().equals(p)) {
       // TODO:
       //noinspection DataFlowIssue
-      BoundingBox bb = currentRitual.getBoundingBox().moved(p.getX(), p.getY(), p.getZ());
+      BoundingBox bb = ritualInstance.getBoundingBox().moved(p.getX(), p.getY(), p.getZ());
       this.cache = new PositionCache(p, bb, new ArrayList<>(BlockPos.betweenClosedStream(bb)
           .map(BlockPos::immutable).toList()));
     }
@@ -377,14 +385,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (lastRecipe != null) {
       pTag.putString("last_recipe", lastRecipe.id().toString());
     }
-    // TODO:
-    todo:
-    {
-      //noinspection StatementWithEmptyBody
-      if (currentRitual != null) {
-        //pTag.putString("current_ritual", RootsRegistries.RITUALS.getKey(currentRitual).toString());
-      }
-      //pTag.putInt("lifetime", lifetime);
+
+    if (ritualInstance != null) {
+      pTag.put("ritual_instance", RitualInstance.CODEC.encodeStart(this.getLevel().registryAccess()
+          .createSerializationContext(NbtOps.INSTANCE), ritualInstance).getOrThrow()
+      );
     }
 
     ListTag storedItems = new ListTag();
@@ -423,19 +428,21 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
     }
-    todo:
-    {
-      if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
-        ResourceLocation ritualId = ResourceLocation.parse(pTag.getString("current_ritual"));
-        setCurrentRitual(RootsRegistries.RITUALS.get(ritualId));
-      } else {
-        setCurrentRitual(null);
-      }
-      //noinspection StatementWithEmptyBody
+    if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
+      ResourceLocation ritualId = ResourceLocation.parse(pTag.getString("current_ritual"));
       if (pTag.contains("lifetime", Tag.TAG_INT)) {
-/*        lifetime = pTag.getInt("lifetime");*/
+        setCurrentRitual(new RitualInstance(RootsRegistries.RITUALS.get(ritualId), pTag.getInt("lifetime")));
+      } else {
+        setCurrentRitual(RootsRegistries.RITUALS.get(ritualId));
       }
+    } else if (pTag.contains("ritual_instance")) {
+      RitualInstance.CODEC
+          .parse(this.getLevel().registryAccess()
+              .createSerializationContext(NbtOps.INSTANCE), pTag.get("ritual_instance"))
+          .resultOrPartial(Util.prefix("Failed to load ritual instance: ", RootsAPI.LOG::warn))
+          .ifPresent(this::setCurrentRitual);
     }
+
     storedItems.clear();
     if (pTag.contains("stored_items", Tag.TAG_LIST)) {
       ListTag incomingStoredItems = pTag.getList("stored_items", Tag.TAG_COMPOUND);
@@ -500,7 +507,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Nullable
   public IRitualInstance getCurrentRitual() {
-    return currentRitual;
+    return ritualInstance;
   }
 
   @Override
@@ -553,13 +560,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @SuppressWarnings("DataFlowIssue")
   public void stopRitual(boolean doLight) {
     resetBounds();
-    if (currentRitual != null) {
+    if (ritualInstance != null) {
       if (!doLight) {
-        currentRitual.stops(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+        ritualInstance.stops(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
       }
-      currentRitual.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+      ritualInstance.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
     }
-    setCurrentRitual(null);
+    clearCurrentRitual();
     setChanged();
     getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.ACTIVE, false)
         .setValue(PyreBlock.LIT, !doLight), 3);
@@ -586,12 +593,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     boolean changed = false;
-    if (currentRitual != null && currentRitual.getLifetime() > 0) {
-      currentRitual.tickLifetime();
+    if (ritualInstance != null && ritualInstance.getLifetime() > 0) {
+      ritualInstance.tickLifetime();
       changed = true;
       setChanged();
-      if (currentRitual.getLifetime() <= 0) {
-        if ((!inventory.isEmpty() && cachedRecipe != null && getLastPlayer() != null && lastRecipe != null && currentRitual.getLifetime() <= 0) && (cachedRecipe.equals(lastRecipe) && cachedRecipe.value()
+      if (ritualInstance.getLifetime() <= 0) {
+        if ((!inventory.isEmpty() && cachedRecipe != null && getLastPlayer() != null && lastRecipe != null && ritualInstance.getLifetime() <= 0) && (cachedRecipe.equals(lastRecipe) && cachedRecipe.value()
             .matches(playerlessCrafting, pLevel))) {
           stopRitual(false);
           // Start
@@ -603,12 +610,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         }
       } else {
         if (cache != null) {
-          cache.initCache(pLevel, currentRitual.getPredicates());
+          cache.initCache(pLevel, ritualInstance.getPredicates());
         }
-        currentRitual.tick(pLevel, pPos, pState, this, cache, this.getRandom());
+        ritualInstance.tick(pLevel, pPos, pState, this, cache, this.getRandom());
         BlockState newState = pState;
         if (pState.is(RootsTags.Blocks.PYRES)) {
-          if (currentRitual.providesLight() && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
+          if (ritualInstance.providesLight() && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
             newState = newState.setValue(PyreBlock.LIT, true);
           }
           if (pState.hasProperty(PyreBlock.ACTIVE) && !pState.getValue(PyreBlock.ACTIVE)) {
@@ -636,9 +643,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   public void removed() {
     if (getLevel() != null && !getLevel().isClientSide()) {
-      if (currentRitual != null) {
-        currentRitual.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
-        currentRitual.removed(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+      if (ritualInstance != null) {
+        ritualInstance.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+        ritualInstance.removed(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
       }
     }
   }
