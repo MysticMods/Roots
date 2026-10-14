@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
+import org.apache.commons.lang3.NotImplementedException;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -30,7 +31,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-// TODO: Actually use this
 public interface IRitualInstance extends RitualLike {
   Ritual getRitual();
 
@@ -74,8 +74,15 @@ public interface IRitualInstance extends RitualLike {
     return DataComponentMap.EMPTY;
   }
 
-  default PatchedDataComponentMap getRitualDataPatch() {
-    return PatchedDataComponentMap.fromPatch(getRitualData(), DataComponentPatch.EMPTY);
+  void setRitualDataPatch (PatchedDataComponentMap map);
+
+  // TODO: Is this needed?
+  default void setRitualDataPatch (DataComponentPatch patch) {
+    setRitualDataPatch(PatchedDataComponentMap.fromPatch(asRitual().getComponents(), patch));
+  }
+
+  default DataComponentPatch getRitualDataPatch() {
+    return DataComponentPatch.EMPTY;
   }
 
   default <T> T getRitualData(DataComponentType<? extends T> component) {
@@ -85,6 +92,10 @@ public interface IRitualInstance extends RitualLike {
   default <T> T getRitualData(Supplier<? extends DataComponentType<? extends T>> component) {
     return getRitualData().get(component.get());
   }
+
+  <T> void setRitualData(DataComponentType<? super T> component, T value);
+
+  <T> void setRitualData(Supplier<? extends DataComponentType<? super T>> component, T value);
 
   @Override
   default Ritual asRitual() {
@@ -247,7 +258,7 @@ public interface IRitualInstance extends RitualLike {
 
     @Override
     public void setEnabledModifiers(RitualModifierSet modifiers) {
-
+      throw new NotImplementedException();
     }
 
     @Override
@@ -258,6 +269,21 @@ public interface IRitualInstance extends RitualLike {
     @Override
     public boolean hasModifier(Holder<RitualModifier> modifier) {
       return false;
+    }
+
+    @Override
+    public void setRitualDataPatch(PatchedDataComponentMap map) {
+      throw new NotImplementedException();
+    }
+
+    @Override
+    public <T> void setRitualData(DataComponentType<? super T> component, T value) {
+      throw new NotImplementedException();
+    }
+
+    @Override
+    public <T> void setRitualData(Supplier<? extends DataComponentType<? super T>> component, T value) {
+      throw new NotImplementedException();
     }
 
     @Override

@@ -63,6 +63,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   protected String descriptionId;
 
+  protected DataComponentMap components;
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration = 0;
@@ -94,6 +95,8 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     this.countProperty = properties.countProperty;
     this.intervalProperty = properties.intervalProperty;
     this.durationProperty = properties.durationProperty;
+
+    this.components = properties.buildAndValidateComponents();
 
     this.allProperties = new ArrayList<>(properties.allProperties);
 
@@ -217,6 +220,10 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
       }
     }
     return style;
+  }
+
+  public DataComponentMap getComponents() {
+    return components;
   }
 
   public boolean providesLight(IRitualInstance iRitualInstance) {
