@@ -34,10 +34,7 @@ public class WardingRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && instance.requiresCache()) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     if (duration % instance.getInterval() == 0) {
       List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB());
@@ -50,6 +47,7 @@ public class WardingRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
     var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    assert properties != null;
     this.potionAmplifier = properties.get(ModRituals.WARDING_POTION_AMPLIFIER);
     this.potionDuration = properties.get(ModRituals.WARDING_POTION_DURATION);
   }

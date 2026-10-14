@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// TODO: Change this completely
 public class AugmentationRitual extends Ritual {
   // TODO: Clear this on reloads
   private static final Map<EntityType<?>, Set<Holder<Attribute>>> ELIGIBLE_ATTRIBUTES = new HashMap<>();
@@ -51,10 +52,7 @@ public class AugmentationRitual extends Ritual {
 
   @Override
   public void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && instance.requiresCache()) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     // TODO: Cache this
     HolderSet<Attribute> attributes = BuiltInRegistries.ATTRIBUTE.getTag(RootsTags.Attributes.AUGMENTABLE)

@@ -62,20 +62,18 @@ public class AnimalHarvestRitual extends Ritual {
 
   @Override
   public void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(instance)) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     // TODO: "First tick"
     FakePlayerUtil.buildItems(pLevel, randomSource);
     if (!checkedAdditionalLootTables) {
+      //noinspection DataFlowIssue
       buildAdditionalLootTables(pLevel.getServer().reloadableRegistries());
       checkedAdditionalLootTables = true;
     }
 
     if (duration % instance.getInterval() == 0) {
-      List<LivingEntity> entities = blockEntity.getLevel()
+      List<LivingEntity> entities = pLevel
           .getEntitiesOfClass(LivingEntity.class, getAABB(instance).move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
               .and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !o.getType()
                   .is(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE) && !emptyLoot.contains(o.getType())));
@@ -150,12 +148,13 @@ public class AnimalHarvestRitual extends Ritual {
 
   protected void buildAdditionalLootTables(ReloadableServerRegistries.Holder registryLookup) {
     for (EntityType<?> type : BuiltInRegistries.ENTITY_TYPE) {
+      //noinspection deprecation
       var additional = type.builtInRegistryHolder().getData(DataMaps.ADDITIONAL_ANIMAL_HARVEST_LOOT_TABLES);
       if (additional != null && !additional.isEmpty()) {
         List<LootTable> additionals = new ArrayList<>();
         for (ResourceKey<LootTable> key : additional) {
           var table = registryLookup.getLootTable(key);
-          if (table != null && table != LootTable.EMPTY) {
+          if (table != LootTable.EMPTY) {
             additionals.add(table);
           }
         }
@@ -168,7 +167,7 @@ public class AnimalHarvestRitual extends Ritual {
 
   protected List<ItemStack> getDrops(LivingEntity entity, RandomSource pRandom) {
     ResourceKey<LootTable> resourcelocation = entity.getLootTable();
-    LootTable loottable = entity.level().getServer().reloadableRegistries().getLootTable(resourcelocation);
+    @SuppressWarnings("DataFlowIssue") LootTable loottable = entity.level().getServer().reloadableRegistries().getLootTable(resourcelocation);
 
     List<LootTable> additionalTables = additionalLootTables.getOrDefault(entity.getType(), Collections.emptyList());
 
@@ -232,6 +231,7 @@ public class AnimalHarvestRitual extends Ritual {
   @Override
   public void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    assert properties != null;
     count = properties.get(ModRituals.ANIMAL_HARVEST_COUNT);
     maxTries = properties.get(ModRituals.ANIMAL_HARVEST_MAX_TRIES);
     glowDuration = properties.get(ModRituals.ANIMAL_HARVEST_GLOW_DURATION);

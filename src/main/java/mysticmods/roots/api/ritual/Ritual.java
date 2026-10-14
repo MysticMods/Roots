@@ -4,6 +4,7 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.Cycling;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -240,6 +241,10 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   public void tick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, @Nullable PositionCache cache, RandomSource random) {
     int dur = instance.getDuration() - blockEntity.getLifetime();
+    if (requiresCache(instance) && cache == null) {
+      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
+      return;
+    }
     functionalTick(instance, pLevel, pPos, pState, cache, blockEntity, dur, random);
 /*    BoundingBox box;
     if (cache == null) {
@@ -295,7 +300,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return Collections.emptyList();
   }
 
-  public ItemStack getRitualIcon (@Nullable IRitualInstance instance) {
+  public ItemStack getRitualIcon(@Nullable IRitualInstance instance) {
     if (instance == null) {
       return getRitualIcon(this.simple());
     }
@@ -336,6 +341,10 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return builtInRegistryHolder().is(key);
   }
 
+  public boolean is(Holder<Ritual> ritual) {
+    return builtInRegistryHolder().is(ritual);
+  }
+
   public boolean is(ResourceKey<Ritual> key) {
     return builtInRegistryHolder().is(key);
   }
@@ -369,7 +378,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   }
 
   @Nullable
-  public final PropertyHolder<Property.IntegerProperty> getCountProperty () {
+  public final PropertyHolder<Property.IntegerProperty> getCountProperty() {
     return countProperty;
   }
 
@@ -377,7 +386,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return !getPredicates(iRitualInstance).isEmpty();
   }
 
-  public IRitualInstance simple () {
+  public IRitualInstance simple() {
     return IRitualInstance.of(this);
   }
 

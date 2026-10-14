@@ -10,6 +10,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
+import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.init.ModSerializers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -42,7 +43,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     this.ritual = ritual.orElse(null);
   }
 
-  @Nullable
+  // Technically this is now nonnull
   public Ritual getRitual() {
     return ritual;
   }
@@ -102,6 +103,9 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     public PyreRecipe build(BaseRecipeData.Builder data) {
+      if (ritual == null) {
+        ritual = ModRituals.CRAFTING.get();
+      }
       return build(data.build());
     }
 

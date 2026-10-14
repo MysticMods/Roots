@@ -46,10 +46,7 @@ public class WildrootGrowthRitual extends SingleTickRitual {
 
   @Override
   protected void singleTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && instance.requiresCache()) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     ServerLevel level = (ServerLevel) pLevel;
 

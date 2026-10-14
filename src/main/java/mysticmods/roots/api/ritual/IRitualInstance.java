@@ -25,6 +25,7 @@ import net.minecraft.world.phys.AABB;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -39,21 +40,25 @@ public interface IRitualInstance extends RitualLike {
 
   int getLifetime();
 
+  void tickLifetime();
+
   default int getDuration() {
     return getRitual().getDuration(this);
   }
 
-  default int getCount () {
+  default int getCount() {
     return getRitual().getCount(this);
   }
 
   RitualModifierSet getEnabledModifiers();
 
+  void setEnabledModifiers (RitualModifierSet modifiers);
+
   default Set<ResourceKey<RitualModifier>> getEnabledModifierKeys() {
     return getEnabledModifiers().getKeys();
   }
 
-  default Set<ResourceKey<RitualModifier>> getTransformingKeys () {
+  default Set<ResourceKey<RitualModifier>> getTransformingKeys() {
     return getEnabledModifiers().getTransformingKeys();
   }
 
@@ -110,8 +115,12 @@ public interface IRitualInstance extends RitualLike {
     return asRitual().is(spell);
   }
 
+  default boolean is(Holder<Ritual> ritual) {
+    return asRitual().is(ritual);
+  }
+
   @Nullable
-  default RitualModifier getFirstModifier (TagKey<RitualModifier> modifier) {
+  default RitualModifier getFirstModifier(TagKey<RitualModifier> modifier) {
     return getEnabledModifiers().getFirstModifier(modifier);
   }
 
@@ -131,7 +140,7 @@ public interface IRitualInstance extends RitualLike {
     return has(modifier.value());
   }
 
-  default int getTransformingHash () {
+  default int getTransformingHash() {
     return getEnabledModifiers().transformingHash();
   }
 
@@ -140,32 +149,32 @@ public interface IRitualInstance extends RitualLike {
   }
 
   @Nullable
-  default AABB getAABB () {
+  default AABB getAABB() {
     return asRitual().getAABB(this);
   }
 
   @Nullable
-  default BoundingBox getBoundingBox () {
+  default BoundingBox getBoundingBox() {
     return asRitual().getBoundingBox(this);
   }
 
-  default List<BiPredicate<Level, BlockPos>> getPredicates () {
+  default List<BiPredicate<Level, BlockPos>> getPredicates() {
     return asRitual().getPredicates(this);
   }
 
-  default int getRadiusXZ () {
+  default int getRadiusXZ() {
     return asRitual().getRadiusXZ(this);
   }
 
-  default int getInterval () {
+  default int getInterval() {
     return asRitual().getInterval(this);
   }
 
-  default int getRadiusY () {
+  default int getRadiusY() {
     return asRitual().getRadiusY(this);
   }
 
-  default boolean requiresCache () {
+  default boolean requiresCache() {
     return asRitual().requiresCache(this);
   }
 
@@ -209,6 +218,13 @@ public interface IRitualInstance extends RitualLike {
     return new IRitualInstance.SimpleRitual(ritual);
   }
 
+  default void resetLifetime() {
+    setLifetime(getDuration());
+  }
+
+  void setLifetime(int value);
+
+  // TODO: handle lifetime/etc
   record SimpleRitual(Ritual ritual) implements IRitualInstance {
     @Override
     public Ritual getRitual() {
@@ -217,12 +233,21 @@ public interface IRitualInstance extends RitualLike {
 
     @Override
     public int getLifetime() {
-      return getDuration();
+      return -1;
+    }
+
+    @Override
+    public void tickLifetime() {
     }
 
     @Override
     public RitualModifierSet getEnabledModifiers() {
       return RitualModifierSet.EMPTY;
+    }
+
+    @Override
+    public void setEnabledModifiers(RitualModifierSet modifiers) {
+
     }
 
     @Override
@@ -234,5 +259,13 @@ public interface IRitualInstance extends RitualLike {
     public boolean hasModifier(Holder<RitualModifier> modifier) {
       return false;
     }
+
+    @Override
+    public void setLifetime(int value) {
+    }
+  }
+
+  interface Identified extends IRitualInstance {
+    UUID getId();
   }
 }

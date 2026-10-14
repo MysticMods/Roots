@@ -1,6 +1,5 @@
 package mysticmods.roots.ritual;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.ritual.IRitualInstance;
@@ -33,10 +32,7 @@ public class FireStormRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(instance)) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     if (duration % instance.getInterval() == 0) {
       List<MeteorEntity> entities = pLevel.getEntitiesOfClass(MeteorEntity.class, pCache.getAABB());

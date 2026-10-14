@@ -68,11 +68,7 @@ public class FrostLandsRitual extends Ritual {
     }
 
     fState = level.getFluidState(above);
-    if (!fState.isEmpty()) {
-      return false;
-    }
-
-    return true;
+    return fState.isEmpty();
   };
 
   private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
@@ -131,10 +127,7 @@ public class FrostLandsRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(instance)) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     List<BlockPos> affectedPositions = new ArrayList<>();
 
@@ -269,6 +262,7 @@ public class FrostLandsRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
     var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    assert properties != null;
     this.healInterval = properties.get(ModRituals.FROST_LANDS_INTERVAL_HEAL);
     this.spawnChance = properties.get(ModRituals.FROST_LANDS_SPAWN_CHANCE);
     this.fluidCount = properties.get(ModRituals.FROST_LANDS_FLUID_COUNT);

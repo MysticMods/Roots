@@ -28,6 +28,8 @@ public class HealingAuraRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    assert pCache != null;
+
     if (duration % instance.getInterval() == 0) {
       List<Player> players = pLevel.getEntitiesOfClass(Player.class, pCache.getAABB());
       for (Player player : players) {
@@ -52,9 +54,10 @@ public class HealingAuraRitual extends Ritual {
 
   @Override
   protected void initialize(Holder<Ritual> holder) {
-    var proprties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
-    this.entityHeal = proprties.get(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT);
-    this.playerHeal = proprties.get(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT);
+    var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    assert properties != null;
+    this.entityHeal = properties.get(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT);
+    this.playerHeal = properties.get(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT);
   }
 
   @Override

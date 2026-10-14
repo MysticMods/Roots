@@ -1,6 +1,5 @@
 package mysticmods.roots.ritual;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
@@ -26,7 +25,7 @@ import java.util.function.BiPredicate;
 
 public class OvergrowthRitual extends Ritual {
   private static List<Direction> HORIZONTALS;
-  // TODO: This *must* be on the block entity
+  // TODO: ~~This *must* be on the block entity~~ This must be in the RitualInstance
   private BlockPos lastChanged;
 
   public OvergrowthRitual(Properties properties) {
@@ -57,10 +56,7 @@ public class OvergrowthRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && instance.requiresCache()) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     if (duration % interval == 0) {
       boolean placed = false;

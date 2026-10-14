@@ -1,6 +1,5 @@
 package mysticmods.roots.ritual;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.ritual.IRitualInstance;
@@ -38,10 +37,7 @@ public class PurityRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && requiresCache(instance)) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB());
     List<MobEffectInstance> toRemove = new ArrayList<>();
@@ -89,6 +85,7 @@ public class PurityRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
     var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    assert properties != null;
     this.conversionAddition = properties.get(ModRituals.PURITY_CONVERSION_ADDITION);
     this.potionCount = properties.get(ModRituals.PURITY_POTION_COUNT);
     this.convertZombies = properties.get(ModRituals.PURITY_CONVERT_ZOMBIES);

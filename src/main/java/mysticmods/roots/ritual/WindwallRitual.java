@@ -51,10 +51,7 @@ public class WindwallRitual extends Ritual {
 
   @Override
   protected void functionalTick(IRitualInstance instance, Level pLevel, BlockPos pPos, BlockState pState, @Nullable PositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (pCache == null && instance.requiresCache()) {
-      RootsAPI.LOG.error("Ritual {} requires a PositionCache but none was provided. This will cause the ritual to not function correctly.", getOrCreateDescriptionId());
-      return;
-    }
+    assert pCache != null;
 
     if (duration % instance.getInterval() == 0) {
       List<Entity> entities = pLevel.getEntities(null, pCache.getAABB());
@@ -91,6 +88,7 @@ public class WindwallRitual extends Ritual {
   @Override
   protected void initialize(Holder<Ritual> holder) {
     var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    assert properties != null;
     this.strength = properties.get(ModRituals.WINDWALL_KNOCKBACK_STRENGTH);
     this.minimumY = properties.get(ModRituals.WINDWALL_MINIMUM_Y_VELOCITY);
     this.heightPercentage = properties.get(ModRituals.WINDWALL_HEIGHT_PERCENTAGE);
