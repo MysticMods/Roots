@@ -11,11 +11,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.util.RandomSource;
 import net.neoforged.neoforge.client.model.data.ModelData;
-import net.neoforged.neoforge.common.conditions.AndCondition;
 
 public class EnchantedTurfBlockEntityRenderer implements BlockEntityRenderer<EnchantedTurfBlockEntity> {
-  AndCondition
-
   private static final RandomSource RANDOM = RandomSource.create();
 
   private final BlockRenderDispatcher blockRenderDispatcher;

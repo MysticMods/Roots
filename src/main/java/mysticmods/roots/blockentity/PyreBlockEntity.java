@@ -149,7 +149,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return InteractionResult.CONSUME;
     }
 
-    if (!ritualInstance.is(ModRituals.CRAFTING) && (ritualInstance.getLifetime() > 0 || getBlockState().getValue(PyreBlock.ACTIVE))) {
+    if (ritualInstance != null && !ritualInstance.is(ModRituals.CRAFTING) && (ritualInstance.getLifetime() > 0 || getBlockState().getValue(PyreBlock.ACTIVE))) {
       Optional<IFluidHandlerItem> optFluid = FluidUtil.getFluidHandler(inHand);
       if (optFluid.isPresent()) {
         IFluidHandlerItem fluidHandler = optFluid.get();
@@ -387,7 +387,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
 
     if (ritualInstance != null) {
-      pTag.put("ritual_instance", RitualInstance.CODEC.encodeStart(this.getLevel().registryAccess()
+      pTag.put("ritual_instance", RitualInstance.CODEC.encodeStart(provider
           .createSerializationContext(NbtOps.INSTANCE), ritualInstance).getOrThrow()
       );
     }
@@ -437,8 +437,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     } else if (pTag.contains("ritual_instance")) {
       RitualInstance.CODEC
-          .parse(this.getLevel().registryAccess()
-              .createSerializationContext(NbtOps.INSTANCE), pTag.get("ritual_instance"))
+          .parse(provider.createSerializationContext(NbtOps.INSTANCE), pTag.get("ritual_instance"))
           .resultOrPartial(Util.prefix("Failed to load ritual instance: ", RootsAPI.LOG::warn))
           .ifPresent(this::setCurrentRitual);
     }
