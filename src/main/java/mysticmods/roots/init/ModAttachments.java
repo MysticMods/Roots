@@ -79,6 +79,9 @@ public class ModAttachments {
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<GlobalPos>> CONTAINMENT_TETHER = ATTACHMENTS.register("containment_tether", () -> AttachmentType.builder(() -> GlobalPos.of(Level.OVERWORLD, BlockPos.ZERO) /* TODO: ??? Is this a valid default??? */)
       .serialize(GlobalPos.CODEC).sync(GlobalPos.STREAM_CODEC).build());
 
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<GrovePowerEntityFlag>> GROVE_POWER_ENTITY_FLAG = ATTACHMENTS.register("grove_power_entity_flag", () -> AttachmentType.builder(() -> GrovePowerEntityFlag.DEFAULT)
+      .serialize(GrovePowerEntityFlag.CODEC).sync(GrovePowerEntityFlag.STREAM_CODEC).build());
+
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();
   }

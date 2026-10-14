@@ -11,6 +11,7 @@ import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 
 public class PowerTicket {
   private final TicketDefinition definition;
@@ -25,7 +26,8 @@ public class PowerTicket {
   }
 
   // Can be supplied from multiple grove stones
-  public int supplyTick(IGroveInstance grove, int amount) {
+  public int supplyTick(IGroveInstance grove, int incomingAmount) {
+    int amount = incomingAmount;
     if (amount <= 0) {
       return amount;
     }
@@ -33,8 +35,8 @@ public class PowerTicket {
       if (grove.is(req.tag())) {
         int fullRequired = req.value();
         int amountSupplied = suppliedMap.getInt(req);
-        int required = fullRequired - amountSupplied;
-        if (required <= amount) {
+        int required = Math.max(0, fullRequired - amountSupplied);
+        if (required > 0 && required <= amount) {
           amount -= required;
           suppliedMap.mergeInt(req, required, Integer::sum);
           suppliedFromMap.put(req, grove.getGrovePosition().asLong());

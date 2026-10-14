@@ -75,6 +75,14 @@
       {
         "max_count": 2,
         "tag": "roots:grove_generators/pastoral"
+      },
+      {
+        "max_count": 1,
+        "tag": "roots:grove_generators/pastoral/dragon_eggs"
+      },
+      {
+        "max_count": 3,
+        "tag": "roots:grove_generators/pastoral/eggs"
       }
     ],
     "roots:twilight": [

@@ -545,6 +545,10 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new SimpleBlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, List.of(
         new SimpleBlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
+    builder24.add(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, List.of(
+        new SimpleBlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, RootsTags.Groves.PASTORAL, 50)), false);
+    builder24.add(RootsTags.Blocks.PASTORAL_GROVE_EGG_GENERATORS, List.of(
+        new SimpleBlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, RootsTags.Groves.PASTORAL, 8)), false);
     builder24.add(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, List.of(
         new SimpleBlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, RootsTags.Groves.PASTORAL, 5)), false);
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
@@ -596,7 +600,9 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new BlockGenerationInfo(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, 8, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.PASTORAL, List.of(
-        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, 2, Symmetry.NONE)
+        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, 2, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, 1, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_EGG_GENERATORS, 3, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.TWILIGHT, List.of(
         new BlockGenerationInfo(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, Symmetry.RADIAL_NOT_MATCHING)

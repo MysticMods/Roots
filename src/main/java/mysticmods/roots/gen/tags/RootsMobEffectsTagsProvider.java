@@ -28,5 +28,6 @@ public final class RootsMobEffectsTagsProvider extends TagsProvider<MobEffect> {
     tag(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT).add(ModEffects.SKY_SOARER.getKey());
     tag(RootsTags.MobEffects.DELAYED_CANCEL_EFFECT).add(ModEffects.LIGHT_DRIFTER.getKey());
     tag(RootsTags.MobEffects.CANCELLABLE_EFFECTS).addTags(RootsTags.MobEffects.INSTANT_CANCEL_EFFECT, RootsTags.MobEffects.DELAYED_CANCEL_EFFECT);
+    tag(RootsTags.MobEffects.GROVE_POWER).add(ModEffects.POWER_ELIGIBLE.getKey(), ModEffects.POWER_ELIGIBLE_POWERED.getKey(), ModEffects.POWER_INELIGIBLE.getKey());
   }
 }

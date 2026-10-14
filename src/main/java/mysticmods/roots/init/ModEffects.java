@@ -30,6 +30,10 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SimpleEffect> MAGNETIC_COOLDOWN = REGISTER.register("magnetic_cooldown", () -> new SimpleEffect(MobEffectCategory.HARMFUL, ChatFormatting.RED.getColor(), false));
   public static final DeferredHolder<MobEffect, SimpleEffect> TEMPORAL_MORASS_COOLDOWN = REGISTER.register("temporal_morass_cooldown", () -> new SimpleEffect(MobEffectCategory.HARMFUL, 0x404040, false));
 
+  public static final DeferredHolder<MobEffect, GrovePowerEffect> POWER_ELIGIBLE_POWERED = REGISTER.register("grove_power_eligible_powered", () -> new GrovePowerEffect(true, true));
+  public static final DeferredHolder<MobEffect, GrovePowerEffect> POWER_ELIGIBLE = REGISTER.register("grove_power_eligible", () -> new GrovePowerEffect(true, false));
+  public static final DeferredHolder<MobEffect, GrovePowerEffect> POWER_INELIGIBLE = REGISTER.register("grove_power_ineligible", () -> new GrovePowerEffect(false, false));
+
   static {
     REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
   }

@@ -3,6 +3,7 @@ package mysticmods.roots.client;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
@@ -13,9 +14,10 @@ public class ColorHelper {
   private final static RandomSource random = RandomSource.create();
   private final static Color DEFAULT_COLOR = new Color(1f, 0.5f, 0.5f);
 
-  public static final Color GREEN = new Color(0.0f, 1.0f, 0.0f);
-  public static final Color RED = new Color(1.0f, 0.0f, 0.0f);
-  public static final Color BLUE = new Color(0.0f, 0.0f, 1.0f);
+  public static final Color GREEN = new Color(0, 1, 0);
+  public static final Color RED = new Color(1, 0, 0);
+  public static final Color BLUE = new Color(0, 0, 1);
+  public static final Color YELLOW = new Color(1, 1, 0);
 
   public static Color color(BlockPos position) {
     try {
@@ -35,6 +37,10 @@ public class ColorHelper {
   public record Color(float r, float g, float b, float a) {
     public Color(float r, float g, float b) {
       this(r, g, b, 1.0f);
+    }
+
+    public int toInteger () {
+      return FastColor.ARGB32.colorFromFloat(a, r, g, b);
     }
   }
 }

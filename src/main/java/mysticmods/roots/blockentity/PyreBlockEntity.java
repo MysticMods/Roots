@@ -316,8 +316,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     CompoundTag tag = pkt.getTag();
     //noinspection ConstantValue
     if (tag != null) {
-      revalidateRecipe();
       loadAdditional(tag, provider);
+      revalidateRecipe();
     }
   }
 

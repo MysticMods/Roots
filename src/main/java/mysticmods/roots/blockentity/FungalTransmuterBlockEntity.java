@@ -218,8 +218,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     super.onDataPacket(net, pkt, lookupProvider);
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
-      revalidateRecipe();
       loadAdditional(tag, lookupProvider);
+      revalidateRecipe();
     }
   }
 

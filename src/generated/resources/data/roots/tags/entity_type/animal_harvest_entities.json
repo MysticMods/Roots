@@ -2,7 +2,9 @@
   "values": [
     "minecraft:allay",
     "minecraft:axolotl",
+    "minecraft:armadillo",
     "minecraft:bee",
+    "minecraft:camel",
     "minecraft:cat",
     "minecraft:chicken",
     "minecraft:cod",
@@ -28,6 +30,7 @@
     "minecraft:sheep",
     "minecraft:squid",
     "minecraft:strider",
+    "minecraft:sniffer",
     "minecraft:tadpole",
     "minecraft:trader_llama",
     "minecraft:tropical_fish",

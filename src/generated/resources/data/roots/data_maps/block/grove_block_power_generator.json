@@ -70,6 +70,20 @@
         "value": 5
       }
     ],
+    "#roots:grove_generators/pastoral/dragon_eggs": [
+      {
+        "blockTag": "roots:grove_generators/pastoral/dragon_eggs",
+        "tag": "roots:pastoral",
+        "value": 50
+      }
+    ],
+    "#roots:grove_generators/pastoral/eggs": [
+      {
+        "blockTag": "roots:grove_generators/pastoral/dragon_eggs",
+        "tag": "roots:pastoral",
+        "value": 8
+      }
+    ],
     "#roots:grove_generators/twilight": [
       {
         "blockTag": "roots:grove_generators/twilight",

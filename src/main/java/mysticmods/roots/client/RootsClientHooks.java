@@ -374,4 +374,8 @@ public class RootsClientHooks {
       ReputationOverlay.updateReputationAlert(grove, 1, progress);
     }
   }
+
+  public static boolean showBoundingBoxes() {
+    return Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes();
+  }
 }

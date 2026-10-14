@@ -21,16 +21,22 @@ import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.ritual.GroveSupplicationRitual;
 import mysticmods.roots.util.ReputationHelper;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -81,6 +87,14 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
 
   public GroveStoneBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     this(ModBlockEntities.GROVE_STONE.get(), pWorldPosition, pBlockState);
+  }
+
+  @Override
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+    if (pkt.getTag() != null) {
+      this.loadAdditional(pkt.getTag(), lookupProvider);
+    }
+    super.onDataPacket(net, pkt, lookupProvider);
   }
 
   @Override
@@ -312,9 +326,22 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
         Map<EntityGenerationInfo, Tracker.EntityTracker> trackers = buildEntityTrackers();
 
         for (Entity entity : potentialEntities) {
+          LivingEntity livingVariant = entity instanceof LivingEntity ? (LivingEntity) entity : null;
+          boolean hasLiving = livingVariant != null;
+
+          if (hasLiving) {
+            // If only `removeEffect` accepted `TagKey<MobEffect>`
+            livingVariant.removeEffect(ModEffects.POWER_ELIGIBLE_POWERED);
+            livingVariant.removeEffect(ModEffects.POWER_ELIGIBLE);
+            livingVariant.removeEffect(ModEffects.POWER_INELIGIBLE);
+          }
+
           List<SimpleEntityGenerator> generators = entity.getType().builtInRegistryHolder()
               .getData(DataMaps.GROVE_ENTITY_POWER_GENERATORS);
           if (generators == null || generators.isEmpty()) {
+            if (hasLiving) {
+              livingVariant.addEffect(new MobEffectInstance(ModEffects.POWER_INELIGIBLE, 60));
+            }
             continue;
           }
 
@@ -326,6 +353,17 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
                   Tracker.EntityTracker tracker = trackers.get(entry);
                   if (tracker.count(entity)) {
                     generatedThisTick += willGenerate;
+                    if (hasLiving) {
+                      livingVariant.addEffect(new MobEffectInstance(ModEffects.POWER_ELIGIBLE_POWERED));
+                    }
+                  } else {
+                    if (hasLiving) {
+                      livingVariant.addEffect(new MobEffectInstance(ModEffects.POWER_ELIGIBLE));
+                    }
+                  }
+                } else {
+                  if (hasLiving) {
+                    livingVariant.addEffect(new MobEffectInstance(ModEffects.POWER_ELIGIBLE, 60));
                   }
                 }
               }

@@ -195,6 +195,8 @@ public class RootsTags {
     public static final TagKey<Block> FAIRY_GROVE_PATHS = modTag("grove_generators/fairy/paths");
     public static final TagKey<Block> WILD_GROVE_GENERATORS = modTag("grove_generators/wild");
     public static final TagKey<Block> PASTORAL_GROVE_GENERATORS = modTag("grove_generators/pastoral");
+    public static final TagKey<Block> PASTORAL_GROVE_DRAGON_EGG_GENERATORS = modTag("grove_generators/pastoral/dragon_eggs");
+    public static final TagKey<Block> PASTORAL_GROVE_EGG_GENERATORS = modTag("grove_generators/pastoral/eggs");
     public static final TagKey<Block> CULTIVATION_GROVE_GENERATORS = modTag("grove_generators/cultivation");
     public static final TagKey<Block> FUNGAL_GROVE_MUSHROOM_GENERATORS = modTag("grove_generators/fungal/mushrooms");
     public static final TagKey<Block> FUNGAL_GROVE_DIRT_GENERATORS = modTag("grove_generators/fungal/dirt");
@@ -462,6 +464,8 @@ public class RootsTags {
     public static final TagKey<MobEffect> INSTANT_CANCEL_EFFECT = modTag("instant_cancel_effects");
     public static final TagKey<MobEffect> DELAYED_CANCEL_EFFECT = modTag("delayed_cancel_effects");
     public static final TagKey<MobEffect> CANCELLABLE_EFFECTS = modTag("cancellable_effects");
+
+    public static final TagKey<MobEffect> GROVE_POWER = modTag("grove_power");
 
     static TagKey<MobEffect> modTag(String name) {
       return TagKey.create(Registries.MOB_EFFECT, RootsAPI.rl(name));

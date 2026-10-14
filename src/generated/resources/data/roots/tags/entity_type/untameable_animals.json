@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:axolotl",
+    "minecraft:armadillo",
     "minecraft:bee",
     "minecraft:chicken",
     "minecraft:cod",
@@ -21,6 +22,7 @@
     "minecraft:sheep",
     "minecraft:squid",
     "minecraft:strider",
+    "minecraft:sniffer",
     "minecraft:tadpole",
     "minecraft:tropical_fish",
     "minecraft:turtle",

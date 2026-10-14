@@ -347,6 +347,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.FAIRY_GROVE_GENERATORS);
     manualCopy(RootsTags.Blocks.FAIRY_GROVE_PATHS);
     manualCopy(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS);
+    manualCopy(RootsTags.Blocks.PASTORAL_GROVE_EGG_GENERATORS);
     manualCopy(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS);
