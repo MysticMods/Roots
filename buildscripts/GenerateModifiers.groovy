@@ -172,7 +172,7 @@ data.each { spellName, spell ->
       def tierName = "${name}_${ROMAN[i]}"
       // registry ids use roman numerals; java constants use arabic
       def constant = tierMap.constant ?: "${SPELL}_${name}_${i + 1}".toUpperCase()
-      def rec = add(tierName, m + [constant: constant], [parentRef: prevId, group: gconst])
+      def rec = add(tierName, m + [constant: constant], [parentRef: prevId, group: gconst, groupValue: i + 1])
       prevId = rec.id
       ids << rec.id
     }
@@ -303,7 +303,7 @@ def propsChain = { rec ->
   if (rec.parent) parts << ".parent(SpellModifiers.${rec.parent})"
   if (rec.condition) parts << ".condition(SpellType.Condition.${rec.condition.toUpperCase()})"
   if (rec.transforms) parts << ".transforms()"
-  if (rec.group) parts << ".group(${rec.group})"
+  if (rec.group) parts << ".group(${rec.group}, ${rec.groupValue})"
   if (rec.conflicts) {
     parts << ".conflicts(${rec.conflicts.collect { "SpellModifiers.${it}" }.join(', ')})"
   }
