@@ -6,6 +6,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.property.Formatters;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
@@ -29,10 +30,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -935,6 +933,13 @@ public final class RootsLangProvider extends LanguageProvider {
 
     for (Symmetry sym : Symmetry.values()) {
       add(sym.getTranslationKey(), toEnglishName(sym.getSerializedName()));
+    }
+    for (Formatters.Formatter<?> formatter : Arrays.asList(Formatters.BRACKETS, Formatters.DEGREES, Formatters.HEARTS, Formatters.LEVEL, Formatters.MULTIPLY, Formatters.NUMBER, Formatters.SINGLE_DECIMAL, Formatters.TICKS, Formatters.PERCENT)) {
+      add(formatter.key(), formatter.translation());
+    }
+
+    for (Formatters.BiFormatter<?, ?> formatter : Arrays.asList(Formatters.BLOCK_RANGE, Formatters.SPRINT_SPEED)) {
+      add(formatter.key(), formatter.translation());
     }
 
     add(Symmetry.RADIAL_NOT_MATCHING.getTranslationKey() + ".description", "Requires a non-matching block positioned radially around the grove stone.");

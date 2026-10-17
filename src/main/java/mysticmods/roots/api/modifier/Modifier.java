@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.IGroupDescribed;
@@ -11,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -23,14 +25,20 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   protected final ResourceKey<T> parent;
   protected final ResourceKey<V> applicable;
   protected final Set<ResourceKey<T>> conflicts;
+  @NotNull
+  protected final GroupId groupId;
+  protected final int groupValue;
 
   protected String descriptionId;
   protected int depth = 0;
+  private String groupDescriptionId = null;
 
   public Modifier(Modifier.Properties<V, T, ?> properties) {
     this.parent = properties.parent;
     this.applicable = properties.applicable;
     this.conflicts = properties.conflicts;
+    this.groupId = properties.groupId;
+    this.groupValue = properties.groupValue;
   }
 
   public abstract boolean isTransforming();
@@ -106,6 +114,20 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
   }
 
   @Override
+  public boolean canGroup() {
+    return !groupId.isEmpty();
+  }
+
+  @Override
+  public GroupId getGroupKey() {
+    return groupId;
+  }
+
+  public int getGroupValue () {
+    return groupValue;
+  }
+
+  @Override
   public void init(Holder<T> holder) {
   }
 
@@ -124,12 +146,23 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     return this.depth;
   }
 
+  @Override
+  public String getOrCreateGroupDescriptionId() {
+    if (groupDescriptionId == null) {
+      this.groupDescriptionId = groupId.createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey());
+    }
+
+    return this.groupDescriptionId;
+  }
+
   public abstract static class Properties<V, T extends Modifier<V, T>, S extends Properties<V, T, S>> {
     final ResourceKey<T> key;
     ResourceKey<T> parent = null;
     ResourceKey<V> applicable;
     Set<ResourceKey<T>> conflicts = new HashSet<>();
     boolean transformer = false;
+    GroupId groupId = GroupId.NONE;
+    int groupValue = -1;
 
     public Properties(ResourceKey<T> key) {
       this.key = key;
@@ -169,6 +202,12 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
       for (Holder<T> mod : conflicts) {
         this.conflicts.add(mod.getKey());
       }
+      return self();
+    }
+
+    public final S group (GroupId group, int value) {
+      this.groupId = group;
+      this.groupValue = value;
       return self();
     }
   }

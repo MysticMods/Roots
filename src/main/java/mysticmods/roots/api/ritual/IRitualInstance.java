@@ -164,6 +164,8 @@ public interface IRitualInstance extends RitualLike {
     return asRitual().getAABB(this);
   }
 
+
+
   @Nullable
   default BoundingBox getBoundingBox() {
     return asRitual().getBoundingBox(this);

@@ -1,6 +1,7 @@
 package mysticmods.roots.api.property;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -9,9 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 
 public record PropertyHolder<T extends Property<?>>(ResourceLocation id, T value) {
-  public static final Codec<PropertyHolder<? extends Property<?>>> CODEC = RecordCodecBuilder.create(instance -> instance.group(ResourceLocation.CODEC.fieldOf("id")
+  public static final Codec<PropertyHolder<? extends Property<?>>> CODEC = RecordCodecBuilder.<PropertyHolder<? extends Property<?>>>create(instance -> instance.group(ResourceLocation.CODEC.fieldOf("id")
           .forGetter(PropertyHolder::id), Property.CODEC.fieldOf("value").forGetter(PropertyHolder::value))
-      .apply(instance, PropertyHolder::new));
+      .apply(instance, PropertyHolder::new)).comapFlatMap(DataResult::success, b -> b);
   public static final StreamCodec<RegistryFriendlyByteBuf, PropertyHolder<? extends Property<?>>> STREAM_CODEC = StreamCodec.composite(ResourceLocation.STREAM_CODEC, PropertyHolder::id, Property.STREAM_CODEC, PropertyHolder::value, PropertyHolder::new);
   public static final Codec<PropertyHolder<? extends Property<?>>> FULL_CODEC = RecordCodecBuilder.create(instance -> instance.group(ResourceLocation.CODEC.fieldOf("id")
           .forGetter(PropertyHolder::id), Property.FULL_CODEC.fieldOf("value").forGetter(PropertyHolder::value))

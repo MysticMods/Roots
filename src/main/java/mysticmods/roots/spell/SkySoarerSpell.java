@@ -28,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class SkySoarerSpell extends Spell {
-  private float amplifier, amplifier_increase, duration_incrase;
+  private float amplifier, amplifier_increase, duration_increase;
   private int duration, friendly_earth_duration;
 
   public SkySoarerSpell(Properties properties) {
@@ -41,7 +41,7 @@ public class SkySoarerSpell extends Spell {
     this.amplifier = properties.get(ModSpells.SKY_SOARER_AMPLIFIER);
     this.amplifier_increase = properties.get(ModSpells.SKY_SOARER_AMPLIFIER_INCREASE);
     this.duration = properties.get(ModSpells.SKY_SOARER_DURATION);
-    this.duration_incrase = properties.get(ModSpells.SKY_SOARER_DURATION_INCREASE);
+    this.duration_increase = properties.get(ModSpells.SKY_SOARER_DURATION_INCREASE);
     this.friendly_earth_duration = properties.get(ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION);
   }
 
@@ -52,7 +52,7 @@ public class SkySoarerSpell extends Spell {
   @Override
   public CastResult cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     int durationCount = instance.count(RootsTags.SpellModifiers.SKY_SOARER_DURATION_INCREASES);
-    int thisDuration = durationCount > 0 ? Mth.floor(((float) duration) * (1f + (duration_incrase * durationCount))) : duration;
+    int thisDuration = durationCount > 0 ? Mth.floor(((float) duration) * (1f + (duration_increase * durationCount))) : duration;
     int amplifierCount = instance.count(RootsTags.SpellModifiers.SKY_SOARER_AMPLIFIER_INCREASES);
     float thisAmplifier = amplifierCount > 0 ? amplifier * (1f + (amplifier_increase * amplifierCount)) : amplifier;
 
@@ -85,7 +85,7 @@ public class SkySoarerSpell extends Spell {
           Component.literal(String.valueOf(friendly_earth_duration))
       };
     } else if (spellModifier.is(ModModifiers.SKY_SOARER_SPEEDY_1)) {
-      double total = (1 * duration_incrase);
+      double total = (1 * duration_increase);
       double duration = this.duration + (((double) this.duration) * total);
       double seconds = duration / 20.0;
 
@@ -95,7 +95,7 @@ public class SkySoarerSpell extends Spell {
           Component.literal(String.format("%.0f", duration))
       };
     } else if (spellModifier.is(ModModifiers.SKY_SOARER_SPEEDY_2)) {
-      double total = (2 * duration_incrase);
+      double total = (2 * duration_increase);
       double duration = this.duration + (((double) this.duration) * total);
       double seconds = duration / 20.0;
 

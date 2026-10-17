@@ -72,54 +72,54 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_1 =
       REGISTER.register("dandelion_winds/duration_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_DURATION_1)
           .source(ModSpells.DANDELION_WINDS)
-          .group(DANDELION_WINDS_DURATION)
+          .group(DANDELION_WINDS_DURATION, 1)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_2 =
       REGISTER.register("dandelion_winds/duration_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_DURATION_2)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_DURATION_1)
-          .group(DANDELION_WINDS_DURATION)
+          .group(DANDELION_WINDS_DURATION, 2)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_3 =
       REGISTER.register("dandelion_winds/duration_iii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_DURATION_3)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_DURATION_2)
-          .group(DANDELION_WINDS_DURATION)
+          .group(DANDELION_WINDS_DURATION, 3)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_4 =
       REGISTER.register("dandelion_winds/duration_iv", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_DURATION_4)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_DURATION_3)
-          .group(DANDELION_WINDS_DURATION)
+          .group(DANDELION_WINDS_DURATION, 4)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_DURATION_5 =
       REGISTER.register("dandelion_winds/duration_v", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_DURATION_5)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_DURATION_4)
-          .group(DANDELION_WINDS_DURATION)
+          .group(DANDELION_WINDS_DURATION, 5)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_1 =
       REGISTER.register("dandelion_winds/chance_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_CHANCE_1)
           .source(ModSpells.DANDELION_WINDS)
-          .group(DANDELION_WINDS_CHANCE)
+          .group(DANDELION_WINDS_CHANCE, 1)
           .costs(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_2 =
       REGISTER.register("dandelion_winds/chance_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_CHANCE_2)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_CHANCE_1)
-          .group(DANDELION_WINDS_CHANCE)
+          .group(DANDELION_WINDS_CHANCE, 2)
           .costs(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_3 =
       REGISTER.register("dandelion_winds/chance_iii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_CHANCE_3)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_CHANCE_2)
-          .group(DANDELION_WINDS_CHANCE)
+          .group(DANDELION_WINDS_CHANCE, 3)
           .costs(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_CHANCE_4 =
       REGISTER.register("dandelion_winds/chance_iv", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_CHANCE_4)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_CHANCE_3)
-          .group(DANDELION_WINDS_CHANCE)
+          .group(DANDELION_WINDS_CHANCE, 4)
           .costs(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_VORTEX =
       REGISTER.register("dandelion_winds/vortex", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_VORTEX)
@@ -129,31 +129,31 @@ public class ModModifiers {
       REGISTER.register("dandelion_winds/vortex_cooldown_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_VORTEX)
-          .group(DANDELION_WINDS_VORTEX_COOLDOWN)
+          .group(DANDELION_WINDS_VORTEX_COOLDOWN, 1)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_VORTEX_COOLDOWN_2 =
       REGISTER.register("dandelion_winds/vortex_cooldown_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1)
-          .group(DANDELION_WINDS_VORTEX_COOLDOWN)
+          .group(DANDELION_WINDS_VORTEX_COOLDOWN, 2)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_VORTEX_COOLDOWN_3 =
       REGISTER.register("dandelion_winds/vortex_cooldown_iii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_2)
-          .group(DANDELION_WINDS_VORTEX_COOLDOWN)
+          .group(DANDELION_WINDS_VORTEX_COOLDOWN, 3)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_VORTEX_COOLDOWN_4 =
       REGISTER.register("dandelion_winds/vortex_cooldown_iv", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_3)
-          .group(DANDELION_WINDS_VORTEX_COOLDOWN)
+          .group(DANDELION_WINDS_VORTEX_COOLDOWN, 4)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_VORTEX_COOLDOWN_5 =
       REGISTER.register("dandelion_winds/vortex_cooldown_v", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_5)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_4)
-          .group(DANDELION_WINDS_VORTEX_COOLDOWN)
+          .group(DANDELION_WINDS_VORTEX_COOLDOWN, 5)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_GUSTS =
       REGISTER.register("dandelion_winds/gusts", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_GUSTS)
@@ -163,31 +163,31 @@ public class ModModifiers {
       REGISTER.register("dandelion_winds/gusts_cooldown_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_GUSTS)
-          .group(DANDELION_WINDS_GUSTS_COOLDOWN)
+          .group(DANDELION_WINDS_GUSTS_COOLDOWN, 1)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_GUSTS_COOLDOWN_2 =
       REGISTER.register("dandelion_winds/gusts_cooldown_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1)
-          .group(DANDELION_WINDS_GUSTS_COOLDOWN)
+          .group(DANDELION_WINDS_GUSTS_COOLDOWN, 2)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_GUSTS_COOLDOWN_3 =
       REGISTER.register("dandelion_winds/gusts_cooldown_iii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_2)
-          .group(DANDELION_WINDS_GUSTS_COOLDOWN)
+          .group(DANDELION_WINDS_GUSTS_COOLDOWN, 3)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_GUSTS_COOLDOWN_4 =
       REGISTER.register("dandelion_winds/gusts_cooldown_iv", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_3)
-          .group(DANDELION_WINDS_GUSTS_COOLDOWN)
+          .group(DANDELION_WINDS_GUSTS_COOLDOWN, 4)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_GUSTS_COOLDOWN_5 =
       REGISTER.register("dandelion_winds/gusts_cooldown_v", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_5)
           .source(ModSpells.DANDELION_WINDS)
           .parent(SpellModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_4)
-          .group(DANDELION_WINDS_GUSTS_COOLDOWN)
+          .group(DANDELION_WINDS_GUSTS_COOLDOWN, 5)
           .costs(CostInstance.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> DANDELION_WINDS_STATUE =
       REGISTER.register("dandelion_winds/statue", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.DANDELION_WINDS_STATUE)
@@ -227,24 +227,24 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_AMPLIFIED_1 =
       REGISTER.register("sky_soarer/amplified_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SKY_SOARER_AMPLIFIED_1)
           .source(ModSpells.SKY_SOARER)
-          .group(SKY_SOARER_AMPLIFIED)
+          .group(SKY_SOARER_AMPLIFIED, 1)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_AMPLIFIED_2 =
       REGISTER.register("sky_soarer/amplified_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SKY_SOARER_AMPLIFIED_2)
           .source(ModSpells.SKY_SOARER)
           .parent(SpellModifiers.SKY_SOARER_AMPLIFIED_1)
-          .group(SKY_SOARER_AMPLIFIED)
+          .group(SKY_SOARER_AMPLIFIED, 2)
           .costs(CostInstance.mult(ModHerbs.CLOUD_BERRY, SpellCosts.MULT_005))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_SPEEDY_1 =
       REGISTER.register("sky_soarer/speedy_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SKY_SOARER_SPEEDY_1)
           .source(ModSpells.SKY_SOARER)
-          .group(SKY_SOARER_SPEEDY)
+          .group(SKY_SOARER_SPEEDY, 1)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SKY_SOARER_SPEEDY_2 =
       REGISTER.register("sky_soarer/speedy_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SKY_SOARER_SPEEDY_2)
           .source(ModSpells.SKY_SOARER)
           .parent(SpellModifiers.SKY_SOARER_SPEEDY_1)
-          .group(SKY_SOARER_SPEEDY)
+          .group(SKY_SOARER_SPEEDY, 2)
           .costs(CostInstance.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0125))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_MAGNETISM =
       REGISTER.register("shatter/magnetism", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_MAGNETISM)
@@ -258,21 +258,21 @@ public class ModModifiers {
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_1 =
       REGISTER.register("shatter/fortune_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_FORTUNE_1)
           .source(ModSpells.SHATTER)
-          .group(SHATTER_FORTUNE)
+          .group(SHATTER_FORTUNE, 1)
           .conflicts(SpellModifiers.SHATTER_SILK_TOUCH)
           .costs(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_2 =
       REGISTER.register("shatter/fortune_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_FORTUNE_2)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_FORTUNE_1)
-          .group(SHATTER_FORTUNE)
+          .group(SHATTER_FORTUNE, 2)
           .conflicts(SpellModifiers.SHATTER_SILK_TOUCH)
           .costs(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_FORTUNE_3 =
       REGISTER.register("shatter/fortune_iii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_FORTUNE_3)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_FORTUNE_2)
-          .group(SHATTER_FORTUNE)
+          .group(SHATTER_FORTUNE, 3)
           .conflicts(SpellModifiers.SHATTER_SILK_TOUCH)
           .costs(CostInstance.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250))));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_SMELTING =
@@ -287,37 +287,37 @@ public class ModModifiers {
       REGISTER.register("shatter/height_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_HEIGHT_1)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_ADJUSTABLE)
-          .group(SHATTER_HEIGHT)
+          .group(SHATTER_HEIGHT, 1)
           .costs(CostInstance.empty())));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_HEIGHT_2 =
       REGISTER.register("shatter/height_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_HEIGHT_2)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_HEIGHT_1)
-          .group(SHATTER_HEIGHT)
+          .group(SHATTER_HEIGHT, 2)
           .costs(CostInstance.empty())));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_WIDTH_1 =
       REGISTER.register("shatter/width_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_WIDTH_1)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_ADJUSTABLE)
-          .group(SHATTER_WIDTH)
+          .group(SHATTER_WIDTH, 1)
           .costs(CostInstance.empty())));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_WIDTH_2 =
       REGISTER.register("shatter/width_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_WIDTH_2)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_WIDTH_1)
-          .group(SHATTER_WIDTH)
+          .group(SHATTER_WIDTH, 2)
           .costs(CostInstance.empty())));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_1 =
       REGISTER.register("shatter/depth_i", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_DEPTH_1)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_ADJUSTABLE)
-          .group(SHATTER_DEPTH)
+          .group(SHATTER_DEPTH, 1)
           .costs(CostInstance.empty())));
   public static final DeferredHolder<SpellModifier, SpellModifier> SHATTER_DEPTH_2 =
       REGISTER.register("shatter/depth_ii", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SHATTER_DEPTH_2)
           .source(ModSpells.SHATTER)
           .parent(SpellModifiers.SHATTER_DEPTH_1)
-          .group(SHATTER_DEPTH)
+          .group(SHATTER_DEPTH, 2)
           .costs(CostInstance.empty())));
   public static final DeferredHolder<SpellModifier, SpellModifier> SYLVAN_LIGHT_COLOR =
       REGISTER.register("sylvan_light/color", () -> new SpellModifier(new SpellModifier.Properties(SpellModifiers.SYLVAN_LIGHT_COLOR)

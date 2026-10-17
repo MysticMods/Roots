@@ -19,7 +19,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SpellModifier extends Modifier<Spell, SpellModifier> implements IExtendedDescribed, ICostedChild {
@@ -28,8 +27,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   protected final SpellType.Charge chargeType; // If null, use the spell default; otherwise, unless a transformer(?), a chargeType of `OPERATION` will store the number of operations of this instance of the modifier; a charge type of `INSTANCE` will only charge once per spell -- depending on the condition type.
   // If null, it will use the spell's code, in which case if it's `OPERATION` it will be charged for every operation if specified, etc.
   protected final SpellType.Condition conditionType; // If `ALWAYS`, it's always charged. If `SPECIFIED`, it must be specified via `costs.charge(SpellModifier)`.
-  @NotNull
-  protected final GroupId groupId;
 
   protected final CostInstance defaultCosts;
   @javax.annotation.Nullable
@@ -38,13 +35,11 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   protected String descriptionTooltipId;
   protected String descriptionTooltipExtendedId;
-  private String groupDescriptionId = null;
   protected Component[] extendedDescription = null;
 
   public SpellModifier(SpellModifier.Properties properties) {
     super(properties);
     this.defaultCosts = properties.costs;
-    this.groupId = properties.groupId;
     this.chargeType = properties.chargeType;
     this.conditionType = properties.conditionType;
     this.transforming = properties.transformer;
@@ -66,8 +61,8 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @Override
   public String getOrCreateTooltipDescriptionId() {
     if (this.descriptionTooltipId == null) {
-      if (this.groupId.useGroupDescription()) {
-        this.descriptionTooltipId = this.groupId.createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey()) + ".description";
+      if (this.getGroupKey().useGroupDescription()) {
+        this.descriptionTooltipId = this.getGroupKey().createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey()) + ".description";
       } else {
         this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
       }
@@ -136,16 +131,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   }
 
   @Override
-  public boolean canGroup() {
-    return !groupId.isEmpty();
-  }
-
-  @Override
-  public GroupId getGroupKey() {
-    return groupId;
-  }
-
-  @Override
   public CostInstance getDefaultCosts() {
     return defaultCosts;
   }
@@ -166,19 +151,9 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     }
   }
 
-  @Override
-  public String getOrCreateGroupDescriptionId() {
-    if (groupDescriptionId == null) {
-      this.groupDescriptionId = groupId.createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey());
-    }
-
-    return this.groupDescriptionId;
-  }
-
   public static class Properties extends Modifier.Properties<Spell, SpellModifier, SpellModifier.Properties> {
     SpellType.Charge chargeType = null;
     SpellType.Condition conditionType = SpellType.Condition.ALWAYS;
-    GroupId groupId = GroupId.NONE;
     CostInstance costs = null;
 
     public Properties(ResourceKey<SpellModifier> key) {
@@ -212,11 +187,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
     public final Properties cost(Holder<Herb> herb, double amount) {
       this.costs = CostInstance.add(herb, amount);
-      return this;
-    }
-
-    public final Properties group (GroupId group) {
-      this.groupId = group;
       return this;
     }
   }

@@ -48,7 +48,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, Merchant {
@@ -359,7 +359,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   }
 
   protected void addOffersFromItemListings(MerchantOffers givenMerchantOffers, VillagerTrades.ItemListing[] newTrades, int maxNumbers) {
-    ArrayList<VillagerTrades.ItemListing> arraylist = Lists.newArrayList(newTrades);
+    List<VillagerTrades.ItemListing> arraylist = Lists.newArrayList(newTrades);
     int i = 0;
 
     FairyHutEntity entity = new FairyHutEntity(ModEntities.FAIRY_HUT.get(), this.getLevel());

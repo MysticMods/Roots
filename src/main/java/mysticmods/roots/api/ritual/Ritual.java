@@ -4,6 +4,7 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.Cycling;
+import mysticmods.roots.api.IPropertyDataMapped;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -49,7 +50,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstance>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance> {
+public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstance>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance>, IPropertyDataMapped {
   public static final Codec<Ritual> CODEC = RootsRegistries.RITUALS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Ritual> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS);
 
@@ -399,6 +400,11 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   public int getCount(IRitualInstance iRitualInstance) {
     return count;
+  }
+
+  @Override
+  public PropertyDataMap getPropertyMap() {
+    return builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA);
   }
 
   // Predicates

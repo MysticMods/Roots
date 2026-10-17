@@ -7,6 +7,7 @@ import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -185,9 +186,9 @@ public interface Property<T> {
     public static class Serializer implements PropertySerializer<BooleanProperty> {
       public static final MapCodec<BooleanProperty> CODEC = RecordCodecBuilder.mapCodec(
           group -> group.group(
-              Codec.BOOL.fieldOf("defaultValue").forGetter(BooleanProperty::value),
+              Codec.BOOL.fieldOf("default_value").forGetter(BooleanProperty::defaultValue),
               Codec.STRING.fieldOf("comment").forGetter(BooleanProperty::comment),
-              Codec.BOOL.optionalFieldOf("default_value", null).forGetter(o -> o.value)
+              Codec.BOOL.optionalFieldOf("value", null).forGetter(o -> o.value)
           ).apply(group, BooleanProperty::new));
       public static final MapCodec<BooleanProperty> FULL_CODEC = RecordCodecBuilder.mapCodec(
           group -> group.group(
@@ -196,7 +197,7 @@ public interface Property<T> {
               Codec.BOOL.fieldOf("value").forGetter(o -> o.value == null ? o.defaultValue : o.value)
           ).apply(group, BooleanProperty::new));
       public static final StreamCodec<ByteBuf, BooleanProperty> STREAM_CODEC = StreamCodec.composite(
-          ByteBufCodecs.BOOL, o -> o.value,
+          ByteBufCodecs.BOOL, o -> o.defaultValue,
           ByteBufCodecs.STRING_UTF8, o -> o.comment,
           ByteBufCodecs.BOOL.apply(ByteBufCodecs::optional), o -> Optional.ofNullable(o.value),
           BooleanProperty::new

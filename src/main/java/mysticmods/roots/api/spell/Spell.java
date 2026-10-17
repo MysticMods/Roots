@@ -49,7 +49,7 @@ import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance> {
+public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance>, IPropertyDataMapped {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
@@ -270,15 +270,15 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return layeredProperties.get(iSpellInstance).cast();
   }
 
-  public void buildProperties(List<PropertyHolder<?>> properties) {
-    properties.addAll(allProperties);
+  public List<PropertyHolder<?>> getProperties() {
+    return allProperties;
   }
 
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = new ArrayList<>();
-    buildProperties(properties);
-    return properties;
+  @Override
+  public PropertyDataMap getPropertyMap() {
+    return builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
   }
+
 
   protected void initializeProperties(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);

@@ -26,7 +26,7 @@ public record PropertyDataMap(List<PropertyHolder<?>> properties) {
     }
   }
 
-  public <V, T extends Property<V>> V get(PropertyHolder<T> holder) {
+  public <V, T extends Property<? extends V>> V get(PropertyHolder<T> holder) {
     PropertyHolder<T> myHolder = null;
     for (PropertyHolder<?> property : properties) {
       if (property.id().equals(holder.id())) {
