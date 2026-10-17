@@ -187,6 +187,7 @@
   "formatter.roots.number": "%s",
   "formatter.roots.percent": "%s%%",
   "formatter.roots.single_decimal": "%s",
+  "formatter.roots.sprint_speed": "×%2$s sprint speed [%1$s]",
   "formatter.roots.ticks": "%s seconds [%s ticks]",
   "gramary_mode.roots.bind_position": "Bind Position",
   "gramary_mode.roots.block_information": "Block Information",

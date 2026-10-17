@@ -1,0 +1,61 @@
+{
+  "variants": {
+    "face=ceiling,facing=east": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "x": 180
+    },
+    "face=ceiling,facing=west": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "y": 90
+    },
+    "face=floor,facing=north": {
+      "model": "roots:block/furnace_speed_amplifier"
+    },
+    "face=floor,facing=south": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "y": 270
+    },
+    "face=wall,facing=east": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "uvlock": true,
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=north": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "uvlock": true,
+      "x": 90
+    },
+    "face=wall,facing=south": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "uvlock": true,
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "roots:block/furnace_speed_amplifier",
+      "uvlock": true,
+      "x": 90,
+      "y": 270
+    }
+  }
+}

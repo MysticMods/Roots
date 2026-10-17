@@ -310,6 +310,7 @@ public final class RootsLootTableProvider {
 
     @Override
     protected void generate() {
+      dropSelf(ModBlocks.FURNACE_SPEED_AMPLIFIER.get());
       dropSelf(ModBlocks.THATCH.get());
       dropSelf(ModBlocks.RUNESTONE.get());
       dropSelf(ModBlocks.MOSSY_RUNESTONE.get());

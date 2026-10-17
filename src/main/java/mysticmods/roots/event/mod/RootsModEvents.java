@@ -108,6 +108,7 @@ public class RootsModEvents {
       event.accept(ModItems.MAGMATIC_SOIL.get());
       event.accept(ModItems.TERRAN_SOIL.get());
       event.accept(ModItems.ENCHANTED_TURF.get());
+      event.accept(ModItems.FURNACE_SPEED_AMPLIFIER.get());
 
       event.accept(ModItems.WILD_GROVE_STONE.get());
       event.accept(ModItems.PASTORAL_GROVE_STONE.get());

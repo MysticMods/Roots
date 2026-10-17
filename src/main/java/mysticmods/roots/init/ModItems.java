@@ -159,6 +159,7 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> MAGMATIC_SOIL = ITEMS.register("magmatic_soil", () -> new BlockItem(ModBlocks.MAGMATIC_SOIL.get(), new Item.Properties().fireResistant()));
   public static DeferredHolder<Item, BlockItem> TERRAN_SOIL = ITEMS.register("terran_soil", () -> new BlockItem(ModBlocks.TERRAN_SOIL.get(), new Item.Properties().fireResistant()));
   public static DeferredHolder<Item, BlockItem> ENCHANTED_TURF = ITEMS.register("enchanted_turf", () -> new EnchantedTurfBlockItem(ModBlocks.ENCHANTED_TURF.get(), new Item.Properties().rarity(Rarity.RARE)));
+  public static DeferredHolder<Item, BlockItem> FURNACE_SPEED_AMPLIFIER = ITEMS.register("furnace_speed_amplifier", () -> new BlockItem(ModBlocks.FURNACE_SPEED_AMPLIFIER.get(), new Item.Properties()));
   public static final DeferredHolder<Item, BlockItem> WILDWOOD_CHEST = ITEMS.register("wildwood_chest", () -> new BlockItem(ModBlocks.WILDWOOD_CHEST.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO: Contents
   public static DeferredHolder<Item, BlockItem> RITUAL_PEDESTAL = ITEMS.register("ritual_pedestal", () -> new BlockItem(ModBlocks.RITUAL_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));

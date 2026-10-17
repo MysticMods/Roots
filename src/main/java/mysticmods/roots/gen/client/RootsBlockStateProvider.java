@@ -10,8 +10,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
@@ -341,6 +343,19 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
 /*    ModelFile stoneAltar = models().withExistingParent("stone_altar", modLoc("block/complex/stone_altar"));
     getVariantBuilder(ModBlocks.STONE_ALTAR.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(stoneAltar).build());*/
+
+    ModelFile pylon = models().withExistingParent("furnace_speed_amplifier", modLoc("block/complex/pylon"));
+    getVariantBuilder(ModBlocks.FURNACE_SPEED_AMPLIFIER.get()).forAllStates(state -> {
+      Direction facing = state.getValue(ButtonBlock.FACING);
+      AttachFace face = state.getValue(ButtonBlock.FACE);
+
+      return ConfiguredModel.builder()
+          .modelFile(pylon)
+          .rotationX(face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? 90 : 180))
+          .rotationY((int) (face == AttachFace.CEILING ? facing : facing.getOpposite()).toYRot())
+          .uvLock(face == AttachFace.WALL)
+          .build();
+    });
 
     ModelFile mortar = models().withExistingParent("mortar", modLoc("block/complex/mortar"));
     getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(mortar)
