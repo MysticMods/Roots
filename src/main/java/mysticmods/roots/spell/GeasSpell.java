@@ -121,17 +121,6 @@ public class GeasSpell extends Spell {
     return 1;
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.valueOf(count)),
-        Component.literal(String.format("%.1f", maxHealth / 2.0)),
-        Component.literal(String.valueOf(5)),
-        Component.literal(String.format("%.1f", duration / 20.0)),
-        Component.literal(String.valueOf(duration))
-    };
-  }
-
   // TODO: when modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

@@ -260,13 +260,4 @@ public class GrowthInfusionSpell extends TwoRadiusSpell {
     }
     return new Component[]{};
   }
-
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", growthInterval / 20.0)),
-        Component.literal(String.valueOf(growthInterval)),
-        Component.literal(String.format("%.1f", reach))
-    };
-  }
 }

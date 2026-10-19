@@ -62,15 +62,6 @@ public class DandelionWindsSpell extends Spell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%s", duration / 20)),
-        Component.literal(String.format("%s", duration)),
-        Component.literal(String.format("%.1f", deflectionChance))
-    };
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     if (spellModifier.is(RootsTags.SpellModifiers.DANDELION_WINDS_INCREASES_DURATION)) {
       int count;

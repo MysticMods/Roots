@@ -116,13 +116,6 @@ public class JauntSpell extends Spell {
     return maxUse;
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.valueOf(jauntDistance))
-    };
-  }
-
   // TODO: Modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

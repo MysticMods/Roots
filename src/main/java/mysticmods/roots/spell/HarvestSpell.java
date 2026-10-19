@@ -79,14 +79,6 @@ public class HarvestSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.valueOf(radiusZX)),
-        Component.literal(String.valueOf(radiusY))
-    };
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[]{};
   }

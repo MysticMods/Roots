@@ -40,19 +40,6 @@ public class AquaBubbleSpell extends Spell {
     this.lava_reduction = properties.get(ModSpells.AQUA_BUBBLE_LAVA_REDUCTION);
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    double absorb = ((absorption + 1) * 4.0) / 2.0;
-
-    return new Component[]{
-        Component.literal(String.format("%.1f", duration / 20.0)),
-        Component.literal(String.valueOf(duration)),
-        Component.literal(String.format("%.1f", absorb)),
-        Component.literal(String.format("%.1f", 1.0 - lava_reduction)),
-        Component.literal(String.format("%.1f", 1.0 - fire_reduction))
-    };
-  }
-
   // TODO: No current modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

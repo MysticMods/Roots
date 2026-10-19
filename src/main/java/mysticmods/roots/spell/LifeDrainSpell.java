@@ -120,17 +120,6 @@ public class LifeDrainSpell extends Spell {
     return results;
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.valueOf(maxCount)),
-        Component.literal(String.format("%.1f", distance)),
-        Component.literal(String.valueOf(angle)),
-        Component.literal(String.format("%.2f", damage / 2.0)),
-        Component.literal(String.format("%.2f", heal / 2.0))
-    };
-  }
-
   // TODO: When modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

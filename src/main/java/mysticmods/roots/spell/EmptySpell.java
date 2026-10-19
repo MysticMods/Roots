@@ -18,11 +18,6 @@ public class EmptySpell extends Spell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[0];
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[0];
   }

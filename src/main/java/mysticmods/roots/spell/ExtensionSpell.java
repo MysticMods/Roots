@@ -51,18 +51,6 @@ public class ExtensionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", nightVisionDuration / 20.0)),
-        Component.literal(String.valueOf(nightVisionDuration)),
-        Component.literal(String.format("%.1f", senseDangerDuration / 20.0)),
-        Component.literal(String.valueOf(senseDangerDuration)),
-        Component.literal(String.valueOf(radiusZX)),
-        Component.literal(String.valueOf(radiusY))
-    };
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[]{};
   }

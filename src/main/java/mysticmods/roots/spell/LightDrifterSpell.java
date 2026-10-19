@@ -74,15 +74,6 @@ public class LightDrifterSpell extends Spell {
     return CastResult.success(instance.getCooldown());
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", duration / 20.0)),
-        Component.literal(String.valueOf(duration)),
-        Component.literal(String.valueOf(maxDistance))
-    };
-  }
-
   // TODO: When modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

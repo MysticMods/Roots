@@ -42,15 +42,6 @@ public class PetalShellSpell extends Spell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.valueOf(count)),
-        Component.literal(String.format("%.1f", duration / 20.0)),
-        Component.literal(String.valueOf(duration))
-    };
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[]{};
   }

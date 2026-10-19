@@ -81,13 +81,6 @@ public class SylvanLightSpell extends Spell {
     return CastResult.success(instance.getCooldown());
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", maxDistance))
-    };
-  }
-
   // TODO: when modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

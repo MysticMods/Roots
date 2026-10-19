@@ -57,15 +57,6 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    float hearts = damage / 2.0f;
-    return new Component[]{
-        Component.literal(String.format("%.1f", hearts)),
-        Component.literal(String.valueOf(count))
-    };
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     if (spellModifier.is(ModModifiers.ACID_CLOUD_FIRE)) {
       return new Component[]{

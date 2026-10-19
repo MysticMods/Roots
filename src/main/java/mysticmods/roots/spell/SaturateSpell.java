@@ -163,14 +163,6 @@ public class SaturateSpell extends Spell {
     return props.nutrition() * foodMultiplier;
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", 1 - saturationMultiplier)),
-        Component.literal(String.format("%.1f", 1 - foodMultiplier))
-    };
-  }
-
   // TODO: Modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

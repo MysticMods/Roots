@@ -66,18 +66,6 @@ public class SkySoarerSpell extends Spell {
 
   @SuppressWarnings("removal")
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    double inSprint = amplifier / RootsAPI.SPRINT_SPEED;
-    return new Component[]{
-        Component.literal(String.format("%.1f", inSprint)),
-        Component.literal(String.format("%.1f", amplifier)),
-        Component.literal(String.format("%.1f", duration / 20.0)),
-        Component.literal(String.valueOf(duration))
-    };
-  }
-
-  @SuppressWarnings("removal")
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     if (spellModifier.is(ModModifiers.SKY_SOARER_FRIENDLY_EARTH)) {
       return new Component[]{

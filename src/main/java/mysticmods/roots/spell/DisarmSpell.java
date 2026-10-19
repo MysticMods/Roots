@@ -134,18 +134,6 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.valueOf(count)),
-        Component.literal(String.valueOf(radiusZX)),
-        Component.literal(String.valueOf(radiusY)),
-        Component.literal(String.format("%.1f", 1 - dropChance)),
-        Component.literal(String.format("%.1f", glowDuration / 20.0)),
-        Component.literal(String.valueOf(glowDuration))
-    };
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[]{};
   }

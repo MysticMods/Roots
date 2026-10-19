@@ -38,14 +38,6 @@ public class MagnetismSpell extends TwoRadiusSpell {
     return 100;
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.valueOf(radiusZX)),
-        Component.literal(String.valueOf(radiusY))
-    };
-  }
-
   // TODO: When modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

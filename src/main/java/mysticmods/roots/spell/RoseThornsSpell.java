@@ -80,15 +80,6 @@ public class RoseThornsSpell extends Spell {
     }
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", duration / 20.0)),
-        Component.literal(String.valueOf(duration)),
-        Component.literal(String.format("%.2f", damage / 2.0))
-    };
-  }
-
   // TODO: Modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

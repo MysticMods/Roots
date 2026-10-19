@@ -187,11 +187,6 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[0];
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     if (spellModifier.is(RootsTags.SpellModifiers.SHATTER_INCREASES_PARAMETERS)) {
       int count;

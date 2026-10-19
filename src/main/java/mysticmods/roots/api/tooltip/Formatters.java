@@ -145,7 +145,7 @@ public class Formatters {
 
     @Override
     public MutableComponent component(Number value) {
-      return Component.translatable(key(), String.format("%.1f", value.doubleValue()));
+      return Component.translatable(key(), String.format("%.1f", 1 - value.doubleValue()));
     }
   };
 
@@ -162,7 +162,7 @@ public class Formatters {
 
     @Override
     public MutableComponent component(Number value) {
-      return Component.translatable(key(), value.doubleValue() / 2.0);
+      return Component.translatable(key(), String.format("%.2f", value.doubleValue() / 2.0));
     }
   };
 
@@ -204,6 +204,11 @@ public class Formatters {
     @Override
     public String translation() {
       return "×%2$s sprint speed [%1$s]";
+    }
+
+    @Override
+    public MutableComponent component(Number value1, Number value2) {
+      return Component.translatable(key(), String.format("%.1f", value1.doubleValue()), String.format("%.1f", value2.doubleValue()));
     }
   };
 

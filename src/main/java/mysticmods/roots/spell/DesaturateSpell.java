@@ -76,13 +76,6 @@ public class DesaturateSpell extends Spell {
     return CastResult.success(instance.getCooldown());
   }
 
-  @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", multiplier))
-    };
-  }
-
   // TODO: Modifiers
   @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {

@@ -38,14 +38,6 @@ public class NondetectionSpell extends Spell {
   }
 
   @Override
-  public Component[] createExtendedDescriptionComponents() {
-    return new Component[]{
-        Component.literal(String.format("%.1f", potionDuration / 20.0)),
-        Component.literal(String.valueOf(potionDuration))
-    };
-  }
-
-  @Override
   public Component[] createModifierDescriptionComponents(SpellModifier spellModifier) {
     return new Component[]{};
   }

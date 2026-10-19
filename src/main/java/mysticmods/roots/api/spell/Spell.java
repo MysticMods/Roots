@@ -134,7 +134,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   public Component[] getOrCreateDescriptionComponents() {
     if (extendedDescription == null) {
       if (this.numberFormatters.isEmpty()) {
-        this.extendedDescription = createExtendedDescriptionComponents();
+        return new Component[0];
       } else {
         this.extendedDescription = componentsFromFormatter(this, this.numberFormatters);
       }
@@ -142,8 +142,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
     return this.extendedDescription;
   }
-
-  public abstract Component[] createExtendedDescriptionComponents();
 
   public abstract Component[] createModifierDescriptionComponents(SpellModifier spellModifier);
 
