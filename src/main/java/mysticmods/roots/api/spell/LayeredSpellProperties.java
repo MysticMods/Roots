@@ -1,12 +1,13 @@
 package mysticmods.roots.api.spell;
 
-import com.google.common.base.Suppliers;
+import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import mysticmods.roots.api.Cycling;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
+import mysticmods.roots.api.tooltip.NumberFormatter;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
@@ -14,9 +15,8 @@ import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.Function;
 
 public class LayeredSpellProperties {
   private static final Hash.Strategy<SpellModifierSet> SPELL_MODIFIER_STRATEGY = new Hash.Strategy<>() {
@@ -37,14 +37,19 @@ public class LayeredSpellProperties {
   private final LayerSet defaultLayer;
   private final Map<ResourceKey<SpellModifier>, LayerSet> layers = new HashMap<>();
   private final Map<SpellModifierSet, LayeredSpellProperty> layerCache = new Object2ObjectOpenCustomHashMap<>(SPELL_MODIFIER_STRATEGY);
+  private final List<Pair<String, String>> stringsToGenerate = new ArrayList<>();
 
   public LayeredSpellProperties(Spell.Properties properties, Spell spell) {
-    this.defaultLayer = new LayerSet(properties.castType, properties.chargeType, true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), Suppliers.memoize(spell::getOrCreateDescriptionComponents), properties.textColor, properties.cycleComponent != null, properties.cycleComponent, false, -1);
+    this.defaultLayer = new LayerSet(properties.castType, properties.chargeType, true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), properties.componentCreator, properties.textColor, properties.cycleComponent != null, properties.cycleComponent, false, -1);
     for (Map.Entry<ResourceKey<SpellModifier>, Spell.Transformer> entry : properties.transformers.entrySet()) {
       if (this.layers.containsKey(entry.getKey())) {
         throw new IllegalStateException("Transformer already registered for modifier '" + entry.getKey() + "'!");
       }
       var t = entry.getValue();
+      if (t.generatedExtendedTooltip != null && !t.generatedExtendedTooltip.isEmpty() && t.descriptionExtendedTooltipId != null && !t.descriptionExtendedTooltipId.isEmpty()) {
+        stringsToGenerate.add(new Pair<>(t.descriptionExtendedTooltipId, t.generatedExtendedTooltip));
+        stringsToGenerate.add(new Pair<>(t.descriptionTooltipId, t.generatedSimpleTooltip));
+      }
       this.layers.put(entry.getKey(), new LayerSet(
           t.castType,
           t.unitType,
@@ -54,7 +59,7 @@ public class LayeredSpellProperties {
           t.descriptionId,
           t.descriptionTooltipId,
           t.descriptionExtendedTooltipId,
-          t.extendedComponents != null ? Suppliers.memoize(t.extendedComponents::get) : null,
+          t.componentCreator,
           t.textColor,
           t.hasComponent,
           t.cyclingComponent,
@@ -62,6 +67,10 @@ public class LayeredSpellProperties {
           t.predicateValue
       ));
     }
+  }
+
+  public List<Pair<String, String>> getTranslationStrings () {
+    return stringsToGenerate;
   }
 
   public LayeredSpellProperty get(ISpellInstance instance) {
@@ -85,7 +94,8 @@ public class LayeredSpellProperties {
   @ApiStatus.Internal
   public record LayerSet(@Nullable SpellType.Cast cast, @Nullable SpellType.Charge charge, boolean hasColors,
                          int color1, int color2, @Nullable String descriptionId, @Nullable String descriptionTooltipId,
-                         @Nullable String descriptionTooltipExtendedId, @Nullable Supplier<Component[]> componentGetter,
+                         @Nullable String descriptionTooltipExtendedId,
+                         @Nullable Function<Spell, Component[]> componentCreator,
                          @Nullable TextColor color, boolean hasComponent,
                          @Nullable DataComponentType<? extends Cycling<?>> component, boolean hasPredicateValue,
                          float predicateValue) {
@@ -99,7 +109,7 @@ public class LayeredSpellProperties {
           nextLayer.descriptionId != null ? nextLayer.descriptionId : this.descriptionId,
           nextLayer.descriptionTooltipId != null ? nextLayer.descriptionTooltipId : this.descriptionTooltipId,
           nextLayer.descriptionTooltipExtendedId != null ? nextLayer.descriptionTooltipExtendedId : this.descriptionTooltipExtendedId,
-          nextLayer.componentGetter != null ? nextLayer.componentGetter : this.componentGetter,
+          nextLayer.componentCreator != null ? nextLayer.componentCreator : this.componentCreator,
           nextLayer.color != null ? nextLayer.color : this.color,
           nextLayer.hasComponent || this.hasComponent,
           nextLayer.hasComponent ? nextLayer.component : this.component,

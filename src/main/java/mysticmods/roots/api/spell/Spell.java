@@ -2,6 +2,7 @@ package mysticmods.roots.api.spell;
 
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.*;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -11,9 +12,12 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.property.IPropertyDataMapped;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.*;
+import mysticmods.roots.api.tooltip.NumberFormatter;
+import mysticmods.roots.api.tooltip.TooltipBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -42,12 +46,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.CommonHooks;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance>, IPropertyDataMapped {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
@@ -79,6 +82,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   protected String descriptionTooltipExtendedId;
   protected Component[] extendedDescription = null;
 
+  protected final String generatedTooltipTemplate;
+  protected final String generatedExtendedTooltipTemplate;
+  protected final List<NumberFormatter<?>> numberFormatters;
+
   private final LayeredSpellProperties layeredProperties;
 
   public Spell(Properties properties) {
@@ -98,10 +105,14 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     this.maxUseProperty = properties.maxUseProperty;
     this.allProperties = new ArrayList<>(properties.allProperties);
 
+    this.generatedTooltipTemplate = properties.simpleTooltip;
+    this.generatedExtendedTooltipTemplate = properties.extendedTooltip;
+    this.numberFormatters = properties.numberFormatters;
+
     this.layeredProperties = new LayeredSpellProperties(properties, this);
   }
 
-  public ResourceKey<Spell> getKey () {
+  public ResourceKey<Spell> getKey() {
     return resourceKey;
   }
 
@@ -109,10 +120,24 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return RootsRegistries.SPELLS.wrapAsHolder(this);
   }
 
+  public static Component[] componentsFromFormatter(Spell spell, List<NumberFormatter<?>> formatters) {
+    List<Component> componentList = new ArrayList<>();
+    formatters.forEach(entry ->
+    {
+      entry.spell(spell);
+      componentList.addAll(entry.build());
+    });
+    return componentList.toArray(Component[]::new);
+  }
+
   @Override
   public Component[] getOrCreateDescriptionComponents() {
     if (extendedDescription == null) {
-      this.extendedDescription = createExtendedDescriptionComponents();
+      if (this.numberFormatters.isEmpty()) {
+        this.extendedDescription = createExtendedDescriptionComponents();
+      } else {
+        this.extendedDescription = componentsFromFormatter(this, this.numberFormatters);
+      }
     }
 
     return this.extendedDescription;
@@ -124,7 +149,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @Override
   public Component[] getOrCreateDescriptionComponents(ISpellInstance instance) {
-    return layeredProperties.get(instance).componentGetter().get();
+    return layeredProperties.get(instance).componentCreator().apply(this);
   }
 
   @Override
@@ -246,7 +271,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return costs;
   }
 
-  public SpellType.Charge getChargeType (ISpellInstance instance) {
+  public SpellType.Charge getChargeType(ISpellInstance instance) {
     return layeredProperties.get(instance).charge();
   }
 
@@ -300,6 +325,19 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     costs = holder.getData(DataMaps.SPELL_COST_DATA);
     initializeProperties(holder);
     initialize(holder);
+  }
+
+  @ApiStatus.Internal
+  public void handleTooltip(BiConsumer<String, String> strings) {
+    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.isEmpty()) {
+      RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
+      return;
+    }
+    strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
+    strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate);
+    for (Pair<String, String> translationPairs : layeredProperties.getTranslationStrings()) {
+      strings.accept(translationPairs.getFirst(), translationPairs.getSecond());
+    }
   }
 
   // TODO: This does not function how it should function
@@ -430,7 +468,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   // TODO: Transformers affecting base cooldown
-  public static class Properties {
+  public static class Properties implements TooltipBuilder.AcceptsTooltip {
     private static final Interner<DataComponentMap> COMPONENT_INTERNER = Interners.newStrongInterner();
     @Nullable
     DataComponentMap.Builder components;
@@ -455,6 +493,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     public PropertyHolder<Property.IntegerProperty> radiusZProperty = null;
 
     public Map<ResourceKey<SpellModifier>, Transformer> transformers = new HashMap<>();
+
+    public String simpleTooltip = "";
+    public String extendedTooltip = "";
+    public List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
+    public Function<Spell, Component[]> componentCreator;
 
     public Properties(ResourceKey<Spell> resourceKey) {
       this.resourceKey = resourceKey;
@@ -617,18 +660,22 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Properties transformer (ResourceKey<SpellModifier> modifier, Transformer transformer) {
+    public Properties transformer(ResourceKey<SpellModifier> modifier, Transformer transformer) {
       this.transformers.put(modifier, transformer);
       return this;
     }
 
-    public Properties transformer (Holder<SpellModifier> modifier, Transformer transformer) {
+    public Properties transformer(Holder<SpellModifier> modifier, Transformer transformer) {
       return this.transformer(modifier.getKey(), transformer);
     }
 
     // TODO: I'm concerned that this may cause issues
-    public Properties transformer (Holder<SpellModifier> modifier, BiFunction <SpellModifier, Transformer, Transformer> operator) {
+    public Properties transformer(Holder<SpellModifier> modifier, BiFunction<SpellModifier, Transformer, Transformer> operator) {
       return this.transformer(modifier.getKey(), operator.apply(modifier.value(), new Spell.Transformer()));
+    }
+
+    public TooltipBuilder<Properties> tooltip() {
+      return new TooltipBuilder<>(this);
     }
 
     DataComponentMap buildAndValidateComponents() {
@@ -643,9 +690,17 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     private DataComponentMap buildComponents() {
       return this.components == null ? DataComponentMap.EMPTY : COMPONENT_INTERNER.intern(this.components.build());
     }
+
+    @Override
+    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+      this.simpleTooltip = s;
+      this.extendedTooltip = s2;
+      this.numberFormatters = numberFormatters;
+      this.componentCreator = Util.memoize((spell) -> Spell.componentsFromFormatter(spell, this.numberFormatters));
+    }
   }
 
-  public static class Transformer {
+  public static class Transformer implements TooltipBuilder.AcceptsTooltip {
     SpellType.Cast castType = null;
     SpellType.Charge unitType = null;
     boolean hasColors = false;
@@ -654,7 +709,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     String descriptionId = null;
     String descriptionTooltipId = null;
     String descriptionExtendedTooltipId = null;
-    Supplier<Component[]> extendedComponents = null;
+    String generatedSimpleTooltip = null;
+    String generatedExtendedTooltip = null;
+    List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
+    Function<Spell, Component[]> componentCreator = null;
     TextColor textColor = null;
     boolean hasComponent = false;
     DataComponentType<? extends Cycling<?>> cyclingComponent = null;
@@ -678,20 +736,21 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     // TODO: Supplier<String>
-    public Transformer description(String descriptionId) {
+    public Transformer descriptionId(String descriptionId) {
       this.descriptionId = descriptionId;
       return this;
     }
 
-    public Transformer tooltip(String descriptionTooltipId) {
+    public Transformer tooltipId(String descriptionTooltipId) {
       this.descriptionTooltipId = descriptionTooltipId;
       return this;
     }
 
-    public Transformer extended(String descriptionExtendedTooltipId) {
+    public Transformer extendedTooltipId(String descriptionExtendedTooltipId) {
       this.descriptionExtendedTooltipId = descriptionExtendedTooltipId;
       return this;
     }
+
 
     public Transformer textColor(TextColor textColor) {
       this.textColor = textColor;
@@ -710,11 +769,23 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this;
     }
 
-    public Transformer component (Supplier<Component[]> extendedComponents) {
-      this.extendedComponents = extendedComponents;
-      return this;
+    public TooltipBuilder<Transformer> tooltip() {
+      return new TooltipBuilder<>(this);
     }
 
-    // TODO: Build and validate function?
+    public TooltipBuilder<Transformer> tooltip(IExtendedDescribed described) {
+      tooltipId(described.getTooltipDescriptionId());
+      extendedTooltipId(described.getTooltipExtendedDescriptionId());
+      descriptionId(described.getTooltipDescriptionId());
+      return tooltip();
+    }
+
+    @Override
+    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+      this.generatedSimpleTooltip = s;
+      this.generatedExtendedTooltip = s2;
+      this.numberFormatters = numberFormatters;
+      this.componentCreator = Util.memoize((spell) -> Spell.componentsFromFormatter(spell, this.numberFormatters));
+    }
   }
 }

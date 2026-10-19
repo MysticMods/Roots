@@ -755,7 +755,7 @@
   "roots.wip": "[Work In Progress]",
   "spell.roots.acid_cloud": "Acid Cloud",
   "spell.roots.acid_cloud.description": "Creates a corrosive, damaging cloud around you while channeled.",
-  "spell.roots.acid_cloud.description.extended": "Creates a corrosive cloud that deals %s hearts of damage to up to %s entities within the cloud's radius.",
+  "spell.roots.acid_cloud.description.extended": "Creates a corrosive cloud that deals %s of damage to up to %s entities within the cloud's radius of %s.",
   "spell.roots.aqua_bubble": "Aqua Bubble",
   "spell.roots.aqua_bubble.description": "Surrounds you in a bubble of water, shielding your health and reducing fire damage.",
   "spell.roots.aqua_bubble.description.extended": "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%.",

@@ -4,7 +4,7 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.Cycling;
-import mysticmods.roots.api.IPropertyDataMapped;
+import mysticmods.roots.api.property.IPropertyDataMapped;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.datamap.DataMaps;

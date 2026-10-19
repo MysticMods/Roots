@@ -11,6 +11,7 @@ import mysticmods.roots.api.reference.SpellProperties;
 import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.tooltip.Formatters;
 import mysticmods.roots.spell.*;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
@@ -36,6 +37,15 @@ public class ModSpells {
       .cooldown(ModSpells.ACID_CLOUD_COOLDOWN)
       .radius(ModSpells.ACID_CLOUD_RADIUS_ZX, ModSpells.ACID_CLOUD_RADIUS_Y)
       .properties(ModSpells.ACID_CLOUD_COUNT, ModSpells.ACID_CLOUD_DAMAGE, ModSpells.ACID_CLOUD_FIRE_TICKS, ModSpells.ACID_CLOUD_SLOW_AMPLIFIER, ModSpells.ACID_CLOUD_SLOW_DURATION, ModSpells.TEMPORAL_MORASS_AMPLIFIER, ModSpells.TEMPORAL_MORASS_COOLDOWN, ModSpells.TEMPORAL_MORASS_DURATION, ModSpells.TEMPORAL_MORASS_RADIUS_Y, ModSpells.TEMPORAL_MORASS_RADIUS_ZX)
+      .tooltip()
+      .simple("Creates a corrosive, damaging cloud around you while channeled.")
+      .segment("Creates a corrosive cloud that deals %s of damage", Formatters.formatterFor(ModSpells.ACID_CLOUD_DAMAGE)
+          .by(Formatters.HEARTS))
+      .segment("to up to %s entities", Formatters.formatterFor(ModSpells.ACID_CLOUD_COUNT)
+          .by(Formatters.NUMBER))
+      .segment("within the cloud's radius of %s.", Formatters.formatterFor(ModSpells.ACID_CLOUD_RADIUS_ZX, ModSpells.ACID_CLOUD_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COOLDOWN = P.recordProperty("acid_cloud/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
@@ -49,7 +59,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_COOLDOWN = P.recordProperty("temporal_morass/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_DURATION = P.recordProperty("temporal_morass/duration", Property.ofInt(300, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_Y = P.recordProperty("temporal_morass/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
-  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_ZX = P.recordProperty("temporal_morass/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_ZX = P.recordProperty("temporal_morass/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_AMPLIFIER = P.recordProperty("temporal_morass/amplifier", Property.ofInt(3, "The amplifier for the slowness effect applied by Temporal Morass."));
 
   public static final DeferredHolder<Spell, EmptySpell> EMPTY = REGISTER.register("empty", () -> new EmptySpell(new Spell.Properties(Spells.EMPTY)
@@ -111,7 +121,7 @@ public class ModSpells {
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = P.recordProperty("magnetism/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_ZX = P.recordProperty("magnetism/radius_zx", Property.ofInt(20, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_ZX = P.recordProperty("magnetism/radius_zx", Property.ofInt(20, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_Y = P.recordProperty("magnetism/radius_y", Property.ofInt(10, SpellProperties.RADIUS_Y));
 
   // Dandelion Winds (20 cooldown)
@@ -203,7 +213,7 @@ public class ModSpells {
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_COOLDOWN = P.recordProperty("disarm/cooldown", Property.ofInt(60, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = P.recordProperty("disarm/radius_zx", Property.ofInt(9, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = P.recordProperty("disarm/radius_zx", Property.ofInt(9, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_Y = P.recordProperty("disarm/radius_y", Property.ofInt(9, SpellProperties.RADIUS_Y));
   public static final PropertyHolder<Property.FloatProperty> DISARM_DROP_CHANCE = P.recordProperty("disarm/drop_chance", Property.ofFloat(0.35f, "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed."));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_GLOW_DURATION = P.recordProperty("disarm/glow_duration", Property.ofInt(20 * 5, "The duration of the glow effect in ticks on entities that are disarmed."));
@@ -226,7 +236,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_COOLDOWN = P.recordProperty("extension/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_NIGHT_VISION_DURATION = P.recordProperty("extension/night_vision_duration", Property.ofInt(4 * 60 * 20, "The duration of the night vision effect in ticks."));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_SENSE_DANGER_DURATION = P.recordProperty("extension/sense_danger_duration", Property.ofInt(4 * 60 * 20, "The duration of the sense danger effect in ticks."));
-  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_ZX = P.recordProperty("extension/radius_zx", Property.ofInt(40, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_ZX = P.recordProperty("extension/radius_zx", Property.ofInt(40, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_Y = P.recordProperty("extension/radius_y", Property.ofInt(20, SpellProperties.RADIUS_Y));
 
   // Nondetection (350 cooldown)
@@ -308,30 +318,39 @@ public class ModSpells {
               .textColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))
               .charge(SpellType.Charge.OPERATION)
               .color(0x157318, 0x13c3eb)
-              .description(mod.getOrCreateDescriptionId())
-              .extended(mod.getOrCreateTooltipExtendedDescriptionId())
-              .tooltip(mod.getOrCreateTooltipDescriptionId())
-              .component(mod::getOrCreateDescriptionComponents)
+              .tooltip(mod)
+              .simple("Causes accelerated growth to all eligible blocks in the area around you.")
+              .segment("Causes accelerated growth for up to %s eligible blocks", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT)
+                  .by(Formatters.NUMBER))
+              .segment("within %s blocks", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
+                  .by(Formatters.BLOCK_RANGE))
+              .segment("every %s while channeled.", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL)
+                  .by(Formatters.TICKS))
+              .segment("The number of ticks applied to each block varies.")
+              .endTooltip()
           )
           .transformer(ModModifiers.GROWTH_INFUSION_FERTILIZER, (mod, transformer) -> transformer
               .cast(SpellType.Cast.INSTANT)
               .charge(SpellType.Charge.INSTANCE)
-              .description(mod.getOrCreateDescriptionId())
+              .descriptionId(mod.getOrCreateDescriptionId())
               .predicate(0.6f)
-              .extended(mod.getOrCreateTooltipExtendedDescriptionId())
-              .tooltip(mod.getOrCreateTooltipDescriptionId())
-              .component(mod::getOrCreateDescriptionComponents))
+              .tooltip(mod)
+              .simple("Duplicates the effects of using bone meal on the targeted block.")
+              .segment("Applies up to %s stacks of bone meal to the targeted block.", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT)
+                  .by(Formatters.NUMBER))
+              .endTooltip()
+          )
           .component(ModAttachments.AOE_GROWTH_MODE.get(), AOEGrowthMode.EVERYTHING)
           .cooldown(ModSpells.GROWTH_INFUSION_COOLDOWN)
           .reach(ModSpells.GROWTH_INFUSION_ADDED_REACH)
-          .radius(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_ZX, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
+          .radius(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
           .properties(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT, ModSpells.GROWTH_INFUSION_INTERVAL, ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT, ModSpells.GROWTH_INFUSION_BONE_MEAL_COOLDOWN)
           .build()
       ));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = P.recordProperty("growth_infusion/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> GROWTH_INFUSION_ADDED_REACH = P.recordProperty("growth_infusion/added_reach", Property.ofDouble(0.0, SpellProperties.ADDED_REACH));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_INTERVAL = P.recordProperty("growth_infusion/interval", Property.ofInt(1, SpellProperties.INTERVAL));
-  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_ZX = P.recordProperty("rampant_growth/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ = P.recordProperty("rampant_growth/radius_xz", Property.ofInt(5, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL = P.recordProperty("rampant_growth/interval", Property.ofInt(2, "The interval between growth ticks in ticks."));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(9, SpellProperties.COUNT));
@@ -368,7 +387,7 @@ public class ModSpells {
   ));
 
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_COOLDOWN = P.recordProperty("harvest/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_ZX = P.recordProperty("harvest/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_ZX = P.recordProperty("harvest/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_Y = P.recordProperty("harvest/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
 
   // Life Drain (20 cooldown)

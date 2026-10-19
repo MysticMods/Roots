@@ -1,9 +1,6 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.property;
 
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.PropertyHolder;
 
 public interface IPropertyDataMapped {
   PropertyDataMap getPropertyMap();

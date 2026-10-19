@@ -13,7 +13,7 @@ public interface SpellProperties {
   String EXTENDED_DURATION = "How much time will be added to the standard duration when boosted";
 
   String RADIUS_Y = "The size of the area that will be affected on the Y axis";
-  String RADIUS_ZX = "The size of the area that will be affected on the Z and X axes";
+  String RADIUS_XZ = "The size of the area that will be affected on the X and Z axes";
   String RADIUS_Z = "The size of the area that will be affected on the Z axis";
   String RADIUS_X = "The size of the area that will be affected on the X axis";
 }

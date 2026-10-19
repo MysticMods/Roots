@@ -6,7 +6,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.Formatters;
+import mysticmods.roots.api.tooltip.Formatters;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
@@ -240,6 +240,7 @@ public final class RootsLangProvider extends LanguageProvider {
           if (!o.getValue().is(RootsTags.Spells.INVALID)) {
             add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
           }
+          describeSpell(o.getValue());
         }
     );
 
@@ -972,8 +973,8 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
     modifierExtendedDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage for %s seconds [%s ticks] after the boost effect ends.");
 
-    spellDescription(ModSpells.ACID_CLOUD, "Creates a corrosive, damaging cloud around you while channeled.");
-    spellExtendedDescription(ModSpells.ACID_CLOUD, "Creates a corrosive cloud that deals %s hearts of damage to up to %s entities within the cloud's radius.");
+    /*spellDescription(ModSpells.ACID_CLOUD, "Creates a corrosive, damaging cloud around you while channeled.");
+    spellExtendedDescription(ModSpells.ACID_CLOUD, "Creates a corrosive cloud that deals %s hearts of damage to up to %s entities within the cloud's radius.");*/
 
     modifierDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities are also set on fire.");
     modifierExtendedDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities that are not currently on fire are also set on fire for %s seconds [%s ticks].");
@@ -1101,6 +1102,10 @@ public final class RootsLangProvider extends LanguageProvider {
     add(prefix, death);
     add(prefix + ".player", player);
     add(prefix + ".item", item);
+  }
+
+  public void describeSpell (Spell spell) {
+    spell.handleTooltip(this::add);
   }
 
   public void spellDescription(Holder<Spell> spell, String value) {

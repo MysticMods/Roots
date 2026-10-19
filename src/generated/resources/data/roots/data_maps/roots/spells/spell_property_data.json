@@ -113,7 +113,7 @@
         "id": "roots:temporal_morass/radius_zx",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
+          "comment": "The size of the area that will be affected on the X and Z axes",
           "default_value": 5,
           "value": 5
         }
@@ -339,7 +339,7 @@
         "id": "roots:disarm/radius_zx",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
+          "comment": "The size of the area that will be affected on the X and Z axes",
           "default_value": 9,
           "value": 9
         }
@@ -406,7 +406,7 @@
         "id": "roots:extension/radius_zx",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
+          "comment": "The size of the area that will be affected on the X and Z axes",
           "default_value": 40,
           "value": 40
         }
@@ -506,10 +506,10 @@
         }
       },
       {
-        "id": "roots:rampant_growth/radius_zx",
+        "id": "roots:rampant_growth/radius_xz",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
+          "comment": "The size of the area that will be affected on the X and Z axes",
           "default_value": 5,
           "value": 5
         }
@@ -583,7 +583,7 @@
         "id": "roots:harvest/radius_zx",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
+          "comment": "The size of the area that will be affected on the X and Z axes",
           "default_value": 5,
           "value": 5
         }
@@ -726,7 +726,7 @@
         "id": "roots:magnetism/radius_zx",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The size of the area that will be affected on the Z and X axes",
+          "comment": "The size of the area that will be affected on the X and Z axes",
           "default_value": 20,
           "value": 20
         }
