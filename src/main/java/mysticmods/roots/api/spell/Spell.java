@@ -674,6 +674,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       return this.transformer(modifier.getKey(), operator.apply(modifier.value(), new Spell.Transformer()));
     }
 
+    public Properties tooltip (String simple) {
+      return new TooltipBuilder<>(this).simple(simple).endTooltip();
+    }
+
     public TooltipBuilder<Properties> tooltip() {
       return new TooltipBuilder<>(this);
     }

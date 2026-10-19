@@ -32,7 +32,11 @@ public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
   }
 
   public T endTooltip() {
-    this.properties.accept(simpleTooltip, String.join(" ", textSegments), propertyFormatters);
+    if (textSegments.isEmpty()) {
+      this.properties.accept(simpleTooltip, simpleTooltip, propertyFormatters);
+    } else {
+      this.properties.accept(simpleTooltip, String.join(" ", textSegments), propertyFormatters);
+    }
     return properties;
   }
 

@@ -38,7 +38,7 @@ public class RoseThornsSpell extends Spell {
   @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    radiusZX = properties.get(ModSpells.ROSE_THORNS_RADIUS_ZX);
+    radiusZX = properties.get(ModSpells.ROSE_THORNS_RADIUS_XZ);
     radiusY = properties.get(ModSpells.ROSE_THORNS_RADIUS_Y);
     duration = properties.get(ModSpells.ROSE_THORNS_DURATION);
     damage = properties.get(ModSpells.ROSE_THORNS_DAMAGE);

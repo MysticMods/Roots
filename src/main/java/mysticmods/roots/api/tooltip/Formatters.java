@@ -73,7 +73,7 @@ public class Formatters {
     }
   };
 
-  public static final Formatter<MutableComponent> DEGREES = new Formatter<>() {
+  public static final Formatter<Number> DEGREES = new Formatter<>() {
 
     @Override
     public ResourceLocation id() {
@@ -83,6 +83,11 @@ public class Formatters {
     @Override
     public String translation() {
       return "%s°";
+    }
+
+    @Override
+    public MutableComponent component(Number value) {
+      return Component.translatable(key(), String.format("%s", Math.clamp(value.intValue(), 1, 180)));
     }
   };
 
@@ -202,11 +207,11 @@ public class Formatters {
     }
   };
 
-  public static <T extends Number> NumberFormatter<T> formatterFor(PropertyHolder<? extends Property<T>> property) {
+  public static <T extends Number> NumberFormatter<T> forProperty(PropertyHolder<? extends Property<T>> property) {
     return new NumberFormatter<>(property);
   }
 
-  public static <T extends Number> NumberFormatter<T> formatterFor(PropertyHolder<? extends Property<T>> property1, PropertyHolder<? extends Property<T>> property2) {
+  public static <T extends Number> NumberFormatter<T> forProperty(PropertyHolder<? extends Property<T>> property1, PropertyHolder<? extends Property<T>> property2) {
     return new NumberFormatter<>(property1, property2);
   }
 }

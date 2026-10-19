@@ -53,7 +53,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
     this.tAmplifier = properties.get(ModSpells.TEMPORAL_MORASS_AMPLIFIER);
     this.tDuration = properties.get(ModSpells.TEMPORAL_MORASS_DURATION);
     this.tRadiusY = properties.get(ModSpells.TEMPORAL_MORASS_RADIUS_Y);
-    this.tRadiusZX = properties.get(ModSpells.TEMPORAL_MORASS_RADIUS_ZX);
+    this.tRadiusZX = properties.get(ModSpells.TEMPORAL_MORASS_RADIUS_XZ);
   }
 
   @Override

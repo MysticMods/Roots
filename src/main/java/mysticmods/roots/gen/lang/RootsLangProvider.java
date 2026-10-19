@@ -950,8 +950,6 @@ public final class RootsLangProvider extends LanguageProvider {
     add(Symmetry.RADIAL_DIFFERENT_SAME_TAG.getTranslationKey() + ".description", "Requires a different block from the same tag positioned radially around the grove stone.");
     add(Symmetry.NONE.getTranslationKey() + ".description", "No symmetry required.");
 
-    spellDescription(ModSpells.SKY_SOARER, "Propels you through the air in the direction you are looking.");
-    spellExtendedDescription(ModSpells.SKY_SOARER, "Propels you through the air at ×%s sprint speed [%s] for %s seconds [%s ticks] in the direction you are looking.");
     modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_VORTEX, "Causes ranged attackers to be pulled towards you.");
     modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_GUSTS, "Causes melee attackers to be pushed away from you.");
 
@@ -989,15 +987,6 @@ public final class RootsLangProvider extends LanguageProvider {
 
     modifierExtendedDescription(ModModifiers.ACID_CLOUD_TEMPORAL_MORASS, "Summons a Temporal Morass to the location where Acid Cloud was cast. The morass covers an area of ±%s/±%s blocks and lasts for %s seconds [%s ticks]. Entities that pass through the morass have Slowness %s applied. Effect triggers a secondary cooldown for %s seconds [%s ticks] before another morass can be summoned.");
 
-    spellDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water, shielding your health and reducing fire damage.");
-    spellExtendedDescription(ModSpells.AQUA_BUBBLE, "Surrounds you in a bubble of water for %s seconds [%s ticks] and grants %s hearts of absorption for the same duration. While active, reduces damage from lava by %s%% and damage from fire by %s%%.");
-
-    spellDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body, allowing you to float through entities and terrain for a short time and distance. Returns you to your body upon expiration.");
-    spellExtendedDescription(ModSpells.LIGHT_DRIFTER, "Expels you from your body for %s seconds [%s ticks], allowing you to float through entities and terrain up to %s blocks away from your location when casting the spell. Triggers a base cooldown of %s seconds [%s ticks].");
-    spellDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs to your location.");
-    spellExtendedDescription(ModSpells.MAGNETISM, "Transports loose items and experience orbs within %s blocks horizontally and %s blocks vertically to your location.");
-    spellDescription(ModSpells.DANDELION_WINDS, "Has a chance to deflect projectiles aimed at you.");
-    spellExtendedDescription(ModSpells.DANDELION_WINDS, "Applies a buff for %s seconds [%s ticks] that gives a %s%% chance to deflect projectiles aimed at you.");
     // These use group id
     modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the Dandelion Winds effect.");
     modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
@@ -1012,39 +1001,12 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_STATUE, "Increases your knockback resistance. [NYI]");
     modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_INFERNO, "Enflames nearby enemies. [NYI]");
 
-    spellDescription(ModSpells.DECAY, "Causes undead entities to decay and shed resources, permanently losing maximum health.");
-    spellExtendedDescription(ModSpells.DECAY, "Causes up to %s undead entities within ±%s/±%s blocks to decay, shedding resources and permanently losing maximum health [result varies depending on the entity]. The maximum number of decay applications varies depending on the entity.");
 
-    spellDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health.");
-    spellExtendedDescription(ModSpells.DESATURATE, "Directly converts saturation and food levels into health. Each point of food provides %s hearts of healing.");
-    spellDescription(ModSpells.SATURATE, "Directly converts food and drink items in your inventory to saturation and food levels. Some value is lost in this process.");
-    spellExtendedDescription(ModSpells.SATURATE, "Directly consumes food items, applying %s%% of the item's saturation and %s%% of the item's food to you.");
-    spellDescription(ModSpells.EMPTY, "Placeholder value. This spell cannot be cast!");
-    spellExtendedDescription(ModSpells.EMPTY, "Placeholder value. This spell cannot be cast!");
-    spellDescription(ModSpells.DISARM, "Disarms entities around you, with a chance to drop the held items.");
-    spellExtendedDescription(ModSpells.DISARM, "Disarms up to %s entities within ±%s/±%s blocks. The chance to drop each equipped item is %s%% or the default drop chance, whichever is lower. Disarmed entities will then glow for %s seconds [%s ticks].");
-    spellDescription(ModSpells.EXTENSION, "Extends your senses, allowing you to see in the dark and sense nearby enemies.");
-    spellExtendedDescription(ModSpells.EXTENSION, "Extends your senses, applying night vision for %s seconds [%s ticks] and sense danger for %s [%s ticks]. Sense danger causes hostile entities that remain within ±%s/±%s blocks to glow.");
-    spellDescription(ModSpells.NONDETECTION, "Reduces the range at which enemies can detect your presence.");
-    spellExtendedDescription(ModSpells.NONDETECTION, "Reduces the range at which enemies can detect your presence for %s seconds [%s ticks].");
-    spellDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light.");
-    spellExtendedDescription(ModSpells.SYLVAN_LIGHT, "Creates a permanent glowing orb of light up to %s blocks away in the direction you are looking.");
-    spellDescription(ModSpells.GEAS, "Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.");
-    spellExtendedDescription(ModSpells.GEAS, "Places a geas on up to %s entities that are visible to you whose maximum health does not exceed %s hearts, up to %s blocks away. For the duration of %s seconds [%s ticks], affected entities will be unable to target you.");
-    spellDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block.");
-    spellDescription(ModSpells.RAMPANT_GROWTH, "Use Growth Infusion instead!");
-    spellExtendedDescription(ModSpells.RAMPANT_GROWTH, "Use growth infusion instead!");
-    spellExtendedDescription(ModSpells.GROWTH_INFUSION, "Causes accelerated growth to the targeted, eligible block every %s seconds [%s ticks] while channeled. While casting this spell, your block interaction range for it is increased by %s blocks.");
-    modifierDescription(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH, "Causes accelerated growth to all eligible blocks in the area around you.");
-    modifierExtendedDescription(ModModifiers.GROWTH_INFUSION_RAMPANT_GROWTH, "Causes accelerated growth for up to %s eligible blocks within ±%s/±%s blocks every %s seconds [%s ticks] while channeled. The number of ticks applied to each block varies.");
     // TODO: Handle this: both of these need to be 'placeholder' modifiers.
     modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_TARGETED_GROWTH, "Causes accelerated growth to only the targeted block. [NYI]");
     modifierDescriptionBoth(ModModifiers.SHATTER_ADJUSTABLE, "Group of modifiers that allow for the adjustment of the width, depth and height of the Shatter spell.");
 
     modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_HYDRATION, "The soil crops are growing upon has its moisture level increased if it has a moisture level.");
-
-    modifierDescription(ModModifiers.GROWTH_INFUSION_FERTILIZER, "Duplicates the effects of using bone meal on the targeted block.");
-    modifierExtendedDescription(ModModifiers.GROWTH_INFUSION_FERTILIZER, "Applies up to %s stacks of bone meal to the targeted block.");
 
     modifierDescription(ModModifiers.SHATTER_DEPTH_1, "Increases the depth of the Shatter spell.");
     modifierExtendedDescription(ModModifiers.SHATTER_DEPTH_1, "Increases the depth of the Shatter spell to %s blocks.");
@@ -1052,19 +1014,6 @@ public final class RootsLangProvider extends LanguageProvider {
     modifierExtendedDescription(ModModifiers.SHATTER_WIDTH_1, "Increases the width of the Shatter spell to %s blocks.");
     modifierDescription(ModModifiers.SHATTER_HEIGHT_1, "Increases the height of the Shatter spell.");
     modifierExtendedDescription(ModModifiers.SHATTER_HEIGHT_1, "Increases the height of the Shatter spell to %s blocks.");
-
-    spellDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks in a radius around you.");
-    spellExtendedDescription(ModSpells.HARVEST, "Harvests and replants all eligible blocks within ±%s/±%s blocks around you.");
-    spellDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.");
-    spellExtendedDescription(ModSpells.LIFE_DRAIN, "Attempts to drain the life from up to %s random entities who are up to %s blocks away in a %s° range, centred on the direction you are facing, dealing %s hearts of damage and healing you for %s hearts.");
-    spellDescription(ModSpells.PETAL_SHELL, "Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.");
-    spellExtendedDescription(ModSpells.PETAL_SHELL, "Creates a shield of %s impenetrable petals around you for %s seconds [%s ticks]. Each attack you take while the effect is active will be blocked, breaking the petal until none remain.");
-    spellDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.");
-    spellExtendedDescription(ModSpells.ROSE_THORNS, "Creates a temporary cluster of viciously sharp vines on the block you are looking at that lasts for %s seconds [%s ticks]. The first entity that touches it will take %s hearts of damage and become trapped until the spell ends.");
-    spellDescription(ModSpells.SHATTER, "Breaks the targeted block. The number of broken blocks can be increased with modifiers.");
-    spellExtendedDescription(ModSpells.SHATTER, "Breaks the targeted block. The number of broken blocks can be increased with modifiers.");
-    spellDescription(ModSpells.JAUNT, "Teleports you a short way in the direction you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.");
-    spellExtendedDescription(ModSpells.JAUNT, "Teleports you %s blocks in the direction you are looking, the distance increasing the longer the spell is charged for, placing you on a safe surface on the next highest or lowest surface.");
 
     addDamage(ModDamage.ACID_CLOUD, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
     addDamage(ModDamage.ACID_CLOUD_NO_KNOCKBACK, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");

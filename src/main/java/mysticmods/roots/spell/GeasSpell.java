@@ -33,7 +33,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class GeasSpell extends Spell {
-  private int count, duration, maxCooldown;
+  private int count, duration, maxCooldown, maxDistance;
   private double maxHealth;
 
   public GeasSpell(Properties properties) {
@@ -48,6 +48,7 @@ public class GeasSpell extends Spell {
     this.duration = dataMap.get(ModSpells.GEAS_DURATION);
     this.maxCooldown = dataMap.get(ModSpells.GEAS_MAX_COOLDOWN);
     this.maxHealth = dataMap.get(ModSpells.GEAS_MAX_HEALTH);
+    this.maxDistance = dataMap.get(ModSpells.GEAS_MAX_DISTANCE);
   }
 
   private static final Function<Player, Predicate<Entity>> GEAS_PREDICATE = Util.memoize((pPlayer) -> EntitySelector.NO_SPECTATORS.and(Entity::isAlive)

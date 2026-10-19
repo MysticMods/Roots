@@ -26,6 +26,18 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModSpells {
   private static final DeferredRegister<Spell> REGISTER = DeferredRegister.create(RootsRegistries.Keys.SPELLS, RootsAPI.MODID);
 
+  public static final DeferredHolder<Spell, EmptySpell> EMPTY = REGISTER.register("empty", () -> new EmptySpell(new Spell.Properties(Spells.EMPTY)
+      .type(SpellType.Cast.INSTANT)
+      .charge(SpellType.Charge.INSTANCE)
+      .color(0xffffff, 0xc0c0c0)
+      .textColor(ChatFormatting.DARK_PURPLE)
+      .costs(CostInstance.EMPTY)
+      .cooldown(ModSpells.EMPTY_COOLDOWN)
+      .tooltip("Placeholder value. This spell cannot be cast!")
+      .build()
+  ));
+  public static final PropertyHolder<Property.IntegerProperty> EMPTY_COOLDOWN = P.recordProperty("empty/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN + " (this spell is unused)"));
+
   // Acid Cloud (20 cooldown)
   public static final DeferredHolder<Spell, AcidCloudSpell> ACID_CLOUD = REGISTER.register(Spells.ACID_CLOUD.location()
       .getPath(), () -> new AcidCloudSpell(new Spell.Properties(Spells.ACID_CLOUD)
@@ -35,21 +47,21 @@ public class ModSpells {
       .charge(SpellType.Charge.INSTANCE)
       .costs(CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)))
       .cooldown(ModSpells.ACID_CLOUD_COOLDOWN)
-      .radius(ModSpells.ACID_CLOUD_RADIUS_ZX, ModSpells.ACID_CLOUD_RADIUS_Y)
-      .properties(ModSpells.ACID_CLOUD_COUNT, ModSpells.ACID_CLOUD_DAMAGE, ModSpells.ACID_CLOUD_FIRE_TICKS, ModSpells.ACID_CLOUD_SLOW_AMPLIFIER, ModSpells.ACID_CLOUD_SLOW_DURATION, ModSpells.TEMPORAL_MORASS_AMPLIFIER, ModSpells.TEMPORAL_MORASS_COOLDOWN, ModSpells.TEMPORAL_MORASS_DURATION, ModSpells.TEMPORAL_MORASS_RADIUS_Y, ModSpells.TEMPORAL_MORASS_RADIUS_ZX)
+      .radius(ModSpells.ACID_CLOUD_RADIUS_XZ, ModSpells.ACID_CLOUD_RADIUS_Y)
+      .properties(ModSpells.ACID_CLOUD_COUNT, ModSpells.ACID_CLOUD_DAMAGE, ModSpells.ACID_CLOUD_FIRE_TICKS, ModSpells.ACID_CLOUD_SLOW_AMPLIFIER, ModSpells.ACID_CLOUD_SLOW_DURATION, ModSpells.TEMPORAL_MORASS_AMPLIFIER, ModSpells.TEMPORAL_MORASS_COOLDOWN, ModSpells.TEMPORAL_MORASS_DURATION, ModSpells.TEMPORAL_MORASS_RADIUS_Y, ModSpells.TEMPORAL_MORASS_RADIUS_XZ)
       .tooltip()
       .simple("Creates a corrosive, damaging cloud around you while channeled.")
-      .segment("Creates a corrosive cloud that deals %s of damage", Formatters.formatterFor(ModSpells.ACID_CLOUD_DAMAGE)
+      .segment("Creates a corrosive cloud that deals %s of damage", Formatters.forProperty(ModSpells.ACID_CLOUD_DAMAGE)
           .by(Formatters.HEARTS))
-      .segment("to up to %s entities", Formatters.formatterFor(ModSpells.ACID_CLOUD_COUNT)
+      .segment("to up to %s entities", Formatters.forProperty(ModSpells.ACID_CLOUD_COUNT)
           .by(Formatters.NUMBER))
-      .segment("within the cloud's radius of %s.", Formatters.formatterFor(ModSpells.ACID_CLOUD_RADIUS_ZX, ModSpells.ACID_CLOUD_RADIUS_Y)
+      .segment("within the cloud's radius of %s.", Formatters.forProperty(ModSpells.ACID_CLOUD_RADIUS_XZ, ModSpells.ACID_CLOUD_RADIUS_Y)
           .by(Formatters.BLOCK_RANGE))
       .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COOLDOWN = P.recordProperty("acid_cloud/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_ZX = P.recordProperty("acid_cloud/radius_zx", Property.ofInt(2, "Radius"));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_XZ = P.recordProperty("acid_cloud/radius_xz", Property.ofInt(2, "Radius"));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_Y = P.recordProperty("acid_cloud/radius_y", Property.ofInt(2, "Radius"));
   public static final PropertyHolder<Property.FloatProperty> ACID_CLOUD_DAMAGE = P.recordProperty("acid_cloud/damage", Property.ofFloat(2.0f, SpellProperties.DAMAGE));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COUNT = P.recordProperty("acid_cloud/count", Property.ofInt(1, SpellProperties.COUNT));
@@ -59,19 +71,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_COOLDOWN = P.recordProperty("temporal_morass/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_DURATION = P.recordProperty("temporal_morass/duration", Property.ofInt(300, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_Y = P.recordProperty("temporal_morass/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
-  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_ZX = P.recordProperty("temporal_morass/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_XZ));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_XZ = P.recordProperty("temporal_morass/radius_xz", Property.ofInt(5, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_AMPLIFIER = P.recordProperty("temporal_morass/amplifier", Property.ofInt(3, "The amplifier for the slowness effect applied by Temporal Morass."));
-
-  public static final DeferredHolder<Spell, EmptySpell> EMPTY = REGISTER.register("empty", () -> new EmptySpell(new Spell.Properties(Spells.EMPTY)
-      .type(SpellType.Cast.INSTANT)
-      .charge(SpellType.Charge.INSTANCE)
-      .color(0xffffff, 0xc0c0c0)
-      .textColor(ChatFormatting.DARK_PURPLE)
-      .costs(CostInstance.EMPTY)
-      .cooldown(ModSpells.EMPTY_COOLDOWN)
-      .build()
-  ));
-  public static final PropertyHolder<Property.IntegerProperty> EMPTY_COOLDOWN = P.recordProperty("empty/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN + " (this spell is unused)"));
 
   // Aqua Bubble (1200 cooldown)
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = REGISTER.register(Spells.AQUA_BUBBLE.location()
@@ -84,6 +85,17 @@ public class ModSpells {
           .cost(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)
           .cooldown(ModSpells.AQUA_BUBBLE_COOLDOWN)
           .properties(ModSpells.AQUA_BUBBLE_ABSORPTION, ModSpells.AQUA_BUBBLE_DURATION, ModSpells.AQUA_BUBBLE_FIRE_REDUCTION, ModSpells.AQUA_BUBBLE_LAVA_REDUCTION)
+          .tooltip()
+          .simple("Surrounds you in a bubble of water, shielding your health and reducing fire damage.")
+          .segment("Surrounds you in a bubble of water for %s", Formatters.forProperty(ModSpells.AQUA_BUBBLE_DURATION)
+              .by(Formatters.TICKS))
+          .segment("and grants %s of absorption for the same duration.", Formatters.forProperty(ModSpells.AQUA_BUBBLE_ABSORPTION)
+              .by(Formatters.HEARTS))
+          .segment("While active, reduces damage from lava by %s", Formatters.forProperty(ModSpells.AQUA_BUBBLE_LAVA_REDUCTION)
+              .by(Formatters.PERCENT))
+          .segment("and damage from fire by %s.", Formatters.forProperty(ModSpells.AQUA_BUBBLE_FIRE_REDUCTION)
+              .by(Formatters.PERCENT))
+          .endTooltip()
           .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_COOLDOWN = P.recordProperty("aqua_bubble/cooldown", Property.ofInt(1200, SpellProperties.COOLDOWN));
@@ -102,6 +114,13 @@ public class ModSpells {
       .cost(ModHerbs.MOONGLOW, SpellCosts.BASE_0250)
       .cooldown(ModSpells.LIGHT_DRIFTER_COOLDOWN)
       .properties(ModSpells.LIGHT_DRIFTER_DISTANCE, ModSpells.LIGHT_DRIFTER_DURATION)
+      .tooltip()
+      .simple("Expels you from your body, allowing you to float through entities and terrain for a short time and distance. Returns you to your body upon expiration.")
+      .segment("Expels you from your body for %s", Formatters.forProperty(ModSpells.LIGHT_DRIFTER_DURATION)
+          .by(Formatters.TICKS))
+      .segment("allowing you to float through entities and terrain up to %s away from the location where the spell was cast.", Formatters.forProperty(ModSpells.LIGHT_DRIFTER_DISTANCE)
+          .by(Formatters.NUMBER))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_COOLDOWN = P.recordProperty("light_drifter/cooldown", Property.ofInt(600, SpellProperties.COOLDOWN));
@@ -117,11 +136,16 @@ public class ModSpells {
       .textColor(ChatFormatting.YELLOW)
       .cost(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0016)
       .cooldown(ModSpells.MAGNETISM_COOLDOWN)
-      .radius(ModSpells.MAGNETISM_RADIUS_ZX, ModSpells.MAGNETISM_RADIUS_Y)
+      .radius(ModSpells.MAGNETISM_RADIUS_XZ, ModSpells.MAGNETISM_RADIUS_Y)
+      .tooltip()
+      .simple("Transports loose items and experience orbs to your location.")
+      .segment("Transports loose items and experience orbs within %s blocks to your location.", Formatters.forProperty(ModSpells.MAGNETISM_RADIUS_XZ, ModSpells.MAGNETISM_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = P.recordProperty("magnetism/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_ZX = P.recordProperty("magnetism/radius_zx", Property.ofInt(20, SpellProperties.RADIUS_XZ));
+  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_XZ = P.recordProperty("magnetism/radius_xz", Property.ofInt(20, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_Y = P.recordProperty("magnetism/radius_y", Property.ofInt(10, SpellProperties.RADIUS_Y));
 
   // Dandelion Winds (20 cooldown)
@@ -134,6 +158,12 @@ public class ModSpells {
       .costs(CostInstance.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0125)))
       .cooldown(ModSpells.DANDELION_WINDS_COOLDOWN)
       .properties(ModSpells.DANDELION_WINDS_DURATION_INCREASE, ModSpells.DANDELION_WINDS_DURATION, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE, ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN)
+      .tooltip()
+      .simple("Has a chance to deflect projectiles aimed at you.")
+      .segment("Applies a buff for %s", Formatters.forProperty(ModSpells.DANDELION_WINDS_DURATION).by(Formatters.TICKS))
+      .segment("that gives a %s chance to deflect projectiles aimed at you.", Formatters.forProperty(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE)
+          .by(Formatters.PERCENT))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_DURATION = P.recordProperty("dandelion_winds/duration", Property.ofInt(20 * 60, SpellProperties.DURATION));
@@ -155,12 +185,19 @@ public class ModSpells {
       .costs(CostInstance.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250)))
       .textColor(ChatFormatting.DARK_GREEN)
       .cooldown(ModSpells.DECAY_COOLDOWN)
-      .radius(ModSpells.DECAY_RADIUS_ZX, ModSpells.DECAY_RADIUS_Y)
+      .radius(ModSpells.DECAY_RADIUS_XZ, ModSpells.DECAY_RADIUS_Y)
       .properties(ModSpells.DECAY_COUNT, ModSpells.DECAY_COOLDOWN_BOSS_MODIFIER, ModSpells.DECAY_COOLDOWN_HEART_MODIFIER)
+      .tooltip()
+      .simple("Causes undead entities to decay and shed resources, permanently losing maximum health.")
+      .segment("Causes up to %s undead entities", Formatters.forProperty(ModSpells.DECAY_COUNT))
+      .segment("within %s blocks to decay,", Formatters.forProperty(ModSpells.DECAY_RADIUS_XZ, ModSpells.DECAY_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .segment("shedding resources and permanently losing maximum health. Maximum health lost varies depending on the entity.")
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_COOLDOWN = P.recordProperty("decay/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_ZX = P.recordProperty("decay/radius_zx", Property.ofInt(3, "Radius"));
+  public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_XZ = P.recordProperty("decay/radius_xz", Property.ofInt(3, "Radius"));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_RADIUS_Y = P.recordProperty("decay/radius_y", Property.ofInt(2, "Radius"));
   public static final PropertyHolder<Property.IntegerProperty> DECAY_COUNT = P.recordProperty("decay/count", Property.ofInt(1, SpellProperties.COUNT));
   public static final PropertyHolder<Property.DoubleProperty> DECAY_COOLDOWN_BOSS_MODIFIER = P.recordProperty("decay/cooldown_boss_modifier", Property.ofDouble(2.5, "How much the cooldown should be multiplied by when decaying a boss entity."));
@@ -176,6 +213,12 @@ public class ModSpells {
       .costs(CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)))
       .cooldown(ModSpells.DESATURATE_COOLDOWN)
       .properties(ModSpells.DESATURATE_MULTIPLIER)
+      .tooltip()
+      .simple("Directly converts saturation and food levels into health.")
+      .segment("Directly converts saturation and food levels into health.")
+      .segment("Each point of food provides %s of healing.", Formatters.forProperty(ModSpells.DESATURATE_MULTIPLIER)
+          .by(Formatters.PERCENT))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> DESATURATE_COOLDOWN = P.recordProperty("desaturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));
@@ -192,6 +235,13 @@ public class ModSpells {
       .costs(CostInstance.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)))
       .cooldown(ModSpells.SATURATE_COOLDOWN)
       .properties(ModSpells.SATURATE_FOOD_MULTIPLIER, ModSpells.SATURATE_SATURATION_MULTIPLIER)
+      .tooltip()
+      .simple("Directly converts food and drink items in your inventory to saturation and food levels. Some value is lost in this process.")
+      .segment("Directly consumes food items, applying %s of the item's saturation", Formatters.forProperty(ModSpells.SATURATE_SATURATION_MULTIPLIER)
+          .by(Formatters.PERCENT))
+      .segment("and %s of the item's food into nutrition.", Formatters.forProperty(ModSpells.SATURATE_FOOD_MULTIPLIER)
+          .by(Formatters.PERCENT))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> SATURATE_COOLDOWN = P.recordProperty("saturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));
@@ -208,12 +258,22 @@ public class ModSpells {
       .costs(CostInstance.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0125), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0125
       )))
       .cooldown(ModSpells.DISARM_COOLDOWN)
-      .radius(ModSpells.DISARM_RADIUS_ZX, ModSpells.DISARM_RADIUS_Y)
+      .radius(ModSpells.DISARM_RADIUS_XZ, ModSpells.DISARM_RADIUS_Y)
       .properties(ModSpells.DISARM_COUNT, ModSpells.DISARM_DROP_CHANCE, ModSpells.DISARM_GLOW_DURATION)
+      .tooltip()
+      .simple("Disarms entities around you, with a chance to drop the held items.")
+      .segment("Disarms up to %s entities", Formatters.forProperty(ModSpells.DISARM_COUNT).by(Formatters.NUMBER))
+      .segment("within %s blocks.", Formatters.forProperty(ModSpells.DISARM_RADIUS_XZ, ModSpells.DISARM_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .segment("The chance to drop each equipped item is %s or the default chance, whichever is lower.", Formatters.forProperty(ModSpells.DISARM_DROP_CHANCE)
+          .by(Formatters.PERCENT))
+      .segment("Disarmed entities will glow for %s.", Formatters.forProperty(ModSpells.DISARM_GLOW_DURATION)
+          .by(Formatters.TICKS))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_COOLDOWN = P.recordProperty("disarm/cooldown", Property.ofInt(60, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = P.recordProperty("disarm/radius_zx", Property.ofInt(9, SpellProperties.RADIUS_XZ));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_XZ = P.recordProperty("disarm/radius_xz", Property.ofInt(9, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_Y = P.recordProperty("disarm/radius_y", Property.ofInt(9, SpellProperties.RADIUS_Y));
   public static final PropertyHolder<Property.FloatProperty> DISARM_DROP_CHANCE = P.recordProperty("disarm/drop_chance", Property.ofFloat(0.35f, "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed."));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_GLOW_DURATION = P.recordProperty("disarm/glow_duration", Property.ofInt(20 * 5, "The duration of the glow effect in ticks on entities that are disarmed."));
@@ -229,14 +289,23 @@ public class ModSpells {
       .textColor(ChatFormatting.BLUE)
       .color(0xcde645, 0xb872b1)
       .cooldown(ModSpells.EXTENSION_COOLDOWN)
-      .radius(ModSpells.EXTENSION_RADIUS_ZX, ModSpells.EXTENSION_RADIUS_Y)
+      .radius(ModSpells.EXTENSION_RADIUS_XZ, ModSpells.EXTENSION_RADIUS_Y)
       .properties(ModSpells.EXTENSION_NIGHT_VISION_DURATION, ModSpells.EXTENSION_SENSE_DANGER_DURATION)
+      .tooltip()
+      .simple("Extends your senses, allowing you to see in the dark and sense nearby enemies.")
+      .segment("Extends your senses, applying night vision for %s", Formatters.forProperty(ModSpells.EXTENSION_NIGHT_VISION_DURATION)
+          .by(Formatters.TICKS))
+      .segment("and sense danger for %s.", Formatters.forProperty(ModSpells.EXTENSION_SENSE_DANGER_DURATION)
+          .by(Formatters.TICKS))
+      .segment("Sense danger causes hostile entities within %s blocks to glow.", Formatters.forProperty(ModSpells.EXTENSION_RADIUS_XZ, ModSpells.EXTENSION_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_COOLDOWN = P.recordProperty("extension/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_NIGHT_VISION_DURATION = P.recordProperty("extension/night_vision_duration", Property.ofInt(4 * 60 * 20, "The duration of the night vision effect in ticks."));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_SENSE_DANGER_DURATION = P.recordProperty("extension/sense_danger_duration", Property.ofInt(4 * 60 * 20, "The duration of the sense danger effect in ticks."));
-  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_ZX = P.recordProperty("extension/radius_zx", Property.ofInt(40, SpellProperties.RADIUS_XZ));
+  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_XZ = P.recordProperty("extension/radius_xz", Property.ofInt(40, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_Y = P.recordProperty("extension/radius_y", Property.ofInt(20, SpellProperties.RADIUS_Y));
 
   // Nondetection (350 cooldown)
@@ -249,6 +318,11 @@ public class ModSpells {
       .textColor(ChatFormatting.DARK_AQUA)
       .cooldown(ModSpells.NONDETECTION_COOLDOWN)
       .properties(ModSpells.NONDETECTION_DURATION)
+      .tooltip()
+      .simple("Reduces the range at which enemies can detect your presence.")
+      .segment("Reduces the range at which enemies can detect your presence for %s.", Formatters.forProperty(ModSpells.NONDETECTION_DURATION)
+          .by(Formatters.TICKS))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_COOLDOWN = P.recordProperty("nondetection/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
@@ -264,6 +338,11 @@ public class ModSpells {
       .textColor(ChatFormatting.LIGHT_PURPLE)
       .cooldown(ModSpells.SYLVAN_LIGHT_COOLDOWN)
       .properties(ModSpells.SYLVAN_LIGHT_DECAY, ModSpells.SYLVAN_LIGHT_MAX_DISTANCE)
+      .tooltip()
+      .simple("Creates a permanent glowing orb of light.")
+      .segment("Creates a permanent glowing orb of light up to %s blocks away in the direction you are looking.", Formatters.forProperty(ModSpells.SYLVAN_LIGHT_MAX_DISTANCE)
+          .by(Formatters.NUMBER))
+      .endTooltip()
       .build()
   ));
 
@@ -285,9 +364,18 @@ public class ModSpells {
       .costs(CostInstance.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)))
       .color(0x802020, 0x202020)
       .cooldown(ModSpells.GEAS_COOLDOWN)
-      .properties(ModSpells.GEAS_COUNT, ModSpells.GEAS_DURATION, ModSpells.GEAS_MAX_COOLDOWN, ModSpells.GEAS_MAX_HEALTH)
+      .properties(ModSpells.GEAS_COUNT, ModSpells.GEAS_DURATION, ModSpells.GEAS_MAX_COOLDOWN, ModSpells.GEAS_MAX_HEALTH, ModSpells.GEAS_MAX_DISTANCE)
+      .tooltip()
+      .simple("Places a geas on a nearby entity. While under its effects, the entity will be reluctant to attack you.")
+      .segment("Places a geas on up to %s entities that are visible to you", Formatters.forProperty(ModSpells.GEAS_COUNT)
+          .by(Formatters.NUMBER))
+      .segment("whose maximum health does not exceed %s,", Formatters.forProperty(ModSpells.GEAS_MAX_HEALTH).by(Formatters.HEARTS))
+      .segment("up to %s blocks away.", Formatters.forProperty(ModSpells.GEAS_MAX_DISTANCE).by(Formatters.NUMBER))
+      .segment("For %s, affected enemies will be unable to target you.", Formatters.forProperty(ModSpells.GEAS_DURATION).by(Formatters.TICKS))
+      .endTooltip()
       .build()
   ));
+  public static final PropertyHolder<Property.IntegerProperty> GEAS_MAX_DISTANCE = P.recordProperty("geas/max_distance", Property.ofInt(5, "Entities must be within this max distance to be affected by the spell."));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_COOLDOWN = P.recordProperty("geas/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_MAX_COOLDOWN = P.recordProperty("geas/max_cooldown", Property.ofInt(80 * 10, "The maximum cooldown for the geas spell when scaling based off maximum health."));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_DURATION = P.recordProperty("geas/duration", Property.ofInt(400, SpellProperties.DURATION));
@@ -320,11 +408,11 @@ public class ModSpells {
               .color(0x157318, 0x13c3eb)
               .tooltip(mod)
               .simple("Causes accelerated growth to all eligible blocks in the area around you.")
-              .segment("Causes accelerated growth for up to %s eligible blocks", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT)
+              .segment("Causes accelerated growth for up to %s eligible blocks", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT)
                   .by(Formatters.NUMBER))
-              .segment("within %s blocks", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
+              .segment("within %s blocks", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
                   .by(Formatters.BLOCK_RANGE))
-              .segment("every %s while channeled.", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL)
+              .segment("every %s while channeled.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL)
                   .by(Formatters.TICKS))
               .segment("The number of ticks applied to each block varies.")
               .endTooltip()
@@ -336,7 +424,7 @@ public class ModSpells {
               .predicate(0.6f)
               .tooltip(mod)
               .simple("Duplicates the effects of using bone meal on the targeted block.")
-              .segment("Applies up to %s stacks of bone meal to the targeted block.", Formatters.formatterFor(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT)
+              .segment("Applies up to %s stacks of bone meal to the targeted block.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT)
                   .by(Formatters.NUMBER))
               .endTooltip()
           )
@@ -345,6 +433,11 @@ public class ModSpells {
           .reach(ModSpells.GROWTH_INFUSION_ADDED_REACH)
           .radius(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
           .properties(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT, ModSpells.GROWTH_INFUSION_INTERVAL, ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT, ModSpells.GROWTH_INFUSION_BONE_MEAL_COOLDOWN)
+          .tooltip()
+          .simple("Causes accelerated growth to the targeted, eligible block.")
+          .segment("Causes accelerated growth to the targeted, eligible block every %s while channeled.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_INTERVAL).by(Formatters.TICKS))
+          .segment("While casting this spell, your block interaction range for it is increase by %s blocks.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_ADDED_REACH).by(Formatters.NUMBER))
+          .endTooltip()
           .build()
       ));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = P.recordProperty("growth_infusion/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
@@ -369,6 +462,7 @@ public class ModSpells {
           .textColor(ChatFormatting.YELLOW)
           .component(ModAttachments.AOE_GROWTH_MODE, AOEGrowthMode.EVERYTHING)
           .cooldown(ModSpells.RAMPANT_GROWTH_COOLDOWN_UNUSED)
+          .tooltip("Use Growth Infusion instead!")
           .build()
       ));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN_UNUSED = P.recordProperty("rampant_growth/cooldown_unused", Property.ofInt(0, SpellProperties.COOLDOWN));
@@ -382,12 +476,15 @@ public class ModSpells {
       .cost(ModHerbs.STALICRIPE, SpellCosts.BASE_0031)
       .component(ModAttachments.HARVEST_MODE, HarvestMode.EVERYTHING)
       .cooldown(ModSpells.HARVEST_COOLDOWN)
-      .radius(ModSpells.HARVEST_RADIUS_ZX, ModSpells.HARVEST_RADIUS_Y)
+      .radius(ModSpells.HARVEST_RADIUS_XZ, ModSpells.HARVEST_RADIUS_Y)
+      .tooltip()
+      .simple("Harvests and replants all nearby eligible blocks.")
+      .segment("Harvests and replants all eligible blocks within %s blocks around you.", Formatters.forProperty(ModSpells.HARVEST_RADIUS_XZ, ModSpells.HARVEST_RADIUS_Y).by(Formatters.BLOCK_RANGE))
+      .endTooltip()
       .build()
   ));
-
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_COOLDOWN = P.recordProperty("harvest/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_ZX = P.recordProperty("harvest/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_XZ));
+  public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_XZ = P.recordProperty("harvest/radius_xz", Property.ofInt(5, SpellProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_Y = P.recordProperty("harvest/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
 
   // Life Drain (20 cooldown)
@@ -400,6 +497,14 @@ public class ModSpells {
       .textColor(ChatFormatting.DARK_PURPLE)
       .cooldown(ModSpells.LIFE_DRAIN_COOLDOWN)
       .properties(ModSpells.LIFE_DRAIN_DISTANCE, ModSpells.LIFE_DRAIN_ANGLE, ModSpells.LIFE_DRAIN_DAMAGE, ModSpells.LIFE_DRAIN_HEAL, ModSpells.LIFE_DRAIN_COUNT)
+      .tooltip(      )
+      .simple("Attempts to drain the life from enemies around you while channeled. Some of the damage taken is converted to healing for you.")
+      .segment("Attempts to drain the life from up to %s random entities", Formatters.forProperty(ModSpells.LIFE_DRAIN_COUNT).by(Formatters.NUMBER))
+      .segment("who are up to %s blocks away", Formatters.forProperty(ModSpells.LIFE_DRAIN_DISTANCE).by(Formatters.NUMBER))
+      .segment("in a %s range, centred on the direction you are facing,", Formatters.forProperty(ModSpells.LIFE_DRAIN_ANGLE).by(Formatters.DEGREES))
+      .segment("dealing %s of damage", Formatters.forProperty(ModSpells.LIFE_DRAIN_DAMAGE).by(Formatters.HEARTS))
+      .segment("and healing you for %s.", Formatters.forProperty(ModSpells.LIFE_DRAIN_HEAL).by(Formatters.HEARTS))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
@@ -419,6 +524,12 @@ public class ModSpells {
       .costs(CostInstance.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250))
       .cooldown(ModSpells.PETAL_SHELL_COOLDOWN)
       .properties(ModSpells.PETAL_SHELL_COUNT, ModSpells.PETAL_SHELL_DURATION)
+      .tooltip()
+      .simple("Creates a shield of impenetrable petals around you for the duration. Each attack you take can be blocked by a petal, breaking that petal until none remain.")
+      .segment("Creates a shield of %s impenetrable petals", Formatters.forProperty(ModSpells.PETAL_SHELL_COUNT).by(Formatters.NUMBER))
+      .segment("around you for %s.", Formatters.forProperty(ModSpells.PETAL_SHELL_DURATION).by(Formatters.TICKS))
+      .segment("Each attack you take while the effect is active will be blocked by breaking a petal. The effect ends early when every petal is broken.")
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_COOLDOWN = P.recordProperty("petal_shell/cooldown", Property.ofInt(120, SpellProperties.COOLDOWN));
@@ -439,12 +550,17 @@ public class ModSpells {
       .textColor(ChatFormatting.RED)
       .cooldown(ModSpells.ROSE_THORNS_COOLDOWN)
       // Non-traditional radius properties
-      .properties(ModSpells.ROSE_THORNS_DAMAGE, ModSpells.ROSE_THORNS_DURATION, ModSpells.ROSE_THORNS_RADIUS_ZX, ModSpells.ROSE_THORNS_RADIUS_Y)
+      .properties(ModSpells.ROSE_THORNS_DAMAGE, ModSpells.ROSE_THORNS_DURATION, ModSpells.ROSE_THORNS_RADIUS_XZ, ModSpells.ROSE_THORNS_RADIUS_Y)
+      .tooltip()
+      .simple("Creates a temporary cluster of viciously sharp vines in the area you are looking. For its duration, the first entity that touches it will be damaged and become trapped.")
+      .segment("Creates a temporary cluster of viciously sharp vines on the block you are looking at that lasts for %s.", Formatters.forProperty(ModSpells.ROSE_THORNS_DURATION).by(Formatters.TICKS))
+      .segment("The first entity that touches it will take %s of damage and become trapped until the spell ends.", Formatters.forProperty(ModSpells.ROSE_THORNS_DAMAGE).by(Formatters.HEARTS))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> ROSE_THORNS_COOLDOWN = P.recordProperty("rose_thorns/cooldown", Property.ofInt(24, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> ROSE_THORNS_DURATION = P.recordProperty("rose_thorns/duration", Property.ofInt(20 * 18, SpellProperties.DURATION));
-  public static final PropertyHolder<Property.DoubleProperty> ROSE_THORNS_RADIUS_ZX = P.recordProperty("rose_thorns/radius_zx", Property.ofDouble(1.2, "The radius of the rose thorns effect in the X and Z axis."));
+  public static final PropertyHolder<Property.DoubleProperty> ROSE_THORNS_RADIUS_XZ = P.recordProperty("rose_thorns/radius_xz", Property.ofDouble(1.2, "The radius of the rose thorns effect in the X and Z axis."));
   public static final PropertyHolder<Property.DoubleProperty> ROSE_THORNS_RADIUS_Y = P.recordProperty("rose_thorns/radius_y", Property.ofDouble(1, "The radius of the rose thorns effect in the Y axis."));
   public static final PropertyHolder<Property.FloatProperty> ROSE_THORNS_DAMAGE = P.recordProperty("rose_thorns/damage", Property.ofFloat(3.5f, SpellProperties.DAMAGE));
 
@@ -464,6 +580,7 @@ public class ModSpells {
       .color(0x606060, 0xc0c0c0)
       .textColor(ChatFormatting.YELLOW)
       .cooldown(ModSpells.SHATTER_COOLDOWN)
+      .tooltip("Breaks the targeted block. The number of broken blocks can be increased with modifiers.")
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> SHATTER_COOLDOWN = P.recordProperty("shatter/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
@@ -479,6 +596,10 @@ public class ModSpells {
       .cooldown(ModSpells.JAUNT_COOLDOWN)
       .maxUse(ModSpells.JAUNT_MAX_USE)
       .properties(ModSpells.JAUNT_DISTANCE)
+      .tooltip()
+      .simple("Teleports you a short way in the direction you are looking. It will attempt to place you on the next highest or lowest surface available, if such exists.")
+      .segment("Teleports you %s blocks in the direction you are looking, the distance increasing the longer the spell is charged for, placing you on a safe surface on the next highest or lowest surface.", Formatters.forProperty(ModSpells.JAUNT_DISTANCE).by(Formatters.NUMBER))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> JAUNT_COOLDOWN = P.recordProperty("jaunt/cooldown", Property.ofInt(80, SpellProperties.COOLDOWN));
@@ -499,6 +620,11 @@ public class ModSpells {
       .color(0x20c8ff, 0x2040ff)
       .cooldown(ModSpells.SKY_SOARER_COOLDOWN)
       .properties(ModSpells.SKY_SOARER_AMPLIFIER, ModSpells.SKY_SOARER_AMPLIFIER_INCREASE, ModSpells.SKY_SOARER_DURATION, ModSpells.SKY_SOARER_DURATION_INCREASE, ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION)
+      .tooltip()
+      .simple("Propels you through the air in the direction you are looking.")
+      .segment("Propels you through the air at %s", Formatters.forProperty(ModSpells.SKY_SOARER_AMPLIFIER).by(Formatters.SPRINT_SPEED))
+      .segment("for %s in the direction you are looking.", Formatters.forProperty(ModSpells.SKY_SOARER_DURATION).by(Formatters.TICKS))
+      .endTooltip()
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_COOLDOWN = P.recordProperty("sky_soarer/cooldown", Property.ofInt(39, SpellProperties.COOLDOWN));

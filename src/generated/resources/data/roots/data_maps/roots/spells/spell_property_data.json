@@ -11,7 +11,7 @@
         }
       },
       {
-        "id": "roots:acid_cloud/radius_zx",
+        "id": "roots:acid_cloud/radius_xz",
         "value": {
           "type": "roots:integer_property",
           "comment": "Radius",
@@ -110,7 +110,7 @@
         }
       },
       {
-        "id": "roots:temporal_morass/radius_zx",
+        "id": "roots:temporal_morass/radius_xz",
         "value": {
           "type": "roots:integer_property",
           "comment": "The size of the area that will be affected on the X and Z axes",
@@ -260,7 +260,7 @@
         }
       },
       {
-        "id": "roots:decay/radius_zx",
+        "id": "roots:decay/radius_xz",
         "value": {
           "type": "roots:integer_property",
           "comment": "Radius",
@@ -336,7 +336,7 @@
         }
       },
       {
-        "id": "roots:disarm/radius_zx",
+        "id": "roots:disarm/radius_xz",
         "value": {
           "type": "roots:integer_property",
           "comment": "The size of the area that will be affected on the X and Z axes",
@@ -403,7 +403,7 @@
         }
       },
       {
-        "id": "roots:extension/radius_zx",
+        "id": "roots:extension/radius_xz",
         "value": {
           "type": "roots:integer_property",
           "comment": "The size of the area that will be affected on the X and Z axes",
@@ -483,6 +483,15 @@
           "comment": "The maximum health an entity can have for the geas spell to affect it.",
           "default_value": 50.0,
           "value": 50.0
+        }
+      },
+      {
+        "id": "roots:geas/max_distance",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "Entities must be within this max distance to be affected by the spell.",
+          "default_value": 5,
+          "value": 5
         }
       }
     ],
@@ -580,7 +589,7 @@
         }
       },
       {
-        "id": "roots:harvest/radius_zx",
+        "id": "roots:harvest/radius_xz",
         "value": {
           "type": "roots:integer_property",
           "comment": "The size of the area that will be affected on the X and Z axes",
@@ -723,7 +732,7 @@
         }
       },
       {
-        "id": "roots:magnetism/radius_zx",
+        "id": "roots:magnetism/radius_xz",
         "value": {
           "type": "roots:integer_property",
           "comment": "The size of the area that will be affected on the X and Z axes",
@@ -830,7 +839,7 @@
         }
       },
       {
-        "id": "roots:rose_thorns/radius_zx",
+        "id": "roots:rose_thorns/radius_xz",
         "value": {
           "type": "roots:double_property",
           "comment": "The radius of the rose thorns effect in the X and Z axis.",
