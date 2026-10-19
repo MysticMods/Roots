@@ -145,7 +145,7 @@ public class Formatters {
 
     @Override
     public MutableComponent component(Number value) {
-      return Component.translatable(key(), String.format("%.1f", 1 - value.doubleValue()));
+      return Component.translatable(key(), String.format("%.1f", 100* (1 - value.doubleValue())));
     }
   };
 
