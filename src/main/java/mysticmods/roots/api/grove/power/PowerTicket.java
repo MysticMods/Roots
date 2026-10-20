@@ -24,6 +24,7 @@ public class PowerTicket {
     this.suppliedMap.defaultReturnValue(0);
   }
 
+  // TODO: May consume power but not end up fully powered
   // Can be supplied from multiple grove stones
   public int supplyTick(IGroveInstance grove, int incomingAmount) {
     int amount = incomingAmount;
@@ -46,7 +47,9 @@ public class PowerTicket {
   }
 
   public void finalizeTick(IGrovePowerConsumer consumer, int generatedThisTick, int remainingPower) {
-
+    // Tell the grove consumer if it was fulfilled
+    // Tell the grove consumer how much power it obtained vs what it wanted and how much was lacking
+    // Tell the grove consumer where the power came from
   }
 
   public boolean isFulfilled() {
