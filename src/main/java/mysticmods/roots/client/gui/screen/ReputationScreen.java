@@ -44,13 +44,13 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   protected void init() {
     super.init();
 
-    this.fairy = new ReputationButton(ModGroves.FAIRY, this.leftPos + 119, this.topPos + 20);
-    this.animate = new ReputationButton(ModGroves.ANIMATE, this.leftPos + 26, this.topPos + 81);
+    this.fairy = new ReputationButton(ModGroves.FAIRY, this.leftPos + 119, this.topPos + 4);
+    this.animate = new ReputationButton(ModGroves.ANIMATE, this.leftPos + 26, this.topPos + 50);
     this.cultivation = new ReputationButton(ModGroves.CULTIVATION, this.leftPos + 42, this.topPos + 171);
-    this.twilight = new ReputationButton(ModGroves.TWILIGHT, this.leftPos + 206, this.topPos + 81);
+    this.twilight = new ReputationButton(ModGroves.TWILIGHT, this.leftPos + 206, this.topPos + 50);
     this.fungal = new ReputationButton(ModGroves.FUNGAL, this.leftPos + 191, this.topPos + 171);
     this.elemental = new ReputationButton(ModGroves.ELEMENTAL, this.leftPos + 119, this.topPos + 220);
-    this.wild = new ReputationButton(ModGroves.WILD, this.leftPos + 119, this.topPos + 126);
+    this.wild = new ReputationButton(ModGroves.WILD, this.leftPos + 119, this.topPos + 112);
 
     this.stars.setPosition(this.leftPos, this.topPos);
     this.addRenderableOnly(this.stars);
@@ -73,7 +73,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   protected void drawLines(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     graphics.hLine(leftPos - 120, leftPos + 256 + 120, topPos + 81, -1);
     graphics.hLine(leftPos - 120, leftPos + 256 + 120, topPos + 171, -1);
-    graphics.hLine(leftPos - 120, leftPos + 256 + 120, topPos + 126, -1);
+    graphics.hLine(leftPos - 120, leftPos + 256 + 120, topPos + 128, -1);
 /*
     graphics.hLine(leftPos + 120, leftPos + 256, 160, -1);
     graphics.hLine(leftPos + 100, leftPos + 120, 140, -1);
