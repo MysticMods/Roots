@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MixinAbstractArrow$WildwoodQuiver",
+    "MixinAbstractFurnaceBlockEntity",
     "MixinBeehiveBlock$RunicShears",
     "MixinBoneMealItem",
     "MixinBrewingStandBlockEntity",
@@ -18,6 +19,7 @@
     "MixinThrownPotion$ExtinguishPyre",
     "MixinWitherBoss$Geas",
     "accessor.AccessorMixinAbstractArrow",
+    "accessor.AccessorMixinAbstractFurnaceBlockEntity",
     "accessor.AccessorMixinBlockLootSubProvider",
     "accessor.AccessorMixinCompositeEntryBase",
     "accessor.AccessorMixinCropBlock",

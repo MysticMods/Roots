@@ -351,7 +351,7 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.GROWTH_AMPLIFIER_GRASSES).add(Blocks.TALL_GRASS, Blocks.SHORT_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
 
     tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS)
-        .add(ENCHANTED_TURF.get(), FUNGAL_TRANSMUTER.get());
+        .add(ENCHANTED_TURF.get(), FUNGAL_TRANSMUTER.get(), FURNACE_AMPLIFIER.get());
 
     tag(RootsTags.Blocks.NETHER_DOORS).add(Blocks.CRIMSON_DOOR, Blocks.WARPED_DOOR);
 

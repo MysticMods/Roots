@@ -403,7 +403,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IGrovePowerConsumer consumer) {
           PowerTicket ticket = consumer.getTicketForTick(tick);
-          if (ticket != null) {
+          if (ticket != null && consumer.canBePowered()) {
             available = ticket.supplyTick(this, available);
             ticket.finalizeTick(consumer, generatedThisTick, available);
           }

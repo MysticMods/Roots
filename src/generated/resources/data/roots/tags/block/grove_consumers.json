@@ -2,6 +2,7 @@
   "values": [
     "#roots:huts",
     "roots:enchanted_turf",
-    "roots:fungal_transmuter"
+    "roots:fungal_transmuter",
+    "roots:furnace_amplifier"
   ]
 }

@@ -13,6 +13,8 @@ import mysticmods.roots.block.FurnaceAmplifierBlock;
 import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.mixin.accessor.AccessorMixinAbstractFurnaceBlockEntity;
+import mysticmods.roots.util.IFurnaceInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -22,10 +24,11 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.AttachFace;
+
+import javax.annotation.Nullable;
 
 public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, ISimpleGrovePowerConsumer {
   private static final int POWER_REQUIRED = 35;
@@ -56,6 +59,7 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
     super.saveAdditional(pTag, pProvider);
     pTag.putBoolean("powered", this.poweredLastTick);
     pTag.putInt("poweredTicks", this.poweredTicks);
+    pTag.putBoolean("canBePowered", this.canBePowered);
   }
 
   @Override
@@ -68,6 +72,9 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
       this.poweredTicks = pTag.getInt("poweredTicks");
     } else {
       this.poweredTicks = 0;
+    }
+    if (pTag.contains("canBePowered")) {
+      this.canBePowered = pTag.getBoolean("canBePowered");
     }
   }
 
@@ -93,26 +100,78 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    if (!canBePowered) {
-      recheckCanBePowered(pLevel, pPos, pState);
+    recheckCanBePowered(pLevel, pPos, pState);
+    if (canBePowered() && wasPoweredLastTick() && getAttachedBlockEntity(pLevel, pPos, pState
+    ) instanceof AbstractFurnaceBlockEntity furnace && pLevel.getRandom().nextBoolean()) {
+      AccessorMixinAbstractFurnaceBlockEntity accessor = ((AccessorMixinAbstractFurnaceBlockEntity) furnace);
+      int cookingProgress = accessor.roots$getCookingProgress();
+      int cookingTotalTime = accessor.roots$getCookingTotalTime();
+      accessor.roots$setCookingProgress(Math.min(cookingProgress + 1, cookingTotalTime - 1));
+      furnace.setChanged();
     }
   }
 
-  private void recheckCanBePowered(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    Direction facing = pState.getValue(FurnaceAmplifierBlock.FACING);
+  @Nullable
+  private AbstractFurnaceBlockEntity getAttachedBlockEntity(Level pLevel, BlockPos pPos, BlockState pState) {
+    BlockPos attachedPos = getAttachedPos(pLevel, pPos, pState);
+    if (attachedPos.equals(pPos)) {
+      return null;
+    }
 
-    BlockState attachedTo = pLevel.getBlockState(pPos.relative(facing.getOpposite()));
+    if (pLevel.getBlockEntity(attachedPos) instanceof AbstractFurnaceBlockEntity furnace) {
+      if (!furnace.getBlockState().is(RootsTags.Blocks.AMPLIFIABLE_FURNACES)) {
+        return null;
+      }
 
+      return furnace;
+    }
+
+    return null;
   }
 
+  private BlockPos getAttachedPos(Level pLevel, BlockPos pPos, BlockState pState) {
+    if (!pState.hasProperty(FurnaceAmplifierBlock.FACING)) {
+      return pPos;
+    }
+    Direction facing = pState.getValue(FurnaceAmplifierBlock.FACING);
+
+    return pPos.relative(facing.getOpposite());
+  }
+
+  private void recheckCanBePowered(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
+    boolean currentValue = this.canBePowered;
+
+    if (getAttachedBlockEntity(pLevel, pPos, pState) instanceof AbstractFurnaceBlockEntity furnace) {
+      this.canBePowered = ((IFurnaceInfo) furnace).roots$hasValidRecipe();
+    } else {
+      this.canBePowered = false;
+    }
+
+    if (currentValue != this.canBePowered) {
+      this.setChanged();
+      this.updateViaState();
+    }
+  }
+
+  @Override
+  public boolean canBePowered() {
+    return canBePowered;
+  }
 
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
-
+    if (canBePowered() && wasPoweredLastTick()) {
+      // Do some particles, Jan
+    }
   }
 
+  @Nullable
   @Override
   public PowerTicket getTicketForTick(long tick) {
+    if (!canBePowered) {
+      return null;
+    }
+
     if (ticket == null) {
       ticket = TICKET_DEFINITION.create(tick);
       return ticket;
