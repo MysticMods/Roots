@@ -142,7 +142,7 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
       return ticket;
     }
 
-    if (ticket.wasFullfilled()) {
+    if (ticket.isFulfilled()) {
       if (!this.poweredLastTick) {
         this.poweredLastTick = true;
         setChanged();

@@ -30,7 +30,7 @@ public final class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Gr
     tag(RootsTags.Groves.CULTIVATION).add(ModGroves.CULTIVATION.get());
     tag(RootsTags.Groves.FUNGAL).add(ModGroves.FUNGAL.get());
     //noinspection unchecked
-    tag(RootsTags.Groves.ANY).addTags(RootsTags.Groves.FAIRY, RootsTags.Groves.ELEMENTAL, RootsTags.Groves.PASTORAL, RootsTags.Groves.TWILIGHT, RootsTags.Groves.CULTIVATION, RootsTags.Groves.FUNGAL);
+    tag(RootsTags.Groves.ANY).addTags(RootsTags.Groves.FAIRY, RootsTags.Groves.ELEMENTAL, RootsTags.Groves.PASTORAL, RootsTags.Groves.TWILIGHT, RootsTags.Groves.CULTIVATION, RootsTags.Groves.FUNGAL, RootsTags.Groves.WILD);
     tag(RootsTags.Groves.ANY_POWERABLE).addTag(RootsTags.Groves.ANY);
     //noinspection unchecked
     tag(RootsTags.Groves.CARES_ABOUT_PACIFIST).addTags(RootsTags.Groves.PASTORAL, RootsTags.Groves.TWILIGHT);

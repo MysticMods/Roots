@@ -135,7 +135,11 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
     }
     Direction facing = pState.getValue(FurnaceAmplifierBlock.FACING);
 
-    return pPos.relative(facing.getOpposite());
+    return switch (pState.getValue(FurnaceAmplifierBlock.FACE)) {
+      case FLOOR -> pPos.below();
+      case CEILING -> pPos.above();
+      default -> pPos.relative(facing.getOpposite());
+    };
   }
 
   private void recheckCanBePowered(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
@@ -181,17 +185,9 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
       return ticket;
     }
 
-    if (ticket.wasFullfilled()) {
-      if (!this.poweredLastTick) {
-        this.poweredLastTick = true;
-        setChanged();
-        updateViaState();
-      }
-    } else if (this.poweredLastTick) {
-      this.poweredLastTick = false;
-      setChanged();
-      updateViaState();
-    }
+    this.poweredLastTick = ticket.isFulfilled();
+    setChanged();
+    updateViaState();
 
     ticket = TICKET_DEFINITION.create(tick);
     return ticket;

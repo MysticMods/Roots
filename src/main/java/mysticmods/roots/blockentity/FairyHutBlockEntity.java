@@ -218,7 +218,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
       return ticket;
     }
 
-    if (ticket.wasFullfilled()) {
+    if (ticket.isFulfilled()) {
       if (!this.wasPoweredLastTick) {
         this.wasPoweredLastTick = true;
         setChanged();

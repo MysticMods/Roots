@@ -1,28 +1,27 @@
 package mysticmods.roots.api.grove.power;
 
 import com.google.common.collect.ImmutableList;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2LongMap;
-import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
+import it.unimi.dsi.fastutil.objects.*;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Mth;
+
+import java.util.*;
 
 public class PowerTicket {
   private final TicketDefinition definition;
   private final long tick;
   private final Object2IntMap<PowerRequest> suppliedMap = new Object2IntOpenHashMap<>();
-  private final Object2LongMap<PowerRequest> suppliedFromMap = new Object2LongOpenHashMap<>();
+  private final Map<PowerRequest, Set<BlockPos>> suppliedFromMap = new Object2ObjectOpenHashMap<>();
 
   private PowerTicket(TicketDefinition definition, long tick) {
     this.definition = definition;
     this.tick = tick;
-    this.suppliedMap.defaultReturnValue(-1);
+    this.suppliedMap.defaultReturnValue(0);
   }
 
   // Can be supplied from multiple grove stones
@@ -39,7 +38,7 @@ public class PowerTicket {
         if (required > 0 && required <= amount) {
           amount -= required;
           suppliedMap.mergeInt(req, required, Integer::sum);
-          suppliedFromMap.put(req, grove.getGrovePosition().asLong());
+          suppliedFromMap.computeIfAbsent(req, k -> new HashSet<>()).add(grove.getGrovePosition());
         }
       }
     }
@@ -50,10 +49,14 @@ public class PowerTicket {
 
   }
 
-  public boolean wasFullfilled() {
+  public boolean isFulfilled() {
+    if (suppliedMap.isEmpty()) {
+      return false;
+    }
+
     for (PowerRequest req : definition.requests()) {
       int supplied = suppliedMap.getInt(req);
-      if (supplied != -1 && supplied >= req.value()) {
+      if (supplied == 0 || supplied < req.value()) {
         return false;
       }
     }
