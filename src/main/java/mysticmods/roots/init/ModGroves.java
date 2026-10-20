@@ -32,10 +32,10 @@ public class ModGroves {
   public static final DeferredHolder<Grove, Grove> ELEMENTAL = REGISTER.register("elemental", () -> new Grove(GroveType.ELEMENTAL, ChatFormatting.DARK_RED, 0xffe98e, 0x80f7ff));
 
   // TODO: Rename
-  public static final DeferredHolder<Grove, Grove> PASTORAL = REGISTER.register("pastoral", () -> new Grove(GroveType.PASTORAL, ChatFormatting.GREEN, 0x71d443, 0xb6cf89));
+  public static final DeferredHolder<Grove, Grove> ANIMATE = REGISTER.register("animate", () -> new Grove(GroveType.ANIMATE, ChatFormatting.GREEN, 0x71d443, 0xb6cf89));
 
   static {
-    REGISTER.addAlias(RootsAPI.rl("primal"), RootsAPI.rl("pastoral"));
+    REGISTER.addAlias(RootsAPI.rl("primal"), RootsAPI.rl("animate"));
   }
 
   public static final DeferredHolder<Grove, Grove> HOLLOW = REGISTER.register("hollow", () -> new Grove(GroveType.HOLLOW, ChatFormatting.DARK_GRAY, 0x000000, 0x000000));

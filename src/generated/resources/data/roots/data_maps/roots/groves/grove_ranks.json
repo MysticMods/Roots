@@ -1,5 +1,11 @@
 {
   "values": {
+    "roots:animate": {
+      "threshold1": 1000,
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
+    },
     "roots:cultivation": {
       "threshold1": 1000,
       "threshold2": 2000,
@@ -25,12 +31,6 @@
       "threshold4": 4000
     },
     "roots:hollow": {
-      "threshold1": 1000,
-      "threshold2": 2000,
-      "threshold3": 3000,
-      "threshold4": 4000
-    },
-    "roots:pastoral": {
       "threshold1": 1000,
       "threshold2": 2000,
       "threshold3": 3000,

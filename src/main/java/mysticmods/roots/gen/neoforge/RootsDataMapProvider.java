@@ -340,12 +340,12 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS),
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("twilight_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.TWILIGHT_REPUTATION_CROPS),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("fairy_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.FAIRY_REPUTATION_CROPS),
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("pastoral_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.PASTORAL_REPUTATION_CROPS)
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("animate_crop_growth"), new GroveReputation(4, 3, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ANIMATE_REPUTATION_CROPS)
     ), false);
 
     int first_spell_reward = 125;
     int first_elemental_spell_reward = 500 / 7;
-    int first_pastoral_spell = 500;
+    int first_animate_spell = 500;
 
     // Fairy: Sylvan Light, Petal Shell, Rose Thorns, Sanctuary     = 4
     // Fungal: Acid Cloud, Disarm, Geas, Summon Undead              = 4
@@ -379,13 +379,13 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/life_drain"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.LIFE_DRAIN.getId()))),
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/jaunt"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.JAUNT.getId()))),
         /*        new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/temporal_morass"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.TEMPORAL_MORASS.getId()))),*/
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("learn_spell/nondetection"), new GroveReputation(first_pastoral_spell), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.NONDETECTION.getId())))
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("learn_spell/nondetection"), new GroveReputation(first_animate_spell), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.NONDETECTION.getId())))
     ), false);
 
     int first_ritual_reward = 200;
     int first_elemental_reward = 50;
     int first_cultivation_reward = 200 / 3;
-    int first_pastoral_reward = 200 / 3;
+    int first_animate_reward = 200 / 3;
     int first_fairy_reward = 200 / 3;
 
     // Fungal: Purity
@@ -405,9 +405,9 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("first_ritual/spreading_forest"), new GroveReputation(first_cultivation_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.SPREADING_FOREST.getId()))),
         new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("first_ritual/wildroot_growth"), new GroveReputation(first_cultivation_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.WILDROOT_GROWTH.getId()))),
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("first_ritual/healing_aura"), new GroveReputation(first_ritual_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.HEALING_AURA.getId()))),
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("first_ritual/animal_harvest"), new GroveReputation(first_pastoral_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.ANIMAL_HARVEST.getId()))),
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("first_ritual/augmentation"), new GroveReputation(first_pastoral_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.AUGMENTATION.getId()))),
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("first_ritual/gathering"), new GroveReputation(first_pastoral_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.GATHERING.getId()))),
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("first_ritual/animal_harvest"), new GroveReputation(first_animate_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.ANIMAL_HARVEST.getId()))),
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("first_ritual/augmentation"), new GroveReputation(first_animate_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.AUGMENTATION.getId()))),
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("first_ritual/gathering"), new GroveReputation(first_animate_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.GATHERING.getId()))),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("first_ritual/blooming"), new GroveReputation(first_fairy_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.BLOOMING.getId()))),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("first_ritual/protection"), new GroveReputation(first_fairy_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.PROTECTION.getId()))),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("first_ritual/warding"), new GroveReputation(first_fairy_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_RITUAL, ModRituals.WARDING.getId())))
@@ -416,7 +416,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("inflict_geas"), new GroveReputation(50, 10, 5, 1, 1))
     ), false);
     builder20.add(ModActions.CRAFT_ITEM, List.of(
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("create_runic_shears"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.RUNIC_SHEARS.getId()))),
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("create_runic_shears"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.RUNIC_SHEARS.getId()))),
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_cloud_berry"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.CLOUD_BERRY.getId()))),
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_inferno_bulb"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.INFERNO_BULB.getId()))),
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("create_stalicripe"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.STALICRIPE.getId()))),
@@ -428,18 +428,18 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     builder20.add(ModActions.RUNIC_SHEARING, List.of(
         new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("create_wildewheet"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.WILDEWHEET.getId()))),
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("create_spirit_leaf"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.SPIRITLEAF.getId())))
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("create_spirit_leaf"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.SPIRITLEAF.getId())))
     ), false);
 
     builder20.add(ModActions.BRED_ANIMAL, List.of(
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("bred_animal"), new GroveReputation(50, 8, 4, 1, 1)),
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("bred_animal"), new GroveReputation(50, 8, 4, 1, 1)),
         new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("bred_sprouts"), new GroveReputation(20, 10, 5, 1, 1), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.SPROUTS)
     ), false);
     builder20.add(ModActions.SHATTER_BLOCK, List.of(
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("shattered_ore_block"), new GroveReputation(20, 1, 0, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, Tags.Blocks.ORES)
     ), false);
     builder20.add(ModActions.KILL_ENTITY, List.of(
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("kill_pacifist_animals"), new GroveReputation(-2, -8, -10, -20, -20), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.PACIFIST),
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("kill_pacifist_animals"), new GroveReputation(-2, -8, -10, -20, -20), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.PACIFIST),
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("kill_pacifist_animals"), new GroveReputation(50, 5, 2, 0, 0), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.PACIFIST),
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("kill_withers"), new GroveReputation(50, 40, 30, 20, 20), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.WITHERS),
         new GroveReputationEntry(ModGroves.HOLLOW.value(), RootsAPI.rl("kill_dragons"), new GroveReputation(50, 40, 30, 20, 20), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.DRAGONS),
@@ -448,7 +448,7 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("kill_sprouts"), new GroveReputation(0, -2, -5, -10, -10), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.SPROUTS)
     ), false);
     builder20.add(ModActions.TAME_ANIMAL, List.of(
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("tame_animals"), new GroveReputation(50, 8, 5, 2, 2))
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("tame_animals"), new GroveReputation(50, 8, 5, 2, 2))
     ), false);
     builder20.add(ModActions.TRADE_VILLAGER, List.of(
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("trade_with_villager"), new GroveReputation(50, 15, 8, 2, 2))
@@ -467,7 +467,8 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("eat_rotten_flesh"), new GroveReputation(20, 0, 0, 0, 0), GroveReputationEntry.SubEntryType.ITEM, RootsTags.Items.ROTTEN_FLESH)
     ), false);
     builder20.add(ModActions.HARVEST_BEE_HIVE, List.of(
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("harvest_bee_hive"), new GroveReputation(50, 8, 4, 2, 2))
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("harvest_bee_hive"), new GroveReputation(50, 8, 4, 2, 2)),
+        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("harvest_bee_hive"), new GroveReputation(50, 8, 4, 2, 2))
     ), false);
     builder20.add(ModActions.FILL_COMPOST, List.of(
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("fill_compost_fungal"), new GroveReputation(50, 8, 4, 2, 2)),
@@ -478,7 +479,8 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.FUNGAL.value(), RootsAPI.rl("grove_huge_mushroom_fungal"), new GroveReputation(50, 8, 2, 1, 1))
     ), false);
     builder20.add(ModActions.MILK_COW, List.of(
-        new GroveReputationEntry(ModGroves.PASTORAL.value(), RootsAPI.rl("milk_cow"), new GroveReputation(10, 1, 0, 0, 0))
+        new GroveReputationEntry(ModGroves.ANIMATE.value(), RootsAPI.rl("milk_cow"), new GroveReputation(10, 1, 0, 0, 0)),
+        new GroveReputationEntry(ModGroves.CULTIVATION.value(), RootsAPI.rl("milk_cow"), new GroveReputation(10, 1, 0, 0, 0))
     ), false);
     builder20.add(ModActions.ARRIVE_DIMENSION, List.of(
         new GroveReputationEntry(ModGroves.HOLLOW.value(), RootsAPI.rl("arrive_in_the_end"), new GroveReputation(500), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.DIMENSION, Level.END.location()))),
@@ -545,12 +547,12 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new SimpleBlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
     builder24.add(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, List.of(
         new SimpleBlockGenerator(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, RootsTags.Groves.FUNGAL, 3)), false);
-    builder24.add(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, List.of(
-        new SimpleBlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, RootsTags.Groves.PASTORAL, 50)), false);
-    builder24.add(RootsTags.Blocks.PASTORAL_GROVE_EGG_GENERATORS, List.of(
-        new SimpleBlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, RootsTags.Groves.PASTORAL, 8)), false);
-    builder24.add(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, List.of(
-        new SimpleBlockGenerator(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, RootsTags.Groves.PASTORAL, 5)), false);
+    builder24.add(RootsTags.Blocks.ANIMATE_GROVE_DRAGON_EGG_GENERATORS, List.of(
+        new SimpleBlockGenerator(RootsTags.Blocks.ANIMATE_GROVE_DRAGON_EGG_GENERATORS, RootsTags.Groves.ANIMATE, 50)), false);
+    builder24.add(RootsTags.Blocks.ANIMATE_GROVE_EGG_GENERATORS, List.of(
+        new SimpleBlockGenerator(RootsTags.Blocks.ANIMATE_GROVE_DRAGON_EGG_GENERATORS, RootsTags.Groves.ANIMATE, 8)), false);
+    builder24.add(RootsTags.Blocks.ANIMATE_GROVE_GENERATORS, List.of(
+        new SimpleBlockGenerator(RootsTags.Blocks.ANIMATE_GROVE_GENERATORS, RootsTags.Groves.ANIMATE, 5)), false);
     builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
         new SimpleBlockGenerator(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, RootsTags.Groves.TWILIGHT, 5)), false);
     builder24.add(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS, List.of(
@@ -564,14 +566,14 @@ public final class RootsDataMapProvider extends DataMapProvider {
 
     var builder37 = builder(DataMaps.GROVE_ENTITY_POWER_GENERATORS);
     builder37.add(RootsTags.Entities.TAMEABLE, List.of(
-        new SimpleEntityGenerator(RootsTags.Entities.TAMEABLE, RootsTags.Groves.PASTORAL, TamedEntityTest.getInstance(), 5)), false);
+        new SimpleEntityGenerator(RootsTags.Entities.TAMEABLE, RootsTags.Groves.ANIMATE, TamedEntityTest.getInstance(), 5)), false);
     builder37.add(RootsTags.Entities.UNTAMEABLE_ANIMALS, List.of(
-        new SimpleEntityGenerator(RootsTags.Entities.UNTAMEABLE_ANIMALS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.UNTAMEABLE_ANIMALS), 1)), false);
-    builder37.add(RootsTags.Entities.SPROUTS, List.of(new SimpleEntityGenerator(RootsTags.Entities.SPROUTS, RootsTags.Groves.PASTORAL, new EntityTagTest(RootsTags.Entities.SPROUTS), 1)), false);
+        new SimpleEntityGenerator(RootsTags.Entities.UNTAMEABLE_ANIMALS, RootsTags.Groves.ANIMATE, new EntityTagTest(RootsTags.Entities.UNTAMEABLE_ANIMALS), 1)), false);
+    builder37.add(RootsTags.Entities.SPROUTS, List.of(new SimpleEntityGenerator(RootsTags.Entities.SPROUTS, RootsTags.Groves.ANIMATE, new EntityTagTest(RootsTags.Entities.SPROUTS), 1)), false);
 
     var builder38 = builder(DataMaps.GROVE_ENTITY_GENERATION_ENTRIES);
     builder38.add(
-        ModGroves.PASTORAL,
+        ModGroves.ANIMATE,
         List.of(
             new EntityGenerationInfo(
                 RootsTags.Entities.TAMEABLE, 2),
@@ -599,10 +601,10 @@ public final class RootsDataMapProvider extends DataMapProvider {
         new BlockGenerationInfo(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS, 5, Symmetry.NONE),
         new BlockGenerationInfo(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS, 8, Symmetry.NONE)
     ), false);
-    builder25.add(ModGroves.PASTORAL, List.of(
-        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS, 2, Symmetry.NONE),
-        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS, 1, Symmetry.NONE),
-        new BlockGenerationInfo(RootsTags.Blocks.PASTORAL_GROVE_EGG_GENERATORS, 3, Symmetry.NONE)
+    builder25.add(ModGroves.ANIMATE, List.of(
+        new BlockGenerationInfo(RootsTags.Blocks.ANIMATE_GROVE_GENERATORS, 2, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.ANIMATE_GROVE_DRAGON_EGG_GENERATORS, 1, Symmetry.NONE),
+        new BlockGenerationInfo(RootsTags.Blocks.ANIMATE_GROVE_EGG_GENERATORS, 3, Symmetry.NONE)
     ), false);
     builder25.add(ModGroves.TWILIGHT, List.of(
         new BlockGenerationInfo(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, 1, Symmetry.RADIAL_NOT_MATCHING)

@@ -47,14 +47,14 @@
     "player_conditions": [
       {
         "type": "roots:grove_rank_condition",
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "minimum_rank": 1
       }
     ],
     "priority": 0,
     "result": {
       "count": 1,
-      "id": "roots:pastoral_grove_stone"
+      "id": "roots:animate_grove_stone"
     }
   }
 }

@@ -40,7 +40,7 @@
     ],
     "roots:bred_animal": [
       {
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:bred_animal",
         "reputation": {
           "gain1": 50,
@@ -78,7 +78,7 @@
             "name": "roots:runic_shears"
           }
         ],
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:create_runic_shears",
         "reputation": {
           "gain1": 50,
@@ -293,11 +293,11 @@
         "entries": [
           {
             "type": "block",
-            "name": "roots:grove/pastoral/crops"
+            "name": "roots:grove/animate/crops"
           }
         ],
-        "grove": "roots:pastoral",
-        "name": "roots:pastoral_crop_growth",
+        "grove": "roots:animate",
+        "name": "roots:animate_crop_growth",
         "reputation": {
           "gain1": 4,
           "gain2": 3,
@@ -410,7 +410,19 @@
     ],
     "roots:harvest_bee_hive": [
       {
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
+        "name": "roots:harvest_bee_hive",
+        "reputation": {
+          "gain1": 50,
+          "gain2": 8,
+          "gain3": 4,
+          "gain4": 2,
+          "gain5": 2
+        },
+        "unique": false
+      },
+      {
+        "grove": "roots:cultivation",
         "name": "roots:harvest_bee_hive",
         "reputation": {
           "gain1": 50,
@@ -430,7 +442,7 @@
             "name": "roots:pacifist"
           }
         ],
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:kill_pacifist_animals",
         "reputation": {
           "gain1": -2,
@@ -864,7 +876,7 @@
             "name": "roots:nondetection"
           }
         ],
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:learn_spell/nondetection",
         "reputation": {
           "gain1": 500,
@@ -878,7 +890,19 @@
     ],
     "roots:milk_cow": [
       {
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
+        "name": "roots:milk_cow",
+        "reputation": {
+          "gain1": 10,
+          "gain2": 1,
+          "gain3": 0,
+          "gain4": 0,
+          "gain5": 0
+        },
+        "unique": false
+      },
+      {
+        "grove": "roots:cultivation",
         "name": "roots:milk_cow",
         "reputation": {
           "gain1": 10,
@@ -916,7 +940,7 @@
             "name": "roots:spiritleaf"
           }
         ],
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:create_spirit_leaf",
         "reputation": {
           "gain1": 50,
@@ -1118,7 +1142,7 @@
             "name": "roots:animal_harvest"
           }
         ],
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:first_ritual/animal_harvest",
         "reputation": {
           "gain1": 66,
@@ -1136,7 +1160,7 @@
             "name": "roots:augmentation"
           }
         ],
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:first_ritual/augmentation",
         "reputation": {
           "gain1": 66,
@@ -1154,7 +1178,7 @@
             "name": "roots:gathering"
           }
         ],
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:first_ritual/gathering",
         "reputation": {
           "gain1": 66,
@@ -1222,7 +1246,7 @@
     ],
     "roots:tame_animal": [
       {
-        "grove": "roots:pastoral",
+        "grove": "roots:animate",
         "name": "roots:tame_animals",
         "reputation": {
           "gain1": 50,

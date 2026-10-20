@@ -142,7 +142,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.WILDWOOD_PLANKS, RootsTags.Items.WILDWOOD_PLANKS);
     this.copy(RootsTags.Blocks.WILDWOOD_CHESTS, RootsTags.Items.WILDWOOD_CHESTS);
     this.copy(RootsTags.Blocks.GROVE_STONES, RootsTags.Items.GROVE_STONES);
-    this.copy(RootsTags.Blocks.GROVE_STONE_PASTORAL, RootsTags.Items.GROVE_STONE_PASTORAL);
+    this.copy(RootsTags.Blocks.GROVE_STONE_ANIMATE, RootsTags.Items.GROVE_STONE_ANIMATE);
     this.copy(RootsTags.Blocks.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_ELEMENTAL);
     this.copy(RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FAIRY);
     this.copy(RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_FUNGAL);
@@ -346,9 +346,9 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS);
     manualCopy(RootsTags.Blocks.FAIRY_GROVE_GENERATORS);
     manualCopy(RootsTags.Blocks.FAIRY_GROVE_PATHS);
-    manualCopy(RootsTags.Blocks.PASTORAL_GROVE_GENERATORS);
-    manualCopy(RootsTags.Blocks.PASTORAL_GROVE_DRAGON_EGG_GENERATORS);
-    manualCopy(RootsTags.Blocks.PASTORAL_GROVE_EGG_GENERATORS);
+    manualCopy(RootsTags.Blocks.ANIMATE_GROVE_GENERATORS);
+    manualCopy(RootsTags.Blocks.ANIMATE_GROVE_DRAGON_EGG_GENERATORS);
+    manualCopy(RootsTags.Blocks.ANIMATE_GROVE_EGG_GENERATORS);
     manualCopy(RootsTags.Blocks.CULTIVATION_GROVE_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS);
     manualCopy(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS);
@@ -369,7 +369,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copySpell(RootsTags.Spells.CULTIVATION);
     copySpell(RootsTags.Spells.WILD);
     copySpell(RootsTags.Spells.TWILIGHT);
-    copySpell(RootsTags.Spells.PASTORAL);
+    copySpell(RootsTags.Spells.ANIMATE);
     copySpell(RootsTags.Spells.HOLLOW);
     copySpell(RootsTags.Spells.GEAS_ACTION);
 
@@ -378,7 +378,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copyRitual(RootsTags.Rituals.ELEMENTAL);
     copyRitual(RootsTags.Rituals.WILD);
     copyRitual(RootsTags.Rituals.TWILIGHT);
-    copyRitual(RootsTags.Rituals.PASTORAL);
+    copyRitual(RootsTags.Rituals.ANIMATE);
     copyRitual(RootsTags.Rituals.FAIRY);
     copyRitual(RootsTags.Rituals.HOLLOW);
 
@@ -388,13 +388,13 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     copyGrove(RootsTags.Groves.CULTIVATION);
     copyGrove(RootsTags.Groves.WILD);
     copyGrove(RootsTags.Groves.TWILIGHT);
-    copyGrove(RootsTags.Groves.PASTORAL);
+    copyGrove(RootsTags.Groves.ANIMATE);
 
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY_POWERABLE)).addTags(
-        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PASTORAL, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
+        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_ANIMATE, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
     );
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANY)).addTags(
-        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_PASTORAL, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
+        RootsTags.Items.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_ANIMATE, RootsTags.Items.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_WILD
     );
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ELEMENTAL)).addTags(
         RootsTags.Items.GROVE_STONE_ELEMENTAL
@@ -411,8 +411,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.TWILIGHT)).addTags(
         RootsTags.Items.GROVE_STONE_TWILIGHT
     );
-    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.PASTORAL)).addTags(
-        RootsTags.Items.GROVE_STONE_PASTORAL
+    this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.ANIMATE)).addTags(
+        RootsTags.Items.GROVE_STONE_ANIMATE
     );
     this.tag(RootsTags.Groves.getGroveStoneTag(RootsTags.Groves.WILD)).addTags(
         RootsTags.Items.GROVE_STONE_WILD

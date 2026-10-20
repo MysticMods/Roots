@@ -82,7 +82,7 @@ public class RootsTags {
     public static final TagKey<Block> GROVE_STONES = modTag("grove_stones");
 
     public static final TagKey<Block> GROVE_STONE_WILD = modTag("grove_stones/wild");
-    public static final TagKey<Block> GROVE_STONE_PASTORAL = modTag("grove_stones/pastoral");
+    public static final TagKey<Block> GROVE_STONE_ANIMATE = modTag("grove_stones/animate");
     public static final TagKey<Block> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
     public static final TagKey<Block> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
     public static final TagKey<Block> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");
@@ -182,7 +182,7 @@ public class RootsTags {
     public static final TagKey<Block> ELEMENTAL_REPUTATION_CROPS = modTag("grove/elemental/crops");
     public static final TagKey<Block> TWILIGHT_REPUTATION_CROPS = modTag("grove/twilight/crops");
     public static final TagKey<Block> FAIRY_REPUTATION_CROPS = modTag("grove/fairy/crops");
-    public static final TagKey<Block> PASTORAL_REPUTATION_CROPS = modTag("grove/pastoral/crops");
+    public static final TagKey<Block> ANIMATE_REPUTATION_CROPS = modTag("grove/animate/crops");
     public static final TagKey<Block> FUNGAL_REPUTATION_CROPS = modTag("grove/fungal/crops");
 
     public static final TagKey<Block> UNDERWATER_FARMLAND = modTag("underwater_farmland");
@@ -194,9 +194,9 @@ public class RootsTags {
     public static final TagKey<Block> FAIRY_GROVE_GENERATORS = modTag("grove_generators/fairy");
     public static final TagKey<Block> FAIRY_GROVE_PATHS = modTag("grove_generators/fairy/paths");
     public static final TagKey<Block> WILD_GROVE_GENERATORS = modTag("grove_generators/wild");
-    public static final TagKey<Block> PASTORAL_GROVE_GENERATORS = modTag("grove_generators/pastoral");
-    public static final TagKey<Block> PASTORAL_GROVE_DRAGON_EGG_GENERATORS = modTag("grove_generators/pastoral/dragon_eggs");
-    public static final TagKey<Block> PASTORAL_GROVE_EGG_GENERATORS = modTag("grove_generators/pastoral/eggs");
+    public static final TagKey<Block> ANIMATE_GROVE_GENERATORS = modTag("grove_generators/animate");
+    public static final TagKey<Block> ANIMATE_GROVE_DRAGON_EGG_GENERATORS = modTag("grove_generators/animate/dragon_eggs");
+    public static final TagKey<Block> ANIMATE_GROVE_EGG_GENERATORS = modTag("grove_generators/animate/eggs");
     public static final TagKey<Block> CULTIVATION_GROVE_GENERATORS = modTag("grove_generators/cultivation");
     public static final TagKey<Block> FUNGAL_GROVE_MUSHROOM_GENERATORS = modTag("grove_generators/fungal/mushrooms");
     public static final TagKey<Block> FUNGAL_GROVE_DIRT_GENERATORS = modTag("grove_generators/fungal/dirt");
@@ -320,7 +320,7 @@ public class RootsTags {
     public static final TagKey<Item> WILDWOOD_CHESTS = modTag("chests/wildwood");
     public static final TagKey<Item> GROVE_STONES = modTag("grove_stones");
     public static final TagKey<Item> GROVE_STONE_WILD = modTag("grove_stones/wild");
-    public static final TagKey<Item> GROVE_STONE_PASTORAL = modTag("grove_stones/pastoral");
+    public static final TagKey<Item> GROVE_STONE_ANIMATE = modTag("grove_stones/animate");
     public static final TagKey<Item> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
     public static final TagKey<Item> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
     public static final TagKey<Item> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");
@@ -607,7 +607,7 @@ public class RootsTags {
     public static final TagKey<Ritual> FUNGAL = modTag("fungal");
     public static final TagKey<Ritual> CULTIVATION = modTag("cultivation");
     public static final TagKey<Ritual> ELEMENTAL = modTag("elemental");
-    public static final TagKey<Ritual> PASTORAL = modTag("pastoral");
+    public static final TagKey<Ritual> ANIMATE = modTag("animate");
     public static final TagKey<Ritual> HOLLOW = modTag("hollow");
 
     public static final TagKey<Ritual> SUMMON_CREATURES = modTag("summon_creatures");
@@ -635,7 +635,7 @@ public class RootsTags {
     public static final TagKey<Spell> FUNGAL = modTag("fungal");
     public static final TagKey<Spell> CULTIVATION = modTag("cultivation");
     public static final TagKey<Spell> ELEMENTAL = modTag("elemental");
-    public static final TagKey<Spell> PASTORAL = modTag("pastoral");
+    public static final TagKey<Spell> ANIMATE = modTag("animate");
     public static final TagKey<Spell> HOLLOW = modTag("hollow");
 
     public static final TagKey<Spell> GEAS_ACTION = modTag("action/geas");
@@ -731,7 +731,7 @@ public class RootsTags {
     public static final TagKey<Herb> TWILIGHT = modTag("twilight");
     public static final TagKey<Herb> FUNGAL = modTag("fungal");
     public static final TagKey<Herb> CULTIVATION = modTag("cultivation");
-    public static final TagKey<Herb> PASTORAL = modTag("pastoral");
+    public static final TagKey<Herb> ANIMATE = modTag("animate");
     public static final TagKey<Herb> HOLLOW = modTag("hollow");
 
     static TagKey<Herb> modTag(String name) {
@@ -752,7 +752,7 @@ public class RootsTags {
     public static final TagKey<Grove> FUNGAL = modTag("fungal");
     public static final TagKey<Grove> CULTIVATION = modTag("cultivation");
     public static final TagKey<Grove> ELEMENTAL = modTag("elemental");
-    public static final TagKey<Grove> PASTORAL = modTag("pastoral");
+    public static final TagKey<Grove> ANIMATE = modTag("animate");
     public static final TagKey<Grove> HOLLOW = modTag("hollow");
 
     public static final TagKey<Grove> CARES_ABOUT_PACIFIST = modTag("cares_about_pacifist");
@@ -765,7 +765,7 @@ public class RootsTags {
     public static final TagKey<Item> FUNGAL_GROVE_STONE = modItemTag("grove_stone/fungal");
     public static final TagKey<Item> CULTIVATION_GROVE_STONE = modItemTag("grove_stone/cultivation");
     public static final TagKey<Item> ELEMENTAL_GROVE_STONE = modItemTag("grove_stone/elemental");
-    public static final TagKey<Item> PASTORAL_GROVE_STONE = modItemTag("grove_stone/pastoral");
+    public static final TagKey<Item> ANIMATE_GROVE_STONE = modItemTag("grove_stone/animate");
 
     private static final Map<TagKey<Grove>, TagKey<Item>> GROVE_MAP = new HashMap<>();
 
@@ -778,7 +778,7 @@ public class RootsTags {
       GROVE_MAP.put(FUNGAL, FUNGAL_GROVE_STONE);
       GROVE_MAP.put(CULTIVATION, CULTIVATION_GROVE_STONE);
       GROVE_MAP.put(ELEMENTAL, ELEMENTAL_GROVE_STONE);
-      GROVE_MAP.put(PASTORAL, PASTORAL_GROVE_STONE);
+      GROVE_MAP.put(ANIMATE, ANIMATE_GROVE_STONE);
       GROVE_MAP.put(HOLLOW, ELEMENTAL_GROVE_STONE);
     }
 

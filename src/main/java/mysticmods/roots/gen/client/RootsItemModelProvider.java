@@ -142,8 +142,8 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
 
     withExistingParent("bafflecap_block", modLoc("block/bafflecap_block_inventory"));
-    withExistingParent(ModBlocks.PASTORAL_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/pastoral_grove_stone_inventory"));
+    withExistingParent(ModBlocks.ANIMATE_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/animate_grove_stone_inventory"));
     withExistingParent(ModBlocks.WILD_GROVE_STONE.getKey().location()
         .getPath(), modLoc("block/wild_grove_stone_inventory"));
     withExistingParent(ModBlocks.CULTIVATION_GROVE_STONE.getKey().location()

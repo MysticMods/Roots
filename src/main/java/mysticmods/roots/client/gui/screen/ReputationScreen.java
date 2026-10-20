@@ -24,7 +24,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   private ReputationButton fairy;
   private ReputationButton elemental;
   private ReputationButton cultivation;
-  private ReputationButton pastoral;
+  private ReputationButton animate;
   private ReputationButton wild;
   private ReputationButton fungal;
   private ReputationButton twilight;
@@ -44,15 +44,8 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   protected void init() {
     super.init();
 
-/*    this.fairy = new ReputationButton(ModGroves.FAIRY, this.leftPos + 119, this.topPos + 7);
-    this.pastoral = new ReputationButton(ModGroves.PASTORAL, this.leftPos + 40, this.topPos + 76);
-    this.cultivation = new ReputationButton(ModGroves.CULTIVATION, this.leftPos + 40, this.topPos + 178);
-    this.twilight = new ReputationButton(ModGroves.TWILIGHT, this.leftPos + 198, this.topPos + 76);
-    this.fungal = new ReputationButton(ModGroves.FUNGAL, this.leftPos + 198, this.topPos + 178);
-    this.elemental = new ReputationButton(ModGroves.ELEMENTAL, this.leftPos + 119, this.topPos + 220);*/
-
     this.fairy = new ReputationButton(ModGroves.FAIRY, this.leftPos + 119, this.topPos + 20);
-    this.pastoral = new ReputationButton(ModGroves.PASTORAL, this.leftPos + 26, this.topPos + 81);
+    this.animate = new ReputationButton(ModGroves.ANIMATE, this.leftPos + 26, this.topPos + 81);
     this.cultivation = new ReputationButton(ModGroves.CULTIVATION, this.leftPos + 42, this.topPos + 171);
     this.twilight = new ReputationButton(ModGroves.TWILIGHT, this.leftPos + 206, this.topPos + 81);
     this.fungal = new ReputationButton(ModGroves.FUNGAL, this.leftPos + 191, this.topPos + 171);
@@ -66,7 +59,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     this.addRenderableOnly(this::drawTreeAndBorder);
     this.addRenderableWidget(this.fungal);
     this.addRenderableWidget(this.fairy);
-    this.addRenderableWidget(this.pastoral);
+    this.addRenderableWidget(this.animate);
     this.addRenderableWidget(this.cultivation);
     this.addRenderableWidget(this.twilight);
     this.addRenderableWidget(this.elemental);

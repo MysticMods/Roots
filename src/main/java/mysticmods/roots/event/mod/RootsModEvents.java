@@ -111,7 +111,7 @@ public class RootsModEvents {
       event.accept(ModItems.FURNACE_SPEED_AMPLIFIER.get());
 
       event.accept(ModItems.WILD_GROVE_STONE.get());
-      event.accept(ModItems.PASTORAL_GROVE_STONE.get());
+      event.accept(ModItems.ANIMATE_GROVE_STONE.get());
       event.accept(ModItems.FAIRY_GROVE_STONE.get());
       event.accept(ModItems.ELEMENTAL_GROVE_STONE.get());
       event.accept(ModItems.TWILIGHT_GROVE_STONE.get());

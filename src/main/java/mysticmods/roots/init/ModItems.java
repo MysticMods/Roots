@@ -183,12 +183,12 @@ public class ModItems {
 
   public static DeferredHolder<Item, BlockItem> BAFFLECAP_BLOCK = ITEMS.register("bafflecap_block", () -> new BlockItem(ModBlocks.BAFFLECAP_BLOCK.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> WILD_GROVE_STONE = ITEMS.register("wild_grove_stone", () -> new BlockItem(ModBlocks.WILD_GROVE_STONE.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> PASTORAL_GROVE_STONE = ITEMS.register("pastoral_grove_stone", () -> new BlockItem(ModBlocks.PASTORAL_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> ANIMATE_GROVE_STONE = ITEMS.register("animate_grove_stone", () -> new BlockItem(ModBlocks.ANIMATE_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> CULTIVATION_GROVE_STONE = ITEMS.register("cultivation_grove_stone", () -> new BlockItem(ModBlocks.CULTIVATION_GROVE_STONE.get(), new Item.Properties()));
 
   static {
     ITEMS.addAlias(RootsAPI.rl("sprouting_grove_stone"), RootsAPI.rl("cultivation_grove_stone"));
-    ITEMS.addAlias(RootsAPI.rl("primal_grove_stone"), RootsAPI.rl("pastoral_grove_stone"));
+    ITEMS.addAlias(RootsAPI.rl("primal_grove_stone"), RootsAPI.rl("animate_grove_stone"));
   }
 
   public static DeferredHolder<Item, BlockItem> TWILIGHT_GROVE_STONE = ITEMS.register("twilight_grove_stone", () -> new BlockItem(ModBlocks.TWILIGHT_GROVE_STONE.get(), new Item.Properties()));
@@ -527,11 +527,11 @@ public class ModItems {
 
   static {
     ITEMS.addAlias(RootsAPI.rl("sprouting"), RootsAPI.rl("cultivation"));
-    ITEMS.addAlias(RootsAPI.rl("primal"), RootsAPI.rl("pastoral"));
+    ITEMS.addAlias(RootsAPI.rl("primal"), RootsAPI.rl("animate"));
   }
 
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_TWILIGHT = ITEMS.register("twilight", () -> grove(ModGroves.TWILIGHT));
-  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_PASTORAL = ITEMS.register("pastoral", () -> grove(ModGroves.PASTORAL));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_ANIMATE = ITEMS.register("animate", () -> grove(ModGroves.ANIMATE));
 
   private static TokenItem.SpellTokenItem spell(Holder<Spell> spell) {
     return new TokenItem.SpellTokenItem(spell.getKey(), new Item.Properties().stacksTo(1));

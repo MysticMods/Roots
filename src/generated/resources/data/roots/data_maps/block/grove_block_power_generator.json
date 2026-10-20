@@ -1,5 +1,26 @@
 {
   "values": {
+    "#roots:grove_generators/animate": [
+      {
+        "blockTag": "roots:grove_generators/animate",
+        "tag": "roots:animate",
+        "value": 5
+      }
+    ],
+    "#roots:grove_generators/animate/dragon_eggs": [
+      {
+        "blockTag": "roots:grove_generators/animate/dragon_eggs",
+        "tag": "roots:animate",
+        "value": 50
+      }
+    ],
+    "#roots:grove_generators/animate/eggs": [
+      {
+        "blockTag": "roots:grove_generators/animate/dragon_eggs",
+        "tag": "roots:animate",
+        "value": 8
+      }
+    ],
     "#roots:grove_generators/creative": [
       {
         "blockTag": "roots:grove_generators/creative",
@@ -61,27 +82,6 @@
         "blockTag": "roots:grove_generators/fungal/other",
         "tag": "roots:fungal",
         "value": 3
-      }
-    ],
-    "#roots:grove_generators/pastoral": [
-      {
-        "blockTag": "roots:grove_generators/pastoral",
-        "tag": "roots:pastoral",
-        "value": 5
-      }
-    ],
-    "#roots:grove_generators/pastoral/dragon_eggs": [
-      {
-        "blockTag": "roots:grove_generators/pastoral/dragon_eggs",
-        "tag": "roots:pastoral",
-        "value": 50
-      }
-    ],
-    "#roots:grove_generators/pastoral/eggs": [
-      {
-        "blockTag": "roots:grove_generators/pastoral/dragon_eggs",
-        "tag": "roots:pastoral",
-        "value": 8
       }
     ],
     "#roots:grove_generators/twilight": [

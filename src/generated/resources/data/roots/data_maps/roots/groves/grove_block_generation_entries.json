@@ -32,6 +32,20 @@
         "tag": "roots:grove_generators/wild/cakes"
       }
     ],
+    "roots:animate": [
+      {
+        "max_count": 2,
+        "tag": "roots:grove_generators/animate"
+      },
+      {
+        "max_count": 1,
+        "tag": "roots:grove_generators/animate/dragon_eggs"
+      },
+      {
+        "max_count": 3,
+        "tag": "roots:grove_generators/animate/eggs"
+      }
+    ],
     "roots:cultivation": [
       {
         "max_count": 3,
@@ -69,20 +83,6 @@
       {
         "max_count": 8,
         "tag": "roots:grove_generators/fungal/other"
-      }
-    ],
-    "roots:pastoral": [
-      {
-        "max_count": 2,
-        "tag": "roots:grove_generators/pastoral"
-      },
-      {
-        "max_count": 1,
-        "tag": "roots:grove_generators/pastoral/dragon_eggs"
-      },
-      {
-        "max_count": 3,
-        "tag": "roots:grove_generators/pastoral/eggs"
       }
     ],
     "roots:twilight": [
