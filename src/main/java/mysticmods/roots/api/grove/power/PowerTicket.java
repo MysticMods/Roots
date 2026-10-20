@@ -1,7 +1,9 @@
 package mysticmods.roots.api.grove.power;
 
 import com.google.common.collect.ImmutableList;
-import it.unimi.dsi.fastutil.objects.*;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
@@ -10,7 +12,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class PowerTicket {
   private final TicketDefinition definition;
@@ -66,7 +70,7 @@ public class PowerTicket {
     return true;
   }
 
-  public int getSupplied (Holder<Grove> grove) {
+  public int getSupplied(Holder<Grove> grove) {
     return getSupplied(grove.value());
   }
 
