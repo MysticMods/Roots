@@ -9,14 +9,14 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record CastSkySoarerFXPacket(int entityId, int duration) implements IRootsPacket {
+public record CastSkySoarerFXPacket(int entityId) implements IRootsPacket {
   public static final Type<CastSkySoarerFXPacket> TYPE = new Type<>(RootsAPI.rl("client_fx/cast_sky_soarer"));
-  public static final StreamCodec<FriendlyByteBuf, CastSkySoarerFXPacket> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, CastSkySoarerFXPacket::entityId, ByteBufCodecs.VAR_INT, CastSkySoarerFXPacket::duration, CastSkySoarerFXPacket::new);
+  public static final StreamCodec<FriendlyByteBuf, CastSkySoarerFXPacket> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, CastSkySoarerFXPacket::entityId,  CastSkySoarerFXPacket::new);
 
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientFXHandlers.castSkySorarer(entityId, duration);
+    ClientFXHandlers.skySoarerTick(entityId);
   }
 
   @Override

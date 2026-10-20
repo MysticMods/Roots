@@ -254,6 +254,42 @@ public class ClientFXHandlers {
     }
   }
 
+  public static void skySoarerTick(int entityId) {
+    if (ConfigManager.DISABLE_PATICLES.get()) {
+      return;
+    }
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    if (entity == null) {
+      return;
+    }
+    RandomSource random = entity.getRandom();
+
+    int color1 = 0xb0ecff; //ModSpells.SKY_SOARER.get().getRawColor1();
+    int color2 = 0xccd3ff; //ModSpells.SKY_SOARER.get().getRawColor2();
+
+    var options = RootsParticleOptions.builder(ModParticles.SKY_SOARER).color(color1, color2).build();
+
+    Vec3 from = new Vec3(entity.xo, entity.yo, entity.zo);
+    Vec3 to = new Vec3(entity.getX(), entity.getY(), entity.getZ());
+    Vec3 motion = entity.getLookAngle().normalize().scale(-0.3);
+
+    int steps = 5;
+    for (int i = 0; i < steps; i++) {
+      if (random.nextDouble() < 0.9) {
+        double t = (double) i / (steps - 1);
+        Vec3 pos = from.lerp(to, t);
+        double px = pos.x + (random.nextDouble() - 0.5) * 0.3;
+        double py = pos.y + (random.nextDouble() - 0.5) * 0.2;
+        double pz = pos.z + (random.nextDouble() - 0.5) * 0.3;
+
+        RootsParticleOptions opt = options.swapColors(random);
+
+        minecraft.level.addParticle(opt, px, py, pz, motion.x, 0, motion.z);
+      }
+    }
+  }
+
   public static void dandelionWinds(int entityId) {
     if (ConfigManager.DISABLE_PATICLES.get()) {
       return;

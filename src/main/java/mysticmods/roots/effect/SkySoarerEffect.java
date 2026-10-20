@@ -3,12 +3,14 @@ package mysticmods.roots.effect;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.CastSkySoarerFXPacket;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 // Does nothing for non-player mobs
 public class SkySoarerEffect extends SimpleEffect {
@@ -21,6 +23,8 @@ public class SkySoarerEffect extends SimpleEffect {
     super.applyEffectTick(pLivingEntity, pAmplifier);
     if (!pLivingEntity.level().isClientSide()) {
       SnapshotHelper.applyLivingWithVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pLivingEntity, new CastSkySoarerFXPacket(pLivingEntity.getId()));
+
         if (vehicle == null) {
           vehicle = player;
         } else {
