@@ -175,6 +175,7 @@ public class HudOverlay {
       int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
 
       boolean powered = consumer.wasPoweredLastTick();
+      boolean canPower = consumer.canBePowered();
 
       y += 10;
       x += 30;
@@ -191,11 +192,13 @@ public class HudOverlay {
 
       Component comp1 = result.getStyledName();
       Component comp2 = Component.literal("Requires: " + requiredPower);
+      Component comp3 = Component.literal(canPower ? powered ? "Powered!" : "Unpowered." : "Ineligible.");
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
       graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
       graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp3, x + 25, y + 24, TEXT_COLOR, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
     }
