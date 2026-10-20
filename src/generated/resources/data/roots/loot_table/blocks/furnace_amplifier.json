@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "roots:furnace_speed_amplifier"
+          "name": "roots:furnace_amplifier"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "roots:blocks/furnace_speed_amplifier"
+  "random_sequence": "roots:blocks/furnace_amplifier"
 }

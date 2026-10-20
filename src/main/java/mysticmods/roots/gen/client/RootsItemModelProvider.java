@@ -68,7 +68,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.RUNED_BRICK_SLAB.get());
     simpleBlockItem(ModBlocks.RUNED_TILE_SLAB.get());
     simpleBlockItem(ModBlocks.WILDWOOD_SLAB.get());
-    simpleBlockItem(ModBlocks.FURNACE_SPEED_AMPLIFIER.get());
+    simpleBlockItem(ModBlocks.FURNACE_AMPLIFIER.get());
     fenceInventory(ModBlocks.WILDWOOD_FENCE.getKey().location()
         .getPath(), modLoc("block/" + ModBlocks.WILDWOOD_PLANKS.getKey().location().getPath()));
     simpleBlockItem(ModBlocks.WILDWOOD_GATE.get());

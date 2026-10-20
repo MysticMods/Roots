@@ -369,6 +369,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS).addTag(
         BlockTags.FLOWERS
     ).addTag(BlockTags.SAPLINGS).add(Blocks.LILY_PAD).add(Blocks.MOSS_CARPET).add(Blocks.VINE).addTags(RootsTags.Blocks.SHORT_GRASS, RootsTags.Blocks.TALL_GRASS);
+
+    this.tag(RootsTags.Blocks.AMPLIFIABLE_FURNACES).add(Blocks.FURNACE, Blocks.BLAST_FURNACE, Blocks.SMOKER);
   }
 
   @Override

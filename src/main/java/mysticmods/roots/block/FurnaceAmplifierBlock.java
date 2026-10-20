@@ -2,6 +2,9 @@ package mysticmods.roots.block;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.reference.Shapes;
+import mysticmods.roots.blockentity.FurnaceAmplifierBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBlockEntity;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.util.VoxelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,7 +13,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.AttachFace;
@@ -18,19 +25,20 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class AmplifierBlock extends FaceAttachedHorizontalDirectionalBlock {
-  public static final MapCodec<AmplifierBlock> CODEC = simpleCodec(AmplifierBlock::new);
+public class FurnaceAmplifierBlock extends FaceAttachedHorizontalDirectionalBlock implements EntityBlock {
+  public static final MapCodec<FurnaceAmplifierBlock> CODEC = simpleCodec(FurnaceAmplifierBlock::new);
   private final Map<BlockState, VoxelShape> shapesCache;
 
   @Override
-  public MapCodec<AmplifierBlock> codec() {
+  public MapCodec<FurnaceAmplifierBlock> codec() {
     return CODEC;
   }
 
-  public AmplifierBlock(Properties properties) {
+  public FurnaceAmplifierBlock(Properties properties) {
     super(properties);
 
     this.registerDefaultState(
@@ -70,5 +78,27 @@ public class AmplifierBlock extends FaceAttachedHorizontalDirectionalBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(FACING, FACE);
+  }
+
+  @Override
+  public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return new FurnaceAmplifierBlockEntity(pos, state);
+  }
+
+  @Override
+  public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    if (!level.isClientSide()) {
+      return BaseBlockEntity::serverTick;
+    } else {
+      return BaseBlockEntity::clientTick;
+    }
+  }
+
+  @Override
+  protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    super.onRemove(state, level, pos, newState, movedByPiston);
+    if (!newState.is(state.getBlock())) {
+      level.getData(ModAttachments.GROVE_CONSUMERS).remove(pos);
+    }
   }
 }

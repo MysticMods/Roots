@@ -38,6 +38,7 @@ public class ModBlockEntities {
       .build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WildwoodChestBlockEntity>> WILDWOOD_CHEST = BLOCK_ENTITIES.register("wildwood_chest", () -> BlockEntityType.Builder.of(WildwoodChestBlockEntity::new, ModBlocks.WILDWOOD_CHEST.get())
       .build(null));
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FurnaceAmplifierBlockEntity>> FURNACE_AMPLIFIER = BLOCK_ENTITIES.register("furnace_amplifier", () -> BlockEntityType.Builder.of(FurnaceAmplifierBlockEntity::new, ModBlocks.FURNACE_AMPLIFIER.get()).build(null));
 
   public static void register(IEventBus bus) {
     BLOCK_ENTITIES.register(bus);

@@ -236,6 +236,8 @@ public class RootsTags {
 
     public static final TagKey<Block> MINEABLE_WITH_SHATTER = modTag("mineable_with_shatter");
 
+    public static final TagKey<Block> AMPLIFIABLE_FURNACES = modTag("amplifiable_furnaces");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }

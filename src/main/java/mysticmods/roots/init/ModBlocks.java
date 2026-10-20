@@ -216,7 +216,7 @@ public class ModBlocks {
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
       .requiresCorrectToolForDrops()));*/
 
-  public static final DeferredHolder<Block, AmplifierBlock> FURNACE_SPEED_AMPLIFIER = BLOCKS.register("furnace_speed_amplifier", () -> new AmplifierBlock(BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.STONE)));
+  public static final DeferredHolder<Block, FurnaceAmplifierBlock> FURNACE_AMPLIFIER = BLOCKS.register("furnace_amplifier", () -> new FurnaceAmplifierBlock(BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.STONE)));
 
   public static final DeferredHolder<Block, FairyHutBlock> RED_FAIRY_HUT = BLOCKS.register("red_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
       .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)

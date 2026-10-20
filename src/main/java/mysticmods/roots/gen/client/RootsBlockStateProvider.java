@@ -344,8 +344,8 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     getVariantBuilder(ModBlocks.STONE_ALTAR.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(stoneAltar).build());*/
 
-    ModelFile pylon = models().withExistingParent("furnace_speed_amplifier", modLoc("block/complex/pylon"));
-    getVariantBuilder(ModBlocks.FURNACE_SPEED_AMPLIFIER.get()).forAllStates(state -> {
+    ModelFile pylon = models().withExistingParent(ModBlocks.FURNACE_AMPLIFIER.getKey().location().getPath(), modLoc("block/complex/pylon"));
+    getVariantBuilder(ModBlocks.FURNACE_AMPLIFIER.get()).forAllStates(state -> {
       Direction facing = state.getValue(ButtonBlock.FACING);
       AttachFace face = state.getValue(ButtonBlock.FACE);
 

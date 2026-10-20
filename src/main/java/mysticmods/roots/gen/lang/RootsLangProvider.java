@@ -519,7 +519,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.POTTED_WILDWOOD_SAPLING);
     addBlock(ModBlocks.RUNIC_DUST);
     addBlock(ModBlocks.RUNESTONE_TICKER);
-    addBlock(ModBlocks.FURNACE_SPEED_AMPLIFIER);
+    addBlock(ModBlocks.FURNACE_AMPLIFIER);
 
     // Some potential duplicates with ModBlocks
 
