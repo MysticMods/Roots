@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
 public class NumberFormatter<T extends Number> extends BasePropertyFormatter<T, NumberFormatter<T>> {
@@ -47,8 +48,12 @@ public class NumberFormatter<T extends Number> extends BasePropertyFormatter<T, 
     return Suppliers.memoize(() -> source.getValue(property));
   }
 
-  public <N extends Number> NumberFormatter<T> multipliedByTier(PropertyHolder<? extends Property<N>> number, Holder<? extends Modifier<?, ?>> modifier) {
-    return this.modifyBy(new AddMultiplier(() -> modifier.value().getGroupValue(), numberGetter(number)));
+  public <N extends Number> NumberFormatter<T> multipliedByTier () {
+    return this.modifyBy(new Multiplier(groupValueSupplier()));
+  }
+
+  public <N extends Number> NumberFormatter<T> multipliedByTier(PropertyHolder<? extends Property<N>> number) {
+    return this.modifyBy(new AddMultiplier(groupValueSupplier(), numberGetter(number)));
   }
 
   public NumberFormatter<T> modifyBy(Function<Number, Number> modifier) {
@@ -58,6 +63,14 @@ public class NumberFormatter<T extends Number> extends BasePropertyFormatter<T, 
 
   private <N extends Number> N value(PropertyHolder<? extends Property<N>> property) {
     return source.getValue(property);
+  }
+
+  private Supplier<Number> groupValueSupplier () {
+    if (this.groupValue != null) {
+      return groupValue;
+    }
+
+    return () -> -1;
   }
 
   private Number modifiedValue(Number value) {

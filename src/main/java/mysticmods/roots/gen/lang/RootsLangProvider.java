@@ -271,6 +271,7 @@ public final class RootsLangProvider extends LanguageProvider {
           //var m = numbers.matcher(e);
 
           add(o.getValue().getDescriptionId(), e);
+          describeModifier(o.getValue());
         }
     );
 
@@ -950,71 +951,6 @@ public final class RootsLangProvider extends LanguageProvider {
     add(Symmetry.RADIAL_DIFFERENT_SAME_TAG.getTranslationKey() + ".description", "Requires a different block from the same tag positioned radially around the grove stone.");
     add(Symmetry.NONE.getTranslationKey() + ".description", "No symmetry required.");
 
-    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_VORTEX, "Causes ranged attackers to be pulled towards you.");
-    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_GUSTS, "Causes melee attackers to be pushed away from you.");
-
-    modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_1, "Increases speed of boost effect.");
-    modifierExtendedDescription(ModModifiers.SKY_SOARER_AMPLIFIED_1, "Increases boost effect to ×%s sprint speed [%s].");
-    modifierDescription(ModModifiers.SKY_SOARER_AMPLIFIED_2, "Increases speed of boost effect.");
-    modifierExtendedDescription(ModModifiers.SKY_SOARER_AMPLIFIED_2, "Increases boost effect to ×%s sprint speed [%s].");
-    modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_1, "Increases duration of boost effect.");
-    modifierExtendedDescription(ModModifiers.SKY_SOARER_SPEEDY_1, "Increases duration of boost effect by [%s%%] to %s seconds [%s ticks].");
-    modifierDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect.");
-    modifierExtendedDescription(ModModifiers.SKY_SOARER_SPEEDY_2, "Increases duration of boost effect by [%s%%] to %s seconds [%s ticks].");
-    modifierDescriptionBoth(ModModifiers.SHATTER_MAGNETISM, "Teleports dropped blocks to the player.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_SILK_TOUCH, "Applies silk touch when breaking blocks.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_1, "Applies Fortune I when breaking blocks.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_2, "Applies Fortune II when breaking blocks.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_FORTUNE_3, "Applies Fortune III when breaking blocks.");
-    modifierDescriptionBoth(ModModifiers.SHATTER_SMELTING, "Smelts items dropped by broken blocks.");
-
-    modifierDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage after boost effect expires.");
-    modifierExtendedDescription(ModModifiers.SKY_SOARER_FRIENDLY_EARTH, "Prevents you from taking fall damage for %s seconds [%s ticks] after the boost effect ends.");
-
-    /*spellDescription(ModSpells.ACID_CLOUD, "Creates a corrosive, damaging cloud around you while channeled.");
-    spellExtendedDescription(ModSpells.ACID_CLOUD, "Creates a corrosive cloud that deals %s hearts of damage to up to %s entities within the cloud's radius.");*/
-
-    modifierDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities are also set on fire.");
-    modifierExtendedDescription(ModModifiers.ACID_CLOUD_FIRE, "Damaged entities that are not currently on fire are also set on fire for %s seconds [%s ticks].");
-    modifierDescriptionBoth(ModModifiers.ACID_CLOUD_PEACEFUL, "Prevents damage to non-hostile entities.");
-
-    modifierDescriptionBoth(ModModifiers.ACID_CLOUD_KNOCKBACK, "Prevents damaged entities from being knocked back when damaged by acid cloud.");
-
-    modifierDescription(ModModifiers.ACID_CLOUD_SLOWNESS, "Damaged entities are also slowed.");
-    modifierExtendedDescription(ModModifiers.ACID_CLOUD_SLOWNESS, "Damaged entities are slowed for %s seconds [%s ticks] with Slowness %s. Entities that are already slowed are unaffected.");
-
-    modifierDescription(ModModifiers.ACID_CLOUD_TEMPORAL_MORASS, "Summons a Temporal Morass to the location where the Acid Cloud was cast. The morass drastically slows any entities that pass through it.");
-
-    modifierExtendedDescription(ModModifiers.ACID_CLOUD_TEMPORAL_MORASS, "Summons a Temporal Morass to the location where Acid Cloud was cast. The morass covers an area of ±%s/±%s blocks and lasts for %s seconds [%s ticks]. Entities that pass through the morass have Slowness %s applied. Effect triggers a secondary cooldown for %s seconds [%s ticks] before another morass can be summoned.");
-
-    // These use group id
-    modifierDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the Dandelion Winds effect.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_DURATION_1, "Increases the duration of the boost effect by %s seconds [%s ticks] to a total of %s seconds [%s ticks].");
-    modifierDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance to deflect projectiles.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_CHANCE_1, "Increases the chance to deflect projectiles by %s%% to a total of %s%%.");
-    modifierDescription(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1, "Reduces the cooldown of the Vortex effect.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_VORTEX_COOLDOWN_1, "Reduces the cooldown of the Vortex effect by %s seconds [%s ticks].");
-    modifierDescription(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1, "Reduces the cooldown of the Gusts effect.");
-    modifierExtendedDescription(ModModifiers.DANDELION_WINDS_GUSTS_COOLDOWN_1, "Reduces the cooldown of the Gusts effect by %s seconds [%s ticks].");
-
-    // TODO: This isn't implemented
-    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_STATUE, "Increases your knockback resistance. [NYI]");
-    modifierDescriptionBoth(ModModifiers.DANDELION_WINDS_INFERNO, "Enflames nearby enemies. [NYI]");
-
-
-    // TODO: Handle this: both of these need to be 'placeholder' modifiers.
-    modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_TARGETED_GROWTH, "Causes accelerated growth to only the targeted block. [NYI]");
-    modifierDescriptionBoth(ModModifiers.SHATTER_ADJUSTABLE, "Group of modifiers that allow for the adjustment of the width, depth and height of the Shatter spell.");
-
-    modifierDescriptionBoth(ModModifiers.GROWTH_INFUSION_HYDRATION, "The soil crops are growing upon has its moisture level increased if it has a moisture level.");
-
-    modifierDescription(ModModifiers.SHATTER_DEPTH_1, "Increases the depth of the Shatter spell.");
-    modifierExtendedDescription(ModModifiers.SHATTER_DEPTH_1, "Increases the depth of the Shatter spell to %s blocks.");
-    modifierDescription(ModModifiers.SHATTER_WIDTH_1, "Increases the width of the Shatter spell.");
-    modifierExtendedDescription(ModModifiers.SHATTER_WIDTH_1, "Increases the width of the Shatter spell to %s blocks.");
-    modifierDescription(ModModifiers.SHATTER_HEIGHT_1, "Increases the height of the Shatter spell.");
-    modifierExtendedDescription(ModModifiers.SHATTER_HEIGHT_1, "Increases the height of the Shatter spell to %s blocks.");
-
     addDamage(ModDamage.ACID_CLOUD, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
     addDamage(ModDamage.ACID_CLOUD_NO_KNOCKBACK, "%1$s expired in a cloud of poison", "%1$s expired in a cloud of poison while fighting $2%s", "%1$s expired in a cloud of poison while fighting %2$s wielding %3$s");
     addDamage(ModDamage.LIFE_DRAIN, "%1$s was drained away to nothing", "%1$s was drained away to nothing while fighting %2$s", "%1$s was drained away to nothing while fighting %2$s wielding %3$s");
@@ -1057,25 +993,8 @@ public final class RootsLangProvider extends LanguageProvider {
     spell.handleTooltip(this::add);
   }
 
-  public void spellDescription(Holder<Spell> spell, String value) {
-    add(spell.value().getTooltipDescriptionId(), value);
-  }
-
-  public void spellExtendedDescription(Holder<Spell> spell, String value) {
-    add(spell.value().getTooltipExtendedDescriptionId(), value);
-  }
-
-  public void modifierDescriptionBoth(Holder<SpellModifier> spellModifier, String value) {
-    modifierDescription(spellModifier, value);
-    modifierExtendedDescription(spellModifier, value);
-  }
-
-  public void modifierDescription(Holder<SpellModifier> spellModifier, String value) {
-    add(spellModifier.value().getTooltipDescriptionId(), value);
-  }
-
-  public void modifierExtendedDescription(Holder<SpellModifier> spellModifier, String value) {
-    add(spellModifier.value().getTooltipExtendedDescriptionId(), value);
+  public void describeModifier (SpellModifier modifier) {
+    modifier.handleTooltip(this::add);
   }
 
   public static String toEnglishName(String internalName) {

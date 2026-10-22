@@ -157,7 +157,7 @@ public class ModSpells {
       .textColor(ChatFormatting.YELLOW)
       .costs(CostInstance.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0125)))
       .cooldown(ModSpells.DANDELION_WINDS_COOLDOWN)
-      .properties(ModSpells.DANDELION_WINDS_DURATION_INCREASE, ModSpells.DANDELION_WINDS_DURATION, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE, ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN)
+      .properties(ModSpells.DANDELION_WINDS_DURATION_INCREASE, ModSpells.DANDELION_WINDS_DURATION, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE, ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE, ModSpells.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_GUSTS_COOLDOWN, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE, ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN)
       .tooltip()
       .simple("Has a chance to deflect projectiles aimed at you.")
       .segment("Applies a buff for %s", Formatters.forProperty(ModSpells.DANDELION_WINDS_DURATION).by(Formatters.TICKS))
@@ -173,8 +173,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_COOLDOWN = P.recordProperty("dandelion_winds/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_VORTEX_COOLDOWN = P.recordProperty("dandelion_winds/vortex_cooldown", Property.ofInt(10 * 20, "How often entities can be effected by Dandelion Winds's vortex effect."));
   public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE = P.recordProperty("dandelion_winds/vortex_cooldown_decrease", Property.ofInt(1 * 20, "How much the vortex cooldown is decreased by for each cooldown reduction modifier applied."));
-  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_MAGNETIC_COOLDOWN = P.recordProperty("dandelion_winds/magnetic_cooldown", Property.ofInt(10 * 20, "How often entities can be effected by Dandelion Winds's magnetic effect."));
-  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE = P.recordProperty("dandelion_winds/magnetic_cooldown_decrease", Property.ofInt(1 * 20, "How much the magnetic cooldown is decreased by for each cooldown reduction modifier applied."));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_GUSTS_COOLDOWN = P.recordProperty("dandelion_winds/gusts_cooldown", Property.ofInt(10 * 20, "How often entities can be effected by Dandelion Winds's gusts effect."));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE = P.recordProperty("dandelion_winds/gusts_cooldown_decrease", Property.ofInt(1 * 20, "How much the gusts cooldown is decreased by for each cooldown reduction modifier applied."));
 
   // Decay
   public static final DeferredHolder<Spell, DecaySpell> DECAY = REGISTER.register(Spells.DECAY.location()
@@ -580,10 +580,14 @@ public class ModSpells {
       .color(0x606060, 0xc0c0c0)
       .textColor(ChatFormatting.YELLOW)
       .cooldown(ModSpells.SHATTER_COOLDOWN)
+      .properties(ModSpells.SHATTER_DEPTH_INCREASE, ModSpells.SHATTER_HEIGHT_INCREASE, ModSpells.SHATTER_WIDTH_INCREASE)
       .tooltip("Breaks the targeted block. The number of broken blocks can be increased with modifiers.")
       .build()
   ));
   public static final PropertyHolder<Property.IntegerProperty> SHATTER_COOLDOWN = P.recordProperty("shatter/cooldown", Property.ofInt(5, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> SHATTER_DEPTH_INCREASE = P.recordProperty("shatter/depth_increase", Property.ofInt(1, "How many blocks each rank of the Depth Increase modifier should increase digging by."));
+  public static final PropertyHolder<Property.IntegerProperty> SHATTER_WIDTH_INCREASE = P.recordProperty("shatter/width_increase", Property.ofInt(1, "How many blocks each rank of the Width Increase modifier should increase digging by."));
+  public static final PropertyHolder<Property.IntegerProperty> SHATTER_HEIGHT_INCREASE = P.recordProperty("shatter/height_increase", Property.ofInt(1, "How many blocks each rank of the Height Increase modifier should increase digging by."));
 
   // Jaunt (80 cooldown)
   public static final DeferredHolder<Spell, JauntSpell> JAUNT = REGISTER.register(Spells.JAUNT.location()

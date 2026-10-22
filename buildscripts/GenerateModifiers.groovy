@@ -5,13 +5,19 @@ import groovy.json.JsonSlurper
 
 // ---------------------------------------------------------------------------
 // Usage: groovy GenerateModifiers.groovy <modifiers.json> <output-src-root>
-//                                        [<template-root>]
+//                                        [<template-root>] [<tooltips-java>]
 // Also runs in-process from build.gradle via GroovyShell; invalid data throws
 // rather than exiting, so it must never call System.exit.
 //
 // The Java skeletons live in src/template/java, laid out by package exactly as
 // the generated sources are; this script only fills their @SLOT@ holes. Slots
 // are listed with each emit() call below.
+//
+// TOOLTIPS
+//   Read from the constants declared in ModModifierTooltips.java. A modifier
+//   uses the tooltip named after its own constant (SHATTER_FORTUNE_1), else,
+//   for a ladder tier, the one named after its ladder (SHATTER_DEPTH). A
+//   modifier with neither gets no .tooltip(...) and a warning is printed.
 //
 // SCHEMA
 //   <spell>.<name>   a modifier; add `tiers` to make it a ladder, i.e. a
@@ -50,6 +56,8 @@ import groovy.json.JsonSlurper
 def data = new JsonSlurper().parse(new File(args[0]))
 def outRoot = new File(args[1])
 def tplRoot = args.size() > 2 ? new File(args[2]) : new File('src/template/java')
+def tipFile = args.size() > 3 ? new File(args[3])
+        : new File('src/main/java/mysticmods/roots/init/ModModifierTooltips.java')
 
 def ROMAN = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x']
 
@@ -246,6 +254,22 @@ if (errors) {
   throw new IllegalStateException(report)
 }
 
+// ---------------------------------------------------------------- tooltips
+// A tier's own constant wins over its ladder's, so SHATTER_FORTUNE_1 is used
+// as-is while SHATTER_DEPTH_1 falls back to SHATTER_DEPTH. Missing tooltips
+// only warn, since some modifiers don't have one written yet.
+if (!tipFile.isFile()) throw new IllegalStateException("missing tooltips: ${tipFile.path}")
+def tooltips = (tipFile.text =~ /\bTooltip\s+([A-Z][A-Z0-9_]*)\s*=/).collect { it[1] } as Set
+def usedTips = [] as Set
+def missingTips = [] as LinkedHashSet
+flat.each { rec ->
+  rec.tooltip = [rec.constant, rec.group].find { it && tooltips.contains(it) }
+  if (rec.tooltip) usedTips << rec.tooltip
+  else missingTips << (rec.group ?: rec.constant)
+}
+missingTips.each { println "warning: no ModModifierTooltips.$it" }
+(tooltips - usedTips).each { println "warning: ModModifierTooltips.$it matches no modifier" }
+
 // ---------------------------------------------------------------- exprs
 def COST_OPS = [add: 'add', mult: 'mult', mult_total: 'multTotal', negate: 'negate']
 
@@ -307,6 +331,8 @@ def propsChain = { rec ->
   if (rec.conflicts) {
     parts << ".conflicts(${rec.conflicts.collect { "SpellModifiers.${it}" }.join(', ')})"
   }
+  // ModModifierTooltips shares ModModifiers' package, so no import is needed
+  if (rec.tooltip) parts << ".tooltip(ModModifierTooltips.${rec.tooltip})"
   parts << ".costs(${costExpr(rec.cost)})"
   parts
 }

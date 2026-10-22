@@ -213,19 +213,19 @@
         }
       },
       {
-        "id": "roots:dandelion_winds/magnetic_cooldown_decrease",
+        "id": "roots:dandelion_winds/gusts_cooldown_decrease",
         "value": {
           "type": "roots:integer_property",
-          "comment": "How much the magnetic cooldown is decreased by for each cooldown reduction modifier applied.",
+          "comment": "How much the gusts cooldown is decreased by for each cooldown reduction modifier applied.",
           "default_value": 20,
           "value": 20
         }
       },
       {
-        "id": "roots:dandelion_winds/magnetic_cooldown",
+        "id": "roots:dandelion_winds/gusts_cooldown",
         "value": {
           "type": "roots:integer_property",
-          "comment": "How often entities can be effected by Dandelion Winds's magnetic effect.",
+          "comment": "How often entities can be effected by Dandelion Winds's gusts effect.",
           "default_value": 200,
           "value": 200
         }
@@ -894,6 +894,33 @@
           "comment": "How long before the player can cast the spell again",
           "default_value": 5,
           "value": 5
+        }
+      },
+      {
+        "id": "roots:shatter/depth_increase",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How many blocks each rank of the Depth Increase modifier should increase digging by.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:shatter/height_increase",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How many blocks each rank of the Height Increase modifier should increase digging by.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:shatter/width_increase",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How many blocks each rank of the Width Increase modifier should increase digging by.",
+          "default_value": 1,
+          "value": 1
         }
       }
     ],

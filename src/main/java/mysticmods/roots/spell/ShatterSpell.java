@@ -11,9 +11,11 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModModifiers;
+import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.lightning.SemiDynamicLightningFXPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,8 +39,19 @@ import java.util.Map;
 public class ShatterSpell extends Spell {
   public static boolean IS_CASTING_SHATTER = false;
 
+  private int depth_increase, width_increase, height_increase;
+
   public ShatterSpell(Properties properties) {
     super(properties);
+  }
+
+  @Override
+  protected void initializeProperties(Holder<Spell> holder) {
+    super.initializeProperties(holder);
+    var props = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.depth_increase = props.get(ModSpells.SHATTER_DEPTH_INCREASE);
+    this.width_increase = props.get(ModSpells.SHATTER_WIDTH_INCREASE);
+    this.height_increase = props.get(ModSpells.SHATTER_HEIGHT_INCREASE);
   }
 
   @Override

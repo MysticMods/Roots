@@ -1,19 +1,18 @@
 package mysticmods.roots.api.modifier;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.IExtendedDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.tooltip.NumberFormatter;
 import mysticmods.roots.api.tooltip.TooltipBuilder;
-import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -22,11 +21,13 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.BiConsumer;
+import java.util.function.UnaryOperator;
 
 public class SpellModifier extends Modifier<Spell, SpellModifier> implements IExtendedDescribed, ICostedChild {
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
@@ -62,7 +63,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   @Override
   public Component[] getOrCreateDescriptionComponents() {
     if (extendedDescription == null) {
-      this.extendedDescription = Spell.componentsFromFormatter(getApplicableHolder().value(), this.numberFormatters);
+      this.extendedDescription = Spell.componentsFromFormatter(getApplicableHolder().value(), this.numberFormatters, this);
     }
 
     return this.extendedDescription;
@@ -72,7 +73,8 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   public String getOrCreateTooltipDescriptionId() {
     if (this.descriptionTooltipId == null) {
       if (this.getGroupKey().useGroupDescription()) {
-        this.descriptionTooltipId = this.getGroupKey().createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey()) + ".description";
+        this.descriptionTooltipId = this.getGroupKey()
+            .createDescriptionId("spell_modifier_group", builtInRegistryHolder().getKey()) + ".description";
       } else {
         this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
       }
@@ -161,6 +163,19 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     }
   }
 
+  @ApiStatus.Internal
+  public void handleTooltip(BiConsumer<String, String> strings) {
+    if (this.getGroupKey().useGroupDescription() && this.groupValue > 1) {
+      return;
+    }
+    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.isEmpty()) {
+      RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
+      return;
+    }
+    strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
+    strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate);
+  }
+
   public static class Properties extends Modifier.Properties<Spell, SpellModifier, SpellModifier.Properties> implements TooltipBuilder.AcceptsTooltip {
     SpellType.Charge chargeType = null;
     SpellType.Condition conditionType = SpellType.Condition.ALWAYS;
@@ -174,12 +189,12 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
       super(key);
     }
 
-    public final Properties charge (SpellType.Charge chargeType) {
+    public final Properties charge(SpellType.Charge chargeType) {
       this.chargeType = chargeType;
       return this;
     }
 
-    public final Properties condition (SpellType.Condition condition) {
+    public final Properties condition(SpellType.Condition condition) {
       this.conditionType = condition;
       return this;
     }
@@ -204,7 +219,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
       return this;
     }
 
-    public Properties tooltip (String simple) {
+    public Properties tooltip(String simple) {
       return new TooltipBuilder<>(this).simple(simple).endTooltip();
     }
 
@@ -212,11 +227,15 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
       return new TooltipBuilder<>(this);
     }
 
+    public Properties tooltip(UnaryOperator<TooltipBuilder<Properties>> operator) {
+      return operator.apply(tooltip()).endTooltip();
+    }
+
     @Override
     public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
-      this.simpleTooltip = s;
-      this.extendedTooltip = s2;
-      this.numberFormatters = numberFormatters;
+      this.simpleTooltip = s == null ? "" : s;
+      this.extendedTooltip = s2 == null ? "" : s2;
+      this.numberFormatters = numberFormatters == null ? List.of() : numberFormatters;
     }
   }
 }

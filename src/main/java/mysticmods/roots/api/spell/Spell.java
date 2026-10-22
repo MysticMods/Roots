@@ -120,6 +120,17 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return RootsRegistries.SPELLS.wrapAsHolder(this);
   }
 
+  public static Component[] componentsFromFormatter (Spell spell, List<NumberFormatter<?>> formatters, SpellModifier modifier) {
+    List<Component> componentList = new ArrayList<>();
+    formatters.forEach(entry ->
+    {
+      entry.spell(spell);
+      entry.modifier(modifier);
+      componentList.addAll(entry.build());
+    });
+    return componentList.toArray(Component[]::new);
+  }
+
   public static Component[] componentsFromFormatter(Spell spell, List<NumberFormatter<?>> formatters) {
     List<Component> componentList = new ArrayList<>();
     formatters.forEach(entry ->
@@ -776,10 +787,9 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     public TooltipBuilder<Transformer> tooltip(IExtendedDescribed described) {
-      tooltipId(described.getTooltipDescriptionId());
-      extendedTooltipId(described.getTooltipExtendedDescriptionId());
-      descriptionId(described.getTooltipDescriptionId());
-      return tooltip();
+      return tooltipId(described.getTooltipDescriptionId()).
+      extendedTooltipId(described.getTooltipExtendedDescriptionId()).
+      descriptionId(described.getDescriptionId()).tooltip();
     }
 
     @Override

@@ -63,7 +63,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     this.addRenderableWidget(this.cultivation);
     this.addRenderableWidget(this.twilight);
     this.addRenderableWidget(this.elemental);
-    this.addRenderableOnly(this.wild);
+    this.addRenderableWidget(this.wild);
 
     //this.addRenderableOnly(this::drawLines);
 

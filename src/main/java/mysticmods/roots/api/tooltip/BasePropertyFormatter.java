@@ -1,14 +1,20 @@
 package mysticmods.roots.api.tooltip;
 
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.IPropertyDataMapped;
+import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 
+import java.util.function.IntSupplier;
+import java.util.function.Supplier;
+
 public class BasePropertyFormatter<T, S extends BasePropertyFormatter<T, S>> {
   protected IPropertyDataMapped source;
+  protected Supplier<Number> groupValue = null;
 
   public S self () {
     //noinspection unchecked
@@ -49,5 +55,23 @@ public class BasePropertyFormatter<T, S extends BasePropertyFormatter<T, S>> {
   public S ritual(Ritual ritual) {
     this.source = ritual;
     return self();
+  }
+
+  public S modifier (SpellModifier modifier) {
+    this.groupValue = modifier::getGroupValue;
+    return self();
+  }
+
+  public S modifier (Holder<SpellModifier> modifier) {
+    this.groupValue = () -> modifier.value().getGroupValue();
+    return self();
+  }
+
+  public S modifier (ResourceKey<SpellModifier> modifierKey) {
+    SpellModifier modifier = RootsRegistries.SPELL_MODIFIERS.get(modifierKey);
+    if (modifier == null) {
+      throw new NullPointerException("Missing modifier for: " + modifierKey);
+    }
+    return modifier(modifier);
   }
 }

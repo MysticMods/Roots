@@ -40,8 +40,8 @@ public class DandelionWindsSpell extends Spell {
     this.durationIncrease = data.get(ModSpells.DANDELION_WINDS_DURATION_INCREASE);
     this.vortexCooldown = data.get(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN);
     this.vortexCooldownDecrease = data.get(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE);
-    this.gustsCooldown = data.get(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN);
-    this.gustsCooldownDecrease = data.get(ModSpells.DANDELION_WINDS_MAGNETIC_COOLDOWN_DECREASE);
+    this.gustsCooldown = data.get(ModSpells.DANDELION_WINDS_GUSTS_COOLDOWN);
+    this.gustsCooldownDecrease = data.get(ModSpells.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE);
   }
 
   @Override
