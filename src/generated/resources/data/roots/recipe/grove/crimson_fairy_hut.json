@@ -37,9 +37,9 @@
       {
         "type": "roots:grove_stone_condition",
         "grove_type": {
-          "grove": "roots:fairy",
-          "name": "fairy",
-          "tag": "roots:grove_stones/fairy"
+          "grove": "roots:unity",
+          "name": "unity",
+          "tag": "roots:grove_stones/unity"
         },
         "require_active": true
       }
@@ -47,7 +47,7 @@
     "player_conditions": [
       {
         "type": "roots:grove_rank_condition",
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "minimum_rank": 1
       }
     ],

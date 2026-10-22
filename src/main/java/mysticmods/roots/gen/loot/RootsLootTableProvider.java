@@ -474,7 +474,7 @@ public final class RootsLootTableProvider {
       addGroveStoneDrops(ModBlocks.ANIMATE_GROVE_STONE, ModItems.ANIMATE_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.WILD_GROVE_STONE, ModItems.WILD_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.FUNGAL_GROVE_STONE, ModItems.FUNGAL_GROVE_STONE);
-      addGroveStoneDrops(ModBlocks.FAIRY_GROVE_STONE, ModItems.FAIRY_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.UNITY_GROVE_STONE, ModItems.UNITY_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.CULTIVATION_GROVE_STONE, ModItems.CULTIVATION_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.ELEMENTAL_GROVE_STONE, ModItems.ELEMENTAL_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.TWILIGHT_GROVE_STONE, ModItems.TWILIGHT_GROVE_STONE);

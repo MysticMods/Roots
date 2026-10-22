@@ -112,7 +112,7 @@ public class RootsModEvents {
 
       event.accept(ModItems.WILD_GROVE_STONE.get());
       event.accept(ModItems.ANIMATE_GROVE_STONE.get());
-      event.accept(ModItems.FAIRY_GROVE_STONE.get());
+      event.accept(ModItems.UNITY_GROVE_STONE.get());
       event.accept(ModItems.ELEMENTAL_GROVE_STONE.get());
       event.accept(ModItems.TWILIGHT_GROVE_STONE.get());
       event.accept(ModItems.FUNGAL_GROVE_STONE.get());

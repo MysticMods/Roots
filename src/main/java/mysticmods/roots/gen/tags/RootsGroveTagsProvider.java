@@ -22,7 +22,7 @@ public final class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Gr
   @Override
   protected void addTags(HolderLookup.Provider provider) {
     tag(RootsTags.Groves.WILD).add(ModGroves.WILD.get());
-    tag(RootsTags.Groves.FAIRY).add(ModGroves.FAIRY.get());
+    tag(RootsTags.Groves.UNITY).add(ModGroves.UNITY.get());
     tag(RootsTags.Groves.ELEMENTAL).add(ModGroves.ELEMENTAL.get());
     tag(RootsTags.Groves.ANIMATE).add(ModGroves.ANIMATE.get());
     tag(RootsTags.Groves.HOLLOW).add(ModGroves.HOLLOW.get());
@@ -30,7 +30,7 @@ public final class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Gr
     tag(RootsTags.Groves.CULTIVATION).add(ModGroves.CULTIVATION.get());
     tag(RootsTags.Groves.FUNGAL).add(ModGroves.FUNGAL.get());
     //noinspection unchecked
-    tag(RootsTags.Groves.ANY).addTags(RootsTags.Groves.FAIRY, RootsTags.Groves.ELEMENTAL, RootsTags.Groves.ANIMATE, RootsTags.Groves.TWILIGHT, RootsTags.Groves.CULTIVATION, RootsTags.Groves.FUNGAL, RootsTags.Groves.WILD);
+    tag(RootsTags.Groves.ANY).addTags(RootsTags.Groves.UNITY, RootsTags.Groves.ELEMENTAL, RootsTags.Groves.ANIMATE, RootsTags.Groves.TWILIGHT, RootsTags.Groves.CULTIVATION, RootsTags.Groves.FUNGAL, RootsTags.Groves.WILD);
     tag(RootsTags.Groves.ANY_POWERABLE).addTag(RootsTags.Groves.ANY);
     //noinspection unchecked
     tag(RootsTags.Groves.CARES_ABOUT_PACIFIST).addTags(RootsTags.Groves.ANIMATE, RootsTags.Groves.TWILIGHT);

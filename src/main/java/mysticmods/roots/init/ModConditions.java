@@ -32,7 +32,7 @@ public class ModConditions {
   public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_4_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 4));
   public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_3_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 3));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, true));
-  public static final Supplier<ILevelCondition> FAIRY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.FAIRY, true));
+  public static final Supplier<ILevelCondition> UNITY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.UNITY, true));
   public static final Supplier<ILevelCondition> FUNGAL_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.FUNGAL, true));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE_INACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, true));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, false));
@@ -51,28 +51,28 @@ public class ModConditions {
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 1));
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 1));
-  public static final Supplier<IPlayerCondition> FAIRY_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 1));
+  public static final Supplier<IPlayerCondition> UNITY_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), 1));
   public static final Supplier<IPlayerCondition> ANIMATE_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), 1));
   public static final Supplier<IPlayerCondition> CULTIVATION_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 1));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 1));
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 2));
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 2));
-  public static final Supplier<IPlayerCondition> FAIRY_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 2));
+  public static final Supplier<IPlayerCondition> UNITY_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), 2));
   public static final Supplier<IPlayerCondition> ANIMATE_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), 2));
   public static final Supplier<IPlayerCondition> CULTIVATION_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 2));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 2));
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 3));
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 3));
-  public static final Supplier<IPlayerCondition> FAIRY_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 3));
+  public static final Supplier<IPlayerCondition> UNITY_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), 3));
   public static final Supplier<IPlayerCondition> ANIMATE_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), 3));
   public static final Supplier<IPlayerCondition> CULTIVATION_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 3));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 3));
 
   public static final Supplier<IPlayerCondition> FUNGAL_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), 4));
   public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), 4));
-  public static final Supplier<IPlayerCondition> FAIRY_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FAIRY.get(), 4));
+  public static final Supplier<IPlayerCondition> UNITY_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), 4));
   public static final Supplier<IPlayerCondition> ANIMATE_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), 4));
   public static final Supplier<IPlayerCondition> CULTIVATION_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), 4));
   public static final Supplier<IPlayerCondition> TWILIGHT_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), 4));

@@ -277,8 +277,8 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.RITUAL_ANIMAL_HARVEST.get(), ANIMAL_HARVEST_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.FUNGAL_TRANSMUTER.get(), TRANSMUTATION_RECIPE_TYPE);
     registration.addRecipeCatalyst(Items.GLASS_BOTTLE, ENTITY_INTERACTION_TYPE);
-    registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.ANIMATE_GROVE_STONE.get(), ModItems.CULTIVATION_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
-    registration.addRecipeCatalysts(GROVE_ENTITY_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.FAIRY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.ANIMATE_GROVE_STONE.get(), ModItems.CULTIVATION_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
+    registration.addRecipeCatalysts(GROVE_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.UNITY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.ANIMATE_GROVE_STONE.get(), ModItems.CULTIVATION_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
+    registration.addRecipeCatalysts(GROVE_ENTITY_POWER_RECIPE_TYPE, ModItems.ELEMENTAL_GROVE_STONE.get(), ModItems.UNITY_GROVE_STONE.get(), ModItems.WILD_GROVE_STONE.get(), ModItems.TWILIGHT_GROVE_STONE.get(), ModItems.ANIMATE_GROVE_STONE.get(), ModItems.CULTIVATION_GROVE_STONE.get(), ModItems.FUNGAL_GROVE_STONE.get());
   }
 
   @Override

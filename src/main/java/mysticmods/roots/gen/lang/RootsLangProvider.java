@@ -291,9 +291,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get().getName(), "Active Grove Stone");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get()
         .getName() + ".description", "A Grove Stone that has been activated by the ritual Grove Supplication.");
-    add("level_condition.roots." + ModConditions.FAIRY_GROVE_STONE_ACTIVE.get().getName(), "Active Fairy Grove Stone");
-    add("level_condition.roots." + ModConditions.FAIRY_GROVE_STONE_ACTIVE.get()
-        .getName() + ".description", "A Fairy Grove Stone that has been activated by the ritual Grove Supplication.");
+    add("level_condition.roots." + ModConditions.UNITY_GROVE_STONE_ACTIVE.get().getName(), "Active Unity Grove Stone");
+    add("level_condition.roots." + ModConditions.UNITY_GROVE_STONE_ACTIVE.get()
+        .getName() + ".description", "A Unity Grove Stone that has been activated by the ritual Grove Supplication.");
     add("level_condition.roots." + ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get()
         .getName(), "Active Fungal Grove Stone");
     add("level_condition.roots." + ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get()
@@ -323,9 +323,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_1.get().getName(), "Elemental Grove Rank 1+");
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Elemental Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_1.get().getName(), "Fairy Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 1.");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_1.get().getName(), "Unity Grove Rank 1+");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_1.get()
+        .getName() + ".description", "Obtain a reputation rank with the Unity Grove of at least 1.");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_1.get().getName(), "Animate Grove Rank 1+");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_1.get()
         .getName() + ".description", "Obtain a reputation rank with the Animate Grove of at least 1.");
@@ -342,9 +342,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_2.get().getName(), "Elemental Grove Rank 2+");
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Elemental Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_2.get().getName(), "Fairy Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 2.");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_2.get().getName(), "Unity Grove Rank 2+");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_2.get()
+        .getName() + ".description", "Obtain a reputation rank with the Unity Grove of at least 2.");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_2.get().getName(), "Animate Grove Rank 2+");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_2.get()
         .getName() + ".description", "Obtain a reputation rank with the Animate Grove of at least 2.");
@@ -361,9 +361,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_3.get().getName(), "Elemental Grove Rank 3+");
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Elemental Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_3.get().getName(), "Fairy Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Fairy Grove of at least 3.");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_3.get().getName(), "Unity Grove Rank 3+");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_3.get()
+        .getName() + ".description", "Obtain a reputation rank with the Unity Grove of at least 3.");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_3.get().getName(), "Animate Grove Rank 3+");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_3.get()
         .getName() + ".description", "Obtain a reputation rank with the Animate Grove of at least 3.");
@@ -380,9 +380,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_4.get().getName(), "Elemental Grove Rank 4");
     add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Elemental Grove.");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_4.get().getName(), "Fairy Grove Rank 4");
-    add("player_condition.roots." + ModConditions.FAIRY_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Fairy Grove.");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_4.get().getName(), "Unity Grove Rank 4");
+    add("player_condition.roots." + ModConditions.UNITY_RANK_4.get()
+        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Unity Grove.");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_4.get().getName(), "Animate Grove Rank 4");
     add("player_condition.roots." + ModConditions.ANIMATE_RANK_4.get()
         .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Animate Grove.");
@@ -491,7 +491,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.TWILIGHT_GROVE_STONE);
     addBlock(ModBlocks.ELEMENTAL_GROVE_STONE);
     addBlock(ModBlocks.CULTIVATION_GROVE_STONE);
-    addBlock(ModBlocks.FAIRY_GROVE_STONE);
+    addBlock(ModBlocks.UNITY_GROVE_STONE);
     addBlock(ModBlocks.FUNGAL_GROVE_STONE);
     addBlock(ModBlocks.INCENSE_BURNER);
     /*    addBlock(ModBlocks.STONE_ALTAR);*/

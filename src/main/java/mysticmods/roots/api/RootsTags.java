@@ -85,7 +85,7 @@ public class RootsTags {
     public static final TagKey<Block> GROVE_STONE_ANIMATE = modTag("grove_stones/animate");
     public static final TagKey<Block> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
     public static final TagKey<Block> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
-    public static final TagKey<Block> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");
+    public static final TagKey<Block> GROVE_STONE_UNITY = modTag("grove_stones/unity");
     public static final TagKey<Block> GROVE_STONE_FUNGAL = modTag("grove_stones/fungal");
     public static final TagKey<Block> GROVE_STONE_CULTIVATION = modTag("grove_stones/cultivation");
 
@@ -181,7 +181,7 @@ public class RootsTags {
     public static final TagKey<Block> CULTIVATION_REPUTATION_CROPS = modTag("grove/cultivation/crops");
     public static final TagKey<Block> ELEMENTAL_REPUTATION_CROPS = modTag("grove/elemental/crops");
     public static final TagKey<Block> TWILIGHT_REPUTATION_CROPS = modTag("grove/twilight/crops");
-    public static final TagKey<Block> FAIRY_REPUTATION_CROPS = modTag("grove/fairy/crops");
+    public static final TagKey<Block> UNITY_REPUTATION_CROPS = modTag("grove/unity/crops");
     public static final TagKey<Block> ANIMATE_REPUTATION_CROPS = modTag("grove/animate/crops");
     public static final TagKey<Block> FUNGAL_REPUTATION_CROPS = modTag("grove/fungal/crops");
 
@@ -191,8 +191,8 @@ public class RootsTags {
 
     public static final TagKey<Block> GROVE_CONSUMERS = modTag("grove_consumers");
 
-    public static final TagKey<Block> FAIRY_GROVE_GENERATORS = modTag("grove_generators/fairy");
-    public static final TagKey<Block> FAIRY_GROVE_PATHS = modTag("grove_generators/fairy/paths");
+    public static final TagKey<Block> UNITY_GROVE_GENERATORS = modTag("grove_generators/unity");
+    public static final TagKey<Block> UNITY_GROVE_PATHS = modTag("grove_generators/unity/paths");
     public static final TagKey<Block> WILD_GROVE_GENERATORS = modTag("grove_generators/wild");
     public static final TagKey<Block> ANIMATE_GROVE_GENERATORS = modTag("grove_generators/animate");
     public static final TagKey<Block> ANIMATE_GROVE_DRAGON_EGG_GENERATORS = modTag("grove_generators/animate/dragon_eggs");
@@ -323,7 +323,7 @@ public class RootsTags {
     public static final TagKey<Item> GROVE_STONE_ANIMATE = modTag("grove_stones/animate");
     public static final TagKey<Item> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
     public static final TagKey<Item> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
-    public static final TagKey<Item> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");
+    public static final TagKey<Item> GROVE_STONE_UNITY = modTag("grove_stones/unity");
     public static final TagKey<Item> GROVE_STONE_FUNGAL = modTag("grove_stones/fungal");
     public static final TagKey<Item> GROVE_STONE_CULTIVATION = modTag("grove_stones/cultivation");
     public static final TagKey<Item> PEDESTALS = modTag("pedestals");
@@ -602,7 +602,7 @@ public class RootsTags {
     public static final TagKey<Ritual> WIP = modTag("wip");
 
     public static final TagKey<Ritual> WILD = modTag("wild");
-    public static final TagKey<Ritual> FAIRY = modTag("fairy");
+    public static final TagKey<Ritual> UNITY = modTag("unity");
     public static final TagKey<Ritual> TWILIGHT = modTag("twilight");
     public static final TagKey<Ritual> FUNGAL = modTag("fungal");
     public static final TagKey<Ritual> CULTIVATION = modTag("cultivation");
@@ -630,7 +630,7 @@ public class RootsTags {
     public static final TagKey<Spell> ADJUSTABLE_SPELL = modTag("adjustable");
 
     public static final TagKey<Spell> WILD = modTag("wild");
-    public static final TagKey<Spell> FAIRY = modTag("fairy");
+    public static final TagKey<Spell> UNITY = modTag("unity");
     public static final TagKey<Spell> TWILIGHT = modTag("twilight");
     public static final TagKey<Spell> FUNGAL = modTag("fungal");
     public static final TagKey<Spell> CULTIVATION = modTag("cultivation");
@@ -727,7 +727,7 @@ public class RootsTags {
     public static final TagKey<Herb> AIR = modTag("elemental/air");
 
     public static final TagKey<Herb> WILD = modTag("wild");
-    public static final TagKey<Herb> FAIRY = modTag("fairy");
+    public static final TagKey<Herb> UNITY = modTag("unity");
     public static final TagKey<Herb> TWILIGHT = modTag("twilight");
     public static final TagKey<Herb> FUNGAL = modTag("fungal");
     public static final TagKey<Herb> CULTIVATION = modTag("cultivation");
@@ -747,7 +747,7 @@ public class RootsTags {
     public static final TagKey<Grove> ANY = modTag("any");
     public static final TagKey<Grove> ANY_POWERABLE = modTag("any_powerable");
     public static final TagKey<Grove> WILD = modTag("wild");
-    public static final TagKey<Grove> FAIRY = modTag("fairy");
+    public static final TagKey<Grove> UNITY = modTag("unity");
     public static final TagKey<Grove> TWILIGHT = modTag("twilight");
     public static final TagKey<Grove> FUNGAL = modTag("fungal");
     public static final TagKey<Grove> CULTIVATION = modTag("cultivation");
@@ -760,7 +760,7 @@ public class RootsTags {
     public static final TagKey<Item> ANY_GROVE_STONE = modItemTag("grove_stone/any");
     public static final TagKey<Item> ANY_POWERABLE_GROVE_STONE = modItemTag("grove_stone/any_powerable");
     public static final TagKey<Item> WILD_GROVE_STONE = modItemTag("grove_stone/wild");
-    public static final TagKey<Item> FAIRY_GROVE_STONE = modItemTag("grove_stone/fairy");
+    public static final TagKey<Item> UNITY_GROVE_STONE = modItemTag("grove_stone/unity");
     public static final TagKey<Item> TWILIGHT_GROVE_STONE = modItemTag("grove_stone/twilight");
     public static final TagKey<Item> FUNGAL_GROVE_STONE = modItemTag("grove_stone/fungal");
     public static final TagKey<Item> CULTIVATION_GROVE_STONE = modItemTag("grove_stone/cultivation");
@@ -773,7 +773,7 @@ public class RootsTags {
       GROVE_MAP.put(ANY, ANY_GROVE_STONE);
       GROVE_MAP.put(ANY_POWERABLE, ANY_POWERABLE_GROVE_STONE);
       GROVE_MAP.put(WILD, WILD_GROVE_STONE);
-      GROVE_MAP.put(FAIRY, FAIRY_GROVE_STONE);
+      GROVE_MAP.put(UNITY, UNITY_GROVE_STONE);
       GROVE_MAP.put(TWILIGHT, TWILIGHT_GROVE_STONE);
       GROVE_MAP.put(FUNGAL, FUNGAL_GROVE_STONE);
       GROVE_MAP.put(CULTIVATION, CULTIVATION_GROVE_STONE);

@@ -47,14 +47,14 @@
     "player_conditions": [
       {
         "type": "roots:grove_rank_condition",
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "minimum_rank": 1
       }
     ],
     "priority": 0,
     "result": {
       "count": 1,
-      "id": "roots:fairy_grove_stone"
+      "id": "roots:unity_grove_stone"
     }
   }
 }

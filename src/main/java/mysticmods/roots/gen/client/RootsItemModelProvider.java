@@ -148,8 +148,8 @@ public final class RootsItemModelProvider extends ItemModelProvider {
         .getPath(), modLoc("block/wild_grove_stone_inventory"));
     withExistingParent(ModBlocks.CULTIVATION_GROVE_STONE.getKey().location()
         .getPath(), modLoc("block/cultivation_grove_stone_inventory"));
-    withExistingParent(ModBlocks.FAIRY_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/fairy_grove_stone_inventory"));
+    withExistingParent(ModBlocks.UNITY_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/unity_grove_stone_inventory"));
     withExistingParent(ModBlocks.ELEMENTAL_GROVE_STONE.getKey().location()
         .getPath(), modLoc("block/elemental_grove_stone_inventory"));
     withExistingParent(ModBlocks.TWILIGHT_GROVE_STONE.getKey().location()

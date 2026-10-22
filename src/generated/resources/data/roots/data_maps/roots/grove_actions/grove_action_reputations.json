@@ -186,7 +186,7 @@
             "name": "roots:pereskia"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:create_pereskia",
         "reputation": {
           "gain1": 50,
@@ -275,11 +275,11 @@
         "entries": [
           {
             "type": "block",
-            "name": "roots:grove/fairy/crops"
+            "name": "roots:grove/unity/crops"
           }
         ],
-        "grove": "roots:fairy",
-        "name": "roots:fairy_crop_growth",
+        "grove": "roots:unity",
+        "name": "roots:unity_crop_growth",
         "reputation": {
           "gain1": 4,
           "gain2": 3,
@@ -310,7 +310,7 @@
     ],
     "roots:cure_villager": [
       {
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:cure_villager",
         "reputation": {
           "gain1": 100,
@@ -514,7 +514,7 @@
             "name": "roots:traders"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:kill_traders",
         "reputation": {
           "gain1": -5,
@@ -570,7 +570,7 @@
             "name": "roots:sylvan_light"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:learn_spell/sylvan_light",
         "reputation": {
           "gain1": 125,
@@ -588,7 +588,7 @@
             "name": "roots:petal_shell"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:learn_spell/petal_shell",
         "reputation": {
           "gain1": 125,
@@ -606,7 +606,7 @@
             "name": "roots:rose_thorns"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:learn_spell/rose_thorns",
         "reputation": {
           "gain1": 125,
@@ -1196,7 +1196,7 @@
             "name": "roots:blooming"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:first_ritual/blooming",
         "reputation": {
           "gain1": 66,
@@ -1214,7 +1214,7 @@
             "name": "roots:protection"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:first_ritual/protection",
         "reputation": {
           "gain1": 66,
@@ -1232,7 +1232,7 @@
             "name": "roots:warding"
           }
         ],
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:first_ritual/warding",
         "reputation": {
           "gain1": 66,
@@ -1260,8 +1260,8 @@
     ],
     "roots:trade_fairy_hut": [
       {
-        "grove": "roots:fairy",
-        "name": "roots:trade_with_fairy_hut",
+        "grove": "roots:unity",
+        "name": "roots:trade_with_unity_hut",
         "reputation": {
           "gain1": 20,
           "gain2": 5,
@@ -1274,7 +1274,7 @@
     ],
     "roots:trade_piglin": [
       {
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:trade_with_piglin",
         "reputation": {
           "gain1": 20,
@@ -1288,7 +1288,7 @@
     ],
     "roots:trade_villager": [
       {
-        "grove": "roots:fairy",
+        "grove": "roots:unity",
         "name": "roots:trade_with_villager",
         "reputation": {
           "gain1": 50,

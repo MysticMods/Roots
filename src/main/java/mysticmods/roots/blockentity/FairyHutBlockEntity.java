@@ -53,7 +53,7 @@ import java.util.UUID;
 
 public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, Merchant {
   private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(
-      ImmutableList.of(new PowerRequest(RootsTags.Groves.FAIRY, 15))
+      ImmutableList.of(new PowerRequest(RootsTags.Groves.UNITY, 15))
   );
 
   private boolean wasPoweredLastTick = false;

@@ -193,7 +193,7 @@ public class ModItems {
 
   public static DeferredHolder<Item, BlockItem> TWILIGHT_GROVE_STONE = ITEMS.register("twilight_grove_stone", () -> new BlockItem(ModBlocks.TWILIGHT_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> FUNGAL_GROVE_STONE = ITEMS.register("fungal_grove_stone", () -> new BlockItem(ModBlocks.FUNGAL_GROVE_STONE.get(), new Item.Properties()));
-  public static DeferredHolder<Item, BlockItem> FAIRY_GROVE_STONE = ITEMS.register("fairy_grove_stone", () -> new BlockItem(ModBlocks.FAIRY_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> UNITY_GROVE_STONE = ITEMS.register("unity_grove_stone", () -> new BlockItem(ModBlocks.UNITY_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> ELEMENTAL_GROVE_STONE = ITEMS.register("elemental_grove_stone", () -> new BlockItem(ModBlocks.ELEMENTAL_GROVE_STONE.get(), new Item.Properties()));
   // TODO: Info
   public static DeferredHolder<Item, BlockItem> INCENSE_BURNER = ITEMS.register("incense_burner", () -> new BlockItem(ModBlocks.INCENSE_BURNER.get(), new Item.Properties()));
@@ -296,6 +296,7 @@ public class ModItems {
 
   static {
     ITEMS.addAlias(RootsAPI.rl("fey_pouch"), RootsAPI.rl("sylvan_pouch"));
+    ITEMS.addAlias(RootsAPI.rl("fairy_grove_stone"), RootsAPI.rl("unity_grove_stone"));
   }
 
   public static final DeferredHolder<Item, PouchItem> HERB_POUCH = ITEMS.register("herb_pouch", () -> new PouchItem(HerbPouchMenu::new, new Item.Properties().stacksTo(1)
@@ -520,7 +521,7 @@ public class ModItems {
   }
 
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_ELEMENTAL = ITEMS.register("elemental", () -> grove(ModGroves.ELEMENTAL));
-  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_FAIRY = ITEMS.register("fairy", () -> grove(ModGroves.FAIRY));
+  public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_UNITY = ITEMS.register("unity", () -> grove(ModGroves.UNITY));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_FUNGAL = ITEMS.register("fungal", () -> grove(ModGroves.FUNGAL));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_WILD = ITEMS.register("wild", () -> grove(ModGroves.WILD));
   public static DeferredHolder<Item, TokenItem.GroveTokenItem> GROVE_CULTIVATION = ITEMS.register("cultivation", () -> grove(ModGroves.CULTIVATION));

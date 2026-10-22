@@ -18,12 +18,6 @@
       "threshold3": 3000,
       "threshold4": 4000
     },
-    "roots:fairy": {
-      "threshold1": 1000,
-      "threshold2": 2000,
-      "threshold3": 3000,
-      "threshold4": 4000
-    },
     "roots:fungal": {
       "threshold1": 1000,
       "threshold2": 2000,
@@ -37,6 +31,12 @@
       "threshold4": 4000
     },
     "roots:twilight": {
+      "threshold1": 1000,
+      "threshold2": 2000,
+      "threshold3": 3000,
+      "threshold4": 4000
+    },
+    "roots:unity": {
       "threshold1": 1000,
       "threshold2": 2000,
       "threshold3": 3000,

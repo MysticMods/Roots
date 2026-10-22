@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ReputationScreen extends RootsScreen implements ScreenParticleSupplier {
-  private ReputationButton fairy;
+  private ReputationButton unity;
   private ReputationButton elemental;
   private ReputationButton cultivation;
   private ReputationButton animate;
@@ -44,7 +44,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
   protected void init() {
     super.init();
 
-    this.fairy = new ReputationButton(ModGroves.FAIRY, this.leftPos + 119, this.topPos + 4);
+    this.unity = new ReputationButton(ModGroves.UNITY, this.leftPos + 119, this.topPos + 4);
     this.animate = new ReputationButton(ModGroves.ANIMATE, this.leftPos + 26, this.topPos + 50);
     this.cultivation = new ReputationButton(ModGroves.CULTIVATION, this.leftPos + 42, this.topPos + 171);
     this.twilight = new ReputationButton(ModGroves.TWILIGHT, this.leftPos + 206, this.topPos + 50);
@@ -58,7 +58,7 @@ public class ReputationScreen extends RootsScreen implements ScreenParticleSuppl
     this.addRenderableOnly(this.clouds);
     this.addRenderableOnly(this::drawTreeAndBorder);
     this.addRenderableWidget(this.fungal);
-    this.addRenderableWidget(this.fairy);
+    this.addRenderableWidget(this.unity);
     this.addRenderableWidget(this.animate);
     this.addRenderableWidget(this.cultivation);
     this.addRenderableWidget(this.twilight);

@@ -59,18 +59,6 @@
         "tag": "roots:grove_generators/elemental"
       }
     ],
-    "roots:fairy": [
-      {
-        "max_count": 2,
-        "symmetry": "radial_same_block",
-        "tag": "roots:grove_generators/fairy"
-      },
-      {
-        "max_count": 30,
-        "symmetry": "radial_same_block",
-        "tag": "roots:grove_generators/fairy/paths"
-      }
-    ],
     "roots:fungal": [
       {
         "max_count": 5,
@@ -90,6 +78,18 @@
         "max_count": 1,
         "symmetry": "radial_not_matching",
         "tag": "roots:grove_generators/twilight"
+      }
+    ],
+    "roots:unity": [
+      {
+        "max_count": 2,
+        "symmetry": "radial_same_block",
+        "tag": "roots:grove_generators/unity"
+      },
+      {
+        "max_count": 30,
+        "symmetry": "radial_same_block",
+        "tag": "roots:grove_generators/unity/paths"
       }
     ]
   }

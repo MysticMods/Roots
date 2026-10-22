@@ -49,20 +49,6 @@
         "value": 5
       }
     ],
-    "#roots:grove_generators/fairy": [
-      {
-        "blockTag": "roots:grove_generators/fairy",
-        "tag": "roots:fairy",
-        "value": 5
-      }
-    ],
-    "#roots:grove_generators/fairy/paths": [
-      {
-        "blockTag": "roots:grove_generators/fairy/paths",
-        "tag": "roots:fairy",
-        "value": 1
-      }
-    ],
     "#roots:grove_generators/fungal/dirt": [
       {
         "blockTag": "roots:grove_generators/fungal/dirt",
@@ -89,6 +75,20 @@
         "blockTag": "roots:grove_generators/twilight",
         "tag": "roots:twilight",
         "value": 5
+      }
+    ],
+    "#roots:grove_generators/unity": [
+      {
+        "blockTag": "roots:grove_generators/unity",
+        "tag": "roots:unity",
+        "value": 5
+      }
+    ],
+    "#roots:grove_generators/unity/paths": [
+      {
+        "blockTag": "roots:grove_generators/unity/paths",
+        "tag": "roots:unity",
+        "value": 1
       }
     ],
     "#roots:grove_generators/wild/cakes": [

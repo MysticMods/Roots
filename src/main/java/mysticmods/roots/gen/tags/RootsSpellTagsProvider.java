@@ -27,7 +27,7 @@ public final class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Sp
     this.tag(RootsTags.Spells.ADJUSTABLE_SPELL)
         .add(ModSpells.SHATTER.get(), ModSpells.GROWTH_INFUSION.get(), ModSpells.HARVEST.get());
 
-    this.tag(RootsTags.Spells.FAIRY)
+    this.tag(RootsTags.Spells.UNITY)
         .add(ModSpells.SYLVAN_LIGHT.get(), ModSpells.PETAL_SHELL.get(), ModSpells.ROSE_THORNS.get()/*, ModSpells.SANCTUARY.get()*/);
     this.tag(RootsTags.Spells.FUNGAL)
         .add(ModSpells.ACID_CLOUD.get(), ModSpells.DISARM.get(), ModSpells.GEAS.get()/*, ModSpells.SUMMON_UNDEAD.get()*/);
