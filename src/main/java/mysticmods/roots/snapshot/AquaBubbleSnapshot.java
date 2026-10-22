@@ -60,6 +60,16 @@ public class AquaBubbleSnapshot extends Snapshot {
     return fireResistance;
   }
 
+  public float recalculateLavaDamage (float incoming) {
+    float reduction = incoming * getLavaResistance();
+    return incoming - reduction;
+  }
+
+  public float recalculateFireDamage (float incoming) {
+    float reduction = incoming * getFireResistance();
+    return incoming - reduction;
+  }
+
   @Override
   public SnapshotType<?> getType() {
     return ModSerializers.AQUA_BUBBLE.get();

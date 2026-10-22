@@ -444,9 +444,9 @@ public class EntityEventHandler {
       SnapshotHelper.applyLiving(entity, ModSerializers.AQUA_BUBBLE.get(), (e, snapshot) -> {
         DamageSource source = event.getSource();
         if (source.is(DamageTypeTags.IS_FIRE)) {
-          event.setNewDamage(event.getNewDamage() * snapshot.getFireResistance());
+          event.setNewDamage(snapshot.recalculateFireDamage(event.getNewDamage()));
         } else if (source.is(RootsTags.DamageTypes.IS_LAVA)) {
-          event.setNewDamage(event.getNewDamage() * snapshot.getLavaResistance());
+          event.setNewDamage(snapshot.recalculateLavaDamage(event.getNewDamage()));
         }
       });
     }

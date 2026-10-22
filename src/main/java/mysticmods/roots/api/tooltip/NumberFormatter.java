@@ -49,7 +49,7 @@ public class NumberFormatter<T extends Number> extends BasePropertyFormatter<T, 
   }
 
   public <N extends Number> NumberFormatter<T> multipliedByTier () {
-    return this.modifyBy(new Multiplier(groupValueSupplier()));
+    return this.modifyBy(new AddMultiplier(groupValueSupplier()));
   }
 
   public <N extends Number> NumberFormatter<T> multipliedByTier(PropertyHolder<? extends Property<N>> number) {
