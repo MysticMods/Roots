@@ -83,22 +83,32 @@ public class ModModifierTooltips {
 
   public static final Tooltip GROWTH_INFUSION_HYDRATION = new Tooltip("Farmland beneath grown crops has its moisture level increased by 1.");
 
-  public static final Tooltip GROWTH_INFUSION_RAMPANT_GROWTH = new Tooltip(o -> {});
+  public static final Tooltip GROWTH_INFUSION_RAMPANT_GROWTH = new Tooltip(tooltip ->
+      tooltip.simple("Causes accelerated growth to all eligible blocks in the area around you.")
+          .segment("Causes accelerated growth for up to %s eligible blocks", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT)
+              .by(Formatters.NUMBER))
+          .segment("within %s blocks", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
+              .by(Formatters.BLOCK_RANGE))
+          .segment("every %s while channeled.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL)
+              .by(Formatters.TICKS))
+          .segment("The number of ticks applied to each block varies."));
 
-  public static final Tooltip GROWTH_INFUSION_FERTILIZER = new Tooltip(o -> {});
+  public static final Tooltip GROWTH_INFUSION_FERTILIZER = new Tooltip(tooltip -> tooltip.simple("Duplicates the effects of using bone meal on the targeted block.")
+      .segment("Applies up to %s stacks of bone meal to the targeted block.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT)
+          .by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_ADJUSTABLE = new Tooltip("Allows adjustment of the width, depth and height.");
 
   public static final Tooltip SHATTER_DEPTH = new Tooltip(tooltip -> tooltip.simple("Increases the depth of the Shatter spell.")
-      .segment("Increases the depth of the Shatter spell by %s blocks.", Formatters.forProperty(ModSpells.SHATTER_DEPTH_INCREASE)
+      .segment("Increases the depth of the Shatter spell to %s blocks.", Formatters.forProperty(ModSpells.SHATTER_DEPTH_INCREASE)
           .multipliedByTier().by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_WIDTH = new Tooltip(tooltip -> tooltip.simple("Increases the width of the Shatter spell.")
-      .segment("Increases the width of the Shatter spell by %s blocks.", Formatters.forProperty(ModSpells.SHATTER_WIDTH_INCREASE)
+      .segment("Increases the width of the Shatter spell to %s blocks.", Formatters.forProperty(ModSpells.SHATTER_WIDTH_INCREASE)
           .multipliedByTier().by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_HEIGHT = new Tooltip(tooltip -> tooltip.simple("Increases the height of the Shatter spell.")
-      .segment("Increases the height of the Shatter spell by %s blocks.", Formatters.forProperty(ModSpells.SHATTER_HEIGHT_INCREASE)
+      .segment("Increases the height of the Shatter spell to %s blocks.", Formatters.forProperty(ModSpells.SHATTER_HEIGHT_INCREASE)
           .multipliedByTier().by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_MAGNETISM = new Tooltip("Teleports dropped blocks to the player.");

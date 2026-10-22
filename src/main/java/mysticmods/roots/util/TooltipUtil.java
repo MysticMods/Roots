@@ -141,13 +141,14 @@ public class TooltipUtil {
     return result;
   }
 
+  // TODO: Skip descriptions of modifiers that have transformed the spell
   public static void addModifierList(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     List<List<SpellModifier>> modifiers = segmentModifiers(spell);
     if (!modifiers.isEmpty()) {
       if (flag.hasShiftDown()) {
         for (List<SpellModifier> modifierGroup : modifiers) {
           SpellModifier first = modifierGroup.getFirst();
-          if (first.is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+          if (first.is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS) || first.isTransforming()) {
             continue;
           }
           Component name = modifierGroup.size() == 1 ? first.getName() : first.getGroupName(modifierGroup.size());
@@ -156,11 +157,10 @@ public class TooltipUtil {
           TooltipUtil.baseModifierCostTooltip(context, result, modifierGroup, flag);
         }
       } else {
-        result.add(CommonComponents.EMPTY);
         MutableComponent modifierNames = Component.empty();
         boolean first = true;
         for (List<SpellModifier> modifierGroup : modifiers) {
-          if (modifierGroup.getFirst().is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+          if (modifierGroup.getFirst().is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS) || modifierGroup.getFirst().isTransforming()) {
             continue;
           }
           if (!first) {
@@ -170,7 +170,10 @@ public class TooltipUtil {
           var firstModifer = modifierGroup.getFirst();
           modifierNames.append(modifierGroup.size() == 1 ? firstModifer.getName() : firstModifer.getGroupName(modifierGroup.size()));
         }
-        result.add(Component.translatable("roots.tooltip.spell.modifiers", modifierNames));
+        if (!first) {
+          result.add(CommonComponents.EMPTY);
+          result.add(Component.translatable("roots.tooltip.spell.modifiers", modifierNames));
+        }
       }
     }
   }
@@ -282,7 +285,6 @@ public class TooltipUtil {
         spellNames.append(modifier.getName());
       }
       tooltipComponents.add(Component.translatable("roots.spell_modifier.transformed", spellNames));
-      return;
     }
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
       tooltipComponents.add(spell.asSpell().getTooltipExtendedDescription(spell));

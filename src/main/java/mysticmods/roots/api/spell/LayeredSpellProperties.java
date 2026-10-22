@@ -69,6 +69,7 @@ public class LayeredSpellProperties {
     }
   }
 
+  // TODO: Does this need to exist?
   public List<Pair<String, String>> getTranslationStrings () {
     return stringsToGenerate;
   }

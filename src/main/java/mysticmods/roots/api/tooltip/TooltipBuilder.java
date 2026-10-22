@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
-  private String simpleTooltip;
+  private String simpleTooltip = "";
   private final List<String> textSegments = new ArrayList<>();
   private final List<NumberFormatter<?>> propertyFormatters = new ArrayList<>();
   private final T properties;
@@ -17,6 +17,11 @@ public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
 
   public TooltipBuilder<T> simple(String simpleTooltip) {
     this.simpleTooltip = simpleTooltip;
+    return this;
+  }
+
+  public TooltipBuilder<T> segment (NumberFormatter<?> property) {
+    this.propertyFormatters.add(property);
     return this;
   }
 
@@ -32,11 +37,8 @@ public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
   }
 
   public T endTooltip() {
-    if (textSegments.isEmpty()) {
-      this.properties.accept(simpleTooltip, simpleTooltip, propertyFormatters);
-    } else {
-      this.properties.accept(simpleTooltip, String.join(" ", textSegments), propertyFormatters);
-    }
+    var generated = textSegments.isEmpty() ? simpleTooltip : String.join(" ", textSegments);
+    properties.accept(simpleTooltip, generated, propertyFormatters);
     return properties;
   }
 

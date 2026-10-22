@@ -346,9 +346,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
     strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
     strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate);
-    for (Pair<String, String> translationPairs : layeredProperties.getTranslationStrings()) {
-      strings.accept(translationPairs.getFirst(), translationPairs.getSecond());
-    }
   }
 
   // TODO: This does not function how it should function

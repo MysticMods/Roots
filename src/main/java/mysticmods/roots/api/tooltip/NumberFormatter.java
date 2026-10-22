@@ -66,11 +66,13 @@ public class NumberFormatter<T extends Number> extends BasePropertyFormatter<T, 
   }
 
   private Supplier<Number> groupValueSupplier () {
-    if (this.groupValue != null) {
-      return groupValue;
-    }
-
-    return () -> -1;
+    return () -> {
+      if (NumberFormatter.this.groupValue != null) {
+        return NumberFormatter.this.groupValue.get();
+      } else {
+        return -1;
+      }
+    };
   }
 
   private Number modifiedValue(Number value) {
