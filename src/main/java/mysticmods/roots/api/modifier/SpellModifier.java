@@ -157,6 +157,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
 
   @Override
   public void init(Holder<SpellModifier> holder) {
+    this.extendedDescription = null;
     var costs = holder.getData(getDataMapType());
     if (costs != null) {
       this.costs = costs;

@@ -315,6 +315,8 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
 
   protected void initializeProperties(Holder<Spell> holder) {
+    this.extendedDescription = null;
+
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.cooldown = properties.get(getCooldownProperty());
     if (getReachProperty() != null) {
@@ -797,7 +799,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       this.generatedSimpleTooltip = s;
       this.generatedExtendedTooltip = s2;
       this.numberFormatters = numberFormatters;
-      this.componentCreator = Util.memoize((spell) -> Spell.componentsFromFormatter(spell, this.numberFormatters));
+      this.componentCreator = (spell) -> Spell.componentsFromFormatter(spell, this.numberFormatters);
     }
   }
 }
