@@ -2,8 +2,8 @@ package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.api.Color;
 import mysticmods.roots.blockentity.VisibleBlockEntity;
-import mysticmods.roots.client.ColorHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -25,7 +25,7 @@ public class VisibleBlockEntityRenderer implements BlockEntityRenderer<VisibleBl
     if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
       pPoseStack.pushPose();
       BlockPos position = pBlockEntity.getBlockPos();
-      ColorHelper.Color color = ColorHelper.color(position);
+      Color color = Color.color(position);
       VoxelShape pShape = pBlockEntity.getBlockState().getShape(pBlockEntity.getLevel(), position);
       VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
       PoseStack.Pose pose = pPoseStack.last();
@@ -39,9 +39,9 @@ public class VisibleBlockEntityRenderer implements BlockEntityRenderer<VisibleBl
         f1 /= f3;
         f2 /= f3;
         pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
-            .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
+            .setColor(color.ri(), color.gi(), color.bi(), color.ai()).setNormal(pose, f, f1, f2);
         pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
-            .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
+            .setColor(color.ri(), color.gi(), color.bi(), color.ai()).setNormal(pose, f, f1, f2);
       });
       pPoseStack.popPose();
     }

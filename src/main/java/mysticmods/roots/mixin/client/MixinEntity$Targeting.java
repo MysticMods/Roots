@@ -2,11 +2,10 @@ package mysticmods.roots.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import mysticmods.roots.client.ColorHelper;
+import mysticmods.roots.api.Color;
 import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.client.TargetingSystem;
 import mysticmods.roots.init.ModAttachments;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -22,15 +21,16 @@ public class MixinEntity$Targeting {
       } else {
         thisEntity.removeData(ModAttachments.TARGETED_ENTITY);
       }
-    } else if (thisEntity.level().isClientSide() && RootsClientHooks.showBoundingBoxes() && thisEntity.hasData(ModAttachments.GROVE_POWER_ENTITY_FLAG)) {
+    } else if (thisEntity.level()
+        .isClientSide() && RootsClientHooks.showBoundingBoxes() && thisEntity.hasData(ModAttachments.GROVE_POWER_ENTITY_FLAG)) {
 
       var data = thisEntity.getData(ModAttachments.GROVE_POWER_ENTITY_FLAG);
       if (!data.eligible()) {
-        return ColorHelper.RED.toInteger();
+        return Color.RED.rgb();
       } else if (data.producedPower()) {
-        return ColorHelper.GREEN.toInteger();
+        return Color.GREEN.rgb();
       } else {
-        return ColorHelper.YELLOW.toInteger();
+        return Color.YELLOW.rgb();
       }
     }
 
@@ -47,7 +47,8 @@ public class MixinEntity$Targeting {
       } else {
         thisEntity.removeData(ModAttachments.TARGETED_ENTITY);
       }
-    } else if (thisEntity.level().isClientSide() && RootsClientHooks.showBoundingBoxes() && thisEntity.hasData(ModAttachments.GROVE_POWER_ENTITY_FLAG)) {
+    } else if (thisEntity.level()
+        .isClientSide() && RootsClientHooks.showBoundingBoxes() && thisEntity.hasData(ModAttachments.GROVE_POWER_ENTITY_FLAG)) {
       return true;
     }
 

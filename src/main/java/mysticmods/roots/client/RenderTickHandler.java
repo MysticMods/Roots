@@ -3,6 +3,7 @@ package mysticmods.roots.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.api.Color;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -168,7 +169,7 @@ public class RenderTickHandler {
             if (bounds != null) {
               RenderUtil.renderAABB(event.getPoseStack(), mc.renderBuffers()
                   .bufferSource(), bounds, player.getPosition(event.getPartialTick()
-                  .getGameTimeDeltaPartialTick(false)), ColorHelper.BLUE, event.getFrustum(), event.getCamera(), true);
+                  .getGameTimeDeltaPartialTick(false)), Color.BLUE, event.getFrustum(), event.getCamera(), true);
             }
           }
         }

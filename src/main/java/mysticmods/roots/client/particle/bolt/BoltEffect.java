@@ -1,6 +1,6 @@
 package mysticmods.roots.client.particle.bolt;
 
-import mysticmods.roots.client.particle.Color;
+import mysticmods.roots.api.Color;
 import net.minecraft.SharedConstants;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;

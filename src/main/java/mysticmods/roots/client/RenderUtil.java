@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import com.mojang.math.MatrixUtil;
+import mysticmods.roots.api.Color;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeRenderType;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinCompositeState;
@@ -76,11 +77,11 @@ public class RenderUtil {
     renderAABB(pPoseStack, bufferSource, bounds, position, null, null);
   }
 
-  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera) {
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable Color color, @Nullable Frustum frustum, @Nullable Camera camera) {
     renderAABB(pPoseStack, bufferSource, position, color, frustum, camera, false);
   }
 
-  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera, boolean always) {
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable Color color, @Nullable Frustum frustum, @Nullable Camera camera, boolean always) {
     double minX = position.getX();
     double minY = position.getY();
     double minZ = position.getZ();
@@ -122,9 +123,9 @@ public class RenderUtil {
       float dy = y2 - y1;
       float dz = z2 - z1;
 
-      consumer.addVertex(pose.pose(), x1, y1, z1).setColor(color.r(), color.g(), color.b(), color.a())
+      consumer.addVertex(pose.pose(), x1, y1, z1).setColor(color.ri(), color.gi(), color.bi(), color.ai())
           .setNormal(pose, dx, dy, dz);
-      consumer.addVertex(pose.pose(), x2, y2, z2).setColor(color.r(), color.g(), color.b(), color.a())
+      consumer.addVertex(pose.pose(), x2, y2, z2).setColor(color.ri(), color.gi(), color.bi(), color.ai())
           .setNormal(pose, dx, dy, dz);
     }
 
@@ -134,7 +135,7 @@ public class RenderUtil {
 
   // This doesn't require multiple AABB creations every render frame
   public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, @NotNull BlockPos position, @Nullable BlockPos colorPos, @Nullable Frustum frustum, @Nullable Camera camera) {
-    ColorHelper.Color color = ColorHelper.color(colorPos == null ? position : colorPos);
+    Color color = Color.color(colorPos == null ? position : colorPos);
     renderAABB(pPoseStack, bufferSource, position, color, frustum, camera);
   }
 
@@ -146,15 +147,15 @@ public class RenderUtil {
     if (position == null) {
       position = BlockPos.containing(bounds.getCenter());
     }
-    ColorHelper.Color color = ColorHelper.color(colorPosition == null ? position : colorPosition);
+    Color color = Color.color(colorPosition == null ? position : colorPosition);
     renderAABB(pPoseStack, bufferSource, bounds, null, color, frustum, camera);
   }
 
-  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable Vec3 center, @NotNull ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera) {
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable Vec3 center, @NotNull Color color, @Nullable Frustum frustum, @Nullable Camera camera) {
     renderAABB(pPoseStack, bufferSource, bounds, center, color, frustum, camera, false);
   }
 
-  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable Vec3 center, @NotNull ColorHelper.Color color, @Nullable Frustum frustum, @Nullable Camera camera, boolean always) {
+  public static void renderAABB(PoseStack pPoseStack, MultiBufferSource bufferSource, AABB bounds, @Nullable Vec3 center, @NotNull Color color, @Nullable Frustum frustum, @Nullable Camera camera, boolean always) {
     if (center != null) {
       bounds = bounds.move(center);
     }
@@ -198,9 +199,9 @@ public class RenderUtil {
       float dy = y2 - y1;
       float dz = z2 - z1;
 
-      consumer.addVertex(pose.pose(), x1, y1, z1).setColor(color.r(), color.g(), color.b(), color.a())
+      consumer.addVertex(pose.pose(), x1, y1, z1).setColor(color.ri(), color.gi(), color.bi(), color.ai())
           .setNormal(pose, dx, dy, dz);
-      consumer.addVertex(pose.pose(), x2, y2, z2).setColor(color.r(), color.g(), color.b(), color.a())
+      consumer.addVertex(pose.pose(), x2, y2, z2).setColor(color.ri(), color.gi(), color.bi(), color.ai())
           .setNormal(pose, dx, dy, dz);
     }
 

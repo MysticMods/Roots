@@ -1,34 +1,44 @@
-package mysticmods.roots.client.particle;
+package mysticmods.roots.api;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
-public class Color {
+public record Color (double r, double g, double b, double a) {
+  private final static Cache<BlockPos, Color> COLOR_CACHE = CacheBuilder.newBuilder().build();
+  private final static RandomSource random = RandomSource.create();
+  private final static Color DEFAULT_COLOR = new Color(1f, 0.5f, 0.5f);
+
+  public static final Color GREEN = new Color(0, 1, 0);
+  public static final Color RED = new Color(1, 0, 0);
+  public static final Color BLUE = new Color(0, 0, 1);
+  public static final Color YELLOW = new Color(1, 1, 0);
 
   public static final Color WHITE = rgbad(1F, 1F, 1F, 1F);
   public static final Color BLACK = rgbad(0F, 0F, 0F, 1F);
 
-  private final double r, g, b, a;
-
-  private Color(double r, double g, double b, double a) {
-    this.r = r;
-    this.g = g;
-    this.b = b;
-    this.a = a;
+  public Color (double r, double g, double b) {
+    this(r, g, b, 1.0);
   }
 
-  public int r() {
+  public int ri() {
     return (int) Math.round(r * 255D);
   }
 
-  public int g() {
+  public int gi() {
     return (int) Math.round(g * 255D);
   }
 
-  public int b() {
+  public int bi() {
     return (int) Math.round(b * 255D);
   }
 
-  public int a() {
+  public int ai() {
     return (int) Math.round(a * 255D);
   }
 
@@ -69,27 +79,27 @@ public class Color {
   }
 
   public int rgba() {
-    return (r() & 0xFF) << 24 | (g() & 0xFF) << 16 | (b() & 0xFF) << 8 | (a() & 0xFF);
+    return (ri() & 0xFF) << 24 | (gi() & 0xFF) << 16 | (bi() & 0xFF) << 8 | (ai() & 0xFF);
   }
 
   public int argb() {
-    return (a() & 0xFF) << 24 | rgb();
+    return (ai() & 0xFF) << 24 | rgb();
   }
 
   public int rgb() {
-    return (r() & 0xFF) << 16 | (g() & 0xFF) << 8 | (b() & 0xFF);
+    return (ri() & 0xFF) << 16 | (gi() & 0xFF) << 8 | (bi() & 0xFF);
   }
 
   public int[] rgbaArray() {
-    return new int[]{r(), g(), b(), a()};
+    return new int[]{ri(), gi(), bi(), ai()};
   }
 
   public int[] argbArray() {
-    return new int[]{a(), r(), g(), b()};
+    return new int[]{ai(), ri(), gi(), bi()};
   }
 
   public int[] rgbArray() {
-    return new int[]{r(), g(), b()};
+    return new int[]{ri(), gi(), bi()};
   }
 
   /**
@@ -254,7 +264,6 @@ public class Color {
   }
 
   public interface ColorFunction {
-
     ColorFunction HEAT = level -> Color.rgbai((int) Math.min(200, 400 * level), (int) Math.max(0, 200 - Math.max(0, -200 + 400 * level)), 0, 255);
 
     static ColorFunction scale(Color from, Color to) {
@@ -262,5 +271,20 @@ public class Color {
     }
 
     Color getColor(float level);
+  }
+
+  public static Color color(BlockPos position) {
+    try {
+      return COLOR_CACHE.get(position, () -> {
+        random.setSeed(position.asLong());
+        int color = Mth.hsvToRgb(random.nextFloat(), 0.3f + 0.7f * random.nextFloat(), 0.8f + 0.2f * random.nextFloat());
+        float r = (color >> 16 & 0xFF) / 255.0F;
+        float g = (color >> 8 & 0xFF) / 255.0F;
+        float b = (color & 0xFF) / 255.0F;
+        return new Color(r, g, b, 1.0f);
+      });
+    } catch (ExecutionException e) {
+      return DEFAULT_COLOR;
+    }
   }
 }

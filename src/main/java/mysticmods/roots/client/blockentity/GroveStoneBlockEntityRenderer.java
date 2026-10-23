@@ -2,13 +2,13 @@ package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
+import mysticmods.roots.api.Color;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.grove.power.generator.BlockGenerationInfo;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
-import mysticmods.roots.client.ColorHelper;
 import mysticmods.roots.client.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -65,17 +65,17 @@ public class GroveStoneBlockEntityRenderer extends BoundedBlockEntityRenderer<Gr
             marked.add(pos);
             BlockPos relativePos = pos.subtract(origin);
             if (match.getFirst()) {
-              RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, ColorHelper.GREEN, null, null);
+              RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, Color.GREEN, null, null);
             } else {
-              RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, ColorHelper.RED, null, null);
+              RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, Color.RED, null, null);
             }
             if (match.getSecond() != null) {
               marked.add(match.getSecond());
               relativePos = match.getSecond().subtract(origin);
               if (match.getFirst()) {
-                RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, ColorHelper.GREEN, null, null);
+                RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, Color.GREEN, null, null);
               } else {
-                RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, ColorHelper.RED, null, null);
+                RenderUtil.renderAABB(pPoseStack, pBufferSource, relativePos, Color.RED, null, null);
               }
             }
           }
