@@ -133,11 +133,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   public static Component[] componentsFromFormatter(Spell spell, List<NumberFormatter<?>> formatters) {
     List<Component> componentList = new ArrayList<>();
-    formatters.forEach(entry ->
-    {
+    for (NumberFormatter<?> entry : formatters) {
       entry.spell(spell);
       componentList.addAll(entry.build());
-    });
+    }
     return componentList.toArray(Component[]::new);
   }
 
@@ -708,6 +707,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
       this.simpleTooltip = s;
       this.extendedTooltip = s2;
       this.numberFormatters = numberFormatters;
+      // TODO: MEmoize?
       this.componentCreator = Util.memoize((spell) -> Spell.componentsFromFormatter(spell, this.numberFormatters));
     }
   }

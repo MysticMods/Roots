@@ -1,6 +1,5 @@
 package mysticmods.roots.api.ritual;
 
-import com.google.common.base.Suppliers;
 import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import mysticmods.roots.api.modifier.RitualModifier;
@@ -13,7 +12,7 @@ import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class LayeredRitualProperties {
   private static final Hash.Strategy<RitualModifierSet> SPELL_MODIFIER_STRATEGY = new Hash.Strategy<>() {
@@ -36,7 +35,7 @@ public class LayeredRitualProperties {
   private final Map<RitualModifierSet, LayeredRitualProperty> layerCache = new Object2ObjectOpenCustomHashMap<>(SPELL_MODIFIER_STRATEGY);
 
   public LayeredRitualProperties(Ritual.Properties properties, Ritual spell) {
-    this.defaultLayer = new LayerSet(true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), Suppliers.memoize(spell::getOrCreateDescriptionComponents), properties.textColor, false, -1);
+    this.defaultLayer = new LayerSet(true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), properties.componentCreator, properties.textColor, false, -1);
     for (Map.Entry<ResourceKey<RitualModifier>, Ritual.Transformer> entry : properties.transformers.entrySet()) {
       if (this.layers.containsKey(entry.getKey())) {
         throw new IllegalStateException("Transformer already registered for modifier '" + entry.getKey() + "'!");
@@ -49,7 +48,7 @@ public class LayeredRitualProperties {
           t.descriptionId,
           t.descriptionTooltipId,
           t.descriptionExtendedTooltipId,
-          t.extendedComponents != null ? Suppliers.memoize(t.extendedComponents::get) : null,
+          t.componentCreator,
           t.textColor,
           t.hasPredicateValue,
           t.predicateValue
@@ -78,7 +77,8 @@ public class LayeredRitualProperties {
   @ApiStatus.Internal
   public record LayerSet(boolean hasColors,
                          int color1, int color2, @Nullable String descriptionId, @Nullable String descriptionTooltipId,
-                         @Nullable String descriptionTooltipExtendedId, @Nullable Supplier<Component[]> componentGetter,
+                         @Nullable String descriptionTooltipExtendedId,
+                         @Nullable Function<Ritual, Component[]> componentCreator,
                          @Nullable TextColor color, boolean hasPredicateValue,
                          float predicateValue) {
     public LayerSet compose(LayerSet nextLayer) {
@@ -89,7 +89,7 @@ public class LayeredRitualProperties {
           nextLayer.descriptionId != null ? nextLayer.descriptionId : this.descriptionId,
           nextLayer.descriptionTooltipId != null ? nextLayer.descriptionTooltipId : this.descriptionTooltipId,
           nextLayer.descriptionTooltipExtendedId != null ? nextLayer.descriptionTooltipExtendedId : this.descriptionTooltipExtendedId,
-          nextLayer.componentGetter != null ? nextLayer.componentGetter : this.componentGetter,
+          nextLayer.componentCreator != null ? nextLayer.componentCreator : this.componentCreator,
           nextLayer.color != null ? nextLayer.color : this.color,
           nextLayer.hasPredicateValue || this.hasPredicateValue,
           nextLayer.hasPredicateValue ? nextLayer.predicateValue : this.predicateValue
