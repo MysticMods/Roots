@@ -68,6 +68,9 @@ public class DataMaps {
   public static final DataMapType<Spell, PropertyDataMap> SPELL_PROPERTY_DATA = DataMapType.builder(RootsAPI.rl("spell_property_data"), RootsRegistries.Keys.SPELLS, PropertyDataMap.CODEC)
       .synced(PropertyDataMap.CODEC, true)
       .build();
+  public static final DataMapType<Grove, PropertyDataMap> GROVE_PROPERTY_DATA = DataMapType.builder(RootsAPI.rl("grove_property_data"), RootsRegistries.Keys.GROVES, PropertyDataMap.CODEC)
+      .synced(PropertyDataMap.CODEC, true)
+      .build();
   public static final DataMapType<Ritual, PropertyDataMap> RITUAL_PROPERTY_DATA = DataMapType.builder(RootsAPI.rl("ritual_property_data"), RootsRegistries.Keys.RITUALS, PropertyDataMap.CODEC)
       .synced(PropertyDataMap.CODEC, true)
       .build();

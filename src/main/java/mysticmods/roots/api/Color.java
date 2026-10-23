@@ -3,6 +3,7 @@ package mysticmods.roots.api;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
@@ -21,7 +22,7 @@ public record Color (double r, double g, double b, double a) {
 
   public static final Color WHITE = rgbad(1F, 1F, 1F, 1F);
   public static final Color BLACK = rgbad(0F, 0F, 0F, 1F);
-  
+
   public Color (double r, double g, double b) {
     this(r, g, b, 1.0);
   }
@@ -140,6 +141,10 @@ public record Color (double r, double g, double b, double a) {
         g * a + aDif,
         b * a + aDif
     );
+  }
+
+  public TextColor text () {
+    return TextColor.fromRgb(rgb());
   }
 
   public static Color blend(Color src, Color dest) {

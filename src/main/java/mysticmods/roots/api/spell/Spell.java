@@ -120,24 +120,20 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return RootsRegistries.SPELLS.wrapAsHolder(this);
   }
 
-  public static Component[] componentsFromFormatter (Spell spell, List<NumberFormatter<?>> formatters, SpellModifier modifier) {
+  public static Component[] componentsFromFormatter (Spell spell, List<NumberFormatter<?>> formatters, @Nullable SpellModifier modifier) {
     List<Component> componentList = new ArrayList<>();
-    formatters.forEach(entry ->
-    {
+    for (NumberFormatter<?> entry : formatters) {
       entry.spell(spell);
-      entry.modifier(modifier);
+      if (modifier != null) {
+        entry.modifier(modifier);
+      }
       componentList.addAll(entry.build());
-    });
+    }
     return componentList.toArray(Component[]::new);
   }
 
   public static Component[] componentsFromFormatter(Spell spell, List<NumberFormatter<?>> formatters) {
-    List<Component> componentList = new ArrayList<>();
-    for (NumberFormatter<?> entry : formatters) {
-      entry.spell(spell);
-      componentList.addAll(entry.build());
-    }
-    return componentList.toArray(Component[]::new);
+    return componentsFromFormatter(spell, formatters, null);
   }
 
   @Override

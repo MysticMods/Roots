@@ -1,5 +1,6 @@
 package mysticmods.roots.api.tooltip;
 
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.IPropertyDataMapped;
 import mysticmods.roots.api.registry.GroupId;
@@ -73,5 +74,23 @@ public class BasePropertyFormatter<T, S extends BasePropertyFormatter<T, S>> {
       throw new NullPointerException("Missing modifier for: " + modifierKey);
     }
     return modifier(modifier);
+  }
+
+  public S grove (Holder<Grove> grove) {
+    this.source = grove.value();
+    return self();
+  }
+
+  public S grove (Grove grove) {
+    this.source = grove;
+    return self();
+  }
+
+  public S grove (ResourceKey<Grove> groveKey) {
+    Grove grove = RootsRegistries.GROVES.get(groveKey);
+    if (grove == null) {
+      throw new NullPointerException("Missing grove for: " + groveKey);
+    }
+    return grove(grove);
   }
 }
