@@ -21,7 +21,7 @@ public record Color (double r, double g, double b, double a) {
 
   public static final Color WHITE = rgbad(1F, 1F, 1F, 1F);
   public static final Color BLACK = rgbad(0F, 0F, 0F, 1F);
-
+  
   public Color (double r, double g, double b) {
     this(r, g, b, 1.0);
   }
