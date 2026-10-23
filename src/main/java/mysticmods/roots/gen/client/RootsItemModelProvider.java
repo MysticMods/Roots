@@ -12,6 +12,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -141,31 +142,20 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     // Wild roots are existing
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
 
-    withExistingParent("bafflecap_block", modLoc("block/bafflecap_block_inventory"));
-    withExistingParent(ModBlocks.ANIMATE_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/animate_grove_stone_inventory"));
-    withExistingParent(ModBlocks.WILD_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/wild_grove_stone_inventory"));
-    withExistingParent(ModBlocks.CULTIVATION_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/cultivation_grove_stone_inventory"));
-    withExistingParent(ModBlocks.UNITY_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/unity_grove_stone_inventory"));
-    withExistingParent(ModBlocks.ELEMENTAL_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/elemental_grove_stone_inventory"));
-    withExistingParent(ModBlocks.TWILIGHT_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/twilight_grove_stone_inventory"));
-    withExistingParent(ModBlocks.FUNGAL_GROVE_STONE.getKey().location()
-        .getPath(), modLoc("block/fungal_grove_stone_inventory"));
-    withExistingParent(ModBlocks.RED_FAIRY_HUT.getKey().location().getPath(), modLoc("block/red_fairy_hut_inventory"));
-    withExistingParent(ModBlocks.BROWN_FAIRY_HUT.getKey().location()
-        .getPath(), modLoc("block/brown_fairy_hut_inventory"));
-    withExistingParent(ModBlocks.CRIMSON_FAIRY_HUT.getKey().location()
-        .getPath(), modLoc("block/crimson_fairy_hut_inventory"));
-    withExistingParent(ModBlocks.WARPED_FAIRY_HUT.getKey().location()
-        .getPath(), modLoc("block/warped_fairy_hut_inventory"));
-    simpleBlockItem(ModBlocks.FUNGAL_TRANSMUTER.get());
-    withExistingParent(ModBlocks.BAFFLECAP_FAIRY_HUT.getKey().location()
-        .getPath(), modLoc("block/bafflecap_fairy_hut_inventory"));
+    inventoryModel(ModBlocks.BAFFLECAP_BLOCK);
+    inventoryModel(ModBlocks.ANIMATE_GROVE_STONE);
+    inventoryModel(ModBlocks.WILD_GROVE_STONE);
+    inventoryModel(ModBlocks.CULTIVATION_GROVE_STONE);
+    inventoryModel(ModBlocks.UNITY_GROVE_STONE);
+    inventoryModel(ModBlocks.ELEMENTAL_GROVE_STONE);
+    inventoryModel(ModBlocks.TWILIGHT_GROVE_STONE);
+    inventoryModel(ModBlocks.FUNGAL_GROVE_STONE);
+    inventoryModel(ModBlocks.RED_FAIRY_HUT);
+    inventoryModel(ModBlocks.BROWN_FAIRY_HUT);
+    inventoryModel(ModBlocks.BAFFLECAP_FAIRY_HUT);
+    inventoryModel(ModBlocks.CRIMSON_FAIRY_HUT);
+    inventoryModel(ModBlocks.WARPED_FAIRY_HUT);
+
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
     /*    simpleBlockItem(ModBlocks.STONE_ALTAR.get());*/
     simpleBlockItem(ModBlocks.MORTAR.get());
@@ -176,6 +166,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.DECORATIVE_PYRE.get());
     simpleBlockItem(ModBlocks.DECORATIVE_SOUL_PYRE.get());
     simpleBlockItem(ModBlocks.UNENDING_BOWL.get());
+    simpleBlockItem(ModBlocks.FUNGAL_TRANSMUTER.get());
 
     // Crops have no item models
     // Potted plants have no item models
@@ -408,6 +399,12 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
     getBuilder("roots:no_grove_stone").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/no_grove_stone"));
+  }
+
+  @SuppressWarnings("UnusedReturnValue")
+  public ItemModelBuilder inventoryModel(Holder<Block> parent) {
+    ResourceLocation item = parent.getKey().location();
+    return withExistingParent(item.getPath(), item.withPrefix("block/").withSuffix("_inventory"));
   }
 
   @SuppressWarnings("UnusedReturnValue")
