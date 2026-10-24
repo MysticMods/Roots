@@ -93,7 +93,7 @@ public class NumberFormatter<T extends Number> extends BasePropertyFormatter<T, 
         Number multipliedValue = modifiedValue(value);
         return List.of(biFormatter.component(value, multipliedValue));
       } else {
-        throw new IllegalStateException("No formatter specified for this PropertyFormatter");
+        throw new IllegalStateException("No formatter specified for this PropertyFormatter " + this.property);
       }
     } else {
       Number value1 = modifiedValue(value(this.property));

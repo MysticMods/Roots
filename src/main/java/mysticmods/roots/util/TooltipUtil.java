@@ -11,9 +11,11 @@ import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostType;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.modifier.SpellModifierSet;
+import mysticmods.roots.api.modifier.*;
 import mysticmods.roots.api.registry.GroupId;
+import mysticmods.roots.api.registry.IExtendedDescribed;
+import mysticmods.roots.api.ritual.IRitualInstance;
+import mysticmods.roots.api.spell.IModified;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
@@ -22,10 +24,12 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -89,27 +93,27 @@ public class TooltipUtil {
     }
     spellModeTooltip(context, result, spell, flag);
     fullSpellCostTooltip(context, result, spell, flag);
-    addModifierList(context, result, spell, flag);
+    addSpellModifierList(context, result, spell, flag);
   }
 
-  private static List<List<SpellModifier>> segmentModifiers(ISpellInstance spell) {
-    SpellModifierSet modifiers = spell.getEnabledModifiers();
+  private static <T, M extends Modifier<T, M>, S extends ModifierSet<T, M, S>, I extends IModified<T, M, S>> List<List<M>> segmentModifiers(I instance, @Nullable TagKey<M> tooltipSkippedTag) {
+    S modifiers = instance.getEnabledModifiers();
     if (modifiers.isEmpty()) {
       return List.of();
     } else if (modifiers.size() == 1) {
-      if (modifiers.firstElement() != null && modifiers.firstElement()
-          .is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+      if (modifiers.firstElement() != null && (tooltipSkippedTag == null || modifiers.firstElement()
+          .is(tooltipSkippedTag))) {
         return List.of();
       }
       return List.of(modifiers.stream().toList());
     }
 
-    List<List<SpellModifier>> result = new ArrayList<>();
+    List<List<M>> result = new ArrayList<>();
 
-    Map<GroupId, List<SpellModifier>> grouped = new HashMap<>();
+    Map<GroupId, List<M>> grouped = new HashMap<>();
 
-    for (SpellModifier modifier : modifiers) {
-      if (!modifier.is(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS)) {
+    for (M modifier : modifiers) {
+      if (tooltipSkippedTag == null || !modifier.is(tooltipSkippedTag)) {
         if (modifier.canGroup()) {
           grouped.computeIfAbsent(modifier.getGroupKey(), k -> new ArrayList<>()).add(modifier);
         } else {
@@ -118,17 +122,17 @@ public class TooltipUtil {
       }
     }
 
-    for (Map.Entry<GroupId, List<SpellModifier>> entry : grouped.entrySet()) {
-      List<SpellModifier> entryValues = entry.getValue();
+    for (Map.Entry<GroupId, List<M>> entry : grouped.entrySet()) {
+      List<M> entryValues = entry.getValue();
       if (entryValues.isEmpty()) {
         RootsAPI.LOG.error("Empty group SOMEHOW??? {}", entry);
         continue;
 
       }
-      Set<ResourceKey<SpellModifier>> parents = entry.getValue().stream().map(SpellModifier::getParent)
+      Set<ResourceKey<M>> parents = entry.getValue().stream().map(Modifier::getParent)
           .filter(Objects::nonNull).collect(Collectors.toSet());
-      List<SpellModifier> newResult = new ArrayList<>();
-      for (SpellModifier modifier : entry.getValue()) {
+      List<M> newResult = new ArrayList<>();
+      for (M modifier : entry.getValue()) {
         if (!parents.contains(modifier.getSelf())) {
           newResult.addFirst(modifier);
         } else {
@@ -141,9 +145,8 @@ public class TooltipUtil {
     return result;
   }
 
-  // TODO: Skip descriptions of modifiers that have transformed the spell
-  public static void addModifierList(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
-    List<List<SpellModifier>> modifiers = segmentModifiers(spell);
+  public static void addSpellModifierList(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
+    List<List<SpellModifier>> modifiers = segmentModifiers(spell, RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS);
     if (!modifiers.isEmpty()) {
       if (flag.hasShiftDown()) {
         for (List<SpellModifier> modifierGroup : modifiers) {
@@ -152,7 +155,7 @@ public class TooltipUtil {
             continue;
           }
           Component name = modifierGroup.size() == 1 ? first.getName() : first.getGroupName(modifierGroup.size());
-          result.add(Component.translatable("roots.tooltip.spell.modifier_description", name, TooltipUtil.describeModifier(context, result, first, flag)));
+          result.add(Component.translatable("roots.tooltip.modifier.modifier_description", name, TooltipUtil.describeModifier(context, result, first, flag)));
           result.add(CommonComponents.EMPTY);
           TooltipUtil.baseModifierCostTooltip(context, result, modifierGroup, flag);
         }
@@ -172,7 +175,7 @@ public class TooltipUtil {
         }
         if (!first) {
           result.add(CommonComponents.EMPTY);
-          result.add(Component.translatable("roots.tooltip.spell.modifiers", modifierNames));
+          result.add(Component.translatable("roots.tooltip.modifier.modifiers", modifierNames));
         }
       }
     }
@@ -286,6 +289,7 @@ public class TooltipUtil {
       }
       tooltipComponents.add(Component.translatable("roots.spell_modifier.transformed", spellNames));
     }
+    // TODO: Move `asSpell` -> `ISpellInstance::getTooltipExtendedDescription`
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
       tooltipComponents.add(spell.asSpell().getTooltipExtendedDescription(spell));
     } else {
@@ -293,11 +297,79 @@ public class TooltipUtil {
     }
   }
 
-  public static Component describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, SpellModifier spellModifier, TooltipFlag tooltipFlag) {
+  public static <T, M extends Modifier<T, M> & IExtendedDescribed> Component describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, M modifier, TooltipFlag tooltipFlag) {
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
-      return spellModifier.getTooltipExtendedDescription();
+      return modifier.getTooltipExtendedDescription();
     } else {
-      return spellModifier.getTooltipDescription();
+      return modifier.getTooltipDescription();
+    }
+  }
+
+  public static void describeRitual(Item.TooltipContext context, List<Component> tooltipComponents, IRitualInstance ritual, TooltipFlag tooltipFlag) {
+    // TODO: Ritual transformers?
+/*    if (ritual.isTransformed()) {
+      MutableComponent spellNames = Component.empty();
+      boolean first = true;
+      for (SpellModifier modifier : ritual.getEnabledModifiers().getTransformingModifiers()) {
+        if (!first) {
+          spellNames.append(Component.literal(", "));
+        }
+        first = false;
+        spellNames.append(modifier.getName());
+      }
+      tooltipComponents.add(Component.translatable("roots.spell_modifier.transformed", spellNames));
+    }*/
+    // TODO: Move `asRitual` -> `IRitualInstance::getTooltipExtendedDescription`
+    if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
+      tooltipComponents.add(ritual.asRitual().getTooltipExtendedDescription(ritual));
+    } else {
+      tooltipComponents.add(ritual.asRitual().getTooltipDescription(ritual));
+    }
+  }
+
+  public static void ritualInstanceTooltip(Item.TooltipContext context, List<Component> result, IRitualInstance ritual, TooltipFlag flag, boolean addName, boolean addDescription) {
+    if (addName) {
+      result.add(ritual.getStyledName());
+    }
+    if (addDescription) {
+      TooltipUtil.describeRitual(context, result, ritual, flag);
+    }
+    addRitualModifierList(context, result, ritual, flag);
+  }
+
+  public static void addRitualModifierList(Item.TooltipContext context, List<Component> result, IRitualInstance ritual, TooltipFlag flag) {
+    List<List<RitualModifier>> modifiers = segmentModifiers(ritual, null);
+    if (!modifiers.isEmpty()) {
+      if (flag.hasShiftDown()) {
+        for (List<RitualModifier> modifierGroup : modifiers) {
+          RitualModifier first = modifierGroup.getFirst();
+          if (/*first.is(RootsTags.RitualModifiers.SKIPPED_IN_TOOLTIPS) || */first.isTransforming()) {
+            continue;
+          }
+          Component name = modifierGroup.size() == 1 ? first.getName() : first.getGroupName(modifierGroup.size());
+          result.add(Component.translatable("roots.tooltip.modifier.modifier_description", name, TooltipUtil.describeModifier(context, result, first, flag)));
+          result.add(CommonComponents.EMPTY);
+/*          TooltipUtil.baseModifierCostTooltip(context, result, modifierGroup, flag);*/
+        }
+      } else {
+        MutableComponent modifierNames = Component.empty();
+        boolean first = true;
+        for (List<RitualModifier> modifierGroup : modifiers) {
+          if (/*modifierGroup.getFirst().is(RootsTags.RitualModifiers.SKIPPED_IN_TOOLTIPS) || */modifierGroup.getFirst().isTransforming()) {
+            continue;
+          }
+          if (!first) {
+            modifierNames.append(", ");
+          }
+          first = false;
+          var firstModifer = modifierGroup.getFirst();
+          modifierNames.append(modifierGroup.size() == 1 ? firstModifer.getName() : firstModifer.getGroupName(modifierGroup.size()));
+        }
+        if (!first) {
+          result.add(CommonComponents.EMPTY);
+          result.add(Component.translatable("roots.tooltip.modifier.modifiers", modifierNames));
+        }
+      }
     }
   }
 }

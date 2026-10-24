@@ -11,6 +11,7 @@ import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.item.util.DyeableWithDefault;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
 import mysticmods.roots.recipe.pyre.PyrePedestalRecipe;
+import mysticmods.roots.api.datacomponent.RitualInstance;
 import mysticmods.roots.spell.mode.AOEGrowthMode;
 import mysticmods.roots.spell.mode.HarvestMode;
 import mysticmods.roots.util.SpatialMap;
@@ -88,8 +89,9 @@ public class ModAttachments {
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellInstance>> SPELL_SLOT = COMPONENTS.register("spell_slot", () -> new DataComponentType.Builder<SpellInstance>().persistent(SpellInstance.CODEC)
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellInstance>> SPELL_INSTANCE = COMPONENTS.register("spell_slot", () -> new DataComponentType.Builder<SpellInstance>().persistent(SpellInstance.CODEC)
       .networkSynchronized(SpellInstance.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<RitualInstance>> RITUAL_INSTANCE = COMPONENTS.register("ritual_instance", () -> new DataComponentType.Builder<RitualInstance>().persistent(RitualInstance.CODEC).networkSynchronized(RitualInstance.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> QUIVER_CONTENTS = COMPONENTS.register("quiver_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
   // 9 only herb slots

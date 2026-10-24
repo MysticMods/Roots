@@ -45,8 +45,10 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     }
     this.internalKeys = this.internal.stream().map(Modifier::getSelf)
         .collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
-    this.transformingModifiers = elements.stream().filter(Modifier::isTransforming).sorted(MODIFIER_ORDER).collect(ImmutableList.toImmutableList());
-    this.transformingKeys = this.transformingModifiers.stream().map(Modifier::getSelf).collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
+    this.transformingModifiers = elements.stream().filter(Modifier::isTransforming).sorted(MODIFIER_ORDER)
+        .collect(ImmutableList.toImmutableList());
+    this.transformingKeys = this.transformingModifiers.stream().map(Modifier::getSelf)
+        .collect(ImmutableSortedSet.toImmutableSortedSet(KEY_ORDER));
     this.hash = this.internal.hashCode();
     this.transformingHash = this.transformingKeys.hashCode();
   }
@@ -93,6 +95,17 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
 
   public boolean has(ResourceKey<T> element) {
     return this.internalKeys.contains(element);
+  }
+
+  @javax.annotation.Nullable
+  public T getFirstModifier(TagKey<T> modifier) {
+    for (T mod : this) {
+      if (mod.is(modifier)) {
+        return mod;
+      }
+    }
+
+    return null;
   }
 
   @Override
@@ -180,7 +193,7 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     return this.hash;
   }
 
-  public int transformingHash () {
+  public int transformingHash() {
     return this.transformingHash;
   }
 
@@ -213,11 +226,11 @@ public abstract class ModifierSet<V, T extends Modifier<V, T>, C extends Modifie
     return internalKeys;
   }
 
-  public Set<ResourceKey<T>> getTransformingKeys () {
+  public Set<ResourceKey<T>> getTransformingKeys() {
     return transformingKeys;
   }
 
-  public List<T> getTransformingModifiers () {
+  public List<T> getTransformingModifiers() {
     return transformingModifiers;
   }
 }

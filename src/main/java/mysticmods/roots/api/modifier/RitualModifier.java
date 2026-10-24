@@ -2,15 +2,17 @@ package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.registry.IExtendedDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.jetbrains.annotations.Nullable;
 
 // TODO: Costs??? Do these really need costs?
-public class RitualModifier extends Modifier<Ritual, RitualModifier> {
+public class RitualModifier extends Modifier<Ritual, RitualModifier> implements IExtendedDescribed {
   public RitualModifier(Modifier.Properties<Ritual, RitualModifier, ?> properties) {
     super(properties);
   }
@@ -56,5 +58,21 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> {
   @Override
   public boolean canGroup() {
     return false;
+  }
+
+  // TODO:
+  @Override
+  public String getOrCreateTooltipExtendedDescriptionId() {
+    return "";
+  }
+
+  @Override
+  public Component[] getOrCreateDescriptionComponents() {
+    return new Component[0];
+  }
+
+  @Override
+  public String getOrCreateTooltipDescriptionId() {
+    return "";
   }
 }

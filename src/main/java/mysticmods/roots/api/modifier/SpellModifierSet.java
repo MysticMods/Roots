@@ -94,17 +94,6 @@ public class SpellModifierSet extends ModifierSet<Spell, SpellModifier, SpellMod
   }
 
   @Nullable
-  public SpellModifier getFirstModifier(TagKey<SpellModifier> modifier) {
-    for (SpellModifier mod : this) {
-      if (mod.is(modifier)) {
-        return mod;
-      }
-    }
-
-    return null;
-  }
-
-  @Nullable
   public ModifierTree<Spell, SpellModifier> getTree() {
     SpellModifier first = firstElement();
     if (first == null) {

@@ -1,4 +1,4 @@
-package mysticmods.roots.ritual;
+package mysticmods.roots.api.datacomponent;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -11,6 +11,9 @@ import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.PatchedDataComponentMap;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -27,6 +30,12 @@ public class RitualInstance implements IRitualInstance.Identified {
       ).apply(instance, RitualInstance::new)
   );
   public static final Codec<RitualInstance> CODEC = MAP_CODEC.codec();
+  public static final StreamCodec<RegistryFriendlyByteBuf, RitualInstance> STREAM_CODEC = StreamCodec.composite(Ritual.STREAM_CODEC, RitualInstance::getRitual,
+      UUIDUtil.STREAM_CODEC, RitualInstance::getId,
+      ByteBufCodecs.VAR_INT, RitualInstance::getLifetime,
+      RitualModifierSet.STREAM_CODEC, RitualInstance::getEnabledModifiers,
+      DataComponentPatch.STREAM_CODEC, o -> o.data == null ? DataComponentPatch.EMPTY : o.data.asPatch(),
+      RitualInstance::new);
 
   private final Ritual ritual;
   private final UUID ritualId;

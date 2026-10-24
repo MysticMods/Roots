@@ -3,6 +3,7 @@ package mysticmods.roots.api.ritual;
 import mysticmods.roots.api.RitualLike;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.modifier.RitualModifierSet;
+import mysticmods.roots.api.spell.IModified;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.core.BlockPos;
@@ -31,7 +32,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public interface IRitualInstance extends RitualLike {
+public interface IRitualInstance extends RitualLike, IModified<Ritual, RitualModifier, RitualModifierSet> {
   Ritual getRitual();
 
   default MutableComponent getName() {
@@ -50,25 +51,7 @@ public interface IRitualInstance extends RitualLike {
     return getRitual().getCount(this);
   }
 
-  RitualModifierSet getEnabledModifiers();
-
   void setEnabledModifiers (RitualModifierSet modifiers);
-
-  default Set<ResourceKey<RitualModifier>> getEnabledModifierKeys() {
-    return getEnabledModifiers().getKeys();
-  }
-
-  default Set<ResourceKey<RitualModifier>> getTransformingKeys() {
-    return getEnabledModifiers().getTransformingKeys();
-  }
-
-  default boolean hasModifier(RitualModifier modifier) {
-    return getEnabledModifiers().contains(modifier);
-  }
-
-  default boolean hasModifier(Holder<RitualModifier> modifier) {
-    return getEnabledModifiers().contains(modifier.value());
-  }
 
   default DataComponentMap getRitualData() {
     return DataComponentMap.EMPTY;
@@ -130,31 +113,6 @@ public interface IRitualInstance extends RitualLike {
     return asRitual().is(ritual);
   }
 
-  @Nullable
-  default RitualModifier getFirstModifier(TagKey<RitualModifier> modifier) {
-    return getEnabledModifiers().getFirstModifier(modifier);
-  }
-
-  default boolean has(TagKey<RitualModifier> modifier) {
-    return getEnabledModifiers().hasTag(modifier);
-  }
-
-  default boolean has(ResourceKey<RitualModifier> modifier) {
-    return getEnabledModifierKeys().contains(modifier);
-  }
-
-  default boolean has(RitualModifier modifier) {
-    return getEnabledModifiers().contains(modifier);
-  }
-
-  default boolean has(Holder<RitualModifier> modifier) {
-    return has(modifier.value());
-  }
-
-  default int getTransformingHash() {
-    return getEnabledModifiers().transformingHash();
-  }
-
   default MutableComponent getStyledName() {
     return asRitual().getStyledName(this);
   }
@@ -163,8 +121,6 @@ public interface IRitualInstance extends RitualLike {
   default AABB getAABB() {
     return asRitual().getAABB(this);
   }
-
-
 
   @Nullable
   default BoundingBox getBoundingBox() {
@@ -264,12 +220,12 @@ public interface IRitualInstance extends RitualLike {
     }
 
     @Override
-    public boolean hasModifier(RitualModifier modifier) {
+    public boolean has(RitualModifier modifier) {
       return false;
     }
 
     @Override
-    public boolean hasModifier(Holder<RitualModifier> modifier) {
+    public boolean has(Holder<RitualModifier> modifier) {
       return false;
     }
 

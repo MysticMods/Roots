@@ -6,6 +6,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.tooltip.Formatters;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -87,8 +88,8 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.token.enabled_modifiers", "Enabled modifiers:");
     add("roots.tooltip.token.ritual", "Ritual: %s");
 
-    add("roots.tooltip.spell.modifiers", "Modifiers: %s");
-    add("roots.tooltip.spell.modifier_description", "%s: %s");
+    add("roots.tooltip.modifier.modifiers", "Modifiers: %s");
+    add("roots.tooltip.modifier.modifier_description", "%s: %s");
     add("roots.tooltip.cost.herb_cost", "%s %s");
     add("roots.tooltip.cost.herb_cost_full", "%s %s%s");
     add("roots.tooltip.cost.herb_cost_modified", " [±%s]");
@@ -253,8 +254,10 @@ public final class RootsLangProvider extends LanguageProvider {
     addCyclingMode(GramaryItem.GramaryMode.values());
     addCyclingMode(HarvestMode.values());
 
-    RootsRegistries.RITUALS.entrySet().forEach(o ->
-        add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
+    RootsRegistries.RITUALS.entrySet().forEach(o -> {
+          add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
+          describeRitual(o.getValue());
+        }
     );
     RootsRegistries.HERBS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
@@ -995,6 +998,10 @@ public final class RootsLangProvider extends LanguageProvider {
 
   public void describeModifier (SpellModifier modifier) {
     modifier.handleTooltip(this::add);
+  }
+
+  public void describeRitual (Ritual ritual) {
+    ritual.handleTooltip(this::add);
   }
 
   public static String toEnglishName(String internalName) {

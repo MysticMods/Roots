@@ -225,7 +225,7 @@ public class RootsClientHooks {
     return ClientTooltipFlag.of(tooltipflag);
   }
 
-  public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+  public static void appendSpellTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.player == null) {
       return;
@@ -263,6 +263,9 @@ public class RootsClientHooks {
         tooltipComponents.add(Component.translatable("roots.tooltip.token.unlock"));
       }
     }
+  }
+
+  public static void appendRitualTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
   }
 
   @Nullable

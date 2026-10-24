@@ -535,7 +535,7 @@ public class CastingItem extends Item {
 
   @Nullable
   public static ISpellInstance getCurrentSpell(@Nullable Level level, @Nullable LivingEntity entity, ItemStack itemStack) {
-    SpellInstance slot = itemStack.get(ModAttachments.SPELL_SLOT);
+    SpellInstance slot = itemStack.get(ModAttachments.SPELL_INSTANCE);
     if (slot != null) {
       return slot;
     }

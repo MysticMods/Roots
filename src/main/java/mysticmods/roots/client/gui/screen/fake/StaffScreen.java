@@ -70,7 +70,7 @@ public class StaffScreen extends RootsScreen {
           staffItemCache.add(ItemStack.EMPTY);
         } else {
           var item = spell.getIcon().copy();
-          item.set(ModAttachments.SPELL_SLOT, spell);
+          item.set(ModAttachments.SPELL_INSTANCE, spell);
           staffItemCache.add(item);
         }
       }

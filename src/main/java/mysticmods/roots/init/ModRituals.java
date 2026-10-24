@@ -7,6 +7,7 @@ import mysticmods.roots.api.reference.RitualProperties;
 import mysticmods.roots.api.reference.Rituals;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.tooltip.Formatters;
 import mysticmods.roots.ritual.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -20,14 +21,23 @@ public class ModRituals {
       new Ritual.Properties(Rituals.EMPTY)
           .duration(ModRituals.EMPTY_DURATION)
           .interval(ModRituals.EMPTY_INTERVAL)
+          .tooltip("This is a placeholder ritual.")
   ));
   public static final PropertyHolder<Property.IntegerProperty> EMPTY_DURATION = P.recordProperty("empty/duration", Property.ofInt(0, RitualProperties.DURATION + " (this ritual is unused"));
   public static final PropertyHolder<Property.IntegerProperty> EMPTY_INTERVAL = P.recordProperty("empty/interval", Property.ofInt(1, RitualProperties.INTERVAL + " (this ritual is unused"));
 
   // This is just a pseudoritual.
   public static final DeferredHolder<Ritual, CraftingRitual> CRAFTING = RITUAL.register("crafting", () -> new CraftingRitual(new Ritual.Properties(Rituals.CRAFTING)
-      .duration(ModRituals.CRAFTING_DURATION)
-      .interval(ModRituals.CRAFTING_INTERVAL)));
+          .duration(ModRituals.CRAFTING_DURATION)
+          .interval(ModRituals.CRAFTING_INTERVAL)
+          .tooltip()
+          .simple("Uses the power of rituals to craft an item.")
+          .segment("Uses the power of rituals to craft an item. Lasts %s", Formatters.forProperty(ModRituals.CRAFTING_DURATION)
+              .by(Formatters.TICKS))
+          .segment(" and activates after %s.", Formatters.forProperty(ModRituals.CRAFTING_INTERVAL).by(Formatters.TICKS))
+          .endTooltip()
+      )
+  );
   public static final PropertyHolder<Property.IntegerProperty> CRAFTING_DURATION = P.recordProperty("crafting/duration", Property.ofInt(160, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> CRAFTING_INTERVAL = P.recordProperty("crafting/interval", Property.ofInt(120, RitualProperties.INTERVAL));
 
@@ -36,7 +46,23 @@ public class ModRituals {
       .count(ModRituals.ANIMAL_HARVEST_COUNT)
       .interval(ModRituals.ANIMAL_HARVEST_INTERVAL)
       .radius(ModRituals.ANIMAL_HARVEST_RADIUS_XZ, ModRituals.ANIMAL_HARVEST_RADIUS_Y)
-      .properties(ModRituals.ANIMAL_HARVEST_GLOW_DURATION, ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE, ModRituals.ANIMAL_HARVEST_LOOTING_VALUE, ModRituals.ANIMAL_HARVEST_MAX_TRIES, ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT, ModRituals.ANIMAL_HARVEST_STACK_LIMIT)));
+      .properties(ModRituals.ANIMAL_HARVEST_GLOW_DURATION, ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE, ModRituals.ANIMAL_HARVEST_LOOTING_VALUE, ModRituals.ANIMAL_HARVEST_MAX_TRIES, ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT, ModRituals.ANIMAL_HARVEST_STACK_LIMIT)
+      .tooltip()
+      .simple("Allows the harvesting of animals within the ritual area, causing them to drop items without them taking physical harm.")
+          .segment("Allows the harvesting of up to %s animals", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_COUNT).by(Formatters.NUMBER))
+      .segment("within the ritual area of %s blocks around the Pyre.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_RADIUS_XZ, ModRituals.ANIMAL_HARVEST_RADIUS_Y).by(Formatters.BLOCK_RANGE))
+          .segment("The ritual will last %s", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_DURATION).by(Formatters.TICKS))
+          .segment("and activate every %s during that time.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_INTERVAL).by(Formatters.TICKS))
+          .segment("Harvested animals will glow for %s.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_GLOW_DURATION).by(Formatters.TICKS))
+          .segment("For each harvesting attempt, there is a %s chance", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE).by(Formatters.PERCENT))
+          .segment("that Looting %s will be applied.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE).by(Formatters.LEVEL))
+          .segment("Drops are limited to %s items (or unlimited if the value is -1)", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_STACK_LIMIT).by(Formatters.NUMBER))
+          .segment("and each individual item is limited to a stack size of %s (or unlimited if the value is -1).", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT).by(Formatters.NUMBER))
+          .segment("The ritual will attempt to harvest animals up to %s times", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_MAX_TRIES).by(Formatters.NUMBER))
+          .segment("if drops fail to generate. All drops are generated as though entities have been killed by a player.")
+      .endTooltip()
+      )
+  );
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_DURATION = P.recordProperty("animal_harvest/duration", Property.ofInt(3200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_INTERVAL = P.recordProperty("animal_harvest/interval", Property.ofInt(110, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_RADIUS_XZ = P.recordProperty("animal_harvest/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
@@ -120,7 +146,6 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> GERMINATION_RADIUS_XZ = P.recordProperty("germination/radius_xz", Property.ofInt(20, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> GERMINATION_RADIUS_Y = P.recordProperty("germination/radius_y", Property.ofInt(20, RitualProperties.RADIUS_Y));
 
-  // TODO: Maybe merge with purity
   public static final DeferredHolder<Ritual, HealingAuraRitual> HEALING_AURA = RITUAL.register("healing_aura", () -> new HealingAuraRitual(new Ritual.Properties(Rituals.HEALING_AURA)
       .duration(ModRituals.HEALING_AURA_DURATION)
       .interval(ModRituals.HEALING_AURA_INTERVAL)

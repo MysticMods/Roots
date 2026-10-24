@@ -41,6 +41,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.CommonHooks;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -300,6 +301,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   }
 
   protected void initializeProperties(Holder<Ritual> holder) {
+    this.extendedDescription = null;
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     duration = properties.get(getDurationProperty());
     if (getRadiusXZProperty() != null) {
@@ -424,6 +426,16 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   @Override
   public PropertyDataMap getPropertyMap() {
     return builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA);
+  }
+
+  @ApiStatus.Internal
+  public void handleTooltip(BiConsumer<String, String> strings) {
+    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.isEmpty()) {
+      RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
+      return;
+    }
+    strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
+    strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate);
   }
 
   // Predicates

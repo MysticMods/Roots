@@ -20,7 +20,7 @@ import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
-import mysticmods.roots.ritual.RitualInstance;
+import mysticmods.roots.api.datacomponent.RitualInstance;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.Util;

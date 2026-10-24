@@ -8,6 +8,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -81,20 +82,20 @@ public abstract class TokenItem extends Item {
 
     @Override
     public String getDescriptionId(ItemStack stack) {
-      if (!stack.has(ModAttachments.SPELL_SLOT)) {
+      if (!stack.has(ModAttachments.SPELL_INSTANCE)) {
         return getSpell().getDescriptionId();
       }
 
-      return getSpell().getDescriptionId(stack.get(ModAttachments.SPELL_SLOT));
+      return getSpell().getDescriptionId(stack.get(ModAttachments.SPELL_INSTANCE));
     }
 
     @Override
     public Component getName(ItemStack stack) {
-      if (!stack.has(ModAttachments.SPELL_SLOT)) {
+      if (!stack.has(ModAttachments.SPELL_INSTANCE)) {
         return getSpell().getStyledName();
       }
 
-      return getSpell().getStyledName(stack.get(ModAttachments.SPELL_SLOT));
+      return getSpell().getStyledName(stack.get(ModAttachments.SPELL_INSTANCE));
     }
 
     @Override
@@ -105,10 +106,10 @@ public abstract class TokenItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-      TooltipUtil.describeSpell(context, tooltipComponents, stack.has(ModAttachments.SPELL_SLOT) ? stack.get(ModAttachments.SPELL_SLOT) : ISpellInstance.of(getSpell()), tooltipFlag);
+      TooltipUtil.describeSpell(context, tooltipComponents, stack.has(ModAttachments.SPELL_INSTANCE) ? stack.get(ModAttachments.SPELL_INSTANCE) : ISpellInstance.of(getSpell()), tooltipFlag);
       tooltipComponents.add(CommonComponents.EMPTY);
-      if (stack.has(ModAttachments.SPELL_SLOT)) {
-        var slot = stack.get(ModAttachments.SPELL_SLOT);
+      if (stack.has(ModAttachments.SPELL_INSTANCE)) {
+        var slot = stack.get(ModAttachments.SPELL_INSTANCE);
         assert slot != null;
         TooltipUtil.spellInstanceCostModeModifiersTooltip(context, tooltipComponents, slot, tooltipFlag, false, false);
       } else {
@@ -116,7 +117,7 @@ public abstract class TokenItem extends Item {
         TooltipUtil.baseSpellCostTooltip(context, tooltipComponents, getSpell(), tooltipFlag);
       }
       if (context.level() != null && context.level().isClientSide()) {
-        RootsClientHooks.appendTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+        RootsClientHooks.appendSpellTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }
     }
   }
@@ -159,7 +160,7 @@ public abstract class TokenItem extends Item {
       tooltipComponents.add(CommonComponents.EMPTY);
       TooltipUtil.baseModifierCostTooltip(context, tooltipComponents, List.of(getSpellModifier()), tooltipFlag);
       if (context.level() != null && context.level().isClientSide()) {
-        RootsClientHooks.appendTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+        RootsClientHooks.appendSpellTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }
     }
   }
@@ -177,6 +178,12 @@ public abstract class TokenItem extends Item {
     }
 
     @Override
+    public Component getName(ItemStack stack) {
+      return getRitual().getStyledName(); //getStyledName();
+    }
+
+
+    @Override
     public String getDescriptionId(ItemStack stack) {
       return getRitual().getDescriptionId();
     }
@@ -184,6 +191,21 @@ public abstract class TokenItem extends Item {
     @Override
     protected @Nullable Unlock<?> getUnlock() {
       return null;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+      super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+      TooltipUtil.describeRitual(context, tooltipComponents, stack.has(ModAttachments.RITUAL_INSTANCE) ? stack.get(ModAttachments.RITUAL_INSTANCE) : IRitualInstance.of(getRitual()), tooltipFlag);
+      tooltipComponents.add(CommonComponents.EMPTY);
+      if (stack.has(ModAttachments.RITUAL_INSTANCE)) {
+        var slot = stack.get(ModAttachments.RITUAL_INSTANCE);
+        assert slot != null;
+        TooltipUtil.ritualInstanceTooltip(context, tooltipComponents, slot, tooltipFlag, false, false);
+      }
+      if (context.level() != null && context.level().isClientSide()) {
+        RootsClientHooks.appendRitualTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+      }
     }
   }
 

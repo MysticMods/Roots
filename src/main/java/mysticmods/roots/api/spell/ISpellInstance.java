@@ -37,7 +37,7 @@ import java.util.function.Supplier;
 
 // TODO: Use tags to indicate enabled modifiers that are transformative
 // TODO: Spell.Properties.transformers(ModifierTransforms...)
-public interface ISpellInstance extends SpellLike, ICostedParent {
+public interface ISpellInstance extends SpellLike, ICostedParent, IModified<Spell, SpellModifier, SpellModifierSet> {
   Spell asSpell();
 
   default boolean isTransformed () {
@@ -51,20 +51,6 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
   // TODO: Decide how to handle slots
   default int getSlot() {
     return -1;
-  }
-
-  SpellModifierSet getEnabledModifiers();
-
-  default Set<ResourceKey<SpellModifier>> getEnabledModifierKeys() {
-    return getEnabledModifiers().getKeys();
-  }
-
-  default Set<ResourceKey<SpellModifier>> getTransformingKeys () {
-    return getEnabledModifiers().getTransformingKeys();
-  }
-
-  default int getTransformingHash () {
-    return getEnabledModifiers().transformingHash();
   }
 
   // Returns length of cooldown
@@ -114,27 +100,6 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   default boolean is(Predicate<ResourceKey<Spell>> spell) {
     return asSpell().is(spell);
-  }
-
-  @Nullable
-  default SpellModifier getFirstModifier (TagKey<SpellModifier> modifier) {
-    return getEnabledModifiers().getFirstModifier(modifier);
-  }
-
-  default boolean has(TagKey<SpellModifier> modifier) {
-    return getEnabledModifiers().hasTag(modifier);
-  }
-
-  default boolean has(ResourceKey<SpellModifier> modifier) {
-    return getEnabledModifierKeys().contains(modifier);
-  }
-
-  default boolean has(SpellModifier modifier) {
-    return getEnabledModifiers().contains(modifier);
-  }
-
-  default boolean has(Holder<SpellModifier> modifier) {
-    return has(modifier.value());
   }
 
   default DataComponentMap getSpellData() {
