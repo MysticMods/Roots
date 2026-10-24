@@ -2,11 +2,11 @@ package mysticmods.roots.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.ClientSetup;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.model.ModelHolder;
 import mysticmods.roots.client.model.SproutModel;
 import mysticmods.roots.entity.SproutEntity;
+import mysticmods.roots.event.setup.ClientSetup;
 import mysticmods.roots.init.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
@@ -54,7 +54,7 @@ public class SproutRenderer extends MobRenderer<SproutEntity, SproutModel> {
   public void render(SproutEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
     super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
 
-    if (entity.hasGift() && ClientSetup.GIFT_BOX_MODEL != null) {
+    if (entity.hasGift() && mysticmods.roots.event.setup.ClientSetup.GIFT_BOX_MODEL != null) {
       double d0 = this.entityRenderDispatcher.distanceToSqr(entity);
       if (d0 < 180) {
         Vec3 vec3 = entity.getAttachments().getNullable(EntityAttachment.NAME_TAG, 0, entity.getViewYRot(partialTicks));

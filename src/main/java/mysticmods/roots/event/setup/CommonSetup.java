@@ -1,6 +1,7 @@
 package mysticmods.roots.event.setup;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.block.ExtraSkullTypes;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
@@ -68,6 +69,8 @@ public class CommonSetup {
       CauldronInteraction.WATER.map().put(ModItems.COMPONENT_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
       CauldronInteraction.WATER.map().put(ModItems.HERB_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
       CauldronInteraction.WATER.map().put(ModItems.SYLVAN_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
+
+      ExtraSkullTypes.register();
     });
   }
 }

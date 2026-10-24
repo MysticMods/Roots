@@ -1,25 +1,43 @@
 package mysticmods.roots.client.model;
 
-import mysticmods.roots.api.RootsAPI;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 
 public class ModelHolder {
-  public static final ModelLayerLocation BEETLE = new ModelLayerLocation(RootsAPI.rl("beetle"), "main");
-  public static final ModelLayerLocation DEER = new ModelLayerLocation(RootsAPI.rl("deer"), "main");
-  public static final ModelLayerLocation DUCK = new ModelLayerLocation(RootsAPI.rl("duck"), "main");
-  public static final ModelLayerLocation HELL_SPROUT = new ModelLayerLocation(RootsAPI.rl("hell_sprout"), "main");
-  public static final ModelLayerLocation OWL = new ModelLayerLocation(RootsAPI.rl("owl"), "main");
-  public static final ModelLayerLocation FENNEC = new ModelLayerLocation(RootsAPI.rl("fennec"), "main");
-  public static final ModelLayerLocation SPROUT = new ModelLayerLocation(RootsAPI.rl("sprout"), "main");
-  public static final ModelLayerLocation BEETLE_ARMOR = new ModelLayerLocation(RootsAPI.rl("beetle_armor"), "main");
-  public static final ModelLayerLocation ANTLER_ARMOR = new ModelLayerLocation(RootsAPI.rl("antler_armor"), "main");
-  public static final ModelLayerLocation METEOR = new ModelLayerLocation(RootsAPI.rl("meteor"), "main");
-  public static final ModelLayerLocation ROSE_THORNS = new ModelLayerLocation(RootsAPI.rl("rose_thorns"), "main");
-  public static final ModelLayerLocation JERBOA = new ModelLayerLocation(RootsAPI.rl("jerboa"), "main");
-  public static final ModelLayerLocation AMPLIFIER_CENTER = new ModelLayerLocation(RootsAPI.rl("amplifier_center"), "main");
-  public static final ModelLayerLocation AMPLIFIER_OUTER = new ModelLayerLocation(RootsAPI.rl("amplifier_outer"), "main");
-  public static final ModelLayerLocation SYLVAN_SPIDER = new ModelLayerLocation(RootsAPI.rl("sylvan_spider"), "main");
-  public static final ModelLayerLocation DANDELION_WINDS = new ModelLayerLocation(RootsAPI.rl("dandelion_winds"), "main");
+  public static final ModelLayerLocation BEETLE = location("beetle");
+  public static final ModelLayerLocation DEER = location("deer");
+  public static final ModelLayerLocation DUCK = location("duck");
+  public static final ModelLayerLocation HELL_SPROUT = location("hell_sprout");
+  public static final ModelLayerLocation OWL = location("owl");
+  public static final ModelLayerLocation FENNEC = location("fennec");
+  public static final ModelLayerLocation SPROUT = location("sprout");
+  public static final ModelLayerLocation BEETLE_ARMOR = location("beetle_armor");
+  public static final ModelLayerLocation ANTLER_ARMOR = location("antler_armor");
+  public static final ModelLayerLocation METEOR = location("meteor");
+  public static final ModelLayerLocation ROSE_THORNS = location("rose_thorns");
+  public static final ModelLayerLocation JERBOA = location("jerboa");
+  public static final ModelLayerLocation AMPLIFIER_CENTER = location("amplifier_center");
+  public static final ModelLayerLocation AMPLIFIER_OUTER = location("amplifier_outer");
+  public static final ModelLayerLocation SYLVAN_SPIDER = location("sylvan_spider");
+  public static final ModelLayerLocation DANDELION_WINDS = location("dandelion_winds");
+
+  public static final ModelLayerLocation HUSK_HEAD = location("husk_head");
+  public static final ModelLayerLocation DROWNED_HEAD = location("drowned_head");
+  public static final ModelLayerLocation ZOMBIE_VILLAGER_HEAD = location("zombie_villager_head");
+  public static final ModelLayerLocation ZOMBIFIED_PIGLIN_HEAD = location("zombified_piglin_head");
+  public static final ModelLayerLocation BOGGED_HEAD = location("bogged_head");
+  public static final ModelLayerLocation STRAY_HEAD = location("stray_head");
+  public static final ModelLayerLocation ENDERMAN_HEAD = location("enderman_head");
+  public static final ModelLayerLocation WITCH_HEAD = location("witch_head");
+  public static final ModelLayerLocation PILLAGER_HEAD = location("pillager_head");
+  public static final ModelLayerLocation ILLUSIONER_HEAD = location("illusioner_head");
+  public static final ModelLayerLocation PIGLIN_BRUTE_HEAD = location("piglin_brute_head");
+  public static final ModelLayerLocation VILLAGER_HEAD = location("villager_head");
+  public static final ModelLayerLocation WANDERING_TRADER_HEAD = location("wandering_trader_head");
+  public static final ModelLayerLocation IRON_GOLEM_HEAD = location("iron_golem_head");
+
+  public static ModelLayerLocation location(String name) {
+    return location(name);
+  }
 
   public static void init() {
   }
