@@ -31,11 +31,12 @@ public class IronGolemHeadModel extends SkullModelBase {
   public static LayerDefinition createIronGolemHead() {
     MeshDefinition meshdefinition = new MeshDefinition();
     PartDefinition partdefinition = meshdefinition.getRoot();
-    partdefinition.addOrReplaceChild(
+    PartDefinition partdefinition1 = partdefinition.addOrReplaceChild(
         "head",
-        CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -12.0F, -5.5F, 8.0F, 10.0F, 8.0F).texOffs(24, 0)
-            .addBox(-1.0F, -5.0F, -7.5F, 2.0F, 4.0F, 2.0F),
-        PartPose.offset(0.0F, -7.0F, -2.0F)
+        CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F), PartPose.ZERO);
+    partdefinition1.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(24, 0)
+            .addBox(-1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F),
+        PartPose.offset(0.0F, -2.0F, -0.0F)
     );
     return LayerDefinition.create(meshdefinition, 128, 128);
   }

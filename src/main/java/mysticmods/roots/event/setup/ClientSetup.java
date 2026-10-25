@@ -303,7 +303,8 @@ public class ClientSetup {
 
     event.registerLayerDefinition(ModelHolder.HUSK_HEAD, humanoid);
     event.registerLayerDefinition(ModelHolder.DROWNED_HEAD, humanoid);
-    event.registerLayerDefinition(ModelHolder.ZOMBIFIED_PIGLIN_HEAD, humanoid);
+    event.registerLayerDefinition(ModelHolder.ZOMBIFIED_PIGLIN_HEAD, () -> LayerDefinition.create(PiglinHeadModel.createHeadModel(), 64, 64));
+    event.registerLayerDefinition(ModelHolder.PIGLIN_BRUTE_HEAD, () -> LayerDefinition.create(PiglinHeadModel.createHeadModel(), 64, 64));
     event.registerLayerDefinition(ModelHolder.BOGGED_HEAD, mob);
     event.registerLayerDefinition(ModelHolder.STRAY_HEAD, mob);
     event.registerLayerDefinition(ModelHolder.ENDERMAN_HEAD, mob);
@@ -567,7 +568,7 @@ public class ClientSetup {
     event.registerSkullModel(ExtraSkullTypes.HUSK, new SkullModel(models.bakeLayer(ModelHolder.HUSK_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.DROWNED, new SkullModel(models.bakeLayer(ModelHolder.DROWNED_HEAD))); // TODO: Outer layer
     event.registerSkullModel(ExtraSkullTypes.ZOMBIE_VILLAGER, new VillagerHeadModel(models.bakeLayer(ModelHolder.ZOMBIE_VILLAGER_HEAD)));
-    event.registerSkullModel(ExtraSkullTypes.ZOMBIFIED_PIGLIN, new PiglinHeadModel(models.bakeLayer(ModelHolder.ZOMBIE_VILLAGER_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.ZOMBIFIED_PIGLIN, new PiglinHeadModel(models.bakeLayer(ModelHolder.ZOMBIFIED_PIGLIN_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.BOGGED, new SkullModel(models.bakeLayer(ModelHolder.BOGGED_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.STRAY, new SkullModel(models.bakeLayer(ModelHolder.STRAY_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.ENDERMAN, new SkullModel(models.bakeLayer(ModelHolder.ENDERMAN_HEAD)));

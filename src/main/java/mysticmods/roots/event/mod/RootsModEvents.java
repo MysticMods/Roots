@@ -146,6 +146,21 @@ public class RootsModEvents {
       event.accept(ModItems.PESTLE.get());
 
       event.accept(ModItems.UNENDING_BOWL.get());
+
+      event.accept(ModBlocks.HUSK_HEAD.get());
+      event.accept(ModBlocks.DROWNED_HEAD.get());
+      event.accept(ModBlocks.ZOMBIE_VILLAGER_HEAD.get());
+      event.accept(ModBlocks.ZOMBIFIED_PIGLIN_HEAD.get());
+      event.accept(ModBlocks.BOGGED_SKULL.get());
+      event.accept(ModBlocks.STRAY_SKULL.get());
+      event.accept(ModBlocks.ENDERMAN_HEAD.get());
+      event.accept(ModBlocks.WITCH_HEAD.get());
+      event.accept(ModBlocks.PILLAGER_HEAD.get());
+      event.accept(ModBlocks.ILLUSIONER_HEAD.get());
+      event.accept(ModBlocks.PIGLIN_BRUTE_HEAD.get());
+      event.accept(ModBlocks.VILLAGER_HEAD.get());
+      event.accept(ModBlocks.WANDERING_TRADER_HEAD.get());
+      event.accept(ModBlocks.IRON_GOLEM_HEAD.get());
       event.accept(ModItems.STONEPETAL.get());
       event.accept(ModItems.WILDROOT.get());
       event.accept(ModItems.GROVE_MOSS.get());

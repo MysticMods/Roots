@@ -18,6 +18,8 @@ import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.List;
+
 @SuppressWarnings("DataFlowIssue")
 public final class RootsItemModelProvider extends ItemModelProvider {
   public RootsItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -399,6 +401,10 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
     getBuilder("roots:no_grove_stone").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/no_grove_stone"));
+
+    for (Holder<Block> headBlock : List.of(ModBlocks.HUSK_HEAD, ModBlocks.DROWNED_HEAD, ModBlocks.ZOMBIE_VILLAGER_HEAD, ModBlocks.ZOMBIFIED_PIGLIN_HEAD, ModBlocks.BOGGED_SKULL, ModBlocks.STRAY_SKULL, ModBlocks.ENDERMAN_HEAD, ModBlocks.WITCH_HEAD, ModBlocks.PILLAGER_HEAD, ModBlocks.ILLUSIONER_HEAD, ModBlocks.PIGLIN_BRUTE_HEAD, ModBlocks.VILLAGER_HEAD, ModBlocks.WANDERING_TRADER_HEAD, ModBlocks.IRON_GOLEM_HEAD)) {
+      withExistingParent(headBlock.getKey().location().toString(), mcLoc("item/template_skull"));
+    }
   }
 
   @SuppressWarnings("UnusedReturnValue")
