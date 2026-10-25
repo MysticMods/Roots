@@ -22,6 +22,8 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.List;
+
 public final class RootsBlockStateProvider extends BlockStateProvider {
   public RootsBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
     super(output, RootsAPI.MODID, exFileHelper);
@@ -458,6 +460,8 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
               .build();
         });
 
+    ModelFile skull = models().getExistingFile(mcLoc("block/skull"));
+
     ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop"))
         .renderType("cutout").texture("crop", modLoc("block/wild_aubergine")).renderType("cutout");
     getVariantBuilder(ModBlocks.WILD_AUBERGINE.get())
@@ -484,6 +488,9 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     fairyHut(ModBlocks.CRIMSON_FAIRY_HUT);
     fairyHut(ModBlocks.BROWN_FAIRY_HUT);
 
+    for (Holder<Block> headBlock : List.of(ModBlocks.HUSK_HEAD, ModBlocks.DROWNED_HEAD, ModBlocks.ZOMBIE_VILLAGER_HEAD, ModBlocks.ZOMBIFIED_PIGLIN_HEAD, ModBlocks.BOGGED_SKULL, ModBlocks.STRAY_SKULL, ModBlocks.ENDERMAN_HEAD, ModBlocks.WITCH_HEAD, ModBlocks.PILLAGER_HEAD, ModBlocks.ILLUSIONER_HEAD, ModBlocks.PIGLIN_BRUTE_HEAD, ModBlocks.VILLAGER_HEAD, ModBlocks.WANDERING_TRADER_HEAD, ModBlocks.IRON_GOLEM_HEAD, ModBlocks.HUSK_WALL_HEAD, ModBlocks.DROWNED_WALL_HEAD, ModBlocks.ZOMBIE_VILLAGER_WALL_HEAD, ModBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD, ModBlocks.BOGGED_WALL_SKULL, ModBlocks.STRAY_WALL_SKULL, ModBlocks.ENDERMAN_WALL_HEAD, ModBlocks.WITCH_WALL_HEAD, ModBlocks.PILLAGER_WALL_HEAD, ModBlocks.ILLUSIONER_WALL_HEAD, ModBlocks.PIGLIN_BRUTE_WALL_HEAD, ModBlocks.VILLAGER_WALL_HEAD, ModBlocks.WANDERING_TRADER_WALL_HEAD, ModBlocks.IRON_GOLEM_WALL_HEAD)) {
+      getVariantBuilder(headBlock.value()).partialState().setModels(new ConfiguredModel(skull));
+    }
   }
 
   private void fairyHut(Holder<Block> holder) {
