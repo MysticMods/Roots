@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.block.ExtraSkullTypes;
 import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.*;
 import mysticmods.roots.worldgen.trees.RootsTreeGrowers;
@@ -216,7 +217,8 @@ public class ModBlocks {
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
       .requiresCorrectToolForDrops()));*/
 
-  public static final DeferredHolder<Block, FurnaceAmplifierBlock> FURNACE_AMPLIFIER = BLOCKS.register("furnace_amplifier", () -> new FurnaceAmplifierBlock(BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.STONE)));
+  public static final DeferredHolder<Block, FurnaceAmplifierBlock> FURNACE_AMPLIFIER = BLOCKS.register("furnace_amplifier", () -> new FurnaceAmplifierBlock(BlockBehaviour.Properties.of()
+      .strength(1.5f).sound(SoundType.STONE)));
 
   public static final DeferredHolder<Block, FairyHutBlock> RED_FAIRY_HUT = BLOCKS.register("red_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
       .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
@@ -337,6 +339,77 @@ public class ModBlocks {
   public static final DeferredHolder<Block, FlowerPotBlock> POTTED_BAFFLECAP = BLOCKS.register("potted_bafflecap", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.BAFFLECAP, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
   public static final DeferredHolder<Block, FlowerPotBlock> POTTED_STONEPETAL = BLOCKS.register("potted_stonepetal", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.STONEPETAL, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
   public static final DeferredHolder<Block, FlowerPotBlock> POTTED_WILDWOOD_SAPLING = BLOCKS.register("potted_wildwood_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.WILDWOOD_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+
+  public static final DeferredHolder<Block, SkullBlock> HUSK_HEAD = BLOCKS.register("husk_head", () -> new SkullBlock(ExtraSkullTypes.HUSK, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> HUSK_WALL_HEAD = BLOCKS.register("husk_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.HUSK, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.HUSK_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> DROWNED_HEAD = BLOCKS.register("drowned_head", () -> new SkullBlock(ExtraSkullTypes.DROWNED, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> DROWNED_WALL_HEAD = BLOCKS.register("drowned_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.DROWNED, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.DROWNED_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> ZOMBIE_VILLAGER_HEAD = BLOCKS.register("zombie_villager_head", () -> new SkullBlock(ExtraSkullTypes.ZOMBIE_VILLAGER, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> ZOMBIE_VILLAGER_WALL_HEAD = BLOCKS.register("zombie_villager_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.ZOMBIE_VILLAGER, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.ZOMBIE_VILLAGER_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> ZOMBIFIED_PIGLIN_HEAD = BLOCKS.register("zombified_piglin_head", () -> new SkullBlock(ExtraSkullTypes.ZOMBIFIED_PIGLIN, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> ZOMBIFIED_PIGLIN_WALL_HEAD = BLOCKS.register("zombified_piglin_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.ZOMBIFIED_PIGLIN, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.ZOMBIFIED_PIGLIN_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> BOGGED_SKULL = BLOCKS.register("bogged_skull", () -> new SkullBlock(ExtraSkullTypes.BOGGED, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> BOGGED_WALL_SKULL = BLOCKS.register("bogged_wall_skull", () -> new WallSkullBlock(ExtraSkullTypes.BOGGED, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.BOGGED_SKULL).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> STRAY_SKULL = BLOCKS.register("stray_skull", () -> new SkullBlock(ExtraSkullTypes.STRAY, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> STRAY_WALL_SKULL = BLOCKS.register("stray_wall_skull", () -> new WallSkullBlock(ExtraSkullTypes.STRAY, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.STRAY_SKULL).pushReaction(PushReaction.DESTROY)));
+
+  // TODO: Sounds
+  public static final DeferredHolder<Block, SkullBlock> ENDERMAN_HEAD = BLOCKS.register("enderman_head", () -> new SkullBlock(ExtraSkullTypes.ENDERMAN, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> ENDERMAN_WALL_HEAD = BLOCKS.register("enderman_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.ENDERMAN, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.ENDERMAN_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> WITCH_HEAD = BLOCKS.register("witch_head", () -> new SkullBlock(ExtraSkullTypes.ENDERMAN, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> WITCH_WALL_HEAD = BLOCKS.register("witch_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.ENDERMAN, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.WITCH_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> PILLAGER_HEAD = BLOCKS.register("pillager_head", () -> new SkullBlock(ExtraSkullTypes.PILLAGER, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> PILLAGER_WALL_HEAD = BLOCKS.register("pillager_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.PILLAGER, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.PILLAGER_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> ILLUSIONER_HEAD = BLOCKS.register("illusioner_head", () -> new SkullBlock(ExtraSkullTypes.ILLUSIONER, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> ILLUSIONER_WALL_HEAD = BLOCKS.register("illusioner_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.ILLUSIONER, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.ILLUSIONER_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> PIGLIN_BRUTE_HEAD = BLOCKS.register("piglin_brute_head", () -> new SkullBlock(ExtraSkullTypes.PIGLIN_BRUTE, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> PIGLIN_BRUTE_WALL_HEAD = BLOCKS.register("piglin_brute_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.PIGLIN_BRUTE, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.PIGLIN_BRUTE_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> VILLAGER_HEAD = BLOCKS.register("villager_head", () -> new SkullBlock(ExtraSkullTypes.VILLAGER, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> VILLAGER_WALL_HEAD = BLOCKS.register("villager_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.VILLAGER, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.VILLAGER_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> WANDERING_TRADER_HEAD = BLOCKS.register("wandering_trader_head", () -> new SkullBlock(ExtraSkullTypes.WANDERING_TRADER, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> WANDERING_TRADER_WALL_HEAD = BLOCKS.register("wandering_trader_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.WANDERING_TRADER, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.WANDERING_TRADER_HEAD).pushReaction(PushReaction.DESTROY)));
+
+  public static final DeferredHolder<Block, SkullBlock> IRON_GOLEM_HEAD = BLOCKS.register("iron_golem_head", () -> new SkullBlock(ExtraSkullTypes.IRON_GOLEM, BlockBehaviour.Properties.of()
+      .instrument(NoteBlockInstrument.CUSTOM_HEAD).strength(1.0F).pushReaction(PushReaction.DESTROY)));
+  public static final DeferredHolder<Block, WallSkullBlock> IRON_GOLEM_WALL_HEAD = BLOCKS.register("iron_golem_wall_head", () -> new WallSkullBlock(ExtraSkullTypes.IRON_GOLEM, BlockBehaviour.Properties.of()
+      .strength(1.0F).lootFrom(ModBlocks.IRON_GOLEM_HEAD).pushReaction(PushReaction.DESTROY)));
 
   private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
     return false;

@@ -16,6 +16,7 @@ import mysticmods.roots.item.block.WaterElementalCropBlockItem;
 import mysticmods.roots.item.living.*;
 import mysticmods.roots.item.util.DyeableWithDefault;
 import net.minecraft.Util;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -212,6 +213,34 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> DECORATIVE_PYRE = ITEMS.register("decorative_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_PYRE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> DECORATIVE_SOUL_PYRE = ITEMS.register("decorative_soul_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_SOUL_PYRE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> UNENDING_BOWL = ITEMS.register("unending_bowl", () -> new BlockItem(ModBlocks.UNENDING_BOWL.get(), new Item.Properties()));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> HUSK_HEAD = ITEMS.register("husk_head", () -> new StandingAndWallBlockItem(ModBlocks.HUSK_HEAD.get(), ModBlocks.HUSK_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> DROWNED_HEAD = ITEMS.register("drowned_head", () -> new StandingAndWallBlockItem(ModBlocks.DROWNED_HEAD.get(), ModBlocks.DROWNED_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> ZOMBIE_VILLAGER_HEAD = ITEMS.register("zombie_villager_head", () -> new StandingAndWallBlockItem(ModBlocks.ZOMBIE_VILLAGER_HEAD.get(), ModBlocks.ZOMBIE_VILLAGER_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> ZOMBIFIED_PIGLIN_HEAD = ITEMS.register("zombified_piglin_head", () -> new StandingAndWallBlockItem(ModBlocks.ZOMBIFIED_PIGLIN_HEAD.get(), ModBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> BOGGED_SKULL = ITEMS.register("bogged_skull", () -> new StandingAndWallBlockItem(ModBlocks.BOGGED_SKULL.get(), ModBlocks.BOGGED_WALL_SKULL.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> STRAY_SKULL = ITEMS.register("stray_skull", () -> new StandingAndWallBlockItem(ModBlocks.STRAY_SKULL.get(), ModBlocks.STRAY_WALL_SKULL.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> ENDERMAN_HEAD = ITEMS.register("enderman_head", () -> new StandingAndWallBlockItem(ModBlocks.ENDERMAN_HEAD.get(), ModBlocks.ENDERMAN_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> WITCH_HEAD = ITEMS.register("witch_head", () -> new StandingAndWallBlockItem(ModBlocks.WITCH_HEAD.get(), ModBlocks.WITCH_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> PILLAGER_HEAD = ITEMS.register("pillager_head", () -> new StandingAndWallBlockItem(ModBlocks.PILLAGER_HEAD.get(), ModBlocks.PILLAGER_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> ILLUSIONER_HEAD = ITEMS.register("illusioner_head", () -> new StandingAndWallBlockItem(ModBlocks.ILLUSIONER_HEAD.get(), ModBlocks.ILLUSIONER_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> PIGLIN_BRUTE_HEAD = ITEMS.register("piglin_brute_head", () -> new StandingAndWallBlockItem(ModBlocks.PIGLIN_BRUTE_HEAD.get(), ModBlocks.PIGLIN_BRUTE_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> VILLAGER_HEAD = ITEMS.register("villager_head", () -> new StandingAndWallBlockItem(ModBlocks.VILLAGER_HEAD.get(), ModBlocks.VILLAGER_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> WANDERING_TRADER_HEAD = ITEMS.register("wandering_trader_head", () -> new StandingAndWallBlockItem(ModBlocks.WANDERING_TRADER_HEAD.get(), ModBlocks.WANDERING_TRADER_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
+
+  public static final DeferredHolder<Item, StandingAndWallBlockItem> IRON_GOLEM_HEAD = ITEMS.register("iron_golem_head", () -> new StandingAndWallBlockItem(ModBlocks.IRON_GOLEM_HEAD.get(), ModBlocks.IRON_GOLEM_WALL_HEAD.get(), new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN));
 
   // Actual items
   public static final DeferredHolder<Item, ItemNameBlockItem> WILDROOT = ITEMS.register("wildroot", () -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), new Item.Properties()));

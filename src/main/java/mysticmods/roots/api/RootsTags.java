@@ -238,6 +238,8 @@ public class RootsTags {
 
     public static final TagKey<Block> AMPLIFIABLE_FURNACES = modTag("amplifiable_furnaces");
 
+    public static final TagKey<Block> HEADS = modTag("heads");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }

@@ -3,6 +3,7 @@ package mysticmods.roots.gen.tags;
 import com.mojang.math.Axis;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -87,10 +88,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.SILVER_ORE).add(SILVER_ORE.get(), DEEPSLATE_SILVER_ORE.get());
     this.tag(RootsTags.Blocks.WILDWOOD_LOGS)
         .add(WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_WOOD.get(), WILDWOOD_WOOD.get());
-    this.tag(RootsTags.Blocks.WILDWOOD_PLANKS)
-        .add(WILDWOOD_PLANKS.get());
-    this.tag(RootsTags.Blocks.WILDWOOD_CHESTS)
-        .add(WILDWOOD_CHEST.get());
+    this.tag(RootsTags.Blocks.WILDWOOD_PLANKS).add(WILDWOOD_PLANKS.get());
+    this.tag(RootsTags.Blocks.WILDWOOD_CHESTS).add(WILDWOOD_CHEST.get());
     this.tag(Tags.Blocks.CHESTS_WOODEN).addTag(RootsTags.Blocks.WILDWOOD_CHESTS);
     this.tag(RootsTags.Blocks.QUARTZ_ORE).add(GRANITE_QUARTZ_ORE.get());
     this.tag(RootsTags.Blocks.RUNED_OBSIDIAN)
@@ -233,39 +232,11 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(RootsTags.Blocks.GRANITE_ORE_REPLACEABLES).add(Blocks.GRANITE);
     Axis.YP.rotationDegrees(90);
-    this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS).add(
-        Blocks.DANDELION,
-        Blocks.POPPY,
-        Blocks.BLUE_ORCHID,
-        Blocks.ALLIUM,
-        Blocks.AZURE_BLUET,
-        Blocks.RED_TULIP,
-        Blocks.ORANGE_TULIP,
-        Blocks.WHITE_TULIP,
-        Blocks.PINK_TULIP,
-        Blocks.OXEYE_DAISY,
-        Blocks.CORNFLOWER,
-        Blocks.LILY_OF_THE_VALLEY,
-        STONEPETAL.get()
-    );
-    this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS).add(
-        Blocks.DANDELION,
-        Blocks.POPPY,
-        Blocks.BLUE_ORCHID,
-        Blocks.ALLIUM,
-        Blocks.AZURE_BLUET,
-        Blocks.RED_TULIP,
-        Blocks.ORANGE_TULIP,
-        Blocks.WHITE_TULIP,
-        Blocks.PINK_TULIP,
-        Blocks.OXEYE_DAISY,
-        Blocks.CORNFLOWER,
-        Blocks.LILY_OF_THE_VALLEY,
-        STONEPETAL.get(),
-        Blocks.TORCHFLOWER,
-        Blocks.WITHER_ROSE,
-        Blocks.SUNFLOWER, Blocks.LILAC, Blocks.PEONY, Blocks.ROSE_BUSH, Blocks.PITCHER_PLANT // Tall flowers
-    );
+    this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS)
+        .add(Blocks.DANDELION, Blocks.POPPY, Blocks.BLUE_ORCHID, Blocks.ALLIUM, Blocks.AZURE_BLUET, Blocks.RED_TULIP, Blocks.ORANGE_TULIP, Blocks.WHITE_TULIP, Blocks.PINK_TULIP, Blocks.OXEYE_DAISY, Blocks.CORNFLOWER, Blocks.LILY_OF_THE_VALLEY, STONEPETAL.get());
+    this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS)
+        .add(Blocks.DANDELION, Blocks.POPPY, Blocks.BLUE_ORCHID, Blocks.ALLIUM, Blocks.AZURE_BLUET, Blocks.RED_TULIP, Blocks.ORANGE_TULIP, Blocks.WHITE_TULIP, Blocks.PINK_TULIP, Blocks.OXEYE_DAISY, Blocks.CORNFLOWER, Blocks.LILY_OF_THE_VALLEY, STONEPETAL.get(), Blocks.TORCHFLOWER, Blocks.WITHER_ROSE, Blocks.SUNFLOWER, Blocks.LILAC, Blocks.PEONY, Blocks.ROSE_BUSH, Blocks.PITCHER_PLANT // Tall flowers
+        );
     this.tag(RootsTags.Blocks.BLOOMING_INELIGIBLE_BLOCKS).addTag(RootsTags.Blocks.TYPED_ELEMENTAL_SOIL);
 
     this.tag(BlockTags.MAINTAINS_FARMLAND).addTag(RootsTags.Blocks.CROPS);
@@ -276,31 +247,13 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(RootsTags.Blocks.SOIL_ELIGIBLE_CROPS).add(
         // Classic crops
-        Blocks.WHEAT,
-        Blocks.BEETROOTS,
-        Blocks.CARROTS,
-        Blocks.POTATOES,
-        Blocks.MELON_STEM,
-        Blocks.MELON,
-        Blocks.ATTACHED_MELON_STEM,
-        Blocks.ATTACHED_PUMPKIN_STEM,
-        Blocks.PUMPKIN_STEM,
-        Blocks.PUMPKIN,
-        Blocks.TORCHFLOWER_CROP,
-        Blocks.PITCHER_CROP,
+        Blocks.WHEAT, Blocks.BEETROOTS, Blocks.CARROTS, Blocks.POTATOES, Blocks.MELON_STEM, Blocks.MELON, Blocks.ATTACHED_MELON_STEM, Blocks.ATTACHED_PUMPKIN_STEM, Blocks.PUMPKIN_STEM, Blocks.PUMPKIN, Blocks.TORCHFLOWER_CROP, Blocks.PITCHER_CROP,
         // Non-traditional crops
         Blocks.NETHER_WART,
         // Mushrooms
-        Blocks.RED_MUSHROOM,
-        Blocks.BROWN_MUSHROOM,
-        Blocks.CRIMSON_FUNGUS,
-        Blocks.WARPED_FUNGUS,
-        BAFFLECAP.get(),
+        Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM, Blocks.CRIMSON_FUNGUS, Blocks.WARPED_FUNGUS, BAFFLECAP.get(),
         // Berry bushes
-        Blocks.SWEET_BERRY_BUSH
-    ).addTag(
-        RootsTags.Blocks.CROPS
-    );
+        Blocks.SWEET_BERRY_BUSH).addTag(RootsTags.Blocks.CROPS);
 
     tag(RootsTags.Blocks.SPREADING_MUSHROOMS).add(Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM, BAFFLECAP.get());
 
@@ -339,7 +292,10 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.FUNGAL_GROVE_DIRT_GENERATORS).add(Blocks.MYCELIUM, Blocks.PODZOL);
     tag(RootsTags.Blocks.FUNGAL_GROVE_OTHER_GENERATORS).add(Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, BAFFLECAP_BLOCK.get());
     tag(RootsTags.Blocks.FUNGAL_GROVE_MUSHROOM_GENERATORS).add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, BAFFLECAP.get(), Blocks.WARPED_FUNGUS, Blocks.CRIMSON_FUNGUS);
-    tag(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS).add(Blocks.CREEPER_HEAD, Blocks.CREEPER_WALL_HEAD, Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD, Blocks.PIGLIN_WALL_HEAD, Blocks.PIGLIN_HEAD, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD, Blocks.ZOMBIE_HEAD, Blocks.ZOMBIE_WALL_HEAD);
+    tag(RootsTags.Blocks.HEADS).add(Blocks.CREEPER_HEAD, Blocks.CREEPER_WALL_HEAD, Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD, Blocks.PIGLIN_WALL_HEAD, Blocks.PIGLIN_HEAD, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD, Blocks.ZOMBIE_HEAD, Blocks.ZOMBIE_WALL_HEAD)
+        .add(ModBlocks.HUSK_HEAD.get(), ModBlocks.DROWNED_HEAD.get(), ModBlocks.ZOMBIE_VILLAGER_HEAD.get(), ModBlocks.ZOMBIFIED_PIGLIN_HEAD.get(), ModBlocks.BOGGED_SKULL.get(), ModBlocks.STRAY_SKULL.get(), ModBlocks.WITCH_HEAD.get(), ModBlocks.PILLAGER_HEAD.get(), ModBlocks.ILLUSIONER_HEAD.get(), ModBlocks.PIGLIN_BRUTE_HEAD.get(), ModBlocks.VILLAGER_HEAD.get(), ModBlocks.WANDERING_TRADER_HEAD.get(), ModBlocks.IRON_GOLEM_HEAD.get())
+        .add(ModBlocks.HUSK_WALL_HEAD.get(), ModBlocks.DROWNED_WALL_HEAD.get(), ModBlocks.ZOMBIE_VILLAGER_WALL_HEAD.get(), ModBlocks.ZOMBIFIED_PIGLIN_WALL_HEAD.get(), ModBlocks.BOGGED_SKULL.get(), ModBlocks.STRAY_SKULL.get(), ModBlocks.WITCH_WALL_HEAD.get(), ModBlocks.PILLAGER_WALL_HEAD.get(), ModBlocks.ILLUSIONER_WALL_HEAD.get(), ModBlocks.PIGLIN_BRUTE_WALL_HEAD.get(), ModBlocks.VILLAGER_WALL_HEAD.get(), ModBlocks.WANDERING_TRADER_WALL_HEAD.get(), ModBlocks.IRON_GOLEM_WALL_HEAD.get());
+    tag(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS).addTag(RootsTags.Blocks.HEADS);
     tag(RootsTags.Blocks.CREATIVE_GROVE_GENERATORS).add(Blocks.STRUCTURE_BLOCK);
 
     tag(RootsTags.Blocks.PYRE_HUD_RENDERER).addTag(RootsTags.Blocks.FUNCTIONAL_PYRES);
@@ -366,9 +322,9 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.WILD_GROVE_LEAF_GENERATORS).addTag(BlockTags.LEAVES);
     this.tag(RootsTags.Blocks.WILD_GROVE_CRAFTER_GENERATORS).addTag(RootsTags.Blocks.GROVE_CRAFTERS);
     this.tag(RootsTags.Blocks.WILD_GROVE_PYRE_GENERATORS).addTag(RootsTags.Blocks.PYRES);
-    this.tag(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS).addTag(
-        BlockTags.FLOWERS
-    ).addTag(BlockTags.SAPLINGS).add(Blocks.LILY_PAD).add(Blocks.MOSS_CARPET).add(Blocks.VINE).addTags(RootsTags.Blocks.SHORT_GRASS, RootsTags.Blocks.TALL_GRASS);
+    this.tag(RootsTags.Blocks.WILD_GROVE_GROUND_COVER_GENERATORS).addTag(BlockTags.FLOWERS).addTag(BlockTags.SAPLINGS)
+        .add(Blocks.LILY_PAD).add(Blocks.MOSS_CARPET).add(Blocks.VINE)
+        .addTags(RootsTags.Blocks.SHORT_GRASS, RootsTags.Blocks.TALL_GRASS);
 
     this.tag(RootsTags.Blocks.AMPLIFIABLE_FURNACES).add(Blocks.FURNACE, Blocks.BLAST_FURNACE, Blocks.SMOKER);
   }

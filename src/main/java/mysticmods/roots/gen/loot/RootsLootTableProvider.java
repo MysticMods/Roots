@@ -478,6 +478,20 @@ public final class RootsLootTableProvider {
       addGroveStoneDrops(ModBlocks.CULTIVATION_GROVE_STONE, ModItems.CULTIVATION_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.ELEMENTAL_GROVE_STONE, ModItems.ELEMENTAL_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.TWILIGHT_GROVE_STONE, ModItems.TWILIGHT_GROVE_STONE);
+      dropSelf(ModBlocks.HUSK_HEAD.get());
+      dropSelf(ModBlocks.DROWNED_HEAD.get());
+      dropSelf(ModBlocks.ZOMBIE_VILLAGER_HEAD.get());
+      dropSelf(ModBlocks.ZOMBIFIED_PIGLIN_HEAD.get());
+      dropSelf(ModBlocks.BOGGED_SKULL.get());
+      dropSelf(ModBlocks.STRAY_SKULL.get());
+      dropSelf(ModBlocks.ENDERMAN_HEAD.get());
+      dropSelf(ModBlocks.WITCH_HEAD.get());
+      dropSelf(ModBlocks.PILLAGER_HEAD.get());
+      dropSelf(ModBlocks.ILLUSIONER_HEAD.get());
+      dropSelf(ModBlocks.PIGLIN_BRUTE_HEAD.get());
+      dropSelf(ModBlocks.VILLAGER_HEAD.get());
+      dropSelf(ModBlocks.WANDERING_TRADER_HEAD.get());
+      dropSelf(ModBlocks.IRON_GOLEM_HEAD.get());
     }
 
     protected void addElementalCropDrops(ElementalCropBlock cropBlock, Item cropItem, ElementalType matchingSoil) {

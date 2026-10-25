@@ -55,8 +55,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PiglinHeadModel;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
@@ -309,109 +307,13 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.BOGGED_HEAD, mob);
     event.registerLayerDefinition(ModelHolder.STRAY_HEAD, mob);
     event.registerLayerDefinition(ModelHolder.ENDERMAN_HEAD, mob);
-    event.registerLayerDefinition(ModelHolder.WITCH_HEAD, ClientSetup::createWitchHead);
-    event.registerLayerDefinition(ModelHolder.PILLAGER_HEAD, ClientSetup::createPillagerHead);
-    event.registerLayerDefinition(ModelHolder.ILLUSIONER_HEAD, ClientSetup::createPillagerHead);
-    event.registerLayerDefinition(ModelHolder.VILLAGER_HEAD, ClientSetup::createVillagerHead);
-    event.registerLayerDefinition(ModelHolder.ZOMBIE_VILLAGER_HEAD, ClientSetup::createVillagerHead);
-    event.registerLayerDefinition(ModelHolder.WANDERING_TRADER_HEAD, ClientSetup::createVillagerHead);
-    event.registerLayerDefinition(ModelHolder.IRON_GOLEM_HEAD, ClientSetup::createIronGolemHead);
-  }
-
-  // TODO: Iron golem head model
-  private static LayerDefinition createIronGolemHead() {
-    MeshDefinition meshdefinition = new MeshDefinition();
-    PartDefinition partdefinition = meshdefinition.getRoot();
-    partdefinition.addOrReplaceChild(
-        "head",
-        CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -12.0F, -5.5F, 8.0F, 10.0F, 8.0F).texOffs(24, 0)
-            .addBox(-1.0F, -5.0F, -7.5F, 2.0F, 4.0F, 2.0F),
-        PartPose.offset(0.0F, -7.0F, -2.0F)
-    );
-    return LayerDefinition.create(meshdefinition, 128, 128);
-  }
-
-  // TODO: Villager head model
-  private static LayerDefinition createVillagerHead() {
-    MeshDefinition meshdefinition = new MeshDefinition();
-    PartDefinition partdefinition = meshdefinition.getRoot();
-    float f = 0.5F;
-    PartDefinition partdefinition1 = partdefinition.addOrReplaceChild(
-        "head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F), PartPose.ZERO
-    );
-    PartDefinition partdefinition2 = partdefinition1.addOrReplaceChild(
-        "hat", CubeListBuilder.create().texOffs(32, 0)
-            .addBox(-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F, new CubeDeformation(0.51F)), PartPose.ZERO
-    );
-    partdefinition2.addOrReplaceChild(
-        "hat_rim",
-        CubeListBuilder.create().texOffs(30, 47).addBox(-8.0F, -8.0F, -6.0F, 16.0F, 16.0F, 1.0F),
-        PartPose.rotation((float) (-Math.PI / 2), 0.0F, 0.0F)
-    );
-    partdefinition1.addOrReplaceChild(
-        "nose", CubeListBuilder.create().texOffs(24, 0)
-            .addBox(-1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F), PartPose.offset(0.0F, -2.0F, 0.0F)
-    );
-    return LayerDefinition.create(meshdefinition, 64, 64);
-  }
-
-  // TODO: Pillager Head Model
-  private static LayerDefinition createPillagerHead() {
-    MeshDefinition meshdefinition = new MeshDefinition();
-    PartDefinition partdefinition = meshdefinition.getRoot();
-    PartDefinition partdefinition1 = partdefinition.addOrReplaceChild(
-        "head", CubeListBuilder.create().texOffs(0, 0)
-            .addBox(-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F), PartPose.offset(0.0F, 0.0F, 0.0F)
-    );
-    partdefinition1.addOrReplaceChild(
-        "hat", CubeListBuilder.create().texOffs(32, 0)
-            .addBox(-4.0F, -10.0F, -4.0F, 8.0F, 12.0F, 8.0F, new CubeDeformation(0.45F)), PartPose.ZERO
-    );
-    partdefinition1.addOrReplaceChild(
-        "nose", CubeListBuilder.create().texOffs(24, 0)
-            .addBox(-1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F), PartPose.offset(0.0F, -2.0F, 0.0F)
-    );
-    return LayerDefinition.create(meshdefinition, 64, 64);
-  }
-
-  // TODO: Move to Witch Head Model
-  private static LayerDefinition createWitchHead() {
-    MeshDefinition meshdefinition = new MeshDefinition();
-    PartDefinition partdefinition = meshdefinition.getRoot();
-    PartDefinition partdefinition1 = partdefinition.addOrReplaceChild(
-        "head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F), PartPose.ZERO
-    );
-    PartDefinition partdefinition2 = partdefinition1.addOrReplaceChild(
-        "hat", CubeListBuilder.create().texOffs(0, 64)
-            .addBox(0.0F, 0.0F, 0.0F, 10.0F, 2.0F, 10.0F), PartPose.offset(-5.0F, -10.03125F, -5.0F)
-    );
-    PartDefinition partdefinition3 = partdefinition2.addOrReplaceChild(
-        "hat2",
-        CubeListBuilder.create().texOffs(0, 76).addBox(0.0F, 0.0F, 0.0F, 7.0F, 4.0F, 7.0F),
-        PartPose.offsetAndRotation(1.75F, -4.0F, 2.0F, -0.05235988F, 0.0F, 0.02617994F)
-    );
-    PartDefinition partdefinition4 = partdefinition3.addOrReplaceChild(
-        "hat3",
-        CubeListBuilder.create().texOffs(0, 87).addBox(0.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F),
-        PartPose.offsetAndRotation(1.75F, -4.0F, 2.0F, -0.10471976F, 0.0F, 0.05235988F)
-    );
-    partdefinition4.addOrReplaceChild(
-        "hat4",
-        CubeListBuilder.create().texOffs(0, 95).addBox(0.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.25F)),
-        PartPose.offsetAndRotation(1.75F, -2.0F, 2.0F, (float) (-Math.PI / 15), 0.0F, 0.10471976F)
-    );
-    partdefinition1.addOrReplaceChild(
-        "nose", CubeListBuilder.create().texOffs(24, 0)
-            .addBox(-1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F), PartPose.offset(0.0F, -2.0F, 0.0F)
-    );
-    PartDefinition partdefinition5 = partdefinition1.getChild("nose");
-    partdefinition5.addOrReplaceChild(
-        "mole",
-        CubeListBuilder.create().texOffs(0, 0)
-            .addBox(0.0F, 3.0F, -6.75F, 1.0F, 1.0F, 1.0F, new CubeDeformation(-0.25F)),
-        PartPose.offset(0.0F, -2.0F, 0.0F)
-    );
-    return LayerDefinition.create(meshdefinition, 64, 128);
+    event.registerLayerDefinition(ModelHolder.WITCH_HEAD, WitchHeadModel::createWitchHead);
+    event.registerLayerDefinition(ModelHolder.PILLAGER_HEAD, IllagerHeadModel::createPillagerHead);
+    event.registerLayerDefinition(ModelHolder.ILLUSIONER_HEAD, IllagerHeadModel::createPillagerHead);
+    event.registerLayerDefinition(ModelHolder.VILLAGER_HEAD, VillagerHeadModel::createVillagerHead);
+    event.registerLayerDefinition(ModelHolder.ZOMBIE_VILLAGER_HEAD, VillagerHeadModel::createVillagerHead);
+    event.registerLayerDefinition(ModelHolder.WANDERING_TRADER_HEAD, VillagerHeadModel::createVillagerHead);
+    event.registerLayerDefinition(ModelHolder.IRON_GOLEM_HEAD, IronGolemHeadModel::createIronGolemHead);
   }
 
   @SubscribeEvent
@@ -662,6 +564,19 @@ public class ClientSetup {
   public static void onSkullModels(EntityRenderersEvent.CreateSkullModels event) {
     EntityModelSet models = event.getEntityModelSet();
 
-    event.registerSkullModel(ExtraSkullTypes.PIGLIN_BRUTE, new PiglinHeadModel(models.bakeLayer(ModelLayers.PIGLIN_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.HUSK, new SkullModel(models.bakeLayer(ModelHolder.HUSK_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.DROWNED, new SkullModel(models.bakeLayer(ModelHolder.DROWNED_HEAD))); // TODO: Outer layer
+    event.registerSkullModel(ExtraSkullTypes.ZOMBIE_VILLAGER, new VillagerHeadModel(models.bakeLayer(ModelHolder.ZOMBIE_VILLAGER_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.ZOMBIFIED_PIGLIN, new PiglinHeadModel(models.bakeLayer(ModelHolder.ZOMBIE_VILLAGER_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.BOGGED, new SkullModel(models.bakeLayer(ModelHolder.BOGGED_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.STRAY, new SkullModel(models.bakeLayer(ModelHolder.STRAY_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.ENDERMAN, new SkullModel(models.bakeLayer(ModelHolder.ENDERMAN_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.WITCH, new SkullModel(models.bakeLayer(ModelHolder.WITCH_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.PILLAGER, new SkullModel(models.bakeLayer(ModelHolder.PILLAGER_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.ILLUSIONER, new SkullModel(models.bakeLayer(ModelHolder.ILLUSIONER_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.PIGLIN_BRUTE, new PiglinHeadModel(models.bakeLayer(ModelHolder.PIGLIN_BRUTE_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.VILLAGER, new SkullModel(models.bakeLayer(ModelHolder.VILLAGER_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.WANDERING_TRADER, new SkullModel(models.bakeLayer(ModelHolder.WANDERING_TRADER_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.IRON_GOLEM, new SkullModel(models.bakeLayer(ModelHolder.IRON_GOLEM_HEAD)));
   }
 }

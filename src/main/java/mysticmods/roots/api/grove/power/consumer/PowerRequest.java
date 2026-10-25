@@ -7,6 +7,7 @@ import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.power.GrovePowerBase;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -14,7 +15,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
 
 import java.util.List;
+import java.util.function.Function;
 
+// This is per-tick
 public record PowerRequest(TagKey<Grove> tag, int value) implements GrovePowerBase {
   public static final MapCodec<PowerRequest> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(RootsRegistries.Keys.GROVES)
           .fieldOf("tag").forGetter(PowerRequest::tag),
@@ -27,5 +30,12 @@ public record PowerRequest(TagKey<Grove> tag, int value) implements GrovePowerBa
   @Override
   public int value(IGroveInstance instance) {
     return value();
+  }
+
+  record ExactValueForRank (int unranked, int rank_i, int rank_ii, int rank_iii, int rank_iv) {
+  }
+
+  record CalculateValueForRank (Function<Rank, Integer> function) {
+
   }
 }

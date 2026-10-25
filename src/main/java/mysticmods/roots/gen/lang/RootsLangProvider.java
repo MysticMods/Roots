@@ -27,6 +27,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
@@ -524,6 +525,22 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.RUNIC_DUST);
     addBlock(ModBlocks.RUNESTONE_TICKER);
     addBlock(ModBlocks.FURNACE_AMPLIFIER);
+
+    addBlock(ModBlocks.HUSK_HEAD);
+    addBlock(ModBlocks.DROWNED_HEAD);
+    addBlock(ModBlocks.ZOMBIE_VILLAGER_HEAD);
+    addBlock(ModBlocks.ZOMBIFIED_PIGLIN_HEAD);
+    addBlock(ModBlocks.BOGGED_SKULL);
+    addBlock(ModBlocks.STRAY_SKULL);
+    addBlock(ModBlocks.ENDERMAN_HEAD);
+    addBlock(ModBlocks.WITCH_HEAD);
+    addBlock(ModBlocks.PILLAGER_HEAD);
+    addBlock(ModBlocks.ILLUSIONER_HEAD);
+    addBlock(ModBlocks.PIGLIN_BRUTE_HEAD);
+    addBlock(ModBlocks.VILLAGER_HEAD);
+    addBlock(ModBlocks.WANDERING_TRADER_HEAD);
+    addBlock(ModBlocks.IRON_GOLEM_HEAD);
+
 
     // Some potential duplicates with ModBlocks
 

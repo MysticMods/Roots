@@ -1,5 +1,6 @@
 package mysticmods.roots.client.model;
 
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 
 public class ModelHolder {
@@ -36,7 +37,7 @@ public class ModelHolder {
   public static final ModelLayerLocation IRON_GOLEM_HEAD = location("iron_golem_head");
 
   public static ModelLayerLocation location(String name) {
-    return location(name);
+    return new ModelLayerLocation(RootsAPI.rl(name), "main");
   }
 
   public static void init() {
