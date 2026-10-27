@@ -1,4 +1,68 @@
 package mysticmods.roots.block;
 
-public class ShapedWallSkullBlock {
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.block.ExtraSkullTypes;
+import mysticmods.roots.api.block.SkullShapes;
+import mysticmods.roots.blockentity.ExtraSkullBlockEntity;
+import mysticmods.roots.init.ModBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractSkullBlock;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.WallSkullBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nullable;
+
+public class ShapedWallSkullBlock extends WallSkullBlock {
+  public static final MapCodec<ShapedWallSkullBlock> CODEC = RecordCodecBuilder.mapCodec(
+      instance -> instance.group(SkullBlock.Type.CODEC.fieldOf("kind")
+              .forGetter(AbstractSkullBlock::getType), propertiesCodec())
+          .apply(instance, ShapedWallSkullBlock::new)
+  );
+
+  public ShapedWallSkullBlock(SkullBlock.Type type, BlockBehaviour.Properties properties) {
+    super(type, properties);
+  }
+
+  @Override
+  public MapCodec<ShapedWallSkullBlock> codec() {
+    return CODEC;
+  }
+
+  @Override
+  protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    VoxelShape shape = SkullShapes.wall(this.getType(), state.getValue(FACING), state.getValue(POWERED));
+    return shape != null ? shape : super.getShape(state, level, pos, context);
+  }
+
+  @Nullable
+  @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    if (level.isClientSide) {
+      if (getType() == ExtraSkullTypes.ENDERMAN) {
+        return createTickerHelper(blockEntityType, ModBlockEntities.EXTRA_SKULL.get(), ExtraSkullBlockEntity::animation);
+      }
+    }
+
+    return null;
+  }
+
+  @Override
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    if (getType() == ExtraSkullTypes.ENDERMAN || getType() == ExtraSkullTypes.DROWNED || getType() == ExtraSkullTypes.STRAY || getType() == ExtraSkullTypes.BOGGED) {
+      return new ExtraSkullBlockEntity(pos, state);
+    } else {
+      return new SkullBlockEntity(pos, state);
+    }
+  }
 }

@@ -6,6 +6,7 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.item.TokenItem;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -403,7 +404,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
         .texture("layer0", modLoc("item/no_grove_stone"));
 
     for (Holder<Block> headBlock : List.of(ModBlocks.HUSK_HEAD, ModBlocks.DROWNED_HEAD, ModBlocks.ZOMBIE_VILLAGER_HEAD, ModBlocks.ZOMBIFIED_PIGLIN_HEAD, ModBlocks.BOGGED_SKULL, ModBlocks.STRAY_SKULL, ModBlocks.ENDERMAN_HEAD, ModBlocks.WITCH_HEAD, ModBlocks.PILLAGER_HEAD, ModBlocks.ILLUSIONER_HEAD, ModBlocks.PIGLIN_BRUTE_HEAD, ModBlocks.VILLAGER_HEAD, ModBlocks.WANDERING_TRADER_HEAD, ModBlocks.IRON_GOLEM_HEAD)) {
-      withExistingParent(headBlock.getKey().location().toString(), mcLoc("item/template_skull"));
+      withExistingParent(headBlock.getKey().location().toString(), modLoc("item/template_skull"));
     }
   }
 

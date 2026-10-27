@@ -16,6 +16,7 @@ import mysticmods.roots.client.RootsShaders;
 import mysticmods.roots.client.blockentity.*;
 import mysticmods.roots.client.gui.layer.*;
 import mysticmods.roots.client.gui.screen.*;
+import mysticmods.roots.client.item.ExtraSkullItemRenderer;
 import mysticmods.roots.client.item.WildwoodChestItemRenderer;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.layer.DandelionWindsRenderLayer;
@@ -55,6 +56,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PiglinHeadModel;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
@@ -207,6 +209,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.ENCHANTED_TURF.get(), EnchantedTurfBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.FUNGAL_TRANSMUTER.get(), FungalTransmuterBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.WILDWOOD_CHEST.get(), WildwoodChestRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.EXTRA_SKULL.get(), ExtraSkullBlockRenderer::new);
   }
 
   @SubscribeEvent
@@ -305,9 +308,9 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.DROWNED_HEAD, humanoid);
     event.registerLayerDefinition(ModelHolder.ZOMBIFIED_PIGLIN_HEAD, () -> LayerDefinition.create(PiglinHeadModel.createHeadModel(), 64, 64));
     event.registerLayerDefinition(ModelHolder.PIGLIN_BRUTE_HEAD, () -> LayerDefinition.create(PiglinHeadModel.createHeadModel(), 64, 64));
-    event.registerLayerDefinition(ModelHolder.BOGGED_HEAD, mob);
+    event.registerLayerDefinition(ModelHolder.BOGGED_HEAD, WitchHeadModel::createBoggedHead);
     event.registerLayerDefinition(ModelHolder.STRAY_HEAD, mob);
-    event.registerLayerDefinition(ModelHolder.ENDERMAN_HEAD, mob);
+    event.registerLayerDefinition(ModelHolder.ENDERMAN_HEAD, EndermanHeadModel::createEndermanHead);
     event.registerLayerDefinition(ModelHolder.WITCH_HEAD, WitchHeadModel::createWitchHead);
     event.registerLayerDefinition(ModelHolder.PILLAGER_HEAD, IllagerHeadModel::createPillagerHead);
     event.registerLayerDefinition(ModelHolder.ILLUSIONER_HEAD, IllagerHeadModel::createPillagerHead);
@@ -315,6 +318,19 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.ZOMBIE_VILLAGER_HEAD, VillagerHeadModel::createVillagerHead);
     event.registerLayerDefinition(ModelHolder.WANDERING_TRADER_HEAD, VillagerHeadModel::createVillagerHead);
     event.registerLayerDefinition(ModelHolder.IRON_GOLEM_HEAD, IronGolemHeadModel::createIronGolemHead);
+
+    MeshDefinition meshdefinition = new MeshDefinition();
+    PartDefinition partdefinition = meshdefinition.getRoot();
+    partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0)
+        .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25f)), PartPose.ZERO);
+    event.registerLayerDefinition(ModelHolder.STRAY_HEAD_OUTER, () -> LayerDefinition.create(meshdefinition, 64, 32));
+    event.registerLayerDefinition(ModelHolder.DROWNED_HEAD_OUTER, () -> LayerDefinition.create(meshdefinition, 64, 64));
+
+    MeshDefinition meshDefinition2 = new MeshDefinition();
+    PartDefinition partDefinition2 = meshDefinition2.getRoot();
+    partDefinition2.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0)
+        .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2f)), PartPose.ZERO);
+    event.registerLayerDefinition(ModelHolder.BOGGED_HEAD_OUTER, () -> LayerDefinition.create(meshDefinition2, 64, 32));
   }
 
   @SubscribeEvent
@@ -359,8 +375,17 @@ public class ClientSetup {
       }
     };
 
+    IClientItemExtensions extraLayerSkulls = new IClientItemExtensions() {
+      @Override
+      public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+        return ExtraSkullItemRenderer.getInstance();
+      }
+    };
+
     event.registerItem(deferToArmorModel, ModItems.BEETLE_HELMET, ModItems.BEETLE_BOOTS, ModItems.BEETLE_CHESTPLATE, ModItems.BEETLE_LEGGINGS, ModItems.ANTLER_HAT);
     event.registerItem(wildwoodChest, ModItems.WILDWOOD_CHEST);
+
+    event.registerItem(extraLayerSkulls, ModItems.STRAY_SKULL.get(), ModItems.DROWNED_HEAD.get(), ModItems.BOGGED_SKULL.get());
   }
 
   @SubscribeEvent
@@ -566,12 +591,12 @@ public class ClientSetup {
     EntityModelSet models = event.getEntityModelSet();
 
     event.registerSkullModel(ExtraSkullTypes.HUSK, new SkullModel(models.bakeLayer(ModelHolder.HUSK_HEAD)));
-    event.registerSkullModel(ExtraSkullTypes.DROWNED, new SkullModel(models.bakeLayer(ModelHolder.DROWNED_HEAD))); // TODO: Outer layer
+    event.registerSkullModel(ExtraSkullTypes.DROWNED, new SkullModel(models.bakeLayer(ModelHolder.DROWNED_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.ZOMBIE_VILLAGER, new VillagerHeadModel(models.bakeLayer(ModelHolder.ZOMBIE_VILLAGER_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.ZOMBIFIED_PIGLIN, new PiglinHeadModel(models.bakeLayer(ModelHolder.ZOMBIFIED_PIGLIN_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.BOGGED, new SkullModel(models.bakeLayer(ModelHolder.BOGGED_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.STRAY, new SkullModel(models.bakeLayer(ModelHolder.STRAY_HEAD)));
-    event.registerSkullModel(ExtraSkullTypes.ENDERMAN, new SkullModel(models.bakeLayer(ModelHolder.ENDERMAN_HEAD)));
+    event.registerSkullModel(ExtraSkullTypes.ENDERMAN, new EndermanHeadModel(models.bakeLayer(ModelHolder.ENDERMAN_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.WITCH, new SkullModel(models.bakeLayer(ModelHolder.WITCH_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.PILLAGER, new SkullModel(models.bakeLayer(ModelHolder.PILLAGER_HEAD)));
     event.registerSkullModel(ExtraSkullTypes.ILLUSIONER, new SkullModel(models.bakeLayer(ModelHolder.ILLUSIONER_HEAD)));

@@ -460,7 +460,7 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
               .build();
         });
 
-    ModelFile skull = models().getExistingFile(mcLoc("block/skull"));
+    ModelFile skull = models().getExistingFile(modLoc("block/skull"));
 
     ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop"))
         .renderType("cutout").texture("crop", modLoc("block/wild_aubergine")).renderType("cutout");

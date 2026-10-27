@@ -40,6 +40,8 @@ public class ModBlockEntities {
       .build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FurnaceAmplifierBlockEntity>> FURNACE_AMPLIFIER = BLOCK_ENTITIES.register("furnace_amplifier", () -> BlockEntityType.Builder.of(FurnaceAmplifierBlockEntity::new, ModBlocks.FURNACE_AMPLIFIER.get()).build(null));
 
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ExtraSkullBlockEntity>> EXTRA_SKULL = BLOCK_ENTITIES.register("extra_skull", () -> BlockEntityType.Builder.of(ExtraSkullBlockEntity::new, ModBlocks.ENDERMAN_HEAD.get(), ModBlocks.ENDERMAN_WALL_HEAD.get(), ModBlocks.DROWNED_HEAD.get(), ModBlocks.DROWNED_WALL_HEAD.get(), ModBlocks.STRAY_SKULL.get(), ModBlocks.STRAY_WALL_SKULL.get(), ModBlocks.BOGGED_SKULL.get(), ModBlocks.BOGGED_WALL_SKULL.get()).build(null));
+
   public static void register(IEventBus bus) {
     BLOCK_ENTITIES.register(bus);
   }

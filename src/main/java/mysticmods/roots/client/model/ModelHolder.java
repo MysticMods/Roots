@@ -23,10 +23,13 @@ public class ModelHolder {
 
   public static final ModelLayerLocation HUSK_HEAD = location("husk_head");
   public static final ModelLayerLocation DROWNED_HEAD = location("drowned_head");
+  public static final ModelLayerLocation DROWNED_HEAD_OUTER = location("drowned_head");
   public static final ModelLayerLocation ZOMBIE_VILLAGER_HEAD = location("zombie_villager_head");
   public static final ModelLayerLocation ZOMBIFIED_PIGLIN_HEAD = location("zombified_piglin_head");
   public static final ModelLayerLocation BOGGED_HEAD = location("bogged_head");
+  public static final ModelLayerLocation BOGGED_HEAD_OUTER = location("bogged_head_outer");
   public static final ModelLayerLocation STRAY_HEAD = location("stray_head");
+  public static final ModelLayerLocation STRAY_HEAD_OUTER = location("stray_head_outer");
   public static final ModelLayerLocation ENDERMAN_HEAD = location("enderman_head");
   public static final ModelLayerLocation WITCH_HEAD = location("witch_head");
   public static final ModelLayerLocation PILLAGER_HEAD = location("pillager_head");

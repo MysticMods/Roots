@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "particle": "minecraft:block/soul_sand"
+  },
+  "gui_light": "front"
+}

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/skull"
+      "model": "roots:block/skull"
     }
   }
 }

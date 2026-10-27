@@ -51,6 +51,7 @@
     "action.MixinPiglinAi$TradeAction"
   ],
   "client": [
+    "accessor.AccessorMixinSkullBlockRenderer",
     "client.MixinCapeLayer$LightDrifter",
     "client.MixinEntity$ParticleHolder",
     "client.MixinEntity$Targeting",
