@@ -31,11 +31,4 @@ public record PowerRequest(TagKey<Grove> tag, int value) implements GrovePowerBa
   public int value(IGroveInstance instance) {
     return value();
   }
-
-  record ExactValueForRank (int unranked, int rank_i, int rank_ii, int rank_iii, int rank_iv) {
-  }
-
-  record CalculateValueForRank (Function<Rank, Integer> function) {
-
-  }
 }
