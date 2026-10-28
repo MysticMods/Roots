@@ -11,9 +11,9 @@
     ],
     "power_requirements": [
       {
-        "rate": 166,
+        "rate": 300,
         "tag": "roots:fungal",
-        "totalRequired": 166
+        "totalRequired": 300
       }
     ],
     "priority": 0,

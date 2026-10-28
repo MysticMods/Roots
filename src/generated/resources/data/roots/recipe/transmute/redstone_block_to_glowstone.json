@@ -8,7 +8,7 @@
     ],
     "power_requirements": [
       {
-        "rate": 2000,
+        "rate": 5,
         "tag": "roots:fungal",
         "totalRequired": 2000
       }

@@ -183,6 +183,26 @@ public class BaseRecipeData {
       return this;
     }
 
+    public Builder requires (TagKey<Grove> grove, int value, int rate) {
+      this.powerRequirements.add(new PowerAccumulationRequest(grove, value, rate));
+      return this;
+    }
+
+    public Builder requires (Holder<Grove> grove, int value, int rate) {
+      this.powerRequirements.add(new PowerAccumulationRequest(grove.value().getGroveTag(), value, rate));
+      return this;
+    }
+
+    public Builder requires (Holder<Grove> grove, int value) {
+      this.powerRequirements.add(new PowerAccumulationRequest(grove.value().getGroveTag(), value, value));
+      return this;
+    }
+
+    public Builder requires (Grove grove, int value, int rate) {
+      this.powerRequirements.add(new PowerAccumulationRequest(grove.getGroveTag(), value, rate));
+      return this;
+    }
+
     public Builder requires (TagKey<Grove> groveTag, int value) {
       this.powerRequirements.add(new PowerAccumulationRequest(new PowerRequest(groveTag, value)));
       return this;
