@@ -55,7 +55,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-// TODO: Change this to function more as a "valid recipe" -> "start" -> "consume power" -> "craft" -> "output" system.
 public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, InventoryBlockEntity, RefillProvider, ClearableBlockEntity, FakeMenuBlockEntity {
   private final TransmutationInventory inventory = new TransmutationInventory() {
     @Override

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class BaseRecipeData {
   public static final MapCodec<BaseRecipeData> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -278,9 +279,17 @@ public class BaseRecipeData {
       return this;
     }
 
+    public Builder level (Supplier<ILevelCondition> levelConditionSupplier) {
+      return this.condition(levelConditionSupplier.get());
+    }
+
     public Builder condition(IPlayerCondition playerCondition) {
       this.playerConditions.add(playerCondition);
       return this;
+    }
+
+    public Builder player (Supplier<IPlayerCondition> playerConditionSupplier) {
+      return this.condition(playerConditionSupplier.get());
     }
 
     public Builder multiplty(int value) {
