@@ -1,5 +1,6 @@
 package mysticmods.roots.api;
 
+import mysticmods.roots.api.grove.Rank;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -16,7 +17,8 @@ public class StateProperties {
   public static class GroveStone {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final PartProperty PART = PartProperty.create("part");
-    public static final IntegerProperty RANK = IntegerProperty.create("rank", 0, 4);
+    public static final IntegerProperty OLD_RANK = IntegerProperty.create("rank", 0, 4);
+    public static final RankProperty RANK = RankProperty.create("grove_rank");
   }
 
   public static class PartProperty extends EnumProperty<Part> {
@@ -26,6 +28,16 @@ public class StateProperties {
 
     public static PartProperty create(String name) {
       return new PartProperty(name);
+    }
+  }
+
+  public static class RankProperty extends EnumProperty<Rank> {
+    protected RankProperty (String name) {
+      super(name, Rank.class, List.of(Rank.values()));
+    }
+
+    public static RankProperty create(String name) {
+      return new RankProperty(name);
     }
   }
 

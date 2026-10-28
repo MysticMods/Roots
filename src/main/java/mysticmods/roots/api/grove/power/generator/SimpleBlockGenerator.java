@@ -49,6 +49,6 @@ public record SimpleBlockGenerator(TagKey<Block> blockTag, TagKey<Grove> tag,
       return value;
     }
 
-    return value * instance.getRank();
+    return value * instance.getRank().ordinal();
   }
 }

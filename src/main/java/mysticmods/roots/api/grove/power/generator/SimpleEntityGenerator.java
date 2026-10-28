@@ -55,6 +55,6 @@ public record SimpleEntityGenerator(TagKey<EntityType<?>> entityTag, TagKey<Grov
       return value;
     }
 
-    return value * instance.getRank();
+    return value * instance.getRank().ordinal();
   }
 }

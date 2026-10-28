@@ -7,6 +7,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.grove.power.PowerTicket;
 import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
@@ -24,7 +25,6 @@ import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.ritual.GroveSupplicationRitual;
 import mysticmods.roots.util.ReputationHelper;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -144,7 +144,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
   // TODO: Resetting the bounds
   @Override
   public int getRadiusX() {
-    return switch (getBlockState().getValue(GroveStoneBlock.RANK)) {
+    return switch (getBlockState().getValue(GroveStoneBlock.OLD_RANK)) {
       case 0 -> getGrove().is(RootsTags.Groves.WILD) ? ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt() : 0;
       case 1 -> ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt();
       case 2 -> ConfigManager.RANK_2_GROVE_BOUNDS_ZX.getAsInt();
@@ -156,7 +156,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
 
   @Override
   public int getRadiusY() {
-    return switch (getBlockState().getValue(GroveStoneBlock.RANK)) {
+    return switch (getBlockState().getValue(GroveStoneBlock.OLD_RANK)) {
       case 0 -> getGrove().is(RootsTags.Groves.WILD) ? ConfigManager.RANK_1_GROVE_BOUNDS_Y.getAsInt() : 0;
       case 1 -> ConfigManager.RANK_1_GROVE_BOUNDS_Y.getAsInt();
       case 2 -> ConfigManager.RANK_2_GROVE_BOUNDS_Y.getAsInt();
@@ -168,7 +168,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
 
   @Override
   public int getRadiusZ() {
-    return switch (getBlockState().getValue(GroveStoneBlock.RANK)) {
+    return switch (getBlockState().getValue(GroveStoneBlock.OLD_RANK)) {
       case 0 -> getGrove().is(RootsTags.Groves.WILD) ? ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt() : 0;
       case 1 -> ConfigManager.RANK_1_GROVE_BOUNDS_ZX.getAsInt();
       case 2 -> ConfigManager.RANK_2_GROVE_BOUNDS_ZX.getAsInt();
@@ -420,18 +420,20 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
   }
 
   @Override
-  public int getRank() {
-    return getBlockState().getValue(GroveStoneBlock.RANK);
-  }
+  public Rank getRank() {
+    BlockState state = getBlockState();
+    int oldRank = state.getValue(GroveStoneBlock.OLD_RANK);
+    Rank rank = state.getValue(GroveStoneBlock.RANK);
 
-  private int maxRank = -1;
+    if (oldRank > rank.ordinal()) {
+      rank = Rank.fromOrdinal(oldRank);
 
-  @Override
-  public int getMaxRank() {
-    if (maxRank == -1) {
-      maxRank = Collections.max(GroveStoneBlock.RANK.getPossibleValues());
+      if (getLevel() != null && !getLevel().isClientSide()) {
+        getLevel().setBlock(getBlockPos(), state.setValue(GroveStoneBlock.RANK, rank), 3);
+      }
     }
-    return maxRank;
+
+    return rank;
   }
 
   @Override
@@ -480,7 +482,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
       return false;
     }
     var rank = ReputationHelper.getRank(player, grove);
-    if (rank.ordinal() > getRank()) {
+    if (rank.compareTo(getRank()) < 0) {
       // TODO: Don't pass ordinal
       activate(level, pos, state, rank.ordinal());
       return true;
@@ -496,12 +498,12 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
       throw new IllegalStateException("GroveStoneBlockEntity::activate can only be called on the block entity of a grove stone, called on " + pos + " which is " + state.getValue(StateProperties.GroveStone.PART));
     }
     level.setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true)
-        .setValue(StateProperties.GroveStone.RANK, rank));
+        .setValue(StateProperties.GroveStone.OLD_RANK, rank));
     BlockState below = level.getBlockState(pos.below());
     level.setBlockAndUpdate(pos.below(), below.setValue(StateProperties.ACTIVE, true)
-        .setValue(StateProperties.GroveStone.RANK, rank));
+        .setValue(StateProperties.GroveStone.OLD_RANK, rank));
     below = level.getBlockState(pos.below().below());
     level.setBlockAndUpdate(pos.below().below(), below.setValue(StateProperties.ACTIVE, true)
-        .setValue(StateProperties.GroveStone.RANK, rank));
+        .setValue(StateProperties.GroveStone.OLD_RANK, rank));
   }
 }

@@ -8,8 +8,9 @@
     ],
     "power_requirements": [
       {
+        "rate": 600,
         "tag": "roots:fungal",
-        "value": 600
+        "totalRequired": 600
       }
     ],
     "priority": 0,

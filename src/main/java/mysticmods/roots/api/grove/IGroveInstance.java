@@ -9,15 +9,12 @@ import net.minecraft.tags.TagKey;
 public interface IGroveInstance extends Bounded, IProvidesTick {
   Grove asGrove();
 
-  @Deprecated(forRemoval = true)
-  default Rank rankForRank () {
-    return Rank.fromOrdinal(getRank());
+  Rank getRank ();
+
+  default Rank getMaxRank () {
+    return Rank.FOURTH;
   }
-
-  int getRank();
-
-  int getMaxRank();
-
+  
   IGrovePowerDistributor getCollector();
 
   default boolean is(TagKey<Grove> tag) {

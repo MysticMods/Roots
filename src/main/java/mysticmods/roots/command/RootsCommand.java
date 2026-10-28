@@ -424,8 +424,8 @@ public class RootsCommand {
         Level level = c.getSource().getLevel();
         for (BlockPos pos : positions) {
           BlockState stateAt = level.getBlockState(pos);
-          if (stateAt.is(RootsTags.Blocks.GROVE_STONES) && stateAt.hasProperty(GroveStoneBlock.RANK)) {
-            level.setBlock(pos, stateAt.setValue(GroveStoneBlock.RANK, rank).setValue(GroveStoneBlock.ACTIVE, true), 3);
+          if (stateAt.is(RootsTags.Blocks.GROVE_STONES) && stateAt.hasProperty(GroveStoneBlock.OLD_RANK)) {
+            level.setBlock(pos, stateAt.setValue(GroveStoneBlock.OLD_RANK, rank).setValue(GroveStoneBlock.ACTIVE, true), 3);
           }
         }
         return 1;

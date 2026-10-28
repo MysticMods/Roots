@@ -7,10 +7,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public enum Rank {
+public enum Rank implements StringRepresentable {
   UNRANKED,
   FIRST,
   SECOND,
@@ -92,5 +93,16 @@ public enum Rank {
     } else {
       return Rank.UNRANKED;
     }
+  }
+
+  private String myName = null;
+
+  @Override
+  public String getSerializedName() {
+    if (myName == null) {
+      myName = name().toLowerCase(Locale.ROOT);
+    }
+
+    return myName;
   }
 }

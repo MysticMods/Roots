@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
@@ -43,7 +44,8 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
   public static final BooleanProperty ACTIVE = StateProperties.ACTIVE;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-  public static final IntegerProperty RANK = StateProperties.GroveStone.RANK;
+  public static final IntegerProperty OLD_RANK = StateProperties.GroveStone.OLD_RANK;
+  public static final EnumProperty<Rank> RANK = StateProperties.GroveStone.RANK;
 
   public static final VoxelShape[] EAST_WEST = {VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_TOP, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_MIDDLE, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_BOTTOM, Direction.EAST)};
   public static final VoxelShape[] NORTH_SOUTH = {Shapes.GROVE_STONE_TOP, Shapes.GROVE_STONE_MIDDLE, Shapes.GROVE_STONE_BOTTOM};
@@ -53,7 +55,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   public GroveStoneBlock(Holder<Grove> grove, Properties builder) {
     super(builder);
     this.registerDefaultState(defaultBlockState().setValue(ACTIVE, false).setValue(PART, StateProperties.Part.BOTTOM)
-        .setValue(WATERLOGGED, false));
+        .setValue(WATERLOGGED, false).setValue(RANK, Rank.UNRANKED));
     this.grove = grove;
   }
 
@@ -71,7 +73,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PART, ACTIVE, FACING, WATERLOGGED, RANK);
+    pBuilder.add(PART, ACTIVE, FACING, WATERLOGGED, OLD_RANK, RANK);
   }
 
   @Override

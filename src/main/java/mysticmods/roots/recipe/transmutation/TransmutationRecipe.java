@@ -3,6 +3,7 @@ package mysticmods.roots.recipe.transmutation;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.grove.power.consumer.PowerAccumulationRequest;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
@@ -28,7 +29,7 @@ public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory,
     super(data);
   }
 
-  public List<PowerRequest> getPowerRequirements() {
+  public List<PowerAccumulationRequest> getPowerRequirements() {
     return data.powerRequirements;
   }
 
