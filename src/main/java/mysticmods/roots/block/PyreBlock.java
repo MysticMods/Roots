@@ -122,15 +122,19 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
           }
           return state.setValue(PyreBlock.ACTIVE, false).setValue(PyreBlock.LIT, false);
         }
-      } else if (itemAbility == ItemAbilities.FIRESTARTER_LIGHT) {
+      } else if (false) {/*itemAbility == ItemAbilities.FIRESTARTER_LIGHT) {*/
+        // Section commented out for my sanity
         if (!state.getValue(PyreBlock.ACTIVE)) {
           if (!simulate && !level.isClientSide()) {
             if (ConfigManager.DEBUG_PYRE.getAsBoolean()) {
               RootsAPI.LOG.info("Actually starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
                   .location(), itemAbility, context.getPlayer());
             }
-            pyre.light(context.getPlayer());
-            pyre.updateState();
+            if (pyre.light(context.getPlayer()).indicateItemUse()) {
+              pyre.updateState();
+            } else {
+              return null;
+            }
           } else {
             RootsAPI.LOG.info("Simulated starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
                 .location(), itemAbility, context.getPlayer());
