@@ -76,6 +76,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       .add(StateCategories.PROGRESS, be -> be.getLifetime() > 0 ? ProgressState.CRAFTING : ProgressState.NONE)
       .add(StateCategories.RECIPE, be -> RecipeState.of(be.cachedRecipe != null))
       .add(StateCategories.ANIMATION, be -> be.getLifetime() > 0 ? AnimationState.CRAFTING : AnimationState.NONE)
+      .add(StateCategories.RITUAL, be -> {
+        if (be.ritualInstance == null) {
+          return RitualState.NONE;
+        }
+        return be.ritualInstance.is(ModRituals.CRAFTING) ? RitualState.CRAFTING : RitualState.RITUAL;
+      })
       .build();
 
   private final StateHolder<PyreBlockEntity> stateHolder = STATE_SCHEMA.createHolder();
@@ -146,6 +152,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.refreshRitualCache();
   }
 
+  private void setCurrentRitual (RecipeHolder<PyreRecipe> pyreRecipe) {
+    Ritual ritual = pyreRecipe.value().getRitual();
+    if (ritual != null) {
+      setCurrentRitual(ritual);
+    }
+  }
+
   private void setCurrentRitual(Ritual ritual) {
     this.ritualInstance = new RitualInstance(ritual);
     this.refreshRitualCache();
@@ -170,7 +183,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return InteractionResult.CONSUME;
     }
 
-    if (ritualInstance != null && !ritualInstance.is(ModRituals.CRAFTING) && (ritualInstance.getLifetime() > 0 || getBlockState().getValue(PyreBlock.ACTIVE))) {
+    updateState();
+
+    if (stateHolder.is(RitualState.RITUAL) && (stateHolder.is(ProgressState.CRAFTING) || state.getValue(PyreBlock.ACTIVE))) {
       Optional<IFluidHandlerItem> optFluid = FluidUtil.getFluidHandler(inHand);
       if (optFluid.isPresent()) {
         IFluidHandlerItem fluidHandler = optFluid.get();
@@ -181,7 +196,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
             RootsAPI.LOG.info("Stopping ritual on PyreBlockEntity at {} in {} as player {} used an item with a suitable water fluid ({})", pos, level.dimension()
                 .location(), player, inHand);
           }
-          stopRitual(true);
+          stopRitual(false);
           if (!player.isCreative()) {
             fluidHandler.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
             player.setItemInHand(hand, fluidHandler.getContainer());
@@ -195,13 +210,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     // Once the ritual has started it doesn't matter what's happening
     if (inHand.isEmpty() && !player.isCrouching()) {
       // extract
-      ItemStack popped = inventory.pop();
-      if (!popped.isEmpty()) {
-        ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
+      if (!stateHolder.is(InventoryState.EMPTY)) {
+        ItemStack popped = inventory.pop();
+        if (!popped.isEmpty()) {
+          ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
+        }
       }
     } else if (inHand.isEmpty() && player.isCrouching()) {
       // Try to refill
-      if (lastRecipe != null && inventory.isEmpty()) {
+      if (lastRecipe != null && stateHolder.is(InventoryState.EMPTY)) {
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
@@ -217,6 +234,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return InteractionResult.SUCCESS;
     } else {
       // insert
+      if (stateHolder.is(InventoryState.FULL)) {
+        return InteractionResult.PASS;
+      }
       ItemStack result = inventory.insert(inHand);
       // ??? TODO
       // it was result, false
@@ -235,59 +255,62 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public InteractionResult light(Player player) {
     if (getBlockState().hasProperty(PyreBlock.ACTIVE) && getBlockState().getValue(PyreBlock.ACTIVE)) {
       // Already lit
+      // TODO: Validate if it should remain lit
       return InteractionResult.SUCCESS_NO_ITEM_USED;
-    }
-
-    if (cachedRecipe == null) {
-      revalidateRecipe();
     }
     if (level == null) {
       // TODO: handle error
       return InteractionResult.SUCCESS_NO_ITEM_USED;
     }
-    if (cachedRecipe != null && cachedRecipe.value().matches(playerlessCrafting, level)) {
-      Ritual newRitual = cachedRecipe.value().getRitual();
-      setCurrentRitual(newRitual);
 
-      // TODO: Provider better feedback to the player
-      ConditionResult result = cachedRecipe.value().checkConditions(level, player, getPyreBoundingBox(), getBlockPos());
-      if (result.anyFailed()) {
-        result.report(player);
-        // Needs to be a success or it sets things on fire
-        return InteractionResult.FAIL;
-      }
-      UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
-      if (failedGrants.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
-        RootsAPI.LOG.info("Grants failed and recipe has no output");
-        failedGrants.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed unlock {}", o));
-        failedGrants.report();
-        return InteractionResult.FAIL;
-      }
-
-      PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
-      lastRecipe = cachedRecipe;
-      lastPlayer = player; // This is where the grove crafter does it.
-      lastPlayerUuid = null; // TODO: Is it handled elsewhere?
-      storedItems.clear(); // TODO: Is this correct?
-      if (ritualInstance.is(ModRituals.CRAFTING)) {
-        storedItems.addAll(cachedRecipe.value()
-            .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
-      }
-      storedItems.removeIf(ItemStack::isEmpty);
-      // process
-      List<ItemStack> processed = cachedRecipe.value().process(inventory.getItemsAndClear());
-      processed = outputAdjacent(processed);
-      for (ItemStack stack : processed) {
-        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
-      }
-      cachedRecipe = null;
-      startRitual(player);
-      setChanged();
-
-      return InteractionResult.SUCCESS;
+    if (stateHolder.is(RecipeState.NONE)) {
+      revalidateRecipe();
+    }
+    if (!stateHolder.is(RecipeState.MATCHING)) {
+      return InteractionResult.SUCCESS_NO_ITEM_USED;
     }
 
-    return InteractionResult.SUCCESS_NO_ITEM_USED;
+    RecipeHolder<PyreRecipe> recipe = cachedRecipe;
+
+    // TODO: Provider better feedback to the player
+    ConditionResult result = recipe.value().checkConditions(level, player, getPyreBoundingBox(), getBlockPos());
+    if (result.anyFailed()) {
+      result.report(player);
+      // Needs to be a success or it sets things on fire
+      return InteractionResult.FAIL;
+    }
+    UnlockResult failedGrants = recipe.value().checkUnlocks(level, (ServerPlayer) player);
+    if (failedGrants.anyFailed() && !recipe.value().hasOutput(level.registryAccess())) {
+      RootsAPI.LOG.info("Grants failed and recipe has no output");
+      failedGrants.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed unlock {}", o));
+      failedGrants.report();
+      return InteractionResult.FAIL;
+    }
+
+    setCurrentRitual(recipe);
+    recomputeState();
+
+    PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
+    lastRecipe = recipe;
+    lastPlayer = player; // This is where the grove crafter does it.
+    lastPlayerUuid = null; // TODO: Is it handled elsewhere?
+    storedItems.clear(); // TODO: Is this correct?
+    if (stateHolder.is(RitualState.CRAFTING)) {
+      storedItems.addAll(recipe.value()
+          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
+    }
+    storedItems.removeIf(ItemStack::isEmpty);
+    // process
+    List<ItemStack> processed = recipe.value().process(inventory.getItemsAndClear());
+    processed = outputAdjacent(processed);
+    for (ItemStack stack : processed) {
+      ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+    }
+    cachedRecipe = null;
+    startRitual(player);
+    setChanged();
+
+    return InteractionResult.SUCCESS;
   }
 
   public void startRitual(Player player) {
@@ -349,7 +372,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (tag != null) {
       loadAdditional(tag, provider);
       revalidateRecipe();
-      recomputeState();
     }
   }
 
@@ -393,6 +415,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         cachedRecipe = null;
       }
     }
+
+    recomputeState();
 
     if (changed && !getLevel().isClientSide()) {
       setChanged();
@@ -576,7 +600,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public void onLoad() {
     super.onLoad();
     this.revalidateRecipe();
-    this.recomputeState();
   }
 
   public void stopRitual() {
@@ -618,16 +641,16 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    boolean changed = false;
-    if (ritualInstance != null && ritualInstance.getLifetime() > 0) {
+    boolean changed = recomputeState();
+    if (stateHolder.is(ProgressState.CRAFTING)) {
       ritualInstance.tickLifetime();
       changed = true;
       setChanged();
       if (ritualInstance.getLifetime() <= 0) {
-        if ((!inventory.isEmpty() && cachedRecipe != null && getLastPlayer() != null && lastRecipe != null && ritualInstance.getLifetime() <= 0) && (cachedRecipe.equals(lastRecipe) && cachedRecipe.value()
-            .matches(playerlessCrafting, pLevel))) {
-          stopRitual(false);
-          // Start
+        if (stateHolder.is(RecipeState.MATCHING) && !stateHolder.is(InventoryState.EMPTY)
+            && cachedRecipe.equals(lastRecipe) && getLastPlayer() != null) {
+          stopRitual(true);
+          // This is broken if light fails because of conditiosn
           if (!light(getLastPlayer()).consumesAction()) {
             stopRitual(true);
           }
@@ -717,12 +740,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public boolean canClear() {
-    return !inventory.isEmpty();
+    return !stateHolder.is(InventoryState.EMPTY);
   }
 
   @Override
   public boolean shouldShowInsert() {
-    return /*this.inventory.isEmpty() || */getCachedRecipe() == null;
+    return stateHolder.is(RecipeState.NONE);
   }
 
   @Override

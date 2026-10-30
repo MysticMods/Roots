@@ -13,6 +13,7 @@ public final class StateCategories {
       new StateCategory<>(RootsAPI.rl("animation"), AnimationState.NONE);
   public static final StateCategory<LockState> LOCK =
       new StateCategory<>(RootsAPI.rl("lock"), LockState.NONE);
+  public static final StateCategory<RitualState> RITUAL = new StateCategory<>(RootsAPI.rl("ritual"), RitualState.NONE);
 
   private StateCategories() {
   }
