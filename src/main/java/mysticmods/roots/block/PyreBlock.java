@@ -98,6 +98,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
       if (projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !state.getValue(PyreBlock.ACTIVE) && !state.getValue(PyreBlock.WATERLOGGED)) {
         pyre.light(player);
+        pyre.updateState();
       }
     }
   }
@@ -114,6 +115,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
                   .location(), itemAbility, context.getPlayer());
             }
             pyre.stopRitual(false);
+            pyre.updateState();
           } else {
             RootsAPI.LOG.info("Simulated stopping ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
                 .location(), itemAbility, context.getPlayer());
@@ -128,6 +130,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
                   .location(), itemAbility, context.getPlayer());
             }
             pyre.light(context.getPlayer());
+            pyre.updateState();
           } else {
             RootsAPI.LOG.info("Simulated starting ritual at {} in {} as item ability {} was triggered by player {}", context.getClickedPos(), level.dimension()
                 .location(), itemAbility, context.getPlayer());

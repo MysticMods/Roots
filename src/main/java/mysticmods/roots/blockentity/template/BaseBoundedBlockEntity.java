@@ -89,7 +89,7 @@ public abstract class BaseBoundedBlockEntity extends BaseBlockEntity implements 
     }
     return pedestalPositions;
   }
-  
+
   @Override
   public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
     if (getLevel() != null && getLevel().isClientSide()) {
@@ -195,5 +195,4 @@ public abstract class BaseBoundedBlockEntity extends BaseBlockEntity implements 
     }
     return result;
   }
-
 }

@@ -10,6 +10,8 @@ import java.util.List;
 public class RecipeInventory extends ItemStackHandler {
   private boolean empty = false;
   private boolean emptyChecked = false;
+  private boolean full = false;
+  private boolean fullChecked = false;
 
   public RecipeInventory() {
   }
@@ -22,21 +24,41 @@ public class RecipeInventory extends ItemStackHandler {
     super(stacks);
   }
 
+  protected void invalidateCache() {
+    emptyChecked = false;
+    fullChecked = false;
+  }
+
   public boolean isEmpty() {
     if (emptyChecked) {
       return empty;
     }
-    emptyChecked = true;
 
+    empty = true;
     for (int i = 0; i < getSlots(); i++) {
       if (!getStackInSlot(i).isEmpty()) {
         empty = false;
-        return false;
+        break;
       }
     }
+    emptyChecked = true;
+    return empty;
+  }
 
-    empty = true;
-    return true;
+  public boolean isFull() {
+    if (fullChecked) {
+      return full;
+    }
+
+    full = true;
+    for (int i = 0; i < getSlots(); i++) {
+      if (getStackInSlot(i).isEmpty()) {
+        full = false;
+        break;
+      }
+    }
+    fullChecked = true;
+    return full;
   }
 
   public List<ItemStack> getItems() {
@@ -67,8 +89,6 @@ public class RecipeInventory extends ItemStackHandler {
     for (int i = 0; i < getSlots(); i++) {
       setStackInSlot(i, ItemStack.EMPTY);
     }
-    emptyChecked = true;
-    empty = true;
     return result;
   }
 
@@ -76,9 +96,8 @@ public class RecipeInventory extends ItemStackHandler {
     for (int i = getSlots() - 1; i >= 0; i--) {
       ItemStack inSlot = getStackInSlot(i);
       if (!inSlot.isEmpty()) {
+        // setStackInSlot invalidates the cache and fires onContentsChanged
         setStackInSlot(i, ItemStack.EMPTY);
-        onContentsChanged(i);
-        emptyChecked = false;
         return inSlot;
       }
     }
@@ -87,11 +106,13 @@ public class RecipeInventory extends ItemStackHandler {
   }
 
   public ItemStack insert(ItemStack stack) {
-    ItemStack result;
+    if (stack.isEmpty()) {
+      return stack;
+    }
+
     int slot = -1;
     for (int i = 0; i < getSlots(); i++) {
-      ItemStack inSlot = getStackInSlot(i);
-      if (inSlot.isEmpty()) {
+      if (getStackInSlot(i).isEmpty()) {
         slot = i;
         break;
       }
@@ -101,17 +122,10 @@ public class RecipeInventory extends ItemStackHandler {
       return stack;
     }
 
-    ItemStack toInsert = stack.copy();
-    if (stack.getCount() > 1) {
-      toInsert.setCount(1);
-      result = stack.copy();
-      result.shrink(1);
-    } else {
-      result = ItemStack.EMPTY;
-    }
+    ItemStack toInsert = stack.copyWithCount(1);
+    ItemStack result = stack.getCount() > 1 ? stack.copyWithCount(stack.getCount() - 1) : ItemStack.EMPTY;
 
     setStackInSlot(slot, toInsert);
-    onContentsChanged(slot);
     return result;
   }
 
@@ -123,14 +137,13 @@ public class RecipeInventory extends ItemStackHandler {
         result.add(leftover);
       }
     }
-    emptyChecked = false;
     return result;
   }
 
   @Override
   public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
     if (!simulate) {
-      emptyChecked = false;
+      invalidateCache();
     }
     return super.insertItem(slot, stack, simulate);
   }
@@ -138,25 +151,31 @@ public class RecipeInventory extends ItemStackHandler {
   @Override
   public ItemStack extractItem(int slot, int amount, boolean simulate) {
     if (!simulate) {
-      emptyChecked = false;
+      invalidateCache();
     }
     return super.extractItem(slot, amount, simulate);
   }
 
   @Override
   public void setStackInSlot(int slot, ItemStack stack) {
+    invalidateCache();
     super.setStackInSlot(slot, stack);
-    emptyChecked = false;
   }
 
   @Override
   public void setSize(int size) {
+    invalidateCache();
     super.setSize(size);
-    emptyChecked = false;
+  }
+
+  @Override
+  protected void onLoad() {
+    invalidateCache();
+    super.onLoad();
   }
 
   @Override
   protected void onContentsChanged(int slot) {
-    this.emptyChecked = false;
+    invalidateCache();
   }
 }

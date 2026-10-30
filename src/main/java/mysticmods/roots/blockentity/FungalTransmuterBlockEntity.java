@@ -101,6 +101,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       return InteractionResult.CONSUME;
     }
 
+/*    if (stateHolder.anyOf(StateHolder.INVENTORY_LOCKED, StateHolder.INVENTORY_FULL, StateHolder.INVENTORY_PARTIAL)) {*/
     if (isCrafting()) {
       return InteractionResult.SUCCESS_NO_ITEM_USED;
     }

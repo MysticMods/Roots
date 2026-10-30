@@ -11,8 +11,10 @@ import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.state.*;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.client.particle.world.block.PyreLeafParticle;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
 import mysticmods.roots.inventory.fake.PyreContainer;
@@ -68,6 +70,16 @@ import java.util.function.Function;
 import java.util.function.IntSupplier;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider, BindableBlockEntity, FakeMenuBlockEntity, ClearableBlockEntity {
+  private static final StateSchema<PyreBlockEntity> STATE_SCHEMA = StateSchema.<PyreBlockEntity>builder()
+      .add(StateCategories.INVENTORY, be -> InventoryState.of(be.inventory))
+      .add(StateCategories.LOCK, be -> LockState.NONE)
+      .add(StateCategories.PROGRESS, be -> be.getLifetime() > 0 ? ProgressState.CRAFTING : ProgressState.NONE)
+      .add(StateCategories.RECIPE, be -> RecipeState.of(be.cachedRecipe != null))
+      .add(StateCategories.ANIMATION, be -> be.getLifetime() > 0 ? AnimationState.CRAFTING : AnimationState.NONE)
+      .build();
+
+  private final StateHolder<PyreBlockEntity> stateHolder = STATE_SCHEMA.createHolder();
+
   // Static bounding box (unrelated to recipe)
   private static BoundingBox PYRE_BOUNDS;
 
@@ -120,6 +132,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     super(ModBlockEntities.PYRE.get(), pWorldPosition, pBlockState);
   }
 
+  public StateHolder<PyreBlockEntity> getStateHolder() {
+    return stateHolder;
+  }
+
+  @Override
+  protected boolean recomputeState() {
+    return stateHolder.recompute(this);
+  }
+
   private void clearCurrentRitual () {
     this.ritualInstance = null;
     this.refreshRitualCache();
@@ -165,6 +186,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
             fluidHandler.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
             player.setItemInHand(hand, fluidHandler.getContainer());
           }
+          updateState();
           return InteractionResult.SUCCESS;
         }
       }
@@ -188,6 +210,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         if (result.indicateItemUse() && inHand.isDamageableItem() && !player.isCreative()) {
           inHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
+        updateState();
         return result;
       }
 
@@ -205,6 +228,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
 
+    updateState();
     return InteractionResult.SUCCESS;
   }
 
@@ -259,7 +283,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       cachedRecipe = null;
       startRitual(player);
       setChanged();
-      updateViaState();
 
       return InteractionResult.SUCCESS;
     }
@@ -326,6 +349,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (tag != null) {
       loadAdditional(tag, provider);
       revalidateRecipe();
+      recomputeState();
     }
   }
 
@@ -440,6 +464,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           .parse(provider.createSerializationContext(NbtOps.INSTANCE), pTag.get("ritual_instance"))
           .resultOrPartial(Util.prefix("Failed to load ritual instance: ", RootsAPI.LOG::warn))
           .ifPresent(this::setCurrentRitual);
+    } else {
+      clearCurrentRitual();
     }
 
     storedItems.clear();
@@ -550,6 +576,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public void onLoad() {
     super.onLoad();
     this.revalidateRecipe();
+    this.recomputeState();
   }
 
   public void stopRitual() {
@@ -635,7 +662,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       changed = true;
     }
 
-    if (changed) {
+    if (recomputeState() || changed) {
       updateViaState();
     }
   }

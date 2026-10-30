@@ -31,6 +31,25 @@ public abstract class BaseBlockEntity extends BlockEntity {
     }
   }
 
+  protected boolean recomputeState() {
+    return false;
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public void setBlockState(BlockState blockState) {
+    super.setBlockState(blockState);
+    if (level != null && level.isClientSide()) {
+      recomputeState();
+    }
+  }
+
+  public void updateState() {
+    if (level != null && !level.isClientSide() && recomputeState()) {
+      updateViaState();
+    }
+  }
+
   public void updateViaState() {
     setChanged();
     ClientboundBlockEntityDataPacket packet = getUpdatePacket();

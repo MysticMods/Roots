@@ -73,7 +73,9 @@ public class FireStarterItem extends Item {
           if (doPyre) {
             BlockEntity be = level.getBlockEntity(pyrePos);
             if (be instanceof PyreBlockEntity pbe) {
-              if (pbe.light(player) != InteractionResult.SUCCESS_NO_ITEM_USED) {
+              InteractionResult result = pbe.light(player);
+              pbe.updateState();
+              if (result != InteractionResult.SUCCESS_NO_ITEM_USED) {
                 level.playSound(player, pyrePos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
                     .nextFloat() * 0.4F + 0.8F);
                 used = true;
