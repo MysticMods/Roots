@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
+import it.unimi.dsi.fastutil.ints.IntList;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
@@ -17,25 +18,29 @@ import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 
-public record PowerAccumulationRequest (TagKey<Grove> tagForPower, int totalRequired, int rate, @Nullable ValueForRank rankedRate){
+public record PowerAccumulationRequest(TagKey<Grove> tagForPower, int totalRequired, int flatRate,
+                                       @Nullable ValueForRank rankedRate) {
   public static final MapCodec<PowerAccumulationRequest> MAP_CODEC = RecordCodecBuilder.mapCodec(instance ->
       instance.group(TagKey.codec(RootsRegistries.Keys.GROVES).fieldOf("tag")
                   .forGetter(o -> o.tagForPower), Codec.INT.fieldOf("totalRequired")
                   .forGetter(o -> o.totalRequired),
-              Codec.either(Codec.INT, ValueForRank.CODEC).fieldOf("rate")
-                  .forGetter(o -> o.rankedRate == null ? Either.left(o.rate) : Either.right(o.rankedRate)))
+              Codec.either(Codec.INT, ValueForRank.CODEC).fieldOf("flatRate")
+                  .forGetter(o -> o.rankedRate == null ? Either.left(o.flatRate) : Either.right(o.rankedRate)))
           .apply(instance, PowerAccumulationRequest::new));
   public static final Codec<PowerAccumulationRequest> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, PowerAccumulationRequest> STREAM_CODEC = StreamCodec.composite(
       ExtraStreamCodecs.GROVE_TAG_STREAM_CODEC, o -> o.tagForPower,
       ByteBufCodecs.VAR_INT, o -> o.totalRequired,
-      ByteBufCodecs.either(ByteBufCodecs.VAR_INT, ValueForRank.STREAM_CODEC), o -> o.rankedRate != null ? Either.right(o.rankedRate) : Either.left(o.rate),
+      ByteBufCodecs.either(ByteBufCodecs.VAR_INT, ValueForRank.STREAM_CODEC), o -> o.rankedRate != null ? Either.right(o.rankedRate) : Either.left(o.flatRate),
       PowerAccumulationRequest::new
   );
-  public static final Codec<List<PowerAccumulationRequest>> LIST_CODEC = CODEC.listOf();
-  public static final StreamCodec<RegistryFriendlyByteBuf, List<PowerAccumulationRequest>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+
+  public PowerAccumulationRequest {
+    if (rankedRate != null) {
+      flatRate = -1;
+    }
+  }
 
   public PowerAccumulationRequest(PowerRequest request) {
     this(request.tag(), request.value(), request.value());
@@ -55,10 +60,10 @@ public record PowerAccumulationRequest (TagKey<Grove> tagForPower, int totalRequ
       return rankedRate.value(grove.getRank());
     }
 
-    return rate;
+    return flatRate;
   }
 
-  public PowerRequest request(IGroveInstance grove) {
+  public PowerRequest asRequest(IGroveInstance grove) {
     return new PowerRequest(tagForPower, Math.min(rate(grove), totalRequired));
   }
 
@@ -72,8 +77,8 @@ public record PowerAccumulationRequest (TagKey<Grove> tagForPower, int totalRequ
       this(values.get(0), values.get(1), values.get(2), values.get(3), values.get(4));
     }
 
-    public List<Integer> asList() {
-      return List.of(unranked, first, second, third, fourth);
+    public IntList asList() {
+      return IntList.of(unranked, first, second, third, fourth);
     }
 
     public int value(Rank rank) {

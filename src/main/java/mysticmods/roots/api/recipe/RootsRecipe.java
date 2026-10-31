@@ -5,6 +5,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.power.consumer.PowerAccumulationRequest;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
@@ -66,9 +67,9 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public List<PowerAccumulationRequest> getPowerRequirements() {
+  public PowerCollection getPowerRequirements() {
     if (this.data.powerRequirements == null) {
-      return Collections.emptyList();
+      return PowerCollection.EMPTY;
     }
     return this.data.powerRequirements;
   }

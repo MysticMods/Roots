@@ -73,7 +73,7 @@ public class BoltRenderer {
         for (Iterator<Map.Entry<Object, BoltOwnerData>> iter = boltOwners.entrySet().iterator(); iter.hasNext(); ) {
           Map.Entry<Object, BoltOwnerData> entry = iter.next();
           BoltOwnerData data = entry.getValue();
-          // tick our bolts based on the refresh rate, removing if they're now finished
+          // tick our bolts based on the refresh flatRate, removing if they're now finished
           if (refresh) {
             tickAndRemove(data, timestamp);
           }

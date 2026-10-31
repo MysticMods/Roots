@@ -5,6 +5,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.power.consumer.PowerAccumulationRequest;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
@@ -52,8 +53,8 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return Collections.emptyList();
   }
 
-  default List<PowerAccumulationRequest> getPowerRequirements() {
-    return Collections.emptyList();
+  default PowerCollection getPowerRequirements() {
+    return PowerCollection.EMPTY;
   }
 
   default List<ChanceOutput> getCachedOutputs() {

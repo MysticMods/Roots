@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.grove.power.consumer.PowerAccumulationRequest;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
@@ -29,7 +30,7 @@ public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory,
     super(data);
   }
 
-  public List<PowerAccumulationRequest> getPowerRequirements() {
+  public PowerCollection getPowerRequirements() {
     return data.powerRequirements;
   }
 
