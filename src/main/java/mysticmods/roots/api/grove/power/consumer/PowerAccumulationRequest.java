@@ -14,13 +14,12 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
-public class PowerAccumulationRequest {
+public record PowerAccumulationRequest (TagKey<Grove> tagForPower, int totalRequired, int rate, @Nullable ValueForRank rankedRate){
   public static final MapCodec<PowerAccumulationRequest> MAP_CODEC = RecordCodecBuilder.mapCodec(instance ->
       instance.group(TagKey.codec(RootsRegistries.Keys.GROVES).fieldOf("tag")
                   .forGetter(o -> o.tagForPower), Codec.INT.fieldOf("totalRequired")
@@ -38,48 +37,17 @@ public class PowerAccumulationRequest {
   public static final Codec<List<PowerAccumulationRequest>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, List<PowerAccumulationRequest>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
-  private final TagKey<Grove> tagForPower;
-  private final int totalRequired;
-  private final int rate;
-  @Nullable
-  private final ValueForRank rankedRate;
-  private int acquired;
-
   public PowerAccumulationRequest(PowerRequest request) {
     this(request.tag(), request.value(), request.value());
   }
 
-  public PowerAccumulationRequest(TagKey<Grove> tagForPower, int totalRequired, @NotNull ValueForRank rankedRate) {
-    this.tagForPower = tagForPower;
-    this.totalRequired = totalRequired;
-    this.rate = 0;
-    this.rankedRate = rankedRate;
-  }
-
   public PowerAccumulationRequest(TagKey<Grove> tagForPower, int totalRequired, int rate) {
-    this.rate = rate;
-    this.totalRequired = totalRequired;
-    this.tagForPower = tagForPower;
-    this.rankedRate = null;
-  }
-
-  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  private PowerAccumulationRequest(TagKey<Grove> groveTagKey, int total, int rate, Optional<ValueForRank> valueForRank) {
-    this.rate = rate;
-    this.totalRequired = total;
-    this.tagForPower = groveTagKey;
-    this.rankedRate = valueForRank.orElse(null);
+    this(tagForPower, totalRequired, rate, null);
   }
 
   public PowerAccumulationRequest(TagKey<Grove> groveTagKey, int total, Either<Integer, ValueForRank> integerValueForRankEither) {
-    this.tagForPower = groveTagKey;
-    this.totalRequired = total;
-    this.rate = integerValueForRankEither.left().orElse(-1);
-    this.rankedRate = integerValueForRankEither.right().orElse(null);
-  }
-
-  public boolean fulfilled() {
-    return acquired >= totalRequired;
+    this(groveTagKey, total, integerValueForRankEither.left().orElse(-1), integerValueForRankEither.right()
+        .orElse(null));
   }
 
   public int rate(IGroveInstance grove) {
@@ -88,12 +56,6 @@ public class PowerAccumulationRequest {
     }
 
     return rate;
-  }
-
-  public void supply(IGroveInstance grove, int amount) {
-    if (grove.is(this.tagForPower)) {
-      this.acquired += amount;
-    }
   }
 
   public PowerRequest request(IGroveInstance grove) {
@@ -123,15 +85,5 @@ public class PowerAccumulationRequest {
         case FOURTH -> fourth;
       };
     }
-  }
-
-  public static boolean isFulfilled(List<PowerAccumulationRequest> requests) {
-    for (PowerAccumulationRequest request : requests) {
-      if (!request.fulfilled()) {
-        return false;
-      }
-    }
-
-    return true;
   }
 }
