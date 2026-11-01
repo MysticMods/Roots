@@ -2,21 +2,23 @@ package mysticmods.roots.api.grove.power.consumer;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
+import mysticmods.roots.api.grove.Grove;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-public record PowerCollection(ImmutableList<PowerAccumulationRequest> list,
-                              int hash) implements Iterable<PowerAccumulationRequest> {
+public record PowerCollection(ImmutableList<PowerRequest> list,
+                              int hash) implements Iterable<PowerRequest> {
   public static final PowerCollection EMPTY = new PowerCollection();
-  public static final Codec<PowerCollection> LIST_CODEC = PowerAccumulationRequest.CODEC.listOf()
+  public static final Codec<PowerCollection> LIST_CODEC = PowerRequest.CODEC.listOf()
       .xmap(ImmutableList::copyOf, Function.identity()).xmap(PowerCollection::new, PowerCollection::list);
-  public static final StreamCodec<RegistryFriendlyByteBuf, PowerCollection> LIST_STREAM_CODEC = PowerAccumulationRequest.STREAM_CODEC.apply(ByteBufCodecs.list())
+  public static final StreamCodec<RegistryFriendlyByteBuf, PowerCollection> LIST_STREAM_CODEC = PowerRequest.STREAM_CODEC.apply(ByteBufCodecs.list())
       .map(ImmutableList::copyOf, Function.identity())
       .map(PowerCollection::new, PowerCollection::list);
 
@@ -29,7 +31,15 @@ public record PowerCollection(ImmutableList<PowerAccumulationRequest> list,
     this(List.of());
   }
 
-  public PowerCollection(List<PowerAccumulationRequest> list) {
+  public PowerCollection (TagKey<Grove> tag, int value) {
+    this(new PowerRequest(tag, value));
+  }
+
+  public PowerCollection (PowerRequest request) {
+    this(ImmutableList.of(request));
+  }
+
+  public PowerCollection(List<PowerRequest> list) {
     this(ImmutableList.copyOf(list), 0);
   }
 
@@ -55,7 +65,11 @@ public record PowerCollection(ImmutableList<PowerAccumulationRequest> list,
   }
 
   @Override
-  public @NotNull Iterator<PowerAccumulationRequest> iterator() {
+  public @NotNull Iterator<PowerRequest> iterator() {
     return list.iterator();
+  }
+
+  public PowerTicket create (long tick) {
+    return new PowerTicket(this, tick);
   }
 }

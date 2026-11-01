@@ -1,6 +1,5 @@
 package mysticmods.roots.blockentity;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import mysticmods.roots.action.TradeFairyHutAction;
@@ -8,9 +7,9 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.grove.power.PowerTicket;
 import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
-import mysticmods.roots.api.grove.power.consumer.PowerRequest;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
+import mysticmods.roots.api.grove.power.consumer.PowerTicket;
 import mysticmods.roots.api.reference.Constants;
 import mysticmods.roots.block.FairyHutBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
@@ -52,9 +51,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, Merchant {
-  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(
-      ImmutableList.of(new PowerRequest(RootsTags.Groves.UNITY, 15))
-  );
+  private static final PowerCollection TICKET_DEFINITION = new PowerCollection(RootsTags.Groves.UNITY, 15);
 
   private boolean wasPoweredLastTick = false;
   private PowerTicket ticket;
@@ -138,7 +135,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    getTicketForTick(pLevel.getGameTime());
+    maybeRebuildTicket(pLevel);
 
     if (!pState.getValue(FairyHutBlock.ACTIVE) && wasPoweredLastTick) {
       pLevel.setBlock(pPos, pState.setValue(FairyHutBlock.ACTIVE, true), 3);
@@ -207,36 +204,32 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     return false;
   }
 
+
   @Override
-  public PowerTicket getTicketForTick(long tick) {
-    if (ticket == null) {
-      ticket = TICKET_DEFINITION.create(tick);
-      return ticket;
-    }
-
-    if (ticket.isValid(tick)) {
-      return ticket;
-    }
-
-    if (ticket.isFulfilled()) {
-      if (!this.wasPoweredLastTick) {
-        this.wasPoweredLastTick = true;
-        setChanged();
-        updateViaState();
-      }
-    } else if (this.wasPoweredLastTick) {
-      this.wasPoweredLastTick = false;
-      setChanged();
-      updateViaState();
-    }
-
-    ticket = TICKET_DEFINITION.create(tick);
+  public PowerTicket getTicket() {
     return ticket;
+  }
+
+  @Override
+  public PowerTicket createTicket(long tick) {
+    return TICKET_DEFINITION.create(tick);
+  }
+
+  @Override
+  public void setPowerTicket(PowerTicket ticket) {
+    this.ticket = ticket;
   }
 
   @Override
   public boolean wasPoweredLastTick() {
     return wasPoweredLastTick;
+  }
+
+  @Override
+  public void finalizeTicket(PowerTicket ticket) {
+    this.wasPoweredLastTick = ticket.wasFulfilled();
+    setChanged();
+    updateViaState();
   }
 
   @Override

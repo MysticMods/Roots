@@ -1,14 +1,13 @@
 package mysticmods.roots.blockentity;
 
-import com.google.common.collect.ImmutableList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.power.PowerTicket;
 import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
-import mysticmods.roots.api.grove.power.consumer.PowerRequest;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
+import mysticmods.roots.api.grove.power.consumer.PowerTicket;
 import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
@@ -39,7 +38,7 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
   private static final int POWER_REQUIRED = 35;
   private static final TagKey<Grove> GROVE_REQUIRED = RootsTags.Groves.ANY;
 
-  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new PowerRequest(RootsTags.Groves.ANY, 35)));
+  private static final PowerCollection TICKET_DEFINITION = new PowerCollection(RootsTags.Groves.ANY, 35);
 
   private PowerTicket ticket;
   private boolean poweredLastTick = false;
@@ -96,7 +95,7 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    getTicketForTick(pLevel.getGameTime());
+    maybeRebuildTicket(pLevel);
 
     if (wasPoweredLastTick()) {
       Item item = TagUtil.getRandomElement(pLevel, RootsTags.Items.GROWTH_AMPLIFIER_GRASSES);
@@ -132,35 +131,30 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
   }
 
   @Override
-  public PowerTicket getTicketForTick(long tick) {
-    if (ticket == null) {
-      ticket = TICKET_DEFINITION.create(tick);
-      return ticket;
-    }
-
-    if (ticket.isValid(tick)) {
-      return ticket;
-    }
-
-    if (ticket.isFulfilled()) {
-      if (!this.poweredLastTick) {
-        this.poweredLastTick = true;
-        setChanged();
-        updateViaState();
-      }
-    } else if (this.poweredLastTick) {
-      this.poweredLastTick = false;
-      setChanged();
-      updateViaState();
-    }
-
-    ticket = TICKET_DEFINITION.create(tick);
+  public PowerTicket getTicket() {
     return ticket;
+  }
+
+  @Override
+  public PowerTicket createTicket(long tick) {
+    return TICKET_DEFINITION.create(tick);
+  }
+
+  @Override
+  public void setPowerTicket(PowerTicket ticket) {
+    this.ticket = ticket;
   }
 
   @Override
   public boolean wasPoweredLastTick() {
     return poweredLastTick;
+  }
+
+  @Override
+  public void finalizeTicket(PowerTicket ticket) {
+    this.poweredLastTick = ticket.wasFulfilled();
+    setChanged();
+    updateViaState();
   }
 
   @Override

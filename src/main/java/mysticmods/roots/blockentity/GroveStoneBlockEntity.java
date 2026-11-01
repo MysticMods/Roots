@@ -9,7 +9,7 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.Symmetry;
-import mysticmods.roots.api.grove.power.PowerTicket;
+import mysticmods.roots.api.grove.power.consumer.PowerTicket;
 import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
 import mysticmods.roots.api.grove.power.distributor.IGrovePowerDistributor;
 import mysticmods.roots.api.grove.power.generator.BlockGenerationInfo;
@@ -405,7 +405,6 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
           PowerTicket ticket = consumer.getTicketForTick(tick);
           if (ticket != null && consumer.canBePowered()) {
             available = ticket.supplyTick(this, available);
-            ticket.finalizeTick(consumer, generatedThisTick, available);
           }
         }
       }

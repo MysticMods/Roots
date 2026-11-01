@@ -11,9 +11,8 @@ import mysticmods.roots.api.condition.ILevelConditionType;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.SimpleGroveValue;
-import mysticmods.roots.api.grove.power.consumer.PowerAccumulationRequest;
-import mysticmods.roots.api.grove.power.consumer.PowerCollection;
 import mysticmods.roots.api.grove.power.consumer.PowerRequest;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
@@ -141,9 +140,9 @@ public class BaseRecipeData {
     private final List<ChanceOutput> chanceOutputs;
     private final List<Unlock<?>> unlocks;
     private int priority;
-    private final List<PowerAccumulationRequest> powerRequirements;
+    private final List<PowerRequest> powerRequirements;
 
-    protected Builder(List<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, List<PowerAccumulationRequest> powerRequirements, int priority) {
+    protected Builder(List<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, List<PowerRequest> powerRequirements, int priority) {
       this.ingredients = ingredients;
       this.levelConditions = levelConditions;
       this.playerConditions = playerConditions;
@@ -176,43 +175,42 @@ public class BaseRecipeData {
     }
 
     public Builder requires(SimpleGroveValue number) {
-      this.powerRequirements.add(new PowerAccumulationRequest(new PowerRequest(number.grove()
-          .getGroveTag(), number.value())));
+      this.powerRequirements.add(new PowerRequest(number.grove().getGroveTag(), number.value()));
       return this;
     }
 
     public Builder requires(Grove grove, int value) {
-      this.powerRequirements.add(new PowerAccumulationRequest(new PowerRequest(grove.getGroveTag(), value)));
+      this.powerRequirements.add(new PowerRequest(grove.getGroveTag(), value));
       return this;
     }
 
     public Builder requires(TagKey<Grove> grove, int value, int rate) {
-      this.powerRequirements.add(new PowerAccumulationRequest(grove, value, rate));
+      this.powerRequirements.add(new PowerRequest(grove, value, rate));
       return this;
     }
 
     public Builder requires(Holder<Grove> grove, int value, int rate) {
-      this.powerRequirements.add(new PowerAccumulationRequest(grove.value().getGroveTag(), value, rate));
+      this.powerRequirements.add(new PowerRequest(grove.value().getGroveTag(), value, rate));
       return this;
     }
 
     public Builder requires(Holder<Grove> grove, int value) {
-      this.powerRequirements.add(new PowerAccumulationRequest(grove.value().getGroveTag(), value, value));
+      this.powerRequirements.add(new PowerRequest(grove.value().getGroveTag(), value, value));
       return this;
     }
 
     public Builder requires(Grove grove, int value, int rate) {
-      this.powerRequirements.add(new PowerAccumulationRequest(grove.getGroveTag(), value, rate));
+      this.powerRequirements.add(new PowerRequest(grove.getGroveTag(), value, rate));
       return this;
     }
 
     public Builder requires(TagKey<Grove> groveTag, int value) {
-      this.powerRequirements.add(new PowerAccumulationRequest(new PowerRequest(groveTag, value)));
+      this.powerRequirements.add(new PowerRequest(groveTag, value));
       return this;
     }
 
     public Builder requires(PowerRequest request) {
-      this.powerRequirements.add(new PowerAccumulationRequest(request));
+      this.powerRequirements.add(request);
       return this;
     }
 

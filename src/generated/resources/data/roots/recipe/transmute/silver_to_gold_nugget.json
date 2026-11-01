@@ -13,7 +13,7 @@
       {
         "flatRate": 300,
         "tag": "roots:fungal",
-        "totalRequired": 300
+        "total": 300
       }
     ],
     "priority": 0,

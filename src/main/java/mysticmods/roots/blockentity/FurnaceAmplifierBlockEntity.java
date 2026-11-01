@@ -1,14 +1,13 @@
 package mysticmods.roots.blockentity;
 
-import com.google.common.collect.ImmutableList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.power.PowerTicket;
 import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
-import mysticmods.roots.api.grove.power.consumer.PowerRequest;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
+import mysticmods.roots.api.grove.power.consumer.PowerTicket;
 import mysticmods.roots.block.FurnaceAmplifierBlock;
 import mysticmods.roots.blockentity.template.BaseBoundedBlockEntity;
 import mysticmods.roots.init.ModAttachments;
@@ -34,7 +33,7 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
   private static final int POWER_REQUIRED = 35;
   private static final TagKey<Grove> GROVE_REQUIRED = RootsTags.Groves.ANY;
 
-  private static final PowerTicket.TicketDefinition TICKET_DEFINITION = new PowerTicket.TicketDefinition(ImmutableList.of(new PowerRequest(RootsTags.Groves.ANY, 35)));
+  private static final PowerCollection TICKET_DEFINITION = new PowerCollection(RootsTags.Groves.ANY, 35);
 
   private PowerTicket ticket;
   private boolean poweredLastTick = false;
@@ -163,34 +162,32 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
   }
 
   @Override
+  public void finalizeTicket(PowerTicket ticket) {
+    this.poweredLastTick = ticket.wasFulfilled();
+    setChanged();
+    updateViaState();
+  }
+
+  @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (canBePowered() && wasPoweredLastTick()) {
       // Do some particles, Jan
     }
   }
 
-  @Nullable
   @Override
-  public PowerTicket getTicketForTick(long tick) {
-    if (!canBePowered) {
-      return null;
-    }
-
-    if (ticket == null) {
-      ticket = TICKET_DEFINITION.create(tick);
-      return ticket;
-    }
-
-    if (ticket.isValid(tick)) {
-      return ticket;
-    }
-
-    this.poweredLastTick = ticket.isFulfilled();
-    setChanged();
-    updateViaState();
-
-    ticket = TICKET_DEFINITION.create(tick);
+  public PowerTicket getTicket() {
     return ticket;
+  }
+
+  @Override
+  public PowerTicket createTicket(long tick) {
+    return TICKET_DEFINITION.create(tick);
+  }
+
+  @Override
+  public void setPowerTicket(PowerTicket ticket) {
+    this.ticket = ticket;
   }
 
   @Override

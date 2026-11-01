@@ -3,9 +3,7 @@ package mysticmods.roots.recipe.transmutation;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.grove.power.consumer.PowerAccumulationRequest;
 import mysticmods.roots.api.grove.power.consumer.PowerCollection;
-import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.reference.Identifiers;
@@ -16,8 +14,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-
-import java.util.List;
 
 public class TransmutationRecipe extends RootsTileRecipe<TransmutationInventory, FungalTransmuterBlockEntity, TransmutationCrafting> {
   public static final MapCodec<TransmutationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(

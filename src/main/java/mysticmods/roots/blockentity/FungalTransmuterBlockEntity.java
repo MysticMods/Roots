@@ -1,17 +1,19 @@
 package mysticmods.roots.blockentity;
 
-import com.google.common.collect.ImmutableList;
 import mysticmods.roots.action.CraftItemAction;
 import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.*;
-import mysticmods.roots.api.grove.power.PowerTicket;
 import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
+import mysticmods.roots.api.grove.power.consumer.PowerRecord;
+import mysticmods.roots.api.grove.power.consumer.PowerTicket;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
+import mysticmods.roots.api.state.*;
 import mysticmods.roots.block.FungalTransmuterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModActions;
@@ -23,11 +25,13 @@ import mysticmods.roots.recipe.transmutation.TransmutationCrafting;
 import mysticmods.roots.recipe.transmutation.TransmutationInventory;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import mysticmods.roots.util.ItemUtil;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.Connection;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -56,6 +60,46 @@ import java.util.List;
 import java.util.UUID;
 
 public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, InventoryBlockEntity, RefillProvider, ClearableBlockEntity, FakeMenuBlockEntity {
+  private static final StateSchema<FungalTransmuterBlockEntity> STATE_SCHEMA = StateSchema.<FungalTransmuterBlockEntity>builder()
+      .add(StateCategories.INVENTORY, be -> InventoryState.of(be.inventory))
+      .add(StateCategories.RECIPE, be -> {
+        if (be.getCurrentRecipe() != null || be.getCachedRecipe() != null) {
+          return RecipeState.MATCHING;
+        }
+
+        return RecipeState.NONE;
+      })
+      .add(StateCategories.LOCK, be -> {
+        if (be.getCurrentRecipe() != null && (be.isCrafting() || be.isConsuming())) {
+          return LockState.LOCKED;
+        }
+
+        return LockState.NONE;
+      })
+      .add(StateCategories.PROGRESS, be -> {
+        if (be.getCurrentRecipe() != null) {
+          if (be.powerRequirementsMet()) {
+            return ProgressState.CRAFTING;
+          } else {
+            return ProgressState.CONSUMING_POWER;
+          }
+        }
+
+        return ProgressState.NONE;
+      })
+      .add(StateCategories.ANIMATION, be -> {
+        if (be.isCrafting()) {
+          return AnimationState.CRAFTING;
+        }
+
+        if (be.getCurrentRecipe() != null && !be.isCrafting()) {
+          return AnimationState.CONSUMING_POWER;
+        }
+
+        return AnimationState.NONE;
+      }).build();
+  private final StateHolder<FungalTransmuterBlockEntity> stateHolder = STATE_SCHEMA.createHolder();
+
   private final TransmutationInventory inventory = new TransmutationInventory() {
     @Override
     protected void onContentsChanged(int slot) {
@@ -68,23 +112,26 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   };
 
   private final TransmutationCrafting playerlessCrafting = new TransmutationCrafting(inventory, this, null);
-  private final List<ItemStack> storedItems = new ArrayList<>();
-  private final List<ItemStack> animatedItems = new ArrayList<>();
-  private PowerTicket ticket = null;
+  private final List<ItemStack> storedOutputs = new ArrayList<>();
+  private final List<ItemStack> storedInputs = new ArrayList<>();
+
   private RecipeHolder<TransmutationRecipe> lastRecipe = null;
   private RecipeHolder<TransmutationRecipe> cachedRecipe = null;
   private RecipeHolder<TransmutationRecipe> currentRecipe = null;
+  private int ticksConsumingPower = -1;
   private int lifetime = -1;
+
+  private PowerTicket ticket = null;
+  private PowerRecord record = null;
 
   private ResourceLocation cachedRecipeId = null;
   private ResourceLocation lastRecipeId = null;
   private ResourceLocation currentRecipeId = null;
 
-  private boolean poweredLastTick = false;
+  private long lastRevalidationTick = -1;
   private boolean revalidatedRecipes = false;
   private Player lastPlayer;
   private UUID lastUuid;
-  private int storedPower = -1;
 
   public float dissolveProgress = 0f;
   public float oDissolveProgress = 0f;
@@ -95,14 +142,21 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     super(ModBlockEntities.FUNGAL_TRANSMUTER.get(), pWorldPosition, pBlockState);
   }
 
+  private void emergencyEject() {
+
+  }
+
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack stack) {
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
 
-/*    if (stateHolder.anyOf(StateHolder.INVENTORY_LOCKED, StateHolder.INVENTORY_FULL, StateHolder.INVENTORY_PARTIAL)) {*/
-    if (isCrafting()) {
+    if (stateHolder.is(LockState.LOCKED)) {
+      if (!stateHolder.is(ProgressState.CONSUMING_POWER) && player.isShiftKeyDown()) {
+        // try to unlock
+        emergencyEject();
+      }
       return InteractionResult.SUCCESS_NO_ITEM_USED;
     }
 
@@ -119,7 +173,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       }
     } else if (stack.is(RootsTags.Items.FUNGAL_TRANSMUTER_ACTIVATION)) {
       if (!state.getValue(FungalTransmuterBlock.ACTIVE)) {
-        InteractionResult result = startCrafting(player);
+        InteractionResult result = startConsuming(player);
         if (result.indicateItemUse() && stack.isDamageableItem() && !player.isCreative()) {
           stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
@@ -141,22 +195,14 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     return InteractionResult.SUCCESS;
   }
 
-  public InteractionResult startCrafting(Player player) {
-    if (currentRecipe != null) {
-      // Currently crafting something
+  public InteractionResult startConsuming(Player player) {
+    if (stateHolder.anyOf(ProgressState.CONSUMING_POWER, ProgressState.CRAFTING)) {
       return InteractionResult.FAIL;
     }
     if (cachedRecipe == null || !cachedRecipe.value().matches(playerlessCrafting, level)) {
       revalidateRecipe();
     }
     if (cachedRecipe != null) {
-/*      if (cachedRecipe.value().getPower() > storedPower) {
-        RootsAPI.LOG.info("Not enough power to craft: {} < {}", storedPower, cachedRecipe.value().getPower());
-        player.displayClientMessage(Component.translatable("roots.transmutation.not_enough_power", storedPower, cachedRecipe.value()
-            .getPower()), true);
-        return InteractionResult.FAIL;
-      }
-      storedPower -= cachedRecipe.value().getPower();*/
       ConditionResult result = cachedRecipe.value()
           .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), getBlockPos());
       if (result.anyFailed()) {
@@ -171,30 +217,49 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
         return InteractionResult.FAIL;
       }
 
-      TransmutationCrafting playerCrafting = new TransmutationCrafting(inventory, this, player);
+      // Any failures here
+
+      // TODO: Defer actual crafting until a later point
+      // and trigger after power has been properly consumed.
+      // Lock the inventory temporarily.
       lastPlayer = player;
       lastUuid = null;
-      lastRecipe = cachedRecipe;
       currentRecipe = cachedRecipe;
-      storedItems.clear();
-
-      storedItems.addAll(lastRecipe.value()
-          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
-      storedItems.removeIf(ItemStack::isEmpty);
-
-      animatedItems.clear();
-      List<ItemStack> items = inventory.getItemsAndClear();
-      items.forEach(o -> animatedItems.add(o.copy()));
-
-      List<ItemStack> processed = lastRecipe.value().process(items);
-      processed = outputAdjacent(processed);
-      for (ItemStack stack : processed) {
-        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
-      }
-      cachedRecipe = null;
-      setChanged();
-      updateViaState();
+      lifetime = -1;
     }
+
+    return InteractionResult.SUCCESS;
+  }
+
+  public InteractionResult startCrafting(Player player) {
+    if (getCurrentRecipe() == null) {
+      throw new IllegalStateException("Tried to start crafting when the recipe was invalid!");
+    }
+
+    if (!powerRequirementsMet()) {
+      throw new IllegalStateException("Tried to start crafting when the power requirements weren't met!");
+    }
+
+    TransmutationCrafting playerCrafting = new TransmutationCrafting(inventory, this, player);
+    storedOutputs.clear();
+    storedOutputs.addAll(getCurrentRecipe().value()
+        .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
+    storedOutputs.removeIf(ItemStack::isEmpty);
+    List<ItemStack> items = inventory.getItemsAndClear();
+    items.forEach(o -> storedInputs.add(o.copy()));
+
+    List<ItemStack> processed = getCurrentRecipe().value().process(items);
+    processed = outputAdjacent(processed);
+    for (ItemStack stack : processed) {
+      ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+    }
+    lastRecipe = currentRecipe;
+    currentRecipe = null;
+    cachedRecipe = null;
+    lifetime = 100;
+
+    setChanged();
+    updateViaState();
     return InteractionResult.SUCCESS;
   }
 
@@ -227,6 +292,13 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     if (getLevel() == null) {
       return false;
     }
+
+    long tick = getLevel().getGameTime();
+    if (tick == lastRevalidationTick) {
+      return false;
+    }
+
+    lastRevalidationTick = tick;
 
     boolean changed = false;
     if (cachedRecipeId != null) {
@@ -282,8 +354,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   @Override
   public List<ItemStack> getNonEmptyItems() {
-    if (!animatedItems.isEmpty()) {
-      return animatedItems;
+    if (!storedInputs.isEmpty()) {
+      return storedInputs;
     }
     return InventoryBlockEntity.super.getNonEmptyItems();
   }
@@ -301,24 +373,23 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       pTag.putString("current_recipe", currentRecipe.id().toString());
     }
     ListTag storedItems = new ListTag();
-    for (ItemStack stack : this.storedItems) {
+    for (ItemStack stack : this.storedOutputs) {
       if (!stack.isEmpty()) {
         storedItems.add(stack.save(lookup, new CompoundTag()));
       }
     }
     ListTag animatedItems = new ListTag();
-    for (ItemStack stack : this.animatedItems) {
+    for (ItemStack stack : this.storedInputs) {
       if (!stack.isEmpty()) {
         animatedItems.add(stack.save(lookup, new CompoundTag()));
       }
     }
     if (!storedItems.isEmpty()) {
-      pTag.put("stored_items", storedItems);
+      pTag.put("stored_outputs", storedItems);
     }
     if (!animatedItems.isEmpty()) {
       pTag.put("animated_items", animatedItems);
     }
-    pTag.putInt("stored_power", storedPower);
     pTag.put("inventory", inventory.serializeNBT(lookup));
 
     if (lastPlayer != null) {
@@ -327,6 +398,11 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       pTag.putUUID("last_player", lastUuid);
     }
 
+    if (record != null) {
+      pTag.put("power_record", PowerRecord.CODEC.encodeStart(lookup.createSerializationContext(NbtOps.INSTANCE), record).getOrThrow());
+    }
+
+    pTag.putInt("ticks_consuming_power", ticksConsumingPower);
     pTag.putInt("lifetime", lifetime);
   }
 
@@ -348,27 +424,23 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     if (tag.contains("inventory", CompoundTag.TAG_COMPOUND)) {
       inventory.deserializeNBT(registries, tag.getCompound("inventory"));
     }
-    storedPower = 0;
-    if (tag.contains("stored_power", CompoundTag.TAG_INT)) {
-      storedPower = tag.getInt("stored_power");
-    }
-    if (!storedItems.isEmpty()) {
+    if (!storedOutputs.isEmpty()) {
       outputStoredItems(getLastPlayer());
     }
-    storedItems.clear();
+    storedOutputs.clear();
     if (tag.contains("stored_items", CompoundTag.TAG_LIST)) {
       ListTag storedItemsList = tag.getList("stored_items", CompoundTag.TAG_COMPOUND);
       for (int i = 0; i < storedItemsList.size(); i++) {
         ItemStack.parse(registries, storedItemsList.getCompound(i))
-            .ifPresent(storedItems::add);
+            .ifPresent(storedOutputs::add);
       }
     }
-    animatedItems.clear();
+    storedInputs.clear();
     if (tag.contains("animated_items", CompoundTag.TAG_LIST)) {
       ListTag animatedItemsList = tag.getList("animated_items", CompoundTag.TAG_COMPOUND);
       for (int i = 0; i < animatedItemsList.size(); i++) {
         ItemStack.parse(registries, animatedItemsList.getCompound(i))
-            .ifPresent(animatedItems::add);
+            .ifPresent(storedInputs::add);
       }
     }
     lastUuid = null;
@@ -381,6 +453,14 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     }
     this.lifetime = tag.contains("crafting_ticks", CompoundTag.TAG_INT) ? tag.getInt("crafting_ticks") : tag.contains("lifetime", CompoundTag.TAG_INT) ? tag.getInt("lifetime") : -1;
     this.revalidatedRecipes = false;
+    this.lastRevalidationTick = -1;
+    this.ticksConsumingPower = tag.getInt("ticks_consuming_power");
+
+    if (tag.contains("power_record")) {
+      PowerRecord.CODEC.parse(registries.createSerializationContext(NbtOps.INSTANCE), tag.get("power_record"))
+          .resultOrPartial(Util.prefix("Failed to load power record: ", RootsAPI.LOG::warn))
+          .ifPresent(o -> this.record = o);
+    }
   }
 
 
@@ -403,11 +483,86 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     return lifetime != -1;
   }
 
+  public boolean isConsuming() {
+    return lifetime == -1 && canConsumePower();
+  }
+
+  public boolean canConsumePower() {
+    if (getCurrentRecipe() == null) {
+      return false;
+    }
+
+    if (powerRequirementsMet()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  protected boolean powerRequirementsMet() {
+    PowerCollection collection = getPowerCollection();
+    if (collection == null) {
+      return false;
+    }
+
+    PowerRecord record = getOrCreateRecord();
+    if (record == null) {
+      throw new IllegalStateException("Can't calculate the record on the client as we got a power collection but no record");
+    }
+
+    if (record.isFulfilled(collection)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  @Nullable
+  protected PowerCollection getPowerCollection() {
+    revalidateRecipe();
+
+    RecipeHolder<TransmutationRecipe> currentRecipe = getCurrentRecipe();
+    if (currentRecipe == null) {
+      return null;
+    }
+
+    return currentRecipe.value().getPowerRequirements();
+  }
+
+  @Nullable
+  protected PowerRecord getOrCreateRecord() {
+    PowerCollection power = getPowerCollection();
+    if (power == null) {
+      return null;
+    }
+
+    if (this.record != null && this.record.isFor(power)) {
+      return this.record;
+    }
+
+    this.record = new PowerRecord(power);
+
+    return this.record;
+  }
+
+  public boolean isActive() {
+    return isCrafting() || isConsuming();
+  }
+
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    // Power storage is handled separately from crafting and happens regardless
     boolean changed = false;
     revalidateRecipe();
+
+    if (isConsuming()) {
+      ticksConsumingPower++;
+
+      if (powerRequirementsMet()) {
+        startCrafting(getLastPlayer());
+      }
+
+      changed = true;
+    }
 
     if (lifetime > 0) {
       lifetime--;
@@ -417,8 +572,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       changed = true;
     }
 
-    if (pState.getValue(FungalTransmuterBlock.ACTIVE) != isCrafting()) {
-      pLevel.setBlock(pPos, pState.setValue(FungalTransmuterBlock.ACTIVE, isCrafting()), 3);
+    if (pState.getValue(FungalTransmuterBlock.ACTIVE) != isActive()) {
+      pLevel.setBlock(pPos, pState.setValue(FungalTransmuterBlock.ACTIVE, isActive()), 3);
       changed = false;
     }
 
@@ -432,9 +587,9 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     if (getLevel() == null || getLevel().isClientSide()) {
       return;
     }
-    if (!storedItems.isEmpty()) {
+    if (!storedOutputs.isEmpty()) {
       if (player != null && ModActions.CRAFT_ITEM.get().shouldTest()) {
-        for (ItemStack item : storedItems) {
+        for (ItemStack item : storedOutputs) {
           CraftItemAction.Context context = new CraftItemAction.Context(
               (ServerLevel) level,
               (ServerPlayer) player,
@@ -443,12 +598,12 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
           ModActions.CRAFT_ITEM.get().accept(context);
         }
       }
-      for (ItemStack stack : this.outputAdjacent(storedItems)) {
+      for (ItemStack stack : this.outputAdjacent(storedOutputs)) {
         ItemUtil.Spawn.spawnItem(level, /*player == null ? */this.getBlockPos()
             .above()/* : player.blockPosition()*/, stack);
       }
     }
-    storedItems.clear();
+    storedOutputs.clear();
     if (lastRecipe != null && player != null && ModActions.CRAFT_RECIPE.get().shouldTest()) {
       CraftRecipeAction.Context context = new CraftRecipeAction.Context(
           (ServerLevel) level,
@@ -459,7 +614,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       );
       ModActions.CRAFT_RECIPE.get().accept(context);
     }
-    animatedItems.clear();
+    storedInputs.clear();
     lastPlayer = null;
     lastUuid = null;
     level.setBlock(getBlockPos(), getBlockState().setValue(FungalTransmuterBlock.ACTIVE, false), 3);
@@ -496,32 +651,44 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   }
 
   @Override
-  public PowerTicket getTicketForTick(long tick) {
-    if (currentRecipe == null) {
-      ticket = null;
-      return ticket;
-    }
-
-    if (ticket == null) {
-      ticket = getTicketForRecipe().create(tick);
-      return ticket;
-    }
-
-    if (ticket.isValid(tick)) {
-      return ticket;
-    }
-
-    ticket = getTicketForRecipe().create(tick);
+  public PowerTicket getTicket() {
     return ticket;
   }
 
-  private PowerTicket.TicketDefinition getTicketForRecipe () {
-    return new PowerTicket.TicketDefinition(ImmutableList.of());
+  @Override
+  public PowerTicket createTicket(long tick) {
+    revalidateRecipe();
+
+    if (getCurrentRecipe() == null) {
+      return null;
+    }
+
+    return getCurrentRecipe().value().getPowerRequirements().create(tick);
+  }
+
+  @Override
+  public void setPowerTicket(PowerTicket ticket) {
+    this.ticket = ticket;
   }
 
   @Override
   public boolean wasPoweredLastTick() {
-    return this.poweredLastTick;
+    return false; // TODO:
+  }
+
+  @Override
+  public void finalizeTicket(PowerTicket ticket) {
+    PowerCollection collection = getPowerCollection();
+    if (collection == null) {
+      RootsAPI.LOG.error("Unable to find a power record for the current ticket, discarding ticket");
+      return;
+    }
+
+    PowerRecord record = getOrCreateRecord();
+    if (record == null) {
+      throw new IllegalStateException("WE had a valid pwoer collection but getOrCreateRecord failed");
+    }
+    ticket.updateRecord(record);
   }
 
   @Override
