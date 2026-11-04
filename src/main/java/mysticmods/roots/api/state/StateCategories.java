@@ -14,6 +14,7 @@ public final class StateCategories {
   public static final StateCategory<LockState> LOCK =
       new StateCategory<>(RootsAPI.rl("lock"), LockState.NONE);
   public static final StateCategory<RitualState> RITUAL = new StateCategory<>(RootsAPI.rl("ritual"), RitualState.NONE);
+  public static final StateCategory<HudState> HUD = new StateCategory<>(RootsAPI.rl("hud"), HudState.NONE);
 
   private StateCategories() {
   }

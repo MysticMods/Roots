@@ -466,7 +466,6 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     }
   }
 
-
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (!revalidatedRecipes) {
