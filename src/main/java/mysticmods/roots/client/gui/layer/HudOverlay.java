@@ -11,6 +11,7 @@ import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.client.RootsClientAPI;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
+import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
 import mysticmods.roots.api.grove.power.distributor.IGrovePowerDistributor;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
@@ -552,9 +553,9 @@ public class HudOverlay {
       IGrovePowerDistributor powerPower = groveInstance.getCollector();
       Grove grove = groveInstance.asGrove();
 
-      Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank(), groveInstance.getMaxRank());
+      Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank().getName(), groveInstance.getMaxRank().getShortName());
       Component comp2 = Component.translatable("roots.hud.grove_power.power", powerPower.getUsedPower(), powerPower.getMaxPower());
-      if (groveInstance.getRank().ordinal() == 0) {
+      if (groveInstance.getRank() == Rank.UNRANKED) {
         if (!groveInstance.is(RootsTags.Groves.WILD)) {
           comp2 = Component.translatable("roots.hud.grove_power.invalid_rank");
         } else {

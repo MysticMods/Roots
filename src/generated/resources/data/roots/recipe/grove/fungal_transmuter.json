@@ -3,13 +3,19 @@
   "data": {
     "ingredients": [
       {
+        "item": "minecraft:composter"
+      },
+      {
         "tag": "c:fertilizers"
       },
       {
-        "tag": "minecraft:logs"
+        "item": "minecraft:milk_bucket"
       },
       {
-        "tag": "c:ingots/iron"
+        "item": "minecraft:apple"
+      },
+      {
+        "tag": "c:eggs"
       },
       {
         "tag": "roots:logs/wildwood"
@@ -25,18 +31,11 @@
       {
         "type": "roots:grove_stone_condition",
         "grove_type": {
-          "grove": "roots:fungal",
-          "name": "fungal",
-          "tag": "roots:grove_stones/fungal"
+          "grove": "roots:any",
+          "name": "any",
+          "tag": "roots:grove_stones"
         },
         "require_active": true
-      }
-    ],
-    "player_conditions": [
-      {
-        "type": "roots:grove_rank_condition",
-        "grove": "roots:fungal",
-        "minimum_rank": 1
       }
     ],
     "priority": 0,

@@ -1,0 +1,28 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/carrot"
+      },
+      {
+        "tag": "c:crops/carrot"
+      },
+      {
+        "tag": "c:crops/carrot"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:any",
+        "total": 600
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:beetroot_seeds"
+    }
+  }
+}

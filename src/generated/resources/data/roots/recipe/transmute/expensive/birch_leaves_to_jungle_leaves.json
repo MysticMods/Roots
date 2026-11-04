@@ -1,0 +1,28 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:birch_leaves"
+      },
+      {
+        "item": "minecraft:birch_leaves"
+      },
+      {
+        "item": "minecraft:birch_leaves"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:any",
+        "total": 600
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:jungle_leaves"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:nuggets/silver"
+      },
+      {
+        "tag": "c:nuggets/silver"
+      },
+      {
+        "tag": "c:nuggets/silver"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:any",
+        "total": 166
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:gold_nugget"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:birch_logs"
+      },
+      {
+        "tag": "minecraft:birch_logs"
+      },
+      {
+        "tag": "minecraft:birch_logs"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:any",
+        "total": 600
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:jungle_log"
+    }
+  }
+}

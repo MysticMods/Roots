@@ -1,0 +1,28 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:torch"
+      },
+      {
+        "item": "minecraft:torch"
+      },
+      {
+        "item": "minecraft:torch"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:any",
+        "total": 600
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:red_mushroom"
+    }
+  }
+}

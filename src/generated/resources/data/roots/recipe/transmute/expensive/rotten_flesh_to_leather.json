@@ -1,0 +1,34 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:rotten_flesh"
+      },
+      {
+        "tag": "roots:rotten_flesh"
+      },
+      {
+        "tag": "roots:rotten_flesh"
+      },
+      {
+        "tag": "roots:rotten_flesh"
+      },
+      {
+        "tag": "roots:rotten_flesh"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:any",
+        "total": 900
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:leather"
+    }
+  }
+}

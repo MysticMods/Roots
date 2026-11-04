@@ -1,0 +1,28 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:storage_blocks/redstone"
+      },
+      {
+        "tag": "c:storage_blocks/redstone"
+      },
+      {
+        "tag": "c:storage_blocks/redstone"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:fungal",
+        "total": 2000
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 2,
+      "id": "minecraft:glowstone"
+    }
+  }
+}

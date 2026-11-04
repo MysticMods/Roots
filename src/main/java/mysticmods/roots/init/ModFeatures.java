@@ -11,6 +11,7 @@ import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
 import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonePiece;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
+import mysticmods.roots.worldgen.trees.MinLobeFancyTrunkPlacer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -25,6 +26,8 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -46,6 +49,7 @@ public class ModFeatures {
   private static final DeferredRegister<BlockPredicateType<?>> BLOCK_PREDICATES = DeferredRegister.create(BuiltInRegistries.BLOCK_PREDICATE_TYPE, RootsAPI.MODID);
   private static final DeferredRegister<StructurePieceType> STRUCTURE_PIECE_TYPES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_PIECE, RootsAPI.MODID);
   private static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_TYPE, RootsAPI.MODID);
+  private static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACERS = DeferredRegister.create(BuiltInRegistries.TRUNK_PLACER_TYPE, RootsAPI.MODID);
 
   public static final DeferredHolder<StructurePieceType, StructurePieceType> STANDING_STONES_PIECE = STRUCTURE_PIECE_TYPES.register("standing_stones_piece", () -> (pContext, pTag) -> new StandingStonePiece(pTag));
 
@@ -64,6 +68,9 @@ public class ModFeatures {
   // Features
   public static DeferredHolder<Feature<?>, SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
   public static DeferredHolder<Feature<?>, HangingMossBlockFeature> HANGING_MOSS_BLOCK_FEATURE = FEATURES.register("hanging_moss_block_feature", () -> new HangingMossBlockFeature(SimpleBlockConfiguration.CODEC));
+
+  // Trunk placers
+  public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<MinLobeFancyTrunkPlacer>> MIN_LOBE_FANCY_TRUNK_PLACER = TRUNK_PLACERS.register("min_lobe_fancy_trunk_placer", () -> new TrunkPlacerType<>(MinLobeFancyTrunkPlacer.CODEC));
 
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_SILVER_ORE_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("silver_ore"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_STONEPETAL_PATCH_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("stonepetal_patch"));

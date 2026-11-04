@@ -1,0 +1,28 @@
+{
+  "type": "roots:transmutation",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:lily_pad"
+      },
+      {
+        "item": "minecraft:lily_pad"
+      },
+      {
+        "item": "minecraft:lily_pad"
+      }
+    ],
+    "power_requirements": [
+      {
+        "flatRate": 1,
+        "tag": "roots:fungal",
+        "total": 600
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "minecraft:snow"
+    }
+  }
+}

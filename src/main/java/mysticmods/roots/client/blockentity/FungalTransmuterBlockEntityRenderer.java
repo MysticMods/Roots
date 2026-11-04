@@ -4,11 +4,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -49,15 +51,19 @@ public class FungalTransmuterBlockEntityRenderer extends BoundedBlockEntityRende
       ItemStack item = items.get(i);
       pPoseStack.pushPose();
       float shifted = (float) ((RenderTickHandler.getClientTicks() + pPartialTick) * 0.4 + i * (360.0 / items.size()));
-      pPoseStack.translate(0.5, 1.1 + 0.05 * ((double) Mth.sin((float) Math.toRadians((double) shifted * 4))), 0.5);
+      pPoseStack.translate(0.5, 1.1, 0.5);
+
+      pPoseStack.translate(0, 0.05 * ((double) Mth.sin((float) Math.toRadians((double) shifted * 4))), 0);
+
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.translate(-0.5, 0, 0);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
-      Minecraft.getInstance().getItemRenderer()
-          .renderStatic(item, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
-/*      BakedModel baked = itemRenderer.getModel(item, Minecraft.getInstance().level, null, 0);
-      RenderUtil.renderItemDissolve(Minecraft.getInstance().getItemRenderer(), item, ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, baked, Mth.lerp(pPartialTick, pBlockEntity.oDissolveProgress, pBlockEntity.dissolveProgress));*/
+/*      Minecraft.getInstance().getItemRenderer()
+          .renderStatic(item, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);*/
+      BakedModel baked = itemRenderer.getModel(item, Minecraft.getInstance().level, null, 0);
+      RenderUtil.renderItemDissolve(Minecraft.getInstance()
+          .getItemRenderer(), item, ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, baked, Mth.lerp(pPartialTick, pBlockEntity.oDissolveProgress, pBlockEntity.dissolveProgress));
       pPoseStack.popPose();
     }
 

@@ -215,6 +215,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.grove.ranks.first.short", "I");
     add("roots.grove.ranks.second.short", "II");
     add("roots.grove.ranks.third.short", "III");
+    add("roots.grove.ranks.fourth.short", "IV");
 
     add(BoundKeys.CATEGORY, "Roots");
     for (KeyMapping bind : BoundKeys.MAPPINGS.values()) {
@@ -914,9 +915,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.hud.pyre.auto1", "will start automatically");
 
     add("roots.hud.grove_power.wild", "%s");
-    add("roots.hud.grove_power.grove", "%s, rank %s/%s");
+    add("roots.hud.grove_power.grove", "%s, %s/%s");
     add("roots.hud.grove_power.power", "Power usage: %s/%s");
-    add("roots.hud.grove_power.invalid_rank", "[Requires rank 1 or higher.]");
+    add("roots.hud.grove_power.invalid_rank", "[Requires Rank I or higher.]");
 
     RootsRegistries.GROVES.entrySet().forEach(o -> {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));

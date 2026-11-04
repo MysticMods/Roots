@@ -14,7 +14,6 @@ import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.api.state.*;
-import mysticmods.roots.block.FungalTransmuterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
@@ -62,48 +61,34 @@ import java.util.UUID;
 public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, InventoryBlockEntity, RefillProvider, ClearableBlockEntity, FakeMenuBlockEntity {
   private static final StateSchema<FungalTransmuterBlockEntity> STATE_SCHEMA = StateSchema.<FungalTransmuterBlockEntity>builder()
       .add(StateCategories.INVENTORY, be -> InventoryState.of(be.inventory))
-      .add(StateCategories.RECIPE, be -> {
-        if (be.getCurrentRecipe() != null || be.getCachedRecipe() != null) {
-          return RecipeState.MATCHING;
-        }
-
-        return RecipeState.NONE;
-      })
-      .add(StateCategories.LOCK, be -> {
-        if (be.getCurrentRecipe() != null && (be.isCrafting() || be.isConsuming())) {
-          return LockState.LOCKED;
-        }
-
-        return LockState.NONE;
-      })
+      .add(StateCategories.RECIPE, be -> RecipeState.of(be.currentRecipe != null || be.cachedRecipe != null))
+      .add(StateCategories.LOCK, be -> LockState.of(be.isCrafting() || be.currentRecipe != null))
       .add(StateCategories.PROGRESS, be -> {
-        if (be.getCurrentRecipe() != null) {
-          if (be.powerRequirementsMet()) {
-            return ProgressState.CRAFTING;
-          } else {
-            return ProgressState.CONSUMING_POWER;
-          }
+        if (be.isCrafting()) {
+          return ProgressState.CRAFTING;
         }
-
+        if (be.currentRecipe != null) {
+          return ProgressState.CONSUMING_POWER;
+        }
         return ProgressState.NONE;
       })
       .add(StateCategories.ANIMATION, be -> {
         if (be.isCrafting()) {
           return AnimationState.CRAFTING;
         }
-
-        if (be.getCurrentRecipe() != null && !be.isCrafting()) {
+        if (be.currentRecipe != null) {
           return AnimationState.CONSUMING_POWER;
         }
-
         return AnimationState.NONE;
-      }).build();
+      })
+      .build();
   private final StateHolder<FungalTransmuterBlockEntity> stateHolder = STATE_SCHEMA.createHolder();
 
   private final TransmutationInventory inventory = new TransmutationInventory() {
     @Override
     protected void onContentsChanged(int slot) {
       if (FungalTransmuterBlockEntity.this.hasLevel() && !FungalTransmuterBlockEntity.this.getLevel().isClientSide()) {
+        FungalTransmuterBlockEntity.this.lastRevalidationTick = -1;
         FungalTransmuterBlockEntity.this.setChanged();
         FungalTransmuterBlockEntity.this.revalidateRecipe();
         FungalTransmuterBlockEntity.this.updateViaState();
@@ -138,8 +123,19 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   private BlockCapabilityCache<IItemHandler, Direction> capabilityCache;
 
+  private static final int CRAFTING_TIME = 100;
+
   public FungalTransmuterBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.FUNGAL_TRANSMUTER.get(), pWorldPosition, pBlockState);
+  }
+
+  public StateHolder<FungalTransmuterBlockEntity> getStateHolder() {
+    return stateHolder;
+  }
+
+  @Override
+  protected boolean recomputeState() {
+    return stateHolder.recompute(this);
   }
 
   private void emergencyEject() {
@@ -152,6 +148,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       return InteractionResult.CONSUME;
     }
 
+    updateState();
+
     if (stateHolder.is(LockState.LOCKED)) {
       if (!stateHolder.is(ProgressState.CONSUMING_POWER) && player.isShiftKeyDown()) {
         // try to unlock
@@ -162,27 +160,27 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
     if (stack.isEmpty() && !player.isCrouching()) {
       // Extract
-      ItemStack popped = inventory.pop();
-      if (!popped.isEmpty()) {
-        ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
+      if (!stateHolder.is(InventoryState.EMPTY)) {
+        ItemStack popped = inventory.pop();
+        if (!popped.isEmpty()) {
+          ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
+        }
       }
     } else if (stack.isEmpty() && player.isCrouching()) {
-      if (lastRecipe != null && inventory.isEmpty()) {
+      if (lastRecipe != null && stateHolder.is(InventoryState.EMPTY)) {
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
-        revalidateRecipe();
       }
     } else if (stack.is(RootsTags.Items.FUNGAL_TRANSMUTER_ACTIVATION)) {
-      if (!state.getValue(FungalTransmuterBlock.ACTIVE)) {
-        InteractionResult result = startConsuming(player);
-        if (result.indicateItemUse() && stack.isDamageableItem() && !player.isCreative()) {
-          stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-        }
-        return result;
+      InteractionResult result = startConsuming(player);
+      if (result.indicateItemUse() && stack.isDamageableItem() && !player.isCreative()) {
+        stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
       }
-
-      return InteractionResult.SUCCESS;
-      // Start crafting
+      updateState();
+      return result;
     } else {
+      if (stateHolder.is(InventoryState.FULL)) {
+        return InteractionResult.PASS;
+      }
       ItemStack result = inventory.insert(stack);
       if (stack.equals(result)) {
         return InteractionResult.PASS;
@@ -192,6 +190,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       }
     }
 
+    updateState();
     return InteractionResult.SUCCESS;
   }
 
@@ -199,39 +198,36 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     if (stateHolder.anyOf(ProgressState.CONSUMING_POWER, ProgressState.CRAFTING)) {
       return InteractionResult.FAIL;
     }
-    if (cachedRecipe == null || !cachedRecipe.value().matches(playerlessCrafting, level)) {
-      revalidateRecipe();
+    if (!stateHolder.is(RecipeState.MATCHING)) {
+      return InteractionResult.SUCCESS_NO_ITEM_USED;
     }
-    if (cachedRecipe != null) {
-      ConditionResult result = cachedRecipe.value()
-          .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), getBlockPos());
-      if (result.anyFailed()) {
-        result.report(player);
-        return InteractionResult.FAIL;
-      }
-      UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
-      if (failedGrants.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
-        RootsAPI.LOG.info("Grants failed and recipe has no output");
-        failedGrants.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed unlock {}", o));
-        failedGrants.report();
-        return InteractionResult.FAIL;
-      }
 
-      // Any failures here
-
-      // TODO: Defer actual crafting until a later point
-      // and trigger after power has been properly consumed.
-      // Lock the inventory temporarily.
-      lastPlayer = player;
-      lastUuid = null;
-      currentRecipe = cachedRecipe;
-      lifetime = -1;
+    RecipeHolder<TransmutationRecipe> recipe = cachedRecipe;
+    ConditionResult result = recipe.value()
+        .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), getBlockPos());
+    if (result.anyFailed()) {
+      result.report(player);
+      return InteractionResult.FAIL;
     }
+    UnlockResult failedGrants = recipe.value().checkUnlocks(level, (ServerPlayer) player);
+    if (failedGrants.anyFailed() && !recipe.value().hasOutput(level.registryAccess())) {
+      RootsAPI.LOG.info("Grants failed and recipe has no output");
+      failedGrants.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed unlock {}", o));
+      failedGrants.report();
+      return InteractionResult.FAIL;
+    }
+
+    lastPlayer = player;
+    lastUuid = null;
+    currentRecipe = recipe;
+    lifetime = -1;
+    ticksConsumingPower = 0;
+    setChanged();
 
     return InteractionResult.SUCCESS;
   }
 
-  public InteractionResult startCrafting(Player player) {
+  public InteractionResult startCrafting(@Nullable Player player) {
     if (getCurrentRecipe() == null) {
       throw new IllegalStateException("Tried to start crafting when the recipe was invalid!");
     }
@@ -240,26 +236,29 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       throw new IllegalStateException("Tried to start crafting when the power requirements weren't met!");
     }
 
-    TransmutationCrafting playerCrafting = new TransmutationCrafting(inventory, this, player);
+    RecipeHolder<TransmutationRecipe> recipe = getCurrentRecipe();
+    TransmutationCrafting crafting = new TransmutationCrafting(inventory, this, player);
     storedOutputs.clear();
-    storedOutputs.addAll(getCurrentRecipe().value()
-        .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
+    storedOutputs.addAll(recipe.value()
+        .assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null));
     storedOutputs.removeIf(ItemStack::isEmpty);
+
     List<ItemStack> items = inventory.getItemsAndClear();
+    storedInputs.clear();
     items.forEach(o -> storedInputs.add(o.copy()));
 
-    List<ItemStack> processed = getCurrentRecipe().value().process(items);
+    List<ItemStack> processed = recipe.value().process(items);
     processed = outputAdjacent(processed);
+    BlockPos spawnPos = player != null ? player.blockPosition() : getBlockPos().above();
     for (ItemStack stack : processed) {
-      ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+      ItemUtil.Spawn.spawnItem(level, spawnPos, stack);
     }
-    lastRecipe = currentRecipe;
+    lastRecipe = recipe;
     currentRecipe = null;
     cachedRecipe = null;
     lifetime = 100;
 
     setChanged();
-    updateViaState();
     return InteractionResult.SUCCESS;
   }
 
@@ -344,6 +343,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       }
     }
 
+    recomputeState();
+
     if (changed && !getLevel().isClientSide()) {
       setChanged();
       updateViaState();
@@ -399,7 +400,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     }
 
     if (record != null) {
-      pTag.put("power_record", PowerRecord.CODEC.encodeStart(lookup.createSerializationContext(NbtOps.INSTANCE), record).getOrThrow());
+      pTag.put("power_record", PowerRecord.CODEC.encodeStart(lookup.createSerializationContext(NbtOps.INSTANCE), record)
+          .getOrThrow());
     }
 
     pTag.putInt("ticks_consuming_power", ticksConsumingPower);
@@ -428,8 +430,9 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       outputStoredItems(getLastPlayer());
     }
     storedOutputs.clear();
-    if (tag.contains("stored_items", CompoundTag.TAG_LIST)) {
-      ListTag storedItemsList = tag.getList("stored_items", CompoundTag.TAG_COMPOUND);
+    String storedKey = tag.contains("stored_outputs", CompoundTag.TAG_LIST) ? "stored_outputs" : "stored_items";
+    if (tag.contains(storedKey, CompoundTag.TAG_LIST)) {
+      ListTag storedItemsList = tag.getList(storedKey, CompoundTag.TAG_COMPOUND);
       for (int i = 0; i < storedItemsList.size(); i++) {
         ItemStack.parse(registries, storedItemsList.getCompound(i))
             .ifPresent(storedOutputs::add);
@@ -470,12 +473,12 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       revalidateRecipe();
       revalidatedRecipes = true;
     }
-    if (dissolveProgress > 1) {
+    if (stateHolder.is(AnimationState.CRAFTING)) {
+      oDissolveProgress = dissolveProgress;
+      dissolveProgress += 1.0f / CRAFTING_TIME;
+    } else {
       dissolveProgress = 0f;
       oDissolveProgress = 0f;
-    } else {
-      oDissolveProgress = dissolveProgress;
-      dissolveProgress += 0.02f;
     }
   }
 
@@ -519,8 +522,6 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   @Nullable
   protected PowerCollection getPowerCollection() {
-    revalidateRecipe();
-
     RecipeHolder<TransmutationRecipe> currentRecipe = getCurrentRecipe();
     if (currentRecipe == null) {
       return null;
@@ -551,10 +552,10 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    boolean changed = false;
     revalidateRecipe();
+    boolean changed = recomputeState();
 
-    if (isConsuming()) {
+    if (stateHolder.is(ProgressState.CONSUMING_POWER)) {
       ticksConsumingPower++;
 
       if (powerRequirementsMet()) {
@@ -572,14 +573,12 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       changed = true;
     }
 
-    if (pState.getValue(FungalTransmuterBlock.ACTIVE) != isActive()) {
-      pLevel.setBlock(pPos, pState.setValue(FungalTransmuterBlock.ACTIVE, isActive()), 3);
-      changed = false;
+    if (!stateHolder.is(LockState.LOCKED) && tryRefill(pLevel, pPos.below())) {
+      changed = true;
     }
 
-    if (changed) {
-      this.setChanged();
-      this.updateViaState();
+    if (recomputeState() || changed) {
+      updateViaState();
     }
   }
 
@@ -617,7 +616,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     storedInputs.clear();
     lastPlayer = null;
     lastUuid = null;
-    level.setBlock(getBlockPos(), getBlockState().setValue(FungalTransmuterBlock.ACTIVE, false), 3);
+    lifetime = -1;
+    setChanged();
   }
 
   @Override
@@ -725,12 +725,12 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   @Override
   public boolean canClear() {
-    return !inventory.isEmpty();
+    return !stateHolder.is(InventoryState.EMPTY) && !stateHolder.is(LockState.LOCKED);
   }
 
   @Override
   public boolean shouldShowInsert() {
-    return getCachedRecipe() == null;
+    return stateHolder.is(RecipeState.NONE) && !stateHolder.is(LockState.LOCKED);
   }
 
   @Override
