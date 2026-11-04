@@ -420,6 +420,7 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
     }
 
     if (!powerCount.isEmpty()) {
+      // TODO: Scale power by total available/consumed this tick
       PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(getBlockPos()), new GrovePowerFXPacket(pPos, getGrove().value(), powerCount));
     }
 

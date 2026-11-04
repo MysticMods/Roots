@@ -54,6 +54,10 @@ public class MeanderTowardsParticle extends RootsParticle {
     this.gravity = 0.01f;
   }
 
+  @Override
+  protected void updateAlpha(float f) {
+  }
+
   protected void recalculateSpeed() {
     Vec3 toDest = new Vec3(xDest - x, yDest - y, zDest - z);
     double dist = toDest.length();
