@@ -2,6 +2,7 @@ package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModParticles;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -27,6 +28,7 @@ public final class RootsParticleProvider extends ParticleDescriptionProvider {
     this.sprite(ModParticles.CHANNEL_FAIL.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.CHANNEL_JAUNT.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.AIR_BUBBLE.get(), ResourceLocation.withDefaultNamespace("bubble"));
+    this.sprite(ModParticles.GROVE_POWER.get(), RootsAPI.rl("simple"));
 
     this.sprite(ModParticles.ANIMAL_HARVEST.get(), RootsAPI.rl("simple"));
 

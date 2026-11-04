@@ -458,6 +458,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.SPARKLE.get(), LightParticle.SmallProvider::new);
     event.registerSpriteSet(ModParticles.TEMPORAL_MORASS.get(), MoveRandomlyInAABBParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GROVE_CRAFTER.get(), GroveCrafterParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.GROVE_POWER.get(), MeanderTowardsParticle.Provider::new);
 
     event.registerSpecial(ModParticles.GROVE_ITEM.get(), new GroveCrafterItemParticle.Provider());
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());

@@ -73,6 +73,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> TEMPORAL_MORASS = PARTICLES.register("temporal_morass", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROVE_CRAFTER = PARTICLES.register("grove_crafter", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> RANK = PARTICLES.register("rank", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROVE_POWER = PARTICLES.register("grove_power", () -> new RootsParticleOptions.Type(false));
 
   // "Special"
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROVE_ITEM = PARTICLES.register("grove_item", () -> new RootsParticleOptions.Type(false));
