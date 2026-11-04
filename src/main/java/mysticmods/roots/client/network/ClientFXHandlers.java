@@ -1150,22 +1150,32 @@ public class ClientFXHandlers {
     }
   }
 
+  private static final double POWER_REFERENCE = 100.0;
+
   public static void grovePowerFX(BlockPos origin, Grove originType, Object2IntMap<BlockPos> counts) {
     Minecraft mc = Minecraft.getInstance();
-    if (mc.level == null || mc.player == null) {
+    int sum = counts.object2IntEntrySet().stream().mapToInt(Object2IntMap.Entry::getIntValue).sum();
+    if (mc.level == null || mc.player == null || counts.isEmpty() || sum == 0) {
       return;
     }
 
     Vec3 startPos = Vec3.atCenterOf(origin);
 
     for (Object2IntMap.Entry<BlockPos> entry : counts.object2IntEntrySet()) {
-      for (int i = 0; i < entry.getIntValue(); i++) {
-        RootsParticleOptions.builder(ModParticles.GROVE_POWER)
-            .color(originType.getColor1(), originType.getColor2())
-            .start(startPos)
-            .velocity(200, 20, 0.4)
-            .pos(entry.getKey()).swapColors(mc.level.random).spawn(mc.level);
+      // TODO: Determine frequency here based on block state tag
+      // i.e., "permanently powered" (fey trading hut)
+      // or "consuming power" (fungal transmuter)
+      if (entry.getIntValue() == 0) {
+        continue;
       }
+      double intensity = Mth.clamp(entry.getIntValue() / POWER_REFERENCE, 0.0, 1.0);
+      RootsParticleOptions.builder(ModParticles.GROVE_POWER)
+          .color(originType.getColor1(), originType.getColor2())
+          .start(startPos)
+          .velocity(20, 0.4, intensity)
+          .pos(entry.getKey())
+          .swapColors(mc.level.random)
+          .spawn(mc.level);
     }
   }
 }

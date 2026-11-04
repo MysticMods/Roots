@@ -26,23 +26,18 @@ public class PowerTicket {
   }
 
   public int supplyTick(IGroveInstance grove, int incomingAmount) {
-    int amount = incomingAmount;
-    if (amount <= 0) {
-      return amount;
-    }
+    int used = 0;
     for (PowerRequest req : definition) {
-      if (grove.is(req.tag())) {
-        int requiredThisTick = req.rate(grove);
-        int amountSupplied = suppliedThisTick.getInt(req);
-        int required = Math.max(0, requiredThisTick - amountSupplied);
-        if (required > 0 && required <= amount) {
-          amount -= required;
+      if (grove.is(req.tag()) && suppliedThisTick.getInt(req) == 0) {
+        int required = req.rate(grove);
+        if (required > 0 && required <= (incomingAmount - used)) {
+          used += required;
           suppliedThisTick.mergeInt(req, required, Integer::sum);
           suppliedFromMap.computeIfAbsent(req, k -> new HashSet<>()).add(grove.getGrovePosition());
         }
       }
     }
-    return amount;
+    return used;
   }
 
   public boolean isFor(long tick) {
@@ -56,7 +51,7 @@ public class PowerTicket {
 
     for (PowerRequest req : definition) {
       int supplied = suppliedThisTick.getInt(req);
-      if (supplied == 0 || supplied < req.total()) {
+      if (supplied != req.total()) {
         return false;
       }
     }

@@ -11,8 +11,8 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.Symmetry;
-import mysticmods.roots.api.grove.power.consumer.PowerTicket;
 import mysticmods.roots.api.grove.power.consumer.IGrovePowerConsumer;
+import mysticmods.roots.api.grove.power.consumer.PowerTicket;
 import mysticmods.roots.api.grove.power.distributor.IGrovePowerDistributor;
 import mysticmods.roots.api.grove.power.generator.BlockGenerationInfo;
 import mysticmods.roots.api.grove.power.generator.EntityGenerationInfo;
@@ -287,7 +287,8 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
           if (stateAt.is(RootsTags.Blocks.GROVE_CONSUMERS)) {
             continue;
           }
-          List<SimpleBlockGenerator> generators = stateAt.getBlockHolder().getData(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
+          List<SimpleBlockGenerator> generators = stateAt.getBlockHolder()
+              .getData(DataMaps.GROVE_BLOCK_POWER_GENERATORS);
           if (generators == null || generators.isEmpty()) {
             continue;
           }
@@ -411,17 +412,18 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
         if (be instanceof IGrovePowerConsumer consumer) {
           PowerTicket ticket = consumer.getTicketForTick(tick);
           if (ticket != null && consumer.canBePowered()) {
-            int newAvailable = ticket.supplyTick(this, available);
-            powerCount.mergeInt(pos, available - newAvailable, Integer::sum);
-            available -= newAvailable;
+            int used = ticket.supplyTick(this, available);
+            powerCount.mergeInt(pos, used, Integer::sum);
+            available -= used;
           }
         }
       }
     }
 
     if (!powerCount.isEmpty()) {
-      // TODO: Scale power by total available/consumed this tick
-      PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(getBlockPos()), new GrovePowerFXPacket(pPos, getGrove().value(), powerCount));
+      if (level.getGameTime() % 2 == 0) {
+        PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(getBlockPos()), new GrovePowerFXPacket(pPos, getGrove().value(), powerCount));
+      }
     }
 
     consumedThisTick = generatedThisTick - available;
