@@ -117,6 +117,7 @@ public class PacketHandler {
     registrar.play(ClientboundRefreshStaffScreenPacket.TYPE, ClientboundRefreshStaffScreenPacket.CODEC);
     registrar.play(DecayTargetFXPacket.TYPE, DecayTargetFXPacket.CODEC);
     registrar.play(ClientboundReputationAlertPacket.TYPE, ClientboundReputationAlertPacket.CODEC);
+    registrar.play(GrovePowerFXPacket.TYPE, GrovePowerFXPacket.STREAM_CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

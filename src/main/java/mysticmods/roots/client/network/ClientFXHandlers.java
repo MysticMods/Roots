@@ -1,5 +1,7 @@
 package mysticmods.roots.client.network;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellTemplate;
 import mysticmods.roots.client.RenderTickHandler;
@@ -1145,6 +1147,25 @@ public class ClientFXHandlers {
           random.nextFloat() * 0.05 + 0.02,
           (random.nextFloat() - 0.5) * 0.05
       );
+    }
+  }
+
+  public static void grovePowerFX(BlockPos origin, Grove originType, Object2IntMap<BlockPos> counts) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc.level == null || mc.player == null) {
+      return;
+    }
+
+    Vec3 startPos = Vec3.atCenterOf(origin);
+
+    for (Object2IntMap.Entry<BlockPos> entry : counts.object2IntEntrySet()) {
+      for (int i = 0; i < entry.getIntValue(); i++) {
+        RootsParticleOptions.builder(ModParticles.GROVE_POWER)
+            .color(originType.getColor1(), originType.getColor2())
+            .start(startPos)
+            .velocity(200, 20, 0.4)
+            .pos(entry.getKey()).swapColors(mc.level.random).spawn(mc.level);
+      }
     }
   }
 }

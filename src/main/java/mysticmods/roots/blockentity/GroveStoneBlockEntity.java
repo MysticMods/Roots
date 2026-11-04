@@ -1,5 +1,7 @@
 package mysticmods.roots.blockentity;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
@@ -23,6 +25,7 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.network.client.fx.GrovePowerFXPacket;
 import mysticmods.roots.ritual.GroveSupplicationRitual;
 import mysticmods.roots.util.ReputationHelper;
 import net.minecraft.core.BlockPos;
@@ -38,12 +41,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -391,6 +396,8 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
     List<BlockPos> consumerPositions = level.getData(ModAttachments.GROVE_CONSUMERS)
         .query(pPos, getGroveStoneSearchRadius());
 
+    Object2IntMap<BlockPos> powerCount = new Object2IntOpenHashMap<>();
+
     for (BlockPos pos : consumerPositions) {
       if (available <= 0) {
         break;
@@ -404,10 +411,16 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
         if (be instanceof IGrovePowerConsumer consumer) {
           PowerTicket ticket = consumer.getTicketForTick(tick);
           if (ticket != null && consumer.canBePowered()) {
-            available = ticket.supplyTick(this, available);
+            int newAvailable = ticket.supplyTick(this, available);
+            powerCount.mergeInt(pos, available - newAvailable, Integer::sum);
+            available -= newAvailable;
           }
         }
       }
+    }
+
+    if (!powerCount.isEmpty()) {
+      PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(getBlockPos()), new GrovePowerFXPacket(pPos, getGrove().value(), powerCount));
     }
 
     consumedThisTick = generatedThisTick - available;

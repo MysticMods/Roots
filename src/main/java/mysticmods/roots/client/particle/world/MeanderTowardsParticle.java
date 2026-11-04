@@ -64,21 +64,22 @@ public class MeanderTowardsParticle extends RootsParticle {
 
     double t = Math.min(1.0, (double) this.age / (double) this.lifetime);
     double f = t * t;
+    double z = 1.0 - f;
 
     if (meanderFrequency > 0 && this.age % meanderFrequency == 0) {
       wander = new Vec3(random.nextGaussian(), random.nextGaussian(), random.nextGaussian()).normalize()
-          .scale(meanderAmount);
+          .scale(meanderAmount * z);
     } else {
       wander = wander.scale(WANDER_DECAY);
     }
 
     double wanderWeight = 1.0 - f;
     Vec3 heading = toDest.normalize().add(wander.scale(wanderWeight));
-    if (heading.lengthSqr() < 1.0E-6) {
+    if (heading.lengthSqr() < 1.0E-7) {
       heading = toDest.normalize();
     }
 
-    double speed = Math.min(dist, MIN_SPEED + 0.37 * dist * f);
+    double speed = Math.min(dist, MIN_SPEED + 0.07 * dist * f);
     Vec3 desired = heading.normalize().scale(speed);
 
     Vec3 smoothed = new Vec3(xd, yd, zd).lerp(desired, STEER);
