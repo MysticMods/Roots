@@ -14,6 +14,7 @@ import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.api.state.*;
+import mysticmods.roots.blockentity.template.StatefulBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
@@ -58,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, InventoryBlockEntity, RefillProvider, ClearableBlockEntity, FakeMenuBlockEntity {
+public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, InventoryBlockEntity, RefillProvider, ClearableBlockEntity, FakeMenuBlockEntity, StatefulBlockEntity<FungalTransmuterBlockEntity> {
   private static final StateSchema<FungalTransmuterBlockEntity> STATE_SCHEMA = StateSchema.<FungalTransmuterBlockEntity>builder()
       .add(StateCategories.INVENTORY, be -> InventoryState.of(be.inventory))
       .add(StateCategories.RECIPE, be -> RecipeState.of(be.currentRecipe != null || be.cachedRecipe != null))
@@ -129,6 +130,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     super(ModBlockEntities.FUNGAL_TRANSMUTER.get(), pWorldPosition, pBlockState);
   }
 
+  @Override
   public StateHolder<FungalTransmuterBlockEntity> getStateHolder() {
     return stateHolder;
   }
@@ -223,6 +225,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     lifetime = -1;
     ticksConsumingPower = 0;
     setChanged();
+    updateViaState();
 
     return InteractionResult.SUCCESS;
   }
@@ -257,8 +260,11 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     currentRecipe = null;
     cachedRecipe = null;
     lifetime = 100;
+    record = null;
+    ticksConsumingPower = -1;
 
     setChanged();
+    updateViaState();
     return InteractionResult.SUCCESS;
   }
 
@@ -325,6 +331,13 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     }
 
     boolean matched = false;
+
+    if (currentRecipe != null) {
+      if (!currentRecipe.value().matches(playerlessCrafting, getLevel())) {
+        currentRecipe = null;
+        changed = true;
+      }
+    }
 
     if (cachedRecipe == null) {
       if (lastRecipe != null && lastRecipe.value().matches(playerlessCrafting, getLevel())) {
@@ -470,6 +483,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (!revalidatedRecipes) {
       revalidateRecipe();
+      recomputeState();
       revalidatedRecipes = true;
     }
     if (stateHolder.is(AnimationState.CRAFTING)) {
@@ -613,10 +627,14 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       ModActions.CRAFT_RECIPE.get().accept(context);
     }
     storedInputs.clear();
+    ticksConsumingPower = -1;
+    record = null;
+    currentRecipe = null;
     lastPlayer = null;
     lastUuid = null;
     lifetime = -1;
     setChanged();
+    updateViaState();
   }
 
   @Override
@@ -656,8 +674,6 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
 
   @Override
   public PowerTicket createTicket(long tick) {
-    revalidateRecipe();
-
     if (getCurrentRecipe() == null) {
       return null;
     }

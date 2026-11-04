@@ -18,6 +18,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.state.ProgressState;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
@@ -359,8 +360,6 @@ public class HudOverlay {
       int x = (graphics.guiWidth() / 2); // + (graphics.guiWidth() / 4);
       int y = (graphics.guiHeight() / 2);// + (graphics.guiHeight() / 4);
 
-      boolean crafting = transmuter.isCrafting();
-
       boolean empty = transmuter.getInventory().isEmpty();
 
       if (!empty) {
@@ -381,35 +380,41 @@ public class HudOverlay {
       y += 10;
       x += 30;
 
+      TransmutationRecipe currentRecipe = transmuter.getCurrentRecipe() == null ? null : transmuter.getCurrentRecipe()
+          .value();
       TransmutationRecipe cachedRecipe = transmuter.getCachedRecipe() == null ? null : transmuter.getCachedRecipe()
           .value();
       TransmutationRecipe lastRecipe = transmuter.getLastRecipe() == null ? null : transmuter.getLastRecipe().value();
 
-      int requiredPower = 0;
-
-      ItemStack output = ItemStack.EMPTY;
+      ItemStack output = currentRecipe != null ? currentRecipe.getResultItem(mc.level.registryAccess()) : ItemStack.EMPTY;
       Component comp1 = CommonComponents.EMPTY;
       Component comp2 = CommonComponents.EMPTY;
       Component comp3 = CommonComponents.EMPTY;
       List<ChanceOutput> outputs = Collections.emptyList();
 
-      if (cachedRecipe != null) {
-        output = cachedRecipe.getResultItem(mc.level.registryAccess());
-        comp1 = Component.translatable("roots.hud.transmuter.begin1");
-        comp2 = Component.translatable("roots.hud.transmuter.begin2");
-        comp3 = Component.translatable("roots.hud.transmuter.begin3", output.getHoverName());
-        outputs = cachedRecipe.getChanceOutputs();
-      } else if (lastRecipe != null && empty) {
-        output = lastRecipe.getResultItem(mc.level.registryAccess());
-        outputs = lastRecipe.getChanceOutputs();
-        if (crafting) {
 
-        } else {
-
-        }
-        comp1 = Component.translatable("roots.hud.transmuter.restart1");
-        comp2 = Component.translatable("roots.hud.transmuter.restart2");
+      if (transmuter.is(ProgressState.CONSUMING_POWER)) {
+        comp1 = Component.translatable("roots.hud.transmuter.power1");
+        comp2 = Component.translatable("roots.hud.transmuter.power2");
         comp3 = output.getHoverName();
+      } else if (transmuter.is(ProgressState.CRAFTING)) {
+        comp1 = Component.translatable("roots.hud.transmuter.crafting1", output.getHoverName());
+        comp2 = Component.empty();
+        comp3 = Component.empty();
+      } else {
+        if (cachedRecipe != null) {
+          output = cachedRecipe.getResultItem(mc.level.registryAccess());
+          comp1 = Component.translatable("roots.hud.transmuter.begin1");
+          comp2 = Component.translatable("roots.hud.transmuter.begin2");
+          comp3 = Component.translatable("roots.hud.transmuter.begin3", output.getHoverName());
+          outputs = cachedRecipe.getChanceOutputs();
+        } else if (lastRecipe != null && empty) {
+          output = lastRecipe.getResultItem(mc.level.registryAccess());
+          outputs = lastRecipe.getChanceOutputs();
+          comp1 = Component.translatable("roots.hud.transmuter.restart1");
+          comp2 = Component.translatable("roots.hud.transmuter.restart2");
+          comp3 = output.getHoverName();
+        }
       }
 
       graphics.renderItem(output, x, y, 0);
@@ -441,7 +446,6 @@ public class HudOverlay {
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
       }
-
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
@@ -553,7 +557,8 @@ public class HudOverlay {
       IGrovePowerDistributor powerPower = groveInstance.getCollector();
       Grove grove = groveInstance.asGrove();
 
-      Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank().getName(), groveInstance.getMaxRank().getShortName());
+      Component comp1 = Component.translatable("roots.hud.grove_power.grove", grove.getStyledName(), groveInstance.getRank()
+          .getName(), groveInstance.getMaxRank().getShortName());
       Component comp2 = Component.translatable("roots.hud.grove_power.power", powerPower.getUsedPower(), powerPower.getMaxPower());
       if (groveInstance.getRank() == Rank.UNRANKED) {
         if (!groveInstance.is(RootsTags.Groves.WILD)) {

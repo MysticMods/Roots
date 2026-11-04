@@ -886,6 +886,11 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.hud.fake_menu", "Press [%s] to view eligible %s recipes.");
     add("roots.hud.clear", "Press [%s] to clear %s.");
 
+    add("roots.hud.transmuter.power1", "Consuming power to");
+    add("roots.hud.transmuter.power2", "transmute items into");
+
+    add("roots.hud.transmuter.crafting1", "Crafting %s");
+
     add("roots.hud.transmuter.begin1", "Right-click with");
     add("roots.hud.transmuter.begin2", "knife to");
     add("roots.hud.transmuter.begin3", "craft %s");
