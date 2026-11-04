@@ -9,6 +9,7 @@
     "MixinBoneMealItem",
     "MixinBrewingStandBlockEntity",
     "MixinBrewingStandMenu$FuelSlot",
+    "MixinFungusBlock$ElementalSoil",
     "MixinMerchantMenu$FairyHutTemporary",
     "MixinMobEffectInstance$DefaultInvisiblePotion",
     "MixinPlayer$IncreaseItemBoundingBox",
