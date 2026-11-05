@@ -413,8 +413,10 @@ public class GroveStoneBlockEntity extends BaseBoundedBlockEntity implements Ser
           PowerTicket ticket = consumer.getTicketForTick(tick);
           if (ticket != null && consumer.canBePowered()) {
             int used = ticket.supplyTick(this, available);
-            powerCount.mergeInt(pos, used, Integer::sum);
-            available -= used;
+            if (used > 0) {
+              powerCount.mergeInt(pos, used, Integer::sum);
+              available -= used;
+            }
           }
         }
       }
