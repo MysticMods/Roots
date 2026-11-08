@@ -507,7 +507,7 @@ public class HudOverlay {
       if (stack.getCount() != 1 || text != null) {
         String s = text == null ? String.valueOf(stack.getCount()) : text;
         graphics.pose().translate(0.0F, 0.0F, 200.0F);
-        Component textComp = Component.literal(s).withStyle(style -> style.withFont(RootsAPI.MINI_OUTLINE_FONT));
+        Component textComp = Component.literal(String.join("\uf801", s.split(""))).withStyle(style -> style.withFont(RootsAPI.MINI_OUTLINE_FONT));
         graphics.drawString(font, textComp, x + 19 + 2 - font.width(s), y + 6 + 3, 16777215, false);
       }
 

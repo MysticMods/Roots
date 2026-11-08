@@ -1,6 +1,12 @@
 {
   "providers": [
     {
+      "type": "space",
+      "advances": {
+        "\uf801": -2
+      }
+    },
+    {
       "type": "bitmap",
       "file": "roots:font/mini_outline.png",
       "height": 7,
