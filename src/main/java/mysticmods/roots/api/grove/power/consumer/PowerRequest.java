@@ -8,6 +8,7 @@ import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.ints.IntList;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.GroveCache;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -65,6 +66,10 @@ public record PowerRequest(TagKey<Grove> tag, int total, int flatRate,
     }
 
     return flatRate;
+  }
+
+  public List<Grove> getAllGroves () {
+    return GroveCache.getAllGroves(tag);
   }
 
   public record ValueForRank(int unranked, int first, int second, int third, int fourth) {

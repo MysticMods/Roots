@@ -559,6 +559,34 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     return this.record;
   }
 
+  @Nullable
+  public PowerRecord getRecord () {
+    PowerCollection power = getPowerCollection();
+    if (power == null) {
+      return null;
+    }
+
+    if (this.record == null || !this.record.isFor(power)) {
+      return null;
+    }
+
+    return this.record;
+  }
+
+  @Nullable
+  public PowerRecord.Typed getTypedRecord () {
+    PowerCollection power = getPowerCollection();
+    if (power == null) {
+      return null;
+    }
+
+    if (this.record == null) {
+      return null;
+    }
+
+    return this.record.typedFor(power);
+  }
+
   public boolean isActive() {
     return isCrafting() || isConsuming();
   }

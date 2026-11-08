@@ -13,6 +13,9 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.IGroveInstance;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
+import mysticmods.roots.api.grove.power.consumer.PowerCollection;
+import mysticmods.roots.api.grove.power.consumer.PowerRecord;
+import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.grove.power.distributor.IGrovePowerDistributor;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.ritual.IRitualInstance;
@@ -40,11 +43,14 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -455,6 +461,79 @@ public class HudOverlay {
       graphics.drawString(mc.font, comp3, x + 25, y + 24, TEXT_COLOR, true);
       RenderSystem.enableDepthTest();
       RenderSystem.enableBlend();
+
+      final float height = 40.0f;
+      final int width = 7;
+      final int barStart = (16 / 2) - (width / 2) + 2;
+      final int barStop = barStart + (width / 2);
+
+      // TODO: Handle cached recipe
+
+      PowerRecord.Typed record = transmuter.getTypedRecord();
+      if (record != null) {
+        x = x + 25;
+        y -= 25;
+
+        for (PowerRecord.TypedEntry entry : record) {
+          Grove groveThisFrame = cycleTimer.getCycled(entry.getAllGroves());
+          graphics.renderItem(groveThisFrame.getIcon(), x, y, 0);
+          renderScaledItemDecorations(graphics, mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(entry.currentValue()));
+          graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - height) - 4, 0x7fcfcfcf);
+          graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - 4 - (height * entry.percentage())), groveThisFrame.getColor1() | 0xff000000);
+          x += 18;
+        }
+      } else if (cachedRecipe != null) {
+        PowerCollection collection = cachedRecipe.getPowerRequirements();
+        if (!collection.isEmpty()) {
+          x = x + 25;
+          y -= 25;
+
+          for (PowerRequest request : collection) {
+            Grove groveThisFrame = cycleTimer.getCycled(request.getAllGroves());
+            graphics.renderItem(groveThisFrame.getIcon(), x, y, 0);
+            graphics.renderItemDecorations(mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(request.total()));
+            graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - height) - 4, 0x7fcfcfcf);
+            x += 18;
+          }
+        }
+      }
+    }
+  }
+
+  public static void renderScaledItemDecorations(GuiGraphics graphics, Font font, ItemStack stack, int x, int y, @javax.annotation.Nullable String text) {
+    if (!stack.isEmpty()) {
+      Minecraft mc = Minecraft.getInstance();
+      graphics.pose().pushPose();
+      if (stack.getCount() != 1 || text != null) {
+        String s = text == null ? String.valueOf(stack.getCount()) : text;
+        graphics.pose().scale(0.8f, 0.8f, 0.8f);
+        graphics.pose().translate(0.0F, 0.0F, 200.0F);
+        graphics.pose().scale(1, 1, 1);
+        graphics.drawString(font, s, x + 19 - 2 - font.width(s), y + 6 + 3, 16777215, true);
+      }
+
+      if (stack.isBarVisible()) {
+        int l = stack.getBarWidth();
+        int i = stack.getBarColor();
+        int j = x + 2;
+        int k = y + 13;
+        graphics.fill(RenderType.guiOverlay(), j, k, j + 13, k + 2, -16777216);
+        graphics.fill(RenderType.guiOverlay(), j, k, j + l, k + 1, i | 0xFF000000);
+      }
+
+      LocalPlayer localplayer = mc.player;
+      float f = localplayer == null
+          ? 0.0F
+          : localplayer.getCooldowns()
+          .getCooldownPercent(stack.getItem(), mc.getTimer().getGameTimeDeltaPartialTick(true));
+      if (f > 0.0F) {
+        int i1 = y + Mth.floor(16.0F * (1.0F - f));
+        int j1 = i1 + Mth.ceil(16.0F * f);
+        graphics.fill(RenderType.guiOverlay(), x, i1, x + 16, j1, Integer.MAX_VALUE);
+      }
+
+      graphics.pose().popPose();
+      net.neoforged.neoforge.client.ItemDecoratorHandler.of(stack).render(graphics, font, stack, x, y);
     }
   }
 
