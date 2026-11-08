@@ -257,7 +257,6 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       ItemUtil.Spawn.spawnItem(level, spawnPos, stack);
     }
     lastRecipe = recipe;
-    currentRecipe = null;
     cachedRecipe = null;
     lifetime = 100;
     record = null;
