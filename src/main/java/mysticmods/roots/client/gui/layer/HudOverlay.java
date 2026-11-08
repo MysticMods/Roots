@@ -404,8 +404,11 @@ public class HudOverlay {
         comp2 = Component.translatable("roots.hud.transmuter.power2");
         comp3 = output.getHoverName();
       } else if (transmuter.is(ProgressState.CRAFTING)) {
-        comp1 = Component.translatable("roots.hud.transmuter.crafting1", output.getHoverName());
-        comp2 = Component.empty();
+        if (output.isEmpty() && lastRecipe != null) {
+          output = lastRecipe.getResultItem(mc.level.registryAccess());
+        }
+        comp2 = Component.translatable("roots.hud.transmuter.crafting1", output.getHoverName());
+        comp1 = Component.empty();
         comp3 = Component.empty();
       } else {
         if (cachedRecipe != null) {
@@ -508,7 +511,7 @@ public class HudOverlay {
         String s = text == null ? String.valueOf(stack.getCount()) : text;
         graphics.pose().translate(0.0F, 0.0F, 200.0F);
         Component textComp = Component.literal(String.join("\uf801", s.split(""))).withStyle(style -> style.withFont(RootsAPI.MINI_OUTLINE_FONT));
-        graphics.drawString(font, textComp, x + 19 + 2 - font.width(s), y + 6 + 3, 16777215, false);
+        graphics.drawString(font, textComp, x + 19 + 2 - font.width(s), y + 6 + 4, 16777215, false);
       }
 
       if (stack.isBarVisible()) {
