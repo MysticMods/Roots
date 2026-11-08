@@ -477,7 +477,7 @@ public class HudOverlay {
         for (PowerRecord.TypedEntry entry : record) {
           Grove groveThisFrame = cycleTimer.getCycled(entry.getAllGroves());
           graphics.renderItem(groveThisFrame.getIcon(), x, y, 0);
-          renderScaledItemDecorations(graphics, mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(entry.currentValue()));
+          renderItemDecorations(graphics, mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(entry.currentValue()));
           graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - height) - 4, 0x7fcfcfcf);
           graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - 4 - (height * entry.percentage())), groveThisFrame.getColor1() | 0xff000000);
           x += 18;
@@ -491,7 +491,7 @@ public class HudOverlay {
           for (PowerRequest request : collection) {
             Grove groveThisFrame = cycleTimer.getCycled(request.getAllGroves());
             graphics.renderItem(groveThisFrame.getIcon(), x, y, 0);
-            graphics.renderItemDecorations(mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(request.total()));
+            renderItemDecorations(graphics, mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(request.total()));
             graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - height) - 4, 0x7fcfcfcf);
             x += 18;
           }
@@ -500,16 +500,15 @@ public class HudOverlay {
     }
   }
 
-  public static void renderScaledItemDecorations(GuiGraphics graphics, Font font, ItemStack stack, int x, int y, @javax.annotation.Nullable String text) {
+  public static void renderItemDecorations(GuiGraphics graphics, Font font, ItemStack stack, int x, int y, @javax.annotation.Nullable String text) {
     if (!stack.isEmpty()) {
       Minecraft mc = Minecraft.getInstance();
       graphics.pose().pushPose();
       if (stack.getCount() != 1 || text != null) {
         String s = text == null ? String.valueOf(stack.getCount()) : text;
-        graphics.pose().scale(0.8f, 0.8f, 0.8f);
         graphics.pose().translate(0.0F, 0.0F, 200.0F);
-        graphics.pose().scale(1, 1, 1);
-        graphics.drawString(font, s, x + 19 - 2 - font.width(s), y + 6 + 3, 16777215, true);
+        Component textComp = Component.literal(s).withStyle(style -> style.withFont(RootsAPI.MINI_OUTLINE_FONT));
+        graphics.drawString(font, textComp, x + 19 + 2 - font.width(s), y + 6 + 3, 16777215, false);
       }
 
       if (stack.isBarVisible()) {
