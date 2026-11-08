@@ -308,6 +308,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
 
     tag(RootsTags.Blocks.GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS)
         .add(ENCHANTED_TURF.get(), FUNGAL_TRANSMUTER.get(), FURNACE_AMPLIFIER.get());
+    tag(RootsTags.Blocks.TEMPORARY_GROVE_CONSUMERS).add(FUNGAL_TRANSMUTER.get());
+    tag(RootsTags.Blocks.CONSTANT_GROVE_CONSUMERS).addTag(RootsTags.Blocks.HUTS).add(ENCHANTED_TURF.get(), FURNACE_AMPLIFIER.get());
 
     tag(RootsTags.Blocks.NETHER_DOORS).add(Blocks.CRIMSON_DOOR, Blocks.WARPED_DOOR);
 

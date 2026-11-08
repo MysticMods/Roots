@@ -190,6 +190,8 @@ public class RootsTags {
     public static final TagKey<Block> FARMLANDS = compatTag("farmlands");
 
     public static final TagKey<Block> GROVE_CONSUMERS = modTag("grove_consumers");
+    public static final TagKey<Block> CONSTANT_GROVE_CONSUMERS = modTag("grove_consumers/constant");
+    public static final TagKey<Block> TEMPORARY_GROVE_CONSUMERS = modTag("grove_consumers/temporary");
 
     public static final TagKey<Block> UNITY_GROVE_GENERATORS = modTag("grove_generators/unity");
     public static final TagKey<Block> UNITY_GROVE_PATHS = modTag("grove_generators/unity/paths");

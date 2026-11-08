@@ -1,6 +1,7 @@
 package mysticmods.roots.client.network;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellTemplate;
@@ -33,6 +34,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector2d;
 
@@ -1168,6 +1170,13 @@ public class ClientFXHandlers {
       if (entry.getIntValue() == 0) {
         continue;
       }
+
+      if (mc.level.getBlockState(entry.getKey()).is(RootsTags.Blocks.CONSTANT_GROVE_CONSUMERS)) {
+        if (mc.level.random.nextInt(7) != 0) {
+          continue;
+        }
+      }
+
       double intensity = Mth.clamp(entry.getIntValue() / POWER_REFERENCE, 0.0, 1.0);
       RootsParticleOptions.builder(ModParticles.GROVE_POWER)
           .color(originType.getColor1(), originType.getColor2())

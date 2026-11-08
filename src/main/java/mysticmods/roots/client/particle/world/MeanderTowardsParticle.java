@@ -18,12 +18,13 @@ import net.minecraft.world.phys.Vec3;
 
 public class MeanderTowardsParticle extends RootsParticle {
   private static final double SPAWN_Y = 6.5 / 16.0;
-  private static final double LAUNCH_DISTANCE = 0.2;
-  private static final double DESCENT_HEIGHT = 0.6;
-  private static final double HANDLE = 0.2;
+  private static final double LAUNCH_DISTANCE = 0.1;
+  private static final double DESCENT_HEIGHT = 0.4;
+  private static final double HANDLE = 0.3;
   private static final double SPREAD_WIDTH = 0.4;
-  private static final double SPREAD_PEAK = 0.3;
-  private static final double SPEED = 0.04;
+  private static final double SPREAD_PEAK = 0.2;
+  private static final double SPREAD_NARROW = 0.15;
+  private static final double SPEED = 0.08;
   private static final int ARC_SAMPLES = 48;
 
   private final int meanderFrequency;
@@ -102,7 +103,12 @@ public class MeanderTowardsParticle extends RootsParticle {
 
     this.defaultMovement = false;
     this.hasPhysics = false;
-    this.alpha = 1f;
+
+    if (level.getBlockState(destPos).is(RootsTags.Blocks.CONSTANT_GROVE_CONSUMERS)) {
+      this.alpha = 0.3f;
+    } else {
+      this.alpha = 1f;
+    }
     this.lifetime = Math.max(10, Mth.ceil(totalLen / SPEED));
     this.quadSize = (float) (0.195 * Mth.lerp(Mth.clamp(intensity, 0.0, 1.0), 0.6, 1.4));
   }
@@ -121,8 +127,17 @@ public class MeanderTowardsParticle extends RootsParticle {
     return v * v * (3 - 2 * v);
   }
 
-  private static double spreadProfile(double s) {
-    return s <= SPREAD_PEAK ? smoothstep(s / SPREAD_PEAK) : smoothstep((1.0 - s) / (1.0 - SPREAD_PEAK));
+  private double spreadProfile(double along) {
+    double peak = SPREAD_PEAK * curveLen;
+    double narrow = Math.max(peak, (1.0 - SPREAD_NARROW) * curveLen);
+    double end = curveLen + descentLen;
+    if (along <= peak) {
+      return smoothstep(along / peak);
+    }
+    if (along <= narrow) {
+      return 1.0;
+    }
+    return smoothstep((end - along) / (end - narrow));
   }
 
   private static Vec3 cubic(Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3, double s) {
@@ -166,12 +181,14 @@ public class MeanderTowardsParticle extends RootsParticle {
     double profile = 0;
     if (d <= LAUNCH_DISTANCE) {
       base = start.lerp(launchEnd, d / LAUNCH_DISTANCE);
-    } else if (d < LAUNCH_DISTANCE + curveLen) {
-      double along = d - LAUNCH_DISTANCE;
-      base = cubic(launchEnd, c1, c2, aboveDest, curveParamAt(along));
-      profile = spreadProfile(along / curveLen);
     } else {
-      base = aboveDest.lerp(dest, (d - LAUNCH_DISTANCE - curveLen) / descentLen);
+      double along = d - LAUNCH_DISTANCE;
+      profile = spreadProfile(along);
+      if (along < curveLen) {
+        base = cubic(launchEnd, c1, c2, aboveDest, curveParamAt(along));
+      } else {
+        base = aboveDest.lerp(dest, (along - curveLen) / descentLen);
+      }
     }
     return base.add(baseOffset.add(wanderOffset).scale(SPREAD_WIDTH * profile));
   }
