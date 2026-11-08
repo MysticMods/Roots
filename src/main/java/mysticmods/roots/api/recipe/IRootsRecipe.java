@@ -39,7 +39,15 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return Collections.emptyList();
   }
 
+  default List<IPlayerCondition> getPlayerConditionsWithoutRanks () {
+    return Collections.emptyList();
+  }
+
   default List<IPlayerCondition> getPlayerConditions() {
+    return Collections.emptyList();
+  }
+
+  default List<IPlayerCondition> getPlayerRankConditions () {
     return Collections.emptyList();
   }
 

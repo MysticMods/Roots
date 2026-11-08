@@ -69,7 +69,7 @@ public abstract class MortarCategory extends RootsRecipeBaseCategory<MortarRecip
       column++;
     }
     int row = 0;
-    for (IPlayerCondition condition : recipe.getPlayerConditions()) {
+    for (IPlayerCondition condition : recipe.getPlayerConditionsWithoutRanks()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
     }

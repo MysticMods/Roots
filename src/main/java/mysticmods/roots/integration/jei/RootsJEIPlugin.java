@@ -18,10 +18,7 @@ import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.grove.IGroveValue;
-import mysticmods.roots.api.grove.SimpleGroveValue;
-import mysticmods.roots.api.grove.Symmetry;
+import mysticmods.roots.api.grove.*;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -29,6 +26,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.client.ClientRecipes;
+import mysticmods.roots.condition.GroveRankReputation;
 import mysticmods.roots.init.*;
 import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.integration.jei.ingredient.block.*;
@@ -107,6 +105,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<RootsDimensionType> DIMENSION_TYPE = ingredient(RootsDimensionType.class);
   public static final IIngredientType<RootsDamageType> DAMAGE_TYPE = ingredient(RootsDamageType.class);
   public static final IIngredientType<Grove> GROVE_TYPE = ingredient(Grove.class);
+  public static final IIngredientType<GroveRankReputation> GROVE_RANK_TYPE = ingredient(GroveRankReputation.class);
   public static final IIngredientType<GroveGeneratedPower> GROVE_POWER_TYPE = ingredient(GroveGeneratedPower.class);
   public static final IIngredientType<GroveReputation> GROVE_REPUTATION_TYPE = ingredient(GroveReputation.class);
   public static final IIngredientType<GroveAction> GROVE_ACTION_TYPE = ingredient(GroveAction.class);
@@ -313,6 +312,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RootsGroveNumberRenderer<GroveReputation> GROVE_REPUTATION_RENDERER = new RootsGroveNumberRenderer<>();
   public static final RootsGroveRenderer GROVE_RENDERER = new RootsGroveRenderer();
   public static final RootsGroveActionRenderer GROVE_ACTION_RENDERER = new RootsGroveActionRenderer();
+  public static final RootsGroveRankRenderer GROVE_RANK_RENDERER = new RootsGroveRankRenderer();
 
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
@@ -330,12 +330,17 @@ public class RootsJEIPlugin implements IModPlugin {
     List<GroveGeneratedPower> grovePowerIngredients = new ArrayList<>();
     List<GroveReputation> groveReputationIngredients = new ArrayList<>();
     List<GroveReputation> groveReputationLossIngredients = new ArrayList<>();
+    List<GroveRankReputation> allGroveRanks = new ArrayList<>();
     for (Holder<Grove> grove : RootsRegistries.GROVES.getTagOrEmpty(RootsTags.Groves.ANY_POWERABLE)) {
       grovePowerIngredients.add(new GroveGeneratedPower(new SimpleGroveValue(grove.value(), Integer.MAX_VALUE, IGroveValue.Type.POWER_GENERATION)));
       groveReputationIngredients.add(new GroveReputation(new SimpleGroveValue(grove.value(), Integer.MAX_VALUE, IGroveValue.Type.REPUTATION_GAIN)));
       groveReputationLossIngredients.add(new GroveReputation(new SimpleGroveValue(grove.value(), Integer.MAX_VALUE, IGroveValue.Type.REPUTATION_LOSS)));
+      for (Rank rank : Rank.values()) {
+        allGroveRanks.add(new GroveRankReputation(grove.value(), rank));
+      }
     }
 
+    registration.register(GROVE_RANK_TYPE, allGroveRanks, new RootsGroveRankHelper(), new RootsGroveRankRenderer(), GroveRankReputation.CODEC);
     registration.register(GROVE_POWER_TYPE, grovePowerIngredients, new RootsGroveNumberHelper.Power(), GROVE_POWER_RENDERER, GroveGeneratedPower.CODEC);
     registration.register(GROVE_REPUTATION_TYPE, groveReputationIngredients, new RootsGroveNumberHelper.Reputation(), GROVE_REPUTATION_RENDERER, GroveReputation.CODEC);
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()

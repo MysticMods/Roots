@@ -211,11 +211,14 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.grove.ranks.third", "Rank III");
     add("roots.grove.ranks.fourth", "Rank IV");
 
-    add("roots.grove.ranks.unranked.short", "");
+    add("roots.grove.ranks.unranked.short", "*");
     add("roots.grove.ranks.first.short", "I");
     add("roots.grove.ranks.second.short", "II");
     add("roots.grove.ranks.third.short", "III");
     add("roots.grove.ranks.fourth.short", "IV");
+
+    add("roots.grove.ranked_grove", "%s %s or higher.");
+    add("roots.grove.or_higher", "%s or higher.");
 
     add(BoundKeys.CATEGORY, "Roots");
     for (KeyMapping bind : BoundKeys.MAPPINGS.values()) {

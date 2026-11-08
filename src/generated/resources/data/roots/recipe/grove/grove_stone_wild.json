@@ -48,7 +48,9 @@
       {
         "type": "roots:grove_rank_condition",
         "grove": "roots:animate",
-        "minimum_rank": 1
+        "minimum_rank": {
+          "rank": 1
+        }
       }
     ],
     "priority": 0,

@@ -10,6 +10,7 @@ import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.condition.GroveRankReputation;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
@@ -40,6 +41,20 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
       builder.addSlot(RecipeIngredientRole.INPUT, 2 + column * 17, 2 + row * 17)
           .addIngredients(recipe.getIngredients().get(i));
       column++;
+    }
+
+    int count = recipe.getIngredients().size();
+    int count2 = recipe.getPlayerRankConditions().size();
+
+    for (int j = 0; j < count2; j++) {
+      int i = j + count;
+      if (i % 4 == 0 && i != 0) {
+        row++;
+        column = 0;
+      }
+      builder.addSlot(RecipeIngredientRole.INPUT, 2 + column * 17, 2 + row * 17)
+          .addIngredient(RootsJEIPlugin.GROVE_RANK_TYPE, (GroveRankReputation) recipe.getPlayerRankConditions().get(j))
+          .setCustomRenderer(RootsJEIPlugin.GROVE_RANK_TYPE, RootsJEIPlugin.GROVE_RANK_RENDERER);
     }
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();
@@ -78,7 +93,7 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
       column++;
     }
     int row = 0;
-    for (IPlayerCondition condition : recipe.getPlayerConditions()) {
+    for (IPlayerCondition condition : recipe.getPlayerConditionsWithoutRanks()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
     }
