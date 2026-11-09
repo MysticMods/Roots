@@ -51,6 +51,10 @@ public record PowerCollection(ImmutableList<PowerRequest> list,
     return list.isEmpty();
   }
 
+  public PowerRequest get (int index) {
+    return list.get(index);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

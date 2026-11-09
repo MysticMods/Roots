@@ -4,9 +4,12 @@ import mysticmods.roots.api.grove.power.consumer.ISimpleGrovePowerConsumer;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GroveCache {
   private static TagKey<Grove> lastGrove = null;
@@ -32,5 +35,10 @@ public class GroveCache {
 
   public static List<Grove> getAllGroves(ISimpleGrovePowerConsumer consumer) {
     return getAllGroves(consumer.grovePowerTag());
+  }
+
+  public static void reset () {
+    lastResult = null;
+    lastGrove = null;
   }
 }

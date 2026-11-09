@@ -17,7 +17,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
@@ -29,8 +31,10 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -630,6 +634,55 @@ public class RenderUtil {
     return stack.is(ItemTags.COMPASSES) || stack.is(Items.CLOCK);
   }
 
+  public static void renderItemDecorationsInMini(GuiGraphics graphics, Font font, ItemStack stack, int x, int y, int customValue) {
+    renderItemDecorationsInMini(graphics, font, stack, x, y, customValue, false);
+  }
+
+  public static void renderItemDecorationsInMini(GuiGraphics graphics, Font font, ItemStack stack, int x, int y, int customValue, boolean doColour) {
+    renderItemDecorationsInMini(graphics, font, stack, x, y, Component.literal(String.join("\uf801", String.valueOf(customValue)
+        .split(""))).withStyle(style -> {
+      var s = style.withFont(RootsAPI.MINI_OUTLINE_FONT);
+      if (doColour) {
+        s = s.withColor(customValue < 0 ? TextColor.fromRgb(16733525) : TextColor.fromRgb(16777215));
+      }
+      return s;
+    }));
+  }
+
+  public static void renderItemDecorationsInMini(GuiGraphics graphics, Font font, ItemStack stack, int x, int y, Component textComp) {
+    if (!stack.isEmpty()) {
+      Minecraft mc = Minecraft.getInstance();
+      graphics.pose().pushPose();
+      graphics.pose().translate(0.0F, 0.0F, 200.0F);
+      graphics.drawString(font, textComp, x + 17 - font.width(textComp), y + 6 + 4, 16777215, false);
+
+      if (stack.isBarVisible()) {
+        int l = stack.getBarWidth();
+        int i = stack.getBarColor();
+        int j = x + 2;
+        int k = y + 13;
+        graphics.fill(RenderType.guiOverlay(), j, k, j + 13, k + 2, -16777216);
+        graphics.fill(RenderType.guiOverlay(), j, k, j + l, k + 1, i | 0xFF000000);
+      }
+
+      LocalPlayer localplayer = mc.player;
+      float f = localplayer == null
+          ? 0.0F
+          : localplayer.getCooldowns()
+          .getCooldownPercent(stack.getItem(), mc.getTimer().getGameTimeDeltaPartialTick(true));
+      if (f > 0.0F) {
+        int i1 = y + Mth.floor(16.0F * (1.0F - f));
+        int j1 = i1 + Mth.ceil(16.0F * f);
+        graphics.fill(RenderType.guiOverlay(), x, i1, x + 16, j1, Integer.MAX_VALUE);
+      }
+
+      graphics.pose().popPose();
+      net.neoforged.neoforge.client.ItemDecoratorHandler.of(stack).render(graphics, font, stack, x, y);
+    }
+  }
+
   private record RenderTypeInformation(RenderType newType, Supplier<ShaderInstance> shader) {
   }
+
+
 }

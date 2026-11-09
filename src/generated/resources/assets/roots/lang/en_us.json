@@ -634,6 +634,7 @@
   "roots.jei.grove_power": "Grove Power Generation",
   "roots.jei.grove_power_entity": "Entity Grove Power Generation",
   "roots.jei.grove_reputation": "Grove Reputation",
+  "roots.jei.ingredient.grove_power_consumption": " Grove Power",
   "roots.jei.ingredient.grove_power_generation": " Grove Power",
   "roots.jei.ingredient.grove_reputation_gain": " Grove Reputation Gain",
   "roots.jei.ingredient.grove_reputation_loss": " Grove Reputation Loss",

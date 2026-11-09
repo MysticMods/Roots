@@ -859,6 +859,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     // JEI
     add("roots.jei.ingredient.grove_power_generation", " Grove Power");
+    add("roots.jei.ingredient.grove_power_consumption", " Grove Power");
     add("roots.jei.ingredient.grove_reputation_gain", " Grove Reputation Gain");
     add("roots.jei.ingredient.grove_reputation_loss", " Grove Reputation Loss");
     add("roots.jei.grove_power", "Grove Power Generation");

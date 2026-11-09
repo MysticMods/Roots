@@ -13,6 +13,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.ingredient.grove.GroveGeneratedPower;
 import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
 import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.transmutation.TransmutationRecipe;
@@ -35,12 +36,26 @@ public class FungalTransmuterCategory extends RootsRecipeBaseCategory<Transmutat
     int column = 0;
 
     for (int i = 0; i < recipe.getIngredients().size(); i++) {
-      if (i % 4 == 0 && i != 0) {
+      if (i % 3 == 0 && i != 0) {
         row++;
         column = 0;
       }
       builder.addSlot(RecipeIngredientRole.INPUT, 2 + column * 17, 2 + row * 17)
           .addIngredients(recipe.getIngredients().get(i));
+      column++;
+    }
+
+    int count = recipe.getIngredients().size();
+
+    for (int j = 0; j < recipe.getPowerRequirements().size(); j++) {
+      int i = count + j;
+      if (i % 3 == 0 && i != 0) {
+        row++;
+        column = 0;
+      }
+      builder.addSlot(RecipeIngredientRole.INPUT, 2 + column * 17, 2 + row * 17)
+          .addIngredients(RootsJEIPlugin.GROVE_POWER_TYPE, GroveGeneratedPower.fromRequest(recipe.getPowerRequirements().get(j)))
+          .setCustomRenderer(RootsJEIPlugin.GROVE_POWER_TYPE, RootsJEIPlugin.GROVE_POWER_RENDERER);
       column++;
     }
 
@@ -87,6 +102,5 @@ public class FungalTransmuterCategory extends RootsRecipeBaseCategory<Transmutat
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
     }
-/*    builder.addWidget(new GrovePowerWidget(recipe.getPower(), 66, 50, Component.translatable("roots.jei.text.grove_power", recipe.getPower())));*/
   }
 }

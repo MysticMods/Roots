@@ -11,7 +11,7 @@
       "file": "roots:font/mini_outline.png",
       "height": 7,
       "ascent": 7,
-      "chars": [ "0123456789" ]
+      "chars": [ "0123456789-" ]
     }
   ]
 }

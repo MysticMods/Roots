@@ -6,6 +6,7 @@ import mezz.jei.api.ingredients.IIngredientRenderer;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.grove.IGroveValue;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.client.RenderUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -43,13 +44,7 @@ public class RootsGroveNumberRenderer<T extends IGroveValue> implements IIngredi
       };
       guiGraphics.pose().pushPose();
       if (ingredient.value() != Integer.MAX_VALUE) {
-        String s = String.valueOf(ingredient.value());
-        guiGraphics.pose().translate(0.0F, 0.0F, 200.0F);
-        int color = 16777215;
-        if (ingredient.value() < 0) {
-          color = 16733525;
-        }
-        guiGraphics.drawString(font, s, posX + 19 - 2 - font.width(s), posY + 6 + 3, color, true);
+        RenderUtil.renderItemDecorationsInMini(guiGraphics, font, ingredient.grove().getIcon(), posX, posY, ingredient.value(), true);
       }
       guiGraphics.pose().translate(0, 0, 200);
       guiGraphics.blit(posX, posY, 0, 16, 16, sprite);

@@ -29,6 +29,7 @@ import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.client.BoundKeys;
+import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.item.GramaryItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -43,7 +44,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ChatScreen;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -480,7 +480,7 @@ public class HudOverlay {
         for (PowerRecord.TypedEntry entry : record) {
           Grove groveThisFrame = cycleTimer.getCycled(entry.getAllGroves());
           graphics.renderItem(groveThisFrame.getIcon(), x, y, 0);
-          renderItemDecorations(graphics, mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(entry.currentValue()));
+          RenderUtil.renderItemDecorationsInMini(graphics, mc.font, groveThisFrame.getIcon(), x, y, entry.currentValue());
           graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - height) - 4, 0x7fcfcfcf);
           graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - 4 - (height * entry.percentage())), groveThisFrame.getColor1() | 0xff000000);
           x += 18;
@@ -494,48 +494,12 @@ public class HudOverlay {
           for (PowerRequest request : collection) {
             Grove groveThisFrame = cycleTimer.getCycled(request.getAllGroves());
             graphics.renderItem(groveThisFrame.getIcon(), x, y, 0);
-            renderItemDecorations(graphics, mc.font, groveThisFrame.getIcon(), x, y, String.valueOf(request.total()));
+            RenderUtil.renderItemDecorationsInMini(graphics, mc.font, groveThisFrame.getIcon(), x, y, request.total());
             graphics.fill(RenderType.guiOverlay(), x + barStart, y - 4, x + barStop, Mth.floor(y - height) - 4, 0x7fcfcfcf);
             x += 18;
           }
         }
       }
-    }
-  }
-
-  public static void renderItemDecorations(GuiGraphics graphics, Font font, ItemStack stack, int x, int y, @javax.annotation.Nullable String text) {
-    if (!stack.isEmpty()) {
-      Minecraft mc = Minecraft.getInstance();
-      graphics.pose().pushPose();
-      if (stack.getCount() != 1 || text != null) {
-        String s = text == null ? String.valueOf(stack.getCount()) : text;
-        graphics.pose().translate(0.0F, 0.0F, 200.0F);
-        Component textComp = Component.literal(String.join("\uf801", s.split(""))).withStyle(style -> style.withFont(RootsAPI.MINI_OUTLINE_FONT));
-        graphics.drawString(font, textComp, x + 19 + 2 - font.width(s), y + 6 + 4, 16777215, false);
-      }
-
-      if (stack.isBarVisible()) {
-        int l = stack.getBarWidth();
-        int i = stack.getBarColor();
-        int j = x + 2;
-        int k = y + 13;
-        graphics.fill(RenderType.guiOverlay(), j, k, j + 13, k + 2, -16777216);
-        graphics.fill(RenderType.guiOverlay(), j, k, j + l, k + 1, i | 0xFF000000);
-      }
-
-      LocalPlayer localplayer = mc.player;
-      float f = localplayer == null
-          ? 0.0F
-          : localplayer.getCooldowns()
-          .getCooldownPercent(stack.getItem(), mc.getTimer().getGameTimeDeltaPartialTick(true));
-      if (f > 0.0F) {
-        int i1 = y + Mth.floor(16.0F * (1.0F - f));
-        int j1 = i1 + Mth.ceil(16.0F * f);
-        graphics.fill(RenderType.guiOverlay(), x, i1, x + 16, j1, Integer.MAX_VALUE);
-      }
-
-      graphics.pose().popPose();
-      net.neoforged.neoforge.client.ItemDecoratorHandler.of(stack).render(graphics, font, stack, x, y);
     }
   }
 

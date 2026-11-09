@@ -3,6 +3,7 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.grove.GroveCache;
 import mysticmods.roots.api.modifier.ModifierTrees;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.IDataMapInitialize;
@@ -105,11 +106,15 @@ public class DataEventHandler {
   @SubscribeEvent
   public static void onTagSync(TagsUpdatedEvent event) {
     if (event.getUpdateCause() != TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
+      // Server-side only
       AnimalHarvestRecipe.cached = AnimalHarvestRecipe.getServerRecipes(event.getRegistryAccess().asGetterLookup());
 
       EntityUtils.retestDeflectState(event.getRegistryAccess());
       ModRituals.ANIMAL_HARVEST.get().reset();
     }
+
+    // Both sides
+    GroveCache.reset();
   }
 
   @SubscribeEvent
