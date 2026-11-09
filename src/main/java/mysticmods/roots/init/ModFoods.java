@@ -33,23 +33,23 @@ public class ModFoods {
   // Drinks
 
   public static final FoodProperties APPLE_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationModifier(7.5f)
-      .usingConvertsTo(Items.GLASS_BOTTLE).build();
+      .usingConvertsTo(Items.GLASS_BOTTLE).alwaysEdible().build();
   public static final FoodProperties CACTUS_SYRUP = new FoodProperties.Builder().nutrition(1).saturationModifier(7.5f)
-      .usingConvertsTo(Items.GLASS).build();
+      .usingConvertsTo(Items.GLASS_BOTTLE).alwaysEdible().build();
   public static final FoodProperties DANDELION_CORDIAL = new FoodProperties.Builder().nutrition(1)
       .saturationModifier(7.5f).alwaysEdible().effect(() -> new MobEffectInstance(ModEffects.WAKEFUL), 1f)
       .usingConvertsTo(Items.GLASS_BOTTLE).build();
   public static final FoodProperties LILAC_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationModifier(7.5f)
-      .usingConvertsTo(Items.GLASS_BOTTLE).build();
+      .usingConvertsTo(Items.GLASS_BOTTLE).alwaysEdible().build();
   public static final FoodProperties PEONY_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationModifier(7.5f)
-      .usingConvertsTo(Items.GLASS_BOTTLE).build();
+      .usingConvertsTo(Items.GLASS_BOTTLE).alwaysEdible().build();
   public static final FoodProperties ROSE_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationModifier(7.5f)
-      .usingConvertsTo(Items.GLASS_BOTTLE).build();
+      .usingConvertsTo(Items.GLASS_BOTTLE).alwaysEdible().build();
   public static final FoodProperties VINEGAR = new FoodProperties.Builder().nutrition(1).saturationModifier(7.5f)
       .alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.HUNGER, 300, 0, false, false), 1.0f)
-      .usingConvertsTo(Items.GLASS_BOTTLE).build();
+      .usingConvertsTo(Items.GLASS_BOTTLE).alwaysEdible().build();
   public static final FoodProperties VEGETABLE_JUICE = new FoodProperties.Builder().nutrition(1)
-      .saturationModifier(7.5f).usingConvertsTo(Items.GLASS_BOTTLE).build();
+      .saturationModifier(7.5f).usingConvertsTo(Items.GLASS_BOTTLE).alwaysEdible().build();
 
   // Salads
   public static final FoodProperties AUBERGINE_SALAD = new FoodProperties.Builder().nutrition(5)
