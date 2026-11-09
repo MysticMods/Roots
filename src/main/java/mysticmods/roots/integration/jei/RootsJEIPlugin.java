@@ -340,7 +340,7 @@ public class RootsJEIPlugin implements IModPlugin {
       }
     }
 
-    registration.register(GROVE_RANK_TYPE, allGroveRanks, new RootsGroveRankHelper(), new RootsGroveRankRenderer(), GroveRankReputation.CODEC);
+    registration.register(GROVE_RANK_TYPE, Collections.emptyList(), new RootsGroveRankHelper(), new RootsGroveRankRenderer(), GroveRankReputation.CODEC);
     registration.register(GROVE_POWER_TYPE, grovePowerIngredients, new RootsGroveNumberHelper.Power(), GROVE_POWER_RENDERER, GroveGeneratedPower.CODEC);
     registration.register(GROVE_REPUTATION_TYPE, groveReputationIngredients, new RootsGroveNumberHelper.Reputation(), GROVE_REPUTATION_RENDERER, GroveReputation.CODEC);
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()

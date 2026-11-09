@@ -27,6 +27,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -2545,6 +2546,21 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.PERESKIA_CROP)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
             ), c, RootsAPI.rl("grove/wildwood_quiver"));
+
+    RecipeSaver.saver().unlockedBy("has_quartz", has(Tags.Items.GEMS_QUARTZ))
+            .save(GroveRecipe.Builder.create()
+                .build(BaseRecipeData.Builder.create()
+                    .result(ModItems.FURNACE_SPEED_AMPLIFIER.get(), 1)
+                    .requires(RootsTags.Items.RUNESTONE)
+                    .requires(RootsTags.Items.RUNESTONE)
+                    .requires(RootsTags.Items.RUNESTONE)
+                    .requires(Tags.Items.GEMS_QUARTZ)
+                    .requires(Items.FURNACE)
+                    .requires(Items.FURNACE)
+                    .requires(Items.FURNACE)
+                    .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                ), c, RootsAPI.rl("grove/furnace_amplifier"));
+
     GENERATING_RECIPES.set(false);
   }
 

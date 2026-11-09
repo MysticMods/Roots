@@ -1,0 +1,44 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "c:gems/quartz"
+      },
+      {
+        "item": "minecraft:furnace"
+      },
+      {
+        "item": "minecraft:furnace"
+      },
+      {
+        "item": "minecraft:furnace"
+      }
+    ],
+    "level_conditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "grove": "roots:any",
+          "name": "any",
+          "tag": "roots:grove_stones"
+        },
+        "require_active": true
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:furnace_amplifier"
+    }
+  }
+}

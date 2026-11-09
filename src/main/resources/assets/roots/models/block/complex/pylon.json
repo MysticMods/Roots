@@ -4,7 +4,8 @@
 	"parent": "block/block",
 	"textures": {
 		"2": "roots:block/runestone",
-		"3": "roots:block/runestone_brick"
+		"3": "roots:block/runestone_brick",
+		"particle": "roots:block/runestone"
 	},
 	"elements": [
 		{

@@ -19,7 +19,7 @@ public class DyeRecipeGenerator {
   public static List<RecipeHolder<CraftingRecipe>> generate() {
     List<RecipeHolder<CraftingRecipe>> recipes = new ArrayList<>();
 
-    for (Item item : Arrays.asList(ModItems.HERB_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get())) {
+    for (Item item : Arrays.asList(ModItems.HERB_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.SYLVAN_POUCH.get())) {
       List<ItemStack> colouredPouches = new ArrayList<>();
       ItemStack def = new ItemStack(item);
       def.set(ModAttachments.DYEABLE, DyeableWithDefault.DEFAULT);
