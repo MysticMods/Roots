@@ -59,7 +59,7 @@ public final class RootsSpellModifierTagsProvider extends IntrinsicHolderTagsPro
         .add(ModModifiers.SHATTER_HEIGHT_1.value(), ModModifiers.SHATTER_HEIGHT_2.value());
     this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_WIDTH)
         .add(ModModifiers.SHATTER_WIDTH_1.value(), ModModifiers.SHATTER_WIDTH_2.value());
-    this.tag(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS).add(ModModifiers.SHATTER_ADJUSTABLE.value());
+    this.tag(RootsTags.SpellModifiers.SKIPPED_IN_TOOLTIPS).add(ModModifiers.SHATTER_ADJUSTABLE.value(), ModModifiers.SYLVAN_LIGHT_COLOR.value());
     //noinspection unchecked
     this.tag(RootsTags.SpellModifiers.SHATTER_INCREASES_PARAMETERS)
         .addTags(RootsTags.SpellModifiers.SHATTER_INCREASES_DEPTH, RootsTags.SpellModifiers.SHATTER_INCREASES_HEIGHT, RootsTags.SpellModifiers.SHATTER_INCREASES_WIDTH);
