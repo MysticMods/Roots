@@ -106,11 +106,13 @@ public class MeanderTowardsParticle extends RootsParticle {
 
     if (level.getBlockState(destPos).is(RootsTags.Blocks.CONSTANT_GROVE_CONSUMERS)) {
       this.alpha = 0.3f;
+      this.quadSize = 0.1f;
     } else {
       this.alpha = 1f;
+      this.quadSize = (float) (0.195 * Mth.lerp(Mth.clamp(intensity, 0.0, 1.0), 0.6, 1.4));
     }
     this.lifetime = Math.max(10, Mth.ceil(totalLen / SPEED));
-    this.quadSize = (float) (0.195 * Mth.lerp(Mth.clamp(intensity, 0.0, 1.0), 0.6, 1.4));
+
   }
 
   private Vec3 randomUnit() {
