@@ -78,6 +78,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     add("roots.tooltip.effect", "Use to gain %s for %s seconds.");
     add("roots.tooltip.chance", "Chance: %s%%");
+    add("roots.tooltip.reputation.open_reputation", "[Press [%s] to view all your reputations.]");
 
     add("roots.tooltip.token.spell", "Spell: %s");
     add("roots.tooltip.token.modifier", "Modifier: %s");

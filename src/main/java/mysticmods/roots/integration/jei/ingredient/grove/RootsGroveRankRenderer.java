@@ -3,6 +3,8 @@ package mysticmods.roots.integration.jei.ingredient.grove;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.ingredients.IIngredientRenderer;
+import mysticmods.roots.api.reference.Keys;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.condition.GroveRankReputation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -42,8 +44,9 @@ public class RootsGroveRankRenderer implements IIngredientRenderer<GroveRankRepu
   @Override
   public List<Component> getTooltip(GroveRankReputation ingredient, TooltipFlag tooltipFlag) {
     List<Component> result = new ArrayList<>();
-    result.add(ingredient.grove().getStyledName());
-    result.add(Component.translatable("roots.grove.or_higher", ingredient.minimumRank().getName()));
+    result.add(Component.translatable("roots.grove.ranked_grove", ingredient.grove().getStyledName(), ingredient.minimumRank().getName()));
+    result.add(Component.empty());
+    result.add(Component.translatable("roots.tooltip.reputation.open_reputation", RootsClientHooks.getKey(tooltipFlag, Keys.OPEN_REPUTATION)));
     return result;
   }
 

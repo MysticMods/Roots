@@ -760,6 +760,7 @@
   "roots.tooltip.pouch.color": "Dyed: %s",
   "roots.tooltip.pouch.color_name": "%s",
   "roots.tooltip.pouch.key_binding": "Press %s to open your pouch.",
+  "roots.tooltip.reputation.open_reputation": "[Press [%s] to view all your reputations.]",
   "roots.tooltip.shift": "Shift",
   "roots.tooltip.staff.cooldown": " (CD: %ss)",
   "roots.tooltip.staff.data": "  %s: %s",
