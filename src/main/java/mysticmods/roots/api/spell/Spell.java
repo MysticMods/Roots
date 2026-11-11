@@ -83,7 +83,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   protected Component[] extendedDescription = null;
 
   protected final String generatedTooltipTemplate;
-  protected final String generatedExtendedTooltipTemplate;
+  protected final String[] generatedExtendedTooltipTemplate;
   protected final List<NumberFormatter<?>> numberFormatters;
 
   private final LayeredSpellProperties layeredProperties;
@@ -335,12 +335,25 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   @ApiStatus.Internal
   public void handleTooltip(BiConsumer<String, String> strings) {
-    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.isEmpty()) {
+    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.length == 0) {
       RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
       return;
     }
     strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
-    strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate);
+
+    int count = getExtendedTooltipLineCount();
+    if (count == 1) {
+      strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate[0]);
+    } else {
+      for (int i = 0; i < count; i++) {
+        strings.accept(this.getOrCreateTooltipExtendedDescriptionId() + "_" + i, this.generatedExtendedTooltipTemplate[i]);
+      }
+    }
+  }
+
+  @Override
+  public int getExtendedTooltipLineCount() {
+    return this.generatedExtendedTooltipTemplate.length;
   }
 
   // TODO: This does not function how it should function
@@ -498,7 +511,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     public Map<ResourceKey<SpellModifier>, Transformer> transformers = new HashMap<>();
 
     public String simpleTooltip = "";
-    public String extendedTooltip = "";
+    public String[] extendedTooltip = new String[]{};
     public List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
     public Function<Spell, Component[]> componentCreator;
 
@@ -699,7 +712,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     @Override
-    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
       this.simpleTooltip = s;
       this.extendedTooltip = s2;
       this.numberFormatters = numberFormatters;
@@ -718,7 +731,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     String descriptionTooltipId = null;
     String descriptionExtendedTooltipId = null;
     String generatedSimpleTooltip = null;
-    String generatedExtendedTooltip = null;
+    String[] generatedExtendedTooltip = null;
     List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
     Function<Spell, Component[]> componentCreator = null;
     TextColor textColor = null;
@@ -788,7 +801,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     }
 
     @Override
-    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
       this.generatedSimpleTooltip = s;
       this.generatedExtendedTooltip = s2;
       this.numberFormatters = numberFormatters;

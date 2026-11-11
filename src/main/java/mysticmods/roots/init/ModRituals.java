@@ -56,6 +56,7 @@ public class ModRituals {
           .segment("Harvested animals will glow for %s.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_GLOW_DURATION).by(Formatters.TICKS))
           .segment("For each harvesting attempt, there is a %s chance", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE).by(Formatters.PERCENT))
           .segment("that Looting %s will be applied.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE).by(Formatters.LEVEL))
+          .linebreak()
           .segment("Drops are limited to %s items (or unlimited if the value is -1)", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_STACK_LIMIT).by(Formatters.NUMBER))
           .segment("and each individual item is limited to a stack size of %s (or unlimited if the value is -1).", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT).by(Formatters.NUMBER))
           .segment("The ritual will attempt to harvest animals up to %s times", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_MAX_TRIES).by(Formatters.NUMBER))

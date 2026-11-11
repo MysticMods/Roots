@@ -1,5 +1,7 @@
 package mysticmods.roots.api.tooltip;
 
+import mysticmods.roots.util.TooltipUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
     return this;
   }
 
-  public TooltipBuilder<T> segment (NumberFormatter<?> property) {
+  public TooltipBuilder<T> segment(NumberFormatter<?> property) {
     this.propertyFormatters.add(property);
     return this;
   }
@@ -30,19 +32,31 @@ public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
     return this;
   }
 
+  public TooltipBuilder<T> linebreak() {
+    this.textSegments.add("%LINEBREAK%");
+    return this;
+  }
+
   public TooltipBuilder<T> segment(String segmentText, NumberFormatter<?> property) {
     this.textSegments.add(segmentText);
     this.propertyFormatters.add(property);
     return this;
   }
 
+  private String[] getGeneratedTooltip () {
+    if (textSegments.isEmpty()) {
+      return new String[]{simpleTooltip};
+    }
+
+    return TooltipUtil.convertToPositionalFormatters(String.join(" ", textSegments)).split("%LINEBREAK%");
+  }
+
   public T endTooltip() {
-    var generated = textSegments.isEmpty() ? simpleTooltip : String.join(" ", textSegments);
-    properties.accept(simpleTooltip, generated, propertyFormatters);
+    properties.accept(simpleTooltip, getGeneratedTooltip(), propertyFormatters);
     return properties;
   }
 
   @FunctionalInterface
-  public interface AcceptsTooltip extends TriConsumer<String, String, List<NumberFormatter<?>>> {
+  public interface AcceptsTooltip extends TriConsumer<String, String[], List<NumberFormatter<?>>> {
   }
 }

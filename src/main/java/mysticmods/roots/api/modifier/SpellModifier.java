@@ -46,7 +46,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   protected Component[] extendedDescription = null;
 
   protected final String generatedTooltipTemplate;
-  protected final String generatedExtendedTooltipTemplate;
+  protected final String[] generatedExtendedTooltipTemplate;
   protected final List<NumberFormatter<?>> numberFormatters;
 
   public SpellModifier(SpellModifier.Properties properties) {
@@ -169,12 +169,25 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     if (this.getGroupKey().useGroupDescription() && this.groupValue > 1) {
       return;
     }
-    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.isEmpty()) {
+    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.length == 0) {
       RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
       return;
     }
     strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
-    strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate);
+
+    int count = getExtendedTooltipLineCount();
+    if (count == 1) {
+      strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate[0]);
+    } else {
+      for (int i = 0; i < count; i++) {
+        strings.accept(this.getOrCreateTooltipExtendedDescriptionId() + "_" + i, this.generatedExtendedTooltipTemplate[i]);
+      }
+    }
+  }
+
+  @Override
+  public int getExtendedTooltipLineCount() {
+    return this.generatedExtendedTooltipTemplate.length;
   }
 
   public static class Properties extends Modifier.Properties<Spell, SpellModifier, SpellModifier.Properties> implements TooltipBuilder.AcceptsTooltip {
@@ -183,7 +196,7 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     CostInstance costs = null;
 
     String simpleTooltip = "";
-    String extendedTooltip = "";
+    String[] extendedTooltip = new String[]{};
     List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
 
     public Properties(ResourceKey<SpellModifier> key) {
@@ -233,9 +246,9 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
     }
 
     @Override
-    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
       this.simpleTooltip = s == null ? "" : s;
-      this.extendedTooltip = s2 == null ? "" : s2;
+      this.extendedTooltip = s2 == null ? new String[]{} : s2;
       this.numberFormatters = numberFormatters == null ? List.of() : numberFormatters;
     }
   }

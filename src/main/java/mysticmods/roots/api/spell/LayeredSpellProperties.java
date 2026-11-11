@@ -37,19 +37,21 @@ public class LayeredSpellProperties {
   private final LayerSet defaultLayer;
   private final Map<ResourceKey<SpellModifier>, LayerSet> layers = new HashMap<>();
   private final Map<SpellModifierSet, LayeredSpellProperty> layerCache = new Object2ObjectOpenCustomHashMap<>(SPELL_MODIFIER_STRATEGY);
-  private final List<Pair<String, String>> stringsToGenerate = new ArrayList<>();
+/*  private final List<Pair<String, String>> stringsToGenerate = new ArrayList<>();*/
 
   public LayeredSpellProperties(Spell.Properties properties, Spell spell) {
-    this.defaultLayer = new LayerSet(properties.castType, properties.chargeType, true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), properties.componentCreator, properties.textColor, properties.cycleComponent != null, properties.cycleComponent, false, -1);
+    this.defaultLayer = new LayerSet(properties.castType, properties.chargeType, true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(),
+        spell.getExtendedTooltipLineCount(),
+        properties.componentCreator, properties.textColor, properties.cycleComponent != null, properties.cycleComponent, false, -1);
     for (Map.Entry<ResourceKey<SpellModifier>, Spell.Transformer> entry : properties.transformers.entrySet()) {
       if (this.layers.containsKey(entry.getKey())) {
         throw new IllegalStateException("Transformer already registered for modifier '" + entry.getKey() + "'!");
       }
       var t = entry.getValue();
-      if (t.generatedExtendedTooltip != null && !t.generatedExtendedTooltip.isEmpty() && t.descriptionExtendedTooltipId != null && !t.descriptionExtendedTooltipId.isEmpty()) {
+/*      if (t.generatedExtendedTooltip != null && t.generatedExtendedTooltip.length != 0 && t.descriptionExtendedTooltipId != null && !t.descriptionExtendedTooltipId.isEmpty()) {
         stringsToGenerate.add(new Pair<>(t.descriptionExtendedTooltipId, t.generatedExtendedTooltip));
         stringsToGenerate.add(new Pair<>(t.descriptionTooltipId, t.generatedSimpleTooltip));
-      }
+      }*/
       this.layers.put(entry.getKey(), new LayerSet(
           t.castType,
           t.unitType,
@@ -59,6 +61,7 @@ public class LayeredSpellProperties {
           t.descriptionId,
           t.descriptionTooltipId,
           t.descriptionExtendedTooltipId,
+          t.generatedExtendedTooltip.length,
           t.componentCreator,
           t.textColor,
           t.hasComponent,
@@ -69,10 +72,10 @@ public class LayeredSpellProperties {
     }
   }
 
-  // TODO: Does this need to exist?
+/*  // TODO: Does this need to exist?
   public List<Pair<String, String>> getTranslationStrings () {
     return stringsToGenerate;
-  }
+  }*/
 
   public LayeredSpellProperty get(ISpellInstance instance) {
     return get(instance.getEnabledModifiers());
@@ -96,6 +99,7 @@ public class LayeredSpellProperties {
   public record LayerSet(@Nullable SpellType.Cast cast, @Nullable SpellType.Charge charge, boolean hasColors,
                          int color1, int color2, @Nullable String descriptionId, @Nullable String descriptionTooltipId,
                          @Nullable String descriptionTooltipExtendedId,
+                         int descriptionTooltipExtendedLineCount,
                          @Nullable Function<Spell, Component[]> componentCreator,
                          @Nullable TextColor color, boolean hasComponent,
                          @Nullable DataComponentType<? extends Cycling<?>> component, boolean hasPredicateValue,
@@ -110,6 +114,7 @@ public class LayeredSpellProperties {
           nextLayer.descriptionId != null ? nextLayer.descriptionId : this.descriptionId,
           nextLayer.descriptionTooltipId != null ? nextLayer.descriptionTooltipId : this.descriptionTooltipId,
           nextLayer.descriptionTooltipExtendedId != null ? nextLayer.descriptionTooltipExtendedId : this.descriptionTooltipExtendedId,
+          nextLayer.descriptionTooltipExtendedLineCount != -1 ? nextLayer.descriptionTooltipExtendedLineCount : this.descriptionTooltipExtendedLineCount,
           nextLayer.componentCreator != null ? nextLayer.componentCreator : this.componentCreator,
           nextLayer.color != null ? nextLayer.color : this.color,
           nextLayer.hasComponent || this.hasComponent,

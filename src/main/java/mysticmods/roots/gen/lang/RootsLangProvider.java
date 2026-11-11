@@ -1020,16 +1020,20 @@ public final class RootsLangProvider extends LanguageProvider {
     add(prefix + ".item", item);
   }
 
+  private void addTrim (String string, String string2) {
+    this.add(string, string2.trim());
+  }
+
   public void describeSpell (Spell spell) {
-    spell.handleTooltip(this::add);
+    spell.handleTooltip(this::addTrim);
   }
 
   public void describeModifier (SpellModifier modifier) {
-    modifier.handleTooltip(this::add);
+    modifier.handleTooltip(this::addTrim);
   }
 
   public void describeRitual (Ritual ritual) {
-    ritual.handleTooltip(this::add);
+    ritual.handleTooltip(this::addTrim);
   }
 
   public static String toEnglishName(String internalName) {

@@ -81,7 +81,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   protected Component[] extendedDescription = null;
 
   protected final String generatedTooltipTemplate;
-  protected final String generatedExtendedTooltipTemplate;
+  protected final String[] generatedExtendedTooltipTemplate;
   protected final List<NumberFormatter<?>> numberFormatters;
 
   public Ritual(Properties properties) {
@@ -430,12 +430,25 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   @ApiStatus.Internal
   public void handleTooltip(BiConsumer<String, String> strings) {
-    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.isEmpty()) {
+    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.length == 0) {
       RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
       return;
     }
     strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
-    strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate);
+
+    int count = getExtendedTooltipLineCount();
+    if (count == 1) {
+      strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate[0]);
+    } else {
+      for (int i = 0; i < count; i++) {
+        strings.accept(this.getOrCreateTooltipExtendedDescriptionId() + "_" + i, this.generatedExtendedTooltipTemplate[i]);
+      }
+    }
+  }
+
+  @Override
+  public int getExtendedTooltipLineCount() {
+    return this.generatedExtendedTooltipTemplate.length;
   }
 
   // Predicates
@@ -462,7 +475,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     public Map<ResourceKey<RitualModifier>, Transformer> transformers = new HashMap<>();
 
     public String simpleTooltip = "";
-    public String extendedTooltip = "";
+    public String[] extendedTooltip = new String[]{};
     public List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
     public Function<Ritual, Component[]> componentCreator;
 
@@ -612,7 +625,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     }
 
     @Override
-    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
       this.simpleTooltip = s;
       this.extendedTooltip = s2;
       this.numberFormatters = numberFormatters;
@@ -628,7 +641,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     String descriptionTooltipId = null;
     String descriptionExtendedTooltipId = null;
     String generatedSimpleTooltip = null;
-    String generatedExtendedTooltip = null;
+    String[] generatedExtendedTooltip = null;
     List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
     Function<Ritual, Component[]> componentCreator = null;
     TextColor textColor = null;
@@ -687,7 +700,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     }
 
     @Override
-    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
       this.generatedSimpleTooltip = s;
       this.generatedExtendedTooltip = s2;
       this.numberFormatters = numberFormatters;

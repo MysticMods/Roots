@@ -3,6 +3,9 @@ package mysticmods.roots.api.registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface IExtendedDescribedInstance<T> extends IExtendedDescribed {
   String getOrCreateTooltipExtendedDescriptionId(T instance);
 
@@ -18,8 +21,18 @@ public interface IExtendedDescribedInstance<T> extends IExtendedDescribed {
     return getOrCreateTooltipExtendedDescriptionId(instance);
   }
 
-  default MutableComponent getTooltipExtendedDescription(T instance) {
-    return Component.translatable(getTooltipExtendedDescriptionId(instance), (Object[]) getOrCreateDescriptionComponents(instance));
+  default List<Component> getTooltipExtendedDescription(T instance) {
+    if (getExtendedTooltipLineCount() == 1) {
+      return List.of(Component.translatable(getTooltipExtendedDescriptionId(instance), (Object[]) getOrCreateDescriptionComponents(instance)));
+    } else {
+      List<Component> result = new ArrayList<>();
+      for (int i = 0; i < getExtendedTooltipLineCount(); i++) {
+        result.add(Component.translatable(getTooltipExtendedDescriptionId(instance) + "_" + i, (Object[]) getOrCreateDescriptionComponents(instance)));
+        result.add(Component.empty());
+      }
+      result.removeLast();
+      return result;
+    }
   }
 
   default MutableComponent getTooltipDescription(T instance) {

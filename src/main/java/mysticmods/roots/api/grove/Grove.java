@@ -2,6 +2,7 @@ package mysticmods.roots.api.grove;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.Color;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsItemCallbacks;
 import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -28,11 +29,13 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
 public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescribed, IPropertyDataMapped, TooltipComponent {
@@ -56,7 +59,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
   protected Component[] extendedDescription = null;
 
   protected final String generatedTooltipTemplate;
-  protected final String generatedExtendedTooltipTemplate;
+  protected final String[] generatedExtendedTooltipTemplate;
   protected final List<NumberFormatter<?>> numberFormatters;
 
   public Grove(Grove.Properties properties) {
@@ -115,6 +118,29 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
 
   public GroveType getType() {
     return this.type;
+  }
+
+  @ApiStatus.Internal
+  public void handleTooltip(BiConsumer<String, String> strings) {
+    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.length == 0) {
+      RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
+      return;
+    }
+    strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
+
+    int count = getExtendedTooltipLineCount();
+    if (count == 1) {
+      strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate[0]);
+    } else {
+      for (int i = 0; i < count; i++) {
+        strings.accept(this.getOrCreateTooltipExtendedDescriptionId() + "_" + i, this.generatedExtendedTooltipTemplate[i]);
+      }
+    }
+  }
+
+  @Override
+  public int getExtendedTooltipLineCount() {
+    return this.generatedExtendedTooltipTemplate.length;
   }
 
   @Override
@@ -219,7 +245,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
     final List<PropertyHolder<?>> allProperties = new ArrayList<>();
 
     public String simpleTooltip = "";
-    public String extendedTooltip = "";
+    public String[] extendedTooltip = new String[]{};
     public List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
     public GroveColors color;
 
@@ -260,7 +286,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
     }
 
     @Override
-    public void accept(String s, String s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
       this.simpleTooltip = s;
       this.extendedTooltip = s2;
       this.numberFormatters = numberFormatters;

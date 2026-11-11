@@ -32,6 +32,8 @@ import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 // Beware: this is triggered on both the server and the client so never reference client-only things
@@ -291,17 +293,17 @@ public class TooltipUtil {
     }
     // TODO: Move `asSpell` -> `ISpellInstance::getTooltipExtendedDescription`
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
-      tooltipComponents.add(spell.asSpell().getTooltipExtendedDescription(spell));
+      tooltipComponents.addAll(spell.asSpell().getTooltipExtendedDescription(spell));
     } else {
       tooltipComponents.add(spell.asSpell().getTooltipDescription(spell));
     }
   }
 
-  public static <T, M extends Modifier<T, M> & IExtendedDescribed> Component describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, M modifier, TooltipFlag tooltipFlag) {
+  public static <T, M extends Modifier<T, M> & IExtendedDescribed> List<Component> describeModifier(Item.TooltipContext context, List<Component> tooltipComponents, M modifier, TooltipFlag tooltipFlag) {
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
       return modifier.getTooltipExtendedDescription();
     } else {
-      return modifier.getTooltipDescription();
+      return List.of(modifier.getTooltipDescription());
     }
   }
 
@@ -321,7 +323,7 @@ public class TooltipUtil {
     }*/
     // TODO: Move `asRitual` -> `IRitualInstance::getTooltipExtendedDescription`
     if (tooltipFlag.hasAltDown() || tooltipFlag.hasControlDown()) {
-      tooltipComponents.add(ritual.asRitual().getTooltipExtendedDescription(ritual));
+      tooltipComponents.addAll(ritual.asRitual().getTooltipExtendedDescription(ritual));
     } else {
       tooltipComponents.add(ritual.asRitual().getTooltipDescription(ritual));
     }
@@ -371,6 +373,26 @@ public class TooltipUtil {
         }
       }
     }
+  }
+
+  private static final Pattern FORMAT_PATTERN = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)");
+
+  public static String convertToPositionalFormatters(String template) {
+    Matcher matcher = FORMAT_PATTERN.matcher(template);
+    StringBuilder out = new StringBuilder(template.length() + 8);
+    int counter = 0;
+
+    while (matcher.find()) {
+      String replacement;
+      if (matcher.group(1) == null && "s".equals(matcher.group(2))) {
+        replacement = "%" + (++counter) + "$s";
+      } else {
+        replacement = matcher.group();
+      }
+      matcher.appendReplacement(out, Matcher.quoteReplacement(replacement));
+    }
+    matcher.appendTail(out);
+    return out.toString();
   }
 }
 

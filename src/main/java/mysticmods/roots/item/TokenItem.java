@@ -156,7 +156,7 @@ public abstract class TokenItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-      tooltipComponents.add(TooltipUtil.describeModifier(context, tooltipComponents, getSpellModifier(), tooltipFlag));
+      tooltipComponents.addAll(TooltipUtil.describeModifier(context, tooltipComponents, getSpellModifier(), tooltipFlag));
       tooltipComponents.add(CommonComponents.EMPTY);
       TooltipUtil.baseModifierCostTooltip(context, tooltipComponents, List.of(getSpellModifier()), tooltipFlag);
       if (context.level() != null && context.level().isClientSide()) {
