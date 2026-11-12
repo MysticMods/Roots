@@ -968,7 +968,7 @@ public final class RootsLangProvider extends LanguageProvider {
     for (Symmetry sym : Symmetry.values()) {
       add(sym.getTranslationKey(), toEnglishName(sym.getSerializedName()));
     }
-    for (Formatters.Formatter<?> formatter : Arrays.asList(Formatters.BRACKETS, Formatters.DEGREES, Formatters.HEARTS, Formatters.LEVEL, Formatters.MULTIPLY, Formatters.NUMBER, Formatters.SINGLE_DECIMAL, Formatters.TICKS, Formatters.PERCENT)) {
+    for (Formatters.Formatter<?> formatter : Arrays.asList(Formatters.BRACKETS, Formatters.DEGREES, Formatters.HEARTS, Formatters.LEVEL, Formatters.MULTIPLY, Formatters.NUMBER, Formatters.SINGLE_DECIMAL, Formatters.TICKS, Formatters.PERCENT, Formatters.BOOL_TRUE, Formatters.BOOL_FALSE, Formatters.BOOL)) {
       add(formatter.key(), formatter.translation());
     }
 

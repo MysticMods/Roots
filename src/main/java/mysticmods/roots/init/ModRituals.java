@@ -32,9 +32,9 @@ public class ModRituals {
           .interval(ModRituals.CRAFTING_INTERVAL)
           .tooltip()
           .simple("Uses the power of rituals to craft an item.")
-          .segment("Uses the power of rituals to craft an item. Lasts %s", Formatters.forProperty(ModRituals.CRAFTING_DURATION)
+          .segment("Uses the power of rituals to craft an item. Lasts %s", Formatters.number(ModRituals.CRAFTING_DURATION)
               .by(Formatters.TICKS))
-          .segment(" and activates after %s.", Formatters.forProperty(ModRituals.CRAFTING_INTERVAL).by(Formatters.TICKS))
+          .segment(" and activates after %s.", Formatters.number(ModRituals.CRAFTING_INTERVAL).by(Formatters.TICKS))
           .endTooltip()
       )
   );
@@ -42,26 +42,36 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> CRAFTING_INTERVAL = P.recordProperty("crafting/interval", Property.ofInt(120, RitualProperties.INTERVAL));
 
   public static final DeferredHolder<Ritual, AnimalHarvestRitual> ANIMAL_HARVEST = RITUAL.register("animal_harvest", () -> new AnimalHarvestRitual(new Ritual.Properties(Rituals.ANIMAL_HARVEST)
-      .duration(ModRituals.ANIMAL_HARVEST_DURATION)
-      .count(ModRituals.ANIMAL_HARVEST_COUNT)
-      .interval(ModRituals.ANIMAL_HARVEST_INTERVAL)
-      .radius(ModRituals.ANIMAL_HARVEST_RADIUS_XZ, ModRituals.ANIMAL_HARVEST_RADIUS_Y)
-      .properties(ModRituals.ANIMAL_HARVEST_GLOW_DURATION, ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE, ModRituals.ANIMAL_HARVEST_LOOTING_VALUE, ModRituals.ANIMAL_HARVEST_MAX_TRIES, ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT, ModRituals.ANIMAL_HARVEST_STACK_LIMIT)
-      .tooltip()
-      .simple("Allows the harvesting of animals within the ritual area, causing them to drop items without them taking physical harm.")
-          .segment("Allows the harvesting of up to %s animals", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_COUNT).by(Formatters.NUMBER))
-      .segment("within the ritual area of %s blocks around the Pyre.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_RADIUS_XZ, ModRituals.ANIMAL_HARVEST_RADIUS_Y).by(Formatters.BLOCK_RANGE))
-          .segment("The ritual will last %s", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_DURATION).by(Formatters.TICKS))
-          .segment("and activate every %s during that time.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_INTERVAL).by(Formatters.TICKS))
-          .segment("Harvested animals will glow for %s.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_GLOW_DURATION).by(Formatters.TICKS))
-          .segment("For each harvesting attempt, there is a %s chance", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE).by(Formatters.PERCENT))
-          .segment("that Looting %s will be applied.", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE).by(Formatters.LEVEL))
+          .duration(ModRituals.ANIMAL_HARVEST_DURATION)
+          .count(ModRituals.ANIMAL_HARVEST_COUNT)
+          .interval(ModRituals.ANIMAL_HARVEST_INTERVAL)
+          .radius(ModRituals.ANIMAL_HARVEST_RADIUS_XZ, ModRituals.ANIMAL_HARVEST_RADIUS_Y)
+          .properties(ModRituals.ANIMAL_HARVEST_GLOW_DURATION, ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE, ModRituals.ANIMAL_HARVEST_LOOTING_VALUE, ModRituals.ANIMAL_HARVEST_MAX_TRIES, ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT, ModRituals.ANIMAL_HARVEST_STACK_LIMIT)
+          .tooltip()
+          .simple("Allows the harvesting of animals within the ritual area, causing them to drop items without them taking physical harm.")
+          .segment("Allows the harvesting of up to %s animals", Formatters.number(ModRituals.ANIMAL_HARVEST_COUNT)
+              .by(Formatters.NUMBER))
+          .segment("within the ritual area of %s blocks around the Pyre.", Formatters.number(ModRituals.ANIMAL_HARVEST_RADIUS_XZ, ModRituals.ANIMAL_HARVEST_RADIUS_Y)
+              .by(Formatters.BLOCK_RANGE))
+          .segment("The ritual will last %s", Formatters.number(ModRituals.ANIMAL_HARVEST_DURATION)
+              .by(Formatters.TICKS))
+          .segment("and activate every %s during that time.", Formatters.number(ModRituals.ANIMAL_HARVEST_INTERVAL)
+              .by(Formatters.TICKS))
+          .segment("Harvested animals will glow for %s.", Formatters.number(ModRituals.ANIMAL_HARVEST_GLOW_DURATION)
+              .by(Formatters.TICKS))
+          .segment("For each harvesting attempt, there is a %s chance", Formatters.number(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE)
+              .by(Formatters.PERCENT))
+          .segment("that Looting %s will be applied.", Formatters.number(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE)
+              .by(Formatters.LEVEL))
           .linebreak()
-          .segment("Drops are limited to %s items (or unlimited if the value is -1)", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_STACK_LIMIT).by(Formatters.NUMBER))
-          .segment("and each individual item is limited to a stack size of %s (or unlimited if the value is -1).", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT).by(Formatters.NUMBER))
-          .segment("The ritual will attempt to harvest animals up to %s times", Formatters.forProperty(ModRituals.ANIMAL_HARVEST_MAX_TRIES).by(Formatters.NUMBER))
+          .segment("Drops are limited to %s items (or unlimited if the value is -1)", Formatters.number(ModRituals.ANIMAL_HARVEST_STACK_LIMIT)
+              .by(Formatters.NUMBER))
+          .segment("and each individual item is limited to a stack size of %s (or unlimited if the value is -1).", Formatters.number(ModRituals.ANIMAL_HARVEST_STACK_COUNT_LIMIT)
+              .by(Formatters.NUMBER))
+          .segment("The ritual will attempt to harvest animals up to %s times", Formatters.number(ModRituals.ANIMAL_HARVEST_MAX_TRIES)
+              .by(Formatters.NUMBER))
           .segment("if drops fail to generate. All drops are generated as though entities have been killed by a player.")
-      .endTooltip()
+          .endTooltip()
       )
   );
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_DURATION = P.recordProperty("animal_harvest/duration", Property.ofInt(3200, RitualProperties.DURATION));
@@ -81,7 +91,10 @@ public class ModRituals {
       .count(ModRituals.AUGMENTATION_COUNT)
       .interval(ModRituals.AUGMENTATION_INTERVAL)
       .radius(ModRituals.AUGMENTATION_RADIUS_XZ, ModRituals.AUGMENTATION_RADIUS_Y)
-      .properties(ModRituals.AUGMENTATION_GLOW_DURATION)));
+      .properties(ModRituals.AUGMENTATION_GLOW_DURATION)
+      .tooltip()
+      .simple("Currently not implemented.")
+      .endTooltip()));
   public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_DURATION = P.recordProperty("augmentation/duration", Property.ofInt(20, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_INTERVAL = P.recordProperty("augmentation/interval", Property.ofInt(19, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> AUGMENTATION_RADIUS_XZ = P.recordProperty("augmentation/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
@@ -93,7 +106,18 @@ public class ModRituals {
       .duration(ModRituals.BLOOMING_DURATION)
       .count(ModRituals.BLOOMING_COUNT)
       .interval(ModRituals.BLOOMING_INTERVAL)
-      .radius(ModRituals.BLOOMING_RADIUS_XZ, ModRituals.BLOOMING_RADIUS_Y)));
+      .radius(ModRituals.BLOOMING_RADIUS_XZ, ModRituals.BLOOMING_RADIUS_Y)
+      .tooltip()
+      .simple("Grows small flowers in a radius around the Pyre.")
+      .segment("Grows up to %s flowers", Formatters.number(ModRituals.BLOOMING_COUNT).by(Formatters.NUMBER))
+      .segment("every %s", Formatters.number(ModRituals.BLOOMING_INTERVAL).by(Formatters.TICKS))
+      .segment("for the ritual's duration of %s", Formatters.number(ModRituals.BLOOMING_DURATION)
+          .by(Formatters.TICKS))
+      .segment("at a random location within %s blocks", Formatters.number(ModRituals.BLOOMING_RADIUS_XZ, ModRituals.BLOOMING_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .linebreak()
+      .segment("Flowers will only grow on the relevant, eligible surfaces.")
+      .endTooltip()));
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_DURATION = P.recordProperty("blooming/duration", Property.ofInt(3200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_INTERVAL = P.recordProperty("blooming/interval", Property.ofInt(100, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_RADIUS_XZ = P.recordProperty("blooming/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
@@ -104,7 +128,17 @@ public class ModRituals {
       .duration(ModRituals.FIRE_STORM_DURATION)
       .count(ModRituals.FIRE_STORM_COUNT)
       .interval(ModRituals.FIRE_STORM_INTERVAL)
-      .radius(ModRituals.FIRE_STORM_RADIUS_XZ, ModRituals.FIRE_STORM_RADIUS_Y)));
+      .radius(ModRituals.FIRE_STORM_RADIUS_XZ, ModRituals.FIRE_STORM_RADIUS_Y)
+      .tooltip()
+      .simple("Causes a storm of meteors to fall from the sky, striking hostile entities.")
+      .segment("Allows a maximum of %s meteors", Formatters.number(ModRituals.FIRE_STORM_COUNT)
+          .by(Formatters.NUMBER))
+      .segment("to fall upon the ritual area of %s blocks, damaging any hostile entity struck.", Formatters.number(ModRituals.FIRE_STORM_RADIUS_XZ, ModRituals.FIRE_STORM_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .segment("Additional meteors up to the maximum are summoned every %s", Formatters.number(ModRituals.FIRE_STORM_INTERVAL)
+          .by(Formatters.TICKS))
+      .segment("for the ritual's duration of %s.", Formatters.number(ModRituals.FIRE_STORM_DURATION))
+      .endTooltip()));
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_DURATION = P.recordProperty("fire_storm/duration", Property.ofInt(600, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_INTERVAL = P.recordProperty("fire_storm/interval", Property.ofInt(60, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_RADIUS_XZ = P.recordProperty("fire_storm/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
@@ -116,7 +150,35 @@ public class ModRituals {
       .count(ModRituals.FROST_LANDS_COUNT)
       .interval(ModRituals.FROST_LANDS_INTERVAL)
       .radius(ModRituals.FROST_LANDS_RADIUS_XZ, ModRituals.FROST_LANDS_RADIUS_Y)
-      .properties(ModRituals.FROST_LANDS_FLUID_COUNT, ModRituals.FROST_LANDS_LAYER_CHANCE, ModRituals.FROST_LANDS_POWDER_CHANCE, ModRituals.FROST_LANDS_ICE_CHANCE, ModRituals.FROST_LANDS_INTERVAL_HEAL, ModRituals.FROST_LANDS_SPAWN_CHANCE)));
+      .properties(ModRituals.FROST_LANDS_FLUID_COUNT, ModRituals.FROST_LANDS_LAYER_CHANCE, ModRituals.FROST_LANDS_POWDER_CHANCE, ModRituals.FROST_LANDS_ICE_CHANCE, ModRituals.FROST_LANDS_INTERVAL_HEAL, ModRituals.FROST_LANDS_SPAWN_CHANCE)
+      .tooltip()
+      .simple("Causes the area around the Pyre to be transformed into ice and snow, summoning Snow Golems and causing blocks to freeze.")
+      .segment("Performs up to %s operations on solid blocks", Formatters.number(ModRituals.FROST_LANDS_COUNT)
+          .by(Formatters.NUMBER))
+      .segment("and %s operations on liquid blocks", Formatters.number(ModRituals.FROST_LANDS_FLUID_COUNT)
+          .by(Formatters.NUMBER))
+      .segment("every %s", Formatters.number(ModRituals.FROST_LANDS_INTERVAL).by(Formatters.TICKS))
+      .segment("in a radius of %s blocks around the Pyre,", Formatters.number(ModRituals.FROST_LANDS_RADIUS_XZ, ModRituals.FROST_LANDS_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .segment("for the ritual's duration of %s.", Formatters.number(ModRituals.FROST_LANDS_DURATION)
+          .by(Formatters.TICKS))
+      .linebreak()
+      .segment("Each solid operation has a %s chance to add a layer of snow above (or increase the current layer by 1),", Formatters.number(ModRituals.FROST_LANDS_LAYER_CHANCE)
+          .by(Formatters.PERCENT))
+      .segment("a %s chance to convert an ice block into packed or blue ice,", Formatters.number(ModRituals.FROST_LANDS_ICE_CHANCE)
+          .by(Formatters.PERCENT))
+      .segment("and a %s chance to convert a fully layered snow block into powdered snow.", Formatters.number(ModRituals.FROST_LANDS_POWDER_CHANCE)
+          .by(Formatters.PERCENT))
+      .linebreak()
+      .segment("Liquid water blocks are converted into ice, lava into obsidian, and magma blocks into basalt.")
+      .linebreak()
+      .segment("Eligible entities, including Snow Golems, are healed every %s.", Formatters.number(ModRituals.FROST_LANDS_INTERVAL_HEAL)
+          .by(Formatters.TICKS))
+      .linebreak()
+      .segment("Every time the ritual ticks, there is a %s chance to spawn a Snow Golem,", Formatters.number(ModRituals.FROST_LANDS_SPAWN_CHANCE))
+      .segment("farmland has its moisture level increased by 1, and fires are extinguished.")
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_FLUID_COUNT = P.recordProperty("frost_lands/fluid_count", Property.ofInt(2, "The number of fluid blocks to tweak per interval."));
   public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_COUNT = P.recordProperty("frost_lands/count", Property.ofInt(5, "The number of blocks to tweak per interval."));
   public static final PropertyHolder<Property.FloatProperty> FROST_LANDS_LAYER_CHANCE = P.recordProperty("frost_lands/layer_chance", Property.ofFloat(0.1f, "The chance per interval that a snow layer will be added to an existing layer"));
@@ -132,7 +194,19 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, GatheringRitual> GATHERING = RITUAL.register("gathering", () -> new GatheringRitual(new Ritual.Properties(Rituals.GATHERING)
       .duration(ModRituals.GATHERING_DURATION)
       .interval(ModRituals.GATHERING_INTERVAL)
-      .radius(ModRituals.GATHERING_RADIUS_XZ, ModRituals.GATHERING_RADIUS_Y)));
+      .radius(ModRituals.GATHERING_RADIUS_XZ, ModRituals.GATHERING_RADIUS_Y)
+      .tooltip()
+      .simple("Teleports items within the radius of the ritual to the Pyre's location. If a suitable container is adjacent (but not beneath) the Pyre, the items will be stored in it.")
+      .segment("Teleports eligible items to the Pyre every %s", Formatters.number(ModRituals.GATHERING_INTERVAL)
+          .by(Formatters.TICKS))
+      .segment("within a radius of %s blocks around the Pyre", Formatters.number(ModRituals.GATHERING_RADIUS_XZ, ModRituals.GATHERING_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .segment("for the ritual's duration of %s.", Formatters.number(ModRituals.GATHERING_DURATION)
+          .by(Formatters.TICKS))
+      .linebreak()
+      .segment("If a suitable container is located adjacent to the Pyre (but not beneath), collected items will instead by stored in it.")
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> GATHERING_DURATION = P.recordProperty("gathering/duration", Property.ofInt(6000, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> GATHERING_INTERVAL = P.recordProperty("gathering/interval", Property.ofInt(80, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> GATHERING_RADIUS_XZ = P.recordProperty("gathering/radius_xz", Property.ofInt(20, RitualProperties.RADIUS_XZ));
@@ -141,7 +215,8 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, GerminationRitual> GERMINATION = RITUAL.register("germination", () -> new GerminationRitual(new Ritual.Properties(Rituals.GERMINATION)
       .duration(ModRituals.GERMINATION_DURATION)
       .interval(ModRituals.GERMINATION_INTERVAL)
-      .radius(ModRituals.GERMINATION_RADIUS_XZ, ModRituals.GERMINATION_RADIUS_Y)));
+      .radius(ModRituals.GERMINATION_RADIUS_XZ, ModRituals.GERMINATION_RADIUS_Y)
+      .tooltip("Not yet implemented.")));
   public static final PropertyHolder<Property.IntegerProperty> GERMINATION_DURATION = P.recordProperty("germination/duration", Property.ofInt(6400, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> GERMINATION_INTERVAL = P.recordProperty("germination/interval", Property.ofInt(64, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> GERMINATION_RADIUS_XZ = P.recordProperty("germination/radius_xz", Property.ofInt(20, RitualProperties.RADIUS_XZ));
@@ -151,7 +226,18 @@ public class ModRituals {
       .duration(ModRituals.HEALING_AURA_DURATION)
       .interval(ModRituals.HEALING_AURA_INTERVAL)
       .radius(ModRituals.HEALING_AURA_RADIUS_XZ, ModRituals.HEALING_AURA_RADIUS_Y)
-      .properties(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT, ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT)));
+      .properties(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT, ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT)
+      .tooltip()
+      .simple("Heals players and other entities around the Pyre.")
+      .segment("Heals every player for %s", Formatters.number(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT).by(Formatters.HEARTS))
+      .segment("and other entities for %s", Formatters.number(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT).by(Formatters.HEARTS))
+      .segment("in a radius of %s blocks around the Pyre", Formatters.number(ModRituals.HEALING_AURA_RADIUS_XZ, ModRituals.HEALING_AURA_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .segment("every %s", Formatters.number(ModRituals.HEALING_AURA_INTERVAL).by(Formatters.TICKS))
+      .segment("for the ritual's duration of %s.", Formatters.number(ModRituals.HEALING_AURA_DURATION)
+          .by(Formatters.TICKS))
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_DURATION = P.recordProperty("healing_aura/duration", Property.ofInt(800, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_INTERVAL = P.recordProperty("healing_aura/interval", Property.ofInt(60, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_RADIUS_XZ = P.recordProperty("healing_aura/radius_xz", Property.ofInt(15, RitualProperties.RADIUS_XZ));
@@ -163,7 +249,16 @@ public class ModRituals {
       .duration(ModRituals.HEAVY_STORMS_DURATION)
       .interval(ModRituals.HEAVY_STORMS_INTERVAL)
       .radius(ModRituals.HEAVY_STORMS_RADIUS_XZ, ModRituals.HEAVY_STORMS_RADIUS_Y)
-      .properties(ModRituals.HEAVY_STORMS_WEATHER_DURATION, ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE, ModRituals.HEAVY_STORMS_CAUSES_RAIN, ModRituals.HEAVY_STORMS_CAUSES_THUNDER)));
+      .properties(ModRituals.HEAVY_STORMS_WEATHER_DURATION, ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE, ModRituals.HEAVY_STORMS_CAUSES_RAIN, ModRituals.HEAVY_STORMS_CAUSES_THUNDER)
+      .tooltip()
+      .simple("Triggers heavy rain and thunderstorms for the duration of the ritual. Has a chance to strike nearby entities with lightning.")
+      .segment("For the ritual's duration of %s,", Formatters.number(ModRituals.HEAVY_STORMS_DURATION).by(Formatters.TICKS))
+      .segment("attempts to modify the weather every %s", Formatters.number(ModRituals.HEAVY_STORMS_INTERVAL).by(Formatters.TICKS))
+      .segment("for the next %s.", Formatters.number(ModRituals.HEAVY_STORMS_WEATHER_DURATION).by(Formatters.TICKS))
+      .linebreak()
+      .segment("Will cause thunderstorms: %s.", Formatters.bool(ModRituals.HEAVY_STORMS_CAUSES_THUNDER).by(Formatters.BOOL))
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_DURATION = P.recordProperty("heavy_storms/duration", Property.ofInt(2400, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_WEATHER_DURATION = P.recordProperty("heavy_storms/weather_duration", Property.ofInt(200, "How long storms and rain should continue for."));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_INTERVAL = P.recordProperty("heavy_storms/interval", Property.ofInt(20, RitualProperties.INTERVAL));

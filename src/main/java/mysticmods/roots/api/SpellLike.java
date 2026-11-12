@@ -3,7 +3,7 @@ package mysticmods.roots.api;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 
-public interface SpellLike {
+public interface SpellLike extends Like<Spell> {
   Spell asSpell();
 
   default ISpellInstance simple () {
@@ -12,5 +12,10 @@ public interface SpellLike {
     }
 
     return ISpellInstance.of(this.asSpell());
+  }
+
+  @Override
+  default Spell asLike () {
+    return asSpell();
   }
 }

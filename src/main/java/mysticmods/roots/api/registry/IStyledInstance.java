@@ -1,6 +1,5 @@
 package mysticmods.roots.api.registry;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -8,7 +7,7 @@ import net.minecraft.network.chat.TextColor;
 import javax.annotation.Nullable;
 
 // TODO: Non-instanced overrides default, @Deprecated, defer to 'getRawXYZ'
-public interface IStyledInstance<T> extends IStyled {
+public interface IStyledInstance<T> extends IStyled, IDescribedInstance<T> {
   @Nullable
   TextColor getTextColor(T instance);
 
@@ -30,16 +29,7 @@ public interface IStyledInstance<T> extends IStyled {
     return getOrCreateStyle(instance);
   }
 
-  String getOrCreateDescriptionId(T instance);
-
-  default String getDescriptionId(T instance) {
-    return getOrCreateDescriptionId(instance);
-  }
-
-  default MutableComponent getName(T instance) {
-    return Component.translatable(this.getDescriptionId(instance));
-  }
-
+  // TODO: This shouldn't be here
   default MutableComponent getName(T instance, Style style) {
     return getName(instance).setStyle(style);
   }

@@ -3,19 +3,20 @@ package mysticmods.roots.api.ritual;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.mojang.serialization.Codec;
-import mysticmods.roots.api.Cycling;
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsItemCallbacks;
+import mysticmods.roots.api.*;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.modifier.RitualModifier;
+import mysticmods.roots.api.modifier.RitualModifierSet;
 import mysticmods.roots.api.property.IPropertyDataMapped;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.property.WithLayeredProperties;
 import mysticmods.roots.api.registry.*;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.tooltip.NumberFormatter;
+import mysticmods.roots.api.tooltip.BasePropertyFormatter;
+import mysticmods.roots.api.tooltip.DescriptionInstanceStore;
 import mysticmods.roots.api.tooltip.TooltipBuilder;
+import mysticmods.roots.api.tooltip.DescriptionStore;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.util.PositionCache;
 import net.minecraft.ChatFormatting;
@@ -41,14 +42,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.CommonHooks;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstance>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance>, IPropertyDataMapped {
+public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstance>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance>, IPropertyDataMapped, IKeyed<Ritual>, WithLayeredProperties<LayeredRitualProperty, Ritual, IRitualInstance>, RitualLike {
   public static final Codec<Ritual> CODEC = RootsRegistries.RITUALS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Ritual> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS);
 
@@ -57,10 +57,9 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   private final int color2;
   private final TextColor textColor;
   private final List<PropertyHolder<?>> allProperties;
+  private final DescriptionInstanceStore<Ritual, IRitualInstance, LayeredRitualProperty> descriptionStore;
 
   private Style style = null;
-
-  protected String descriptionId;
 
   protected DataComponentMap components;
   protected BoundingBox boundingBox;
@@ -76,13 +75,6 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   private final PropertyHolder<Property.IntegerProperty> countProperty;
 
   private final LayeredRitualProperties layeredProperties;
-  private String descriptionTooltipExtendedId;
-  private String descriptionTooltipId;
-  protected Component[] extendedDescription = null;
-
-  protected final String generatedTooltipTemplate;
-  protected final String[] generatedExtendedTooltipTemplate;
-  protected final List<NumberFormatter<?>> numberFormatters;
 
   public Ritual(Properties properties) {
     properties.build();
@@ -104,15 +96,24 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
     this.allProperties = new ArrayList<>(properties.allProperties);
 
-    this.generatedTooltipTemplate = properties.simpleTooltip;
-    this.generatedExtendedTooltipTemplate = properties.extendedTooltip;
-    this.numberFormatters = properties.numberFormatters;
+    this.descriptionStore = new DescriptionInstanceStore<>(this, properties.simpleTooltip, properties.extendedTooltip, properties.formatters);
 
     this.layeredProperties = new LayeredRitualProperties(properties, this);
   }
 
+  @Override
+  public Ritual asRitual() {
+    return this;
+  }
+
+  @Override
   public ResourceKey<Ritual> getKey() {
     return resourceKey;
+  }
+
+  @Override
+  public String getSignifier() {
+    return "ritual";
   }
 
   @Override
@@ -123,17 +124,18 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   @Override
   public String getOrCreateDescriptionId() {
-    if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("ritual", getKey().location());
-    }
-
-    return this.descriptionId;
+    return descriptionStore.getOrCreateDescriptionId();
   }
 
-  public static Component[] componentsFromFormatter(Ritual ritual, List<NumberFormatter<?>> formatters) {
+  @Override
+  public BiFunction<Like<Ritual>, List<BasePropertyFormatter<?, ?>>, Component[]> getComponentBuilder() {
+    return Ritual::componentsFromFormatter;
+  }
+
+  public static Component[] componentsFromFormatter(Like<Ritual> ritual, List<BasePropertyFormatter<?, ?>> formatters) {
     List<Component> componentList = new ArrayList<>();
-    for (NumberFormatter<?> formatter : formatters) {
-      formatter.ritual(ritual);
+    for (BasePropertyFormatter<?, ?> formatter : formatters) {
+      formatter.ritual(ritual.asLike());
       componentList.addAll(formatter.build());
     }
     return componentList.toArray(Component[]::new);
@@ -154,30 +156,18 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   @Override
   public Component[] getOrCreateDescriptionComponents() {
-    if (this.extendedDescription == null) {
-      if (this.numberFormatters.isEmpty()) {
-        this.extendedDescription = new Component[0];
-      } else {
-        this.extendedDescription = componentsFromFormatter(this, this.numberFormatters);
-      }
-    }
-
-    return this.extendedDescription;
+    return descriptionStore.getOrCreateDescriptionComponents();
   }
 
   @Override
   public Component[] getOrCreateDescriptionComponents(IRitualInstance instance) {
-    return layeredProperties.get(instance).componentCreator().apply(instance.asRitual());
+    return layeredProperties.get(instance).componentCreator().apply(instance);
   }
 
   // TODO: Tooltip doesn't have SpelInstance?
   @Override
   public String getOrCreateTooltipDescriptionId() {
-    if (this.descriptionTooltipId == null) {
-      this.descriptionTooltipId = getOrCreateDescriptionId() + ".description";
-    }
-
-    return this.descriptionTooltipId;
+    return descriptionStore.getOrCreateTooltipDescriptionId();
   }
 
   @Override
@@ -187,11 +177,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
   @Override
   public String getOrCreateTooltipExtendedDescriptionId() {
-    if (this.descriptionTooltipExtendedId == null) {
-      this.descriptionTooltipExtendedId = getOrCreateTooltipDescriptionId() + ".extended";
-    }
-
-    return this.descriptionTooltipExtendedId;
+    return this.descriptionStore.getOrCreateTooltipExtendedDescriptionId();
   }
 
   @Override
@@ -300,8 +286,13 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return properties;
   }
 
+  @Override
+  public LayeredRitualProperty getLayer(IRitualInstance iRitualInstance) {
+    return layeredProperties.get(iRitualInstance);
+  }
+
   protected void initializeProperties(Holder<Ritual> holder) {
-    this.extendedDescription = null;
+    this.descriptionStore.reset();
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     duration = properties.get(getDurationProperty());
     if (getRadiusXZProperty() != null) {
@@ -428,27 +419,13 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA);
   }
 
-  @ApiStatus.Internal
   public void handleTooltip(BiConsumer<String, String> strings) {
-    if (this.generatedTooltipTemplate.isEmpty() || this.generatedExtendedTooltipTemplate.length == 0) {
-      RootsAPI.LOG.info("Skipped {} as no generated tooltips!", this);
-      return;
-    }
-    strings.accept(this.getOrCreateTooltipDescriptionId(), this.generatedTooltipTemplate);
-
-    int count = getExtendedTooltipLineCount();
-    if (count == 1) {
-      strings.accept(this.getOrCreateTooltipExtendedDescriptionId(), this.generatedExtendedTooltipTemplate[0]);
-    } else {
-      for (int i = 0; i < count; i++) {
-        strings.accept(this.getOrCreateTooltipExtendedDescriptionId() + "_" + i, this.generatedExtendedTooltipTemplate[i]);
-      }
-    }
+    this.descriptionStore.handleTooltip(strings);
   }
 
   @Override
   public int getExtendedTooltipLineCount() {
-    return this.generatedExtendedTooltipTemplate.length;
+    return this.descriptionStore.getExtendedTooltipLineCount();
   }
 
   // Predicates
@@ -476,8 +453,8 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
 
     public String simpleTooltip = "";
     public String[] extendedTooltip = new String[]{};
-    public List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
-    public Function<Ritual, Component[]> componentCreator;
+    public List<BasePropertyFormatter<?, ?>> formatters = new ArrayList<>();
+    public Function<Like<Ritual>, Component[]> componentCreator;
 
     public Properties(ResourceKey<Ritual> resourceKey) {
       this.resourceKey = resourceKey;
@@ -625,11 +602,10 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     }
 
     @Override
-    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<BasePropertyFormatter<?, ?>> numberFormatters) {
       this.simpleTooltip = s;
       this.extendedTooltip = s2;
-      this.numberFormatters = numberFormatters;
-      this.componentCreator = Util.memoize((ritual) -> Ritual.componentsFromFormatter(ritual, this.numberFormatters));
+      this.formatters = numberFormatters;
     }
   }
 
@@ -642,8 +618,8 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     String descriptionExtendedTooltipId = null;
     String generatedSimpleTooltip = null;
     String[] generatedExtendedTooltip = null;
-    List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
-    Function<Ritual, Component[]> componentCreator = null;
+    List<BasePropertyFormatter<?, ?>> numberFormatters = new ArrayList<>();
+    Function<Like<Ritual>, Component[]> componentCreator = null;
     TextColor textColor = null;
     boolean hasComponent = false;
     DataComponentType<? extends Cycling<?>> cyclingComponent = null;
@@ -700,7 +676,7 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     }
 
     @Override
-    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<BasePropertyFormatter<?, ?>> numberFormatters) {
       this.generatedSimpleTooltip = s;
       this.generatedExtendedTooltip = s2;
       this.numberFormatters = numberFormatters;

@@ -28,7 +28,7 @@ public class ModModifierTooltips {
 
   public static final Tooltip ACID_CLOUD_FIRE = new Tooltip(tooltip ->
       tooltip.simple("Damaged entities are also set on fire.")
-          .segment("Damaged entities that are not currently on fire are set on fire for %s.", Formatters.forProperty(ModSpells.ACID_CLOUD_FIRE_TICKS)
+          .segment("Damaged entities that are not currently on fire are set on fire for %s.", Formatters.number(ModSpells.ACID_CLOUD_FIRE_TICKS)
               .by(Formatters.TICKS))
   );
 
@@ -38,30 +38,30 @@ public class ModModifierTooltips {
 
   public static final Tooltip ACID_CLOUD_SLOWNESS = new Tooltip(tooltip ->
       tooltip.simple("Damaged entities are also slowed.")
-          .segment("Damaged entities are afflicted with Slowness %s", Formatters.forProperty(ModSpells.ACID_CLOUD_SLOW_AMPLIFIER)
+          .segment("Damaged entities are afflicted with Slowness %s", Formatters.number(ModSpells.ACID_CLOUD_SLOW_AMPLIFIER)
               .by(Formatters.LEVEL))
-          .segment("for %s. This effect will not be refreshed until it expires.", Formatters.forProperty(ModSpells.ACID_CLOUD_SLOW_DURATION)
+          .segment("for %s. This effect will not be refreshed until it expires.", Formatters.number(ModSpells.ACID_CLOUD_SLOW_DURATION)
               .by(Formatters.TICKS)));
 
   public static final Tooltip ACID_CLOUD_TEMPORAL_MORASS = new Tooltip(tooltip -> tooltip.simple("Summons a Temporal Morass to the location where Acid Cloud was cast. The morass drastically slows any entities that pass through it.")
-      .segment("Summons a Temporal Morass to the location where Acid Cloud was cast. The morass covers an area of %s blocks", Formatters.forProperty(ModSpells.TEMPORAL_MORASS_RADIUS_XZ, ModSpells.TEMPORAL_MORASS_RADIUS_Y)
+      .segment("Summons a Temporal Morass to the location where Acid Cloud was cast. The morass covers an area of %s blocks", Formatters.number(ModSpells.TEMPORAL_MORASS_RADIUS_XZ, ModSpells.TEMPORAL_MORASS_RADIUS_Y)
           .by(Formatters.BLOCK_RANGE))
-      .segment("and lasts for %s.", Formatters.forProperty(ModSpells.TEMPORAL_MORASS_DURATION).by(Formatters.TICKS))
-      .segment("Entities are afflicted with Slowness %s as long as they remain in the morass.", Formatters.forProperty(ModSpells.TEMPORAL_MORASS_AMPLIFIER)
+      .segment("and lasts for %s.", Formatters.number(ModSpells.TEMPORAL_MORASS_DURATION).by(Formatters.TICKS))
+      .segment("Entities are afflicted with Slowness %s as long as they remain in the morass.", Formatters.number(ModSpells.TEMPORAL_MORASS_AMPLIFIER)
           .by(Formatters.LEVEL))
-      .segment("Summoning a morass triggers a cooldown of %s.", Formatters.forProperty(ModSpells.TEMPORAL_MORASS_COOLDOWN)
+      .segment("Summoning a morass triggers a cooldown of %s.", Formatters.number(ModSpells.TEMPORAL_MORASS_COOLDOWN)
           .by(Formatters.TICKS)));
 
   public static final Tooltip DANDELION_WINDS_DURATION = new Tooltip(tooltip -> tooltip.simple("Increases the duration of the Dandelion Winds effect.")
-      .segment("Increases the duration of the boost effect by %s", Formatters.forProperty(ModSpells.DANDELION_WINDS_DURATION_INCREASE)
+      .segment("Increases the duration of the boost effect by %s", Formatters.number(ModSpells.DANDELION_WINDS_DURATION_INCREASE)
           .by(Formatters.TICKS).multipliedByTier())
-      .segment("to a total of %s.", Formatters.forProperty(ModSpells.DANDELION_WINDS_DURATION).by(Formatters.TICKS)
+      .segment("to a total of %s.", Formatters.number(ModSpells.DANDELION_WINDS_DURATION).by(Formatters.TICKS)
           .multipliedByTier(ModSpells.DANDELION_WINDS_DURATION_INCREASE)));
 
   public static final Tooltip DANDELION_WINDS_CHANCE = new Tooltip(tooltip -> tooltip.simple("Increases the chance to deflect projectiles.")
-      .segment("Increases the chance to deflect projectiles by %s", Formatters.forProperty(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE)
+      .segment("Increases the chance to deflect projectiles by %s", Formatters.number(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE)
           .by(Formatters.PERCENT).multipliedByTier())
-      .segment("to a total of %s.", Formatters.forProperty(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE)
+      .segment("to a total of %s.", Formatters.number(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_CHANCE)
           .multipliedByTier(ModSpells.DANDELION_WINDS_PROJECTILE_DEFLECTION_INCREASE).by(Formatters.PERCENT)));
 
   // TODO:
@@ -69,11 +69,11 @@ public class ModModifierTooltips {
   public static final Tooltip DANDELION_WINDS_GUSTS = new Tooltip("Causes melee attackers to be pushed away from you.");
 
   public static final Tooltip DANDELION_WINDS_VORTEX_COOLDOWN = new Tooltip(tooltip -> tooltip.simple("Reduces the cooldown of the Vortex effect.")
-      .segment("Reduces the cooldown of the Vortex effect by %s.", Formatters.forProperty(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE)
+      .segment("Reduces the cooldown of the Vortex effect by %s.", Formatters.number(ModSpells.DANDELION_WINDS_VORTEX_COOLDOWN_DECREASE)
           .by(Formatters.TICKS).multipliedByTier()));
 
   public static final Tooltip DANDELION_WINDS_GUSTS_COOLDOWN = new Tooltip(tooltip -> tooltip.simple("Reduces the cooldown of the Gusts effect.")
-      .segment("Reduces the cooldown of the Gusts effect by %s.", Formatters.forProperty(ModSpells.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE)
+      .segment("Reduces the cooldown of the Gusts effect by %s.", Formatters.number(ModSpells.DANDELION_WINDS_GUSTS_COOLDOWN_DECREASE)
           .by(Formatters.TICKS).multipliedByTier()));
 
   public static final Tooltip DANDELION_WINDS_STATUE = new Tooltip("Increases your knockback resistance. [NYI]");
@@ -85,30 +85,30 @@ public class ModModifierTooltips {
 
   public static final Tooltip GROWTH_INFUSION_RAMPANT_GROWTH = new Tooltip(tooltip ->
       tooltip.simple("Causes accelerated growth to all eligible blocks in the area around you.")
-          .segment("Causes accelerated growth for up to %s eligible blocks", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT)
+          .segment("Causes accelerated growth for up to %s eligible blocks", Formatters.number(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_COUNT)
               .by(Formatters.NUMBER))
-          .segment("within %s blocks", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
+          .segment("within %s blocks", Formatters.number(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_XZ, ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_RADIUS_Y)
               .by(Formatters.BLOCK_RANGE))
-          .segment("every %s while channeled.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL)
+          .segment("every %s while channeled.", Formatters.number(ModSpells.GROWTH_INFUSION_RAMPANT_GROWTH_INTERVAL)
               .by(Formatters.TICKS))
           .segment("The number of ticks applied to each block varies."));
 
   public static final Tooltip GROWTH_INFUSION_FERTILIZER = new Tooltip(tooltip -> tooltip.simple("Duplicates the effects of using bone meal on the targeted block.")
-      .segment("Applies up to %s stacks of bone meal to the targeted block.", Formatters.forProperty(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT)
+      .segment("Applies up to %s stacks of bone meal to the targeted block.", Formatters.number(ModSpells.GROWTH_INFUSION_BONE_MEAL_COUNT)
           .by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_ADJUSTABLE = new Tooltip("Allows adjustment of the width, depth and height.");
 
   public static final Tooltip SHATTER_DEPTH = new Tooltip(tooltip -> tooltip.simple("Increases the depth of the Shatter spell.")
-      .segment("Increases the depth of the Shatter spell to %s blocks.", Formatters.forProperty(ModSpells.SHATTER_DEPTH_INCREASE)
+      .segment("Increases the depth of the Shatter spell to %s blocks.", Formatters.number(ModSpells.SHATTER_DEPTH_INCREASE)
           .multipliedByTier().by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_WIDTH = new Tooltip(tooltip -> tooltip.simple("Increases the width of the Shatter spell.")
-      .segment("Increases the width of the Shatter spell to %s blocks.", Formatters.forProperty(ModSpells.SHATTER_WIDTH_INCREASE)
+      .segment("Increases the width of the Shatter spell to %s blocks.", Formatters.number(ModSpells.SHATTER_WIDTH_INCREASE)
           .multipliedByTier().by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_HEIGHT = new Tooltip(tooltip -> tooltip.simple("Increases the height of the Shatter spell.")
-      .segment("Increases the height of the Shatter spell to %s blocks.", Formatters.forProperty(ModSpells.SHATTER_HEIGHT_INCREASE)
+      .segment("Increases the height of the Shatter spell to %s blocks.", Formatters.number(ModSpells.SHATTER_HEIGHT_INCREASE)
           .multipliedByTier().by(Formatters.NUMBER)));
 
   public static final Tooltip SHATTER_MAGNETISM = new Tooltip("Teleports dropped blocks to the player.");
@@ -119,17 +119,17 @@ public class ModModifierTooltips {
   public static final Tooltip SHATTER_FORTUNE_3 = new Tooltip("Applies Fortune III when breaking blocks.");
 
   public static final Tooltip SKY_SOARER_AMPLIFIED = new Tooltip(tooltip -> tooltip.simple("Increases speed of boost effect.")
-      .segment("Increases boost effect to %s.", Formatters.forProperty(ModSpells.SKY_SOARER_AMPLIFIER_INCREASE)
+      .segment("Increases boost effect to %s.", Formatters.number(ModSpells.SKY_SOARER_AMPLIFIER_INCREASE)
           .multipliedByTier().by(Formatters.SPRINT_SPEED)));
 
   public static final Tooltip SKY_SOARER_SPEEDY = new Tooltip(tooltip -> tooltip.simple("Increases duration of boost effect.")
-      .segment("Increases duration of boost effect [by %s]", Formatters.forProperty(ModSpells.SKY_SOARER_DURATION_INCREASE)
+      .segment("Increases duration of boost effect [by %s]", Formatters.number(ModSpells.SKY_SOARER_DURATION_INCREASE)
           .multipliedByTier().by(Formatters.PERCENT))
-      .segment("to %s.", Formatters.forProperty(ModSpells.SKY_SOARER_DURATION)
+      .segment("to %s.", Formatters.number(ModSpells.SKY_SOARER_DURATION)
           .multipliedByTier(ModSpells.SKY_SOARER_DURATION_INCREASE).by(Formatters.TICKS)));
 
   public static final Tooltip SKY_SOARER_FRIENDLY_EARTH = new Tooltip(tooltip -> tooltip.simple("Prevents you from taking fall damage after the boost effect expires.")
-      .segment("Prevents you from taking fall damage for %s after the boost effect ends.", Formatters.forProperty(ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION)
+      .segment("Prevents you from taking fall damage for %s after the boost effect ends.", Formatters.number(ModSpells.SKY_SOARER_FRIENDLY_EARTH_DURATION)
           .by(Formatters.TICKS)));
 
   public static final Tooltip SYLVAN_LIGHT_COLOR = new Tooltip("Allows Sylvan Light to be different colours.");

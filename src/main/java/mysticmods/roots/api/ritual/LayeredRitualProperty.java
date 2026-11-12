@@ -1,19 +1,20 @@
 package mysticmods.roots.api.ritual;
 
-import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.Like;
+import mysticmods.roots.api.RitualLike;
+import mysticmods.roots.api.property.LayeredProperty;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public record LayeredRitualProperty(
     int color1, int color2, String descriptionId, String descriptionTooltipId,
     String descriptionTooltipExtendedId,
-    Function<Ritual, Component[]> componentCreator,
+    Function<Like<Ritual>, Component[]> componentCreator,
     TextColor color,
-    float predicateValue) {
-  public LayeredRitualProperty(LayeredRitualProperties.LayerSet base) {
+    float predicateValue) implements LayeredProperty<Ritual> {
+  public LayeredRitualProperty(LayeredRitualProperties.RitualLayerSet base) {
     this(base.color1(), base.color2(), base.descriptionId(), base.descriptionTooltipId(), base.descriptionTooltipExtendedId(), base.componentCreator(), base.color(), base.predicateValue());
   }
 }

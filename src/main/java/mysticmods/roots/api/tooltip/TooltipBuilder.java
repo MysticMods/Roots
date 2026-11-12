@@ -10,7 +10,7 @@ import java.util.List;
 public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
   private String simpleTooltip = "";
   private final List<String> textSegments = new ArrayList<>();
-  private final List<NumberFormatter<?>> propertyFormatters = new ArrayList<>();
+  private final List<BasePropertyFormatter<?, ?>> propertyFormatters = new ArrayList<>();
   private final T properties;
 
   public TooltipBuilder(T properties) {
@@ -37,7 +37,7 @@ public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
     return this;
   }
 
-  public TooltipBuilder<T> segment(String segmentText, NumberFormatter<?> property) {
+  public TooltipBuilder<T> segment(String segmentText, BasePropertyFormatter<?, ?> property) {
     this.textSegments.add(segmentText);
     this.propertyFormatters.add(property);
     return this;
@@ -57,6 +57,6 @@ public class TooltipBuilder<T extends TooltipBuilder.AcceptsTooltip> {
   }
 
   @FunctionalInterface
-  public interface AcceptsTooltip extends TriConsumer<String, String[], List<NumberFormatter<?>>> {
+  public interface AcceptsTooltip extends TriConsumer<String, String[], List<BasePropertyFormatter<?, ?>>> {
   }
 }

@@ -31,6 +31,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
 
   protected String descriptionId;
   protected int depth = 0;
+  protected final ResourceKey<T> key;
   private String groupDescriptionId = null;
 
   public Modifier(Modifier.Properties<V, T, ?> properties) {
@@ -39,6 +40,7 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     this.conflicts = properties.conflicts;
     this.groupId = properties.groupId;
     this.groupValue = properties.groupValue;
+    this.key = properties.key;
   }
 
   public abstract boolean isTransforming();
@@ -74,12 +76,12 @@ public abstract class Modifier<V, T extends Modifier<V, T>> implements IDescribe
     return builtInRegistryHolder().getKey();
   }
 
-  protected abstract String getSignifier();
+  protected abstract String getModifierSignifier();
 
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId(getSignifier(), getSelf().location());
+      this.descriptionId = Util.makeDescriptionId(getModifierSignifier(), getSelf().location());
     }
 
     return this.descriptionId;

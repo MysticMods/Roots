@@ -1,13 +1,13 @@
 package mysticmods.roots.api.spell;
 
-import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import mysticmods.roots.api.Cycling;
+import mysticmods.roots.api.Like;
 import mysticmods.roots.api.SpellType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
-import mysticmods.roots.api.tooltip.NumberFormatter;
+import mysticmods.roots.api.property.LayeredProperties;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
@@ -15,10 +15,11 @@ import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
-public class LayeredSpellProperties {
+public class LayeredSpellProperties implements LayeredProperties<LayeredSpellProperty, Spell, ISpellInstance, SpellModifier, SpellModifierSet> {
   private static final Hash.Strategy<SpellModifierSet> SPELL_MODIFIER_STRATEGY = new Hash.Strategy<>() {
     @Override
     public int hashCode(SpellModifierSet o) {
@@ -37,7 +38,6 @@ public class LayeredSpellProperties {
   private final LayerSet defaultLayer;
   private final Map<ResourceKey<SpellModifier>, LayerSet> layers = new HashMap<>();
   private final Map<SpellModifierSet, LayeredSpellProperty> layerCache = new Object2ObjectOpenCustomHashMap<>(SPELL_MODIFIER_STRATEGY);
-/*  private final List<Pair<String, String>> stringsToGenerate = new ArrayList<>();*/
 
   public LayeredSpellProperties(Spell.Properties properties, Spell spell) {
     this.defaultLayer = new LayerSet(properties.castType, properties.chargeType, true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(),
@@ -48,10 +48,6 @@ public class LayeredSpellProperties {
         throw new IllegalStateException("Transformer already registered for modifier '" + entry.getKey() + "'!");
       }
       var t = entry.getValue();
-/*      if (t.generatedExtendedTooltip != null && t.generatedExtendedTooltip.length != 0 && t.descriptionExtendedTooltipId != null && !t.descriptionExtendedTooltipId.isEmpty()) {
-        stringsToGenerate.add(new Pair<>(t.descriptionExtendedTooltipId, t.generatedExtendedTooltip));
-        stringsToGenerate.add(new Pair<>(t.descriptionTooltipId, t.generatedSimpleTooltip));
-      }*/
       this.layers.put(entry.getKey(), new LayerSet(
           t.castType,
           t.unitType,
@@ -72,15 +68,12 @@ public class LayeredSpellProperties {
     }
   }
 
-/*  // TODO: Does this need to exist?
-  public List<Pair<String, String>> getTranslationStrings () {
-    return stringsToGenerate;
-  }*/
-
+  @Override
   public LayeredSpellProperty get(ISpellInstance instance) {
     return get(instance.getEnabledModifiers());
   }
 
+  @Override
   public LayeredSpellProperty get(SpellModifierSet modifiers) {
     return layerCache.computeIfAbsent(modifiers, mods -> {
       LayerSet base = defaultLayer;
@@ -100,7 +93,7 @@ public class LayeredSpellProperties {
                          int color1, int color2, @Nullable String descriptionId, @Nullable String descriptionTooltipId,
                          @Nullable String descriptionTooltipExtendedId,
                          int descriptionTooltipExtendedLineCount,
-                         @Nullable Function<Spell, Component[]> componentCreator,
+                         @Nullable Function<Like<Spell>, Component[]> componentCreator,
                          @Nullable TextColor color, boolean hasComponent,
                          @Nullable DataComponentType<? extends Cycling<?>> component, boolean hasPredicateValue,
                          float predicateValue) {

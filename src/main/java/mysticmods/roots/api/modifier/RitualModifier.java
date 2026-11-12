@@ -46,7 +46,7 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> implements 
   }
 
   @Override
-  protected String getSignifier() {
+  protected String getModifierSignifier() {
     return "ritual_modifier";
   }
 

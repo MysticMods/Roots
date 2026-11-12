@@ -2,8 +2,11 @@ package mysticmods.roots.api.ritual;
 
 import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
+import mysticmods.roots.api.Like;
+import mysticmods.roots.api.RitualLike;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.modifier.RitualModifierSet;
+import mysticmods.roots.api.property.LayeredProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
@@ -14,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class LayeredRitualProperties {
+public class LayeredRitualProperties implements LayeredProperties<LayeredRitualProperty, Ritual, IRitualInstance, RitualModifier, RitualModifierSet> {
   private static final Hash.Strategy<RitualModifierSet> SPELL_MODIFIER_STRATEGY = new Hash.Strategy<>() {
     @Override
     public int hashCode(RitualModifierSet o) {
@@ -30,18 +33,18 @@ public class LayeredRitualProperties {
     }
   };
 
-  private final LayerSet defaultLayer;
-  private final Map<ResourceKey<RitualModifier>, LayerSet> layers = new HashMap<>();
+  private final RitualLayerSet defaultLayer;
+  private final Map<ResourceKey<RitualModifier>, RitualLayerSet> layers = new HashMap<>();
   private final Map<RitualModifierSet, LayeredRitualProperty> layerCache = new Object2ObjectOpenCustomHashMap<>(SPELL_MODIFIER_STRATEGY);
 
-  public LayeredRitualProperties(Ritual.Properties properties, Ritual spell) {
-    this.defaultLayer = new LayerSet(true, properties.color1, properties.color2, spell.getDescriptionId(), spell.getTooltipDescriptionId(), spell.getTooltipExtendedDescriptionId(), properties.componentCreator, properties.textColor, false, -1);
+  public LayeredRitualProperties(Ritual.Properties properties, Ritual ritual) {
+    this.defaultLayer = new RitualLayerSet(true, properties.color1, properties.color2, ritual.getDescriptionId(), ritual.getTooltipDescriptionId(), ritual.getTooltipExtendedDescriptionId(), properties.componentCreator, properties.textColor, false, -1);
     for (Map.Entry<ResourceKey<RitualModifier>, Ritual.Transformer> entry : properties.transformers.entrySet()) {
       if (this.layers.containsKey(entry.getKey())) {
         throw new IllegalStateException("Transformer already registered for modifier '" + entry.getKey() + "'!");
       }
       var t = entry.getValue();
-      this.layers.put(entry.getKey(), new LayerSet(
+      this.layers.put(entry.getKey(), new RitualLayerSet(
           t.hasColors,
           t.color1,
           t.color2,
@@ -56,13 +59,15 @@ public class LayeredRitualProperties {
     }
   }
 
+  @Override
   public LayeredRitualProperty get(IRitualInstance instance) {
     return get(instance.getEnabledModifiers());
   }
 
+  @Override
   public LayeredRitualProperty get(RitualModifierSet modifiers) {
     return layerCache.computeIfAbsent(modifiers, mods -> {
-      LayerSet base = defaultLayer;
+      RitualLayerSet base = defaultLayer;
       for (ResourceKey<RitualModifier> transformer : mods.getTransformingKeys()) {
         var nextLayer = layers.get(transformer);
         if (nextLayer == null) {
@@ -75,14 +80,14 @@ public class LayeredRitualProperties {
   }
 
   @ApiStatus.Internal
-  public record LayerSet(boolean hasColors,
-                         int color1, int color2, @Nullable String descriptionId, @Nullable String descriptionTooltipId,
-                         @Nullable String descriptionTooltipExtendedId,
-                         @Nullable Function<Ritual, Component[]> componentCreator,
-                         @Nullable TextColor color, boolean hasPredicateValue,
-                         float predicateValue) {
-    public LayerSet compose(LayerSet nextLayer) {
-      return new LayerSet(
+  public record RitualLayerSet(boolean hasColors,
+                               int color1, int color2, @Nullable String descriptionId, @Nullable String descriptionTooltipId,
+                               @Nullable String descriptionTooltipExtendedId,
+                               @Nullable Function<Like<Ritual>, Component[]> componentCreator,
+                               @Nullable TextColor color, boolean hasPredicateValue,
+                               float predicateValue) {
+    public RitualLayerSet compose(RitualLayerSet nextLayer) {
+      return new RitualLayerSet(
           true,
           nextLayer.hasColors ? nextLayer.color1 : this.color1,
           nextLayer.hasColors ? nextLayer.color2 : this.color2,

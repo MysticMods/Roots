@@ -6,7 +6,7 @@ import net.minecraft.network.chat.MutableComponent;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IExtendedDescribedInstance<T> extends IExtendedDescribed {
+public interface IExtendedDescribedInstance<T> extends IExtendedDescribed, IDescribedInstance<T> {
   String getOrCreateTooltipExtendedDescriptionId(T instance);
 
   String getOrCreateTooltipDescriptionId(T instance);

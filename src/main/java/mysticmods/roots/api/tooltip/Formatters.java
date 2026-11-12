@@ -7,6 +7,7 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.ApiStatus;
 
 public class Formatters {
   public interface Formatter<T> {
@@ -178,6 +179,44 @@ public class Formatters {
     }
   };
 
+  @ApiStatus.Internal
+  public static final Formatter<Void> BOOL_TRUE = new Formatter<>() {
+    @Override
+    public ResourceLocation id() {
+      return RootsAPI.rl("bool_true");
+    }
+
+    @Override
+    public String translation() {
+      return "True";
+    }
+  };
+
+  @ApiStatus.Internal
+  public static final Formatter<Void> BOOL_FALSE = new Formatter<>() {
+    @Override
+    public ResourceLocation id() {
+      return RootsAPI.rl("bool_false");
+    }
+
+    @Override
+    public String translation() {
+      return "False";
+    }
+  };
+
+  public static final Formatter<Boolean> BOOL = new Formatter<>() {
+    @Override
+    public ResourceLocation id() {
+      return RootsAPI.rl("bool");
+    }
+
+    @Override
+    public MutableComponent component(Boolean value) {
+      return Component.translatable(key(), value == null || !value ? BOOL_FALSE.component(null) : BOOL_TRUE.component(null));
+    }
+  };
+
   public static final BiFormatter<Number, Number> BLOCK_RANGE = new BiFormatter<>() {
     @Override
     public ResourceLocation id() {
@@ -212,11 +251,15 @@ public class Formatters {
     }
   };
 
-  public static <T extends Number> NumberFormatter<T> forProperty(PropertyHolder<? extends Property<T>> property) {
+  public static <T extends Number> NumberFormatter<T> number(PropertyHolder<? extends Property<T>> property) {
     return new NumberFormatter<>(property);
   }
 
-  public static <T extends Number> NumberFormatter<T> forProperty(PropertyHolder<? extends Property<T>> property1, PropertyHolder<? extends Property<T>> property2) {
+  public static <T extends Number> NumberFormatter<T> number(PropertyHolder<? extends Property<T>> property1, PropertyHolder<? extends Property<T>> property2) {
     return new NumberFormatter<>(property1, property2);
+  }
+
+  public static BooleanFormatter<Boolean> bool(PropertyHolder<? extends Property<Boolean>> property1) {
+    return new BooleanFormatter<>(property1);
   }
 }

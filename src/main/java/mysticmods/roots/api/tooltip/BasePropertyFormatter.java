@@ -8,16 +8,18 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 
+import java.util.List;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
-public class BasePropertyFormatter<T, S extends BasePropertyFormatter<T, S>> {
+public abstract class BasePropertyFormatter<T, S extends BasePropertyFormatter<T, S>> {
   protected IPropertyDataMapped source;
   protected Supplier<Number> groupValue = null;
 
-  public S self () {
+  public S self() {
     //noinspection unchecked
     return (S) this;
   }
@@ -58,17 +60,17 @@ public class BasePropertyFormatter<T, S extends BasePropertyFormatter<T, S>> {
     return self();
   }
 
-  public S modifier (SpellModifier modifier) {
+  public S modifier(SpellModifier modifier) {
     this.groupValue = modifier::getGroupValue;
     return self();
   }
 
-  public S modifier (Holder<SpellModifier> modifier) {
+  public S modifier(Holder<SpellModifier> modifier) {
     this.groupValue = () -> modifier.value().getGroupValue();
     return self();
   }
 
-  public S modifier (ResourceKey<SpellModifier> modifierKey) {
+  public S modifier(ResourceKey<SpellModifier> modifierKey) {
     SpellModifier modifier = RootsRegistries.SPELL_MODIFIERS.get(modifierKey);
     if (modifier == null) {
       throw new NullPointerException("Missing modifier for: " + modifierKey);
@@ -76,21 +78,23 @@ public class BasePropertyFormatter<T, S extends BasePropertyFormatter<T, S>> {
     return modifier(modifier);
   }
 
-  public S grove (Holder<Grove> grove) {
+  public S grove(Holder<Grove> grove) {
     this.source = grove.value();
     return self();
   }
 
-  public S grove (Grove grove) {
+  public S grove(Grove grove) {
     this.source = grove;
     return self();
   }
 
-  public S grove (ResourceKey<Grove> groveKey) {
+  public S grove(ResourceKey<Grove> groveKey) {
     Grove grove = RootsRegistries.GROVES.get(groveKey);
     if (grove == null) {
       throw new NullPointerException("Missing grove for: " + groveKey);
     }
     return grove(grove);
   }
+
+  public abstract List<MutableComponent> build();
 }

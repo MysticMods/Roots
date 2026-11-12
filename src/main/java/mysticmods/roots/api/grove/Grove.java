@@ -13,6 +13,7 @@ import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IExtendedDescribed;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.tooltip.BasePropertyFormatter;
 import mysticmods.roots.api.tooltip.NumberFormatter;
 import mysticmods.roots.api.tooltip.TooltipBuilder;
 import net.minecraft.Util;
@@ -60,7 +61,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
 
   protected final String generatedTooltipTemplate;
   protected final String[] generatedExtendedTooltipTemplate;
-  protected final List<NumberFormatter<?>> numberFormatters;
+  protected final List<BasePropertyFormatter<?, ?>> numberFormatters;
 
   public Grove(Grove.Properties properties) {
     this.type = properties.groveType;
@@ -196,9 +197,9 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
     return this.descriptionTooltipExtendedId;
   }
 
-  public static Component[] componentsFromFormatter(Grove grove, List<NumberFormatter<?>> formatters) {
+  public static Component[] componentsFromFormatter(Grove grove, List<BasePropertyFormatter<?, ?>> formatters) {
     List<Component> componentList = new ArrayList<>();
-    for (NumberFormatter<?> entry : formatters) {
+    for (BasePropertyFormatter<?, ?> entry : formatters) {
       entry.grove(grove);
       componentList.addAll(entry.build());
     }
@@ -246,7 +247,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
 
     public String simpleTooltip = "";
     public String[] extendedTooltip = new String[]{};
-    public List<NumberFormatter<?>> numberFormatters = new ArrayList<>();
+    public List<BasePropertyFormatter<?, ?>> numberFormatters = new ArrayList<>();
     public GroveColors color;
 
     public Properties(ResourceKey<Grove> resourceKey) {
@@ -286,7 +287,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove>, IExtendedDescr
     }
 
     @Override
-    public void accept(String s, String[] s2, List<NumberFormatter<?>> numberFormatters) {
+    public void accept(String s, String[] s2, List<BasePropertyFormatter<?, ?>> numberFormatters) {
       this.simpleTooltip = s;
       this.extendedTooltip = s2;
       this.numberFormatters = numberFormatters;
