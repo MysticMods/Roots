@@ -1,8 +1,9 @@
-package mysticmods.roots.api.description;
+package mysticmods.roots.api.description.store;
 
-import mysticmods.roots.api.registry.Like;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.description.IExtendedDescribed;
 import mysticmods.roots.api.registry.GroupId;
+import mysticmods.roots.api.registry.Like;
 import mysticmods.roots.api.tooltip.BasePropertyFormatter;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class DescriptionStore<BASE extends IKeyed<BASE> & Like<BASE>> implements IExtendedDescribed {
+public class DescriptionStore<BASE extends IDescriptionStored<BASE> & Like<BASE>> implements IExtendedDescribed {
   protected String descriptionId;
   protected String descriptionTooltipExtendedId;
   protected String descriptionTooltipId;

@@ -7,6 +7,8 @@ import mysticmods.roots.api.*;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.description.*;
+import mysticmods.roots.api.description.store.DescriptionInstanceStore;
+import mysticmods.roots.api.description.store.IDescriptionStored;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
@@ -52,7 +54,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance>, IPropertyDataMapped, IKeyed<Spell>, WithLayeredProperties<LayeredSpellProperty, Spell, ISpellInstance> {
+public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance>, IPropertyDataMapped, IDescriptionStored<Spell>, WithLayeredProperties<LayeredSpellProperty, Spell, ISpellInstance> {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 

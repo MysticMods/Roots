@@ -2,7 +2,8 @@ package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.*;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.description.IKeyed;
+import mysticmods.roots.api.description.IStoredDescription;
+import mysticmods.roots.api.description.store.IDescriptionStored;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
@@ -13,7 +14,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellType;
 import mysticmods.roots.api.tooltip.BasePropertyFormatter;
-import mysticmods.roots.api.description.DescriptionStore;
+import mysticmods.roots.api.description.store.DescriptionStore;
 import mysticmods.roots.api.tooltip.TooltipBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -32,7 +33,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
 
-public class SpellModifier extends Modifier<Spell, SpellModifier> implements IExtendedDescribed, ICostedChild, IKeyed<SpellModifier>, Like<SpellModifier> {
+public class SpellModifier extends Modifier<Spell, SpellModifier> implements IStoredDescription<SpellModifier>, ICostedChild, IDescriptionStored<SpellModifier>, Like<SpellModifier> {
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
 
   protected final SpellType.Charge chargeType; // If null, use the spell default; otherwise, unless a transformer(?), a chargeType of `OPERATION` will store the number of operations of this instance of the modifier; a charge type of `INSTANCE` will only charge once per spell -- depending on the condition type.
@@ -45,7 +46,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   protected boolean transforming;
 
   protected final DescriptionStore<SpellModifier> descriptionStore;
-
 
   public SpellModifier(SpellModifier.Properties properties) {
     super(properties);
@@ -61,21 +61,9 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
   }
 
   @Override
-  public Component[] getOrCreateDescriptionComponents() {
-    return this.descriptionStore.getOrCreateDescriptionComponents();
+  public DescriptionStore<SpellModifier> getDescriptionStore() {
+    return this.descriptionStore;
   }
-
-  @Override
-  public String getOrCreateTooltipDescriptionId() {
-    return this.descriptionStore.getOrCreateTooltipDescriptionId();
-  }
-
-
-  @Override
-  public String getOrCreateTooltipExtendedDescriptionId() {
-    return descriptionStore.getOrCreateTooltipExtendedDescriptionId();
-  }
-
 
   @Override
   public boolean isTransforming() {
@@ -168,11 +156,6 @@ public class SpellModifier extends Modifier<Spell, SpellModifier> implements IEx
       return;
     }
     this.descriptionStore.handleTooltip(strings);
-  }
-
-  @Override
-  public int getExtendedTooltipLineCount() {
-    return this.descriptionStore.getExtendedTooltipLineCount();
   }
 
   @Override

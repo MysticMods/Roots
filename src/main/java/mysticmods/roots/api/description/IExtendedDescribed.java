@@ -28,7 +28,7 @@ public interface IExtendedDescribed extends ITooltipDescribed {
 
   Component[] getOrCreateDescriptionComponents();
 
-  default int getExtendedTooltipLineCount () {
+  default int getExtendedTooltipLineCount() {
     return 1;
   }
 }

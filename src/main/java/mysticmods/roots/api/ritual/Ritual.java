@@ -7,6 +7,8 @@ import mysticmods.roots.api.*;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.description.*;
+import mysticmods.roots.api.description.store.DescriptionInstanceStore;
+import mysticmods.roots.api.description.store.IDescriptionStored;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.property.IPropertyDataMapped;
 import mysticmods.roots.api.property.Property;
@@ -45,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstance>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance>, IPropertyDataMapped, IKeyed<Ritual>, WithLayeredProperties<LayeredRitualProperty, Ritual, IRitualInstance>, RitualLike {
+public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstance>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance>, IPropertyDataMapped, IDescriptionStored<Ritual>, WithLayeredProperties<LayeredRitualProperty, Ritual, IRitualInstance>, RitualLike {
   public static final Codec<Ritual> CODEC = RootsRegistries.RITUALS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Ritual> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS);
 
