@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstance>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance>, IPropertyDataMapped, IDescriptionStored<Ritual>, WithLayeredProperties<LayeredRitualProperty, Ritual, IRitualInstance>, RitualLike {
+public abstract class Ritual implements IStoredDescriptionInstance<Ritual, IRitualInstance, LayeredRitualProperty>, TooltipComponent, IDataMapInitialize<Ritual>, IStyledInstance<IRitualInstance>, IPropertyDataMapped, IDescriptionStored<Ritual>, WithLayeredProperties<LayeredRitualProperty, Ritual, IRitualInstance>, RitualLike {
   public static final Codec<Ritual> CODEC = RootsRegistries.RITUALS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Ritual> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS);
 
@@ -101,6 +101,11 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   }
 
   @Override
+  public DescriptionInstanceStore<Ritual, IRitualInstance, LayeredRitualProperty> getDescriptionStore() {
+    return this.descriptionStore;
+  }
+
+  @Override
   public Ritual asRitual() {
     return this;
   }
@@ -122,11 +127,6 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
   }
 
   @Override
-  public String getOrCreateDescriptionId() {
-    return descriptionStore.getOrCreateDescriptionId();
-  }
-
-  @Override
   public BiFunction<Like<Ritual>, List<BasePropertyFormatter<?, ?>>, Component[]> getComponentBuilder() {
     return Ritual::componentsFromFormatter;
   }
@@ -140,48 +140,13 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return componentList.toArray(Component[]::new);
   }
 
-  @Override
-  public String getOrCreateDescriptionId(IRitualInstance instance) {
-    return layeredProperties.get(instance).descriptionId();
-  }
-
   public Holder<Ritual> builtInRegistryHolder() {
     return RootsRegistries.RITUALS.wrapAsHolder(this);
   }
 
+  // TODO: ?
   public Component[] createModifierDescriptionComponents(RitualModifier modifier) {
     return new Component[]{};
-  }
-
-  @Override
-  public Component[] getOrCreateDescriptionComponents() {
-    return descriptionStore.getOrCreateDescriptionComponents();
-  }
-
-  @Override
-  public Component[] getOrCreateDescriptionComponents(IRitualInstance instance) {
-    return layeredProperties.get(instance).componentCreator().apply(instance);
-  }
-
-  // TODO: Tooltip doesn't have SpelInstance?
-  @Override
-  public String getOrCreateTooltipDescriptionId() {
-    return descriptionStore.getOrCreateTooltipDescriptionId();
-  }
-
-  @Override
-  public String getOrCreateTooltipDescriptionId(IRitualInstance iSpellInstance) {
-    return layeredProperties.get(iSpellInstance).descriptionTooltipId();
-  }
-
-  @Override
-  public String getOrCreateTooltipExtendedDescriptionId() {
-    return this.descriptionStore.getOrCreateTooltipExtendedDescriptionId();
-  }
-
-  @Override
-  public String getOrCreateTooltipExtendedDescriptionId(IRitualInstance instance) {
-    return layeredProperties.get(instance).descriptionTooltipExtendedId();
   }
 
   @Deprecated
@@ -418,13 +383,9 @@ public abstract class Ritual implements IExtendedDescribedInstance<IRitualInstan
     return builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA);
   }
 
+  // TODO:
   public void handleTooltip(BiConsumer<String, String> strings) {
     this.descriptionStore.handleTooltip(strings);
-  }
-
-  @Override
-  public int getExtendedTooltipLineCount() {
-    return this.descriptionStore.getExtendedTooltipLineCount();
   }
 
   // Predicates

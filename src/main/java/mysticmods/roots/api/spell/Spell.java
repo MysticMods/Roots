@@ -54,7 +54,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IExtendedDescribedInstance<ISpellInstance>, IPropertyDataMapped, IDescriptionStored<Spell>, WithLayeredProperties<LayeredSpellProperty, Spell, ISpellInstance> {
+public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted, SpellLike, TooltipComponent, IDataMapInitialize<Spell>, IStoredDescriptionInstance<Spell, ISpellInstance, LayeredSpellProperty>, IPropertyDataMapped, IDescriptionStored<Spell>, WithLayeredProperties<LayeredSpellProperty, Spell, ISpellInstance> {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
@@ -78,7 +78,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
 
   protected Style style;
   protected TextColor textColor;
-
 
   private final DescriptionInstanceStore<Spell, ISpellInstance, LayeredSpellProperty> descriptionStore;
 
@@ -107,6 +106,11 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   }
 
   @Override
+  public DescriptionInstanceStore<Spell, ISpellInstance, LayeredSpellProperty> getDescriptionStore() {
+    return this.descriptionStore;
+  }
+
+  @Override
   public ResourceKey<Spell> getKey() {
     return resourceKey;
   }
@@ -131,17 +135,7 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return componentsFromFormatter(spell, formatters, null);
   }
 
-  @Override
-  public Component[] getOrCreateDescriptionComponents() {
-    return descriptionStore.getOrCreateDescriptionComponents();
-  }
-
   public abstract Component[] createModifierDescriptionComponents(SpellModifier spellModifier);
-
-  @Override
-  public Component[] getOrCreateDescriptionComponents(ISpellInstance instance) {
-    return descriptionStore.getOrCreateDescriptionComponents(instance);
-  }
 
   @Override
   @Nullable
@@ -173,37 +167,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   public Style getOrCreateStyle(ISpellInstance instance) {
     var props = layeredProperties.get(instance);
     return Style.EMPTY.withColor(props.color()).withBold(true);
-  }
-
-  @Override
-  public String getOrCreateDescriptionId() {
-    return descriptionStore.getOrCreateDescriptionId();
-  }
-
-  @Override
-  public String getOrCreateDescriptionId(ISpellInstance instance) {
-    return descriptionStore.getOrCreateDescriptionId(instance);
-  }
-
-  @Override
-  public String getOrCreateTooltipDescriptionId() {
-    return descriptionStore.getOrCreateTooltipDescriptionId();
-  }
-
-  @Override
-  public String getOrCreateTooltipDescriptionId(ISpellInstance iSpellInstance) {
-    return descriptionStore.getOrCreateTooltipDescriptionId(iSpellInstance);
-  }
-
-
-  @Override
-  public String getOrCreateTooltipExtendedDescriptionId() {
-    return descriptionStore.getOrCreateTooltipExtendedDescriptionId();
-  }
-
-  @Override
-  public String getOrCreateTooltipExtendedDescriptionId(ISpellInstance instance) {
-    return descriptionStore.getOrCreateTooltipExtendedDescriptionId(instance);
   }
 
   @Deprecated
@@ -282,7 +245,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     return builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
   }
 
-
   protected void initializeProperties(Holder<Spell> holder) {
     this.descriptionStore.reset();;
 
@@ -307,14 +269,10 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
     initialize(holder);
   }
 
+  // TODO:
   @ApiStatus.Internal
   public void handleTooltip(BiConsumer<String, String> strings) {
     this.descriptionStore.handleTooltip(strings);
-  }
-
-  @Override
-  public int getExtendedTooltipLineCount() {
-    return this.descriptionStore.getExtendedTooltipLineCount();
   }
 
   @Override
@@ -412,11 +370,6 @@ public abstract class Spell implements IStyledInstance<ISpellInstance>, ICosted,
   @Nullable
   public AABB getAABB(ISpellInstance iSpellInstance) {
     return null;
-  }
-
-  @Override
-  public String getDescriptionId(ISpellInstance spellSlot) {
-    return layeredProperties.get(spellSlot).descriptionId();
   }
 
   public DataComponentMap getComponents() {

@@ -32,6 +32,7 @@ public class ModModifiers {
     var y = CostInstance.class;
     var z = SpellType.class;
     var a = SpellCosts.class;
+    var b = SpellModifiers.class;
   }
 
   public static final GroupId DANDELION_WINDS_DURATION = group("dandelion_winds/duration", true);
