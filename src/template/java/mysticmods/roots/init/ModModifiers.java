@@ -4,6 +4,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
+import mysticmods.roots.api.reference.SpellModifiers;
 import mysticmods.roots.api.spell.SpellType;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.reference.SpellCosts;
@@ -30,6 +31,7 @@ public class ModModifiers {
     var y = CostInstance.class;
     var z = SpellType.class;
     var a = SpellCosts.class;
+    var b = SpellModifiers.class;
   }
 
   // @GROUPS@
