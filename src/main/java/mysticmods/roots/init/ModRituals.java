@@ -229,8 +229,10 @@ public class ModRituals {
       .properties(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT, ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT)
       .tooltip()
       .simple("Heals players and other entities around the Pyre.")
-      .segment("Heals every player for %s", Formatters.number(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT).by(Formatters.HEARTS))
-      .segment("and other entities for %s", Formatters.number(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT).by(Formatters.HEARTS))
+      .segment("Heals every player for %s", Formatters.number(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT)
+          .by(Formatters.HEARTS))
+      .segment("and other entities for %s", Formatters.number(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT)
+          .by(Formatters.HEARTS))
       .segment("in a radius of %s blocks around the Pyre", Formatters.number(ModRituals.HEALING_AURA_RADIUS_XZ, ModRituals.HEALING_AURA_RADIUS_Y)
           .by(Formatters.BLOCK_RANGE))
       .segment("every %s", Formatters.number(ModRituals.HEALING_AURA_INTERVAL).by(Formatters.TICKS))
@@ -252,11 +254,22 @@ public class ModRituals {
       .properties(ModRituals.HEAVY_STORMS_WEATHER_DURATION, ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE, ModRituals.HEAVY_STORMS_CAUSES_RAIN, ModRituals.HEAVY_STORMS_CAUSES_THUNDER)
       .tooltip()
       .simple("Triggers heavy rain and thunderstorms for the duration of the ritual. Has a chance to strike nearby entities with lightning.")
-      .segment("For the ritual's duration of %s,", Formatters.number(ModRituals.HEAVY_STORMS_DURATION).by(Formatters.TICKS))
-      .segment("attempts to modify the weather every %s", Formatters.number(ModRituals.HEAVY_STORMS_INTERVAL).by(Formatters.TICKS))
-      .segment("for the next %s.", Formatters.number(ModRituals.HEAVY_STORMS_WEATHER_DURATION).by(Formatters.TICKS))
+      .segment("For the ritual's duration of %s,", Formatters.number(ModRituals.HEAVY_STORMS_DURATION)
+          .by(Formatters.TICKS))
+      .segment("attempts to modify the weather every %s", Formatters.number(ModRituals.HEAVY_STORMS_INTERVAL)
+          .by(Formatters.TICKS))
+      .segment("for the next %s.", Formatters.number(ModRituals.HEAVY_STORMS_DURATION).by(Formatters.TICKS))
+      .segment("Weather modification lasts for %s.", Formatters.number(ModRituals.HEAVY_STORMS_WEATHER_DURATION).by(Formatters.TICKS))
       .linebreak()
-      .segment("Will cause thunderstorms: %s.", Formatters.bool(ModRituals.HEAVY_STORMS_CAUSES_THUNDER).by(Formatters.BOOL))
+      .segment("Each interval there is a %s chance", Formatters.number(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE)
+          .by(Formatters.PERCENT))
+      .segment("for lightning to strike a location within %s blocks.", Formatters.number(ModRituals.HEAVY_STORMS_RADIUS_XZ, ModRituals.HEAVY_STORMS_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .linebreak()
+      .segment("Will cause thunderstorms: %s.", Formatters.bool(ModRituals.HEAVY_STORMS_CAUSES_THUNDER)
+          .by(Formatters.BOOL))
+      .linebreak()
+      .segment("Will cause rain: %s.", Formatters.bool(ModRituals.HEAVY_STORMS_CAUSES_RAIN).by(Formatters.BOOL))
       .endTooltip()
   ));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_DURATION = P.recordProperty("heavy_storms/duration", Property.ofInt(2400, RitualProperties.DURATION));
@@ -271,7 +284,19 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, OvergrowthRitual> OVERGROWTH = RITUAL.register("overgrowth", () -> new OvergrowthRitual(new Ritual.Properties(Rituals.OVERGROWTH)
       .duration(ModRituals.OVERGROWTH_DURATION)
       .interval(ModRituals.OVERGROWTH_INTERVAL)
-      .radius(ModRituals.OVERGROWTH_RADIUS_XZ, ModRituals.OVERGROWTH_RADIUS_Y)));
+      .radius(ModRituals.OVERGROWTH_RADIUS_XZ, ModRituals.OVERGROWTH_RADIUS_Y)
+      .tooltip()
+      .simple("Attempts to grow grove moss nearby: either adjacent to existing patches of grove moss, or above blocks adjacent to water.")
+      .segment("Attempts to grow grove moss every %s", Formatters.number(ModRituals.OVERGROWTH_INTERVAL)
+          .by(Formatters.TICKS))
+      .segment("for the ritual's duration of %s", Formatters.number(ModRituals.OVERGROWTH_DURATION)
+          .by(Formatters.TICKS))
+      .segment("at eligible locations within %s blocks.", Formatters.number(ModRituals.OVERGROWTH_RADIUS_XZ, ModRituals.OVERGROWTH_RADIUS_Y)
+          .by(Formatters.BLOCK_RANGE))
+      .linebreak()
+      .segment("Eligible locations are adjacent to existing patches of grove moss, or above blocks that are adjacent to water.")
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> OVERGROWTH_DURATION = P.recordProperty("overgrowth/duration", Property.ofInt(1950, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> OVERGROWTH_INTERVAL = P.recordProperty("overgrowth/interval", Property.ofInt(150, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> OVERGROWTH_RADIUS_XZ = P.recordProperty("overgrowth/radius_xz", Property.ofInt(6, RitualProperties.RADIUS_XZ));
@@ -281,7 +306,12 @@ public class ModRituals {
       .duration(ModRituals.PROTECTION_DURATION)
       .interval(ModRituals.PROTECTION_INTERVAL)
       .radius(ModRituals.PROTECTION_RADIUS_XZ, ModRituals.PROTECTION_RADIUS_Y)
-      .properties(ModRituals.PROTECTION_DAY_LENGTH, ModRituals.PROTECTION_NIGHT_THRESHOLD, ModRituals.PROTECTION_CLEARS_WEATHER, ModRituals.PROTECTION_SHORTENS_NIGHT, ModRituals.PROTECTION_LENGTHENS_DAY, ModRituals.PROTECTION_DAY_SPEED, ModRituals.PROTECTION_NIGHT_SPEED, ModRituals.PROTECTION_CLEAR_DURATION)));
+      .properties(ModRituals.PROTECTION_DAY_LENGTH, ModRituals.PROTECTION_NIGHT_THRESHOLD, ModRituals.PROTECTION_CLEARS_WEATHER, ModRituals.PROTECTION_SHORTENS_NIGHT, ModRituals.PROTECTION_LENGTHENS_DAY, ModRituals.PROTECTION_DAY_SPEED, ModRituals.PROTECTION_NIGHT_SPEED, ModRituals.PROTECTION_CLEAR_DURATION)
+      .tooltip()
+      .simple("Provides protection by lengthening the duration of daylight and shortening the duration of night, clearing away any inclement weather.")
+      // TODO:
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_DURATION = P.recordProperty("protection/duration", Property.ofInt(1200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_INTERVAL = P.recordProperty("protection/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_RADIUS_XZ = P.recordProperty("protection/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
