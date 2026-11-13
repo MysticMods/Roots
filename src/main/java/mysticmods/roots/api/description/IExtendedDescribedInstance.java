@@ -30,7 +30,9 @@ public interface IExtendedDescribedInstance<T> extends IExtendedDescribed, IDesc
         result.add(Component.translatable(getTooltipExtendedDescriptionId(instance) + "_" + i, (Object[]) getOrCreateDescriptionComponents(instance)));
         result.add(Component.empty());
       }
-      result.removeLast();
+      if (!result.isEmpty()) {
+        result.removeLast();
+      }
       return result;
     }
   }
