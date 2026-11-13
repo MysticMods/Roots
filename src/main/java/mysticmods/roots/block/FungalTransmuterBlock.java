@@ -1,7 +1,7 @@
 package mysticmods.roots.block;
 
 import com.mojang.serialization.MapCodec;
-import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.block.StateProperties;
 import mysticmods.roots.blockentity.FungalTransmuterBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModAttachments;

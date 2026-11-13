@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.SpellType;
+import mysticmods.roots.api.spell.SpellType;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedChild;

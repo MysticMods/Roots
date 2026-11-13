@@ -2,9 +2,8 @@ package mysticmods.roots.api.spell;
 
 import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
-import mysticmods.roots.api.Cycling;
-import mysticmods.roots.api.Like;
-import mysticmods.roots.api.SpellType;
+import mysticmods.roots.api.description.Cycling;
+import mysticmods.roots.api.registry.Like;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.property.LayeredProperties;

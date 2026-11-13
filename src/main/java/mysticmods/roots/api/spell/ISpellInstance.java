@@ -2,12 +2,14 @@ package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.*;
 import mysticmods.roots.api.attachment.CooldownStorage;
+import mysticmods.roots.api.description.Cycling;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.modifier.SpellModifierSet;
 import mysticmods.roots.api.registry.ICostedChild;
 import mysticmods.roots.api.registry.ICostedParent;
+import mysticmods.roots.api.registry.SpellLike;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentPatch;

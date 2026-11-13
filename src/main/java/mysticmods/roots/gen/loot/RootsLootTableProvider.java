@@ -1,7 +1,7 @@
 package mysticmods.roots.gen.loot;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.block.StateProperties;
 import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ElementalType;

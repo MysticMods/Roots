@@ -1,6 +1,6 @@
 package mysticmods.roots.api.property;
 
-import mysticmods.roots.api.Like;
+import mysticmods.roots.api.registry.Like;
 import net.minecraft.network.chat.Component;
 
 import java.util.function.Function;

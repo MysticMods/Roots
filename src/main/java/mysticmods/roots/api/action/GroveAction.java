@@ -2,7 +2,7 @@ package mysticmods.roots.api.action;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.registry.IDescribed;
+import mysticmods.roots.api.description.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;

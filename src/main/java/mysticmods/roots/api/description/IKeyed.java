@@ -1,6 +1,6 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.description;
 
-import mysticmods.roots.api.property.LayeredProperties;
+import mysticmods.roots.api.registry.Like;
 import mysticmods.roots.api.tooltip.BasePropertyFormatter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;

@@ -1,6 +1,6 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.SpellType;
+import mysticmods.roots.api.spell.SpellType;
 
 import java.util.Set;
 

@@ -1,6 +1,6 @@
 package mysticmods.roots.api.ritual;
 
-import mysticmods.roots.api.RitualLike;
+import mysticmods.roots.api.registry.RitualLike;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.modifier.RitualModifierSet;
 import mysticmods.roots.api.spell.IModified;
@@ -26,7 +26,6 @@ import org.apache.commons.lang3.NotImplementedException;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;

@@ -1,7 +1,6 @@
 package mysticmods.roots.api.ritual;
 
-import mysticmods.roots.api.Like;
-import mysticmods.roots.api.RitualLike;
+import mysticmods.roots.api.registry.Like;
 import mysticmods.roots.api.property.LayeredProperty;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;

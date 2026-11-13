@@ -1,4 +1,4 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.block;
 
 import mysticmods.roots.api.grove.Rank;
 import net.minecraft.util.StringRepresentable;

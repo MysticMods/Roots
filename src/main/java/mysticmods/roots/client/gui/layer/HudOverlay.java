@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.block.StateProperties;
 import mysticmods.roots.api.blockentity.ClearableBlockEntity;
 import mysticmods.roots.api.blockentity.FakeMenuBlockEntity;
 import mysticmods.roots.api.client.RootsClientAPI;

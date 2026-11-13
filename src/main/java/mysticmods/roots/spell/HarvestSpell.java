@@ -1,6 +1,6 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.Cycling;
+import mysticmods.roots.api.description.Cycling;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Costing;
 import mysticmods.roots.api.modifier.SpellModifier;

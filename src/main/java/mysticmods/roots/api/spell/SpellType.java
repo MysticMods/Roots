@@ -1,4 +1,4 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.spell;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;

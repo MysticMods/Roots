@@ -1,6 +1,6 @@
 package mysticmods.roots.network.server;
 
-import mysticmods.roots.api.Cycling;
+import mysticmods.roots.api.description.Cycling;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.GrantStorage;

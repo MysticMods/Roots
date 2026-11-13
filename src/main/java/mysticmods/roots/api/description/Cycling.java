@@ -1,6 +1,5 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.description;
 
-import mysticmods.roots.api.registry.IStyled;
 import net.minecraft.util.StringRepresentable;
 
 public interface Cycling<T extends Cycling<T>> extends IStyled, StringRepresentable {

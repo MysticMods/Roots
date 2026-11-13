@@ -10,7 +10,7 @@ import mysticmods.roots.action.LearnSpellModifierAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.registry.IDescribed;
+import mysticmods.roots.api.description.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.LibrarySpell;

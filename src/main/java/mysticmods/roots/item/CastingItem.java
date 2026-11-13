@@ -3,7 +3,7 @@ package mysticmods.roots.item;
 import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.SpellType;
+import mysticmods.roots.api.spell.SpellType;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.datacomponent.SpellInstance;
 import mysticmods.roots.api.datacomponent.SpellStorage;

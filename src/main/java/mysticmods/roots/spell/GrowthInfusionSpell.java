@@ -2,7 +2,7 @@ package mysticmods.roots.spell;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import mysticmods.roots.action.CropGrowthAction;
-import mysticmods.roots.api.Cycling;
+import mysticmods.roots.api.description.Cycling;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;

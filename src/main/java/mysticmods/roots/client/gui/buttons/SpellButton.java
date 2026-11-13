@@ -1,7 +1,7 @@
 package mysticmods.roots.client.gui.buttons;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mysticmods.roots.api.SpellLike;
+import mysticmods.roots.api.registry.SpellLike;
 import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.client.gui.screen.RootsScreen;
 import net.minecraft.client.gui.GuiGraphics;

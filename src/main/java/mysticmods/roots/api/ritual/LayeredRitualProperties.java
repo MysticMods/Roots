@@ -2,8 +2,7 @@ package mysticmods.roots.api.ritual;
 
 import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
-import mysticmods.roots.api.Like;
-import mysticmods.roots.api.RitualLike;
+import mysticmods.roots.api.registry.Like;
 import mysticmods.roots.api.modifier.RitualModifier;
 import mysticmods.roots.api.modifier.RitualModifierSet;
 import mysticmods.roots.api.property.LayeredProperties;

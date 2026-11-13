@@ -1,4 +1,4 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.registry;
 
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;

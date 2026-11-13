@@ -3,7 +3,7 @@ package mysticmods.roots.api.modifier;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.IDataMapInitialize;
-import mysticmods.roots.api.registry.IDescribed;
+import mysticmods.roots.api.description.IDescribed;
 import mysticmods.roots.api.registry.IGroupDescribed;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;

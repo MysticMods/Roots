@@ -1,4 +1,4 @@
-package mysticmods.roots.api.registry;
+package mysticmods.roots.api.description;
 
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;

@@ -4,7 +4,6 @@ import net.minecraft.Util;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-// TODO: Group descriptions
 public record GroupId(String groupKey, boolean useGroupDescription) {
   public static final GroupId NONE = new GroupId(null, false);
 

@@ -1,11 +1,10 @@
-package mysticmods.roots.api.tooltip;
+package mysticmods.roots.api.description;
 
-import mysticmods.roots.api.IKeyed;
-import mysticmods.roots.api.Like;
+import mysticmods.roots.api.registry.Like;
 import mysticmods.roots.api.property.LayeredProperty;
 import mysticmods.roots.api.property.WithLayeredProperties;
 import mysticmods.roots.api.registry.GroupId;
-import mysticmods.roots.api.registry.IExtendedDescribedInstance;
+import mysticmods.roots.api.tooltip.BasePropertyFormatter;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
