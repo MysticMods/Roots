@@ -190,6 +190,11 @@ public class Formatters {
     public String translation() {
       return "True";
     }
+
+    @Override
+    public MutableComponent component(Void value) {
+      return Component.translatable(key());
+    }
   };
 
   @ApiStatus.Internal
@@ -202,6 +207,11 @@ public class Formatters {
     @Override
     public String translation() {
       return "False";
+    }
+
+    @Override
+    public MutableComponent component(Void value) {
+      return Component.translatable(key());
     }
   };
 

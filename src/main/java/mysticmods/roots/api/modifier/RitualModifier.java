@@ -72,6 +72,11 @@ public class RitualModifier extends Modifier<Ritual, RitualModifier> implements 
   }
 
   @Override
+  public int getExtendedTooltipLineCount() {
+    return 1;
+  }
+
+  @Override
   public String getOrCreateTooltipDescriptionId() {
     return "";
   }

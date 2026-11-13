@@ -566,6 +566,7 @@ public abstract class Ritual implements IStoredDescriptionInstance<Ritual, IRitu
       this.simpleTooltip = s;
       this.extendedTooltip = s2;
       this.formatters = numberFormatters;
+      this.componentCreator = (ritualLike -> Ritual.componentsFromFormatter(ritualLike, numberFormatters));
     }
   }
 

@@ -27,4 +27,9 @@ public interface IStoredDescription<BASE extends IDescriptionStored<BASE> & Like
   default String getOrCreateDescriptionId() {
     return getDescriptionStore().getOrCreateDescriptionId();
   }
+
+  @Override
+  default int getExtendedTooltipLineCount() {
+    return getDescriptionStore().getExtendedTooltipLineCount();
+  }
 }
