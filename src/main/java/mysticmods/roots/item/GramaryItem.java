@@ -5,6 +5,8 @@ import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.description.Cycling;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.BindableBlockEntity;
+import mysticmods.roots.api.item.IKeybindItem;
+import mysticmods.roots.api.reference.Keys;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -28,7 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.IntFunction;
 
-public class GramaryItem extends Item {
+public class GramaryItem extends Item implements IKeybindItem {
   public GramaryItem(Properties properties) {
     super(properties);
   }
@@ -42,6 +44,7 @@ public class GramaryItem extends Item {
   @Override
   public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    includeKeybind(stack, context, tooltipComponents, tooltipFlag);
   }
 
   @Override
@@ -91,6 +94,16 @@ public class GramaryItem extends Item {
     }
 
     return GramaryMode.NONE;
+  }
+
+  @Override
+  public String getBoundKey() {
+    return Keys.CYCLE_SPELL_MODE;
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return "roots.tooltip.gramary.key_binding";
   }
 
   public enum GramaryMode implements Cycling<GramaryMode>, StringRepresentable {

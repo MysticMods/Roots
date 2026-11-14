@@ -209,10 +209,22 @@ public class RootsClientHooks {
     MutableComponent base = Component.empty().append(prefix).append(boundKey.getTranslatedKeyMessage()).append(suffix);
 
     if (tooltipFlag.hasControlDown() || tooltipFlag.hasAltDown()) {
-      return Component.translatable("roots.tooltip.extended_key_binding", base, Component.translatable(boundKey.getCategory()), Component.translatable(boundKey.getName()));
+      return getExtendedKey(key, prefix, suffix);
     } else {
       return base;
     }
+  }
+
+  public static Component getExtendedKey (String key) {
+    return getExtendedKey(key, "'", "'");
+  }
+
+  public static Component getExtendedKey (String key, String prefix, String suffix) {
+    KeyMapping boundKey = BoundKeys.getKey(key);
+
+    MutableComponent base = Component.empty().append(prefix).append(boundKey.getTranslatedKeyMessage()).append(suffix);
+
+    return Component.translatable("roots.tooltip.extended_key_binding", base, Component.translatable(boundKey.getCategory()), Component.translatable(boundKey.getName()));
   }
 
   public static TooltipFlag tooltipFlag() {

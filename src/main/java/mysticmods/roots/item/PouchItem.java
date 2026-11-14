@@ -1,8 +1,7 @@
 package mysticmods.roots.item;
 
-import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.item.IKeybindItem;
 import mysticmods.roots.api.reference.Keys;
-import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.item.util.DyeableWithDefault;
@@ -26,7 +25,7 @@ import org.codehaus.plexus.util.StringUtils;
 import java.util.EnumMap;
 import java.util.List;
 
-public class PouchItem extends Item {
+public class PouchItem extends Item implements IKeybindItem {
   private final PouchMenuProvider provider;
 
   public PouchItem(PouchMenuProvider provider, Properties properties) {
@@ -83,15 +82,22 @@ public class PouchItem extends Item {
       tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", colorName)
           .setStyle(Style.EMPTY.withColor(color.getTextColor()).withBold(true))));
     }
-    if (context.level() != null && context.level().isClientSide() && stack.is(RootsTags.Items.POUCHES)) {
-      tooltipComponents.add(CommonComponents.EMPTY);
-      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.key_binding", RootsClientHooks.getKey(tooltipFlag, Keys.OPEN_POUCH)));
-    }
+    this.includeKeybind(stack, context, tooltipComponents, tooltipFlag);
   }
 
   @Override
   public boolean canFitInsideContainerItems() {
     return false;
+  }
+
+  @Override
+  public String getBoundKey() {
+    return Keys.OPEN_POUCH;
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return "roots.tooltip.pouch.key_binding";
   }
 
   @FunctionalInterface

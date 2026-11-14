@@ -3,6 +3,8 @@ package mysticmods.roots.item;
 import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.item.IKeybindItem;
+import mysticmods.roots.api.reference.KeySets;
 import mysticmods.roots.api.spell.SpellType;
 import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.datacomponent.SpellInstance;
@@ -54,7 +56,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class CastingItem extends Item {
+public class CastingItem extends Item implements IKeybindItem {
   public CastingItem(Properties pProperties) {
     super(pProperties);
   }
@@ -495,9 +497,7 @@ public class CastingItem extends Item {
   public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-    if (context.level() != null && context.level().isClientSide()) {
-      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getKey(tooltipFlag, Keys.OPEN_SPELL_LIBRARY), RootsClientHooks.getKey(tooltipFlag, Keys.CYCLE_STAFF_SPELL), RootsClientHooks.getKey(tooltipFlag, Keys.USE), RootsClientHooks.getKey(tooltipFlag, Keys.MODIFY_SPELL)));
-    }
+    includeKeybind(stack, context, tooltipComponents, tooltipFlag);
 
     TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);
   }
@@ -565,5 +565,20 @@ public class CastingItem extends Item {
     if (newStorage != previousStorage) {
       itemStack.set(ModAttachments.SPELL_STORAGE, newStorage);
     }
+  }
+
+  @Override
+  public String getBoundKey() {
+    return Keys.OPEN_SPELL_LIBRARY;
+  }
+
+  @Override
+  public String[] getBoundKeys () {
+    return KeySets.STAFF;
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return "roots.tooltip.staff.key_binding";
   }
 }
