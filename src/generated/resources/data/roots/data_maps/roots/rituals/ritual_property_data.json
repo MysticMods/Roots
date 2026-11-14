@@ -768,7 +768,7 @@
         }
       },
       {
-        "id": "roots:protection/shortens_night",
+        "id": "roots:protection/adjusts_night",
         "value": {
           "type": "roots:boolean_property",
           "comment": "Whether the ritual shortens the length of the night by the defined value.",
@@ -777,7 +777,7 @@
         }
       },
       {
-        "id": "roots:protection/lengthens_day",
+        "id": "roots:protection/adjusts_day",
         "value": {
           "type": "roots:boolean_property",
           "comment": "Whether the ritual lengthens the length of the day by the defined value.",
@@ -789,16 +789,16 @@
         "id": "roots:protection/day_speed",
         "value": {
           "type": "roots:float_property",
-          "comment": "The fractional value that is applied to the time per tick during the 'day' period. The default of 0.3 means that the length of the day is increased by about 60%. -1 represents no difference.",
-          "default_value": 0.3,
-          "value": 0.3
+          "comment": "The fractional value that is applied to the time per tick during the 'day' period. The default of 0.625 means that the length of the day is increased by about 60%. 1 represents no difference.",
+          "default_value": 0.625,
+          "value": 0.625
         }
       },
       {
         "id": "roots:protection/night_speed",
         "value": {
           "type": "roots:float_property",
-          "comment": "The fractional value that is applied to the time per tick during the 'night' period. The default of 2 means that the length of the night is reduced by about 50%. -1 represents no difference.",
+          "comment": "The fractional value that is applied to the time per tick during the 'night' period. The default of 2 means that the length of the night is reduced by about 50%. 1 represents no difference.",
           "default_value": 2.0,
           "value": 2.0
         }
@@ -863,7 +863,7 @@
         "id": "roots:purity/conversion_addition",
         "value": {
           "type": "roots:integer_property",
-          "comment": "The number of ticks to reduce the remaining conversion duration for zombie villagers; this is applied every teck, rather than every interval.",
+          "comment": "The number of ticks to reduce the remaining conversion duration for zombie villagers; this is applied every tick, rather than every interval.",
           "default_value": 1,
           "value": 1
         }

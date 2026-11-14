@@ -109,6 +109,33 @@ public class Formatters {
     }
   };
 
+  public static final Formatter<Number> TIME_ADJUSTMENT = new Formatter<>() {
+
+    @Override
+    public ResourceLocation id() {
+      return RootsAPI.rl("time_adjustment");
+    }
+
+    @Override
+    public String translation() {
+      return "%s%s%%";
+    }
+
+    @Override
+    public MutableComponent component(Number value) {
+      float floatValue = value.floatValue();
+
+      if (floatValue < 0) {
+        floatValue = 1;
+      }
+
+      float change = (1f / floatValue) - 1f;
+      String sign = change > 0 ? "+" : change < 0 ? "-" : "";
+      int percent = Math.round(Math.abs(change) * 100f);
+      return Component.translatable(key(), sign, percent);
+    }
+  };
+
   public static final Formatter<Number> SINGLE_DECIMAL = new Formatter<>() {
     @Override
     public ResourceLocation id() {

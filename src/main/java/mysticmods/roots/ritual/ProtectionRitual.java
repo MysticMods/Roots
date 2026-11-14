@@ -90,9 +90,15 @@ public class ProtectionRitual extends Ritual {
     nightThreshold = properties.get(ModRituals.PROTECTION_NIGHT_THRESHOLD);
     clearDuration = properties.get(ModRituals.PROTECTION_CLEAR_DURATION);
     clearsWeather = properties.get(ModRituals.PROTECTION_CLEARS_WEATHER);
-    shortensNight = properties.get(ModRituals.PROTECTION_SHORTENS_NIGHT);
-    lengthensDay = properties.get(ModRituals.PROTECTION_LENGTHENS_DAY);
+    shortensNight = properties.get(ModRituals.PROTECTION_ADJUSTS_NIGHT);
+    lengthensDay = properties.get(ModRituals.PROTECTION_ADJUSTS_DAY);
     daySpeed = properties.get(ModRituals.PROTECTION_DAY_SPEED);
+    if (daySpeed < 0) {
+      daySpeed = 1;
+    }
     nightSpeed = properties.get(ModRituals.PROTECTION_NIGHT_SPEED);
+    if (nightSpeed < 0) {
+      nightSpeed = 1;
+    }
   }
 }

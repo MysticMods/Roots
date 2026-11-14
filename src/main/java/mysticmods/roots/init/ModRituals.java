@@ -306,10 +306,24 @@ public class ModRituals {
       .duration(ModRituals.PROTECTION_DURATION)
       .interval(ModRituals.PROTECTION_INTERVAL)
       .radius(ModRituals.PROTECTION_RADIUS_XZ, ModRituals.PROTECTION_RADIUS_Y)
-      .properties(ModRituals.PROTECTION_DAY_LENGTH, ModRituals.PROTECTION_NIGHT_THRESHOLD, ModRituals.PROTECTION_CLEARS_WEATHER, ModRituals.PROTECTION_SHORTENS_NIGHT, ModRituals.PROTECTION_LENGTHENS_DAY, ModRituals.PROTECTION_DAY_SPEED, ModRituals.PROTECTION_NIGHT_SPEED, ModRituals.PROTECTION_CLEAR_DURATION)
+      .properties(ModRituals.PROTECTION_DAY_LENGTH, ModRituals.PROTECTION_NIGHT_THRESHOLD, ModRituals.PROTECTION_CLEARS_WEATHER, ModRituals.PROTECTION_ADJUSTS_NIGHT, ModRituals.PROTECTION_ADJUSTS_DAY, ModRituals.PROTECTION_DAY_SPEED, ModRituals.PROTECTION_NIGHT_SPEED, ModRituals.PROTECTION_CLEAR_DURATION)
       .tooltip()
       .simple("Provides protection by lengthening the duration of daylight and shortening the duration of night, clearing away any inclement weather.")
-      // TODO:
+      .segment("Every tick for the ritual's duration of %s,", Formatters.number(ModRituals.PROTECTION_DURATION).by(Formatters.TICKS))
+      .segment("the length of night will be adjusted by %s", Formatters.number(ModRituals.PROTECTION_NIGHT_SPEED).by(Formatters.TIME_ADJUSTMENT))
+      .segment("and the length of day will be adjusted by %s.", Formatters.number(ModRituals.PROTECTION_DAY_SPEED).by(Formatters.TIME_ADJUSTMENT))
+      .linebreak()
+      .segment("Every %s", Formatters.number(ModRituals.PROTECTION_INTERVAL).by(Formatters.TICKS))
+      .segment("the weather will be cleared for %s.", Formatters.number(ModRituals.PROTECTION_CLEAR_DURATION).by(Formatters.TICKS))
+      .linebreak()
+      .segment("For the purposes of calculating day and night, the length of a day is considered to be %s ticks", Formatters.number(ModRituals.PROTECTION_DAY_LENGTH).by(Formatters.NUMBER))
+      .segment("while night is considered to start after %s ticks.", Formatters.number(ModRituals.PROTECTION_NIGHT_THRESHOLD).by(Formatters.NUMBER))
+      .linebreak()
+      .segment("Day length is adjusted: %s.", Formatters.bool(ModRituals.PROTECTION_ADJUSTS_DAY).by(Formatters.BOOL))
+      .linebreak()
+      .segment("Night length is adjusted: %s.", Formatters.bool(ModRituals.PROTECTION_ADJUSTS_NIGHT).by(Formatters.BOOL))
+      .linebreak()
+      .segment("Clears weather: %s.", Formatters.bool(ModRituals.PROTECTION_CLEARS_WEATHER).by(Formatters.BOOL))
       .endTooltip()
   ));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_DURATION = P.recordProperty("protection/duration", Property.ofInt(1200, RitualProperties.DURATION));
@@ -319,29 +333,42 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_DAY_LENGTH = P.recordProperty("protection/day_length", Property.ofInt(24000, "The length of a day."));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_NIGHT_THRESHOLD = P.recordProperty("protection/night_threshold", Property.ofInt(12000, "The point at which day transitions to night."));
   public static final PropertyHolder<Property.BooleanProperty> PROTECTION_CLEARS_WEATHER = P.recordProperty("protection/clears_weather", Property.ofBool(true, "Whether the ritual should clear weather."));
-  public static final PropertyHolder<Property.BooleanProperty> PROTECTION_SHORTENS_NIGHT = P.recordProperty("protection/shortens_night", Property.ofBool(true, "Whether the ritual shortens the length of the night by the defined value."));
-  public static final PropertyHolder<Property.BooleanProperty> PROTECTION_LENGTHENS_DAY = P.recordProperty("protection/lengthens_day", Property.ofBool(true, "Whether the ritual lengthens the length of the day by the defined value."));
-  public static final PropertyHolder<Property.FloatProperty> PROTECTION_DAY_SPEED = P.recordProperty("protection/day_speed", Property.ofFloat(0.3f, "The fractional value that is applied to the time per tick during the 'day' period. The default of 0.3 means that the length of the day is increased by about 60%. -1 represents no difference."));
-  public static final PropertyHolder<Property.FloatProperty> PROTECTION_NIGHT_SPEED = P.recordProperty("protection/night_speed", Property.ofFloat(2f, "The fractional value that is applied to the time per tick during the 'night' period. The default of 2 means that the length of the night is reduced by about 50%. -1 represents no difference."));
+  public static final PropertyHolder<Property.BooleanProperty> PROTECTION_ADJUSTS_NIGHT = P.recordProperty("protection/adjusts_night", Property.ofBool(true, "Whether the ritual shortens the length of the night by the defined value."));
+  public static final PropertyHolder<Property.BooleanProperty> PROTECTION_ADJUSTS_DAY = P.recordProperty("protection/adjusts_day", Property.ofBool(true, "Whether the ritual lengthens the length of the day by the defined value."));
+  public static final PropertyHolder<Property.FloatProperty> PROTECTION_DAY_SPEED = P.recordProperty("protection/day_speed", Property.ofFloat(0.625f, "The fractional value that is applied to the time per tick during the 'day' period. The default of 0.625 means that the length of the day is increased by about 60%. 1 represents no difference."));
+  public static final PropertyHolder<Property.FloatProperty> PROTECTION_NIGHT_SPEED = P.recordProperty("protection/night_speed", Property.ofFloat(2f, "The fractional value that is applied to the time per tick during the 'night' period. The default of 2 means that the length of the night is reduced by about 50%. 1 represents no difference."));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_CLEAR_DURATION = P.recordProperty("protection/clear_duration", Property.ofInt(20 * 60 * 20, "How long the weather is cleared for, if the weather is cleared."));
 
   public static final DeferredHolder<Ritual, PurityRitual> PURITY = RITUAL.register("purity", () -> new PurityRitual(new Ritual.Properties(Rituals.PURITY)
       .duration(ModRituals.PURITY_DURATION)
       .interval(ModRituals.PURITY_INTERVAL)
       .radius(ModRituals.PURITY_RADIUS_XZ, ModRituals.PURITY_RADIUS_Y)
-      .properties(ModRituals.PURITY_CONVERT_ZOMBIES, ModRituals.PURITY_CONVERSION_ADDITION, ModRituals.PURITY_POTION_COUNT)));
+      .properties(ModRituals.PURITY_CONVERT_ZOMBIES, ModRituals.PURITY_CONVERSION_ADDITION, ModRituals.PURITY_POTION_COUNT)
+      .tooltip()
+      .simple("Nullifies the effects of negative potions upon nearby entities. Increases the speed at which zombie villagers recover.")
+      .segment("Every %s", Formatters.number(ModRituals.PURITY_INTERVAL).by(Formatters.TICKS))
+      .segment("for the ritual's duration of %s", Formatters.number(ModRituals.PURITY_DURATION).by(Formatters.TICKS))
+      .segment("removes up to %s", Formatters.number(ModRituals.PURITY_POTION_COUNT).by(Formatters.NUMBER))
+      .segment("non-beneficial potion effects from entities within %s blocks.", Formatters.number(ModRituals.PURITY_RADIUS_XZ, ModRituals.PURITY_RADIUS_Y).by(Formatters.BLOCK_RANGE))
+      .linebreak()
+      .segment("Every tick, the timer for zombie villagers who are recovering from their curse will be reduced by an additional %s tick(s).", Formatters.number(ModRituals.PURITY_CONVERSION_ADDITION).by(Formatters.NUMBER))
+      .linebreak()
+      .segment("Zombie villagers will have their conversion speed increased: %s", Formatters.bool(ModRituals.PURITY_CONVERT_ZOMBIES).by(Formatters.BOOL))
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> PURITY_DURATION = P.recordProperty("purity/duration", Property.ofInt(1200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> PURITY_INTERVAL = P.recordProperty("purity/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> PURITY_RADIUS_XZ = P.recordProperty("purity/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> PURITY_RADIUS_Y = P.recordProperty("purity/radius_y", Property.ofInt(4, RitualProperties.RADIUS_Y));
   public static final PropertyHolder<Property.BooleanProperty> PURITY_CONVERT_ZOMBIES = P.recordProperty("purity/convert_zombies", Property.ofBool(true, "Whether the ritual should reduce the conversion time of zombie villagers."));
-  public static final PropertyHolder<Property.IntegerProperty> PURITY_CONVERSION_ADDITION = P.recordProperty("purity/conversion_addition", Property.ofInt(1, "The number of ticks to reduce the remaining conversion duration for zombie villagers; this is applied every teck, rather than every interval."));
+  public static final PropertyHolder<Property.IntegerProperty> PURITY_CONVERSION_ADDITION = P.recordProperty("purity/conversion_addition", Property.ofInt(1, "The number of ticks to reduce the remaining conversion duration for zombie villagers; this is applied every tick, rather than every interval."));
   public static final PropertyHolder<Property.IntegerProperty> PURITY_POTION_COUNT = P.recordProperty("purity/potion_count", Property.ofInt(1, "The number of potion effects to clear per entity per interval."));
 
   public static final DeferredHolder<Ritual, SpreadingForestRitual> SPREADING_FOREST = RITUAL.register("spreading_forest", () -> new SpreadingForestRitual(new Ritual.Properties(Rituals.SPREADING_FOREST)
       .duration(ModRituals.SPREADING_FOREST_DURATION)
       .interval(ModRituals.SPREADING_FOREST_INTERVAL)
-      .radius(ModRituals.SPREADING_FOREST_RADIUS_XZ, ModRituals.SPREADING_FOREST_RADIUS_Y)));
+      .radius(ModRituals.SPREADING_FOREST_RADIUS_XZ, ModRituals.SPREADING_FOREST_RADIUS_Y)
+      .tooltip("Not yet implemented.")));
   public static final PropertyHolder<Property.IntegerProperty> SPREADING_FOREST_DURATION = P.recordProperty("spreading_forest/duration", Property.ofInt(2400, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> SPREADING_FOREST_INTERVAL = P.recordProperty("spreading_forest/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> SPREADING_FOREST_RADIUS_XZ = P.recordProperty("spreading_forest/radius_xz", Property.ofInt(35, RitualProperties.RADIUS_XZ));
@@ -349,7 +376,14 @@ public class ModRituals {
 
   public static final DeferredHolder<Ritual, SummonCreaturesRitual> SUMMON_CREATURES = RITUAL.register("summon_creatures", () -> new SummonCreaturesRitual(new Ritual.Properties(Rituals.SUMMON_CREATURES)
       .duration(ModRituals.SUMMON_CREATURES_DURATION)
-      .interval(ModRituals.SUMMON_CREATURES_INTERVAL)));
+      .interval(ModRituals.SUMMON_CREATURES_INTERVAL)
+      .tooltip()
+      .simple("Summons an entity at the Pyre's location with a recipe based on the items placed upon nearby ritual pedestals.")
+      .segment("After %s", Formatters.number(ModRituals.SUMMON_CREATURES_INTERVAL).by(Formatters.TICKS))
+      // TODO: Range?
+      .segment("summons an entity based on the items placed upon nearby ritual pedestals.")
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> SUMMON_CREATURES_DURATION = P.recordProperty("summon_creatures/duration", Property.ofInt(200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> SUMMON_CREATURES_INTERVAL = P.recordProperty("summon_creatures/interval", Property.ofInt(150, RitualProperties.INTERVAL));
 
@@ -357,7 +391,16 @@ public class ModRituals {
       .duration(ModRituals.WARDING_DURATION)
       .interval(ModRituals.WARDING_INTERVAL)
       .radius(ModRituals.WARDING_RADIUS_XZ, ModRituals.WARDING_RADIUS_Y)
-      .properties(ModRituals.WARDING_POTION_DURATION, ModRituals.WARDING_POTION_AMPLIFIER)));
+      .properties(ModRituals.WARDING_POTION_DURATION, ModRituals.WARDING_POTION_AMPLIFIER)
+      .tooltip()
+      .simple("For the duration of the ritual, applies the Resistance effect to all nearby entities.")
+      .segment("Every %s", Formatters.number(ModRituals.WARDING_INTERVAL).by(Formatters.TICKS))
+      .segment("for the ritual's duration of %s", Formatters.number(ModRituals.WARDING_DURATION).by(Formatters.TICKS))
+      .segment("all eligible entities within %s blocks", Formatters.number(ModRituals.WARDING_RADIUS_XZ, ModRituals.WARDING_RADIUS_Y).by(Formatters.BLOCK_RANGE))
+      .segment("will have Resistance %s applied", Formatters.number(ModRituals.WARDING_POTION_AMPLIFIER).by(Formatters.LEVEL))
+      .segment("for %s.", Formatters.number(ModRituals.WARDING_POTION_DURATION).by(Formatters.TICKS))
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> WARDING_DURATION = P.recordProperty("warding/duration", Property.ofInt(1200, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> WARDING_INTERVAL = P.recordProperty("warding/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> WARDING_RADIUS_XZ = P.recordProperty("warding/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
@@ -368,7 +411,13 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, WildrootGrowthRitual> WILDROOT_GROWTH = RITUAL.register("wildroot_growth", () -> new WildrootGrowthRitual(new Ritual.Properties(Rituals.WILDROOT_GROWTH)
       .duration(ModRituals.WILDROOT_GROWTH_DURATION)
       .interval(ModRituals.WILDROOT_GROWTH_INTERVAL)
-      .radius(ModRituals.WILDROOT_GROWTH_RADIUS_XZ, ModRituals.WILDROOT_GROWTH_RADIUS_Y)));
+      .radius(ModRituals.WILDROOT_GROWTH_RADIUS_XZ, ModRituals.WILDROOT_GROWTH_RADIUS_Y)
+      .tooltip()
+      .simple("Attempts to grow a wildwood tree from a nearby, mature wildroot crop.")
+      .segment("After %s,", Formatters.number(ModRituals.WILDROOT_GROWTH_INTERVAL).by(Formatters.TICKS))
+      .segment("attempts to grow a Wildwood tree from a mature wildroot crop within %s blocks.", Formatters.number(ModRituals.WILDROOT_GROWTH_RADIUS_XZ, ModRituals.WILDROOT_GROWTH_RADIUS_Y).by(Formatters.BLOCK_RANGE))
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> WILDROOT_GROWTH_DURATION = P.recordProperty("wildroot_growth/duration", Property.ofInt(300, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> WILDROOT_GROWTH_INTERVAL = P.recordProperty("wildroot_growth/interval", Property.ofInt(250, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> WILDROOT_GROWTH_RADIUS_XZ = P.recordProperty("wildroot_growth/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
@@ -379,7 +428,20 @@ public class ModRituals {
       .duration(ModRituals.WINDWALL_DURATION)
       .interval(ModRituals.WINDWALL_INTERVAL)
       .radius(ModRituals.WINDWALL_RADIUS_XZ, ModRituals.WINDWALL_RADIUS_Y)
-      .properties(ModRituals.WINDWALL_KNOCKBACK_STRENGTH, ModRituals.WINDWALL_MINIMUM_Y_VELOCITY, ModRituals.WINDWALL_HEIGHT_PERCENTAGE)));
+      .properties(ModRituals.WINDWALL_KNOCKBACK_STRENGTH, ModRituals.WINDWALL_MINIMUM_Y_VELOCITY, ModRituals.WINDWALL_HEIGHT_PERCENTAGE)
+      .tooltip()
+      .simple("Forcefully moves nearby hostile entities away from the Pyre.")
+      .segment("Every %s", Formatters.number(ModRituals.WINDWALL_INTERVAL).by(Formatters.TICKS))
+      .segment("for the ritual's duration of %s,", Formatters.number(ModRituals.WINDWALL_DURATION).by(Formatters.TICKS))
+      .segment("all entities within %s blocks", Formatters.number(ModRituals.WINDWALL_RADIUS_XZ, ModRituals.WINDWALL_RADIUS_Y).by(Formatters.BLOCK_RANGE))
+      .segment("will be forced away from the Pyre until they are outside of the ritual's bounds.")
+      .linebreak()
+      .segment("The knock back effect has a strength of %s", Formatters.number(ModRituals.WINDWALL_KNOCKBACK_STRENGTH).by(Formatters.SINGLE_DECIMAL))
+      .segment("with an additional vertical momentum of %s", Formatters.number(ModRituals.WINDWALL_MINIMUM_Y_VELOCITY).by(Formatters.SINGLE_DECIMAL))
+      .segment("plus %s percent of the entity's height", Formatters.number(ModRituals.WINDWALL_HEIGHT_PERCENTAGE).by(Formatters.PERCENT))
+      .segment("being applied to ensure they do not become stuck.")
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_DURATION = P.recordProperty("windwall/duration", Property.ofInt(3000, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_INTERVAL = P.recordProperty("windwall/interval", Property.ofInt(10, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_RADIUS_XZ = P.recordProperty("windwall/radius_xz", Property.ofInt(51, RitualProperties.RADIUS_XZ));
@@ -391,7 +453,8 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, ContainmentRitual> CONTAINMENT = RITUAL.register("containment", () -> new ContainmentRitual(new Ritual.Properties(Rituals.CONTAINMENT)
       .duration(ModRituals.CONTAINMENT_DURATION)
       .interval(ModRituals.CONTAINMENT_INTERVAL)
-      .radius(ModRituals.CONTAINMENT_RADIUS)));
+      .radius(ModRituals.CONTAINMENT_RADIUS)
+      .tooltip("Not yet implemented.")));
   public static final PropertyHolder<Property.IntegerProperty> CONTAINMENT_DURATION = P.recordProperty("containment/duration", Property.ofInt(3 * 60 * 20, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> CONTAINMENT_RADIUS = P.recordProperty("containment/radius", Property.ofInt(15, RitualProperties.RADIUS));
   public static final PropertyHolder<Property.IntegerProperty> CONTAINMENT_INTERVAL = P.recordProperty("containment/interval", Property.ofInt(1, RitualProperties.INTERVAL));
@@ -399,7 +462,15 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, GroveSupplicationRitual> GROVE_SUPPLICATION = RITUAL.register("grove_supplication", () -> new GroveSupplicationRitual(new Ritual.Properties(Rituals.GROVE_SUPPLICATION)
       .duration(ModRituals.GROVE_SUPPLICATION_DURATION)
       .interval(ModRituals.GROVE_SUPPLICATION_INTERVAL)
-      .radius(ModRituals.GROVE_SUPPLICATION_RADIUS_XZ, ModRituals.GROVE_SUPPLICATION_RADIUS_Y)));
+      .radius(ModRituals.GROVE_SUPPLICATION_RADIUS_XZ, ModRituals.GROVE_SUPPLICATION_RADIUS_Y)
+      .tooltip()
+      .simple("Supplicates the entities of the Sylvan realm to bless a grove stone, activating it and impressing their power upon it based on the strength of your relationship. [Not required for the Wild grove stone. Requires at least Rank I reputation with the relevant grove.]")
+      .segment("After %s have elapsed,", Formatters.number(ModRituals.GROVE_SUPPLICATION_INTERVAL).by(Formatters.TICKS))
+      .segment("beseech the entities of the Sylvan realm to bless an inactive grove stone [wild grove excluded] within %s blocks.", Formatters.number(ModRituals.GROVE_SUPPLICATION_RADIUS_XZ, ModRituals.GROVE_SUPPLICATION_RADIUS_Y).by(Formatters.BLOCK_RANGE))
+      .linebreak()
+      .segment("The strength of your reputation will improve the strength of the grove stone. If your reputation is Unranked, the ritual will fail.")
+      .endTooltip()
+  ));
   public static final PropertyHolder<Property.IntegerProperty> GROVE_SUPPLICATION_DURATION = P.recordProperty("grove_supplication/duration", Property.ofInt(250, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> GROVE_SUPPLICATION_INTERVAL = P.recordProperty("grove_supplication/interval", Property.ofInt(210, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> GROVE_SUPPLICATION_RADIUS_XZ = P.recordProperty("grove_supplication/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
