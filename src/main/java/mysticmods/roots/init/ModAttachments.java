@@ -83,6 +83,8 @@ public class ModAttachments {
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<GrovePowerEntityFlag>> GROVE_POWER_ENTITY_FLAG = ATTACHMENTS.register("grove_power_entity_flag", () -> AttachmentType.builder(() -> GrovePowerEntityFlag.DEFAULT)
       .serialize(GrovePowerEntityFlag.CODEC).sync(GrovePowerEntityFlag.STREAM_CODEC).build());
 
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<KeybindsNotified>> NOTIFIED_KEYBINDS = ATTACHMENTS.register("notified_keybinds", () -> AttachmentType.<KeybindsNotified>builder(() -> KeybindsNotified.EMPTY).serialize(KeybindsNotified.CODEC).sync(KeybindsNotified.STREAM_CODEC).copyOnDeath().build());
+
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();
   }

@@ -35,7 +35,20 @@ public interface IKeybindItem {
     }
   }
 
-  default Component summary (ItemStack stack, Item.TooltipContext context, TooltipFlag tooltipFlag) {
-    return Component.translatable("roots.tooltip.crafted_key_binding", RootsClientHooks.getExtendedKey(getBoundKey()));
+  default Component unbound () {
+    return Component.translatable("roots.tooltip.crafted_unbound");
+
+  }
+
+  default Component activate () {
+    return Component.translatable("roots.tooltip.crafted_key_binding", RootsClientHooks.getKey(getBoundKey()));
+  }
+
+  default Component describe () {
+    return RootsClientHooks.describeKey(getBoundKey());
+  }
+
+  default boolean isBound () {
+    return RootsClientHooks.isBound(getBoundKey());
   }
 }

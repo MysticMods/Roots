@@ -16,6 +16,7 @@
     "MixinPlayer$LightDrifter",
     "MixinProjectileWeaponItem$WildwoodQuiver",
     "MixinRecipeBuilder$DataGenerationModidFix",
+    "MixinServerPlayer$InventoryChanged",
     "MixinServerPlayerGameMode",
     "MixinThrownPotion$ExtinguishPyre",
     "MixinWitherBoss$Geas",

@@ -26,6 +26,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.network.client.ClientboundNotifyKeybind;
 import mysticmods.roots.network.client.ClientboundReputationAlertPacket;
 import mysticmods.roots.network.client.ClientboundReputationMessagePacket;
 import mysticmods.roots.network.client.attachment.ClientboundReputationSyncPacket;
@@ -119,6 +120,14 @@ public class RootsCommand {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.usage"), false);
         return 1;
       });
+    }
+    test_toast:
+    {
+      builder.then(Commands.literal("test_toast").executes(c -> {
+        ServerPlayer player = c.getSource().getPlayerOrException();
+        PacketDistributor.sendToPlayer(player, new ClientboundNotifyKeybind(ModItems.SYLVAN_POUCH.get()));
+        return 1;
+      }));
     }
     reset_cooldowns:
     {

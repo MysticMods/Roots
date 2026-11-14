@@ -108,10 +108,12 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.pouch.color_name", "%s");
     add("roots.tooltip.pouch.key_binding", "Press %s to open your pouch.");
 
-    add("roots.tooltip.crafted_key_binding", "This item can be activated by pressing %s.");
+    add("roots.tooltip.crafted_unbound", "Assign key to activate!");
+    add("roots.tooltip.crafted_key_binding", "Press %s to activate!");
     add("roots.tooltip.gramary.key_binding", "Press %s to change mode.");
 
     add("roots.tooltip.extended_key_binding", "%s [%s: %s]");
+    add("roots.tooltip.describe_key_binding", "%s: %s");
 
     add("roots.hud.attributes", "%s: %s");
 

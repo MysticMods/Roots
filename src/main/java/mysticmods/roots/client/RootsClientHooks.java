@@ -11,6 +11,7 @@ import mysticmods.roots.client.gui.layer.ReputationOverlay;
 import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.fake.SpellModifierScreen;
 import mysticmods.roots.client.gui.screen.fake.StaffScreen;
+import mysticmods.roots.client.gui.toasts.KeybindItemToast;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.entity.other.LightDrifterEntity;
 import mysticmods.roots.init.ModAttachments;
@@ -215,16 +216,36 @@ public class RootsClientHooks {
     }
   }
 
-  public static Component getExtendedKey (String key) {
+  public static Component getKey(String key) {
+    return getKey(key, "'", "'");
+  }
+
+  public static Component getKey(String key, String prefix, String suffix) {
+    KeyMapping boundKey = BoundKeys.getKey(key);
+
+    return Component.empty().append(prefix).append(boundKey.getTranslatedKeyMessage()).append(suffix);
+  }
+
+  public static Component getExtendedKey(String key) {
     return getExtendedKey(key, "'", "'");
   }
 
-  public static Component getExtendedKey (String key, String prefix, String suffix) {
+  public static boolean isBound(String key) {
+    return !BoundKeys.getKey(key).isUnbound();
+  }
+
+  public static Component getExtendedKey(String key, String prefix, String suffix) {
     KeyMapping boundKey = BoundKeys.getKey(key);
 
     MutableComponent base = Component.empty().append(prefix).append(boundKey.getTranslatedKeyMessage()).append(suffix);
 
     return Component.translatable("roots.tooltip.extended_key_binding", base, Component.translatable(boundKey.getCategory()), Component.translatable(boundKey.getName()));
+  }
+
+  public static Component describeKey(String key) {
+    KeyMapping boundKey = BoundKeys.getKey(key);
+
+    return Component.translatable("roots.tooltip.describe_key_binding", Component.translatable(boundKey.getCategory()), Component.translatable(boundKey.getName()));
   }
 
   public static TooltipFlag tooltipFlag() {
@@ -392,5 +413,12 @@ public class RootsClientHooks {
 
   public static boolean showBoundingBoxes() {
     return Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes();
+  }
+
+  public static void notifyItem(Item item) {
+    if (ConfigManager.SHOW_ACQUIRED_ITEM_KEY_BINDS.getAsBoolean()) {
+      Minecraft mc = Minecraft.getInstance();
+      mc.getToasts().addToast(new KeybindItemToast(item));
+    }
   }
 }

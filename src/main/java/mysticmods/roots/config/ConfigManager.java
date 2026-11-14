@@ -97,6 +97,8 @@ public class ConfigManager {
   public static final ModConfigSpec.BooleanValue DISABLE_PATICLES;
   public static final ModConfigSpec.BooleanValue FORCE_CUSTOM_PARTICLE_SHADER;
 
+  public static final ModConfigSpec.BooleanValue SHOW_ACQUIRED_ITEM_KEY_BINDS;
+
   public static final ModConfigSpec.ConfigValue<List<? extends String>> GUI_LAYER_SKIP;
 
   public static final ModConfigSpec COMMON_CONFIG;
@@ -262,6 +264,9 @@ public class ConfigManager {
         .define("show_delete_in_game_message", true);
     HIGHLIGHT_LAST_BLOCK = CLIENT_BUILDER.comment("if true, the most recent 'eligible block' for interaction (view recipes or clear container) will be visually highlighted")
         .define("highlight_last_block", true);
+    CLIENT_BUILDER.pop();
+    CLIENT_BUILDER.push("toasts");
+    SHOW_ACQUIRED_ITEM_KEY_BINDS = CLIENT_BUILDER.comment("if true, the first time a specific item which has an associated keybind is crafted or acquired, a toast will inform the player of the key binding").define("show_acquired_item_key_binds", true);
     CLIENT_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
