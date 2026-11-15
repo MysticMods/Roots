@@ -1008,19 +1008,21 @@ public final class RootsLangProvider extends LanguageProvider {
     addTooltip(ModItems.LIVING_SWORD, repair);
 
     Set<String> doneStrings = new HashSet<>();
-
-    for (ModConfigSpec.ConfigValue<?> value : ((AccessorMixinModConfigSpec) ConfigManager.COMMON_BUILDER).roots$getValues()) {
-      StringJoiner keyBuilder = new StringJoiner(".");
-      for (String s : value.getPath()) {
-        keyBuilder.add(s);
+    addConfig(((AccessorMixinModConfigSpec) ConfigManager.COMMON_BUILDER).roots$getValues(), doneStrings);
+    addConfig(((AccessorMixinModConfigSpec) ConfigManager.CLIENT_BUILDER).roots$getValues(), doneStrings);
+  }
+  private void addConfig (List<ModConfigSpec.ConfigValue<?>> values, Set<String> doneStrings) {
+    for (ModConfigSpec.ConfigValue<?> value : values) {
+      String category = value.getPath().getFirst();
+      if (!doneStrings.contains(category)) {
+        add("roots.configuration." + category, toEnglishName(category));
+        doneStrings.add(category);
       }
-      String key = keyBuilder.toString();
-      if (doneStrings.contains(key)) {
-        continue;
+      String key = value.getPath().getLast();
+      if (!doneStrings.contains(key)) {
+        add("roots.configuration." + key, toEnglishName(key));
+        doneStrings.add(key);
       }
-
-      add("roots.configuration." + key, toEnglishName(value.getPath().getLast()));
-      doneStrings.add(key);
     }
   }
 
