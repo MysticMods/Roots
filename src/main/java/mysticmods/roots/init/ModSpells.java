@@ -22,6 +22,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+// To find any segment without an associated formatter
+// .segment\("[^"]+",\s*Formatters\.(number|bool)\(\s*Mod[A-Za-z]+\.[A-Z0-9_]+\s*\)\s*\)
 
 public class ModSpells {
   private static final DeferredRegister<Spell> REGISTER = DeferredRegister.create(RootsRegistries.Keys.SPELLS, RootsAPI.MODID);
@@ -189,7 +191,7 @@ public class ModSpells {
       .properties(ModSpells.DECAY_COUNT, ModSpells.DECAY_COOLDOWN_BOSS_MODIFIER, ModSpells.DECAY_COOLDOWN_HEART_MODIFIER)
       .tooltip()
       .simple("Causes undead entities to decay and shed resources, permanently losing maximum health.")
-      .segment("Causes up to %s undead entities", Formatters.number(ModSpells.DECAY_COUNT))
+      .segment("Causes up to %s undead entities", Formatters.number(ModSpells.DECAY_COUNT).by(Formatters.NUMBER))
       .segment("within %s blocks to decay,", Formatters.number(ModSpells.DECAY_RADIUS_XZ, ModSpells.DECAY_RADIUS_Y)
           .by(Formatters.BLOCK_RANGE))
       .segment("shedding resources and permanently losing maximum health. Maximum health lost varies depending on the entity.")

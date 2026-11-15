@@ -415,7 +415,7 @@ public class ModItems {
   public static DeferredHolder<Item, ArmorItem> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(COPPER_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
   public static DeferredHolder<Item, ArmorItem> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(COPPER_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
   public static DeferredHolder<Item, ArmorItem> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(COPPER_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
-  public static DeferredHolder<Item, Item> ALERTNESS_CHARM = ITEMS.register("charm_of_alertness", () -> new Item(new Item.Properties().stacksTo(1)));
+  public static DeferredHolder<Item, Item> ALERTNESS_CHARM = ITEMS.register("charm_of_alertness", () -> new TooltipItem(new Item.Properties().stacksTo(1)));
   public static DeferredHolder<Item, HomesicknessCharm> HOMESICKNSES_CHARM = ITEMS.register("charm_of_homesickness", () -> new HomesicknessCharm(new Item.Properties().stacksTo(1)));
   public static DeferredHolder<Item, DeferredSpawnEggItem> BEETLE_SPAWN_EGG = ITEMS.register("beetle_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.BEETLE, 0x418594, 0x211D15, new Item.Properties()));
   public static final DeferredHolder<Item, DeferredSpawnEggItem> JERBOA_SPAWN_EGG = ITEMS.register("jerboa_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.JERBOA, 0xdbc6a4, 0xeaaea1, new Item.Properties()));

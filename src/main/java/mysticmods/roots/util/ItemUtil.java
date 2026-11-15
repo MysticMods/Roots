@@ -137,4 +137,40 @@ public class ItemUtil {
       return result;
     }
   }
+
+  public static List<ItemStack> combine(List<ItemStack> incoming) {
+    List<ItemStack> result = new ArrayList<>();
+
+    for (ItemStack stack : incoming) {
+      if (stack.isEmpty()) {
+        continue;
+      }
+
+      ItemStack remaining = stack.copy();
+
+      for (ItemStack existing : result) {
+        if (remaining.isEmpty()) {
+          break;
+        }
+        if (!ItemStack.isSameItemSameComponents(existing, remaining)) {
+          continue;
+        }
+
+        int space = existing.getMaxStackSize() - existing.getCount();
+        if (space <= 0) {
+          continue;
+        }
+
+        int moved = Math.min(space, remaining.getCount());
+        existing.grow(moved);
+        remaining.shrink(moved);
+      }
+
+      if (!remaining.isEmpty()) {
+        result.add(remaining);
+      }
+    }
+
+    return result;
+  }
 }

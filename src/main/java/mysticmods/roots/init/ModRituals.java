@@ -137,7 +137,7 @@ public class ModRituals {
           .by(Formatters.BLOCK_RANGE))
       .segment("Additional meteors up to the maximum are summoned every %s", Formatters.number(ModRituals.FIRE_STORM_INTERVAL)
           .by(Formatters.TICKS))
-      .segment("for the ritual's duration of %s.", Formatters.number(ModRituals.FIRE_STORM_DURATION))
+      .segment("for the ritual's duration of %s.", Formatters.number(ModRituals.FIRE_STORM_DURATION).by(Formatters.TICKS))
       .endTooltip()));
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_DURATION = P.recordProperty("fire_storm/duration", Property.ofInt(600, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_INTERVAL = P.recordProperty("fire_storm/interval", Property.ofInt(60, RitualProperties.INTERVAL));
@@ -175,7 +175,7 @@ public class ModRituals {
       .segment("Eligible entities, including Snow Golems, are healed every %s.", Formatters.number(ModRituals.FROST_LANDS_INTERVAL_HEAL)
           .by(Formatters.TICKS))
       .linebreak()
-      .segment("Every time the ritual ticks, there is a %s chance to spawn a Snow Golem,", Formatters.number(ModRituals.FROST_LANDS_SPAWN_CHANCE))
+      .segment("Every time the ritual ticks, there is a %s chance to spawn a Snow Golem,", Formatters.number(ModRituals.FROST_LANDS_SPAWN_CHANCE).by(Formatters.PERCENT))
       .segment("farmland has its moisture level increased by 1, and fires are extinguished.")
       .endTooltip()
   ));

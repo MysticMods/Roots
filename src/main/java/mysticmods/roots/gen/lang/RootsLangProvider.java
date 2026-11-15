@@ -22,6 +22,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -993,6 +994,19 @@ public final class RootsLangProvider extends LanguageProvider {
     addDamage(ModDamage.ROSE_THORNS, "%1$s was poked to death by rose thorns", "%1$s was poked to death by rose thorns while fighting %2$s", "%1$s was poked to death by rose thorns while fighting %2$s wielding %3$s");
     addDamage(ModDamage.WILDFIRE, "%1$s was immolated by wild fire", "%1$s was immolated by wild fire while fighting %2$s", "%1$s was immolated by wild fire while fighting %2$s wielding %3$s");
 
+    addTooltip(ModItems.FIRE_STARTER, "Hold Right-Click to light the targeted block on fire. Consumed upon use.");
+    addTooltip(ModItems.GROVE_SPORES, "Right-Click adjacent creeping grove moss or on top of a block that is adjacent to water to grow creeping grove moss. Consumed upon use.");
+    addTooltip(ModItems.HOMESICKNSES_CHARM, "Right-Click to be teleported to your spawn location. Consumed upon use and triggers the Homesickness effect, preventing you from using another until that effect ends.");
+    addTooltip(ModItems.WOODEN_SHEARS, "Less effective than normal shears when shearing sheep, limiting the amount of wool produced.");
+    addTooltip(ModItems.ALERTNESS_CHARM, "When equipped as a curio or held in either hand, alerts you whenever a hostile monster targets you.");
+    addTooltip(ModItems.DEWGONIA, "Must be planted on farmland that has water above it, unless planting on elemental soil.");
+    var repair = "Slowly repairs itself while in your inventory.";
+    addTooltip(ModItems.LIVING_AXE, repair);
+    addTooltip(ModItems.LIVING_HOE, repair);
+    addTooltip(ModItems.LIVING_PICKAXE, repair);
+    addTooltip(ModItems.LIVING_SHOVEL, repair);
+    addTooltip(ModItems.LIVING_SWORD, repair);
+
     Set<String> doneStrings = new HashSet<>();
 
     for (ModConfigSpec.ConfigValue<?> value : ((AccessorMixinModConfigSpec) ConfigManager.COMMON_BUILDER).roots$getValues()) {
@@ -1008,6 +1022,11 @@ public final class RootsLangProvider extends LanguageProvider {
       add("roots.configuration." + key, toEnglishName(value.getPath().getLast()));
       doneStrings.add(key);
     }
+  }
+
+  private void addTooltip (Holder<Item> item, String tooltip) {
+    ResourceLocation itemId = item.getKey().location();
+    add(itemId.getNamespace() + ".tooltip.item." + itemId.getPath(), tooltip);
   }
 
   private void addCyclingMode(Cycling<?>[] values) {

@@ -3,9 +3,11 @@ package mysticmods.roots.item;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
@@ -28,6 +31,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ItemAbility;
+
+import java.util.List;
 
 public class FireStarterItem extends Item {
   public FireStarterItem(Properties props) {
@@ -146,5 +151,11 @@ public class FireStarterItem extends Item {
     ItemStack stack = player.getItemInHand(hand);
     player.startUsingItem(hand);
     return InteractionResultHolder.consume(stack);
+  }
+
+  @Override
+  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    tooltipComponents.add(TooltipUtil.tooltip(this));
   }
 }

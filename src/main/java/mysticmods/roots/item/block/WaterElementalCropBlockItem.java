@@ -2,14 +2,19 @@ package mysticmods.roots.item.block;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
+import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.List;
 
 public class WaterElementalCropBlockItem extends ItemNameBlockItem {
   public WaterElementalCropBlockItem(Block block, Properties properties) {
@@ -34,5 +39,11 @@ public class WaterElementalCropBlockItem extends ItemNameBlockItem {
     }
 
     return result;
+  }
+
+  @Override
+  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    tooltipComponents.add(TooltipUtil.tooltip(this));
   }
 }

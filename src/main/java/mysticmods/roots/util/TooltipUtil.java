@@ -24,6 +24,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -393,6 +394,11 @@ public class TooltipUtil {
     }
     matcher.appendTail(out);
     return out.toString();
+  }
+
+  public static Component tooltip (Item item) {
+    ResourceLocation itemId = item.builtInRegistryHolder().getKey().location();
+    return Component.translatable(itemId.getNamespace() + ".tooltip.item." + itemId.getPath());
   }
 }
 
