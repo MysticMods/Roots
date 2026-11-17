@@ -24,7 +24,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Map;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 
 public class ExtraStreamCodecs {
   public static final StreamCodec<ByteBuf, Vec3> VEC3 = StreamCodec.composite(

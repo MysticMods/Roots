@@ -282,27 +282,6 @@ public final class RootsDataGenerators {
                   HolderGetter<Item> itemGetter = bootstrap.lookup(Registries.ITEM);
 
                   bootstrap.register(
-                      ModEnchantment.FORAGING,
-                      new Enchantment(
-                          Component.translatable("enchantment.roots.foraging"),
-                          new Enchantment.EnchantmentDefinition(
-                              itemGetter.getOrThrow(RootsTags.Items.FORAGING_ELIGIBLE),
-                              Optional.empty(),
-                              1,
-                              6,
-                              new Enchantment.Cost(3, 1),
-                              new Enchantment.Cost(4, 2),
-                              2,
-                              List.of(EquipmentSlotGroup.MAINHAND)
-                          ),
-                          HolderSet.empty(),
-                          DataComponentMap.builder().set(
-                              ModEnchantment.FORAGING_EFFECT,
-                              new AddValue(LevelBasedValue.perLevel(1))
-                          ).build()
-                      )
-                  );
-                  bootstrap.register(
                       ModEnchantment.COLLECTING,
                       new Enchantment(
                           Component.translatable("enchantment.roots.collecting"),

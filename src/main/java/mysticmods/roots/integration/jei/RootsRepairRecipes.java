@@ -31,9 +31,7 @@ public class RootsRepairRecipes {
 
   private static Stream<RepairData> getRepairData() {
     return Stream.of(
-        new RepairData(Tiers.WOOD.getRepairIngredient(), new ItemStack(ModItems.WOODEN_KNIFE.get())),
         new RepairData(RootsAPI.COPPER_TIER.getRepairIngredient(),
-            new ItemStack(ModItems.COPPER_KNIFE.get()),
             new ItemStack(ModItems.COPPER_SWORD.get()),
             new ItemStack(ModItems.COPPER_PICKAXE.get()),
             new ItemStack(ModItems.COPPER_AXE.get()),
@@ -57,17 +55,11 @@ public class RootsRepairRecipes {
         new RepairData(Tiers.IRON.getRepairIngredient(),
             new ItemStack(ModItems.IRON_KNIFE.get())
         ),
-        new RepairData(Tiers.GOLD.getRepairIngredient(),
-            new ItemStack(ModItems.GOLDEN_KNIFE.get())
-        ),
         new RepairData(Tiers.DIAMOND.getRepairIngredient(),
             new ItemStack(ModItems.DIAMOND_KNIFE.get())
         ),
         new RepairData(Tiers.NETHERITE.getRepairIngredient(),
             new ItemStack(ModItems.NETHERITE_KNIFE.get())
-        ),
-        new RepairData(RootsAPI.SILVER_TIER.getRepairIngredient(),
-            new ItemStack(ModItems.SILVER_KNIFE.get())
         )
     );
   }

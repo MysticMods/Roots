@@ -28,7 +28,7 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
   private static ItemStack knife;
 
   public KnifeCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.KNIFE_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/bark_carving.png"), () -> new ItemStack(ModItems.SILVER_KNIFE.get()), Component.translatable("roots.jei.knife_crafting"));
+    super(RootsJEIPlugin.KNIFE_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/bark_carving.png"), () -> new ItemStack(ModItems.IRON_KNIFE.get()), Component.translatable("roots.jei.knife_crafting"));
   }
 
   public static void generateDynamicIngredients() {

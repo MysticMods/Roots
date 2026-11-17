@@ -113,8 +113,6 @@ public class ModAttachments {
     COMPONENTS.addAlias(RootsAPI.rl("fey_pouch_contents"), RootsAPI.rl("sylvan_pouch_contents"));
   }
 
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FORAGING = COMPONENTS.register("foraging", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT)
-      .networkSynchronized(ByteBufCodecs.VAR_INT).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<DyeableWithDefault>> DYEABLE = COMPONENTS.register("dyeable", () -> new DataComponentType.Builder<DyeableWithDefault>().persistent(DyeableWithDefault.CODEC)
       .networkSynchronized(DyeableWithDefault.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<UUID>> ITEM_UUID = COMPONENTS.register("uuid", () -> new DataComponentType.Builder<UUID>().persistent(UUIDUtil.CODEC)

@@ -26,6 +26,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.ModConfigSpec;
@@ -49,6 +50,10 @@ public final class RootsLangProvider extends LanguageProvider {
   public void addItem(Holder<Item> holder) {
     //noinspection DataFlowIssue
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
+  }
+
+  public void addAttribute (Holder<Attribute> value) {
+    add(value.value().getDescriptionId(), toEnglishName(value.getKey().location().getPath()));
   }
 
   public void addEntity(Holder<EntityType<?>> holder) {
@@ -628,12 +633,8 @@ public final class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.WILDWOOD_BOW);
     addItem(ModItems.WILDWOOD_QUIVER);
     addItem(ModItems.WOODEN_SHEARS);
-    addItem(ModItems.WOODEN_KNIFE);
     addItem(ModItems.STONE_KNIFE);
-    addItem(ModItems.COPPER_KNIFE);
     addItem(ModItems.IRON_KNIFE);
-    addItem(ModItems.GOLDEN_KNIFE);
-    addItem(ModItems.SILVER_KNIFE);
     addItem(ModItems.DIAMOND_KNIFE);
     addItem(ModItems.NETHERITE_KNIFE);
     addItem(ModItems.RELIQUARY);
@@ -1010,6 +1011,10 @@ public final class RootsLangProvider extends LanguageProvider {
     Set<String> doneStrings = new HashSet<>();
     addConfig(((AccessorMixinModConfigSpec) ConfigManager.COMMON_BUILDER).roots$getValues(), doneStrings);
     addConfig(((AccessorMixinModConfigSpec) ConfigManager.CLIENT_BUILDER).roots$getValues(), doneStrings);
+
+    addAttribute(ModAttributes.COOLDOWN_REDUCTION);
+    addAttribute(ModAttributes.COST_REDUCTION);
+    addAttribute(ModAttributes.FORAGING);
   }
   private void addConfig (List<ModConfigSpec.ConfigValue<?>> values, Set<String> doneStrings) {
     for (ModConfigSpec.ConfigValue<?> value : values) {

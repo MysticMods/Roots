@@ -18,6 +18,8 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
+import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class CommonSetup {
@@ -53,12 +55,8 @@ public class CommonSetup {
       DispenserBlock.registerProjectileBehavior(ModItems.LIVING_ARROW.get());
 
       KnifeItem.KnifeDispenseBehaviour behaviour = new KnifeItem.KnifeDispenseBehaviour();
-      DispenserBlock.registerBehavior(ModItems.WOODEN_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.STONE_KNIFE.get(), behaviour);
-      DispenserBlock.registerBehavior(ModItems.COPPER_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.IRON_KNIFE.get(), behaviour);
-      DispenserBlock.registerBehavior(ModItems.GOLDEN_KNIFE.get(), behaviour);
-      DispenserBlock.registerBehavior(ModItems.SILVER_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.DIAMOND_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.NETHERITE_KNIFE.get(), behaviour);
 

@@ -314,12 +314,8 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.ALERTNESS_CHARM, "charms");
     subfolder(ModItems.HOMESICKNSES_CHARM, "charms");
 
-    handheldItem(ModItems.WOODEN_KNIFE.get());
     handheldItem(ModItems.STONE_KNIFE.get());
-    handheldItem(ModItems.COPPER_KNIFE.get());
     handheldItem(ModItems.IRON_KNIFE.get());
-    handheldItem(ModItems.GOLDEN_KNIFE.get());
-    handheldItem(ModItems.SILVER_KNIFE.get());
     handheldItem(ModItems.DIAMOND_KNIFE.get());
     handheldItem(ModItems.NETHERITE_KNIFE.get());
 

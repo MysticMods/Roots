@@ -30,7 +30,7 @@
         "tag": "c:gems/emerald"
       },
       {
-        "item": "roots:golden_knife"
+        "item": "minecraft:golden_sword"
       }
     ],
     "level_conditions": [

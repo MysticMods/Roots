@@ -32,7 +32,7 @@ public class ModLoot {
 
   public static final DeferredHolder<LootItemConditionType, LootItemConditionType> HAS_HORNS = LOOT_ITEM_CONDITIONS.register("has_horns", () -> new LootItemConditionType(HasHornsCondition.CODEC));
 
-  public static final DeferredHolder<LootItemConditionType, LootItemConditionType> FORAGING_RANDOM_CHANCE = LOOT_ITEM_CONDITIONS.register("foraging_random_chance", () -> new LootItemConditionType(ForagingRandomChanceCondition.CODEC));
+  public static final DeferredHolder<LootItemConditionType, LootItemConditionType> FORAGING_RANDOM_CHANCE = LOOT_ITEM_CONDITIONS.register("foraging_random_chance", () -> new LootItemConditionType(ForagingAttributeCondition.CODEC));
 
   public static final DeferredHolder<LootItemConditionType, LootItemConditionType> WATERLOGGED_BLOCK = LOOT_ITEM_CONDITIONS.register("waterlogged_block", () -> new LootItemConditionType(WaterloggedBlockCondition.CODEC));
 

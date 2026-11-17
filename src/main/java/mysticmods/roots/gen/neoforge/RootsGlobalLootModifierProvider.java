@@ -2,6 +2,7 @@ package mysticmods.roots.gen.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.loot.conditions.*;
 import mysticmods.roots.loot.modifiers.AddGrassDropsModifier;
@@ -58,9 +59,9 @@ public final class RootsGlobalLootModifierProvider extends GlobalLootModifierPro
     return conditions.toArray(LootItemCondition[]::new);
   }
 
-  private LootItemCondition[] getForagingConditions(TagKey<Block> tag, float initialChance, boolean wet, @Nullable String configName, boolean doublePlant) {
+  private LootItemCondition[] getForagingConditions(TagKey<Block> tag, boolean wet, @Nullable String configName, boolean doublePlant) {
     List<LootItemCondition> conditions = new ArrayList<>();
-    conditions.add(ForagingRandomChanceCondition.randomChance(initialChance).build());
+    conditions.add(ForagingAttributeCondition.instance());
     conditions.add(LootItemBlockTagCondition.tag(tag));
     if (wet) {
       conditions.add(WaterloggedBlockCondition.waterlogged().build());
@@ -90,13 +91,13 @@ public final class RootsGlobalLootModifierProvider extends GlobalLootModifierPro
     this.add("grove_spores_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.008f, "grove_spores", true), ModItems.GROVE_SPORES));
     this.add("wildroot_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.004f, "wildroot", true), ModItems.WILDROOT));
 
-    this.add("grove_spores_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, null, false), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_waterlogged_foreagable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.03f, true, null, false), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, false, null, true), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_waterlogged_foreagable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.03f, true, null, true), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, false, null, false), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_waterlogged_foreagable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, true, null, false), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, false, null, true), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_waterlogged_foreagable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, true, null, true), ModItems.GROVE_SPORES));
 
-    this.add("wildroot_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, null, false), ModItems.WILDROOT));
-    this.add("wildroot_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, false, null, true), ModItems.WILDROOT));
+    this.add("wildroot_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, false, null, false), ModItems.WILDROOT));
+    this.add("wildroot_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, false, null, true), ModItems.WILDROOT));
 
     this.add("squid_tentacles", new AddTableLootModifier(new LootItemCondition[]{LootItemEntityPropertyCondition.hasProperties(
         LootContext.EntityTarget.THIS,

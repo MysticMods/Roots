@@ -1456,15 +1456,6 @@ public final class RootsRecipeProvider extends RecipeProvider {
                     .requires(RootsTags.Items.WILDROOT_HERB).requires(ItemTags.SAPLINGS)
                     .unlocks(Unlock.spell(ModSpells.ROSE_THORNS))), c, RootsAPI.rl("spell/rose_thorns"));
 
-    // Wildfire
-/*    RecipeSaver.saver().unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB))
-        .save(MortarRecipe.Builder.create().times(5)
-            .build(
-                BaseRecipeData.Builder.create().requires(RootsTags.Items.INFERNO_BULB_HERB)
-                    .requires(Items.GUNPOWDER).requires(Items.CAMPFIRE)
-                    .requires(Items.MAGMA_CREAM).requires(Items.LAVA_BUCKET)
-                    .unlocks(Unlock.spell(ModSpells.WILDFIRE))), c, RootsAPI.rl("spell/wildfire"));*/
-
     RecipeSaver.saver().unlockedBy("has_armadillo_scute", has(Items.ARMADILLO_SCUTE))
         .save(MortarRecipe.Builder.create().times(6)
             .build(
@@ -1479,41 +1470,19 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB))
         .save(c, RootsAPI.rl("moss_block_from_grove_moss"));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WOODEN_KNIFE.get())
-        .pattern("  X")
-        .pattern(" W ")
-        .pattern("S  ")
-        .define('S', Tags.Items.RODS_WOODEN)
-        .define('W', RootsTags.Items.WILDROOT_HERB)
-        .define('X', ItemTags.PLANKS)
-        .unlockedBy("has_planks", has(ItemTags.PLANKS))
-        .save(c, RootsAPI.rl("wooden_knife"));
-
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.IRON_KNIFE.get())
         .pattern("  X")
-        .pattern(" W ")
+        .pattern(" S ")
         .pattern("S  ")
         .define('S', Tags.Items.RODS_WOODEN)
-        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('X', Tags.Items.INGOTS_IRON)
         .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
         .save(c, RootsAPI.rl("iron_knife"));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.GOLDEN_KNIFE.get())
-        .pattern("  X")
-        .pattern(" W ")
-        .pattern("S  ")
-        .define('W', RootsTags.Items.WILDROOT_HERB)
-        .define('S', Tags.Items.RODS_WOODEN)
-        .define('X', Tags.Items.INGOTS_GOLD)
-        .unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
-        .save(c, RootsAPI.rl("golden_knife"));
-
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.DIAMOND_KNIFE.get())
         .pattern("  X")
-        .pattern(" W ")
+        .pattern(" S ")
         .pattern("S  ")
-        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('S', Tags.Items.RODS_WOODEN)
         .define('X', Tags.Items.GEMS_DIAMOND)
         .unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
@@ -1522,6 +1491,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     // TODO: This is in the meincraft namespace
     netheriteSmithing(c, ModItems.DIAMOND_KNIFE.get(), RecipeCategory.COMBAT, ModItems.NETHERITE_KNIFE.get());
 
+/*
     // Copper
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_KNIFE.get())
         .pattern("  X")
@@ -1543,6 +1513,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .define('X', RootsTags.Items.SILVER_INGOT)
         .unlockedBy("has_silver_ingot", has(RootsTags.Items.SILVER_INGOT))
         .save(c, RootsAPI.rl("silver_knife"));
+*/
 
     // Stone
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STONE_KNIFE.get())
@@ -1930,7 +1901,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Items.COMPASS)
                 .requires(Tags.Items.GEMS_EMERALD)
                 .requires(Tags.Items.GEMS_EMERALD)
-                .requires(ModItems.GOLDEN_KNIFE.get())
+                .requires(Items.GOLDEN_SWORD)
                 .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
                 .condition(ModConditions.UNITY_RANK_1.get())
             ), c, RootsAPI.rl("grove/grove_stone_fairy"));

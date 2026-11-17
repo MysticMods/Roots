@@ -98,9 +98,7 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.CASTING_TOOLS).add(ModItems.STAFF.get()).addTag(RootsTags.Items.CREATIVE_CASTING_TOOLS);
 
     this.tag(RootsTags.Items.KNIVES)
-        .add(ModItems.WOODEN_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get());
-    // Silver?
-    this.tag(ItemTags.PIGLIN_LOVED).add(ModItems.COPPER_KNIFE.get()/*, ModItems.SILVER_KNIFE.get()*/);
+        .add(ModItems.STONE_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
 
     this.tag(RootsTags.Items.RUNIC_DUST).add(ModItems.RUNIC_DUST.get());
 
@@ -112,8 +110,8 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.SILVER_INGOT).add(ModItems.SILVER_INGOT.get());
 
     this.tag(RootsTags.Items.COPPER_ITEMS)
-        .add(ModItems.COPPER_KNIFE.get(), ModItems.COPPER_AXE.get(), ModItems.COPPER_HOE.get(), ModItems.COPPER_PICKAXE.get(), ModItems.COPPER_SHOVEL.get(), ModItems.COPPER_SWORD.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
-    this.tag(RootsTags.Items.SILVER_ITEMS).add(ModItems.SILVER_KNIFE.get());
+        .add(/*ModItems.COPPER_KNIFE.get(), */ModItems.COPPER_AXE.get(), ModItems.COPPER_HOE.get(), ModItems.COPPER_PICKAXE.get(), ModItems.COPPER_SHOVEL.get(), ModItems.COPPER_SWORD.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
+    this.tag(RootsTags.Items.SILVER_ITEMS);
 
     this.tag(RootsTags.Items.SILVER_NUGGET).add(ModItems.SILVER_NUGGET.get());
     this.tag(RootsTags.Items.COPPER_NUGGET).add(ModItems.COPPER_NUGGET.get());

@@ -22,6 +22,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -365,22 +366,14 @@ public class ModItems {
       .component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
   public static final DeferredHolder<Item, WoodenShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new WoodenShearsItem(new Item.Properties().durability(120)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
-  public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = ITEMS.register("wooden_knife", () -> new KnifeItem(Tiers.WOOD, new Item.Properties().component(ModAttachments.FORAGING, 1)
-      .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.WOOD, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> STONE_KNIFE = ITEMS.register("stone_knife", () -> new KnifeItem(Tiers.STONE, new Item.Properties().component(ModAttachments.FORAGING, 2)
-      .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.STONE, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> COPPER_KNIFE = ITEMS.register("copper_knife", () -> new KnifeItem(RootsAPI.COPPER_TIER, new Item.Properties().component(ModAttachments.FORAGING, 3)
-      .stacksTo(1).attributes(SwordItem.createAttributes(RootsAPI.COPPER_TIER, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> IRON_KNIFE = ITEMS.register("iron_knife", () -> new KnifeItem(Tiers.IRON, new Item.Properties().component(ModAttachments.FORAGING, 3)
-      .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.IRON, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> GOLDEN_KNIFE = ITEMS.register("golden_knife", () -> new KnifeItem(Tiers.GOLD, new Item.Properties().component(ModAttachments.FORAGING, 4)
-      .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.GOLD, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> SILVER_KNIFE = ITEMS.register("silver_knife", () -> new KnifeItem(RootsAPI.SILVER_TIER, new Item.Properties().component(ModAttachments.FORAGING, 4)
-      .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.GOLD, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> DIAMOND_KNIFE = ITEMS.register("diamond_knife", () -> new KnifeItem(Tiers.DIAMOND, new Item.Properties().component(ModAttachments.FORAGING, 5)
-      .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.DIAMOND, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> NETHERITE_KNIFE = ITEMS.register("netherite_knife", () -> new KnifeItem(Tiers.NETHERITE, new Item.Properties().component(ModAttachments.FORAGING, 6)
-      .stacksTo(1).attributes(SwordItem.createAttributes(Tiers.NETHERITE, 1f, -2.4f)).fireResistant()));
+  public static DeferredHolder<Item, KnifeItem> STONE_KNIFE = ITEMS.register("stone_knife", () -> new KnifeItem(Tiers.STONE, new Item.Properties()
+      .stacksTo(1).attributes(KnifeItem.createAttributes(Tiers.STONE))));
+  public static DeferredHolder<Item, KnifeItem> IRON_KNIFE = ITEMS.register("iron_knife", () -> new KnifeItem(Tiers.IRON, new Item.Properties()
+      .stacksTo(1).attributes(KnifeItem.createAttributes(Tiers.IRON))));
+  public static DeferredHolder<Item, KnifeItem> DIAMOND_KNIFE = ITEMS.register("diamond_knife", () -> new KnifeItem(Tiers.DIAMOND, new Item.Properties()
+      .stacksTo(1).attributes(KnifeItem.createAttributes(Tiers.DIAMOND))));
+  public static DeferredHolder<Item, KnifeItem> NETHERITE_KNIFE = ITEMS.register("netherite_knife", () -> new KnifeItem(Tiers.NETHERITE, new Item.Properties()
+      .stacksTo(1).attributes(KnifeItem.createAttributes(Tiers.NETHERITE)).fireResistant()));
 
   public static final DeferredHolder<Item, Item> RELIQUARY = ITEMS.register("reliquary", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
   public static final DeferredHolder<Item, Item> SPIRIT_BAG = ITEMS.register("spirit_bag", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));

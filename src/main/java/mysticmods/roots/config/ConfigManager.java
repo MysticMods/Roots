@@ -169,6 +169,9 @@ public class ConfigManager {
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
         .defineInRange("default_chance", 10, 1, 100);
     COMMON_BUILDER.pop();
+/*    COMMON_BUILDER.comment("Options for the Foraging feature").push("foraging");
+    FORAGING_CHANCE = COMMON_BUILDER.comment("The base chance of the foraging feature [default 0.4, 40%]").defineInRange("foraging_chance", 0.4, 0.0, 1.0);
+    COMMON_BUILDER.pop();*/
     COMMON_BUILDER.comment("Options for the Alertness charm").push("alertness");
     // TODO: This should be in client?
     ALERTNESS_VISUAL = COMMON_BUILDER.comment("whether or not the Alertness charm should display a visual effect")
