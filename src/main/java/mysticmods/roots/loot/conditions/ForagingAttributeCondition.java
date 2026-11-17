@@ -39,7 +39,7 @@ public record ForagingAttributeCondition() implements LootItemCondition {
 
     double baseChance;
 
-    if (false && context.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof Player pPlayer) {
+    if (context.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof Player pPlayer) {
       baseChance = pPlayer.getAttributeValue(ModAttributes.FORAGING);
     } else {
       baseChance = EnchantmentUtil.getForagingValue(itemstack);
