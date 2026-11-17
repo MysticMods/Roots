@@ -230,7 +230,7 @@ public class KnifeItem extends TieredItem {
         .add(
             ModAttributes.FORAGING,
             new AttributeModifier(RootsAPI.rl("foraging_default"), 0.04, AttributeModifier.Operation.ADD_VALUE),
-            EquipmentSlotGroup.HAND
+            EquipmentSlotGroup.MAINHAND
         )
         .build();
   }

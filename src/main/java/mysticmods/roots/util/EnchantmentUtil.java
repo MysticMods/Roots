@@ -13,7 +13,7 @@ public class EnchantmentUtil {
   public static double getForagingValue(ItemStack item) {
     AttributeInstance instance = new AttributeInstance(ModAttributes.FORAGING, (c) -> {
     });
-    item.getAttributeModifiers().forEach(EquipmentSlotGroup.HAND, (attr, mod) -> {
+    item.getAttributeModifiers().forEach(EquipmentSlotGroup.MAINHAND, (attr, mod) -> {
       if (attr.is(ModAttributes.FORAGING)) {
         instance.addPermanentModifier(mod);
       }
