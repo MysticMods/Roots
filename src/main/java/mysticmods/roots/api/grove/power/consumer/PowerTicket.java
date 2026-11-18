@@ -58,6 +58,10 @@ public class PowerTicket {
     return true;
   }
 
+  public boolean anyPower () {
+    return !suppliedThisTick.isEmpty();
+  }
+
   public int getSupplied(Holder<Grove> grove) {
     return getSupplied(grove.value());
   }

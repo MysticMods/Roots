@@ -37,6 +37,8 @@ public interface IGrovePowerConsumer {
   // Returns true if the consumer was fully powered the previous tick
   boolean wasPoweredLastTick();
 
+  int ticksWithoutPower ();
+
   default boolean canBePowered() {
     return true;
   }

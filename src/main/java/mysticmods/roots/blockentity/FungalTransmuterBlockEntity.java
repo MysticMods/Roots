@@ -59,6 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+// TODO: Implement MeanderTarget
 public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, IGrovePowerConsumer, InventoryBlockEntity, RefillProvider, ClearableBlockEntity, FakeMenuBlockEntity, StatefulBlockEntity<FungalTransmuterBlockEntity> {
   private static final StateSchema<FungalTransmuterBlockEntity> STATE_SCHEMA = StateSchema.<FungalTransmuterBlockEntity>builder()
       .add(StateCategories.INVENTORY, be -> InventoryState.of(be.inventory))
@@ -125,6 +126,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   private BlockCapabilityCache<IItemHandler, Direction> capabilityCache;
 
   private static final int CRAFTING_TIME = 100;
+  private int ticksWithoutPower = 0;
 
   public FungalTransmuterBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.FUNGAL_TRANSMUTER.get(), pWorldPosition, pBlockState);
@@ -141,7 +143,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   }
 
   private void emergencyEject() {
-
+    // TODO: Emergency eject
   }
 
   @Override
@@ -224,6 +226,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     currentRecipe = recipe;
     lifetime = -1;
     ticksConsumingPower = 0;
+    ticksWithoutPower = 0;
     setChanged();
     updateViaState();
 
@@ -417,6 +420,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     }
 
     pTag.putInt("ticks_consuming_power", ticksConsumingPower);
+    pTag.putInt("ticksWithoutPower", ticksWithoutPower);
     pTag.putInt("lifetime", lifetime);
   }
 
@@ -475,6 +479,12 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       PowerRecord.CODEC.parse(registries.createSerializationContext(NbtOps.INSTANCE), tag.get("power_record"))
           .resultOrPartial(Util.prefix("Failed to load power record: ", RootsAPI.LOG::warn))
           .ifPresent(o -> this.record = o);
+    }
+
+    if (tag.contains("ticksWithoutPower")) {
+      this.ticksWithoutPower = tag.getInt("ticksWithoutPower");
+    } else {
+      this.ticksWithoutPower = 0;
     }
   }
 
@@ -594,6 +604,8 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     revalidateRecipe();
     boolean changed = recomputeState();
+
+    maybeRebuildTicket(pLevel);
 
     if (stateHolder.is(ProgressState.CONSUMING_POWER)) {
       ticksConsumingPower++;
@@ -719,6 +731,11 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   }
 
   @Override
+  public int ticksWithoutPower() {
+    return ticksWithoutPower;
+  }
+
+  @Override
   public void finalizeTicket(PowerTicket ticket) {
     PowerCollection collection = getPowerCollection();
     if (collection == null) {
@@ -731,6 +748,12 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
       throw new IllegalStateException("WE had a valid pwoer collection but getOrCreateRecord failed");
     }
     ticket.updateRecord(record);
+
+    if (!ticket.anyPower()) {
+      this.ticksWithoutPower++;
+    } else {
+      this.ticksWithoutPower = 0;
+    }
   }
 
   @Override
@@ -783,5 +806,10 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   @Override
   public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
     buffer.writeBlockPos(getBlockPos());
+  }
+
+  @Override
+  public boolean canBePowered() {
+    return stateHolder.is(ProgressState.CONSUMING_POWER);
   }
 }

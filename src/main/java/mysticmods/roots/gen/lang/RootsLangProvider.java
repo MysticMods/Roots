@@ -897,8 +897,15 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.hud.fake_menu", "Press [%s] to view eligible %s recipes.");
     add("roots.hud.clear", "Press [%s] to clear %s.");
 
+    add("roots.hud.grove_consumer.type", "Requires %s");
+    add("roots.hud.grove_consumer.powered", "Powered!");
+    add("roots.hud.grove_consumer.unpowered", "Unpowered.");
+    add("roots.hud.grove_consumer.ineligible", "Ineligible.");
+    add("roots.hud.grove_consumer.no_power", "No nearby power.");
+
     add("roots.hud.transmuter.power1", "Consuming power to");
     add("roots.hud.transmuter.power2", "transmute items into");
+    add("roots.hud.transmuter.no_power", "No nearby grove power.");
 
     add("roots.hud.transmuter.crafting1", "Crafting %s");
 

@@ -54,6 +54,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   private static final PowerCollection TICKET_DEFINITION = new PowerCollection(RootsTags.Groves.UNITY, 15);
 
   private boolean wasPoweredLastTick = false;
+  private int ticksWithoutPower = 0;
   private PowerTicket ticket;
 
   // Trading stuff
@@ -152,6 +153,10 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     boolean changed = false;
 
     if (wasPoweredLastTick()) {
+      if (this.ticksWithoutPower != 0) {
+        this.ticksWithoutPower = 0;
+        changed = true;
+      }
       if (!this.isTrading() && this.updateMerchantTimer > 0) {
         this.updateMerchantTimer--;
         if (this.updateMerchantTimer <= 0) {
@@ -185,6 +190,10 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
         setChanged();
         updateViaState();
       }
+    } else {
+      this.ticksWithoutPower++;
+      setChanged();
+      updateViaState();
     }
   }
 
@@ -226,6 +235,11 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
   }
 
   @Override
+  public int ticksWithoutPower() {
+    return ticksWithoutPower;
+  }
+
+  @Override
   public void finalizeTicket(PowerTicket ticket) {
     this.wasPoweredLastTick = ticket.wasFulfilled();
     setChanged();
@@ -255,6 +269,11 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     if (compound.contains("afternoonReset")) {
       this.afternoonReset = compound.getBoolean("afternoonReset");
     }
+    if (compound.contains("ticksWithoutPower")) {
+      this.ticksWithoutPower = compound.getInt("ticksWithoutPower");
+    } else {
+      this.ticksWithoutPower = 0;
+    }
 
   }
 
@@ -271,6 +290,7 @@ public class FairyHutBlockEntity extends UseDelegatedBlockEntity implements Serv
     pTag.putInt("level", this.xpLevel);
     pTag.putBoolean("morningReset", this.morningReset);
     pTag.putBoolean("afternoonReset", this.afternoonReset);
+    pTag.putInt("ticksWithoutPower", this.ticksWithoutPower);
     if (!this.getLevel().isClientSide()) {
       MerchantOffers merchantoffers = this.getOffers();
       if (!merchantoffers.isEmpty()) {

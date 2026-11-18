@@ -184,6 +184,7 @@ public class HudOverlay {
 
       boolean powered = consumer.wasPoweredLastTick();
       boolean canPower = consumer.canBePowered();
+      int ticksWithoutPower = consumer.ticksWithoutPower();
 
       y += 10;
       x += 30;
@@ -198,9 +199,14 @@ public class HudOverlay {
         return;
       }
 
+      // TODO: Grove symbols
       Component comp1 = result.getStyledName();
-      Component comp2 = Component.literal("Requires: " + requiredPower);
-      Component comp3 = Component.literal(canPower ? powered ? "Powered!" : "Unpowered." : "Ineligible.");
+      Component comp2 = Component.translatable("roots.hud.grove_consumer.type", requiredPower);
+      Component comp3 = canPower ? powered ? Component.translatable("roots.hud.grove_consumer.powered") : Component.translatable("roots.hud.grove_consumer.unpowered") : Component.translatable("roots.hud.grove_consumer.ineligible");
+
+      if (canPower && ticksWithoutPower > 5 * 20) {
+        comp3 = Component.translatable("roots.hud.grove_consumer.no_power");
+      }
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
@@ -396,6 +402,7 @@ public class HudOverlay {
       Component comp1 = CommonComponents.EMPTY;
       Component comp2 = CommonComponents.EMPTY;
       Component comp3 = CommonComponents.EMPTY;
+      Component comp4 = CommonComponents.EMPTY;
       List<ChanceOutput> outputs = Collections.emptyList();
 
 
@@ -403,6 +410,11 @@ public class HudOverlay {
         comp1 = Component.translatable("roots.hud.transmuter.power1");
         comp2 = Component.translatable("roots.hud.transmuter.power2");
         comp3 = output.getHoverName();
+
+        if (transmuter.canBePowered() && transmuter.ticksWithoutPower() > 5 * 20) {
+          comp4 = Component.translatable("roots.hud.transmuter.no_power");
+        }
+
       } else if (transmuter.is(ProgressState.CRAFTING)) {
         if (output.isEmpty() && lastRecipe != null) {
           output = lastRecipe.getResultItem(mc.level.registryAccess());
@@ -435,7 +447,7 @@ public class HudOverlay {
       int rowSpacing = 18;
       int itemsPerRow = 2;
 
-      Component comp4 = Component.empty();
+      //Component comp4 = Component.empty();
       //Component.translatable("roots.hud.transmuter.power", requiredPower, transmuter.getPower()/*, transmuter.getMaxPower()*/);
 
       for (int i = 0; i < outputs.size(); i++) {
@@ -458,7 +470,7 @@ public class HudOverlay {
 
       RenderSystem.disableDepthTest();
       RenderSystem.disableBlend();
-      graphics.drawString(mc.font, comp4, x + 25, y - 24, TEXT_COLOR, true);
+      graphics.drawString(mc.font, comp4, x + 25, y + 36, TEXT_COLOR, true);
       graphics.drawString(mc.font, comp1, x + 25, y, TEXT_COLOR, true);
       graphics.drawString(mc.font, comp2, x + 25, y + 12, TEXT_COLOR, true);
       graphics.drawString(mc.font, comp3, x + 25, y + 24, TEXT_COLOR, true);

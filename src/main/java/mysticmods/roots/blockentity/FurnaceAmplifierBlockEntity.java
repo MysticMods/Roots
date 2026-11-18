@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
+// TODO: Implement MeanderTarget
 public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implements ServerTickBlockEntity, ClientTickBlockEntity, ISimpleGrovePowerConsumer {
   private static final int POWER_REQUIRED = 35;
   private static final TagKey<Grove> GROVE_REQUIRED = RootsTags.Groves.ANY;
@@ -39,6 +40,7 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
   private boolean poweredLastTick = false;
   private int poweredTicks;
   private boolean canBePowered = false;
+  private int ticksWithoutPower = 0;
 
   public FurnaceAmplifierBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -59,6 +61,7 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
     pTag.putBoolean("powered", this.poweredLastTick);
     pTag.putInt("poweredTicks", this.poweredTicks);
     pTag.putBoolean("canBePowered", this.canBePowered);
+    pTag.putInt("ticksWithoutPower", this.ticksWithoutPower);
   }
 
   @Override
@@ -74,6 +77,11 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
     }
     if (pTag.contains("canBePowered")) {
       this.canBePowered = pTag.getBoolean("canBePowered");
+    }
+    if (pTag.contains("ticksWithoutPower")) {
+      this.ticksWithoutPower = pTag.getInt("ticksWithoutPower");
+    } else {
+      this.ticksWithoutPower = 0;
     }
   }
 
@@ -100,6 +108,7 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     recheckCanBePowered(pLevel, pPos, pState);
+    maybeRebuildTicket(pLevel);
     if (canBePowered() && wasPoweredLastTick() && getAttachedBlockEntity(pLevel, pPos, pState
     ) instanceof AbstractFurnaceBlockEntity furnace && pLevel.getRandom().nextBoolean()) {
       AccessorMixinAbstractFurnaceBlockEntity accessor = ((AccessorMixinAbstractFurnaceBlockEntity) furnace);
@@ -164,6 +173,11 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
   @Override
   public void finalizeTicket(PowerTicket ticket) {
     this.poweredLastTick = ticket.wasFulfilled();
+    if (!ticket.wasFulfilled()) {
+      this.ticksWithoutPower++;
+    } else {
+      this.ticksWithoutPower = 0;
+    }
     setChanged();
     updateViaState();
   }
@@ -193,6 +207,11 @@ public class FurnaceAmplifierBlockEntity extends BaseBoundedBlockEntity implemen
   @Override
   public boolean wasPoweredLastTick() {
     return poweredLastTick;
+  }
+
+  @Override
+  public int ticksWithoutPower() {
+    return ticksWithoutPower;
   }
 
   @Override

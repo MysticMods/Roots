@@ -43,6 +43,7 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
   private PowerTicket ticket;
   private boolean poweredLastTick = false;
   private int poweredTicks;
+  private int ticksWithoutPower;
 
   public EnchantedTurfBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.ENCHANTED_TURF.get(), pWorldPosition, pBlockState);
@@ -58,6 +59,7 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
     super.saveAdditional(pTag, pProvider);
     pTag.putBoolean("powered", this.poweredLastTick);
     pTag.putInt("poweredTicks", this.poweredTicks);
+    pTag.putInt("ticksWithoutPower", this.ticksWithoutPower);
   }
 
   @Override
@@ -70,6 +72,11 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
       this.poweredTicks = pTag.getInt("poweredTicks");
     } else {
       this.poweredTicks = 0;
+    }
+    if (pTag.contains("ticksWithoutPower")) {
+      this.ticksWithoutPower = pTag.getInt("ticksWithoutPower");
+    } else {
+      this.ticksWithoutPower = 0;
     }
   }
 
@@ -98,6 +105,8 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
     maybeRebuildTicket(pLevel);
 
     if (wasPoweredLastTick()) {
+      ticksWithoutPower = 0;
+
       Item item = TagUtil.getRandomElement(pLevel, RootsTags.Items.GROWTH_AMPLIFIER_GRASSES);
       if (!(item instanceof BlockItem flowerToPlace)) {
         return;
@@ -151,8 +160,16 @@ public class EnchantedTurfBlockEntity extends BaseBoundedBlockEntity implements 
   }
 
   @Override
+  public int ticksWithoutPower() {
+    return ticksWithoutPower;
+  }
+
+  @Override
   public void finalizeTicket(PowerTicket ticket) {
     this.poweredLastTick = ticket.wasFulfilled();
+    if (!ticket.wasFulfilled()) {
+      this.ticksWithoutPower++;
+    }
     setChanged();
     updateViaState();
   }
