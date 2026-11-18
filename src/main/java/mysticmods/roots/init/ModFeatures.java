@@ -2,10 +2,11 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.worldgen.features.HangingMossBlockFeature;
+import mysticmods.roots.worldgen.features.HugeBafflecapMushroomFeature;
 import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
-import mysticmods.roots.worldgen.features.placements.AllAroundLogPlacement;
-import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
-import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
+import mysticmods.roots.worldgen.placements.AllAroundLogPlacement;
+import mysticmods.roots.worldgen.placements.DimensionPlacement;
+import mysticmods.roots.worldgen.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreeBranchPredicate;
 import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
 import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
@@ -20,13 +21,13 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
 import net.minecraft.world.level.levelgen.blockpredicates.MatchingBlockTagPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.HugeRedMushroomFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
@@ -68,6 +69,7 @@ public class ModFeatures {
   // Features
   public static DeferredHolder<Feature<?>, SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
   public static DeferredHolder<Feature<?>, HangingMossBlockFeature> HANGING_MOSS_BLOCK_FEATURE = FEATURES.register("hanging_moss_block_feature", () -> new HangingMossBlockFeature(SimpleBlockConfiguration.CODEC));
+  public static DeferredHolder<Feature<?>, HugeBafflecapMushroomFeature> HUGE_BAFFLECAP_MUSHROOM_FEATURE = FEATURES.register("huge_bafflecap_mushroom_feature", () -> new HugeBafflecapMushroomFeature(HugeMushroomFeatureConfiguration.CODEC));
 
   // Trunk placers
   public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<MinLobeFancyTrunkPlacer>> MIN_LOBE_FANCY_TRUNK_PLACER = TRUNK_PLACERS.register("min_lobe_fancy_trunk_placer", () -> new TrunkPlacerType<>(MinLobeFancyTrunkPlacer.CODEC));

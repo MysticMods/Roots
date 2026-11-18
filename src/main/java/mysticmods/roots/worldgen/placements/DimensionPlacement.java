@@ -1,4 +1,4 @@
-package mysticmods.roots.worldgen.features.placements;
+package mysticmods.roots.worldgen.placements;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

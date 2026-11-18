@@ -15,8 +15,8 @@ import mysticmods.roots.gen.recipe.RootsRecipeProvider;
 import mysticmods.roots.gen.tags.*;
 import mysticmods.roots.init.*;
 import mysticmods.roots.util.FakePlayerUtil;
-import mysticmods.roots.worldgen.features.placements.AllAroundLogPlacement;
-import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
+import mysticmods.roots.worldgen.placements.AllAroundLogPlacement;
+import mysticmods.roots.worldgen.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
 import net.minecraft.DetectedVersion;
@@ -109,7 +109,7 @@ public final class RootsDataGenerators {
                   bootstrap.register(
                       ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY,
                       new ConfiguredFeature<>(
-                          Feature.HUGE_RED_MUSHROOM,
+                          ModFeatures.HUGE_BAFFLECAP_MUSHROOM_FEATURE.get(),
                           new HugeMushroomFeatureConfiguration(
                               BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.get().defaultBlockState()
                                   .setValue(HugeMushroomBlock.DOWN, false)),
