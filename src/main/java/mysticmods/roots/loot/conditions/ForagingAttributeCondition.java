@@ -3,13 +3,16 @@ package mysticmods.roots.loot.conditions;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModLoot;
 import mysticmods.roots.util.EnchantmentUtil;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
@@ -33,14 +36,22 @@ public record ForagingAttributeCondition() implements LootItemCondition {
   @Override
   public boolean test(LootContext context) {
     ItemStack itemstack = context.getParamOrNull(LootContextParams.TOOL);
-    if (itemstack == null || !itemstack.canPerformAction(RootsAPI.FORAGE)) {
+    Player player = context.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof Player pPlayer ? pPlayer : null;
+
+    if (itemstack == null && player == null) {
       return false;
     }
 
     double baseChance;
 
-    if (context.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof Player pPlayer) {
-      baseChance = pPlayer.getAttributeValue(ModAttributes.FORAGING);
+    boolean canForage = itemstack == null || !itemstack.canPerformAction(RootsAPI.FORAGE);
+
+    if (!ConfigManager.FORAGING_WITHOUT_ITEM.getAsBoolean() && !canForage) {
+      return false;
+    }
+
+    if (player != null) {
+      baseChance = player.getAttributeValue(ModAttributes.FORAGING);
     } else {
       baseChance = EnchantmentUtil.getForagingValue(itemstack);
     }

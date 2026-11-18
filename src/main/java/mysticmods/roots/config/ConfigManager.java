@@ -78,6 +78,8 @@ public class ConfigManager {
 
   public static final ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
 
+  public static final ModConfigSpec.BooleanValue FORAGING_WITHOUT_ITEM;
+
   public static final ModConfigSpec.BooleanValue DEBUG_REPUTATION;
   public static final ModConfigSpec.BooleanValue DEBUG_GROVE_ACTIONS;
   public static final ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
@@ -169,9 +171,9 @@ public class ConfigManager {
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
         .defineInRange("default_chance", 10, 1, 100);
     COMMON_BUILDER.pop();
-/*    COMMON_BUILDER.comment("Options for the Foraging feature").push("foraging");
-    FORAGING_CHANCE = COMMON_BUILDER.comment("The base chance of the foraging feature [default 0.4, 40%]").defineInRange("foraging_chance", 0.4, 0.0, 1.0);
-    COMMON_BUILDER.pop();*/
+    COMMON_BUILDER.comment("Options for the Foraging feature").push("foraging");
+    FORAGING_WITHOUT_ITEM = COMMON_BUILDER.comment("If true, only the player will be checked for the foraging attribute, allowing for foraging without a knife equipped [default: false]").define("foraging_without_item", false);
+    COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for the Alertness charm").push("alertness");
     // TODO: This should be in client?
     ALERTNESS_VISUAL = COMMON_BUILDER.comment("whether or not the Alertness charm should display a visual effect")

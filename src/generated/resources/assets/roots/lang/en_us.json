@@ -608,6 +608,8 @@
   "roots.configuration.enable_extinguish_pyre": "Enable Extinguish Pyre",
   "roots.configuration.enchanted_turf": "Enchanted Turf",
   "roots.configuration.enchanted_turf_ticks": "Enchanted Turf Ticks",
+  "roots.configuration.foraging": "Foraging",
+  "roots.configuration.foraging_without_item": "Foraging Without Item",
   "roots.configuration.force_custom_particle_shader": "Force Custom Particle Shader",
   "roots.configuration.grass_drops": "Grass Drops",
   "roots.configuration.grove_stone_power_range_x": "Grove Stone Power Range X",
