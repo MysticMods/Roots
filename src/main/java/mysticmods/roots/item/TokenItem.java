@@ -119,6 +119,10 @@ public abstract class TokenItem extends Item {
       if (context.level() != null && context.level().isClientSide()) {
         RootsClientHooks.appendSpellTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }
+      if (!tooltipFlag.hasAltDown() && !tooltipFlag.hasControlDown())  {
+        tooltipComponents.add(CommonComponents.EMPTY);
+        tooltipComponents.add(RootsAPI.extendedTooltip());
+      }
     }
   }
 
@@ -161,6 +165,10 @@ public abstract class TokenItem extends Item {
       TooltipUtil.baseModifierCostTooltip(context, tooltipComponents, List.of(getSpellModifier()), tooltipFlag);
       if (context.level() != null && context.level().isClientSide()) {
         RootsClientHooks.appendSpellTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
+      }
+      if (!tooltipFlag.hasAltDown() && !tooltipFlag.hasControlDown())  {
+        tooltipComponents.add(CommonComponents.EMPTY);
+        tooltipComponents.add(RootsAPI.extendedTooltip());
       }
     }
   }
@@ -206,6 +214,9 @@ public abstract class TokenItem extends Item {
       if (context.level() != null && context.level().isClientSide()) {
         RootsClientHooks.appendRitualTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }
+      if (!tooltipFlag.hasAltDown() && !tooltipFlag.hasControlDown())  {
+        tooltipComponents.add(RootsAPI.extendedTooltip());
+      }
     }
   }
 
@@ -229,28 +240,6 @@ public abstract class TokenItem extends Item {
     @Override
     public @Nullable Unlock<?> getUnlock() {
       return null;
-    }
-  }
-
-  public enum TokenType implements StringRepresentable {
-    SPELL, MODIFIER, RITUAL, GROVE;
-
-    public static final Codec<TokenType> CODEC = StringRepresentable.fromEnum(TokenType::values);
-    public static final StreamCodec<ByteBuf, TokenType> STREAM_CODEC = ByteBufCodecs.VAR_INT.map(TokenType::fromOrdinal, TokenType::ordinal);
-
-    private final String name;
-
-    TokenType() {
-      this.name = name().toLowerCase(Locale.ROOT);
-    }
-
-    @Override
-    public String getSerializedName() {
-      return name;
-    }
-
-    public static TokenType fromOrdinal(int ordinal) {
-      return TokenType.values()[ordinal];
     }
   }
 }

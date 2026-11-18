@@ -2,7 +2,9 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.Roots;
 import mysticmods.roots.config.ConfigManager;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -17,6 +19,7 @@ import net.neoforged.neoforge.common.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.awt.*;
 import java.util.ServiceLoader;
 import java.util.Set;
 
@@ -93,5 +96,9 @@ public abstract class RootsAPI {
     if (ConfigManager.DEBUG_EXTENSIVE.get() || !FMLEnvironment.production) {
       LOG.error(message);
     }
+  }
+
+  public static Component extendedTooltip () {
+    return Component.translatable("roots.tooltip.extended", Component.translatable("roots.tooltip.ctrl"), Component.translatable("roots.tooltip.alt")).withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY));
   }
 }

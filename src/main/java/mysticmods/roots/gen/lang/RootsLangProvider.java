@@ -134,6 +134,9 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.staff.key_binding", "Press %s to open your spell library. Cycle spells with %s or use (%s) while sneaking.");
     add("roots.tooltip.hold_shift", "[Hold %s for more information.]");
     add("roots.tooltip.shift", "Shift");
+    add("roots.tooltip.extended", "[Hold %s or %s for extended information.]");
+    add("roots.tooltip.ctrl", "Ctrl");
+    add("roots.tooltip.alt", "Alt");
 
     add("roots.item.staff.with_spell", "Staff (%s)");
     add("roots.item.staff.with_modified_spell", "Staff (%s*)");
