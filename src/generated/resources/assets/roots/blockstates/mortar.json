@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "pestle_inside=false": {
       "model": "roots:block/mortar"
+    },
+    "pestle_inside=true": {
+      "model": "roots:block/mortar_with_pestle"
     }
   }
 }

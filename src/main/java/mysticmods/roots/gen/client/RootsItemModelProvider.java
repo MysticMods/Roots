@@ -160,8 +160,10 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     inventoryModel(ModBlocks.WARPED_FAIRY_HUT);
 
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
-    /*    simpleBlockItem(ModBlocks.STONE_ALTAR.get());*/
+
     simpleBlockItem(ModBlocks.MORTAR.get());
+
+/*    withExistingParent(ModBlocks.MORTAR.getKey().location().toString(),  RootsAPI.rl("block/complex/mortar_pestle"));*/
     simpleBlockItem(ModBlocks.PYRE.get());
     simpleBlockItem(ModBlocks.SOUL_PYRE.get());
     simpleBlockItem(ModBlocks.REINFORCED_PYRE.get());

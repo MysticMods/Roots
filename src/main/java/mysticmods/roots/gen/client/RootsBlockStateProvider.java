@@ -360,7 +360,8 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     });
 
     ModelFile mortar = models().withExistingParent("mortar", modLoc("block/complex/mortar"));
-    getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(mortar)
+    ModelFile mortarWithPestle = models().withExistingParent("mortar_with_pestle", modLoc("block/complex/mortar_pestle"));
+    getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(state.getValue(MortarBlock.PESTLE_INSIDE) ? mortarWithPestle : mortar)
         .build());
 
     ModelFile pyre = models().withExistingParent("pyre", modLoc("block/complex/pyre")).renderType("cutout");

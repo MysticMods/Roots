@@ -14,6 +14,10 @@ public class StateProperties {
   public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
   public static final BooleanProperty CRAFTING = BooleanProperty.create("crafting");
 
+  public static class Mortar {
+    public static final BooleanProperty PESTLE_INSIDE = BooleanProperty.create("pestle_inside");
+  }
+
   public static class GroveStone {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final PartProperty PART = PartProperty.create("part");

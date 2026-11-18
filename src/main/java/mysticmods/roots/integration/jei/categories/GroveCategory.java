@@ -1,32 +1,20 @@
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.IPlayerCondition;
-import mysticmods.roots.api.recipe.output.ChanceOutput;
-import mysticmods.roots.condition.GroveRankReputation;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.List;
-
-public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
+public class GroveCategory extends RootsDefaultCategory<GroveRecipe> {
   public GroveCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.GROVE_RECIPE_TYPE, helper, 186, 118, RootsAPI.rl("textures/gui/jei/grove_crafting.png"), () -> new ItemStack(ModBlocks.GROVE_CRAFTER.get()), Component.translatable("roots.jei.grove_crafting"));
+    super(RootsJEIPlugin.GROVE_RECIPE_TYPE, helper, () -> new ItemStack(ModBlocks.GROVE_CRAFTER.get()), Component.translatable("roots.jei.grove_crafting"));
   }
-
-  @Override
+/*  @Override
   public void setRecipe(IRecipeLayoutBuilder builder, GroveRecipe recipe, IFocusGroup iFocusGroup) {
     super.setRecipe(builder, recipe, iFocusGroup);
 
@@ -72,30 +60,11 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
           .addRichTooltipCallback(this.richestTooltip(recipe));
       column++;
     }
-  }
+  }*/
 
   @Override
-  public void createRecipeExtras(IRecipeExtrasBuilder builder, GroveRecipe recipe, IFocusGroup focuses) {
-    super.createRecipeExtras(builder, recipe, focuses);
-
-    int column = 0;
-    for (ILevelCondition condition : recipe.getLevelConditions()) {
-      CanonicalRepresentation rep = condition.getRepresentation();
-      int count = rep.getStates().size();
-      int offset = 81;
-      if (count == 4) {
-        offset = 86;
-      }
-      if (count == 3) {
-        offset = 89;
-      }
-      builder.addWidget(new LevelConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
-      column++;
-    }
-    int row = 0;
-    for (IPlayerCondition condition : recipe.getPlayerConditionsWithoutRanks()) {
-      builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
-      row++;
-    }
+  protected void addDevice(IRecipeLayoutBuilder builder) {
+    builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 80, 26)
+        .addIngredients(Ingredient.of(ModBlocks.GROVE_CRAFTER.get()));
   }
 }

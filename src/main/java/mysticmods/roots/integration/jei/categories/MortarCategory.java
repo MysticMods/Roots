@@ -1,56 +1,22 @@
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.IPlayerCondition;
-import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.List;
-
-public abstract class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
+public abstract class MortarCategory extends RootsDefaultCategory<MortarRecipe> {
   public MortarCategory(RecipeType<MortarRecipe> type, Component title, IGuiHelper helper) {
-    super(type, helper, 185, 117, RootsAPI.rl("textures/gui/jei/mortar_and_pestle.png"), () -> new ItemStack(ModBlocks.MORTAR.get()), title);
+    super(type, helper, () -> new ItemStack(ModBlocks.MORTAR.get()), title);
   }
 
-  @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, MortarRecipe recipe, IFocusGroup iFocusGroup) {
-    super.setRecipe(builder, recipe, iFocusGroup);
-    for (int i = 0; i < recipe.getIngredients().size(); i++) {
-      builder.addSlot(RecipeIngredientRole.INPUT, 1 + i * 18, 3).addIngredients(recipe.getIngredients().get(i));
-    }
-
-    List<ChanceOutput> outputs = recipe.getCachedOutputs();
-
-    int row = 0;
-    int column = 0;
-
-    for (int i = 0; i < outputs.size(); i++) {
-      if (i % 4 == 0 && i != 0) {
-        row++;
-        column = 0;
-      }
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 117 + column * 17, 2 + row * 17)
-          .addItemStack(outputs.get(i).output()).setSlotName(String.valueOf(i))
-          .addRichTooltipCallback(this.richestTooltip(recipe));
-      column++;
-    }
-  }
-
-  @Override
+/*  @Override
   public void createRecipeExtras(IRecipeExtrasBuilder builder, MortarRecipe recipe, IFocusGroup focuses) {
     super.createRecipeExtras(builder, recipe, focuses);
 
@@ -73,6 +39,12 @@ public abstract class MortarCategory extends RootsRecipeBaseCategory<MortarRecip
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
     }
+  }*/
+
+  @Override
+  protected void addDevice(IRecipeLayoutBuilder builder) {
+    builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 80, 26)
+        .addIngredients(Ingredient.of(ModBlocks.MORTAR.get()));
   }
 
   public static class Regular extends MortarCategory {
