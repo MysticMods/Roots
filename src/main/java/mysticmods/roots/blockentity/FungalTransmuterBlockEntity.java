@@ -144,6 +144,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
   }
 
   // TODO: "Delete" for emergency eject?
+  // TODO: Hud overlay should display sneak-use to cancel craft
   private void emergencyEject() {
     this.record = null;
 
