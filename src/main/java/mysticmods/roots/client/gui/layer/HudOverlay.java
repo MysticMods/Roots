@@ -331,19 +331,24 @@ public class HudOverlay {
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
 
-      int baseX = x - 24;
+      int baseX = x; // - 24;
       int baseY = y + 18;
       int columnSpacing = 25;
       int rowSpacing = 18;
       int itemsPerRow = 2;
 
-      for (int i = 0; i < outputs.size(); i++) {
-        ChanceOutput chanceOutput = outputs.get(i);
+      ChanceOutput chanceOutput = cycleTimer.getCycled(outputs);
+
+      if (chanceOutput != null) {
+/*      for (int i = 0; i < outputs.size(); i++) {
+        ChanceOutput chanceOutput = outputs.get(i);*/
+/*
         int col = i % itemsPerRow;
         int row = i / itemsPerRow;
+*/
 
-        int xPos = baseX + col * columnSpacing;
-        int yPos = baseY + row * rowSpacing;
+        int xPos = baseX;/* + col * columnSpacing;*/
+        int yPos = baseY;/* + row * rowSpacing;*/
 
         graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
         graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
@@ -441,7 +446,7 @@ public class HudOverlay {
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
 
-      int baseX = x - 24;
+      int baseX = x; // - 24;
       int baseY = y + 18;
       int columnSpacing = 25;
       int rowSpacing = 18;
@@ -450,13 +455,19 @@ public class HudOverlay {
       //Component comp4 = Component.empty();
       //Component.translatable("roots.hud.transmuter.power", requiredPower, transmuter.getPower()/*, transmuter.getMaxPower()*/);
 
+      ChanceOutput chanceOutput = cycleTimer.getCycled(outputs);
+
+      if (chanceOutput != null) {
+
+/*
       for (int i = 0; i < outputs.size(); i++) {
         ChanceOutput chanceOutput = outputs.get(i);
         int col = i % itemsPerRow;
         int row = i / itemsPerRow;
+*/
 
-        int xPos = baseX + col * columnSpacing;
-        int yPos = baseY + row * rowSpacing;
+        int xPos = baseX; // + col * columnSpacing;
+        int yPos = baseY; // + row * rowSpacing;
 
         graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
         graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
@@ -545,19 +556,25 @@ public class HudOverlay {
       graphics.renderItemDecorations(mc.font, output, x, y);
 
 
-      int baseX = x - 24;
+      int baseX = x; // - 24;
       int baseY = y + 18;
       int columnSpacing = 25;
       int rowSpacing = 18;
       int itemsPerRow = 2;
 
+      ChanceOutput chanceOutput = cycleTimer.getCycled(outputs);
+
+      if (chanceOutput != null) {
+
+/*
       for (int i = 0; i < outputs.size(); i++) {
         ChanceOutput chanceOutput = outputs.get(i);
         int col = i % itemsPerRow;
         int row = i / itemsPerRow;
+*/
 
-        int xPos = baseX + col * columnSpacing;
-        int yPos = baseY + row * rowSpacing;
+        int xPos = baseX;/* + col * columnSpacing;*/
+        int yPos = baseY/* + row * rowSpacing*/;
 
         graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
         graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
@@ -731,19 +748,22 @@ public class HudOverlay {
       graphics.renderItem(output, x, y, 0);
       graphics.renderItemDecorations(mc.font, output, x, y);
 
-      int baseX = x - 24;
+      int baseX = x; // - 24;
       int baseY = y + 18;
       int columnSpacing = 25;
       int rowSpacing = 18;
       int itemsPerRow = 2;
 
-      for (int i = 0; i < outputs.size(); i++) {
-        ChanceOutput chanceOutput = outputs.get(i);
-        int col = i % itemsPerRow;
-        int row = i / itemsPerRow;
+      ChanceOutput chanceOutput = cycleTimer.getCycled(outputs);
 
-        int xPos = baseX + col * columnSpacing;
-        int yPos = baseY + row * rowSpacing;
+      if (chanceOutput != null) {
+/*      for (int i = 0; i < outputs.size(); i++) {
+        ChanceOutput chanceOutput = outputs.get(i);*/
+/*        int col = i % itemsPerRow;
+        int row = i / itemsPerRow;*/
+
+        int xPos = baseX;/* + *//*col * *//*columnSpacing;*/
+        int yPos = baseY;/* + *//*row * *//*rowSpacing;*/
 
         graphics.renderItem(chanceOutput.output(), xPos, yPos, 0);
         graphics.renderItemDecorations(mc.font, chanceOutput.output(), xPos, yPos);
