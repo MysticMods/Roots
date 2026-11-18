@@ -1,59 +1,23 @@
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.IPlayerCondition;
-import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.List;
-
-public abstract class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
+public abstract class PyreCategory extends RootsDefaultCategory<PyreRecipe> {
   public PyreCategory(RecipeType<PyreRecipe> type, Component title, IGuiHelper helper) {
-    super(type, helper, 167, 124, RootsAPI.rl("textures/gui/jei/ritual_crafting.png"), () -> new ItemStack(ModBlocks.PYRE.value()), title);
+    super(type, helper, () -> new ItemStack(ModBlocks.PYRE.value()), title);
   }
 
-  @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, PyreRecipe recipe, IFocusGroup iFocusGroup) {
-    super.setRecipe(builder, recipe, iFocusGroup);
-
-    builder.addSlot(RecipeIngredientRole.INPUT, 27, 6).addIngredients(recipe.getIngredients().get(0));
-    builder.addSlot(RecipeIngredientRole.INPUT, 1, 27).addIngredients(recipe.getIngredients().get(1));
-    builder.addSlot(RecipeIngredientRole.INPUT, 53, 27).addIngredients(recipe.getIngredients().get(2));
-    builder.addSlot(RecipeIngredientRole.INPUT, 8, 60).addIngredients(recipe.getIngredients().get(3));
-    builder.addSlot(RecipeIngredientRole.INPUT, 48, 60).addIngredients(recipe.getIngredients().get(4));
-
-    List<ChanceOutput> outputs = recipe.getCachedOutputs();
-
-    int row = 0;
-    int column = 0;
-
-    for (int i = 0; i < outputs.size(); i++) {
-      if (i % 4 == 0 && i != 0) {
-        row++;
-        column = 0;
-      }
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 97 + column * 17, 2 + row * 17)
-          .addItemStack(outputs.get(i).output()).setSlotName(String.valueOf(i))
-          .addRichTooltipCallback(this.richestTooltip(recipe));
-      column++;
-    }
-  }
-
-  @Override
+/*  @Override
   public void createRecipeExtras(IRecipeExtrasBuilder builder, PyreRecipe recipe, IFocusGroup focuses) {
     super.createRecipeExtras(builder, recipe, focuses);
 
@@ -76,6 +40,12 @@ public abstract class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
     }
+  }*/
+
+  @Override
+  protected void addDevice(IRecipeLayoutBuilder builder) {
+    builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 80, 26)
+        .addIngredients(Ingredient.of(RootsTags.Items.FUNCTIONAL_PYRES));
   }
 
   public static class Pyre extends PyreCategory {
