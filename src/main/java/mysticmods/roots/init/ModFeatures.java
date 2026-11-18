@@ -127,7 +127,12 @@ public class ModFeatures {
   public static ResourceKey<StructureSet> STANDING_STONES_SET_KEY = ResourceKey.create(Registries.STRUCTURE_SET, RootsAPI.rl("standing_stones"));
 
   public static TreeConfiguration.TreeConfigurationBuilder createWildwood() {
-    return (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(ModBlocks.WILDWOOD_LOG.get()), new FancyTrunkPlacer(12, 1, 1), BlockStateProvider.simple(ModBlocks.WILDWOOD_LEAVES.get()), new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines();
+    return new TreeConfiguration.TreeConfigurationBuilder(
+        BlockStateProvider.simple(ModBlocks.WILDWOOD_LOG.get()),
+        new MinLobeFancyTrunkPlacer(9, 4, 3, 4, 3),
+        BlockStateProvider.simple(ModBlocks.WILDWOOD_LEAVES.get()),
+        new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
+        new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))).ignoreVines();
   }
 
   public static void register(IEventBus bus) {
@@ -136,5 +141,6 @@ public class ModFeatures {
     BLOCK_PREDICATES.register(bus);
     STRUCTURES.register(bus);
     STRUCTURE_PIECE_TYPES.register(bus);
+    TRUNK_PLACERS.register(bus);
   }
 }
