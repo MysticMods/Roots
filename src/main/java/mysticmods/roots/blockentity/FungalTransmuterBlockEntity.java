@@ -38,6 +38,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.datafix.fixes.ItemStackTagFix;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -142,8 +143,16 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     return stateHolder.recompute(this);
   }
 
+  // TODO: "Delete" for emergency eject?
   private void emergencyEject() {
-    // TODO: Emergency eject
+    this.record = null;
+
+    List<ItemStack> removed = inventory.getItemsAndClear();
+    for (ItemStack popped : removed) {
+      ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
+    }
+
+    revalidateRecipe();
   }
 
   @Override
@@ -155,7 +164,7 @@ public class FungalTransmuterBlockEntity extends UseDelegatedBlockEntity impleme
     updateState();
 
     if (stateHolder.is(LockState.LOCKED)) {
-      if (!stateHolder.is(ProgressState.CONSUMING_POWER) && player.isShiftKeyDown()) {
+      if (!stateHolder.is(ProgressState.CRAFTING) && player.isShiftKeyDown()) {
         // try to unlock
         emergencyEject();
       }
