@@ -6,6 +6,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.block.PillarBlock;
 import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchMenu;
 import mysticmods.roots.inventory.pouch.component.ComponentPouchMenu;
 import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
@@ -26,6 +27,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.common.Tags;
@@ -184,6 +190,12 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> FUNGAL_TRANSMUTER = ITEMS.register("fungal_transmuter", () -> new BlockItem(ModBlocks.FUNGAL_TRANSMUTER.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
 
   public static DeferredHolder<Item, BlockItem> BAFFLECAP_BLOCK = ITEMS.register("bafflecap_block", () -> new BlockItem(ModBlocks.BAFFLECAP_BLOCK.get(), new Item.Properties()));
+
+  public static final DeferredHolder<Item, BlockItem> SHORT_RUNESTONE_PILLAR = ITEMS.register("short_runestone_pillar", () -> new BlockItem(ModBlocks.SHORT_RUNESTONE_PILLAR.get(), new Item.Properties()));
+  public static final DeferredHolder<Item, BlockItem> TALL_RUNESTONE_PILLAR = ITEMS.register("tall_runestone_pillar", () -> new BlockItem(ModBlocks.TALL_RUNESTONE_PILLAR.get(), new Item.Properties()));
+  public static final DeferredHolder<Item, BlockItem> SHORT_RUNED_OBSIDIAN_PILLAR = ITEMS.register("short_runed_obsidian_pillar", () -> new BlockItem(ModBlocks.SHORT_RUNED_OBSIDIAN_PILLAR.get(), new Item.Properties()));
+  public static final DeferredHolder<Item, BlockItem> TALL_RUNED_OBSIDIAN_PILLAR = ITEMS.register("tall_runed_obsidian_pillar", () -> new BlockItem(ModBlocks.TALL_RUNED_OBSIDIAN_PILLAR.get(), new Item.Properties()));
+
   public static DeferredHolder<Item, BlockItem> WILD_GROVE_STONE = ITEMS.register("wild_grove_stone", () -> new BlockItem(ModBlocks.WILD_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> ANIMATE_GROVE_STONE = ITEMS.register("animate_grove_stone", () -> new BlockItem(ModBlocks.ANIMATE_GROVE_STONE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> CULTIVATION_GROVE_STONE = ITEMS.register("cultivation_grove_stone", () -> new BlockItem(ModBlocks.CULTIVATION_GROVE_STONE.get(), new Item.Properties()));

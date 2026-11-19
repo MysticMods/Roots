@@ -110,6 +110,11 @@ public class RootsModEvents {
       event.accept(ModItems.ENCHANTED_TURF.get());
       event.accept(ModItems.FURNACE_SPEED_AMPLIFIER.get());
 
+      event.accept(ModItems.TALL_RUNESTONE_PILLAR.get());
+      event.accept(ModItems.SHORT_RUNESTONE_PILLAR.get());
+      event.accept(ModItems.TALL_RUNED_OBSIDIAN_PILLAR.get());
+      event.accept(ModItems.SHORT_RUNED_OBSIDIAN_PILLAR.get());
+
       event.accept(ModItems.WILD_GROVE_STONE.get());
       event.accept(ModItems.ANIMATE_GROVE_STONE.get());
       event.accept(ModItems.UNITY_GROVE_STONE.get());

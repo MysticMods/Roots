@@ -85,6 +85,13 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.PELT).add(ModItems.PELT.get());
     this.tag(RootsTags.Items.ANTLERS).add(ModItems.ANTLERS.get());
 
+    this.tag(RootsTags.Items.RUNED_CAPSTONES).add(ModItems.CHISELED_RUNED_OBSIDIAN.get());
+    this.tag(RootsTags.Items.RUNED_PILLARS)
+        .add(ModItems.RUNED_OBSIDIAN.get(), ModItems.RUNED_BRICK.get(), ModItems.RUNED_TILE.get());
+    this.tag(RootsTags.Items.RUNE_CAPSTONES).add(ModItems.CHISELED_RUNESTONE.get());
+    this.tag(RootsTags.Items.RUNE_PILLARS)
+        .add(ModItems.RUNESTONE.get(), ModItems.RUNESTONE_BRICK.get(), ModItems.MOSSY_RUNESTONE.get(), ModItems.RUNESTONE_TILE.get());
+
     this.tag(RootsTags.Items.PROTEINS)
         .add(ModItems.VENISON.get(), ModItems.COOKED_VENISON.get(), ModItems.RAW_SQUID.get(), ModItems.COOKED_SQUID.get());
 
@@ -108,6 +115,15 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.RAW_SILVER_STORAGE, RootsTags.Items.RAW_SILVER_STORAGE);
     this.copy(RootsTags.Blocks.CLAY_STORAGE, RootsTags.Items.CLAY_STORAGE);
     this.tag(RootsTags.Items.SILVER_INGOT).add(ModItems.SILVER_INGOT.get());
+
+    this.copy(RootsTags.Blocks.TALL_RUNESTONE_PILLARS, RootsTags.Items.TALL_RUNESTONE_PILLARS);
+    this.copy(RootsTags.Blocks.SHORT_RUNESTONE_PILLARS, RootsTags.Items.SHORT_RUNESTONE_PILLARS);
+    this.copy(RootsTags.Blocks.RUNESTONE_PILLARS, RootsTags.Items.RUNESTONE_PILLARS);
+    this.copy(RootsTags.Blocks.RUNED_OBSIDIAN_PILLARS, RootsTags.Items.RUNED_OBSIDIAN_PILLARS);
+    this.copy(RootsTags.Blocks.SHORT_RUNED_OBSIDIAN_PILLARS, RootsTags.Items.SHORT_RUNED_OBSIDIAN_PILLARS);
+    this.copy(RootsTags.Blocks.TALL_RUNED_OBSIDIAN_PILLARS, RootsTags.Items.TALL_RUNED_OBSIDIAN_PILLARS);
+    this.copy(RootsTags.Blocks.TALL_PILLARS, RootsTags.Items.TALL_PILLARS);
+    this.copy(RootsTags.Blocks.SHORT_PILLARS, RootsTags.Items.SHORT_PILLARS);
 
     this.tag(RootsTags.Items.COPPER_ITEMS)
         .add(/*ModItems.COPPER_KNIFE.get(), */ModItems.COPPER_AXE.get(), ModItems.COPPER_HOE.get(), ModItems.COPPER_PICKAXE.get(), ModItems.COPPER_SHOVEL.get(), ModItems.COPPER_SWORD.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
@@ -157,14 +173,6 @@ public final class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.PYRES, RootsTags.Items.PYRES);
     this.copy(RootsTags.Blocks.GROVE_CRAFTERS, RootsTags.Items.GROVE_CRAFTERS);
     this.copy(RootsTags.Blocks.MORTARS, RootsTags.Items.MORTARS);
-    this.copy(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Items.RUNE_CAPSTONES);
-    this.copy(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Items.RUNE_PILLARS);
-    this.copy(RootsTags.Blocks.RUNED_CAPSTONES, RootsTags.Items.RUNED_CAPSTONES);
-    this.copy(RootsTags.Blocks.RUNED_PILLARS, RootsTags.Items.RUNED_PILLARS);
-    this.copy(RootsTags.Blocks.RUNES_CAPSTONES, RootsTags.Items.RUNES_CAPSTONES);
-    this.copy(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Items.RUNES_PILLARS);
-    this.copy(RootsTags.Blocks.CAPSTONES, RootsTags.Items.CAPSTONES);
-    this.copy(RootsTags.Blocks.PILLARS, RootsTags.Items.PILLARS);
     this.copy(RootsTags.Blocks.STONEPETAL, RootsTags.Items.STONEPETAL);
     this.tag(ItemTags.SMALL_FLOWERS).addTags(RootsTags.Items.STONEPETAL);
     this.copy(RootsTags.Blocks.SHORT_GRASS, RootsTags.Items.SHORT_GRASS);

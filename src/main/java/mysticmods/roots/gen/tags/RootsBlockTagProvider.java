@@ -94,13 +94,8 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.QUARTZ_ORE).add(GRANITE_QUARTZ_ORE.get());
     this.tag(RootsTags.Blocks.RUNED_OBSIDIAN)
         .add(RUNED_OBSIDIAN.get(), CHISELED_RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get());
-    this.tag(RootsTags.Blocks.RUNED_CAPSTONES).add(CHISELED_RUNED_OBSIDIAN.get());
-    this.tag(RootsTags.Blocks.RUNED_PILLARS).add(RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get());
     this.tag(RootsTags.Blocks.RUNESTONE)
         .add(RUNESTONE.get(), RUNESTONE_BRICK.get(), CHISELED_RUNESTONE.get(), MOSSY_RUNESTONE.get(), RUNESTONE_TILE.get());
-    this.tag(RootsTags.Blocks.RUNE_CAPSTONES).add(CHISELED_RUNESTONE.get());
-    this.tag(RootsTags.Blocks.RUNE_PILLARS)
-        .add(RUNESTONE.get(), RUNESTONE_BRICK.get(), MOSSY_RUNESTONE.get(), RUNESTONE_TILE.get());
     this.tag(RootsTags.Blocks.BASE_ELEMENTAL_SOIL).add(ELEMENTAL_SOIL.get());
     this.tag(RootsTags.Blocks.AIR_SOIL).add(CAELIC_SOIL.get());
     this.tag(RootsTags.Blocks.FIRE_SOIL).add(MAGMATIC_SOIL.get());
@@ -130,6 +125,17 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.GROVE_CRAFTERS).add(GROVE_CRAFTER.get());
 
     this.tag(RootsTags.Blocks.GROVE_MOSS).add(CREEPING_GROVE_MOSS.get(), HANGING_GROVE_MOSS.get());
+
+    this.tag(RootsTags.Blocks.RUNED_OBSIDIAN_PILLARS).addTag(RootsTags.Blocks.SHORT_RUNED_OBSIDIAN_PILLARS).addTag(RootsTags.Blocks.TALL_RUNED_OBSIDIAN_PILLARS);
+    this.tag(RootsTags.Blocks.RUNESTONE_PILLARS).addTag(RootsTags.Blocks.SHORT_RUNESTONE_PILLARS).addTag(RootsTags.Blocks.TALL_RUNESTONE_PILLARS);
+    this.tag(RootsTags.Blocks.PILLARS).addTag(RootsTags.Blocks.SHORT_PILLARS).addTag(RootsTags.Blocks.TALL_PILLARS);
+    this.tag(RootsTags.Blocks.SHORT_PILLARS).addTag(RootsTags.Blocks.SHORT_RUNED_OBSIDIAN_PILLARS).addTag(RootsTags.Blocks.SHORT_RUNESTONE_PILLARS);
+    this.tag(RootsTags.Blocks.TALL_PILLARS).addTag(RootsTags.Blocks.TALL_RUNED_OBSIDIAN_PILLARS).addTag(RootsTags.Blocks.TALL_RUNESTONE_PILLARS);
+
+    this.tag(RootsTags.Blocks.SHORT_RUNESTONE_PILLARS).add(SHORT_RUNESTONE_PILLAR.get());
+    this.tag(RootsTags.Blocks.SHORT_RUNED_OBSIDIAN_PILLARS).add(SHORT_RUNED_OBSIDIAN_PILLAR.get());
+    this.tag(RootsTags.Blocks.TALL_RUNESTONE_PILLARS).add(TALL_RUNESTONE_PILLAR.get());
+    this.tag(RootsTags.Blocks.TALL_RUNED_OBSIDIAN_PILLARS).add(TALL_RUNED_OBSIDIAN_PILLAR.get());
 
     this.tag(RootsTags.Blocks.GROVE_STONE_WILD).add(WILD_GROVE_STONE.get());
     this.tag(RootsTags.Blocks.GROVE_STONE_ANIMATE).add(ANIMATE_GROVE_STONE.get());
@@ -215,16 +221,6 @@ public final class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(BlockTags.LOGS_THAT_BURN).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
     //noinspection unchecked
     this.tag(BlockTags.LOGS).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
-
-    //noinspection unchecked
-    this.tag(RootsTags.Blocks.RUNES_CAPSTONES)
-        .addTags(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Blocks.RUNED_CAPSTONES);
-    //noinspection unchecked
-    this.tag(RootsTags.Blocks.CAPSTONES).addTags(RootsTags.Blocks.RUNES_CAPSTONES);
-    //noinspection unchecked
-    this.tag(RootsTags.Blocks.RUNES_PILLARS).addTags(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Blocks.RUNED_PILLARS);
-    //noinspection unchecked
-    this.tag(RootsTags.Blocks.PILLARS).addTags(RootsTags.Blocks.RUNES_PILLARS);
 
     //noinspection unchecked
     this.tag(BlockTags.MINEABLE_WITH_AXE).addTags(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS)

@@ -471,6 +471,10 @@ public final class RootsLootTableProvider {
       addFairyHouseDrops(ModBlocks.CRIMSON_FAIRY_HUT, ModItems.CRIMSON_FAIRY_HUT);
       addFairyHouseDrops(ModBlocks.WARPED_FAIRY_HUT, ModItems.WARPED_FAIRY_HUT);
 
+      addGroveStoneDrops(ModBlocks.TALL_RUNED_OBSIDIAN_PILLAR, ModItems.TALL_RUNED_OBSIDIAN_PILLAR);
+      addGroveStoneDrops(ModBlocks.TALL_RUNESTONE_PILLAR, ModItems.TALL_RUNESTONE_PILLAR);
+      addGroveStoneDrops(ModBlocks.SHORT_RUNED_OBSIDIAN_PILLAR, ModItems.SHORT_RUNED_OBSIDIAN_PILLAR);
+      addGroveStoneDrops(ModBlocks.SHORT_RUNESTONE_PILLAR, ModItems.SHORT_RUNESTONE_PILLAR);
       addGroveStoneDrops(ModBlocks.ANIMATE_GROVE_STONE, ModItems.ANIMATE_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.WILD_GROVE_STONE, ModItems.WILD_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.FUNGAL_GROVE_STONE, ModItems.FUNGAL_GROVE_STONE);

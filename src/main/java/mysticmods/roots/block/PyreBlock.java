@@ -2,6 +2,7 @@ package mysticmods.roots.block;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.block.StateProperties;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -201,7 +202,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
       BoundingBox bb = PyreBlockEntity.getPyreBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
       List<BlockPos> positions = BlockPos.betweenClosedStream(bb).filter(p -> {
         BlockState state = pLevel.getBlockState(p);
-        return state.is(RootsTags.Blocks.CAPSTONES);
+        return state.is(RootsTags.Blocks.PILLARS) && state.hasProperty(StateProperties.GroveStone.PART) && state.getValue(StateProperties.GroveStone.PART) == StateProperties.Part.TOP;
       }).map(BlockPos::immutable).toList();
 
       for (BlockPos pos : positions) {

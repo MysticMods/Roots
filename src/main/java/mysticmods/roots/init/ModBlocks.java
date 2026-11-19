@@ -257,6 +257,17 @@ public class ModBlocks {
   public static final DeferredHolder<Block, HugeMushroomBlock> BAFFLECAP_BLOCK = BLOCKS.register("bafflecap_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD)
       .ignitedByLava()));
+  public static final DeferredHolder<Block, PillarBlock> SHORT_RUNESTONE_PILLAR = BLOCKS.register("short_runestone_pillar", () -> new PillarBlock.Short(BlockBehaviour.Properties.of()
+      .forceSolidOn().strength(2.0f, 6.0f).requiresCorrectToolForDrops().mapColor(MapColor.STONE)));
+  public static final DeferredHolder<Block, PillarBlock> TALL_RUNESTONE_PILLAR = BLOCKS.register("tall_runestone_pillar", () -> new PillarBlock.Tall(BlockBehaviour.Properties.of()
+      .forceSolidOn().strength(2.0f, 6.0f).requiresCorrectToolForDrops().mapColor(MapColor.STONE)));
+  public static final DeferredHolder<Block, PillarBlock> SHORT_RUNED_OBSIDIAN_PILLAR = BLOCKS.register("short_runed_obsidian_pillar", () -> new PillarBlock.Short(BlockBehaviour.Properties.of()
+      .mapColor(DyeColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(18.0f, 1200.0f).pushReaction(PushReaction.BLOCK).forceSolidOn()));
+  public static final DeferredHolder<Block, PillarBlock> TALL_RUNED_OBSIDIAN_PILLAR = BLOCKS.register("tall_runed_obsidian_pillar", () -> new PillarBlock.Tall(BlockBehaviour.Properties.of()
+      .mapColor(DyeColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(18.0f, 1200.0f).pushReaction(PushReaction.BLOCK).forceSolidOn()));
+
   public static final DeferredHolder<Block, GroveStoneBlock> WILD_GROVE_STONE = BLOCKS.register("wild_grove_stone", () -> new GroveStoneBlock(ModGroves.WILD, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));

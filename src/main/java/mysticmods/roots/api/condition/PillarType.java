@@ -3,6 +3,7 @@ package mysticmods.roots.api.condition;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.registries.Registries;
@@ -10,24 +11,57 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 
-public record PillarType(String name, TagKey<Block> pillar, TagKey<Block> capstone) {
-  public static final PillarType RUNESTONE = new PillarType("runestone", RootsTags.Blocks.RUNE_PILLARS, RootsTags.Blocks.RUNE_CAPSTONES);
-  public static final PillarType RUNED_OBSIDIAN = new PillarType("runed_obsidian", RootsTags.Blocks.RUNED_PILLARS, RootsTags.Blocks.RUNED_CAPSTONES);
-  public static final PillarType ANY_RUNE = new PillarType("any_rune", RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.RUNES_CAPSTONES);
-  public static final PillarType ANY = new PillarType("any", RootsTags.Blocks.PILLARS, RootsTags.Blocks.CAPSTONES);
+import java.util.function.IntFunction;
+
+public record PillarType(String name, TagKey<Block> pillar, PillarHeight height) {
+  public static final PillarType TALL_RUNESTONE = new PillarType("tall_runestone", RootsTags.Blocks.TALL_RUNESTONE_PILLARS, PillarHeight.TALL);
+  public static final PillarType SHORT_RUNESTONE = new PillarType("short_runestone", RootsTags.Blocks.SHORT_RUNESTONE_PILLARS, PillarHeight.SHORT);
+  public static final PillarType TALL_RUNED_OBSIDIAN = new PillarType("tall_runed_obsidian", RootsTags.Blocks.TALL_RUNED_OBSIDIAN_PILLARS, PillarHeight.TALL);
+  public static final PillarType SHORT_RUNED_OBSIDIAN = new PillarType("short_runestone", RootsTags.Blocks.SHORT_RUNED_OBSIDIAN_PILLARS, PillarHeight.SHORT);
+  public static final PillarType TALL = new PillarType("tall", RootsTags.Blocks.TALL_PILLARS, PillarHeight.TALL);
+  public static final PillarType SHORT = new PillarType("short", RootsTags.Blocks.SHORT_PILLARS, PillarHeight.SHORT);
+  public static final PillarType ANY = new PillarType("any", RootsTags.Blocks.PILLARS, PillarHeight.ANY);
 
   public static final MapCodec<PillarType> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       Codec.STRING.fieldOf("name").forGetter(PillarType::name),
       TagKey.codec(Registries.BLOCK).fieldOf("pillar").forGetter(PillarType::pillar),
-      TagKey.codec(Registries.BLOCK).fieldOf("capstone").forGetter(PillarType::capstone)
+      PillarHeight.CODEC.fieldOf("height").forGetter(PillarType::height)
   ).apply(instance, PillarType::new));
   public static final Codec<PillarType> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, PillarType> STREAM_CODEC = StreamCodec.composite(
       ByteBufCodecs.STRING_UTF8, PillarType::name,
       ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC, PillarType::pillar,
-      ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC, PillarType::capstone,
+      PillarHeight.STREAM_CODEC, PillarType::height,
       PillarType::new
   );
+
+  enum PillarHeight implements StringRepresentable {
+    TALL(0, "tall"),
+    SHORT(1, "short"),
+    ANY(2, "any");
+
+    private final int id;
+    private final String name;
+    public static final Codec<PillarHeight> CODEC = StringRepresentable.fromEnum(PillarHeight::values);
+    public static final IntFunction<PillarHeight> BY_ID = ByIdMap.continuous(PillarHeight::getId, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+    public static final StreamCodec<ByteBuf, PillarHeight> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, PillarHeight::getId);
+
+    PillarHeight(int id, String name) {
+      this.id = id;
+      this.name = name;
+    }
+
+    @Override
+    public String getSerializedName() {
+      return name;
+    }
+
+    public int getId() {
+      return id;
+    }
+  }
 }

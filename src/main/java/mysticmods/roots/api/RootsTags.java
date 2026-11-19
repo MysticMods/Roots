@@ -109,16 +109,6 @@ public class RootsTags {
     // Mortars
     public static final TagKey<Block> MORTARS = modTag("mortars");
 
-    // Valid capstones for runed/runestone pillars
-    public static final TagKey<Block> RUNE_CAPSTONES = modTag("capstones/runes/rune");
-    public static final TagKey<Block> RUNE_PILLARS = modTag("pillars/runes/rune");
-    public static final TagKey<Block> RUNED_CAPSTONES = modTag("capstones/runes/runed");
-    public static final TagKey<Block> RUNED_PILLARS = modTag("pillars/runes/runed");
-    public static final TagKey<Block> RUNES_CAPSTONES = modTag("capstones/runes/any");
-    public static final TagKey<Block> RUNES_PILLARS = modTag("pillars/runes/any");
-
-    public static final TagKey<Block> CAPSTONES = modTag("capstones/any");
-    public static final TagKey<Block> PILLARS = modTag("pillars/any");
 
     // Crops that should not be affected by the growth spells
     public static final TagKey<Block> GROWTH_BLACKLIST = modTag("growth/blacklist");
@@ -159,6 +149,15 @@ public class RootsTags {
     public static final TagKey<Block> MOSS_STORAGE = compatTag("storage_blocks/moss");
 
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
+    public static final TagKey<Block> TALL_RUNESTONE_PILLARS = modTag("pillars/runestone/tall");
+    public static final TagKey<Block> SHORT_RUNESTONE_PILLARS = modTag("pillars/runestone/short");
+    public static final TagKey<Block> RUNESTONE_PILLARS = modTag("pillars/runestone");
+    public static final TagKey<Block> RUNED_OBSIDIAN_PILLARS = modTag("pillars/runed_obsidian");
+    public static final TagKey<Block> SHORT_RUNED_OBSIDIAN_PILLARS = modTag("pillars/runed_obsidian/short");
+    public static final TagKey<Block> TALL_RUNED_OBSIDIAN_PILLARS = modTag("pillars/runed_obsidian/tall");
+    public static final TagKey<Block> TALL_PILLARS = modTag("pillars/tall");
+    public static final TagKey<Block> SHORT_PILLARS = modTag("pillars/short");
+    public static final TagKey<Block> PILLARS = modTag("pillars");
 
     public static final TagKey<Block> GRANITE_ORE_REPLACEABLES = modTag("granite_ore_replaceables");
 
@@ -404,11 +403,16 @@ public class RootsTags {
     public static final TagKey<Item> RUNE_PILLARS = modTag("pillars/runes/rune");
     public static final TagKey<Item> RUNED_CAPSTONES = modTag("capstones/runes/runed");
     public static final TagKey<Item> RUNED_PILLARS = modTag("pillars/runes/runed");
-    public static final TagKey<Item> RUNES_CAPSTONES = modTag("capstones/runes/any");
-    public static final TagKey<Item> RUNES_PILLARS = modTag("pillars/runes/any");
 
-    public static final TagKey<Item> CAPSTONES = modTag("capstones/any");
-    public static final TagKey<Item> PILLARS = modTag("pillars/any");
+    public static final TagKey<Item> TALL_RUNESTONE_PILLARS = modTag("pillars/runestone/tall");
+    public static final TagKey<Item> SHORT_RUNESTONE_PILLARS = modTag("pillars/runestone/short");
+    public static final TagKey<Item> RUNESTONE_PILLARS = modTag("pillars/runestone");
+    public static final TagKey<Item> RUNED_OBSIDIAN_PILLARS = modTag("pillars/runed_obsidian");
+    public static final TagKey<Item> SHORT_RUNED_OBSIDIAN_PILLARS = modTag("pillars/runed_obsidian/short");
+    public static final TagKey<Item> TALL_RUNED_OBSIDIAN_PILLARS = modTag("pillars/runed_obsidian/tall");
+    public static final TagKey<Item> TALL_PILLARS = modTag("pillars/tall");
+    public static final TagKey<Item> SHORT_PILLARS = modTag("pillars/short");
+    public static final TagKey<Item> PILLARS = modTag("pillars");
 
     public static final TagKey<Item> SPROUT_BREEDING_REWARDS = modTag("sprout_breeding_rewards");
 

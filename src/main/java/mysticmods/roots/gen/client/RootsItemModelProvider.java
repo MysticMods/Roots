@@ -147,6 +147,10 @@ public final class RootsItemModelProvider extends ItemModelProvider {
 
     inventoryModel(ModBlocks.BAFFLECAP_BLOCK);
     inventoryModel(ModBlocks.ANIMATE_GROVE_STONE);
+    inventoryModel(ModBlocks.TALL_RUNED_OBSIDIAN_PILLAR);
+    inventoryModel(ModBlocks.SHORT_RUNED_OBSIDIAN_PILLAR);
+    inventoryModel(ModBlocks.TALL_RUNESTONE_PILLAR);
+    inventoryModel(ModBlocks.SHORT_RUNESTONE_PILLAR);
     inventoryModel(ModBlocks.WILD_GROVE_STONE);
     inventoryModel(ModBlocks.CULTIVATION_GROVE_STONE);
     inventoryModel(ModBlocks.UNITY_GROVE_STONE);

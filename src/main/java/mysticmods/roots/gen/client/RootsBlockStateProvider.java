@@ -475,6 +475,11 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
     simpleBlock(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), models().withExistingParent("potted_wildwood_sapling", mcLoc("block/flower_pot_cross"))
         .texture("plant", modLoc("block/wildwood_sapling")).renderType("cutout"));
 
+    runestonePillar(ModBlocks.TALL_RUNESTONE_PILLAR, true, RootsAPI.rl("block/runestone_pillar"));
+    runestonePillar(ModBlocks.SHORT_RUNESTONE_PILLAR, true, RootsAPI.rl("block/runestone_pillar"));
+    runestonePillar(ModBlocks.TALL_RUNED_OBSIDIAN_PILLAR, true, RootsAPI.rl("block/runed_obsidian_pillar"));
+    runestonePillar(ModBlocks.SHORT_RUNED_OBSIDIAN_PILLAR, true, RootsAPI.rl("block/runed_obsidian_pillar"));
+
     groveStone(ModBlocks.ANIMATE_GROVE_STONE);
     groveStone(ModBlocks.WILD_GROVE_STONE);
     groveStone(ModBlocks.UNITY_GROVE_STONE);
@@ -519,6 +524,27 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
               .rotationX(0)
               .rotationY(dir.getAxis().isVertical() ? 0 : (int) (dir.toYRot() - 90) % 360)
               .build();
+        });
+  }
+
+  private void runestonePillar(Holder<Block> holder, boolean tall, ResourceLocation texture) {
+    String blockName = holder.unwrapKey().orElseThrow().location().getPath();
+    String size = tall ? "tall" : "short";
+
+    String inventoryParent = tall ? "tall_runestone_pillar_inventory" : "short_runestone_pillar_inventory";
+    models().withExistingParent(blockName + "_inventory", modLoc("block/complex/" + inventoryParent))
+        .texture("pillar", texture)
+        .texture("particle", texture);
+
+    getVariantBuilder(holder.value())
+        .forAllStates(state -> {
+          String partName = state.getValue(PillarBlock.PART).getSerializedName();
+          BlockModelBuilder model = models()
+              .withExistingParent(blockName + "_" + partName, modLoc("block/complex/" + size + "_runestone_pillar_" + partName))
+              .texture("pillar", texture)
+              .texture("particle", texture);
+
+          return ConfiguredModel.builder().modelFile(model).build();
         });
   }
 

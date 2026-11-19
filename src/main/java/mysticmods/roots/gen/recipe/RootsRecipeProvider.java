@@ -1117,9 +1117,9 @@ public final class RootsRecipeProvider extends RecipeProvider {
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDEWHEET_HERB).requires(ItemTags.WOOL)
                 .requires(Tags.Items.CROPS_CARROT).requires(Tags.Items.CROPS_POTATO)
                 .requires(RootsTags.Items.WILDROOT_HERB)
-                .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
-                .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
-                .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/animal_harvest"));
+                .condition(ModConditions.SHORT_PILLAR.get())
+                .condition(ModConditions.TALL_PILLAR.get())
+                .condition(ModConditions.SHORT_PILLAR.get())), c, RootsAPI.rl("pyre/animal_harvest"));
 
     RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.AUGMENTATION)
@@ -1130,9 +1130,9 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(ItemTags.BIRCH_LOGS)
                 .requires(RootsTags.Items.WILDWOOD_LOGS)
                 .condition(ModConditions.ANIMATE_RANK_1.get())
-                .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())
-                .condition(ModConditions.RUNESTONE_PILLAR_4_HIGH.get())
-                .condition(ModConditions.RUNESTONE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/augmentation"));
+                .condition(ModConditions.SHORT_PILLAR.get())
+                .condition(ModConditions.TALL_PILLAR.get())
+                .condition(ModConditions.SHORT_PILLAR.get())), c, RootsAPI.rl("pyre/augmentation"));
 
     RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.GATHERING).build(

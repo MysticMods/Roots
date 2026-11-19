@@ -1,0 +1,76 @@
+{
+	"format_version": "1.21.1",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [
+		64,
+		64
+	],
+	"textures": {
+		"pillar": "roots:block/runestone_pillar",
+		"particle": "roots:block/runestone_pillar"
+	},
+	"elements": [
+		{
+			"from": [				3,				0,				3			],
+			"to": [				13,				16,				13			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					3,
+					2,
+					3
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						6.75,
+						2.5,
+						10.75
+					],
+					"texture": "#pillar"
+				},
+				"east": {
+					"uv": [
+						2.5,
+						6.75,
+						5,
+						10.75
+					],
+					"texture": "#pillar"
+				},
+				"south": {
+					"uv": [
+						5,
+						6.75,
+						7.5,
+						10.75
+					],
+					"texture": "#pillar"
+				},
+				"west": {
+					"uv": [
+						7.5,
+						6.75,
+						10,
+						10.75
+					],
+					"texture": "#pillar"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						2.5,
+						2.5
+					],
+					"rotation": 90,
+					"texture": "#pillar"
+				}
+			}
+		}
+	]
+}

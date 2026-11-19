@@ -1,0 +1,7 @@
+{
+  "parent": "roots:block/complex/tall_runestone_pillar_inventory",
+  "textures": {
+    "particle": "roots:block/runed_obsidian_pillar",
+    "pillar": "roots:block/runed_obsidian_pillar"
+  }
+}

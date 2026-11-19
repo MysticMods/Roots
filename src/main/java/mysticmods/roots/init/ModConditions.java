@@ -30,8 +30,14 @@ public class ModConditions {
   public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<BlockStatePropertyCondition>> BLOCK_STATE_CONDITION_TYPE = LEVEL.register("block_state_property_condition", BlockStatePropertyCondition.Type::new);
   public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<OvergrowthCondition>> OVERGROWTH_CONDITION_TYPE = LEVEL.register("overgrowth_condition", OvergrowthCondition.Type::new);
 
-  public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_4_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 4));
-  public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_3_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 3));
+  public static final Supplier<ILevelCondition> TALL_RUNESTONE_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.TALL_RUNESTONE));
+  public static final Supplier<ILevelCondition> SHORT_RUNESTONE_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.SHORT_RUNESTONE));
+  public static final Supplier<ILevelCondition> TALL_RUNED_OBSIDIAN_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.TALL_RUNED_OBSIDIAN));
+  public static final Supplier<ILevelCondition> SHORT_RUNED_OBSIDIAN_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.SHORT_RUNED_OBSIDIAN));
+  public static final Supplier<ILevelCondition> SHORT_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.SHORT));
+  public static final Supplier<ILevelCondition> TALL_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.TALL));
+  public static final Supplier<ILevelCondition> ANY_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY));
+
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, true));
   public static final Supplier<ILevelCondition> UNITY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.UNITY, true));
   public static final Supplier<ILevelCondition> FUNGAL_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.FUNGAL, true));

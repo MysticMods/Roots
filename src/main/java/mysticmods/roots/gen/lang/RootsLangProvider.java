@@ -326,12 +326,12 @@ public final class RootsLangProvider extends LanguageProvider {
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE.get().getName(), "Any Grove Stone");
     add("level_condition.roots." + ModConditions.ANY_GROVE_STONE.get()
         .getName() + ".description", "A Grove Stone of any kind, active or inactive.");
-    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_3_HIGH.get().getName(), "3 High Runestone Pillar");
-    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_3_HIGH.get()
-        .getName() + ".description", "A pillar of three (3) runestone or runed obsidian blocks, topped with a chiseled runestone or runed obsidian block.");
-    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_4_HIGH.get().getName(), "4 High Runestone Pillar");
-    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_4_HIGH.get()
-        .getName() + ".description", "A pillar of four (4) runestone or runed obsidian blocks, topped with a chiseled runestone or runed obsidian block.");
+    add("level_condition.roots." + ModConditions.TALL_PILLAR.get().getName(), "Tall Pillar");
+    add("level_condition.roots." + ModConditions.TALL_PILLAR.get()
+        .getName() + ".description", "A tall pillar constructed from runestone or runed obsidian.");
+    add("level_condition.roots." + ModConditions.SHORT_PILLAR.get().getName(), "Short Pillar");
+    add("level_condition.roots." + ModConditions.SHORT_PILLAR.get()
+        .getName() + ".description", "A short pillar constructed from runestone or runed obsidian.");
     add("level_condition.roots." + ModConditions.MATURE_WILDROOT_CROP.get().getName(), "Mature Wildroot Crop");
     add("level_condition.roots." + ModConditions.MATURE_WILDROOT_CROP.get()
         .getName() + ".description", "A wildroot crop that has reached its final growth stage.");
@@ -508,6 +508,10 @@ public final class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.CREEPING_GROVE_MOSS);
     addBlock(ModBlocks.HANGING_GROVE_MOSS);
     addBlock(ModBlocks.BAFFLECAP_BLOCK);
+    addBlock(ModBlocks.TALL_RUNED_OBSIDIAN_PILLAR);
+    addBlock(ModBlocks.TALL_RUNESTONE_PILLAR);
+    addBlock(ModBlocks.SHORT_RUNED_OBSIDIAN_PILLAR);
+    addBlock(ModBlocks.SHORT_RUNESTONE_PILLAR);
     addBlock(ModBlocks.ANIMATE_GROVE_STONE);
     addBlock(ModBlocks.WILD_GROVE_STONE);
     addBlock(ModBlocks.TWILIGHT_GROVE_STONE);

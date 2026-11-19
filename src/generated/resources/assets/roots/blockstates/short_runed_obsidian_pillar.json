@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "part=bottom,waterlogged=false": {
+      "model": "roots:block/short_runed_obsidian_pillar_bottom"
+    },
+    "part=bottom,waterlogged=true": {
+      "model": "roots:block/short_runed_obsidian_pillar_bottom"
+    },
+    "part=middle,waterlogged=false": {
+      "model": "roots:block/short_runed_obsidian_pillar_middle"
+    },
+    "part=middle,waterlogged=true": {
+      "model": "roots:block/short_runed_obsidian_pillar_middle"
+    },
+    "part=top,waterlogged=false": {
+      "model": "roots:block/short_runed_obsidian_pillar_top"
+    },
+    "part=top,waterlogged=true": {
+      "model": "roots:block/short_runed_obsidian_pillar_top"
+    }
+  }
+}

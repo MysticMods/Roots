@@ -1,0 +1,329 @@
+{
+	"format_version": "1.21.1",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [
+		64,
+		64
+	],
+	"textures": {
+		"pillar": "roots:block/runestone_pillar",
+		"particle": "roots:block/runestone_pillar"
+	},
+	"elements": [
+		{
+			"from": [
+				3,
+				21,
+				3
+			],
+			"to": [
+				13,
+				31,
+				13
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					3,
+					21,
+					3
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						2.5,
+						2.5
+					],
+					"texture": "#pillar"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						2.5,
+						2.5
+					],
+					"texture": "#pillar"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						2.5,
+						2.5
+					],
+					"texture": "#pillar"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						2.5,
+						2.5
+					],
+					"texture": "#pillar"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						2.5,
+						2.5
+					],
+					"texture": "#pillar"
+				}
+			}
+		},
+		{
+			"from": [
+				3,
+				11,
+				3
+			],
+			"to": [
+				13,
+				21,
+				13
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					3,
+					11,
+					3
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						2.5,
+						2.5,
+						5
+					],
+					"texture": "#pillar"
+				},
+				"east": {
+					"uv": [
+						2.5,
+						2.5,
+						5,
+						5
+					],
+					"texture": "#pillar"
+				},
+				"south": {
+					"uv": [
+						5,
+						2.5,
+						7.5,
+						5
+					],
+					"texture": "#pillar"
+				},
+				"west": {
+					"uv": [
+						7.5,
+						2.5,
+						10,
+						5
+					],
+					"texture": "#pillar"
+				}
+			}
+		},
+		{
+			"from": [
+				3,
+				0,
+				3
+			],
+			"to": [
+				13,
+				11,
+				13
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					3,
+					1,
+					3
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						5,
+						2.5,
+						7.75
+					],
+					"texture": "#pillar"
+				},
+				"east": {
+					"uv": [
+						2.5,
+						5,
+						5,
+						7.75
+					],
+					"texture": "#pillar"
+				},
+				"south": {
+					"uv": [
+						5,
+						5,
+						7.5,
+						7.75
+					],
+					"texture": "#pillar"
+				},
+				"west": {
+					"uv": [
+						7.5,
+						5,
+						10,
+						7.75
+					],
+					"texture": "#pillar"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						2.5,
+						2.5
+					],
+					"rotation": 90,
+					"texture": "#pillar"
+				}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [
+				75,
+				45,
+				0
+			],
+			"translation": [
+				0,
+				2.5,
+				0
+			],
+			"scale": [
+				0.33,
+				0.33,
+				0.33
+			]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [
+				75,
+				45,
+				0
+			],
+			"translation": [
+				0,
+				2.5,
+				0
+			],
+			"scale": [
+				0.33,
+				0.33,
+				0.33
+			]
+		},
+		"firstperson_righthand": {
+			"rotation": [
+				0,
+				135,
+				0
+			],
+			"scale": [
+				0.26,
+				0.26,
+				0.26
+			]
+		},
+		"firstperson_lefthand": {
+			"rotation": [
+				0,
+				135,
+				0
+			],
+			"scale": [
+				0.26,
+				0.26,
+				0.26
+			]
+		},
+		"ground": {
+			"translation": [
+				0,
+				3,
+				0
+			],
+			"scale": [
+				0.22,
+				0.22,
+				0.22
+			]
+		},
+		"gui": {
+			"rotation": [
+				30,
+				225,
+				0
+			],
+			"translation": [
+				0,
+				-3.25,
+				0
+			],
+			"scale": [
+				0.45,
+				0.45,
+				0.45
+			]
+		},
+		"fixed": {
+			"translation": [
+				0,
+				-3.25,
+				-1
+			],
+			"scale": [
+				0.45,
+				0.45,
+				0.45
+			]
+		}
+	},
+	"groups": [
+		{
+			"name": "tall_inventory",
+			"origin": [
+				3,
+				0,
+				3
+			],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				0,
+				1,
+				2
+			]
+		}
+	]
+}
