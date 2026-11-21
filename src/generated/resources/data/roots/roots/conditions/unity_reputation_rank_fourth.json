@@ -1,0 +1,7 @@
+{
+  "type": "roots:grove_rank_condition",
+  "grove": "roots:unity",
+  "minimum_rank": {
+    "rank": 4
+  }
+}

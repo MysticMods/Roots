@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:chiseled_runestone_from_runestone_tile"
+        "recipe": "roots:chiseled_runestone_from_tile"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:chiseled_runestone_from_runestone_tile"
+      "roots:chiseled_runestone_from_tile"
     ]
   }
 }

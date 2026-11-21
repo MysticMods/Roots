@@ -11,7 +11,7 @@ import java.util.List;
 public interface IWorldRecipe<W extends IWorldCrafting> extends IRootsRecipe<W> {
   PartialBlockState getOutputState();
 
-  List<WorldCondition> getConditions();
+  List<WorldCondition> getWorldConditions();
 
   List<String> getSkipProperties();
 

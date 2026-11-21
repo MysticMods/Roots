@@ -6,17 +6,12 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import mysticmods.roots.integration.jei.widget.CooldownWidget;
 import mysticmods.roots.integration.jei.widget.DurabilityWidget;
-import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -85,7 +80,7 @@ public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityReci
     }
 
     int column = 0;
-    for (ILevelCondition condition : recipe.getLevelConditions()) {
+/*    for (ILevelCondition condition : recipe.getLevelConditions()) {
       CanonicalRepresentation rep = condition.getRepresentation();
       int count = rep.getStates().size();
       int offset = 71;
@@ -102,6 +97,6 @@ public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityReci
     for (IPlayerCondition condition : recipe.getPlayerConditions()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
-    }
+    }*/
   }
 }

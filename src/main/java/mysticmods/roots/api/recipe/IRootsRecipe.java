@@ -2,6 +2,7 @@ package mysticmods.roots.api.recipe;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.power.consumer.PowerCollection;
@@ -9,6 +10,7 @@ import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.util.SetUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,19 +37,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return result;
   }
 
-  default List<ILevelCondition> getLevelConditions() {
-    return Collections.emptyList();
-  }
-
-  default List<IPlayerCondition> getPlayerConditionsWithoutRanks () {
-    return Collections.emptyList();
-  }
-
-  default List<IPlayerCondition> getPlayerConditions() {
-    return Collections.emptyList();
-  }
-
-  default List<IPlayerCondition> getPlayerRankConditions () {
+  default List<Holder<ICondition>> getConditions() {
     return Collections.emptyList();
   }
 
@@ -82,24 +72,24 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   void buildCachedOutputs(HolderLookup.Provider provider);
 
   default ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
-    List<IPlayerCondition> failedPlayer = new ArrayList<>();
-    for (IPlayerCondition condition : this.getPlayerConditions()) {
-      if (!condition.test(level, player)) {
-        failedPlayer.add(condition);
-      }
-    }
-    List<ILevelCondition> failedLevel = new ArrayList<>();
+    List<Holder<ICondition>> failed = new ArrayList<>();
     Set<BlockPos> testedPositions = new HashSet<>();
-    for (ILevelCondition condition : this.getLevelConditions()) {
-      Set<BlockPos> newPositions = condition.test(level, player, bounds, center, testedPositions);
-      if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
-        failedLevel.add(condition);
-      } else {
-        testedPositions.addAll(newPositions);
+    for (Holder<ICondition> condition : this.getConditions()) {
+      if (condition.value() instanceof IPlayerCondition playerCondition) {
+        if (!playerCondition.test(level, player)) {
+          failed.add(condition);
+        }
+      } else if (condition.value() instanceof ILevelCondition levelCondition) {
+        Set<BlockPos> newPositions = levelCondition.test(level, player, bounds, center, testedPositions);
+        if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
+          failed.add(condition);
+        } else {
+          testedPositions.addAll(newPositions);
+        }
       }
     }
 
-    return new ConditionResult(failedLevel, failedPlayer);
+    return new ConditionResult(failed);
   }
 
   default UnlockResult checkUnlocks(Level level, ServerPlayer player) {

@@ -190,7 +190,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     return InteractionResult.SUCCESS;
   }
 
-  public static final GroveStoneCondition ANY_VALID_GROVE_STONE = new GroveStoneCondition(GroveType.ANY, true);
+  public static final GroveStoneCondition ANY_VALID_GROVE_STONE = new GroveStoneCondition(GroveType.ANY, GroveStoneCondition.GroveStoneState.ACTIVE);
 
   protected void revalidateRecipe() {
     if (getLevel() == null) {

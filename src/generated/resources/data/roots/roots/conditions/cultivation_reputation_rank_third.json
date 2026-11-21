@@ -1,0 +1,7 @@
+{
+  "type": "roots:grove_rank_condition",
+  "grove": "roots:cultivation",
+  "minimum_rank": {
+    "rank": 3
+  }
+}

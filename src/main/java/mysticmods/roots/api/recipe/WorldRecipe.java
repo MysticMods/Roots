@@ -49,7 +49,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   }
 
   @Override
-  public List<WorldCondition> getConditions() {
+  public List<WorldCondition> getWorldConditions() {
     return conditions;
   }
 
@@ -66,7 +66,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
         return false;
       }
     }
-    for (WorldCondition condition : getConditions()) {
+    for (WorldCondition condition : getWorldConditions()) {
       if (!condition.test(pContainer.getBlockPos(), pLevel, pLevel.getRandom())) {
         return false;
       }

@@ -1,6 +1,9 @@
 {
   "type": "roots:pyre",
   "data": {
+    "conditions": [
+      "roots:overgrowth"
+    ],
     "ingredients": [
       {
         "tag": "minecraft:logs"
@@ -16,11 +19,6 @@
       },
       {
         "tag": "roots:short_grass"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:overgrowth_condition"
       }
     ],
     "priority": 0

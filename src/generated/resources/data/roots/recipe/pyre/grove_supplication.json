@@ -1,6 +1,9 @@
 {
   "type": "roots:pyre",
   "data": {
+    "conditions": [
+      "roots:any_grove_stone"
+    ],
     "ingredients": [
       {
         "tag": "minecraft:doors"
@@ -16,16 +19,6 @@
       },
       {
         "tag": "c:foods/bread"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "grove": "roots:any",
-          "name": "any",
-          "tag": "roots:grove_stones"
-        }
       }
     ],
     "priority": 0

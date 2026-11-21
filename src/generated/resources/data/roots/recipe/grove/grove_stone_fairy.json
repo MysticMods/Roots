@@ -1,6 +1,10 @@
 {
   "type": "roots:grove",
   "data": {
+    "conditions": [
+      "roots:active_grove_stone",
+      "roots:unity_reputation_rank_first"
+    ],
     "ingredients": [
       {
         "tag": "roots:grove_stones/wild"
@@ -31,26 +35,6 @@
       },
       {
         "item": "minecraft:golden_sword"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "grove": "roots:any",
-          "name": "any",
-          "tag": "roots:grove_stones"
-        },
-        "require_active": true
-      }
-    ],
-    "player_conditions": [
-      {
-        "type": "roots:grove_rank_condition",
-        "grove": "roots:unity",
-        "minimum_rank": {
-          "rank": 1
-        }
       }
     ],
     "priority": 0,

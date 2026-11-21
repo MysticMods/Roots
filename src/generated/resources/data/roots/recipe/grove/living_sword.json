@@ -1,6 +1,9 @@
 {
   "type": "roots:grove",
   "data": {
+    "conditions": [
+      "roots:active_grove_stone"
+    ],
     "ingredients": [
       {
         "tag": "roots:herbs/grove_moss"
@@ -16,17 +19,6 @@
       },
       {
         "item": "minecraft:wooden_sword"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "grove": "roots:any",
-          "name": "any",
-          "tag": "roots:grove_stones"
-        },
-        "require_active": true
       }
     ],
     "priority": 0,

@@ -1,6 +1,12 @@
 {
   "type": "roots:pyre",
   "data": {
+    "conditions": [
+      "roots:animate_reputation_rank_first",
+      "roots:short_pillar",
+      "roots:tall_pillar",
+      "roots:short_pillar"
+    ],
     "ingredients": [
       {
         "item": "minecraft:golden_carrot"
@@ -16,41 +22,6 @@
       },
       {
         "tag": "roots:logs/wildwood"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:pillar_condition",
-        "pillar_type": {
-          "height": "short",
-          "name": "short",
-          "pillar": "roots:pillars/short"
-        }
-      },
-      {
-        "type": "roots:pillar_condition",
-        "pillar_type": {
-          "height": "tall",
-          "name": "tall",
-          "pillar": "roots:pillars/tall"
-        }
-      },
-      {
-        "type": "roots:pillar_condition",
-        "pillar_type": {
-          "height": "short",
-          "name": "short",
-          "pillar": "roots:pillars/short"
-        }
-      }
-    ],
-    "player_conditions": [
-      {
-        "type": "roots:grove_rank_condition",
-        "grove": "roots:animate",
-        "minimum_rank": {
-          "rank": 1
-        }
       }
     ],
     "priority": 0

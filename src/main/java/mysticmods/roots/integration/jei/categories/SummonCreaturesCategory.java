@@ -7,16 +7,11 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.ComplexEntityType;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
-import mysticmods.roots.integration.jei.widget.LevelConditionWidget;
-import mysticmods.roots.integration.jei.widget.PlayerConditionWidget;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -80,7 +75,7 @@ public class SummonCreaturesCategory extends RootsRecipeBaseCategory<SummonCreat
     HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
 
     int column = 0;
-    for (ILevelCondition condition : recipe.getLevelConditions()) {
+/*    for (ILevelCondition condition : recipe.getLevelConditions()) {
       CanonicalRepresentation rep = condition.getRepresentation();
       int count = rep.getStates().size();
       int offset = 71;
@@ -97,6 +92,6 @@ public class SummonCreaturesCategory extends RootsRecipeBaseCategory<SummonCreat
     for (IPlayerCondition condition : recipe.getPlayerConditions()) {
       builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
       row++;
-    }
+    }*/
   }
 }

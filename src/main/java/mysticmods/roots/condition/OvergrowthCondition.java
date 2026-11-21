@@ -1,17 +1,12 @@
 package mysticmods.roots.condition;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.ILevelConditionType;
 import mysticmods.roots.init.ModBlocks;
-import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.item.GroveSporesItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -24,26 +19,9 @@ import java.util.Set;
 public record OvergrowthCondition() implements ILevelCondition {
   private static final OvergrowthCondition INSTANCE = new OvergrowthCondition();
   public static final MapCodec<OvergrowthCondition> MAP_CODEC = MapCodec.unit(INSTANCE);
-  public static final Codec<OvergrowthCondition> CODEC = MAP_CODEC.codec();
-  public static final StreamCodec<RegistryFriendlyByteBuf, OvergrowthCondition> STREAM_CODEC = StreamCodec.unit(INSTANCE);
 
   public static OvergrowthCondition getInstance() {
     return INSTANCE;
-  }
-
-  @Override
-  public CanonicalRepresentation getRepresentation() {
-    return new CanonicalRepresentation(ModBlocks.CREEPING_GROVE_MOSS.get());
-  }
-
-  @Override
-  public ILevelConditionType<?> type() {
-    return ModConditions.OVERGROWTH_CONDITION_TYPE.get();
-  }
-
-  @Override
-  public String getName() {
-    return "overgrowth";
   }
 
   @Override
@@ -72,21 +50,8 @@ public record OvergrowthCondition() implements ILevelCondition {
     return Collections.emptySet();
   }
 
-  public static class Type implements ILevelConditionType<OvergrowthCondition> {
-
-    @Override
-    public Codec<OvergrowthCondition> codec() {
-      return CODEC;
-    }
-
-    @Override
-    public MapCodec<OvergrowthCondition> mapCodec() {
-      return MAP_CODEC;
-    }
-
-    @Override
-    public StreamCodec<RegistryFriendlyByteBuf, OvergrowthCondition> streamCodec() {
-      return STREAM_CODEC;
-    }
+  @Override
+  public MapCodec<? extends ICondition> codec() {
+    return MAP_CODEC;
   }
 }

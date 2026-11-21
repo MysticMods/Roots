@@ -1,6 +1,11 @@
 {
   "type": "roots:pyre",
   "data": {
+    "conditions": [
+      "roots:short_pillar",
+      "roots:tall_pillar",
+      "roots:short_pillar"
+    ],
     "ingredients": [
       {
         "tag": "roots:herbs/wildewheet"
@@ -16,32 +21,6 @@
       },
       {
         "tag": "roots:herbs/wildroot"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:pillar_condition",
-        "pillar_type": {
-          "height": "short",
-          "name": "short",
-          "pillar": "roots:pillars/short"
-        }
-      },
-      {
-        "type": "roots:pillar_condition",
-        "pillar_type": {
-          "height": "tall",
-          "name": "tall",
-          "pillar": "roots:pillars/tall"
-        }
-      },
-      {
-        "type": "roots:pillar_condition",
-        "pillar_type": {
-          "height": "short",
-          "name": "short",
-          "pillar": "roots:pillars/short"
-        }
       }
     ],
     "priority": 0

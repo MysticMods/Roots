@@ -1,6 +1,9 @@
 {
   "type": "roots:grove_pouch",
   "data": {
+    "conditions": [
+      "roots:active_grove_stone"
+    ],
     "ingredients": [
       {
         "item": "roots:apothecary_pouch"
@@ -37,17 +40,6 @@
       },
       {
         "tag": "roots:chests/wildwood"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "grove": "roots:any",
-          "name": "any",
-          "tag": "roots:grove_stones"
-        },
-        "require_active": true
       }
     ],
     "priority": 0,

@@ -2,12 +2,14 @@ package mysticmods.roots.api.recipe;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.condition.IRankCondition;
 import mysticmods.roots.api.grove.power.consumer.PowerCollection;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,49 +36,11 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public List<ILevelCondition> getLevelConditions() {
-    if (this.data.levelConditions == null) {
+  public List<Holder<ICondition>> getConditions() {
+    if (this.data.conditions == null) {
       return Collections.emptyList();
     }
-    return this.data.levelConditions;
-  }
-
-  private List<IPlayerCondition> cachedConditions = null;
-
-  @Override
-  public List<IPlayerCondition> getPlayerConditionsWithoutRanks () {
-    if (this.data.playerConditions == null) {
-      return Collections.emptyList();
-    }
-
-    if (cachedConditions == null) {
-      cachedConditions = this.data.playerConditions.stream().filter(o -> !(o instanceof IRankCondition)).toList();
-    }
-
-    return cachedConditions;
-  }
-
-  private List<IPlayerCondition> cachedRankConditions = null;
-
-  @Override
-  public List<IPlayerCondition> getPlayerRankConditions () {
-    if (this.data.playerConditions == null) {
-      return Collections.emptyList();
-    }
-
-    if (cachedRankConditions == null) {
-      cachedRankConditions = this.data.playerConditions.stream().filter(o -> o instanceof IRankCondition).toList();
-    }
-
-    return cachedRankConditions;
-  }
-
-  @Override
-  public List<IPlayerCondition> getPlayerConditions() {
-    if (this.data.playerConditions == null) {
-      return Collections.emptyList();
-    }
-    return this.data.playerConditions;
+    return this.data.conditions;
   }
 
   @Override

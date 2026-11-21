@@ -4,177 +4,90 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.block.StateProperties;
-import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.GroveType;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.ILevelConditionType;
-import mysticmods.roots.api.test.world.PartialBlockState;
-import mysticmods.roots.block.GroveStoneBlock;
-import mysticmods.roots.init.ModConditions;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
-// TODO: Overhaul this?
-public record GroveStoneCondition(GroveType groveType, boolean requireValid,
-                                  boolean requireInvalid) implements ILevelCondition {
-  public static final MapCodec<GroveStoneCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(GroveType.CODEC.fieldOf("grove_type")
-              .forGetter(GroveStoneCondition::groveType),
-          Codec.BOOL.optionalFieldOf("require_active", false).forGetter(GroveStoneCondition::requireValid),
-          Codec.BOOL.optionalFieldOf("require_inactive", false).forGetter(GroveStoneCondition::requireInvalid))
+public record GroveStoneCondition(TagKey<Block> tag, GroveStoneState state)
+    implements ILevelCondition {
+  public static final MapCodec<GroveStoneCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK)
+              .fieldOf("tag").forGetter(GroveStoneCondition::tag),
+          GroveStoneState.CODEC.fieldOf("state").forGetter(GroveStoneCondition::state))
       .apply(instance, GroveStoneCondition::new));
-  public static final Codec<GroveStoneCondition> CODEC = MAP_CODEC.codec();
-  public static final StreamCodec<RegistryFriendlyByteBuf, GroveStoneCondition> STREAM_CODEC = StreamCodec.composite(GroveType.STREAM_CODEC, GroveStoneCondition::groveType, ByteBufCodecs.BOOL, GroveStoneCondition::requireValid, ByteBufCodecs.BOOL, GroveStoneCondition::requireInvalid, GroveStoneCondition::new);
 
-  public GroveStoneCondition(GroveType groveType, boolean requireValid) {
-    this(groveType, requireValid, false);
+  private static final StateProperties.Part[] PARTS_TOP_DOWN = {StateProperties.Part.TOP, StateProperties.Part.MIDDLE, StateProperties.Part.BOTTOM};
+
+  public GroveStoneCondition (GroveType grove, GroveStoneState state) {
+    this(grove.tag(), state);
+  }
+
+  @Override
+  public MapCodec<? extends ICondition> codec() {
+    return MAP_CODEC;
   }
 
   @Nullable
-  private StateProperties.Part getPart(BlockState state) {
-    if (!state.hasProperty(StateProperties.GroveStone.PART)) {
-      return null;
-    } else {
-      return state.getValue(StateProperties.GroveStone.PART);
-    }
+  private static StateProperties.Part getPart(BlockState state) {
+    return state.hasProperty(StateProperties.GroveStone.PART) ? state.getValue(StateProperties.GroveStone.PART) : null;
   }
 
-  private boolean getValid(BlockState state) {
-    if (!state.hasProperty(StateProperties.ACTIVE)) {
-      return false;
-    } else {
-      return state.getValue(StateProperties.ACTIVE);
-    }
+  private static boolean isActive(BlockState state) {
+    return state.hasProperty(StateProperties.ACTIVE) && state.getValue(StateProperties.ACTIVE);
   }
 
   @Override
-  public CanonicalRepresentation getRepresentation() {
-    var tag = BuiltInRegistries.BLOCK.getTag(groveType.tag());
-    if (tag.isEmpty()) {
-      throw new IllegalStateException("Cannot build a canonical representation of " + this + " as the grove type tag " + groveType + " is empty");
-    }
-    BlockState state = tag.get().get(0).value().defaultBlockState();
-    return fromBlockState(state, requireValid, requireInvalid);
-  }
-
-  public static CanonicalRepresentation fromBlockState(BlockState state, boolean requireValid, boolean requireInvalid) {
-    BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)
-        .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-    BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE)
-        .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-    BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP)
-        .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-    //noinspection rawtypes
-    Property[] properties = new Property[]{StateProperties.GroveStone.PART, StateProperties.ACTIVE, StateProperties.GroveStone.FACING};
-    return new CanonicalRepresentation(new PartialBlockState(bottom, properties), new PartialBlockState(middle, properties), new PartialBlockState(top, properties));
-  }
-
-  @Override
-  public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player) {
-    BlockState initial = level.getBlockState(pos);
-    // If the initial position isn't the capstone, we don't care
-    if (!initial.is(groveType.tag()) && getPart(initial) != StateProperties.Part.TOP) {
-      return Collections.emptySet();
-    }
-
-    int validCount = 0;
-    int invalidCount = 0;
-    if (getValid(initial)) {
-      validCount++;
-    } else {
-      invalidCount++;
-    }
-
-    // Keep a note of which blockpositions are part of this pillar
+  public Set<BlockPos> test(BlockPos pos, Level level, @Nullable Player player) {
     Set<BlockPos> result = new HashSet<>();
-    result.add(pos.immutable());
-    BlockPos pPos = pos.below();
-
-    initial = level.getBlockState(pPos);
-    if (!initial.is(groveType.tag()) && getPart(initial) != StateProperties.Part.MIDDLE) {
-      return Collections.emptySet();
+    int active = 0;
+    BlockPos cursor = pos.immutable();
+    for (StateProperties.Part part : PARTS_TOP_DOWN) {
+      BlockState blockState = level.getBlockState(cursor);
+      if (!blockState.is(tag) || getPart(blockState) != part) {
+        return Collections.emptySet();
+      }
+      if (isActive(blockState)) {
+        active++;
+      }
+      result.add(cursor);
+      cursor = cursor.below();
     }
 
-    result.add(pPos.immutable());
-
-    if (getValid(initial)) {
-      validCount++;
-    } else {
-      invalidCount++;
-    }
-
-    pPos = pPos.below();
-    initial = level.getBlockState(pPos);
-    if (!initial.is(groveType.tag()) && getPart(initial) != StateProperties.Part.BOTTOM) {
-      return Collections.emptySet();
-    }
-
-    result.add(pPos.immutable());
-
-    if (getValid(initial)) {
-      validCount++;
-    } else {
-      invalidCount++;
-    }
-
-    if (requireInvalid && invalidCount != 3) {
-      return Collections.emptySet();
-    } else if (!requireInvalid && requireValid && validCount != 3) {
-      return Collections.emptySet();
-    }
-
-    return result;
+    return switch (state) {
+      case ANY -> result;
+      case ACTIVE -> active == PARTS_TOP_DOWN.length ? result : Collections.emptySet();
+      case INACTIVE -> active == 0 ? result : Collections.emptySet();
+    };
   }
 
-  @Override
-  public ILevelConditionType<?> type() {
-    return ModConditions.GROVE_STONE_CONDITION_TYPE.get();
-  }
+  public enum GroveStoneState implements StringRepresentable {
+    ANY("any"),
+    ACTIVE("active"),
+    INACTIVE("inactive");
 
-  @Override
-  public String getName() {
-    String req;
-    if (!requireInvalid && !requireValid) {
-      req = "any";
-    } else if (requireValid) {
-      req = "active";
-    } else {
-      req = "inactive";
-    }
-    if (!groveType.equals(GroveType.ANY)) {
-      req += "_" + groveType.name().toLowerCase(Locale.ROOT);
-    }
+    public static final Codec<GroveStoneState> CODEC = StringRepresentable.fromEnum(GroveStoneState::values);
 
-    return req + "_grove_stone";
-  }
+    private final String name;
 
-  public static class Type implements ILevelConditionType<GroveStoneCondition> {
-
-    @Override
-    public Codec<GroveStoneCondition> codec() {
-      return CODEC;
+    GroveStoneState(String name) {
+      this.name = name;
     }
 
     @Override
-    public MapCodec<GroveStoneCondition> mapCodec() {
-      return MAP_CODEC;
-    }
-
-    @Override
-    public StreamCodec<RegistryFriendlyByteBuf, GroveStoneCondition> streamCodec() {
-      return STREAM_CODEC;
+    public String getSerializedName() {
+      return name;
     }
   }
 }

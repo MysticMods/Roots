@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.BaseRecipeData;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.init.*;
@@ -57,6 +58,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
   @Override
   protected void buildRecipes(RecipeOutput c, HolderLookup.Provider p) {
     GENERATING_RECIPES.set(true);
+    var conditionLookup = p.lookupOrThrow(RootsRegistries.Keys.CONDITIONS);
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.ELEMENTAL_SOIL.get(), 1)
         .requires(RootsTags.Items.ELEMENTAL_SOIL)
         .unlockedBy("has_elemental_soil", has(RootsTags.Items.ELEMENTAL_SOIL))
@@ -807,7 +809,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
 
     BaseRecipeData.Builder groveRunestoneBuilder = BaseRecipeData.Builder.create()
         .requires(RootsTags.Items.STONELIKE)
-        .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+        .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
         .result(ModBlocks.RUNESTONE, 1);
 
     // TODO: Simplify this
@@ -837,7 +839,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .requires(RootsTags.Items.RUNESTONE)
         .requires(RootsTags.Items.RUNESTONE)
         .requires(Tags.Items.OBSIDIANS)
-        .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+        .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
         .result(ModBlocks.RUNED_OBSIDIAN, 4);
 
     saver = RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
@@ -865,8 +867,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.GRAVELS)
             .requires(ItemTags.DIRT).requires(ItemTags.SAND).requires(RootsTags.Items.CLAY_STORAGE)
             .requires(RootsTags.Items.MOSS_STORAGE).requires(Tags.Items.FERTILIZERS).result(ModItems.ELEMENTAL_SOIL, 5)
-            .condition(ModConditions.ELEMENTAL_RANK_1.get())
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/elemental_soil"));
+            .condition(conditionLookup.getOrThrow(ModConditions.ELEMENTAL_RANK_1))
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))), c, RootsAPI.rl("grove/elemental_soil"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.AQUEOUS_SOIL.get(), 1)
         .requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.DEWGONIA_HERB)
@@ -888,7 +890,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
             .requires(ModItems.ELEMENTAL_SOIL.get())
             .requires(RootsTags.Items.GROVE_MOSS_HERB)
             .result(ModItems.ENCHANTED_TURF.get(), 1)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("wildwood_soil_from_elemental_soil_and_wildwood_herb"));
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))), c, RootsAPI.rl("wildwood_soil_from_elemental_soil_and_wildwood_herb"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.TERRAN_SOIL.get(), 1)
         .requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.STALICRIPE_HERB)
@@ -908,7 +910,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS)
             .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
             .requires(RootsTags.Items.WILDWOOD_LOGS)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
             .result(ModBlocks.WILDWOOD_PEDESTAL, 5)), c, RootsAPI.rl("grove/wildwood_pedestal"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DECORATIVE_PYRE.get(), 1)
@@ -926,7 +928,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.RUNESTONE)
             .requires(ItemTags.SMALL_FLOWERS).requires(RootsTags.Items.GROVE_MOSS_HERB)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
             .requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))
             .result(ModItems.RUNIC_SHEARS)), c, RootsAPI.rl("grove/runic_shears"));
 
@@ -936,7 +938,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.INGOTS_GOLD)
                 .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
                 .requires(Items.WOODEN_PICKAXE)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
                 .result(ModItems.LIVING_PICKAXE)), c, RootsAPI.rl("grove/living_pickaxe"));
 
     // Living sword
@@ -946,7 +948,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.INGOTS_GOLD)
                 .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
                 .requires(Items.WOODEN_SWORD)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
                 .result(ModItems.LIVING_SWORD)), c, RootsAPI.rl("grove/living_sword"));
 
     // Living axe
@@ -956,7 +958,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.INGOTS_GOLD)
                 .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
                 .requires(Items.WOODEN_AXE)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
                 .result(ModItems.LIVING_AXE)), c, RootsAPI.rl("grove/living_axe"));
 
     // Living hoe
@@ -966,7 +968,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.INGOTS_GOLD)
                 .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
                 .requires(Items.WOODEN_HOE)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
                 .result(ModItems.LIVING_HOE)), c, RootsAPI.rl("grove/living_hoe"));
 
     // Living shovel
@@ -976,7 +978,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.INGOTS_GOLD)
                 .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
                 .requires(Items.WOODEN_SHOVEL)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
                 .result(ModItems.LIVING_SHOVEL)), c, RootsAPI.rl("grove/living_shovel"));
 
 
@@ -1090,7 +1092,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_torch", has(Items.TORCH)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.GLASS_BLOCKS)
             .requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.GLASS_BLOCKS).requires(Items.TORCH)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
             .result(ModItems.GLASS_EYE, 2)), c, RootsAPI.rl("grove/glass_eye"));
 
     RecipeSaver.saver().unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
@@ -1117,9 +1119,9 @@ public final class RootsRecipeProvider extends RecipeProvider {
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDEWHEET_HERB).requires(ItemTags.WOOL)
                 .requires(Tags.Items.CROPS_CARROT).requires(Tags.Items.CROPS_POTATO)
                 .requires(RootsTags.Items.WILDROOT_HERB)
-                .condition(ModConditions.SHORT_PILLAR.get())
-                .condition(ModConditions.TALL_PILLAR.get())
-                .condition(ModConditions.SHORT_PILLAR.get())), c, RootsAPI.rl("pyre/animal_harvest"));
+                .condition(conditionLookup.getOrThrow(ModConditions.SHORT_PILLAR))
+                .condition(conditionLookup.getOrThrow(ModConditions.TALL_PILLAR))
+                .condition(conditionLookup.getOrThrow(ModConditions.SHORT_PILLAR))), c, RootsAPI.rl("pyre/animal_harvest"));
 
     RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.AUGMENTATION)
@@ -1129,10 +1131,10 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.SILVER_INGOT)
                 .requires(ItemTags.BIRCH_LOGS)
                 .requires(RootsTags.Items.WILDWOOD_LOGS)
-                .condition(ModConditions.ANIMATE_RANK_1.get())
-                .condition(ModConditions.SHORT_PILLAR.get())
-                .condition(ModConditions.TALL_PILLAR.get())
-                .condition(ModConditions.SHORT_PILLAR.get())), c, RootsAPI.rl("pyre/augmentation"));
+                .condition(conditionLookup.getOrThrow(ModConditions.ANIMATE_RANK_1))
+                .condition(conditionLookup.getOrThrow(ModConditions.SHORT_PILLAR))
+                .condition(conditionLookup.getOrThrow(ModConditions.TALL_PILLAR))
+                .condition(conditionLookup.getOrThrow(ModConditions.SHORT_PILLAR))), c, RootsAPI.rl("pyre/augmentation"));
 
     RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.GATHERING).build(
@@ -1242,20 +1244,20 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(ItemTags.LOGS)
                 .requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.CROPS_SUGAR_CANE)
                 .requires(RootsTags.Items.SHORT_GRASS)
-                .condition(ModConditions.OVERGROWTH.get())), c, RootsAPI.rl("pyre/overgrowth"));
+                .condition(conditionLookup.getOrThrow(ModConditions.OVERGROWTH))), c, RootsAPI.rl("pyre/overgrowth"));
 
     RecipeSaver.saver().unlockedBy("has_door", has(ItemTags.DOORS))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.GROVE_SUPPLICATION)
             .build(BaseRecipeData.Builder.create().requires(ItemTags.DOORS).requires(Items.BOWL)
                 .requires(ItemTags.SAPLINGS).requires(ItemTags.SMALL_FLOWERS).requires(Tags.Items.FOODS_BREAD)
-                .condition(ModConditions.ANY_GROVE_STONE.get())), c, RootsAPI.rl("pyre/grove_supplication"));
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE))), c, RootsAPI.rl("pyre/grove_supplication"));
 
     RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.WILDROOT_GROWTH)
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_HERB)
                 .requires(ItemTags.LOGS).requires(ItemTags.LOGS)
                 .requires(RootsTags.Items.SPIRITLEAF_HERB).requires(ItemTags.SAPLINGS)
-                .condition(ModConditions.MATURE_WILDROOT_CROP.get())), c, RootsAPI.rl("pyre/wildroot_growth"));
+                .condition(conditionLookup.getOrThrow(ModConditions.MATURE_WILDROOT_CROP))), c, RootsAPI.rl("pyre/wildroot_growth"));
 
     RecipeSaver.saver().unlockedBy("has_lightning_rod", has(Items.LIGHTNING_ROD)).save(PyreRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Items.LIGHTNING_ROD).requires(Items.SUGAR)
@@ -1668,14 +1670,14 @@ public final class RootsRecipeProvider extends RecipeProvider {
             .requires(ModItems.HERB_POUCH.get())
             .requires(Tags.Items.STRINGS).requires(Tags.Items.INGOTS_IRON).requires(Tags.Items.INGOTS_IRON)
             .requires(ItemTags.WOOL).requires(ItemTags.WOOL).requires(Tags.Items.CHESTS).requires(Tags.Items.CHESTS)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/component_pouch"));
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))), c, RootsAPI.rl("grove/component_pouch"));
 
     RecipeSaver.saver().unlockedBy("has_gold", has(Tags.Items.INGOTS_GOLD)).save(GrovePouchRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().result(ModItems.APOTHECARY_POUCH, 1).requires(Tags.Items.STRINGS)
             .requires(ModItems.COMPONENT_POUCH.get())
             .requires(Tags.Items.STRINGS).requires(Tags.Items.INGOTS_GOLD).requires(Tags.Items.INGOTS_GOLD)
             .requires(ItemTags.WOOL).requires(ItemTags.WOOL).requires(Tags.Items.CHESTS).requires(Tags.Items.CHESTS)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/apothecary_pouch"));
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))), c, RootsAPI.rl("grove/apothecary_pouch"));
 
     RecipeSaver.saver().unlockedBy("has_sylvan_leather", has(RootsTags.Items.SYLVAN_LEATHERS))
         .save(GrovePouchRecipe.Builder.create().build(BaseRecipeData.Builder.create().result(ModItems.SYLVAN_POUCH, 1)
@@ -1686,7 +1688,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
             .requires(RootsTags.Items.PERESKIA_HERB).requires(RootsTags.Items.PERESKIA_HERB)
             .requires(Tags.Items.INGOTS_GOLD).requires(Tags.Items.INGOTS_GOLD)
             .requires(RootsTags.Items.WILDWOOD_CHESTS).requires(RootsTags.Items.WILDWOOD_CHESTS)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/dye_pouch"));
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))), c, RootsAPI.rl("grove/dye_pouch"));
 
     SpecialRecipeBuilder.special(PouchDyeRecipe::new).save(c, RootsAPI.rl("dye_pouch"));
 
@@ -1694,7 +1696,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_leaves", has(ItemTags.LEAVES)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().result(ModItems.LIVING_ARROW, 2).requires(ItemTags.LEAVES)
             .requires(ItemTags.LEAVES).requires(RootsTags.Items.FLINT).requires(Tags.Items.RODS_WOODEN)
-            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/living_arrow"));
+            .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))), c, RootsAPI.rl("grove/living_arrow"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.ALERTNESS_CHARM.get(), 1)
         .pattern("HNH")
@@ -1829,8 +1831,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.SEEDS)
                 .requires(Tags.Items.BUCKETS)
                 .requires(Items.GOLDEN_HOE)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.CULTIVATION_RANK_1.get())), c, RootsAPI.rl("grove/grove_stone_cultivation"));
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.CULTIVATION_RANK_1))), c, RootsAPI.rl("grove/grove_stone_cultivation"));
 
     // Fungal
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
@@ -1847,8 +1849,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Items.CRIMSON_FUNGUS)
                 .requires(Items.WARPED_FUNGUS)
                 .requires(Items.GOLDEN_SHOVEL)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.FUNGAL_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.FUNGAL_RANK_1))
             ), c, RootsAPI.rl("grove/grove_stone_fungal"));
 
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
@@ -1865,8 +1867,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.FEATHERS)
                 .requires(RootsTags.Items.SILVER_INGOT)
                 .requires(Items.GOLDEN_SWORD)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.TWILIGHT_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.TWILIGHT_RANK_1))
             ), c, RootsAPI.rl("grove/grove_stone_twilight"));
 
 
@@ -1884,8 +1886,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.STALICRIPE_HERB)
                 .requires(RootsTags.Items.STALICRIPE_HERB)
                 .requires(Items.GOLDEN_PICKAXE)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.ELEMENTAL_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.ELEMENTAL_RANK_1))
             ), c, RootsAPI.rl("grove/grove_stone_elemental"));
 
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
@@ -1902,8 +1904,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.GEMS_EMERALD)
                 .requires(Tags.Items.GEMS_EMERALD)
                 .requires(Items.GOLDEN_SWORD)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.UNITY_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_RANK_1))
             ), c, RootsAPI.rl("grove/grove_stone_fairy"));
 
     RecipeSaver.saver().unlockedBy("has_grove_stone", has(RootsTags.Items.GROVE_STONE_WILD))
@@ -1920,16 +1922,16 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(Tags.Items.CROPS)
                 .requires(Tags.Items.CROPS)
                 .requires(Items.GOLDEN_AXE)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.ANIMATE_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.ANIMATE_RANK_1))
             ), c, RootsAPI.rl("grove/grove_stone_wild"));
 
     RecipeSaver.saver().unlockedBy("has_red_mushroom", has(Items.RED_MUSHROOM))
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.RED_FAIRY_HUT.get(), 1)
-                .condition(ModConditions.UNITY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.UNITY_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_RANK_1))
                 .requires(Items.RED_MUSHROOM)
                 .requires(Items.RED_MUSHROOM)
                 .requires(Items.RED_MUSHROOM)
@@ -1946,8 +1948,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.BROWN_FAIRY_HUT.get(), 1)
-                .condition(ModConditions.UNITY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.UNITY_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_RANK_1))
                 .requires(Items.BROWN_MUSHROOM)
                 .requires(Items.BROWN_MUSHROOM)
                 .requires(Items.BROWN_MUSHROOM)
@@ -1964,8 +1966,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.BAFFLECAP_FAIRY_HUT.get(), 1)
-                .condition(ModConditions.UNITY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.UNITY_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_RANK_1))
                 .requires(RootsTags.Items.BAFFLECAP_HERB)
                 .requires(RootsTags.Items.BAFFLECAP_HERB)
                 .requires(RootsTags.Items.BAFFLECAP_HERB)
@@ -1982,8 +1984,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.CRIMSON_FAIRY_HUT.get(), 1)
-                .condition(ModConditions.UNITY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.UNITY_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_RANK_1))
                 .requires(Items.CRIMSON_FUNGUS)
                 .requires(Items.CRIMSON_FUNGUS)
                 .requires(Items.CRIMSON_FUNGUS)
@@ -2000,8 +2002,8 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .save(GroveRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.WARPED_FAIRY_HUT.get(), 1)
-                .condition(ModConditions.UNITY_GROVE_STONE_ACTIVE.get())
-                .condition(ModConditions.UNITY_RANK_1.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_GROVE_STONE_ACTIVE))
+                .condition(conditionLookup.getOrThrow(ModConditions.UNITY_RANK_1))
                 .requires(Items.WARPED_FUNGUS)
                 .requires(Items.WARPED_FUNGUS)
                 .requires(Items.WARPED_FUNGUS)
@@ -2482,7 +2484,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.WILDWOOD_LOGS)
                 .requires(RootsTags.Items.WILDWOOD_LOGS)
                 .requires(RootsTags.Items.WILDWOOD_LOGS)
-                .level(ModConditions.ANY_GROVE_STONE_ACTIVE)
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
             ), c, RootsAPI.rl("grove/fungal_transmuter"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GRAMARY.get())
@@ -2515,7 +2517,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.SPIRITLEAF_CROP)
                 .requires(RootsTags.Items.WILDEWHEET_CROP)
                 .requires(RootsTags.Items.PERESKIA_CROP)
-                .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
             ), c, RootsAPI.rl("grove/wildwood_quiver"));
 
     RecipeSaver.saver().unlockedBy("has_quartz", has(Tags.Items.GEMS_QUARTZ))
@@ -2529,7 +2531,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
                     .requires(Items.FURNACE)
                     .requires(Items.FURNACE)
                     .requires(Items.FURNACE)
-                    .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
+                    .condition(conditionLookup.getOrThrow(ModConditions.ANY_GROVE_STONE_ACTIVE))
                 ), c, RootsAPI.rl("grove/furnace_amplifier"));
 
     GENERATING_RECIPES.set(false);

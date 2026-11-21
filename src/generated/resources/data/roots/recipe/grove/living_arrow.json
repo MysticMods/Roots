@@ -1,6 +1,9 @@
 {
   "type": "roots:grove",
   "data": {
+    "conditions": [
+      "roots:active_grove_stone"
+    ],
     "ingredients": [
       {
         "tag": "minecraft:leaves"
@@ -13,17 +16,6 @@
       },
       {
         "tag": "c:rods/wooden"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "grove": "roots:any",
-          "name": "any",
-          "tag": "roots:grove_stones"
-        },
-        "require_active": true
       }
     ],
     "priority": 0,

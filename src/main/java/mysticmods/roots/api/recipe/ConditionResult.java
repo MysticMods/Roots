@@ -1,16 +1,17 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.condition.IPlayerCondition;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
-public record ConditionResult(List<ILevelCondition> failedLevelConditions,
-                              List<IPlayerCondition> failedPlayerConditions) {
+public record ConditionResult(List<Holder<ICondition>> failed) {
   public boolean anyFailed() {
-    return !failedLevelConditions.isEmpty() || !failedPlayerConditions.isEmpty();
+    return !failed.isEmpty();
   }
 
   public void report(Player player) {
@@ -21,7 +22,6 @@ public record ConditionResult(List<ILevelCondition> failedLevelConditions,
     // Improve this
 
     player.displayClientMessage(Component.translatable("roots.message.recipe.failures"), false);
-    failedLevelConditions.forEach(condition -> player.displayClientMessage(Component.translatable("roots.message.recipe.requires", condition.getNameComponent()), false));
-    failedPlayerConditions.forEach(condition -> player.displayClientMessage(Component.translatable("roots.message.recipe.requires", condition.getNameComponent()), false));
+    failed.forEach(condition -> player.displayClientMessage(Component.translatable("roots.message.recipe.requires", ICondition.getName(condition)), false));
   }
 }

@@ -11,6 +11,8 @@ import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.condition.ConditionIngredient;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
@@ -327,13 +329,17 @@ public class RootsCommand {
         ItemHandlerHelper.insertItemStacked(playerInv, new ItemStack(Items.FLINT_AND_STEEL), false);
 
         // Iterate over world conditions and create them using /place
-        List<ILevelCondition> conditions = recipe.value().getLevelConditions();
+        List<Holder<ICondition>> conditions = recipe.value().getConditions();
         for (int i = 0; i < conditions.size(); i++) {
-          ILevelCondition condition = conditions.get(i);
-          if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
-            c.getSource()
-                .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", condition.getNameComponent()));
-            return 1;
+          Holder<ICondition> condition = conditions.get(i);
+          if (condition.value() instanceof ILevelCondition levelCondition) {
+            ConditionIngredient ingredient = levelCondition.getIngredient();
+            // TODO:
+/*            if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
+              c.getSource()
+                  .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", condition.getNameComponent()));
+              return 1;
+            }*/
           }
         }
         return 1;
@@ -399,8 +405,9 @@ public class RootsCommand {
         // Give the player a flint and steel
         ItemHandlerHelper.insertItemStacked(playerInv, new ItemStack(Items.FLINT_AND_STEEL), false);
 
+        // TODO: New conditions
         // Iterate over world conditions and create them using /place
-        List<ILevelCondition> conditions = recipe.value().getLevelConditions();
+/*        List<ILevelCondition> conditions = recipe.value().getConditions();
         for (int i = 0; i < conditions.size(); i++) {
           ILevelCondition condition = conditions.get(i);
           if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
@@ -408,7 +415,7 @@ public class RootsCommand {
                 .sendFailure(Component.translatable("roots.commands.ritual.failed_condition", condition.getNameComponent()));
             return 1;
           }
-        }
+        }*/
 
         return 1;
       })));

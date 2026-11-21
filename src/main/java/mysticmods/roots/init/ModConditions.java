@@ -1,93 +1,82 @@
 package mysticmods.roots.init;
 
-import com.google.common.base.Suppliers;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.condition.*;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.test.world.PartialBlockState;
-import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
-import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.condition.*;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.Map;
-import java.util.function.Supplier;
-
 
 public class ModConditions {
-  private static final DeferredRegister<ILevelConditionType<?>> LEVEL = DeferredRegister.create(RootsRegistries.LEVEL_CONDITIONS, RootsAPI.MODID);
-  private static final DeferredRegister<IPlayerConditionType<?>> PLAYER = DeferredRegister.create(RootsRegistries.PLAYER_CONDITIONS, RootsAPI.MODID);
+  private static final DeferredRegister<MapCodec<? extends ICondition>> TYPES = DeferredRegister.create(RootsRegistries.Keys.CONDITION_TYPES, RootsAPI.MODID);
 
-  public static final Map<String, Supplier<CanonicalRepresentation>> SPECIAL_REPRESENTATIONS = new Object2ObjectOpenHashMap<>();
-  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<GroveStoneCondition>> GROVE_STONE_CONDITION_TYPE = LEVEL.register("grove_stone_condition", GroveStoneCondition.Type::new);
-  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<PillarCondition>> PILLAR_CONDITION_TYPE = LEVEL.register("pillar_condition", PillarCondition.Type::new);
-  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<FluidSourcePropertyCondition>> FLUID_SOURCE_CONDITION_TYPE = LEVEL.register("fluid_source_property_condition", FluidSourcePropertyCondition.Type::new);
-  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<BlockStatePropertyCondition>> BLOCK_STATE_CONDITION_TYPE = LEVEL.register("block_state_property_condition", BlockStatePropertyCondition.Type::new);
-  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<OvergrowthCondition>> OVERGROWTH_CONDITION_TYPE = LEVEL.register("overgrowth_condition", OvergrowthCondition.Type::new);
+  public static final DeferredHolder<MapCodec<? extends ICondition>, MapCodec<GroveStoneCondition>> GROVE_STONE_CONDITION_TYPE = TYPES.register("grove_stone_condition", () -> GroveStoneCondition.MAP_CODEC);
+  public static final DeferredHolder<MapCodec<? extends ICondition>, MapCodec<PillarCondition>> PILLAR_CONDITION_TYPE = TYPES.register("pillar_condition", () -> PillarCondition.MAP_CODEC);
+  public static final DeferredHolder<MapCodec<? extends ICondition>, MapCodec<FluidSourcePropertyCondition>> FLUID_SOURCE_CONDITION_TYPE = TYPES.register("fluid_source_property_condition", () -> FluidSourcePropertyCondition.MAP_CODEC);
+  public static final DeferredHolder<MapCodec<? extends ICondition>, MapCodec<BlockStatePropertyCondition>> BLOCK_STATE_CONDITION_TYPE = TYPES.register("block_state_property_condition", () -> BlockStatePropertyCondition.MAP_CODEC);
+  public static final DeferredHolder<MapCodec<? extends ICondition>, MapCodec<OvergrowthCondition>> OVERGROWTH_CONDITION_TYPE = TYPES.register("overgrowth_condition", () -> OvergrowthCondition.MAP_CODEC);
+  public static final DeferredHolder<MapCodec<? extends ICondition>, MapCodec<GroveRankReputation>> GROVE_RANK_CONDITION_TYPE = TYPES.register("grove_rank_condition", () -> GroveRankReputation.MAP_CODEC);
 
-  public static final Supplier<ILevelCondition> TALL_RUNESTONE_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.TALL_RUNESTONE));
-  public static final Supplier<ILevelCondition> SHORT_RUNESTONE_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.SHORT_RUNESTONE));
-  public static final Supplier<ILevelCondition> TALL_RUNED_OBSIDIAN_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.TALL_RUNED_OBSIDIAN));
-  public static final Supplier<ILevelCondition> SHORT_RUNED_OBSIDIAN_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.SHORT_RUNED_OBSIDIAN));
-  public static final Supplier<ILevelCondition> SHORT_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.SHORT));
-  public static final Supplier<ILevelCondition> TALL_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.TALL));
-  public static final Supplier<ILevelCondition> ANY_PILLAR = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY));
+  public static final ResourceKey<ICondition> TALL_RUNESTONE_PILLAR = key("tall_runestone");
+  public static final ResourceKey<ICondition> SHORT_RUNESTONE_PILLAR = key("short_runestone");
+  public static final ResourceKey<ICondition> TALL_RUNED_OBSIDIAN_PILLAR = key("tall_runed_obsidian");
+  public static final ResourceKey<ICondition> SHORT_RUNED_OBSIDIAN_PILLAR = key("short_runed_obsidian");
+  public static final ResourceKey<ICondition> SHORT_PILLAR = key("short_pillar");
+  public static final ResourceKey<ICondition> TALL_PILLAR = key("tall_pillar");
+  public static final ResourceKey<ICondition> ANY_PILLAR = key("any_pillar");
 
-  public static final Supplier<ILevelCondition> ANY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, true));
-  public static final Supplier<ILevelCondition> UNITY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.UNITY, true));
-  public static final Supplier<ILevelCondition> FUNGAL_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.FUNGAL, true));
-  public static final Supplier<ILevelCondition> ANY_GROVE_STONE_INACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, true));
-  public static final Supplier<ILevelCondition> ANY_GROVE_STONE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, false));
-  private static final String WILDROOT_CROP = "mature_wildroot_crop";
-  public static final Supplier<ILevelCondition> MATURE_WILDROOT_CROP = Suppliers.memoize(() -> new BlockStatePropertyCondition(WILDROOT_CROP, new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
-      .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
+  public static final ResourceKey<ICondition> ANY_GROVE_STONE_ACTIVE = key("active_grove_stone");
+  public static final ResourceKey<ICondition> UNITY_GROVE_STONE_ACTIVE = key("active_unity_grove_stone");
+  public static final ResourceKey<ICondition> FUNGAL_GROVE_STONE_ACTIVE = key("active_fungal_grove_stone");
+  public static final ResourceKey<ICondition> ANY_GROVE_STONE_INACTIVE = key("inactive_grove_stone");
+  public static final ResourceKey<ICondition> ANY_GROVE_STONE = key("any_grove_stone");
 
-  static {
-    SPECIAL_REPRESENTATIONS.put(WILDROOT_CROP, Suppliers.memoize(() -> new CanonicalRepresentation(
-        Blocks.FARMLAND,
-        new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
-            .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
-  }
+  public static final ResourceKey<ICondition> MATURE_WILDROOT_CROP = key("mature_wildroot_crop");
+  public static final ResourceKey<ICondition> OVERGROWTH = key("overgrowth");
 
-  public static final Supplier<ILevelCondition> OVERGROWTH = Suppliers.memoize(OvergrowthCondition::getInstance);
+  public static final ResourceKey<ICondition> FUNGAL_RANK_1 = rankKey("fungal", Rank.FIRST);
+  public static final ResourceKey<ICondition> ELEMENTAL_RANK_1 = rankKey("elemental", Rank.FIRST);
+  public static final ResourceKey<ICondition> UNITY_RANK_1 = rankKey("unity", Rank.FIRST);
+  public static final ResourceKey<ICondition> ANIMATE_RANK_1 = rankKey("animate", Rank.FIRST);
+  public static final ResourceKey<ICondition> CULTIVATION_RANK_1 = rankKey("cultivation", Rank.FIRST);
+  public static final ResourceKey<ICondition> TWILIGHT_RANK_1 = rankKey("twilight", Rank.FIRST);
 
-  public static final Supplier<IPlayerCondition> FUNGAL_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.FIRST));
-  public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.FIRST));
-  public static final Supplier<IPlayerCondition> UNITY_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), Rank.FIRST));
-  public static final Supplier<IPlayerCondition> ANIMATE_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.FIRST));
-  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.FIRST));
-  public static final Supplier<IPlayerCondition> TWILIGHT_RANK_1 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.FIRST));
+  public static final ResourceKey<ICondition> FUNGAL_RANK_2 = rankKey("fungal", Rank.SECOND);
+  public static final ResourceKey<ICondition> ELEMENTAL_RANK_2 = rankKey("elemental", Rank.SECOND);
+  public static final ResourceKey<ICondition> UNITY_RANK_2 = rankKey("unity", Rank.SECOND);
+  public static final ResourceKey<ICondition> ANIMATE_RANK_2 = rankKey("animate", Rank.SECOND);
+  public static final ResourceKey<ICondition> CULTIVATION_RANK_2 = rankKey("cultivation", Rank.SECOND);
+  public static final ResourceKey<ICondition> TWILIGHT_RANK_2 = rankKey("twilight", Rank.SECOND);
 
-  public static final Supplier<IPlayerCondition> FUNGAL_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.SECOND));
-  public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.SECOND));
-  public static final Supplier<IPlayerCondition> UNITY_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), Rank.SECOND));
-  public static final Supplier<IPlayerCondition> ANIMATE_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.SECOND));
-  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.SECOND));
-  public static final Supplier<IPlayerCondition> TWILIGHT_RANK_2 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.SECOND));
+  public static final ResourceKey<ICondition> FUNGAL_RANK_3 = rankKey("fungal", Rank.THIRD);
+  public static final ResourceKey<ICondition> ELEMENTAL_RANK_3 = rankKey("elemental", Rank.THIRD);
+  public static final ResourceKey<ICondition> UNITY_RANK_3 = rankKey("unity", Rank.THIRD);
+  public static final ResourceKey<ICondition> ANIMATE_RANK_3 = rankKey("animate", Rank.THIRD);
+  public static final ResourceKey<ICondition> CULTIVATION_RANK_3 = rankKey("cultivation", Rank.THIRD);
+  public static final ResourceKey<ICondition> TWILIGHT_RANK_3 = rankKey("twilight", Rank.THIRD);
 
-  public static final Supplier<IPlayerCondition> FUNGAL_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.THIRD));
-  public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.THIRD));
-  public static final Supplier<IPlayerCondition> UNITY_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), Rank.THIRD));
-  public static final Supplier<IPlayerCondition> ANIMATE_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.THIRD));
-  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.THIRD));
-  public static final Supplier<IPlayerCondition> TWILIGHT_RANK_3 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.THIRD));
-
-  public static final Supplier<IPlayerCondition> FUNGAL_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.FOURTH));
-  public static final Supplier<IPlayerCondition> ELEMENTAL_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.FOURTH));
-  public static final Supplier<IPlayerCondition> UNITY_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.UNITY.get(), Rank.FOURTH));
-  public static final Supplier<IPlayerCondition> ANIMATE_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.FOURTH));
-  public static final Supplier<IPlayerCondition> CULTIVATION_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.FOURTH));
-  public static final Supplier<IPlayerCondition> TWILIGHT_RANK_4 = Suppliers.memoize(() -> new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.FOURTH));
-
-  public static final DeferredHolder<IPlayerConditionType<?>, IPlayerConditionType<GroveRankReputation>> GROVE_RANK_CONDITION_TYPE = PLAYER.register("grove_rank_condition", GroveRankReputation.Type::new);
+  public static final ResourceKey<ICondition> FUNGAL_RANK_4 = rankKey("fungal", Rank.FOURTH);
+  public static final ResourceKey<ICondition> ELEMENTAL_RANK_4 = rankKey("elemental", Rank.FOURTH);
+  public static final ResourceKey<ICondition> UNITY_RANK_4 = rankKey("unity", Rank.FOURTH);
+  public static final ResourceKey<ICondition> ANIMATE_RANK_4 = rankKey("animate", Rank.FOURTH);
+  public static final ResourceKey<ICondition> CULTIVATION_RANK_4 = rankKey("cultivation", Rank.FOURTH);
+  public static final ResourceKey<ICondition> TWILIGHT_RANK_4 = rankKey("twilight", Rank.FOURTH);
 
   public static void register(IEventBus bus) {
-    LEVEL.register(bus);
-    PLAYER.register(bus);
+    TYPES.register(bus);
+  }
+
+  private static ResourceKey<ICondition> key(String name) {
+    return ResourceKey.create(RootsRegistries.Keys.CONDITIONS, RootsAPI.rl(name));
+  }
+
+  // Same naming as the old GroveRankReputation.getName(), so lang keys carry over.
+  private static ResourceKey<ICondition> rankKey(String grove, Rank rank) {
+    return key(grove + "_reputation_rank_" + rank.getSerializedName());
   }
 }

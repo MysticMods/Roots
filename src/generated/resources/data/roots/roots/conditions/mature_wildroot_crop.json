@@ -1,0 +1,11 @@
+{
+  "type": "roots:block_state_property_condition",
+  "test": {
+    "partial_block_state": {
+      "block": "roots:wildroot_crop",
+      "properties": {
+        "age": "3"
+      }
+    }
+  }
+}

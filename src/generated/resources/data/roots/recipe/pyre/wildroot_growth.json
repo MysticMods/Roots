@@ -1,6 +1,9 @@
 {
   "type": "roots:pyre",
   "data": {
+    "conditions": [
+      "roots:mature_wildroot_crop"
+    ],
     "ingredients": [
       {
         "tag": "roots:herbs/wildroot"
@@ -16,20 +19,6 @@
       },
       {
         "tag": "minecraft:saplings"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:block_state_property_condition",
-        "name": "mature_wildroot_crop",
-        "test": {
-          "partial_block_state": {
-            "block": "roots:wildroot_crop",
-            "properties": {
-              "age": "3"
-            }
-          }
-        }
       }
     ],
     "priority": 0

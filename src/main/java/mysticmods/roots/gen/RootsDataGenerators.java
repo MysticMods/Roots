@@ -4,6 +4,14 @@ import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.EnumProxies;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.condition.GroveType;
+import mysticmods.roots.api.condition.PillarType;
+import mysticmods.roots.api.grove.Rank;
+import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
+import mysticmods.roots.block.crop.ThreeStageCropBlock;
+import mysticmods.roots.condition.*;
 import mysticmods.roots.gen.advancement.RootsAdvancementProvider;
 import mysticmods.roots.gen.client.*;
 import mysticmods.roots.gen.lang.RootsLangProvider;
@@ -307,7 +315,8 @@ public final class RootsDataGenerators {
 
                   bootstrap.register(ModDamage.ACID_CLOUD, new DamageType(ModDamage.ACID_CLOUD.location()
                       .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
-                  bootstrap.register(ModDamage.ACID_CLOUD_NO_KNOCKBACK, new DamageType(ModDamage.ACID_CLOUD_NO_KNOCKBACK.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.ACID_CLOUD_NO_KNOCKBACK, new DamageType(ModDamage.ACID_CLOUD_NO_KNOCKBACK.location()
+                      .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
                   bootstrap.register(ModDamage.METEOR, new DamageType(ModDamage.METEOR.location()
                       .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
                   bootstrap.register(ModDamage.WILDFIRE, new DamageType(ModDamage.WILDFIRE.location()
@@ -317,6 +326,56 @@ public final class RootsDataGenerators {
                   bootstrap.register(ModDamage.LIFE_DRAIN, new DamageType(ModDamage.LIFE_DRAIN.location()
                       .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, EnumProxies.ROOTS_DRAINING.getValue()));
 
+                })
+                .add(RootsRegistries.Keys.CONDITIONS, bootstrap -> {
+                  // Reputation ranks
+                  bootstrap.register(ModConditions.ANIMATE_RANK_1, new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.FIRST));
+                  bootstrap.register(ModConditions.ANIMATE_RANK_2, new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.SECOND));
+                  bootstrap.register(ModConditions.ANIMATE_RANK_3, new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.THIRD));
+                  bootstrap.register(ModConditions.ANIMATE_RANK_4, new GroveRankReputation(ModGroves.ANIMATE.get(), Rank.FOURTH));
+
+                  bootstrap.register(ModConditions.FUNGAL_RANK_1, new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.FIRST));
+                  bootstrap.register(ModConditions.FUNGAL_RANK_2, new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.SECOND));
+                  bootstrap.register(ModConditions.FUNGAL_RANK_3, new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.THIRD));
+                  bootstrap.register(ModConditions.FUNGAL_RANK_4, new GroveRankReputation(ModGroves.FUNGAL.get(), Rank.FOURTH));
+
+                  bootstrap.register(ModConditions.UNITY_RANK_1, new GroveRankReputation(ModGroves.UNITY.get(), Rank.FIRST));
+                  bootstrap.register(ModConditions.UNITY_RANK_2, new GroveRankReputation(ModGroves.UNITY.get(), Rank.SECOND));
+                  bootstrap.register(ModConditions.UNITY_RANK_3, new GroveRankReputation(ModGroves.UNITY.get(), Rank.THIRD));
+                  bootstrap.register(ModConditions.UNITY_RANK_4, new GroveRankReputation(ModGroves.UNITY.get(), Rank.FOURTH));
+
+                  bootstrap.register(ModConditions.ELEMENTAL_RANK_1, new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.FIRST));
+                  bootstrap.register(ModConditions.ELEMENTAL_RANK_2, new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.SECOND));
+                  bootstrap.register(ModConditions.ELEMENTAL_RANK_3, new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.THIRD));
+                  bootstrap.register(ModConditions.ELEMENTAL_RANK_4, new GroveRankReputation(ModGroves.ELEMENTAL.get(), Rank.FOURTH));
+
+                  bootstrap.register(ModConditions.CULTIVATION_RANK_1, new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.FIRST));
+                  bootstrap.register(ModConditions.CULTIVATION_RANK_2, new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.SECOND));
+                  bootstrap.register(ModConditions.CULTIVATION_RANK_3, new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.THIRD));
+                  bootstrap.register(ModConditions.CULTIVATION_RANK_4, new GroveRankReputation(ModGroves.CULTIVATION.get(), Rank.FOURTH));
+
+                  bootstrap.register(ModConditions.TWILIGHT_RANK_1, new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.FIRST));
+                  bootstrap.register(ModConditions.TWILIGHT_RANK_2, new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.SECOND));
+                  bootstrap.register(ModConditions.TWILIGHT_RANK_3, new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.THIRD));
+                  bootstrap.register(ModConditions.TWILIGHT_RANK_4, new GroveRankReputation(ModGroves.TWILIGHT.get(), Rank.FOURTH));
+
+                  bootstrap.register(ModConditions.ANY_GROVE_STONE, new GroveStoneCondition(GroveType.ANY, GroveStoneCondition.GroveStoneState.ANY));
+                  bootstrap.register(ModConditions.ANY_GROVE_STONE_ACTIVE, new GroveStoneCondition(GroveType.ANY, GroveStoneCondition.GroveStoneState.ACTIVE));
+                  bootstrap.register(ModConditions.ANY_GROVE_STONE_INACTIVE, new GroveStoneCondition(GroveType.ANY, GroveStoneCondition.GroveStoneState.INACTIVE));
+                  bootstrap.register(ModConditions.FUNGAL_GROVE_STONE_ACTIVE, new GroveStoneCondition(GroveType.FUNGAL, GroveStoneCondition.GroveStoneState.ACTIVE));
+                  bootstrap.register(ModConditions.UNITY_GROVE_STONE_ACTIVE, new GroveStoneCondition(GroveType.UNITY, GroveStoneCondition.GroveStoneState.ACTIVE));
+
+                  bootstrap.register(ModConditions.TALL_RUNESTONE_PILLAR, new PillarCondition(PillarType.TALL_RUNESTONE));
+                  bootstrap.register(ModConditions.SHORT_RUNESTONE_PILLAR, new PillarCondition(PillarType.SHORT_RUNESTONE));
+                  bootstrap.register(ModConditions.TALL_RUNED_OBSIDIAN_PILLAR, new PillarCondition(PillarType.TALL_RUNED_OBSIDIAN));
+                  bootstrap.register(ModConditions.SHORT_RUNED_OBSIDIAN_PILLAR, new PillarCondition(PillarType.SHORT_RUNED_OBSIDIAN));
+                  bootstrap.register(ModConditions.TALL_PILLAR, new PillarCondition(PillarType.TALL));
+                  bootstrap.register(ModConditions.SHORT_PILLAR, new PillarCondition(PillarType.SHORT));
+                  bootstrap.register(ModConditions.ANY_PILLAR, new PillarCondition(PillarType.ANY));
+
+                  bootstrap.register(ModConditions.MATURE_WILDROOT_CROP, new BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
+                      .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
+                  bootstrap.register(ModConditions.OVERGROWTH, OvergrowthCondition.getInstance());
                 }),
             Set.of(RootsAPI.MODID)
         )
@@ -358,7 +417,6 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsEnchantmentTagProvider(output, dataPackProvider, helper));
     generator.addProvider(event.includeServer(), new RootsRitualModifierTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsSpellModifierTagsProvider(output, provider, helper));
-    generator.addProvider(event.includeServer(), new RootsLevelConditionTypeTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsModifierModelProvider(output, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
 

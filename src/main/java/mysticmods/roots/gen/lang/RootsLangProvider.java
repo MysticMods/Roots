@@ -1,16 +1,17 @@
 package mysticmods.roots.gen.lang;
 
-import mysticmods.roots.api.description.Cycling;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveAction;
+import mysticmods.roots.api.condition.ICondition;
+import mysticmods.roots.api.description.Cycling;
 import mysticmods.roots.api.grove.Symmetry;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.tooltip.Formatters;
 import mysticmods.roots.api.registry.GroupId;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.tooltip.Formatters;
 import mysticmods.roots.client.BoundKeys;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
@@ -52,7 +53,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
-  public void addAttribute (Holder<Attribute> value) {
+  public void addAttribute(Holder<Attribute> value) {
     add(value.value().getDescriptionId(), toEnglishName(value.getKey().location().getPath()));
   }
 
@@ -310,110 +311,76 @@ public final class RootsLangProvider extends LanguageProvider {
         .forEach(o -> add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
         );
 
-    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get().getName(), "Active Grove Stone");
-    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get()
-        .getName() + ".description", "A Grove Stone that has been activated by the ritual Grove Supplication.");
-    add("level_condition.roots." + ModConditions.UNITY_GROVE_STONE_ACTIVE.get().getName(), "Active Unity Grove Stone");
-    add("level_condition.roots." + ModConditions.UNITY_GROVE_STONE_ACTIVE.get()
-        .getName() + ".description", "A Unity Grove Stone that has been activated by the ritual Grove Supplication.");
-    add("level_condition.roots." + ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get()
-        .getName(), "Active Fungal Grove Stone");
-    add("level_condition.roots." + ModConditions.FUNGAL_GROVE_STONE_ACTIVE.get()
-        .getName() + ".description", "A Fungal Grove Stone that has been activated by the ritual Grove Supplication.");
-    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_INACTIVE.get().getName(), "Inactive Grove Stone");
-    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_INACTIVE.get()
-        .getName() + ".description", "A Grove Stone that has not yet been activated.");
-    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE.get().getName(), "Any Grove Stone");
-    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE.get()
-        .getName() + ".description", "A Grove Stone of any kind, active or inactive.");
-    add("level_condition.roots." + ModConditions.TALL_PILLAR.get().getName(), "Tall Pillar");
-    add("level_condition.roots." + ModConditions.TALL_PILLAR.get()
-        .getName() + ".description", "A tall pillar constructed from runestone or runed obsidian.");
-    add("level_condition.roots." + ModConditions.SHORT_PILLAR.get().getName(), "Short Pillar");
-    add("level_condition.roots." + ModConditions.SHORT_PILLAR.get()
-        .getName() + ".description", "A short pillar constructed from runestone or runed obsidian.");
-    add("level_condition.roots." + ModConditions.MATURE_WILDROOT_CROP.get().getName(), "Mature Wildroot Crop");
-    add("level_condition.roots." + ModConditions.MATURE_WILDROOT_CROP.get()
-        .getName() + ".description", "A wildroot crop that has reached its final growth stage.");
-    add("level_condition.roots." + ModConditions.OVERGROWTH.get().getName(), "Creeping Grove Moss or Water Source");
-    add("level_condition.roots." + ModConditions.OVERGROWTH.get()
-        .getName() + ".description", "An already existing block of creeping grove moss with space adjacent for future growth, or any solid block that has a water source block adjacent to it.");
+    addCondition(ModConditions.ANY_GROVE_STONE_ACTIVE, "Active Grove Stone");
+    addCondition(ModConditions.ANY_GROVE_STONE_ACTIVE, "description", "A Grove Stone that has been activated by the ritual Grove Supplication.");
+    addCondition(ModConditions.UNITY_GROVE_STONE_ACTIVE, "Active Unity Grove Stone");
+    addCondition(ModConditions.UNITY_GROVE_STONE_ACTIVE, "description", "A Unity Grove Stone that has been activated by the ritual Grove Supplication.");
+    addCondition(ModConditions.FUNGAL_GROVE_STONE_ACTIVE, "Active Fungal Grove Stone");
+    addCondition(ModConditions.FUNGAL_GROVE_STONE_ACTIVE, "description", "A Fungal Grove Stone that has been activated by the ritual Grove Supplication.");
+    addCondition(ModConditions.ANY_GROVE_STONE_INACTIVE, "Inactive Grove Stone");
+    addCondition(ModConditions.ANY_GROVE_STONE_INACTIVE, "description", "A Grove Stone that has not yet been activated.");
+    addCondition(ModConditions.ANY_GROVE_STONE, "Any Grove Stone");
+    addCondition(ModConditions.ANY_GROVE_STONE, "description", "A Grove Stone of any kind, active or inactive.");
+    addCondition(ModConditions.TALL_PILLAR, "Tall Pillar");
+    addCondition(ModConditions.TALL_PILLAR, "description", "A tall pillar constructed from runestone or runed obsidian.");
+    addCondition(ModConditions.SHORT_PILLAR, "Short Pillar");
+    addCondition(ModConditions.SHORT_PILLAR, "description", "A short pillar constructed from runestone or runed obsidian.");
+    addCondition(ModConditions.MATURE_WILDROOT_CROP, "Mature Wildroot Crop");
+    addCondition(ModConditions.MATURE_WILDROOT_CROP, "description", "A wildroot crop that has reached its final growth stage.");
+    addCondition(ModConditions.OVERGROWTH, "Creeping Grove Moss or Water Source");
+    addCondition(ModConditions.OVERGROWTH, "description", "An already existing block of creeping grove moss with space adjacent for future growth, or any solid block that has a water source block adjacent to it.");
 
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_1.get().getName(), "Fungal Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Fungal Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_1.get().getName(), "Elemental Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Elemental Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_1.get().getName(), "Unity Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Unity Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_1.get().getName(), "Animate Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Animate Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_1.get().getName(), "Cultivation Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 1.");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_1.get().getName(), "Twilight Grove Rank 1+");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_1.get()
-        .getName() + ".description", "Obtain a reputation rank with the Twilight Grove of at least 1.");
+    addCondition(ModConditions.FUNGAL_RANK_1, "Fungal Grove Rank 1+");
+    addCondition(ModConditions.FUNGAL_RANK_1, "description", "Obtain a reputation rank with the Fungal Grove of at least 1.");
+    addCondition(ModConditions.ELEMENTAL_RANK_1, "Elemental Grove Rank 1+");
+    addCondition(ModConditions.ELEMENTAL_RANK_1, "description", "Obtain a reputation rank with the Elemental Grove of at least 1.");
+    addCondition(ModConditions.UNITY_RANK_1, "Unity Grove Rank 1+");
+    addCondition(ModConditions.UNITY_RANK_1, "description", "Obtain a reputation rank with the Unity Grove of at least 1.");
+    addCondition(ModConditions.ANIMATE_RANK_1, "Animate Grove Rank 1+");
+    addCondition(ModConditions.ANIMATE_RANK_1, "description", "Obtain a reputation rank with the Animate Grove of at least 1.");
+    addCondition(ModConditions.CULTIVATION_RANK_1, "Cultivation Grove Rank 1+");
+    addCondition(ModConditions.CULTIVATION_RANK_1, "description", "Obtain a reputation rank with the Cultivation Grove of at least 1.");
+    addCondition(ModConditions.TWILIGHT_RANK_1, "Twilight Grove Rank 1+");
+    addCondition(ModConditions.TWILIGHT_RANK_1, "description", "Obtain a reputation rank with the Twilight Grove of at least 1.");
 
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_2.get().getName(), "Fungal Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Fungal Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_2.get().getName(), "Elemental Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Elemental Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_2.get().getName(), "Unity Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Unity Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_2.get().getName(), "Animate Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Animate Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_2.get().getName(), "Cultivation Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 2.");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_2.get().getName(), "Twilight Grove Rank 2+");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_2.get()
-        .getName() + ".description", "Obtain a reputation rank with the Twilight Grove of at least 2.");
+    addCondition(ModConditions.FUNGAL_RANK_2, "Fungal Grove Rank 2+");
+    addCondition(ModConditions.FUNGAL_RANK_2, "description", "Obtain a reputation rank with the Fungal Grove of at least 2.");
+    addCondition(ModConditions.ELEMENTAL_RANK_2, "Elemental Grove Rank 2+");
+    addCondition(ModConditions.ELEMENTAL_RANK_2, "description", "Obtain a reputation rank with the Elemental Grove of at least 2.");
+    addCondition(ModConditions.UNITY_RANK_2, "Unity Grove Rank 2+");
+    addCondition(ModConditions.UNITY_RANK_2, "description", "Obtain a reputation rank with the Unity Grove of at least 2.");
+    addCondition(ModConditions.ANIMATE_RANK_2, "Animate Grove Rank 2+");
+    addCondition(ModConditions.ANIMATE_RANK_2, "description", "Obtain a reputation rank with the Animate Grove of at least 2.");
+    addCondition(ModConditions.CULTIVATION_RANK_2, "Cultivation Grove Rank 2+");
+    addCondition(ModConditions.CULTIVATION_RANK_2, "description", "Obtain a reputation rank with the Cultivation Grove of at least 2.");
+    addCondition(ModConditions.TWILIGHT_RANK_2, "Twilight Grove Rank 2+");
+    addCondition(ModConditions.TWILIGHT_RANK_2, "description", "Obtain a reputation rank with the Twilight Grove of at least 2.");
 
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_3.get().getName(), "Fungal Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Fungal Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_3.get().getName(), "Elemental Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Elemental Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_3.get().getName(), "Unity Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Unity Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_3.get().getName(), "Animate Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Animate Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_3.get().getName(), "Cultivation Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Cultivation Grove of at least 3.");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_3.get().getName(), "Twilight Grove Rank 3+");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_3.get()
-        .getName() + ".description", "Obtain a reputation rank with the Twilight Grove of at least 3.");
+    addCondition(ModConditions.FUNGAL_RANK_3, "Fungal Grove Rank 3+");
+    addCondition(ModConditions.FUNGAL_RANK_3, "description", "Obtain a reputation rank with the Fungal Grove of at least 3.");
+    addCondition(ModConditions.ELEMENTAL_RANK_3, "Elemental Grove Rank 3+");
+    addCondition(ModConditions.ELEMENTAL_RANK_3, "description", "Obtain a reputation rank with the Elemental Grove of at least 3.");
+    addCondition(ModConditions.UNITY_RANK_3, "Unity Grove Rank 3+");
+    addCondition(ModConditions.UNITY_RANK_3, "description", "Obtain a reputation rank with the Unity Grove of at least 3.");
+    addCondition(ModConditions.ANIMATE_RANK_3, "Animate Grove Rank 3+");
+    addCondition(ModConditions.ANIMATE_RANK_3, "description", "Obtain a reputation rank with the Animate Grove of at least 3.");
+    addCondition(ModConditions.CULTIVATION_RANK_3, "Cultivation Grove Rank 3+");
+    addCondition(ModConditions.CULTIVATION_RANK_3, "description", "Obtain a reputation rank with the Cultivation Grove of at least 3.");
+    addCondition(ModConditions.TWILIGHT_RANK_3, "Twilight Grove Rank 3+");
+    addCondition(ModConditions.TWILIGHT_RANK_3, "description", "Obtain a reputation rank with the Twilight Grove of at least 3.");
 
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_4.get().getName(), "Fungal Grove Rank 4");
-    add("player_condition.roots." + ModConditions.FUNGAL_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Fungal Grove.");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_4.get().getName(), "Elemental Grove Rank 4");
-    add("player_condition.roots." + ModConditions.ELEMENTAL_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Elemental Grove.");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_4.get().getName(), "Unity Grove Rank 4");
-    add("player_condition.roots." + ModConditions.UNITY_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Unity Grove.");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_4.get().getName(), "Animate Grove Rank 4");
-    add("player_condition.roots." + ModConditions.ANIMATE_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Animate Grove.");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_4.get().getName(), "Cultivation Grove Rank 4");
-    add("player_condition.roots." + ModConditions.CULTIVATION_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Cultivation Grove.");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_4.get().getName(), "Twilight Grove Rank 4");
-    add("player_condition.roots." + ModConditions.TWILIGHT_RANK_4.get()
-        .getName() + ".description", "Obtain the maximum reputation rank of 4 with the Twilight Grove.");
+    addCondition(ModConditions.FUNGAL_RANK_4, "Fungal Grove Rank 4");
+    addCondition(ModConditions.FUNGAL_RANK_4, "description", "Obtain the maximum reputation rank of 4 with the Fungal Grove.");
+    addCondition(ModConditions.ELEMENTAL_RANK_4, "Elemental Grove Rank 4");
+    addCondition(ModConditions.ELEMENTAL_RANK_4, "description", "Obtain the maximum reputation rank of 4 with the Elemental Grove.");
+    addCondition(ModConditions.UNITY_RANK_4, "Unity Grove Rank 4");
+    addCondition(ModConditions.UNITY_RANK_4, "description", "Obtain the maximum reputation rank of 4 with the Unity Grove.");
+    addCondition(ModConditions.ANIMATE_RANK_4, "Animate Grove Rank 4");
+    addCondition(ModConditions.ANIMATE_RANK_4, "description", "Obtain the maximum reputation rank of 4 with the Animate Grove.");
+    addCondition(ModConditions.CULTIVATION_RANK_4, "Cultivation Grove Rank 4");
+    addCondition(ModConditions.CULTIVATION_RANK_4, "description", "Obtain the maximum reputation rank of 4 with the Cultivation Grove.");
+    addCondition(ModConditions.TWILIGHT_RANK_4, "Twilight Grove Rank 4");
+    addCondition(ModConditions.TWILIGHT_RANK_4, "description", "Obtain the maximum reputation rank of 4 with the Twilight Grove.");
 
     // Blocks
     addBlock(ModBlocks.THATCH);
@@ -1030,7 +997,8 @@ public final class RootsLangProvider extends LanguageProvider {
     addAttribute(ModAttributes.COST_REDUCTION);
     addAttribute(ModAttributes.FORAGING);
   }
-  private void addConfig (List<ModConfigSpec.ConfigValue<?>> values, Set<String> doneStrings) {
+
+  private void addConfig(List<ModConfigSpec.ConfigValue<?>> values, Set<String> doneStrings) {
     for (ModConfigSpec.ConfigValue<?> value : values) {
       String category = value.getPath().getFirst();
       if (!doneStrings.contains(category)) {
@@ -1045,7 +1013,7 @@ public final class RootsLangProvider extends LanguageProvider {
     }
   }
 
-  private void addTooltip (Holder<Item> item, String tooltip) {
+  private void addTooltip(Holder<Item> item, String tooltip) {
     ResourceLocation itemId = item.getKey().location();
     add(itemId.getNamespace() + ".tooltip.item." + itemId.getPath(), tooltip);
   }
@@ -1064,19 +1032,31 @@ public final class RootsLangProvider extends LanguageProvider {
     add(prefix + ".item", item);
   }
 
-  private void addTrim (String string, String string2) {
+  public void addCondition(ResourceKey<ICondition> condition, String description) {
+    String path = condition.location().getPath();
+    String namespace = condition.location().getNamespace();
+    add("condition." + namespace + "." + path, description);
+  }
+
+  public void addCondition(ResourceKey<ICondition> condition, String prefix, String description) {
+    String path = condition.location().getPath();
+    String namespace = condition.location().getNamespace();
+    add("condition." + namespace + "." + path + "." + prefix, description);
+  }
+
+  private void addTrim(String string, String string2) {
     this.add(string, string2.trim());
   }
 
-  public void describeSpell (Spell spell) {
+  public void describeSpell(Spell spell) {
     spell.handleTooltip(this::addTrim);
   }
 
-  public void describeModifier (SpellModifier modifier) {
+  public void describeModifier(SpellModifier modifier) {
     modifier.handleTooltip(this::addTrim);
   }
 
-  public void describeRitual (Ritual ritual) {
+  public void describeRitual(Ritual ritual) {
     ritual.handleTooltip(this::addTrim);
   }
 

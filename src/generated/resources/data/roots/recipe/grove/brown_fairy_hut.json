@@ -1,6 +1,10 @@
 {
   "type": "roots:grove",
   "data": {
+    "conditions": [
+      "roots:active_unity_grove_stone",
+      "roots:unity_reputation_rank_first"
+    ],
     "ingredients": [
       {
         "item": "minecraft:brown_mushroom"
@@ -31,26 +35,6 @@
       },
       {
         "tag": "c:fertilizers"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "grove": "roots:unity",
-          "name": "unity",
-          "tag": "roots:grove_stones/unity"
-        },
-        "require_active": true
-      }
-    ],
-    "player_conditions": [
-      {
-        "type": "roots:grove_rank_condition",
-        "grove": "roots:unity",
-        "minimum_rank": {
-          "rank": 1
-        }
       }
     ],
     "priority": 0,

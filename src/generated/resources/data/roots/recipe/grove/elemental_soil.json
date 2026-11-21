@@ -1,6 +1,10 @@
 {
   "type": "roots:grove",
   "data": {
+    "conditions": [
+      "roots:elemental_reputation_rank_first",
+      "roots:active_grove_stone"
+    ],
     "ingredients": [
       {
         "tag": "c:gravels"
@@ -19,26 +23,6 @@
       },
       {
         "tag": "c:fertilizers"
-      }
-    ],
-    "level_conditions": [
-      {
-        "type": "roots:grove_stone_condition",
-        "grove_type": {
-          "grove": "roots:any",
-          "name": "any",
-          "tag": "roots:grove_stones"
-        },
-        "require_active": true
-      }
-    ],
-    "player_conditions": [
-      {
-        "type": "roots:grove_rank_condition",
-        "grove": "roots:elemental",
-        "minimum_rank": {
-          "rank": 1
-        }
       }
     ],
     "priority": 0,

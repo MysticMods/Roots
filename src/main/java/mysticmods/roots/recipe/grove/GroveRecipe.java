@@ -3,6 +3,7 @@ package mysticmods.roots.recipe.grove;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
@@ -12,6 +13,7 @@ import mysticmods.roots.condition.GroveStoneCondition;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.PedestalInventoryWrapper;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -69,8 +71,8 @@ public class GroveRecipe extends RootsTileRecipe<PedestalInventoryWrapper, Grove
     public GroveRecipe build(BaseRecipeData.Builder data) {
       var built = data.build();
       boolean found = false;
-      for (ILevelCondition condition : built.levelConditions) {
-        if (condition instanceof GroveStoneCondition) {
+      for (Holder<ICondition> condition : built.conditions) {
+        if (condition.value() instanceof GroveStoneCondition) {
           found = true;
           break;
         }
