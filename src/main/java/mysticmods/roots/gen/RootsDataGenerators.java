@@ -350,7 +350,7 @@ public final class RootsDataGenerators {
     generator.addProvider(event.includeClient(), new RootsItemModelProvider(output, helper));
     generator.addProvider(event.includeServer(), new RootsGlobalLootModifierProvider(output, provider));
     generator.addProvider(event.includeServer(), new StructureNbtUpdater("structures", RootsAPI.MODID, helper, output));
-    generator.addProvider(event.includeServer(), new RootsRecipeProvider(output, provider));
+    generator.addProvider(event.includeServer(), new RootsRecipeProvider(output, dataPackProvider));
     generator.addProvider(event.includeClient(), new RootsParticleProvider(output, helper));
     generator.addProvider(event.includeServer(), new RootsMobEffectsTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsDamageTagsProvider(output, dataPackProvider, helper));

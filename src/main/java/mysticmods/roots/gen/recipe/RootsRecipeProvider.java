@@ -89,7 +89,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .pattern("XX")
         .define('X', ModBlocks.RUNESTONE_TILE.get())
         .unlockedBy("has_runestone_tile", has(ModBlocks.RUNESTONE_TILE.get()))
-        .save(c, RootsAPI.rl("chiseled_runestone_from_runestone_tile"));
+        .save(c, RootsAPI.rl("chiseled_runestone_from_tile"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE.get(), 4)
         .pattern("XX")
