@@ -1,5 +1,5 @@
 {
-  "parent": "roots:block/complex/tall_runestone_pillar_bottom",
+  "parent": "roots:block/complex/short_runestone_pillar_bottom",
   "textures": {
     "particle": "roots:block/runestone_pillar",
     "pillar": "roots:block/runestone_pillar"

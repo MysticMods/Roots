@@ -476,9 +476,9 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
         .texture("plant", modLoc("block/wildwood_sapling")).renderType("cutout"));
 
     runestonePillar(ModBlocks.TALL_RUNESTONE_PILLAR, true, RootsAPI.rl("block/runestone_pillar"));
-    runestonePillar(ModBlocks.SHORT_RUNESTONE_PILLAR, true, RootsAPI.rl("block/runestone_pillar"));
+    runestonePillar(ModBlocks.SHORT_RUNESTONE_PILLAR, false, RootsAPI.rl("block/runestone_pillar"));
     runestonePillar(ModBlocks.TALL_RUNED_OBSIDIAN_PILLAR, true, RootsAPI.rl("block/runed_obsidian_pillar"));
-    runestonePillar(ModBlocks.SHORT_RUNED_OBSIDIAN_PILLAR, true, RootsAPI.rl("block/runed_obsidian_pillar"));
+    runestonePillar(ModBlocks.SHORT_RUNED_OBSIDIAN_PILLAR, false, RootsAPI.rl("block/runed_obsidian_pillar"));
 
     groveStone(ModBlocks.ANIMATE_GROVE_STONE);
     groveStone(ModBlocks.WILD_GROVE_STONE);
