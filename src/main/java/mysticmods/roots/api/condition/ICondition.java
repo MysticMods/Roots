@@ -4,15 +4,20 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 
 public interface ICondition {
@@ -26,9 +31,15 @@ public interface ICondition {
 
   MapCodec<? extends ICondition> codec();
 
+  Set<BlockPos> test(Level level, @Nullable Player player, @Nullable BoundingBox bounds, @Nullable BlockPos pos, @Nullable Set<BlockPos> exclusions);
+
+  boolean place (Level level, BlockPos position);
+
   @Nullable
-  default ConditionIngredient getIngredient() {
-    return null;
+  IConditionIngredient getIngredient(Holder<ICondition> condition);
+
+  static IConditionIngredient getConditionIngredient (Holder<ICondition> condition) {
+    return condition.value().getIngredient(condition);
   }
 
   static String getDescriptionId(Holder<ICondition> condition) {

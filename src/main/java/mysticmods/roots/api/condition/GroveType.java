@@ -12,24 +12,28 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-public record GroveType(String name, TagKey<Grove> grove, TagKey<Block> tag) {
-  public static final GroveType ANY = new GroveType("any", RootsTags.Groves.ANY, RootsTags.Blocks.GROVE_STONES);
-  public static final GroveType ANIMATE = new GroveType("animate", RootsTags.Groves.ANIMATE, RootsTags.Blocks.GROVE_STONE_ANIMATE);
-  public static final GroveType ELEMENTAL = new GroveType("elemental", RootsTags.Groves.ELEMENTAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
-  public static final GroveType UNITY = new GroveType("unity", RootsTags.Groves.UNITY, RootsTags.Blocks.GROVE_STONE_UNITY);
-  public static final GroveType FUNGAL = new GroveType("fungal", RootsTags.Groves.FUNGAL, RootsTags.Blocks.GROVE_STONE_FUNGAL);
-  public static final GroveType CULTIVATION = new GroveType("cultivation", RootsTags.Groves.CULTIVATION, RootsTags.Blocks.GROVE_STONE_CULTIVATION);
-  public static final GroveType TWILIGHT = new GroveType("twilight", RootsTags.Groves.TWILIGHT, RootsTags.Blocks.GROVE_STONE_TWILIGHT);
-  public static final GroveType WILD = new GroveType("wild", RootsTags.Groves.WILD, RootsTags.Blocks.GROVE_STONE_WILD);
-  public static final GroveType HOLLOW = new GroveType("hollow", RootsTags.Groves.HOLLOW, RootsTags.Blocks.GROVE_STONE_ELEMENTAL);
+public record GroveType(String name, TagKey<Grove> grove, TagKey<Block> tag, TagKey<Item> itemTag) {
+  public static final GroveType ANY = new GroveType("any", RootsTags.Groves.ANY, RootsTags.Blocks.GROVE_STONES, RootsTags.Items.GROVE_STONES);
+  public static final GroveType ANIMATE = new GroveType("animate", RootsTags.Groves.ANIMATE, RootsTags.Blocks.GROVE_STONE_ANIMATE, RootsTags.Items.GROVE_STONE_ANIMATE);
+  public static final GroveType ELEMENTAL = new GroveType("elemental", RootsTags.Groves.ELEMENTAL, RootsTags.Blocks.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_ELEMENTAL);
+  public static final GroveType UNITY = new GroveType("unity", RootsTags.Groves.UNITY, RootsTags.Blocks.GROVE_STONE_UNITY, RootsTags.Items.GROVE_STONE_UNITY);
+  public static final GroveType FUNGAL = new GroveType("fungal", RootsTags.Groves.FUNGAL, RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_FUNGAL);
+  public static final GroveType CULTIVATION = new GroveType("cultivation", RootsTags.Groves.CULTIVATION, RootsTags.Blocks.GROVE_STONE_CULTIVATION, RootsTags.Items.GROVE_STONE_CULTIVATION);
+  public static final GroveType TWILIGHT = new GroveType("twilight", RootsTags.Groves.TWILIGHT, RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_TWILIGHT);
+  public static final GroveType WILD = new GroveType("wild", RootsTags.Groves.WILD, RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Items.GROVE_STONE_WILD);
+  public static final GroveType HOLLOW = new GroveType("hollow", RootsTags.Groves.HOLLOW, RootsTags.Blocks.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_ELEMENTAL);
 
   public static final MapCodec<GroveType> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.STRING.fieldOf("name")
           .forGetter(GroveType::name),
       TagKey.codec(RootsRegistries.Keys.GROVES).fieldOf("grove").forGetter(GroveType::grove),
-      TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(GroveType::tag)
+      TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(GroveType::tag),
+      TagKey.codec(Registries.ITEM).fieldOf("itemTag").forGetter(GroveType::itemTag)
   ).apply(instance, GroveType::new));
   public static final Codec<GroveType> CODEC = MAP_CODEC.codec();
-  public static final StreamCodec<RegistryFriendlyByteBuf, GroveType> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, GroveType::name, ExtraStreamCodecs.GROVE_TAG_STREAM_CODEC, GroveType::grove, ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC, GroveType::tag, GroveType::new);
+  public static final StreamCodec<RegistryFriendlyByteBuf, GroveType> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, GroveType::name, ExtraStreamCodecs.GROVE_TAG_STREAM_CODEC, GroveType::grove, ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC, GroveType::tag,
+      ExtraStreamCodecs.ITEM_TAG_STREAM_CODEC, GroveType::itemTag,
+      GroveType::new);
 }

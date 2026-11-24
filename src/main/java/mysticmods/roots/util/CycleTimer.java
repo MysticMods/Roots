@@ -8,14 +8,14 @@ import java.util.List;
 // Borrowed in its entirety from
 // mezz.jei.library.gui.ingredients.CycleTimer, MIT licensed
 public class CycleTimer {
-  private static final CycleTimer ZERO_OFFSET = new CycleTimer(0);
+  public static final CycleTimer DEFAULT = new CycleTimer(0);
   private static final int MAX_INDEX = 100_000;
   /* the amount of time in ms to display one thing before cycling to the next one */
   private static final int CYCLE_TIME_MS = 1_000;
 
   public static CycleTimer create(int offset) {
     if (offset == 0) {
-      return ZERO_OFFSET;
+      return DEFAULT;
     }
     return new CycleTimer(offset);
   }

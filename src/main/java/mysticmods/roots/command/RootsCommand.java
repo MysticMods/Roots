@@ -11,7 +11,7 @@ import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.Unlock;
-import mysticmods.roots.api.condition.ConditionIngredient;
+import mysticmods.roots.api.condition.IConditionIngredient;
 import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -41,7 +41,6 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.ResourceArgument;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -333,7 +332,7 @@ public class RootsCommand {
         for (int i = 0; i < conditions.size(); i++) {
           Holder<ICondition> condition = conditions.get(i);
           if (condition.value() instanceof ILevelCondition levelCondition) {
-            ConditionIngredient ingredient = levelCondition.getIngredient();
+            IConditionIngredient ingredient = levelCondition.getIngredient(condition);
             // TODO:
 /*            if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
               c.getSource()
