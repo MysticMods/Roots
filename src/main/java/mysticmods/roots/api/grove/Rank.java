@@ -12,22 +12,24 @@ import net.minecraft.util.StringRepresentable;
 import java.util.Locale;
 
 public enum Rank implements StringRepresentable {
-  UNRANKED,
-  FIRST,
-  SECOND,
-  THIRD,
-  FOURTH;
+  UNRANKED("unranked"),
+  FIRST("first"),
+  SECOND("second"),
+  THIRD("third"),
+  FOURTH("fourth");
 
-  public static final MapCodec<Rank> MAP_CODEC = Codec.INT.fieldOf("rank").xmap(Rank::fromOrdinal, Rank::ordinal);
-  public static final Codec<Rank> CODEC = MAP_CODEC.codec();
+  public static final Codec<Rank> CODEC = StringRepresentable.fromEnum(Rank::values);
+  public static final MapCodec<Rank> MAP_CODEC = CODEC.fieldOf("rank");
   public static final StreamCodec<ByteBuf, Rank> STREAM_CODEC = ByteBufCodecs.VAR_INT.map(Rank::fromOrdinal, Rank::ordinal);
 
-  private final MutableComponent name;
+  private final String name;
+  private final MutableComponent componentName;
   private final MutableComponent shortName;
 
-  Rank() {
-    this.name = Component.translatable("roots.grove.ranks." + name().toLowerCase(Locale.ROOT));
-    this.shortName = Component.translatable("roots.grove.ranks." + name().toLowerCase(Locale.ROOT) + ".short");
+  Rank(String name) {
+    this.name = name;
+    this.componentName = Component.translatable("roots.grove.ranks." + name);
+    this.shortName = Component.translatable("roots.grove.ranks." + name + ".short");
   }
 
   public MutableComponent getShortName () {
@@ -35,7 +37,7 @@ public enum Rank implements StringRepresentable {
   }
 
   public MutableComponent getName() {
-    return this.name;
+    return this.componentName;
   }
 
   public static Rank fromOrdinal(int rank) {
@@ -95,14 +97,16 @@ public enum Rank implements StringRepresentable {
     }
   }
 
-  private String myName = null;
-
   @Override
   public String getSerializedName() {
-    if (myName == null) {
-      myName = name().toLowerCase(Locale.ROOT);
-    }
+    return name;
+  }
 
-    return myName;
+  public static Rank minimum () {
+    return UNRANKED;
+  }
+
+  public static Rank maximum () {
+    return FOURTH;
   }
 }

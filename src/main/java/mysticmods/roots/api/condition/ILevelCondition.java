@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.Set;
 
 public interface ILevelCondition extends ICondition {
+  boolean place (Level level, BlockPos position);
+
   Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);
 
   default Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {

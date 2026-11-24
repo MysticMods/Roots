@@ -33,8 +33,6 @@ public interface ICondition {
 
   Set<BlockPos> test(Level level, @Nullable Player player, @Nullable BoundingBox bounds, @Nullable BlockPos pos, @Nullable Set<BlockPos> exclusions);
 
-  boolean place (Level level, BlockPos position);
-
   @Nullable
   IConditionIngredient getIngredient(Holder<ICondition> condition);
 

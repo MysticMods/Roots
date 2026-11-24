@@ -6,12 +6,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.block.StateProperties;
 import mysticmods.roots.api.condition.*;
 import mysticmods.roots.api.grove.Rank;
+import mysticmods.roots.api.grove.RankRange;
 import mysticmods.roots.block.GroveStoneBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -29,19 +29,23 @@ import java.util.Optional;
 import java.util.Set;
 
 public record GroveStoneCondition(TagKey<Block> tag, GroveStoneState state, TagKey<Item>
-                                  itemTag, Optional<Rank> minimumRank)
+                                  itemTag, Optional<RankRange> rankRange)
     implements ILevelCondition {
   public static final MapCodec<GroveStoneCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK)
               .fieldOf("tag").forGetter(GroveStoneCondition::tag),
           GroveStoneState.CODEC.fieldOf("state").forGetter(GroveStoneCondition::state),
           TagKey.codec(Registries.ITEM).fieldOf("itemTag").forGetter(GroveStoneCondition::itemTag),
-      Rank.CODEC.optionalFieldOf("minimumRank").forGetter(GroveStoneCondition::minimumRank))
+      RankRange.CODEC.optionalFieldOf("rankRange").forGetter(GroveStoneCondition::rankRange))
       .apply(instance, GroveStoneCondition::new));
 
   private static final StateProperties.Part[] PARTS_TOP_DOWN = {StateProperties.Part.TOP, StateProperties.Part.MIDDLE, StateProperties.Part.BOTTOM};
 
   public GroveStoneCondition (GroveType grove, GroveStoneState state) {
     this(grove.tag(), state, grove.itemTag(), Optional.empty());
+  }
+
+  public GroveStoneCondition (GroveType grove, GroveStoneState state, Rank minimumRank) {
+    this(grove.tag(), state, grove.itemTag(), Optional.of(RankRange.minimum(minimumRank)));
   }
 
   @Override
@@ -60,11 +64,11 @@ public record GroveStoneCondition(TagKey<Block> tag, GroveStoneState state, TagK
     if (!base.hasProperty(GroveStoneBlock.PART)) {
       throw new IllegalStateException("The resolved block for the tag '" + tag.location() + "' (" + block.builtInRegistryHolder().getKey().location() + ") doesn't have the PART property!");
     }
-    if (minimumRank.isPresent() && !base.hasProperty(GroveStoneBlock.RANK)) {
+    if (rankRange.isPresent() && !base.hasProperty(GroveStoneBlock.RANK)) {
       throw new IllegalStateException("The resolved block for the tag '" + tag.location() + "' (" + block.builtInRegistryHolder().getKey().location() + ") doesn't have the RANK property while the condition specifies a minumum rank!");
-    } else if (minimumRank.isPresent()) {
+    } else if (rankRange.isPresent()) {
       final BlockState original = base;
-      base = minimumRank.map(o -> original.setValue(GroveStoneBlock.RANK, o)).orElse(base);
+      base = rankRange.map(o -> original.setValue(GroveStoneBlock.RANK, o.minimum())).orElse(base);
     }
     level.setBlock(position, base.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM), 3);
     level.setBlock(position.above(), base.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE), 3);
@@ -73,8 +77,7 @@ public record GroveStoneCondition(TagKey<Block> tag, GroveStoneState state, TagK
   }
 
   @Override
-  public @Nullable IConditionIngredient.Single getIngredient(Holder<ICondition> condition) {
-    Component.translatable("").withStyle()
+  public @Nullable IConditionIngredient getIngredient(Holder<ICondition> condition) {
     return null;
   }
 
@@ -94,7 +97,7 @@ public record GroveStoneCondition(TagKey<Block> tag, GroveStoneState state, TagK
     BlockPos cursor = pos.immutable();
     for (StateProperties.Part part : PARTS_TOP_DOWN) {
       BlockState blockState = level.getBlockState(cursor);
-      if (minimumRank().map(o -> blockState.getValue(GroveStoneBlock.RANK).compareTo(o) < 0).orElse(false)) {
+      if (rankRange().map(o -> o.valid(blockState.getValue(GroveStoneBlock.RANK))).orElse(false)) {
         return Collections.emptySet();
       }
       if (!blockState.is(tag) || getPart(blockState) != part) {
