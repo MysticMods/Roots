@@ -11,7 +11,6 @@ import mysticmods.roots.api.attachment.CooldownStorage;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.Unlock;
-import mysticmods.roots.api.condition.IConditionIngredient;
 import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -41,6 +40,7 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.ResourceArgument;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -157,7 +157,9 @@ public class RootsCommand {
         GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
         Holder<Spell> spell = ResourceArgument.getResource(c, "spell", RootsRegistries.Keys.SPELLS);
         if (spell.is(RootsTags.Spells.INVALID) || spell.is(RootsTags.Spells.EMPTY)) {
-          c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spell.getKey().location().toString()));
+          c.getSource()
+              .sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spell.getKey().location()
+                  .toString()));
           return 0;
         }
         if (grants.hasSpell(spell.value())) {
@@ -167,7 +169,8 @@ public class RootsCommand {
         }
         grants.unlock(player, Unlock.spell(spell));
         c.getSource()
-            .sendSuccess(() -> Component.translatable("roots.commands.library.add.success", spell.value().getStyledName()), false);
+            .sendSuccess(() -> Component.translatable("roots.commands.library.add.success", spell.value()
+                .getStyledName()), false);
         return 1;
 
       }))).then(Commands.literal("remove").executes(c -> {
@@ -182,17 +185,21 @@ public class RootsCommand {
         GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE.get());
         Holder<Spell> spell = ResourceArgument.getResource(c, "spell", RootsRegistries.Keys.SPELLS);
         if (spell.is(RootsTags.Spells.INVALID) || spell.is(RootsTags.Spells.EMPTY)) {
-          c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spell.getKey().location().toString()));
+          c.getSource()
+              .sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spell.getKey().location()
+                  .toString()));
           return 0;
         }
         if (!grants.hasSpell(spell.value())) {
           c.getSource()
-              .sendFailure(Component.translatable("roots.commands.library.remove.failure", spell.value().getStyledName()));
+              .sendFailure(Component.translatable("roots.commands.library.remove.failure", spell.value()
+                  .getStyledName()));
           return 0;
         }
         grants.removeSpell(player, spell.value());
         c.getSource()
-            .sendSuccess(() -> Component.translatable("roots.commands.library.remove.success", spell.value().getStyledName()), false);
+            .sendSuccess(() -> Component.translatable("roots.commands.library.remove.success", spell.value()
+                .getStyledName()), false);
         return 1;
       }))).then(Commands.literal("clear").executes(c -> {
         if (!c.getSource().isPlayer()) {
@@ -234,7 +241,9 @@ public class RootsCommand {
       }).then(suggestSpells(context).executes(c -> {
         Holder<Spell> spell = ResourceArgument.getResource(c, "spell", RootsRegistries.Keys.SPELLS);
         if (spell.is(RootsTags.Spells.INVALID) || spell.is(RootsTags.Spells.EMPTY)) {
-          c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spell.getKey().location().toString()));
+          c.getSource()
+              .sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spell.getKey().location()
+                  .toString()));
           return 1;
         }
         ServerPlayer player = c.getSource().getPlayerOrException();
@@ -332,13 +341,11 @@ public class RootsCommand {
         for (int i = 0; i < conditions.size(); i++) {
           Holder<ICondition> condition = conditions.get(i);
           if (condition.value() instanceof ILevelCondition levelCondition) {
-            IConditionIngredient ingredient = levelCondition.getIngredient(condition);
-            // TODO:
-/*            if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
+            if (levelCondition.place(level, pos.relative(Direction.NORTH, i + 1))) {
               c.getSource()
-                  .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", condition.getNameComponent()));
+                  .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", ICondition.getName(condition)));
               return 1;
-            }*/
+            }
           }
         }
         return 1;
@@ -404,17 +411,18 @@ public class RootsCommand {
         // Give the player a flint and steel
         ItemHandlerHelper.insertItemStacked(playerInv, new ItemStack(Items.FLINT_AND_STEEL), false);
 
-        // TODO: New conditions
         // Iterate over world conditions and create them using /place
-/*        List<ILevelCondition> conditions = recipe.value().getConditions();
+        List<Holder<ICondition>> conditions = recipe.value().getConditions();
         for (int i = 0; i < conditions.size(); i++) {
-          ILevelCondition condition = conditions.get(i);
-          if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
-            c.getSource()
-                .sendFailure(Component.translatable("roots.commands.ritual.failed_condition", condition.getNameComponent()));
-            return 1;
+          Holder<ICondition> condition = conditions.get(i);
+          if (condition.value() instanceof ILevelCondition levelCondition) {
+            if (levelCondition.place(level, pos.relative(Direction.NORTH, i + 1))) {
+              c.getSource()
+                  .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", ICondition.getName(condition)));
+              return 1;
+            }
           }
-        }*/
+        }
 
         return 1;
       })));
@@ -440,7 +448,8 @@ public class RootsCommand {
         for (BlockPos pos : positions) {
           BlockState stateAt = level.getBlockState(pos);
           if (stateAt.is(RootsTags.Blocks.GROVE_STONES) && stateAt.hasProperty(GroveStoneBlock.OLD_RANK)) {
-            level.setBlock(pos, stateAt.setValue(GroveStoneBlock.OLD_RANK, rank).setValue(GroveStoneBlock.ACTIVE, true), 3);
+            level.setBlock(pos, stateAt.setValue(GroveStoneBlock.OLD_RANK, rank)
+                .setValue(GroveStoneBlock.ACTIVE, true), 3);
           }
         }
         return 1;
@@ -466,8 +475,9 @@ public class RootsCommand {
       builder.then(Commands.literal("reputation_alerts").executes(c -> {
         if (c.getSource().isPlayer()) {
           PacketDistributor.sendToPlayer(c.getSource().getPlayer(), ClientboundReputationAlertPacket.getInstance());
-          c.getSource().sendSuccess(() -> Component.translatable("roots.commands.alerts.synced_reputation", c.getSource()
-              .getDisplayName()), false);
+          c.getSource()
+              .sendSuccess(() -> Component.translatable("roots.commands.alerts.synced_reputation", c.getSource()
+                  .getDisplayName()), false);
           return 1;
         } else {
           c.getSource().sendFailure(Component.translatable("roots.commands.alerts.no_player"));
@@ -538,7 +548,8 @@ public class RootsCommand {
         PacketDistributor.sendToPlayer(player, new ClientboundReputationMessagePacket(grove.value(), amount, storage.getProgress(grove.value())));
         c.getSource()
             .sendSuccess(() -> Component.translatable("roots.commands.reputation.add", player.getDisplayName(), grove.value()
-                .getStyledName(), amount, storage.getRank(grove.value()).getName(), storage.getReputation(grove.value())), false);
+                .getStyledName(), amount, storage.getRank(grove.value())
+                .getName(), storage.getReputation(grove.value())), false);
         return 1;
       }))).then(Commands.literal("remove").executes(c -> {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove.usage"), false);
@@ -558,7 +569,8 @@ public class RootsCommand {
         PacketDistributor.sendToPlayer(player, new ClientboundReputationMessagePacket(grove.value(), amount, storage.getProgress(grove.value())));
         c.getSource()
             .sendSuccess(() -> Component.translatable("roots.commands.reputation.remove", player.getDisplayName(), grove.value()
-                .getStyledName(), amount, storage.getRank(grove.value()).getName(), storage.getReputation(grove.value())), false);
+                .getStyledName(), amount, storage.getRank(grove.value())
+                .getName(), storage.getReputation(grove.value())), false);
         return 1;
       }))).then(Commands.literal("set").executes(c -> {
         c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set.usage"), false);
