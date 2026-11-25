@@ -4,12 +4,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.block.StateProperties;
-import mysticmods.roots.api.condition.GroveType;
-import mysticmods.roots.api.condition.ICondition;
-import mysticmods.roots.api.condition.IConditionIngredient;
-import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.*;
 import mysticmods.roots.api.grove.Rank;
 import mysticmods.roots.api.grove.RankRange;
+import mysticmods.roots.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,16 +17,14 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public record GroveStoneCondition(TagKey<Block> tag, GroveStoneState state, TagKey<Item>
 itemTag, Optional<RankRange> rankRange)
@@ -86,8 +82,25 @@ itemTag, Optional<RankRange> rankRange)
   }
 
   @Override
-  public @Nullable IConditionIngredient getIngredient(Holder<ICondition> condition) {
-    return null;
+  public List<ConditionIngredient> getIngredient(Holder<ICondition> condition) {
+    List<ConditionIngredient> ingredientList = new ArrayList<>();
+    if (state != GroveStoneState.ACTIVE) {
+      ingredientList.add(new ConditionIngredient(condition, new ItemStack(ModItems.INACTIVE_GROVE_STONE)));
+    }
+    if (rankRange().isPresent()) {
+      List<Rank> range = rankRange.get().range();
+      for (Rank rank : range) {
+        if (rank == Rank.UNRANKED && state == GroveStoneState.ACTIVE) {
+          continue;
+        }
+        ingredientList.addAll(ConditionIngredient.fromTag(itemTag, rank.getAsNumber(), condition));
+      }
+    } else {
+      if (state == GroveStoneState.ACTIVE) {
+        ingredientList.addAll(ConditionIngredient.fromTag(itemTag, condition));
+      }
+    }
+    return ingredientList;
   }
 
   @Nullable

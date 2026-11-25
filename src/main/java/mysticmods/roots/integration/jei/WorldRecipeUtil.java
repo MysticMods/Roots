@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories;
+package mysticmods.roots.integration.jei;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -7,7 +7,6 @@ import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.api.test.world.BlockMatchWorldTest;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
-import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.ingredient.block.BlockStateType;
 import mysticmods.roots.integration.jei.ingredient.block.SimpleBlockType;
 import mysticmods.roots.recipe.knife.OutputStateMapper;

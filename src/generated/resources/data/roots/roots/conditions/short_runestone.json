@@ -1,4 +1,5 @@
 {
   "type": "roots:pillar_condition",
+  "itemTag": "roots:pillars/runestone/short",
   "tag": "roots:pillars/runestone/short"
 }

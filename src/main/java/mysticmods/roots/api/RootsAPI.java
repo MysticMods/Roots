@@ -26,6 +26,7 @@ import java.util.Set;
 public abstract class RootsAPI {
   public static final ResourceLocation MINI_FONT = RootsAPI.rl("mini");
   public static final ResourceLocation MINI_OUTLINE_FONT = RootsAPI.rl("mini_outline");
+  public static final ResourceLocation RANK_FONT = RootsAPI.rl("rank");
 
   public static final int MAX_TRANSMUTATION_INGREDIENTS = 25;
 

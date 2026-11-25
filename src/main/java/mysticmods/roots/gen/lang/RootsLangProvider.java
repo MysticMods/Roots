@@ -638,7 +638,7 @@ public final class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.COPPER_LEGGINGS);
     addItem(ModItems.COPPER_BOOTS);
     addItem(ModItems.ALERTNESS_CHARM);
-    addItem(ModItems.HOMESICKNSES_CHARM);
+    addItem(ModItems.HOMESICKNESS_CHARM);
     addItem(ModItems.BEETLE_SPAWN_EGG);
     addItem(ModItems.JERBOA_SPAWN_EGG);
     addItem(ModItems.DEER_SPAWN_EGG);
@@ -651,6 +651,10 @@ public final class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.MELODY_SPROUT_SPAWN_EGG);
     addItem(ModItems.OWL_SPAWN_EGG);
     addItem(ModItems.DUCK_SPAWN_EGG);
+
+    // These shouldn't actually be used
+    addItem(ModItems.OVERGROWTH_CONDITION);
+    addItem(ModItems.INACTIVE_GROVE_STONE);
 
     addEntity(ModEntities.BEETLE);
     addEntity(ModEntities.DEER);
@@ -978,7 +982,7 @@ public final class RootsLangProvider extends LanguageProvider {
 
     addTooltip(ModItems.FIRE_STARTER, "Hold Right-Click to light the targeted block on fire. Consumed upon use.");
     addTooltip(ModItems.GROVE_SPORES, "Right-Click adjacent creeping grove moss or on top of a block that is adjacent to water to grow creeping grove moss. Consumed upon use.");
-    addTooltip(ModItems.HOMESICKNSES_CHARM, "Right-Click to be teleported to your spawn location. Consumed upon use and triggers the Homesickness effect, preventing you from using another until that effect ends.");
+    addTooltip(ModItems.HOMESICKNESS_CHARM, "Right-Click to be teleported to your spawn location. Consumed upon use and triggers the Homesickness effect, preventing you from using another until that effect ends.");
     addTooltip(ModItems.WOODEN_SHEARS, "Less effective than normal shears when shearing sheep, limiting the amount of wool produced.");
     addTooltip(ModItems.ALERTNESS_CHARM, "When equipped as a curio or held in either hand, alerts you whenever a hostile monster targets you.");
     addTooltip(ModItems.DEWGONIA, "Must be planted on farmland that has water above it, unless planting on elemental soil.");

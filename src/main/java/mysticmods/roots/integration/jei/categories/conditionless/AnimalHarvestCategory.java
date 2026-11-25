@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories;
+package mysticmods.roots.integration.jei.categories.conditionless;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
@@ -9,6 +9,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.RootsRecipeBaseCategory;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import mysticmods.roots.integration.jei.widget.InfoWidget;
 import mysticmods.roots.recipe.AnimalHarvestRecipe;
@@ -20,6 +21,7 @@ import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
 import java.util.List;
 
+// TODO: Conditions
 public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvestRecipe> {
   public AnimalHarvestCategory(IGuiHelper helper) {
     super(RootsJEIPlugin.ANIMAL_HARVEST_RECIPE_TYPE, helper, 165, 83, RootsAPI.rl("textures/gui/jei/animal_harvest.png"), () -> new ItemStack(ModItems.RITUAL_ANIMAL_HARVEST.get()), Component.translatable("roots.jei.animal_harvest"));

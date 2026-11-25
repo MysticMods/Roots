@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories;
+package mysticmods.roots.integration.jei.categories.defaulted;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -16,31 +16,6 @@ public abstract class PyreCategory extends RootsDefaultCategory<PyreRecipe> {
   public PyreCategory(RecipeType<PyreRecipe> type, Component title, IGuiHelper helper) {
     super(type, helper, () -> new ItemStack(ModBlocks.PYRE.value()), title);
   }
-
-/*  @Override
-  public void createRecipeExtras(IRecipeExtrasBuilder builder, PyreRecipe recipe, IFocusGroup focuses) {
-    super.createRecipeExtras(builder, recipe, focuses);
-
-    int column = 0;
-    for (ILevelCondition condition : recipe.getLevelConditions()) {
-      CanonicalRepresentation rep = condition.getRepresentation();
-      int count = rep.getStates().size();
-      int offset = 81;
-      if (count == 4) {
-        offset = 86;
-      }
-      if (count == 3) {
-        offset = 89;
-      }
-      builder.addWidget(new LevelConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
-      column++;
-    }
-    int row = 0;
-    for (IPlayerCondition condition : recipe.getPlayerConditions()) {
-      builder.addWidget(PlayerConditionWidget.create(getWidth(), 78 + row * 18, condition));
-      row++;
-    }
-  }*/
 
   @Override
   protected void addDevice(IRecipeLayoutBuilder builder) {

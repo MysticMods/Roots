@@ -6,7 +6,6 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.item.TokenItem;
-import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -144,6 +143,9 @@ public final class RootsItemModelProvider extends ItemModelProvider {
         .getPath(), modLoc("block/complex/grove_amplifier"));*/
     // Wild roots are existing
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
+
+    ResourceLocation inactive = ModItems.INACTIVE_GROVE_STONE.getId();
+    withExistingParent(inactive.getPath(), inactive.withPrefix("block/").withSuffix("_inventory"));
 
     inventoryModel(ModBlocks.BAFFLECAP_BLOCK);
     inventoryModel(ModBlocks.ANIMATE_GROVE_STONE);
@@ -318,7 +320,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     handheld(ModItems.WOODEN_SHEARS, "tools");
 
     subfolder(ModItems.ALERTNESS_CHARM, "charms");
-    subfolder(ModItems.HOMESICKNSES_CHARM, "charms");
+    subfolder(ModItems.HOMESICKNESS_CHARM, "charms");
 
     handheldItem(ModItems.STONE_KNIFE.get());
     handheldItem(ModItems.IRON_KNIFE.get());
@@ -408,6 +410,8 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     for (Holder<Block> headBlock : List.of(ModBlocks.HUSK_HEAD, ModBlocks.DROWNED_HEAD, ModBlocks.ZOMBIE_VILLAGER_HEAD, ModBlocks.ZOMBIFIED_PIGLIN_HEAD, ModBlocks.BOGGED_SKULL, ModBlocks.STRAY_SKULL, ModBlocks.ENDERMAN_HEAD, ModBlocks.WITCH_HEAD, ModBlocks.PILLAGER_HEAD, ModBlocks.ILLUSIONER_HEAD, ModBlocks.PIGLIN_BRUTE_HEAD, ModBlocks.VILLAGER_HEAD, ModBlocks.WANDERING_TRADER_HEAD, ModBlocks.IRON_GOLEM_HEAD)) {
       withExistingParent(headBlock.getKey().location().toString(), modLoc("item/template_skull"));
     }
+
+    getBuilder(ModItems.OVERGROWTH_CONDITION.getId().toString()).parent(getExistingFile(modLoc("block/overgrowth_condition")));
   }
 
   @SuppressWarnings("UnusedReturnValue")

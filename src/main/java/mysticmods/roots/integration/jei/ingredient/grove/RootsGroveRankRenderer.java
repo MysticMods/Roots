@@ -32,7 +32,7 @@ public class RootsGroveRankRenderer implements IIngredientRenderer<GroveRankRepu
       guiGraphics.renderFakeItem(ingredient.grove().getIcon(), posX, posY);
       guiGraphics.pose().pushPose();
       guiGraphics.pose().translate(0.0F, 0.0F, 200.0F);
-      Component text = ingredient.minimumRank().getShortName();
+      Component text = ingredient.minimumRank().getAsNumber();
       guiGraphics.drawString(font, text, posX + 19 - 2 - font.width(text), posY + 6 + 3, 16777215, true);
       guiGraphics.pose().popPose();
       RenderSystem.disableBlend();

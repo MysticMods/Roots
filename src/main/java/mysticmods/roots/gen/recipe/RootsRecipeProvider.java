@@ -28,7 +28,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -1707,7 +1706,7 @@ public final class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_nugget", has(Tags.Items.NUGGETS))
         .save(c);
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.HOMESICKNSES_CHARM.get(), 1)
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.HOMESICKNESS_CHARM.get(), 1)
         .pattern(" B ")
         .pattern("BEB")
         .pattern(" B ")

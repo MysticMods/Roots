@@ -566,6 +566,7 @@ public final class RootsBlockStateProvider extends BlockStateProvider {
             active = modLoc("block/ob_stone_active");
             models().withExistingParent("wild_grove_stone_inventory", modLoc("block/complex/grove_stone_full"))
                 .texture("monolith", active).texture("particle", active);
+            models().withExistingParent("inactive_grove_stone_inventory", modLoc("block/complex/grove_stone_full"));
           } else {
             active = modLoc("block/ob_stone_active_" + groveType);
             models().withExistingParent(groveType + "_grove_stone_inventory", modLoc("block/complex/grove_stone_full"))

@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories;
+package mysticmods.roots.integration.jei.categories.conditionless;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
@@ -9,6 +9,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.RootsRecipeBaseCategory;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import mysticmods.roots.recipe.fake.SproutGiftRecipe;
 import net.minecraft.network.chat.Component;

@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories;
+package mysticmods.roots.integration.jei.categories.conditionless;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

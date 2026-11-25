@@ -1,0 +1,13 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "roots:font/rank.png",
+      "height": 7,
+      "ascent": 7,
+      "chars": [
+        "01234"
+      ]
+    }
+  ]
+}

@@ -82,6 +82,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
@@ -109,9 +110,11 @@ public class ClientSetup {
   public static final ResourceLocation STRING_COLOR = RootsAPI.rl("string_color");
   public static final ResourceLocation UNDYED = RootsAPI.rl("undyed");
   public static final BlockColor GRASS =
-      (p_276237_, p_276238_, p_276239_, p_276240_) -> p_276238_ != null && p_276239_ != null
-          ? BiomeColors.getAverageGrassColor(p_276238_, p_276239_)
+      (state, level, pos, index) -> level != null && pos != null
+          ? BiomeColors.getAverageGrassColor(level, pos)
           : GrassColor.getDefaultColor();
+  public static final int DEFAULT_WATER_COLOR = 4159204;
+  public static final BlockColor WATER = (state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageWaterColor(level, pos) : DEFAULT_WATER_COLOR;
   public static final ResourceLocation WARNING_OVERLAY = RootsAPI.rl("warning");
   public static final ResourceLocation HERB_ALERT_OVERLAY = RootsAPI.rl("herb_alert");
   public static final ResourceLocation REPUTATION_ALERT_OVERLAY = RootsAPI.rl("reputation_alert");
@@ -255,10 +258,19 @@ public class ClientSetup {
       }
       return -1;
     }, ModItems.HERB_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
-    event.register((p_92687_, p_92688_) -> {
-      BlockState blockstate = ((BlockItem) p_92687_.getItem()).getBlock().defaultBlockState();
-      return GRASS.getColor(blockstate, null, null, p_92688_);
+    event.register((stack, index) -> {
+      BlockState blockstate = ((BlockItem) stack.getItem()).getBlock().defaultBlockState();
+      return GRASS.getColor(blockstate, null, null, index);
     }, ModItems.ENCHANTED_TURF.get());
+    event.register((stack, index) -> {
+      if (index == 1) {
+        return GRASS.getColor(Blocks.GRASS_BLOCK.defaultBlockState(), null, null, index);
+      } else if (index == 2) {
+        return WATER.getColor(Blocks.WATER.defaultBlockState(), null, null, index);
+      } else {
+        return -1;
+      }
+    }, ModItems.OVERGROWTH_CONDITION.get());
   }
 
   @SubscribeEvent

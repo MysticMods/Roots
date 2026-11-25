@@ -2,9 +2,7 @@ package mysticmods.roots.condition;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mysticmods.roots.api.condition.ICondition;
-import mysticmods.roots.api.condition.IConditionIngredient;
-import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -12,11 +10,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public record FluidSourcePropertyCondition(TagKey<Fluid> fluidTag) implements ILevelCondition {
@@ -54,7 +55,11 @@ public record FluidSourcePropertyCondition(TagKey<Fluid> fluidTag) implements IL
   }
 
   @Override
-  public @Nullable IConditionIngredient getIngredient(Holder<ICondition> condition) {
-    return null;
+  public List<ConditionIngredient> getIngredient(Holder<ICondition> condition) {
+    List<Item> fluidItems = new ArrayList<>();
+    for (Holder<Fluid> fluid : BuiltInRegistries.FLUID.getTagOrEmpty(fluidTag)) {
+      fluidItems.add(fluid.value().getBucket());
+    }
+    return ConditionIngredient.fromItemLikes(fluidItems, condition);
   }
 }

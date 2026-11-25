@@ -1,4 +1,5 @@
 {
   "type": "roots:pillar_condition",
+  "itemTag": "roots:pillars/tall",
   "tag": "roots:pillars/tall"
 }

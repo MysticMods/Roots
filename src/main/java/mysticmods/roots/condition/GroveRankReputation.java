@@ -12,7 +12,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Optional;
 
 public record GroveRankReputation(Grove grove, Rank minimumRank) implements IPlayerCondition, IRankCondition {
   public static final MapCodec<GroveRankReputation> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(RootsRegistries.GROVES.byNameCodec()
@@ -31,7 +33,7 @@ public record GroveRankReputation(Grove grove, Rank minimumRank) implements IPla
   }
 
   @Override
-  public @Nullable IConditionIngredient getIngredient(Holder<ICondition> condition) {
-    return null;
+  public List<ConditionIngredient> getIngredient(Holder<ICondition> condition) {
+    return List.of(new ConditionIngredient(condition, grove.getIcon(), minimumRank.getAsNumber()));
   }
 }

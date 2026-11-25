@@ -1,4 +1,5 @@
 {
   "type": "roots:pillar_condition",
+  "itemTag": "roots:pillars/short",
   "tag": "roots:pillars/short"
 }

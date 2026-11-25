@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories;
+package mysticmods.roots.integration.jei.categories.defaulted;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -6,10 +6,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.condition.ConditionIngredient;
+import mysticmods.roots.api.condition.ICondition;
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.RootsRecipeBaseCategory;
 import mysticmods.roots.integration.jei.ingredient.grove.GroveGeneratedPower;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -27,17 +31,24 @@ public abstract class RootsDefaultCategory<T extends RootsRecipe<?, ?>> extends 
     super(recipeType, helper, width == 0 ? 178 : width, height == 0 ? 68 : height, background == null ? RootsAPI.rl("textures/gui/jei/default.png") : background, icon, title);
   }
 
+  private static final class Pos {
+    public int row = 0;
+    public int column = 0;
+    public int count = 0;
+  }
+
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup) {
     super.setRecipe(builder, recipe, iFocusGroup);
 
-    int ingredientCount = addIngredients(builder, recipe, iFocusGroup);
-    addConditions(builder, recipe, iFocusGroup, ingredientCount);
+    Pos pos = new Pos ();
+    addIngredients(builder, recipe, iFocusGroup, pos);
+    addConditions(builder, recipe, iFocusGroup, pos);
     addOutputs(builder, recipe, iFocusGroup);
     addDevice(builder);
   }
 
-  private void addOutputs(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup) {
+  protected void addOutputs(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup) {
     int row = 0;
     int column = 0;
 
@@ -55,22 +66,37 @@ public abstract class RootsDefaultCategory<T extends RootsRecipe<?, ?>> extends 
     }
   }
 
-  private void addConditions(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, int count) {
-    int row = 0;
-    int column = 0;
-
+  protected void addConditions(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, Pos pos) {
     // TODO: Tweak this for the rest of the requirements
     for (int j = 0; j < recipe.getPowerRequirements().size(); j++) {
-      int i = count + j;
+      int i = pos.count + j;
       if (i % getIngredientColumnCount() == 0 && i != 0) {
-        row++;
-        column = 0;
+        pos.row++;
+        pos.column = 0;
       }
-      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientXPadding() + column * getIngredientWidth(), getIngredientYPadding() + row * getIngredientHeight())
+      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientXPadding() + pos.column * getIngredientWidth(), getIngredientYPadding() + pos.row * getIngredientHeight())
           .addIngredients(RootsJEIPlugin.GROVE_POWER_TYPE, GroveGeneratedPower.fromRequest(recipe.getPowerRequirements()
               .get(j)))
           .setCustomRenderer(RootsJEIPlugin.GROVE_POWER_TYPE, RootsJEIPlugin.GROVE_POWER_RENDERER);
-      column++;
+      pos.column++;
+      pos.count++;
+    }
+
+    for (int j = 0; j < recipe.getConditions().size(); j++) {
+      Holder<ICondition> holder = recipe.getConditions().get(j);
+      List<ConditionIngredient> ingredient = holder.value().getIngredient(holder);
+      if (ingredient == null || ingredient.isEmpty()) {
+        continue; // TODO: unsure about continuing
+      }
+      int i = pos.count + j;
+      if (i % getIngredientColumnCount() == 0 && i != 0) {
+        pos.row++;
+        pos.column = 0;
+      }
+      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientXPadding() + pos.column * getIngredientWidth(), getIngredientYPadding() + pos.row * getIngredientHeight())
+          .addIngredients( RootsJEIPlugin.CONDITION_INGREDIENT, ingredient)
+          .setCustomRenderer(RootsJEIPlugin.CONDITION_INGREDIENT, RootsJEIPlugin.CONDITION_RENDERER);
+      pos.column++;
     }
   }
 
@@ -114,23 +140,17 @@ public abstract class RootsDefaultCategory<T extends RootsRecipe<?, ?>> extends 
     return 4;
   }
 
-  protected int addIngredients(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup) {
-    int row = 0;
-    int column = 0;
-
-    int ingredientCount = 0;
+  protected void addIngredients(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, Pos pos) {
     for (int i = 0; i < recipe.getIngredients().size(); i++) {
       if (i % getIngredientColumnCount() == 0 && i != 0) {
-        row++;
-        column = 0;
+        pos.row++;
+        pos.column = 0;
       }
-      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientXPadding() + column * getIngredientWidth(), getIngredientYPadding() + row * getIngredientHeight())
+      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientXPadding() + pos.column * getIngredientWidth(), getIngredientYPadding() + pos.row * getIngredientHeight())
           .addIngredients(recipe.getIngredients().get(i));
-      column++;
-      ingredientCount++;
+      pos.column++;
+      pos.count++;
     }
-
-    return ingredientCount;
   }
 
   protected abstract void addDevice(IRecipeLayoutBuilder builder);

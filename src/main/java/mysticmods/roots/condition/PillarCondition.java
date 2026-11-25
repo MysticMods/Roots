@@ -1,11 +1,9 @@
 package mysticmods.roots.condition;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.block.StateProperties;
-import mysticmods.roots.api.condition.ICondition;
-import mysticmods.roots.api.condition.IConditionIngredient;
-import mysticmods.roots.api.condition.ILevelCondition;
-import mysticmods.roots.api.condition.PillarType;
+import mysticmods.roots.api.condition.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -21,16 +20,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public record PillarCondition(TagKey<Block> tag) implements ILevelCondition {
-  public static final MapCodec<PillarCondition> MAP_CODEC = TagKey.codec(Registries.BLOCK).fieldOf("tag")
-      .xmap(PillarCondition::new, PillarCondition::tag);
+public record PillarCondition(TagKey<Block> tag, TagKey<Item> itemTag) implements ILevelCondition {
+  public static final MapCodec<PillarCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(PillarCondition::tag), TagKey.codec(Registries.ITEM).fieldOf("itemTag").forGetter(PillarCondition::itemTag)).apply(instance, PillarCondition::new));
 
   private static final StateProperties.Part[] PARTS_TOP_DOWN = {StateProperties.Part.TOP, StateProperties.Part.MIDDLE, StateProperties.Part.BOTTOM};
 
   public PillarCondition(PillarType type) {
-    this(type.pillar());
+    this(type.pillar(), type.itemTag());
   }
 
   @Nullable
@@ -78,7 +77,7 @@ public record PillarCondition(TagKey<Block> tag) implements ILevelCondition {
   }
 
   @Override
-  public @Nullable IConditionIngredient getIngredient(Holder<ICondition> condition) {
-    return null;
+  public List<ConditionIngredient> getIngredient(Holder<ICondition> condition) {
+    return ConditionIngredient.fromTag(itemTag, condition);
   }
 }

@@ -33,12 +33,7 @@ public interface ICondition {
 
   Set<BlockPos> test(Level level, @Nullable Player player, @Nullable BoundingBox bounds, @Nullable BlockPos pos, @Nullable Set<BlockPos> exclusions);
 
-  @Nullable
-  IConditionIngredient getIngredient(Holder<ICondition> condition);
-
-  static IConditionIngredient getConditionIngredient (Holder<ICondition> condition) {
-    return condition.value().getIngredient(condition);
-  }
+  List<ConditionIngredient> getIngredient(Holder<ICondition> condition);
 
   static String getDescriptionId(Holder<ICondition> condition) {
     return Util.makeDescriptionId("condition", condition.getKey().location());

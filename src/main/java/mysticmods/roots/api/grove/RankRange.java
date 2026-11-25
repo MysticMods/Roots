@@ -11,6 +11,8 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public record RankRange(Optional<Rank> minimumRank, Optional<Rank> maximumRank) {
@@ -72,6 +74,17 @@ public record RankRange(Optional<Rank> minimumRank, Optional<Rank> maximumRank) 
 
   public Rank maximum() {
     return maximumRank.orElse(Rank.maximum());
+  }
+
+  public List<Rank> range () {
+    List<Rank> result = new ArrayList<>();
+    for (Rank rank : Rank.values()) {
+      if (valid(rank)) {
+        result.add(rank);
+      }
+    }
+
+    return result;
   }
 
   public static RankRange minimum(Rank minimumRank) {
