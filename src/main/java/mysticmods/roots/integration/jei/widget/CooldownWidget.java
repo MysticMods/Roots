@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.network.chat.Component;
 
+// TODO: Ingredient
 public class CooldownWidget implements IRecipeWidget {
   private final Component tooltip;
   private final int x, y;

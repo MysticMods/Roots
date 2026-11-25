@@ -10,6 +10,7 @@ import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 
+// TODO: Ingredient
 public class DurabilityWidget implements IRecipeWidget {
   private final Component tooltip;
   private final int x, y;

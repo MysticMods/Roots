@@ -9,6 +9,7 @@ import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
+// TODO: Convert into ingredient
 public class SymmetryWidget implements IRecipeWidget {
   private final Component tooltip;
   private final int x, y;
