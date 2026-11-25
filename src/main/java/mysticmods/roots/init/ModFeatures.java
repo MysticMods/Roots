@@ -131,7 +131,7 @@ public class ModFeatures {
   public static TreeConfiguration.TreeConfigurationBuilder createWildwood() {
     return new TreeConfiguration.TreeConfigurationBuilder(
         BlockStateProvider.simple(ModBlocks.WILDWOOD_LOG.get()),
-        new MinLobeFancyTrunkPlacer(9, 3, 4, 4, 4),
+        new MinLobeFancyTrunkPlacer(9, 3, 4, 4, 4, 1),
         BlockStateProvider.simple(ModBlocks.WILDWOOD_LEAVES.get()),
         new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
         new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))).ignoreVines();
