@@ -1,7 +1,5 @@
 {
   "type": "roots:grove_rank_condition",
   "grove": "roots:elemental",
-  "minimum_rank": {
-    "rank": 2
-  }
+  "minimum_rank": "second"
 }

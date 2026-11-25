@@ -1,7 +1,5 @@
 {
   "type": "roots:grove_rank_condition",
   "grove": "roots:fungal",
-  "minimum_rank": {
-    "rank": 4
-  }
+  "minimum_rank": "fourth"
 }

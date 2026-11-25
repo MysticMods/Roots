@@ -2,11 +2,13 @@ package mysticmods.roots.condition;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.condition.ICondition;
+import mysticmods.roots.api.condition.IConditionIngredient;
 import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.item.GroveSporesItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -22,6 +24,12 @@ public record OvergrowthCondition() implements ILevelCondition {
 
   public static OvergrowthCondition getInstance() {
     return INSTANCE;
+  }
+
+  @Override
+  public boolean place(Level level, BlockPos position) {
+    level.setBlock(position, ModBlocks.CREEPING_GROVE_MOSS.value().defaultBlockState(), 3);
+    return true;
   }
 
   @Override
@@ -53,5 +61,10 @@ public record OvergrowthCondition() implements ILevelCondition {
   @Override
   public MapCodec<? extends ICondition> codec() {
     return MAP_CODEC;
+  }
+
+  @Override
+  public @Nullable IConditionIngredient getIngredient(Holder<ICondition> condition) {
+    return null;
   }
 }

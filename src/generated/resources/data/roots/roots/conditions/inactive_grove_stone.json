@@ -1,5 +1,6 @@
 {
   "type": "roots:grove_stone_condition",
+  "itemTag": "roots:grove_stones",
   "state": "inactive",
   "tag": "roots:grove_stones"
 }
