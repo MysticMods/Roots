@@ -417,6 +417,7 @@ public class ModItems {
   public static final DeferredHolder<Item, HomesicknessCharm> HOMESICKNESS_CHARM = ITEMS.register("charm_of_homesickness", () -> new HomesicknessCharm(new Item.Properties().stacksTo(1)));
   public static final DeferredHolder<Item, Item> OVERGROWTH_CONDITION = ITEMS.register("overgrowth_condition", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> INACTIVE_GROVE_STONE = ITEMS.register("inactive_grove_stone", () -> new Item(new Item.Properties()));
+  public static final DeferredHolder<Item, Item> COOLDOWN = ITEMS.register("cooldown", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, DeferredSpawnEggItem> BEETLE_SPAWN_EGG = ITEMS.register("beetle_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.BEETLE, 0x418594, 0x211D15, new Item.Properties()));
   public static final DeferredHolder<Item, DeferredSpawnEggItem> JERBOA_SPAWN_EGG = ITEMS.register("jerboa_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.JERBOA, 0xdbc6a4, 0xeaaea1, new Item.Properties()));
   public static final DeferredHolder<Item, DeferredSpawnEggItem> DEER_SPAWN_EGG = ITEMS.register("deer_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.DEER, 0xa18458, 0x5e4d33, new Item.Properties()));

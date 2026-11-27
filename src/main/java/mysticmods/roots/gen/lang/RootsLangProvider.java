@@ -655,6 +655,7 @@ public final class RootsLangProvider extends LanguageProvider {
     // These shouldn't actually be used
     addItem(ModItems.OVERGROWTH_CONDITION);
     addItem(ModItems.INACTIVE_GROVE_STONE);
+    addItem(ModItems.COOLDOWN);
 
     addEntity(ModEntities.BEETLE);
     addEntity(ModEntities.DEER);
@@ -861,7 +862,7 @@ public final class RootsLangProvider extends LanguageProvider {
     add("roots.jei.mortar_crafting", "Mortar Crafting");
     add("roots.jei.mortar_spell_crafting", "Spell Crafting");
     add("roots.jei.text.durability", "Durability: %s");
-    add("roots.jei.text.cooldown", "Cooldown: %ss");
+    add("roots.text.cooldown", "Cooldown: %ss");
     add("roots.jei.sprout_gifts", "Rewards for Breeding Sprouts");
     add("roots.jei.animal_harvest", "Animal Harvest");
     add("roots.jei.animal_harvest.info", "Note: Outputs shown are default and may vary based on mod interactions.");

@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public record ChanceOutput(ItemStack output, float chance) {
+public record ChanceOutput(ItemStack output, float chance) implements IOutput {
   public static final Codec<ChanceOutput> CODEC = RecordCodecBuilder.create(instance -> instance.group(
       ItemStack.STRICT_CODEC.fieldOf("output").forGetter(ChanceOutput::output),
       Codec.FLOAT.fieldOf("chance").forGetter(ChanceOutput::chance)

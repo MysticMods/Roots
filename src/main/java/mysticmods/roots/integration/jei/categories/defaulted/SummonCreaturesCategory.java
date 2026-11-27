@@ -41,7 +41,7 @@ public class SummonCreaturesCategory extends RootsDefaultCategory<SummonCreature
   }
 
   @Override
-  protected void addOutputs(IRecipeLayoutBuilder builder, SummonCreaturesRecipe recipe, IFocusGroup iFocusGroup) {
+  protected void addOutputs(IRecipeLayoutBuilder builder, SummonCreaturesRecipe recipe, IFocusGroup iFocusGroup, Pos pos) {
     List<ChanceOutput> outputs = recipe.getCachedOutputs();
     if (!outputs.isEmpty()) {
       RootsAPI.LOG.error("Summon Creatures recipe {} has chance outputs, this is not expected!");

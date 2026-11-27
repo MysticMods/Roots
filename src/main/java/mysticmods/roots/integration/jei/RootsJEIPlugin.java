@@ -22,6 +22,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.grove.*;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.recipe.output.Cooldown;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -35,6 +36,8 @@ import mysticmods.roots.integration.jei.categories.defaulted.*;
 import mysticmods.roots.integration.jei.ingredient.block.*;
 import mysticmods.roots.integration.jei.ingredient.condition.RootsConditionIngredientHelper;
 import mysticmods.roots.integration.jei.ingredient.condition.RootsConditionIngredientRenderer;
+import mysticmods.roots.integration.jei.ingredient.cooldown.RootsCooldownIngredientHelper;
+import mysticmods.roots.integration.jei.ingredient.cooldown.RootsCooldownIngredientRenderer;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageHelper;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageRenderer;
 import mysticmods.roots.integration.jei.ingredient.damage.RootsDamageType;
@@ -115,6 +118,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<GroveReputation> GROVE_REPUTATION_TYPE = ingredient(GroveReputation.class);
   public static final IIngredientType<GroveAction> GROVE_ACTION_TYPE = ingredient(GroveAction.class);
   public static final IIngredientType<ConditionIngredient> CONDITION_INGREDIENT = ingredient(ConditionIngredient.class);
+  public static final IIngredientType<Cooldown> COOLDOWN_INGREDIENT = ingredient(Cooldown.class);
 
   @Override
   public ResourceLocation getPluginUid() {
@@ -320,6 +324,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RootsGroveActionRenderer GROVE_ACTION_RENDERER = new RootsGroveActionRenderer();
   public static final RootsGroveRankRenderer GROVE_RANK_RENDERER = new RootsGroveRankRenderer(); // TODO???
   public static final RootsConditionIngredientRenderer CONDITION_RENDERER = new RootsConditionIngredientRenderer();
+  public static final RootsCooldownIngredientRenderer COOLDOWN_RENDERER = new RootsCooldownIngredientRenderer();
 
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
@@ -353,6 +358,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.register(GROVE_ACTION_TYPE, RootsRegistries.GROVE_ACTIONS.stream()
         .toList(), new RootsGroveActionHelper(), GROVE_ACTION_RENDERER, RootsRegistries.GROVE_ACTIONS.byNameCodec());
     registration.register(CONDITION_INGREDIENT, Collections.emptyList(), new RootsConditionIngredientHelper(), CONDITION_RENDERER, ConditionIngredient.CODEC);
+    registration.register(COOLDOWN_INGREDIENT, Collections.emptyList(), new RootsCooldownIngredientHelper(), COOLDOWN_RENDERER, Cooldown.CODEC);
   }
 
   private IJeiRuntime runtime = null;

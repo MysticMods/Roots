@@ -227,6 +227,7 @@ public final class RootsItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.VINEGAR.get());
     basicItem(ModItems.VEGETABLE_JUICE.get());
     basicItem(ModItems.INK_BOTTLE.get());
+    basicItem(ModItems.COOLDOWN.get());
 
     subfolder(ModItems.SYLVAN_POUCH, "pouches");
     subfolder(ModItems.CREATIVE_POUCH, "pouches");

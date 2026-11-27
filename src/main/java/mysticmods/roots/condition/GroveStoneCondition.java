@@ -72,7 +72,7 @@ itemTag, Optional<RankRange> rankRange)
       base = rankRange.map(o -> original.setValue(StateProperties.GroveStone.RANK, o.minimum())).orElse(base);
     }
     if (state == GroveStoneState.ACTIVE) {
-      base.setValue(StateProperties.ACTIVE, true);
+      base = base.setValue(StateProperties.ACTIVE, true);
     }
     level.setBlock(position, base.setValue(StateProperties.GroveStone.PART, StateProperties.Part.BOTTOM), 3);
     level.setBlock(position.above(), base.setValue(StateProperties.GroveStone.PART, StateProperties.Part.MIDDLE), 3);
@@ -119,7 +119,7 @@ itemTag, Optional<RankRange> rankRange)
     BlockPos cursor = pos.immutable();
     for (StateProperties.Part part : PARTS_TOP_DOWN) {
       BlockState blockState = level.getBlockState(cursor);
-      if (rankRange().map(o -> o.valid(blockState.getValue(StateProperties.GroveStone.RANK))).orElse(false)) {
+      if (rankRange().map(o -> !o.valid(blockState.getValue(StateProperties.GroveStone.RANK))).orElse(false)) {
         return Collections.emptySet();
       }
       if (!blockState.is(tag) || getPart(blockState) != part) {
