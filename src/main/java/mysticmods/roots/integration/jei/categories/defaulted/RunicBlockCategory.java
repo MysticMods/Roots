@@ -32,4 +32,9 @@ public class RunicBlockCategory extends RootsDefaultCategory<RunicBlockRecipe> {
     builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 47, 25)
         .addIngredients(Ingredient.of(RootsTags.Items.RUNIC_SHEARS));
   }
+
+  @Override
+  protected ItemStack getTool() {
+    return new ItemStack(ModItems.RUNIC_SHEARS);
+  }
 }

@@ -46,7 +46,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   }
 
   default List<ItemStack> getOtherOutputs() {
-    return Collections.emptyList();
+    return new ArrayList<>();
   }
 
   default List<Unlock<?>> getUnlocks() {

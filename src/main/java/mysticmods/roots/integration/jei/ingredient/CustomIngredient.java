@@ -81,7 +81,7 @@ public record CustomIngredient<I>(
   }
 
   public void fill(Pos positionInfo, IRecipeLayoutBuilder builder, IPositioned recipeInfo) {
-    var slot = builder.addSlot(role, recipeInfo.getIngredientX(positionInfo), recipeInfo.getIngredientY(positionInfo));
+    var slot = role == RecipeIngredientRole.INPUT ? builder.addSlot(role, recipeInfo.getIngredientX(positionInfo), recipeInfo.getIngredientY(positionInfo)) : builder.addSlot(role, recipeInfo.getOutputX(positionInfo), recipeInfo.getOutputY(positionInfo));
     if (this.multiBuilder != null) {
       this.multiBuilder.accept(ingredients, slot);
     } else {

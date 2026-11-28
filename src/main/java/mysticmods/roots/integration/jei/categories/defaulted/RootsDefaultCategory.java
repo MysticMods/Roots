@@ -179,7 +179,7 @@ public abstract class RootsDefaultCategory<T extends RootsRecipe<?, ?>> extends 
 
     List<CustomIngredient<?>> outputs = new ArrayList<>();
 
-    if (recipe.hasOutput(provider)) {
+    if (recipe.hasItemOutput(provider)) {
       outputs.add(new CustomIngredient<>(RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, List.of(recipe.getResultItem(provider))));
     }
 
@@ -191,6 +191,12 @@ public abstract class RootsDefaultCategory<T extends RootsRecipe<?, ?>> extends 
 
     if (recipe.hasCooldown()) {
       outputs.add(new CustomIngredient<>(RecipeIngredientRole.OUTPUT, RootsJEIPlugin.COOLDOWN_INGREDIENT, List.of(new Cooldown(recipe.getCooldown())), RootsJEIPlugin.COOLDOWN_RENDERER));
+    }
+
+    if (recipe.hasOtherOutput(provider)) {
+      for (ItemStack item : recipe.getOtherOutputs()) {
+        outputs.add(new CustomIngredient<>(RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, List.of(item)));
+      }
     }
 
     return outputs;

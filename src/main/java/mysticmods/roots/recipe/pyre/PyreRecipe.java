@@ -69,7 +69,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
   public List<ItemStack> getOtherOutputs() {
     List<ItemStack> others = super.getOtherOutputs();
     var ritual = this.getRitual();
-    if (ritual != null && !ritual.is(RootsTags.Rituals.EMPTY)) {
+    if (ritual != null && !ritual.is(RootsTags.Rituals.EMPTY) && !ritual.is(ModRituals.CRAFTING)) {
       others.add(ritual.simple().getRitualIcon());
     }
     return others;

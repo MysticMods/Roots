@@ -1,4 +1,4 @@
-package mysticmods.roots.integration.jei.categories.conditionless;
+package mysticmods.roots.integration.jei.categories.defaulted;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -7,7 +7,6 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
-import mysticmods.roots.integration.jei.categories.defaulted.RootsDefaultCategory;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.util.Pos;
@@ -47,5 +46,10 @@ public class RunicEntityCategory extends RootsDefaultCategory<RunicEntityRecipe>
   protected void addDevice(IRecipeLayoutBuilder builder) {
     builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 80, 26)
         .addIngredients(Ingredient.of(RootsTags.Items.RUNIC_SHEARS));
+  }
+
+  @Override
+  protected ItemStack getTool() {
+    return new ItemStack(ModItems.RUNIC_SHEARS);
   }
 }

@@ -11,6 +11,14 @@ public interface IPositioned {
     return getIngredientYPadding() + pos.row * getIngredientHeight();
   }
 
+  default int getOutputX (Pos pos) {
+    return getOutputXPadding() + pos.column * getOutputWidth();
+  }
+
+  default int getOutputY (Pos pos) {
+    return getOutputYPadding() + pos.row * getOutputHeight();
+  }
+
   int getIngredientWidth();
 
   int getIngredientXPadding();
