@@ -30,7 +30,6 @@ import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.client.ClientRecipes;
 import mysticmods.roots.condition.GroveRankReputation;
 import mysticmods.roots.init.*;
-import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.integration.jei.categories.conditionless.*;
 import mysticmods.roots.integration.jei.categories.defaulted.*;
 import mysticmods.roots.integration.jei.ingredient.block.*;

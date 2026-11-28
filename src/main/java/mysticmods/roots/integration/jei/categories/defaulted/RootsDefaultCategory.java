@@ -1,5 +1,6 @@
 package mysticmods.roots.integration.jei.categories.defaulted;
 
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -8,17 +9,25 @@ import mezz.jei.api.recipe.RecipeType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.ConditionIngredient;
 import mysticmods.roots.api.condition.ICondition;
+import mysticmods.roots.api.grove.power.consumer.PowerRequest;
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.recipe.output.Cooldown;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.categories.RootsRecipeBaseCategory;
+import mysticmods.roots.integration.jei.ingredient.CustomIngredient;
 import mysticmods.roots.integration.jei.ingredient.grove.GroveGeneratedPower;
+import mysticmods.roots.util.Pos;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -37,65 +46,35 @@ public abstract class RootsDefaultCategory<T extends RootsRecipe<?, ?>> extends 
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup) {
-    super.setRecipe(builder, recipe, iFocusGroup);
-
-    Pos pos = new Pos ();
-    addIngredients(builder, recipe, iFocusGroup, pos);
-    addConditions(builder, recipe, iFocusGroup, pos);
-    Pos pos2 = new Pos ();
-    addOutputs(builder, recipe, iFocusGroup, pos2);
+    addInputs(builder, recipe, iFocusGroup, new Pos());
+    addOutputs(builder, recipe, iFocusGroup, new Pos());
     addDevice(builder);
   }
 
-  protected void addOutputs(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, Pos pos) {
-    pos.row = 0;
-    pos.column = 0;
-    pos.count = 0;
+  protected void addInputs(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, Pos pos) {
+    List<CustomIngredient<?>> ingredients = gatherInputs(recipe);
 
-    List<ChanceOutput> outputs = recipe.getCachedOutputs();
+    for (int i = 0; i < ingredients.size(); i++) {
+      if (i % getIngredientColumnCount() == 0 && i != 0) {
+        pos.row++;
+        pos.column = 0;
+      }
+      CustomIngredient<?> ingredient = ingredients.get(i);
+      ingredient.fill(pos, builder, this);
+      pos.column++;
+    }
+  }
+
+  protected void addOutputs(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, Pos pos) {
+    List<CustomIngredient<?>> outputs = gatherOutputs(recipe);
 
     for (int i = 0; i < outputs.size(); i++) {
       if (i % getOutputColumnCount() == 0 && i != 0) {
         pos.row++;
         pos.column = 0;
       }
-      builder.addSlot(RecipeIngredientRole.OUTPUT, getOutputXPadding() + pos.column * getOutputWidth(), getOutputYPadding() + pos.row * getOutputHeight())
-          .addItemStack(outputs.get(i).output()).setSlotName(String.valueOf(i))
-          .addRichTooltipCallback(this.richestTooltip(recipe));
-      pos.column++;
-      pos.count++;
-    }
-  }
-
-  protected void addConditions(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, Pos pos) {
-    for (int j = 0; j < recipe.getPowerRequirements().size(); j++) {
-      int i = pos.count + j;
-      if (i % getIngredientColumnCount() == 0 && i != 0) {
-        pos.row++;
-        pos.column = 0;
-      }
-      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientX(pos), getIngredientY(pos))
-          .addIngredients(RootsJEIPlugin.GROVE_POWER_TYPE, GroveGeneratedPower.fromRequest(recipe.getPowerRequirements()
-              .get(j)))
-          .setCustomRenderer(RootsJEIPlugin.GROVE_POWER_TYPE, RootsJEIPlugin.GROVE_POWER_RENDERER);
-      pos.column++;
-      pos.count++;
-    }
-
-    for (int j = 0; j < recipe.getConditions().size(); j++) {
-      Holder<ICondition> holder = recipe.getConditions().get(j);
-      List<ConditionIngredient> ingredient = holder.value().getIngredient(holder);
-      if (ingredient == null || ingredient.isEmpty()) {
-        continue; // TODO: unsure about continuing
-      }
-      int i = pos.count + j;
-      if (i % getIngredientColumnCount() == 0 && i != 0) {
-        pos.row++;
-        pos.column = 0;
-      }
-      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientXPadding() + pos.column * getIngredientWidth(), getIngredientYPadding() + pos.row * getIngredientHeight())
-          .addIngredients( RootsJEIPlugin.CONDITION_INGREDIENT, ingredient)
-          .setCustomRenderer(RootsJEIPlugin.CONDITION_INGREDIENT, RootsJEIPlugin.CONDITION_RENDERER);
+      CustomIngredient<?> ingredient = outputs.get(i);
+      ingredient.fill(pos, builder, this);
       pos.column++;
     }
   }
@@ -150,18 +129,70 @@ public abstract class RootsDefaultCategory<T extends RootsRecipe<?, ?>> extends 
     return 4;
   }
 
-  protected void addIngredients(IRecipeLayoutBuilder builder, T recipe, IFocusGroup iFocusGroup, Pos pos) {
-    for (int i = 0; i < recipe.getIngredients().size(); i++) {
-      if (i % getIngredientColumnCount() == 0 && i != 0) {
-        pos.row++;
-        pos.column = 0;
-      }
-      builder.addSlot(RecipeIngredientRole.INPUT, getIngredientXPadding() + pos.column * getIngredientWidth(), getIngredientYPadding() + pos.row * getIngredientHeight())
-          .addIngredients(recipe.getIngredients().get(i));
-      pos.column++;
-      pos.count++;
-    }
+  protected abstract void addDevice(IRecipeLayoutBuilder builder);
+
+  protected ItemStack getTool () {
+    return ItemStack.EMPTY;
   }
 
-  protected abstract void addDevice(IRecipeLayoutBuilder builder);
+  public List<CustomIngredient<?>> gatherInputs(T recipe) {
+    List<CustomIngredient<?>> ingredients = new ArrayList<>();
+
+    // Actual ingredients
+    for (Ingredient ingredient : recipe.getIngredients()) {
+      ingredients.add(new CustomIngredient<>(RecipeIngredientRole.INPUT, VanillaTypes.ITEM_STACK, List.of(ingredient.getItems())));
+    }
+
+    // Power requirements
+    for (PowerRequest power : recipe.getPowerRequirements()) {
+      ingredients.add(new CustomIngredient<>(RecipeIngredientRole.INPUT, RootsJEIPlugin.GROVE_POWER_TYPE, GroveGeneratedPower.fromRequest(power), RootsJEIPlugin.GROVE_POWER_RENDERER));
+    }
+
+    // Conditions
+    for (Holder<ICondition> condHolder : recipe.getConditions()) {
+      List<ConditionIngredient> values = condHolder.value().getIngredient(condHolder);
+      if (values != null && !values.isEmpty()) {
+        ingredients.add(new CustomIngredient<>(RecipeIngredientRole.INPUT, RootsJEIPlugin.CONDITION_INGREDIENT, values, RootsJEIPlugin.CONDITION_RENDERER, CustomIngredient.CONDITION_ITEM_STACK_BUILDER));
+      }
+    }
+
+    if (recipe.hasDurabilityCost()) {
+      ItemStack tool = getTool();
+      if (tool.isEmpty()) {
+        throw new IllegalStateException("Recipe has a durability cost but no tool: " + recipe);
+      }
+
+      // TODO: Custom renderer
+      tool.setDamageValue(tool.getMaxDamage() - recipe.getDurabilityCost());
+      ingredients.add(new CustomIngredient<>(RecipeIngredientRole.INPUT, VanillaTypes.ITEM_STACK, List.of(tool)));
+    }
+
+    return ingredients;
+  }
+
+  public List<CustomIngredient<?>> gatherOutputs (T recipe) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft.level == null) {
+      throw new IllegalStateException("No level in Minecraft");
+    }
+    HolderLookup.Provider provider = minecraft.level.registryAccess();
+
+    List<CustomIngredient<?>> outputs = new ArrayList<>();
+
+    if (recipe.hasOutput(provider)) {
+      outputs.add(new CustomIngredient<>(RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, List.of(recipe.getResultItem(provider))));
+    }
+
+    if (recipe.hasChanceOutputs(provider)) {
+      for (ChanceOutput chanceOutput : recipe.getChanceOutputs()) {
+        outputs.add(new CustomIngredient<>(RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, List.of(chanceOutput.output()), null, CustomIngredient.chance(chanceOutput)));
+      }
+    }
+
+    if (recipe.hasCooldown()) {
+      outputs.add(new CustomIngredient<>(RecipeIngredientRole.OUTPUT, RootsJEIPlugin.COOLDOWN_INGREDIENT, List.of(new Cooldown(recipe.getCooldown())), RootsJEIPlugin.COOLDOWN_RENDERER));
+    }
+
+    return outputs;
+  }
 }

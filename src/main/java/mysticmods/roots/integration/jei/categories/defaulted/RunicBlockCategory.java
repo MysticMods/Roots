@@ -1,26 +1,19 @@
-package mysticmods.roots.integration.jei.categories;
+package mysticmods.roots.integration.jei.categories.defaulted;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.WorldRecipeUtil;
-import mysticmods.roots.integration.jei.categories.defaulted.RootsDefaultCategory;
-import mysticmods.roots.integration.jei.widget.DurabilityWidget;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.HolderLookup;
+import mysticmods.roots.util.Pos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.List;
 
 public class RunicBlockCategory extends RootsDefaultCategory<RunicBlockRecipe> {
   public RunicBlockCategory(IGuiHelper helper) {
@@ -28,8 +21,8 @@ public class RunicBlockCategory extends RootsDefaultCategory<RunicBlockRecipe> {
   }
 
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, RunicBlockRecipe recipe, IFocusGroup iFocusGroup) {
-    super.setRecipe(builder, recipe, iFocusGroup);
+  protected void addInputs(IRecipeLayoutBuilder builder, RunicBlockRecipe recipe, IFocusGroup iFocusGroup, Pos pos) {
+    super.addInputs(builder, recipe, iFocusGroup, pos);
 
     WorldRecipeUtil.setWorldRecipe(builder, recipe, iFocusGroup, 11, 25, 84, 25);
   }

@@ -70,14 +70,18 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
   }
 
   @Override
-  public void buildCachedOutputs(List<ChanceOutput> list, HolderLookup.Provider provider) {
-    if (getResultItem(provider).isEmpty() && !getUnlocks().isEmpty()) {
-      Unlock<?> unlock = getUnlocks().getFirst();
-      if (unlock instanceof Unlock.SpellUnlock spellUnlock) {
-        list.add(new ChanceOutput(spellUnlock.getIcon(), 1));
+  public List<ItemStack> getOtherOutputs() {
+    List<ItemStack> others = super.getOtherOutputs();
+    if (!getUnlocks().isEmpty()) {
+      for (Unlock<?> unlock : getUnlocks()) {
+        if (unlock instanceof Unlock.SpellUnlock spellUnlock) {
+          others.add(spellUnlock.getIcon());
+        } else if (unlock instanceof Unlock.SpellModifierUnlock modifierUnlock) {
+          others.add(modifierUnlock.getIcon());
+        }
       }
     }
-    super.buildCachedOutputs(list, provider);
+    return others;
   }
 
   public static class Serializer implements RecipeSerializer<MortarRecipe> {

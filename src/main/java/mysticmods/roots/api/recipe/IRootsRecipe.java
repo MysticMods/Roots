@@ -45,6 +45,10 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return Collections.emptyList();
   }
 
+  default List<ItemStack> getOtherOutputs() {
+    return Collections.emptyList();
+  }
+
   default List<Unlock<?>> getUnlocks() {
     return Collections.emptyList();
   }
@@ -52,24 +56,6 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   default PowerCollection getPowerRequirements() {
     return PowerCollection.EMPTY;
   }
-
-  default List<ChanceOutput> getCachedOutputs() {
-    return Collections.emptyList();
-  }
-
-  default void buildCachedOutputs(List<ChanceOutput> list, HolderLookup.Provider provider) {
-    if (hasOutput(provider)) {
-      ItemStack result = getResultItem(provider);
-      if (!result.isEmpty()) {
-        list.add(new ChanceOutput(result, 1f));
-      }
-    }
-    if (hasChanceOutputs(provider)) {
-      list.addAll(getChanceOutputs());
-    }
-  }
-
-  void buildCachedOutputs(HolderLookup.Provider provider);
 
   default ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
     List<Holder<ICondition>> failed = new ArrayList<>();
@@ -120,7 +106,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   }
 
   default boolean hasOtherOutput(HolderLookup.Provider provider) {
-    return false;
+    return !getOtherOutputs().isEmpty();
   }
 
   default boolean hasOutput(HolderLookup.Provider provider) {
@@ -133,18 +119,20 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
 
   default List<ItemStack> assembleOutputs(W inventory, RandomSource random, HolderLookup.Provider provider, @Nullable Supplier<List<ItemStack>> inputProvider) {
     List<ItemStack> results = new ArrayList<>();
-    if (!hasItemOutput(provider)) {
-      if (inventory instanceof IRootsCrafting<?> crafting) {
-        Player player = crafting.getPlayer();
-        if (player instanceof ServerPlayer sPlayer) {
-          for (Unlock<?> unlock : getUnlocks()) {
-            if (RootsAPI.getInstance().canUnlock(sPlayer, unlock)) {
-              RootsAPI.getInstance().unlock(sPlayer, unlock);
-            }
+    // TODO: In theory, this being wrapped this way means that the unlocks
+    // would only ever trigger if there were no outputs.
+    //if (!hasItemOutput(provider)) {
+    if (inventory instanceof IRootsCrafting<?> crafting) {
+      Player player = crafting.getPlayer();
+      if (player instanceof ServerPlayer sPlayer) {
+        for (Unlock<?> unlock : getUnlocks()) {
+          if (RootsAPI.getInstance().canUnlock(sPlayer, unlock)) {
+            RootsAPI.getInstance().unlock(sPlayer, unlock);
           }
         }
       }
     }
+    //}
     results.add(assemble(inventory, provider));
     if (hasChanceOutputs(provider)) {
       results.addAll(assembleChanceOutputs(inventory, random, provider));
@@ -158,5 +146,21 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
 
   default boolean partiallyMatches(W input, Level level) {
     return RecipeUtil.partiallyMatchesIngredients(this, input, level);
+  }
+
+  default int getDurabilityCost() {
+    return 0;
+  }
+
+  default boolean hasDurabilityCost() {
+    return getDurabilityCost() > 0;
+  }
+
+  default int getCooldown() {
+    return -1;
+  }
+
+  default boolean hasCooldown() {
+    return getCooldown() >= 0;
   }
 }

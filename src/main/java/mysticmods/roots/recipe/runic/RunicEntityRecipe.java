@@ -53,10 +53,12 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
 
   }
 
+  @Override
   public int getCooldown() {
     return cooldown;
   }
 
+  @Override
   public int getDurabilityCost() {
     return durabilityCost;
   }

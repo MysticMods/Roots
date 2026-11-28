@@ -73,6 +73,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     this.durabilityCost = durabilityCost;
   }
 
+  @Override
   public int getDurabilityCost() {
     return durabilityCost;
   }

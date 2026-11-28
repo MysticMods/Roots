@@ -34,8 +34,6 @@ public class AnimalHarvestCategory extends RootsRecipeBaseCategory<AnimalHarvest
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, AnimalHarvestRecipe recipe, IFocusGroup iFocusGroup) {
-    super.setRecipe(builder, recipe, iFocusGroup);
-
     var collector = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
 
     SpawnEggItem inputItem = DeferredSpawnEggItem.byId(recipe.entity());

@@ -6,12 +6,15 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.condition.ConditionIngredient;
 import mysticmods.roots.api.recipe.ComplexEntityType;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.ingredient.CustomIngredient;
 import mysticmods.roots.integration.jei.ingredient.entity.RootsEntityType;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
+import mysticmods.roots.util.Pos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -42,9 +45,9 @@ public class SummonCreaturesCategory extends RootsDefaultCategory<SummonCreature
 
   @Override
   protected void addOutputs(IRecipeLayoutBuilder builder, SummonCreaturesRecipe recipe, IFocusGroup iFocusGroup, Pos pos) {
-    List<ChanceOutput> outputs = recipe.getCachedOutputs();
+    List<CustomIngredient<?>> outputs = gatherOutputs(recipe);
     if (!outputs.isEmpty()) {
-      RootsAPI.LOG.error("Summon Creatures recipe {} has chance outputs, this is not expected!");
+      RootsAPI.LOG.error("Summon Creatures recipe {} has outputs, this is not expected!");
     }
   }
 

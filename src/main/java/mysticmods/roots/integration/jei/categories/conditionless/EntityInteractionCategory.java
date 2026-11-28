@@ -34,8 +34,6 @@ public class EntityInteractionCategory extends RootsRecipeBaseCategory<EntityInt
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, EntityInteractionRecipe recipe, IFocusGroup iFocusGroup) {
-    super.setRecipe(builder, recipe, iFocusGroup);
-
     var collector = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
 
     for (EntityType<?> entityType : recipe.test().getEntityTypes()) {

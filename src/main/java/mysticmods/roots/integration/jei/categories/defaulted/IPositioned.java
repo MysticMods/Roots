@@ -1,24 +1,13 @@
 package mysticmods.roots.integration.jei.categories.defaulted;
 
-import mysticmods.roots.integration.jei.ingredient.CustomIngredient;
-
-import java.util.Collections;
-import java.util.List;
+import mysticmods.roots.util.Pos;
 
 public interface IPositioned {
-  default List<CustomIngredient<?>> gatherInputs () {
-    return Collections.emptyList();
-  }
-
-  default List<CustomIngredient<?>> gatherOutputs () {
-    return Collections.emptyList();
-  }
-
-  default int getIngredientX (Pos pos) {
+  default int getIngredientX(Pos pos) {
     return getIngredientXPadding() + pos.column * getIngredientWidth();
   }
 
-  default int getIngredientY (Pos pos) {
+  default int getIngredientY(Pos pos) {
     return getIngredientYPadding() + pos.row * getIngredientHeight();
   }
 

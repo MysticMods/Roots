@@ -32,8 +32,6 @@ public class SproutGiftCategory extends RootsRecipeBaseCategory<SproutGiftRecipe
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, SproutGiftRecipe recipe, IFocusGroup iFocusGroup) {
-    super.setRecipe(builder, recipe, iFocusGroup);
-
     var collector = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
 
     SpawnEggItem inputItem = DeferredSpawnEggItem.byId(recipe.sprout());

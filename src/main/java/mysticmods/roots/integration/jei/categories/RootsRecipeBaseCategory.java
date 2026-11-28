@@ -38,16 +38,9 @@ public abstract class RootsRecipeBaseCategory<T> implements IRecipeCategory<T> {
 
   public List<ChanceOutput> getChanceOutputs(T recipe) {
     if (recipe instanceof RootsRecipe<?, ?> rootsRecipe) {
-      return rootsRecipe.getCachedOutputs();
+      return rootsRecipe.getChanceOutputs();
     }
     throw new NotImplementedException();
-  }
-
-  @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
-    if (recipe instanceof RootsRecipe<?, ?> rootsRecipe) {
-      rootsRecipe.buildCachedOutputs(Minecraft.getInstance().level.registryAccess());
-    }
   }
 
   @Override
